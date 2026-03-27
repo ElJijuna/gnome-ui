@@ -27,6 +27,9 @@ export type { SwitchProps } from "./components/Switch";
 export { Checkbox } from "./components/Checkbox";
 export type { CheckboxProps } from "./components/Checkbox";
 
+export { TextField } from "./components/TextField";
+export type { TextFieldProps } from "./components/TextField";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 

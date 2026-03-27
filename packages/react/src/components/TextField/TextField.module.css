@@ -1,0 +1,118 @@
+/* ─── Wrapper ──────────────────────────────────────────────────────────────── */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 6px);
+}
+
+.disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+/* ─── Label ────────────────────────────────────────────────────────────────── */
+
+.label {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Input ────────────────────────────────────────────────────────────────── */
+
+.input {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  padding: 8px var(--gnome-space-2, 12px);
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-view-fg-color, rgba(0, 0, 0, 0.8));
+
+  background-color: var(--gnome-view-bg-color, #ffffff);
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+
+  transition:
+    border-color  var(--gnome-duration-fast) var(--gnome-easing-default),
+    box-shadow    var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.input::placeholder {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  /* opacity handled by .disabled wrapper */
+}
+
+/* ─── Error state ──────────────────────────────────────────────────────────── */
+
+.errorInput {
+  border-color: var(--gnome-error-color, #e01b24);
+}
+
+.errorInput:focus-visible {
+  border-color: var(--gnome-error-color, #e01b24);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-error-color, #e01b24);
+}
+
+/* ─── Hint / error text ────────────────────────────────────────────────────── */
+
+.hint {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.errorHint {
+  opacity: 1;
+  color: var(--gnome-error-color, #e01b24);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .input {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+}
