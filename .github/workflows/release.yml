@@ -74,7 +74,7 @@ jobs:
   # ── 2b. Release @gnome-ui/icons ────────────────────────────────────────────
   release-icons:
     name: Release @gnome-ui/icons
-    needs: build
+    needs: release-core
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
