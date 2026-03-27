@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import type { ReactNode } from "react";
-import "../src/styles/tokens.css";
+import "@gnome-ui/core/styles";
 
 function CenteredDecorator({ children }: { children: ReactNode }) {
   return (

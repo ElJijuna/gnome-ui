@@ -1,56 +1,31 @@
 {
-  "name": "@gnome-react/ui",
-  "version": "0.1.0",
-  "description": "React component library following GNOME Human Interface Guidelines",
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./styles": "./dist/style.css"
-  },
-  "files": [
-    "dist"
+  "name": "gnome-ui",
+  "private": true,
+  "packageManager": "npm@10.9.4",
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "typecheck": "tsc --noEmit",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "storybook": "turbo storybook",
+    "build-storybook": "turbo build-storybook",
+    "typecheck": "turbo typecheck",
+    "lint": "turbo lint"
   },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+  "overrides": {
+    "vite": "^8.0.3"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@eslint/js": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "globals": "^15.0.0",
+    "turbo": "^2.8.20",
     "typescript": "^5.5.3",
-    "vite": "^6.0.0",
-    "vite-plugin-dts": "^4.0.0",
-    "@storybook/react": "^8.0.0",
-    "@storybook/react-vite": "^8.0.0",
-    "@storybook/blocks": "^8.0.0",
-    "@storybook/addon-essentials": "^8.0.0",
-    "@storybook/addon-interactions": "^8.0.0",
-    "@storybook/addon-a11y": "^8.0.0",
-    "@storybook/test": "^8.0.0",
-    "storybook": "^8.0.0"
+    "typescript-eslint": "^8.0.0"
   }
 }
