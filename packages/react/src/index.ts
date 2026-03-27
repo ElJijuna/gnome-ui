@@ -51,6 +51,9 @@ export type { IconProps, IconSize } from "./components/Icon";
 export { Sidebar, SidebarItem } from "./components/Sidebar";
 export type { SidebarProps, SidebarItemProps } from "./components/Sidebar";
 
+export { SpinButton } from "./components/SpinButton";
+export type { SpinButtonProps } from "./components/SpinButton";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 
