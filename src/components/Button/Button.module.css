@@ -1,0 +1,172 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-1);
+
+  /* Typography */
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body);
+  font-weight: var(--gnome-font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+
+  /* Shape */
+  border-radius: var(--gnome-radius-md);
+  border: 1px solid transparent;
+  padding: var(--gnome-space-1) var(--gnome-space-2);
+  min-height: 34px;
+  min-width: 5.5rem;
+
+  /* Behavior */
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  vertical-align: middle;
+  outline: none;
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    box-shadow var(--gnome-duration-fast) var(--gnome-easing-default),
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* ─── Focus ───────────────────────────────────────────────────── */
+
+.button:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
+    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color);
+}
+
+/* ─── Disabled ────────────────────────────────────────────────── */
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  opacity: var(--gnome-opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Pill shape ──────────────────────────────────────────────── */
+
+.pill {
+  border-radius: var(--gnome-radius-pill);
+  padding-inline: var(--gnome-space-3);
+}
+
+/* ─── Circular shape ──────────────────────────────────────────── */
+
+.circular {
+  border-radius: var(--gnome-radius-pill);
+  padding: var(--gnome-space-1);
+  min-width: 34px;
+  min-height: 34px;
+  width: 34px;
+  height: 34px;
+}
+
+/* ─── Variants ────────────────────────────────────────────────── */
+
+/* Default — slight raised appearance with visible border */
+.default {
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  border-color: var(--gnome-light-3, #deddda);
+  box-shadow: var(--gnome-shadow-sm);
+}
+
+.default:hover:not(:disabled) {
+  background-color: var(--gnome-light-2, #f6f5f4);
+}
+
+.default:active:not(:disabled) {
+  background-color: var(--gnome-light-3, #deddda);
+  box-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .default {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  .default:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .default:active:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+  }
+}
+
+/* Suggested — accent color for primary / affirmative actions */
+.suggested {
+  background-color: var(--gnome-accent-bg-color);
+  color: var(--gnome-accent-fg-color);
+  border-color: transparent;
+}
+
+.suggested:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.suggested:active:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+/* Destructive — red for dangerous / irreversible actions */
+.destructive {
+  background-color: var(--gnome-destructive-bg-color);
+  color: var(--gnome-destructive-fg-color);
+  border-color: transparent;
+}
+
+.destructive:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.destructive:active:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+/* Flat — no border, no background. Used inside header bars */
+.flat {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.flat:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.flat:active:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flat:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .flat:active:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+}
+
+/* ─── Sizes ───────────────────────────────────────────────────── */
+
+.sm {
+  font-size: var(--gnome-font-size-caption);
+  min-height: 28px;
+  padding: 4px var(--gnome-space-1);
+  min-width: 4rem;
+}
+
+.lg {
+  font-size: var(--gnome-font-size-title-4);
+  min-height: 42px;
+  padding: var(--gnome-space-1) var(--gnome-space-3);
+}
