@@ -1,3 +1,18 @@
+## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.1.0...@gnome-ui/react@1.2.0) (2026-03-27)
+
+### Features
+
+* add component <Chip /> and <WrapBox /> ([ddc4f11](https://github.com/ElJijuna/gnome-ui/commit/ddc4f11a6f0ba74d72fd271946b1d2fd3a5dc69c))
+* add component <Link /> ([a1d0b72](https://github.com/ElJijuna/gnome-ui/commit/a1d0b72e595b8814d8ab5d1786d8e1f71fc37c2a))
+* add component <ToggleGroup /> and <ToggleGroupItem /> ([af772d1](https://github.com/ElJijuna/gnome-ui/commit/af772d1794f3100f562a9c5377cc8d46b4eac9b6))
+* implement and update with Adaptive Layout. ([682c1de](https://github.com/ElJijuna/gnome-ui/commit/682c1debeaeaaed1a3b9aa56f928a9e790e37954))
+
+### Documentation
+
+* update README files. ([213fca6](https://github.com/ElJijuna/gnome-ui/commit/213fca6f9dd01e5ac2ae78fcf6f3a897fec66309))
+* update ROADMAP with Adaptive Layout and Link component. ([32ef325](https://github.com/ElJijuna/gnome-ui/commit/32ef325ed306a5ab8b92ea8ebd5e4cd041a54d7c))
+* update ROADMAP with changes in gnome 48-50 ([e3aa8d2](https://github.com/ElJijuna/gnome-ui/commit/e3aa8d2a0402ba86bdb073f7cbf3224b3b6e3f97))
+
 ## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.0.0...@gnome-ui/react@1.1.0) (2026-03-27)
 
 ### Features
