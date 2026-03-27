@@ -41,7 +41,13 @@ export default function App() {
 
 ## Components
 
-See the [Storybook](https://github.com/ElJijuna/gnome-ui.git) for live examples and documentation.
+Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gnome-ui/)**
+
+| Component | Description | Story |
+|-----------|-------------|-------|
+| `Button` | Default, Suggested, Destructive, Flat, Pill, Circular | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-button--docs) |
+| `Text` | 12 Adwaita type styles: large-title, title-1…4, heading, body, caption… | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-text--docs) |
+| `Card` | Elevated surface for grouping content; static or interactive (activatable) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-card--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

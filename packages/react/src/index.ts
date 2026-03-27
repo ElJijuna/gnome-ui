@@ -8,3 +8,6 @@ export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape } from "./comp
 
 export { Text } from "./components/Text";
 export type { TextProps, TextVariant, TextColor } from "./components/Text";
+
+export { Card } from "./components/Card";
+export type { CardProps, CardPadding } from "./components/Card";

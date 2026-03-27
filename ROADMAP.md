@@ -28,7 +28,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ⬜ | **Separator** | Horizontal/vertical divider line |
-| ⬜ | **Card** | Elevated surface for grouping related content |
+| ✅ | **Card** | Elevated surface for grouping related content |
 | ⬜ | **Boxed List** | Rounded bordered list of `ActionRow` items — the most common GNOME pattern |
 | ⬜ | **Action Row** | Row with title, subtitle, and an end widget (switch, button…) |
 | ⬜ | **Header Bar** | Title bar with centered title and action buttons |
