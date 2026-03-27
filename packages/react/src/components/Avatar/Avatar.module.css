@@ -1,0 +1,85 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--gnome-radius-pill);
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  /* Subtle ring so the avatar reads on any background */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Sizes ────────────────────────────────────────────────────────────────── */
+
+.sm {
+  width: 24px;
+  height: 24px;
+}
+
+.md {
+  width: 32px;
+  height: 32px;
+}
+
+.lg {
+  width: 48px;
+  height: 48px;
+}
+
+.xl {
+  width: 64px;
+  height: 64px;
+}
+
+/* ─── Image ────────────────────────────────────────────────────────────────── */
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Initials ─────────────────────────────────────────────────────────────── */
+
+.initials {
+  font-family: var(--gnome-font-family);
+  font-weight: var(--gnome-font-weight-semibold);
+  line-height: 1;
+  color: #ffffff;
+  /* Scale initials font relative to the avatar size */
+  font-size: 0.42em;
+}
+
+.sm .initials  { font-size: 0.5em; }
+.md .initials  { font-size: 0.44em; }
+.lg .initials  { font-size: 0.42em; }
+.xl .initials  { font-size: 0.40em; }
+
+/* ─── Color variants (initials fallback) ───────────────────────────────────── */
+
+.color-blue   { background-color: var(--gnome-blue-3,   #3584e4); }
+.color-green  { background-color: var(--gnome-green-4,  #2ec27e); }
+.color-yellow {
+  background-color: var(--gnome-yellow-4, #f5c211);
+  /* yellow needs dark initials for contrast */
+}
+.color-yellow .initials { color: rgba(0, 0, 0, 0.8); }
+
+.color-orange { background-color: var(--gnome-orange-4, #e66100); }
+.color-red    { background-color: var(--gnome-red-3,    #e01b24); }
+.color-purple { background-color: var(--gnome-purple-3, #9141ac); }
+.color-brown  { background-color: var(--gnome-brown-3,  #986a44); }
+.color-teal   { background-color: #2190a4; }
+.color-slate  { background-color: var(--gnome-dark-2,   #5e5c64); }
+
+/* ─── Dark mode ring ───────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .avatar {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+}
