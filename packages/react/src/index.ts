@@ -109,3 +109,6 @@ export type { ViewSwitcherBarProps } from "./components/ViewSwitcherBar";
 
 export { Link } from "./components/Link";
 export type { LinkProps } from "./components/Link";
+
+export { ToggleGroup, ToggleGroupItem } from "./components/ToggleGroup";
+export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/ToggleGroup";

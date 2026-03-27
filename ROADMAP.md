@@ -107,7 +107,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **ToggleGroup** | Unified group of mutually-exclusive toggle buttons — replaces the pattern of multiple `Button` in a box; mirrors `AdwToggleGroup` |
+| ✅ | **ToggleGroup** | Unified group of mutually-exclusive toggle buttons — replaces the pattern of multiple `Button` in a box; mirrors `AdwToggleGroup` |
 | ⬜ | **WrapBox** | Flexible wrapping layout for tag/chip lists that flows across multiple lines — mirrors `AdwWrapBox` |
 
 ### libadwaita 1.8 — GNOME 49

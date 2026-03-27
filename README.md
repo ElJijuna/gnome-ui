@@ -81,6 +81,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `OverlaySplitView` | Sidebar becomes slide-over overlay at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) |
 | `ViewSwitcherBar` | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) |
 | `Link` | Inline hyperlink with accent colour, animated underline, and external-URL variant | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) |
+| `ToggleGroup` / `ToggleGroupItem` | Mutually-exclusive toggle buttons for in-place option selection — mirrors `AdwToggleGroup` (GNOME 48) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

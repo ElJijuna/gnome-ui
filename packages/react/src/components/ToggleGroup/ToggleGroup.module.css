@@ -1,0 +1,133 @@
+/* ─── Container ─────────────────────────────────────────────────────────────── */
+
+.group {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1px solid var(--gnome-light-3, #deddda);
+  border-radius: var(--gnome-radius-md);
+  box-shadow: var(--gnome-shadow-sm);
+  padding: 2px;
+  gap: 2px;
+}
+
+/* ─── Item ──────────────────────────────────────────────────────────────────── */
+
+.item {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-1, 6px);
+
+  padding: 4px var(--gnome-space-2, 12px);
+  border-radius: calc(var(--gnome-radius-md) - 2px);
+  min-height: 28px;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    box-shadow       var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* Icon-only: square aspect ratio */
+.iconOnly {
+  padding: 4px;
+  min-width: 28px;
+}
+
+.item:hover:not(:disabled):not(.active) {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.item:active:not(:disabled):not(.active) {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.item:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+/* ─── Focus ─────────────────────────────────────────────────────────────────── */
+
+.item:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #ffffff),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Active ────────────────────────────────────────────────────────────────── */
+
+.active {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 15%, transparent);
+  color: var(--gnome-accent-color, #3584e4);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 40%, transparent);
+}
+
+/* ─── Icon ──────────────────────────────────────────────────────────────────── */
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.itemLabel {
+  line-height: 1;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .group {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  .item:hover:not(:disabled):not(.active) {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .item:active:not(:disabled):not(.active) {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .item:focus-visible {
+    box-shadow:
+      0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #383838),
+      0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+        var(--gnome-focus-ring-color, #78aeed);
+  }
+
+  .active {
+    background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 25%, transparent);
+    color: var(--gnome-accent-color, #78aeed);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 50%, transparent);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}
