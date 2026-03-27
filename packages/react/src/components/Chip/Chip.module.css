@@ -1,0 +1,163 @@
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 3px 10px;
+  border-radius: var(--gnome-radius-pill);
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.875rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: 1.4;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1px solid var(--gnome-light-3, #deddda);
+
+  /* Not a button by default */
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: default;
+  user-select: none;
+  outline: none;
+}
+
+/* ─── Selectable (toggle button) ────────────────────────────────────────────── */
+
+.selectable {
+  cursor: pointer;
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    border-color     var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.selectable:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 85%, black);
+}
+
+.selectable:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 70%, black);
+}
+
+.selectable:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Selected state ────────────────────────────────────────────────────────── */
+
+.selected {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 15%, transparent);
+  border-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 50%, transparent);
+  color: var(--gnome-accent-color, #3584e4);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.selected.selectable:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 22%, transparent);
+}
+
+/* ─── Disabled ──────────────────────────────────────────────────────────────── */
+
+.disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Leading icon ──────────────────────────────────────────────────────────── */
+
+.icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-inline-start: -2px;
+}
+
+/* ─── Label ─────────────────────────────────────────────────────────────────── */
+
+.label {
+  /* nothing extra needed */
+}
+
+/* ─── Remove button ─────────────────────────────────────────────────────────── */
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-inline-end: -4px;
+  cursor: pointer;
+  outline: none;
+
+  color: inherit;
+  opacity: 0.6;
+  border-radius: var(--gnome-radius-pill);
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.remove:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.remove:focus-visible {
+  opacity: 1;
+  box-shadow:
+    0 0 0 2px var(--gnome-window-bg-color, #fafafa),
+    0 0 0 4px var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .chip {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .selectable:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--gnome-card-bg-color, #383838) 85%, white);
+  }
+
+  .selectable:active:not(:disabled) {
+    background-color: color-mix(in srgb, var(--gnome-card-bg-color, #383838) 70%, white);
+  }
+
+  .selected {
+    background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 25%, transparent);
+    border-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 60%, transparent);
+    color: var(--gnome-accent-color, #78aeed);
+  }
+
+  .selected.selectable:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 35%, transparent);
+  }
+
+  .selectable:focus-visible {
+    box-shadow:
+      0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #242424),
+      0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+        var(--gnome-focus-ring-color, #78aeed);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .selectable,
+  .remove {
+    transition: none;
+  }
+}

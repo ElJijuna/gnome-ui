@@ -1,0 +1,12 @@
+.wrapBox {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: var(--wrapbox-row-gap) var(--wrapbox-gap);
+  justify-content: var(--wrapbox-justify);
+  align-items: var(--wrapbox-align);
+}
+
+.reverse {
+  flex-wrap: wrap-reverse;
+}

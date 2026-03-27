@@ -82,6 +82,8 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `ViewSwitcherBar` | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) |
 | `Link` | Inline hyperlink with accent colour, animated underline, and external-URL variant | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) |
 | `ToggleGroup` / `ToggleGroupItem` | Mutually-exclusive toggle buttons for in-place option selection — mirrors `AdwToggleGroup` (GNOME 48) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) |
+| `WrapBox` | Flexible wrapping layout container — mirrors `AdwWrapBox` (GNOME 48) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-wrapbox--docs) |
+| `Chip` | Compact pill label for tags and filters; static, removable, and selectable modes | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-chip--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

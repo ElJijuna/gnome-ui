@@ -112,3 +112,9 @@ export type { LinkProps } from "./components/Link";
 
 export { ToggleGroup, ToggleGroupItem } from "./components/ToggleGroup";
 export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/ToggleGroup";
+
+export { WrapBox } from "./components/WrapBox";
+export type { WrapBoxProps, WrapBoxJustify, WrapBoxAlign } from "./components/WrapBox";
+
+export { Chip } from "./components/Chip";
+export type { ChipProps } from "./components/Chip";
