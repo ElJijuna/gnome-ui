@@ -55,9 +55,9 @@
 }
 
 .sm .initials  { font-size: 0.5em; }
-.md .initials  { font-size: 0.44em; }
-.lg .initials  { font-size: 0.42em; }
-.xl .initials  { font-size: 0.40em; }
+.md .initials  { font-size: 0.60em; }
+.lg .initials  { font-size: 1.0em; }
+.xl .initials  { font-size: 1.40em; }
 
 /* ─── Color variants (initials fallback) ───────────────────────────────────── */
 
