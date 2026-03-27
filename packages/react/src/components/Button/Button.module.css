@@ -139,20 +139,26 @@
 }
 
 .flat:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: var(--gnome-hover-overlay);
 }
 
 .flat:active:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: var(--gnome-active-overlay);
 }
 
-@media (prefers-color-scheme: dark) {
-  .flat:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.08);
+/* ─── High contrast ───────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .default {
+    border-width: 2px;
+    box-shadow: none;
   }
 
-  .flat:active:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.14);
+  .button:focus-visible {
+    box-shadow:
+      0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
+      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color),
+      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width) + 1px) var(--gnome-window-bg-color);
   }
 }
 

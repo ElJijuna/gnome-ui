@@ -129,4 +129,4 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **High-contrast support** | Add `@media (prefers-contrast: more)` overrides to design tokens and all components — formalised in libadwaita 1.8 |
+| ✅ | **High-contrast support** | Add `@media (prefers-contrast: more)` overrides to design tokens and all components — formalised in libadwaita 1.8 |

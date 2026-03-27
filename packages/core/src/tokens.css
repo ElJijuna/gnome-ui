@@ -181,6 +181,14 @@
   --gnome-focus-ring-color: var(--gnome-accent-color);
   --gnome-focus-ring-width: 3px;
   --gnome-focus-ring-offset: 2px;
+
+  /* ─── Interactive State Overlays ─────────────────────────────── */
+  /* Use these tokens instead of hardcoded rgba so HC mode can override them. */
+
+  --gnome-hover-overlay: rgba(0, 0, 0, 0.06);
+  --gnome-active-overlay: rgba(0, 0, 0, 0.12);
+  --gnome-border-subtle: rgba(0, 0, 0, 0.15);
+  --gnome-divider-color: rgba(0, 0, 0, 0.07);
 }
 
 /* ─── Dark Mode ─────────────────────────────────────────────────── */
@@ -213,6 +221,88 @@
 
     --gnome-dialog-bg-color: #242424;
     --gnome-dialog-fg-color: rgba(255, 255, 255, 0.87);
+
+    /* Interactive overlays inverted for dark surfaces */
+    --gnome-hover-overlay: rgba(255, 255, 255, 0.08);
+    --gnome-active-overlay: rgba(255, 255, 255, 0.14);
+    --gnome-border-subtle: rgba(255, 255, 255, 0.15);
+    --gnome-divider-color: rgba(255, 255, 255, 0.07);
+  }
+}
+
+/* ─── High Contrast (light) ──────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  :root {
+    /* Semantic colors: fully opaque, high-contrast variants */
+    --gnome-accent-color: var(--gnome-blue-5);
+    --gnome-accent-bg-color: var(--gnome-blue-5);
+
+    --gnome-destructive-color: var(--gnome-red-5);
+    --gnome-destructive-bg-color: var(--gnome-red-5);
+
+    --gnome-success-color: var(--gnome-green-5);
+    --gnome-success-bg-color: var(--gnome-green-5);
+
+    --gnome-warning-color: var(--gnome-orange-5);
+    --gnome-warning-bg-color: var(--gnome-orange-4);
+
+    --gnome-error-color: var(--gnome-red-5);
+    --gnome-error-bg-color: var(--gnome-red-5);
+
+    /* Overlays: solid, not transparent */
+    --gnome-hover-overlay: rgba(0, 0, 0, 0.12);
+    --gnome-active-overlay: rgba(0, 0, 0, 0.22);
+    --gnome-border-subtle: rgba(0, 0, 0, 0.5);
+    --gnome-divider-color: rgba(0, 0, 0, 0.2);
+
+    /* Focus ring: wider, higher contrast */
+    --gnome-focus-ring-color: var(--gnome-blue-5);
+    --gnome-focus-ring-width: 3px;
+
+    /* Opacity: less dimming so disabled states stay readable */
+    --gnome-opacity-disabled: 0.6;
+    --gnome-opacity-dim: 0.7;
+    --gnome-opacity-border: 0.4;
+  }
+}
+
+/* ─── High Contrast (dark) ───────────────────────────────────────── */
+
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root {
+    --gnome-accent-color: var(--gnome-blue-1);
+    --gnome-accent-bg-color: var(--gnome-blue-2);
+
+    --gnome-destructive-color: var(--gnome-red-1);
+    --gnome-destructive-bg-color: var(--gnome-red-2);
+
+    --gnome-success-color: var(--gnome-green-1);
+    --gnome-success-bg-color: var(--gnome-green-2);
+
+    --gnome-warning-color: var(--gnome-yellow-1);
+    --gnome-warning-bg-color: var(--gnome-yellow-2);
+    --gnome-warning-fg-color: rgba(0, 0, 0, 0.9);
+
+    --gnome-error-color: var(--gnome-red-1);
+    --gnome-error-bg-color: var(--gnome-red-2);
+
+    --gnome-hover-overlay: rgba(255, 255, 255, 0.12);
+    --gnome-active-overlay: rgba(255, 255, 255, 0.22);
+    --gnome-border-subtle: rgba(255, 255, 255, 0.5);
+    --gnome-divider-color: rgba(255, 255, 255, 0.2);
+
+    --gnome-focus-ring-color: var(--gnome-blue-1);
+
+    /* Surface colors: higher contrast dark surfaces */
+    --gnome-window-fg-color: #ffffff;
+    --gnome-view-fg-color: #ffffff;
+    --gnome-card-fg-color: #ffffff;
+    --gnome-headerbar-fg-color: #ffffff;
+    --gnome-headerbar-border-color: rgba(255, 255, 255, 0.3);
+    --gnome-sidebar-fg-color: #ffffff;
+    --gnome-popover-fg-color: #ffffff;
+    --gnome-dialog-fg-color: #ffffff;
   }
 }
 

@@ -25,7 +25,7 @@
 .section + .section {
   margin-top: var(--gnome-space-1, 6px);
   padding-top: var(--gnome-space-1, 6px);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--gnome-divider-color);
 }
 
 .sectionTitle {
@@ -85,19 +85,11 @@
 }
 
 .itemBtn:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-sidebar-bg-color, #ebebeb) 88%,
-    black 12%
-  );
+  background-color: var(--gnome-hover-overlay);
 }
 
 .itemBtn:active {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-sidebar-bg-color, #ebebeb) 78%,
-    black 22%
-  );
+  background-color: var(--gnome-active-overlay);
 }
 
 .itemBtn:focus-visible {
@@ -121,19 +113,11 @@
 }
 
 .active:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-accent-bg-color, #3584e4) 92%,
-    black 8%
-  );
+  filter: brightness(1.08);
 }
 
 .active:active {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-accent-bg-color, #3584e4) 84%,
-    black 16%
-  );
+  filter: brightness(0.92);
 }
 
 /* ─── Icon ─────────────────────────────────────────────────────────────────── */
@@ -176,7 +160,7 @@
   min-width: 160px;
 
   background-color: var(--gnome-card-bg-color, #ffffff);
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--gnome-border-subtle);
   border-radius: var(--gnome-radius-md, 8px);
   box-shadow: var(--gnome-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.15));
   padding: 4px;
@@ -214,11 +198,11 @@
 }
 
 .contextMenuItem:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: var(--gnome-hover-overlay);
 }
 
 .contextMenuItem:active:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.13);
+  background-color: var(--gnome-active-overlay);
 }
 
 .contextMenuItem:focus-visible {
@@ -234,45 +218,24 @@
   color: var(--gnome-destructive-color, #e01b24);
 }
 
-/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+/* ─── High contrast ────────────────────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-contrast: more) {
   .sidebar {
-    border-right-color: var(--gnome-headerbar-border-color, rgba(255, 255, 255, 0.1));
+    border-right-width: 2px;
   }
 
   .section + .section {
-    border-top-color: rgba(255, 255, 255, 0.08);
+    border-top-width: 2px;
   }
 
   .contextMenu {
-    background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    border-width: 2px;
   }
 
-  .contextMenuItem:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
-
-  .contextMenuItem:active:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.14);
-  }
-
-  .itemBtn:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-sidebar-bg-color, #303030) 85%,
-      white 15%
-    );
-  }
-
-  .itemBtn:active {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-sidebar-bg-color, #303030) 75%,
-      white 25%
-    );
+  .active {
+    outline: 2px solid var(--gnome-accent-fg-color, #ffffff);
+    outline-offset: -3px;
   }
 }
 

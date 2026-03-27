@@ -7,7 +7,7 @@
 
   background-color: var(--gnome-card-bg-color, #ffffff);
   color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.07));
+  border: 1px solid var(--gnome-divider-color);
   border-radius: var(--gnome-radius-lg);
   overflow: hidden;
 }
@@ -24,7 +24,19 @@
 
 .divider {
   height: 1px;
-  background-color: var(--gnome-card-shade-color, rgba(0, 0, 0, 0.07));
+  background-color: var(--gnome-divider-color);
   /* Indent to align with row content — matches ActionRow's horizontal padding */
   margin-left: var(--gnome-space-4, 24px);
+}
+
+/* ─── High contrast ────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .list {
+    border-width: 2px;
+  }
+
+  .divider {
+    height: 2px;
+  }
 }

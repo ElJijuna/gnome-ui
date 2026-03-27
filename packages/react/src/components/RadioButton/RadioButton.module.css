@@ -90,6 +90,20 @@
   }
 }
 
+/* ─── High contrast ────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .radio {
+    border-width: 2px;
+    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  }
+
+  .radio:not(:checked):hover {
+    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    background-color: var(--gnome-hover-overlay);
+  }
+}
+
 /* ─── Reduced motion ───────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

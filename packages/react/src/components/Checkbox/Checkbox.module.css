@@ -114,6 +114,20 @@
   }
 }
 
+/* ─── High contrast ────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .checkbox {
+    border-width: 2px;
+    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  }
+
+  .checkbox:not(:checked):not(:indeterminate):hover {
+    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    background-color: var(--gnome-hover-overlay);
+  }
+}
+
 /* ─── Reduced motion ───────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

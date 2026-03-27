@@ -77,19 +77,11 @@
 }
 
 .interactive:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-card-bg-color, #ffffff) 94%,
-    black 6%
-  );
+  background-color: var(--gnome-hover-overlay);
 }
 
 .interactive:active {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-card-bg-color, #ffffff) 88%,
-    black 12%
-  );
+  background-color: var(--gnome-active-overlay);
 }
 
 .interactive:focus-visible {
@@ -103,24 +95,4 @@
   opacity: var(--gnome-opacity-disabled, 0.5);
   cursor: not-allowed;
   pointer-events: none;
-}
-
-/* ─── Dark mode ────────────────────────────────────────────────────────────── */
-
-@media (prefers-color-scheme: dark) {
-  .interactive:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-card-bg-color, rgba(255, 255, 255, 0.08)) 85%,
-      white 15%
-    );
-  }
-
-  .interactive:active {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-card-bg-color, rgba(255, 255, 255, 0.08)) 75%,
-      white 25%
-    );
-  }
 }
