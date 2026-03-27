@@ -14,6 +14,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **Button** | Default, Suggested, Destructive, Flat, Pill, Circular |
 | ✅ | **Text** | All 12 Adwaita styles: large-title, title-1…4, heading, body, document, caption, caption-heading, monospace, numeric |
+| ⬜ | **Link** | Inline hyperlink with accent colour, hover underline, and external-URL variant |
 | ✅ | **Text Field** | Text input with label, helper text, and error state |
 | ✅ | **Switch** | On/off toggle — replaces checkbox in settings UIs |
 | ✅ | **Checkbox** | Multi-selection with indeterminate state |
@@ -70,3 +71,28 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Avatar** | Circular user image with initials fallback |
 | ✅ | **Badge** | Counter or status indicator overlaid on another element |
 | ✅ | **Popover** | Floating panel anchored to a trigger element |
+
+---
+
+## Tier 6 — Adaptive Layout
+
+> Responsive primitives mirroring the libadwaita adaptive layout system.
+>
+> **GNOME breakpoints** (1 sp ≈ 1 px at 1× density):
+> | Threshold | Pattern triggered |
+> |-----------|-------------------|
+> | ≤ 400 sp | Collapse split views to single pane; sidebar becomes overlay |
+> | ≤ 550 sp | Move `ViewSwitcher` from header bar to a bottom bar |
+> | ≤ 860 sp | Collapse outer pane in nested two-level split views |
+>
+> **Sizing guidelines for sidebars:**
+> - Width fraction: 25 % of total width
+> - Min width: 180 sp · Max width: 280 sp
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`useBreakpoint`** | Hook that tracks viewport width against GNOME breakpoints and fires callbacks on change — mirrors `AdwBreakpoint` |
+| ⬜ | **Clamp** | Constrains content to a maximum width while allowing it to shrink freely — mirrors `AdwClamp` |
+| ⬜ | **NavigationSplitView** | Two-pane sidebar + content layout; collapses to a single navigable pane at ≤ 400 sp — mirrors `AdwNavigationSplitView` |
+| ⬜ | **OverlaySplitView** | Sidebar + content layout where the sidebar becomes a slide-over overlay at ≤ 400 sp — mirrors `AdwOverlaySplitView` |
+| ⬜ | **ViewSwitcherBar** | Bottom bar that replaces the header-bar `ViewSwitcher` on narrow windows (≤ 550 sp) — mirrors `AdwViewSwitcherBar` |
