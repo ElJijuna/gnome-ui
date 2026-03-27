@@ -96,3 +96,36 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **NavigationSplitView** | Two-pane sidebar + content layout; collapses to a single navigable pane at ≤ 400 sp — mirrors `AdwNavigationSplitView` |
 | ✅ | **OverlaySplitView** | Sidebar + content layout where the sidebar becomes a slide-over overlay at ≤ 400 sp — mirrors `AdwOverlaySplitView` |
 | ✅ | **ViewSwitcherBar** | Bottom bar that replaces the header-bar `ViewSwitcher` on narrow windows (≤ 550 sp) — mirrors `AdwViewSwitcherBar` |
+
+---
+
+## Tier 7 — GNOME 48–50 (libadwaita 1.7–1.9)
+
+> New widgets introduced in libadwaita 1.7 (GNOME 48), 1.8 (GNOME 49), and 1.9 (GNOME 50 "Tokyo", March 2026).
+
+### libadwaita 1.7 — GNOME 48
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **ToggleGroup** | Unified group of mutually-exclusive toggle buttons — replaces the pattern of multiple `Button` in a box; mirrors `AdwToggleGroup` |
+| ⬜ | **WrapBox** | Flexible wrapping layout for tag/chip lists that flows across multiple lines — mirrors `AdwWrapBox` |
+
+### libadwaita 1.8 — GNOME 49
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **ShortcutsDialog** | Modal listing keyboard shortcuts with integrated search — mirrors `AdwShortcutsDialog` (replaces deprecated `GtkShortcutsWindow`) |
+
+### libadwaita 1.9 — GNOME 50
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **Sidebar** (v2) | Rewrite of the existing `Sidebar` component following `AdwSidebar`: named sections, per-row suffix widgets, context menus, tooltip, and drag-and-drop activation |
+| ⬜ | **ViewSwitcherSidebar** | Sidebar-based view switcher — mirrors `AdwViewSwitcherSidebar` (replaces `GtkStackSidebar`) |
+| ⬜ | **BreakpointBin** | Applies layout changes when the **component** (not the viewport) crosses a size threshold — CSS container queries equivalent of `AdwBreakpointBin` |
+
+### Cross-cutting — accessibility
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **High-contrast support** | Add `@media (prefers-contrast: more)` overrides to design tokens and all components — formalised in libadwaita 1.8 |
