@@ -24,6 +24,12 @@ export interface StatusPageProps extends HTMLAttributes<HTMLDivElement> {
    * Rendered below the description.
    */
   children?: ReactNode;
+  /**
+   * Reduces padding, icon size, and title scale for use in compact
+   * contexts such as sidebars, popovers, and small panels.
+   * Mirrors the `.compact` style class.
+   */
+  compact?: boolean;
 }
 
 /**
@@ -41,16 +47,20 @@ export function StatusPage({
   title,
   description,
   children,
+  compact = false,
   className,
   ...props
 }: StatusPageProps) {
+  const iconSize = compact ? 64 : 128;
   const iconContent = icon
-    ? <Icon icon={icon} width={128} height={128} aria-hidden />
+    ? <Icon icon={icon} width={iconSize} height={iconSize} aria-hidden />
     : iconNode ?? null;
 
   return (
     <div
-      className={[styles.page, className].filter(Boolean).join(" ")}
+      className={[styles.page, compact ? styles.compact : null, className]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
     >
       {iconContent && (

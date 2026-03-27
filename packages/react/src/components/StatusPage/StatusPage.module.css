@@ -63,6 +63,31 @@
   margin-top: var(--gnome-space-4, 24px);
 }
 
+/* ─── Compact mode ───────────────────────────────────────────────────────────── */
+
+.compact {
+  padding: var(--gnome-space-3, 18px) var(--gnome-space-3, 18px);
+}
+
+.compact .iconWrap {
+  margin-bottom: var(--gnome-space-2, 12px);
+}
+
+.compact .title {
+  font-size: var(--gnome-font-size-title-4, 1.125rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.compact .description {
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  margin-top: var(--gnome-space-1, 6px);
+}
+
+.compact .actions {
+  margin-top: var(--gnome-space-2, 12px);
+  gap: var(--gnome-space-1, 6px);
+}
+
 /* ─── Dark mode ──────────────────────────────────────────────────────────────── */
 
 @media (prefers-color-scheme: dark) {

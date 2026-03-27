@@ -174,7 +174,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`StatusPage` `compact` prop** | Add `compact` prop to the existing `StatusPage`: reduces spacing and icon size for sidebars/popovers — mirrors `.compact` style class |
+| ✅ | **`StatusPage` `compact` prop** | Add `compact` prop to the existing `StatusPage`: reduces spacing and icon size for sidebars/popovers — mirrors `.compact` style class |
 
 ### Tab / Search inline variant
 

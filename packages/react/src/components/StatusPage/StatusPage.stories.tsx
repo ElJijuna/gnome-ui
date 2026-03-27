@@ -4,6 +4,7 @@ import {
 } from "@gnome-ui/icons";
 import { StatusPage } from "./StatusPage";
 import { Button } from "../Button";
+import { Popover } from "../Popover";
 
 const meta: Meta<typeof StatusPage> = {
   title: "Components/StatusPage",
@@ -176,6 +177,67 @@ export const Informational: Story = {
     </StatusPage>
   ),
   parameters: { controls: { disable: true } },
+};
+
+// ─── Compact ──────────────────────────────────────────────────────────────────
+
+export const Compact: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start" }}>
+      {/* Sidebar panel */}
+      <div
+        style={{
+          width: 220,
+          border: "1px solid rgba(0,0,0,0.1)",
+          borderRadius: 12,
+          overflow: "hidden",
+          background: "var(--gnome-card-bg-color, #fff)",
+        }}
+      >
+        <StatusPage
+          compact
+          icon={Search}
+          title="No Results"
+          description="Try a different search term."
+        />
+      </div>
+
+      {/* Popover */}
+      <Popover
+        content={
+          <StatusPage
+            compact
+            icon={StarOutline}
+            title="No Favourites"
+            description="Star items to save them here."
+          >
+            <Button size="sm" variant="suggested">Browse</Button>
+          </StatusPage>
+        }
+      >
+        <Button>Open Popover</Button>
+      </Popover>
+
+      {/* Comparison: default vs compact */}
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+        <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden", background: "var(--gnome-card-bg-color,#fff)", width: 200 }}>
+          <StatusPage icon={Information} title="Default" description="Full spacing and icon size." />
+        </div>
+        <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden", background: "var(--gnome-card-bg-color,#fff)", width: 200 }}>
+          <StatusPage compact icon={Information} title="Compact" description="Reduced spacing and icon size." />
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Use `compact` for sidebars, popovers, and small panels where full spacing would overwhelm the context. Icon shrinks from 128 px to 64 px; title drops to `title-4` scale; padding and gaps are reduced.",
+      },
+    },
+  },
 };
 
 // ─── Destructive action ───────────────────────────────────────────────────────
