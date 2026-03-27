@@ -1,0 +1,179 @@
+/* ─── Toaster (portal container) ────────────────────────────────────────────── */
+
+.toaster {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+
+  /* Don't intercept pointer events in empty space */
+  pointer-events: none;
+}
+
+.toasterBottom {
+  bottom: var(--gnome-space-4, 24px);
+}
+
+.toasterTop {
+  top: var(--gnome-space-4, 24px);
+}
+
+/* ─── Toast card ─────────────────────────────────────────────────────────────── */
+
+.toast {
+  pointer-events: auto;
+
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+
+  padding: 10px var(--gnome-space-2, 12px) 10px var(--gnome-space-3, 16px);
+  min-height: 44px;
+  max-width: 480px;
+  min-width: 240px;
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  border-radius: var(--gnome-radius-lg, 12px);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+
+  /* Slide in from bottom */
+  animation: toast-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Title ──────────────────────────────────────────────────────────────────── */
+
+.title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Actions ────────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  flex-shrink: 0;
+}
+
+/* ─── Action button ──────────────────────────────────────────────────────────── */
+
+.actionBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-accent-color, #3584e4);
+  cursor: pointer;
+  padding: 4px var(--gnome-space-1, 6px);
+  border-radius: var(--gnome-radius-sm, 6px);
+
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.actionBtn:hover {
+  background-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 10%, transparent);
+}
+
+.actionBtn:active {
+  background-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 18%, transparent);
+}
+
+.actionBtn:focus {
+  outline: none;
+}
+
+.actionBtn:focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: var(--gnome-focus-ring-offset, 2px);
+}
+
+/* ─── Dismiss button ─────────────────────────────────────────────────────────── */
+
+.dismissBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: var(--gnome-radius-sm, 6px);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.55;
+
+  transition:
+    opacity          var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.dismissBtn:hover {
+  opacity: 1;
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.dismissBtn:active {
+  background-color: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.dismissBtn:focus {
+  outline: none;
+}
+
+.dismissBtn:focus-visible {
+  opacity: 1;
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: var(--gnome-focus-ring-offset, 2px);
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .toast {
+    background-color: var(--gnome-card-bg-color, #383838);
+    box-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+
+  .actionBtn,
+  .dismissBtn {
+    transition: none;
+  }
+}

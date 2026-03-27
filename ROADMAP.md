@@ -52,7 +52,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **Spinner** | Indeterminate loading indicator |
 | ✅ | **Progress Bar** | Determinate and indeterminate progress |
-| ⬜ | **Toast** | Non-blocking temporary notification |
+| ✅ | **Toast** | Non-blocking temporary notification |
 | ✅ | **Banner** | Persistent message at the top of a view |
 | ⬜ | **Dialog** | Blocking modal with title, body, and buttons |
 | ⬜ | **Tooltip** | Informational text on hover |
