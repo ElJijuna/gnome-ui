@@ -37,9 +37,10 @@ jobs:
           path: |
             packages/core/src/tokens.css
             packages/core/src/tokens.d.ts
+            packages/icons/dist/
             packages/react/dist/
 
-  # ── 2. Release @gnome-ui/core ──────────────────────────────────────────────
+  # ── 2a. Release @gnome-ui/core ─────────────────────────────────────────────
   release-core:
     name: Release @gnome-ui/core
     needs: build
@@ -70,10 +71,41 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-  # ── 3. Release @gnome-ui/react (after core) ───────────────────────────────
+  # ── 2b. Release @gnome-ui/icons ────────────────────────────────────────────
+  release-icons:
+    name: Release @gnome-ui/icons
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
+
+      - name: Release
+        working-directory: packages/icons
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  # ── 3. Release @gnome-ui/react (after core + icons) ───────────────────────
   release-react:
     name: Release @gnome-ui/react
-    needs: release-core
+    needs: [release-core, release-icons]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
