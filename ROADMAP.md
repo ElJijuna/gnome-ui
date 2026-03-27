@@ -51,7 +51,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ✅ | **Spinner** | Indeterminate loading indicator |
-| ⬜ | **Progress Bar** | Determinate and indeterminate progress |
+| ✅ | **Progress Bar** | Determinate and indeterminate progress |
 | ⬜ | **Toast** | Non-blocking temporary notification |
 | ⬜ | **Banner** | Persistent message at the top of a view |
 | ⬜ | **Dialog** | Blocking modal with title, body, and buttons |

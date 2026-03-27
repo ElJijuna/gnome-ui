@@ -1,0 +1,57 @@
+/* ─── Track ────────────────────────────────────────────────────────────────── */
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--gnome-radius-pill);
+  background-color: var(--gnome-light-3, #deddda);
+  overflow: hidden;
+}
+
+/* ─── Fill (determinate) ───────────────────────────────────────────────────── */
+
+.fill {
+  height: 100%;
+  border-radius: var(--gnome-radius-pill);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  transition: width var(--gnome-duration-normal) var(--gnome-easing-default);
+  will-change: width;
+}
+
+/* ─── Indeterminate pulse ──────────────────────────────────────────────────── */
+
+.indeterminate {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  animation: pulse 1.4s var(--gnome-easing-default) infinite;
+}
+
+@keyframes pulse {
+  0%   { left: -40%; }
+  100% { left: 100%; }
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .track {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .fill {
+    transition: none;
+  }
+
+  .indeterminate {
+    animation: none;
+    left: 0;
+    width: 100%;
+    opacity: 0.5;
+  }
+}
