@@ -54,6 +54,9 @@ export type { SidebarProps, SidebarItemProps } from "./components/Sidebar";
 export { SpinButton } from "./components/SpinButton";
 export type { SpinButtonProps } from "./components/SpinButton";
 
+export { TabBar, TabItem, TabPanel } from "./components/Tabs";
+export type { TabBarProps, TabItemProps, TabPanelProps } from "./components/Tabs";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 

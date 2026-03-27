@@ -63,6 +63,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Icon` | React adapter for `@gnome-ui/icons` — inline SVG, inherits `currentColor` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-icon--docs) |
 | `Sidebar` / `SidebarItem` | Lateral navigation panel with active state and badge support | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-sidebar--docs) |
 | `SpinButton` | Numeric input with −/+ buttons, keyboard nav, decimal support | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinbutton--docs) |
+| `TabBar` / `TabItem` / `TabPanel` | Tab-based navigation with keyboard support and optional close buttons | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tabs--docs) |
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 
