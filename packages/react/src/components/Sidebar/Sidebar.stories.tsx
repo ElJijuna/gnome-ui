@@ -2,9 +2,10 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   GoHome, Search, Settings, Star, Delete,
-  ViewMore, MediaPlay,
+  ViewMore, MediaPlay, Share, Add,
 } from "@gnome-ui/icons";
 import { Sidebar } from "./Sidebar";
+import { SidebarSection } from "./SidebarSection";
 import { SidebarItem } from "./SidebarItem";
 import { Badge } from "../Badge";
 import { HeaderBar } from "../HeaderBar";
@@ -23,14 +24,14 @@ const meta: Meta<typeof Sidebar> = {
         component: `
 Lateral navigation panel following the Adwaita \`.navigation-sidebar\` pattern.
 
-Compose \`Sidebar\` with \`SidebarItem\` for each navigation entry.
+Updated for **libadwaita 1.9 / GNOME 50**:
 
-### Guidelines
-- Use for apps with 3–7 top-level views.
-- Keep labels short — one or two words.
-- Only one item should be \`active\` at a time; set \`aria-current="page"\` automatically via the prop.
-- Place the sidebar on the **leading** side (left in LTR layouts).
-- Use the \`badge\` prop to show unread counts or status dots.
+- **\`SidebarSection\`** — groups items under a named heading with a divider between sections.
+- **\`suffix\`** — general trailing widget per item (button, badge, icon…); supersedes \`badge\`.
+- **\`tooltip\`** — short label shown on hover, useful for truncated or icon-only rows.
+- **\`menuItems\`** — per-item context menu on right-click or the \`Menu\` key.
+
+All previous \`Sidebar\` / \`SidebarItem\` usage is fully backward compatible.
         `,
       },
     },
@@ -40,108 +41,141 @@ Compose \`Sidebar\` with \`SidebarItem\` for each navigation entry.
 export default meta;
 type Story = StoryObj<typeof Sidebar>;
 
-// ─── Default ───────────────────────────────────────────────────────────────────
+// ─── Default (flat, backward compat) ──────────────────────────────────────────
 
 export const Default: Story = {
   render: () => (
     <Sidebar style={{ height: 320 }}>
-      <SidebarItem icon={GoHome}    label="Home"     active />
-      <SidebarItem icon={Star}      label="Starred" />
-      <SidebarItem icon={Search}    label="Search" />
-      <SidebarItem icon={Settings}  label="Settings" />
+      <SidebarSection>
+        <SidebarItem icon={GoHome}    label="Home"     active />
+        <SidebarItem icon={Star}      label="Starred" />
+        <SidebarItem icon={Search}    label="Search" />
+        <SidebarItem icon={Settings}  label="Settings" />
+      </SidebarSection>
     </Sidebar>
   ),
   parameters: { controls: { disable: true } },
 };
 
-// ─── With badges ──────────────────────────────────────────────────────────────
+// ─── Sections ─────────────────────────────────────────────────────────────────
 
-export const WithBadges: Story = {
+export const WithSections: Story = {
+  render: function WithSectionsStory() {
+    const [active, setActive] = useState("inbox");
+    return (
+      <Sidebar style={{ height: 400 }}>
+        <SidebarSection title="Mailboxes">
+          <SidebarItem icon={GoHome}    label="Inbox"   active={active === "inbox"}   onClick={() => setActive("inbox")}   suffix={<Badge variant="accent">12</Badge>} />
+          <SidebarItem icon={Share}     label="Sent"    active={active === "sent"}    onClick={() => setActive("sent")} />
+          <SidebarItem icon={Delete}    label="Trash"   active={active === "trash"}   onClick={() => setActive("trash")}  suffix={<Badge variant="neutral">4</Badge>} />
+        </SidebarSection>
+        <SidebarSection title="Tags">
+          <SidebarItem icon={Star}      label="Work"     active={active === "work"}    onClick={() => setActive("work")} />
+          <SidebarItem icon={Star}      label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
+          <SidebarItem icon={Star}      label="Finance"  active={active === "finance"} onClick={() => setActive("finance")} />
+        </SidebarSection>
+        <SidebarSection title="Accounts">
+          <SidebarItem icon={Settings}  label="alice@example.com" active={active === "alice"} onClick={() => setActive("alice")} />
+          <SidebarItem icon={Settings}  label="bob@example.com"   active={active === "bob"}   onClick={() => setActive("bob")} />
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: { controls: { disable: true } },
+};
+
+// ─── Suffix ───────────────────────────────────────────────────────────────────
+
+export const WithSuffix: Story = {
   render: () => (
     <Sidebar style={{ height: 320 }}>
-      <SidebarItem icon={GoHome}   label="Inbox"  active badge={<Badge variant="accent">12</Badge>} />
-      <SidebarItem icon={Star}     label="Starred" />
-      <SidebarItem icon={Delete}   label="Trash"  badge={<Badge variant="neutral">4</Badge>} />
-      <SidebarItem icon={Settings} label="Settings" />
+      <SidebarSection>
+        <SidebarItem icon={GoHome}   label="Inbox"    active suffix={<Badge variant="accent">12</Badge>} />
+        <SidebarItem icon={Star}     label="Starred"         suffix={<Badge variant="neutral">4</Badge>} />
+        <SidebarItem icon={MediaPlay} label="Podcasts"       suffix={
+          <Button variant="flat" shape="circular" aria-label="New episode" style={{ width: 24, height: 24, minWidth: 0 }}>
+            <Icon icon={Add} size="sm" aria-hidden />
+          </Button>
+        } />
+        <SidebarItem icon={Settings} label="Settings" />
+      </SidebarSection>
     </Sidebar>
   ),
   parameters: { controls: { disable: true } },
 };
 
-// ─── No icons ─────────────────────────────────────────────────────────────────
+// ─── Tooltip ──────────────────────────────────────────────────────────────────
 
-export const NoIcons: Story = {
+export const WithTooltips: Story = {
   render: () => (
-    <Sidebar style={{ height: 240 }}>
-      <SidebarItem label="All Notes"   active />
-      <SidebarItem label="Favourites" />
-      <SidebarItem label="Archive" />
-      <SidebarItem label="Trash" />
+    <Sidebar style={{ height: 280, width: 52 }}>
+      <SidebarSection>
+        <SidebarItem icon={GoHome}   label="" tooltip="Home"     active />
+        <SidebarItem icon={Search}   label="" tooltip="Search" />
+        <SidebarItem icon={Star}     label="" tooltip="Starred" />
+        <SidebarItem icon={Settings} label="" tooltip="Settings" />
+      </SidebarSection>
     </Sidebar>
   ),
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: { story: "Icon-only sidebar (narrow width). Hover to see the tooltip." },
+    },
+  },
 };
 
-// ─── Controlled ───────────────────────────────────────────────────────────────
+// ─── Context menu ─────────────────────────────────────────────────────────────
 
-export const Controlled: Story = {
-  render: function ControlledStory() {
-    const items = [
-      { id: "home",     label: "Home",    icon: GoHome },
-      { id: "music",    label: "Music",   icon: MediaPlay },
-      { id: "starred",  label: "Starred", icon: Star },
-      { id: "settings", label: "Settings",icon: Settings },
-    ];
+export const WithContextMenu: Story = {
+  render: function ContextMenuStory() {
     const [active, setActive] = useState("home");
-
     return (
-      <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
         <Sidebar style={{ height: 280 }}>
-          {items.map(({ id, label, icon }) => (
+          <SidebarSection>
             <SidebarItem
-              key={id}
-              icon={icon}
-              label={label}
-              active={active === id}
-              onClick={() => setActive(id)}
+              icon={GoHome} label="Home" active={active === "home"} onClick={() => setActive("home")}
+              menuItems={[
+                { label: "Open in new window", onClick: () => alert("Open in new window") },
+                { label: "Add to favourites",  onClick: () => alert("Add to favourites") },
+              ]}
             />
-          ))}
+            <SidebarItem
+              icon={Star} label="Documents" active={active === "docs"} onClick={() => setActive("docs")}
+              menuItems={[
+                { label: "Rename",  onClick: () => alert("Rename") },
+                { label: "Share",   onClick: () => alert("Share") },
+                { label: "Delete",  onClick: () => alert("Delete"), destructive: true },
+              ]}
+            />
+            <SidebarItem
+              icon={Search} label="Search" active={active === "search"} onClick={() => setActive("search")}
+              menuItems={[
+                { label: "Clear history", onClick: () => alert("Clear history"), destructive: true },
+              ]}
+            />
+            <SidebarItem icon={Settings} label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+          </SidebarSection>
         </Sidebar>
-        <div style={{ padding: "12px 0" }}>
-          <Text variant="body" color="dim">Active: <strong>{active}</strong></Text>
-        </div>
+        <Text variant="caption" color="dim" style={{ paddingTop: 12 }}>
+          Right-click an item to see its context menu.
+        </Text>
       </div>
     );
   },
   parameters: { controls: { disable: true } },
 };
 
-// ─── In a full layout ─────────────────────────────────────────────────────────
+// ─── Full layout ──────────────────────────────────────────────────────────────
 
 export const InLayout: Story = {
   render: function LayoutStory() {
-    const items = [
-      { id: "home",     label: "Home",    icon: GoHome },
-      { id: "search",   label: "Search",  icon: Search },
-      { id: "starred",  label: "Starred", icon: Star, badge: <Badge variant="accent">3</Badge> },
-      { id: "settings", label: "Settings",icon: Settings },
-    ];
-    const [active, setActive] = useState("home");
-
+    const [active, setActive] = useState("inbox");
     return (
-      <div
-        style={{
-          border: "1px solid rgba(0,0,0,0.1)",
-          borderRadius: 12,
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          height: 400,
-          maxWidth: 640,
-        }}
-      >
+      <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden", display: "flex", flexDirection: "column", height: 440, maxWidth: 700 }}>
         <HeaderBar
-          title={items.find(i => i.id === active)?.label ?? ""}
+          title="Mail"
           end={
             <Button variant="flat" aria-label="More options">
               <Icon icon={ViewMore} size="md" aria-hidden />
@@ -150,33 +184,28 @@ export const InLayout: Story = {
         />
         <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
           <Sidebar style={{ height: "100%" }}>
-            {items.map(({ id, label, icon, badge }) => (
-              <SidebarItem
-                key={id}
-                icon={icon}
-                label={label}
-                active={active === id}
-                badge={badge}
-                onClick={() => setActive(id)}
-              />
-            ))}
+            <SidebarSection title="Mailboxes">
+              <SidebarItem icon={GoHome}  label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")}  suffix={<Badge variant="accent">12</Badge>}
+                menuItems={[{ label: "Mark all as read", onClick: () => {} }, { label: "Empty folder", onClick: () => {}, destructive: true }]} />
+              <SidebarItem icon={Share}   label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")} />
+              <SidebarItem icon={Delete}  label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")} suffix={<Badge variant="neutral">4</Badge>}
+                menuItems={[{ label: "Empty Trash", onClick: () => {}, destructive: true }]} />
+            </SidebarSection>
+            <SidebarSection title="Tags">
+              <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")}
+                menuItems={[{ label: "Rename tag", onClick: () => {} }, { label: "Delete tag", onClick: () => {}, destructive: true }]} />
+              <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
+            </SidebarSection>
           </Sidebar>
           <main style={{ flex: 1, padding: 24, overflow: "auto" }}>
-            <Text variant="title-3">{items.find(i => i.id === active)?.label}</Text>
+            <Text variant="title-3" style={{ textTransform: "capitalize" }}>{active}</Text>
             <Text variant="body" color="dim" style={{ marginTop: 8 }}>
-              Content area for the selected view.
+              Content area. Right-click sidebar items to see the context menu.
             </Text>
           </main>
         </div>
       </div>
     );
   },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: "Sidebar inside a full app layout with HeaderBar and content area.",
-      },
-    },
-  },
+  parameters: { controls: { disable: true } },
 };

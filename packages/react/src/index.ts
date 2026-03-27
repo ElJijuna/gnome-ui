@@ -48,8 +48,8 @@ export type { BadgeProps, BadgeVariant } from "./components/Badge";
 export { Icon } from "./components/Icon";
 export type { IconProps, IconSize } from "./components/Icon";
 
-export { Sidebar, SidebarItem } from "./components/Sidebar";
-export type { SidebarProps, SidebarItemProps } from "./components/Sidebar";
+export { Sidebar, SidebarSection, SidebarItem } from "./components/Sidebar";
+export type { SidebarProps, SidebarSectionProps, SidebarItemProps, SidebarMenuEntry } from "./components/Sidebar";
 
 export { SpinButton } from "./components/SpinButton";
 export type { SpinButtonProps } from "./components/SpinButton";

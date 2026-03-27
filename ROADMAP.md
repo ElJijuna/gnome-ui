@@ -121,7 +121,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **Sidebar** (v2) | Rewrite of the existing `Sidebar` component following `AdwSidebar`: named sections, per-row suffix widgets, context menus, tooltip, and drag-and-drop activation |
+| ✅ | **Sidebar** (v2) | Rewrite of the existing `Sidebar` component following `AdwSidebar`: named sections, per-row suffix widgets, context menus, and tooltip |
 | ⬜ | **ViewSwitcherSidebar** | Sidebar-based view switcher — mirrors `AdwViewSwitcherSidebar` (replaces `GtkStackSidebar`) |
 | ⬜ | **BreakpointBin** | Applies layout changes when the **component** (not the viewport) crosses a size threshold — CSS container queries equivalent of `AdwBreakpointBin` |
 

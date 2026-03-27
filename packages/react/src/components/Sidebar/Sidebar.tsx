@@ -8,8 +8,11 @@ export interface SidebarProps extends HTMLAttributes<HTMLElement> {
 /**
  * Lateral navigation panel following the Adwaita `.navigation-sidebar` style.
  *
- * Renders as `<nav>`. Compose with `SidebarItem` for individual entries.
+ * Updated for libadwaita 1.9 / GNOME 50: compose with `SidebarSection` to
+ * group items under named headings separated by dividers.
+ * For flat (unsectioned) sidebars, place `SidebarItem` children directly.
  *
+ * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Sidebar.html
  * @see https://developer.gnome.org/hig/patterns/nav/sidebars.html
  */
 export function Sidebar({ children, className, ...props }: SidebarProps) {
@@ -18,9 +21,7 @@ export function Sidebar({ children, className, ...props }: SidebarProps) {
       className={[styles.sidebar, className].filter(Boolean).join(" ")}
       {...props}
     >
-      <ul role="list" className={styles.list}>
-        {children}
-      </ul>
+      {children}
     </nav>
   );
 }
