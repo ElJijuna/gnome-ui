@@ -52,6 +52,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Avatar` | Circular user image with deterministic-color initials fallback | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatar--docs) |
 | `Separator` | Horizontal/vertical dividing line between content groups | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-separator--docs) |
 | `Switch` | On/off toggle for settings that apply immediately | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-switch--docs) |
+| `Checkbox` | Multi-selection with checked, unchecked, and indeterminate states | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-checkbox--docs) |
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 

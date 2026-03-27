@@ -24,6 +24,9 @@ export type { SeparatorProps, SeparatorOrientation } from "./components/Separato
 export { Switch } from "./components/Switch";
 export type { SwitchProps } from "./components/Switch";
 
+export { Checkbox } from "./components/Checkbox";
+export type { CheckboxProps } from "./components/Checkbox";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 

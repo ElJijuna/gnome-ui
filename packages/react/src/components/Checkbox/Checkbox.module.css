@@ -1,0 +1,124 @@
+/* ─── Reset & base ─────────────────────────────────────────────────────────── */
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+  border-radius: var(--gnome-radius-sm, 4px);
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1.5px solid var(--gnome-light-4, #c0bfbc);
+
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    border-color     var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* ─── Checkmark (checked) ──────────────────────────────────────────────────── */
+
+.checkbox::before {
+  content: "";
+  display: block;
+  opacity: 0;
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.checkbox:checked {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.checkbox:checked::before {
+  opacity: 1;
+  /* SVG checkmark rendered via clip-path */
+  width: 10px;
+  height: 7px;
+  background-color: #ffffff;
+  clip-path: polygon(
+    14% 44%,
+    0 58%,
+    36% 100%,
+    100% 12%,
+    84% 0%,
+    36% 68%
+  );
+}
+
+/* ─── Indeterminate (mixed) ────────────────────────────────────────────────── */
+
+.checkbox:indeterminate {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.checkbox:indeterminate::before {
+  opacity: 1;
+  width: 10px;
+  height: 2px;
+  background-color: #ffffff;
+  clip-path: none;
+  border-radius: 1px;
+}
+
+/* ─── Focus ────────────────────────────────────────────────────────────────── */
+
+.checkbox:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Hover ────────────────────────────────────────────────────────────────── */
+
+.checkbox:not(:checked):not(:indeterminate):hover {
+  border-color: var(--gnome-light-5, #9a9996);
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-card-bg-color, #ffffff) 94%,
+    black 6%
+  );
+}
+
+/* ─── Disabled ─────────────────────────────────────────────────────────────── */
+
+.checkbox:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .checkbox {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: var(--gnome-dark-1, #77767b);
+  }
+
+  .checkbox:not(:checked):not(:indeterminate):hover {
+    border-color: var(--gnome-light-4, #c0bfbc);
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-card-bg-color, #383838) 85%,
+      white 15%
+    );
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .checkbox,
+  .checkbox::before {
+    transition: none;
+  }
+}
