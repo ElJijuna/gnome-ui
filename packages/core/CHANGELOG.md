@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.2...@gnome-ui/core@1.1.3) (2026-03-27)
+
+### Bug Fixes
+
+*  update needs to release-core in release-icons section. ([ab591c6](https://github.com/ElJijuna/gnome-ui/commit/ab591c6e362041ec24832194d597445d09bb78df))
+
 ## [1.1.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.1...@gnome-ui/core@1.1.2) (2026-03-27)
 
 ### Bug Fixes
