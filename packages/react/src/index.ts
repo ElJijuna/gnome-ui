@@ -121,3 +121,6 @@ export type { ChipProps } from "./components/Chip";
 
 export { ShortcutsDialog } from "./components/ShortcutsDialog";
 export type { ShortcutsDialogProps, ShortcutsSection, ShortcutEntry } from "./components/ShortcutsDialog";
+
+export { ViewSwitcherSidebar, ViewSwitcherSidebarItem } from "./components/ViewSwitcherSidebar";
+export type { ViewSwitcherSidebarProps, ViewSwitcherSidebarItemProps } from "./components/ViewSwitcherSidebar";

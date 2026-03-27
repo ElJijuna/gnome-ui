@@ -67,6 +67,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 | `ViewSwitcher` / `ViewSwitcherItem` | Segmented pill control for switching between 2–4 top-level views | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitcher--docs) |
+| `ViewSwitcherSidebar` / `ViewSwitcherSidebarItem` | Sidebar-style view switcher for 5+ views with optional counts — mirrors `AdwViewSwitcherSidebar` (GNOME 50) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitchersidebar--docs) |
 | `SearchBar` | Collapsible search bar with auto-focus, clear button, and optional filter row | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) |
 | `Toast` / `Toaster` | Non-blocking temporary notification with auto-dismiss, action, and queue support | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-toast--docs) |
 | `Dialog` | Blocking modal with title, body, focus trap, and configurable buttons | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dialog--docs) |

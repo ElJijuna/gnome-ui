@@ -1,0 +1,195 @@
+/* ─── Container ─────────────────────────────────────────────────────────────── */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 100%;
+  background-color: var(--gnome-sidebar-bg-color, #ebebeb);
+  color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.8));
+  border-right: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ─── List ──────────────────────────────────────────────────────────────────── */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: var(--gnome-space-1, 6px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ─── Item wrapper ──────────────────────────────────────────────────────────── */
+
+.item {
+  display: block;
+}
+
+/* ─── Item button ───────────────────────────────────────────────────────────── */
+
+.itemBtn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  width: 100%;
+  padding: 9px var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-md, 8px);
+  min-height: 42px;
+
+  color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.8));
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+
+  transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.itemBtn:hover:not(:disabled):not(.active) {
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-sidebar-bg-color, #ebebeb) 88%,
+    black 12%
+  );
+}
+
+.itemBtn:active:not(:disabled):not(.active) {
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-sidebar-bg-color, #ebebeb) 78%,
+    black 22%
+  );
+}
+
+.itemBtn:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-sidebar-bg-color, #ebebeb),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+.itemBtn:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+/* ─── Active ────────────────────────────────────────────────────────────────── */
+
+.active {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #ffffff);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.active:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 92%, black 8%);
+}
+
+.active:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 84%, black 16%);
+}
+
+/* ─── Icon ──────────────────────────────────────────────────────────────────── */
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.active .itemIcon {
+  opacity: 1;
+}
+
+/* ─── Label ─────────────────────────────────────────────────────────────────── */
+
+.itemLabel {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Suffix / count ────────────────────────────────────────────────────────── */
+
+.itemSuffix {
+  flex-shrink: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--gnome-radius-pill);
+
+  font-size: var(--gnome-font-size-caption, 0.875rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1;
+
+  /* Inactive: dim pill */
+  background-color: rgba(0, 0, 0, 0.12);
+  color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.active .count {
+  /* Active: white pill on accent */
+  background-color: rgba(255, 255, 255, 0.25);
+  color: var(--gnome-accent-fg-color, #ffffff);
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    border-right-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .itemBtn:hover:not(:disabled):not(.active) {
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-sidebar-bg-color, #303030) 85%,
+      white 15%
+    );
+  }
+
+  .itemBtn:active:not(:disabled):not(.active) {
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-sidebar-bg-color, #303030) 75%,
+      white 25%
+    );
+  }
+
+  .count {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: var(--gnome-sidebar-fg-color, rgba(255, 255, 255, 0.87));
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .itemBtn {
+    transition: none;
+  }
+}
