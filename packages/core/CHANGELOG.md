@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.7.0...@gnome-ui/core@1.8.0) (2026-03-27)
+
+### Features
+
+* add component example <Dashboard /> in layout and add collapsed prop in <Sidebar />, update <SidebarItem /> ([3212c4a](https://github.com/ElJijuna/gnome-ui/commit/3212c4a34ad0839d29b218118e61536519d76179))
+
 ## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.6.0...@gnome-ui/core@1.7.0) (2026-03-27)
 
 ### Features
