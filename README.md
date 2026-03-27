@@ -81,6 +81,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `NavigationSplitView` | Two-pane layout that collapses to single pane at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationsplitview--docs) |
 | `OverlaySplitView` | Sidebar becomes slide-over overlay at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) |
 | `ViewSwitcherBar` | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) |
+| `BreakpointBin` | Fires layout changes when the **container** crosses a width threshold (`ResizeObserver`) — mirrors `AdwBreakpointBin` (GNOME 50) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-breakpointbin--docs) |
 | `Link` | Inline hyperlink with accent colour, animated underline, and external-URL variant | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) |
 | `ToggleGroup` / `ToggleGroupItem` | Mutually-exclusive toggle buttons for in-place option selection — mirrors `AdwToggleGroup` (GNOME 48) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) |
 | `WrapBox` | Flexible wrapping layout container — mirrors `AdwWrapBox` (GNOME 48) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-wrapbox--docs) |

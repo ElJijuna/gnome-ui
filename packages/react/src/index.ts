@@ -124,3 +124,6 @@ export type { ShortcutsDialogProps, ShortcutsSection, ShortcutEntry } from "./co
 
 export { ViewSwitcherSidebar, ViewSwitcherSidebarItem } from "./components/ViewSwitcherSidebar";
 export type { ViewSwitcherSidebarProps, ViewSwitcherSidebarItemProps } from "./components/ViewSwitcherSidebar";
+
+export { BreakpointBin } from "./components/BreakpointBin";
+export type { BreakpointBinProps, BreakpointDefinition, BreakpointBinState } from "./components/BreakpointBin";
