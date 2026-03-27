@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.0...@gnome-ui/core@1.1.1) (2026-03-27)
+
+### Bug Fixes
+
+* add build @gnome-ui/icons in action to build storybook. ([ca7c59c](https://github.com/ElJijuna/gnome-ui/commit/ca7c59ca6d6668658ae4fedf647a2c8c6b7035b8))
+
 ## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.0.0...@gnome-ui/core@1.1.0) (2026-03-27)
 
 ### Features
