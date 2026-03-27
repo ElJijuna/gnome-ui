@@ -1,0 +1,95 @@
+/* ─── Reset & layout ───────────────────────────────────────────────────────── */
+
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  width: 56px;
+  height: 28px;
+  border-radius: var(--gnome-radius-pill);
+
+  background-color: var(--gnome-light-4, #c0bfbc);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    border-color     var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* ─── Thumb ────────────────────────────────────────────────────────────────── */
+
+.switch::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--gnome-radius-pill);
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* ─── Checked ──────────────────────────────────────────────────────────────── */
+
+.switch:checked {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.switch:checked::before {
+  transform: translateX(28px);
+}
+
+/* ─── Focus ────────────────────────────────────────────────────────────────── */
+
+.switch:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Disabled ─────────────────────────────────────────────────────────────── */
+
+.switch:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .switch {
+    background-color: var(--gnome-dark-2, #5e5c64);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .switch::before {
+    background-color: var(--gnome-light-3, #deddda);
+  }
+
+  .switch:checked {
+    background-color: var(--gnome-accent-bg-color, #3584e4);
+    border-color: var(--gnome-accent-bg-color, #3584e4);
+  }
+
+  .switch:checked::before {
+    background-color: #ffffff;
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .switch::before {
+    transition: none;
+  }
+}

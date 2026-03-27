@@ -15,7 +15,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Button** | Default, Suggested, Destructive, Flat, Pill, Circular |
 | ✅ | **Text** | All 12 Adwaita styles: large-title, title-1…4, heading, body, document, caption, caption-heading, monospace, numeric |
 | ⬜ | **Text Field** | Text input with label, helper text, and error state |
-| ⬜ | **Switch** | On/off toggle — replaces checkbox in settings UIs |
+| ✅ | **Switch** | On/off toggle — replaces checkbox in settings UIs |
 | ⬜ | **Checkbox** | Multi-selection with indeterminate state |
 | ⬜ | **Radio Button** | Single selection within a group |
 
@@ -29,8 +29,8 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **Separator** | Horizontal/vertical divider line |
 | ✅ | **Card** | Elevated surface for grouping related content |
-| ⬜ | **Boxed List** | Rounded bordered list of `ActionRow` items — the most common GNOME pattern |
-| ⬜ | **Action Row** | Row with title, subtitle, and an end widget (switch, button…) |
+| ✅ | **Boxed List** | Rounded bordered list of `ActionRow` items — the most common GNOME pattern |
+| ✅ | **Action Row** | Row with title, subtitle, and an end widget (switch, button…) |
 | ⬜ | **Header Bar** | Title bar with centered title and action buttons |
 
 ---

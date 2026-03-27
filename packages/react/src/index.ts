@@ -20,3 +20,12 @@ export type { AvatarProps, AvatarSize, AvatarColor } from "./components/Avatar";
 
 export { Separator } from "./components/Separator";
 export type { SeparatorProps, SeparatorOrientation } from "./components/Separator";
+
+export { Switch } from "./components/Switch";
+export type { SwitchProps } from "./components/Switch";
+
+export { ActionRow } from "./components/ActionRow";
+export type { ActionRowProps } from "./components/ActionRow";
+
+export { BoxedList } from "./components/BoxedList";
+export type { BoxedListProps } from "./components/BoxedList";
