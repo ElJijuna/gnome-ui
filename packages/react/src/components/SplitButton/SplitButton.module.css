@@ -1,0 +1,212 @@
+/* ─── Container ─────────────────────────────────────────────────────────────── */
+
+.container {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: var(--gnome-radius-md);
+  border: 1px solid transparent;
+  overflow: visible;
+  position: relative;
+}
+
+/* ─── Shared button base ────────────────────────────────────────────────────── */
+
+.primary,
+.toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body);
+  font-weight: var(--gnome-font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+
+  min-height: 34px;
+
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.primary:focus-visible,
+.toggle:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
+    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color);
+  position: relative;
+  z-index: 1;
+}
+
+.primary:disabled,
+.toggle:disabled {
+  opacity: var(--gnome-opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Primary half ──────────────────────────────────────────────────────────── */
+
+.primary {
+  border-radius: var(--gnome-radius-md) 0 0 var(--gnome-radius-md);
+  padding: var(--gnome-space-1) var(--gnome-space-2);
+  background: transparent;
+}
+
+/* ─── Separator ─────────────────────────────────────────────────────────────── */
+
+.separator {
+  display: block;
+  width: 1px;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* ─── Toggle (arrow) half ───────────────────────────────────────────────────── */
+
+.toggle {
+  border-radius: 0 var(--gnome-radius-md) var(--gnome-radius-md) 0;
+  padding: var(--gnome-space-1) 8px;
+  background: transparent;
+}
+
+.chevron {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ─── Variant: default ──────────────────────────────────────────────────────── */
+
+.default {
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border-color: var(--gnome-light-3, #deddda);
+  box-shadow: var(--gnome-shadow-sm);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.default .primary:hover:not(:disabled),
+.default .toggle:hover:not(:disabled) {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.default .primary:active:not(:disabled),
+.default .toggle:active:not(:disabled) {
+  background-color: var(--gnome-active-overlay);
+}
+
+.default .separator {
+  background-color: var(--gnome-light-3, #deddda);
+}
+
+@media (prefers-color-scheme: dark) {
+  .default {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  .default .separator {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* ─── Variant: suggested ────────────────────────────────────────────────────── */
+
+.suggested {
+  background-color: var(--gnome-accent-bg-color);
+  border-color: transparent;
+  color: var(--gnome-accent-fg-color);
+}
+
+.suggested .primary:hover:not(:disabled),
+.suggested .toggle:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.suggested .primary:active:not(:disabled),
+.suggested .toggle:active:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.suggested .separator {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Variant: destructive ──────────────────────────────────────────────────── */
+
+.destructive {
+  background-color: var(--gnome-destructive-bg-color);
+  border-color: transparent;
+  color: var(--gnome-destructive-fg-color);
+}
+
+.destructive .primary:hover:not(:disabled),
+.destructive .toggle:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.destructive .primary:active:not(:disabled),
+.destructive .toggle:active:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.destructive .separator {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Dropdown panel ────────────────────────────────────────────────────────── */
+
+.dropdown {
+  position: fixed;
+  z-index: var(--gnome-z-popover, 1000);
+  min-width: 160px;
+
+  background-color: var(--gnome-popover-bg-color, #ffffff);
+  border: 1px solid var(--gnome-popover-border-color, rgba(0, 0, 0, 0.12));
+  border-radius: var(--gnome-radius-md);
+  box-shadow: var(--gnome-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.18));
+  padding: var(--gnome-space-1, 6px);
+
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default),
+    transform var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.dropdownVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dropdown {
+    background-color: var(--gnome-popover-bg-color, #2d2d2d);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ─── High contrast ─────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .default {
+    border-width: 2px;
+    box-shadow: none;
+  }
+
+  .primary:focus-visible,
+  .toggle:focus-visible {
+    box-shadow:
+      0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
+      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color),
+      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width) + 1px) var(--gnome-window-bg-color);
+  }
+}

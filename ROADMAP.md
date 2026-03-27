@@ -160,9 +160,9 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ 🟢 | **`SplitButton`** | Primary action button with an attached dropdown arrow — mirrors `AdwSplitButton`; supports `suggested` and `destructive` variants |
-| ⬜ | **`Button` `raised` variant** | Add `variant="raised"` to `Button`: explicit raised look for buttons inside flat/toolbar contexts — mirrors `.raised` style class |
-| ⬜ | **`Button` `osd` modifier** | Add `osd` prop to `Button`: dark semi-transparent style for controls overlaid on media/images — mirrors `.osd` style class |
+| ✅ | **`SplitButton`** | Primary action button with an attached dropdown arrow — mirrors `AdwSplitButton`; supports `suggested` and `destructive` variants |
+| ✅ | **`Button` `raised` variant** | Add `variant="raised"` to `Button`: explicit raised look for buttons inside flat/toolbar contexts — mirrors `.raised` style class |
+| ✅ | **`Button` `osd` modifier** | Add `osd` prop to `Button`: dark semi-transparent style for controls overlaid on media/images — mirrors `.osd` style class |
 
 ### View Switcher additions
 

@@ -146,6 +146,67 @@
   background-color: var(--gnome-active-overlay);
 }
 
+/* Raised — explicit raised look inside flat/toolbar contexts */
+.raised {
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  border-color: var(--gnome-light-3, #deddda);
+  box-shadow: var(--gnome-shadow-sm);
+}
+
+.raised:hover:not(:disabled) {
+  background-color: var(--gnome-light-2, #f6f5f4);
+}
+
+.raised:active:not(:disabled) {
+  background-color: var(--gnome-light-3, #deddda);
+  box-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .raised {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--gnome-shadow-sm);
+  }
+
+  .raised:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .raised:active:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+  }
+}
+
+/* OSD — dark semi-transparent overlay style for media/image contexts */
+.osd {
+  background-color: rgba(0, 0, 0, 0.65) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.osd:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  filter: none;
+}
+
+.osd:active:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .osd {
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
 /* ─── High contrast ───────────────────────────────────────────── */
 
 @media (prefers-contrast: more) {

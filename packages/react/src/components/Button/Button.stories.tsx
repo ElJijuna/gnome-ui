@@ -24,7 +24,7 @@ Button component following the [GNOME Human Interface Guidelines](https://develo
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "suggested", "destructive", "flat"],
+      options: ["default", "suggested", "destructive", "flat", "raised"],
       description: "Visual style of the button.",
     },
     size: {
@@ -134,6 +134,69 @@ export const Circular: Story = {
   },
 };
 
+// ─── Raised ───────────────────────────────────────────────────────────────────
+
+/** Raised buttons have explicit elevation inside flat/toolbar contexts. */
+export const Raised: Story = {
+  args: { variant: "raised", children: "Open" },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          backgroundColor: "var(--gnome-headerbar-bg-color, #ebebeb)",
+          padding: "8px 12px",
+          borderRadius: "8px",
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Use `raised` inside toolbar or flat contexts to give a button explicit elevation — mirrors the `.raised` style class.",
+      },
+    },
+  },
+};
+
+// ─── OSD ──────────────────────────────────────────────────────────────────────
+
+/** OSD buttons are placed over images or media. */
+export const Osd: Story = {
+  args: { osd: true, children: "Play" },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+          padding: "40px 24px",
+          borderRadius: "12px",
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Use `osd` for buttons overlaid on media or images. Always dark semi-transparent regardless of system theme — mirrors the `.osd` style class.",
+      },
+    },
+  },
+};
+
 // ─── States ───────────────────────────────────────────────────────────────────
 
 export const Disabled: Story = {
@@ -154,9 +217,21 @@ export const AllVariants: Story = {
           padding: "4px 8px",
           borderRadius: "6px",
           display: "flex",
+          gap: "8px",
         }}
       >
         <Button variant="flat">Flat</Button>
+        <Button variant="raised">Raised</Button>
+      </div>
+      <div
+        style={{
+          background: "linear-gradient(135deg, #1a1a2e, #0f3460)",
+          padding: "4px 8px",
+          borderRadius: "6px",
+          display: "flex",
+        }}
+      >
+        <Button osd>OSD</Button>
       </div>
       <Button disabled>Disabled</Button>
     </div>

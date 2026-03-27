@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
 
-export type ButtonVariant = "default" | "suggested" | "destructive" | "flat";
+export type ButtonVariant = "default" | "suggested" | "destructive" | "flat" | "raised";
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonShape = "default" | "pill" | "circular";
 
@@ -12,6 +12,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   /** Shape of the button. "pill" for primary actions in open space, "circular" for icon-only buttons. */
   shape?: ButtonShape;
+  /**
+   * Dark semi-transparent overlay style for buttons placed on top of
+   * media or images — mirrors the `.osd` style class.
+   */
+  osd?: boolean;
   /** Icon placed before the label. */
   leadingIcon?: ReactNode;
   /** Icon placed after the label. */
@@ -34,6 +39,7 @@ export function Button({
   variant = "default",
   size = "md",
   shape = "default",
+  osd = false,
   leadingIcon,
   trailingIcon,
   children,
@@ -45,6 +51,7 @@ export function Button({
     styles[variant],
     size !== "md" ? styles[size] : null,
     shape !== "default" ? styles[shape] : null,
+    osd ? styles.osd : null,
     className,
   ]
     .filter(Boolean)

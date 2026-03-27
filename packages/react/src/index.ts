@@ -130,3 +130,6 @@ export type { BreakpointBinProps, BreakpointDefinition, BreakpointBinState } fro
 
 export { ButtonRow } from "./components/ButtonRow";
 export type { ButtonRowProps, ButtonRowVariant } from "./components/ButtonRow";
+
+export { SplitButton } from "./components/SplitButton";
+export type { SplitButtonProps, SplitButtonVariant } from "./components/SplitButton";
