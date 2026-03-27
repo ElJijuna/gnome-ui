@@ -1,3 +1,17 @@
+## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.6.0...@gnome-ui/core@1.7.0) (2026-03-27)
+
+### Features
+
+* add component <ExpanderRow /> ([fcc520b](https://github.com/ElJijuna/gnome-ui/commit/fcc520b6867a05543d9970c84ca0b1bcbfeedafd))
+* add component <InlineSwitcher /> and <InlineSwitcherItem /> ([51b6cbd](https://github.com/ElJijuna/gnome-ui/commit/51b6cbd8f45ebd3bbe0b51d1b42a55f895f73eb6))
+* update <StatusPage /> component with compac proptery. ([0fff944](https://github.com/ElJijuna/gnome-ui/commit/0fff944f06bbd1b8a1d4b8ad4c046ab3cd8ee2da))
+* update components <ActionRow /> and <BoxedList /> ([0bed393](https://github.com/ElJijuna/gnome-ui/commit/0bed39340ddacd48a5afe5f44bbb19bea1aa32c1))
+* update components <SearchBar />, <Tabs /> and <TabBar /> with inline prop. ([c350703](https://github.com/ElJijuna/gnome-ui/commit/c350703bd94560672918fe032f501525a19257cf))
+
+### Bug Fixes
+
+* update avatar text sizes. ([94579e8](https://github.com/ElJijuna/gnome-ui/commit/94579e81013cc976543bcf808fb14943f7f63da3))
+
 ## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.5.0...@gnome-ui/core@1.6.0) (2026-03-27)
 
 ### Features
