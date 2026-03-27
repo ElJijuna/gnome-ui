@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import type { ReactNode } from "react";
+import { parameters as docsParameters } from "@storybook/addon-docs/preview";
 import "@gnome-ui/core/styles";
 
 function CenteredDecorator({ children }: { children: ReactNode }) {
@@ -42,6 +43,7 @@ const preview: Preview = {
       },
     },
     docs: {
+      ...docsParameters.docs,
       toc: true,
     },
   },

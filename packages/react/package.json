@@ -45,6 +45,7 @@
     "vite-plugin-dts": "^4.5.4",
     "@storybook/react": "^10.3.3",
     "@storybook/react-vite": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-a11y": "^10.3.3",
     "storybook": "^10.3.3"
   }
