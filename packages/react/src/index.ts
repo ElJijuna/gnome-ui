@@ -39,6 +39,9 @@ export type { ProgressBarProps } from "./components/ProgressBar";
 export { Banner } from "./components/Banner";
 export type { BannerProps, BannerVariant } from "./components/Banner";
 
+export { HeaderBar } from "./components/HeaderBar";
+export type { HeaderBarProps } from "./components/HeaderBar";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 

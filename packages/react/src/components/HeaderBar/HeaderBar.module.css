@@ -1,0 +1,68 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.headerBar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+
+  padding: 0 var(--gnome-space-2, 12px);
+  min-height: 47px;
+
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  color: var(--gnome-headerbar-fg-color, rgba(0, 0, 0, 0.8));
+
+  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+
+  font-family: var(--gnome-font-family);
+}
+
+/* ─── Flat variant ─────────────────────────────────────────────────────────── */
+
+.flat {
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+/* ─── Leading / trailing slots ─────────────────────────────────────────────── */
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+.slotEnd {
+  justify-content: flex-end;
+}
+
+/* ─── Title slot (center) ──────────────────────────────────────────────────── */
+
+.titleSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 var(--gnome-space-1, 6px);
+}
+
+/* ─── Title text ───────────────────────────────────────────────────────────── */
+
+.title {
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-heading, 1.2);
+  color: var(--gnome-headerbar-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .headerBar {
+    border-bottom-color: var(--gnome-headerbar-border-color, rgba(255, 255, 255, 0.1));
+  }
+}
