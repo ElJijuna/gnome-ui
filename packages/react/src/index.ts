@@ -139,3 +139,6 @@ export type { ToolbarProps, SpacerProps } from "./components/Toolbar";
 
 export { LinkedGroup } from "./components/LinkedGroup";
 export type { LinkedGroupProps } from "./components/LinkedGroup";
+
+export { Frame } from "./components/Frame";
+export type { FrameProps } from "./components/Frame";
