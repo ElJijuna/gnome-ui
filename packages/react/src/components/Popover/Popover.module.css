@@ -1,0 +1,124 @@
+/* ─── Panel ──────────────────────────────────────────────────────────────────── */
+
+.panel {
+  position: fixed;
+  z-index: 10200; /* above Toaster (9999), below Dialog (10000) */
+
+  min-width: 180px;
+  max-width: 320px;
+
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #ffffff));
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  border-radius: var(--gnome-radius-lg, 12px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.14),
+    0 1px 4px  rgba(0, 0, 0, 0.08);
+
+  padding: var(--gnome-space-2, 12px);
+
+  font-family: var(--gnome-font-family);
+
+  /* Hidden before position is known */
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity   var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+
+  /* Don't intercept events while invisible */
+  pointer-events: none;
+
+  outline: none;
+}
+
+.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* ─── Arrow ──────────────────────────────────────────────────────────────────── */
+
+.arrow {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #ffffff));
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+
+  /* Arrow points toward the trigger */
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Position arrow on each side */
+.bottom .arrow {
+  top: -6px;
+  left: 50%;
+  margin-left: -6px;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.top .arrow {
+  bottom: -6px;
+  left: 50%;
+  margin-left: -6px;
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+
+.left .arrow {
+  right: -6px;
+  top: 50%;
+  margin-top: -6px;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.right .arrow {
+  left: -6px;
+  top: 50%;
+  margin-top: -6px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .panel {
+    background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #383838));
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      0 1px 4px  rgba(0, 0, 0, 0.3);
+  }
+
+  .arrow {
+    background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #383838));
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .bottom .arrow { border-right-color: transparent; border-bottom-color: transparent; }
+  .top    .arrow { border-left-color:  transparent; border-top-color:    transparent; }
+  .left   .arrow { border-left-color:  transparent; border-bottom-color: transparent; }
+  .right  .arrow { border-right-color: transparent; border-top-color:    transparent; }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: opacity var(--gnome-duration-fast, 100ms) linear;
+    transform: none;
+  }
+
+  .visible {
+    transform: none;
+  }
+}

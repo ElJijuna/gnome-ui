@@ -86,3 +86,6 @@ export type { DropdownProps, DropdownOption } from "./components/Dropdown";
 
 export { Slider } from "./components/Slider";
 export type { SliderProps } from "./components/Slider";
+
+export { Popover } from "./components/Popover";
+export type { PopoverProps, PopoverPlacement } from "./components/Popover";

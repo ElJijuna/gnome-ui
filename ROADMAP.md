@@ -69,4 +69,4 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Spin Button** | Numeric input with +/− buttons |
 | ✅ | **Avatar** | Circular user image with initials fallback |
 | ✅ | **Badge** | Counter or status indicator overlaid on another element |
-| ⬜ | **Popover** | Floating panel anchored to a trigger element |
+| ✅ | **Popover** | Floating panel anchored to a trigger element |
