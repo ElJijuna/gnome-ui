@@ -1,3 +1,17 @@
+## [1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.2.0...@gnome-ui/react@1.3.0) (2026-03-27)
+
+### Features
+
+* add component <BreackpointBin /> ([524f941](https://github.com/ElJijuna/gnome-ui/commit/524f94156005909afcb14d93700afae1dca4ce84))
+* add component <ShortcutsDialog /> ([7ff26f6](https://github.com/ElJijuna/gnome-ui/commit/7ff26f627b2749314862bc5cddf07b02f4d8a6ae))
+* add component <ViewSiwitcherSidebar /> and <ViewSwitcherSidebarItem />. ([040c653](https://github.com/ElJijuna/gnome-ui/commit/040c6531a7277389ee781c721d34d4922d84add9))
+* update component <Sidebar /> and <SidebarItem />, add new component <SidebarSection /> ([e77ab52](https://github.com/ElJijuna/gnome-ui/commit/e77ab52687d294853aa5126a3ba0dd1d2c3cb0b0))
+* update components with media queries to high contraste support. ([ce7fa26](https://github.com/ElJijuna/gnome-ui/commit/ce7fa26f31b6af42cf4e5175aa35fa1858f5cfc2))
+
+### Documentation
+
+* update ROADMAP. ([80fe637](https://github.com/ElJijuna/gnome-ui/commit/80fe6379502c4cf86b30f07a6c7f93241935f9ed))
+
 ## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.1.0...@gnome-ui/react@1.2.0) (2026-03-27)
 
 ### Features
