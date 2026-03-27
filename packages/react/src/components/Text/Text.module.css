@@ -1,0 +1,121 @@
+.text {
+  font-family: var(--gnome-font-family);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  margin: 0;
+}
+
+/* ─── Variants ────────────────────────────────────────────────── */
+
+.large-title {
+  font-size: var(--gnome-font-size-large-title); /* 2.25rem */
+  font-weight: 300;
+  line-height: var(--gnome-line-height-heading);
+  letter-spacing: -0.02em;
+}
+
+.title-1 {
+  font-size: var(--gnome-font-size-title-1); /* 1.875rem */
+  font-weight: var(--gnome-font-weight-bold);
+  line-height: var(--gnome-line-height-heading);
+}
+
+.title-2 {
+  font-size: var(--gnome-font-size-title-2); /* 1.5rem */
+  font-weight: var(--gnome-font-weight-bold);
+  line-height: var(--gnome-line-height-heading);
+}
+
+.title-3 {
+  font-size: var(--gnome-font-size-title-3); /* 1.25rem */
+  font-weight: var(--gnome-font-weight-bold);
+  line-height: var(--gnome-line-height-heading);
+}
+
+.title-4 {
+  font-size: var(--gnome-font-size-title-4); /* 1.125rem */
+  font-weight: var(--gnome-font-weight-semibold);
+  line-height: var(--gnome-line-height-heading);
+}
+
+/* Heading — same size as body but bold. Used for section labels, boxed list headers */
+.heading {
+  font-size: var(--gnome-font-size-body);
+  font-weight: var(--gnome-font-weight-bold);
+  line-height: var(--gnome-line-height-heading);
+}
+
+/* Body — default UI text for labels and descriptions */
+.body {
+  font-size: var(--gnome-font-size-body);
+  font-weight: var(--gnome-font-weight-normal);
+  line-height: var(--gnome-line-height-body);
+}
+
+/* Document — main reading content (chat messages, articles) */
+.document {
+  font-size: var(--gnome-font-size-body);
+  font-weight: var(--gnome-font-weight-normal);
+  line-height: 1.65;
+}
+
+/* Caption — sub-text accompanying body text */
+.caption {
+  font-size: var(--gnome-font-size-caption); /* 0.75rem */
+  font-weight: var(--gnome-font-weight-normal);
+  line-height: var(--gnome-line-height-body);
+}
+
+/* Caption Heading — small label, often used above groups */
+.caption-heading {
+  font-size: var(--gnome-font-size-caption);
+  font-weight: var(--gnome-font-weight-semibold);
+  line-height: var(--gnome-line-height-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Monospace — code, logs, shell commands */
+.monospace {
+  font-family: var(--gnome-font-family-mono);
+  font-size: 0.875rem;
+  line-height: var(--gnome-line-height-body);
+}
+
+/* Numeric — tabular figures for aligned numbers */
+.numeric {
+  font-size: var(--gnome-font-size-body);
+  font-weight: var(--gnome-font-weight-normal);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  line-height: var(--gnome-line-height-body);
+}
+
+/* ─── Colors ──────────────────────────────────────────────────── */
+
+.color-default {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.color-dim {
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.color-accent {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.color-destructive {
+  color: var(--gnome-destructive-color, #e01b24);
+}
+
+.color-success {
+  color: var(--gnome-success-color, #2ec27e);
+}
+
+.color-warning {
+  color: var(--gnome-warning-color, #e5a50a);
+}
+
+.color-error {
+  color: var(--gnome-error-color, #e01b24);
+}

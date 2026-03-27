@@ -5,3 +5,6 @@ import "@gnome-ui/core/styles";
 // Components
 export { Button } from "./components/Button";
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape } from "./components/Button";
+
+export { Text } from "./components/Text";
+export type { TextProps, TextVariant, TextColor } from "./components/Text";
