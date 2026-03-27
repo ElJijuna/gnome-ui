@@ -36,6 +36,9 @@ export type { RadioButtonProps } from "./components/RadioButton";
 export { ProgressBar } from "./components/ProgressBar";
 export type { ProgressBarProps } from "./components/ProgressBar";
 
+export { Banner } from "./components/Banner";
+export type { BannerProps, BannerVariant } from "./components/Banner";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 

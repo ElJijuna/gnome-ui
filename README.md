@@ -56,6 +56,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `TextField` | Text input with label, helper text, and error state | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-textfield--docs) |
 | `RadioButton` | Single-selection within a group; keyboard arrow-key navigation | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-radiobutton--docs) |
 | `ProgressBar` | Determinate (0–1) and indeterminate progress indicator | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-progressbar--docs) |
+| `Banner` | Persistent message strip with optional action and dismiss | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-banner--docs) |
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 

@@ -1,0 +1,137 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: 10px var(--gnome-space-4, 24px);
+  min-height: 44px;
+  width: 100%;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+/* ─── Message ──────────────────────────────────────────────────────────────── */
+
+.message {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Actions (action button + dismiss) ────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  flex-shrink: 0;
+}
+
+/* ─── Action button ────────────────────────────────────────────────────────── */
+
+.actionBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  cursor: pointer;
+  padding: 4px var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-md, 8px);
+  transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.actionBtn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      currentColor;
+}
+
+/* ─── Dismiss button ───────────────────────────────────────────────────────── */
+
+.dismissBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: var(--gnome-radius-md, 8px);
+  opacity: 0.6;
+  transition:
+    opacity      var(--gnome-duration-fast) var(--gnome-easing-default),
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.dismissBtn:hover  { opacity: 1; }
+.dismissBtn:active { opacity: 0.8; }
+
+.dismissBtn:focus-visible {
+  outline: none;
+  opacity: 1;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      currentColor;
+}
+
+/* ─── Variant: info ────────────────────────────────────────────────────────── */
+
+.info {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #ffffff);
+}
+
+.actionBtn-info:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.actionBtn-info:active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Variant: warning ─────────────────────────────────────────────────────── */
+
+.warning {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+  color: var(--gnome-warning-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.actionBtn-warning:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.actionBtn-warning:active {
+  background-color: rgba(0, 0, 0, 0.14);
+}
+
+/* ─── Variant: error ───────────────────────────────────────────────────────── */
+
+.error {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+  color: var(--gnome-error-fg-color, #ffffff);
+}
+
+.actionBtn-error:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.actionBtn-error:active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Variant: success ─────────────────────────────────────────────────────── */
+
+.success {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+  color: var(--gnome-success-fg-color, #ffffff);
+}
+
+.actionBtn-success:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.actionBtn-success:active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
