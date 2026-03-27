@@ -12,5 +12,8 @@
   "files": [
     "src/tokens.css",
     "src/tokens.d.ts"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
