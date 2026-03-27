@@ -1,0 +1,106 @@
+/* ─── Base row ─────────────────────────────────────────────────────────────── */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
+  min-height: 52px;
+  width: 100%;
+
+  /* Reset button */
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  font: inherit;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+
+  transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.row:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.row:active {
+  background-color: var(--gnome-active-overlay);
+}
+
+.row:focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+.row:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Title ─────────────────────────────────────────────────────────────────── */
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  flex: 1;
+  text-align: center;
+}
+
+/* ─── Leading / trailing icons ─────────────────────────────────────────────── */
+
+.leading,
+.trailing {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ─── Variants ─────────────────────────────────────────────────────────────── */
+
+.default .title {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.default .leading,
+.default .trailing {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.suggested .title {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.suggested .leading,
+.suggested .trailing {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.destructive .title {
+  color: var(--gnome-destructive-color, #e01b24);
+}
+
+.destructive .leading,
+.destructive .trailing {
+  color: var(--gnome-destructive-color, #e01b24);
+}
+
+/* ─── High contrast ─────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .row:focus-visible {
+    box-shadow:
+      inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+      inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+        var(--gnome-focus-ring-color, #3584e4),
+      inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px) + 1px)
+        var(--gnome-window-bg-color, #fafafa);
+  }
+}

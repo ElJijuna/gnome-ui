@@ -127,3 +127,6 @@ export type { ViewSwitcherSidebarProps, ViewSwitcherSidebarItemProps } from "./c
 
 export { BreakpointBin } from "./components/BreakpointBin";
 export type { BreakpointBinProps, BreakpointDefinition, BreakpointBinState } from "./components/BreakpointBin";
+
+export { ButtonRow } from "./components/ButtonRow";
+export type { ButtonRowProps, ButtonRowVariant } from "./components/ButtonRow";
