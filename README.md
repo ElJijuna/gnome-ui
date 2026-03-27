@@ -50,6 +50,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Card` | Elevated surface for grouping content; static or interactive (activatable) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-card--docs) |
 | `Spinner` | Indeterminate loading indicator; sm/md/lg sizes, accessible label | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinner--docs) |
 | `Avatar` | Circular user image with deterministic-color initials fallback | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatar--docs) |
+| `Separator` | Horizontal/vertical dividing line between content groups | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-separator--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

@@ -17,3 +17,6 @@ export type { SpinnerProps, SpinnerSize } from "./components/Spinner";
 
 export { Avatar } from "./components/Avatar";
 export type { AvatarProps, AvatarSize, AvatarColor } from "./components/Avatar";
+
+export { Separator } from "./components/Separator";
+export type { SeparatorProps, SeparatorOrientation } from "./components/Separator";
