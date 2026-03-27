@@ -1,0 +1,240 @@
+/* ─── Wrapper ────────────────────────────────────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 160px;
+}
+
+/* ─── Trigger button ─────────────────────────────────────────────────────────── */
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-1, 6px);
+  width: 100%;
+
+  padding: 7px var(--gnome-space-2, 12px);
+  min-height: 36px;
+
+  appearance: none;
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgba(0,0,0,0.08));
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color     var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow       var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.trigger:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 90%, black 10%);
+}
+
+.trigger:focus {
+  outline: none;
+}
+
+.trigger:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+.trigger:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+.triggerOpen {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Trigger label ──────────────────────────────────────────────────────────── */
+
+.triggerLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeholder {
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── Chevron icon ───────────────────────────────────────────────────────────── */
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ─── Listbox ────────────────────────────────────────────────────────────────── */
+
+.list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #ffffff));
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.12));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.12),
+    0 1px 3px  rgba(0, 0, 0, 0.08);
+
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  animation: list-in var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes list-in {
+  from { opacity: 0; transform: scaleY(0.95); transform-origin: top center; }
+  to   { opacity: 1; transform: scaleY(1);    transform-origin: top center; }
+}
+
+.listDown {
+  top: calc(100% + 4px);
+}
+
+.listUp {
+  bottom: calc(100% + 4px);
+  animation-name: list-in-up;
+}
+
+@keyframes list-in-up {
+  from { opacity: 0; transform: scaleY(0.95); transform-origin: bottom center; }
+  to   { opacity: 1; transform: scaleY(1);    transform-origin: bottom center; }
+}
+
+/* ─── Option ─────────────────────────────────────────────────────────────────── */
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: 8px var(--gnome-space-2, 12px);
+  min-height: 40px;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.optionActive {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 12%, transparent);
+}
+
+.optionSelected {
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.optionDisabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Option text block ──────────────────────────────────────────────────────── */
+
+.optionText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.optionLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.optionDesc {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  opacity: var(--gnome-opacity-dim, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Check icon (selected) ──────────────────────────────────────────────────── */
+
+.checkIcon {
+  flex-shrink: 0;
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .trigger {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  .trigger:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .list {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 1px 3px  rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .chevron {
+    transition: none;
+  }
+
+  .list {
+    animation: none;
+  }
+}

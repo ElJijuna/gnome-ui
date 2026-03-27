@@ -72,6 +72,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Dialog` | Blocking modal with title, body, focus trap, and configurable buttons | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dialog--docs) |
 | `Tooltip` | Floating informational label on hover/focus with auto-flip positioning | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tooltip--docs) |
 | `StatusPage` | Empty-state page with icon, title, description, and optional actions | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) |
+| `Dropdown` | Expandable option list with keyboard nav, flip positioning, and descriptions | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dropdown--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

@@ -80,3 +80,6 @@ export type { TooltipProps, TooltipPlacement } from "./components/Tooltip";
 
 export { StatusPage } from "./components/StatusPage";
 export type { StatusPageProps } from "./components/StatusPage";
+
+export { Dropdown } from "./components/Dropdown";
+export type { DropdownProps, DropdownOption } from "./components/Dropdown";
