@@ -48,6 +48,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Button` | Default, Suggested, Destructive, Flat, Pill, Circular | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-button--docs) |
 | `Text` | 12 Adwaita type styles: large-title, title-1…4, heading, body, caption… | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-text--docs) |
 | `Card` | Elevated surface for grouping content; static or interactive (activatable) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-card--docs) |
+| `Spinner` | Indeterminate loading indicator; sm/md/lg sizes, accessible label | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinner--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

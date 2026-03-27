@@ -1,0 +1,54 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: var(--gnome-spinner-track-color, rgba(0, 0, 0, 0.15));
+  border-top-color: var(--gnome-accent-color, #3584e4);
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ─── Sizes ────────────────────────────────────────────────────────────────── */
+
+.sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.md {
+  width: 24px;
+  height: 24px;
+  border-width: 2.5px;
+}
+
+.lg {
+  width: 36px;
+  height: 36px;
+  border-width: 3px;
+}
+
+/* ─── Keyframes ────────────────────────────────────────────────────────────── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .spinner {
+    border-color: var(--gnome-spinner-track-color, rgba(255, 255, 255, 0.15));
+    border-top-color: var(--gnome-accent-color, #3584e4);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2s;
+  }
+}

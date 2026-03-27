@@ -50,7 +50,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **Spinner** | Indeterminate loading indicator |
+| ✅ | **Spinner** | Indeterminate loading indicator |
 | ⬜ | **Progress Bar** | Determinate and indeterminate progress |
 | ⬜ | **Toast** | Non-blocking temporary notification |
 | ⬜ | **Banner** | Persistent message at the top of a view |

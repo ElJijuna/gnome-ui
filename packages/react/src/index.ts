@@ -11,3 +11,6 @@ export type { TextProps, TextVariant, TextColor } from "./components/Text";
 
 export { Card } from "./components/Card";
 export type { CardProps, CardPadding } from "./components/Card";
+
+export { Spinner } from "./components/Spinner";
+export type { SpinnerProps, SpinnerSize } from "./components/Spinner";
