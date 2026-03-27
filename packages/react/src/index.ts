@@ -62,3 +62,6 @@ export type { ActionRowProps } from "./components/ActionRow";
 
 export { BoxedList } from "./components/BoxedList";
 export type { BoxedListProps } from "./components/BoxedList";
+
+export { ViewSwitcher, ViewSwitcherItem } from "./components/ViewSwitcher";
+export type { ViewSwitcherProps, ViewSwitcherItemProps } from "./components/ViewSwitcher";
