@@ -1,0 +1,26 @@
+/* ─── Toolbar ─────────────────────────────────────────────────────────────────
+   Mirrors the libadwaita `.toolbar` style class:
+   horizontal flex row, 6 px padding on all sides, 6 px gap between children.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--gnome-space-1, 6px);
+  padding: var(--gnome-space-1, 6px);
+  min-height: 46px;
+
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  font-family: var(--gnome-font-family);
+}
+
+/* ─── Spacer ──────────────────────────────────────────────────────────────────
+   Invisible flex filler — mirrors `GtkSeparator.spacer`.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.spacer {
+  flex: 1;
+  min-width: 0;
+}

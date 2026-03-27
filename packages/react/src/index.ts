@@ -133,3 +133,6 @@ export type { ButtonRowProps, ButtonRowVariant } from "./components/ButtonRow";
 
 export { SplitButton } from "./components/SplitButton";
 export type { SplitButtonProps, SplitButtonVariant } from "./components/SplitButton";
+
+export { Toolbar, Spacer } from "./components/Toolbar";
+export type { ToolbarProps, SpacerProps } from "./components/Toolbar";

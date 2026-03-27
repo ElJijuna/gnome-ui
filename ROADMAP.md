@@ -142,8 +142,8 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ 🟢 | **`Toolbar`** | `.toolbar` box: flat-buttons, 6 px margins/gap — wraps `AdwHeaderBar`, `GtkActionBar`, and generic tool rows |
-| ⬜ 🟢 | **`Spacer`** | `.spacer` separator: invisible `flex: 1` filler for `Toolbar`/`HeaderBar` to push trailing items to the end — mirrors `GtkSeparator.spacer` |
+| ✅ | **`Toolbar`** | `.toolbar` box: flat-buttons, 6 px margins/gap — wraps `AdwHeaderBar`, `GtkActionBar`, and generic tool rows |
+| ✅ | **`Spacer`** | `.spacer` separator: invisible `flex: 1` filler for `Toolbar`/`HeaderBar` to push trailing items to the end — mirrors `GtkSeparator.spacer` |
 | ⬜ 🟢 | **`LinkedGroup`** | `.linked` box: children rendered as a single connected unit with no gap and merged borders — canonical GNOME pattern for button groups and segmented inputs |
 | ⬜ 🟢 | **`Frame`** | `.frame` container: simple bordered surface (`border` + `border-radius`) without background — mirrors `GtkFrame` default styling |
 
