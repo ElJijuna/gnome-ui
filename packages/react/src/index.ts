@@ -118,3 +118,6 @@ export type { WrapBoxProps, WrapBoxJustify, WrapBoxAlign } from "./components/Wr
 
 export { Chip } from "./components/Chip";
 export type { ChipProps } from "./components/Chip";
+
+export { ShortcutsDialog } from "./components/ShortcutsDialog";
+export type { ShortcutsDialogProps, ShortcutsSection, ShortcutEntry } from "./components/ShortcutsDialog";

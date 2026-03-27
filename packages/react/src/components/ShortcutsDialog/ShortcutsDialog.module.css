@@ -1,0 +1,342 @@
+/* ─── Backdrop ──────────────────────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Dialog card ───────────────────────────────────────────────────────────── */
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+
+  width: min(580px, calc(100vw - 48px));
+  max-height: min(640px, calc(100vh - 80px));
+
+  background-color: var(--gnome-window-bg-color, #fafafa);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  border-radius: var(--gnome-radius-xl, 16px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
+  animation: dialog-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gnome-space-3, 18px) var(--gnome-space-3, 18px) var(--gnome-space-2, 12px);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-title-4, 1.125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  line-height: 1.3;
+}
+
+.closeBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  border-radius: var(--gnome-radius-pill);
+
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.6;
+
+  transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+              opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.closeBtn:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+  opacity: 1;
+}
+
+.closeBtn:focus-visible {
+  opacity: 1;
+  box-shadow:
+    0 0 0 2px var(--gnome-window-bg-color, #fafafa),
+    0 0 0 4px var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Search ────────────────────────────────────────────────────────────────── */
+
+.searchRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 var(--gnome-space-3, 18px) var(--gnome-space-2, 12px);
+  flex-shrink: 0;
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1px solid var(--gnome-light-3, #deddda);
+  border-radius: var(--gnome-radius-md, 8px);
+}
+
+.searchIcon {
+  padding: 0 var(--gnome-space-1, 6px) 0 var(--gnome-space-2, 12px);
+  font-size: 1.1rem;
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 7px 0;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.searchInput::placeholder {
+  opacity: 0.5;
+}
+
+/* hide browser-native × */
+.searchInput::-webkit-search-cancel-button { display: none; }
+
+.searchClear {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  padding: 0 var(--gnome-space-2, 12px);
+
+  font-size: 1rem;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.5;
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.searchClear:hover { opacity: 1; }
+
+.searchRow:focus-within {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gnome-accent-color, #3584e4) 25%, transparent);
+}
+
+/* ─── Scrollable body ───────────────────────────────────────────────────────── */
+
+.body {
+  overflow-y: auto;
+  padding: 0 var(--gnome-space-3, 18px) var(--gnome-space-3, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-3, 18px);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--gnome-space-4, 24px) 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  opacity: 0.5;
+  margin: 0;
+}
+
+/* ─── Section ───────────────────────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--gnome-space-1, 6px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.875rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.5;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--gnome-radius-md, 8px);
+  overflow: hidden;
+}
+
+/* ─── Shortcut row ──────────────────────────────────────────────────────────── */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-3, 18px);
+  padding: 8px var(--gnome-space-2, 12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+/* ─── Key caps ──────────────────────────────────────────────────────────────── */
+
+.keys {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.keyCap {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.keyCap kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2px 7px;
+  min-width: 24px;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.875rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  font-style: normal;
+  line-height: 1.6;
+
+  background-color: var(--gnome-window-bg-color, #fafafa);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-bottom-width: 2px;
+  border-radius: var(--gnome-radius-sm, 4px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+}
+
+.plus {
+  font-size: var(--gnome-font-size-caption, 0.875rem);
+  opacity: 0.4;
+}
+
+/* ─── Description ───────────────────────────────────────────────────────────── */
+
+.description {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  text-align: end;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .dialog {
+    background-color: var(--gnome-window-bg-color, #242424);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .closeBtn:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .searchRow {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .list {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .row {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .keyCap kbd {
+    background-color: var(--gnome-window-bg-color, #242424);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation: none;
+  }
+
+  .closeBtn,
+  .searchClear {
+    transition: none;
+  }
+}
