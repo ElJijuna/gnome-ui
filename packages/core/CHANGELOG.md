@@ -1,3 +1,9 @@
+## [1.1.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.1...@gnome-ui/core@1.1.2) (2026-03-27)
+
+### Bug Fixes
+
+* update release action to deploy @gnome-ui/icons ([edef28c](https://github.com/ElJijuna/gnome-ui/commit/edef28c8ddf9498fcd2b19c582f539004e8c8d33))
+
 ## [1.1.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.0...@gnome-ui/core@1.1.1) (2026-03-27)
 
 ### Bug Fixes
