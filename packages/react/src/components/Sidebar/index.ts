@@ -1,4 +1,4 @@
-export { Sidebar } from "./Sidebar";
+export { Sidebar, SidebarCollapsedContext, useSidebarCollapsed } from "./Sidebar";
 export type { SidebarProps } from "./Sidebar";
 
 export { SidebarSection } from "./SidebarSection";

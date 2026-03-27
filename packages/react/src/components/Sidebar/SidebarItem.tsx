@@ -12,6 +12,7 @@ import { createPortal } from "react-dom";
 import type { IconDefinition } from "@gnome-ui/icons";
 import { Icon } from "../Icon";
 import { Tooltip } from "../Tooltip";
+import { useSidebarCollapsed } from "./Sidebar";
 import styles from "./Sidebar.module.css";
 
 export interface SidebarMenuEntry {
@@ -73,7 +74,10 @@ export function SidebarItem({
   className,
   ...props
 }: SidebarItemProps) {
+  const collapsed = useSidebarCollapsed();
   const trailing = suffix ?? badge;
+  // When collapsed, always show a tooltip (fall back to the item label)
+  const effectiveTooltip = collapsed ? (tooltip ?? label) : tooltip;
 
   // ── Context menu state ──────────────────────────────────────────────────
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
@@ -125,9 +129,11 @@ export function SidebarItem({
     <button
       type="button"
       aria-current={active ? "page" : undefined}
+      aria-label={collapsed ? label : undefined}
       className={[
         styles.itemBtn,
         active ? styles.active : null,
+        collapsed ? styles.itemCollapsed : null,
         className,
       ]
         .filter(Boolean)
@@ -141,15 +147,15 @@ export function SidebarItem({
           <Icon icon={icon} size="md" aria-hidden />
         </span>
       )}
-      <span className={styles.itemLabel}>{label}</span>
-      {trailing && <span className={styles.itemSuffix}>{trailing}</span>}
+      {!collapsed && <span className={styles.itemLabel}>{label}</span>}
+      {!collapsed && trailing && <span className={styles.itemSuffix}>{trailing}</span>}
     </button>
   );
 
   return (
     <li className={styles.item}>
-      {tooltip
-        ? <Tooltip label={tooltip} placement="right">{button}</Tooltip>
+      {effectiveTooltip
+        ? <Tooltip label={effectiveTooltip} placement="right">{button}</Tooltip>
         : button}
 
       {/* Context menu portal */}

@@ -167,6 +167,43 @@ export const WithContextMenu: Story = {
   parameters: { controls: { disable: true } },
 };
 
+// ─── Collapsible (icon-only rail) ─────────────────────────────────────────────
+
+export const Collapsible: Story = {
+  render: function CollapsibleStory() {
+    const [collapsed, setCollapsed] = useState(false);
+    const [active, setActive] = useState("home");
+    return (
+      <div style={{ display: "flex", height: 320, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden" }}>
+        <Sidebar collapsed={collapsed} style={{ height: "100%" }}>
+          <SidebarSection>
+            <SidebarItem icon={GoHome}    label="Home"     active={active === "home"}     onClick={() => setActive("home")} />
+            <SidebarItem icon={Star}      label="Starred"  active={active === "starred"}  onClick={() => setActive("starred")}  suffix={<Badge variant="accent">3</Badge>} />
+            <SidebarItem icon={Search}    label="Search"   active={active === "search"}   onClick={() => setActive("search")} />
+            <SidebarItem icon={Settings}  label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+          </SidebarSection>
+        </Sidebar>
+        <main style={{ flex: 1, padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+          <Button variant="flat" onClick={() => setCollapsed((v) => !v)} style={{ alignSelf: "flex-start" }}>
+            {collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          </Button>
+          <Text variant="caption" color="dim">
+            Active: <strong>{active}</strong>
+          </Text>
+        </main>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "Toggle `collapsed` to switch between full and icon-only (rail) mode. Tooltips appear automatically on hover when collapsed.",
+      },
+    },
+  },
+};
+
 // ─── Full layout ──────────────────────────────────────────────────────────────
 
 export const InLayout: Story = {

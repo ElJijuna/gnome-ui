@@ -182,3 +182,23 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **`TabBar` `inline` prop** | Add `inline` prop to `TabBar`: removes the header-bar background so the bar blends into any surface — mirrors `.inline` style class |
 | ✅ | **`SearchBar` `inline` prop** | Add `inline` prop to `SearchBar`: same neutral-background treatment as above — mirrors `.inline` style class |
+
+---
+
+## Tier 9 — Stories & Composition Examples
+
+> Full-page composition stories that demonstrate real-world use of the component library.
+
+| Status | Story | Description |
+|--------|-------|-------------|
+| ✅ | **`Layout/Dashboard`** | Full-page app layout: `Toolbar` with logo + inline `SearchBar` + action buttons + avatar `Popover`, collapsible sidebar with `SidebarItem` + `Badge`, content area with `Card`, `BoxedList`, `ExpanderRow`, `InlineViewSwitcher`, `StatusPage`, and footer `Toolbar` |
+
+---
+
+## Tier 10 — Sidebar Enhancements (identified via Dashboard story)
+
+> Gaps discovered while building the Dashboard composition story.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ✅ | **`Sidebar` `collapsed` prop** | Built-in icon-only (mini/rail) mode: `collapsed` prop animates width (240 px → 56 px), hides labels/suffixes/section titles, and auto-shows tooltips on hover. `SidebarCollapsedContext` and `useSidebarCollapsed` hook exported for custom consumers. Dashboard story updated to use the real `Sidebar` component. |

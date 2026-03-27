@@ -12,6 +12,8 @@
   overflow-x: hidden;
   padding: var(--gnome-space-1, 6px);
   gap: 0;
+  transition: width 200ms var(--gnome-easing-default, ease);
+  flex-shrink: 0;
 }
 
 /* ─── Section ───────────────────────────────────────────────────────────────── */
@@ -216,6 +218,25 @@
 
 .contextMenuDestructive {
   color: var(--gnome-destructive-color, #e01b24);
+}
+
+/* ─── Collapsed (icon-only / rail) mode ────────────────────────────────────── */
+
+.collapsed {
+  width: 56px;
+  transition: width 200ms var(--gnome-easing-default, ease);
+}
+
+/* Hide section headings when collapsed */
+.collapsed .sectionTitle {
+  display: none;
+}
+
+/* Center icon when collapsed */
+.itemCollapsed {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* ─── High contrast ────────────────────────────────────────────────────────── */
