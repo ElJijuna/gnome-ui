@@ -71,3 +71,6 @@ export type { SearchBarProps } from "./components/SearchBar";
 
 export { Toast, Toaster } from "./components/Toast";
 export type { ToastProps, ToasterProps } from "./components/Toast";
+
+export { Dialog } from "./components/Dialog";
+export type { DialogProps, DialogButton } from "./components/Dialog";
