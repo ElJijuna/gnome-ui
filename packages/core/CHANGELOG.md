@@ -1,3 +1,13 @@
+## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.5.0...@gnome-ui/core@1.6.0) (2026-03-27)
+
+### Features
+
+* add component <ButtonRow /> ([ced8c73](https://github.com/ElJijuna/gnome-ui/commit/ced8c73e3b1b98c5919b5ad263240a1f563c7e80))
+* add component <Frame /> ([dde464c](https://github.com/ElJijuna/gnome-ui/commit/dde464c20bbc12b909a750c3919ecfe1f70a37b0))
+* add component <LinkedGroup /> ([f235e26](https://github.com/ElJijuna/gnome-ui/commit/f235e262981bb2c928a104326ae00eed13dead3d))
+* add component <Toolbar /> and <Spacer /> ([a2a54c4](https://github.com/ElJijuna/gnome-ui/commit/a2a54c42aeaae2193856b4d64289ce0b3b1899f6))
+* update components <Button /> and <SplitButton />  to support raised and  osd. ([3947a5d](https://github.com/ElJijuna/gnome-ui/commit/3947a5dc912a6d37ebc8f33cfee768d1df2cda0e))
+
 ## [1.5.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.4.0...@gnome-ui/core@1.5.0) (2026-03-27)
 
 ### Features
