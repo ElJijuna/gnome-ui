@@ -1,0 +1,62 @@
+/* ─── Container ─────────────────────────────────────────────────────────────── */
+
+.linked {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+/* ─── Strip inner border-radius from all children ───────────────────────────── */
+
+.linked > :global(*) {
+  border-radius: 0 !important;
+  flex-shrink: 0;
+}
+
+/* ─── Collapse shared borders (horizontal) ──────────────────────────────────── */
+
+.linked:not(.vertical) > :global(*:not(:first-child)) {
+  margin-left: -1px;
+}
+
+/* ─── Collapse shared borders (vertical) ───────────────────────────────────── */
+
+.linked.vertical > :global(*:not(:first-child)) {
+  margin-top: -1px;
+}
+
+/* ─── Restore radius — first child ─────────────────────────────────────────── */
+
+.linked:not(.vertical) > :global(*:first-child) {
+  border-top-left-radius: var(--gnome-radius-md) !important;
+  border-bottom-left-radius: var(--gnome-radius-md) !important;
+}
+
+.linked.vertical > :global(*:first-child) {
+  border-top-left-radius: var(--gnome-radius-md) !important;
+  border-top-right-radius: var(--gnome-radius-md) !important;
+}
+
+/* ─── Restore radius — last child ──────────────────────────────────────────── */
+
+.linked:not(.vertical) > :global(*:last-child) {
+  border-top-right-radius: var(--gnome-radius-md) !important;
+  border-bottom-right-radius: var(--gnome-radius-md) !important;
+}
+
+.linked.vertical > :global(*:last-child) {
+  border-bottom-left-radius: var(--gnome-radius-md) !important;
+  border-bottom-right-radius: var(--gnome-radius-md) !important;
+}
+
+/* ─── Bring hovered / focused child to the front so its border shows ────────── */
+
+.linked > :global(*:hover),
+.linked > :global(*:focus-visible) {
+  position: relative;
+  z-index: 1;
+}

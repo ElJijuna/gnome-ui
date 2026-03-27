@@ -136,3 +136,6 @@ export type { SplitButtonProps, SplitButtonVariant } from "./components/SplitBut
 
 export { Toolbar, Spacer } from "./components/Toolbar";
 export type { ToolbarProps, SpacerProps } from "./components/Toolbar";
+
+export { LinkedGroup } from "./components/LinkedGroup";
+export type { LinkedGroupProps } from "./components/LinkedGroup";
