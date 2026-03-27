@@ -89,3 +89,20 @@ export type { SliderProps } from "./components/Slider";
 
 export { Popover } from "./components/Popover";
 export type { PopoverProps, PopoverPlacement } from "./components/Popover";
+
+// Hooks
+export { useBreakpoint, GNOME_BREAKPOINTS } from "./hooks/useBreakpoint";
+export type { BreakpointState, GnomeBreakpointName } from "./hooks/useBreakpoint";
+
+// Adaptive Layout
+export { Clamp } from "./components/Clamp";
+export type { ClampProps } from "./components/Clamp";
+
+export { NavigationSplitView } from "./components/NavigationSplitView";
+export type { NavigationSplitViewProps } from "./components/NavigationSplitView";
+
+export { OverlaySplitView } from "./components/OverlaySplitView";
+export type { OverlaySplitViewProps } from "./components/OverlaySplitView";
+
+export { ViewSwitcherBar } from "./components/ViewSwitcherBar";
+export type { ViewSwitcherBarProps } from "./components/ViewSwitcherBar";

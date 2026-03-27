@@ -75,6 +75,11 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Dropdown` | Expandable option list with keyboard nav, flip positioning, and descriptions | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dropdown--docs) |
 | `Slider` | Draggable range control with tick marks, decimal steps, and keyboard nav | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-slider--docs) |
 | `Popover` | Floating panel with rich interactive content, arrow, and auto-flip positioning | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-popover--docs) |
+| `useBreakpoint` | Hook tracking viewport width against GNOME breakpoints (400 / 550 / 860 px) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-usebreakpoint--docs) |
+| `Clamp` | Constrains content to a max width, centering it — mirrors `AdwClamp` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-clamp--docs) |
+| `NavigationSplitView` | Two-pane layout that collapses to single pane at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationsplitview--docs) |
+| `OverlaySplitView` | Sidebar becomes slide-over overlay at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) |
+| `ViewSwitcherBar` | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

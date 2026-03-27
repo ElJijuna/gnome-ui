@@ -1,0 +1,86 @@
+/* ─── Root ───────────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ─── Wide (both panes visible) ──────────────────────────────────────────────── */
+
+.expanded {
+  flex-direction: row;
+}
+
+.expanded .sidebar {
+  width: var(--sidebar-width, clamp(180px, 25%, 280px));
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.expanded .contentPane {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* ─── Narrow (one pane at a time) ────────────────────────────────────────────── */
+
+.collapsed {
+  flex-direction: column;
+  position: relative;
+}
+
+.collapsed .sidebar,
+.collapsed .contentPane {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  transition: transform var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
+}
+
+/* Sidebar slides out to the left when content is shown */
+.collapsed .sidebar.paneVisible {
+  transform: translateX(0);
+}
+
+.collapsed .sidebar.paneHidden {
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* Content slides in from the right when shown */
+.collapsed .contentPane.paneVisible {
+  transform: translateX(0);
+}
+
+.collapsed .contentPane.paneHidden {
+  transform: translateX(100%);
+  pointer-events: none;
+}
+
+/* ─── Divider ────────────────────────────────────────────────────────────────── */
+
+.divider {
+  width: 1px;
+  background-color: var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .divider {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsed .sidebar,
+  .collapsed .contentPane {
+    transition: none;
+  }
+}

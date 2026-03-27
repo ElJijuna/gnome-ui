@@ -1,0 +1,108 @@
+/* ─── Root ───────────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Wide — side by side ────────────────────────────────────────────────────── */
+
+.wide {
+  flex-direction: row;
+}
+
+.wide.end {
+  flex-direction: row-reverse;
+}
+
+.wide .sidebar {
+  width: var(--sidebar-width, clamp(180px, 25%, 280px));
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.wide .content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* ─── Narrow — overlay mode ──────────────────────────────────────────────────── */
+
+.narrow .content {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.narrow .sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-width, clamp(180px, 75%, 280px));
+  overflow-y: auto;
+  z-index: 100;
+
+  background-color: var(--gnome-window-bg-color, #fafafa);
+  box-shadow: 2px 0 16px rgba(0, 0, 0, 0.2);
+
+  transition: transform var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
+}
+
+/* Start (left) sidebar */
+.narrow.start .sidebar {
+  left: 0;
+}
+
+.narrow.start .sidebarOpen  { transform: translateX(0); }
+.narrow.start .sidebarClosed { transform: translateX(-100%); }
+
+/* End (right) sidebar */
+.narrow.end .sidebar {
+  right: 0;
+}
+
+.narrow.end .sidebarOpen  { transform: translateX(0); }
+.narrow.end .sidebarClosed { transform: translateX(100%); }
+
+/* ─── Backdrop ───────────────────────────────────────────────────────────────── */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
+}
+
+.backdropVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .narrow .sidebar {
+    background-color: var(--gnome-window-bg-color, #242424);
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .backdrop {
+    background-color: rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .narrow .sidebar,
+  .backdrop {
+    transition: none;
+  }
+}

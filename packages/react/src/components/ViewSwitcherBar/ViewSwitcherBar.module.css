@@ -1,0 +1,40 @@
+/* ─── Bottom bar ─────────────────────────────────────────────────────────────── */
+
+.bar {
+  display: flex;
+  align-items: stretch;
+
+  width: 100%;
+  min-height: 52px;
+
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  border-top: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
+
+  /* Safe-area inset for mobile browsers */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Each child (ViewSwitcherItem) fills equal width */
+.bar > * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+
+  /* Override the horizontal pill style from ViewSwitcherItem */
+  border-radius: 0 !important;
+  padding: 6px 4px !important;
+  font-size: var(--gnome-font-size-caption, 0.8125rem) !important;
+  min-height: 52px;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .bar {
+    background-color: var(--gnome-headerbar-bg-color, #303030);
+    border-top-color: rgba(0, 0, 0, 0.3);
+  }
+}
