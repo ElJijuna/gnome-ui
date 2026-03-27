@@ -1,0 +1,57 @@
+.link {
+  color: var(--gnome-accent-color);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+
+  /* Smooth underline on hover */
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition:
+    background-size var(--gnome-duration-fast) var(--gnome-easing-default),
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.link:hover {
+  background-size: 100% 1px;
+}
+
+.link:active {
+  opacity: 0.7;
+}
+
+/* ─── Focus ────────────────────────────────────────────────────── */
+
+.link:focus-visible {
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
+    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color);
+}
+
+/* ─── External indicator ──────────────────────────────────────── */
+
+.externalIcon {
+  display: inline-block;
+  margin-inline-start: 0.15em;
+  font-size: 0.8em;
+  vertical-align: super;
+  line-height: 1;
+  /* don't underline the icon itself */
+  background-image: none;
+}
+
+/* ─── Reduced motion ──────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+    background-size: 0%;
+  }
+}

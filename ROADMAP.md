@@ -14,7 +14,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **Button** | Default, Suggested, Destructive, Flat, Pill, Circular |
 | ✅ | **Text** | All 12 Adwaita styles: large-title, title-1…4, heading, body, document, caption, caption-heading, monospace, numeric |
-| ⬜ | **Link** | Inline hyperlink with accent colour, hover underline, and external-URL variant |
+| ✅ | **Link** | Inline hyperlink with accent colour, hover underline, and external-URL variant |
 | ✅ | **Text Field** | Text input with label, helper text, and error state |
 | ✅ | **Switch** | On/off toggle — replaces checkbox in settings UIs |
 | ✅ | **Checkbox** | Multi-selection with indeterminate state |

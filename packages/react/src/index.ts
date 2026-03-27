@@ -106,3 +106,6 @@ export type { OverlaySplitViewProps } from "./components/OverlaySplitView";
 
 export { ViewSwitcherBar } from "./components/ViewSwitcherBar";
 export type { ViewSwitcherBarProps } from "./components/ViewSwitcherBar";
+
+export { Link } from "./components/Link";
+export type { LinkProps } from "./components/Link";

@@ -80,6 +80,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `NavigationSplitView` | Two-pane layout that collapses to single pane at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationsplitview--docs) |
 | `OverlaySplitView` | Sidebar becomes slide-over overlay at ≤ 400 px | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) |
 | `ViewSwitcherBar` | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) |
+| `Link` | Inline hyperlink with accent colour, animated underline, and external-URL variant | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 
