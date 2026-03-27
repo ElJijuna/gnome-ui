@@ -1,0 +1,100 @@
+/* ─── Reset & base ─────────────────────────────────────────────────────────── */
+
+.radio {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+  border-radius: var(--gnome-radius-pill);
+
+  background-color: var(--gnome-card-bg-color, #ffffff);
+  border: 1.5px solid var(--gnome-light-4, #c0bfbc);
+
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    border-color     var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* ─── Inner dot (checked) ──────────────────────────────────────────────────── */
+
+.radio::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--gnome-radius-pill);
+  background-color: #ffffff;
+  opacity: 0;
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.radio:checked {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.radio:checked::before {
+  opacity: 1;
+}
+
+/* ─── Hover ────────────────────────────────────────────────────────────────── */
+
+.radio:not(:checked):hover {
+  border-color: var(--gnome-light-5, #9a9996);
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-card-bg-color, #ffffff) 94%,
+    black 6%
+  );
+}
+
+/* ─── Focus ────────────────────────────────────────────────────────────────── */
+
+.radio:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Disabled ─────────────────────────────────────────────────────────────── */
+
+.radio:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .radio {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: var(--gnome-dark-1, #77767b);
+  }
+
+  .radio:not(:checked):hover {
+    border-color: var(--gnome-light-4, #c0bfbc);
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-card-bg-color, #383838) 85%,
+      white 15%
+    );
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .radio,
+  .radio::before {
+    transition: none;
+  }
+}

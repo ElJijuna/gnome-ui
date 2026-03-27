@@ -17,7 +17,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Text Field** | Text input with label, helper text, and error state |
 | ✅ | **Switch** | On/off toggle — replaces checkbox in settings UIs |
 | ✅ | **Checkbox** | Multi-selection with indeterminate state |
-| ⬜ | **Radio Button** | Single selection within a group |
+| ✅ | **Radio Button** | Single selection within a group |
 
 ---
 

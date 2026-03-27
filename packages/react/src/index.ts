@@ -30,6 +30,9 @@ export type { CheckboxProps } from "./components/Checkbox";
 export { TextField } from "./components/TextField";
 export type { TextFieldProps } from "./components/TextField";
 
+export { RadioButton } from "./components/RadioButton";
+export type { RadioButtonProps } from "./components/RadioButton";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 
