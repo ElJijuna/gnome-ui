@@ -77,3 +77,6 @@ export type { DialogProps, DialogButton } from "./components/Dialog";
 
 export { Tooltip } from "./components/Tooltip";
 export type { TooltipProps, TooltipPlacement } from "./components/Tooltip";
+
+export { StatusPage } from "./components/StatusPage";
+export type { StatusPageProps } from "./components/StatusPage";

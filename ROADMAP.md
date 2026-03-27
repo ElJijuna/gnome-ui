@@ -56,7 +56,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Banner** | Persistent message at the top of a view |
 | ✅ | **Dialog** | Blocking modal with title, body, and buttons |
 | ✅ | **Tooltip** | Informational text on hover |
-| ⬜ | **Status Page** | Empty state with icon, title, and description |
+| ✅ | **Status Page** | Empty state with icon, title, and description |
 
 ---
 

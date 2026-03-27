@@ -1,0 +1,72 @@
+/* ─── Page container ─────────────────────────────────────────────────────────── */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  width: 100%;
+  padding: var(--gnome-space-6, 48px) var(--gnome-space-4, 24px);
+  gap: 0;
+
+  font-family: var(--gnome-font-family);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Icon ───────────────────────────────────────────────────────────────────── */
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--gnome-space-4, 24px);
+
+  /* Adwaita dims the icon slightly to keep the title as the focal point */
+  opacity: 0.55;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Title ──────────────────────────────────────────────────────────────────── */
+
+.title {
+  margin: 0;
+
+  font-size: var(--gnome-font-size-title-1, 2rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  line-height: var(--gnome-line-height-title, 1.2);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Description ────────────────────────────────────────────────────────────── */
+
+.description {
+  margin: var(--gnome-space-2, 12px) 0 0;
+
+  max-width: 36ch;
+
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── Actions ────────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gnome-space-2, 12px);
+  justify-content: center;
+  margin-top: var(--gnome-space-4, 24px);
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .iconWrap {
+    opacity: 0.45;
+  }
+}
