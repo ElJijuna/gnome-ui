@@ -45,6 +45,9 @@ export type { HeaderBarProps } from "./components/HeaderBar";
 export { Badge } from "./components/Badge";
 export type { BadgeProps, BadgeVariant } from "./components/Badge";
 
+export { Icon } from "./components/Icon";
+export type { IconProps, IconSize } from "./components/Icon";
+
 export { ActionRow } from "./components/ActionRow";
 export type { ActionRowProps } from "./components/ActionRow";
 

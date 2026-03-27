@@ -1,0 +1,30 @@
+{
+  "name": "@gnome-ui/icons",
+  "version": "0.1.0",
+  "description": "Adwaita symbolic icon definitions (framework-agnostic SVG path data)",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "vite": "^8.0.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

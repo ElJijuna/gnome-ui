@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import styles from "./HeaderBar.module.css";
 
-export interface HeaderBarProps extends HTMLAttributes<HTMLElement> {
+export interface HeaderBarProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   /** Centered title. Pass a string or a custom element. */
   title?: ReactNode;
   /** Controls placed at the leading (left) edge — back button, menu, etc. */
