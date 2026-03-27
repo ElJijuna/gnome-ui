@@ -145,3 +145,10 @@ export type { FrameProps } from "./components/Frame";
 
 export { ExpanderRow } from "./components/ExpanderRow";
 export type { ExpanderRowProps } from "./components/ExpanderRow";
+
+export { InlineViewSwitcher, InlineViewSwitcherItem } from "./components/InlineViewSwitcher";
+export type {
+  InlineViewSwitcherProps,
+  InlineViewSwitcherVariant,
+  InlineViewSwitcherItemProps,
+} from "./components/InlineViewSwitcher";

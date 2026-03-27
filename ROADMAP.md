@@ -168,7 +168,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ 🟢 | **`InlineViewSwitcher`** | Compact inline view switcher built on `ToggleGroup` internals; `flat` and `round` style variants — mirrors `AdwInlineViewSwitcher` (GNOME 48) |
+| ✅ | **`InlineViewSwitcher`** | Compact inline view switcher built on `ToggleGroup` internals; `flat` and `round` style variants — mirrors `AdwInlineViewSwitcher` (GNOME 48) |
 
 ### StatusPage addition
 
