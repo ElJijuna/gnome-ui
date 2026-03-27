@@ -130,3 +130,55 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Item | Description |
 |--------|------|-------------|
 | ✅ | **High-contrast support** | Add `@media (prefers-contrast: more)` overrides to design tokens and all components — formalised in libadwaita 1.8 |
+
+---
+
+## Tier 8 — Style-class Utilities & Composition Helpers
+
+> Lightweight components and props derived from the libadwaita 1.9 **style-class reference**.
+> These fill gaps between what we already ship and what the full Adwaita toolkit offers.
+
+### Layout primitives
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ 🟢 | **`Toolbar`** | `.toolbar` box: flat-buttons, 6 px margins/gap — wraps `AdwHeaderBar`, `GtkActionBar`, and generic tool rows |
+| ⬜ 🟢 | **`Spacer`** | `.spacer` separator: invisible `flex: 1` filler for `Toolbar`/`HeaderBar` to push trailing items to the end — mirrors `GtkSeparator.spacer` |
+| ⬜ 🟢 | **`LinkedGroup`** | `.linked` box: children rendered as a single connected unit with no gap and merged borders — canonical GNOME pattern for button groups and segmented inputs |
+| ⬜ 🟢 | **`Frame`** | `.frame` container: simple bordered surface (`border` + `border-radius`) without background — mirrors `GtkFrame` default styling |
+
+### BoxedList / ActionRow variants
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`BoxedList` `separate` prop** | Add `variant="separate"` to `BoxedList`: renders each child as its own rounded card — mirrors `.boxed-list-separate` |
+| ⬜ 🟢 | **`ButtonRow`** | Full-width activatable row styled as a button inside a `BoxedList` — mirrors `AdwButtonRow`; supports `suggested` and `destructive` variants |
+| ⬜ | **`ActionRow` `property` variant** | Add `variant="property"` to `ActionRow`: flips weight so the subtitle is the primary text (read-only property display) — mirrors `.property` style class |
+| ⬜ 🟢 | **`ExpanderRow`** | Collapsible `ActionRow` that reveals nested rows on activation — mirrors `AdwExpanderRow` |
+
+### Button additions
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ 🟢 | **`SplitButton`** | Primary action button with an attached dropdown arrow — mirrors `AdwSplitButton`; supports `suggested` and `destructive` variants |
+| ⬜ | **`Button` `raised` variant** | Add `variant="raised"` to `Button`: explicit raised look for buttons inside flat/toolbar contexts — mirrors `.raised` style class |
+| ⬜ | **`Button` `osd` modifier** | Add `osd` prop to `Button`: dark semi-transparent style for controls overlaid on media/images — mirrors `.osd` style class |
+
+### View Switcher additions
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ 🟢 | **`InlineViewSwitcher`** | Compact inline view switcher built on `ToggleGroup` internals; `flat` and `round` style variants — mirrors `AdwInlineViewSwitcher` (GNOME 48) |
+
+### StatusPage addition
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`StatusPage` `compact` prop** | Add `compact` prop to the existing `StatusPage`: reduces spacing and icon size for sidebars/popovers — mirrors `.compact` style class |
+
+### Tab / Search inline variant
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`TabBar` `inline` prop** | Add `inline` prop to `TabBar`: removes the header-bar background so the bar blends into any surface — mirrors `.inline` style class |
+| ⬜ | **`SearchBar` `inline` prop** | Add `inline` prop to `SearchBar`: same neutral-background treatment as above — mirrors `.inline` style class |
