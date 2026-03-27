@@ -1,3 +1,15 @@
+## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.3...@gnome-ui/core@1.2.0) (2026-03-27)
+
+### Features
+
+* add component <Dialog /> ([3652cc7](https://github.com/ElJijuna/gnome-ui/commit/3652cc719d517d6c0851806f148e5d7047e68247))
+* add component <Toast /> and <Toaster /> ([edc2ca7](https://github.com/ElJijuna/gnome-ui/commit/edc2ca7cede804ccc88069a2faaafc30bb71baef))
+* add component <Tooltip /> ([081a2c9](https://github.com/ElJijuna/gnome-ui/commit/081a2c9e99da746e621958871f0291d9283ed9e4))
+
+### Bug Fixes
+
+* add ref: main to solve error in publish time. ([b41bdc4](https://github.com/ElJijuna/gnome-ui/commit/b41bdc4cb72cbff36f8e94ceda3e2bf2bdd6a141))
+
 ## [1.1.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.1.2...@gnome-ui/core@1.1.3) (2026-03-27)
 
 ### Bug Fixes
