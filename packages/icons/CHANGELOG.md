@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.5.0...@gnome-ui/icons@1.6.0) (2026-03-27)
+
+### Features
+
+* add component example <Dashboard /> in layout and add collapsed prop in <Sidebar />, update <SidebarItem /> ([3212c4a](https://github.com/ElJijuna/gnome-ui/commit/3212c4a34ad0839d29b218118e61536519d76179))
+
 ## [1.5.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.4.0...@gnome-ui/icons@1.5.0) (2026-03-27)
 
 ### Features
