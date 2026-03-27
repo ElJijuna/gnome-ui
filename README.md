@@ -114,7 +114,8 @@ npm install
 ```
 gnome-react/
 ├── packages/
-│   ├── core/          # @gnome-ui/core — CSS design tokens
+│   ├── core/          # @gnome-ui/core  — CSS design tokens
+│   ├── icons/         # @gnome-ui/icons — Adwaita icon definitions (SVG path data)
 │   └── react/         # @gnome-ui/react — React components
 ├── GNOME_GUIDELINES.md
 ├── ROADMAP.md
