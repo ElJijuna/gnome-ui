@@ -43,7 +43,8 @@ export default function App() {
 
 | Component | Description |
 |-----------|-------------|
-| [`Button`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-button--docs) | Default, Suggested, Destructive, Flat variants; sm/md/lg sizes; pill and circular shapes |
+| [`Button`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-button--docs) | Default, Suggested, Destructive, Flat, Raised variants; `osd` overlay modifier; sm/md/lg sizes; pill and circular shapes |
+| [`SplitButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-splitbutton--docs) | Primary action button with attached dropdown arrow; Default, Suggested, Destructive variants |
 | [`Switch`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-switch--docs) | On/off toggle for settings that apply immediately |
 | [`Checkbox`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-checkbox--docs) | Multi-selection with checked, unchecked, and indeterminate states |
 | [`RadioButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-radiobutton--docs) | Single-selection within a group; keyboard arrow-key navigation |
@@ -51,8 +52,10 @@ export default function App() {
 | [`SpinButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinbutton--docs) | Numeric input with −/+ buttons, keyboard nav, decimal support |
 | [`Slider`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-slider--docs) | Draggable range control with tick marks, decimal steps, and keyboard nav |
 | [`Dropdown`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dropdown--docs) | Expandable option list with keyboard nav, flip positioning, and descriptions |
-| [`SearchBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) | Collapsible search bar with auto-focus, clear button, and optional filter row |
+| [`SearchBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) | Collapsible search bar with auto-focus, clear button, filter row, and `inline` variant |
 | [`Link`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) | Inline hyperlink with accent colour, animated underline, and external-URL variant |
+| [`ToggleGroup`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) / `ToggleGroupItem` | Mutually-exclusive toggle buttons; icon-only, label-only, or icon + label |
+| [`InlineViewSwitcher`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-inlineviewswitcher--docs) / `InlineViewSwitcherItem` | Compact inline view switcher; `default`, `flat`, and `round` variants |
 
 ### Display
 
@@ -64,20 +67,30 @@ export default function App() {
 | [`Badge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) | Counter or status dot, optionally anchored over another element |
 | [`Spinner`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinner--docs) | Indeterminate loading indicator; sm/md/lg sizes |
 | [`ProgressBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-progressbar--docs) | Determinate (0–1) and indeterminate progress indicator |
-| [`StatusPage`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) | Empty-state page with icon, title, description, and optional actions |
+| [`StatusPage`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) | Empty-state page with icon, title, description, and optional actions; `compact` prop for sidebars/popovers |
 | [`Separator`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-separator--docs) | Horizontal/vertical dividing line between content groups |
+| [`Chip`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-chip--docs) | Compact pill-shaped label for tags, filters, and multi-select; static, removable, and selectable modes |
 
 ### Layout & containers
 
 | Component | Description |
 |-----------|-------------|
 | [`Card`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-card--docs) | Elevated surface for grouping content; static or interactive (activatable) |
+| [`Frame`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-frame--docs) | Bordered surface without background fill — mirrors `GtkFrame` |
 | [`HeaderBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-headerbar--docs) | Title bar with centered title and leading/trailing action slots |
-| [`Sidebar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-sidebar--docs) / `SidebarItem` | Lateral navigation panel with active state and badge support |
-| [`ActionRow`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) | Settings row with title, subtitle, and trailing widget |
+| [`Toolbar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-toolbar--docs) | Horizontal action bar with 6 px padding/gap for flat and raised buttons |
+| [`Spacer`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spacer--docs) | Invisible `flex: 1` filler to push trailing items to the end of a `Toolbar` |
+| [`LinkedGroup`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-linkedgroup--docs) | Renders children as a single connected unit with merged borders; horizontal and vertical |
+| [`Sidebar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-sidebar--docs) / `SidebarSection` / `SidebarItem` | Lateral navigation panel with named sections, suffix widgets, and context menus |
+| [`ActionRow`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) | Settings row with title, subtitle, leading icon, and trailing widget |
+| [`ButtonRow`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-buttonrow--docs) | Full-width activatable row styled as a button inside a `BoxedList`; Default, Suggested, Destructive |
+| [`ExpanderRow`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-expanderrow--docs) | Collapsible `ActionRow` that reveals nested rows; controlled and uncontrolled |
 | [`BoxedList`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) | Rounded bordered list of rows — canonical GNOME settings pattern |
-| [`TabBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tabs--docs) / `TabItem` / `TabPanel` | Tab-based navigation with keyboard support and optional close buttons |
+| [`WrapBox`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-wrapbox--docs) | Flexible wrapping layout for tag/chip lists that flows across multiple lines |
+| [`TabBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tabs--docs) / `TabItem` / `TabPanel` | Tab-based navigation with keyboard support, optional close buttons, and `inline` variant |
 | [`ViewSwitcher`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitcher--docs) / `ViewSwitcherItem` | Segmented pill control for switching between 2–4 top-level views |
+| [`ViewSwitcherSidebar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitchersidebar--docs) / `ViewSwitcherSidebarItem` | Sidebar-based view switcher — replaces `GtkStackSidebar` |
+| [`ShortcutsDialog`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-shortcutsdialog--docs) | Modal listing keyboard shortcuts with integrated search |
 
 ### Overlays
 
@@ -98,6 +111,7 @@ export default function App() {
 | [`NavigationSplitView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationsplitview--docs) | Two-pane layout that collapses to a single pane at ≤ 400 px |
 | [`OverlaySplitView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) | Sidebar becomes slide-over overlay at ≤ 400 px |
 | [`ViewSwitcherBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) |
+| [`BreakpointBin`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-breakpointbin--docs) | Applies layout changes when the **component** crosses a size threshold — CSS container queries equivalent |
 
 ## License
 

@@ -180,5 +180,5 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`TabBar` `inline` prop** | Add `inline` prop to `TabBar`: removes the header-bar background so the bar blends into any surface — mirrors `.inline` style class |
-| ⬜ | **`SearchBar` `inline` prop** | Add `inline` prop to `SearchBar`: same neutral-background treatment as above — mirrors `.inline` style class |
+| ✅ | **`TabBar` `inline` prop** | Add `inline` prop to `TabBar`: removes the header-bar background so the bar blends into any surface — mirrors `.inline` style class |
+| ✅ | **`SearchBar` `inline` prop** | Add `inline` prop to `SearchBar`: same neutral-background treatment as above — mirrors `.inline` style class |

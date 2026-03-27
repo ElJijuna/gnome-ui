@@ -26,6 +26,12 @@ export interface SearchBarProps
    * Only visible while `open` is true.
    */
   children?: ReactNode;
+  /**
+   * Removes the header-bar background so the bar blends into any surface.
+   * Use inside cards, content areas, or custom containers.
+   * Mirrors the `.inline` style class.
+   */
+  inline?: boolean;
 }
 
 /**
@@ -47,6 +53,7 @@ export function SearchBar({
   onChange,
   placeholder = "Search…",
   disabled,
+  inline = false,
   className,
   ...props
 }: SearchBarProps) {
@@ -81,7 +88,7 @@ export function SearchBar({
         .join(" ")}
       aria-hidden={!open}
     >
-      <div className={[styles.bar, disabled ? styles.disabled : null].filter(Boolean).join(" ")}>
+      <div className={[styles.bar, inline ? styles.inline : null, disabled ? styles.disabled : null].filter(Boolean).join(" ")}>
         {/* Search icon */}
         <span className={styles.searchIcon} aria-hidden>
           <Icon icon={Search} size="md" />

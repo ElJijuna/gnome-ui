@@ -242,3 +242,56 @@ export const InLayout: Story = {
   },
   parameters: { controls: { disable: true } },
 };
+
+// ─── Inline ───────────────────────────────────────────────────────────────────
+
+export const Inline: Story = {
+  render: () => {
+    const [active, setActive] = useState("overview");
+    const tabs = [
+      { id: "overview", label: "Overview" },
+      { id: "files", label: "Files" },
+      { id: "history", label: "History" },
+    ];
+    return (
+      <div
+        style={{
+          border: "1px solid var(--gnome-light-3, rgba(0,0,0,0.1))",
+          borderRadius: 12,
+          overflow: "hidden",
+          maxWidth: 560,
+          background: "var(--gnome-card-bg-color, #fff)",
+        }}
+      >
+        <TabBar inline aria-label="Document sections">
+          {tabs.map(({ id, label }) => (
+            <TabItem
+              key={id}
+              label={label}
+              active={active === id}
+              panelId={`inline-panel-${id}`}
+              onClick={() => setActive(id)}
+            />
+          ))}
+        </TabBar>
+        {tabs.map(({ id, label }) => (
+          <TabPanel key={id} id={`inline-panel-${id}`} active={active === id} style={{ padding: 24 }}>
+            <Text variant="title-4">{label}</Text>
+            <Text variant="body" color="dim" style={{ marginTop: 8 }}>
+              Content for the {label.toLowerCase()} tab.
+            </Text>
+          </TabPanel>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Use `inline` to remove the header-bar background so the tab bar blends into any surface — cards, content areas, or custom containers.",
+      },
+    },
+  },
+};

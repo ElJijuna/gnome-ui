@@ -10,6 +10,12 @@ export interface TabBarProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   /** Accessible label for the tab list. */
   "aria-label"?: string;
+  /**
+   * Removes the header-bar background so the tab bar blends into any surface.
+   * Use when placing the bar inside a card, content area, or custom container.
+   * Mirrors the `.inline` style class.
+   */
+  inline?: boolean;
 }
 
 /**
@@ -22,6 +28,7 @@ export interface TabBarProps extends HTMLAttributes<HTMLDivElement> {
 export function TabBar({
   children,
   className,
+  inline = false,
   "aria-label": ariaLabel = "Tabs",
   ...props
 }: TabBarProps) {
@@ -49,7 +56,9 @@ export function TabBar({
 
   return (
     <div
-      className={[styles.bar, className].filter(Boolean).join(" ")}
+      className={[styles.bar, inline ? styles.inline : null, className]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
     >
       <div

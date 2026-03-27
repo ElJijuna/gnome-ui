@@ -245,3 +245,44 @@ export const Disabled: Story = {
     controls: { disable: true },
   },
 };
+
+// ─── Inline ───────────────────────────────────────────────────────────────────
+
+export const Inline: Story = {
+  render: () => {
+    const [query, setQuery] = useState("");
+    return (
+      <div
+        style={{
+          border: "1px solid var(--gnome-light-3, rgba(0,0,0,0.1))",
+          borderRadius: 12,
+          overflow: "hidden",
+          maxWidth: 480,
+          background: "var(--gnome-card-bg-color, #fff)",
+        }}
+      >
+        <SearchBar
+          inline
+          open
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onClose={() => setQuery("")}
+          onClear={() => setQuery("")}
+          placeholder="Search inside card…"
+        />
+        <div style={{ padding: 16, color: "var(--gnome-window-fg-color)", opacity: 0.5, fontSize: "0.875rem" }}>
+          Card content area
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Use `inline` to remove the header-bar background so the bar blends into any surface — cards, content areas, or custom containers.",
+      },
+    },
+  },
+};
