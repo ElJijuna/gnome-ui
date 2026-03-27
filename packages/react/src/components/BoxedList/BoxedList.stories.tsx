@@ -34,6 +34,16 @@ Mirrors the Adwaita \`.boxed-list\` style class on \`GtkListBox\`.
       </div>
     ),
   ],
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "separate"],
+      description: "`separate` renders each child as its own standalone card.",
+    },
+  },
+  args: {
+    variant: "default",
+  },
 };
 
 export default meta;
@@ -42,14 +52,13 @@ type Story = StoryObj<typeof BoxedList>;
 // ─── Default ───────────────────────────────────────────────────────────────────
 
 export const Default: Story = {
-  render: () => (
-    <BoxedList>
+  render: (args) => (
+    <BoxedList {...args}>
       <ActionRow title="Wi-Fi" subtitle="Home Network" trailing={<Switch defaultChecked aria-label="Wi-Fi" />} />
       <ActionRow title="Bluetooth" subtitle="Off" trailing={<Switch aria-label="Bluetooth" />} />
       <ActionRow title="VPN" subtitle="Not connected" trailing={<Switch aria-label="VPN" />} />
     </BoxedList>
   ),
-  parameters: { controls: { disable: true } },
 };
 
 // ─── Simple rows ──────────────────────────────────────────────────────────────
@@ -76,6 +85,42 @@ export const WithActions: Story = {
     </BoxedList>
   ),
   parameters: { controls: { disable: true } },
+};
+
+// ─── Separate variant ──────────────────────────────────────────────────────────
+
+export const Separate: Story = {
+  render: () => (
+    <BoxedList variant="separate">
+      <ActionRow
+        interactive
+        title="System Settings"
+        subtitle="Display, sound, power"
+        onClick={() => {}}
+      />
+      <ActionRow
+        interactive
+        title="Wi-Fi"
+        subtitle="Home Network"
+        onClick={() => {}}
+      />
+      <ActionRow
+        interactive
+        title="Bluetooth"
+        subtitle="Off"
+        onClick={() => {}}
+      />
+    </BoxedList>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "`variant=\"separate\"` renders each child as its own standalone rounded card. Use when rows are independent items rather than a continuous grouped list — mirrors `.boxed-list-separate`.",
+      },
+    },
+  },
 };
 
 // ─── Labelled sections ─────────────────────────────────────────────────────────

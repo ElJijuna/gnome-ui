@@ -1,2 +1,2 @@
 export { BoxedList } from "./BoxedList";
-export type { BoxedListProps } from "./BoxedList";
+export type { BoxedListProps, BoxedListVariant } from "./BoxedList";

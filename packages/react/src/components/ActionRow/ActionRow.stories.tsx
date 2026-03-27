@@ -107,6 +107,28 @@ export const WithLeadingIcon: Story = {
   parameters: { controls: { disable: true } },
 };
 
+// ─── Property variant ─────────────────────────────────────────────────────────
+
+export const Property: Story = {
+  render: () => (
+    <BoxedList>
+      <ActionRow variant="property" title="Operating System" subtitle="GNOME OS 48" />
+      <ActionRow variant="property" title="Version" subtitle="48.0 (2026-03-25)" />
+      <ActionRow variant="property" title="Kernel" subtitle="Linux 6.8.0" />
+      <ActionRow variant="property" title="Memory" subtitle="15.4 GiB" />
+    </BoxedList>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "`variant=\"property\"` flips the visual hierarchy: the `title` shrinks to a dim caption label and the `subtitle` becomes the prominent value. Use for read-only property display — mirrors the `.property` style class.",
+      },
+    },
+  },
+};
+
 // ─── With button ──────────────────────────────────────────────────────────────
 
 export const WithButton: Story = {

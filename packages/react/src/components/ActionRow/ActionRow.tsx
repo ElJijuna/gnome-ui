@@ -19,6 +19,13 @@ export interface ActionRowProps extends HTMLAttributes<HTMLDivElement> {
    * Use for rows that navigate or trigger an action.
    */
   interactive?: boolean;
+  /**
+   * `"property"` flips the visual hierarchy: the subtitle becomes the
+   * prominent value and the title shrinks to a dim label above it.
+   * Use for read-only property display (e.g. "OS Version / Ubuntu 24.04").
+   * Mirrors the `.property` style class.
+   */
+  variant?: "default" | "property";
 }
 
 /**
@@ -36,14 +43,17 @@ export function ActionRow({
   leading,
   trailing,
   interactive = false,
+  variant = "default",
   className,
   ...props
 }: ActionRowProps) {
   const Tag = interactive ? "button" : "div";
+  const property = variant === "property";
 
   const classes = [
     styles.row,
     interactive ? styles.interactive : null,
+    property ? styles.property : null,
     className,
   ]
     .filter(Boolean)
@@ -54,8 +64,8 @@ export function ActionRow({
       {leading && <span className={styles.leading}>{leading}</span>}
 
       <span className={styles.content}>
-        <span className={styles.title}>{title}</span>
-        {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
+        <span className={property ? styles.propertyLabel : styles.title}>{title}</span>
+        {subtitle && <span className={property ? styles.propertyValue : styles.subtitle}>{subtitle}</span>}
       </span>
 
       {trailing && <span className={styles.trailing}>{trailing}</span>}

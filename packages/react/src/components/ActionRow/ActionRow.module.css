@@ -62,6 +62,33 @@
   gap: var(--gnome-space-1, 6px);
 }
 
+/* ─── Property variant ─────────────────────────────────────────────────────── */
+
+/* The label (title) is rendered small and dim above the value (subtitle) */
+.propertyLabel {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.55));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The value (subtitle) is rendered at body size and full opacity */
+.propertyValue {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ─── Interactive (activatable row) ────────────────────────────────────────── */
 
 .interactive {
