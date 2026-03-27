@@ -29,6 +29,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Build packages
+        run: npm run build --workspace packages/icons
+
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/react
 
