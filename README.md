@@ -1,0 +1,100 @@
+# gnome-ui
+
+A React component library that faithfully implements the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/), built on top of the [Adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/) design language.
+
+[![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+## Packages
+
+| Package | Description | Version |
+|---------|-------------|---------|
+| [`@gnome-ui/core`](packages/core) | Framework-agnostic design tokens (CSS custom properties) | [![npm](https://img.shields.io/npm/v/@gnome-ui/core)](https://www.npmjs.com/package/@gnome-ui/core) |
+| [`@gnome-ui/react`](packages/react) | React component library | [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react) |
+
+## Quick start
+
+```bash
+npm install @gnome-ui/react
+```
+
+```tsx
+import { Button } from "@gnome-ui/react";
+import "@gnome-ui/react/styles";
+
+export default function App() {
+  return (
+    <Button variant="suggested" onClick={() => console.log("clicked")}>
+      Save Changes
+    </Button>
+  );
+}
+```
+
+> **Tokens only** (framework-agnostic):
+> ```bash
+> npm install @gnome-ui/core
+> ```
+> ```css
+> @import "@gnome-ui/core/styles";
+> ```
+
+## Components
+
+See the [Storybook](https://github.com/ElJijuna/gnome-ui.git) for live examples and documentation.
+
+See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
+
+## Development
+
+### Prerequisites
+
+- Node.js 22+
+- npm 10+
+
+### Setup
+
+```bash
+git clone https://github.com/your-org/gnome-react.git
+cd gnome-react
+npm install
+```
+
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run build` | Build all packages |
+| `npm run storybook` | Start Storybook dev server at `localhost:6006` |
+| `npm run build-storybook` | Build Storybook for production |
+| `npm run typecheck` | Type-check all packages |
+| `npm run lint` | Lint all packages |
+
+### Project structure
+
+```
+gnome-react/
+├── packages/
+│   ├── core/          # @gnome-ui/core — CSS design tokens
+│   └── react/         # @gnome-ui/react — React components
+├── GNOME_GUIDELINES.md
+├── ROADMAP.md
+└── turbo.json
+```
+
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/). Your commit messages determine the next version automatically via semantic-release:
+
+| Prefix | Release |
+|--------|---------|
+| `feat:` | minor |
+| `fix:`, `perf:`, `refactor:` | patch |
+| `feat!:` or `BREAKING CHANGE:` | major |
+| `chore:`, `docs:`, `test:` | no release |
+
+## License
+
+[MIT](LICENSE) © el_jijuna
