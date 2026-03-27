@@ -61,6 +61,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `HeaderBar` | Title bar with centered title and leading/trailing action slots | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-headerbar--docs) |
 | `Badge` | Counter or status dot, optionally anchored over another element | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) |
 | `Icon` | React adapter for `@gnome-ui/icons` — inline SVG, inherits `currentColor` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-icon--docs) |
+| `Sidebar` / `SidebarItem` | Lateral navigation panel with active state and badge support | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-sidebar--docs) |
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 
