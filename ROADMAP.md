@@ -65,7 +65,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ✅ | **Dropdown / Select** | Expandable option list |
-| ⬜ | **Slider** | Numeric range with draggable handle |
+| ✅ | **Slider** | Numeric range with draggable handle |
 | ✅ | **Spin Button** | Numeric input with +/− buttons |
 | ✅ | **Avatar** | Circular user image with initials fallback |
 | ✅ | **Badge** | Counter or status indicator overlaid on another element |

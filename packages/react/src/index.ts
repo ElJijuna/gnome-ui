@@ -83,3 +83,6 @@ export type { StatusPageProps } from "./components/StatusPage";
 
 export { Dropdown } from "./components/Dropdown";
 export type { DropdownProps, DropdownOption } from "./components/Dropdown";
+
+export { Slider } from "./components/Slider";
+export type { SliderProps } from "./components/Slider";
