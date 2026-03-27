@@ -1,3 +1,12 @@
+## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.0.0...@gnome-ui/icons@1.1.0) (2026-03-27)
+
+### Features
+
+* add component <Dropdown /> ([49169db](https://github.com/ElJijuna/gnome-ui/commit/49169dbd117b637ff64ce76ac43c46da06ed4be2))
+* add component <Popover /> ([753727a](https://github.com/ElJijuna/gnome-ui/commit/753727a924a0b34aae1a92a6f37320e95d69ac86))
+* add component <Slider /> ([a8265f6](https://github.com/ElJijuna/gnome-ui/commit/a8265f69a7939bb7610fd3139b68f6023f59c235))
+* add component <StatusPage /> ([93c7889](https://github.com/ElJijuna/gnome-ui/commit/93c788910cd1ab404d80795786f46ad06e9f7484))
+
 ## 1.0.0 (2026-03-27)
 
 ### Features
