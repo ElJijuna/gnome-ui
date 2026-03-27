@@ -42,7 +42,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Tabs / Tab Bar** | Tab-based navigation |
 | ✅ | **View Switcher** | Segmented control for switching between views |
 | ✅ | **Sidebar** | Lateral navigation panel |
-| ⬜ | **Search Bar** | Collapsible search bar |
+| ✅ | **Search Bar** | Collapsible search bar |
 
 ---
 

@@ -67,6 +67,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 | `ViewSwitcher` / `ViewSwitcherItem` | Segmented pill control for switching between 2–4 top-level views | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitcher--docs) |
+| `SearchBar` | Collapsible search bar with auto-focus, clear button, and optional filter row | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

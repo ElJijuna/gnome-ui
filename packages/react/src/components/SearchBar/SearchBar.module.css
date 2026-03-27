@@ -1,0 +1,154 @@
+/* ─── Collapsible wrapper ───────────────────────────────────────────────────── */
+
+.wrapper {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+
+  transition:
+    max-height var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease),
+    opacity    var(--gnome-duration-fast,   100ms) var(--gnome-easing-default, ease);
+}
+
+.open {
+  max-height: 120px; /* enough for bar + filter row */
+  opacity: 1;
+}
+
+/* ─── Inner bar ─────────────────────────────────────────────────────────────── */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
+}
+
+.disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+/* ─── Search icon ───────────────────────────────────────────────────────────── */
+
+.searchIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── Input ─────────────────────────────────────────────────────────────────── */
+
+.input {
+  flex: 1;
+  min-width: 0;
+
+  /* Reset browser search input */
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: none;
+  background: transparent;
+  outline: none;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.input::placeholder {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* Hide webkit search cancel button — we render our own */
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+/* ─── Clear button ──────────────────────────────────────────────────────────── */
+
+.clearButton {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  appearance: none;
+  border: none;
+  background: transparent;
+  border-radius: var(--gnome-radius-sm, 6px);
+  padding: 0;
+  cursor: pointer;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+
+  transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.clearButton:hover:not(:disabled) {
+  opacity: 1;
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.clearButton:active:not(:disabled) {
+  background-color: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.clearButton:focus {
+  outline: none;
+}
+
+.clearButton:focus-visible {
+  opacity: 1;
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: var(--gnome-focus-ring-offset, 2px);
+}
+
+/* ─── Filter row (optional children) ───────────────────────────────────────── */
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gnome-space-1, 6px);
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .bar,
+  .filterRow {
+    background-color: var(--gnome-headerbar-bg-color, #303030);
+    border-bottom-color: rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper {
+    transition: none;
+  }
+
+  .clearButton {
+    transition: none;
+  }
+}

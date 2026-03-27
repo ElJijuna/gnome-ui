@@ -65,3 +65,6 @@ export type { BoxedListProps } from "./components/BoxedList";
 
 export { ViewSwitcher, ViewSwitcherItem } from "./components/ViewSwitcher";
 export type { ViewSwitcherProps, ViewSwitcherItemProps } from "./components/ViewSwitcher";
+
+export { SearchBar } from "./components/SearchBar";
+export type { SearchBarProps } from "./components/SearchBar";
