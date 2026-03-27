@@ -1,0 +1,92 @@
+/* ─── Wrapper (when used with anchor) ──────────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* ─── Base badge ───────────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--gnome-font-family);
+  font-size: 0.6875rem;        /* 11px — keeps it compact */
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--gnome-radius-pill);
+
+  /* Thin white ring to separate from any background */
+  box-shadow: 0 0 0 2px var(--gnome-window-bg-color, #fafafa);
+}
+
+/* ─── Anchored position (top-right of parent) ──────────────────────────────── */
+
+.anchored {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 1;
+}
+
+/* ─── Dot variant ──────────────────────────────────────────────────────────── */
+
+.dot {
+  min-width: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: var(--gnome-radius-pill);
+}
+
+.dot.anchored {
+  top: -2px;
+  right: -2px;
+}
+
+/* ─── Color variants ───────────────────────────────────────────────────────── */
+
+.accent {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #ffffff);
+}
+
+.success {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+  color: var(--gnome-success-fg-color, #ffffff);
+}
+
+.warning {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+  color: var(--gnome-warning-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.error {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+  color: var(--gnome-error-fg-color, #ffffff);
+}
+
+.neutral {
+  background-color: var(--gnome-light-4, #c0bfbc);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .badge {
+    box-shadow: 0 0 0 2px var(--gnome-window-bg-color, #242424);
+  }
+
+  .neutral {
+    background-color: var(--gnome-dark-2, #5e5c64);
+    color: rgba(255, 255, 255, 0.87);
+  }
+}

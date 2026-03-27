@@ -68,5 +68,5 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ⬜ | **Slider** | Numeric range with draggable handle |
 | ⬜ | **Spin Button** | Numeric input with +/− buttons |
 | ✅ | **Avatar** | Circular user image with initials fallback |
-| ⬜ | **Badge** | Counter or status indicator overlaid on another element |
+| ✅ | **Badge** | Counter or status indicator overlaid on another element |
 | ⬜ | **Popover** | Floating panel anchored to a trigger element |

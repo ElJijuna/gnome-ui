@@ -58,6 +58,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `ProgressBar` | Determinate (0–1) and indeterminate progress indicator | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-progressbar--docs) |
 | `Banner` | Persistent message strip with optional action and dismiss | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-banner--docs) |
 | `HeaderBar` | Title bar with centered title and leading/trailing action slots | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-headerbar--docs) |
+| `Badge` | Counter or status dot, optionally anchored over another element | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) |
 | `ActionRow` | Settings row with title, subtitle, and trailing widget | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-actionrow--docs) |
 | `BoxedList` | Rounded bordered list of rows — canonical GNOME settings pattern | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-boxedlist--docs) |
 
