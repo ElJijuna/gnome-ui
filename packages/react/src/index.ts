@@ -74,3 +74,6 @@ export type { ToastProps, ToasterProps } from "./components/Toast";
 
 export { Dialog } from "./components/Dialog";
 export type { DialogProps, DialogButton } from "./components/Dialog";
+
+export { Tooltip } from "./components/Tooltip";
+export type { TooltipProps, TooltipPlacement } from "./components/Tooltip";

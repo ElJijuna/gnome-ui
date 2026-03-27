@@ -70,6 +70,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `SearchBar` | Collapsible search bar with auto-focus, clear button, and optional filter row | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) |
 | `Toast` / `Toaster` | Non-blocking temporary notification with auto-dismiss, action, and queue support | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-toast--docs) |
 | `Dialog` | Blocking modal with title, body, focus trap, and configurable buttons | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dialog--docs) |
+| `Tooltip` | Floating informational label on hover/focus with auto-flip positioning | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tooltip--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 
