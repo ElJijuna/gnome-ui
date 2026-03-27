@@ -154,7 +154,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ⬜ | **`BoxedList` `separate` prop** | Add `variant="separate"` to `BoxedList`: renders each child as its own rounded card — mirrors `.boxed-list-separate` |
 | ✅ | **`ButtonRow`** | Full-width activatable row styled as a button inside a `BoxedList` — mirrors `AdwButtonRow`; supports `suggested` and `destructive` variants |
 | ⬜ | **`ActionRow` `property` variant** | Add `variant="property"` to `ActionRow`: flips weight so the subtitle is the primary text (read-only property display) — mirrors `.property` style class |
-| ⬜ 🟢 | **`ExpanderRow`** | Collapsible `ActionRow` that reveals nested rows on activation — mirrors `AdwExpanderRow` |
+| ✅ | **`ExpanderRow`** | Collapsible `ActionRow` that reveals nested rows on activation — mirrors `AdwExpanderRow` |
 
 ### Button additions
 

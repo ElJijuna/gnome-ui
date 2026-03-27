@@ -142,3 +142,6 @@ export type { LinkedGroupProps } from "./components/LinkedGroup";
 
 export { Frame } from "./components/Frame";
 export type { FrameProps } from "./components/Frame";
+
+export { ExpanderRow } from "./components/ExpanderRow";
+export type { ExpanderRowProps } from "./components/ExpanderRow";
