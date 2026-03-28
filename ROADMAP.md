@@ -202,3 +202,69 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ✅ | **`Sidebar` `collapsed` prop** | Built-in icon-only (mini/rail) mode: `collapsed` prop animates width (240 px → 56 px), hides labels/suffixes/section titles, and auto-shows tooltips on hover. `SidebarCollapsedContext` and `useSidebarCollapsed` hook exported for custom consumers. Dashboard story updated to use the real `Sidebar` component. |
+
+---
+
+## Tier 11 — Sidebar 1.9 Completeness
+
+> Gaps vs `AdwSidebar` in libadwaita 1.9 identified by reviewing the [release notes](https://nyaa.place/blog/libadwaita-1-9/).
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`Sidebar` search/filter** | Built-in `filter` prop + `SearchBar` integration; shows a `StatusPage` placeholder when the filtered list is empty — mirrors `AdwSidebar`'s `GtkFilter` support |
+| ⬜ | **`Sidebar` adaptive mode** | `mode` prop (`"sidebar" \| "page"`) that switches to a boxed-list layout on narrow viewports (≤ 400 sp), mirroring `AdwSidebar` mobile behaviour |
+| ⬜ | **`SidebarItem` drop target** | `onDrop` / `acceptTypes` props to turn individual rows into drag-and-drop targets — mirrors `AdwSidebar` per-row drop target support |
+
+---
+
+## Tier 12 — Boxed List Row Variants
+
+> Specialised row types present in the libadwaita [widget gallery](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/widget-gallery.html) but not yet implemented.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`SwitchRow`** | `ActionRow` with an embedded `Switch` as the end widget — mirrors `AdwSwitchRow`; the canonical GNOME settings toggle pattern |
+| ⬜ | **`ComboRow`** | `ActionRow` with an inline dropdown selector — mirrors `AdwComboRow`; common for single-choice preferences |
+| ⬜ | **`EntryRow`** | `ActionRow` where the subtitle area is a live text input — mirrors `AdwEntryRow` |
+| ⬜ | **`PasswordEntryRow`** | `EntryRow` variant with masked input and a reveal toggle — mirrors `AdwPasswordEntryRow` |
+| ⬜ | **`SpinRow`** | `ActionRow` with an embedded `SpinButton` — mirrors `AdwSpinRow` |
+
+---
+
+## Tier 13 — Preferences UI
+
+> Full preferences-window pattern used by most GNOME applications.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`PreferencesGroup`** | Titled section that wraps a `BoxedList` with an optional description — mirrors `AdwPreferencesGroup` |
+| ⬜ | **`PreferencesPage`** | Scrollable page composed of `PreferencesGroup` sections — mirrors `AdwPreferencesPage` |
+| ⬜ | **`PreferencesDialog`** | Multi-page settings dialog using `PreferencesPage` tabs — mirrors `AdwPreferencesDialog` (replaces `AdwPreferencesWindow`) |
+
+---
+
+## Tier 14 — Missing Navigation & Overlays
+
+> Navigation and overlay patterns present in the widget gallery but not yet shipped.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`NavigationView`** | Single-pane push/pop navigation stack — mirrors `AdwNavigationView`; the mobile-first counterpart to `NavigationSplitView` |
+| ⬜ | **`BottomSheet`** | Slide-up panel that overlays content from the bottom edge — mirrors `AdwBottomSheet` (libadwaita 1.6+) |
+| ⬜ | **`Carousel`** | Swipeable horizontal/vertical content carousel with `CarouselIndicatorDots` and `CarouselIndicatorLines` — mirrors `AdwCarousel` |
+| ⬜ | **`AlertDialog`** | Specialised dialog for confirmations and destructive-action warnings with `response` variants — mirrors `AdwAlertDialog` |
+| ⬜ | **`AboutDialog`** | Standard application info dialog (name, version, credits, links) — mirrors `AdwAboutDialog` |
+
+---
+
+## Tier 15 — Layout & Utility Gaps
+
+> Small primitives and helpers present in the widget gallery that round out the system.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`Bin`** | Single-child container with no visual styling — mirrors `AdwBin`; useful as a base for custom components |
+| ⬜ | **`ToolbarView`** | Layout container that attaches a `HeaderBar`/`ActionBar` at top or bottom and scrolls only the middle content — mirrors `AdwToolbarView` |
+| ⬜ | **`WindowTitle`** | Two-line title + subtitle widget centred in a `HeaderBar` — mirrors `AdwWindowTitle` |
+| ⬜ | **`ShortcutLabel`** | Read-only display of a keyboard shortcut (e.g. `Ctrl+S`) with proper key-cap styling — mirrors `GtkShortcutLabel` |
+| ⬜ | **`ButtonContent`** | Icon + label layout helper for buttons with both an icon and text — mirrors `AdwButtonContent` |
