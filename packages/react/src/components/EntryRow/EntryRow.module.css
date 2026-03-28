@@ -1,0 +1,143 @@
+/* ─── Row container ─────────────────────────────────────────────────────────── */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: 0 var(--gnome-space-4, 24px);
+  min-height: 52px;
+  width: 100%;
+  cursor: text;
+  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+
+  transition: box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.focused {
+  box-shadow:
+    inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Disabled ──────────────────────────────────────────────────────────────── */
+
+.disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Leading / trailing ────────────────────────────────────────────────────── */
+
+.leading {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.trailing {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--gnome-space-1, 6px);
+}
+
+/* ─── Field wrap ────────────────────────────────────────────────────────────── */
+
+.fieldWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+}
+
+/* ─── Floating label ────────────────────────────────────────────────────────── */
+
+.label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.55));
+  opacity: var(--gnome-opacity-dim, 0.55);
+
+  transition:
+    top var(--gnome-duration-fast) var(--gnome-easing-default),
+    transform var(--gnome-duration-fast) var(--gnome-easing-default),
+    font-size var(--gnome-duration-fast) var(--gnome-easing-default),
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+/* When floated (focused or has value) the label moves up */
+.labelFloated {
+  top: 10px;
+  transform: translateY(0);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  opacity: 0.7;
+}
+
+/* ─── Input field ───────────────────────────────────────────────────────────── */
+
+.input {
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+
+  /* Hide until floated — the label is the placeholder */
+  opacity: 0;
+  padding-top: 18px;
+  padding-bottom: 4px;
+
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.inputFloated {
+  opacity: 1;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── High contrast ─────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .focused {
+    box-shadow:
+      inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+      inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+        var(--gnome-focus-ring-color, #3584e4),
+      inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px) + 1px)
+        var(--gnome-window-bg-color, #fafafa);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .label,
+  .input {
+    transition: none;
+  }
+}
