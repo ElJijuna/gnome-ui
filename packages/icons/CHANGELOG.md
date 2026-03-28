@@ -1,3 +1,17 @@
+## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.6.0...@gnome-ui/icons@1.7.0) (2026-03-28)
+
+### Features
+
+* add new components ([0f96caf](https://github.com/ElJijuna/gnome-ui/commit/0f96caf9b0c00f4165f3af1684aa1cb623bb7686))
+
+### Bug Fixes
+
+* omit "onChange" from EntryRow. ([36d420b](https://github.com/ElJijuna/gnome-ui/commit/36d420b6bfe96478b91990b73c9e91fcb1f4452d))
+
+### Documentation
+
+* update ROADMAP. ([a7c755f](https://github.com/ElJijuna/gnome-ui/commit/a7c755f1b8a650dc9d0475b17b0dba4090cc808b))
+
 ## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.5.0...@gnome-ui/icons@1.6.0) (2026-03-27)
 
 ### Features
