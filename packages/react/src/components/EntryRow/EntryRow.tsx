@@ -1,7 +1,7 @@
 import { useState, useId, useRef, type InputHTMLAttributes, type ReactNode } from "react";
 import styles from "./EntryRow.module.css";
 
-export interface EntryRowProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+export interface EntryRowProps extends InputHTMLAttributes<HTMLInputElement> {
   /**
    * Acts as a floating label: shown small above the input when the field has
    * content or focus, shown as a placeholder when empty and unfocused.
