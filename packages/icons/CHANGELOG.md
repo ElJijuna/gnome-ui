@@ -1,3 +1,13 @@
+## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.7.0...@gnome-ui/icons@1.8.0) (2026-03-29)
+
+### Features
+
+* add component PasswordEntryRow and icons ViewConceal and ViewReveal. ([44e8aeb](https://github.com/ElJijuna/gnome-ui/commit/44e8aeb8206ac8b2426bd78cdffde11610341d9e))
+
+### Bug Fixes
+
+* update size value in Icon from PasswordEntryRow. ([a903161](https://github.com/ElJijuna/gnome-ui/commit/a9031613cb970e15ac720e7f8e5e0892b0a5ee9b))
+
 ## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.6.0...@gnome-ui/icons@1.7.0) (2026-03-28)
 
 ### Features
