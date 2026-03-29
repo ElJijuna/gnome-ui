@@ -1,0 +1,291 @@
+/* ─── Backdrop ──────────────────────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Dialog card ───────────────────────────────────────────────────────────── */
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(540px, calc(100vw - 48px));
+  max-height: min(640px, 90dvh);
+
+  background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #fafafa));
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  border-radius: var(--gnome-radius-xl, 16px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
+  animation: dialog-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+/* Wider layout when sidebar is present */
+.dialogMulti {
+  width: min(720px, calc(100vw - 48px));
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-2, 12px) var(--gnome-space-2, 12px) var(--gnome-space-3, 16px);
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  flex-shrink: 0;
+}
+
+.closeBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.6;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+              opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+  order: -1;
+}
+
+.closeBtn:hover {
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  opacity: 1;
+}
+
+.closeBtn:focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 2px;
+}
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1;
+  text-align: center;
+}
+
+/* ─── Search ────────────────────────────────────────────────────────────────── */
+
+.searchWrap {
+  grid-column: 3;
+}
+
+.searchInput {
+  appearance: none;
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  background-color: var(--gnome-card-bg-color, rgba(0, 0, 0, 0.04));
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  padding: 5px var(--gnome-space-2, 12px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: 1.5;
+  width: 180px;
+  transition: border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+              box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.searchInput::placeholder {
+  opacity: 0.5;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow: 0 0 0 var(--gnome-focus-ring-width, 3px) color-mix(in srgb, var(--gnome-accent-color, #3584e4) 30%, transparent);
+}
+
+/* ─── Body ──────────────────────────────────────────────────────────────────── */
+
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────────────────────── */
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  overflow-y: auto;
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-2, 12px);
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navItem {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-md, 8px);
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  text-align: left;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.navItem:hover:not(.navItemActive) {
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.navItemActive {
+  background-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 12%, transparent);
+  color: var(--gnome-accent-color, #3584e4);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.navItem:focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 2px;
+}
+
+.navIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.navLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Page area ─────────────────────────────────────────────────────────────── */
+
+.pageWrap {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .dialog {
+    background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #242424));
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .header {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .sidebar {
+    border-right-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .searchInput {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation: none;
+  }
+
+  .closeBtn,
+  .navItem,
+  .searchInput {
+    transition: none;
+  }
+}
+
+/* ─── High contrast ─────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .dialog {
+    box-shadow: none;
+    border: 2px solid var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  }
+
+  .header {
+    border-bottom-width: 2px;
+  }
+
+  .sidebar {
+    border-right-width: 2px;
+  }
+
+  .navItemActive {
+    outline: 2px solid var(--gnome-accent-color, #3584e4);
+  }
+}

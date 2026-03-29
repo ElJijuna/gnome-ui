@@ -1,0 +1,17 @@
+/* ─── ButtonContent ──────────────────────────────────────────────────────────── */
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.label {
+  /* Inherit all button text styles */
+}

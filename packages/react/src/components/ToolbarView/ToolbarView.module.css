@@ -1,0 +1,25 @@
+/* ─── ToolbarView ────────────────────────────────────────────────────────────── */
+
+.toolbarView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Top bar — fixed, no scroll */
+.top {
+  flex-shrink: 0;
+}
+
+/* Scrollable content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Bottom bar — fixed, no scroll */
+.bottom {
+  flex-shrink: 0;
+}

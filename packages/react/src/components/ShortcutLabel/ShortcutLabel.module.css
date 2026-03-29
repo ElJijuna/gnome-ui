@@ -1,0 +1,48 @@
+/* ─── ShortcutLabel ──────────────────────────────────────────────────────────── */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  font-style: normal;
+  line-height: 1;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  background-color: var(--gnome-card-bg-color, rgba(0, 0, 0, 0.06));
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  border-radius: var(--gnome-radius-sm, 4px);
+  box-shadow: 0 1px 0 var(--gnome-card-shade-color, rgba(0, 0, 0, 0.12));
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .key {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ─── High contrast ──────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .key {
+    border-width: 2px;
+    box-shadow: none;
+  }
+}

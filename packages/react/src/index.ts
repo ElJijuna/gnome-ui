@@ -189,3 +189,27 @@ export type {
   CarouselIndicatorDotsProps,
   CarouselIndicatorLinesProps,
 } from "./components/Carousel";
+
+export { Bin } from "./components/Bin";
+export type { BinProps } from "./components/Bin";
+
+export { ButtonContent } from "./components/ButtonContent";
+export type { ButtonContentProps } from "./components/ButtonContent";
+
+export { ShortcutLabel } from "./components/ShortcutLabel";
+export type { ShortcutLabelProps } from "./components/ShortcutLabel";
+
+export { ToolbarView } from "./components/ToolbarView";
+export type { ToolbarViewProps } from "./components/ToolbarView";
+
+export { WindowTitle } from "./components/WindowTitle";
+export type { WindowTitleProps } from "./components/WindowTitle";
+
+export { PreferencesGroup } from "./components/PreferencesGroup";
+export type { PreferencesGroupProps } from "./components/PreferencesGroup";
+
+export { PreferencesPage } from "./components/PreferencesPage";
+export type { PreferencesPageProps } from "./components/PreferencesPage";
+
+export { PreferencesDialog } from "./components/PreferencesDialog";
+export type { PreferencesDialogProps } from "./components/PreferencesDialog";

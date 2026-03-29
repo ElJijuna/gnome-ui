@@ -1,0 +1,36 @@
+/* ─── WindowTitle ────────────────────────────────────────────────────────────── */
+
+.windowTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1.2;
+  color: var(--gnome-headerbar-fg-color, var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8)));
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.subtitle {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: 1.2;
+  color: var(--gnome-headerbar-fg-color, var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8)));
+  opacity: var(--gnome-opacity-dim, 0.55);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}

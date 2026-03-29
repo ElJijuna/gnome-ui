@@ -2,7 +2,6 @@ import {
   createContext,
   useContext,
   useState,
-  useId,
   type ReactNode,
   type HTMLAttributes,
 } from "react";
@@ -24,8 +23,8 @@ interface NavigationContextValue {
 }
 
 const NavigationContext = createContext<NavigationContextValue>({
-  navigate: () => {},
-  pop: () => {},
+  navigate: () => { },
+  pop: () => { },
   canGoBack: false,
   currentTag: "",
   direction: "forward",

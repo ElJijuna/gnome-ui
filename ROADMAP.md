@@ -237,9 +237,9 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`PreferencesGroup`** | Titled section that wraps a `BoxedList` with an optional description — mirrors `AdwPreferencesGroup` |
-| ⬜ | **`PreferencesPage`** | Scrollable page composed of `PreferencesGroup` sections — mirrors `AdwPreferencesPage` |
-| ⬜ | **`PreferencesDialog`** | Multi-page settings dialog using `PreferencesPage` tabs — mirrors `AdwPreferencesDialog` (replaces `AdwPreferencesWindow`) |
+| ✅ | **`PreferencesGroup`** | Titled section that wraps a `BoxedList` with an optional description — mirrors `AdwPreferencesGroup` |
+| ✅ | **`PreferencesPage`** | Scrollable page composed of `PreferencesGroup` sections — mirrors `AdwPreferencesPage` |
+| ✅ | **`PreferencesDialog`** | Multi-page settings dialog using `PreferencesPage` tabs — mirrors `AdwPreferencesDialog` (replaces `AdwPreferencesWindow`) |
 
 ---
 
@@ -263,8 +263,8 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`Bin`** | Single-child container with no visual styling — mirrors `AdwBin`; useful as a base for custom components |
-| ⬜ | **`ToolbarView`** | Layout container that attaches a `HeaderBar`/`ActionBar` at top or bottom and scrolls only the middle content — mirrors `AdwToolbarView` |
-| ⬜ | **`WindowTitle`** | Two-line title + subtitle widget centred in a `HeaderBar` — mirrors `AdwWindowTitle` |
-| ⬜ | **`ShortcutLabel`** | Read-only display of a keyboard shortcut (e.g. `Ctrl+S`) with proper key-cap styling — mirrors `GtkShortcutLabel` |
-| ⬜ | **`ButtonContent`** | Icon + label layout helper for buttons with both an icon and text — mirrors `AdwButtonContent` |
+| ✅ | **`Bin`** | Single-child container with no visual styling — mirrors `AdwBin`; useful as a base for custom components |
+| ✅ | **`ToolbarView`** | Layout container that attaches a `HeaderBar`/`ActionBar` at top or bottom and scrolls only the middle content — mirrors `AdwToolbarView` |
+| ✅ | **`WindowTitle`** | Two-line title + subtitle widget centred in a `HeaderBar` — mirrors `AdwWindowTitle` |
+| ✅ | **`ShortcutLabel`** | Read-only display of a keyboard shortcut (e.g. `Ctrl+S`) with proper key-cap styling — mirrors `GtkShortcutLabel` |
+| ✅ | **`ButtonContent`** | Icon + label layout helper for buttons with both an icon and text — mirrors `AdwButtonContent` |

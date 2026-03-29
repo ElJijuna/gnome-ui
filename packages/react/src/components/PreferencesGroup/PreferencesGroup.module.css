@@ -1,0 +1,50 @@
+/* ─── PreferencesGroup ───────────────────────────────────────────────────────── */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.headerText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.description {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.suffix {
+  flex-shrink: 0;
+}
+
+/* ─── Content ───────────────────────────────────────────────────────────────── */
+
+.content {
+  /* Rows/BoxedList rendered here */
+}
