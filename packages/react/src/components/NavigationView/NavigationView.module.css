@@ -1,0 +1,77 @@
+/* ─── View container ────────────────────────────────────────────────────────── */
+
+.view {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Page ──────────────────────────────────────────────────────────────────── */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--gnome-window-bg-color, #fafafa);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Page header (title bar) ────────────────────────────────────────────────── */
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 47px;
+  padding: 0 var(--gnome-space-4, 24px);
+  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-headerbar-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Page content ──────────────────────────────────────────────────────────── */
+
+.pageContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--gnome-space-3, 16px);
+}
+
+/* ─── Enter animations ──────────────────────────────────────────────────────── */
+
+.enterForward {
+  animation: slide-in-right var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+.enterBack {
+  animation: slide-in-left var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-40px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .enterForward,
+  .enterBack {
+    animation: none;
+  }
+}

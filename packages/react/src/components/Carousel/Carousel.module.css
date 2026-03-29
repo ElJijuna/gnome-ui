@@ -1,0 +1,130 @@
+/* ─── Carousel container ────────────────────────────────────────────────────── */
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  scroll-snap-type: both mandatory;
+  -webkit-overflow-scrolling: touch;
+  outline: none;
+  width: 100%;
+}
+
+.carousel:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+  border-radius: var(--gnome-radius-md, 8px);
+}
+
+.horizontal {
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+.vertical {
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+}
+
+/* ─── Slide ─────────────────────────────────────────────────────────────────── */
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ─── Dot indicators ────────────────────────────────────────────────────────── */
+
+.indicatorDots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: var(--gnome-space-2, 12px) 0;
+}
+
+.dot {
+  appearance: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.2;
+  transition:
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default),
+    transform var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.dot:hover {
+  opacity: 0.5;
+}
+
+.dotActive {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 2px;
+}
+
+/* ─── Line indicators ───────────────────────────────────────────────────────── */
+
+.indicatorLines {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--gnome-space-2, 12px) 0;
+}
+
+.line {
+  appearance: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.2;
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.line:hover {
+  opacity: 0.5;
+}
+
+.lineActive {
+  opacity: 1;
+}
+
+.line:focus-visible {
+  outline: 2px solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 2px;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel {
+    scroll-behavior: auto;
+  }
+
+  .dot,
+  .line {
+    transition: none;
+  }
+}

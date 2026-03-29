@@ -12,16 +12,18 @@ const meta: Meta<typeof Dialog> = {
     docs: {
       description: {
         component: `
-Blocking modal dialog following the Adwaita \`AdwDialog\` / \`AdwAlertDialog\` pattern.
+Blocking modal dialog — three modes in one component.
 
-### Guidelines
-- Use for actions that require confirmation before proceeding (delete, discard, sign out).
-- Keep the title short — a noun or verb phrase, no period.
-- Body text is optional — omit it for simple confirmations.
-- Provide at most one \`suggested\` or \`destructive\` button.
-- Always include a cancel/dismiss path (Cancel button or Escape key).
-- Do not use for complex forms — open a full page instead.
-- Focus is trapped inside while open; Escape and backdrop click call \`onClose\`.
+**Standard** — \`title\` + \`children\` + \`buttons[]\`.
+
+**Alert** (\`role="alertdialog"\` + \`responses[]\` + \`onResponse\`) — for confirmations
+and destructive-action warnings. Screen readers announce it immediately.
+Escape / backdrop fire the first non-destructive response. Mirrors \`AdwAlertDialog\`.
+
+**About** (\`variant="about"\` + \`applicationName\` + info props) — standard app info
+dialog with details, credits, and legal tabs. Mirrors \`AdwAboutDialog\`.
+
+All modes share the same portal, focus-trap, and card/backdrop styles.
         `,
       },
     },
@@ -175,6 +177,115 @@ export const MultipleButtons: Story = {
     docs: {
       description: {
         story: "Three-button dialog: cancel · destructive · suggested. Each button occupies a full-width row.",
+      },
+    },
+  },
+};
+
+// ─── Alert — destructive confirmation ─────────────────────────────────────────
+
+export const AlertDestructive: Story = {
+  render: function AlertStory() {
+    const [open, setOpen] = useState(false);
+    const [result, setResult] = useState<string | null>(null);
+    return (
+      <>
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <Button variant="destructive" onClick={() => setOpen(true)}>Delete file…</Button>
+          {result && <Text variant="caption" color="dim">Response: <strong>{result}</strong></Text>}
+        </div>
+        <Dialog
+          open={open}
+          role="alertdialog"
+          title="Delete File?"
+          responses={[
+            { id: "cancel", label: "Cancel",  variant: "default" },
+            { id: "delete", label: "Delete",  variant: "destructive" },
+          ]}
+          onResponse={(id) => { setResult(id); setOpen(false); }}
+        >
+          The file will be permanently deleted and cannot be recovered.
+        </Dialog>
+      </>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "`role=\"alertdialog\"` + `responses` + `onResponse`. Escape fires the non-destructive response.",
+      },
+    },
+  },
+};
+
+// ─── Alert — save changes ──────────────────────────────────────────────────────
+
+export const AlertSaveChanges: Story = {
+  render: function SaveStory() {
+    const [open, setOpen] = useState(false);
+    const [result, setResult] = useState<string | null>(null);
+    return (
+      <>
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <Button onClick={() => setOpen(true)}>Close document…</Button>
+          {result && <Text variant="caption" color="dim">Response: <strong>{result}</strong></Text>}
+        </div>
+        <Dialog
+          open={open}
+          role="alertdialog"
+          title="Save Changes?"
+          responses={[
+            { id: "discard", label: "Discard", variant: "destructive" },
+            { id: "cancel",  label: "Cancel",  variant: "default" },
+            { id: "save",    label: "Save",    variant: "suggested" },
+          ]}
+          onResponse={(id) => { setResult(id); setOpen(false); }}
+        >
+          If you close without saving, your changes will be lost.
+        </Dialog>
+      </>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: { story: "Three-response alert: destructive · cancel · suggested." },
+    },
+  },
+};
+
+// ─── About ────────────────────────────────────────────────────────────────────
+
+export const About: Story = {
+  render: function AboutStory() {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>About Files</Button>
+        <Dialog
+          open={open}
+          variant="about"
+          applicationName="Files"
+          version="45.0"
+          comments="A file manager for the GNOME desktop."
+          developerName="GNOME Project"
+          website="https://apps.gnome.org/Nautilus/"
+          websiteLabel="Files on GNOME Apps"
+          developers={["Carlos Soriano", "António Fernandes", "Corey Berla"]}
+          designers={["Allan Day", "Jakub Steiner"]}
+          copyright="© 2024 The GNOME Project"
+          licenseType="GPL-3.0-or-later"
+          onClose={() => setOpen(false)}
+        />
+      </>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "`variant=\"about\"` renders app name, version, details, and Credits / Legal tabs.",
       },
     },
   },

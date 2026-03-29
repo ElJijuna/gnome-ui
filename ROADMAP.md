@@ -249,11 +249,11 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`NavigationView`** | Single-pane push/pop navigation stack — mirrors `AdwNavigationView`; the mobile-first counterpart to `NavigationSplitView` |
-| ⬜ | **`BottomSheet`** | Slide-up panel that overlays content from the bottom edge — mirrors `AdwBottomSheet` (libadwaita 1.6+) |
-| ⬜ | **`Carousel`** | Swipeable horizontal/vertical content carousel with `CarouselIndicatorDots` and `CarouselIndicatorLines` — mirrors `AdwCarousel` |
-| ⬜ | **`AlertDialog`** | Specialised dialog for confirmations and destructive-action warnings with `response` variants — mirrors `AdwAlertDialog` |
-| ⬜ | **`AboutDialog`** | Standard application info dialog (name, version, credits, links) — mirrors `AdwAboutDialog` |
+| ✅ | **`NavigationView`** | Single-pane push/pop navigation stack — mirrors `AdwNavigationView`; the mobile-first counterpart to `NavigationSplitView` |
+| ✅ | **`BottomSheet`** | Slide-up panel that overlays content from the bottom edge — mirrors `AdwBottomSheet` (libadwaita 1.6+) |
+| ✅ | **`Carousel`** | Swipeable horizontal/vertical content carousel with `CarouselIndicatorDots` and `CarouselIndicatorLines` — mirrors `AdwCarousel` |
+| ✅ | **`AlertDialog`** | `role="alertdialog"` + `responses`/`onResponse` API added to `Dialog` — mirrors `AdwAlertDialog` |
+| ✅ | **`AboutDialog`** | `variant="about"` + app info props added to `Dialog` (details/credits/legal tabs) — mirrors `AdwAboutDialog` |
 
 ---
 

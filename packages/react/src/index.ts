@@ -73,7 +73,13 @@ export { Toast, Toaster } from "./components/Toast";
 export type { ToastProps, ToasterProps } from "./components/Toast";
 
 export { Dialog } from "./components/Dialog";
-export type { DialogProps, DialogButton } from "./components/Dialog";
+export type {
+  DialogProps,
+  DialogButton,
+  AlertDialogResponse,
+  AlertDialogResponseVariant,
+  AboutDialogLink,
+} from "./components/Dialog";
 
 export { Tooltip } from "./components/Tooltip";
 export type { TooltipProps, TooltipPlacement } from "./components/Tooltip";
@@ -170,3 +176,16 @@ export type { PasswordEntryRowProps } from "./components/PasswordEntryRow";
 
 export { SpinRow } from "./components/SpinRow";
 export type { SpinRowProps } from "./components/SpinRow";
+
+export { NavigationView, NavigationPage, useNavigation } from "./components/NavigationView";
+export type { NavigationViewProps, NavigationPageProps } from "./components/NavigationView";
+
+export { BottomSheet } from "./components/BottomSheet";
+export type { BottomSheetProps } from "./components/BottomSheet";
+
+export { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from "./components/Carousel";
+export type {
+  CarouselProps,
+  CarouselIndicatorDotsProps,
+  CarouselIndicatorLinesProps,
+} from "./components/Carousel";
