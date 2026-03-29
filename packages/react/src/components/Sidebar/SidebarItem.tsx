@@ -3,7 +3,9 @@ import {
   useRef,
   useEffect,
   useCallback,
+  useContext,
   type ButtonHTMLAttributes,
+  type DragEvent,
   type ReactNode,
   type MouseEvent,
   type KeyboardEvent,
@@ -12,7 +14,7 @@ import { createPortal } from "react-dom";
 import type { IconDefinition } from "@gnome-ui/icons";
 import { Icon } from "../Icon";
 import { Tooltip } from "../Tooltip";
-import { useSidebarCollapsed } from "./Sidebar";
+import { useSidebarCollapsed, SidebarFilterContext } from "./Sidebar";
 import styles from "./Sidebar.module.css";
 
 export interface SidebarMenuEntry {
@@ -40,28 +42,37 @@ export interface SidebarItemProps extends ButtonHTMLAttributes<HTMLButtonElement
   suffix?: ReactNode;
   /**
    * @deprecated Use `suffix` instead.
-   * Kept for backward compatibility.
    */
   badge?: ReactNode;
   /**
    * Short tooltip shown when hovering the item.
-   * Useful for icon-only sidebars or when the label is truncated.
+   * Automatically shown when the sidebar is `collapsed`.
    */
   tooltip?: string;
   /**
    * Context-menu entries shown on right-click or the Menu key.
-   * Mirrors the per-row context menu support in `AdwSidebar` (GNOME 50).
    */
   menuItems?: SidebarMenuEntry[];
+  /**
+   * Called when a dragged item is dropped onto this row.
+   * Mirrors `AdwSidebar` per-row drop target support (libadwaita 1.9).
+   */
+  onDrop?: (e: DragEvent<HTMLButtonElement>) => void;
+  /**
+   * MIME types this row accepts as drop targets (e.g. `["text/plain"]`).
+   * When provided, drops of other types are rejected via `e.preventDefault()`.
+   * When omitted, all types are accepted.
+   */
+  acceptTypes?: string[];
 }
 
 /**
  * Individual navigation item inside a `Sidebar` or `SidebarSection`.
  *
- * Updated for libadwaita 1.9 / GNOME 50:
- * - `suffix` — general trailing widget (supersedes `badge`).
- * - `tooltip` — shown on hover via the `Tooltip` component.
- * - `menuItems` — context menu on right-click or Menu key.
+ * **Tier 11 additions:**
+ * - Automatically hidden when `Sidebar`'s `filter` / `searchable` is active
+ *   and the `label` does not match (case-insensitive substring).
+ * - `onDrop` / `acceptTypes` — HTML5 drag-and-drop target support.
  */
 export function SidebarItem({
   label,
@@ -71,31 +82,54 @@ export function SidebarItem({
   badge,
   tooltip,
   menuItems,
+  onDrop,
+  acceptTypes,
   className,
   ...props
 }: SidebarItemProps) {
   const collapsed = useSidebarCollapsed();
+  const filterValue = useContext(SidebarFilterContext);
   const trailing = suffix ?? badge;
-  // When collapsed, always show a tooltip (fall back to the item label)
   const effectiveTooltip = collapsed ? (tooltip ?? label) : tooltip;
 
-  // ── Context menu state ──────────────────────────────────────────────────
+  // ── Filter visibility ────────────────────────────────────────────────────
+  const isFiltered =
+    filterValue.length > 0 &&
+    !label.toLowerCase().includes(filterValue.toLowerCase());
+
+  // ── Drag-and-drop ────────────────────────────────────────────────────────
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  const handleDragOver = (e: DragEvent<HTMLButtonElement>) => {
+    if (!onDrop) return;
+    if (acceptTypes?.length) {
+      const accepted = acceptTypes.some((t) => e.dataTransfer.types.includes(t));
+      if (!accepted) return;
+    }
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => setIsDragOver(false);
+
+  const handleDrop = (e: DragEvent<HTMLButtonElement>) => {
+    if (!onDrop) return;
+    e.preventDefault();
+    setIsDragOver(false);
+    onDrop(e);
+  };
+
+  // ── Context menu ─────────────────────────────────────────────────────────
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const openMenu = useCallback((x: number, y: number) => {
-    setMenu({ x, y });
-  }, []);
-
+  const openMenu = useCallback((x: number, y: number) => setMenu({ x, y }), []);
   const closeMenu = useCallback(() => setMenu(null), []);
 
-  // Close on click outside or Escape
   useEffect(() => {
     if (!menu) return;
     const handleClick = (e: globalThis.MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        closeMenu();
-      }
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) closeMenu();
     };
     const handleKey = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape") closeMenu();
@@ -108,7 +142,6 @@ export function SidebarItem({
     };
   }, [menu, closeMenu]);
 
-  // ── Handlers ────────────────────────────────────────────────────────────
   const handleContextMenu = (e: MouseEvent<HTMLButtonElement>) => {
     if (!menuItems?.length) return;
     e.preventDefault();
@@ -124,7 +157,7 @@ export function SidebarItem({
     }
   };
 
-  // ── Render ──────────────────────────────────────────────────────────────
+  // ── Render ───────────────────────────────────────────────────────────────
   const button = (
     <button
       type="button"
@@ -134,12 +167,16 @@ export function SidebarItem({
         styles.itemBtn,
         active ? styles.active : null,
         collapsed ? styles.itemCollapsed : null,
+        isDragOver ? styles.dragOver : null,
         className,
       ]
         .filter(Boolean)
         .join(" ")}
       onContextMenu={handleContextMenu}
       onKeyDown={handleMenuKey}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
       {...props}
     >
       {icon && (
@@ -153,12 +190,11 @@ export function SidebarItem({
   );
 
   return (
-    <li className={styles.item}>
+    <li className={styles.item} hidden={isFiltered || undefined}>
       {effectiveTooltip
         ? <Tooltip label={effectiveTooltip} placement="right">{button}</Tooltip>
         : button}
 
-      {/* Context menu portal */}
       {menu && menuItems?.length && typeof document !== "undefined" &&
         createPortal(
           <div

@@ -211,9 +211,9 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`Sidebar` search/filter** | Built-in `filter` prop + `SearchBar` integration; shows a `StatusPage` placeholder when the filtered list is empty — mirrors `AdwSidebar`'s `GtkFilter` support |
-| ⬜ | **`Sidebar` adaptive mode** | `mode` prop (`"sidebar" \| "page"`) that switches to a boxed-list layout on narrow viewports (≤ 400 sp), mirroring `AdwSidebar` mobile behaviour |
-| ⬜ | **`SidebarItem` drop target** | `onDrop` / `acceptTypes` props to turn individual rows into drag-and-drop targets — mirrors `AdwSidebar` per-row drop target support |
+| ✅ | **`Sidebar` search/filter** | Built-in `filter` prop + `SearchBar` integration; shows a `StatusPage` placeholder when the filtered list is empty — mirrors `AdwSidebar`'s `GtkFilter` support |
+| ✅ | **`Sidebar` adaptive mode** | `mode` prop (`"sidebar" \| "page"`) that switches to a boxed-list layout on narrow viewports (≤ 400 sp), mirroring `AdwSidebar` mobile behaviour |
+| ✅ | **`SidebarItem` drop target** | `onDrop` / `acceptTypes` props to turn individual rows into drag-and-drop targets — mirrors `AdwSidebar` per-row drop target support |
 
 ---
 

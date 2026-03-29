@@ -220,6 +220,32 @@
   color: var(--gnome-destructive-color, #e01b24);
 }
 
+/* ─── Search wrap ───────────────────────────────────────────────────────────── */
+
+.searchWrap {
+  padding-bottom: var(--gnome-space-1, 6px);
+}
+
+/* Override SearchBar min-height to keep it compact inside the sidebar */
+.searchWrap > * {
+  min-height: unset;
+}
+
+/* ─── Page mode (full-width boxed-list layout) ──────────────────────────────── */
+
+.pageMode {
+  width: 100%;
+  border-right: none;
+}
+
+/* ─── Drag-over highlight ───────────────────────────────────────────────────── */
+
+.dragOver {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #ffffff);
+  opacity: 0.7;
+}
+
 /* ─── Collapsed (icon-only / rail) mode ────────────────────────────────────── */
 
 .collapsed {
