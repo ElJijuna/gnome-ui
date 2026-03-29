@@ -35,7 +35,7 @@ export function PasswordEntryRow({ trailing, disabled, ...props }: PasswordEntry
     >
       <Icon
         icon={revealed ? ViewConceal : ViewReveal}
-        size={16}
+        size="md"
         aria-hidden
       />
     </button>
