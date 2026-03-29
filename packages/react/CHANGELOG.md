@@ -1,3 +1,10 @@
+## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.8.0...@gnome-ui/react@1.9.0) (2026-03-29)
+
+### Features
+
+* add component Bin, ButtonContent, PReferencesGroup, PreferencesDialog, ToolbarView,  PreferencesPage, WindowTitle and upadte NavigationView. ([c99d3c5](https://github.com/ElJijuna/gnome-ui/commit/c99d3c520df554c3bd7066e9860d1e4d78a22d15))
+* add component NavigationView, Carousel  and BottomSheet, update Dialog with modes Standard, Alert and About. ([1ef4dd6](https://github.com/ElJijuna/gnome-ui/commit/1ef4dd6b5420351c5974bd2557f2352d318630de))
+
 ## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.7.0...@gnome-ui/react@1.8.0) (2026-03-29)
 
 ### Features
