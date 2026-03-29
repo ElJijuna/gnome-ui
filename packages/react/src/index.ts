@@ -165,5 +165,8 @@ export type { ComboRowProps, ComboRowOption } from "./components/ComboRow";
 export { EntryRow } from "./components/EntryRow";
 export type { EntryRowProps } from "./components/EntryRow";
 
+export { PasswordEntryRow } from "./components/PasswordEntryRow";
+export type { PasswordEntryRowProps } from "./components/PasswordEntryRow";
+
 export { SpinRow } from "./components/SpinRow";
 export type { SpinRowProps } from "./components/SpinRow";

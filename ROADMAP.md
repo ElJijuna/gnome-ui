@@ -223,11 +223,11 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`SwitchRow`** | `ActionRow` with an embedded `Switch` as the end widget — mirrors `AdwSwitchRow`; the canonical GNOME settings toggle pattern |
-| ⬜ | **`ComboRow`** | `ActionRow` with an inline dropdown selector — mirrors `AdwComboRow`; common for single-choice preferences |
-| ⬜ | **`EntryRow`** | `ActionRow` where the subtitle area is a live text input — mirrors `AdwEntryRow` |
-| ⬜ | **`PasswordEntryRow`** | `EntryRow` variant with masked input and a reveal toggle — mirrors `AdwPasswordEntryRow` |
-| ⬜ | **`SpinRow`** | `ActionRow` with an embedded `SpinButton` — mirrors `AdwSpinRow` |
+| ✅ | **`SwitchRow`** | `ActionRow` with an embedded `Switch` as the end widget — mirrors `AdwSwitchRow`; the canonical GNOME settings toggle pattern |
+| ✅ | **`ComboRow`** | `ActionRow` with an inline dropdown selector — mirrors `AdwComboRow`; common for single-choice preferences |
+| ✅ | **`EntryRow`** | `ActionRow` where the subtitle area is a live text input — mirrors `AdwEntryRow` |
+| ✅ | **`PasswordEntryRow`** | `EntryRow` variant with masked input and a reveal toggle — mirrors `AdwPasswordEntryRow` |
+| ✅ | **`SpinRow`** | `ActionRow` with an embedded `SpinButton` — mirrors `AdwSpinRow` |
 
 ---
 

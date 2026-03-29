@@ -30,6 +30,8 @@ export { Attachment } from "./Attachment.ts";
 export { OpenMenu } from "./OpenMenu.ts";
 export { ViewMore } from "./ViewMore.ts";
 export { ViewSidebar } from "./ViewSidebar.ts";
+export { ViewReveal } from "./ViewReveal.ts";
+export { ViewConceal } from "./ViewConceal.ts";
 export { Settings } from "./Settings.ts";
 
 // ─── Status ───────────────────────────────────────────────────────────────────
