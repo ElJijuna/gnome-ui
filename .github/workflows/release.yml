@@ -96,6 +96,9 @@ jobs:
           name: dist
           path: .
 
+      - name: Build @gnome-ui/icons
+        run: npm run build --workspace=packages/icons
+
       - name: Release
         working-directory: packages/icons
         env:
@@ -127,6 +130,9 @@ jobs:
         with:
           name: dist
           path: .
+
+      - name: Build @gnome-ui/react
+        run: npm run build --workspace=packages/react
 
       - name: Release
         working-directory: packages/react
