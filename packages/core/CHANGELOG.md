@@ -1,3 +1,9 @@
+## [1.11.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.0...@gnome-ui/core@1.11.1) (2026-03-31)
+
+### Bug Fixes
+
+* **ci:** build packages before release to ensure dist is included in npm publish. ([275f01c](https://github.com/ElJijuna/gnome-ui/commit/275f01c683bce9e24de70940d940de605e69a68f))
+
 ## [1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.10.0...@gnome-ui/core@1.11.0) (2026-03-29)
 
 ### Features
