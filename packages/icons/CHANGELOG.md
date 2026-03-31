@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.9.0...@gnome-ui/icons@1.9.1) (2026-03-31)
+
+### Bug Fixes
+
+* **ci:** build packages before release to ensure dist is included in npm publish. ([275f01c](https://github.com/ElJijuna/gnome-ui/commit/275f01c683bce9e24de70940d940de605e69a68f))
+
 ## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.8.0...@gnome-ui/icons@1.9.0) (2026-03-29)
 
 ### Features
