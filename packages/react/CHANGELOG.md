@@ -1,3 +1,11 @@
+## [1.9.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.9.0...@gnome-ui/react@1.9.1) (2026-03-31)
+
+### Bug Fixes
+
+* **ci:** build icons before react in release-react job to resolve module types ([1271438](https://github.com/ElJijuna/gnome-ui/commit/127143806ee95e53699bcdfd6fdc1dcfa992a738))
+* **ci:** build packages before release to ensure dist is included in npm publish. ([275f01c](https://github.com/ElJijuna/gnome-ui/commit/275f01c683bce9e24de70940d940de605e69a68f))
+* **react:** exclude story and test files from build tsconfig ([293c668](https://github.com/ElJijuna/gnome-ui/commit/293c6689435d2957318ef6efc0309bb1ba4dea0a))
+
 ## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.8.0...@gnome-ui/react@1.9.0) (2026-03-29)
 
 ### Features
