@@ -1,3 +1,9 @@
+## [1.11.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.1...@gnome-ui/core@1.11.2) (2026-03-31)
+
+### Bug Fixes
+
+* **react:** exclude story and test files from build tsconfig ([293c668](https://github.com/ElJijuna/gnome-ui/commit/293c6689435d2957318ef6efc0309bb1ba4dea0a))
+
 ## [1.11.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.0...@gnome-ui/core@1.11.1) (2026-03-31)
 
 ### Bug Fixes
