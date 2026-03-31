@@ -1,3 +1,9 @@
+## [1.11.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.2...@gnome-ui/core@1.11.3) (2026-03-31)
+
+### Bug Fixes
+
+* **ci:** build icons before react in release-react job to resolve module types ([1271438](https://github.com/ElJijuna/gnome-ui/commit/127143806ee95e53699bcdfd6fdc1dcfa992a738))
+
 ## [1.11.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.1...@gnome-ui/core@1.11.2) (2026-03-31)
 
 ### Bug Fixes
