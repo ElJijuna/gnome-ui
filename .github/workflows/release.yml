@@ -39,6 +39,7 @@ jobs:
             packages/core/src/tokens.d.ts
             packages/icons/dist/
             packages/react/dist/
+            packages/charts/dist/
 
   # ── 2a. Release @gnome-ui/core ─────────────────────────────────────────────
   release-core:
@@ -101,6 +102,41 @@ jobs:
 
       - name: Release
         working-directory: packages/icons
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  # ── 2c. Release @gnome-ui/charts ──────────────────────────────────────────
+  release-charts:
+    name: Release @gnome-ui/charts
+    needs: release-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
+
+      - name: Build @gnome-ui/charts
+        run: npm run build --workspace=packages/charts
+
+      - name: Release
+        working-directory: packages/charts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
