@@ -1,3 +1,13 @@
+## [1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.3...@gnome-ui/core@1.12.0) (2026-04-08)
+
+### Features
+
+* add component Footer. ([5d7b21d](https://github.com/ElJijuna/gnome-ui/commit/5d7b21dba28019544c5b70bfdcd00debdd07edb2))
+
+### Bug Fixes
+
+* **ci:** split storybook workflow into parallel jobs and build react before storybook. ([be67963](https://github.com/ElJijuna/gnome-ui/commit/be67963e802e76aba6d103a21b1879265e195137))
+
 ## [1.11.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.11.2...@gnome-ui/core@1.11.3) (2026-03-31)
 
 ### Bug Fixes
