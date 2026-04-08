@@ -42,6 +42,9 @@ export type { BannerProps, BannerVariant } from "./components/Banner";
 export { HeaderBar } from "./components/HeaderBar";
 export type { HeaderBarProps } from "./components/HeaderBar";
 
+export { Footer } from "./components/Footer";
+export type { FooterProps } from "./components/Footer";
+
 export { Badge } from "./components/Badge";
 export type { BadgeProps, BadgeVariant } from "./components/Badge";
 
