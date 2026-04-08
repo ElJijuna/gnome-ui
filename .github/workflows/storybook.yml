@@ -16,8 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build Storybook
+  build-core:
+    name: Build @gnome-ui/core
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,20 +29,88 @@ jobs:
 
       - run: npm ci
 
-      - name: Build packages
-        run: npm run build --workspace packages/icons
+      - uses: actions/upload-artifact@v4
+        with:
+          name: core-dist
+          path: |
+            packages/core/src/tokens.css
+            packages/core/src/tokens.d.ts
+
+  build-icons:
+    name: Build @gnome-ui/icons
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build --workspace=packages/icons
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist/
+
+  build-react:
+    name: Build @gnome-ui/react
+    needs: build-icons
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist
+
+      - run: npm run build --workspace=packages/react
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: react-dist
+          path: packages/react/dist/
+
+  build-storybook:
+    name: Build Storybook
+    needs: [build-core, build-icons, build-react]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist
 
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/react
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: packages/react/storybook-static
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: build
+    needs: build-storybook
     runs-on: ubuntu-latest
     environment:
       name: github-pages
