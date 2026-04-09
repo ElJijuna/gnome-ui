@@ -268,3 +268,37 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **`WindowTitle`** | Two-line title + subtitle widget centred in a `HeaderBar` — mirrors `AdwWindowTitle` |
 | ✅ | **`ShortcutLabel`** | Read-only display of a keyboard shortcut (e.g. `Ctrl+S`) with proper key-cap styling — mirrors `GtkShortcutLabel` |
 | ✅ | **`ButtonContent`** | Icon + label layout helper for buttons with both an icon and text — mirrors `AdwButtonContent` |
+
+---
+
+## Tier 16 — Platform Integration
+
+> New workspaces that bridge the React layer with the GNOME host process.
+> See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full dependency graph and communication model.
+
+### `@gnome-ui/platform` — TypeScript API layer
+
+Pure TypeScript package. Communicates with GNOME via the WebKitGTK `window.webkit.messageHandlers` bridge or XDG Desktop Portals. Falls back to no-op stubs in standard browsers / test environments.
+
+| Status | Module | Description |
+|--------|--------|-------------|
+| ⬜ | **`settings`** | Read/write application settings via `GSettings` |
+| ⬜ | **`notifications`** | Send and withdraw desktop notifications (`Gio.Notification`) |
+| ⬜ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
+| ⬜ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
+| ⬜ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
+| ⬜ | **`clipboard`** | Read and write the GDK clipboard (text, files, images) |
+| ⬜ | **`portals`** | Low-level XDG Desktop Portal access for sandboxed (Flatpak) apps |
+
+### `@gnome-ui/hooks` — React hooks
+
+React hooks that surface every `@gnome-ui/platform` module as idiomatic React state.
+
+| Status | Hook | Description |
+|--------|------|-------------|
+| ⬜ | **`useSettings`** | Read and write a GSettings key; re-renders on external changes |
+| ⬜ | **`useNotification`** | Returns a `send(title, body, icon?)` helper and dismissal control |
+| ⬜ | **`useColorScheme`** | Returns `"light" \| "dark" \| "auto"` and a setter |
+| ⬜ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path |
+| ⬜ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state |
+| ⬜ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters |
