@@ -40,6 +40,8 @@ jobs:
             packages/icons/dist/
             packages/react/dist/
             packages/charts/dist/
+            packages/platform/dist/
+            packages/hooks/dist/
 
   # ── 2a. Release @gnome-ui/core ─────────────────────────────────────────────
   release-core:
@@ -142,10 +144,83 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-  # ── 3. Release @gnome-ui/react (after core + icons + charts) ─────────────
+  # ── 2d. Release @gnome-ui/platform ───────────────────────────────────────
+  release-platform:
+    name: Release @gnome-ui/platform
+    needs: release-charts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
+
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
+
+      - name: Release
+        working-directory: packages/platform
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  # ── 2e. Release @gnome-ui/hooks ───────────────────────────────────────────
+  release-hooks:
+    name: Release @gnome-ui/hooks
+    needs: release-platform
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
+
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
+
+      - name: Build @gnome-ui/hooks
+        run: npm run build --workspace=packages/hooks
+
+      - name: Release
+        working-directory: packages/hooks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  # ── 3. Release @gnome-ui/react (after icons + charts + hooks) ────────────
   release-react:
     name: Release @gnome-ui/react
-    needs: [release-icons, release-charts]
+    needs: [release-icons, release-hooks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
