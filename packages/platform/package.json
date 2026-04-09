@@ -1,0 +1,30 @@
+{
+  "name": "@gnome-ui/platform",
+  "version": "1.0.0",
+  "description": "TypeScript API layer for communicating with the GNOME host process from a React app",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "vite": "^8.0.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}
