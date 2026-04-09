@@ -110,7 +110,7 @@ jobs:
   # ── 2c. Release @gnome-ui/charts ──────────────────────────────────────────
   release-charts:
     name: Release @gnome-ui/charts
-    needs: release-core
+    needs: release-icons
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -142,10 +142,10 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-  # ── 3. Release @gnome-ui/react (after core + icons) ───────────────────────
+  # ── 3. Release @gnome-ui/react (after core + icons + charts) ─────────────
   release-react:
     name: Release @gnome-ui/react
-    needs: [release-core, release-icons]
+    needs: [release-icons, release-charts]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
