@@ -1,3 +1,9 @@
+## [1.13.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.13.0...@gnome-ui/core@1.13.1) (2026-04-09)
+
+### Bug Fixes
+
+* **ci:** serialize release jobs to prevent concurrent push conflicts ([3e2ace1](https://github.com/ElJijuna/gnome-ui/commit/3e2ace1109d666adbc9ee3a851271ccae1125707))
+
 ## [1.13.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.12.0...@gnome-ui/core@1.13.0) (2026-04-09)
 
 ### Features
