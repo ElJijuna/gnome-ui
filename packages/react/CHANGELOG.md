@@ -1,3 +1,13 @@
+## [1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.10.0...@gnome-ui/react@1.11.0) (2026-04-09)
+
+### Features
+
+* add new npm workspace to manage charts, using recharts and tokens values. ([b801079](https://github.com/ElJijuna/gnome-ui/commit/b80107956b6b4a02e9c49f390a00ac9082e1bfe4))
+
+### Bug Fixes
+
+* add css-module to solve import css in @gnome-ui/charts ([c002faf](https://github.com/ElJijuna/gnome-ui/commit/c002faf080a09fe8001652214cd65fb7c5ffc3b8))
+
 ## [1.10.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.9.1...@gnome-ui/react@1.10.0) (2026-04-08)
 
 ### Features
