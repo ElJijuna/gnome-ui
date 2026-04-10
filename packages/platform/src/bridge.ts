@@ -50,3 +50,42 @@ export function postMessage(
   }
   return Promise.resolve();
 }
+
+// ---------------------------------------------------------------------------
+// Native → Web events
+//
+// The GJS host dispatches events by evaluating JS in the WebView:
+//
+//   webView.evaluate_javascript(
+//     `window.dispatchEvent(new CustomEvent("gnome:open-modal", { detail: { id: "settings" } }))`,
+//     -1, null, null, null, null
+//   );
+//
+// All events use the "gnome:" prefix to avoid collisions with other DOM events.
+// ---------------------------------------------------------------------------
+
+const NATIVE_EVENT_PREFIX = "gnome:";
+
+export type NativeEventHandler<T = unknown> = (payload: T) => void;
+
+/**
+ * Subscribe to a native event dispatched by the GJS host.
+ * Returns an unsubscribe function — call it to clean up.
+ *
+ * @example
+ * const off = onNativeEvent("open-modal", (payload) => openModal(payload.id));
+ * // later:
+ * off();
+ */
+export function onNativeEvent<T = unknown>(
+  type: string,
+  handler: NativeEventHandler<T>
+): () => void {
+  if (typeof window === "undefined") return () => {};
+
+  const listener = (event: Event) =>
+    handler((event as CustomEvent<T>).detail);
+
+  window.addEventListener(NATIVE_EVENT_PREFIX + type, listener);
+  return () => window.removeEventListener(NATIVE_EVENT_PREFIX + type, listener);
+}

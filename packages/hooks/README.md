@@ -1,6 +1,7 @@
 # @gnome-ui/hooks
 
-React hooks that expose [@gnome-ui/platform](../platform/README.md) APIs as idiomatic React state.
+React hooks that expose [@gnome-ui/platform](../platform/README.md) APIs
+as idiomatic React state.
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks)
 [![npm downloads](https://img.shields.io/npm/dm/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks)
@@ -20,16 +21,68 @@ Requires `@gnome-ui/platform` and `react` ≥ 19 as peer dependencies.
 
 ## Hooks
 
+### Platform & runtime
+
 | Hook | Returns | Description |
 | --- | --- | --- |
-| `useSettings(schema, key)` | `[value, setValue]` | Read/write a GSettings key; re-renders on external changes |
+| `usePlatform()` | `PlatformInfo` | Convenience booleans for the current shell context |
+| `useRuntime()` | `RuntimeInfo` | Full runtime snapshot: shell, engine, browser, OS |
+| `useNativeEvent(type, handler)` | `void` | Subscribe to an event dispatched by the GJS host |
+
+### GNOME integrations
+
+| Hook | Returns | Description |
+| --- | --- | --- |
+| `useSettings(schema, key)` | `[value, setValue]` | Read/write a GSettings key; re-renders on changes |
 | `useNotification()` | `{ send, dismiss }` | Send and dismiss desktop notifications |
 | `useColorScheme()` | `[scheme, setScheme]` | Reactive `"light"`, `"dark"`, or `"auto"` color scheme |
-| `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs and get the resolved path |
-| `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard contents with copy/paste helpers |
-| `useWindowState()` | `{ maximized, fullscreen, focused, ... }` | Reactive window state with matching setters |
+| `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs |
+| `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard with copy/paste helpers |
+| `useWindowState()` | `{ maximized, fullscreen, ... }` | Reactive window state with matching setters |
 
-## Quick example
+## Examples
+
+### Detect GNOME WebView context
+
+```tsx
+import { usePlatform } from "@gnome-ui/hooks";
+
+export function NativeOnlyBanner() {
+  const { isGnomeWebView } = usePlatform();
+
+  if (!isGnomeWebView) return null;
+  return <Banner>Running inside a GNOME app</Banner>;
+}
+```
+
+### Listen to a native event from the GJS host
+
+```tsx
+import { useNativeEvent } from "@gnome-ui/hooks";
+
+export function SettingsModal() {
+  const [open, setOpen] = useState(false);
+
+  useNativeEvent("open-modal", (payload: { id: string }) => {
+    if (payload.id === "settings") setOpen(true);
+  });
+
+  return <Modal open={open} onClose={() => setOpen(false)} />;
+}
+```
+
+The GJS host dispatches the event by evaluating JS in the WebView:
+
+```js
+webView.evaluate_javascript(
+  `window.dispatchEvent(new CustomEvent("gnome:open-modal", {
+    detail: { id: "settings" }
+  }))`,
+  -1, null, null, null, null
+);
+```
+
+### Toggle color scheme
 
 ```tsx
 import { useColorScheme } from "@gnome-ui/hooks";
