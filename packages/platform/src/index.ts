@@ -1,4 +1,5 @@
-export { isWebKitBridge, postMessage } from "./bridge";
+export { isWebKitBridge, postMessage, onNativeEvent } from "./bridge";
+export type { NativeEventHandler } from "./bridge";
 export { getRuntime } from "./runtime";
 export type { RuntimeInfo, RuntimeBrowser, RuntimeOS, Shell, Engine } from "./runtime";
 export * from "./settings";
