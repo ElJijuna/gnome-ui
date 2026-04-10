@@ -1,4 +1,5 @@
 export * from "./useRuntime";
+export * from "./usePlatform";
 export * from "./useSettings";
 export * from "./useNotification";
 export * from "./useColorScheme";
