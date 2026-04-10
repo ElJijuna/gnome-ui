@@ -1,3 +1,17 @@
+## [1.14.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.13.1...@gnome-ui/core@1.14.0) (2026-04-10)
+
+### Features
+
+* **@gnome-ui/hooks:** add package @gnome-ui/platform → interface to wrap in react hooks → @gnome-ui/platform to customize UI experience and interactuate with OS/platform layer. ([7c8411a](https://github.com/ElJijuna/gnome-ui/commit/7c8411a44ca714cd123080ed939eaa5df39b3783))
+* **@gnome-ui/platform:** add package @gnome-ui/platform  → communication layer with OS/platform, example gtk events, detection is envolved in webview gnome and send events (future) ([628e3b2](https://github.com/ElJijuna/gnome-ui/commit/628e3b2c384e567e1217f7656a408f23f6110967))
+* add hook useNativeEvent and function to communicate events to native layer. ([e67b5a7](https://github.com/ElJijuna/gnome-ui/commit/e67b5a7ddb563140497c2ebb956056317e3fbfc1))
+* add hook usePlatform to return platform boolean values. ([ce22ebc](https://github.com/ElJijuna/gnome-ui/commit/ce22ebc2fe3ef5ba5ef9a297764129a78007f0cb))
+
+### Documentation
+
+* **@gnome-ui/charts:** add README.md ([467aeab](https://github.com/ElJijuna/gnome-ui/commit/467aeabe44ce8beb55aabeaafe6b4956413448d4))
+* update ROADMAP and add ARCHITECTURE ([e700050](https://github.com/ElJijuna/gnome-ui/commit/e700050045c266a36baed1957135007ff851b98c))
+
 ## [1.13.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.13.0...@gnome-ui/core@1.13.1) (2026-04-09)
 
 ### Bug Fixes
