@@ -1,7 +1,7 @@
 {
-  "name": "@gnome-ui/react",
-  "version": "1.12.0",
-  "description": "React component library following GNOME Human Interface Guidelines",
+  "name": "@gnome-ui/layout",
+  "version": "0.0.0",
+  "description": "Full-page layout shell components following the GNOME Human Interface Guidelines",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,34 +18,36 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@gnome-ui/core": "*",
-    "@gnome-ui/icons": "*"
+    "@gnome-ui/core": "*"
   },
   "peerDependencies": {
+    "@gnome-ui/react": "*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@gnome-ui/icons": "*",
+    "@gnome-ui/react": "*",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/react": "^10.3.3",
     "@storybook/react-vite": "^10.3.3",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.1",

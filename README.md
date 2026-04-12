@@ -3,6 +3,8 @@
 A React component library that faithfully implements the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/), built on top of the [Adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/) design language.
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react)
+[![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
+[![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://eljijuna.github.io/gnome-ui/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Packages
@@ -12,6 +14,7 @@ A React component library that faithfully implements the [GNOME Human Interface 
 | [`@gnome-ui/core`](packages/core) | Framework-agnostic design tokens (CSS custom properties) | [![npm](https://img.shields.io/npm/v/@gnome-ui/core)](https://www.npmjs.com/package/@gnome-ui/core) |
 | [`@gnome-ui/icons`](packages/icons) | Framework-agnostic Adwaita symbolic icon definitions (SVG path data) | [![npm](https://img.shields.io/npm/v/@gnome-ui/icons)](https://www.npmjs.com/package/@gnome-ui/icons) |
 | [`@gnome-ui/react`](packages/react) | React component library | [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react) |
+| [`@gnome-ui/layout`](packages/layout) | Full-page application shell (`Layout`) | [![npm](https://img.shields.io/npm/v/@gnome-ui/layout)](https://www.npmjs.com/package/@gnome-ui/layout) |
 
 ## Quick start
 
@@ -87,6 +90,12 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `WrapBox` | Flexible wrapping layout container — mirrors `AdwWrapBox` (GNOME 48) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-wrapbox--docs) |
 | `Chip` | Compact pill label for tags and filters; static, removable, and selectable modes | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-chip--docs) |
 | `ShortcutsDialog` | Modal listing keyboard shortcuts by section with integrated search — mirrors `AdwShortcutsDialog` (GNOME 49) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-shortcutsdialog--docs) |
+
+### Layout shells (`@gnome-ui/layout`)
+
+| Component | Description | Story |
+|-----------|-------------|-------|
+| `Layout` | Full-page shell with four named zones: `topBar`, `sidebar`, `children`, `bottomBar` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-layout--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

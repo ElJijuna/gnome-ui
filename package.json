@@ -11,7 +11,8 @@
     "storybook": "turbo storybook",
     "build-storybook": "turbo build-storybook",
     "typecheck": "turbo typecheck",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "test": "turbo test"
   },
   "overrides": {
     "vite": "^8.0.3"

@@ -53,3 +53,22 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build workspace deps
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
