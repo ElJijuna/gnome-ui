@@ -24,6 +24,11 @@ export interface BarChartProps {
   height?: number;
   showGrid?: boolean;
   showLegend?: boolean;
+  stacked?: boolean;
+  layout?: "horizontal" | "vertical";
+  showXAxis?: boolean;
+  showYAxis?: boolean;
+  yAxisFormatter?: (value: number) => string;
   className?: string;
 }
 
@@ -49,8 +54,15 @@ export function BarChart({
   height = 300,
   showGrid = true,
   showLegend = false,
+  stacked = false,
+  layout = "horizontal",
+  showXAxis = true,
+  showYAxis = true,
+  yAxisFormatter = (value) => String(value),
   className,
 }: BarChartProps) {
+  const isVertical = layout === "vertical";
+
   return (
     <div
       className={[styles.container, className].filter(Boolean).join(" ")}
@@ -59,30 +71,64 @@ export function BarChart({
       <ResponsiveContainer width="100%" height="100%">
         <RechartsBarChart
           data={data}
-          margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
+          layout={layout}
+          margin={{ top: 8, right: 16, left: 8, bottom: 0 }}
         >
           {showGrid && (
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="var(--gnome-light-3, #deddda)"
-              vertical={false}
+              horizontal={!isVertical}
+              vertical={isVertical}
             />
           )}
-          <XAxis
-            dataKey={xAxisKey}
-            tick={AXIS_STYLE}
-            axisLine={{ stroke: "var(--gnome-light-4, #c0bfbc)" }}
-            tickLine={false}
-          />
-          <YAxis
-            tick={AXIS_STYLE}
-            axisLine={false}
-            tickLine={false}
-            width={40}
-          />
+          {isVertical ? (
+            <>
+              <XAxis
+                type="number"
+                hide={!showYAxis}
+                tick={AXIS_STYLE}
+                axisLine={{ stroke: "var(--gnome-light-4, #c0bfbc)" }}
+                tickLine={false}
+                tickFormatter={yAxisFormatter}
+              />
+              <YAxis
+                type="category"
+                dataKey={xAxisKey}
+                hide={!showXAxis}
+                tick={AXIS_STYLE}
+                axisLine={false}
+                tickLine={false}
+                width={72}
+              />
+            </>
+          ) : (
+            <>
+              <XAxis
+                dataKey={xAxisKey}
+                hide={!showXAxis}
+                tick={AXIS_STYLE}
+                axisLine={{ stroke: "var(--gnome-light-4, #c0bfbc)" }}
+                tickLine={false}
+              />
+              <YAxis
+                hide={!showYAxis}
+                tick={AXIS_STYLE}
+                axisLine={false}
+                tickLine={false}
+                width={yAxisFormatter ? 48 : 56}
+                tickFormatter={yAxisFormatter}
+              />
+            </>
+          )}
           <Tooltip
             contentStyle={TOOLTIP_CONTENT_STYLE}
             cursor={{ fill: "var(--gnome-card-shade-color, rgba(0,0,0,0.07))" }}
+            labelFormatter={(_, payload) =>
+              String(
+                (payload?.[0]?.payload as Record<string, unknown>)?.[xAxisKey] ?? ""
+              )
+            }
           />
           {showLegend && (
             <Legend
@@ -92,15 +138,23 @@ export function BarChart({
               }}
             />
           )}
-          {series.map((s, i) => (
-            <Bar
-              key={s.dataKey}
-              dataKey={s.dataKey}
-              name={s.name ?? s.dataKey}
-              fill={s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length]}
-              radius={[4, 4, 0, 0]}
-            />
-          ))}
+          {series.map((s, i) => {
+            const isLast = i === series.length - 1;
+            const horizontalRadius: [number, number, number, number] =
+              stacked ? (isLast ? [4, 4, 0, 0] : [0, 0, 0, 0]) : [4, 4, 0, 0];
+            const verticalRadius: [number, number, number, number] =
+              stacked ? (isLast ? [0, 4, 4, 0] : [0, 0, 0, 0]) : [0, 4, 4, 0];
+            return (
+              <Bar
+                key={s.dataKey}
+                dataKey={s.dataKey}
+                name={s.name ?? s.dataKey}
+                fill={s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length]}
+                radius={isVertical ? verticalRadius : horizontalRadius}
+                stackId={stacked ? "stack" : undefined}
+              />
+            );
+          })}
         </RechartsBarChart>
       </ResponsiveContainer>
     </div>
