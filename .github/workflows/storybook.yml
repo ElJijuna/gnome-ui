@@ -82,8 +82,8 @@ jobs:
           name: react-dist
           path: packages/react/dist/
 
-  build-storybook:
-    name: Build Storybook
+  build-storybook-react:
+    name: Build Storybook (@gnome-ui/react)
     needs: [build-core, build-icons, build-react]
     runs-on: ubuntu-latest
     steps:
@@ -104,18 +104,65 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/react
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          path: packages/react/storybook-static
+          name: storybook-react
+          path: packages/react/storybook-static/
 
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build-storybook
+  build-storybook-layout:
+    name: Build Storybook (@gnome-ui/layout)
+    needs: [build-core, build-icons, build-react]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: react-dist
+          path: packages/react/dist
+
+      - name: Build Storybook
+        run: npm run build-storybook --workspace packages/layout
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storybook-layout
+          path: packages/layout/storybook-static/
+
+  combine-and-deploy:
+    name: Combine & Deploy to GitHub Pages
+    needs: [build-storybook-react, build-storybook-layout]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: storybook-react
+          path: site/
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: storybook-layout
+          path: site/layout/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

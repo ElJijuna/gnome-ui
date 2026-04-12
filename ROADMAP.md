@@ -271,6 +271,17 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 ---
 
+## Tier 17 — `@gnome-ui/layout` Package
+
+> Dedicated npm package that ships the full-page application shell as a first-class primitive.
+> Consumers can compose any GNOME application layout without pulling in the full `@gnome-ui/react` bundle.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ✅ | **`Layout`** | Full-page shell with four named zones: `topBar` (pinned header), `sidebar` (fixed-width navigation), `children` (scrollable content), and `bottomBar` (pinned footer). All zones are optional. Mirrors the composition pattern demonstrated in `Layout/Dashboard`. Ships as `@gnome-ui/layout` with its own CSS output, Vitest unit tests, and Storybook story (`Layout/Layout`). |
+
+---
+
 ## Tier 16 — Platform Integration
 
 > New workspaces that bridge the React layer with the GNOME host process.

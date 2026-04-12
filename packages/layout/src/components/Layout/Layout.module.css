@@ -1,0 +1,55 @@
+/* ─── Layout ──────────────────────────────────────────────────────────────── */
+
+/**
+ * Root shell: full-viewport column flex container.
+ * The three zones (top bar, body, bottom bar) stack vertically;
+ * only the content area scrolls.
+ */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--gnome-window-bg-color, #fafafa);
+  font-family: var(--gnome-font-family, sans-serif);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ── Top bar ──────────────────────────────────────────────────────────────── */
+
+.topBar {
+  flex-shrink: 0;
+  background: var(--gnome-headerbar-bg-color, #ebebeb);
+  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+}
+
+/* ── Body (sidebar + content) ─────────────────────────────────────────────── */
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── Sidebar slot ─────────────────────────────────────────────────────────── */
+
+.sidebar {
+  flex-shrink: 0;
+}
+
+/* ── Main content ─────────────────────────────────────────────────────────── */
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* ── Bottom bar ───────────────────────────────────────────────────────────── */
+
+.bottomBar {
+  flex-shrink: 0;
+  background: var(--gnome-headerbar-bg-color, #ebebeb);
+  border-top: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+}
