@@ -56,8 +56,8 @@
 
 @media (max-width: 639px) {
   .body {
-    position: relative; /* stacking context for absolute sidebar + backdrop */
-    overflow: hidden;   /* clip the sidebar while it slides off-screen */
+    position: relative;  /* stacking context for absolute sidebar + backdrop */
+    overflow-x: clip;    /* clip the sliding sidebar without creating a new scroll context */
   }
 
   .sidebar {
