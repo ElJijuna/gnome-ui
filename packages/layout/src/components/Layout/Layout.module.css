@@ -38,12 +38,52 @@
   flex-shrink: 0;
 }
 
+/* ── Backdrop (mobile only) ───────────────────────────────────────────────── */
+
+.backdrop {
+  display: none;
+}
+
 /* ── Main content ─────────────────────────────────────────────────────────── */
 
 .content {
   flex: 1;
   overflow-y: auto;
   min-width: 0;
+}
+
+/* ── Mobile overlay behaviour (< 640 px) ──────────────────────────────────── */
+
+@media (max-width: 639px) {
+  .body {
+    position: relative; /* stacking context for absolute sidebar + backdrop */
+  }
+
+  .sidebar {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 10;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    /* Make sure sidebar background is opaque so content doesn't bleed through */
+    background: var(--gnome-sidebar-bg-color, var(--gnome-window-bg-color, #fafafa));
+  }
+
+  /* When open: slide in */
+  .bodySidebarOpen .sidebar {
+    transform: translateX(0);
+  }
+
+  /* Backdrop: covers the content area behind the sidebar */
+  .bodySidebarOpen .backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+  }
 }
 
 /* ── Bottom bar ───────────────────────────────────────────────────────────── */
