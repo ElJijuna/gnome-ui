@@ -4,10 +4,8 @@ React hooks that expose [@gnome-ui/platform](../platform/README.md) APIs
 as idiomatic React state.
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks)
-[![npm downloads](https://img.shields.io/npm/dm/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks)
+[![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/ElJijuna/gnome-react)](https://github.com/ElJijuna/gnome-react/commits/main)
-[![GitHub issues](https://img.shields.io/github/issues/ElJijuna/gnome-react)](https://github.com/ElJijuna/gnome-react/issues)
 
 > **Status:** work in progress — API surface is defined, implementations are pending.
 
