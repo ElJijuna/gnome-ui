@@ -22,6 +22,7 @@ import {
   StatusPage,
   Switch,
   Box,
+  WrapBox,
 } from "@gnome-ui/react";
 import { Layout } from "./Layout";
 
@@ -251,28 +252,31 @@ function AppContent({ activeNav, contentView, onViewChange }: {
             ))}
           </div>
 
-          <Box spacing={8}>
-            <Text variant="caption-heading" color="dim" style={{ paddingLeft: 4 }}>Recent</Text>
-            <BoxedList>
-              <ActionRow interactive title="Project Proposal.odt" subtitle="Modified 2 hours ago · 142 KB" onClick={() => {}} />
-              <ActionRow interactive title="Budget 2026.ods"       subtitle="Modified yesterday · 38 KB"   onClick={() => {}} />
-              <ActionRow interactive title="Presentation.odp"      subtitle="Modified 3 days ago · 2.4 MB" onClick={() => {}} />
-            </BoxedList>
-          </Box>
-          <Box spacing={8}>
-            <Text variant="caption-heading" color="dim" style={{ paddingLeft: 4 }}>Devices</Text>
-            <BoxedList>
-              <ExpanderRow title="Home Server" subtitle="Connected · 1.2 TB free" defaultExpanded>
-                <ActionRow variant="property" title="Hostname"    subtitle="homeserver.local" />
-                <ActionRow variant="property" title="Protocol"    subtitle="SMB / CIFS" />
-                <ActionRow variant="property" title="Mount point" subtitle="/mnt/home" />
-              </ExpanderRow>
-              <ExpanderRow title="USB Drive" subtitle="32 GB · FAT32">
-                <ActionRow variant="property" title="Capacity" subtitle="32 GB" />
-                <ActionRow variant="property" title="Used"     subtitle="14.2 GB" />
-              </ExpanderRow>
-            </BoxedList>
-          </Box>
+          {/* WrapBox: side-by-side on desktop, stacked on mobile */}
+          <WrapBox childSpacing={24} lineSpacing={24} align="start">
+            <Box spacing={8} style={{ flex: "1 1 260px", minWidth: 0 }}>
+              <Text variant="caption-heading" color="dim" style={{ paddingLeft: 4 }}>Recent</Text>
+              <BoxedList>
+                <ActionRow interactive title="Project Proposal.odt" subtitle="Modified 2 hours ago · 142 KB" onClick={() => {}} />
+                <ActionRow interactive title="Budget 2026.ods"       subtitle="Modified yesterday · 38 KB"   onClick={() => {}} />
+                <ActionRow interactive title="Presentation.odp"      subtitle="Modified 3 days ago · 2.4 MB" onClick={() => {}} />
+              </BoxedList>
+            </Box>
+            <Box spacing={8} style={{ flex: "1 1 260px", minWidth: 0 }}>
+              <Text variant="caption-heading" color="dim" style={{ paddingLeft: 4 }}>Devices</Text>
+              <BoxedList>
+                <ExpanderRow title="Home Server" subtitle="Connected · 1.2 TB free" defaultExpanded>
+                  <ActionRow variant="property" title="Hostname"    subtitle="homeserver.local" />
+                  <ActionRow variant="property" title="Protocol"    subtitle="SMB / CIFS" />
+                  <ActionRow variant="property" title="Mount point" subtitle="/mnt/home" />
+                </ExpanderRow>
+                <ExpanderRow title="USB Drive" subtitle="32 GB · FAT32">
+                  <ActionRow variant="property" title="Capacity" subtitle="32 GB" />
+                  <ActionRow variant="property" title="Used"     subtitle="14.2 GB" />
+                </ExpanderRow>
+              </BoxedList>
+            </Box>
+          </WrapBox>
         </>
       )}
 
