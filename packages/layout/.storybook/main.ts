@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
@@ -10,12 +9,20 @@ const config: StorybookConfig = {
   },
   docs: {},
   viteFinal: async (config) => {
-    // Resolve workspace deps from source for proper HMR in the monorepo.
+    const root = new URL("../../../../node_modules", import.meta.url).pathname;
+
     config.resolve ??= {};
+    config.resolve.dedupe = [
+      ...(config.resolve.dedupe ?? []),
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+    ];
     config.resolve.alias = {
       ...(config.resolve.alias as Record<string, string>),
-      "@gnome-ui/react": resolve(import.meta.dirname, "../../react/src/index.ts"),
-      "@gnome-ui/icons": resolve(import.meta.dirname, "../../icons/src/index.ts"),
+      react:              `${root}/react`,
+      "react-dom":        `${root}/react-dom`,
+      "react/jsx-runtime":`${root}/react/jsx-runtime`,
     };
     return config;
   },
