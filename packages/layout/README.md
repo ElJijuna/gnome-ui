@@ -6,7 +6,7 @@ Full-page application shell components following the [GNOME Human Interface Guid
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-Live documentation: **[Storybook →](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-Layout--docs)**
+Live documentation: **[Storybook →](https://eljijuna.github.io/gnome-ui/layout/)**
 
 ## Installation
 
@@ -38,18 +38,37 @@ Full-page application shell with four named, optional zones:
 
 All props of `<div>` are forwarded to the root element.
 
+#### Mobile sidebar overlay
+
+On viewports narrower than **640 px** the sidebar becomes a slide-in overlay panel. Two additional props control its visibility:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sidebarOpen` | `boolean` | `false` | Whether the sidebar overlay is visible on mobile |
+| `onSidebarClose` | `() => void` | — | Called when the user taps the backdrop — use it to set `sidebarOpen` back to `false` |
+
+On wider (desktop) viewports the sidebar is always visible in the layout flow and these props are ignored.
+
 ```tsx
+import { useState } from "react";
 import { Layout } from "@gnome-ui/layout";
 import "@gnome-ui/layout/styles";
-
-// With @gnome-ui/react for inner components:
-import { Toolbar, Spacer, Sidebar, SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
+import { Toolbar, Spacer, Button, Sidebar, SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
 
 export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <Layout
       topBar={
-        <Toolbar style={{ minHeight: 48, padding: "0 16px" }}>
+        <Toolbar style={{ minHeight: 48, padding: "0 8px" }}>
+          <Button
+            variant="flat"
+            aria-label="Toggle sidebar"
+            onClick={() => setSidebarOpen((v) => !v)}
+          >
+            ☰
+          </Button>
           <Text variant="heading">My App</Text>
           <Spacer />
         </Toolbar>
@@ -57,11 +76,13 @@ export default function App() {
       sidebar={
         <Sidebar>
           <SidebarSection>
-            <SidebarItem label="Home" active />
-            <SidebarItem label="Settings" />
+            <SidebarItem label="Home" active onClick={() => setSidebarOpen(false)} />
+            <SidebarItem label="Settings" onClick={() => setSidebarOpen(false)} />
           </SidebarSection>
         </Sidebar>
       }
+      sidebarOpen={sidebarOpen}
+      onSidebarClose={() => setSidebarOpen(false)}
       bottomBar={
         <Toolbar style={{ minHeight: 36, padding: "0 16px" }}>
           <Text variant="caption" color="dim">Ready</Text>

@@ -31,10 +31,10 @@ import "@gnome-ui/charts/styles";
 | Component | Description |
 |-----------|-------------|
 | `AreaChart` | Filled area chart with optional stacking, grid, and legend |
-| `BarChart` | Vertical bar chart with rounded bars, grid, and legend |
+| `BarChart` | Vertical or horizontal bar chart with rounded bars, optional stacking, grid, and legend |
 | `LineChart` | Line chart with dots, grid, and legend |
 
-All components use the Adwaita color palette and CSS custom properties for theming, and adapt automatically to light/dark mode.
+All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom properties for theming, and adapt automatically to light/dark mode.
 
 ## Quick example
 
@@ -97,6 +97,20 @@ All three components share a common set of props:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `stacked` | `boolean` | `false` | Stack all series on top of each other |
+
+`BarChart` also accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `stacked` | `boolean` | `false` | Stack series on top of each other |
+| `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation — `"horizontal"` for a horizontal bar chart |
+| `yAxisFormatter` | `(value: number) => string` | — | Custom formatter for Y-axis tick labels |
+
+## Utilities
+
+| Export | Description |
+|--------|-------------|
+| `GNOME_CHART_PALETTE` | Array of GNOME Adwaita accent colors used as the default series palette |
 
 ## License
 
