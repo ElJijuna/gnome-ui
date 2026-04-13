@@ -21,6 +21,7 @@ import {
   InlineViewSwitcherItem,
   StatusPage,
   Switch,
+  Box,
 } from "@gnome-ui/react";
 import { Layout } from "./Layout";
 
@@ -250,17 +251,16 @@ function AppContent({ activeNav, contentView, onViewChange }: {
             ))}
           </div>
 
-          <div>
-            <Text variant="caption-heading" color="dim" style={{ marginBottom: 8, paddingLeft: 4 }}>Recent</Text>
+          <Box spacing={8}>
+            <Text variant="caption-heading" color="dim" style={{ paddingLeft: 4 }}>Recent</Text>
             <BoxedList>
               <ActionRow interactive title="Project Proposal.odt" subtitle="Modified 2 hours ago · 142 KB" onClick={() => {}} />
               <ActionRow interactive title="Budget 2026.ods"       subtitle="Modified yesterday · 38 KB"   onClick={() => {}} />
               <ActionRow interactive title="Presentation.odp"      subtitle="Modified 3 days ago · 2.4 MB" onClick={() => {}} />
             </BoxedList>
-          </div>
-
-          <div>
-            <Text variant="caption-heading" color="dim" style={{ marginBottom: 8, paddingLeft: 4 }}>Devices</Text>
+          </Box>
+          <Box spacing={8}>
+            <Text variant="caption-heading" color="dim" style={{ paddingLeft: 4 }}>Devices</Text>
             <BoxedList>
               <ExpanderRow title="Home Server" subtitle="Connected · 1.2 TB free" defaultExpanded>
                 <ActionRow variant="property" title="Hostname"    subtitle="homeserver.local" />
@@ -272,7 +272,7 @@ function AppContent({ activeNav, contentView, onViewChange }: {
                 <ActionRow variant="property" title="Used"     subtitle="14.2 GB" />
               </ExpanderRow>
             </BoxedList>
-          </div>
+          </Box>
         </>
       )}
 
