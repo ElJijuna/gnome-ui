@@ -82,6 +82,27 @@ jobs:
           name: react-dist
           path: packages/react/dist/
 
+  build-charts:
+    name: Build @gnome-ui/charts
+    needs: build-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build --workspace=packages/charts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: charts-dist
+          path: packages/charts/dist/
+
   build-storybook-react:
     name: Build Storybook (@gnome-ui/react)
     needs: [build-core, build-icons, build-react]
@@ -141,9 +162,36 @@ jobs:
           name: storybook-layout
           path: packages/layout/storybook-static/
 
+  build-storybook-charts:
+    name: Build Storybook (@gnome-ui/charts)
+    needs: [build-core, build-charts]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: charts-dist
+          path: packages/charts/dist
+
+      - name: Build Storybook
+        run: npm run build-storybook --workspace packages/charts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storybook-charts
+          path: packages/charts/storybook-static/
+
   combine-and-deploy:
     name: Combine & Deploy to GitHub Pages
-    needs: [build-storybook-react, build-storybook-layout]
+    needs: [build-storybook-react, build-storybook-layout, build-storybook-charts]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -158,6 +206,11 @@ jobs:
         with:
           name: storybook-layout
           path: site/layout/
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: storybook-charts
+          path: site/charts/
 
       - uses: actions/upload-pages-artifact@v3
         with:
