@@ -11,8 +11,23 @@ export interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
    * Sidebar navigation panel — typically a `Sidebar` component.
    * Rendered at the leading edge of the body zone and fills the full
    * available height.
+   *
+   * On viewports narrower than 640 px the sidebar becomes an overlay panel
+   * that slides in from the leading edge. Use `sidebarOpen` to control its
+   * visibility and `onSidebarClose` to handle backdrop / dismiss events.
    */
   sidebar?: ReactNode;
+  /**
+   * Controls sidebar visibility **on narrow (mobile) viewports only**.
+   * On wider viewports the sidebar is always visible regardless of this prop.
+   * Defaults to `false`.
+   */
+  sidebarOpen?: boolean;
+  /**
+   * Called when the user taps the backdrop behind the sidebar on mobile.
+   * Use this to set `sidebarOpen` back to `false`.
+   */
+  onSidebarClose?: () => void;
   /**
    * Scrollable main content area. Fills the remaining horizontal space
    * after the sidebar and scrolls independently.
@@ -56,11 +71,20 @@ export interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
 export function Layout({
   topBar,
   sidebar,
+  sidebarOpen = false,
+  onSidebarClose,
   children,
   bottomBar,
   className,
   ...props
 }: LayoutProps) {
+  const bodyClass = [
+    styles.body,
+    sidebar && sidebarOpen ? styles.bodySidebarOpen : undefined,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div
       className={[styles.layout, className].filter(Boolean).join(" ")}
@@ -68,8 +92,18 @@ export function Layout({
     >
       {topBar && <div className={styles.topBar}>{topBar}</div>}
 
-      <div className={styles.body}>
-        {sidebar && <div className={styles.sidebar}>{sidebar}</div>}
+      <div className={bodyClass}>
+        {sidebar && (
+          <>
+            <div className={styles.sidebar}>{sidebar}</div>
+            {/* Backdrop — visible on mobile when sidebar is open */}
+            <div
+              className={styles.backdrop}
+              onClick={onSidebarClose}
+              aria-hidden="true"
+            />
+          </>
+        )}
         <div className={styles.content}>{children}</div>
       </div>
 

@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Layout } from "./Layout";
 
 describe("Layout", () => {
@@ -96,5 +96,47 @@ describe("Layout", () => {
       <Layout style={{ height: "500px" }}><p>Content</p></Layout>,
     );
     expect((container.firstChild as HTMLElement).style.height).toBe("500px");
+  });
+
+  describe("mobile sidebar overlay", () => {
+    it("does not apply bodySidebarOpen class when sidebarOpen is false", () => {
+      const { container } = render(
+        <Layout sidebar={<nav>Nav</nav>} sidebarOpen={false}>
+          <p>Content</p>
+        </Layout>,
+      );
+      expect(container.querySelector("[class*='bodySidebarOpen']")).toBeNull();
+    });
+
+    it("applies bodySidebarOpen class when sidebarOpen is true", () => {
+      const { container } = render(
+        <Layout sidebar={<nav>Nav</nav>} sidebarOpen>
+          <p>Content</p>
+        </Layout>,
+      );
+      expect(container.querySelector("[class*='bodySidebarOpen']")).not.toBeNull();
+    });
+
+    it("does not apply bodySidebarOpen when sidebar is absent even if sidebarOpen is true", () => {
+      const { container } = render(
+        <Layout sidebarOpen>
+          <p>Content</p>
+        </Layout>,
+      );
+      expect(container.querySelector("[class*='bodySidebarOpen']")).toBeNull();
+    });
+
+    it("calls onSidebarClose when the backdrop is clicked", () => {
+      const onClose = vi.fn();
+      const { container } = render(
+        <Layout sidebar={<nav>Nav</nav>} sidebarOpen onSidebarClose={onClose}>
+          <p>Content</p>
+        </Layout>,
+      );
+      const backdrop = container.querySelector("[class*='backdrop']") as HTMLElement;
+      expect(backdrop).not.toBeNull();
+      fireEvent.click(backdrop);
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
   });
 });

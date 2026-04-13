@@ -312,18 +312,27 @@ function AppStatusBar() {
 
 // ─── Full app composition ──────────────────────────────────────────────────────
 
-function FilesApp() {
+function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(startMobileOpen);
   const [activeNav, setActiveNav] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [contentView, setContentView] = useState("grid");
+
+  function handleToggleSidebar() {
+    // On desktop: collapses the sidebar to icon-only.
+    // On mobile: the CSS hides the static sidebar and shows the overlay;
+    // the hamburger opens it.
+    setSidebarCollapsed((v) => !v);
+    setSidebarOpen((v) => !v);
+  }
 
   return (
     <Layout
       topBar={
         <AppHeader
           sidebarCollapsed={sidebarCollapsed}
-          onToggleSidebar={() => setSidebarCollapsed((v) => !v)}
+          onToggleSidebar={handleToggleSidebar}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
         />
@@ -332,9 +341,14 @@ function FilesApp() {
         <AppSidebar
           collapsed={sidebarCollapsed}
           activeNav={activeNav}
-          onNavChange={setActiveNav}
+          onNavChange={(id) => {
+            setActiveNav(id);
+            setSidebarOpen(false); // auto-close overlay after navigation on mobile
+          }}
         />
       }
+      sidebarOpen={sidebarOpen}
+      onSidebarClose={() => setSidebarOpen(false)}
       bottomBar={<AppStatusBar />}
     >
       <AppContent
@@ -424,6 +438,21 @@ export const Minimal: StoryObj<typeof Layout> = {
     </Layout>
   ),
   parameters: { controls: { disable: true } },
+};
+
+/**
+ * Simulates a narrow mobile viewport (360 × 780 px).
+ * The sidebar is hidden by default and slides in as an overlay when the
+ * hamburger button is tapped. Tap the backdrop or a nav item to close it.
+ */
+export const MobileOverlay: StoryObj<typeof Layout> = {
+  name: "Mobile overlay sidebar",
+  render: () => <FilesApp startMobileOpen={false} />,
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: "mobile1" },
+    chromatic: { viewports: [360] },
+  },
 };
 
 /** Only a content area — no bars, no sidebar. */
