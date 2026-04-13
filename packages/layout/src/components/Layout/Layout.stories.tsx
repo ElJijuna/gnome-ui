@@ -320,11 +320,15 @@ function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
   const [contentView, setContentView] = useState("grid");
 
   function handleToggleSidebar() {
-    // On desktop: collapses the sidebar to icon-only.
-    // On mobile: the CSS hides the static sidebar and shows the overlay;
-    // the hamburger opens it.
-    setSidebarCollapsed((v) => !v);
-    setSidebarOpen((v) => !v);
+    if (window.matchMedia("(max-width: 639px)").matches) {
+      // Mobile: only open/close the overlay — never change collapsed state.
+      // Changing collapsed while the slide animation runs causes a width-change
+      // mid-transition that makes the sidebar look like it expands before hiding.
+      setSidebarOpen((v) => !v);
+    } else {
+      // Desktop: collapse to icon-only; overlay CSS is inactive here.
+      setSidebarCollapsed((v) => !v);
+    }
   }
 
   return (
