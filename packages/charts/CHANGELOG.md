@@ -1,3 +1,20 @@
+## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.1.0...@gnome-ui/charts@1.2.0) (2026-04-13)
+
+### Features
+
+* add capacity to use overlay sidebar in small viewports. ([24d8c07](https://github.com/ElJijuna/gnome-ui/commit/24d8c0765ce35327703a143edb3c1193a2b591a0))
+* add new component Box and update Layout example tu use this. ([2384a35](https://github.com/ElJijuna/gnome-ui/commit/2384a3536e9ffef468ddbb6a3d2a7eddc5809ff8))
+* add package/project @gnome-ui/layout and use Layout storie in react to create this. ([5eb181d](https://github.com/ElJijuna/gnome-ui/commit/5eb181dccdc5759b286fbef97da627366c776e3d))
+
+### Bug Fixes
+
+* add overflow-x: clip in body for views minors to 639. ([a60fa75](https://github.com/ElJijuna/gnome-ui/commit/a60fa75dc5eabdeb7fe54fc7a6713a9abe538c46))
+
+### Documentation
+
+* update badges icons. ([1581c37](https://github.com/ElJijuna/gnome-ui/commit/1581c37ed16aa413fe55d8371b50c5023936a997))
+* update README with new info. ([849351f](https://github.com/ElJijuna/gnome-ui/commit/849351f15ea6293cd21d5e94e64e369643302a74))
+
 ## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.0.0...@gnome-ui/charts@1.1.0) (2026-04-10)
 
 ### Features
