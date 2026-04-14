@@ -1,0 +1,144 @@
+/* ─── Root ────────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  min-height: 48px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+}
+
+.titleText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trailing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ─── Toggle button ───────────────────────────────────────────────────────── */
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--gnome-radius-sm, 6px);
+  cursor: pointer;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  flex-shrink: 0;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.toggle:hover {
+  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+}
+
+.toggle:active {
+  background-color: var(--gnome-active-overlay, rgba(0, 0, 0, 0.12));
+}
+
+.toggle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Body + Footer (collapsible zone) ───────────────────────────────────── */
+
+/*
+ * grid-template-rows transition: 0fr collapses the inner content to zero
+ * height without needing JS to measure element height.
+ */
+.bodyWrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 200ms var(--gnome-easing-default, ease);
+}
+
+.bodyCollapsed {
+  grid-template-rows: 0fr;
+}
+
+.bodyInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Body ────────────────────────────────────────────────────────────────── */
+
+.body {
+  padding: 12px 16px;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  min-height: 40px;
+}
+
+.footerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .toggle:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .toggle:active {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+}

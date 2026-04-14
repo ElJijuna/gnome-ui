@@ -10,3 +10,6 @@ export type { CounterCardProps } from "./components/CounterCard";
 
 export { UserCard } from "./components/UserCard";
 export type { UserCardProps, UserCardAction } from "./components/UserCard";
+
+export { PanelCard } from "./components/PanelCard";
+export type { PanelCardProps, PanelCardHandle } from "./components/PanelCard";
