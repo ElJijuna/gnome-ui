@@ -11,7 +11,6 @@ import {
   Sidebar,
   SidebarSection,
   SidebarItem,
-  Card,
   BoxedList,
   ActionRow,
   ExpanderRow,
@@ -25,6 +24,7 @@ import {
   WrapBox,
 } from "@gnome-ui/react";
 import { Layout } from "./Layout";
+import { CounterCard } from "../CounterCard";
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -237,19 +237,10 @@ function AppContent({ activeNav, contentView, onViewChange }: {
       {activeNav === "home" && (
         <>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 16 }}>
-            {[
-              { label: "Documents", value: "1 248",   accent: false },
-              { label: "Starred",   value: "3",       accent: true  },
-              { label: "Shared",    value: "24",      accent: false },
-              { label: "Trash",     value: "7 items", accent: false },
-            ].map(({ label, value, accent }) => (
-              <Card key={label} style={{ padding: 20 }}>
-                <Text variant="caption" color="dim">{label}</Text>
-                <Text variant="title-2" style={{ color: accent ? "var(--gnome-accent-color, #3584e4)" : undefined }}>
-                  {value}
-                </Text>
-              </Card>
-            ))}
+            <CounterCard label="Documents" value={1248} suffix=" files"  duration={900}  />
+            <CounterCard label="Starred"   value={3}                     duration={700}  accent />
+            <CounterCard label="Shared"    value={24}   suffix=" items"  duration={1000} />
+            <CounterCard label="Trash"     value={7}    suffix=" items"  duration={800}  />
           </div>
 
           {/* WrapBox: side-by-side on desktop, stacked on mobile */}
