@@ -1,0 +1,188 @@
+/* ─── Vertical orientation ───────────────────────────────────────────────── */
+
+/*
+ * Grid: 3 columns shared by every item via subgrid.
+ *   col 1 (auto)  → leading: timestamps, labels — sized by widest content
+ *   col 2 (24px)  → nodeTrack: node circle + connector line
+ *   col 3 (1fr)   → content: event title / description
+ *
+ * align-self on items defaults to stretch so the nodeTrack cell grows to fill
+ * the full row height; the flex line inside it then fills gap between nodes.
+ */
+.vertical {
+  display: grid;
+  grid-template-columns: auto 24px 1fr;
+  column-gap: 12px;
+}
+
+.vertical .item {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+/* Leading: timestamp / label — left-aligned column, text right-aligned */
+.vertical .leading {
+  padding-top: 4px; /* align text baseline with node center */
+  text-align: end;
+  align-self: start; /* don't stretch; only nodeTrack stretches */
+}
+
+/* Node track: node on top, connector line fills remaining height */
+.vertical .nodeTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* align-self defaults to stretch — fills full row height so the line
+     reaches the next item's node without a gap */
+}
+
+/* Content: fills the third column */
+.vertical .content {
+  min-width: 0;
+  padding-top: 2px;
+  align-self: start; /* don't stretch content, only nodeTrack */
+}
+
+/* Space between items — applied only to content so nodeTrack (which draws the
+   connector line) fills the padding area, keeping the line continuous. */
+.vertical .item:not(:last-child) .content {
+  padding-bottom: 20px;
+}
+
+/* ─── Horizontal orientation ──────────────────────────────────────────────── */
+
+/*
+ * Grid: 3 rows shared by every item via subgrid.
+ *   row 1 (auto) → leading: label / timestamp above the node
+ *   row 2 (auto) → nodeTrack: the horizontal line + node
+ *   row 3 (auto) → content: label / description below the node
+ *
+ * grid-auto-flow: column places each item into a new column automatically.
+ * All items share the same row heights → leading and content stay vertically
+ * aligned regardless of text length.
+ */
+.horizontal {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(72px, 1fr);
+  overflow-x: auto;
+}
+
+.horizontal .item {
+  display: grid;
+  grid-row: 1 / -1; /* span all 3 rows */
+  grid-template-rows: subgrid;
+}
+
+/* Leading: label / timestamp — bottom-aligned so it sits close to the node */
+.horizontal .leading {
+  text-align: center;
+  align-self: end;
+  padding-bottom: 8px;
+}
+
+/* Node track: horizontal row — left line · node · right line */
+.horizontal .nodeTrack {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+/* Content: label / description — top-aligned below the node */
+.horizontal .content {
+  text-align: center;
+  padding: 8px 8px 0;
+  align-self: start;
+}
+
+/* ─── Node ────────────────────────────────────────────────────────────────── */
+
+.node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Small dot when no icon */
+.nodeDot {
+  width: 12px;
+  height: 12px;
+  background: var(--gnome-accent-bg-color, #3584e4);
+}
+
+/* Larger circle when an icon is provided */
+.nodeWithIcon {
+  width: 28px;
+  height: 28px;
+  background: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #fff);
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ─── Invisible line (edge positions in horizontal) ──────────────────────── */
+
+/* Takes the same space as a real line but is invisible — keeps the node
+   centered in horizontal items regardless of whether it's first or last. */
+.lineInvisible {
+  visibility: hidden;
+}
+
+/* ─── Connector line ──────────────────────────────────────────────────────── */
+
+/* Vertical line (inside .vertical .nodeTrack) */
+.vertical .line {
+  width: 2px;
+  flex: 1;
+  min-height: 16px;
+  background: var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+}
+
+.vertical .lineDotted {
+  background: none;
+  border-left: 2px dotted var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  width: 0;
+}
+
+/* Horizontal line (inside .horizontal .nodeTrack) */
+.horizontal .line {
+  flex: 1;
+  height: 2px;
+  background: var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+}
+
+.horizontal .lineDotted {
+  background: none;
+  border-top: 2px dotted var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  height: 0;
+  flex: 1;
+}
+
+/* ─── Dark mode ───────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .vertical .line,
+  .horizontal .line {
+    background: var(--gnome-border-subtle, rgba(255, 255, 255, 0.15));
+  }
+
+  .vertical .lineDotted {
+    border-left-color: var(--gnome-border-subtle, rgba(255, 255, 255, 0.15));
+  }
+
+  .horizontal .lineDotted {
+    border-top-color: var(--gnome-border-subtle, rgba(255, 255, 255, 0.15));
+  }
+}

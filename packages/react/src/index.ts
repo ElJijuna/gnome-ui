@@ -219,3 +219,6 @@ export type { PreferencesPageProps } from "./components/PreferencesPage";
 
 export { PreferencesDialog } from "./components/PreferencesDialog";
 export type { PreferencesDialogProps } from "./components/PreferencesDialog";
+
+export { Timeline } from "./components/Timeline";
+export type { TimelineProps, TimelineItem, TimelineOrientation, TimelineVariant } from "./components/Timeline";
