@@ -1,0 +1,48 @@
+/* CounterCard overrides Card padding to use its own tighter layout */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px !important; /* override Card .padding-md */
+}
+
+/* ─── Label ───────────────────────────────────────────────────────────────── */
+
+.label {
+  display: block;
+}
+
+/* ─── Value row ───────────────────────────────────────────────────────────── */
+
+.value {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  line-height: 1;
+}
+
+.number {
+  /* tabular-nums prevents the layout from jumping as digits change width */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  line-height: 1 !important;
+}
+
+.affix {
+  font-size: 0.9375rem;
+  line-height: 1;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.7;
+}
+
+/* ─── Accent variant ─────────────────────────────────────────────────────── */
+
+.accent .number {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.accent .affix {
+  color: var(--gnome-accent-color, #3584e4);
+  opacity: 0.8;
+}
