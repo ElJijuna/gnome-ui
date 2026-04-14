@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.14.0...@gnome-ui/react@1.15.0) (2026-04-14)
+
+### Features
+
+* **react:** add Timeline component ([#5](https://github.com/ElJijuna/gnome-ui/issues/5)) ([0543cb5](https://github.com/ElJijuna/gnome-ui/commit/0543cb51ac856a6d96e72eeb4eee89b7c865f3d3))
+
 ## [1.14.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.13.0...@gnome-ui/react@1.14.0) (2026-04-14)
 
 ### Features
