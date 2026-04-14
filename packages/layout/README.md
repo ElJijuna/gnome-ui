@@ -98,6 +98,130 @@ export default function App() {
 }
 ```
 
+---
+
+### `CounterCard`
+
+Metric card with an animated numeric counter. Counts from `0` (or from the previous value) to `value` using an ease-out cubic curve. Respects `prefers-reduced-motion`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Text label shown above the value |
+| `value` | `number` | — | Numeric target value |
+| `prefix` | `string` | — | String prepended to the number (e.g. `"$"`) |
+| `suffix` | `string` | — | String appended to the number (e.g. `" files"`) |
+| `decimals` | `number` | `0` | Decimal places to display |
+| `format` | `(n: number) => string` | — | Custom formatter; overrides `decimals` |
+| `animated` | `boolean` | `true` | Animate the counter on mount and value change |
+| `duration` | `number` | `1000` | Animation duration in ms |
+| `accent` | `boolean` | `false` | Render the value in the accent color |
+| `interactive` | `boolean` | `false` | Make the card clickable |
+
+```tsx
+import { CounterCard } from "@gnome-ui/layout";
+
+<CounterCard label="Documents" value={1248} suffix=" files" />
+<CounterCard label="Revenue"   value={9420} prefix="$" accent duration={1500} />
+```
+
+---
+
+### `UserCard`
+
+User identity panel for popovers, sidebar footers, and profile pages. Renders an `Avatar`, a display name, an optional sub-line, and a list of action buttons. A separator is automatically inserted before the first `"destructive"` action when non-destructive actions precede it.
+
+The component has **no card chrome** — place it inside a `Popover` or wrap it in `<Card>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | — | Display name; also drives avatar initials and color |
+| `email` | `string` | — | Optional secondary line |
+| `avatarSrc` | `string` | — | Avatar image URL; falls back to initials |
+| `avatarColor` | `AvatarColor` | — | Override the auto-derived avatar color |
+| `avatarSize` | `AvatarSize` | `"md"` | Avatar size |
+| `actions` | `UserCardAction[]` | `[]` | Action buttons; use `variant: "destructive"` for danger actions |
+| `minWidth` | `number` | `200` | Minimum card width in px |
+
+```tsx
+import { UserCard } from "@gnome-ui/layout";
+
+<UserCard
+  name="Ada Lovelace"
+  email="ada@gnome.org"
+  actions={[
+    { label: "View Profile",     onClick: () => {} },
+    { label: "Account Settings", onClick: () => {} },
+    { label: "Sign Out",         onClick: () => {}, variant: "destructive" },
+  ]}
+/>
+```
+
+---
+
+### `PanelCard`
+
+Card with a structured **header / body / footer** layout and built-in collapse/expand behaviour.
+
+The expanded state is managed internally. Control it imperatively via a `ref`:
+
+```tsx
+import { useRef } from "react";
+import { PanelCard } from "@gnome-ui/layout";
+import type { PanelCardHandle } from "@gnome-ui/layout";
+
+const ref = useRef<PanelCardHandle>(null);
+
+// Drive from anywhere in the parent:
+ref.current?.expand();
+ref.current?.collapse();
+ref.current?.toggle();
+```
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `ReactNode` | — | Primary title shown in the header |
+| `icon` | `ReactNode` | — | Leading icon in the header |
+| `headerActions` | `ReactNode` | — | Controls at the trailing edge of the header, before the chevron |
+| `defaultExpanded` | `boolean` | `true` | Initial expanded state |
+| `collapsible` | `boolean` | `true` | Show the chevron toggle; set `false` to lock the panel open |
+| `onExpandedChange` | `(expanded: boolean) => void` | — | Notification callback — fires on every state transition |
+| `children` | `ReactNode` | — | Body content (collapsed/expanded with the panel) |
+| `footer` | `ReactNode` | — | Leading content in the footer bar (feedback text, badge…) |
+| `footerActions` | `ReactNode` | — | Trailing controls in the footer bar |
+
+The footer bar is only rendered when at least one of `footer` or `footerActions` is provided.
+
+#### Ref handle
+
+| Method | Description |
+|--------|-------------|
+| `expand()` | Expand the panel |
+| `collapse()` | Collapse the panel |
+| `toggle()` | Toggle between expanded and collapsed |
+
+```tsx
+import { Icon, Button, Text } from "@gnome-ui/react";
+import { FolderOpen } from "@gnome-ui/icons";
+import { PanelCard } from "@gnome-ui/layout";
+import type { PanelCardHandle } from "@gnome-ui/layout";
+
+const panelRef = useRef<PanelCardHandle>(null);
+
+<PanelCard
+  ref={panelRef}
+  icon={<Icon icon={FolderOpen} />}
+  title="Project Files"
+  headerActions={<Button variant="flat" size="sm">Rename</Button>}
+  onExpandedChange={(open) => console.log("panel:", open)}
+  footer={<Text variant="caption" color="dim">Last modified: 2 min ago</Text>}
+  footerActions={<Button variant="suggested" size="sm">Save</Button>}
+>
+  <p>Panel body content here</p>
+</PanelCard>
+```
+
 ## License
 
 [MIT](../../LICENSE)
