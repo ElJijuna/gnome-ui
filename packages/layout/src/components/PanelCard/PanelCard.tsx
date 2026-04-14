@@ -20,7 +20,7 @@ export interface PanelCardHandle {
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
-export interface PanelCardProps extends HTMLAttributes<HTMLDivElement> {
+export interface PanelCardProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   // ── Header ──────────────────────────────────────────────────────────────────
   /** Icon placed at the leading edge of the header. */
   icon?: ReactNode;
