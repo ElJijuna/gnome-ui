@@ -221,7 +221,7 @@ jobs:
   # ── 2f. Release @gnome-ui/layout ─────────────────────────────────────────
   release-layout:
     name: Release @gnome-ui/layout
-    needs: release-core
+    needs: release-charts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
