@@ -242,6 +242,12 @@ jobs:
         with:
           name: dist
           path: .
+      
+      - name: Build @gnome-ui/icons
+        run: npm run build --workspace=packages/icons
+
+      - name: Build @gnome-ui/react
+        run: npm run build --workspace=packages/react
 
       - name: Build @gnome-ui/layout
         run: npm run build --workspace=packages/layout
