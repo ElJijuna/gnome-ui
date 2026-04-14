@@ -1,3 +1,16 @@
+## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.1.0...@gnome-ui/hooks@1.2.0) (2026-04-14)
+
+### Features
+
+* add ColorPicker component. ([5cf5474](https://github.com/ElJijuna/gnome-ui/commit/5cf5474d0d7cd48ed6b776f24cfc23e341525848))
+* add CounterCard layout component and ROADMAP. ([49e4291](https://github.com/ElJijuna/gnome-ui/commit/49e42918522d8c847c95a3323401c3c3c484e95d))
+* add UserCard layout component. ([8129d07](https://github.com/ElJijuna/gnome-ui/commit/8129d076badbf1c34bbe8d76efb7551340e662f0))
+
+### Bug Fixes
+
+* ColorPicker issues. ([4578884](https://github.com/ElJijuna/gnome-ui/commit/4578884775d87421814cbaabda407adff843fd58))
+* update Popover position detect values. ([952954b](https://github.com/ElJijuna/gnome-ui/commit/952954b34da2240d60a6c56e86f3bcdeb1e59114))
+
 ## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.0.0...@gnome-ui/hooks@1.1.0) (2026-04-13)
 
 ### Features
