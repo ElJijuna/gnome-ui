@@ -1,0 +1,109 @@
+/* ─── Root ───────────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 10px;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: var(--gnome-font-weight-semibold, 600) !important;
+  line-height: 1.25 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Actions ────────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 4px;
+  gap: 0;
+}
+
+.action {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--gnome-radius-sm, 6px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 0.9375rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-align: start;
+  cursor: pointer;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.action:hover {
+  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+}
+
+.action:active {
+  background-color: var(--gnome-active-overlay, rgba(0, 0, 0, 0.12));
+}
+
+.action:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Destructive variant ────────────────────────────────────────────────────── */
+
+.destructive {
+  color: var(--gnome-destructive-color, #e01b24);
+}
+
+.destructive:hover {
+  background-color: color-mix(in srgb, var(--gnome-destructive-color, #e01b24) 10%, transparent);
+}
+
+.destructive:active {
+  background-color: color-mix(in srgb, var(--gnome-destructive-color, #e01b24) 18%, transparent);
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .separator {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .action:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .action:active {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+}

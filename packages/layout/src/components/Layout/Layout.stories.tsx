@@ -25,51 +25,15 @@ import {
 } from "@gnome-ui/react";
 import { Layout } from "./Layout";
 import { CounterCard } from "../CounterCard";
+import { UserCard } from "../UserCard";
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
-function AvatarMenuItem({
-  label,
-  destructive = false,
-  onClick,
-}: {
-  label: string;
-  destructive?: boolean;
-  onClick?: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      style={{
-        display: "block",
-        width: "100%",
-        padding: "8px 12px",
-        background: "transparent",
-        border: "none",
-        borderRadius: 6,
-        font: "inherit",
-        fontSize: "0.9375rem",
-        textAlign: "start",
-        cursor: "pointer",
-        color: destructive
-          ? "var(--gnome-destructive-color, #e01b24)"
-          : "var(--gnome-window-fg-color, rgba(0,0,0,0.8))",
-        whiteSpace: "nowrap",
-      }}
-      onMouseEnter={(e) =>
-        ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-          "var(--gnome-hover-overlay)")
-      }
-      onMouseLeave={(e) =>
-        ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-          "transparent")
-      }
-    >
-      {label}
-    </button>
-  );
-}
+const userActions = [
+  { label: "View Profile",     onClick: () => alert("profile")  },
+  { label: "Account Settings", onClick: () => alert("settings") },
+  { label: "Sign Out",         onClick: () => alert("sign out"), variant: "destructive" as const },
+];
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
@@ -148,24 +112,11 @@ function AppHeader({
       <Popover
         placement="bottom"
         content={
-          <div style={{ minWidth: 180 }}>
-            <div style={{
-              display: "flex", alignItems: "center", gap: 10,
-              padding: "10px 12px 8px",
-              borderBottom: "1px solid var(--gnome-divider-color, rgba(0,0,0,0.08))",
-              marginBottom: 4,
-            }}>
-              <Avatar name="Ada Lovelace" size="sm" />
-              <div>
-                <Text variant="body" style={{ fontWeight: 600, lineHeight: 1.2 }}>Ada Lovelace</Text>
-                <Text variant="caption" color="dim">ada@gnome.org</Text>
-              </div>
-            </div>
-            <AvatarMenuItem label="View Profile"     onClick={() => alert("profile")} />
-            <AvatarMenuItem label="Account Settings" onClick={() => alert("settings")} />
-            <div style={{ height: 1, background: "var(--gnome-divider-color, rgba(0,0,0,0.08))", margin: "4px 0" }} />
-            <AvatarMenuItem label="Sign Out" destructive onClick={() => alert("sign out")} />
-          </div>
+          <UserCard
+            name="Ada Lovelace"
+            email="ada@gnome.org"
+            actions={userActions}
+          />
         }
       >
         <button

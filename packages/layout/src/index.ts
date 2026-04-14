@@ -7,3 +7,6 @@ export type { LayoutProps } from "./components/Layout";
 
 export { CounterCard } from "./components/CounterCard";
 export type { CounterCardProps } from "./components/CounterCard";
+
+export { UserCard } from "./components/UserCard";
+export type { UserCardProps, UserCardAction } from "./components/UserCard";
