@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.4.0...@gnome-ui/charts@1.5.0) (2026-04-14)
+
+### Features
+
+* **react:** add Timeline component ([#5](https://github.com/ElJijuna/gnome-ui/issues/5)) ([0543cb5](https://github.com/ElJijuna/gnome-ui/commit/0543cb51ac856a6d96e72eeb4eee89b7c865f3d3))
+
 ## [1.4.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.3.0...@gnome-ui/charts@1.4.0) (2026-04-14)
 
 ### Features
