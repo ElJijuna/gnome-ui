@@ -52,10 +52,15 @@ interface Position {
   top: number;
   left: number;
   placement: PopoverPlacement;
+  /** Arrow center offset in px from the near edge of the panel.
+   *  Horizontal (left) for top/bottom; vertical (top) for left/right.
+   *  Undefined means use the default 50% CSS. */
+  arrowOffset?: number;
 }
 
 const GAP = 8;
-const MARGIN = 8;
+const MARGIN = 10;
+const ARROW_HALF = 6; // half of the 12 px arrow
 
 function computePosition(
   trigger: DOMRect,
@@ -77,38 +82,78 @@ function computePosition(
   // De-duplicate while preserving order
   const candidates = [...new Set(order)];
 
+  function calcRaw(p: PopoverPlacement): { top: number; left: number } {
+    if (p === "bottom") return {
+      top:  trigger.bottom + GAP,
+      left: trigger.left + trigger.width / 2 - popover.width / 2,
+    };
+    if (p === "top") return {
+      top:  trigger.top - popover.height - GAP,
+      left: trigger.left + trigger.width / 2 - popover.width / 2,
+    };
+    if (p === "left") return {
+      top:  trigger.top + trigger.height / 2 - popover.height / 2,
+      left: trigger.left - popover.width - GAP,
+    };
+    return {
+      top:  trigger.top + trigger.height / 2 - popover.height / 2,
+      left: trigger.right + GAP,
+    };
+  }
+
+  // First pass: find a placement that fits both axes perfectly.
   for (const p of candidates) {
-    let top = 0, left = 0;
-
-    if (p === "bottom") {
-      top  = trigger.bottom + GAP;
-      left = trigger.left + trigger.width / 2 - popover.width / 2;
-    } else if (p === "top") {
-      top  = trigger.top - popover.height - GAP;
-      left = trigger.left + trigger.width / 2 - popover.width / 2;
-    } else if (p === "left") {
-      top  = trigger.top + trigger.height / 2 - popover.height / 2;
-      left = trigger.left - popover.width - GAP;
-    } else {
-      top  = trigger.top + trigger.height / 2 - popover.height / 2;
-      left = trigger.right + GAP;
-    }
-
+    const { top, left } = calcRaw(p);
     const fitsH = left >= MARGIN && left + popover.width  <= vw - MARGIN;
     const fitsV = top  >= MARGIN && top  + popover.height <= vh - MARGIN;
-
     if (fitsH && fitsV) {
-      return { top, left, placement: p };
+      // Always use pixel arrowOffset (never rely on CSS left:50%) so the arrow
+      // points exactly at the trigger center regardless of sub-pixel rounding.
+      const arrowOffset =
+        p === "top" || p === "bottom"
+          ? trigger.left + trigger.width  / 2 - left
+          : trigger.top  + trigger.height / 2 - top;
+      return { top, left, placement: p, arrowOffset };
     }
   }
 
-  // Fallback: clamp bottom placement
-  const top  = trigger.bottom + GAP;
-  const left = trigger.left + trigger.width / 2 - popover.width / 2;
+  // Second pass: fits the primary axis; clamp the secondary axis and
+  // shift the arrow so it still points at the trigger center.
+  for (const p of candidates) {
+    const { top, left } = calcRaw(p);
+    const fitsV = top  >= MARGIN && top  + popover.height <= vh - MARGIN;
+    const fitsH = left >= MARGIN && left + popover.width  <= vw - MARGIN;
+
+    if ((p === "top" || p === "bottom") && fitsV) {
+      const clampedLeft = Math.max(MARGIN, Math.min(left, vw - popover.width - MARGIN));
+      const rawOffset = trigger.left + trigger.width / 2 - clampedLeft;
+      return {
+        top, left: clampedLeft, placement: p,
+        arrowOffset: Math.max(ARROW_HALF + 4, Math.min(rawOffset, popover.width - ARROW_HALF - 4)),
+      };
+    }
+
+    if ((p === "left" || p === "right") && fitsH) {
+      const clampedTop = Math.max(MARGIN, Math.min(top, vh - popover.height - MARGIN));
+      const rawOffset = trigger.top + trigger.height / 2 - clampedTop;
+      return {
+        top: clampedTop, left, placement: p,
+        arrowOffset: Math.max(ARROW_HALF + 4, Math.min(rawOffset, popover.height - ARROW_HALF - 4)),
+      };
+    }
+  }
+
+  // Fallback: clamp bottom placement and shift arrow to match trigger.
+  const fbTop  = trigger.bottom + GAP;
+  const fbLeft = trigger.left + trigger.width / 2 - popover.width / 2;
+  const clampedTop  = Math.max(MARGIN, Math.min(fbTop,  vh - popover.height - MARGIN));
+  const clampedLeft = Math.max(MARGIN, Math.min(fbLeft, vw - popover.width  - MARGIN));
+  const rawArrowOffset = trigger.left + trigger.width / 2 - clampedLeft;
   return {
-    top:  Math.max(MARGIN, Math.min(top,  vh - popover.height - MARGIN)),
-    left: Math.max(MARGIN, Math.min(left, vw - popover.width  - MARGIN)),
+    top: clampedTop,
+    left: clampedLeft,
     placement: "bottom",
+    arrowOffset: Math.max(ARROW_HALF + 4, Math.min(rawArrowOffset, popover.width - ARROW_HALF - 4)),
   };
 }
 
@@ -267,8 +312,18 @@ export function Popover({
       }
       onKeyDown={handlePanelKeyDown}
     >
-      {/* Arrow */}
-      <div className={styles.arrow} aria-hidden="true" />
+      {/* Arrow — offset shifts it to point at the trigger when the panel is clamped */}
+      <div
+        className={styles.arrow}
+        aria-hidden="true"
+        style={
+          pos?.arrowOffset !== undefined
+            ? pos.placement === "top" || pos.placement === "bottom"
+              ? { left: pos.arrowOffset - ARROW_HALF, marginLeft: 0 }
+              : { top:  pos.arrowOffset - ARROW_HALF, marginTop: 0 }
+            : undefined
+        }
+      />
       {content}
     </div>
   );
