@@ -8,6 +8,18 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {},
+  refs: {
+    charts: {
+      title: "@gnome-ui/react",
+      url: "https://gnome-ui.org/react",
+      expanded: false,
+    },
+    layout: {
+      title: "@gnome-ui/layout",
+      url: "https://gnome-ui.org/layout",
+      expanded: false,
+    },
+  },
 };
 
 export default config;
