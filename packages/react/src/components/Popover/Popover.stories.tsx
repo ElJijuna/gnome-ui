@@ -212,6 +212,79 @@ export const Controlled: Story = {
   },
 };
 
+// ─── Edge detection ───────────────────────────────────────────────────────────
+
+function QuickSettingsContent() {
+  const [wifi,       setWifi]       = useState(true);
+  const [bluetooth,  setBluetooth]  = useState(false);
+  const [brightness, setBrightness] = useState(70);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 240 }}>
+      <Text variant="heading">Quick Settings</Text>
+      <Separator />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Text variant="body">Wi-Fi</Text>
+        <Switch checked={wifi} onChange={(e) => setWifi(e.target.checked)} aria-label="Wi-Fi" />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Text variant="body">Bluetooth</Text>
+        <Switch checked={bluetooth} onChange={(e) => setBluetooth(e.target.checked)} aria-label="Bluetooth" />
+      </div>
+      <Separator />
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Text variant="body">Brightness</Text>
+          <Text variant="body" color="dim">{brightness}%</Text>
+        </div>
+        <Slider aria-label="Brightness" value={brightness} onChange={setBrightness} min={0} max={100} step={5} />
+      </div>
+    </div>
+  );
+}
+
+export const EdgeDetection: Story = {
+  render: () => (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        width: "100%",
+        padding: "16px 8px 16px 0",
+      }}
+    >
+      <Popover placement="bottom" content={<QuickSettingsContent />}>
+        <Button variant="flat" shape="circular" aria-label="Quick settings (left)">
+          <Icon icon={Settings} size="md" aria-hidden />
+        </Button>
+      </Popover>
+
+      <Popover placement="bottom" content={<QuickSettingsContent />}>
+        <Button variant="flat" shape="circular" aria-label="Quick settings (center)">
+          <Icon icon={Settings} size="md" aria-hidden />
+        </Button>
+      </Popover>
+
+      <Popover placement="bottom" content={<QuickSettingsContent />}>
+        <Button variant="flat" shape="circular" aria-label="Quick settings (right)">
+          <Icon icon={Settings} size="md" aria-hidden />
+        </Button>
+      </Popover>
+    </div>
+  ),
+  parameters: {
+    layout: "fullscreen",
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Three identical popovers with triggers at the left edge, center, and right edge of the viewport. " +
+          "Verifies that the panel never overflows and the arrow always points at the trigger.",
+      },
+    },
+  },
+};
+
 // ─── Share sheet ──────────────────────────────────────────────────────────────
 
 export const ShareSheet: Story = {
