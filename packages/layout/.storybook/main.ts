@@ -20,11 +20,23 @@ const config: StorybookConfig = {
     ];
     config.resolve.alias = {
       ...(config.resolve.alias as Record<string, string>),
-      react:              `${root}/react`,
-      "react-dom":        `${root}/react-dom`,
-      "react/jsx-runtime":`${root}/react/jsx-runtime`,
+      react: `${root}/react`,
+      "react-dom": `${root}/react-dom`,
+      "react/jsx-runtime": `${root}/react/jsx-runtime`,
     };
     return config;
+  },
+  refs: {
+    charts: {
+      title: "@gnome-ui/react",
+      url: "https://gnome-ui.org/react",
+      expanded: false,
+    },
+    layout: {
+      title: "@gnome-ui/charts",
+      url: "https://gnome-ui.org/charts",
+      expanded: false,
+    },
   },
 };
 
