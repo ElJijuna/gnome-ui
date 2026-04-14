@@ -1,3 +1,13 @@
+## [1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.2.0...@gnome-ui/hooks@1.3.0) (2026-04-14)
+
+### Features
+
+* add layout component PanelCard, and update README. ([60e19f0](https://github.com/ElJijuna/gnome-ui/commit/60e19f06b93ed4337596ea4e85da4b155fc5680f))
+
+### Bug Fixes
+
+* Omit title prop. ([7a041d9](https://github.com/ElJijuna/gnome-ui/commit/7a041d9cf5d6f258aaeade3b51fda02c8aa65e9a))
+
 ## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.1.0...@gnome-ui/hooks@1.2.0) (2026-04-14)
 
 ### Features
