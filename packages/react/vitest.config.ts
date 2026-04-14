@@ -9,5 +9,8 @@ export default defineConfig({
     globals: true,
     css: true,
     passWithNoTests: true,
+    typecheck: {
+      tsconfig: "./tsconfig.test.json",
+    },
   },
 });
