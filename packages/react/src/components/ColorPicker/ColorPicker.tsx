@@ -11,7 +11,7 @@ import styles from "./ColorPicker.module.css";
 export type ColorSwatchSize = "sm" | "md" | "lg";
 
 export interface ColorSwatchProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, "onClick"> {
+  extends Omit<HTMLAttributes<HTMLButtonElement>, "onClick" | "onSelect"> {
   /** CSS color value displayed as the swatch background. */
   color: string;
   /** Whether this swatch is the currently selected color. */
@@ -103,7 +103,7 @@ export const GNOME_PALETTE: ColorPickerColor[] = [
   { value: "#5e5c64", label: "Slate"  },
 ];
 
-export interface ColorPickerProps extends HTMLAttributes<HTMLDivElement> {
+export interface ColorPickerProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
   /** Currently selected color value. */
   value?: string;
   /** Called when the user selects a color. */
