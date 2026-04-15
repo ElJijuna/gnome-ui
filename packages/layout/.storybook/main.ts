@@ -27,12 +27,12 @@ const config: StorybookConfig = {
     return config;
   },
   refs: {
-    charts: {
+    react: {
       title: "@gnome-ui/react",
       url: "https://gnome-ui.org/react",
       expanded: false,
     },
-    layout: {
+    charts: {
       title: "@gnome-ui/charts",
       url: "https://gnome-ui.org/charts",
       expanded: false,

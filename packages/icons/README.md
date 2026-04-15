@@ -66,46 +66,96 @@ interface IconDefinition {
 
 All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 × 16 viewBox.
 
-| Export | Description |
-|--------|-------------|
-| `Add` | Plus / add |
-| `Attachment` | Paperclip |
-| `Check` | Checkmark |
-| `Close` | × close / dismiss |
-| `Copy` | Copy to clipboard |
-| `Cut` | Cut |
-| `Delete` | Trash / delete |
-| `DocumentOpen` | Open document |
-| `Edit` | Pencil / edit |
-| `Error` | Error badge |
-| `GoHome` | Home |
-| `GoNext` | Right chevron |
-| `GoPrevious` | Left chevron |
-| `GoUp` | Up chevron |
-| `Information` | Info badge |
-| `MediaPause` | Pause |
-| `MediaPlay` | Play |
-| `MediaSkipBackward` | Skip backward |
-| `MediaSkipForward` | Skip forward |
-| `OpenMenu` | Hamburger menu |
-| `PanDown` | Pan / caret down |
-| `PanEnd` | Pan / caret right |
-| `PanStart` | Pan / caret left |
-| `PanUp` | Pan / caret up |
-| `Paste` | Paste |
-| `Redo` | Redo |
-| `Refresh` | Refresh / reload |
-| `Remove` | Minus / remove |
-| `Save` | Save / floppy disk |
-| `Search` | Magnifying glass |
-| `Settings` | Gear / settings |
-| `Share` | Share / export |
-| `Star` | Star (filled) |
-| `StarOutline` | Star (outline) |
-| `Undo` | Undo |
-| `ViewMore` | Three dots / overflow |
-| `ViewSidebar` | Sidebar toggle |
-| `Warning` | Warning triangle |
+### Navigation
+
+| Export | Symbolic name |
+|--------|--------------|
+| `GoPrevious` | `go-previous-symbolic` |
+| `GoNext` | `go-next-symbolic` |
+| `GoHome` | `go-home-symbolic` |
+| `GoUp` | `go-up-symbolic` |
+| `PanDown` | `pan-down-symbolic` |
+| `PanUp` | `pan-up-symbolic` |
+| `PanStart` | `pan-start-symbolic` |
+| `PanEnd` | `pan-end-symbolic` |
+
+### Actions
+
+| Export | Symbolic name |
+|--------|--------------|
+| `Add` | `list-add-symbolic` |
+| `Remove` | `list-remove-symbolic` |
+| `Delete` | `edit-delete-symbolic` |
+| `Edit` | `document-edit-symbolic` |
+| `Copy` | `edit-copy-symbolic` |
+| `Paste` | `edit-paste-symbolic` |
+| `Cut` | `edit-cut-symbolic` |
+| `Undo` | `edit-undo-symbolic` |
+| `Redo` | `edit-redo-symbolic` |
+| `Save` | `document-save-symbolic` |
+| `DocumentOpen` | `document-open-symbolic` |
+| `Close` | `window-close-symbolic` |
+| `Search` | `system-search-symbolic` |
+| `Refresh` | `view-refresh-symbolic` |
+| `Share` | `emblem-shared-symbolic` |
+| `Attachment` | `mail-attachment-symbolic` |
+
+### UI
+
+| Export | Symbolic name |
+|--------|--------------|
+| `OpenMenu` | `open-menu-symbolic` |
+| `ViewMore` | `view-more-symbolic` |
+| `ViewSidebar` | `sidebar-show-symbolic` |
+| `ViewReveal` | `view-reveal-symbolic` |
+| `ViewConceal` | `view-conceal-symbolic` |
+| `Settings` | `preferences-system-symbolic` |
+
+### Status
+
+| Export | Symbolic name |
+|--------|--------------|
+| `Information` | `dialog-information-symbolic` |
+| `Warning` | `dialog-warning-symbolic` |
+| `Error` | `dialog-error-symbolic` |
+| `Check` | `object-select-symbolic` |
+
+### People & Identity
+
+| Export | Symbolic name |
+|--------|--------------|
+| `Person` | `system-users-symbolic` |
+| `Accessibility` | `preferences-desktop-accessibility-symbolic` |
+
+### System & Hardware
+
+| Export | Symbolic name |
+|--------|--------------|
+| `Applications` | `view-app-grid-symbolic` |
+| `Notifications` | `notifications-symbolic` |
+| `InputMouse` | `input-mouse-symbolic` |
+| `InputKeyboard` | `input-keyboard-symbolic` |
+| `InputTablet` | `input-tablet-symbolic` |
+| `ColorManagement` | `preferences-color-symbolic` |
+| `Printer` | `printer-symbolic` |
+| `Lock` | `changes-prevent-symbolic` |
+
+### Misc
+
+| Export | Symbolic name |
+|--------|--------------|
+| `Star` | `starred-symbolic` |
+| `StarOutline` | `non-starred-symbolic` |
+| `Heart` | `emblem-favorite-symbolic` |
+
+### Media
+
+| Export | Symbolic name |
+|--------|--------------|
+| `MediaPlay` | `media-playback-start-symbolic` |
+| `MediaPause` | `media-playback-pause-symbolic` |
+| `MediaSkipForward` | `media-skip-forward-symbolic` |
+| `MediaSkipBackward` | `media-skip-backward-symbolic` |
 
 ## License
 

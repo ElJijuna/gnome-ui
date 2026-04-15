@@ -225,3 +225,6 @@ export type { PreferencesDialogProps } from "./components/PreferencesDialog";
 
 export { Timeline } from "./components/Timeline";
 export type { TimelineProps, TimelineItem, TimelineOrientation, TimelineVariant } from "./components/Timeline";
+
+export { PathBar } from "./components/PathBar";
+export type { PathBarProps, PathBarSegment } from "./components/PathBar";
