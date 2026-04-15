@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.6.0...@gnome-ui/charts@1.7.0) (2026-04-15)
+
+### Features
+
+* update ProgressBar to support variant. ([34d342f](https://github.com/ElJijuna/gnome-ui/commit/34d342f4791a2f0306e989799f84f81071db9cc0))
+
 ## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.5.0...@gnome-ui/charts@1.6.0) (2026-04-15)
 
 ### Features
