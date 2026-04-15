@@ -40,9 +40,24 @@ export { Warning } from "./Warning.ts";
 export { Error } from "./Error.ts";
 export { Check } from "./Check.ts";
 
+// ─── People & Identity ────────────────────────────────────────────────────────
+export { Person } from "./Person.ts";
+export { Accessibility } from "./Accessibility.ts";
+
+// ─── System & Hardware ────────────────────────────────────────────────────────
+export { Applications } from "./Applications.ts";
+export { Notifications } from "./Notifications.ts";
+export { InputMouse } from "./InputMouse.ts";
+export { InputKeyboard } from "./InputKeyboard.ts";
+export { InputTablet } from "./InputTablet.ts";
+export { ColorManagement } from "./ColorManagement.ts";
+export { Printer } from "./Printer.ts";
+export { Lock } from "./Lock.ts";
+
 // ─── Misc ─────────────────────────────────────────────────────────────────────
 export { Star } from "./Star.ts";
 export { StarOutline } from "./StarOutline.ts";
+export { Heart } from "./Heart.ts";
 
 // ─── Media ────────────────────────────────────────────────────────────────────
 export { MediaPlay } from "./MediaPlay.ts";

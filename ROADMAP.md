@@ -44,6 +44,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **View Switcher** | Segmented control for switching between views |
 | ✅ | **Sidebar** | Lateral navigation panel |
 | ✅ | **Search Bar** | Collapsible search bar |
+| ✅ | **PathBar** | Breadcrumb path bar for hierarchical navigation; ancestor segments are interactive buttons, current segment is bold non-interactive label; optional per-segment icons — issue [#17](https://github.com/ElJijuna/gnome-ui/issues/17) |
 
 ---
 
@@ -192,6 +193,8 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Story | Description |
 |--------|-------|-------------|
 | ✅ | **`Layout/Dashboard`** | Full-page app layout: `Toolbar` with logo + inline `SearchBar` + action buttons + avatar `Popover`, collapsible sidebar with `SidebarItem` + `Badge`, content area with `Card`, `BoxedList`, `ExpanderRow`, `InlineViewSwitcher`, `StatusPage`, and footer `Toolbar` |
+| ✅ | **`Layout/FileManager`** | GNOME Files (Nautilus)–style file browser: `PathBar` breadcrumb navigation in toolbar, collapsible `Sidebar` with Places + Network sections, `InlineViewSwitcher` for grid/list toggle, folder drill-down, and mobile overlay sidebar — issue [#16](https://github.com/ElJijuna/gnome-ui/issues/16) |
+| ✅ | **`Layout/Settings`** | GNOME Settings–style preferences app: dual-headerbar pattern, 14-category sidebar with per-category icons, sub-page drill-down (Accessibility → Seeing), `SwitchRow` toggle rows, `ActionRow` for value navigation, `PreferencesGroup` sections |
 
 ---
 
@@ -268,6 +271,23 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **`WindowTitle`** | Two-line title + subtitle widget centred in a `HeaderBar` — mirrors `AdwWindowTitle` |
 | ✅ | **`ShortcutLabel`** | Read-only display of a keyboard shortcut (e.g. `Ctrl+S`) with proper key-cap styling — mirrors `GtkShortcutLabel` |
 | ✅ | **`ButtonContent`** | Icon + label layout helper for buttons with both an icon and text — mirrors `AdwButtonContent` |
+
+---
+
+## `@gnome-ui/icons` — Icon Library
+
+> Framework-agnostic Adwaita symbolic icon definitions. Each icon is a plain `IconDefinition` object (SVG path data) consumed by the `<Icon>` component in `@gnome-ui/react`.
+
+| Status | Category | Icons |
+|--------|----------|-------|
+| ✅ | **Navigation** | `GoPrevious`, `GoNext`, `GoHome`, `GoUp`, `PanDown`, `PanUp`, `PanStart`, `PanEnd` |
+| ✅ | **Actions** | `Add`, `Remove`, `Delete`, `Edit`, `Copy`, `Paste`, `Cut`, `Undo`, `Redo`, `Save`, `DocumentOpen`, `Close`, `Search`, `Refresh`, `Share`, `Attachment` |
+| ✅ | **UI** | `OpenMenu`, `ViewMore`, `ViewSidebar`, `ViewReveal`, `ViewConceal`, `Settings` |
+| ✅ | **Status** | `Information`, `Warning`, `Error`, `Check` |
+| ✅ | **People & Identity** | `Person`, `Accessibility` |
+| ✅ | **System & Hardware** | `Applications`, `Notifications`, `InputMouse`, `InputKeyboard`, `InputTablet`, `ColorManagement`, `Printer`, `Lock` |
+| ✅ | **Misc** | `Star`, `StarOutline`, `Heart` |
+| ✅ | **Media** | `MediaPlay`, `MediaPause`, `MediaSkipForward`, `MediaSkipBackward` |
 
 ---
 

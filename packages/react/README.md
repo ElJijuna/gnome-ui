@@ -59,6 +59,7 @@ export default function App() {
 | [`Link`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) | Inline hyperlink with accent colour, animated underline, and external-URL variant |
 | [`ToggleGroup`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) / `ToggleGroupItem` | Mutually-exclusive toggle buttons; icon-only, label-only, or icon + label |
 | [`InlineViewSwitcher`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-inlineviewswitcher--docs) / `InlineViewSwitcherItem` | Compact inline view switcher; `default`, `flat`, and `round` variants |
+| [`PathBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-pathbar--docs) | Breadcrumb path bar for hierarchical navigation; ancestor segments are interactive buttons, current segment is highlighted |
 
 ### Display
 

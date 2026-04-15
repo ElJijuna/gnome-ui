@@ -9,14 +9,14 @@ const config: StorybookConfig = {
   },
   docs: {},
   refs: {
-    charts: {
-      title: "@gnome-ui/charts",
-      url: "https://gnome-ui.org/charts",
-      expanded: false,
-    },
     layout: {
       title: "@gnome-ui/layout",
       url: "https://gnome-ui.org/layout",
+      expanded: false,
+    },
+    charts: {
+      title: "@gnome-ui/charts",
+      url: "https://gnome-ui.org/charts",
       expanded: false,
     },
   },

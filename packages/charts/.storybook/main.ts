@@ -9,7 +9,7 @@ const config: StorybookConfig = {
   },
   docs: {},
   refs: {
-    charts: {
+    react: {
       title: "@gnome-ui/react",
       url: "https://gnome-ui.org/react",
       expanded: false,
