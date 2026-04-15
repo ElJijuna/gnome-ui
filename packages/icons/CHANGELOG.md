@@ -1,3 +1,9 @@
+## [1.18.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.17.0...@gnome-ui/icons@1.18.0) (2026-04-15)
+
+### Features
+
+* update ProgressBar to support variant. ([34d342f](https://github.com/ElJijuna/gnome-ui/commit/34d342f4791a2f0306e989799f84f81071db9cc0))
+
 ## [1.17.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.16.0...@gnome-ui/icons@1.17.0) (2026-04-15)
 
 ### Features
