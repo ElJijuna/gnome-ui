@@ -1,3 +1,9 @@
+## [1.19.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.18.0...@gnome-ui/core@1.19.0) (2026-04-15)
+
+### Features
+
+* add component Blockquote, update tokens ([#3](https://github.com/ElJijuna/gnome-ui/issues/3)) ([b921779](https://github.com/ElJijuna/gnome-ui/commit/b921779220618368d09f7870b82d614d271c31d0))
+
 ## [1.18.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.17.0...@gnome-ui/core@1.18.0) (2026-04-14)
 
 ### Features
