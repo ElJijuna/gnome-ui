@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.7.0...@gnome-ui/charts@1.7.1) (2026-04-15)
+
+### Refactoring
+
+* update components to use Separator componente and remove local css code in componentes to reference a .divider class. ([450052a](https://github.com/ElJijuna/gnome-ui/commit/450052ad3b3f6b8f161cdc9c09ee8fb9b6707ba2))
+
 ## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.6.0...@gnome-ui/charts@1.7.0) (2026-04-15)
 
 ### Features
