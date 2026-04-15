@@ -313,3 +313,35 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path |
 | ⬜ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state |
 | ⬜ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters |
+
+---
+
+## GNOME 50 Compatibility
+
+> Items identified from GNOME 50 (libadwaita 1.9, March 2026) that require new work or updates.
+
+### Accessibility — `prefers-reduced-motion`
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ✅ | **`ExpanderRow`** | Disable `grid-template-rows` transition and chevron rotate on reduced-motion |
+| ✅ | **`PanelCard`** (`@gnome-ui/layout`) | Disable `grid-template-rows` collapse transition on reduced-motion |
+| ✅ | **`Layout`** (`@gnome-ui/layout`) | Disable mobile sidebar slide-in transition on reduced-motion |
+
+### CSS theming
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ✅ | **Unified `style.css`** | GNOME 50 deprecates autoloaded `style-dark.css` / `style-hc.css` in favour of a single file with `@media` queries — `tokens.css` already follows this pattern |
+
+### Adaptive layout guidance
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **Mobile-first audit** | Review `NavigationSplitView` and `OverlaySplitView` default breakpoints against updated GNOME 50 HIG ("design from most constrained screen first") — issue [#15](https://github.com/ElJijuna/gnome-ui/issues/15) |
+
+### New widgets
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`ColumnView`** | Multi-column sortable data table — mirrors `GtkColumnView` / `AdwColumnView` (issue [#14](https://github.com/ElJijuna/gnome-ui/issues/14)) |

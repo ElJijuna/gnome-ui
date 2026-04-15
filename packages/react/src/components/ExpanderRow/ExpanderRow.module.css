@@ -156,3 +156,15 @@
         var(--gnome-window-bg-color, #fafafa);
   }
 }
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+
+  .chevronWrap {
+    transition: none;
+  }
+}

@@ -131,6 +131,14 @@
   flex-shrink: 0;
 }
 
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .bodyWrapper {
+    transition: none;
+  }
+}
+
 /* ─── Dark mode ──────────────────────────────────────────────────────────── */
 
 @media (prefers-color-scheme: dark) {
