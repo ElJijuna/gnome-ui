@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.1.0...@gnome-ui/layout@1.2.0) (2026-04-15)
+
+### Features
+
+* add component Blockquote, update tokens ([#3](https://github.com/ElJijuna/gnome-ui/issues/3)) ([b921779](https://github.com/ElJijuna/gnome-ui/commit/b921779220618368d09f7870b82d614d271c31d0))
+* **react:** add Timeline component ([#5](https://github.com/ElJijuna/gnome-ui/issues/5)) ([0543cb5](https://github.com/ElJijuna/gnome-ui/commit/0543cb51ac856a6d96e72eeb4eee89b7c865f3d3))
+
 ## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.0.0...@gnome-ui/layout@1.1.0) (2026-04-14)
 
 ### Features
