@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/platform@1.6.2...@gnome-ui/platform@1.7.0) (2026-04-15)
+
+### Features
+
+* add component PathBar [#16](https://github.com/ElJijuna/gnome-ui/issues/16) Layout/FileManager story ([093018a](https://github.com/ElJijuna/gnome-ui/commit/093018ad45b407c4ac8657eded80fac1eaa893ae)), closes [#17](https://github.com/ElJijuna/gnome-ui/issues/17)
+
 ## [1.6.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/platform@1.6.1...@gnome-ui/platform@1.6.2) (2026-04-15)
 
 ### Bug Fixes
