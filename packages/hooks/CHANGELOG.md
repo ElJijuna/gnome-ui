@@ -1,3 +1,9 @@
+## [1.6.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.6.1...@gnome-ui/hooks@1.6.2) (2026-04-15)
+
+### Bug Fixes
+
+* add prefers-reduced-motion to ExpanderRow, PanelCard and Layout; update ROADMAP with GNOME 50 items. ([537fe95](https://github.com/ElJijuna/gnome-ui/commit/537fe95864dbeac8499e5b9828f16ee1c7badfc1))
+
 ## [1.6.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.6.0...@gnome-ui/hooks@1.6.1) (2026-04-15)
 
 ### Refactoring
