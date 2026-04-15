@@ -1,4 +1,5 @@
 import { useState, Children, useId, type HTMLAttributes, type ReactNode } from "react";
+import { Separator } from "../Separator";
 import styles from "./ExpanderRow.module.css";
 
 export interface ExpanderRowProps extends HTMLAttributes<HTMLDivElement> {
@@ -110,7 +111,7 @@ export function ExpanderRow({
         <div className={styles.panelInner}>
           {childItems.map((child, i) => (
             <div key={i} className={styles.childItem}>
-              <div className={styles.divider} aria-hidden="true" />
+              <Separator aria-hidden="true" />
               {child}
             </div>
           ))}

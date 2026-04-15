@@ -1,4 +1,5 @@
 import { Children, type HTMLAttributes, type ReactNode } from "react";
+import { Separator } from "../Separator";
 import styles from "./BoxedList.module.css";
 
 export type BoxedListVariant = "default" | "separate";
@@ -40,7 +41,7 @@ export function BoxedList({ children, variant = "default", className, ...props }
     >
       {items.map((child, i) => (
         <li key={i} className={separate ? styles.separateItem : styles.item}>
-          {!separate && i > 0 && <div className={styles.divider} aria-hidden="true" />}
+          {!separate && i > 0 && <Separator aria-hidden="true" />}
           {child}
         </li>
       ))}

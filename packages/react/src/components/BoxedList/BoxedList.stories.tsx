@@ -4,6 +4,8 @@ import { ActionRow } from "../ActionRow";
 import { Switch } from "../Switch";
 import { Button } from "../Button";
 import { Text } from "../Text";
+import { Box } from "../Box";
+import { WrapBox } from "../WrapBox";
 
 const meta: Meta<typeof BoxedList> = {
   title: "Components/BoxedList",
@@ -127,8 +129,8 @@ export const Separate: Story = {
 
 export const LabelledSections: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <div>
+    <WrapBox childSpacing={24} lineSpacing={24}>
+      <Box>
         <Text variant="caption-heading" color="dim" style={{ marginBottom: 6, paddingLeft: 12 }}>
           Network
         </Text>
@@ -136,8 +138,8 @@ export const LabelledSections: Story = {
           <ActionRow title="Wi-Fi" subtitle="Home Network" trailing={<Switch defaultChecked aria-label="Wi-Fi" />} />
           <ActionRow title="Ethernet" subtitle="Connected" trailing={<Switch defaultChecked aria-label="Ethernet" />} />
         </BoxedList>
-      </div>
-      <div>
+      </Box>
+      <Box>
         <Text variant="caption-heading" color="dim" style={{ marginBottom: 6, paddingLeft: 12 }}>
           Privacy
         </Text>
@@ -145,8 +147,8 @@ export const LabelledSections: Story = {
           <ActionRow title="Location Services" trailing={<Switch aria-label="Location Services" />} />
           <ActionRow title="Usage & Diagnostics" trailing={<Switch aria-label="Usage & Diagnostics" />} />
         </BoxedList>
-      </div>
-    </div>
+      </Box>
+    </WrapBox>
   ),
   parameters: {
     controls: { disable: true },

@@ -144,12 +144,6 @@
   flex-direction: column;
 }
 
-.divider {
-  height: 1px;
-  background-color: var(--gnome-divider-color, rgba(0, 0, 0, 0.08));
-  margin-left: var(--gnome-space-4, 24px);
-}
-
 /* ─── High contrast ─────────────────────────────────────────────────────────── */
 
 @media (prefers-contrast: more) {
@@ -160,9 +154,5 @@
         var(--gnome-focus-ring-color, #3584e4),
       inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px) + 1px)
         var(--gnome-window-bg-color, #fafafa);
-  }
-
-  .divider {
-    height: 2px;
   }
 }

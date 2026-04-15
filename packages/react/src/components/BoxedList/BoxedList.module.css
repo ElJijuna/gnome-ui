@@ -20,14 +20,6 @@
   flex-direction: column;
 }
 
-/* ─── Divider between rows ─────────────────────────────────────────────────── */
-
-.divider {
-  height: 1px;
-  background-color: var(--gnome-divider-color);
-  /* Indent to align with row content — matches ActionRow's horizontal padding */
-  margin-left: var(--gnome-space-4, 24px);
-}
 
 /* ─── Separate variant ─────────────────────────────────────────────────────── */
 
