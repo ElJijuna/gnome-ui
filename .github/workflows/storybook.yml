@@ -105,7 +105,7 @@ jobs:
 
   build-storybook-react:
     name: Build Storybook (@gnome-ui/react)
-    needs: [build-core, build-icons, build-react]
+    needs: [build-icons]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -132,7 +132,7 @@ jobs:
 
   build-storybook-layout:
     name: Build Storybook (@gnome-ui/layout)
-    needs: [build-core, build-icons, build-react]
+    needs: [build-react]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -164,7 +164,7 @@ jobs:
 
   build-storybook-charts:
     name: Build Storybook (@gnome-ui/charts)
-    needs: [build-core, build-charts]
+    needs: [build-charts]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
