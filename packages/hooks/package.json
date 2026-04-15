@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/hooks",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "React hooks that expose @gnome-ui/platform APIs as idiomatic React state",
   "type": "module",
   "main": "./dist/index.cjs",
