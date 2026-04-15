@@ -68,6 +68,7 @@ export default function App() {
 | [`Icon`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-icon--docs) | React adapter for `@gnome-ui/icons` — inline SVG, inherits `currentColor` |
 | [`Avatar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatar--docs) | Circular user image with deterministic-color initials fallback |
 | [`Badge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) | Counter or status dot, optionally anchored over another element |
+| [`Blockquote`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-blockquote--docs) | Styled pull-quote with left-border accent; default, info, warning, error, success variants; optional icon and attribution |
 | [`Spinner`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinner--docs) | Indeterminate loading indicator; sm/md/lg sizes |
 | [`ProgressBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-progressbar--docs) | Determinate (0–1) and indeterminate progress indicator |
 | [`StatusPage`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) | Empty-state page with icon, title, description, and optional actions; `compact` prop for sidebars/popovers |
@@ -75,6 +76,7 @@ export default function App() {
 | [`Chip`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-chip--docs) | Compact pill-shaped label for tags, filters, and multi-select; static, removable, and selectable modes |
 | [`ShortcutLabel`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-shortcutlabel--docs) | Renders keyboard shortcut tokens (e.g. `Ctrl+S`) as individual key cap pills |
 | [`WindowTitle`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-windowtitle--docs) | Two-line title + subtitle widget for use inside a `HeaderBar` |
+| [`Timeline`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-timeline--docs) | Ordered sequence of events connected by a visual connector line; vertical (activity feed) and horizontal (stepper) orientations; solid, dotted, and none variants |
 
 ### Layout & containers
 
