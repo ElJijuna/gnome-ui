@@ -1,0 +1,86 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.blockquote {
+  margin: 0;
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-3, 18px);
+  border-left: var(--gnome-blockquote-border-width, 3px) solid;
+  border-radius: 0 var(--gnome-radius-sm, 4px) var(--gnome-radius-sm, 4px) 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+/* ─── Body (icon + text) ──────────────────────────────────────────────────── */
+
+.body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 2px; /* optical alignment with first text baseline */
+}
+
+.content {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Attribution ─────────────────────────────────────────────────────────── */
+
+.footer {
+  margin-top: var(--gnome-space-1, 6px);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.cite {
+  font-style: normal;
+}
+
+/* ─── Variants ────────────────────────────────────────────────────────────── */
+
+.default {
+  border-color: var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+}
+
+.info {
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-accent-bg-color, #3584e4) 8%,
+    transparent
+  );
+}
+
+.warning {
+  border-color: var(--gnome-warning-bg-color, #f6d32d);
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-warning-bg-color, #f6d32d) 14%,
+    transparent
+  );
+}
+
+.error {
+  border-color: var(--gnome-error-bg-color, #e01b24);
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-error-bg-color, #e01b24) 8%,
+    transparent
+  );
+}
+
+.success {
+  border-color: var(--gnome-success-bg-color, #2ec27e);
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-success-bg-color, #2ec27e) 8%,
+    transparent
+  );
+}

@@ -3,6 +3,9 @@
 import "@gnome-ui/core/styles";
 
 // Components
+export { Blockquote } from "./components/Blockquote";
+export type { BlockquoteProps, BlockquoteVariant } from "./components/Blockquote";
+
 export { Button } from "./components/Button";
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape } from "./components/Button";
 
