@@ -25,9 +25,11 @@ Determinate and indeterminate progress bar following the Adwaita style.
   },
   argTypes: {
     value: { control: { type: "range", min: 0, max: 1, step: 0.01 } },
+    variant: { control: "select", options: ["accent", "success", "warning", "error"] },
   },
   args: {
     value: 0.6,
+    variant: "accent",
     "aria-label": "Loading",
   },
   decorators: [
@@ -106,6 +108,20 @@ export const Animated: Story = {
       },
     },
   },
+};
+
+// ─── Variants ─────────────────────────────────────────────────────────────────
+
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <ProgressBar value={0.7} variant="accent"  aria-label="Accent"  />
+      <ProgressBar value={0.7} variant="success" aria-label="Success" />
+      <ProgressBar value={0.7} variant="warning" aria-label="Warning" />
+      <ProgressBar value={0.7} variant="error"   aria-label="Error"   />
+    </div>
+  ),
+  parameters: { controls: { disable: true } },
 };
 
 // ─── Multiple bars ────────────────────────────────────────────────────────────

@@ -14,7 +14,15 @@ function CenteredDecorator({ children }: { children: ReactNode }) {
         minHeight: "6rem",
       }}
     >
-      {children}
+      {/*
+       * This inner wrapper gives children a definite width so that
+       * width:100% inside story decorators (e.g. maxWidth:400) resolves
+       * correctly. Without it, flex items have no definite inline size and
+       * width:100% components (ProgressBar, Banner, Separator…) render at 0px.
+       */}
+      <div style={{ flex: "1 1 0%", minWidth: 0 }}>
+        {children}
+      </div>
     </div>
   );
 }

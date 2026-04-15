@@ -14,10 +14,16 @@
 .fill {
   height: 100%;
   border-radius: var(--gnome-radius-pill);
-  background-color: var(--gnome-accent-bg-color, #3584e4);
   transition: width var(--gnome-duration-normal) var(--gnome-easing-default);
   will-change: width;
 }
+
+/* ─── Variants ─────────────────────────────────────────────────────────────── */
+
+.accent  { background-color: var(--gnome-accent-bg-color,   #3584e4); }
+.success { background-color: var(--gnome-success-bg-color,  #2ec27e); }
+.warning { background-color: var(--gnome-warning-bg-color,  #f6d32d); }
+.error   { background-color: var(--gnome-error-bg-color,    #e01b24); }
 
 /* ─── Indeterminate pulse ──────────────────────────────────────────────────── */
 

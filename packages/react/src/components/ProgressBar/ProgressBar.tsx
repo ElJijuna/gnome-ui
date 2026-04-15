@@ -1,12 +1,22 @@
 import type { HTMLAttributes } from "react";
 import styles from "./ProgressBar.module.css";
 
+export type ProgressBarVariant = "accent" | "success" | "warning" | "error";
+
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Current progress value between `0` and `1` (e.g. `0.6` = 60 %).
    * Omit or set to `undefined` for the indeterminate (pulsing) state.
    */
   value?: number;
+  /**
+   * Fill color of the progress indicator.
+   * - `"accent"` (default) — blue, general-purpose progress.
+   * - `"success"` — green, completed or healthy state.
+   * - `"warning"` — yellow, approaching a limit.
+   * - `"error"`   — red, failed or critical state.
+   */
+  variant?: ProgressBarVariant;
   /** Accessible label describing what is loading. */
   "aria-label"?: string;
   /** Associates the bar with a visible element that labels it. */
@@ -26,6 +36,7 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function ProgressBar({
   value,
+  variant = "accent",
   className,
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
@@ -49,6 +60,7 @@ export function ProgressBar({
       <div
         className={[
           styles.fill,
+          styles[variant],
           isIndeterminate ? styles.indeterminate : null,
         ]
           .filter(Boolean)
