@@ -19,9 +19,9 @@ const config: StorybookConfig = {
       url: "https://gnome-ui.org/layout",
       expanded: false,
     },
-    icons: {
-      title: "@gnome-ui/icons",
-      url: "https://gnome-ui.org/icons",
+    charts: {
+      title: "@gnome-ui/charts",
+      url: "https://gnome-ui.org/charts",
       expanded: false,
     },
   },
