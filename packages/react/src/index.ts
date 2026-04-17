@@ -228,3 +228,6 @@ export type { TimelineProps, TimelineItem, TimelineOrientation, TimelineVariant 
 
 export { PathBar } from "./components/PathBar";
 export type { PathBarProps, PathBarSegment } from "./components/PathBar";
+
+export { ContributionGraph } from "./components/ContributionGraph";
+export type { ContributionGraphProps, ContributionDay } from "./components/ContributionGraph";
