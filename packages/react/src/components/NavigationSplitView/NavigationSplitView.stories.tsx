@@ -45,6 +45,69 @@ const items = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
+export const NarrowViewport: Story = {
+  render: function NarrowStory() {
+    const [active, setActive]           = useState("home");
+    const [showContent, setShowContent] = useState(false);
+    const { isNarrow }                  = useBreakpoint();
+
+    return (
+      <div style={{ height: 480, display: "flex", flexDirection: "column", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden" }}>
+        <HeaderBar
+          title={isNarrow && showContent
+            ? items.find(i => i.id === active)?.label
+            : "Mail"}
+          start={isNarrow && showContent
+            ? (
+              <Button variant="flat" aria-label="Back" onClick={() => setShowContent(false)}>
+                <Icon icon={GoPrevious} size="md" aria-hidden />
+                Back
+              </Button>
+            )
+            : undefined}
+        />
+        <NavigationSplitView
+          style={{ flex: 1 }}
+          showContent={showContent}
+          sidebar={
+            <Sidebar style={{ height: "100%" }}>
+              {items.map(({ id, label, icon }) => (
+                <SidebarItem
+                  key={id}
+                  icon={icon}
+                  label={label}
+                  active={active === id}
+                  onClick={() => { setActive(id); setShowContent(true); }}
+                />
+              ))}
+            </Sidebar>
+          }
+          content={
+            <div style={{ padding: 24 }}>
+              <Text variant="title-3">{items.find(i => i.id === active)?.label}</Text>
+              <Text variant="body" color="dim" style={{ marginTop: 8 }}>
+                Tap an item in the sidebar list to drill into the detail view.
+                Use the Back button to return.
+              </Text>
+            </div>
+          }
+        />
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: "mobile1" },
+    docs: {
+      description: {
+        story:
+          "Narrow viewport (≤ 400 px): only one pane is visible at a time. " +
+          "Tap an item to navigate to the content pane; use Back to return to the sidebar list.",
+      },
+    },
+  },
+};
+
 export const Default: Story = {
   render: function DefaultStory() {
     const [active, setActive]           = useState("home");

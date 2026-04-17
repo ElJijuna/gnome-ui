@@ -101,6 +101,30 @@ export function OverlaySplitView({
 
   const isEnd = sidebarPosition === "end";
 
+  // Swipe-to-dismiss: drag the sidebar in the close direction to trigger onClose
+  useEffect(() => {
+    if (!isNarrow || !showSidebar) return;
+    const el = sidebarRef.current;
+    if (!el) return;
+
+    let startX = 0;
+    const THRESHOLD = 80;
+
+    const onTouchStart = (e: TouchEvent) => { startX = e.touches[0].clientX; };
+    const onTouchEnd   = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const closeSwipe = isEnd ? dx > THRESHOLD : dx < -THRESHOLD;
+      if (closeSwipe) onClose?.();
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchend",   onTouchEnd,   { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchend",   onTouchEnd);
+    };
+  }, [isNarrow, showSidebar, isEnd, onClose]);
+
   return (
     <div
       className={[

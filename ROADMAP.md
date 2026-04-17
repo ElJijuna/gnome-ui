@@ -359,7 +359,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **Mobile-first audit** | Review `NavigationSplitView` and `OverlaySplitView` default breakpoints against updated GNOME 50 HIG ("design from most constrained screen first") — issue [#15](https://github.com/ElJijuna/gnome-ui/issues/15) |
+| ✅ | **Mobile-first audit** | Verified 400/550/860 sp thresholds and mobile-first defaults; added swipe-to-dismiss to `OverlaySplitView`; added `NarrowViewport` stories to `NavigationSplitView`, `OverlaySplitView`, and `BreakpointBin` — issue [#15](https://github.com/ElJijuna/gnome-ui/issues/15) |
 
 ### New widgets
 
