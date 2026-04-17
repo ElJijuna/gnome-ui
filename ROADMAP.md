@@ -364,7 +364,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`ColumnView`** | Multi-column sortable data table — mirrors `GtkColumnView` / `AdwColumnView` (issue [#14](https://github.com/ElJijuna/gnome-ui/issues/14)) |
+| ✅ | **`ColumnView`** | Multi-column sortable data table — mirrors `GtkColumnView` / `AdwColumnView` (issue [#14](https://github.com/ElJijuna/gnome-ui/issues/14)) |
 
 ---
 
