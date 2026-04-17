@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BreakpointBin } from "./BreakpointBin";
+import { GNOME_BREAKPOINTS } from "../../hooks/useBreakpoint";
 import { Text } from "../Text";
 import { Button } from "../Button";
 import { ActionRow } from "../ActionRow";
@@ -51,6 +52,44 @@ const BREAKPOINTS = [
 ];
 
 // ─── Active breakpoint indicator ──────────────────────────────────────────────
+
+export const NarrowViewport: Story = {
+  render: () => (
+    <BreakpointBin
+      breakpoints={[
+        { name: "compact", maxWidth: GNOME_BREAKPOINTS.narrow },
+        { name: "medium",  maxWidth: GNOME_BREAKPOINTS.medium },
+      ]}
+      style={{ width: "100%" }}
+    >
+      {({ activeBreakpoint, width }) => (
+        <div style={{ padding: 16, background: "var(--gnome-card-bg-color)", borderRadius: 12, border: "1px solid rgba(0,0,0,0.08)" }}>
+          <Text variant="title-4">
+            {activeBreakpoint === "compact"
+              ? "Compact (≤ 400 px)"
+              : activeBreakpoint === "medium"
+              ? "Medium (≤ 550 px)"
+              : "Regular (> 550 px)"}
+          </Text>
+          <Text variant="body" color="dim" style={{ marginTop: 4 }}>
+            Container width: {Math.round(width)} px · breakpoint: <strong>{activeBreakpoint ?? "none"}</strong>
+          </Text>
+        </div>
+      )}
+    </BreakpointBin>
+  ),
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: "mobile1" },
+    docs: {
+      description: {
+        story:
+          "Uses the canonical GNOME breakpoints (`narrow` = 400 px, `medium` = 550 px). " +
+          "On this mobile viewport the container is in `compact` mode.",
+      },
+    },
+  },
+};
 
 export const ActiveBreakpoint: Story = {
   render: () => (

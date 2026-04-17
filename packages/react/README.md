@@ -135,8 +135,8 @@ export default function App() {
 |-----------|-------------|
 | [`useBreakpoint`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-usebreakpoint--docs) | Hook tracking viewport width against GNOME breakpoints (400 / 550 / 860 px) |
 | [`Clamp`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-clamp--docs) | Constrains content to a max width, centering it — mirrors `AdwClamp` |
-| [`NavigationSplitView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationsplitview--docs) | Two-pane layout that collapses to a single pane at ≤ 400 px |
-| [`OverlaySplitView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) | Sidebar becomes slide-over overlay at ≤ 400 px |
+| [`NavigationSplitView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationsplitview--docs) | Two-pane layout that collapses to a single pane at ≤ 400 px; sidebar shown first (mobile-first default) |
+| [`OverlaySplitView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-overlaysplitview--docs) | Sidebar becomes slide-over overlay at ≤ 400 px; supports backdrop, Escape, and swipe-to-dismiss |
 | [`NavigationView`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-navigationview--docs) / `NavigationPage` | Mobile-style navigation stack with forward/back slide transitions — mirrors `AdwNavigationView` |
 | [`ViewSwitcherBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) |
 | [`BreakpointBin`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-breakpointbin--docs) | Applies layout changes when the **component** crosses a size threshold — CSS container queries equivalent |
