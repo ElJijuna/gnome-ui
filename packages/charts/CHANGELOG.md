@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.8.0...@gnome-ui/charts@1.9.0) (2026-04-17)
+
+### Features
+
+* independize storybook of icons [#19](https://github.com/ElJijuna/gnome-ui/issues/19) ([c9c6717](https://github.com/ElJijuna/gnome-ui/commit/c9c67177d10a0245465fe408d1917e880426a49c))
+
 ## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.7.2...@gnome-ui/charts@1.8.0) (2026-04-15)
 
 ### Features
