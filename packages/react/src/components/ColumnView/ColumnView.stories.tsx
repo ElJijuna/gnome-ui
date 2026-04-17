@@ -39,21 +39,21 @@ interface FileRow {
 }
 
 const FILES: FileRow[] = [
-  { id: 1, name: "Documents",  type: "Folder", size: "—",       modified: "2 days ago"  },
-  { id: 2, name: "Downloads",  type: "Folder", size: "—",       modified: "Today"       },
-  { id: 3, name: "Pictures",   type: "Folder", size: "—",       modified: "Last week"   },
-  { id: 4, name: "Music",      type: "Folder", size: "—",       modified: "1 month ago" },
-  { id: 5, name: "report.pdf", type: "PDF",    size: "1.2 MB",  modified: "Yesterday"   },
-  { id: 6, name: "photo.jpg",  type: "Image",  size: "3.8 MB",  modified: "3 days ago"  },
-  { id: 7, name: "notes.txt",  type: "Text",   size: "4 KB",    modified: "Today"       },
-  { id: 8, name: "backup.zip", type: "Archive","size": "48 MB", modified: "Last month"  },
+  { id: 1, name: "Documents", type: "Folder", size: "—", modified: "2 days ago" },
+  { id: 2, name: "Downloads", type: "Folder", size: "—", modified: "Today" },
+  { id: 3, name: "Pictures", type: "Folder", size: "—", modified: "Last week" },
+  { id: 4, name: "Music", type: "Folder", size: "—", modified: "1 month ago" },
+  { id: 5, name: "report.pdf", type: "PDF", size: "1.2 MB", modified: "Yesterday" },
+  { id: 6, name: "photo.jpg", type: "Image", size: "3.8 MB", modified: "3 days ago" },
+  { id: 7, name: "notes.txt", type: "Text", size: "4 KB", modified: "Today" },
+  { id: 8, name: "backup.zip", type: "Archive", "size": "48 MB", modified: "Last month" },
 ];
 
 const FILE_COLUMNS: ColumnDef<FileRow>[] = [
-  { id: "name",     header: "Name",     cell: (r) => r.name,     sortable: true, width: "40%" },
-  { id: "type",     header: "Type",     cell: (r) => r.type,     sortable: true               },
-  { id: "size",     header: "Size",     cell: (r) => r.size,     align: "end"                 },
-  { id: "modified", header: "Modified", cell: (r) => r.modified, sortable: true               },
+  { id: "name", header: "Name", cell: (r) => r.name, sortable: true, width: "40%" },
+  { id: "type", header: "Type", cell: (r) => r.type, sortable: true },
+  { id: "size", header: "Size", cell: (r) => r.size, align: "end" },
+  { id: "modified", header: "Modified", cell: (r) => r.modified, sortable: true },
 ];
 
 export const Default: Story = {
