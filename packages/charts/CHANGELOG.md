@@ -1,3 +1,9 @@
+## [1.13.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.12.0...@gnome-ui/charts@1.13.0) (2026-04-17)
+
+### Features
+
+* **react:** mobile-first audit & OverlaySplitView swipe-to-dismiss — closes [#15](https://github.com/ElJijuna/gnome-ui/issues/15) ([fe55782](https://github.com/ElJijuna/gnome-ui/commit/fe55782837bd4b74fae97677624499126eb57ddb))
+
 ## [1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.11.0...@gnome-ui/charts@1.12.0) (2026-04-17)
 
 ### Features
