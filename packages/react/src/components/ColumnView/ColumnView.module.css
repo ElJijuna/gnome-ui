@@ -1,0 +1,212 @@
+/* ─── Outer container (border + radius, no overflow to preserve sticky) ────── */
+
+.outer {
+  border: 1px solid var(--gnome-divider-color, rgba(0, 0, 0, 0.15));
+  border-radius: var(--gnome-radius-lg, 12px);
+  background: var(--gnome-card-bg-color, #ffffff);
+  /* overflow:clip clips to border-radius without creating a scroll ctx */
+  overflow: clip;
+}
+
+/* ─── Scroll container ──────────────────────────────────────────────────────── */
+
+.scroll {
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* ─── Table ─────────────────────────────────────────────────────────────────── */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+
+.thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--gnome-card-bg-color, #ffffff);
+  /* Separator below sticky header */
+  box-shadow: 0 1px 0 var(--gnome-divider-color, rgba(0, 0, 0, 0.15));
+}
+
+.th {
+  padding: 0 var(--gnome-space-4, 24px);
+  height: 40px;
+  text-align: start;
+  font-family: var(--gnome-font-family, system-ui);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.headerLabel {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.55;
+}
+
+/* ─── Sort button ───────────────────────────────────────────────────────────── */
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: 700;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.55;
+  outline: none;
+  border-radius: var(--gnome-radius-sm, 4px);
+  transition: opacity var(--gnome-transition-fast, 100ms) ease;
+}
+
+.sortBtn:hover {
+  opacity: 0.8;
+}
+
+.sortBtn:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: 2px;
+  opacity: 0.8;
+}
+
+.sortBtnActive {
+  opacity: 1;
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.sortActive {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.sortNeutral {
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Body ──────────────────────────────────────────────────────────────────── */
+
+.tbody {
+  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Row ───────────────────────────────────────────────────────────────────── */
+
+.row {
+  outline: none;
+  transition: background-color var(--gnome-transition-fast, 100ms) ease;
+}
+
+.row:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--gnome-accent-color, #3584e4);
+}
+
+.rowSelectable {
+  cursor: pointer;
+}
+
+.rowSelectable:hover {
+  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.07));
+}
+
+.rowSelectable:active {
+  background-color: var(--gnome-active-overlay, rgba(0, 0, 0, 0.12));
+}
+
+.rowSelected {
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-accent-color, #3584e4) 15%,
+    transparent
+  );
+}
+
+.rowSelected:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--gnome-accent-color, #3584e4) 22%,
+    transparent
+  );
+}
+
+/* ─── Cell ──────────────────────────────────────────────────────────────────── */
+
+.td {
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
+  font-family: var(--gnome-font-family, system-ui);
+  font-size: var(--gnome-font-size-body, 1rem);
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Alignment ─────────────────────────────────────────────────────────────── */
+
+.alignStart {
+  text-align: start;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignEnd {
+  text-align: end;
+}
+
+/* ─── Checkbox column ───────────────────────────────────────────────────────── */
+
+.checkboxCol {
+  width: 48px;
+  padding-inline: var(--gnome-space-3, 18px);
+  text-align: center;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--gnome-accent-color, #3584e4);
+  vertical-align: middle;
+}
+
+/* ─── Empty state ───────────────────────────────────────────────────────────── */
+
+.emptyCell {
+  padding: var(--gnome-space-6, 36px) var(--gnome-space-4, 24px);
+  text-align: center;
+}
+
+.emptyLabel {
+  font-family: var(--gnome-font-family, system-ui);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.55;
+}
+
+/* ─── High contrast ─────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .outer {
+    border-width: 2px;
+  }
+
+  .row + .row .td {
+    border-top: 1px solid var(--gnome-divider-color, rgba(0, 0, 0, 0.15));
+  }
+
+  .sortBtn {
+    text-decoration: underline;
+  }
+}

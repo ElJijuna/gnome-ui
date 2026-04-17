@@ -231,3 +231,12 @@ export type { PathBarProps, PathBarSegment } from "./components/PathBar";
 
 export { ContributionGraph } from "./components/ContributionGraph";
 export type { ContributionGraphProps, ContributionDay } from "./components/ContributionGraph";
+
+export { ColumnView } from "./components/ColumnView";
+export type {
+  ColumnViewProps,
+  ColumnDef,
+  ColumnViewSortState,
+  ColumnViewSelectionMode,
+  SortDirection,
+} from "./components/ColumnView";
