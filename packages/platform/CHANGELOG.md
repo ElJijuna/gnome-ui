@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/platform@1.8.0...@gnome-ui/platform@1.9.0) (2026-04-17)
+
+### Features
+
+* **react:** add ContributionGraph component — closes [#21](https://github.com/ElJijuna/gnome-ui/issues/21) ([2542fef](https://github.com/ElJijuna/gnome-ui/commit/2542fef8b6ba02c868ce87823e0375d6e3042075))
+
 ## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/platform@1.7.0...@gnome-ui/platform@1.8.0) (2026-04-17)
 
 ### Features
