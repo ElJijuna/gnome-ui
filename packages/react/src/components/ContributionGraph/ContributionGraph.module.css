@@ -1,0 +1,92 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 6px);
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.label {
+  font-family: var(--gnome-font-family, system-ui);
+  font-size: 11px;
+  fill: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.6;
+  user-select: none;
+}
+
+.cell {
+  cursor: default;
+  transition: transform var(--gnome-transition-fast, 100ms) ease;
+  transform-box: fill-box;
+  transform-origin: center;
+  outline: none;
+}
+
+.cell:not([aria-disabled="true"]):hover {
+  transform: scale(1.2);
+}
+
+.cell:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .cell {
+    stroke: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    stroke-width: 0.5;
+    stroke-opacity: 0.3;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 6px));
+  background: var(--gnome-popover-bg-color, #fff);
+  border: 1px solid var(--gnome-light-3, #deddda);
+  border-radius: var(--gnome-radius-md, 8px);
+  padding: 4px 8px;
+  font-family: var(--gnome-font-family, system-ui);
+  font-size: 12px;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  box-shadow: var(--gnome-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gnome-space-1, 6px);
+}
+
+.legendLabel {
+  font-family: var(--gnome-font-family, system-ui);
+  font-size: 11px;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.6;
+  user-select: none;
+}
+
+.legendCell {
+  display: block;
+  flex-shrink: 0;
+}

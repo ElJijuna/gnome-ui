@@ -365,3 +365,25 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ⬜ | **`ColumnView`** | Multi-column sortable data table — mirrors `GtkColumnView` / `AdwColumnView` (issue [#14](https://github.com/ElJijuna/gnome-ui/issues/14)) |
+
+---
+
+## `@gnome-ui/charts` — Chart Components
+
+> Data visualisation components built on top of Recharts, fully styled with Adwaita design tokens.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ✅ | **`LineChart`** | Multi-series time-series line chart |
+| ✅ | **`BarChart`** | Grouped and stacked bar chart |
+| ✅ | **`AreaChart`** | Filled-area chart for cumulative data |
+
+---
+
+## Tier 18 — Data Display
+
+> Read-only data display widgets rendered in pure HTML/SVG — no Recharts dependency.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| 🚧 | **`ContributionGraph`** | Activity heatmap calendar: a 52-week grid of rounded SVG cells where colour intensity (Adwaita green palette) represents activity count; supports dark mode, keyboard navigation (`role="grid"`), and screen-reader labels — issue [#21](https://github.com/ElJijuna/gnome-ui/issues/21) |
