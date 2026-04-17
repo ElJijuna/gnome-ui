@@ -131,6 +131,72 @@
   border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
 }
 
+/* ─── Suggestions popover ───────────────────────────────────────────────────── */
+
+.suggestionsPanel {
+  position: fixed;
+  z-index: 10200;
+  margin: 0;
+  padding: var(--gnome-space-1, 6px);
+  list-style: none;
+
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #ffffff));
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  border-top: none;
+  border-radius: 0 0 var(--gnome-radius-lg, 12px) var(--gnome-radius-lg, 12px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.14),
+    0 1px 4px  rgba(0, 0, 0, 0.08);
+
+  max-height: 280px;
+  overflow-y: auto;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+}
+
+.suggestionsLoading {
+  display: flex;
+  justify-content: center;
+  padding: var(--gnome-space-2, 12px);
+}
+
+.suggestionItem {
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-sm, 6px);
+  cursor: pointer;
+  user-select: none;
+
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.suggestionItem:hover,
+.suggestionItemActive {
+  background-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 12%, transparent);
+}
+
+.suggestionItemActive {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .suggestionsPanel {
+    background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #383838));
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      0 1px 4px  rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suggestionItem {
+    transition: none;
+  }
+}
+
 /* ─── Inline variant ────────────────────────────────────────────────────────── */
 
 .inline {

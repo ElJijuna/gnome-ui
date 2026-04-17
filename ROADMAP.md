@@ -183,6 +183,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **`TabBar` `inline` prop** | Add `inline` prop to `TabBar`: removes the header-bar background so the bar blends into any surface — mirrors `.inline` style class |
 | ✅ | **`SearchBar` `inline` prop** | Add `inline` prop to `SearchBar`: same neutral-background treatment as above — mirrors `.inline` style class |
+| ✅ | **`SearchBar` autocomplete** | `suggestions` prop + `Popover`-based typeahead list anchored to the input; keyboard navigation (`↑↓ Enter`); `role="listbox"` + `aria-activedescendant`; replaces deprecated `GtkEntryCompletion` following the GTK4 `AdwSearchBar` + `GtkPopover` + `GtkListView` pattern — issue [#24](https://github.com/ElJijuna/gnome-ui/issues/24) |
 
 ---
 

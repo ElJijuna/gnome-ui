@@ -55,7 +55,7 @@ export default function App() {
 | [`SpinButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinbutton--docs) | Numeric input with −/+ buttons, keyboard nav, decimal support |
 | [`Slider`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-slider--docs) | Draggable range control with tick marks, decimal steps, and keyboard nav |
 | [`Dropdown`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dropdown--docs) | Expandable option list with keyboard nav, flip positioning, and descriptions |
-| [`SearchBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) | Collapsible search bar with auto-focus, clear button, filter row, and `inline` variant |
+| [`SearchBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) | Collapsible search bar with auto-focus, clear button, filter row, `inline` variant, and autocomplete popover (`suggestions` / `loadingSuggestions`) |
 | [`Link`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) | Inline hyperlink with accent colour, animated underline, and external-URL variant |
 | [`ToggleGroup`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) / `ToggleGroupItem` | Mutually-exclusive toggle buttons; icon-only, label-only, or icon + label |
 | [`InlineViewSwitcher`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-inlineviewswitcher--docs) / `InlineViewSwitcherItem` | Compact inline view switcher; `default`, `flat`, and `round` variants |

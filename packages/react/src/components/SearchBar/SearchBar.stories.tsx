@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { SearchBar } from "./SearchBar";
+import { SearchBar, type Suggestion } from "./SearchBar";
 import { HeaderBar } from "../HeaderBar";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
@@ -243,6 +243,122 @@ export const Disabled: Story = {
   ),
   parameters: {
     controls: { disable: true },
+  },
+};
+
+// ─── Autocomplete (sync) ──────────────────────────────────────────────────────
+
+const CITIES: Suggestion[] = [
+  { id: "ams", label: "Amsterdam" },
+  { id: "bcn", label: "Barcelona" },
+  { id: "ber", label: "Berlin" },
+  { id: "lon", label: "London" },
+  { id: "mad", label: "Madrid" },
+  { id: "par", label: "Paris" },
+  { id: "rom", label: "Rome" },
+  { id: "vie", label: "Vienna" },
+];
+
+export const Autocomplete: Story = {
+  render: function AutocompleteStory() {
+    const [open, setOpen]   = useState(true);
+    const [query, setQuery] = useState("");
+
+    const suggestions = query
+      ? CITIES.filter((c) => c.label.toLowerCase().startsWith(query.toLowerCase()))
+      : [];
+
+    return (
+      <div style={{ maxWidth: 480 }}>
+        <SearchBar
+          open={open}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onClose={() => { setOpen(false); setQuery(""); }}
+          onClear={() => setQuery("")}
+          placeholder="Search cities…"
+          suggestions={suggestions}
+          onSuggestionSelect={(s) => { setQuery(s.label); }}
+        />
+        {query && (
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+            Searching for: <strong>{query}</strong>
+          </Text>
+        )}
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Sync autocomplete: suggestions are filtered client-side on each keystroke. " +
+          "Use `↓ ↑` to navigate, `Enter` to select, `Escape` to close.",
+      },
+    },
+  },
+};
+
+// ─── Autocomplete (async) ─────────────────────────────────────────────────────
+
+function fakeFetch(q: string): Promise<Suggestion[]> {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(
+        CITIES.filter((c) => c.label.toLowerCase().startsWith(q.toLowerCase()))
+      );
+    }, 600)
+  );
+}
+
+export const AutocompleteAsync: Story = {
+  render: function AsyncStory() {
+    const [open, setOpen]             = useState(true);
+    const [query, setQuery]           = useState("");
+    const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+    const [loading, setLoading]       = useState(false);
+
+    async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+      const q = e.target.value;
+      setQuery(q);
+      if (!q) { setSuggestions([]); setLoading(false); return; }
+      setLoading(true);
+      const results = await fakeFetch(q);
+      setSuggestions(results);
+      setLoading(false);
+    }
+
+    return (
+      <div style={{ maxWidth: 480 }}>
+        <SearchBar
+          open={open}
+          value={query}
+          onChange={handleChange}
+          onClose={() => { setOpen(false); setQuery(""); setSuggestions([]); }}
+          onClear={() => { setQuery(""); setSuggestions([]); }}
+          placeholder="Search cities…"
+          suggestions={suggestions}
+          loadingSuggestions={loading}
+          onSuggestionSelect={(s) => { setQuery(s.label); setSuggestions([]); }}
+        />
+        {query && !loading && (
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+            Searching for: <strong>{query}</strong>
+          </Text>
+        )}
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Async autocomplete: results are fetched with a simulated 600 ms delay. " +
+          "A spinner appears in the popover while loading.",
+      },
+    },
   },
 };
 
