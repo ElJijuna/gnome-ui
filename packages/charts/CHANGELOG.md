@@ -1,3 +1,10 @@
+## [1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.11.0...@gnome-ui/charts@1.12.0) (2026-04-17)
+
+### Features
+
+* **react:** add ColumnView component — closes [#14](https://github.com/ElJijuna/gnome-ui/issues/14) ([e9df1a8](https://github.com/ElJijuna/gnome-ui/commit/e9df1a836fa05e2c1f1c044a486be8a6bfb0dca2))
+* **react:** add SearchBar autocomplete — closes [#24](https://github.com/ElJijuna/gnome-ui/issues/24) ([4a7fcb5](https://github.com/ElJijuna/gnome-ui/commit/4a7fcb5b390d4755de784f9658e8fa7957cbeb2a))
+
 ## [1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.10.0...@gnome-ui/charts@1.11.0) (2026-04-17)
 
 ### Features
