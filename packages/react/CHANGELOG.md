@@ -1,3 +1,9 @@
+## [1.21.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.20.0...@gnome-ui/react@1.21.0) (2026-04-17)
+
+### Features
+
+* **react:** add ColumnView component — closes [#14](https://github.com/ElJijuna/gnome-ui/issues/14) ([9043061](https://github.com/ElJijuna/gnome-ui/commit/90430616c44ab508599093503fb12bb4434a0872))
+
 ## [1.20.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.19.0...@gnome-ui/react@1.20.0) (2026-04-17)
 
 ### Features
