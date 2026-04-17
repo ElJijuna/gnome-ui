@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/platform",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "TypeScript API layer for communicating with the GNOME host process from a React app",
   "type": "module",
   "main": "./dist/index.cjs",
