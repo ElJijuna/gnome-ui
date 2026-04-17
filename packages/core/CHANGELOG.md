@@ -1,3 +1,9 @@
+## [1.26.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.25.0...@gnome-ui/core@1.26.0) (2026-04-17)
+
+### Features
+
+* **react:** mobile-first audit & OverlaySplitView swipe-to-dismiss — closes [#15](https://github.com/ElJijuna/gnome-ui/issues/15) ([fe55782](https://github.com/ElJijuna/gnome-ui/commit/fe55782837bd4b74fae97677624499126eb57ddb))
+
 ## [1.25.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.24.0...@gnome-ui/core@1.25.0) (2026-04-17)
 
 ### Features
