@@ -350,9 +350,9 @@ export function Dialog({
                 )}
                 {links?.map((l) => (
                   <><dt key={`${l.label}-dt`} className={styles.aboutInfoLabel}>{l.label}</dt>
-                  <dd key={`${l.label}-dd`} className={styles.aboutInfoValue}>
-                    <a href={l.url} target="_blank" rel="noopener noreferrer" className={styles.aboutLink}>{l.url}</a>
-                  </dd></>
+                    <dd key={`${l.label}-dd`} className={styles.aboutInfoValue}>
+                      <a href={l.url} target="_blank" rel="noopener noreferrer" className={styles.aboutLink}>{l.url}</a>
+                    </dd></>
                 ))}
               </dl>
             )}
@@ -363,8 +363,8 @@ export function Dialog({
           <div className={styles.aboutSection}>
             {[
               { heading: "Developers", list: developers },
-              { heading: "Designers",  list: designers },
-              { heading: "Artists",    list: artists },
+              { heading: "Designers", list: designers },
+              { heading: "Artists", list: artists },
             ].filter((g) => g.list?.length).map(({ heading, list }) => (
               <div key={heading} className={styles.aboutCreditGroup}>
                 <h4 className={styles.aboutCreditTitle}>{heading}</h4>
@@ -378,7 +378,7 @@ export function Dialog({
 
         {aboutTab === "legal" && (
           <div className={styles.aboutSection}>
-            {copyright   && <p className={styles.aboutCopyright}>{copyright}</p>}
+            {copyright && <p className={styles.aboutCopyright}>{copyright}</p>}
             {licenseType && <p className={styles.aboutLicenseType}>{licenseType}</p>}
             {licenseText && <pre className={styles.aboutLicenseText}>{licenseText}</pre>}
           </div>
@@ -415,7 +415,6 @@ export function Dialog({
             {children && <div className={styles.body}>{children}</div>}
           </>
         )}
-
         {renderButtons()}
       </div>
     </div>

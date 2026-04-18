@@ -54,7 +54,7 @@
 /* ─── Title ─────────────────────────────────────────────────────────────────── */
 
 .title {
-  padding: var(--gnome-space-4, 24px) var(--gnome-space-4, 24px) 0;
+  padding: var(--gnome-space-4, 24px);
 
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-title-4, 1.125rem);
@@ -63,6 +63,10 @@
   color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
 
   text-align: center;
+}
+
+.dialog:has(.body) .title {
+  padding: var(--gnome-space-4, 24px) var(--gnome-space-4, 24px) 0 !important;
 }
 
 /* ─── Body ──────────────────────────────────────────────────────────────────── */
