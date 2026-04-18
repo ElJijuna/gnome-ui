@@ -231,6 +231,72 @@
   min-height: unset;
 }
 
+/* ─── Variants ──────────────────────────────────────────────────────────────── */
+
+.variantBlue {
+  --gnome-sidebar-bg-color: #1a4a7a;
+  --gnome-sidebar-fg-color: rgba(255, 255, 255, 0.95);
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.1);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.18);
+  --gnome-divider-color: rgba(255, 255, 255, 0.15);
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.15);
+}
+
+.variantGreen {
+  --gnome-sidebar-bg-color: #1a4a2e;
+  --gnome-sidebar-fg-color: rgba(255, 255, 255, 0.95);
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.1);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.18);
+  --gnome-divider-color: rgba(255, 255, 255, 0.15);
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.15);
+}
+
+.variantRed {
+  --gnome-sidebar-bg-color: #6e1414;
+  --gnome-sidebar-fg-color: rgba(255, 255, 255, 0.95);
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.1);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.18);
+  --gnome-divider-color: rgba(255, 255, 255, 0.15);
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.15);
+}
+
+.variantYellow {
+  --gnome-sidebar-bg-color: #5a4500;
+  --gnome-sidebar-fg-color: rgba(255, 255, 255, 0.95);
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.1);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.18);
+  --gnome-divider-color: rgba(255, 255, 255, 0.15);
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.15);
+}
+
+.variantBlack {
+  --gnome-sidebar-bg-color: #0a0a0a;
+  --gnome-sidebar-fg-color: rgba(255, 255, 255, 0.9);
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.08);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.14);
+  --gnome-divider-color: rgba(255, 255, 255, 0.1);
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.1);
+}
+
+.variantTransparent {
+  --gnome-sidebar-bg-color: transparent;
+  border-right-color: var(--gnome-divider-color);
+}
+
+.variantBlurred {
+  --gnome-sidebar-bg-color: rgba(255, 255, 255, 0.55);
+  border-right-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  .variantBlurred {
+    --gnome-sidebar-bg-color: rgba(30, 30, 30, 0.6);
+    border-right-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 /* ─── Page mode (full-width boxed-list layout) ──────────────────────────────── */
 
 .pageMode {

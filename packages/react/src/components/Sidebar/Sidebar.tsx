@@ -42,6 +42,18 @@ function countMatchingItems(children: ReactNode, filter: string): number {
   return count;
 }
 
+// ─── Variant map ──────────────────────────────────────────────────────────────
+
+const variantClass: Record<string, string> = {
+  blue: "variantBlue",
+  green: "variantGreen",
+  red: "variantRed",
+  yellow: "variantYellow",
+  black: "variantBlack",
+  transparent: "variantTransparent",
+  blurred: "variantBlurred",
+};
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export interface SidebarProps extends HTMLAttributes<HTMLElement> {
@@ -74,6 +86,15 @@ export interface SidebarProps extends HTMLAttributes<HTMLElement> {
    * mirroring `AdwSidebar` mobile behaviour.
    */
   mode?: "sidebar" | "page";
+  /**
+   * Visual style variant for the sidebar background.
+   * - `"classic"` — default GNOME gray
+   * - `"blue"` | `"green"` | `"red"` | `"yellow"` — tinted accent backgrounds
+   * - `"black"` — dark/OLED background
+   * - `"transparent"` — no background, inherits parent
+   * - `"blurred"` — frosted glass (backdrop-filter blur), like macOS
+   */
+  variant?: "classic" | "blue" | "green" | "red" | "yellow" | "black" | "transparent" | "blurred";
 }
 
 /**
@@ -94,6 +115,7 @@ export function Sidebar({
   filter: controlledFilter,
   onFilterChange,
   mode,
+  variant = "classic",
   className,
   ...props
 }: SidebarProps) {
@@ -120,6 +142,7 @@ export function Sidebar({
             styles.sidebar,
             collapsed ? styles.collapsed : null,
             effectiveMode === "page" ? styles.pageMode : null,
+            variant !== "classic" ? styles[variantClass[variant]] : null,
             className,
           ]
             .filter(Boolean)

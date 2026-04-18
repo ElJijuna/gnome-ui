@@ -22,6 +22,11 @@
   width: var(--sidebar-width, clamp(180px, 25%, 280px));
   flex-shrink: 0;
   overflow-y: auto;
+  transition: width 200ms var(--gnome-easing-default, ease);
+}
+
+.wide.collapsed .sidebar {
+  width: 56px;
 }
 
 .wide .content {

@@ -24,6 +24,12 @@ export interface OverlaySplitViewProps
    */
   onClose?: () => void;
   /**
+   * When `true`, collapses the sidebar to icon-only width on wide screens.
+   * Has no effect in narrow (overlay) mode.
+   * Pair with `collapsed` on the inner `<Sidebar>` component to hide labels.
+   */
+  collapsed?: boolean;
+  /**
    * Which side the sidebar appears on. Defaults to `"start"` (left in LTR).
    */
   sidebarPosition?: "start" | "end";
@@ -66,6 +72,7 @@ export function OverlaySplitView({
   content,
   showSidebar = false,
   onClose,
+  collapsed = false,
   sidebarPosition = "start",
   minSidebarWidth = 180,
   maxSidebarWidth = 280,
@@ -130,6 +137,7 @@ export function OverlaySplitView({
       className={[
         styles.root,
         isNarrow ? styles.narrow : styles.wide,
+        !isNarrow && collapsed ? styles.collapsed : null,
         isEnd ? styles.end : styles.start,
         className,
       ]

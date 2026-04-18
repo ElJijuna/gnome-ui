@@ -45,6 +45,10 @@ All previous \`Sidebar\` / \`SidebarItem\` usage is fully backward compatible.
       control: "select",
       options: ["sidebar", "page"],
     },
+    variant: {
+      control: "select",
+      options: ["classic", "blue", "green", "red", "yellow", "black", "transparent", "blurred"],
+    },
   },
   args: {
     collapsed: false,
@@ -326,6 +330,41 @@ export const DropTargets: Story = {
     docs: {
       description: {
         story: "Use `onDrop` and `acceptTypes` to turn rows into drag-and-drop targets. Drag the pill onto a mailbox row to see it highlighted and the drop registered.",
+      },
+    },
+  },
+};
+
+// ─── Variants ─────────────────────────────────────────────────────────────────
+
+const VARIANTS = ["classic", "blue", "green", "red", "yellow", "black", "transparent", "blurred"] as const;
+
+export const Variants: Story = {
+  render: function VariantsStory() {
+    const [active, setActive] = useState("home");
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 16, padding: 16, background: "var(--gnome-window-bg-color, #f6f5f4)" }}>
+        {VARIANTS.map((variant) => (
+          <div key={variant} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <Sidebar variant={variant} style={{ height: 200, borderRadius: 12 }}>
+              <SidebarSection>
+                <SidebarItem icon={GoHome}    label="Home"     active={active === "home"}     onClick={() => setActive("home")} />
+                <SidebarItem icon={Star}      label="Starred"  active={active === "starred"}  onClick={() => setActive("starred")} />
+                <SidebarItem icon={Search}    label="Search"   active={active === "search"}   onClick={() => setActive("search")} />
+                <SidebarItem icon={Settings}  label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+              </SidebarSection>
+            </Sidebar>
+            <Text variant="caption" color="dim" style={{ textAlign: "center" }}>{variant}</Text>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "All available `variant` values. `blurred` requires a non-opaque parent background to show the frosted-glass effect.",
       },
     },
   },
