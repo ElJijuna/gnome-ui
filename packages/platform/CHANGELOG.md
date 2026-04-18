@@ -1,3 +1,9 @@
+## [1.12.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/platform@1.12.0...@gnome-ui/platform@1.12.1) (2026-04-18)
+
+### Bug Fixes
+
+* update padding in header without body in Dialog. ([f90d247](https://github.com/ElJijuna/gnome-ui/commit/f90d247c8be4aa7129d345aced96f85862216fb9))
+
 ## [1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/platform@1.11.0...@gnome-ui/platform@1.12.0) (2026-04-17)
 
 ### Features
