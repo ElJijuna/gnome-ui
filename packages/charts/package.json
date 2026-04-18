@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/charts",
-  "version": "1.13.1",
+  "version": "1.13.2",
   "description": "Chart components for @gnome-ui/react, styled with GNOME Adwaita design tokens",
   "type": "module",
   "main": "./dist/index.cjs",
