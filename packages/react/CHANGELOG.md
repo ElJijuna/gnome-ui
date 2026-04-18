@@ -1,3 +1,9 @@
+## [1.23.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.23.1...@gnome-ui/react@1.23.2) (2026-04-18)
+
+### Bug Fixes
+
+* update BoxedList to remove overflow: hidden and fix border radius. ([389c54a](https://github.com/ElJijuna/gnome-ui/commit/389c54a928881fd8dab54772ca4fb5e4aaeb2022))
+
 ## [1.23.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.23.0...@gnome-ui/react@1.23.1) (2026-04-18)
 
 ### Bug Fixes
