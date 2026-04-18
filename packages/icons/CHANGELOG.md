@@ -1,3 +1,9 @@
+## [1.24.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.24.0...@gnome-ui/icons@1.24.1) (2026-04-18)
+
+### Bug Fixes
+
+* update padding in header without body in Dialog. ([f90d247](https://github.com/ElJijuna/gnome-ui/commit/f90d247c8be4aa7129d345aced96f85862216fb9))
+
 ## [1.24.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.23.0...@gnome-ui/icons@1.24.0) (2026-04-17)
 
 ### Features
