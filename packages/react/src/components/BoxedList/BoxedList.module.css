@@ -9,7 +9,6 @@
   color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
   border: 1px solid var(--gnome-divider-color);
   border-radius: var(--gnome-radius-lg);
-  overflow: hidden;
 }
 
 /* ─── Row wrapper ──────────────────────────────────────────────────────────── */
@@ -18,6 +17,18 @@
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+.item:first-child > * {
+  border-radius: var(--gnome-radius-lg) var(--gnome-radius-lg) 0 0;
+}
+
+.item:last-child > * {
+  border-radius: 0 0 var(--gnome-radius-lg) var(--gnome-radius-lg);
+}
+
+.item:only-child > * {
+  border-radius: var(--gnome-radius-lg);
 }
 
 
