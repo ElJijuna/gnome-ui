@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/core",
-  "version": "1.26.0",
+  "version": "1.26.1",
   "description": "Design tokens for the GNOME UI design system (framework-agnostic)",
   "type": "module",
   "exports": {
