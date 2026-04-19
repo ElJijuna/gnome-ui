@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Card, Popover, Avatar, Button } from "@gnome-ui/react";
+import { Card, Popover, Avatar } from "@gnome-ui/react";
 import { UserCard } from "./UserCard";
 
 const meta: Meta<typeof UserCard> = {
@@ -48,7 +48,7 @@ const defaultActions = [
   { label: "Sign Out",         onClick: () => alert("sign out"), variant: "destructive" as const },
 ];
 
-// ─── Default ──────────────────────────────────────────────────────────────────
+// ─── Default (vertical) ───────────────────────────────────────────────────────
 
 export const Default: Story = {
   args: {
@@ -58,7 +58,23 @@ export const Default: Story = {
   },
   parameters: {
     docs: {
-      description: { story: "Full user card: avatar, name, e-mail, and three actions with an auto-separator before Sign Out." },
+      description: { story: "Default orientation (`vertical`): avatar centered on top, identity below, actions at the bottom." },
+    },
+  },
+};
+
+// ─── Horizontal ───────────────────────────────────────────────────────────────
+
+export const Horizontal: Story = {
+  args: {
+    name: "Ada Lovelace",
+    email: "ada@gnome.org",
+    orientation: "horizontal",
+    actions: defaultActions,
+  },
+  parameters: {
+    docs: {
+      description: { story: "`orientation=\"horizontal\"` places the avatar on the left — suited for popovers and compact sidebar footers." },
     },
   },
 };

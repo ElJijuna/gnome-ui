@@ -30,6 +30,7 @@
 }
 
 .affix {
+  font-family: var(--gnome-font-family);
   font-size: 0.9375rem;
   line-height: 1;
   color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));

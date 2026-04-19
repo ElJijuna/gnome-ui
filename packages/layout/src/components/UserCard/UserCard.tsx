@@ -28,6 +28,12 @@ export interface UserCardProps extends HTMLAttributes<HTMLDivElement> {
    */
   avatarSize?: AvatarSize;
   /**
+   * Layout orientation of the identity header.
+   * - `"vertical"` (default) — avatar centered on top, name/email centered below.
+   * - `"horizontal"` — avatar on the left, name/email on the right.
+   */
+  orientation?: "vertical" | "horizontal";
+  /**
    * Action items rendered below the identity header.
    * A separator is automatically inserted before the first
    * `"destructive"` action when non-destructive actions precede it.
@@ -69,12 +75,15 @@ export function UserCard({
   avatarSrc,
   avatarColor,
   avatarSize = "md",
+  orientation = "vertical",
   actions = [],
   minWidth = 200,
   className,
   style,
   ...props
 }: UserCardProps) {
+  const isVertical = orientation === "vertical";
+
   // Insert a separator before the first destructive action when there are
   // non-destructive actions above it.
   const hasNonDestructiveBefore = (index: number) =>
@@ -87,14 +96,14 @@ export function UserCard({
       {...props}
     >
       {/* ── Header ── */}
-      <div className={styles.header}>
+      <div className={[styles.header, isVertical ? styles.headerVertical : null].filter(Boolean).join(" ")}>
         <Avatar
           name={name}
           src={avatarSrc}
           color={avatarColor}
           size={avatarSize}
         />
-        <div className={styles.identity}>
+        <div className={[styles.identity, isVertical ? styles.identityVertical : null].filter(Boolean).join(" ")}>
           <Text variant="body" className={styles.name}>{name}</Text>
           {email && (
             <Text variant="caption" color="dim" className={styles.email}>
