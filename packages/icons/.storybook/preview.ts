@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { parameters as docsParameters } from "@storybook/addon-docs/preview";
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 
 const preview: Preview = {
   globalTypes: {
@@ -43,14 +44,7 @@ const preview: Preview = {
       ],
     },
     viewport: {
-      options: {
-        mobilePortrait:  { name: "Mobile Portrait",  styles: { width: "390px",  height: "844px"  }, type: "mobile"  },
-        mobileLandscape: { name: "Mobile Landscape",  styles: { width: "844px",  height: "390px"  }, type: "mobile"  },
-        tabletPortrait:  { name: "Tablet Portrait",  styles: { width: "768px",  height: "1024px" }, type: "tablet"  },
-        tabletLandscape: { name: "Tablet Landscape",  styles: { width: "1024px", height: "768px"  }, type: "tablet"  },
-        desktop:         { name: "Desktop",          styles: { width: "1280px", height: "800px"  }, type: "desktop" },
-        largeDesktop:    { name: "Large Desktop",    styles: { width: "1920px", height: "1080px" }, type: "desktop" },
-      },
+      options: INITIAL_VIEWPORTS,
     },
     controls: {
       matchers: {
