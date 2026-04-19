@@ -1,3 +1,28 @@
+## [1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.2.0...@gnome-ui/layout@1.3.0) (2026-04-19)
+
+### Features
+
+* add component PathBar [#16](https://github.com/ElJijuna/gnome-ui/issues/16) Layout/FileManager story ([093018a](https://github.com/ElJijuna/gnome-ui/commit/093018ad45b407c4ac8657eded80fac1eaa893ae)), closes [#17](https://github.com/ElJijuna/gnome-ui/issues/17)
+* add useBreakpoint hook — isMobile, isTablet, isDesktop (closes [#29](https://github.com/ElJijuna/gnome-ui/issues/29)) ([127da8d](https://github.com/ElJijuna/gnome-ui/commit/127da8d8c8feab07f97dd8fbebe90c9622be9877))
+* **core:** add [data-theme] support to tokens.css for runtime theme overrides (closes [#27](https://github.com/ElJijuna/gnome-ui/issues/27)) and add orientation prop in UserCard. ([27453bb](https://github.com/ElJijuna/gnome-ui/commit/27453bb634c9eeb9c095f0a7a048607c0fcc211a))
+* independize storybook of icons [#19](https://github.com/ElJijuna/gnome-ui/issues/19) ([c9c6717](https://github.com/ElJijuna/gnome-ui/commit/c9c67177d10a0245465fe408d1917e880426a49c))
+* **react:** add ColumnView component — closes [#14](https://github.com/ElJijuna/gnome-ui/issues/14) ([e9df1a8](https://github.com/ElJijuna/gnome-ui/commit/e9df1a836fa05e2c1f1c044a486be8a6bfb0dca2))
+* **react:** add ColumnView component — closes [#14](https://github.com/ElJijuna/gnome-ui/issues/14) ([9043061](https://github.com/ElJijuna/gnome-ui/commit/90430616c44ab508599093503fb12bb4434a0872))
+* **react:** add ContributionGraph component — closes [#21](https://github.com/ElJijuna/gnome-ui/issues/21) ([2542fef](https://github.com/ElJijuna/gnome-ui/commit/2542fef8b6ba02c868ce87823e0375d6e3042075))
+* **react:** add SearchBar autocomplete — closes [#24](https://github.com/ElJijuna/gnome-ui/issues/24) ([4a7fcb5](https://github.com/ElJijuna/gnome-ui/commit/4a7fcb5b390d4755de784f9658e8fa7957cbeb2a))
+* **react:** mobile-first audit & OverlaySplitView swipe-to-dismiss — closes [#15](https://github.com/ElJijuna/gnome-ui/issues/15) ([fe55782](https://github.com/ElJijuna/gnome-ui/commit/fe55782837bd4b74fae97677624499126eb57ddb))
+* update ProgressBar to support variant. ([34d342f](https://github.com/ElJijuna/gnome-ui/commit/34d342f4791a2f0306e989799f84f81071db9cc0))
+
+### Bug Fixes
+
+* add prefers-reduced-motion to ExpanderRow, PanelCard and Layout; update ROADMAP with GNOME 50 items. ([537fe95](https://github.com/ElJijuna/gnome-ui/commit/537fe95864dbeac8499e5b9828f16ee1c7badfc1))
+* update BoxedList to remove overflow: hidden and fix border radius. ([389c54a](https://github.com/ElJijuna/gnome-ui/commit/389c54a928881fd8dab54772ca4fb5e4aaeb2022))
+* update padding in header without body in Dialog. ([f90d247](https://github.com/ElJijuna/gnome-ui/commit/f90d247c8be4aa7129d345aced96f85862216fb9))
+
+### Refactoring
+
+* update components to use Separator componente and remove local css code in componentes to reference a .divider class. ([450052a](https://github.com/ElJijuna/gnome-ui/commit/450052ad3b3f6b8f161cdc9c09ee8fb9b6707ba2))
+
 ## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.1.0...@gnome-ui/layout@1.2.0) (2026-04-15)
 
 ### Features
