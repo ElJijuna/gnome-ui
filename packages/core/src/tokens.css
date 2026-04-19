@@ -310,6 +310,171 @@
   }
 }
 
+/* ─── [data-theme] overrides ─────────────────────────────────────── */
+/*
+ * Apply data-theme to <html> or any container element to force a specific
+ * theme regardless of the OS preference (prefers-color-scheme).
+ *
+ * Usage:
+ *   <html data-theme="dark">   → force dark mode
+ *   <html data-theme="light">  → force light mode
+ *   <html data-theme="high-contrast">      → force high-contrast light
+ *   <html data-theme="high-contrast-dark"> → force high-contrast dark
+ *
+ * These selectors come after the @media blocks in source order so they
+ * win the cascade at equal specificity without needing !important.
+ */
+
+[data-theme="dark"] {
+  --gnome-accent-color: var(--gnome-blue-2);
+  --gnome-accent-bg-color: var(--gnome-blue-3);
+
+  --gnome-window-bg-color: #242424;
+  --gnome-window-fg-color: rgba(255, 255, 255, 0.87);
+
+  --gnome-view-bg-color: #1e1e1e;
+  --gnome-view-fg-color: rgba(255, 255, 255, 0.87);
+
+  --gnome-card-bg-color: #383838;
+  --gnome-card-fg-color: rgba(255, 255, 255, 0.87);
+  --gnome-card-shade-color: rgba(0, 0, 0, 0.36);
+
+  --gnome-headerbar-bg-color: #303030;
+  --gnome-headerbar-fg-color: rgba(255, 255, 255, 0.87);
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.1);
+  --gnome-headerbar-shade-color: rgba(0, 0, 0, 0.36);
+
+  --gnome-sidebar-bg-color: #303030;
+  --gnome-sidebar-fg-color: rgba(255, 255, 255, 0.87);
+
+  --gnome-popover-bg-color: #383838;
+  --gnome-popover-fg-color: rgba(255, 255, 255, 0.87);
+
+  --gnome-dialog-bg-color: #242424;
+  --gnome-dialog-fg-color: rgba(255, 255, 255, 0.87);
+
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.08);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.14);
+  --gnome-border-subtle: rgba(255, 255, 255, 0.15);
+  --gnome-divider-color: rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="light"] {
+  --gnome-accent-color: var(--gnome-blue-3);
+  --gnome-accent-bg-color: var(--gnome-blue-3);
+
+  --gnome-window-bg-color: #fafafa;
+  --gnome-window-fg-color: rgba(0, 0, 0, 0.8);
+
+  --gnome-view-bg-color: #ffffff;
+  --gnome-view-fg-color: rgba(0, 0, 0, 0.8);
+
+  --gnome-card-bg-color: #ffffff;
+  --gnome-card-fg-color: rgba(0, 0, 0, 0.8);
+  --gnome-card-shade-color: rgba(0, 0, 0, 0.07);
+
+  --gnome-headerbar-bg-color: #ebebeb;
+  --gnome-headerbar-fg-color: rgba(0, 0, 0, 0.8);
+  --gnome-headerbar-border-color: rgba(0, 0, 0, 0.12);
+  --gnome-headerbar-shade-color: rgba(0, 0, 0, 0.12);
+
+  --gnome-sidebar-bg-color: #ebebeb;
+  --gnome-sidebar-fg-color: rgba(0, 0, 0, 0.8);
+
+  --gnome-popover-bg-color: #ffffff;
+  --gnome-popover-fg-color: rgba(0, 0, 0, 0.8);
+
+  --gnome-dialog-bg-color: #fafafa;
+  --gnome-dialog-fg-color: rgba(0, 0, 0, 0.8);
+
+  --gnome-hover-overlay: rgba(0, 0, 0, 0.06);
+  --gnome-active-overlay: rgba(0, 0, 0, 0.12);
+  --gnome-border-subtle: rgba(0, 0, 0, 0.15);
+  --gnome-divider-color: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="high-contrast"] {
+  --gnome-accent-color: var(--gnome-blue-5);
+  --gnome-accent-bg-color: var(--gnome-blue-5);
+
+  --gnome-destructive-color: var(--gnome-red-5);
+  --gnome-destructive-bg-color: var(--gnome-red-5);
+
+  --gnome-success-color: var(--gnome-green-5);
+  --gnome-success-bg-color: var(--gnome-green-5);
+
+  --gnome-warning-color: var(--gnome-orange-5);
+  --gnome-warning-bg-color: var(--gnome-orange-4);
+
+  --gnome-error-color: var(--gnome-red-5);
+  --gnome-error-bg-color: var(--gnome-red-5);
+
+  --gnome-hover-overlay: rgba(0, 0, 0, 0.12);
+  --gnome-active-overlay: rgba(0, 0, 0, 0.22);
+  --gnome-border-subtle: rgba(0, 0, 0, 0.5);
+  --gnome-divider-color: rgba(0, 0, 0, 0.2);
+
+  --gnome-focus-ring-color: var(--gnome-blue-5);
+  --gnome-focus-ring-width: 3px;
+
+  --gnome-opacity-disabled: 0.6;
+  --gnome-opacity-dim: 0.7;
+  --gnome-opacity-border: 0.4;
+}
+
+[data-theme="high-contrast-dark"] {
+  --gnome-accent-color: var(--gnome-blue-1);
+  --gnome-accent-bg-color: var(--gnome-blue-2);
+
+  --gnome-destructive-color: var(--gnome-red-1);
+  --gnome-destructive-bg-color: var(--gnome-red-2);
+
+  --gnome-success-color: var(--gnome-green-1);
+  --gnome-success-bg-color: var(--gnome-green-2);
+
+  --gnome-warning-color: var(--gnome-yellow-1);
+  --gnome-warning-bg-color: var(--gnome-yellow-2);
+  --gnome-warning-fg-color: rgba(0, 0, 0, 0.9);
+
+  --gnome-error-color: var(--gnome-red-1);
+  --gnome-error-bg-color: var(--gnome-red-2);
+
+  --gnome-window-bg-color: #242424;
+  --gnome-window-fg-color: #ffffff;
+
+  --gnome-view-bg-color: #1e1e1e;
+  --gnome-view-fg-color: #ffffff;
+
+  --gnome-card-bg-color: #383838;
+  --gnome-card-fg-color: #ffffff;
+  --gnome-card-shade-color: rgba(0, 0, 0, 0.36);
+
+  --gnome-headerbar-bg-color: #303030;
+  --gnome-headerbar-fg-color: #ffffff;
+  --gnome-headerbar-border-color: rgba(255, 255, 255, 0.3);
+  --gnome-headerbar-shade-color: rgba(0, 0, 0, 0.36);
+
+  --gnome-sidebar-bg-color: #303030;
+  --gnome-sidebar-fg-color: #ffffff;
+
+  --gnome-popover-bg-color: #383838;
+  --gnome-popover-fg-color: #ffffff;
+
+  --gnome-dialog-bg-color: #242424;
+  --gnome-dialog-fg-color: #ffffff;
+
+  --gnome-hover-overlay: rgba(255, 255, 255, 0.12);
+  --gnome-active-overlay: rgba(255, 255, 255, 0.22);
+  --gnome-border-subtle: rgba(255, 255, 255, 0.5);
+  --gnome-divider-color: rgba(255, 255, 255, 0.2);
+
+  --gnome-focus-ring-color: var(--gnome-blue-1);
+
+  --gnome-opacity-disabled: 0.6;
+  --gnome-opacity-dim: 0.7;
+  --gnome-opacity-border: 0.4;
+}
+
 /* ─── Base Reset ─────────────────────────────────────────────────── */
 
 *,
