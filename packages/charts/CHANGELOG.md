@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.14.0...@gnome-ui/charts@1.15.0) (2026-04-19)
+
+### Features
+
+* add useBreakpoint hook — isMobile, isTablet, isDesktop (closes [#29](https://github.com/ElJijuna/gnome-ui/issues/29)) ([127da8d](https://github.com/ElJijuna/gnome-ui/commit/127da8d8c8feab07f97dd8fbebe90c9622be9877))
+
 ## [1.14.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.13.2...@gnome-ui/charts@1.14.0) (2026-04-19)
 
 ### Features
