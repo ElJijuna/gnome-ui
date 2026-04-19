@@ -19,6 +19,12 @@ Requires `@gnome-ui/platform` and `react` ≥ 19 as peer dependencies.
 
 ## Hooks
 
+### Viewport
+
+| Hook | Returns | Description |
+| --- | --- | --- |
+| `useBreakpoint()` | `BreakpointInfo` | Reactive `isMobile`, `isTablet`, `isDesktop` flags based on GNOME HIG breakpoints |
+
 ### Platform & runtime
 
 | Hook | Returns | Description |
@@ -39,6 +45,28 @@ Requires `@gnome-ui/platform` and `react` ≥ 19 as peer dependencies.
 | `useWindowState()` | `{ maximized, fullscreen, ... }` | Reactive window state with matching setters |
 
 ## Examples
+
+### Adapt layout to viewport size
+
+```tsx
+import { useBreakpoint } from "@gnome-ui/hooks";
+
+export function AdaptiveLayout() {
+  const { isMobile, isDesktop } = useBreakpoint();
+
+  return isDesktop ? <SidebarLayout /> : <StackedLayout />;
+}
+```
+
+Breakpoints follow the GNOME HIG adaptive layout recommendations:
+
+| Flag | Range |
+| --- | --- |
+| `isMobile` | `width < 480 px` |
+| `isTablet` | `480 px ≤ width < 1024 px` |
+| `isDesktop` | `width ≥ 1024 px` |
+
+SSR-safe: defaults to `isDesktop: true` when `window` is not available.
 
 ### Detect GNOME WebView context
 
