@@ -1,3 +1,9 @@
+## [1.24.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.23.2...@gnome-ui/react@1.24.0) (2026-04-19)
+
+### Features
+
+* **core:** add [data-theme] support to tokens.css for runtime theme overrides (closes [#27](https://github.com/ElJijuna/gnome-ui/issues/27)) and add orientation prop in UserCard. ([27453bb](https://github.com/ElJijuna/gnome-ui/commit/27453bb634c9eeb9c095f0a7a048607c0fcc211a))
+
 ## [1.23.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.23.1...@gnome-ui/react@1.23.2) (2026-04-18)
 
 ### Bug Fixes
