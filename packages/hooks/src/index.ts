@@ -1,5 +1,6 @@
 export * from "./useRuntime";
 export * from "./usePlatform";
+export * from "./useBreakpoint";
 export * from "./useNativeEvent";
 export * from "./useSettings";
 export * from "./useNotification";
