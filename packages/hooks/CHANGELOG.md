@@ -1,3 +1,9 @@
+## [1.13.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.12.2...@gnome-ui/hooks@1.13.0) (2026-04-19)
+
+### Features
+
+* **core:** add [data-theme] support to tokens.css for runtime theme overrides (closes [#27](https://github.com/ElJijuna/gnome-ui/issues/27)) and add orientation prop in UserCard. ([27453bb](https://github.com/ElJijuna/gnome-ui/commit/27453bb634c9eeb9c095f0a7a048607c0fcc211a))
+
 ## [1.12.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.12.1...@gnome-ui/hooks@1.12.2) (2026-04-18)
 
 ### Bug Fixes
