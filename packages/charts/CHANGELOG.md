@@ -1,3 +1,9 @@
+## [1.16.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.15.0...@gnome-ui/charts@1.16.0) (2026-04-21)
+
+### Features
+
+* add CountDown component (closes [#12](https://github.com/ElJijuna/gnome-ui/issues/12)) ([ee1e731](https://github.com/ElJijuna/gnome-ui/commit/ee1e731b4801eb9c3105fb851973ee006ec32d35))
+
 ## [1.15.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.14.0...@gnome-ui/charts@1.15.0) (2026-04-19)
 
 ### Features
