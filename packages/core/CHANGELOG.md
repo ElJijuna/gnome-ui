@@ -1,3 +1,9 @@
+## [1.29.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.28.0...@gnome-ui/core@1.29.0) (2026-04-21)
+
+### Features
+
+* add CountDown component (closes [#12](https://github.com/ElJijuna/gnome-ui/issues/12)) ([ee1e731](https://github.com/ElJijuna/gnome-ui/commit/ee1e731b4801eb9c3105fb851973ee006ec32d35))
+
 ## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.27.0...@gnome-ui/core@1.28.0) (2026-04-19)
 
 ### Features
