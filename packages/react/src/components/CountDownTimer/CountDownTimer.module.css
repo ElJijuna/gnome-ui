@@ -1,0 +1,110 @@
+/* ─── Base container ──────────────────────────────────────────────────────── */
+
+.countdownTimer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.5rem 1rem;
+  border-radius: var(--gnome-radius-default, 6px);
+  background-color: var(--gnome-view-bg-color, #f6f5f4);
+
+  font-family: var(--gnome-font-family);
+  font-size: 1rem;
+  font-weight: var(--gnome-font-weight-medium, 500);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+
+  user-select: none;
+  transition: all 200ms ease-out;
+}
+
+/* ─── Value display ────────────────────────────────────────────────────────── */
+
+.value {
+  font-family: "Fira Mono", monospace;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* ─── Variant: accent (default) ────────────────────────────────────────────── */
+
+.accent {
+  background-color: rgba(53, 132, 228, 0.1);
+  color: #3584e4;
+  border: 1px solid rgba(53, 132, 228, 0.2);
+}
+
+.accent .value {
+  color: #3584e4;
+}
+
+/* ─── Variant: success ─────────────────────────────────────────────────────── */
+
+.success {
+  background-color: rgba(51, 209, 122, 0.1);
+  color: #33d17a;
+  border: 1px solid rgba(51, 209, 122, 0.2);
+}
+
+.success .value {
+  color: #33d17a;
+}
+
+/* ─── Variant: warning ─────────────────────────────────────────────────────── */
+
+.warning {
+  background-color: rgba(255, 190, 0, 0.1);
+  color: #f8e45c;
+  border: 1px solid rgba(255, 190, 0, 0.2);
+}
+
+.warning .value {
+  color: #f8e45c;
+}
+
+/* ─── Variant: destructive ────────────────────────────────────────────────── */
+
+.destructive {
+  background-color: rgba(225, 59, 59, 0.1);
+  color: #e13b3b;
+  border: 1px solid rgba(225, 59, 59, 0.2);
+}
+
+.destructive .value {
+  color: #e13b3b;
+}
+
+/* ─── Finished state ───────────────────────────────────────────────────────── */
+
+.finished {
+  opacity: 0.7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .countdownTimer {
+    background-color: var(--gnome-view-bg-color, #3d3846);
+  }
+
+  .accent {
+    background-color: rgba(53, 132, 228, 0.15);
+    border-color: rgba(53, 132, 228, 0.3);
+  }
+
+  .success {
+    background-color: rgba(51, 209, 122, 0.15);
+    border-color: rgba(51, 209, 122, 0.3);
+  }
+
+  .warning {
+    background-color: rgba(255, 190, 0, 0.15);
+    border-color: rgba(255, 190, 0, 0.3);
+  }
+
+  .destructive {
+    background-color: rgba(225, 59, 59, 0.15);
+    border-color: rgba(225, 59, 59, 0.3);
+  }
+}
