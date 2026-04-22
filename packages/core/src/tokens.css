@@ -195,6 +195,92 @@
   --gnome-divider-color: rgba(0, 0, 0, 0.07);
 }
 
+/* ─── oklch palette ──────────────────────────────────────────────────────────
+ *
+ * Browsers that don't support oklch() keep the hex values above.
+ * Browsers that do get these values, which are perceptually uniform sRGB
+ * equivalents — visually identical today, ready for wide-gamut expansion later.
+ *
+ * Semantic tokens that use var() (e.g. --gnome-accent-bg-color: var(--gnome-blue-3))
+ * inherit the upgraded palette automatically — no changes needed there.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+@supports (color: oklch(0 0 0)) {
+  :root {
+    /* Blue */
+    --gnome-blue-1: oklch(79.5% 0.087 259);
+    --gnome-blue-2: oklch(68.5% 0.138 259);
+    --gnome-blue-3: oklch(57.5% 0.185 259);
+    --gnome-blue-4: oklch(51.0% 0.185 256);
+    --gnome-blue-5: oklch(44.0% 0.164 255);
+
+    /* Green */
+    --gnome-green-1: oklch(89.0% 0.148 152);
+    --gnome-green-2: oklch(83.0% 0.183 152);
+    --gnome-green-3: oklch(77.0% 0.183 152);
+    --gnome-green-4: oklch(72.0% 0.166 157);
+    --gnome-green-5: oklch(62.0% 0.139 158);
+
+    /* Yellow */
+    --gnome-yellow-1: oklch(95.0% 0.156 104);
+    --gnome-yellow-2: oklch(92.0% 0.165 97);
+    --gnome-yellow-3: oklch(88.0% 0.182 93);
+    --gnome-yellow-4: oklch(84.0% 0.179 85);
+    --gnome-yellow-5: oklch(76.0% 0.165 79);
+
+    /* Orange */
+    --gnome-orange-1: oklch(84.0% 0.126 71);
+    --gnome-orange-2: oklch(77.0% 0.155 55);
+    --gnome-orange-3: oklch(69.0% 0.189 43);
+    --gnome-orange-4: oklch(61.0% 0.182 41);
+    --gnome-orange-5: oklch(51.0% 0.163 38);
+
+    /* Red */
+    --gnome-red-1: oklch(62.0% 0.185 24);
+    --gnome-red-2: oklch(52.0% 0.218 27);
+    --gnome-red-3: oklch(49.0% 0.222 27);
+    --gnome-red-4: oklch(43.0% 0.196 25);
+    --gnome-red-5: oklch(38.0% 0.165 22);
+
+    /* Purple */
+    --gnome-purple-1: oklch(70.0% 0.159 312);
+    --gnome-purple-2: oklch(57.0% 0.193 309);
+    --gnome-purple-3: oklch(46.0% 0.179 308);
+    --gnome-purple-4: oklch(41.0% 0.168 308);
+    --gnome-purple-5: oklch(35.0% 0.048 55);
+
+    /* Brown */
+    --gnome-brown-1: oklch(74.0% 0.055 62);
+    --gnome-brown-2: oklch(62.0% 0.076 56);
+    --gnome-brown-3: oklch(53.0% 0.074 54);
+    --gnome-brown-4: oklch(48.0% 0.067 53);
+    --gnome-brown-5: oklch(35.0% 0.048 55);
+
+    /* Light (neutral) */
+    --gnome-light-1: oklch(100% 0 0);
+    --gnome-light-2: oklch(97.1% 0.003 74);
+    --gnome-light-3: oklch(89.3% 0.003 74);
+    --gnome-light-4: oklch(78.5% 0.003 74);
+    --gnome-light-5: oklch(63.9% 0.003 74);
+
+    /* Dark (neutral) */
+    --gnome-dark-1: oklch(53.3% 0.005 286);
+    --gnome-dark-2: oklch(43.0% 0.009 286);
+    --gnome-dark-3: oklch(29.0% 0.013 286);
+    --gnome-dark-4: oklch(18.7% 0.024 284);
+    --gnome-dark-5: oklch(0% 0 0);
+
+    /* Surface colors — light mode */
+    --gnome-window-bg-color:    oklch(98.1% 0 0);
+    --gnome-view-bg-color:      oklch(100% 0 0);
+    --gnome-card-bg-color:      oklch(100% 0 0);
+    --gnome-headerbar-bg-color: oklch(93.3% 0 0);
+    --gnome-sidebar-bg-color:   oklch(93.3% 0 0);
+    --gnome-popover-bg-color:   oklch(100% 0 0);
+    --gnome-dialog-bg-color:    oklch(98.1% 0 0);
+  }
+}
+
 /* ─── Dark Mode ─────────────────────────────────────────────────── */
 
 @media (prefers-color-scheme: dark) {
@@ -231,6 +317,20 @@
     --gnome-active-overlay: rgba(255, 255, 255, 0.14);
     --gnome-border-subtle: rgba(255, 255, 255, 0.15);
     --gnome-divider-color: rgba(255, 255, 255, 0.07);
+  }
+}
+
+@supports (color: oklch(0 0 0)) {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --gnome-window-bg-color:    oklch(17.9% 0 0);
+      --gnome-view-bg-color:      oklch(15.1% 0 0);
+      --gnome-card-bg-color:      oklch(26.8% 0 0);
+      --gnome-headerbar-bg-color: oklch(22.7% 0 0);
+      --gnome-sidebar-bg-color:   oklch(22.7% 0 0);
+      --gnome-popover-bg-color:   oklch(26.8% 0 0);
+      --gnome-dialog-bg-color:    oklch(17.9% 0 0);
+    }
   }
 }
 
@@ -359,6 +459,18 @@
   --gnome-divider-color: rgba(255, 255, 255, 0.07);
 }
 
+@supports (color: oklch(0 0 0)) {
+  [data-theme="dark"] {
+    --gnome-window-bg-color:    oklch(17.9% 0 0);
+    --gnome-view-bg-color:      oklch(15.1% 0 0);
+    --gnome-card-bg-color:      oklch(26.8% 0 0);
+    --gnome-headerbar-bg-color: oklch(22.7% 0 0);
+    --gnome-sidebar-bg-color:   oklch(22.7% 0 0);
+    --gnome-popover-bg-color:   oklch(26.8% 0 0);
+    --gnome-dialog-bg-color:    oklch(17.9% 0 0);
+  }
+}
+
 [data-theme="light"] {
   --gnome-accent-color: var(--gnome-blue-3);
   --gnome-accent-bg-color: var(--gnome-blue-3);
@@ -391,6 +503,18 @@
   --gnome-active-overlay: rgba(0, 0, 0, 0.12);
   --gnome-border-subtle: rgba(0, 0, 0, 0.15);
   --gnome-divider-color: rgba(0, 0, 0, 0.07);
+}
+
+@supports (color: oklch(0 0 0)) {
+  [data-theme="light"] {
+    --gnome-window-bg-color:    oklch(98.1% 0 0);
+    --gnome-view-bg-color:      oklch(100% 0 0);
+    --gnome-card-bg-color:      oklch(100% 0 0);
+    --gnome-headerbar-bg-color: oklch(93.3% 0 0);
+    --gnome-sidebar-bg-color:   oklch(93.3% 0 0);
+    --gnome-popover-bg-color:   oklch(100% 0 0);
+    --gnome-dialog-bg-color:    oklch(98.1% 0 0);
+  }
 }
 
 [data-theme="high-contrast"] {
@@ -473,6 +597,18 @@
   --gnome-opacity-disabled: 0.6;
   --gnome-opacity-dim: 0.7;
   --gnome-opacity-border: 0.4;
+}
+
+@supports (color: oklch(0 0 0)) {
+  [data-theme="high-contrast-dark"] {
+    --gnome-window-bg-color:    oklch(17.9% 0 0);
+    --gnome-view-bg-color:      oklch(15.1% 0 0);
+    --gnome-card-bg-color:      oklch(26.8% 0 0);
+    --gnome-headerbar-bg-color: oklch(22.7% 0 0);
+    --gnome-sidebar-bg-color:   oklch(22.7% 0 0);
+    --gnome-popover-bg-color:   oklch(26.8% 0 0);
+    --gnome-dialog-bg-color:    oklch(17.9% 0 0);
+  }
 }
 
 /* ─── Base Reset ─────────────────────────────────────────────────── */
