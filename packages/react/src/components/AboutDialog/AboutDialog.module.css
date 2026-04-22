@@ -1,0 +1,315 @@
+/* ─── Backdrop ──────────────────────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--gnome-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(var(--gnome-dialog-backdrop-blur, 4px));
+  -webkit-backdrop-filter: blur(var(--gnome-dialog-backdrop-blur, 4px));
+
+  animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Dialog card ───────────────────────────────────────────────────────────── */
+
+.dialog {
+  position: relative;
+  width: min(480px, calc(100vw - 48px));
+  max-height: min(640px, 90dvh);
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #fafafa));
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+
+  border-radius: var(--gnome-radius-xl, 16px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
+  animation: dialog-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--gnome-space-4, 24px) var(--gnome-space-4, 24px) var(--gnome-space-3, 16px);
+  text-align: center;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--gnome-space-2, 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appName {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-title-3, 1.25rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  line-height: 1.3;
+}
+
+.version {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── Tab bar ───────────────────────────────────────────────────────────────── */
+
+.tabBar {
+  display: flex;
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  padding: 0 var(--gnome-space-3, 16px);
+  gap: 4px;
+}
+
+.tabBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px var(--gnome-space-2, 12px);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: 0.6;
+  transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default),
+              border-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.tabBtn:hover { opacity: 1; }
+
+.tabBtnActive {
+  opacity: 1;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  border-bottom-color: var(--gnome-accent-color, #3584e4);
+}
+
+.tabBtn:focus-visible {
+  outline: 2px solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Tab content ───────────────────────────────────────────────────────────── */
+
+.tabContent {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.section {
+  padding: var(--gnome-space-3, 16px) var(--gnome-space-4, 24px);
+}
+
+/* Details */
+.comments {
+  margin: 0 0 var(--gnome-space-3, 16px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: 1.5;
+  text-align: center;
+  opacity: var(--gnome-opacity-dim, 0.7);
+}
+
+.infoList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px var(--gnome-space-3, 16px);
+  margin: 0;
+}
+
+.infoLabel {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+.infoValue {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.link {
+  color: var(--gnome-accent-color, #3584e4);
+  text-decoration: none;
+}
+
+.link:hover { text-decoration: underline; }
+
+/* Credits */
+.creditGroup + .creditGroup {
+  margin-top: var(--gnome-space-3, 16px);
+}
+
+.creditTitle {
+  margin: 0 0 6px;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.5;
+}
+
+.creditList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.creditItem {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+}
+
+/* Legal */
+.copyright {
+  margin: 0 0 var(--gnome-space-2, 12px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  opacity: var(--gnome-opacity-dim, 0.7);
+}
+
+.licenseType {
+  margin: 0 0 var(--gnome-space-2, 12px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.licenseText {
+  margin: 0;
+  padding: var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-md, 8px);
+  background: var(--gnome-card-bg-color, rgba(0, 0, 0, 0.04));
+  font-family: monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+/* ─── Footer (close button) ─────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.08));
+  background: transparent;
+  width: 100%;
+  padding: 14px var(--gnome-space-4, 24px);
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+
+  cursor: pointer;
+  text-align: center;
+
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.btn:last-child { border-bottom: none; }
+
+.btn:hover:not(:disabled) {
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.btn:active:not(:disabled) {
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.btn:focus { outline: none; }
+
+.btn:focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: -3px;
+}
+
+.btnDefault {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .dialog {
+    background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #242424));
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+}
