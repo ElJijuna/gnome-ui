@@ -30,8 +30,54 @@
   border-top: 1px solid var(--gnome-divider-color);
 }
 
+/* ─── Section header (title row, optionally a button when collapsible) ──────── */
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  width: 100%;
+  margin: 4px 0 2px;
+  padding: 2px var(--gnome-space-1, 6px);
+  border-radius: var(--gnome-radius-sm, 4px);
+  background: transparent;
+  border: none;
+  font: inherit;
+  text-align: start;
+  cursor: default;
+}
+
+button.sectionHeader {
+  cursor: pointer;
+  transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+button.sectionHeader:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+button.sectionHeader:active {
+  background-color: var(--gnome-active-overlay);
+}
+
+button.sectionHeader:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-sidebar-bg-color, #ebebeb),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+      var(--gnome-focus-ring-color, #3584e4);
+}
+
+.sectionHeaderIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
 .sectionTitle {
-  margin: 4px var(--gnome-space-1, 6px) 2px;
+  flex: 1;
+  min-width: 0;
   padding: 0;
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-caption, 0.875rem);
@@ -40,6 +86,33 @@
   letter-spacing: 0.06em;
   opacity: 0.5;
   user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sectionChevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  opacity: 0.5;
+}
+
+/* ─── Collapsible section body ──────────────────────────────────────────────── */
+
+.sectionBody {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 200ms var(--gnome-easing-default, ease);
+}
+
+.sectionBodyCollapsed {
+  grid-template-rows: 0fr;
+}
+
+.sectionBodyInner {
+  overflow: hidden;
 }
 
 /* ─── List ─────────────────────────────────────────────────────────────────── */
@@ -355,7 +428,9 @@
 /* ─── Reduced motion ───────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .itemBtn {
+  .itemBtn,
+  button.sectionHeader,
+  .sectionBody {
     transition: none;
   }
 }

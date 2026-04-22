@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   GoHome, Search, Settings, Star, Delete,
-  ViewMore, MediaPlay, Share, Add,
+  ViewMore, MediaPlay, Share, Add, Applications, DocumentOpen,
 } from "@gnome-ui/icons";
 import { Sidebar } from "./Sidebar";
 import { SidebarSection } from "./SidebarSection";
+import type { SidebarSectionHandle } from "./SidebarSection";
 import { SidebarItem } from "./SidebarItem";
 import { Badge } from "../Badge";
 import { HeaderBar } from "../HeaderBar";
@@ -411,4 +412,198 @@ export const InLayout: Story = {
     );
   },
   parameters: { controls: { disable: true } },
+};
+
+// ─── SidebarSection: icon prop ───────────────────────────────────────────────
+
+export const SectionWithIcon: Story = {
+  render: function SectionWithIconStory() {
+    const [active, setActive] = useState("shared");
+    return (
+      <Sidebar style={{ height: 280 }}>
+        <SidebarSection title="Network" icon={Applications}>
+          <SidebarItem icon={Share}  label="Shared"  active={active === "shared"}  onClick={() => setActive("shared")} />
+          <SidebarItem icon={Star}   label="Starred" active={active === "starred"} onClick={() => setActive("starred")} />
+        </SidebarSection>
+        <SidebarSection title="Local" icon={DocumentOpen}>
+          <SidebarItem icon={GoHome}    label="Home"      active={active === "home"}     onClick={() => setActive("home")} />
+          <SidebarItem icon={Settings}  label="Settings"  active={active === "settings"} onClick={() => setActive("settings")} />
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: { story: "Use `icon` on `SidebarSection` to render an icon left of the section title." },
+    },
+  },
+};
+
+// ─── SidebarSection: collapsible (uncontrolled) ──────────────────────────────
+
+export const CollapsibleSection: Story = {
+  render: function CollapsibleStory() {
+    const [active, setActive] = useState("inbox");
+    return (
+      <Sidebar style={{ height: 360 }}>
+        <SidebarSection title="Mailboxes" icon={GoHome} collapsible defaultOpen>
+          <SidebarItem icon={GoHome}   label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")}  suffix={<Badge variant="accent">12</Badge>} />
+          <SidebarItem icon={Share}    label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")} />
+          <SidebarItem icon={Delete}   label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")} />
+        </SidebarSection>
+        <SidebarSection title="Tags" icon={Star} collapsible defaultOpen={false}>
+          <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")} />
+          <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "Add `collapsible` to let users toggle a section. `defaultOpen={false}` starts it collapsed.",
+      },
+    },
+  },
+};
+
+// ─── SidebarSection: collapsible (controlled) ────────────────────────────────
+
+export const CollapsibleSectionControlled: Story = {
+  render: function ControlledStory() {
+    const [open, setOpen] = useState(true);
+    const [active, setActive] = useState("inbox");
+    return (
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+        <Sidebar style={{ height: 280 }}>
+          <SidebarSection
+            title="Mailboxes"
+            icon={GoHome}
+            collapsible
+            open={open}
+            onOpenChange={setOpen}
+          >
+            <SidebarItem icon={GoHome}  label="Inbox" active={active === "inbox"} onClick={() => setActive("inbox")} />
+            <SidebarItem icon={Share}   label="Sent"  active={active === "sent"}  onClick={() => setActive("sent")} />
+            <SidebarItem icon={Delete}  label="Trash" active={active === "trash"} onClick={() => setActive("trash")} />
+          </SidebarSection>
+        </Sidebar>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 12 }}>
+          <Button variant="flat" onClick={() => setOpen((v) => !v)}>
+            {open ? "Collapse section" : "Expand section"}
+          </Button>
+          <Text variant="caption" color="dim">open: <strong>{String(open)}</strong></Text>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "Controlled mode: drive `open` externally with `onOpenChange`. The external button and the section header both toggle the same state.",
+      },
+    },
+  },
+};
+
+// ─── SidebarSection: imperative ref ──────────────────────────────────────────
+
+export const CollapsibleSectionWithRef: Story = {
+  render: function RefStory() {
+    const sectionRef = useRef<SidebarSectionHandle>(null);
+    const [active, setActive] = useState("inbox");
+    return (
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+        <Sidebar style={{ height: 280 }}>
+          <SidebarSection ref={sectionRef} title="Mailboxes" icon={GoHome} collapsible>
+            <SidebarItem icon={GoHome}  label="Inbox" active={active === "inbox"} onClick={() => setActive("inbox")} />
+            <SidebarItem icon={Share}   label="Sent"  active={active === "sent"}  onClick={() => setActive("sent")} />
+            <SidebarItem icon={Delete}  label="Trash" active={active === "trash"} onClick={() => setActive("trash")} />
+          </SidebarSection>
+        </Sidebar>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 12 }}>
+          <Button variant="flat" onClick={() => sectionRef.current?.expand()}>expand()</Button>
+          <Button variant="flat" onClick={() => sectionRef.current?.collapse()}>collapse()</Button>
+          <Button variant="flat" onClick={() => sectionRef.current?.toggle()}>toggle()</Button>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "Drive the section imperatively via `ref`. Use `expand()`, `collapse()`, and `toggle()` from outside the component.",
+      },
+    },
+  },
+};
+
+// ─── SidebarSection: collapsible in rail mode ─────────────────────────────────
+
+export const CollapsibleSectionInRailMode: Story = {
+  render: function RailStory() {
+    const [collapsed, setCollapsed] = useState(false);
+    const [active, setActive] = useState("inbox");
+    return (
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+        <Sidebar collapsed={collapsed} style={{ height: 300 }}>
+          <SidebarSection title="Mailboxes" icon={GoHome} collapsible defaultOpen={false}>
+            <SidebarItem icon={GoHome}  label="Inbox" active={active === "inbox"} onClick={() => setActive("inbox")} />
+            <SidebarItem icon={Share}   label="Sent"  active={active === "sent"}  onClick={() => setActive("sent")} />
+            <SidebarItem icon={Delete}  label="Trash" active={active === "trash"} onClick={() => setActive("trash")} />
+          </SidebarSection>
+        </Sidebar>
+        <div style={{ paddingTop: 12 }}>
+          <Button variant="flat" onClick={() => setCollapsed((v) => !v)}>
+            {collapsed ? "Expand sidebar" : "Collapse sidebar (rail)"}
+          </Button>
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+            In rail mode the body is always visible, even when defaultOpen is false.
+          </Text>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "When the sidebar is in rail (icon-only) mode, collapsible sections always show their body — there's no title row to tap. The chevron is hidden.",
+      },
+    },
+  },
+};
+
+// ─── SidebarSection: filter hides empty sections ─────────────────────────────
+
+export const CollapsibleSectionWithFilter: Story = {
+  render: function FilterStory() {
+    const [active, setActive] = useState("inbox");
+    return (
+      <Sidebar style={{ height: 360 }} searchable>
+        <SidebarSection title="Mailboxes" icon={GoHome} collapsible>
+          <SidebarItem icon={GoHome}   label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")} />
+          <SidebarItem icon={Share}    label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")} />
+          <SidebarItem icon={Delete}   label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")} />
+        </SidebarSection>
+        <SidebarSection title="Tags" icon={Star} collapsible>
+          <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")} />
+          <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
+          <SidebarItem icon={Star} label="Finance"  active={active === "finance"}  onClick={() => setActive("finance")} />
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "When a filter is active, sections with no matching items are hidden entirely. Try searching for \"finance\" or \"trash\".",
+      },
+    },
+  },
 };
