@@ -87,8 +87,10 @@ export type {
   DialogButton,
   AlertDialogResponse,
   AlertDialogResponseVariant,
-  AboutDialogLink,
 } from "./components/Dialog";
+
+export { AboutDialog } from "./components/AboutDialog";
+export type { AboutDialogProps, AboutDialogLink } from "./components/AboutDialog";
 
 export { Tooltip } from "./components/Tooltip";
 export type { TooltipProps, TooltipPlacement } from "./components/Tooltip";

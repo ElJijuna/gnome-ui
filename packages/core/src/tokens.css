@@ -118,6 +118,8 @@
 
   --gnome-dialog-bg-color: #fafafa;
   --gnome-dialog-fg-color: rgba(0, 0, 0, 0.8);
+  --gnome-dialog-backdrop-color: rgba(0, 0, 0, 0.5);
+  --gnome-dialog-backdrop-blur: 4px;
 
   /* ─── Typography ────────────────────────────────────────────── */
 
@@ -311,6 +313,7 @@
 
     --gnome-dialog-bg-color: #242424;
     --gnome-dialog-fg-color: rgba(255, 255, 255, 0.87);
+    --gnome-dialog-backdrop-color: rgba(0, 0, 0, 0.65);
 
     /* Interactive overlays inverted for dark surfaces */
     --gnome-hover-overlay: rgba(255, 255, 255, 0.08);
@@ -452,6 +455,7 @@
 
   --gnome-dialog-bg-color: #242424;
   --gnome-dialog-fg-color: rgba(255, 255, 255, 0.87);
+  --gnome-dialog-backdrop-color: rgba(0, 0, 0, 0.65);
 
   --gnome-hover-overlay: rgba(255, 255, 255, 0.08);
   --gnome-active-overlay: rgba(255, 255, 255, 0.14);
@@ -498,6 +502,7 @@
 
   --gnome-dialog-bg-color: #fafafa;
   --gnome-dialog-fg-color: rgba(0, 0, 0, 0.8);
+  --gnome-dialog-backdrop-color: rgba(0, 0, 0, 0.5);
 
   --gnome-hover-overlay: rgba(0, 0, 0, 0.06);
   --gnome-active-overlay: rgba(0, 0, 0, 0.12);
@@ -586,6 +591,7 @@
 
   --gnome-dialog-bg-color: #242424;
   --gnome-dialog-fg-color: #ffffff;
+  --gnome-dialog-backdrop-color: rgba(0, 0, 0, 0.65);
 
   --gnome-hover-overlay: rgba(255, 255, 255, 0.12);
   --gnome-active-overlay: rgba(255, 255, 255, 0.22);

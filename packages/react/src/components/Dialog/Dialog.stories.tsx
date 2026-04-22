@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Dialog } from "./Dialog";
+import { AboutDialog } from "../AboutDialog";
 import { Button } from "../Button";
 import { Text } from "../Text";
 
@@ -12,7 +13,7 @@ const meta: Meta<typeof Dialog> = {
     docs: {
       description: {
         component: `
-Blocking modal dialog — three modes in one component.
+Blocking modal dialog — two modes in one component.
 
 **Standard** — \`title\` + \`children\` + \`buttons[]\`.
 
@@ -20,10 +21,7 @@ Blocking modal dialog — three modes in one component.
 and destructive-action warnings. Screen readers announce it immediately.
 Escape / backdrop fire the first non-destructive response. Mirrors \`AdwAlertDialog\`.
 
-**About** (\`variant="about"\` + \`applicationName\` + info props) — standard app info
-dialog with details, credits, and legal tabs. Mirrors \`AdwAboutDialog\`.
-
-All modes share the same portal, focus-trap, and card/backdrop styles.
+For the app-info dialog, use \`<AboutDialog />\` instead.
         `,
       },
     },
@@ -255,7 +253,7 @@ export const AlertSaveChanges: Story = {
   },
 };
 
-// ─── About ────────────────────────────────────────────────────────────────────
+// ─── About (use <AboutDialog /> for this) ─────────────────────────────────────
 
 export const About: Story = {
   render: function AboutStory() {
@@ -263,9 +261,8 @@ export const About: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>About Files</Button>
-        <Dialog
+        <AboutDialog
           open={open}
-          variant="about"
           applicationName="Files"
           version="45.0"
           comments="A file manager for the GNOME desktop."
@@ -285,7 +282,7 @@ export const About: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`variant=\"about\"` renders app name, version, details, and Credits / Legal tabs.",
+        story: "For app-info dialogs use `<AboutDialog />` — a dedicated standalone component.",
       },
     },
   },

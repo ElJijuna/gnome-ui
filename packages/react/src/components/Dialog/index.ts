@@ -4,5 +4,4 @@ export type {
   DialogButton,
   AlertDialogResponse,
   AlertDialogResponseVariant,
-  AboutDialogLink,
 } from "./Dialog";
