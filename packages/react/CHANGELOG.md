@@ -1,3 +1,9 @@
+## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.27.0...@gnome-ui/react@1.28.0) (2026-04-22)
+
+### Features
+
+* **@gnome-ui/core:** add oklch(...) color tokens with hex fallback (closes [#55](https://github.com/ElJijuna/gnome-ui/issues/55)) ([933c8f5](https://github.com/ElJijuna/gnome-ui/commit/933c8f589871e22f70691851b2c17ac1f0d8ded9))
+
 ## [1.27.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.26.0...@gnome-ui/react@1.27.0) (2026-04-22)
 
 ### Features
