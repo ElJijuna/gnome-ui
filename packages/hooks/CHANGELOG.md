@@ -1,3 +1,9 @@
+## [1.16.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.15.0...@gnome-ui/hooks@1.16.0) (2026-04-22)
+
+### Features
+
+* uodate SIdebarSection for support Icon, and collapsible and expand functions (closes  [#34](https://github.com/ElJijuna/gnome-ui/issues/34)) ([49863e7](https://github.com/ElJijuna/gnome-ui/commit/49863e7fd41497d973a98c4086a3dac874f25fa6))
+
 ## [1.15.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.14.0...@gnome-ui/hooks@1.15.0) (2026-04-21)
 
 ### Features
