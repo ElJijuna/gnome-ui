@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/icons",
-  "version": "1.29.1",
+  "version": "1.30.0",
   "description": "Adwaita symbolic icon definitions (framework-agnostic SVG path data)",
   "type": "module",
   "main": "./dist/index.cjs",
