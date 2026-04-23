@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/react",
-  "version": "1.28.1",
+  "version": "1.29.0",
   "description": "React component library following GNOME Human Interface Guidelines",
   "type": "module",
   "main": "./dist/index.cjs",
