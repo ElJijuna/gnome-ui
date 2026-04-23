@@ -13,3 +13,6 @@ export type { UserCardProps, UserCardAction } from "./components/UserCard";
 
 export { PanelCard } from "./components/PanelCard";
 export type { PanelCardProps, PanelCardHandle } from "./components/PanelCard";
+
+export { AdaptiveLayout } from "./components/AdaptiveLayout";
+export type { AdaptiveLayoutProps, AdaptiveNavItem } from "./components/AdaptiveLayout";

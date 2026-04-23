@@ -54,6 +54,11 @@ export { ColorManagement } from "./ColorManagement.ts";
 export { Printer } from "./Printer.ts";
 export { Lock } from "./Lock.ts";
 
+// ─── Files ────────────────────────────────────────────────────────────────────
+export { Folder } from "./Folder.ts";
+export { Document } from "./Document.ts";
+export { Image } from "./Image.ts";
+
 // ─── Misc ─────────────────────────────────────────────────────────────────────
 export { Star } from "./Star.ts";
 export { StarOutline } from "./StarOutline.ts";

@@ -13,6 +13,7 @@ import styles from "./ViewSwitcherSidebar.module.css";
 interface ViewSwitcherSidebarContextValue {
   value: string;
   onValueChange: (value: string) => void;
+  collapsed: boolean;
 }
 
 const ViewSwitcherSidebarContext =
@@ -36,6 +37,15 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
   onValueChange: (value: string) => void;
   /** Accessible label for the group. Defaults to `"Views"`. */
   "aria-label"?: string;
+  /**
+   * When `true`, items render icon-only (labels hidden) and the sidebar
+   * shrinks to its compact width. Used by `AdaptiveLayout` on tablet viewports.
+   */
+  collapsed?: boolean;
+  /** Rendered above the scrollable item list (e.g. user card). */
+  header?: ReactNode;
+  /** Rendered below the scrollable item list (e.g. collapse toggle). */
+  footer?: ReactNode;
   children?: ReactNode;
 }
 
@@ -63,6 +73,9 @@ export function ViewSwitcherSidebar({
   value,
   onValueChange,
   "aria-label": ariaLabel = "Views",
+  collapsed = false,
+  header,
+  footer,
   children,
   className,
   ...props
@@ -93,12 +106,13 @@ export function ViewSwitcherSidebar({
   }
 
   return (
-    <ViewSwitcherSidebarContext.Provider value={{ value, onValueChange }}>
+    <ViewSwitcherSidebarContext.Provider value={{ value, onValueChange, collapsed }}>
       <nav
-        className={[styles.sidebar, className].filter(Boolean).join(" ")}
+        className={[styles.sidebar, collapsed ? styles.sidebarCollapsed : null, className].filter(Boolean).join(" ")}
         onKeyDown={handleKeyDown}
         {...props}
       >
+        {header && <div className={styles.header}>{header}</div>}
         <ul
           ref={groupRef}
           role="radiogroup"
@@ -107,6 +121,7 @@ export function ViewSwitcherSidebar({
         >
           {children}
         </ul>
+        {footer && <div className={styles.footer}>{footer}</div>}
       </nav>
     </ViewSwitcherSidebarContext.Provider>
   );

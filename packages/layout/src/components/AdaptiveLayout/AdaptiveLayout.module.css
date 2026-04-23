@@ -1,0 +1,198 @@
+/* ─── Root shell ────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--gnome-window-bg-color, #fafafa);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  font-family: var(--gnome-font-family, sans-serif);
+}
+
+.topBarSlot {
+  flex-shrink: 0;
+}
+
+/* ─── Body (sidebar + content) ──────────────────────────────────────────────── */
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ─── Content area ──────────────────────────────────────────────────────────── */
+
+.contentSlot {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* ─── Collapse toggle ───────────────────────────────────────────────────────── */
+
+.collapseBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+
+  font-family: var(--gnome-font-family);
+  font-size: 0.82rem;
+  color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.6));
+  opacity: 0.5;
+  transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.collapseBtn:hover { opacity: 1; }
+
+.collapseBtn:focus-visible {
+  outline: 2px solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: -2px;
+}
+
+.collapseBtnLabel {
+  font-size: 0.82rem;
+}
+
+/* ─── Sidebar group section ─────────────────────────────────────────────────── */
+
+.sidebarGroup {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--gnome-space-1, 6px);
+}
+
+.sidebarGroupLabel {
+  display: block;
+  padding: 4px var(--gnome-space-2, 12px) 2px;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.5;
+  color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+/* ─── Mobile: "More" button ─────────────────────────────────────────────────── */
+
+.moreBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 4px;
+  min-height: 52px;
+  font-family: var(--gnome-font-family);
+  color: var(--gnome-headerbar-fg-color, rgba(0, 0, 0, 0.6));
+  opacity: 0.7;
+  transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.moreBtn:hover { opacity: 1; }
+
+.moreBtnActive {
+  opacity: 1;
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.moreDots {
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+.moreLabel {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+}
+
+/* ─── BottomSheet item list ─────────────────────────────────────────────────── */
+
+.sheetList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sheetItem {
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: 12px var(--gnome-space-3, 16px);
+  border-radius: var(--gnome-radius-md, 8px);
+  cursor: pointer;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.sheetItem:hover {
+  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+}
+
+.sheetItem:focus-visible {
+  outline: 2px solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: -2px;
+}
+
+.sheetItemActive {
+  color: var(--gnome-accent-color, #3584e4);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.sheetItemIcon {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.sheetItemLabel {
+  flex: 1;
+  text-align: start;
+}
+
+.sheetItemBadge {
+  margin-left: auto;
+  font-size: var(--gnome-font-size-caption, 0.875rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--gnome-radius-pill, 999px);
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .sheetItemBadge {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
