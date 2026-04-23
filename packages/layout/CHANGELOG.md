@@ -1,3 +1,17 @@
+## [1.4.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.3.0...@gnome-ui/layout@1.4.0) (2026-04-23)
+
+### Features
+
+* **@gnome-ui/core:** add oklch(...) color tokens with hex fallback (closes [#55](https://github.com/ElJijuna/gnome-ui/issues/55)) ([933c8f5](https://github.com/ElJijuna/gnome-ui/commit/933c8f589871e22f70691851b2c17ac1f0d8ded9))
+* add Adwaita fonts and update reference to use (closes [#58](https://github.com/ElJijuna/gnome-ui/issues/58)) ([abeebc7](https://github.com/ElJijuna/gnome-ui/commit/abeebc7ad17073c0f5f37dcbd4276c69b78444fd))
+* add CountDown component (closes [#12](https://github.com/ElJijuna/gnome-ui/issues/12)) ([ee1e731](https://github.com/ElJijuna/gnome-ui/commit/ee1e731b4801eb9c3105fb851973ee006ec32d35))
+* uodate SIdebarSection for support Icon, and collapsible and expand functions (closes  [#34](https://github.com/ElJijuna/gnome-ui/issues/34)) ([49863e7](https://github.com/ElJijuna/gnome-ui/commit/49863e7fd41497d973a98c4086a3dac874f25fa6))
+
+### Refactoring
+
+* **Dialog:** split AboutDialog into its own component (closes [#35](https://github.com/ElJijuna/gnome-ui/issues/35)) ([b4307cd](https://github.com/ElJijuna/gnome-ui/commit/b4307cd4e2761231ce1e6feeaa92d5f3e3c55866)), closes [#36](https://github.com/ElJijuna/gnome-ui/issues/36)
+* update AfaptativeLayout with support special layout flor sm md and large (closes [#33](https://github.com/ElJijuna/gnome-ui/issues/33)) ([6f5a69c](https://github.com/ElJijuna/gnome-ui/commit/6f5a69ca131057f179b9896960073c1788378184))
+
 ## [1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.2.0...@gnome-ui/layout@1.3.0) (2026-04-19)
 
 ### Features
