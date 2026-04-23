@@ -246,6 +246,9 @@ jobs:
       - name: Build @gnome-ui/icons
         run: npm run build --workspace=packages/icons
 
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
+
       - name: Build @gnome-ui/hooks
         run: npm run build --workspace=packages/hooks
 
