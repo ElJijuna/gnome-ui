@@ -1,3 +1,53 @@
+/* ─── Adwaita Fonts ──────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Adwaita Sans";
+  src: url("./fonts/AdwaitaSans-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adwaita Sans";
+  src: url("./fonts/AdwaitaSans-Italic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adwaita Mono";
+  src: url("./fonts/AdwaitaMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adwaita Mono";
+  src: url("./fonts/AdwaitaMono-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adwaita Mono";
+  src: url("./fonts/AdwaitaMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adwaita Mono";
+  src: url("./fonts/AdwaitaMono-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /**
  * GNOME / Adwaita Design Tokens
  * Based on GNOME Human Interface Guidelines and libadwaita CSS variables
