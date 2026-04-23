@@ -1,3 +1,9 @@
+## [1.28.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.28.0...@gnome-ui/react@1.28.1) (2026-04-23)
+
+### Refactoring
+
+* **Dialog:** split AboutDialog into its own component (closes [#35](https://github.com/ElJijuna/gnome-ui/issues/35)) ([b4307cd](https://github.com/ElJijuna/gnome-ui/commit/b4307cd4e2761231ce1e6feeaa92d5f3e3c55866)), closes [#36](https://github.com/ElJijuna/gnome-ui/issues/36)
+
 ## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.27.0...@gnome-ui/react@1.28.0) (2026-04-22)
 
 ### Features
