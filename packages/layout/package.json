@@ -24,7 +24,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "storybook": "storybook dev -p 6008",
+    "storybook": "storybook dev -p 6009",
     "build-storybook": "storybook build"
   },
   "publishConfig": {
@@ -34,11 +34,13 @@
     "@gnome-ui/core": "*"
   },
   "peerDependencies": {
+    "@gnome-ui/hooks": "*",
     "@gnome-ui/react": "*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@gnome-ui/hooks": "*",
     "@gnome-ui/icons": "*",
     "@gnome-ui/react": "*",
     "@storybook/addon-a11y": "^10.3.3",

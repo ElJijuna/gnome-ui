@@ -40,7 +40,7 @@ export function ViewSwitcherSidebarItem({
   className,
   ...props
 }: ViewSwitcherSidebarItemProps) {
-  const { value, onValueChange } = useViewSwitcherSidebar();
+  const { value, onValueChange, collapsed } = useViewSwitcherSidebar();
   const active = value === name;
   const trailing = suffix ?? (count != null ? count : null);
 
@@ -67,8 +67,8 @@ export function ViewSwitcherSidebarItem({
             <Icon icon={icon} size="md" aria-hidden />
           </span>
         )}
-        <span className={styles.itemLabel}>{label}</span>
-        {trailing != null && (
+        {!collapsed && <span className={styles.itemLabel}>{label}</span>}
+        {!collapsed && trailing != null && (
           <span className={styles.itemSuffix}>
             {typeof trailing === "number" ? (
               <span className={styles.count}>{trailing > 99 ? "99+" : trailing}</span>
