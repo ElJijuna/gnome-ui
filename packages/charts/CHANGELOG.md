@@ -1,3 +1,13 @@
+## [1.19.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.18.1...@gnome-ui/charts@1.19.0) (2026-04-23)
+
+### Features
+
+* add Adwaita fonts and update reference to use (closes [#58](https://github.com/ElJijuna/gnome-ui/issues/58)) ([abeebc7](https://github.com/ElJijuna/gnome-ui/commit/abeebc7ad17073c0f5f37dcbd4276c69b78444fd))
+
+### Refactoring
+
+* update AfaptativeLayout with support special layout flor sm md and large (closes [#33](https://github.com/ElJijuna/gnome-ui/issues/33)) ([6f5a69c](https://github.com/ElJijuna/gnome-ui/commit/6f5a69ca131057f179b9896960073c1788378184))
+
 ## [1.18.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.18.0...@gnome-ui/charts@1.18.1) (2026-04-23)
 
 ### Refactoring
