@@ -56,6 +56,26 @@ jobs:
           name: icons-dist
           path: packages/icons/dist/
 
+  build-hooks:
+    name: Build @gnome-ui/hooks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build --workspace=packages/hooks
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hooks-dist
+          path: packages/hooks/dist/
+
   build-react:
     name: Build @gnome-ui/react
     needs: build-icons
@@ -153,7 +173,7 @@ jobs:
 
   build-storybook-layout:
     name: Build Storybook (@gnome-ui/layout)
-    needs: [build-react]
+    needs: [build-react, build-hooks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -174,6 +194,11 @@ jobs:
         with:
           name: react-dist
           path: packages/react/dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: hooks-dist
+          path: packages/hooks/dist
 
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/layout

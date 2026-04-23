@@ -221,7 +221,7 @@ jobs:
   # ── 2f. Release @gnome-ui/layout ─────────────────────────────────────────
   release-layout:
     name: Release @gnome-ui/layout
-    needs: release-charts
+    needs: [release-charts, release-hooks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -242,9 +242,12 @@ jobs:
         with:
           name: dist
           path: .
-      
+
       - name: Build @gnome-ui/icons
         run: npm run build --workspace=packages/icons
+
+      - name: Build @gnome-ui/hooks
+        run: npm run build --workspace=packages/hooks
 
       - name: Build @gnome-ui/react
         run: npm run build --workspace=packages/react
