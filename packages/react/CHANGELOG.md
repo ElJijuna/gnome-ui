@@ -1,3 +1,12 @@
+## [1.34.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.33.0...@gnome-ui/react@1.34.0) (2026-04-24)
+
+### Features
+
+* add ApplicationCard component ([64250e6](https://github.com/ElJijuna/gnome-ui/commit/64250e6acb71f04ffbd31097fa290796befe19dd)), closes [#63](https://github.com/ElJijuna/gnome-ui/issues/63)
+* **core:** add --gnome-new-* semantic color tokens (purple) ([e7f1444](https://github.com/ElJijuna/gnome-ui/commit/e7f1444c9e9f9a65acd2b6111e5795cf14a14f7c))
+* **layout:** add EntityCard component ([2850006](https://github.com/ElJijuna/gnome-ui/commit/28500065ceca08a44285e5ac5d3f873c8f5e0e78)), closes [#61](https://github.com/ElJijuna/gnome-ui/issues/61)
+* **react:** add StatusBadge component ([47baa4a](https://github.com/ElJijuna/gnome-ui/commit/47baa4ad4ced33dc28223ad5ad70e1f4b55d4686))
+
 ## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.32.0...@gnome-ui/react@1.33.0) (2026-04-24)
 
 ### Features
