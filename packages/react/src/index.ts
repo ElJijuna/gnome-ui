@@ -245,3 +245,6 @@ export type {
   ColumnViewSelectionMode,
   SortDirection,
 } from "./components/ColumnView";
+
+export { TerminalView } from "./components/TerminalView";
+export type { TerminalViewProps, TerminalVariant } from "./components/TerminalView";
