@@ -1,3 +1,9 @@
+## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.32.0...@gnome-ui/core@1.33.0) (2026-04-24)
+
+### Features
+
+* add IconBadge component (closes [#64](https://github.com/ElJijuna/gnome-ui/issues/64)) ([6e0027e](https://github.com/ElJijuna/gnome-ui/commit/6e0027e9dc8239db15699bfbf51f119cf0bf66ce))
+
 ## [1.32.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.31.1...@gnome-ui/core@1.32.0) (2026-04-23)
 
 ### Features
