@@ -1,0 +1,78 @@
+/* ─── Card override ──────────────────────────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px !important;
+}
+
+/* ─── Avatar + body row ──────────────────────────────────────────────────────── */
+
+.inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.avatarSlot {
+  flex-shrink: 0;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ─── Title row ──────────────────────────────────────────────────────────────── */
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: 600;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+}
+
+.badge {
+  flex-shrink: 0;
+}
+
+.trailing {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ─── Subtitle / description ─────────────────────────────────────────────────── */
+
+.subtitle {
+  display: block;
+}
+
+.description {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Footer meta ────────────────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

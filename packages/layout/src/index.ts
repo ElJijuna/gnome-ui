@@ -19,3 +19,6 @@ export type { AdaptiveLayoutProps, AdaptiveNavItem } from "./components/Adaptive
 
 export { IconBadge } from "./components/IconBadge";
 export type { IconBadgeProps, IconBadgeColor, IconBadgeSize } from "./components/IconBadge";
+
+export { EntityCard } from "./components/EntityCard";
+export type { EntityCardProps } from "./components/EntityCard";
