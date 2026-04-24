@@ -248,3 +248,6 @@ export type {
 
 export { TerminalView } from "./components/TerminalView";
 export type { TerminalViewProps, TerminalVariant } from "./components/TerminalView";
+
+export { StatusBadge } from "./components/StatusBadge";
+export type { StatusBadgeProps, StatusBadgeVariant } from "./components/StatusBadge";
