@@ -1,0 +1,65 @@
+/* ─── Container ──────────────────────────────────────────────────────────────── */
+
+.terminal {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: var(--gnome-radius-default, 6px);
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  /* Adwaita-style thin scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.pre {
+  margin: 0;
+  font-family: "Fira Mono", "Cascadia Code", monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.line {
+  min-height: 1em;
+}
+
+/* ─── Light theme ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: light) {
+  .terminal {
+    background-color: #f6f5f4;
+    color: rgba(0, 0, 0, 0.8);
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+}
+
+/* ─── Variants ───────────────────────────────────────────────────────────────── */
+
+.success .line {
+  color: #a6e3a1;
+}
+
+.warning .line {
+  color: #f9e2af;
+}
+
+.destructive .line {
+  color: #f38ba8;
+}
+
+@media (prefers-color-scheme: light) {
+  .success .line {
+    color: var(--gnome-success-color, #26a269);
+  }
+
+  .warning .line {
+    color: var(--gnome-warning-color, #e5a50a);
+  }
+
+  .destructive .line {
+    color: var(--gnome-destructive-color, #e01b24);
+  }
+}
