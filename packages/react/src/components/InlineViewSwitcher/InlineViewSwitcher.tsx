@@ -8,7 +8,7 @@ import {
 } from "react";
 import styles from "./InlineViewSwitcher.module.css";
 
-export type InlineViewSwitcherVariant = "default" | "flat" | "round";
+export type InlineViewSwitcherVariant = "default" | "flat" | "round" | "pill";
 
 // ─── Internal context ──────────────────────────────────────────────────────────
 
@@ -41,6 +41,7 @@ export interface InlineViewSwitcherProps extends HTMLAttributes<HTMLDivElement> 
    * - `default` — card background with border and shadow (same as `ToggleGroup`).
    * - `flat`    — no background or border; active indicator only.
    * - `round`   — pill-shaped container and items.
+   * - `pill`    — segmented-control style; active item appears lifted, no accent color.
    */
   variant?: InlineViewSwitcherVariant;
   /** Accessible label for the group. */

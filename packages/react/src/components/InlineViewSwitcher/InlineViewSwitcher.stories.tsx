@@ -26,7 +26,8 @@ Compose with \`InlineViewSwitcherItem\`. Keyboard: **← →** cycle, **Home / E
 |---------|-------------|
 | \`default\` | Standalone control with clear elevation — inside cards or content areas |
 | \`flat\` | Inside a toolbar or header bar background — blends with the surface |
-| \`round\` | Prominent pill shape for primary view selection in open space |
+| \`round\` | Prominent pill shape with accent active indicator |
+| \`pill\` | Segmented-control style — active item lifted, no accent color (Following tabs) |
 
 ### Guidelines
 - Prefer \`ViewSwitcher\` in a \`HeaderBar\` for top-level navigation.
@@ -46,7 +47,7 @@ Compose with \`InlineViewSwitcherItem\`. Keyboard: **← →** cycle, **Home / E
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "flat", "round"],
+      options: ["default", "flat", "round", "pill"],
     },
     value: { control: "text" },
   },
@@ -86,6 +87,7 @@ export const AllVariants: Story = {
     const [v1, setV1] = useState("list");
     const [v2, setV2] = useState("list");
     const [v3, setV3] = useState("list");
+    const [v4, setV4] = useState("apps");
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 20, width: "100%" }}>
         <div>
@@ -122,13 +124,23 @@ export const AllVariants: Story = {
             <InlineViewSwitcherItem name="columns" label="Columns" />
           </InlineViewSwitcher>
         </div>
+
+        <div>
+          <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+            pill
+          </p>
+          <InlineViewSwitcher variant="pill" value={v4} onValueChange={setV4} aria-label="Following view">
+            <InlineViewSwitcherItem name="apps" label="Apps" />
+            <InlineViewSwitcherItem name="maintainers" label="Maintainers" />
+          </InlineViewSwitcher>
+        </div>
       </div>
     );
   },
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "All three variants side by side in their natural contexts." },
+      description: { story: "All four variants side by side in their natural contexts." },
     },
   },
 };
@@ -245,6 +257,29 @@ export const DisabledItems: Story = {
     controls: { disable: true },
     docs: {
       description: { story: "Individual items can be disabled while leaving others active." },
+    },
+  },
+};
+
+// ─── Pill ──────────────────────────────────────────────────────────────────────
+
+export const Pill: Story = {
+  render: () => {
+    const [tab, setTab] = useState("apps");
+    return (
+      <InlineViewSwitcher variant="pill" value={tab} onValueChange={setTab} aria-label="Following view">
+        <InlineViewSwitcherItem name="apps" label="Apps" />
+        <InlineViewSwitcherItem name="maintainers" label="Maintainers" />
+      </InlineViewSwitcher>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "`pill` variant — segmented-control style. Active item appears lifted with a card background and subtle shadow; no accent color is used. Ideal for tab-like switching in open content areas.",
+      },
     },
   },
 };
