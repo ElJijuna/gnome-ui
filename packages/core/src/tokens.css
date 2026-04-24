@@ -143,6 +143,10 @@
   --gnome-error-bg-color: var(--gnome-red-3);
   --gnome-error-fg-color: #ffffff;
 
+  --gnome-new-color: var(--gnome-purple-3);
+  --gnome-new-bg-color: var(--gnome-purple-3);
+  --gnome-new-fg-color: #ffffff;
+
   /* ─── Window & Surface Colors ───────────────────────────────── */
 
   --gnome-window-bg-color: #fafafa;
@@ -407,6 +411,9 @@
     --gnome-error-color: var(--gnome-red-5);
     --gnome-error-bg-color: var(--gnome-red-5);
 
+    --gnome-new-color: var(--gnome-purple-5);
+    --gnome-new-bg-color: var(--gnome-purple-5);
+
     /* Overlays: solid, not transparent */
     --gnome-hover-overlay: rgba(0, 0, 0, 0.12);
     --gnome-active-overlay: rgba(0, 0, 0, 0.22);
@@ -443,6 +450,9 @@
 
     --gnome-error-color: var(--gnome-red-1);
     --gnome-error-bg-color: var(--gnome-red-2);
+
+    --gnome-new-color: var(--gnome-purple-1);
+    --gnome-new-bg-color: var(--gnome-purple-2);
 
     --gnome-hover-overlay: rgba(255, 255, 255, 0.12);
     --gnome-active-overlay: rgba(255, 255, 255, 0.22);
@@ -588,6 +598,9 @@
   --gnome-error-color: var(--gnome-red-5);
   --gnome-error-bg-color: var(--gnome-red-5);
 
+  --gnome-new-color: var(--gnome-purple-5);
+  --gnome-new-bg-color: var(--gnome-purple-5);
+
   --gnome-hover-overlay: rgba(0, 0, 0, 0.12);
   --gnome-active-overlay: rgba(0, 0, 0, 0.22);
   --gnome-border-subtle: rgba(0, 0, 0, 0.5);
@@ -617,6 +630,9 @@
 
   --gnome-error-color: var(--gnome-red-1);
   --gnome-error-bg-color: var(--gnome-red-2);
+
+  --gnome-new-color: var(--gnome-purple-1);
+  --gnome-new-bg-color: var(--gnome-purple-2);
 
   --gnome-window-bg-color: #242424;
   --gnome-window-fg-color: #ffffff;
