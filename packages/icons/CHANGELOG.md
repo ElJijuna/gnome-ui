@@ -1,3 +1,9 @@
+## [1.34.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.33.0...@gnome-ui/icons@1.34.0) (2026-04-24)
+
+### Features
+
+* extend CounterCard with icon, color, and trend props ([b82d87c](https://github.com/ElJijuna/gnome-ui/commit/b82d87cd0d9e7cab29f8cce65fe28593ae822405)), closes [#60](https://github.com/ElJijuna/gnome-ui/issues/60)
+
 ## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.32.0...@gnome-ui/icons@1.33.0) (2026-04-24)
 
 ### Features
