@@ -1,0 +1,88 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── Sizes ───────────────────────────────────────────────────────────────── */
+
+.xs {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  font-size: 0.75rem;
+}
+
+.sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.md {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  font-size: 1.1rem;
+}
+
+.lg {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  font-size: 1.5rem;
+}
+
+.xl {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  font-size: 2rem;
+}
+
+/* ─── Neutral (no color) ──────────────────────────────────────────────────── */
+
+.neutral {
+  background: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+}
+
+/* ─── Color variants ──────────────────────────────────────────────────────── */
+
+.blue {
+  background: color-mix(in srgb, var(--gnome-blue-3) 15%, transparent);
+  color: var(--gnome-blue-3);
+}
+
+.green {
+  background: color-mix(in srgb, var(--gnome-green-3) 15%, transparent);
+  color: var(--gnome-green-3);
+}
+
+.yellow {
+  background: color-mix(in srgb, var(--gnome-yellow-3) 15%, transparent);
+  color: var(--gnome-yellow-5);
+}
+
+.orange {
+  background: color-mix(in srgb, var(--gnome-orange-3) 15%, transparent);
+  color: var(--gnome-orange-3);
+}
+
+.red {
+  background: color-mix(in srgb, var(--gnome-red-3) 15%, transparent);
+  color: var(--gnome-red-3);
+}
+
+.purple {
+  background: color-mix(in srgb, var(--gnome-purple-3) 15%, transparent);
+  color: var(--gnome-purple-3);
+}
+
+.brown {
+  background: color-mix(in srgb, var(--gnome-brown-3) 15%, transparent);
+  color: var(--gnome-brown-3);
+}

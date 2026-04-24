@@ -16,3 +16,6 @@ export type { PanelCardProps, PanelCardHandle } from "./components/PanelCard";
 
 export { AdaptiveLayout } from "./components/AdaptiveLayout";
 export type { AdaptiveLayoutProps, AdaptiveNavItem } from "./components/AdaptiveLayout";
+
+export { IconBadge } from "./components/IconBadge";
+export type { IconBadgeProps, IconBadgeColor, IconBadgeSize } from "./components/IconBadge";
