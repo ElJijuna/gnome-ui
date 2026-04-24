@@ -1,3 +1,9 @@
+## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.32.0...@gnome-ui/icons@1.33.0) (2026-04-24)
+
+### Features
+
+* add TerminalView component (closes [#53](https://github.com/ElJijuna/gnome-ui/issues/53)) ([fda9ee2](https://github.com/ElJijuna/gnome-ui/commit/fda9ee2c6dcf4f3aec57f79a2797dd85030d1106))
+
 ## [1.32.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.31.0...@gnome-ui/icons@1.32.0) (2026-04-24)
 
 ### Features
