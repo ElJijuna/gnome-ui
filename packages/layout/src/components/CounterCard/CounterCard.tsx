@@ -4,7 +4,8 @@ import {
   useState,
   type HTMLAttributes,
 } from "react";
-import { Card, Text } from "@gnome-ui/react";
+import { Card, Icon, Text } from "@gnome-ui/react";
+import type { IconDefinition } from "@gnome-ui/icons";
 import styles from "./CounterCard.module.css";
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
@@ -109,20 +110,18 @@ export interface CounterCardProps extends HTMLAttributes<HTMLDivElement> {
   accent?: boolean;
   /** Make the card interactive (clickable). Passed to `Card`. */
   interactive?: boolean;
+  /** Icon rendered in a tinted badge in the top-right corner of the card. */
+  icon?: IconDefinition;
+  /**
+   * Per-card accent color (CSS color string, e.g. `"#3584e4"`).
+   * Drives the icon badge background tint and the value text color.
+   * Takes precedence over the `accent` boolean when provided.
+   */
+  color?: string;
+  /** Short trend line rendered below the value in a muted success color. */
+  trend?: string;
 }
 
-/**
- * Metric card with an animated numeric counter.
- *
- * Wraps `Card` from `@gnome-ui/react` and adds a `useCountUp` animation that
- * counts from `0` (or from the previous value) to `value` using an ease-out
- * cubic curve. Respects `prefers-reduced-motion`.
- *
- * ```tsx
- * <CounterCard label="Documents" value={1248} suffix=" files" />
- * <CounterCard label="Revenue"   value={9420} prefix="$" accent duration={1500} />
- * ```
- */
 export function CounterCard({
   label,
   value,
@@ -134,6 +133,9 @@ export function CounterCard({
   duration = 1000,
   accent = false,
   interactive = false,
+  icon,
+  color,
+  trend,
   className,
   style,
   ...props
@@ -147,6 +149,8 @@ export function CounterCard({
         maximumFractionDigits: decimals,
       });
 
+  const useColor = Boolean(color);
+
   return (
     <Card
       interactive={interactive}
@@ -154,16 +158,32 @@ export function CounterCard({
       style={style}
       {...props}
     >
-      <Text variant="caption" color="dim" className={styles.label}>
-        {label}
-      </Text>
+      <div className={styles.header}>
+        <Text variant="caption" color="dim" className={styles.label}>
+          {label}
+        </Text>
+        {icon && (
+          <div
+            className={styles.iconBadge}
+            style={{
+              background: color
+                ? `color-mix(in srgb, ${color} 15%, transparent)`
+                : "var(--gnome-hover-overlay, rgba(0,0,0,0.06))",
+              color: color ?? undefined,
+            }}
+          >
+            <Icon icon={icon} size="sm" />
+          </div>
+        )}
+      </div>
       <span
         className={[
           styles.value,
-          accent ? styles.accent : null,
+          useColor ? null : accent ? styles.accent : null,
         ]
           .filter(Boolean)
           .join(" ")}
+        style={useColor ? { color } : undefined}
         aria-live="polite"
         aria-atomic="true"
         aria-label={`${label}: ${prefix ?? ""}${value.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix ?? ""}`}
@@ -174,6 +194,11 @@ export function CounterCard({
         </Text>
         {suffix && <span className={styles.affix}>{suffix}</span>}
       </span>
+      {trend && (
+        <Text variant="caption" className={styles.trend}>
+          {trend}
+        </Text>
+      )}
     </Card>
   );
 }
