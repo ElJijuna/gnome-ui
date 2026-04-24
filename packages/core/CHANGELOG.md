@@ -1,3 +1,9 @@
+## [1.34.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.33.0...@gnome-ui/core@1.34.0) (2026-04-24)
+
+### Features
+
+* add 'pill' variant to InlineViewSwitcher (closes [#62](https://github.com/ElJijuna/gnome-ui/issues/62)) ([0862fd0](https://github.com/ElJijuna/gnome-ui/commit/0862fd071610cd9825ea14a74f14398676651743))
+
 ## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.32.0...@gnome-ui/core@1.33.0) (2026-04-24)
 
 ### Features
