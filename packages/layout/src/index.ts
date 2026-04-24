@@ -22,3 +22,6 @@ export type { IconBadgeProps, IconBadgeColor, IconBadgeSize } from "./components
 
 export { EntityCard } from "./components/EntityCard";
 export type { EntityCardProps } from "./components/EntityCard";
+
+export { ApplicationCard } from "./components/ApplicationCard";
+export type { ApplicationCardProps, ApplicationCardStat } from "./components/ApplicationCard";
