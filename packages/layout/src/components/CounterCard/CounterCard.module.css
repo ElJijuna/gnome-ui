@@ -7,10 +7,27 @@
   padding: 20px !important; /* override Card .padding-md */
 }
 
-/* ─── Label ───────────────────────────────────────────────────────────────── */
+/* ─── Header row (label + icon badge) ────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
 
 .label {
   display: block;
+}
+
+.iconBadge {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ─── Value row ───────────────────────────────────────────────────────────── */
@@ -35,6 +52,14 @@
   line-height: 1;
   color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
   opacity: 0.7;
+}
+
+/* ─── Trend line ──────────────────────────────────────────────────────────── */
+
+.trend {
+  display: block;
+  color: var(--gnome-success-color, #26a269) !important;
+  margin-top: 2px;
 }
 
 /* ─── Accent variant ─────────────────────────────────────────────────────── */

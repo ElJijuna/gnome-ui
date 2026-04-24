@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@gnome-ui/react";
+import { Applications, Person, Refresh, Heart } from "@gnome-ui/icons";
 import { CounterCard } from "./CounterCard";
 
 const meta: Meta<typeof CounterCard> = {
@@ -163,6 +164,38 @@ export const LiveChange: Story = {
           "When `value` changes while a previous animation is still running, the counter " +
           "re-animates **from its current mid-point** — no jump, no restart from 0.",
       },
+    },
+  },
+};
+
+// ─── Dashboard stats (icon + color + trend) ───────────────────────────────────
+
+const STATS = [
+  { label: "Published Apps",  value: 3,     format: undefined as ((v: number) => string) | undefined, icon: Applications, color: "#3584e4", trend: "↑ 1 this month" },
+  { label: "Total Downloads", value: 25700, format: (v: number) => `${(v / 1000).toFixed(1)}k`,       icon: Person,       color: "#33d17a", trend: "↑ 12% this week" },
+  { label: "API Calls Today", value: 1482,  format: undefined as ((v: number) => string) | undefined, icon: Refresh,      color: "#ff7800", trend: "↑ 340 from yesterday" },
+  { label: "Followers",       value: 128,   format: undefined as ((v: number) => string) | undefined, icon: Heart,        color: "#e01b24", trend: "↑ 8 this week" },
+];
+
+export const DashboardStats: Story = {
+  render: () => (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 180px)", gap: 12 }}>
+      {STATS.map((s) => (
+        <CounterCard
+          key={s.label}
+          label={s.label}
+          value={s.value}
+          format={s.format}
+          icon={s.icon}
+          color={s.color}
+          trend={s.trend}
+        />
+      ))}
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: { story: "`icon`, `color`, and `trend` props — mirrors the Developer Portal Dashboard STATS grid." },
     },
   },
 };
