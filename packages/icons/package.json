@@ -7,16 +7,33 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./icons": {
+      "types": "./dist/icons.d.ts",
+      "import": "./dist/icons.js",
+      "require": "./dist/icons.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./third-party": {
+      "types": "./dist/third-party.d.ts",
+      "import": "./dist/third-party.js",
+      "require": "./dist/third-party.cjs"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs"
     }
   },
+  "sideEffects": false,
   "files": [
     "dist"
   ],
   "scripts": {
+    "prebuild": "vite-magic validate",
     "build": "tsc && vite build",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6008",
@@ -37,6 +54,7 @@
     "react-dom": "^19.0.0",
     "storybook": "^10.3.3",
     "vite": "^8.0.3",
+    "vite-magic-tree-shaking": "^1.0.0",
     "vite-plugin-dts": "^4.5.4"
   }
 }

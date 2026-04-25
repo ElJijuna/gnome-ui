@@ -13,6 +13,22 @@ Each icon is a plain JavaScript object (`IconDefinition`) containing SVG path da
 npm install @gnome-ui/icons
 ```
 
+## Tree-shaking
+
+This package is fully tree-shakeable. Importing a single icon only pulls that icon's module into your bundle — not the entire registry.
+
+```ts
+// Only `Add` and `Search` are included in the final bundle
+import { Add, Search } from "@gnome-ui/icons";
+```
+
+Each icon is also available as a direct sub-path import for bundlers that prefer explicit paths:
+
+```ts
+import { Add } from "@gnome-ui/icons/icons";
+import { GitHub } from "@gnome-ui/icons/third-party";
+```
+
 ## Usage
 
 ### With `@gnome-ui/react`
@@ -93,6 +109,7 @@ All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 ×
 | `Undo` | `edit-undo-symbolic` |
 | `Redo` | `edit-redo-symbolic` |
 | `Save` | `document-save-symbolic` |
+| `Document` | `document-symbolic` |
 | `DocumentOpen` | `document-open-symbolic` |
 | `Close` | `window-close-symbolic` |
 | `Search` | `system-search-symbolic` |
@@ -140,6 +157,13 @@ All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 ×
 | `Printer` | `printer-symbolic` |
 | `Lock` | `changes-prevent-symbolic` |
 
+### Files & Media
+
+| Export | Symbolic name |
+|--------|--------------|
+| `Folder` | `folder-symbolic` |
+| `Image` | `image-x-generic-symbolic` |
+
 ### Misc
 
 | Export | Symbolic name |
@@ -156,6 +180,17 @@ All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 ×
 | `MediaPause` | `media-playback-pause-symbolic` |
 | `MediaSkipForward` | `media-skip-forward-symbolic` |
 | `MediaSkipBackward` | `media-skip-backward-symbolic` |
+
+### Third-party brand icons
+
+Available via `@gnome-ui/icons` or the `@gnome-ui/icons/third-party` sub-path.
+
+| Export | Brand |
+|--------|-------|
+| `GitHub` | GitHub |
+| `GitLab` | GitLab |
+| `Bitbucket` | Bitbucket |
+| `X` | X (Twitter) |
 
 ## License
 
