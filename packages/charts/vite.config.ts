@@ -2,6 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { resolve } from "path";
+import { fileURLToPath } from "node:url";
+import { generateEntries } from "vite-magic-tree-shaking";
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -19,20 +23,15 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "GnomeCharts",
+      entry: generateEntries(__dirname, "src", { warnOnExportsMismatch: true }),
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
+      fileName: (_, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime", "recharts"],
       output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "react/jsx-runtime": "jsxRuntime",
-          recharts: "Recharts",
-        },
+        preserveModules: true,
+        preserveModulesRoot: "src",
         assetFileNames: "style.css",
       },
     },

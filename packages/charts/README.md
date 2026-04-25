@@ -38,6 +38,33 @@ import "@gnome-ui/charts/styles";
 All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom
 properties for theming, and adapt automatically to light/dark mode.
 
+## Imports
+
+### Standard import (barrel)
+
+Import any component from the package root. Works with every bundler and is
+the simplest option. Modern bundlers that respect the `sideEffects` field in
+`package.json` will still tree-shake unused components automatically.
+
+```tsx
+import { AreaChart, BarChart, LineChart, TreeMap } from "@gnome-ui/charts";
+```
+
+### Per-component import (explicit tree-shaking)
+
+Each component is also exposed as its own sub-path export. Use this form if
+your bundler does not perform tree-shaking, or when you want to be explicit
+about what you pull in.
+
+```tsx
+import { BarChart } from "@gnome-ui/charts/components/BarChart";
+import { LineChart } from "@gnome-ui/charts/components/LineChart";
+import { AreaChart } from "@gnome-ui/charts/components/AreaChart";
+import { TreeMap } from "@gnome-ui/charts/components/TreeMap";
+```
+
+Both forms are fully typed and produce identical runtime behavior.
+
 ## Quick example
 
 ```tsx

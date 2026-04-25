@@ -6,7 +6,33 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": ["**/*.css", "dist/style.css"],
   "exports": {
+    "./colors": {
+      "types": "./dist/colors.d.ts",
+      "import": "./dist/colors.js",
+      "require": "./dist/colors.cjs"
+    },
+    "./components/AreaChart": {
+      "types": "./dist/components/AreaChart.d.ts",
+      "import": "./dist/components/AreaChart.js",
+      "require": "./dist/components/AreaChart.cjs"
+    },
+    "./components/BarChart": {
+      "types": "./dist/components/BarChart.d.ts",
+      "import": "./dist/components/BarChart.js",
+      "require": "./dist/components/BarChart.cjs"
+    },
+    "./components/LineChart": {
+      "types": "./dist/components/LineChart.d.ts",
+      "import": "./dist/components/LineChart.js",
+      "require": "./dist/components/LineChart.cjs"
+    },
+    "./components/TreeMap": {
+      "types": "./dist/components/TreeMap.d.ts",
+      "import": "./dist/components/TreeMap.js",
+      "require": "./dist/components/TreeMap.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
@@ -35,17 +61,18 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
+    "@storybook/react": "^10.3.3",
+    "@storybook/react-vite": "^10.3.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "storybook": "^10.3.3",
     "vite": "^8.0.3",
-    "vite-plugin-dts": "^4.5.4",
-    "@storybook/react": "^10.3.3",
-    "@storybook/react-vite": "^10.3.3",
-    "@storybook/addon-docs": "^10.3.3",
-    "@storybook/addon-a11y": "^10.3.3",
-    "storybook": "^10.3.3"
+    "vite-magic-tree-shaking": "^1.0.0",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
