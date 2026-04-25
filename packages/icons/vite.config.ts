@@ -16,7 +16,8 @@ export default defineConfig({
     lib: {
       entry: generateEntries(__dirname, "src", { warnOnExportsMismatch: true }),
       formats: ["es", "cjs"],
-      fileName: (_, entryName) => `${entryName}.js`,
+      fileName: (format, entryName) =>
+        format === "cjs" ? `${entryName}.cjs` : `${entryName}.js`,
     },
     rollupOptions: {
       output: {
