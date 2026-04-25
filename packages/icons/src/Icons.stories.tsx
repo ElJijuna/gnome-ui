@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { IconDefinition } from "./types.ts";
 import * as icons from "./icons/index.ts";
+import * as thirdParty from "./third-party/index.ts";
 
 // ─── Minimal inline SVG renderer ──────────────────────────────────────────────
 
@@ -224,4 +225,60 @@ export const StatusIcons: Story = {
 export const MediaIcons: Story = {
   name: "Media",
   render: (args) => <CategoryGrid category="Media" size={args.size} color={args.color} />,
+};
+
+// ─── Third-party logos ────────────────────────────────────────────────────────
+
+const thirdPartyEntries = Object.entries(thirdParty) as [string, IconDefinition][];
+
+const PLATFORM_COLORS: Record<string, string> = {
+  GitHub:    "#24292f",
+  GitLab:    "#FC6D26",
+  Bitbucket: "#0052CC",
+  X:         "#000000",
+};
+
+export const ThirdPartyIcons: Story = {
+  name: "Third-party",
+  render: (args) => (
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+      <p style={{ color: "#666", marginBottom: "0.5rem", fontSize: "0.875rem" }}>
+        Brand marks for third-party platforms. These follow the same{" "}
+        <code>IconDefinition</code> shape and work with{" "}
+        <code>&lt;Icon&gt;</code> from <code>@gnome-ui/react</code>.
+      </p>
+      <p style={{ color: "#999", marginBottom: "1.5rem", fontSize: "0.75rem" }}>
+        Import from <code>@gnome-ui/icons</code> — they are re-exported alongside GNOME symbolic icons.
+      </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+        {thirdPartyEntries.map(([name, def]) => (
+          <div
+            key={name}
+            style={{
+              display: "flex", flexDirection: "column", alignItems: "center",
+              gap: "0.5rem", padding: "1rem 1.25rem",
+              borderRadius: "8px", border: "1px solid #e0e0e0",
+              backgroundColor: "#fff", minWidth: "90px",
+            }}
+          >
+            <div style={{
+              width: 36, height: 36, borderRadius: 8,
+              background: PLATFORM_COLORS[name] ?? "#eee",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <Icon icon={def} size={args.size} color="#ffffff" />
+            </div>
+            <span style={{ fontSize: "0.7rem", color: "#555", textAlign: "center" }}>{name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Third-party platform logos (`GitHub`, `GitLab`, `Bitbucket`). Rendered with their brand colors for context — in production, pass `color` to `<Icon>` as needed.",
+      },
+    },
+  },
 };
