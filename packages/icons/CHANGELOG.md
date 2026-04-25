@@ -1,3 +1,9 @@
+## [1.37.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.36.0...@gnome-ui/icons@1.37.0) (2026-04-25)
+
+### Features
+
+* **@gnome-ui/charts:** add TreeMap component (closes [#45](https://github.com/ElJijuna/gnome-ui/issues/45)) ([b6cc71f](https://github.com/ElJijuna/gnome-ui/commit/b6cc71fa3f1a0477b403e98fd1b356bf2c064121))
+
 ## [1.36.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.35.0...@gnome-ui/icons@1.36.0) (2026-04-25)
 
 ### Features
