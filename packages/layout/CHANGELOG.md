@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.9.0...@gnome-ui/layout@1.10.0) (2026-04-25)
+
+### Features
+
+* add third party icons Github, Bitbucket, Gitlab and X. ([507754c](https://github.com/ElJijuna/gnome-ui/commit/507754c261e852233ca4d397ecb0ab39196c3b6e))
+
 ## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.8.0...@gnome-ui/layout@1.9.0) (2026-04-24)
 
 ### Features
