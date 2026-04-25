@@ -1,12 +1,12 @@
 # @gnome-ui/charts
 
-Chart components for [@gnome-ui/react](../react/README.md), styled with GNOME Adwaita design tokens.
+Chart components for [@gnome-ui/react](../react/README.md), styled with GNOME Adwaita
+design tokens.
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/charts)](https://www.npmjs.com/package/@gnome-ui/charts)
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://eljijuna.github.io/gnome-ui/charts/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
-
 
 ## Installation
 
@@ -33,13 +33,15 @@ import "@gnome-ui/charts/styles";
 | `AreaChart` | Filled area chart with optional stacking, grid, and legend |
 | `BarChart` | Vertical or horizontal bar chart with rounded bars, optional stacking, grid, and legend |
 | `LineChart` | Line chart with dots, grid, and legend |
+| `TreeMap` | Proportional tile chart with optional group coloring and labels |
 
-All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom properties for theming, and adapt automatically to light/dark mode.
+All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom
+properties for theming, and adapt automatically to light/dark mode.
 
 ## Quick example
 
 ```tsx
-import { AreaChart, BarChart, LineChart } from "@gnome-ui/charts";
+import { AreaChart, BarChart, LineChart, TreeMap } from "@gnome-ui/charts";
 
 const data = [
   { month: "Jan", sales: 400, returns: 80 },
@@ -76,6 +78,16 @@ const data = [
   showGrid
   showLegend
 />
+
+// TreeMap
+<TreeMap
+  data={[
+    { label: "React", value: 4200, group: "Frontend" },
+    { label: "Vue", value: 2100, group: "Frontend" },
+    { label: "Node.js", value: 3800, group: "Backend" },
+  ]}
+  height={400}
+/>
 ```
 
 ## Props
@@ -103,8 +115,17 @@ All three components share a common set of props:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `stacked` | `boolean` | `false` | Stack series on top of each other |
-| `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation — `"horizontal"` for a horizontal bar chart |
-| `yAxisFormatter` | `(value: number) => string` | — | Custom formatter for Y-axis tick labels |
+| `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
+| `yAxisFormatter` | `(value: number) => string` | — | Custom Y-axis tick formatter |
+
+`TreeMap` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `TreeMapDataItem[]` | — | Array of `{ label, value, group? }` |
+| `height` | `number` | `400` | Chart height in px |
+| `showLabels` | `boolean` | `true` | Show name and value inside each tile |
+| `className` | `string` | — | Extra CSS class on the wrapper |
 
 ## Utilities
 

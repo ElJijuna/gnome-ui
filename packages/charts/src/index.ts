@@ -7,4 +7,7 @@ export type { LineChartProps, LineChartSeries } from "./components/LineChart";
 export { AreaChart } from "./components/AreaChart";
 export type { AreaChartProps, AreaChartSeries } from "./components/AreaChart";
 
+export { TreeMap } from "./components/TreeMap";
+export type { TreeMapProps, TreeMapDataItem } from "./components/TreeMap";
+
 export { GNOME_CHART_PALETTE } from "./colors";
