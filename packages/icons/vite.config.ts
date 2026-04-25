@@ -1,6 +1,9 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import { resolve } from "path";
+import { fileURLToPath } from "node:url";
+import { generateEntries } from "vite-magic-tree-shaking";
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -11,10 +14,15 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "GnomeIcons",
+      entry: generateEntries(__dirname, "src", { warnOnExportsMismatch: true }),
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
+      fileName: (_, entryName) => `${entryName}.js`,
+    },
+    rollupOptions: {
+      output: {
+        preserveModules: true,
+        preserveModulesRoot: "src",
+      },
     },
     sourcemap: true,
   },
