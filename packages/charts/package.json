@@ -1,12 +1,15 @@
 {
   "name": "@gnome-ui/charts",
-  "version": "1.26.0",
+  "version": "1.26.1",
   "description": "Chart components for @gnome-ui/react, styled with GNOME Adwaita design tokens",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "sideEffects": ["**/*.css", "dist/style.css"],
+  "sideEffects": [
+    "**/*.css",
+    "dist/style.css"
+  ],
   "exports": {
     "./colors": {
       "types": "./dist/colors.d.ts",
