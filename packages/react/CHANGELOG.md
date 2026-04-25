@@ -1,3 +1,10 @@
+## [1.36.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.36.1...@gnome-ui/react@1.36.2) (2026-04-25)
+
+### Bug Fixes
+
+* **@gnome-ui/icons:** enable per-component tree-shaking (closes [#38](https://github.com/ElJijuna/gnome-ui/issues/38)) ([5f7ca53](https://github.com/ElJijuna/gnome-ui/commit/5f7ca53c856c41135e387d17dbd576b41b250ef8))
+* **@gnome-ui/icons:** use .cjs extension for CommonJS output ([85a619d](https://github.com/ElJijuna/gnome-ui/commit/85a619d412179fce23157d5cda037b2a5a74ffe4))
+
 ## [1.36.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.36.0...@gnome-ui/react@1.36.1) (2026-04-25)
 
 ### Bug Fixes
