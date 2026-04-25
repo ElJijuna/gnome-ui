@@ -1,3 +1,9 @@
+## [1.39.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.39.0...@gnome-ui/core@1.39.1) (2026-04-25)
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** enable per-component tree-shaking (closes [#39](https://github.com/ElJijuna/gnome-ui/issues/39)) ([f885498](https://github.com/ElJijuna/gnome-ui/commit/f8854988d564c10319dd2fae0cf577a23523a02a))
+
 ## [1.39.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.38.0...@gnome-ui/core@1.39.0) (2026-04-25)
 
 ### Features
