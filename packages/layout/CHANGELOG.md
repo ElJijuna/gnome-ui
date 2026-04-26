@@ -1,3 +1,9 @@
+## [1.11.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.11.2...@gnome-ui/layout@1.11.3) (2026-04-26)
+
+### Bug Fixes
+
+* **@gnome-ui/react:** enable tree-shaking (closes [#37](https://github.com/ElJijuna/gnome-ui/issues/37)) ([5cd8956](https://github.com/ElJijuna/gnome-ui/commit/5cd895678b60c591ec11d789a76568effd386e2a))
+
 ## [1.11.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.11.1...@gnome-ui/layout@1.11.2) (2026-04-25)
 
 ### Bug Fixes
