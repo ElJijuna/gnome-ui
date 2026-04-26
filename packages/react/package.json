@@ -7,6 +7,391 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./components/AboutDialog": {
+      "types": "./dist/components/AboutDialog.d.ts",
+      "import": "./dist/components/AboutDialog.js",
+      "require": "./dist/components/AboutDialog.cjs"
+    },
+    "./components/ActionRow": {
+      "types": "./dist/components/ActionRow.d.ts",
+      "import": "./dist/components/ActionRow.js",
+      "require": "./dist/components/ActionRow.cjs"
+    },
+    "./components/Avatar": {
+      "types": "./dist/components/Avatar.d.ts",
+      "import": "./dist/components/Avatar.js",
+      "require": "./dist/components/Avatar.cjs"
+    },
+    "./components/Badge": {
+      "types": "./dist/components/Badge.d.ts",
+      "import": "./dist/components/Badge.js",
+      "require": "./dist/components/Badge.cjs"
+    },
+    "./components/Banner": {
+      "types": "./dist/components/Banner.d.ts",
+      "import": "./dist/components/Banner.js",
+      "require": "./dist/components/Banner.cjs"
+    },
+    "./components/Bin": {
+      "types": "./dist/components/Bin.d.ts",
+      "import": "./dist/components/Bin.js",
+      "require": "./dist/components/Bin.cjs"
+    },
+    "./components/Blockquote": {
+      "types": "./dist/components/Blockquote.d.ts",
+      "import": "./dist/components/Blockquote.js",
+      "require": "./dist/components/Blockquote.cjs"
+    },
+    "./components/BottomSheet": {
+      "types": "./dist/components/BottomSheet.d.ts",
+      "import": "./dist/components/BottomSheet.js",
+      "require": "./dist/components/BottomSheet.cjs"
+    },
+    "./components/Box": {
+      "types": "./dist/components/Box.d.ts",
+      "import": "./dist/components/Box.js",
+      "require": "./dist/components/Box.cjs"
+    },
+    "./components/BoxedList": {
+      "types": "./dist/components/BoxedList.d.ts",
+      "import": "./dist/components/BoxedList.js",
+      "require": "./dist/components/BoxedList.cjs"
+    },
+    "./components/BreakpointBin": {
+      "types": "./dist/components/BreakpointBin.d.ts",
+      "import": "./dist/components/BreakpointBin.js",
+      "require": "./dist/components/BreakpointBin.cjs"
+    },
+    "./components/Button": {
+      "types": "./dist/components/Button.d.ts",
+      "import": "./dist/components/Button.js",
+      "require": "./dist/components/Button.cjs"
+    },
+    "./components/ButtonContent": {
+      "types": "./dist/components/ButtonContent.d.ts",
+      "import": "./dist/components/ButtonContent.js",
+      "require": "./dist/components/ButtonContent.cjs"
+    },
+    "./components/ButtonRow": {
+      "types": "./dist/components/ButtonRow.d.ts",
+      "import": "./dist/components/ButtonRow.js",
+      "require": "./dist/components/ButtonRow.cjs"
+    },
+    "./components/Card": {
+      "types": "./dist/components/Card.d.ts",
+      "import": "./dist/components/Card.js",
+      "require": "./dist/components/Card.cjs"
+    },
+    "./components/Carousel": {
+      "types": "./dist/components/Carousel.d.ts",
+      "import": "./dist/components/Carousel.js",
+      "require": "./dist/components/Carousel.cjs"
+    },
+    "./components/CheckRow": {
+      "types": "./dist/components/CheckRow.d.ts",
+      "import": "./dist/components/CheckRow.js",
+      "require": "./dist/components/CheckRow.cjs"
+    },
+    "./components/Checkbox": {
+      "types": "./dist/components/Checkbox.d.ts",
+      "import": "./dist/components/Checkbox.js",
+      "require": "./dist/components/Checkbox.cjs"
+    },
+    "./components/Chip": {
+      "types": "./dist/components/Chip.d.ts",
+      "import": "./dist/components/Chip.js",
+      "require": "./dist/components/Chip.cjs"
+    },
+    "./components/Clamp": {
+      "types": "./dist/components/Clamp.d.ts",
+      "import": "./dist/components/Clamp.js",
+      "require": "./dist/components/Clamp.cjs"
+    },
+    "./components/ColorPicker": {
+      "types": "./dist/components/ColorPicker.d.ts",
+      "import": "./dist/components/ColorPicker.js",
+      "require": "./dist/components/ColorPicker.cjs"
+    },
+    "./components/ColumnView": {
+      "types": "./dist/components/ColumnView.d.ts",
+      "import": "./dist/components/ColumnView.js",
+      "require": "./dist/components/ColumnView.cjs"
+    },
+    "./components/ComboRow": {
+      "types": "./dist/components/ComboRow.d.ts",
+      "import": "./dist/components/ComboRow.js",
+      "require": "./dist/components/ComboRow.cjs"
+    },
+    "./components/ContributionGraph": {
+      "types": "./dist/components/ContributionGraph.d.ts",
+      "import": "./dist/components/ContributionGraph.js",
+      "require": "./dist/components/ContributionGraph.cjs"
+    },
+    "./components/CountDownTimer": {
+      "types": "./dist/components/CountDownTimer.d.ts",
+      "import": "./dist/components/CountDownTimer.js",
+      "require": "./dist/components/CountDownTimer.cjs"
+    },
+    "./components/Dialog": {
+      "types": "./dist/components/Dialog.d.ts",
+      "import": "./dist/components/Dialog.js",
+      "require": "./dist/components/Dialog.cjs"
+    },
+    "./components/Dropdown": {
+      "types": "./dist/components/Dropdown.d.ts",
+      "import": "./dist/components/Dropdown.js",
+      "require": "./dist/components/Dropdown.cjs"
+    },
+    "./components/EntryRow": {
+      "types": "./dist/components/EntryRow.d.ts",
+      "import": "./dist/components/EntryRow.js",
+      "require": "./dist/components/EntryRow.cjs"
+    },
+    "./components/ExpanderRow": {
+      "types": "./dist/components/ExpanderRow.d.ts",
+      "import": "./dist/components/ExpanderRow.js",
+      "require": "./dist/components/ExpanderRow.cjs"
+    },
+    "./components/Footer": {
+      "types": "./dist/components/Footer.d.ts",
+      "import": "./dist/components/Footer.js",
+      "require": "./dist/components/Footer.cjs"
+    },
+    "./components/Frame": {
+      "types": "./dist/components/Frame.d.ts",
+      "import": "./dist/components/Frame.js",
+      "require": "./dist/components/Frame.cjs"
+    },
+    "./components/HeaderBar": {
+      "types": "./dist/components/HeaderBar.d.ts",
+      "import": "./dist/components/HeaderBar.js",
+      "require": "./dist/components/HeaderBar.cjs"
+    },
+    "./components/Icon": {
+      "types": "./dist/components/Icon.d.ts",
+      "import": "./dist/components/Icon.js",
+      "require": "./dist/components/Icon.cjs"
+    },
+    "./components/InlineViewSwitcher": {
+      "types": "./dist/components/InlineViewSwitcher.d.ts",
+      "import": "./dist/components/InlineViewSwitcher.js",
+      "require": "./dist/components/InlineViewSwitcher.cjs"
+    },
+    "./components/Link": {
+      "types": "./dist/components/Link.d.ts",
+      "import": "./dist/components/Link.js",
+      "require": "./dist/components/Link.cjs"
+    },
+    "./components/LinkedGroup": {
+      "types": "./dist/components/LinkedGroup.d.ts",
+      "import": "./dist/components/LinkedGroup.js",
+      "require": "./dist/components/LinkedGroup.cjs"
+    },
+    "./components/NavigationSplitView": {
+      "types": "./dist/components/NavigationSplitView.d.ts",
+      "import": "./dist/components/NavigationSplitView.js",
+      "require": "./dist/components/NavigationSplitView.cjs"
+    },
+    "./components/NavigationView": {
+      "types": "./dist/components/NavigationView.d.ts",
+      "import": "./dist/components/NavigationView.js",
+      "require": "./dist/components/NavigationView.cjs"
+    },
+    "./components/OverlaySplitView": {
+      "types": "./dist/components/OverlaySplitView.d.ts",
+      "import": "./dist/components/OverlaySplitView.js",
+      "require": "./dist/components/OverlaySplitView.cjs"
+    },
+    "./components/PasswordEntryRow": {
+      "types": "./dist/components/PasswordEntryRow.d.ts",
+      "import": "./dist/components/PasswordEntryRow.js",
+      "require": "./dist/components/PasswordEntryRow.cjs"
+    },
+    "./components/PathBar": {
+      "types": "./dist/components/PathBar.d.ts",
+      "import": "./dist/components/PathBar.js",
+      "require": "./dist/components/PathBar.cjs"
+    },
+    "./components/Popover": {
+      "types": "./dist/components/Popover.d.ts",
+      "import": "./dist/components/Popover.js",
+      "require": "./dist/components/Popover.cjs"
+    },
+    "./components/PreferencesDialog": {
+      "types": "./dist/components/PreferencesDialog.d.ts",
+      "import": "./dist/components/PreferencesDialog.js",
+      "require": "./dist/components/PreferencesDialog.cjs"
+    },
+    "./components/PreferencesGroup": {
+      "types": "./dist/components/PreferencesGroup.d.ts",
+      "import": "./dist/components/PreferencesGroup.js",
+      "require": "./dist/components/PreferencesGroup.cjs"
+    },
+    "./components/PreferencesPage": {
+      "types": "./dist/components/PreferencesPage.d.ts",
+      "import": "./dist/components/PreferencesPage.js",
+      "require": "./dist/components/PreferencesPage.cjs"
+    },
+    "./components/ProgressBar": {
+      "types": "./dist/components/ProgressBar.d.ts",
+      "import": "./dist/components/ProgressBar.js",
+      "require": "./dist/components/ProgressBar.cjs"
+    },
+    "./components/RadioButton": {
+      "types": "./dist/components/RadioButton.d.ts",
+      "import": "./dist/components/RadioButton.js",
+      "require": "./dist/components/RadioButton.cjs"
+    },
+    "./components/SearchBar": {
+      "types": "./dist/components/SearchBar.d.ts",
+      "import": "./dist/components/SearchBar.js",
+      "require": "./dist/components/SearchBar.cjs"
+    },
+    "./components/Separator": {
+      "types": "./dist/components/Separator.d.ts",
+      "import": "./dist/components/Separator.js",
+      "require": "./dist/components/Separator.cjs"
+    },
+    "./components/ShortcutLabel": {
+      "types": "./dist/components/ShortcutLabel.d.ts",
+      "import": "./dist/components/ShortcutLabel.js",
+      "require": "./dist/components/ShortcutLabel.cjs"
+    },
+    "./components/ShortcutsDialog": {
+      "types": "./dist/components/ShortcutsDialog.d.ts",
+      "import": "./dist/components/ShortcutsDialog.js",
+      "require": "./dist/components/ShortcutsDialog.cjs"
+    },
+    "./components/Sidebar": {
+      "types": "./dist/components/Sidebar.d.ts",
+      "import": "./dist/components/Sidebar.js",
+      "require": "./dist/components/Sidebar.cjs"
+    },
+    "./components/Slider": {
+      "types": "./dist/components/Slider.d.ts",
+      "import": "./dist/components/Slider.js",
+      "require": "./dist/components/Slider.cjs"
+    },
+    "./components/SpinButton": {
+      "types": "./dist/components/SpinButton.d.ts",
+      "import": "./dist/components/SpinButton.js",
+      "require": "./dist/components/SpinButton.cjs"
+    },
+    "./components/SpinRow": {
+      "types": "./dist/components/SpinRow.d.ts",
+      "import": "./dist/components/SpinRow.js",
+      "require": "./dist/components/SpinRow.cjs"
+    },
+    "./components/Spinner": {
+      "types": "./dist/components/Spinner.d.ts",
+      "import": "./dist/components/Spinner.js",
+      "require": "./dist/components/Spinner.cjs"
+    },
+    "./components/SplitButton": {
+      "types": "./dist/components/SplitButton.d.ts",
+      "import": "./dist/components/SplitButton.js",
+      "require": "./dist/components/SplitButton.cjs"
+    },
+    "./components/StatusBadge": {
+      "types": "./dist/components/StatusBadge.d.ts",
+      "import": "./dist/components/StatusBadge.js",
+      "require": "./dist/components/StatusBadge.cjs"
+    },
+    "./components/StatusPage": {
+      "types": "./dist/components/StatusPage.d.ts",
+      "import": "./dist/components/StatusPage.js",
+      "require": "./dist/components/StatusPage.cjs"
+    },
+    "./components/Switch": {
+      "types": "./dist/components/Switch.d.ts",
+      "import": "./dist/components/Switch.js",
+      "require": "./dist/components/Switch.cjs"
+    },
+    "./components/SwitchRow": {
+      "types": "./dist/components/SwitchRow.d.ts",
+      "import": "./dist/components/SwitchRow.js",
+      "require": "./dist/components/SwitchRow.cjs"
+    },
+    "./components/Tabs": {
+      "types": "./dist/components/Tabs.d.ts",
+      "import": "./dist/components/Tabs.js",
+      "require": "./dist/components/Tabs.cjs"
+    },
+    "./components/TerminalView": {
+      "types": "./dist/components/TerminalView.d.ts",
+      "import": "./dist/components/TerminalView.js",
+      "require": "./dist/components/TerminalView.cjs"
+    },
+    "./components/Text": {
+      "types": "./dist/components/Text.d.ts",
+      "import": "./dist/components/Text.js",
+      "require": "./dist/components/Text.cjs"
+    },
+    "./components/TextField": {
+      "types": "./dist/components/TextField.d.ts",
+      "import": "./dist/components/TextField.js",
+      "require": "./dist/components/TextField.cjs"
+    },
+    "./components/Timeline": {
+      "types": "./dist/components/Timeline.d.ts",
+      "import": "./dist/components/Timeline.js",
+      "require": "./dist/components/Timeline.cjs"
+    },
+    "./components/Toast": {
+      "types": "./dist/components/Toast.d.ts",
+      "import": "./dist/components/Toast.js",
+      "require": "./dist/components/Toast.cjs"
+    },
+    "./components/ToggleGroup": {
+      "types": "./dist/components/ToggleGroup.d.ts",
+      "import": "./dist/components/ToggleGroup.js",
+      "require": "./dist/components/ToggleGroup.cjs"
+    },
+    "./components/Toolbar": {
+      "types": "./dist/components/Toolbar.d.ts",
+      "import": "./dist/components/Toolbar.js",
+      "require": "./dist/components/Toolbar.cjs"
+    },
+    "./components/ToolbarView": {
+      "types": "./dist/components/ToolbarView.d.ts",
+      "import": "./dist/components/ToolbarView.js",
+      "require": "./dist/components/ToolbarView.cjs"
+    },
+    "./components/Tooltip": {
+      "types": "./dist/components/Tooltip.d.ts",
+      "import": "./dist/components/Tooltip.js",
+      "require": "./dist/components/Tooltip.cjs"
+    },
+    "./components/ViewSwitcher": {
+      "types": "./dist/components/ViewSwitcher.d.ts",
+      "import": "./dist/components/ViewSwitcher.js",
+      "require": "./dist/components/ViewSwitcher.cjs"
+    },
+    "./components/ViewSwitcherBar": {
+      "types": "./dist/components/ViewSwitcherBar.d.ts",
+      "import": "./dist/components/ViewSwitcherBar.js",
+      "require": "./dist/components/ViewSwitcherBar.cjs"
+    },
+    "./components/ViewSwitcherSidebar": {
+      "types": "./dist/components/ViewSwitcherSidebar.d.ts",
+      "import": "./dist/components/ViewSwitcherSidebar.js",
+      "require": "./dist/components/ViewSwitcherSidebar.cjs"
+    },
+    "./components/WindowTitle": {
+      "types": "./dist/components/WindowTitle.d.ts",
+      "import": "./dist/components/WindowTitle.js",
+      "require": "./dist/components/WindowTitle.cjs"
+    },
+    "./components/WrapBox": {
+      "types": "./dist/components/WrapBox.d.ts",
+      "import": "./dist/components/WrapBox.js",
+      "require": "./dist/components/WrapBox.cjs"
+    },
+    "./hooks": {
+      "types": "./dist/hooks.d.ts",
+      "import": "./dist/hooks.js",
+      "require": "./dist/hooks.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
@@ -17,6 +402,10 @@
       "default": "./dist/style.css"
     }
   },
+  "sideEffects": [
+    "**/*.css",
+    "dist/style.css"
+  ],
   "files": [
     "dist"
   ],
@@ -58,6 +447,7 @@
     "react-dom": "^19.0.0",
     "storybook": "^10.3.3",
     "vite": "^8.0.3",
+    "vite-magic-tree-shaking": "^1.0.0",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.1.4"
   }
