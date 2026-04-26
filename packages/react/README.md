@@ -27,8 +27,7 @@ import "@gnome-ui/react/styles";
 ## Quick example
 
 ```tsx
-import { Button, TextField, Dialog } from "@gnome-ui/react";
-import "@gnome-ui/react/styles";
+import { Button } from "@gnome-ui/react";
 
 export default function App() {
   return (
@@ -37,6 +36,21 @@ export default function App() {
     </Button>
   );
 }
+```
+
+## Tree-shaking
+
+The package ships per-component entry points, so bundlers (webpack, Rollup, esbuild, Vite) can eliminate unused components automatically. Named imports from the root entry work with any bundler that respects `"sideEffects"`:
+
+```tsx
+// Only Button is included in the bundle
+import { Button } from "@gnome-ui/react";
+```
+
+Per-component paths are also available for explicit control:
+
+```tsx
+import { Button } from "@gnome-ui/react/components/Button";
 ```
 
 ## Components
