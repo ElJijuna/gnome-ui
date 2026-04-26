@@ -24,6 +24,21 @@ Import the stylesheet once at the root of your app:
 import "@gnome-ui/layout/styles";
 ```
 
+## Tree-shaking
+
+The package ships per-component entry points, so bundlers can eliminate unused components automatically:
+
+```tsx
+// Only Layout is included in the bundle
+import { Layout } from "@gnome-ui/layout";
+```
+
+Per-component paths are also available:
+
+```tsx
+import { Layout } from "@gnome-ui/layout/components/Layout";
+```
+
 ## Components
 
 ### `Layout`
