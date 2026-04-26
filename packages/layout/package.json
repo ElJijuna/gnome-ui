@@ -7,6 +7,46 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./components/AdaptiveLayout": {
+      "types": "./dist/components/AdaptiveLayout.d.ts",
+      "import": "./dist/components/AdaptiveLayout.js",
+      "require": "./dist/components/AdaptiveLayout.cjs"
+    },
+    "./components/ApplicationCard": {
+      "types": "./dist/components/ApplicationCard.d.ts",
+      "import": "./dist/components/ApplicationCard.js",
+      "require": "./dist/components/ApplicationCard.cjs"
+    },
+    "./components/CounterCard": {
+      "types": "./dist/components/CounterCard.d.ts",
+      "import": "./dist/components/CounterCard.js",
+      "require": "./dist/components/CounterCard.cjs"
+    },
+    "./components/EntityCard": {
+      "types": "./dist/components/EntityCard.d.ts",
+      "import": "./dist/components/EntityCard.js",
+      "require": "./dist/components/EntityCard.cjs"
+    },
+    "./components/IconBadge": {
+      "types": "./dist/components/IconBadge.d.ts",
+      "import": "./dist/components/IconBadge.js",
+      "require": "./dist/components/IconBadge.cjs"
+    },
+    "./components/Layout": {
+      "types": "./dist/components/Layout.d.ts",
+      "import": "./dist/components/Layout.js",
+      "require": "./dist/components/Layout.cjs"
+    },
+    "./components/PanelCard": {
+      "types": "./dist/components/PanelCard.d.ts",
+      "import": "./dist/components/PanelCard.js",
+      "require": "./dist/components/PanelCard.cjs"
+    },
+    "./components/UserCard": {
+      "types": "./dist/components/UserCard.d.ts",
+      "import": "./dist/components/UserCard.js",
+      "require": "./dist/components/UserCard.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
@@ -14,6 +54,7 @@
     },
     "./styles": "./dist/style.css"
   },
+  "sideEffects": ["**/*.css", "dist/style.css"],
   "files": [
     "dist"
   ],
@@ -59,6 +100,7 @@
     "react-dom": "^19.0.0",
     "storybook": "^10.3.3",
     "vite": "^8.0.3",
+    "vite-magic-tree-shaking": "^1.0.0",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.1.4"
   }
