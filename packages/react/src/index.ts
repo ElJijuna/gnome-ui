@@ -127,7 +127,7 @@ export { ToggleGroup, ToggleGroupItem } from "./components/ToggleGroup";
 export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/ToggleGroup";
 
 export { Box } from "./components/Box";
-export type { BoxProps, BoxOrientation, BoxAlign, BoxJustify, BoxSpacing } from "./components/Box";
+export type { BoxProps, BoxOrientation, BoxAlign, BoxJustify, BoxSpacing, BoxPadding } from "./components/Box";
 
 export { WrapBox } from "./components/WrapBox";
 export type { WrapBoxProps, WrapBoxJustify, WrapBoxAlign } from "./components/WrapBox";

@@ -3,6 +3,9 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
 /** GNOME HIG standard spacing values (matches GtkBox spacing tokens). */
 export type BoxSpacing = 3 | 6 | 12 | 18 | 24 | 32 | 48;
 
+/** Alias of `BoxSpacing` for use as a padding scale. */
+export type BoxPadding = BoxSpacing;
+
 export type BoxOrientation = "horizontal" | "vertical";
 export type BoxAlign = "start" | "center" | "end" | "stretch" | "baseline";
 export type BoxJustify =
@@ -36,6 +39,11 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
    * Defaults to `"start"`.
    */
   justify?: BoxJustify;
+  /**
+   * Inner padding applied to all sides.
+   * Accepts any of the GNOME HIG standard spacing values or any CSS string.
+   */
+  padding?: BoxPadding | number | string;
   children?: ReactNode;
 }
 
@@ -77,6 +85,7 @@ export function Box({
   spacing = 6,
   align,
   justify = "start",
+  padding,
   className,
   style,
   children,
@@ -91,6 +100,7 @@ export function Box({
     gap: typeof spacing === "number" ? `${spacing}px` : spacing,
     alignItems: align ?? defaultAlign,
     justifyContent: justify,
+    ...(padding !== undefined && { padding: typeof padding === "number" ? `${padding}px` : padding }),
     ...style,
   };
 
