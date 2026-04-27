@@ -1,3 +1,9 @@
+## [1.27.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.27.0...@gnome-ui/charts@1.27.1) (2026-04-27)
+
+### Refactoring
+
+* **layout:** move inline styles to CSS and add footer/Separator to AdaptiveLayout ([7377c45](https://github.com/ElJijuna/gnome-ui/commit/7377c45cf0ad7d702c7ce4320f0d83dc5bb1b32e))
+
 ## [1.27.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.26.4...@gnome-ui/charts@1.27.0) (2026-04-27)
 
 ### Features
