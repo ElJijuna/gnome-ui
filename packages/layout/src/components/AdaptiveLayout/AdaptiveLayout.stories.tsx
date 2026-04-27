@@ -4,12 +4,27 @@ import { GoHome, Search, Star, Settings, Share, Folder, Document, Applications }
 import { HeaderBar, Avatar } from "@gnome-ui/react";
 import { AdaptiveLayout } from "./AdaptiveLayout";
 import { UserCard } from "../UserCard";
-import type { AdaptiveNavItem } from "./AdaptiveLayout";
+import type { AdaptiveNavItem, GnomeColor, GnomeColorShade } from "./AdaptiveLayout";
 
 const meta: Meta<typeof AdaptiveLayout> = {
   title: "Adaptive/AdaptiveLayout",
   component: AdaptiveLayout,
   tags: ["autodocs"],
+  argTypes: {
+    bgColor: {
+      control: "select",
+      options: ["white", "blue", "green", "yellow", "orange", "red", "purple", "brown"],
+      description: "Background color from the gnome palette",
+    },
+    bgShade: {
+      control: { type: "range", min: 1, max: 5, step: 1 },
+      description: "Shade of the background color (1 = lightest, 5 = darkest)",
+    },
+    bgOpacity: {
+      control: { type: "range", min: 0, max: 1, step: 0.05 },
+      description: "Opacity of the background color (0–1)",
+    },
+  },
   parameters: {
     layout: "fullscreen",
     docs: {
@@ -27,6 +42,8 @@ for the avatar-only version (collapsed). Grouped items (\`group\` field) become
 sidebar sections on tablet/desktop and a single slot + \`BottomSheet\` on mobile.
 When mobile bar slots exceed 4, the first 3 are shown and a **More** button handles
 the rest.
+
+Use \`bgColor\`, \`bgShade\` (1–5), and \`bgOpacity\` (0–1) to tint the shell background.
         `,
       },
     },
@@ -133,6 +150,58 @@ export const MobileOverflow: Story = {
     docs: {
       description: {
         story: "6 ungrouped items on mobile: the first 3 appear in the bar, the rest open via a **More** BottomSheet. If the active item is in the overflow group, More renders in its active state.",
+      },
+    },
+  },
+};
+
+export const WithBackground: Story = {
+  render: function BackgroundStory(args) {
+    const [active, setActive] = useState("dashboard");
+    const activeItem = items.find((i) => i.id === active);
+
+    return (
+      <AdaptiveLayout
+        {...args}
+        items={items}
+        value={active}
+        onValueChange={setActive}
+        topBar={<HeaderBar title="Developer Portal" />}
+        sidebarHeader={
+          <UserCard
+            name="El Jijuna"
+            email="Developer"
+            orientation="horizontal"
+            avatarColor="red"
+            avatarSize="md"
+          />
+        }
+        sidebarHeaderCollapsed={
+          <div style={{ display: "flex", justifyContent: "center", padding: "10px 0" }}>
+            <Avatar name="El Jijuna" color="red" size="md" />
+          </div>
+        }
+      >
+        <div style={{ padding: 24 }}>
+          <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
+            {activeItem?.label}
+          </p>
+          <p style={{ fontFamily: "var(--gnome-font-family)", opacity: 0.6, margin: 0 }}>
+            Use the <strong>Controls</strong> panel to change <code>bgColor</code>, <code>bgShade</code>, and <code>bgOpacity</code>.
+          </p>
+        </div>
+      </AdaptiveLayout>
+    );
+  },
+  args: {
+    bgColor: "white" as GnomeColor,
+    bgShade: 3 as GnomeColorShade,
+    bgOpacity: 1,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Use the **Controls** panel to experiment with `bgColor`, `bgShade` (1–5), and `bgOpacity` (0–1) on any breakpoint.",
       },
     },
   },

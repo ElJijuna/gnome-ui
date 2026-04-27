@@ -1,4 +1,4 @@
-import { useState, useMemo, type ReactNode } from "react";
+import { useState, useMemo, type CSSProperties, type ReactNode } from "react";
 import { useBreakpoint } from "@gnome-ui/hooks";
 import {
   ViewSwitcherBar,
@@ -30,6 +30,11 @@ export interface AdaptiveNavItem {
   group?: string;
 }
 
+export type GnomeColor =
+  | "white" | "blue" | "green" | "yellow" | "orange" | "red" | "purple" | "brown";
+
+export type GnomeColorShade = 1 | 2 | 3 | 4 | 5;
+
 export interface AdaptiveLayoutProps {
   /** Navigation items rendered in the bar (mobile) or sidebar (tablet/desktop). */
   items: AdaptiveNavItem[];
@@ -51,6 +56,21 @@ export interface AdaptiveLayoutProps {
   sidebarHeaderCollapsed?: ReactNode;
   /** Main scrollable content area. */
   children?: ReactNode;
+  /**
+   * Background color from the gnome color palette.
+   * Defaults to white (`#ffffff`) when omitted.
+   */
+  bgColor?: GnomeColor;
+  /**
+   * Shade of the selected `bgColor` (1–5, lightest to darkest).
+   * Defaults to `3`.
+   */
+  bgShade?: GnomeColorShade;
+  /**
+   * Opacity of the background color (0–1).
+   * Defaults to `1` (fully opaque).
+   */
+  bgOpacity?: number;
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -86,6 +106,9 @@ export function AdaptiveLayout({
   sidebarHeader,
   sidebarHeaderCollapsed,
   children,
+  bgColor,
+  bgShade = 3,
+  bgOpacity = 1,
 }: AdaptiveLayoutProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
@@ -95,6 +118,13 @@ export function AdaptiveLayout({
 
   // Tablet always icon-only; desktop expanded by default, user can toggle.
   const sidebarCollapsed = isTablet || (userCollapsed ?? false);
+
+  const bgStyle: CSSProperties =
+    !bgColor || bgColor === "white"
+      ? bgOpacity < 1
+        ? { background: `rgba(255, 255, 255, ${bgOpacity})` }
+        : {}
+      : { background: `color-mix(in srgb, var(--gnome-${bgColor}-${bgShade}) ${bgOpacity * 100}%, transparent)` };
 
   // ── Mobile: compute bar slots ──────────────────────────────────────────────
   const barSlots = useMemo<BarSlot[]>(() => {
@@ -153,7 +183,7 @@ export function AdaptiveLayout({
   if (isMobile) {
     return (
       <>
-        <div className={styles.root}>
+        <div className={styles.root} style={bgStyle}>
           {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
           <div className={styles.contentSlot}>{children}</div>
 
@@ -242,7 +272,7 @@ export function AdaptiveLayout({
 
   // ── Tablet / Desktop ───────────────────────────────────────────────────────
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={bgStyle}>
       {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
 
       <div className={styles.body}>
