@@ -1,9 +1,10 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { GoHome, Search, Star, Settings, Share, Folder, Document, Applications } from "@gnome-ui/icons";
-import { HeaderBar, Avatar } from "@gnome-ui/react";
+import { HeaderBar, Avatar, WrapBox, Text, Icon, Box, Button } from "@gnome-ui/react";
 import { AdaptiveLayout } from "./AdaptiveLayout";
 import { UserCard } from "../UserCard";
+import { IconBadge } from "../IconBadge";
 import type { AdaptiveNavItem, GnomeColor, GnomeColorShade } from "./AdaptiveLayout";
 
 const meta: Meta<typeof AdaptiveLayout> = {
@@ -117,14 +118,12 @@ export const Default: Story = {
           </div>
         }
       >
-        <div style={{ padding: 24 }}>
-          <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
-            {activeItem?.label}
-          </p>
-          <p style={{ fontFamily: "var(--gnome-font-family)", opacity: 0.6, margin: 0 }}>
-            Resize the viewport using the toolbar to see Mobile, Tablet, and Desktop layouts.
-          </p>
-        </div>
+        <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
+          {activeItem?.label}
+        </p>
+        <p style={{ fontFamily: "var(--gnome-font-family)", opacity: 0.6, margin: 0 }}>
+          Resize the viewport using the toolbar to see Mobile, Tablet, and Desktop layouts.
+        </p>
       </AdaptiveLayout>
     );
   },
@@ -150,7 +149,7 @@ export const MobileOverflow: Story = {
         onValueChange={setActive}
         topBar={<HeaderBar title="My App" />}
       >
-        <div style={{ padding: 24 }}>
+        <div>
           <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
             {activeItem?.label}
           </p>
@@ -185,13 +184,15 @@ export const Playground: Story = {
         onValueChange={setActive}
         topBar={<HeaderBar title="Developer Portal" />}
         sidebarHeader={
-          <UserCard
-            name="El Jijuna"
-            email="Developer"
-            orientation="horizontal"
-            avatarColor="red"
-            avatarSize="md"
-          />
+          <Box orientation="horizontal" justify="space-between" align="center" padding={6}>
+            <Box orientation="horizontal" align="center" style={{ flexGrow: 1 }}>
+              <Avatar name="Application" color="red" size="md" />
+              <Text>App Name</Text>
+            </Box>
+            <Button shape="circular" size="sm">
+              <Icon icon={Settings} size="sm" />
+            </Button>
+          </Box>
         }
         sidebarHeaderCollapsed={
           <div style={{ display: "flex", justifyContent: "center", padding: "10px 0" }}>
@@ -212,8 +213,17 @@ export const Playground: Story = {
             <Avatar name="El Jijuna" color="red" size="md" />
           </div>
         }
+        footer={
+          <WrapBox justify="space-between">
+            <Text color="dim" variant="caption">© 2025 My Company</Text>
+            <WrapBox>
+              <Button variant="flat" size="sm">Privacy</Button>
+              <Button variant="flat" size="sm">Terms</Button>
+            </WrapBox>
+          </WrapBox>
+        }
       >
-        <div style={{ padding: 24 }}>
+        <div>
           <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
             {activeItem?.label}
           </p>
@@ -270,7 +280,7 @@ export const SidebarFull: Story = {
           </div>
         }
       >
-        <div style={{ padding: 24 }}>
+        <div>
           <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
             {activeItem?.label}
           </p>
@@ -320,7 +330,7 @@ export const WithSidebarFooter: Story = {
           </div>
         }
       >
-        <div style={{ padding: 24 }}>
+        <div>
           <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
             {activeItem?.label}
           </p>

@@ -7,6 +7,9 @@ import {
   ViewSwitcherSidebarItem,
   BottomSheet,
   Icon,
+  Box,
+  Button,
+  Separator,
 } from "@gnome-ui/react";
 import { PanStart, PanEnd } from "@gnome-ui/icons";
 import type { IconDefinition } from "@gnome-ui/icons";
@@ -57,6 +60,8 @@ export interface AdaptiveLayoutProps {
   sidebarHeaderCollapsed?: ReactNode;
   /** Main scrollable content area. */
   children?: ReactNode;
+  /** Content rendered below the main content area (outside the scrollable zone). */
+  footer?: ReactNode;
   /**
    * Controls how the sidebar relates to the top bar on tablet/desktop.
    * - `"inline"` (default): top bar spans the full width, sidebar sits below it.
@@ -135,6 +140,7 @@ export function AdaptiveLayout({
   sidebarHeader,
   sidebarHeaderCollapsed,
   children,
+  footer,
   bgColor,
   bgShade = 3,
   bgOpacity = 1,
@@ -143,8 +149,8 @@ export function AdaptiveLayout({
   sidebarFooterCollapsed,
   showCollapseButton = true,
   showHeaderSeparator = true,
-  showFooterSeparator = true,
   showCollapseButtonSeparator = false,
+  showFooterSeparator = true,
 }: AdaptiveLayoutProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
@@ -207,9 +213,9 @@ export function AdaptiveLayout({
   }
 
   // ── Sidebar header node ────────────────────────────────────────────────────
-  const headerNode = sidebarCollapsed
+  const headerNode = <div className={styles.sidebarSlot}>{sidebarCollapsed
     ? (sidebarHeaderCollapsed ?? sidebarHeader)
-    : sidebarHeader;
+    : sidebarHeader}</div>;
 
   // ── Sidebar items (ungrouped + grouped sections) ───────────────────────────
   const ungroupedItems = items.filter((i) => !i.group);
@@ -294,17 +300,6 @@ export function AdaptiveLayout({
   }
 
   // ── Collapse toggle footer ─────────────────────────────────────────────────
-  const collapseFooter = (
-    <button
-      type="button"
-      className={[styles.collapseBtn, showCollapseButtonSeparator ? styles.collapseBtnSeparator : null].filter(Boolean).join(" ")}
-      onClick={() => setUserCollapsed(!sidebarCollapsed)}
-      aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-    >
-      <Icon icon={sidebarCollapsed ? PanEnd : PanStart} size="sm" aria-hidden />
-    </button>
-  );
-
   const footerContentNode = sidebarCollapsed
     ? (sidebarFooterCollapsed ?? sidebarFooter)
     : sidebarFooter;
@@ -312,9 +307,26 @@ export function AdaptiveLayout({
   const collapseFooterNode = (
     <>
       {footerContentNode && (
-        <div className={styles.sidebarFooterSlot}>{footerContentNode}</div>
+        <>
+          {showFooterSeparator && <Separator className={styles.sidebarSeparator} />}
+          <div className={styles.sidebarSlot}>{footerContentNode}</div>
+        </>
       )}
-      {showCollapseButton && collapseFooter}
+      {showCollapseButton && (
+        <>
+          {showCollapseButtonSeparator && <Separator className={styles.sidebarSeparator} />}
+          <div className={styles.sidebarSlot}>
+            <Button
+              variant="flat"
+              className={styles.collapseBtn}
+              onClick={() => setUserCollapsed(!sidebarCollapsed)}
+              aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            >
+              <Icon icon={sidebarCollapsed ? PanEnd : PanStart} size="sm" aria-hidden />
+            </Button>
+          </div>
+        </>
+      )}
     </>
   );
 
@@ -327,7 +339,8 @@ export function AdaptiveLayout({
       header={headerNode}
       footer={collapseFooterNode}
       showHeaderSeparator={showHeaderSeparator}
-      showFooterSeparator={showFooterSeparator}
+      showFooterSeparator={false}
+      className={sidebarPlacement === "full" ? styles.sidebarNoRightBorder : undefined}
     >
       {ungroupedItems.map((item) => (
         <ViewSwitcherSidebarItem
@@ -367,8 +380,11 @@ export function AdaptiveLayout({
       <div className={`${styles.root} ${styles.rootFull}`} style={bgStyle}>
         {sidebarNav}
         <div className={styles.fullRight}>
-          {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
-          <div className={styles.contentSlot}>{children}</div>
+          {topBar && <div className={`${styles.topBarSlot} ${styles.topBarSlotFull}`}>{topBar}</div>}
+          <div className={`${styles.contentSlot} ${styles.contentSlotFull}`}>{children}</div>
+          <Box padding={6}>
+            {footer}
+          </Box>
         </div>
       </div>
     );
@@ -380,7 +396,15 @@ export function AdaptiveLayout({
 
       <div className={styles.body}>
         {sidebarNav}
-        <div className={styles.contentSlot}>{children}</div>
+        <div className={styles.contentSlot}>
+          <div className={styles.inlineContentWrapper}>{children}</div>
+          {footer && (
+            <div className={styles.inlineFooterWrapper}>
+              <Separator />
+              <Box padding={6}>{footer}</Box>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
