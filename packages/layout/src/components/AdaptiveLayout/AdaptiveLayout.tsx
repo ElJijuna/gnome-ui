@@ -42,7 +42,7 @@ export interface AdaptiveLayoutProps {
   value: string;
   /** Called with the id of the newly selected item. */
   onValueChange: (id: string) => void;
-  /** Content for the top HeaderBar zone — spans full width. */
+  /** Content for the top HeaderBar zone. */
   topBar?: ReactNode;
   /**
    * Content shown at the top of the sidebar in expanded mode (desktop).
@@ -56,6 +56,13 @@ export interface AdaptiveLayoutProps {
   sidebarHeaderCollapsed?: ReactNode;
   /** Main scrollable content area. */
   children?: ReactNode;
+  /**
+   * Controls how the sidebar relates to the top bar on tablet/desktop.
+   * - `"inline"` (default): top bar spans the full width, sidebar sits below it.
+   * - `"full"`: sidebar spans the full height on the left, top bar + content
+   *   are stacked on the right — the sidebar effectively pushes everything to the right.
+   */
+  sidebarPlacement?: "inline" | "full";
   /**
    * Background color from the gnome color palette.
    * Defaults to white (`#ffffff`) when omitted.
@@ -109,6 +116,7 @@ export function AdaptiveLayout({
   bgColor,
   bgShade = 3,
   bgOpacity = 1,
+  sidebarPlacement = "inline",
 }: AdaptiveLayoutProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
@@ -270,50 +278,66 @@ export function AdaptiveLayout({
     </button>
   );
 
+  // ── Sidebar nav (shared between both placement modes) ─────────────────────
+  const sidebarNav = (
+    <ViewSwitcherSidebar
+      value={value}
+      onValueChange={onValueChange}
+      collapsed={sidebarCollapsed}
+      header={headerNode}
+      footer={collapseFooter}
+    >
+      {ungroupedItems.map((item) => (
+        <ViewSwitcherSidebarItem
+          key={item.id}
+          name={item.id}
+          label={item.label}
+          icon={item.icon}
+          count={item.badge ?? undefined}
+        />
+      ))}
+
+      {groupNames.map((groupName) => {
+        const groupItems = items.filter((i) => i.group === groupName);
+        return (
+          <li key={groupName} className={styles.sidebarGroup}>
+            {!sidebarCollapsed && (
+              <span className={styles.sidebarGroupLabel}>{groupName}</span>
+            )}
+            {groupItems.map((item) => (
+              <ViewSwitcherSidebarItem
+                key={item.id}
+                name={item.id}
+                label={item.label}
+                icon={item.icon}
+                count={item.badge ?? undefined}
+              />
+            ))}
+          </li>
+        );
+      })}
+    </ViewSwitcherSidebar>
+  );
+
   // ── Tablet / Desktop ───────────────────────────────────────────────────────
+  if (sidebarPlacement === "full") {
+    return (
+      <div className={`${styles.root} ${styles.rootFull}`} style={bgStyle}>
+        {sidebarNav}
+        <div className={styles.fullRight}>
+          {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
+          <div className={styles.contentSlot}>{children}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.root} style={bgStyle}>
       {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
 
       <div className={styles.body}>
-        <ViewSwitcherSidebar
-          value={value}
-          onValueChange={onValueChange}
-          collapsed={sidebarCollapsed}
-          header={headerNode}
-          footer={collapseFooter}
-        >
-          {ungroupedItems.map((item) => (
-            <ViewSwitcherSidebarItem
-              key={item.id}
-              name={item.id}
-              label={item.label}
-              icon={item.icon}
-              count={item.badge ?? undefined}
-            />
-          ))}
-
-          {groupNames.map((groupName) => {
-            const groupItems = items.filter((i) => i.group === groupName);
-            return (
-              <li key={groupName} className={styles.sidebarGroup}>
-                {!sidebarCollapsed && (
-                  <span className={styles.sidebarGroupLabel}>{groupName}</span>
-                )}
-                {groupItems.map((item) => (
-                  <ViewSwitcherSidebarItem
-                    key={item.id}
-                    name={item.id}
-                    label={item.label}
-                    icon={item.icon}
-                    count={item.badge ?? undefined}
-                  />
-                ))}
-              </li>
-            );
-          })}
-        </ViewSwitcherSidebar>
-
+        {sidebarNav}
         <div className={styles.contentSlot}>{children}</div>
       </div>
     </div>

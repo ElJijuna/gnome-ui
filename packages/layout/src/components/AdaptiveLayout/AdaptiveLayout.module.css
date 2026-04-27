@@ -23,6 +23,20 @@
   min-height: 0;
 }
 
+/* ─── sidebarPlacement="full" ───────────────────────────────────────────────── */
+
+.rootFull {
+  flex-direction: row;
+}
+
+.fullRight {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
 /* ─── Content area ──────────────────────────────────────────────────────────── */
 
 .contentSlot {

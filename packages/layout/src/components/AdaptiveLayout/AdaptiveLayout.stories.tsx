@@ -11,6 +11,11 @@ const meta: Meta<typeof AdaptiveLayout> = {
   component: AdaptiveLayout,
   tags: ["autodocs"],
   argTypes: {
+    sidebarPlacement: {
+      control: "radio",
+      options: ["inline", "full"],
+      description: "\"inline\": top bar spans full width, sidebar below it. \"full\": sidebar spans full height on the left, top bar + content on the right.",
+    },
     bgColor: {
       control: "select",
       options: ["white", "blue", "green", "yellow", "orange", "red", "purple", "brown"],
@@ -202,6 +207,55 @@ export const WithBackground: Story = {
     docs: {
       description: {
         story: "Use the **Controls** panel to experiment with `bgColor`, `bgShade` (1–5), and `bgOpacity` (0–1) on any breakpoint.",
+      },
+    },
+  },
+};
+
+export const SidebarFull: Story = {
+  render: function SidebarFullStory() {
+    const [active, setActive] = useState("dashboard");
+    const activeItem = items.find((i) => i.id === active);
+
+    return (
+      <AdaptiveLayout
+        items={items}
+        value={active}
+        onValueChange={setActive}
+        sidebarPlacement="full"
+        topBar={<HeaderBar title="Developer Portal" />}
+        sidebarHeader={
+          <UserCard
+            name="El Jijuna"
+            email="Developer"
+            orientation="horizontal"
+            avatarColor="red"
+            avatarSize="md"
+          />
+        }
+        sidebarHeaderCollapsed={
+          <div style={{ display: "flex", justifyContent: "center", padding: "10px 0" }}>
+            <Avatar name="El Jijuna" color="red" size="md" />
+          </div>
+        }
+      >
+        <div style={{ padding: 24 }}>
+          <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
+            {activeItem?.label}
+          </p>
+          <p style={{ fontFamily: "var(--gnome-font-family)", opacity: 0.6, margin: 0 }}>
+            <code>sidebarPlacement="full"</code>: the sidebar spans the full height on the left,
+            the top bar and content are stacked on the right.
+          </p>
+        </div>
+      </AdaptiveLayout>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "`sidebarPlacement=\"full\"`: sidebar occupies the full left column, top bar and content are stacked to its right.",
       },
     },
   },
