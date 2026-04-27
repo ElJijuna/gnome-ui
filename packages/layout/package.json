@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/layout",
-  "version": "1.11.3",
+  "version": "1.11.4",
   "description": "Full-page layout shell components following the GNOME Human Interface Guidelines",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -54,7 +54,10 @@
     },
     "./styles": "./dist/style.css"
   },
-  "sideEffects": ["**/*.css", "dist/style.css"],
+  "sideEffects": [
+    "**/*.css",
+    "dist/style.css"
+  ],
   "files": [
     "dist"
   ],
