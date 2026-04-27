@@ -1,3 +1,16 @@
+## [1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.11.4...@gnome-ui/layout@1.12.0) (2026-04-27)
+
+### Features
+
+* **layout:** add bgColor/bgShade/bgOpacity props to AdaptiveLayout ([502965c](https://github.com/ElJijuna/gnome-ui/commit/502965cbc9116d88351953bc83a6267794516de2))
+* **layout:** add sidebarPlacement prop to AdaptiveLayout ([ba4392b](https://github.com/ElJijuna/gnome-ui/commit/ba4392b19ff7cc6f43c344a1f38ff6d68c7b0193))
+* **layout:** sidebar collapse fix, sidebarFooter, separators, and Storybook Playground ([8e36528](https://github.com/ElJijuna/gnome-ui/commit/8e36528364e5a690283c75303f0789de4df72e88))
+* **react:** add padding prop and BoxPadding type to Box ([1feb298](https://github.com/ElJijuna/gnome-ui/commit/1feb298a43c56386f4890d6ed6f311778cd25b1f))
+
+### Bug Fixes
+
+* **layout:** fix sidebar collapse toggle on tablet and polish collapse button (closes [#77](https://github.com/ElJijuna/gnome-ui/issues/77)) ([8d0b103](https://github.com/ElJijuna/gnome-ui/commit/8d0b103a19c292ceb131e950cbf618d98c087351))
+
 ## [1.11.4](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.11.3...@gnome-ui/layout@1.11.4) (2026-04-27)
 
 ### Bug Fixes
