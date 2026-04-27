@@ -33,6 +33,14 @@
   border-top: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
 }
 
+.noHeaderSeparator .header {
+  border-bottom-color: transparent;
+}
+
+.noFooterSeparator .footer {
+  border-top-color: transparent;
+}
+
 /* ─── List ──────────────────────────────────────────────────────────────────── */
 
 .list {

@@ -45,6 +45,12 @@
   min-width: 0;
 }
 
+/* ─── Sidebar footer slot ───────────────────────────────────────────────────── */
+
+.sidebarFooterSlot {
+  padding: var(--gnome-space-2, 8px);
+}
+
 /* ─── Collapse toggle ───────────────────────────────────────────────────────── */
 
 .collapseBtn {
@@ -65,6 +71,10 @@
   color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.6));
   opacity: 0.5;
   transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.collapseBtnSeparator {
+  border-top: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
 }
 
 .collapseBtn:hover { opacity: 1; }

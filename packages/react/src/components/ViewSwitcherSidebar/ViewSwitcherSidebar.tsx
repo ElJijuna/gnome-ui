@@ -46,6 +46,10 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
   header?: ReactNode;
   /** Rendered below the scrollable item list (e.g. collapse toggle). */
   footer?: ReactNode;
+  /** Show the separator line below the header slot. Defaults to `true`. */
+  showHeaderSeparator?: boolean;
+  /** Show the separator line above the footer slot. Defaults to `true`. */
+  showFooterSeparator?: boolean;
   children?: ReactNode;
 }
 
@@ -76,6 +80,8 @@ export function ViewSwitcherSidebar({
   collapsed = false,
   header,
   footer,
+  showHeaderSeparator = true,
+  showFooterSeparator = true,
   children,
   className,
   ...props
@@ -108,7 +114,13 @@ export function ViewSwitcherSidebar({
   return (
     <ViewSwitcherSidebarContext.Provider value={{ value, onValueChange, collapsed }}>
       <nav
-        className={[styles.sidebar, collapsed ? styles.sidebarCollapsed : null, className].filter(Boolean).join(" ")}
+        className={[
+          styles.sidebar,
+          collapsed ? styles.sidebarCollapsed : null,
+          !showHeaderSeparator ? styles.noHeaderSeparator : null,
+          !showFooterSeparator ? styles.noFooterSeparator : null,
+          className,
+        ].filter(Boolean).join(" ")}
         onKeyDown={handleKeyDown}
         {...props}
       >

@@ -7,7 +7,6 @@ import {
   ViewSwitcherSidebarItem,
   BottomSheet,
   Icon,
-  Box,
 } from "@gnome-ui/react";
 import { PanStart, PanEnd } from "@gnome-ui/icons";
 import type { IconDefinition } from "@gnome-ui/icons";
@@ -66,10 +65,26 @@ export interface AdaptiveLayoutProps {
    */
   sidebarPlacement?: "inline" | "full";
   /**
+   * Content rendered at the bottom of the sidebar, above the collapse button.
+   * Typically a `UserCard`. Hidden on mobile.
+   */
+  sidebarFooter?: ReactNode;
+  /**
+   * Collapsed version of `sidebarFooter` — shown when the sidebar is icon-only.
+   * Falls back to `sidebarFooter` when omitted.
+   */
+  sidebarFooterCollapsed?: ReactNode;
+  /**
    * Whether to show the collapse/expand toggle button at the bottom of the
    * sidebar on tablet/desktop. Defaults to `true`.
    */
   showCollapseButton?: boolean;
+  /** Show the separator line below the sidebar header slot. Defaults to `true`. */
+  showHeaderSeparator?: boolean;
+  /** Show the separator line above the sidebar footer slot. Defaults to `true`. */
+  showFooterSeparator?: boolean;
+  /** Show the separator line between `sidebarFooter` content and the collapse button. Defaults to `false`. */
+  showCollapseButtonSeparator?: boolean;
   /**
    * Background color from the gnome color palette.
    * Defaults to white (`#ffffff`) when omitted.
@@ -124,7 +139,12 @@ export function AdaptiveLayout({
   bgShade = 3,
   bgOpacity = 1,
   sidebarPlacement = "inline",
+  sidebarFooter,
+  sidebarFooterCollapsed,
   showCollapseButton = true,
+  showHeaderSeparator = true,
+  showFooterSeparator = true,
+  showCollapseButtonSeparator = false,
 }: AdaptiveLayoutProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
@@ -277,7 +297,7 @@ export function AdaptiveLayout({
   const collapseFooter = (
     <button
       type="button"
-      className={styles.collapseBtn}
+      className={[styles.collapseBtn, showCollapseButtonSeparator ? styles.collapseBtnSeparator : null].filter(Boolean).join(" ")}
       onClick={() => setUserCollapsed(!sidebarCollapsed)}
       aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
     >
@@ -285,7 +305,18 @@ export function AdaptiveLayout({
     </button>
   );
 
-  const collapseFooterNode = showCollapseButton ? collapseFooter : null;
+  const footerContentNode = sidebarCollapsed
+    ? (sidebarFooterCollapsed ?? sidebarFooter)
+    : sidebarFooter;
+
+  const collapseFooterNode = (
+    <>
+      {footerContentNode && (
+        <div className={styles.sidebarFooterSlot}>{footerContentNode}</div>
+      )}
+      {showCollapseButton && collapseFooter}
+    </>
+  );
 
   // ── Sidebar nav (shared between both placement modes) ─────────────────────
   const sidebarNav = (
@@ -295,6 +326,8 @@ export function AdaptiveLayout({
       collapsed={sidebarCollapsed}
       header={headerNode}
       footer={collapseFooterNode}
+      showHeaderSeparator={showHeaderSeparator}
+      showFooterSeparator={showFooterSeparator}
     >
       {ungroupedItems.map((item) => (
         <ViewSwitcherSidebarItem
