@@ -7,7 +7,9 @@ import {
   ViewSwitcherSidebarItem,
   BottomSheet,
   Icon,
+  Box,
 } from "@gnome-ui/react";
+import { PanStart, PanEnd } from "@gnome-ui/icons";
 import type { IconDefinition } from "@gnome-ui/icons";
 import styles from "./AdaptiveLayout.module.css";
 
@@ -64,6 +66,11 @@ export interface AdaptiveLayoutProps {
    */
   sidebarPlacement?: "inline" | "full";
   /**
+   * Whether to show the collapse/expand toggle button at the bottom of the
+   * sidebar on tablet/desktop. Defaults to `true`.
+   */
+  showCollapseButton?: boolean;
+  /**
    * Background color from the gnome color palette.
    * Defaults to white (`#ffffff`) when omitted.
    */
@@ -86,9 +93,9 @@ const MAX_VISIBLE = 3;
 
 // ─── Mobile bar slot types ────────────────────────────────────────────────────
 
-type ItemSlot  = { type: "item";  item: AdaptiveNavItem };
+type ItemSlot = { type: "item"; item: AdaptiveNavItem };
 type GroupSlot = { type: "group"; groupName: string; icon: IconDefinition; groupItems: AdaptiveNavItem[] };
-type BarSlot   = ItemSlot | GroupSlot;
+type BarSlot = ItemSlot | GroupSlot;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -117,6 +124,7 @@ export function AdaptiveLayout({
   bgShade = 3,
   bgOpacity = 1,
   sidebarPlacement = "inline",
+  showCollapseButton = true,
 }: AdaptiveLayoutProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
@@ -124,8 +132,8 @@ export function AdaptiveLayout({
   const [sheetTitle, setSheetTitle] = useState<string | undefined>();
   const [sheetItems, setSheetItems] = useState<AdaptiveNavItem[]>([]);
 
-  // Tablet always icon-only; desktop expanded by default, user can toggle.
-  const sidebarCollapsed = isTablet || (userCollapsed ?? false);
+  // Tablet defaults to collapsed; desktop defaults to expanded. User can override either.
+  const sidebarCollapsed = userCollapsed ?? isTablet;
 
   const bgStyle: CSSProperties =
     !bgColor || bgColor === "white"
@@ -150,8 +158,8 @@ export function AdaptiveLayout({
     return slots;
   }, [items]);
 
-  const hasOverflow   = barSlots.length > 4;
-  const visibleSlots  = hasOverflow ? barSlots.slice(0, MAX_VISIBLE) : barSlots;
+  const hasOverflow = barSlots.length > 4;
+  const visibleSlots = hasOverflow ? barSlots.slice(0, MAX_VISIBLE) : barSlots;
   const overflowSlots = hasOverflow ? barSlots.slice(MAX_VISIBLE) : [];
 
   const overflowItems = useMemo(
@@ -273,10 +281,11 @@ export function AdaptiveLayout({
       onClick={() => setUserCollapsed(!sidebarCollapsed)}
       aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
     >
-      <span aria-hidden="true">{sidebarCollapsed ? "›" : "‹"}</span>
-      {!sidebarCollapsed && <span className={styles.collapseBtnLabel}>Compress</span>}
+      <Icon icon={sidebarCollapsed ? PanEnd : PanStart} size="sm" aria-hidden />
     </button>
   );
+
+  const collapseFooterNode = showCollapseButton ? collapseFooter : null;
 
   // ── Sidebar nav (shared between both placement modes) ─────────────────────
   const sidebarNav = (
@@ -285,7 +294,7 @@ export function AdaptiveLayout({
       onValueChange={onValueChange}
       collapsed={sidebarCollapsed}
       header={headerNode}
-      footer={collapseFooter}
+      footer={collapseFooterNode}
     >
       {ungroupedItems.map((item) => (
         <ViewSwitcherSidebarItem

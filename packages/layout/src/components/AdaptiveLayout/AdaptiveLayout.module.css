@@ -56,6 +56,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   flex-shrink: 0;
 
@@ -75,6 +76,7 @@
 
 .collapseBtnLabel {
   font-size: 0.82rem;
+  margin-right: auto;
 }
 
 /* ─── Sidebar group section ─────────────────────────────────────────────────── */
