@@ -1,3 +1,9 @@
+## [1.37.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.37.0...@gnome-ui/react@1.37.1) (2026-04-27)
+
+### Refactoring
+
+* **layout:** move inline styles to CSS and add footer/Separator to AdaptiveLayout ([7377c45](https://github.com/ElJijuna/gnome-ui/commit/7377c45cf0ad7d702c7ce4320f0d83dc5bb1b32e))
+
 ## [1.37.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.36.4...@gnome-ui/react@1.37.0) (2026-04-27)
 
 ### Features
