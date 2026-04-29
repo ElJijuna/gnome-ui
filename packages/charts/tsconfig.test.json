@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["@testing-library/jest-dom"]
+  },
+  "include": [
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "test/**/*"
+  ]
+}
