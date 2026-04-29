@@ -10,4 +10,7 @@ export type { AreaChartProps, AreaChartSeries } from "./components/AreaChart";
 export { TreeMap } from "./components/TreeMap";
 export type { TreeMapProps, TreeMapDataItem } from "./components/TreeMap";
 
+export { RadialBarChart } from "./components/RadialBarChart";
+export type { RadialBarChartProps, RadialBarChartDataItem } from "./components/RadialBarChart";
+
 export { GNOME_CHART_PALETTE } from "./colors";
