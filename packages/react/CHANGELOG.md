@@ -1,3 +1,14 @@
+## [1.38.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.37.1...@gnome-ui/react@1.38.0) (2026-04-29)
+
+### Features
+
+* **@gnome-ui/charts:** add CloudChart component ([e6c69d3](https://github.com/ElJijuna/gnome-ui/commit/e6c69d3eb138c7c6b9a2ba3d87938a31b22abf83)), closes [#73](https://github.com/ElJijuna/gnome-ui/issues/73)
+* **@gnome-ui/charts:** add gradient fill option to AreaChart ([9a0df8c](https://github.com/ElJijuna/gnome-ui/commit/9a0df8c8acd2303b5d9d5f19b032963c1eed47b1)), closes [#41](https://github.com/ElJijuna/gnome-ui/issues/41)
+* **@gnome-ui/charts:** add PieChart component ([af03a01](https://github.com/ElJijuna/gnome-ui/commit/af03a010f8605c777bbfe3a35661e01d115cff55)), closes [#42](https://github.com/ElJijuna/gnome-ui/issues/42)
+* **@gnome-ui/charts:** add RadarChart component ([dac0be6](https://github.com/ElJijuna/gnome-ui/commit/dac0be6ce1029f17f1fb0bd58cfbb44c208bd35d)), closes [#43](https://github.com/ElJijuna/gnome-ui/issues/43)
+* **@gnome-ui/charts:** add RadialBarChart component ([73f9e1a](https://github.com/ElJijuna/gnome-ui/commit/73f9e1a00e3015ff8d6428d12e182b545fd9fcdb)), closes [#44](https://github.com/ElJijuna/gnome-ui/issues/44)
+* **@gnome-ui/charts:** add Vitest unit tests for all chart components ([df5b6ac](https://github.com/ElJijuna/gnome-ui/commit/df5b6ac4ae7c674086b1dfcc7800406145891127)), closes [#47](https://github.com/ElJijuna/gnome-ui/issues/47)
+
 ## [1.37.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.37.0...@gnome-ui/react@1.37.1) (2026-04-27)
 
 ### Refactoring
