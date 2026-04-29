@@ -51,3 +51,30 @@ export const Stacked: Story = {
     stacked: true,
   },
 };
+
+export const Gradient: Story = {
+  args: {
+    data: TRAFFIC_DATA,
+    series: [
+      { dataKey: "downloads", name: "Downloads" },
+      { dataKey: "installs", name: "Installs" },
+    ],
+    xAxisKey: "week",
+    showLegend: true,
+    gradient: true,
+  },
+};
+
+export const GradientStacked: Story = {
+  args: {
+    data: TRAFFIC_DATA,
+    series: [
+      { dataKey: "downloads", name: "Downloads" },
+      { dataKey: "installs", name: "Installs" },
+    ],
+    xAxisKey: "week",
+    showLegend: true,
+    gradient: true,
+    stacked: true,
+  },
+};

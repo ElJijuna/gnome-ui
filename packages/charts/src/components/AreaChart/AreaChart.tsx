@@ -25,6 +25,7 @@ export interface AreaChartProps {
   showGrid?: boolean;
   showLegend?: boolean;
   stacked?: boolean;
+  gradient?: boolean;
   className?: string;
 }
 
@@ -51,8 +52,15 @@ export function AreaChart({
   showGrid = true,
   showLegend = false,
   stacked = false,
+  gradient = false,
   className,
 }: AreaChartProps) {
+  const seriesWithColors = series.map((s, i) => ({
+    ...s,
+    resolvedColor:
+      s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length],
+  }));
+
   return (
     <div
       className={[styles.container, className].filter(Boolean).join(" ")}
@@ -63,6 +71,29 @@ export function AreaChart({
           data={data}
           margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
         >
+          {gradient && (
+            <defs>
+              {seriesWithColors.map((s) => (
+                <linearGradient
+                  key={s.dataKey}
+                  id={`grad-${s.dataKey}`}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop
+                    offset="5%"
+                    style={{ stopColor: s.resolvedColor, stopOpacity: 0.4 }}
+                  />
+                  <stop
+                    offset="95%"
+                    style={{ stopColor: s.resolvedColor, stopOpacity: 0 }}
+                  />
+                </linearGradient>
+              ))}
+            </defs>
+          )}
           {showGrid && (
             <CartesianGrid
               strokeDasharray="3 3"
@@ -91,23 +122,19 @@ export function AreaChart({
               }}
             />
           )}
-          {series.map((s, i) => {
-            const color =
-              s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length];
-            return (
-              <Area
-                key={s.dataKey}
-                type="monotone"
-                dataKey={s.dataKey}
-                name={s.name ?? s.dataKey}
-                stroke={color}
-                fill={color}
-                fillOpacity={0.15}
-                strokeWidth={2}
-                stackId={stacked ? "stack" : undefined}
-              />
-            );
-          })}
+          {seriesWithColors.map((s) => (
+            <Area
+              key={s.dataKey}
+              type="monotone"
+              dataKey={s.dataKey}
+              name={s.name ?? s.dataKey}
+              stroke={s.resolvedColor}
+              fill={gradient ? `url(#grad-${s.dataKey})` : s.resolvedColor}
+              fillOpacity={gradient ? 1 : 0.15}
+              strokeWidth={2}
+              stackId={stacked ? "stack" : undefined}
+            />
+          ))}
         </RechartsAreaChart>
       </ResponsiveContainer>
     </div>
