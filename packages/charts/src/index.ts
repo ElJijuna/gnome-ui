@@ -16,4 +16,7 @@ export type { RadialBarChartProps, RadialBarChartDataItem } from "./components/R
 export { RadarChart } from "./components/RadarChart";
 export type { RadarChartProps, RadarChartSeries } from "./components/RadarChart";
 
+export { PieChart } from "./components/PieChart";
+export type { PieChartProps, PieChartDataItem } from "./components/PieChart";
+
 export { GNOME_CHART_PALETTE } from "./colors";

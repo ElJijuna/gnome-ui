@@ -34,6 +34,7 @@ import "@gnome-ui/charts/styles";
 | `BarChart` | Vertical or horizontal bar chart with rounded bars, optional stacking, grid, and legend |
 | `LineChart` | Line chart with dots, grid, and legend |
 | `RadialBarChart` | Concentric arc chart with optional labels, legend, and inner radius control |
+| `PieChart` | Pie or donut chart with optional slice labels and legend |
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 
@@ -49,7 +50,7 @@ the simplest option. Modern bundlers that respect the `sideEffects` field in
 `package.json` will still tree-shake unused components automatically.
 
 ```tsx
-import { AreaChart, BarChart, LineChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
+import { AreaChart, BarChart, LineChart, PieChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
 ```
 
 ### Per-component import (explicit tree-shaking)
@@ -62,6 +63,7 @@ about what you pull in.
 import { BarChart } from "@gnome-ui/charts/components/BarChart";
 import { LineChart } from "@gnome-ui/charts/components/LineChart";
 import { AreaChart } from "@gnome-ui/charts/components/AreaChart";
+import { PieChart } from "@gnome-ui/charts/components/PieChart";
 import { RadarChart } from "@gnome-ui/charts/components/RadarChart";
 import { RadialBarChart } from "@gnome-ui/charts/components/RadialBarChart";
 import { TreeMap } from "@gnome-ui/charts/components/TreeMap";
@@ -72,7 +74,7 @@ Both forms are fully typed and produce identical runtime behavior.
 ## Quick example
 
 ```tsx
-import { AreaChart, BarChart, LineChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
+import { AreaChart, BarChart, LineChart, PieChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
 
 const data = [
   { month: "Jan", sales: 400, returns: 80 },
@@ -107,6 +109,18 @@ const data = [
     { dataKey: "returns", name: "Returns" },
   ]}
   showGrid
+  showLegend
+/>
+
+// Pie / donut chart
+<PieChart
+  data={[
+    { label: "Chrome", value: 62 },
+    { label: "Firefox", value: 18 },
+    { label: "Safari", value: 11 },
+    { label: "Other", value: 9 },
+  ]}
+  donut
   showLegend
 />
 
@@ -174,6 +188,18 @@ const data = [
 | `stacked` | `boolean` | `false` | Stack series on top of each other |
 | `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
 | `yAxisFormatter` | `(value: number) => string` | — | Custom Y-axis tick formatter |
+
+`PieChart` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `PieChartDataItem[]` | — | Array of `{ label, value, color? }` |
+| `height` | `number` | `400` | Chart height in px |
+| `donut` | `boolean` | `false` | Render as a donut chart with a center hole |
+| `showLabels` | `boolean` | `false` | Show slice labels outside the chart |
+| `showLegend` | `boolean` | `false` | Show legend below chart |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
 
 `RadarChart` accepts:
 
