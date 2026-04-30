@@ -25,7 +25,7 @@ describe("isWebKitBridge", () => {
   });
 
   it("returns false when webkit has no messageHandlers", () => {
-    (window as Window & { webkit?: object }).webkit = {};
+    (window as Window & { webkit?: unknown }).webkit = {};
     expect(isWebKitBridge()).toBe(false);
   });
 
