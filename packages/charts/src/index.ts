@@ -13,4 +13,7 @@ export type { TreeMapProps, TreeMapDataItem } from "./components/TreeMap";
 export { RadialBarChart } from "./components/RadialBarChart";
 export type { RadialBarChartProps, RadialBarChartDataItem } from "./components/RadialBarChart";
 
+export { RadarChart } from "./components/RadarChart";
+export type { RadarChartProps, RadarChartSeries } from "./components/RadarChart";
+
 export { GNOME_CHART_PALETTE } from "./colors";
