@@ -34,6 +34,7 @@ import "@gnome-ui/charts/styles";
 | `BarChart` | Vertical or horizontal bar chart with rounded bars, optional stacking, grid, and legend |
 | `LineChart` | Line chart with dots, grid, and legend |
 | `RadialBarChart` | Concentric arc chart with optional labels, legend, and inner radius control |
+| `CloudChart` | Word/tag cloud with linear font-size scaling and per-word color support |
 | `PieChart` | Pie or donut chart with optional slice labels and legend |
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
@@ -50,7 +51,7 @@ the simplest option. Modern bundlers that respect the `sideEffects` field in
 `package.json` will still tree-shake unused components automatically.
 
 ```tsx
-import { AreaChart, BarChart, LineChart, PieChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
+import { AreaChart, BarChart, CloudChart, LineChart, PieChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
 ```
 
 ### Per-component import (explicit tree-shaking)
@@ -64,6 +65,7 @@ import { BarChart } from "@gnome-ui/charts/components/BarChart";
 import { LineChart } from "@gnome-ui/charts/components/LineChart";
 import { AreaChart } from "@gnome-ui/charts/components/AreaChart";
 import { PieChart } from "@gnome-ui/charts/components/PieChart";
+import { CloudChart } from "@gnome-ui/charts/components/CloudChart";
 import { RadarChart } from "@gnome-ui/charts/components/RadarChart";
 import { RadialBarChart } from "@gnome-ui/charts/components/RadialBarChart";
 import { TreeMap } from "@gnome-ui/charts/components/TreeMap";
@@ -74,7 +76,7 @@ Both forms are fully typed and produce identical runtime behavior.
 ## Quick example
 
 ```tsx
-import { AreaChart, BarChart, LineChart, PieChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
+import { AreaChart, BarChart, CloudChart, LineChart, PieChart, RadarChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
 
 const data = [
   { month: "Jan", sales: 400, returns: 80 },
@@ -110,6 +112,16 @@ const data = [
   ]}
   showGrid
   showLegend
+/>
+
+// Word cloud
+<CloudChart
+  data={[
+    { text: "TypeScript", value: 95 },
+    { text: "React", value: 80 },
+    { text: "CSS", value: 60 },
+    { text: "Docker", value: 40 },
+  ]}
 />
 
 // Pie / donut chart
@@ -189,6 +201,17 @@ const data = [
 | `stacked` | `boolean` | `false` | Stack series on top of each other |
 | `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
 | `yAxisFormatter` | `(value: number) => string` | — | Custom Y-axis tick formatter |
+
+`CloudChart` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `CloudChartDataItem[]` | — | Array of `{ text, value, color? }` |
+| `height` | `number` | `300` | Minimum height of the cloud container in px |
+| `minFontSize` | `number` | `12` | Font size in px for the lowest-value word |
+| `maxFontSize` | `number` | `48` | Font size in px for the highest-value word |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
 
 `PieChart` accepts:
 

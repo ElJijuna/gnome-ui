@@ -19,4 +19,7 @@ export type { RadarChartProps, RadarChartSeries } from "./components/RadarChart"
 export { PieChart } from "./components/PieChart";
 export type { PieChartProps, PieChartDataItem } from "./components/PieChart";
 
+export { CloudChart } from "./components/CloudChart";
+export type { CloudChartProps, CloudChartDataItem } from "./components/CloudChart";
+
 export { GNOME_CHART_PALETTE } from "./colors";

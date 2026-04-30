@@ -1,0 +1,23 @@
+.cloud {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px);
+  box-sizing: border-box;
+}
+
+.word {
+  font-family: var(--gnome-font-family, system-ui);
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: default;
+  transition: opacity 0.15s ease;
+  user-select: none;
+}
+
+.word:hover {
+  opacity: 0.7;
+}
