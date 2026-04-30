@@ -180,6 +180,7 @@ const data = [
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `stacked` | `boolean` | `false` | Stack all series on top of each other |
+| `gradient` | `boolean` | `false` | Fill areas with a top-to-transparent gradient |
 
 `BarChart` also accepts:
 
