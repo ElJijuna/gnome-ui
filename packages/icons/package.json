@@ -36,6 +36,9 @@
     "prebuild": "vite-magic validate",
     "build": "tsc && vite build",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6008",
     "build-storybook": "storybook build"
   },
@@ -43,6 +46,8 @@
     "access": "public"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.4",
+    "vitest": "^4.1.4",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/react": "^10.3.3",
