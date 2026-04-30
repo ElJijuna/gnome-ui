@@ -33,6 +33,7 @@ import "@gnome-ui/charts/styles";
 | `AreaChart` | Filled area chart with optional stacking, grid, and legend |
 | `BarChart` | Vertical or horizontal bar chart with rounded bars, optional stacking, grid, and legend |
 | `LineChart` | Line chart with dots, grid, and legend |
+| `RadialBarChart` | Concentric arc chart with optional labels, legend, and inner radius control |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 
 All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom
@@ -47,7 +48,7 @@ the simplest option. Modern bundlers that respect the `sideEffects` field in
 `package.json` will still tree-shake unused components automatically.
 
 ```tsx
-import { AreaChart, BarChart, LineChart, TreeMap } from "@gnome-ui/charts";
+import { AreaChart, BarChart, LineChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
 ```
 
 ### Per-component import (explicit tree-shaking)
@@ -60,6 +61,7 @@ about what you pull in.
 import { BarChart } from "@gnome-ui/charts/components/BarChart";
 import { LineChart } from "@gnome-ui/charts/components/LineChart";
 import { AreaChart } from "@gnome-ui/charts/components/AreaChart";
+import { RadialBarChart } from "@gnome-ui/charts/components/RadialBarChart";
 import { TreeMap } from "@gnome-ui/charts/components/TreeMap";
 ```
 
@@ -68,7 +70,7 @@ Both forms are fully typed and produce identical runtime behavior.
 ## Quick example
 
 ```tsx
-import { AreaChart, BarChart, LineChart, TreeMap } from "@gnome-ui/charts";
+import { AreaChart, BarChart, LineChart, RadialBarChart, TreeMap } from "@gnome-ui/charts";
 
 const data = [
   { month: "Jan", sales: 400, returns: 80 },
@@ -106,6 +108,16 @@ const data = [
   showLegend
 />
 
+// Radial bar chart
+<RadialBarChart
+  data={[
+    { label: "CPU", value: 72 },
+    { label: "Memory", value: 58 },
+    { label: "Disk", value: 41 },
+  ]}
+  showLegend
+/>
+
 // TreeMap
 <TreeMap
   data={[
@@ -119,7 +131,7 @@ const data = [
 
 ## Props
 
-All three components share a common set of props:
+`AreaChart`, `BarChart`, and `LineChart` share a common set of props:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -144,6 +156,18 @@ All three components share a common set of props:
 | `stacked` | `boolean` | `false` | Stack series on top of each other |
 | `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
 | `yAxisFormatter` | `(value: number) => string` | — | Custom Y-axis tick formatter |
+
+`RadialBarChart` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `RadialBarChartDataItem[]` | — | Array of `{ label, value, color? }` |
+| `height` | `number` | `400` | Chart height in px |
+| `innerRadius` | `number \| string` | `"20%"` | Inner radius of the donut gap |
+| `showLabels` | `boolean` | `false` | Show category name inside each arc |
+| `showLegend` | `boolean` | `false` | Show legend below chart |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
 
 `TreeMap` accepts:
 
