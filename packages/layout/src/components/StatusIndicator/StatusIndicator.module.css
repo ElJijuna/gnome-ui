@@ -1,0 +1,74 @@
+.root {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* ─── Dot ─────────────────────────────────────────────────────────────────── */
+
+.dot {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+/* Sizes */
+.dot.md {
+  width: 10px;
+  height: 10px;
+  margin-top: 5px; /* vertically center against body text */
+}
+
+.dot.sm {
+  width: 8px;
+  height: 8px;
+  margin-top: 4px; /* vertically center against caption text */
+}
+
+/* Status colors */
+.dot.online {
+  background-color: var(--gnome-success-color, #26a269);
+}
+
+.dot.warning {
+  background-color: var(--gnome-warning-color, #e5a50a);
+}
+
+.dot.error {
+  background-color: var(--gnome-error-color, #e01b24);
+}
+
+.dot.offline {
+  background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.dot.loading {
+  background-color: var(--gnome-accent-color, #3584e4);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot.loading {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ─── Content ─────────────────────────────────────────────────────────────── */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.label,
+.description {
+  margin: 0;
+}
