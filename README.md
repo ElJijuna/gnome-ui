@@ -14,7 +14,10 @@ A React component library that faithfully implements the [GNOME Human Interface 
 | [`@gnome-ui/core`](packages/core) | Framework-agnostic design tokens (CSS custom properties) | [![npm](https://img.shields.io/npm/v/@gnome-ui/core)](https://www.npmjs.com/package/@gnome-ui/core) |
 | [`@gnome-ui/icons`](packages/icons) | Framework-agnostic Adwaita symbolic icon definitions (SVG path data) | [![npm](https://img.shields.io/npm/v/@gnome-ui/icons)](https://www.npmjs.com/package/@gnome-ui/icons) |
 | [`@gnome-ui/react`](packages/react) | React component library | [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react) |
-| [`@gnome-ui/layout`](packages/layout) | Full-page application shell (`Layout`) | [![npm](https://img.shields.io/npm/v/@gnome-ui/layout)](https://www.npmjs.com/package/@gnome-ui/layout) |
+| [`@gnome-ui/layout`](packages/layout) | Full-page application shell and dashboard components | [![npm](https://img.shields.io/npm/v/@gnome-ui/layout)](https://www.npmjs.com/package/@gnome-ui/layout) |
+| [`@gnome-ui/platform`](packages/platform) | TypeScript bridge to GNOME host APIs (GSettings, portals, notifications…) | [![npm](https://img.shields.io/npm/v/@gnome-ui/platform)](https://www.npmjs.com/package/@gnome-ui/platform) |
+| [`@gnome-ui/hooks`](packages/hooks) | React hooks that surface `@gnome-ui/platform` APIs as idiomatic React state | [![npm](https://img.shields.io/npm/v/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks) |
+| [`@gnome-ui/charts`](packages/charts) | Data visualisation components (Line, Bar, Area) styled with Adwaita tokens | [![npm](https://img.shields.io/npm/v/@gnome-ui/charts)](https://www.npmjs.com/package/@gnome-ui/charts) |
 
 ## Quick start
 
@@ -91,11 +94,18 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Chip` | Compact pill label for tags and filters; static, removable, and selectable modes | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-chip--docs) |
 | `ShortcutsDialog` | Modal listing keyboard shortcuts by section with integrated search — mirrors `AdwShortcutsDialog` (GNOME 49) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-shortcutsdialog--docs) |
 
-### Layout shells (`@gnome-ui/layout`)
+### Layout shells & dashboard (`@gnome-ui/layout`)
 
 | Component | Description | Story |
 |-----------|-------------|-------|
 | `Layout` | Full-page shell with four named zones: `topBar`, `sidebar`, `children`, `bottomBar` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-layout--docs) |
+| `AdaptiveLayout` | Responsive layout that adapts column structure to the available width | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-adaptivelayout--docs) |
+| `CounterCard` | Card displaying a labelled numeric count | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-countercard--docs) |
+| `UserCard` | Card displaying user identity (avatar, name, role) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-usercard--docs) |
+| `PanelCard` | Collapsible card panel with header and body | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-panelcard--docs) |
+| `EntityCard` | Card for displaying a generic named entity with metadata | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-entitycard--docs) |
+| `ApplicationCard` | Card for displaying an application entry (icon, name, description) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-applicationcard--docs) |
+| `IconBadge` | Badge with an embedded icon | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-iconbadge--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 
@@ -127,11 +137,15 @@ npm install
 ### Project structure
 
 ```
-gnome-react/
+gnome-ui/
 ├── packages/
-│   ├── core/          # @gnome-ui/core  — CSS design tokens
-│   ├── icons/         # @gnome-ui/icons — Adwaita icon definitions (SVG path data)
-│   └── react/         # @gnome-ui/react — React components
+│   ├── core/          # @gnome-ui/core     — CSS design tokens
+│   ├── icons/         # @gnome-ui/icons    — Adwaita icon definitions (SVG path data)
+│   ├── react/         # @gnome-ui/react    — React components
+│   ├── layout/        # @gnome-ui/layout   — Application shell & dashboard components
+│   ├── platform/      # @gnome-ui/platform — GNOME host bridge (GSettings, portals…)
+│   ├── hooks/         # @gnome-ui/hooks    — React hooks for platform APIs
+│   └── charts/        # @gnome-ui/charts   — Adwaita-styled chart components
 ├── GNOME_GUIDELINES.md
 ├── ROADMAP.md
 └── turbo.json

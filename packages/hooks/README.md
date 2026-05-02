@@ -7,8 +7,6 @@ as idiomatic React state.
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** work in progress — API surface is defined, implementations are pending.
-
 ## Installation
 
 ```bash
@@ -16,6 +14,17 @@ npm install @gnome-ui/hooks
 ```
 
 Requires `@gnome-ui/platform` and `react` ≥ 19 as peer dependencies.
+
+The package is fully tree-shakeable (`sideEffects: false`). Each hook has its
+own deep entry point so bundlers can eliminate unused hooks:
+
+```ts
+// barrel import — all hooks
+import { useBreakpoint } from "@gnome-ui/hooks";
+
+// deep import — only useBreakpoint in the bundle
+import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
+```
 
 ## Hooks
 
