@@ -21,3 +21,6 @@ export type { EntityCardProps } from "./components/EntityCard";
 
 export { ApplicationCard } from "./components/ApplicationCard";
 export type { ApplicationCardProps, ApplicationCardStat } from "./components/ApplicationCard";
+
+export { EmptyState } from "./components/EmptyState";
+export type { EmptyStateProps } from "./components/EmptyState";
