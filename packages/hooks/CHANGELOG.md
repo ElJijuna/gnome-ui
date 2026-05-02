@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.27.0...@gnome-ui/hooks@1.27.1) (2026-05-02)
+
+### Bug Fixes
+
+* **ci:** serialize release pipeline runs with concurrency group. ([028ab54](https://github.com/ElJijuna/gnome-ui/commit/028ab5462308fd78eac08d9ae7837cfc744963f0))
+* exclude test files from build tsconfig and fix bridge.test type error ([9c83b9d](https://github.com/ElJijuna/gnome-ui/commit/9c83b9d100d19cff4fb8b6c47a937e929fc52f37))
+
 ## [1.27.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.26.1...@gnome-ui/hooks@1.27.0) (2026-04-29)
 
 ### Features
