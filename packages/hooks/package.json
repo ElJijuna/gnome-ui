@@ -11,8 +11,59 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./useBreakpoint": {
+      "types": "./dist/useBreakpoint.d.ts",
+      "import": "./dist/useBreakpoint.js",
+      "require": "./dist/useBreakpoint.cjs"
+    },
+    "./useClipboard": {
+      "types": "./dist/useClipboard.d.ts",
+      "import": "./dist/useClipboard.js",
+      "require": "./dist/useClipboard.cjs"
+    },
+    "./useColorScheme": {
+      "types": "./dist/useColorScheme.d.ts",
+      "import": "./dist/useColorScheme.js",
+      "require": "./dist/useColorScheme.cjs"
+    },
+    "./useFileChooser": {
+      "types": "./dist/useFileChooser.d.ts",
+      "import": "./dist/useFileChooser.js",
+      "require": "./dist/useFileChooser.cjs"
+    },
+    "./useNativeEvent": {
+      "types": "./dist/useNativeEvent.d.ts",
+      "import": "./dist/useNativeEvent.js",
+      "require": "./dist/useNativeEvent.cjs"
+    },
+    "./useNotification": {
+      "types": "./dist/useNotification.d.ts",
+      "import": "./dist/useNotification.js",
+      "require": "./dist/useNotification.cjs"
+    },
+    "./usePlatform": {
+      "types": "./dist/usePlatform.d.ts",
+      "import": "./dist/usePlatform.js",
+      "require": "./dist/usePlatform.cjs"
+    },
+    "./useRuntime": {
+      "types": "./dist/useRuntime.d.ts",
+      "import": "./dist/useRuntime.js",
+      "require": "./dist/useRuntime.cjs"
+    },
+    "./useSettings": {
+      "types": "./dist/useSettings.d.ts",
+      "import": "./dist/useSettings.js",
+      "require": "./dist/useSettings.cjs"
+    },
+    "./useWindowState": {
+      "types": "./dist/useWindowState.d.ts",
+      "import": "./dist/useWindowState.js",
+      "require": "./dist/useWindowState.cjs"
     }
   },
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -41,6 +92,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vite": "^8.0.3",
+    "vite-magic-tree-shaking": "^1.0.0",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.1.4"
   }

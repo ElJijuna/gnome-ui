@@ -314,13 +314,13 @@ Pure TypeScript package. Communicates with GNOME via the WebKitGTK `window.webki
 
 | Status | Module | Description |
 |--------|--------|-------------|
-| ⬜ | **`settings`** | Read/write application settings via `GSettings` |
-| ⬜ | **`notifications`** | Send and withdraw desktop notifications (`Gio.Notification`) |
-| ⬜ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
-| ⬜ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
-| ⬜ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
-| ⬜ | **`clipboard`** | Read and write the GDK clipboard (text, files, images) |
-| ⬜ | **`portals`** | Low-level XDG Desktop Portal access for sandboxed (Flatpak) apps |
+| ✅ | **`settings`** | Read/write application settings via `GSettings` |
+| ✅ | **`notifications`** | Send and withdraw desktop notifications (`Gio.Notification`) |
+| ✅ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
+| ✅ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
+| ✅ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
+| ✅ | **`clipboard`** | Read and write the GDK clipboard (text, files, images) |
+| ✅ | **`portals`** | Low-level XDG Desktop Portal access for sandboxed (Flatpak) apps |
 
 ### `@gnome-ui/hooks` — React hooks
 
@@ -328,12 +328,17 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 | Status | Hook | Description |
 |--------|------|-------------|
-| ⬜ | **`useSettings`** | Read and write a GSettings key; re-renders on external changes |
-| ⬜ | **`useNotification`** | Returns a `send(title, body, icon?)` helper and dismissal control |
-| ⬜ | **`useColorScheme`** | Returns `"light" \| "dark" \| "auto"` and a setter |
-| ⬜ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path |
-| ⬜ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state |
-| ⬜ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters |
+| ✅ | **`useRuntime`** | Full runtime snapshot: shell, engine, browser, OS |
+| ✅ | **`usePlatform`** | Convenience booleans for the current shell context (`isGnomeWebView`, `isPWA`…) |
+| ✅ | **`useNativeEvent`** | Subscribe to an event dispatched by the GJS host via `gnome:` prefix |
+| ✅ | **`useBreakpoint`** | Reactive `isMobile`, `isTablet`, `isDesktop` flags based on GNOME HIG breakpoints |
+| ✅ | **`useSettings`** | Read and write a GSettings key; re-renders on external changes |
+| ✅ | **`useNotification`** | Returns a `send(title, body, icon?)` helper and dismissal control |
+| ✅ | **`useColorScheme`** | Returns `"light" \| "dark" \| "auto"` and a setter |
+| ✅ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path |
+| ✅ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state |
+| ✅ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters |
+| ⬜ | **`useHapticFeedback`** | Trigger haptic feedback via feedbackd (native) or Vibration API (browser) — issue [#81](https://github.com/ElJijuna/gnome-ui/issues/81) |
 
 ---
 
@@ -388,3 +393,29 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | Status | Component | Description |
 |--------|-----------|-------------|
 | 🚧 | **`ContributionGraph`** | Activity heatmap calendar: a 52-week grid of rounded SVG cells where colour intensity (Adwaita green palette) represents activity count; supports dark mode, keyboard navigation (`role="grid"`), and screen-reader labels — issue [#21](https://github.com/ElJijuna/gnome-ui/issues/21) |
+
+---
+
+## Tier 19 — Dashboard Components (`@gnome-ui/layout`)
+
+> Purpose-built components for composing dashboard and monitoring views.
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`DashboardGrid`** | Responsive CSS Grid container for arranging dashboard widgets; supports column count and per-item span — issue [#82](https://github.com/ElJijuna/gnome-ui/issues/82) |
+| ⬜ | **`StatCard`** | Key metric display with optional trend indicator (direction, percentage, period) and loading skeleton — issue [#83](https://github.com/ElJijuna/gnome-ui/issues/83) |
+| ⬜ | **`ProgressCard`** | Resource usage card with labelled progress bar; color thresholds at 75 % (warning) and 90 % (critical) — issue [#84](https://github.com/ElJijuna/gnome-ui/issues/84) |
+| ⬜ | **`ActivityFeed`** | Chronological event list with relative timestamps, icons, and truncation — issue [#85](https://github.com/ElJijuna/gnome-ui/issues/85) |
+| ⬜ | **`QuickActions`** | Grid of shortcut action buttons with keyboard navigation — issue [#86](https://github.com/ElJijuna/gnome-ui/issues/86) |
+| ⬜ | **`StatusIndicator`** | Service/connection status dot: `online`, `offline`, `warning`, `error`, `loading` — issue [#87](https://github.com/ElJijuna/gnome-ui/issues/87) |
+| ⬜ | **`SectionHeader`** | Section title row with optional subtitle and trailing action slot — issue [#88](https://github.com/ElJijuna/gnome-ui/issues/88) |
+| ⬜ | **`EmptyState`** | Centered empty-state illustration: icon, title, description, optional CTA — issue [#89](https://github.com/ElJijuna/gnome-ui/issues/89) |
+| ⬜ | **`ErrorState`** | Error state with preset types (`generic`, `network`, `permission`, `not-found`) and recovery action slot — issue [#90](https://github.com/ElJijuna/gnome-ui/issues/90) |
+
+---
+
+## Infrastructure
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ✅ | **`@gnome-ui/hooks` tree-shaking** | `sideEffects: false` + `vite-magic-tree-shaking` per-hook entries; consumers importing a single hook no longer receive the full bundle — issue [#76](https://github.com/ElJijuna/gnome-ui/issues/76) |
