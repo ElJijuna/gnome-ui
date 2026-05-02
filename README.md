@@ -108,6 +108,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `IconBadge` | Badge with an embedded icon | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-iconbadge--docs) |
 | `EmptyState` | Centered empty-state with icon, title, description, and optional CTA | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-emptystate--docs) |
 | `StatusIndicator` | Service/connection status dot: `online`, `offline`, `warning`, `error`, `loading` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-statusindicator--docs) |
+| `ErrorState` | Error state with presets: `generic`, `network`, `permission`, `not-found` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-errorstate--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

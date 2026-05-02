@@ -411,7 +411,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`SectionHeader`** | Section title row with optional subtitle and trailing action slot — issue [#88](https://github.com/ElJijuna/gnome-ui/issues/88) |
 | ✅ | **`EmptyState`** | Centered empty-state illustration: icon, title, description, optional CTA — issue [#89](https://github.com/ElJijuna/gnome-ui/issues/89) |
 | ✅ | **`StatusIndicator`** | Service/connection status dot: `online`, `offline`, `warning`, `error`, `loading` — issue [#87](https://github.com/ElJijuna/gnome-ui/issues/87) |
-| ⬜ | **`ErrorState`** | Error state with preset types (`generic`, `network`, `permission`, `not-found`) and recovery action slot — issue [#90](https://github.com/ElJijuna/gnome-ui/issues/90) |
+| ✅ | **`ErrorState`** | Error state with preset types (`generic`, `network`, `permission`, `not-found`) and recovery action slot — issue [#90](https://github.com/ElJijuna/gnome-ui/issues/90) |
 
 ---
 

@@ -31,3 +31,6 @@ export type {
   StatusIndicatorStatus,
   StatusIndicatorSize,
 } from "./components/StatusIndicator";
+
+export { ErrorState } from "./components/ErrorState";
+export type { ErrorStateProps, ErrorStateType } from "./components/ErrorState";

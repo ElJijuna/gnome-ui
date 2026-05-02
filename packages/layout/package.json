@@ -32,6 +32,11 @@
       "import": "./dist/components/EntityCard.js",
       "require": "./dist/components/EntityCard.cjs"
     },
+    "./components/ErrorState": {
+      "types": "./dist/components/ErrorState.d.ts",
+      "import": "./dist/components/ErrorState.js",
+      "require": "./dist/components/ErrorState.cjs"
+    },
     "./components/IconBadge": {
       "types": "./dist/components/IconBadge.d.ts",
       "import": "./dist/components/IconBadge.js",
