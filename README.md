@@ -106,6 +106,8 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `EntityCard` | Card for displaying a generic named entity with metadata | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-entitycard--docs) |
 | `ApplicationCard` | Card for displaying an application entry (icon, name, description) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-applicationcard--docs) |
 | `IconBadge` | Badge with an embedded icon | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-iconbadge--docs) |
+| `EmptyState` | Centered empty-state with icon, title, description, and optional CTA | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-emptystate--docs) |
+| `StatusIndicator` | Service/connection status dot: `online`, `offline`, `warning`, `error`, `loading` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-statusindicator--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

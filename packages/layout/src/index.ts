@@ -24,3 +24,10 @@ export type { ApplicationCardProps, ApplicationCardStat } from "./components/App
 
 export { EmptyState } from "./components/EmptyState";
 export type { EmptyStateProps } from "./components/EmptyState";
+
+export { StatusIndicator } from "./components/StatusIndicator";
+export type {
+  StatusIndicatorProps,
+  StatusIndicatorStatus,
+  StatusIndicatorSize,
+} from "./components/StatusIndicator";

@@ -22,6 +22,11 @@
       "import": "./dist/components/CounterCard.js",
       "require": "./dist/components/CounterCard.cjs"
     },
+    "./components/EmptyState": {
+      "types": "./dist/components/EmptyState.d.ts",
+      "import": "./dist/components/EmptyState.js",
+      "require": "./dist/components/EmptyState.cjs"
+    },
     "./components/EntityCard": {
       "types": "./dist/components/EntityCard.d.ts",
       "import": "./dist/components/EntityCard.js",
@@ -42,6 +47,11 @@
       "import": "./dist/components/PanelCard.js",
       "require": "./dist/components/PanelCard.cjs"
     },
+    "./components/StatusIndicator": {
+      "types": "./dist/components/StatusIndicator.d.ts",
+      "import": "./dist/components/StatusIndicator.js",
+      "require": "./dist/components/StatusIndicator.cjs"
+    },
     "./components/UserCard": {
       "types": "./dist/components/UserCard.d.ts",
       "import": "./dist/components/UserCard.js",
@@ -51,8 +61,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./styles": "./dist/style.css"
+    }
   },
   "sideEffects": [
     "**/*.css",
