@@ -11,28 +11,48 @@
         "releaseRules": [
           {
             "type": "feat",
-            "release": "minor",
-            "scope": "@gnome-ui/icons"
+            "scope": "@gnome-ui/icons",
+            "release": "minor"
           },
           {
             "type": "fix",
-            "release": "patch",
-            "scope": "@gnome-ui/icons"
+            "scope": "@gnome-ui/icons",
+            "release": "patch"
           },
           {
             "type": "perf",
-            "release": "patch",
-            "scope": "@gnome-ui/icons"
+            "scope": "@gnome-ui/icons",
+            "release": "patch"
           },
           {
             "type": "refactor",
-            "release": "patch",
-            "scope": "@gnome-ui/icons"
+            "scope": "@gnome-ui/icons",
+            "release": "patch"
           },
           {
             "breaking": true,
-            "release": "major",
-            "scope": "@gnome-ui/icons"
+            "scope": "@gnome-ui/icons",
+            "release": "major"
+          },
+          {
+            "type": "feat",
+            "release": false
+          },
+          {
+            "type": "fix",
+            "release": false
+          },
+          {
+            "type": "perf",
+            "release": false
+          },
+          {
+            "type": "refactor",
+            "release": false
+          },
+          {
+            "breaking": true,
+            "release": false
           }
         ]
       }
