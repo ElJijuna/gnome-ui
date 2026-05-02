@@ -9,51 +9,16 @@
       {
         "preset": "conventionalcommits",
         "releaseRules": [
-          {
-            "type": "feat",
-            "scope": "@gnome-ui/core",
-            "release": "minor"
-          },
-          {
-            "type": "fix",
-            "scope": "@gnome-ui/core",
-            "release": "patch"
-          },
-          {
-            "type": "perf",
-            "scope": "@gnome-ui/core",
-            "release": "patch"
-          },
-          {
-            "type": "refactor",
-            "scope": "@gnome-ui/core",
-            "release": "patch"
-          },
-          {
-            "breaking": true,
-            "scope": "@gnome-ui/core",
-            "release": "major"
-          },
-          {
-            "type": "feat",
-            "release": false
-          },
-          {
-            "type": "fix",
-            "release": false
-          },
-          {
-            "type": "perf",
-            "release": false
-          },
-          {
-            "type": "refactor",
-            "release": false
-          },
-          {
-            "breaking": true,
-            "release": false
-          }
+          { "type": "feat",     "release": false },
+          { "type": "fix",      "release": false },
+          { "type": "perf",     "release": false },
+          { "type": "refactor", "release": false },
+          { "breaking": true,   "release": false },
+          { "type": "feat",     "scope": "@gnome-ui/core", "release": "minor" },
+          { "type": "fix",      "scope": "@gnome-ui/core", "release": "patch" },
+          { "type": "perf",     "scope": "@gnome-ui/core", "release": "patch" },
+          { "type": "refactor", "scope": "@gnome-ui/core", "release": "patch" },
+          { "breaking": true,   "scope": "@gnome-ui/core", "release": "major" }
         ]
       }
     ],

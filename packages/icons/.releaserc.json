@@ -9,51 +9,16 @@
       {
         "preset": "conventionalcommits",
         "releaseRules": [
-          {
-            "type": "feat",
-            "scope": "@gnome-ui/icons",
-            "release": "minor"
-          },
-          {
-            "type": "fix",
-            "scope": "@gnome-ui/icons",
-            "release": "patch"
-          },
-          {
-            "type": "perf",
-            "scope": "@gnome-ui/icons",
-            "release": "patch"
-          },
-          {
-            "type": "refactor",
-            "scope": "@gnome-ui/icons",
-            "release": "patch"
-          },
-          {
-            "breaking": true,
-            "scope": "@gnome-ui/icons",
-            "release": "major"
-          },
-          {
-            "type": "feat",
-            "release": false
-          },
-          {
-            "type": "fix",
-            "release": false
-          },
-          {
-            "type": "perf",
-            "release": false
-          },
-          {
-            "type": "refactor",
-            "release": false
-          },
-          {
-            "breaking": true,
-            "release": false
-          }
+          { "type": "feat",     "release": false },
+          { "type": "fix",      "release": false },
+          { "type": "perf",     "release": false },
+          { "type": "refactor", "release": false },
+          { "breaking": true,   "release": false },
+          { "type": "feat",     "scope": "@gnome-ui/icons", "release": "minor" },
+          { "type": "fix",      "scope": "@gnome-ui/icons", "release": "patch" },
+          { "type": "perf",     "scope": "@gnome-ui/icons", "release": "patch" },
+          { "type": "refactor", "scope": "@gnome-ui/icons", "release": "patch" },
+          { "breaking": true,   "scope": "@gnome-ui/icons", "release": "major" }
         ]
       }
     ],
