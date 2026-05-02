@@ -1,17 +1,39 @@
 {
   "tagFormat": "@gnome-ui/hooks@${version}",
-  "branches": ["main"],
+  "branches": [
+    "main"
+  ],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
         "preset": "conventionalcommits",
         "releaseRules": [
-          { "type": "feat",     "release": "minor" },
-          { "type": "fix",      "release": "patch" },
-          { "type": "perf",     "release": "patch" },
-          { "type": "refactor", "release": "patch" },
-          { "breaking": true,   "release": "major" }
+          {
+            "type": "feat",
+            "release": "minor",
+            "scope": "@gnome-ui/hooks"
+          },
+          {
+            "type": "fix",
+            "release": "patch",
+            "scope": "@gnome-ui/hooks"
+          },
+          {
+            "type": "perf",
+            "release": "patch",
+            "scope": "@gnome-ui/hooks"
+          },
+          {
+            "type": "refactor",
+            "release": "patch",
+            "scope": "@gnome-ui/hooks"
+          },
+          {
+            "breaking": true,
+            "release": "major",
+            "scope": "@gnome-ui/hooks"
+          }
         ]
       }
     ],
@@ -21,35 +43,64 @@
         "preset": "conventionalcommits",
         "presetConfig": {
           "types": [
-            { "type": "feat",     "section": "Features" },
-            { "type": "fix",      "section": "Bug Fixes" },
-            { "type": "perf",     "section": "Performance" },
-            { "type": "refactor", "section": "Refactoring" },
-            { "type": "docs",     "section": "Documentation", "hidden": false },
-            { "type": "chore",    "section": "Chores",        "hidden": true }
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "perf",
+              "section": "Performance"
+            },
+            {
+              "type": "refactor",
+              "section": "Refactoring"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation",
+              "hidden": false
+            },
+            {
+              "type": "chore",
+              "section": "Chores",
+              "hidden": true
+            }
           ]
         }
       }
     ],
     [
       "@semantic-release/changelog",
-      { "changelogFile": "CHANGELOG.md" }
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
     ],
     [
       "@semantic-release/npm",
-      { "pkgRoot": "." }
+      {
+        "pkgRoot": "."
+      }
     ],
     [
       "@semantic-release/github",
       {
-        "successComment": "🎉 This change is included in `@gnome-ui/hooks@${nextRelease.version}`.",
-        "releasedLabels": ["released"]
+        "successComment": "\ud83c\udf89 This change is included in `@gnome-ui/hooks@${nextRelease.version}`.",
+        "releasedLabels": [
+          "released"
+        ]
       }
     ],
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "package.json"],
+        "assets": [
+          "CHANGELOG.md",
+          "package.json"
+        ],
         "message": "chore(release): @gnome-ui/hooks@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
