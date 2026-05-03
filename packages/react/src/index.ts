@@ -14,6 +14,9 @@ export type { CardProps, CardPadding } from "./components/Card";
 export { Spinner } from "./components/Spinner";
 export type { SpinnerProps, SpinnerSize } from "./components/Spinner";
 
+export { Skeleton } from "./components/Skeleton";
+export type { SkeletonProps, SkeletonVariant } from "./components/Skeleton";
+
 export { Avatar } from "./components/Avatar";
 export type { AvatarProps, AvatarSize, AvatarColor } from "./components/Avatar";
 

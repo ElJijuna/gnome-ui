@@ -54,6 +54,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|-----------|-------------|
 | ✅ | **Spinner** | Indeterminate loading indicator |
 | ✅ | **Progress Bar** | Determinate and indeterminate progress |
+| ✅ | **Skeleton** | Content-shaped loading placeholder for web-style skeleton screens; pragmatic extension beyond GNOME HIG loading patterns — issue [#95](https://github.com/ElJijuna/gnome-ui/issues/95) |
 | ✅ | **Toast** | Non-blocking temporary notification |
 | ✅ | **Banner** | Persistent message at the top of a view |
 | ✅ | **Dialog** | Blocking modal with title, body, and buttons |

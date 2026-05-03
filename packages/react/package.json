@@ -267,6 +267,11 @@
       "import": "./dist/components/Sidebar.js",
       "require": "./dist/components/Sidebar.cjs"
     },
+    "./components/Skeleton": {
+      "types": "./dist/components/Skeleton.d.ts",
+      "import": "./dist/components/Skeleton.js",
+      "require": "./dist/components/Skeleton.cjs"
+    },
     "./components/Slider": {
       "types": "./dist/components/Slider.d.ts",
       "import": "./dist/components/Slider.js",
