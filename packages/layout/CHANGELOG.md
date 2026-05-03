@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.14.0...@gnome-ui/layout@1.15.0) (2026-05-03)
+
+### Features
+
+* **@gnome-ui/layout:** add DashboardGrid component (closes [#82](https://github.com/ElJijuna/gnome-ui/issues/82)) ([feb03f3](https://github.com/ElJijuna/gnome-ui/commit/feb03f3b5c7dfdfcc7bab246f3471a1b320c9145))
+
 ## [1.14.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.13.1...@gnome-ui/layout@1.14.0) (2026-05-02)
 
 ### Features
