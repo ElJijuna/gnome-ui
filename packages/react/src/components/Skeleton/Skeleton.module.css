@@ -1,0 +1,88 @@
+/* Base */
+
+.skeleton {
+  --skeleton-base: var(--gnome-skeleton-base-color, rgba(0, 0, 0, 0.09));
+  --skeleton-highlight: var(--gnome-skeleton-highlight-color, rgba(255, 255, 255, 0.55));
+
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: var(--skeleton-base);
+}
+
+.skeleton::after,
+.line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+}
+
+.animated::after,
+.animated .line::after {
+  animation: shimmer 1.4s var(--gnome-easing-default, ease) infinite;
+}
+
+/* Variants */
+
+.rect {
+  border-radius: var(--gnome-radius-md, 6px);
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  background-color: transparent;
+}
+
+.text::after {
+  display: none;
+}
+
+.line {
+  position: relative;
+  width: var(--skeleton-line-width, 100%);
+  height: 12px;
+  overflow: hidden;
+  border-radius: var(--gnome-radius-pill, 999px);
+  background-color: var(--skeleton-base);
+}
+
+/* Keyframes */
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Dark mode */
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    --skeleton-base: var(--gnome-skeleton-base-color, rgba(255, 255, 255, 0.12));
+    --skeleton-highlight: var(--gnome-skeleton-highlight-color, rgba(255, 255, 255, 0.18));
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .animated::after,
+  .animated .line::after {
+    animation: none;
+  }
+}

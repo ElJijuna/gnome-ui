@@ -86,6 +86,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`Blockquote`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-blockquote--docs) | Styled pull-quote with left-border accent; default, info, warning, error, success variants; optional icon and attribution |
 | [`Spinner`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinner--docs) | Indeterminate loading indicator; sm/md/lg sizes |
 | [`ProgressBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-progressbar--docs) | Determinate (0–1) and indeterminate progress indicator |
+| [`Skeleton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-skeleton--docs) | Content-shaped loading placeholder; rectangular, circular, and multi-line text variants with optional shimmer |
 | [`CountDownTimer`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-countdowntimer--docs) | Countdown timer showing remaining time until a specified date; `date`, `time`, or `datetime` formats; executes callback on completion |
 | [`StatusPage`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) | Empty-state page with icon, title, description, and optional actions; `compact` prop for sidebars/popovers |
 | [`Separator`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-separator--docs) | Horizontal/vertical dividing line between content groups |
