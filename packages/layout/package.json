@@ -22,6 +22,11 @@
       "import": "./dist/components/CounterCard.js",
       "require": "./dist/components/CounterCard.cjs"
     },
+    "./components/DashboardGrid": {
+      "types": "./dist/components/DashboardGrid.d.ts",
+      "import": "./dist/components/DashboardGrid.js",
+      "require": "./dist/components/DashboardGrid.cjs"
+    },
     "./components/EmptyState": {
       "types": "./dist/components/EmptyState.d.ts",
       "import": "./dist/components/EmptyState.js",

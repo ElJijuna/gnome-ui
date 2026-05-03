@@ -1,0 +1,22 @@
+.grid {
+  display: grid;
+  width: 100%;
+}
+
+/* ─── Gap variants ────────────────────────────────────────────────────────── */
+
+.gapSm { gap: 8px; }
+.gapMd { gap: 16px; }
+.gapLg { gap: 24px; }
+
+/* ─── Auto responsive columns ─────────────────────────────────────────────── */
+
+.auto {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* ─── Item ────────────────────────────────────────────────────────────────── */
+
+.item {
+  min-width: 0;
+}

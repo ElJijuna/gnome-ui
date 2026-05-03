@@ -88,18 +88,9 @@ Colapsa a una sola columna en mobile (patrón `NavigationSplitView` pero al nive
 
 ---
 
-### `DashboardGrid`
+### ~~`DashboardGrid`~~ ✅ Implementado — issue [#82](https://github.com/ElJijuna/gnome-ui/issues/82)
 
 Grid responsivo de tarjetas con columnas fluidas, gap consistente y soporte para celdas de distintos tamaños (`span`).
-
-```tsx
-<DashboardGrid>
-  <DashboardGrid.Cell span={2}><StatsCard /></DashboardGrid.Cell>
-  <DashboardGrid.Cell><ChartCard /></DashboardGrid.Cell>
-</DashboardGrid>
-```
-
-**Por qué en layout:** encapsula el CSS Grid responsivo con los tokens de espaciado de GNOME.
 
 ---
 

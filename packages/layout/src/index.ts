@@ -34,3 +34,11 @@ export type {
 
 export { ErrorState } from "./components/ErrorState";
 export type { ErrorStateProps, ErrorStateType } from "./components/ErrorState";
+
+export { DashboardGrid } from "./components/DashboardGrid";
+export type {
+  DashboardGridProps,
+  DashboardGridItemProps,
+  DashboardGridColumns,
+  DashboardGridGap,
+} from "./components/DashboardGrid";
