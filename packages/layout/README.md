@@ -237,6 +237,41 @@ const panelRef = useRef<PanelCardHandle>(null);
 </PanelCard>
 ```
 
+---
+
+### `DashboardGrid`
+
+Responsive CSS Grid container for arranging dashboard widgets and panels.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `1 \| 2 \| 3 \| 4 \| "auto"` | `"auto"` | Column count. `"auto"` fills columns with `minmax(280px, 1fr)`. |
+| `gap` | `"sm" \| "md" \| "lg"` | `"md"` | Gap between items (8 / 16 / 24 px). |
+| `children` | `ReactNode` | — | `DashboardGrid.Item` elements. |
+
+#### `DashboardGrid.Item` props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `span` | `1 \| 2 \| 3 \| 4` | `1` | Number of columns the item spans. |
+| `children` | `ReactNode` | — | Widget content. |
+
+Both `DashboardGrid` and `DashboardGrid.Item` forward all `<div>` props
+to their root element.
+
+```tsx
+import { DashboardGrid } from "@gnome-ui/layout";
+
+<DashboardGrid columns={3} gap="md">
+  <DashboardGrid.Item span={2}>
+    <StatCard />
+  </DashboardGrid.Item>
+  <DashboardGrid.Item>
+    <ProgressCard />
+  </DashboardGrid.Item>
+</DashboardGrid>
+```
+
 ## License
 
 [MIT](../../LICENSE)
