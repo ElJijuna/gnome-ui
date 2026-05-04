@@ -57,6 +57,11 @@
       "import": "./dist/components/PanelCard.js",
       "require": "./dist/components/PanelCard.cjs"
     },
+    "./components/QuickActions": {
+      "types": "./dist/components/QuickActions.d.ts",
+      "import": "./dist/components/QuickActions.js",
+      "require": "./dist/components/QuickActions.cjs"
+    },
     "./components/StatusIndicator": {
       "types": "./dist/components/StatusIndicator.d.ts",
       "import": "./dist/components/StatusIndicator.js",

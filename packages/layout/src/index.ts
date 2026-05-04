@@ -42,3 +42,6 @@ export type {
   DashboardGridColumns,
   DashboardGridGap,
 } from "./components/DashboardGrid";
+
+export { QuickActions } from "./components/QuickActions";
+export type { QuickAction, QuickActionsProps } from "./components/QuickActions";

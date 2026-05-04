@@ -272,6 +272,60 @@ import { DashboardGrid } from "@gnome-ui/layout";
 </DashboardGrid>
 ```
 
+---
+
+### `QuickActions`
+
+Grid of shortcut action buttons for dashboards, file managers, and control panels.
+Actions are keyboard navigable with arrow keys, and disabled actions are skipped
+and cannot be activated.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `actions` | `QuickAction[]` | — | Shortcut action definitions |
+| `columns` | `number` | `4` | Number of grid columns |
+
+#### `QuickAction`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Stable action id |
+| `label` | `string` | Visible button label |
+| `icon` | `ReactNode` | Icon or visual element. Size and color are controlled by the node you pass in. |
+| `disabled` | `boolean` | Visually disables the action and blocks activation |
+| `onActivate` | `() => void` | Called when the action is clicked or activated from the keyboard |
+
+```tsx
+import { Add, Save, Share } from "@gnome-ui/icons";
+import { Icon } from "@gnome-ui/react";
+import { QuickActions } from "@gnome-ui/layout";
+
+<QuickActions
+  columns={3}
+  actions={[
+    {
+      id: "new-file",
+      label: "New File",
+      icon: <Icon icon={Add} size="lg" />,
+      onActivate: () => {},
+    },
+    {
+      id: "save",
+      label: "Save",
+      icon: <Icon icon={Save} size="lg" />,
+      onActivate: () => {},
+    },
+    {
+      id: "share",
+      label: "Share",
+      icon: <Icon icon={Share} size="lg" />,
+      disabled: true,
+      onActivate: () => {},
+    },
+  ]}
+/>
+```
+
 ## License
 
 [MIT](../../LICENSE)
