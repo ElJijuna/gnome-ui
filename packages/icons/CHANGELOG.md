@@ -1,3 +1,22 @@
+## [1.40.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.39.0...@gnome-ui/icons@1.40.0) (2026-05-04)
+
+### Features
+
+* **@gnome-ui/icons:** add Npm icon and fix Share icon ([6ae994e](https://github.com/ElJijuna/gnome-ui/commit/6ae994eb4400a54bba0636fc284b1d2d14b4eb45))
+* **@gnome-ui/layout:** add DashboardGrid component (closes [#82](https://github.com/ElJijuna/gnome-ui/issues/82)) ([feb03f3](https://github.com/ElJijuna/gnome-ui/commit/feb03f3b5c7dfdfcc7bab246f3471a1b320c9145))
+* **@gnome-ui/layout:** add EmptyState component (closes [#89](https://github.com/ElJijuna/gnome-ui/issues/89)) ([1d9bc09](https://github.com/ElJijuna/gnome-ui/commit/1d9bc094c362400ac5bb4c177fc30ca49d967c94))
+* **@gnome-ui/layout:** add ErrorState component (closes [#90](https://github.com/ElJijuna/gnome-ui/issues/90)) ([75fe802](https://github.com/ElJijuna/gnome-ui/commit/75fe802a91cc450dc49d4bc2903c72a50b992e99))
+* **@gnome-ui/layout:** add StatusIndicator component (closes [#87](https://github.com/ElJijuna/gnome-ui/issues/87)) ([46b59ff](https://github.com/ElJijuna/gnome-ui/commit/46b59ff0fb36f063565cafba407881f7f899ed14))
+* add new icon Npm and fix Share icon. ([68fcf36](https://github.com/ElJijuna/gnome-ui/commit/68fcf36ddf3b0b056175a32a63890bf7cfbd0dbc))
+* **react:** add Skeleton component ([c993481](https://github.com/ElJijuna/gnome-ui/commit/c993481e593b6e84ad4470bf3f1b4460f96c586e)), closes [#95](https://github.com/ElJijuna/gnome-ui/issues/95)
+
+### Bug Fixes
+
+* **@gnome-ui/hooks:** enable tree-shaking via vite-magic-tree-shaking (closes [#76](https://github.com/ElJijuna/gnome-ui/issues/76)) ([ff4d084](https://github.com/ElJijuna/gnome-ui/commit/ff4d084bd2b86a5acd2e03d55b5888b5dc8a2217))
+* **ci:** add catch-all false rules to prevent preset fallback in monorepo releases ([599036f](https://github.com/ElJijuna/gnome-ui/commit/599036f5b139261ca6c97cda647cc1af45a0caa6))
+* **ci:** reorder releaseRules so catch-all false precedes scoped rules ([cca9c41](https://github.com/ElJijuna/gnome-ui/commit/cca9c412f0ce5877bde00fff3c9a2f96db66edc4))
+* **ci:** scope semantic-release rules per package to prevent cross-package tag conflicts ([f0af255](https://github.com/ElJijuna/gnome-ui/commit/f0af2557eb23657c859b3743577fdd34dbd0d5c3))
+
 ## [1.39.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.38.1...@gnome-ui/icons@1.39.0) (2026-05-02)
 
 ### Features
