@@ -1,3 +1,9 @@
+## [1.18.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.17.0...@gnome-ui/layout@1.18.0) (2026-05-04)
+
+### Features
+
+* **@gnome-ui/layout:** add responsive DashboardGrid layouts (closes [#99](https://github.com/ElJijuna/gnome-ui/issues/99)) ([550f367](https://github.com/ElJijuna/gnome-ui/commit/550f367388f83609a54f4a4c94fd73f34a8276be))
+
 ## [1.17.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.16.0...@gnome-ui/layout@1.17.0) (2026-05-04)
 
 ### Features
