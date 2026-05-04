@@ -3,16 +3,54 @@
   width: 100%;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ─── Gap variants ────────────────────────────────────────────────────────── */
 
-.gapSm { gap: 8px; }
-.gapMd { gap: 16px; }
-.gapLg { gap: 24px; }
+.gapSm { gap: var(--gnome-space-2, 12px); }
+.gapMd { gap: var(--gnome-space-3, 18px); }
+.gapLg { gap: var(--gnome-space-4, 24px); }
 
 /* ─── Auto responsive columns ─────────────────────────────────────────────── */
 
 .auto {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* ─── Explicit responsive columns ─────────────────────────────────────────── */
+
+.responsive {
+  grid-template-columns: repeat(var(--dashboard-grid-columns-sm, 1), minmax(0, 1fr));
+}
+
+@media (min-width: 550px) {
+  .responsive {
+    grid-template-columns: repeat(
+      var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, 1)),
+      minmax(0, 1fr)
+    );
+  }
+}
+
+@media (min-width: 860px) {
+  .responsive {
+    grid-template-columns: repeat(
+      var(--dashboard-grid-columns-lg, var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, 1))),
+      minmax(0, 1fr)
+    );
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive {
+    grid-template-columns: repeat(
+      var(--dashboard-grid-columns-xl, var(--dashboard-grid-columns-lg, var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, 1)))),
+      minmax(0, 1fr)
+    );
+  }
 }
 
 /* ─── Item ────────────────────────────────────────────────────────────────── */

@@ -281,15 +281,25 @@ Responsive CSS Grid container for arranging dashboard widgets and panels.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `columns` | `1 \| 2 \| 3 \| 4 \| "auto"` | `"auto"` | Column count. `"auto"` fills columns with `minmax(280px, 1fr)`. |
-| `gap` | `"sm" \| "md" \| "lg"` | `"md"` | Gap between items (8 / 16 / 24 px). |
+| `columns` | `1 \| 2 \| 3 \| 4 \| "auto" \| ResponsiveColumns` | `"auto"` | Column count. `"auto"` fills columns with `minmax(280px, 1fr)`. Objects map breakpoints to explicit counts. |
+| `gap` | `"sm" \| "md" \| "lg"` | `"md"` | Gap between items using core spacing tokens (`--gnome-space-2/3/4`). |
+| `layout` | `"grid" \| "column"` | `"grid"` | Render as a grid or as a vertical stack. |
 | `children` | `ReactNode` | — | `DashboardGrid.Item` elements. |
+
+#### Responsive columns
+
+| Key | Width |
+|-----|-------|
+| `sm` | Base / small screens |
+| `md` | `≥ 550px` |
+| `lg` | `≥ 860px` |
+| `xl` | `≥ 1200px` |
 
 #### `DashboardGrid.Item` props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `span` | `1 \| 2 \| 3 \| 4` | `1` | Number of columns the item spans. |
+| `span` | `1 \| 2 \| 3 \| 4` | `1` | Number of columns the item spans in grid mode. Harmless in column mode. |
 | `children` | `ReactNode` | — | Widget content. |
 
 Both `DashboardGrid` and `DashboardGrid.Item` forward all `<div>` props
@@ -298,12 +308,23 @@ to their root element.
 ```tsx
 import { DashboardGrid } from "@gnome-ui/layout";
 
-<DashboardGrid columns={3} gap="md">
+<DashboardGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap="md">
   <DashboardGrid.Item span={2}>
     <StatCard />
   </DashboardGrid.Item>
   <DashboardGrid.Item>
     <ProgressCard />
+  </DashboardGrid.Item>
+</DashboardGrid>
+```
+
+```tsx
+<DashboardGrid layout="column" gap="md">
+  <DashboardGrid.Item>
+    <StatCard />
+  </DashboardGrid.Item>
+  <DashboardGrid.Item>
+    <ActivityFeed />
   </DashboardGrid.Item>
 </DashboardGrid>
 ```
