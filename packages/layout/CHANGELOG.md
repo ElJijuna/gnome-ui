@@ -1,3 +1,12 @@
+## [1.16.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.15.0...@gnome-ui/layout@1.16.0) (2026-05-04)
+
+### Features
+
+* **@gnome-ui/icons:** add Npm icon and fix Share icon ([6ae994e](https://github.com/ElJijuna/gnome-ui/commit/6ae994eb4400a54bba0636fc284b1d2d14b4eb45))
+* **@gnome-ui/layout:** add QuickActions component (closes [#86](https://github.com/ElJijuna/gnome-ui/issues/86)) ([fa55062](https://github.com/ElJijuna/gnome-ui/commit/fa55062068f87c93853f46018d08bca15daad776))
+* add new icon Npm and fix Share icon. ([68fcf36](https://github.com/ElJijuna/gnome-ui/commit/68fcf36ddf3b0b056175a32a63890bf7cfbd0dbc))
+* **react:** add Skeleton component ([c993481](https://github.com/ElJijuna/gnome-ui/commit/c993481e593b6e84ad4470bf3f1b4460f96c586e)), closes [#95](https://github.com/ElJijuna/gnome-ui/issues/95)
+
 ## [1.15.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.14.0...@gnome-ui/layout@1.15.0) (2026-05-03)
 
 ### Features
