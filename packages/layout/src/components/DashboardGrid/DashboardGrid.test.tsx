@@ -47,6 +47,51 @@ describe("DashboardGrid", () => {
       const grid = container.firstChild as HTMLElement;
       expect(grid.style.gridTemplateColumns).toBe("");
     });
+
+    it("sets responsive column CSS variables for object columns", () => {
+      const { container } = render(
+        <DashboardGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} />,
+      );
+      const grid = container.firstChild as HTMLElement;
+
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-sm")).toBe("1");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-md")).toBe("2");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-lg")).toBe("3");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-xl")).toBe("4");
+      expect(grid.style.gridTemplateColumns).toBe("");
+      expect(grid.className).toMatch(/responsive/);
+    });
+
+    it("preserves user inline styles with responsive columns", () => {
+      const { container } = render(
+        <DashboardGrid columns={{ sm: 1, md: 2 }} style={{ maxWidth: 640 }} />,
+      );
+      const grid = container.firstChild as HTMLElement;
+
+      expect(grid.style.maxWidth).toBe("640px");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-md")).toBe("2");
+    });
+  });
+
+  describe("layout prop", () => {
+    it("defaults to grid layout", () => {
+      const { container } = render(<DashboardGrid />);
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).not.toMatch(/column/);
+    });
+
+    it("applies column layout class", () => {
+      const { container } = render(<DashboardGrid layout="column" />);
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.className).toMatch(/column/);
+    });
+
+    it("does not apply grid column styles in column layout", () => {
+      const { container } = render(<DashboardGrid layout="column" columns={3} />);
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.gridTemplateColumns).toBe("");
+      expect(grid.className).not.toMatch(/auto|responsive/);
+    });
   });
 
   describe("gap prop", () => {

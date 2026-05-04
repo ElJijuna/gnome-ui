@@ -37,13 +37,15 @@ const meta: Meta<typeof DashboardGrid> = {
         component: `
 Responsive grid container for arranging dashboard widgets and panels.
 
-Use \`columns\` to fix the column count or let it adapt automatically with \`"auto"\`.
+Use \`columns\` to fix the column count, let it adapt automatically with \`"auto"\`,
+or map explicit column counts to responsive breakpoints.
 Wrap each widget in \`DashboardGrid.Item\` and set \`span\` to make it span multiple columns.
+Set \`layout="column"\` when the same children should stack vertically.
 
 \`\`\`tsx
 import { DashboardGrid } from "@gnome-ui/layout";
 
-<DashboardGrid columns={3} gap="md">
+<DashboardGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap="md">
   <DashboardGrid.Item span={2}>
     <StatCard ... />
   </DashboardGrid.Item>
@@ -58,12 +60,15 @@ import { DashboardGrid } from "@gnome-ui/layout";
   },
   argTypes: {
     columns: {
-      control: { type: "select" },
-      options: [1, 2, 3, 4, "auto"],
+      control: false,
     },
     gap: {
       control: { type: "radio" },
       options: ["sm", "md", "lg"],
+    },
+    layout: {
+      control: { type: "radio" },
+      options: ["grid", "column"],
     },
   },
 };
@@ -105,6 +110,56 @@ export const FixedColumns: Story = {
   ),
   parameters: {
     docs: { description: { story: "Fixed 3-column layout." } },
+  },
+};
+
+export const ResponsiveColumns: Story = {
+  args: {
+    columns: { sm: 1, md: 2, lg: 3, xl: 4 },
+    gap: "md",
+  },
+  render: (args) => (
+    <DashboardGrid {...args}>
+      {["Users", "Revenue", "Sessions", "Errors", "Latency", "Uptime", "Jobs", "Storage"].map(
+        (label) => (
+          <DashboardGrid.Item key={label}>
+            <Placeholder label={label} />
+          </DashboardGrid.Item>
+        ),
+      )}
+    </DashboardGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Explicit responsive columns: 1 on small screens, 2 at medium, 3 at large, and 4 at extra-large widths.",
+      },
+    },
+  },
+};
+
+export const ColumnLayout: Story = {
+  args: {
+    layout: "column",
+    gap: "md",
+  },
+  render: (args) => (
+    <DashboardGrid {...args}>
+      {["Queue", "Workers", "Deployments"].map((label) => (
+        <DashboardGrid.Item key={label} span={3}>
+          <Placeholder label={label} height={88} />
+        </DashboardGrid.Item>
+      ))}
+    </DashboardGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`layout=\"column\"` stacks children vertically and keeps using the same gap scale. Item `span` is harmless in this mode.",
+      },
+    },
   },
 };
 

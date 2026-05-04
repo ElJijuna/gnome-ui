@@ -47,7 +47,10 @@ export type {
   DashboardGridProps,
   DashboardGridItemProps,
   DashboardGridColumns,
+  DashboardGridColumnCount,
+  DashboardGridResponsiveColumns,
   DashboardGridGap,
+  DashboardGridLayout,
 } from "./components/DashboardGrid";
 
 export { QuickActions } from "./components/QuickActions";
