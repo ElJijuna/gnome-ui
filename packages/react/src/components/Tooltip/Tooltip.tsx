@@ -7,6 +7,7 @@ import {
   cloneElement,
   type ReactElement,
   type HTMLAttributes,
+  type Ref,
 } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Tooltip.module.css";
@@ -44,6 +45,15 @@ interface Position {
 }
 
 const GAP = 6; // px between trigger and tooltip
+
+function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
+  if (!ref) return;
+  if (typeof ref === "function") {
+    ref(value);
+    return;
+  }
+  ref.current = value;
+}
 
 function computePosition(
   trigger: DOMRect,
@@ -190,9 +200,16 @@ export function Tooltip({
     return () => document.removeEventListener("keydown", handler);
   }, [visible, hide]);
 
+  const childRef = (children.props as HTMLAttributes<HTMLElement> & {
+    ref?: Ref<HTMLElement>;
+  }).ref;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const child = cloneElement(children as any, {
-    ref: triggerRef,
+    ref: (node: HTMLElement | null) => {
+      triggerRef.current = node;
+      assignRef(childRef, node);
+    },
     "aria-describedby": id,
     onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
       show();

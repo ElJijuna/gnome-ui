@@ -1,3 +1,4 @@
+import { createRef } from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -111,6 +112,12 @@ describe("Button", () => {
         "aria-label",
         "Close dialog",
       );
+    });
+
+    it("forwards refs", () => {
+      const ref = createRef<HTMLButtonElement>();
+      render(<Button ref={ref}>Save</Button>);
+      expect(ref.current).toBe(screen.getByRole("button", { name: "Save" }));
     });
   });
 });

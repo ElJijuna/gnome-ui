@@ -172,6 +172,11 @@
       "import": "./dist/components/Icon.js",
       "require": "./dist/components/Icon.cjs"
     },
+    "./components/IconButton": {
+      "types": "./dist/components/IconButton.d.ts",
+      "import": "./dist/components/IconButton.js",
+      "require": "./dist/components/IconButton.cjs"
+    },
     "./components/InlineViewSwitcher": {
       "types": "./dist/components/InlineViewSwitcher.d.ts",
       "import": "./dist/components/InlineViewSwitcher.js",

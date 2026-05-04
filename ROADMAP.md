@@ -163,6 +163,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ✅ | **`SplitButton`** | Primary action button with an attached dropdown arrow — mirrors `AdwSplitButton`; supports `suggested` and `destructive` variants |
+| ✅ | **`IconButton`** | Accessible icon-only action button composed from `Button`, `Icon`, and optional `Tooltip`; supports variants, sizes, disabled state, refs, and HTML button attributes — issue [#102](https://github.com/ElJijuna/gnome-ui/issues/102) |
 | ✅ | **`Button` `raised` variant** | Add `variant="raised"` to `Button`: explicit raised look for buttons inside flat/toolbar contexts — mirrors `.raised` style class |
 | ✅ | **`Button` `osd` modifier** | Add `osd` prop to `Button`: dark semi-transparent style for controls overlaid on media/images — mirrors `.osd` style class |
 

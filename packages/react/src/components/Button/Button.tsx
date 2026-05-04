@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import styles from "./Button.module.css";
 
 export type ButtonVariant = "default" | "suggested" | "destructive" | "flat" | "raised";
@@ -35,7 +35,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/controls/buttons.html
  */
-export function Button({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({
   variant = "default",
   size = "md",
   shape = "default",
@@ -45,7 +45,7 @@ export function Button({
   children,
   className,
   ...props
-}: ButtonProps) {
+}: ButtonProps, ref) {
   const classes = [
     styles.button,
     styles[variant],
@@ -58,10 +58,10 @@ export function Button({
     .join(" ");
 
   return (
-    <button className={classes} {...props}>
+    <button ref={ref} className={classes} {...props}>
       {leadingIcon}
       {children}
       {trailingIcon}
     </button>
   );
-}
+});

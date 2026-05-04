@@ -60,6 +60,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | Component | Description |
 |-----------|-------------|
 | [`Button`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-button--docs) | Default, Suggested, Destructive, Flat, Raised variants; `osd` overlay modifier; sm/md/lg sizes; pill and circular shapes |
+| [`IconButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-iconbutton--docs) | Accessible icon-only action button composed from `Button`, `Icon`, and optional `Tooltip`; supports variants, sizes, disabled state, and refs |
 | [`SplitButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-splitbutton--docs) | Primary action button with attached dropdown arrow; Default, Suggested, Destructive variants |
 | [`ButtonContent`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-buttoncontent--docs) | Icon + label layout helper for buttons that contain both an icon and text |
 | [`Switch`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-switch--docs) | On/off toggle for settings that apply immediately |

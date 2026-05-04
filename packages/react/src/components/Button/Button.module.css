@@ -232,8 +232,24 @@
   min-width: 4rem;
 }
 
+.sm.circular {
+  min-width: 28px;
+  min-height: 28px;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+}
+
 .lg {
   font-size: var(--gnome-font-size-title-4);
   min-height: 42px;
   padding: var(--gnome-space-1) var(--gnome-space-3);
+}
+
+.lg.circular {
+  min-width: 42px;
+  min-height: 42px;
+  width: 42px;
+  height: 42px;
+  padding: var(--gnome-space-1);
 }

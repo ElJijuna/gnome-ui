@@ -56,6 +56,9 @@ export type { CountDownTimerProps, CountDownVariant } from "./components/CountDo
 export { Icon } from "./components/Icon";
 export type { IconProps, IconSize } from "./components/Icon";
 
+export { IconButton } from "./components/IconButton";
+export type { IconButtonProps, IconButtonSize, IconButtonVariant } from "./components/IconButton";
+
 export { Sidebar, SidebarSection, SidebarItem, SidebarCollapsedContext, useSidebarCollapsed } from "./components/Sidebar";
 export type { SidebarProps, SidebarSectionProps, SidebarItemProps, SidebarMenuEntry } from "./components/Sidebar";
 
