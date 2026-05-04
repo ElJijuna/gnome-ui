@@ -1,3 +1,26 @@
+## [1.39.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.38.1...@gnome-ui/react@1.39.0) (2026-05-04)
+
+### Features
+
+* **@gnome-ui/icons:** add Npm icon and fix Share icon ([6ae994e](https://github.com/ElJijuna/gnome-ui/commit/6ae994eb4400a54bba0636fc284b1d2d14b4eb45))
+* **@gnome-ui/layout:** add DashboardGrid component (closes [#82](https://github.com/ElJijuna/gnome-ui/issues/82)) ([feb03f3](https://github.com/ElJijuna/gnome-ui/commit/feb03f3b5c7dfdfcc7bab246f3471a1b320c9145))
+* **@gnome-ui/layout:** add EmptyState component (closes [#89](https://github.com/ElJijuna/gnome-ui/issues/89)) ([1d9bc09](https://github.com/ElJijuna/gnome-ui/commit/1d9bc094c362400ac5bb4c177fc30ca49d967c94))
+* **@gnome-ui/layout:** add ErrorState component (closes [#90](https://github.com/ElJijuna/gnome-ui/issues/90)) ([75fe802](https://github.com/ElJijuna/gnome-ui/commit/75fe802a91cc450dc49d4bc2903c72a50b992e99))
+* **@gnome-ui/layout:** add QuickActions component (closes [#86](https://github.com/ElJijuna/gnome-ui/issues/86)) ([fa55062](https://github.com/ElJijuna/gnome-ui/commit/fa55062068f87c93853f46018d08bca15daad776))
+* **@gnome-ui/layout:** add responsive DashboardGrid layouts (closes [#99](https://github.com/ElJijuna/gnome-ui/issues/99)) ([550f367](https://github.com/ElJijuna/gnome-ui/commit/550f367388f83609a54f4a4c94fd73f34a8276be))
+* **@gnome-ui/layout:** add StatCard component (closes [#83](https://github.com/ElJijuna/gnome-ui/issues/83)) ([166b689](https://github.com/ElJijuna/gnome-ui/commit/166b6898a191b079f757ba46a9c3456cb9967af2))
+* **@gnome-ui/layout:** add StatusIndicator component (closes [#87](https://github.com/ElJijuna/gnome-ui/issues/87)) ([46b59ff](https://github.com/ElJijuna/gnome-ui/commit/46b59ff0fb36f063565cafba407881f7f899ed14))
+* **@gnome-ui/react:** add componente IconButton, update Button to add class to use circular button and add refs prop, update Tooltip to export refs prop. ([a033b3c](https://github.com/ElJijuna/gnome-ui/commit/a033b3cadff68019a85097d68a145a186a7388e2))
+* add new icon Npm and fix Share icon. ([68fcf36](https://github.com/ElJijuna/gnome-ui/commit/68fcf36ddf3b0b056175a32a63890bf7cfbd0dbc))
+* **react:** add Skeleton component ([c993481](https://github.com/ElJijuna/gnome-ui/commit/c993481e593b6e84ad4470bf3f1b4460f96c586e)), closes [#95](https://github.com/ElJijuna/gnome-ui/issues/95)
+
+### Bug Fixes
+
+* **@gnome-ui/hooks:** enable tree-shaking via vite-magic-tree-shaking (closes [#76](https://github.com/ElJijuna/gnome-ui/issues/76)) ([ff4d084](https://github.com/ElJijuna/gnome-ui/commit/ff4d084bd2b86a5acd2e03d55b5888b5dc8a2217))
+* **ci:** add catch-all false rules to prevent preset fallback in monorepo releases ([599036f](https://github.com/ElJijuna/gnome-ui/commit/599036f5b139261ca6c97cda647cc1af45a0caa6))
+* **ci:** reorder releaseRules so catch-all false precedes scoped rules ([cca9c41](https://github.com/ElJijuna/gnome-ui/commit/cca9c412f0ce5877bde00fff3c9a2f96db66edc4))
+* **ci:** scope semantic-release rules per package to prevent cross-package tag conflicts ([f0af255](https://github.com/ElJijuna/gnome-ui/commit/f0af2557eb23657c859b3743577fdd34dbd0d5c3))
+
 ## [1.38.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.38.0...@gnome-ui/react@1.38.1) (2026-05-02)
 
 ### Bug Fixes
