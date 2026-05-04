@@ -4,6 +4,13 @@ export type { LayoutProps } from "./components/Layout";
 export { CounterCard } from "./components/CounterCard";
 export type { CounterCardProps } from "./components/CounterCard";
 
+export { StatCard } from "./components/StatCard";
+export type {
+  StatCardProps,
+  StatCardTrend,
+  StatCardTrendDirection,
+} from "./components/StatCard";
+
 export { UserCard } from "./components/UserCard";
 export type { UserCardProps, UserCardAction } from "./components/UserCard";
 

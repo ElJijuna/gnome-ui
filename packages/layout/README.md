@@ -141,6 +141,42 @@ import { CounterCard } from "@gnome-ui/layout";
 
 ---
 
+### `StatCard`
+
+Key metric card with optional unit, trend indicator, icon, and skeleton loading
+state. Use it for dashboard metrics that need context beyond a raw count.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Metric label |
+| `value` | `number \| string` | — | Primary value |
+| `unit` | `string` | — | Optional unit suffix |
+| `trend` | `{ direction: "up" \| "down" \| "neutral"; value: number; period?: string }` | — | Optional trend indicator |
+| `icon` | `ReactNode` | — | Optional visual element. Size and color are controlled by the node you pass in. |
+| `loading` | `boolean` | `false` | Render a skeleton placeholder state |
+
+```tsx
+import { Person } from "@gnome-ui/icons";
+import { Icon } from "@gnome-ui/react";
+import { StatCard } from "@gnome-ui/layout";
+
+<StatCard
+  label="Active Users"
+  value={1284}
+  unit="users"
+  icon={<Icon icon={Person} size="lg" />}
+  trend={{ direction: "up", value: 12, period: "vs last week" }}
+/>
+```
+
+Per-component path:
+
+```tsx
+import { StatCard } from "@gnome-ui/layout/components/StatCard";
+```
+
+---
+
 ### `UserCard`
 
 User identity panel for popovers, sidebar footers, and profile pages. Renders an `Avatar`, a display name, an optional sub-line, and a list of action buttons. A separator is automatically inserted before the first `"destructive"` action when non-destructive actions precede it.

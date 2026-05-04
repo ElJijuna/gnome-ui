@@ -404,7 +404,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ✅ | **`DashboardGrid`** | Responsive CSS Grid container for arranging dashboard widgets; supports column count and per-item span — issue [#82](https://github.com/ElJijuna/gnome-ui/issues/82) |
-| ⬜ | **`StatCard`** | Key metric display with optional trend indicator (direction, percentage, period) and loading skeleton — issue [#83](https://github.com/ElJijuna/gnome-ui/issues/83) |
+| ✅ | **`StatCard`** | Key metric display with optional trend indicator (direction, percentage, period) and loading skeleton — issue [#83](https://github.com/ElJijuna/gnome-ui/issues/83) |
 | ⬜ | **`ProgressCard`** | Resource usage card with labelled progress bar; color thresholds at 75 % (warning) and 90 % (critical) — issue [#84](https://github.com/ElJijuna/gnome-ui/issues/84) |
 | ⬜ | **`ActivityFeed`** | Chronological event list with relative timestamps, icons, and truncation — issue [#85](https://github.com/ElJijuna/gnome-ui/issues/85) |
 | ⬜ | **`QuickActions`** | Grid of shortcut action buttons with keyboard navigation — issue [#86](https://github.com/ElJijuna/gnome-ui/issues/86) |
