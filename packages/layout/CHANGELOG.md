@@ -1,3 +1,9 @@
+## [1.17.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.16.0...@gnome-ui/layout@1.17.0) (2026-05-04)
+
+### Features
+
+* **@gnome-ui/layout:** add StatCard component (closes [#83](https://github.com/ElJijuna/gnome-ui/issues/83)) ([166b689](https://github.com/ElJijuna/gnome-ui/commit/166b6898a191b079f757ba46a9c3456cb9967af2))
+
 ## [1.16.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.15.0...@gnome-ui/layout@1.16.0) (2026-05-04)
 
 ### Features
