@@ -236,6 +236,7 @@ const PLATFORM_COLORS: Record<string, string> = {
   GitLab:    "#FC6D26",
   Bitbucket: "#0052CC",
   X:         "#000000",
+  Npm:       "#CB3837",
 };
 
 export const ThirdPartyIcons: Story = {
@@ -277,7 +278,7 @@ export const ThirdPartyIcons: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Third-party platform logos (`GitHub`, `GitLab`, `Bitbucket`). Rendered with their brand colors for context — in production, pass `color` to `<Icon>` as needed.",
+        story: "Third-party platform logos (`GitHub`, `GitLab`, `Bitbucket`, `X`, `Npm`). Rendered with their brand colors for context — in production, pass `color` to `<Icon>` as needed.",
       },
     },
   },

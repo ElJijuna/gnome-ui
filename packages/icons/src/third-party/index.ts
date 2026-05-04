@@ -6,3 +6,4 @@ export { GitHub } from "./GitHub.ts";
 export { GitLab } from "./GitLab.ts";
 export { Bitbucket } from "./Bitbucket.ts";
 export { X } from "./X.ts";
+export { Npm } from "./Npm.ts";

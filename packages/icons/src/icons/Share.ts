@@ -1,7 +1,10 @@
 import type { IconDefinition } from "../types.ts";
 
-/** emblem-shared-symbolic */
+/** share-symbolic */
 export const Share: IconDefinition = {
   viewBox: "0 0 16 16",
-  paths: [{ d: "M11 1a3 3 0 1 1-1.18 5.76L6.6 8.9A3.02 3.02 0 0 1 7 10a3 3 0 1 1-1.18-2.38l3.36-2.24A3 3 0 0 1 9 5a3 3 0 0 1 .18-1.02L5.82 1.76A3 3 0 1 1 7 0a2.99 2.99 0 0 1-.18 1.02l3.36 2.22A3 3 0 0 1 11 1z", fillRule: "evenodd" }],
+  paths: [{
+    d: "M 9.5 8 a 2.5 2.5 0 1 1 5 0 a 2.5 2.5 0 1 1 -5 0 z M 1.5 3.5 a 2.5 2.5 0 1 1 5 0 a 2.5 2.5 0 1 1 -5 0 z M 1.5 12.5 a 2.5 2.5 0 1 1 5 0 a 2.5 2.5 0 1 1 -5 0 z M 5.55 5.23 L 6.29 3.92 L 10.45 6.27 L 9.71 7.58 Z M 6.29 12.08 L 5.55 10.77 L 9.71 8.42 L 10.45 9.73 Z",
+    fillRule: "nonzero",
+  }],
 };
