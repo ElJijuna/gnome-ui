@@ -101,6 +101,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `Layout` | Full-page shell with four named zones: `topBar`, `sidebar`, `children`, `bottomBar` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-layout--docs) |
 | `AdaptiveLayout` | Responsive layout that adapts column structure to the available width | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-adaptivelayout--docs) |
 | `CounterCard` | Card displaying a labelled numeric count | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-countercard--docs) |
+| `StatCard` | Key metric card with unit, trend indicator, icon, and skeleton loading state | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-statcard--docs) |
 | `UserCard` | Card displaying user identity (avatar, name, role) | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-usercard--docs) |
 | `PanelCard` | Collapsible card panel with header and body | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-panelcard--docs) |
 | `EntityCard` | Card for displaying a generic named entity with metadata | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-entitycard--docs) |

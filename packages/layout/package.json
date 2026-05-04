@@ -27,6 +27,11 @@
       "import": "./dist/components/DashboardGrid.js",
       "require": "./dist/components/DashboardGrid.cjs"
     },
+    "./components/StatCard": {
+      "types": "./dist/components/StatCard.d.ts",
+      "import": "./dist/components/StatCard.js",
+      "require": "./dist/components/StatCard.cjs"
+    },
     "./components/EmptyState": {
       "types": "./dist/components/EmptyState.d.ts",
       "import": "./dist/components/EmptyState.js",
