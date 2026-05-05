@@ -1,3 +1,13 @@
+## [1.40.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.39.0...@gnome-ui/react@1.40.0) (2026-05-05)
+
+### Features
+
+* **@gnome-ui/icons, @gnome-ui/react:** add simple-icons support to Icon component ([7b3e454](https://github.com/ElJijuna/gnome-ui/commit/7b3e454b96e4562ad06c4d4851310e87c380c8df))
+* **@gnome-ui/icons:** add simple-icons support to Icon component ([dc7eb3f](https://github.com/ElJijuna/gnome-ui/commit/dc7eb3f66aaa381c0e768b45e6970ea16c4b8206))
+* **@gnome-ui/layout:** support hex colors in IconBadge ([95d599c](https://github.com/ElJijuna/gnome-ui/commit/95d599ccb6eb55424a520310b96dc725cf2cab83))
+* **@gnome-ui/react:** add simple-icons support to Icon component ([a17286e](https://github.com/ElJijuna/gnome-ui/commit/a17286ec53fc07ceee3b95eeeb4a0d69f64558be))
+* **storybook:** add accent color toolbar to react and layout packages ([832e1ab](https://github.com/ElJijuna/gnome-ui/commit/832e1abf397e8f8174284eeca36bb6f052a8c795))
+
 ## [1.39.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.38.1...@gnome-ui/react@1.39.0) (2026-05-04)
 
 ### Features
