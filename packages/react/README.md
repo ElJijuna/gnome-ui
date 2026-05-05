@@ -81,7 +81,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | Component | Description |
 |-----------|-------------|
 | [`Text`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-text--docs) | 12 Adwaita type styles: large-title, title-1…4, heading, body, caption… |
-| [`Icon`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-icon--docs) | React adapter for `@gnome-ui/icons` — inline SVG, inherits `currentColor` |
+| [`Icon`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-icon--docs) | Inline SVG icon. Accepts `@gnome-ui/icons` definitions, [`simple-icons`](https://simpleicons.org/) icons, or any `{ path }` object; inherits `currentColor` |
 | [`Avatar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatar--docs) | Circular user image with deterministic-color initials fallback |
 | [`Badge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) | Counter or status dot, optionally anchored over another element |
 | [`Blockquote`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-blockquote--docs) | Styled pull-quote with left-border accent; default, info, warning, error, success variants; optional icon and attribution |

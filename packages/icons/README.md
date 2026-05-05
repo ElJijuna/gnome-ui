@@ -4,6 +4,8 @@ Framework-agnostic Adwaita symbolic icon definitions for the [gnome-ui](https://
 
 Each icon is a plain JavaScript object (`IconDefinition`) containing SVG path data — no DOM, no React, no styles. UI framework adapters consume this shape to render inline SVGs.
 
+The `Icon` React adapter also accepts icons from [`simple-icons`](https://simpleicons.org/) directly, without any conversion.
+
 [![npm](https://img.shields.io/npm/v/@gnome-ui/icons)](https://www.npmjs.com/package/@gnome-ui/icons)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
@@ -41,6 +43,28 @@ import { Search, Settings, GoHome } from "@gnome-ui/icons";
 <Icon icon={Settings} size="lg" aria-hidden />
 ```
 
+### With `simple-icons`
+
+The `Icon` component accepts any `simple-icons` icon directly — no adapter or conversion needed. `simple-icons` is not a dependency of this package; install it separately in your project.
+
+```tsx
+import { Icon } from "@gnome-ui/react";
+import { siGithub, siNpm } from "simple-icons";
+
+<Icon icon={siGithub} label="GitHub" />
+<Icon icon={siNpm} size="lg" label="npm" />
+```
+
+You can also pass a plain `{ path }` object for any single-path SVG icon:
+
+```tsx
+import { Icon } from "@gnome-ui/react";
+
+<Icon icon={{ path: "M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12..." }} label="My icon" />
+// Custom viewBox (defaults to "0 0 24 24"):
+<Icon icon={{ path: "M0 0h32v32H0z", viewBox: "0 0 32 32" }} />
+```
+
 ### Framework-agnostic (raw SVG)
 
 ```ts
@@ -65,9 +89,10 @@ function renderIcon(icon: IconDefinition, size = 16) {
 }
 ```
 
-## `IconDefinition` type
+## Types
 
 ```ts
+/** Icons from @gnome-ui/icons — multi-path, fixed viewBox. */
 interface IconDefinition {
   readonly viewBox: string;
   readonly paths: ReadonlyArray<{
@@ -76,6 +101,15 @@ interface IconDefinition {
     readonly clipRule?: "nonzero" | "evenodd" | "inherit";
   }>;
 }
+
+/** Single-path icons from simple-icons or any { path } object. */
+interface RawPathIconDefinition {
+  readonly path: string;
+  readonly viewBox?: string; // defaults to "0 0 24 24"
+}
+
+/** Union accepted by the Icon component. */
+type AnyIconDefinition = IconDefinition | RawPathIconDefinition;
 ```
 
 ## Available icons

@@ -57,3 +57,56 @@ describe("Icon", () => {
     expect(container.querySelectorAll("path").length).toBeGreaterThan(0);
   });
 });
+
+describe("Icon — RawPathIconDefinition (simple-icons compatible)", () => {
+  const rawPath = "M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0z";
+
+  it("renders an SVG element from a raw path object", () => {
+    const { container } = render(<Icon icon={{ path: rawPath }} />);
+    expect(container.querySelector("svg")).toBeInTheDocument();
+  });
+
+  it("defaults viewBox to 0 0 24 24 when not specified", () => {
+    const { container } = render(<Icon icon={{ path: rawPath }} />);
+    expect(container.querySelector("svg")).toHaveAttribute("viewBox", "0 0 24 24");
+  });
+
+  it("respects an explicit viewBox override", () => {
+    const { container } = render(<Icon icon={{ path: rawPath, viewBox: "0 0 32 32" }} />);
+    expect(container.querySelector("svg")).toHaveAttribute("viewBox", "0 0 32 32");
+  });
+
+  it("renders a single path element with the correct d attribute", () => {
+    const { container } = render(<Icon icon={{ path: rawPath }} />);
+    const paths = container.querySelectorAll("path");
+    expect(paths).toHaveLength(1);
+    expect(paths[0]).toHaveAttribute("d", rawPath);
+  });
+
+  it("is structurally compatible with a full SimpleIcon object (extra fields ignored)", () => {
+    const siGithubMock = {
+      title: "GitHub",
+      slug: "github",
+      hex: "181717",
+      source: "https://github.com",
+      svg: "<svg/>",
+      path: rawPath,
+    };
+    const { container } = render(<Icon icon={siGithubMock} />);
+    expect(container.querySelector("svg")).toBeInTheDocument();
+    expect(container.querySelector("path")).toHaveAttribute("d", rawPath);
+  });
+
+  it("gives precedence to paths when both path and paths are present", () => {
+    const mixed = { path: "M1 1", paths: [{ d: "M2 2" }], viewBox: "0 0 16 16" };
+    const { container } = render(<Icon icon={mixed} />);
+    expect(container.querySelector("path")).toHaveAttribute("d", "M2 2");
+  });
+
+  it("applies label and aria attributes to raw path icons", () => {
+    render(<Icon icon={{ path: rawPath }} label="GitHub" />);
+    const svg = document.querySelector("svg");
+    expect(svg).toHaveAttribute("aria-label", "GitHub");
+    expect(svg).toHaveAttribute("role", "img");
+  });
+});
