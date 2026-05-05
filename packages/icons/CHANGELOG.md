@@ -1,3 +1,17 @@
+## [1.41.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.40.0...@gnome-ui/icons@1.41.0) (2026-05-05)
+
+### Features
+
+* **@gnome-ui/icons, @gnome-ui/react:** add simple-icons support to Icon component ([7b3e454](https://github.com/ElJijuna/gnome-ui/commit/7b3e454b96e4562ad06c4d4851310e87c380c8df))
+* **@gnome-ui/icons:** add simple-icons support to Icon component ([dc7eb3f](https://github.com/ElJijuna/gnome-ui/commit/dc7eb3f66aaa381c0e768b45e6970ea16c4b8206))
+* **@gnome-ui/layout:** add QuickActions component (closes [#86](https://github.com/ElJijuna/gnome-ui/issues/86)) ([fa55062](https://github.com/ElJijuna/gnome-ui/commit/fa55062068f87c93853f46018d08bca15daad776))
+* **@gnome-ui/layout:** add responsive DashboardGrid layouts (closes [#99](https://github.com/ElJijuna/gnome-ui/issues/99)) ([550f367](https://github.com/ElJijuna/gnome-ui/commit/550f367388f83609a54f4a4c94fd73f34a8276be))
+* **@gnome-ui/layout:** add StatCard component (closes [#83](https://github.com/ElJijuna/gnome-ui/issues/83)) ([166b689](https://github.com/ElJijuna/gnome-ui/commit/166b6898a191b079f757ba46a9c3456cb9967af2))
+* **@gnome-ui/layout:** support hex colors in IconBadge ([95d599c](https://github.com/ElJijuna/gnome-ui/commit/95d599ccb6eb55424a520310b96dc725cf2cab83))
+* **@gnome-ui/react:** add componente IconButton, update Button to add class to use circular button and add refs prop, update Tooltip to export refs prop. ([a033b3c](https://github.com/ElJijuna/gnome-ui/commit/a033b3cadff68019a85097d68a145a186a7388e2))
+* **@gnome-ui/react:** add simple-icons support to Icon component ([a17286e](https://github.com/ElJijuna/gnome-ui/commit/a17286ec53fc07ceee3b95eeeb4a0d69f64558be))
+* **storybook:** add accent color toolbar to react and layout packages ([832e1ab](https://github.com/ElJijuna/gnome-ui/commit/832e1abf397e8f8174284eeca36bb6f052a8c795))
+
 ## [1.40.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.39.0...@gnome-ui/icons@1.40.0) (2026-05-04)
 
 ### Features
