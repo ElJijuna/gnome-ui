@@ -1,3 +1,11 @@
+## [1.19.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.18.0...@gnome-ui/layout@1.19.0) (2026-05-05)
+
+### Features
+
+* **@gnome-ui/layout:** support hex colors in IconBadge ([95d599c](https://github.com/ElJijuna/gnome-ui/commit/95d599ccb6eb55424a520310b96dc725cf2cab83))
+* **@gnome-ui/react:** add componente IconButton, update Button to add class to use circular button and add refs prop, update Tooltip to export refs prop. ([a033b3c](https://github.com/ElJijuna/gnome-ui/commit/a033b3cadff68019a85097d68a145a186a7388e2))
+* **storybook:** add accent color toolbar to react and layout packages ([832e1ab](https://github.com/ElJijuna/gnome-ui/commit/832e1abf397e8f8174284eeca36bb6f052a8c795))
+
 ## [1.18.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.17.0...@gnome-ui/layout@1.18.0) (2026-05-04)
 
 ### Features
