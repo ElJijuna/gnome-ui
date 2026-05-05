@@ -13,13 +13,13 @@ const meta: Meta<typeof IconBadge> = {
     docs: {
       description: {
         component: `
-Rounded-square tinted icon container that follows the gnome-ui color token system.
+Rounded-square tinted icon container. Accepts the seven gnome-ui named colors or any hex value (\`#rgb\` / \`#rrggbb\`). In both cases the background is rendered at 15% opacity via \`color-mix\`.
 
 \`\`\`tsx
 import { IconBadge } from "@gnome-ui/layout";
 
 <IconBadge color="blue" size="lg">🚀</IconBadge>
-<IconBadge color="green" size="md"><Icon icon={GoHome} /></IconBadge>
+<IconBadge color="#6c8ebf" size="md"><Icon icon={GoHome} /></IconBadge>
 <IconBadge size="sm">📄</IconBadge>
 \`\`\`
         `,
@@ -114,6 +114,28 @@ export const Neutral: Story = {
   parameters: {
     docs: {
       description: { story: "When `color` is omitted the background uses `--gnome-hover-overlay` (neutral grey tray)." },
+    },
+  },
+};
+
+const HEX_COLORS = ["#6c8ebf", "#82b366", "#d79b00", "#ae4132", "#7b64a0", "#5d4037", "#ddd"];
+
+export const HexColors: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+      {HEX_COLORS.map((color) => (
+        <IconBadge key={color} color={color} size="md">
+          🎨
+        </IconBadge>
+      ))}
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Arbitrary hex colors (`#rgb` or `#rrggbb`). The same 15% `color-mix` transparency applied to named colors is used here via inline styles.",
+      },
     },
   },
 };

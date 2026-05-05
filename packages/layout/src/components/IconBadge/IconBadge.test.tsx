@@ -42,6 +42,32 @@ describe("IconBadge", () => {
     });
   });
 
+  describe("hex color support", () => {
+    it("applies inline background with color-mix for 6-digit hex", () => {
+      const { container } = render(<IconBadge color="#4a90e2">🔵</IconBadge>);
+      const el = container.firstChild as HTMLElement;
+      expect(el.style.background).toContain("color-mix");
+      expect(el.style.color).toBeTruthy();
+    });
+
+    it("applies inline background with color-mix for 3-digit hex", () => {
+      const { container } = render(<IconBadge color="#abc">🟣</IconBadge>);
+      const el = container.firstChild as HTMLElement;
+      expect(el.style.background).toContain("color-mix");
+    });
+
+    it("does not apply a color CSS class when hex is provided", () => {
+      const { container } = render(<IconBadge color="#ff0000">🔴</IconBadge>);
+      const className = (container.firstChild as HTMLElement).className;
+      expect(className).not.toMatch(/blue|green|red|orange|yellow|purple|brown/);
+    });
+
+    it("still applies neutral class when no color", () => {
+      const { container } = render(<IconBadge>📄</IconBadge>);
+      expect((container.firstChild as HTMLElement).className).toMatch(/neutral/);
+    });
+  });
+
   describe("HTML attribute forwarding", () => {
     it("forwards className", () => {
       const { container } = render(<IconBadge className="custom">📄</IconBadge>);

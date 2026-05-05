@@ -115,6 +115,36 @@ export default function App() {
 
 ---
 
+### `IconBadge`
+
+Rounded-square tinted icon container. Accepts the seven gnome-ui named colors or any hex value (`#rgb` / `#rrggbb`). In both cases the background is rendered at 15% opacity.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `"blue" \| "green" \| "yellow" \| "orange" \| "red" \| "purple" \| "brown" \| string` | — | Named color token or any hex value. Omit for a neutral grey background. |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Badge size |
+| `children` | `ReactNode` | — | Icon, emoji, or any inline content |
+
+All `<div>` props are forwarded to the root element.
+
+```tsx
+import { IconBadge } from "@gnome-ui/layout";
+import { Icon } from "@gnome-ui/react";
+import { GoHome } from "@gnome-ui/icons";
+
+// Named color token
+<IconBadge color="blue" size="lg">🚀</IconBadge>
+
+// Arbitrary hex — same 15% tinted background
+<IconBadge color="#6c8ebf" size="md"><Icon icon={GoHome} size="sm" /></IconBadge>
+<IconBadge color="#ddd" size="sm">📄</IconBadge>
+
+// No color — neutral grey overlay
+<IconBadge size="md">📄</IconBadge>
+```
+
+---
+
 ### `CounterCard`
 
 Metric card with an animated numeric counter. Counts from `0` (or from the previous value) to `value` using an ease-out cubic curve. Respects `prefers-reduced-motion`.

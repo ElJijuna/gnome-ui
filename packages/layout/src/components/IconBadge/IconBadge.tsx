@@ -13,7 +13,7 @@ export type IconBadgeColor =
 export type IconBadgeSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 export interface IconBadgeProps extends HTMLAttributes<HTMLDivElement> {
-  color?: IconBadgeColor;
+  color?: IconBadgeColor | (string & {});
   size?: IconBadgeSize;
   children: ReactNode;
 }
@@ -26,17 +26,25 @@ export function IconBadge({
   children,
   ...props
 }: IconBadgeProps) {
+  const isHex = color ? /^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(color) : false;
+
   return (
     <div
       className={[
         styles.badge,
         styles[size],
-        color ? styles[color] : styles.neutral,
+        isHex ? undefined : color ? styles[color as IconBadgeColor] : styles.neutral,
         className,
       ]
         .filter(Boolean)
         .join(" ")}
-      style={style}
+      style={{
+        ...(isHex && {
+          background: `color-mix(in srgb, ${color} 15%, transparent)`,
+          color,
+        }),
+        ...style,
+      }}
       {...props}
     >
       {children}
