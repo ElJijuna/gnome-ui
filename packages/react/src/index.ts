@@ -141,6 +141,9 @@ export type { WrapBoxProps, WrapBoxJustify, WrapBoxAlign } from "./components/Wr
 export { Chip } from "./components/Chip";
 export type { ChipProps } from "./components/Chip";
 
+export { ColorPicker, ColorSwatch, GNOME_PALETTE } from "./components/ColorPicker";
+export type { ColorPickerProps, ColorPickerColor, ColorSwatchProps, ColorSwatchSize } from "./components/ColorPicker";
+
 export { ShortcutsDialog } from "./components/ShortcutsDialog";
 export type { ShortcutsDialogProps, ShortcutsSection, ShortcutEntry } from "./components/ShortcutsDialog";
 
