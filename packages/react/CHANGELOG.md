@@ -1,3 +1,9 @@
+## [1.40.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.40.0...@gnome-ui/react@1.40.1) (2026-05-06)
+
+### Bug Fixes
+
+* **@gnome-ui/react:** export ColorPicker. ([991c3a9](https://github.com/ElJijuna/gnome-ui/commit/991c3a9ac32b6021e653eceafd0c520a9db0fe01))
+
 ## [1.40.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.39.0...@gnome-ui/react@1.40.0) (2026-05-05)
 
 ### Features
