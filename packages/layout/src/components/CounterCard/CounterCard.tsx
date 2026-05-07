@@ -4,7 +4,7 @@ import {
   useState,
   type HTMLAttributes,
 } from "react";
-import { Card, Icon, Text } from "@gnome-ui/react";
+import { Card, Icon, Text, useLocale } from "@gnome-ui/react";
 import type { IconDefinition } from "@gnome-ui/icons";
 import styles from "./CounterCard.module.css";
 
@@ -140,14 +140,15 @@ export function CounterCard({
   style,
   ...props
 }: CounterCardProps) {
+  const locale = useLocale();
   const raw = useCountUp(value, duration, animated);
 
-  const formatted = format
-    ? format(raw)
-    : raw.toLocaleString(undefined, {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals,
-      });
+  const numberFormat = new Intl.NumberFormat(locale, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  const formatted = format ? format(raw) : numberFormat.format(raw);
 
   const useColor = Boolean(color);
 
@@ -186,7 +187,7 @@ export function CounterCard({
         style={useColor ? { color } : undefined}
         aria-live="polite"
         aria-atomic="true"
-        aria-label={`${label}: ${prefix ?? ""}${value.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix ?? ""}`}
+        aria-label={`${label}: ${prefix ?? ""}${numberFormat.format(value)}${suffix ?? ""}`}
       >
         {prefix && <span className={styles.affix}>{prefix}</span>}
         <Text variant="title-2" as="span" className={styles.number}>
