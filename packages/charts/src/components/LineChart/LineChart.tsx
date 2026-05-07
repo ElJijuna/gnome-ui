@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useLocale } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./LineChart.module.css";
 
@@ -51,6 +52,9 @@ export function LineChart({
   showLegend = false,
   className,
 }: LineChartProps) {
+  const locale = useLocale();
+  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+
   return (
     <div
       className={[styles.container, className].filter(Boolean).join(" ")}
@@ -79,8 +83,12 @@ export function LineChart({
             axisLine={false}
             tickLine={false}
             width={40}
+            tickFormatter={formatNumber}
           />
-          <Tooltip contentStyle={TOOLTIP_CONTENT_STYLE} />
+          <Tooltip
+            contentStyle={TOOLTIP_CONTENT_STYLE}
+            formatter={(value: number, name: string) => [formatNumber(value), name]}
+          />
           {showLegend && (
             <Legend
               wrapperStyle={{

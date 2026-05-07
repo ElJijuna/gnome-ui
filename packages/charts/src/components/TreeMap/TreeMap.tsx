@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { Treemap, ResponsiveContainer, Tooltip } from "recharts";
+import { useLocale } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./TreeMap.module.css";
 
@@ -46,12 +47,14 @@ interface TileProps {
   group?: string;
   colorMap: Map<string, string>;
   showLabels: boolean;
+  formatNumber: (value: number) => string;
 }
 
-function Tile({ x, y, width, height, name, value, group, colorMap, showLabels }: TileProps) {
+function Tile({ x, y, width, height, name, value, group, colorMap, showLabels, formatNumber }: TileProps) {
   const colorKey = group ?? name;
   const fill = colorMap.get(colorKey) ?? GNOME_CHART_PALETTE[0];
   const showText = showLabels && width > 40 && height > 24;
+  const formattedValue = formatNumber(value);
 
   return (
     <g>
@@ -66,7 +69,7 @@ function Tile({ x, y, width, height, name, value, group, colorMap, showLabels }:
         rx={4}
         ry={4}
         role="img"
-        aria-label={`${name}: ${value}`}
+        aria-label={`${name}: ${formattedValue}`}
       />
       {showText && (
         <>
@@ -93,7 +96,7 @@ function Tile({ x, y, width, height, name, value, group, colorMap, showLabels }:
               fontFamily="var(--gnome-font-family, system-ui)"
               style={{ pointerEvents: "none", userSelect: "none" }}
             >
-              {value}
+              {formattedValue}
             </text>
           )}
         </>
@@ -108,6 +111,9 @@ export function TreeMap({
   showLabels = true,
   className,
 }: TreeMapProps) {
+  const locale = useLocale();
+  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+
   const colorMap = buildColorMap(data);
   const rechartsData = data.map((item) => ({ name: item.label, value: item.value, group: item.group }));
 
@@ -134,13 +140,14 @@ export function TreeMap({
                 group={props.group}
                 colorMap={colorMap}
                 showLabels={showLabels}
+                formatNumber={formatNumber}
               />
             )) as unknown as ReactElement
           }
         >
           <Tooltip
             contentStyle={TOOLTIP_CONTENT_STYLE}
-            formatter={(value: number, name: string) => [value, name]}
+            formatter={(value: number, name: string) => [formatNumber(value), name]}
           />
         </Treemap>
       </ResponsiveContainer>

@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useLocale } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./AreaChart.module.css";
 
@@ -55,6 +56,9 @@ export function AreaChart({
   gradient = false,
   className,
 }: AreaChartProps) {
+  const locale = useLocale();
+  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+
   const seriesWithColors = series.map((s, i) => ({
     ...s,
     resolvedColor:
@@ -112,8 +116,12 @@ export function AreaChart({
             axisLine={false}
             tickLine={false}
             width={40}
+            tickFormatter={formatNumber}
           />
-          <Tooltip contentStyle={TOOLTIP_CONTENT_STYLE} />
+          <Tooltip
+            contentStyle={TOOLTIP_CONTENT_STYLE}
+            formatter={(value: number, name: string) => [formatNumber(value), name]}
+          />
           {showLegend && (
             <Legend
               wrapperStyle={{

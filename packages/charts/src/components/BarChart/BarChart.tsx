@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useLocale } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./BarChart.module.css";
 
@@ -51,6 +52,9 @@ export function BarChart({
   showLegend = false,
   className,
 }: BarChartProps) {
+  const locale = useLocale();
+  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+
   return (
     <div
       className={[styles.container, className].filter(Boolean).join(" ")}
@@ -79,10 +83,12 @@ export function BarChart({
             axisLine={false}
             tickLine={false}
             width={40}
+            tickFormatter={formatNumber}
           />
           <Tooltip
             contentStyle={TOOLTIP_CONTENT_STYLE}
             cursor={{ fill: "var(--gnome-card-shade-color, rgba(0,0,0,0.07))" }}
+            formatter={(value: number, name: string) => [formatNumber(value), name]}
           />
           {showLegend && (
             <Legend

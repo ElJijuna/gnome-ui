@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { GnomeProvider } from "@gnome-ui/react";
 import { TreeMap } from "./TreeMap";
 
 const meta: Meta<typeof TreeMap> = {
@@ -45,5 +46,22 @@ export const NoLabels: Story = {
     data: GROUPED_DATA,
     height: 400,
     showLabels: false,
+  },
+};
+
+export const WithLocale: Story = {
+  render: (args) => (
+    <GnomeProvider locale="de-DE">
+      <TreeMap {...args} />
+    </GnomeProvider>
+  ),
+  args: {
+    data: [
+      { label: "React", value: 42000, group: "Frontend" },
+      { label: "Vue", value: 21000, group: "Frontend" },
+      { label: "Node.js", value: 38000, group: "Backend" },
+      { label: "Python", value: 51000, group: "Backend" },
+    ],
+    height: 400,
   },
 };
