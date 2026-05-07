@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GnomeProvider } from "@gnome-ui/react";
 import { BarChart } from "./BarChart";
 
 const meta: Meta<typeof BarChart> = {
@@ -46,28 +45,5 @@ export const NoGrid: Story = {
     series: [{ dataKey: "users", name: "Users" }],
     xAxisKey: "month",
     showGrid: false,
-  },
-};
-
-const LARGE_DATA = [
-  { month: "Jan", users: 12420, sessions: 68300 },
-  { month: "Feb", users: 38000, sessions: 59100 },
-  { month: "Mar", users: 51000, sessions: 82000 },
-];
-
-export const WithLocale: Story = {
-  render: (args) => (
-    <GnomeProvider locale="de-DE">
-      <BarChart {...args} />
-    </GnomeProvider>
-  ),
-  args: {
-    data: LARGE_DATA,
-    series: [
-      { dataKey: "users", name: "Users" },
-      { dataKey: "sessions", name: "Sessions" },
-    ],
-    xAxisKey: "month",
-    showLegend: true,
   },
 };

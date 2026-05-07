@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GnomeProvider } from "@gnome-ui/react";
 import { LineChart } from "./LineChart";
 
 const meta: Meta<typeof LineChart> = {
@@ -47,29 +46,5 @@ export const NoGrid: Story = {
     series: [{ dataKey: "cpu", name: "CPU %" }],
     xAxisKey: "day",
     showGrid: false,
-  },
-};
-
-const LARGE_METRICS = [
-  { day: "Mon", requests: 142000, errors: 1800 },
-  { day: "Tue", requests: 158000, errors: 2200 },
-  { day: "Wed", requests: 135000, errors: 1500 },
-  { day: "Thu", requests: 171000, errors: 2800 },
-];
-
-export const WithLocale: Story = {
-  render: (args) => (
-    <GnomeProvider locale="de-DE">
-      <LineChart {...args} />
-    </GnomeProvider>
-  ),
-  args: {
-    data: LARGE_METRICS,
-    series: [
-      { dataKey: "requests", name: "Requests" },
-      { dataKey: "errors", name: "Errors" },
-    ],
-    xAxisKey: "day",
-    showLegend: true,
   },
 };

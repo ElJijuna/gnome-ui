@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GnomeProvider } from "@gnome-ui/react";
 import { AreaChart } from "./AreaChart";
 
 const meta: Meta<typeof AreaChart> = {
@@ -77,28 +76,5 @@ export const GradientStacked: Story = {
     showLegend: true,
     gradient: true,
     stacked: true,
-  },
-};
-
-const LARGE_TRAFFIC_DATA = [
-  { week: "W1", downloads: 32000, installs: 21000 },
-  { week: "W2", downloads: 48000, installs: 31000 },
-  { week: "W3", downloads: 41000, installs: 28000 },
-];
-
-export const WithLocale: Story = {
-  render: (args) => (
-    <GnomeProvider locale="de-DE">
-      <AreaChart {...args} />
-    </GnomeProvider>
-  ),
-  args: {
-    data: LARGE_TRAFFIC_DATA,
-    series: [
-      { dataKey: "downloads", name: "Downloads" },
-      { dataKey: "installs", name: "Installs" },
-    ],
-    xAxisKey: "week",
-    showLegend: true,
   },
 };
