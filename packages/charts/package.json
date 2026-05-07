@@ -63,10 +63,12 @@
     "recharts": "^2.15.3"
   },
   "peerDependencies": {
+    "@gnome-ui/react": "*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@gnome-ui/react": "*",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/react": "^10.3.3",

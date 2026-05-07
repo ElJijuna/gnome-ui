@@ -3,9 +3,26 @@ import { useEffect } from "react";
 import { parameters as docsParameters } from "@storybook/addon-docs/preview";
 import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 import "@gnome-ui/core/styles";
+import { GnomeProvider } from "@gnome-ui/react";
 
 const preview: Preview = {
   globalTypes: {
+    locale: {
+      description: "Locale for number and date formatting",
+      toolbar: {
+        title: "Locale",
+        icon: "globe",
+        items: [
+          { value: "", title: "Browser default" },
+          { value: "en-US", title: "English (US)" },
+          { value: "es-ES", title: "Spanish (ES)" },
+          { value: "de-DE", title: "German (DE)" },
+          { value: "fr-FR", title: "French (FR)" },
+          { value: "ar-SA", title: "Arabic (SA)" },
+        ],
+        dynamicTitle: true,
+      },
+    },
     theme: {
       description: "Color theme",
       toolbar: {
@@ -23,6 +40,7 @@ const preview: Preview = {
     },
   },
   initialGlobals: {
+    locale: "",
     theme: "",
   },
   decorators: [
@@ -37,6 +55,11 @@ const preview: Preview = {
       }, [theme]);
       return <Story />;
     },
+    (Story, context) => (
+      <GnomeProvider locale={context.globals.locale || undefined}>
+        <Story />
+      </GnomeProvider>
+    ),
   ],
   parameters: {
     layout: "fullscreen",

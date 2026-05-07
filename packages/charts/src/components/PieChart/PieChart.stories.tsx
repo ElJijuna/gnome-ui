@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { GnomeProvider } from "@gnome-ui/react";
 import { PieChart } from "./PieChart";
 
 const meta: Meta<typeof PieChart> = {
@@ -61,6 +62,24 @@ export const CustomColors: Story = {
       { label: "Passed", value: 74, color: "var(--gnome-green-4, #2ec27e)" },
       { label: "Failed", value: 12, color: "var(--gnome-red-3, #e01b24)" },
       { label: "Skipped", value: 14, color: "var(--gnome-yellow-5, #e5a50a)" },
+    ],
+    donut: true,
+    showLegend: true,
+  },
+};
+
+export const WithLocale: Story = {
+  render: (args) => (
+    <GnomeProvider locale="de-DE">
+      <PieChart {...args} />
+    </GnomeProvider>
+  ),
+  args: {
+    data: [
+      { label: "Chrome", value: 62300 },
+      { label: "Firefox", value: 18100 },
+      { label: "Safari", value: 11500 },
+      { label: "Edge", value: 6200 },
     ],
     donut: true,
     showLegend: true,

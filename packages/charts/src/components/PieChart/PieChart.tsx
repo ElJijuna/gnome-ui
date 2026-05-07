@@ -6,6 +6,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useLocale } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./PieChart.module.css";
 
@@ -82,6 +83,9 @@ export function PieChart({
   className,
   "aria-label": ariaLabel,
 }: PieChartProps) {
+  const locale = useLocale();
+  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+
   const chartData = data.map((item, i) => ({
     name: item.label,
     value: item.value,
@@ -93,7 +97,7 @@ export function PieChart({
       role="img"
       aria-label={
         ariaLabel ??
-        `Pie chart: ${data.map((d) => `${d.label} ${d.value}`).join(", ")}`
+        `Pie chart: ${data.map((d) => `${d.label} ${formatNumber(d.value)}`).join(", ")}`
       }
       className={[styles.container, className].filter(Boolean).join(" ")}
       style={{ height }}
@@ -102,7 +106,7 @@ export function PieChart({
         <RechartsPieChart margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <Tooltip
             contentStyle={TOOLTIP_CONTENT_STYLE}
-            formatter={(value: number, name: string) => [value, name]}
+            formatter={(value: number, name: string) => [formatNumber(value), name]}
           />
           {showLegend && (
             <Legend
