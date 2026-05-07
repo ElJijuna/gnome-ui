@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { parameters as docsParameters } from "@storybook/addon-docs/preview";
 import "@gnome-ui/core/styles";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
+import { GnomeProvider } from "../src/components/GnomeProvider/GnomeProvider";
 
 function CenteredDecorator({ children }: { children: ReactNode }) {
   return (
@@ -31,6 +32,22 @@ function CenteredDecorator({ children }: { children: ReactNode }) {
 
 const preview: Preview = {
   globalTypes: {
+    locale: {
+      description: "Locale for number and date formatting",
+      toolbar: {
+        title: "Locale",
+        icon: "globe",
+        items: [
+          { value: "", title: "Browser default" },
+          { value: "en-US", title: "English (US)" },
+          { value: "es-ES", title: "Spanish (ES)" },
+          { value: "de-DE", title: "German (DE)" },
+          { value: "fr-FR", title: "French (FR)" },
+          { value: "ar-SA", title: "Arabic (SA)" },
+        ],
+        dynamicTitle: true,
+      },
+    },
     theme: {
       description: "Color theme",
       toolbar: {
@@ -66,6 +83,7 @@ const preview: Preview = {
     },
   },
   initialGlobals: {
+    locale: "",
     theme: "",
     accentColor: "",
   },
@@ -114,6 +132,11 @@ const preview: Preview = {
       }, [accentColor]);
       return <Story />;
     },
+    (Story, context) => (
+      <GnomeProvider locale={context.globals.locale || undefined}>
+        <Story />
+      </GnomeProvider>
+    ),
     (Story) => (
       <CenteredDecorator>
         <Story />
