@@ -256,3 +256,9 @@ export type { TerminalViewProps, TerminalVariant } from "./components/TerminalVi
 
 export { StatusBadge } from "./components/StatusBadge";
 export type { StatusBadgeProps, StatusBadgeVariant } from "./components/StatusBadge";
+
+export { GnomeProvider } from "./components/GnomeProvider/GnomeProvider";
+export type { GnomeProviderProps } from "./components/GnomeProvider/GnomeProvider";
+
+export { useLocale, useDir } from "./components/GnomeProvider/GnomeContext";
+export type { GnomeDir } from "./components/GnomeProvider/GnomeContext";
