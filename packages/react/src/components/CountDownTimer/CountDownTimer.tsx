@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { HTMLAttributes } from "react";
 import styles from "./CountDownTimer.module.css";
+import { useLocale } from "../GnomeProvider/GnomeContext";
 
 export type CountDownVariant = "accent" | "destructive" | "success" | "warning";
 
@@ -39,6 +40,7 @@ export function CountDownTimer({
     className,
     ...props
 }: CountDownTimerProps) {
+    const locale = useLocale();
     const [timeRemaining, setTimeRemaining] = useState<TimeRemaining | null>(null);
     const [hasExecutedAction, setHasExecutedAction] = useState(false);
 
@@ -98,7 +100,7 @@ export function CountDownTimer({
     const formatTime = (): string => {
         if (format === "date") {
             const endDate = new Date(end);
-            return endDate.toLocaleDateString();
+            return new Intl.DateTimeFormat(locale).format(endDate);
         }
 
         const { days, hours, minutes, seconds, isFinished } = timeRemaining;
@@ -109,7 +111,7 @@ export function CountDownTimer({
 
         if (format === "datetime") {
             const endDate = new Date(end);
-            const dateString = endDate.toLocaleDateString();
+            const dateString = new Intl.DateTimeFormat(locale).format(endDate);
             const timeString = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
             return `${dateString} ${timeString}`;
         }
