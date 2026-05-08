@@ -38,6 +38,23 @@ export default function App() {
 }
 ```
 
+### Locale & number formatting
+
+Wrap your app in `GnomeProvider` to share locale, text direction, and default `Intl` options across `@gnome-ui/react`, `@gnome-ui/layout`, and `@gnome-ui/charts`.
+
+```tsx
+import { GnomeProvider } from "@gnome-ui/react";
+
+<GnomeProvider
+  locale="en-US"
+  numberFormat={{ notation: "compact", compactDisplay: "short" }}
+>
+  <App />
+</GnomeProvider>
+```
+
+Compact notation renders values like `1K`; standard notation renders values like `1,000`.
+
 > **Tokens only** (framework-agnostic):
 > ```bash
 > npm install @gnome-ui/core
