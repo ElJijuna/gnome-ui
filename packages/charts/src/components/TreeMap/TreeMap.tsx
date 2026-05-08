@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Treemap, ResponsiveContainer, Tooltip } from "recharts";
-import { useLocale } from "@gnome-ui/react";
+import { useNumberFormatter } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./TreeMap.module.css";
 
@@ -111,8 +111,7 @@ export function TreeMap({
   showLabels = true,
   className,
 }: TreeMapProps) {
-  const locale = useLocale();
-  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+  const formatNumber = useNumberFormatter().format;
 
   const colorMap = buildColorMap(data);
   const rechartsData = data.map((item) => ({ name: item.label, value: item.value, group: item.group }));

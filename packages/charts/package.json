@@ -26,10 +26,30 @@
       "import": "./dist/components/BarChart.js",
       "require": "./dist/components/BarChart.cjs"
     },
+    "./components/CloudChart": {
+      "types": "./dist/components/CloudChart.d.ts",
+      "import": "./dist/components/CloudChart.js",
+      "require": "./dist/components/CloudChart.cjs"
+    },
     "./components/LineChart": {
       "types": "./dist/components/LineChart.d.ts",
       "import": "./dist/components/LineChart.js",
       "require": "./dist/components/LineChart.cjs"
+    },
+    "./components/PieChart": {
+      "types": "./dist/components/PieChart.d.ts",
+      "import": "./dist/components/PieChart.js",
+      "require": "./dist/components/PieChart.cjs"
+    },
+    "./components/RadarChart": {
+      "types": "./dist/components/RadarChart.d.ts",
+      "import": "./dist/components/RadarChart.js",
+      "require": "./dist/components/RadarChart.cjs"
+    },
+    "./components/RadialBarChart": {
+      "types": "./dist/components/RadialBarChart.d.ts",
+      "import": "./dist/components/RadialBarChart.js",
+      "require": "./dist/components/RadialBarChart.cjs"
     },
     "./components/TreeMap": {
       "types": "./dist/components/TreeMap.d.ts",

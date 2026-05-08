@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { useLocale } from "@gnome-ui/react";
+import { useNumberFormatter } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./AreaChart.module.css";
 
@@ -56,8 +56,7 @@ export function AreaChart({
   gradient = false,
   className,
 }: AreaChartProps) {
-  const locale = useLocale();
-  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+  const formatNumber = useNumberFormatter().format;
 
   const seriesWithColors = series.map((s, i) => ({
     ...s,

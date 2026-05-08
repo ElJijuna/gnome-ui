@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { useLocale } from "@gnome-ui/react";
+import { useNumberFormatter } from "@gnome-ui/react";
 import { GNOME_CHART_PALETTE } from "../../colors";
 import styles from "./BarChart.module.css";
 
@@ -52,8 +52,7 @@ export function BarChart({
   showLegend = false,
   className,
 }: BarChartProps) {
-  const locale = useLocale();
-  const formatNumber = (value: number) => new Intl.NumberFormat(locale).format(value);
+  const formatNumber = useNumberFormatter().format;
 
   return (
     <div
