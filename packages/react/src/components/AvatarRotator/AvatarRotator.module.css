@@ -1,0 +1,51 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.rotator {
+  position: relative;
+  display: inline-grid;
+  border-radius: var(--gnome-radius-pill);
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ─── Sizes ────────────────────────────────────────────────────────────────── */
+
+.sm {
+  width: 24px;
+  height: 24px;
+}
+
+.md {
+  width: 32px;
+  height: 32px;
+}
+
+.lg {
+  width: 48px;
+  height: 48px;
+}
+
+.xl {
+  width: 64px;
+  height: 64px;
+}
+
+/* ─── Layers ───────────────────────────────────────────────────────────────── */
+
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--avatar-rotator-duration, 240ms) ease;
+}
+
+.active {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    transition: none;
+  }
+}

@@ -20,6 +20,9 @@ export type { SkeletonProps, SkeletonVariant } from "./components/Skeleton";
 export { Avatar } from "./components/Avatar";
 export type { AvatarProps, AvatarSize, AvatarColor } from "./components/Avatar";
 
+export { AvatarRotator } from "./components/AvatarRotator";
+export type { AvatarRotatorProps } from "./components/AvatarRotator";
+
 export { Separator } from "./components/Separator";
 export type { SeparatorProps, SeparatorOrientation } from "./components/Separator";
 
