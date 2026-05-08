@@ -1,3 +1,33 @@
+## [1.41.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.40.1...@gnome-ui/react@1.41.0) (2026-05-08)
+
+### Features
+
+* **@gnome-ui/charts:** format numbers with Intl.NumberFormat using GnomeProvider locale. ([3d66f95](https://github.com/ElJijuna/gnome-ui/commit/3d66f95703bcf3e04d295033243d92ce0df61c1d))
+* **@gnome-ui/layout:** add locale toolbar to Storybook preview. ([29ada4b](https://github.com/ElJijuna/gnome-ui/commit/29ada4b4b7fef0a355bcb6b338e598f79e843533))
+* **@gnome-ui/layout:** use Intl.NumberFormat with GnomeProvider locale in CounterCard and StatCard. ([2381936](https://github.com/ElJijuna/gnome-ui/commit/23819363e2e4792b34d67567a18571dfa0a5f37d))
+* **@gnome-ui/react:** add AvatarRotator component. ([0ec5ec8](https://github.com/ElJijuna/gnome-ui/commit/0ec5ec826e02e9a0a38e64836a3a5dc0cc6358e4))
+* **@gnome-ui/react:** add GnomeProvider with locale and dir context ([eb8fb53](https://github.com/ElJijuna/gnome-ui/commit/eb8fb53f01b557cc18ec8bb55369e11ffbdd6b64))
+* **@gnome-ui/react:** add locale toolbar to Storybook and WithLocale stories. ([fe068f9](https://github.com/ElJijuna/gnome-ui/commit/fe068f9442eea631ffe02411b169f9b5e9b7a209))
+* **@gnome-ui/react:** add provider Intl formatting hooks. ([f7de293](https://github.com/ElJijuna/gnome-ui/commit/f7de293fcd5941c03c7e079e84cc7271f1a3a19c))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** add missing component subpath exports. ([e4a8017](https://github.com/ElJijuna/gnome-ui/commit/e4a801732ab3094594785ebce698201d8a7512b3))
+* **@gnome-ui/charts:** remove redundant WithLocale stories covered by preview decorator. ([e5da5f9](https://github.com/ElJijuna/gnome-ui/commit/e5da5f9a8129ce03d8424db9b111af9abc128dd3))
+* **@gnome-ui/layout:** externalize internal package dependencies. ([fcfee6a](https://github.com/ElJijuna/gnome-ui/commit/fcfee6a0323b3ceeb65a57b5c93c0f49444daf02))
+* **@gnome-ui/react:** externalize internal package dependencies ([d2fcb4c](https://github.com/ElJijuna/gnome-ui/commit/d2fcb4c01209675c488f3c8776fc3b18f1a03a46))
+* **ci:** build react before charts workflows ([87a4f2f](https://github.com/ElJijuna/gnome-ui/commit/87a4f2f97b88aa4597e4245eeb1566be2ee8f33e))
+* **ci:** provide icons artifacts for dependent builds ([64f1c9a](https://github.com/ElJijuna/gnome-ui/commit/64f1c9a947b3947f06ca711967156354b9afdda1))
+* update package-lock.json ([a29bbc2](https://github.com/ElJijuna/gnome-ui/commit/a29bbc28c3a45f47c1af7591cd11ab47785ba524))
+
+### Refactoring
+
+* **@gnome-ui/layout:** use provider number formatting ([267b443](https://github.com/ElJijuna/gnome-ui/commit/267b44361067d7003cb8efbea92b03bf0093d995))
+
+### Documentation
+
+* update README and ROADMAP. ([d88b65d](https://github.com/ElJijuna/gnome-ui/commit/d88b65d4ae7bca38c09c5c2e0414ec525f66553f))
+
 ## [1.40.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.40.0...@gnome-ui/react@1.40.1) (2026-05-06)
 
 ### Bug Fixes
