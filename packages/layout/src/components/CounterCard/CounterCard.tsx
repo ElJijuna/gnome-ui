@@ -4,7 +4,7 @@ import {
   useState,
   type HTMLAttributes,
 } from "react";
-import { Card, Icon, Text, useLocale } from "@gnome-ui/react";
+import { Card, Icon, Text, useNumberFormatter } from "@gnome-ui/react";
 import type { IconDefinition } from "@gnome-ui/icons";
 import styles from "./CounterCard.module.css";
 
@@ -140,10 +140,8 @@ export function CounterCard({
   style,
   ...props
 }: CounterCardProps) {
-  const locale = useLocale();
   const raw = useCountUp(value, duration, animated);
-
-  const numberFormat = new Intl.NumberFormat(locale, {
+  const numberFormat = useNumberFormatter({
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });

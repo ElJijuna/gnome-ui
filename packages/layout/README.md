@@ -24,6 +24,24 @@ Import the stylesheet once at the root of your app:
 import "@gnome-ui/layout/styles";
 ```
 
+## Formatting
+
+Numeric layout components such as `CounterCard` and `StatCard` inherit locale and default number formatting from `GnomeProvider` in `@gnome-ui/react`.
+
+```tsx
+import { GnomeProvider } from "@gnome-ui/react";
+import { CounterCard } from "@gnome-ui/layout";
+
+<GnomeProvider
+  locale="en-US"
+  numberFormat={{ notation: "compact", compactDisplay: "short" }}
+>
+  <CounterCard label="Downloads" value={12500} />
+</GnomeProvider>
+```
+
+Use compact notation for values like `13K`; omit `numberFormat` or use `notation: "standard"` for full values like `12,500`. A component-level `format` prop, where available, still takes precedence.
+
 ## Tree-shaking
 
 The package ships per-component entry points, so bundlers can eliminate unused components automatically:
