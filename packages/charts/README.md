@@ -42,6 +42,30 @@ import "@gnome-ui/charts/styles";
 All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom
 properties for theming, and adapt automatically to light/dark mode.
 
+## Formatting
+
+Charts inherit locale and default number formatting from `GnomeProvider` in
+`@gnome-ui/react`. This affects axis ticks, tooltips, and generated accessible
+labels.
+
+```tsx
+import { GnomeProvider } from "@gnome-ui/react";
+import { BarChart } from "@gnome-ui/charts";
+
+<GnomeProvider
+  locale="en-US"
+  numberFormat={{ notation: "compact", compactDisplay: "short" }}
+>
+  <BarChart
+    data={[{ month: "Jan", downloads: 12500 }]}
+    series={[{ dataKey: "downloads", name: "Downloads" }]}
+  />
+</GnomeProvider>
+```
+
+Use compact notation for values like `13K`; omit `numberFormat` or use
+`notation: "standard"` for full values like `12,500`.
+
 ## Imports
 
 ### Standard import (barrel)
