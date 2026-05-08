@@ -1,3 +1,54 @@
+## [1.29.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.28.0...@gnome-ui/charts@1.29.0) (2026-05-08)
+
+### Features
+
+* **@gnome-ui/charts:** format numbers with Intl.NumberFormat using GnomeProvider locale. ([3d66f95](https://github.com/ElJijuna/gnome-ui/commit/3d66f95703bcf3e04d295033243d92ce0df61c1d))
+* **@gnome-ui/icons, @gnome-ui/react:** add simple-icons support to Icon component ([7b3e454](https://github.com/ElJijuna/gnome-ui/commit/7b3e454b96e4562ad06c4d4851310e87c380c8df))
+* **@gnome-ui/icons:** add Npm icon and fix Share icon ([6ae994e](https://github.com/ElJijuna/gnome-ui/commit/6ae994eb4400a54bba0636fc284b1d2d14b4eb45))
+* **@gnome-ui/icons:** add simple-icons support to Icon component ([dc7eb3f](https://github.com/ElJijuna/gnome-ui/commit/dc7eb3f66aaa381c0e768b45e6970ea16c4b8206))
+* **@gnome-ui/layout:** add DashboardGrid component (closes [#82](https://github.com/ElJijuna/gnome-ui/issues/82)) ([feb03f3](https://github.com/ElJijuna/gnome-ui/commit/feb03f3b5c7dfdfcc7bab246f3471a1b320c9145))
+* **@gnome-ui/layout:** add EmptyState component (closes [#89](https://github.com/ElJijuna/gnome-ui/issues/89)) ([1d9bc09](https://github.com/ElJijuna/gnome-ui/commit/1d9bc094c362400ac5bb4c177fc30ca49d967c94))
+* **@gnome-ui/layout:** add ErrorState component (closes [#90](https://github.com/ElJijuna/gnome-ui/issues/90)) ([75fe802](https://github.com/ElJijuna/gnome-ui/commit/75fe802a91cc450dc49d4bc2903c72a50b992e99))
+* **@gnome-ui/layout:** add locale toolbar to Storybook preview. ([29ada4b](https://github.com/ElJijuna/gnome-ui/commit/29ada4b4b7fef0a355bcb6b338e598f79e843533))
+* **@gnome-ui/layout:** add QuickActions component (closes [#86](https://github.com/ElJijuna/gnome-ui/issues/86)) ([fa55062](https://github.com/ElJijuna/gnome-ui/commit/fa55062068f87c93853f46018d08bca15daad776))
+* **@gnome-ui/layout:** add responsive DashboardGrid layouts (closes [#99](https://github.com/ElJijuna/gnome-ui/issues/99)) ([550f367](https://github.com/ElJijuna/gnome-ui/commit/550f367388f83609a54f4a4c94fd73f34a8276be))
+* **@gnome-ui/layout:** add StatCard component (closes [#83](https://github.com/ElJijuna/gnome-ui/issues/83)) ([166b689](https://github.com/ElJijuna/gnome-ui/commit/166b6898a191b079f757ba46a9c3456cb9967af2))
+* **@gnome-ui/layout:** add StatusIndicator component (closes [#87](https://github.com/ElJijuna/gnome-ui/issues/87)) ([46b59ff](https://github.com/ElJijuna/gnome-ui/commit/46b59ff0fb36f063565cafba407881f7f899ed14))
+* **@gnome-ui/layout:** support hex colors in IconBadge ([95d599c](https://github.com/ElJijuna/gnome-ui/commit/95d599ccb6eb55424a520310b96dc725cf2cab83))
+* **@gnome-ui/layout:** use Intl.NumberFormat with GnomeProvider locale in CounterCard and StatCard. ([2381936](https://github.com/ElJijuna/gnome-ui/commit/23819363e2e4792b34d67567a18571dfa0a5f37d))
+* **@gnome-ui/react:** add AvatarRotator component. ([0ec5ec8](https://github.com/ElJijuna/gnome-ui/commit/0ec5ec826e02e9a0a38e64836a3a5dc0cc6358e4))
+* **@gnome-ui/react:** add componente IconButton, update Button to add class to use circular button and add refs prop, update Tooltip to export refs prop. ([a033b3c](https://github.com/ElJijuna/gnome-ui/commit/a033b3cadff68019a85097d68a145a186a7388e2))
+* **@gnome-ui/react:** add GnomeProvider with locale and dir context ([eb8fb53](https://github.com/ElJijuna/gnome-ui/commit/eb8fb53f01b557cc18ec8bb55369e11ffbdd6b64))
+* **@gnome-ui/react:** add locale toolbar to Storybook and WithLocale stories. ([fe068f9](https://github.com/ElJijuna/gnome-ui/commit/fe068f9442eea631ffe02411b169f9b5e9b7a209))
+* **@gnome-ui/react:** add provider Intl formatting hooks. ([f7de293](https://github.com/ElJijuna/gnome-ui/commit/f7de293fcd5941c03c7e079e84cc7271f1a3a19c))
+* **@gnome-ui/react:** add simple-icons support to Icon component ([a17286e](https://github.com/ElJijuna/gnome-ui/commit/a17286ec53fc07ceee3b95eeeb4a0d69f64558be))
+* add new icon Npm and fix Share icon. ([68fcf36](https://github.com/ElJijuna/gnome-ui/commit/68fcf36ddf3b0b056175a32a63890bf7cfbd0dbc))
+* **react:** add Skeleton component ([c993481](https://github.com/ElJijuna/gnome-ui/commit/c993481e593b6e84ad4470bf3f1b4460f96c586e)), closes [#95](https://github.com/ElJijuna/gnome-ui/issues/95)
+* **storybook:** add accent color toolbar to react and layout packages ([832e1ab](https://github.com/ElJijuna/gnome-ui/commit/832e1abf397e8f8174284eeca36bb6f052a8c795))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** add missing component subpath exports. ([e4a8017](https://github.com/ElJijuna/gnome-ui/commit/e4a801732ab3094594785ebce698201d8a7512b3))
+* **@gnome-ui/charts:** remove redundant WithLocale stories covered by preview decorator. ([e5da5f9](https://github.com/ElJijuna/gnome-ui/commit/e5da5f9a8129ce03d8424db9b111af9abc128dd3))
+* **@gnome-ui/hooks:** enable tree-shaking via vite-magic-tree-shaking (closes [#76](https://github.com/ElJijuna/gnome-ui/issues/76)) ([ff4d084](https://github.com/ElJijuna/gnome-ui/commit/ff4d084bd2b86a5acd2e03d55b5888b5dc8a2217))
+* **@gnome-ui/layout:** externalize internal package dependencies. ([fcfee6a](https://github.com/ElJijuna/gnome-ui/commit/fcfee6a0323b3ceeb65a57b5c93c0f49444daf02))
+* **@gnome-ui/react:** export ColorPicker. ([991c3a9](https://github.com/ElJijuna/gnome-ui/commit/991c3a9ac32b6021e653eceafd0c520a9db0fe01))
+* **@gnome-ui/react:** externalize internal package dependencies ([d2fcb4c](https://github.com/ElJijuna/gnome-ui/commit/d2fcb4c01209675c488f3c8776fc3b18f1a03a46))
+* **ci:** add catch-all false rules to prevent preset fallback in monorepo releases ([599036f](https://github.com/ElJijuna/gnome-ui/commit/599036f5b139261ca6c97cda647cc1af45a0caa6))
+* **ci:** build react before charts workflows ([87a4f2f](https://github.com/ElJijuna/gnome-ui/commit/87a4f2f97b88aa4597e4245eeb1566be2ee8f33e))
+* **ci:** provide icons artifacts for dependent builds ([64f1c9a](https://github.com/ElJijuna/gnome-ui/commit/64f1c9a947b3947f06ca711967156354b9afdda1))
+* **ci:** reorder releaseRules so catch-all false precedes scoped rules ([cca9c41](https://github.com/ElJijuna/gnome-ui/commit/cca9c412f0ce5877bde00fff3c9a2f96db66edc4))
+* **ci:** scope semantic-release rules per package to prevent cross-package tag conflicts ([f0af255](https://github.com/ElJijuna/gnome-ui/commit/f0af2557eb23657c859b3743577fdd34dbd0d5c3))
+* update package-lock.json ([a29bbc2](https://github.com/ElJijuna/gnome-ui/commit/a29bbc28c3a45f47c1af7591cd11ab47785ba524))
+
+### Refactoring
+
+* **@gnome-ui/layout:** use provider number formatting ([267b443](https://github.com/ElJijuna/gnome-ui/commit/267b44361067d7003cb8efbea92b03bf0093d995))
+
+### Documentation
+
+* update README and ROADMAP. ([d88b65d](https://github.com/ElJijuna/gnome-ui/commit/d88b65d4ae7bca38c09c5c2e0414ec525f66553f))
+
 ## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.27.1...@gnome-ui/charts@1.28.0) (2026-05-02)
 
 ### Features
