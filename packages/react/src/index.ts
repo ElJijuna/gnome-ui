@@ -263,5 +263,10 @@ export type { StatusBadgeProps, StatusBadgeVariant } from "./components/StatusBa
 export { GnomeProvider } from "./components/GnomeProvider/GnomeProvider";
 export type { GnomeProviderProps } from "./components/GnomeProvider/GnomeProvider";
 
-export { useLocale, useDir } from "./components/GnomeProvider/GnomeContext";
+export {
+  useLocale,
+  useDir,
+  useNumberFormatter,
+  useDateTimeFormatter,
+} from "./components/GnomeProvider/GnomeContext";
 export type { GnomeDir } from "./components/GnomeProvider/GnomeContext";

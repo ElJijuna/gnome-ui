@@ -167,6 +167,16 @@
       "import": "./dist/components/Frame.js",
       "require": "./dist/components/Frame.cjs"
     },
+    "./components/GnomeProvider/GnomeContext": {
+      "types": "./dist/components/GnomeProvider/GnomeContext.d.ts",
+      "import": "./dist/components/GnomeProvider/GnomeContext.js",
+      "require": "./dist/components/GnomeProvider/GnomeContext.cjs"
+    },
+    "./components/GnomeProvider/GnomeProvider": {
+      "types": "./dist/components/GnomeProvider/GnomeProvider.d.ts",
+      "import": "./dist/components/GnomeProvider/GnomeProvider.js",
+      "require": "./dist/components/GnomeProvider/GnomeProvider.cjs"
+    },
     "./components/HeaderBar": {
       "types": "./dist/components/HeaderBar.d.ts",
       "import": "./dist/components/HeaderBar.js",
