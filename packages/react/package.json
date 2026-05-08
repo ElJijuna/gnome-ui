@@ -22,6 +22,11 @@
       "import": "./dist/components/Avatar.js",
       "require": "./dist/components/Avatar.cjs"
     },
+    "./components/AvatarRotator": {
+      "types": "./dist/components/AvatarRotator.d.ts",
+      "import": "./dist/components/AvatarRotator.js",
+      "require": "./dist/components/AvatarRotator.cjs"
+    },
     "./components/Badge": {
       "types": "./dist/components/Badge.d.ts",
       "import": "./dist/components/Badge.js",
