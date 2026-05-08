@@ -6,6 +6,20 @@ import { fileURLToPath } from "node:url";
 import { generateEntries } from "vite-magic-tree-shaking";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
+const externalPackages = [
+  "@gnome-ui/core",
+  "@gnome-ui/hooks",
+  "@gnome-ui/icons",
+  "@gnome-ui/react",
+  "react",
+  "react-dom",
+];
+
+function isExternalDependency(id: string) {
+  return externalPackages.some((packageName) =>
+    id === packageName || id.startsWith(`${packageName}/`),
+  );
+}
 
 export default defineConfig({
   plugins: [
@@ -29,7 +43,7 @@ export default defineConfig({
         format === "cjs" ? `${entryName}.cjs` : `${entryName}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime", "@gnome-ui/react", "@gnome-ui/hooks", "@gnome-ui/core"],
+      external: isExternalDependency,
       output: {
         preserveModules: true,
         preserveModulesRoot: "src",

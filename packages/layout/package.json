@@ -104,7 +104,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@gnome-ui/core": "*"
+    "@gnome-ui/core": "*",
+    "@gnome-ui/icons": "*"
   },
   "peerDependencies": {
     "@gnome-ui/hooks": "*",
@@ -114,7 +115,6 @@
   },
   "devDependencies": {
     "@gnome-ui/hooks": "*",
-    "@gnome-ui/icons": "*",
     "@gnome-ui/react": "*",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
