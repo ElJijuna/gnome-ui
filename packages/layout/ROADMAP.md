@@ -116,4 +116,5 @@ Usa `OverlaySplitView` internamente.
 - Cada componente de layout puede importar de `@gnome-ui/react` pero **nunca al revés**.
 - Los estilos propios van en `ComponentName.module.css`; los tokens vienen de `@gnome-ui/core`.
 - Cada componente exporta su tipo `Props` nombrado.
+- Los valores numéricos deben usar `useNumberFormatter` de `@gnome-ui/react` para respetar `GnomeProvider` (`locale`, `numberFormat`) salvo que el componente exponga un `format` local explícito.
 - Stories usan `layout: "fullscreen"` para mostrar el comportamiento en contexto real.

@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import { Card, Skeleton, Text, useLocale } from "@gnome-ui/react";
+import { Card, Skeleton, Text, useNumberFormatter } from "@gnome-ui/react";
 import styles from "./StatCard.module.css";
 
 export type StatCardTrendDirection = "up" | "down" | "neutral";
@@ -31,16 +31,6 @@ const TREND_SYMBOL: Record<StatCardTrendDirection, string> = {
   neutral: "steady",
 };
 
-function formatValue(value: number | string, locale: string | undefined) {
-  return typeof value === "number"
-    ? new Intl.NumberFormat(locale).format(value)
-    : value;
-}
-
-function formatTrendValue(value: number, locale: string | undefined) {
-  return `${value > 0 ? "+" : ""}${new Intl.NumberFormat(locale).format(value)}%`;
-}
-
 export function StatCard({
   label,
   value,
@@ -51,7 +41,7 @@ export function StatCard({
   className,
   ...props
 }: StatCardProps) {
-  const locale = useLocale();
+  const numberFormat = useNumberFormatter();
 
   if (loading) {
     return (
@@ -72,7 +62,8 @@ export function StatCard({
     );
   }
 
-  const displayValue = formatValue(value, locale);
+  const displayValue =
+    typeof value === "number" ? numberFormat.format(value) : value;
   const accessibleValue = unit ? `${displayValue} ${unit}` : displayValue;
 
   return (
@@ -114,7 +105,9 @@ export function StatCard({
             .join(" ")}
         >
           <span aria-hidden="true">{TREND_SYMBOL[trend.direction]}</span>
-          <span className={styles.trendValue}>{formatTrendValue(trend.value, locale)}</span>
+          <span className={styles.trendValue}>
+            {`${trend.value > 0 ? "+" : ""}${numberFormat.format(trend.value)}%`}
+          </span>
           {trend.period && (
             <span className={styles.period}>{trend.period}</span>
           )}
