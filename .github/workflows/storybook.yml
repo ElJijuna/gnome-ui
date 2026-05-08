@@ -106,7 +106,7 @@ jobs:
 
   build-charts:
     name: Build @gnome-ui/charts
-    needs: build-core
+    needs: [build-core, build-react]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -117,6 +117,11 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: react-dist
+          path: packages/react/dist
 
       - run: npm run build --workspace=packages/charts
 
@@ -175,7 +180,7 @@ jobs:
 
   build-storybook-layout:
     name: Build Storybook (@gnome-ui/layout)
-    needs: [build-react, build-hooks]
+    needs: [build-icons, build-react, build-hooks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -215,7 +220,7 @@ jobs:
 
   build-storybook-charts:
     name: Build Storybook (@gnome-ui/charts)
-    needs: [build-charts]
+    needs: [build-charts, build-react]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -231,6 +236,11 @@ jobs:
         with:
           name: charts-dist
           path: packages/charts/dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: react-dist
+          path: packages/react/dist
 
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/charts

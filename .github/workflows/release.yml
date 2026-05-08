@@ -139,6 +139,9 @@ jobs:
           name: dist
           path: .
 
+      - name: Build @gnome-ui/react
+        run: npm run build --workspace=packages/react
+
       - name: Build @gnome-ui/charts
         run: npm run build --workspace=packages/charts
 

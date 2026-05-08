@@ -28,7 +28,13 @@ export default defineConfig({
       fileName: (_, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime", "recharts"],
+      external: [
+        "@gnome-ui/react",
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "recharts",
+      ],
       output: {
         preserveModules: true,
         preserveModulesRoot: "src",
