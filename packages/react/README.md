@@ -38,6 +38,47 @@ export default function App() {
 }
 ```
 
+## Provider & formatting
+
+`GnomeProvider` supplies locale, text direction, and default `Intl` formatting options to gnome-ui components. When `locale` is omitted, the browser locale is used.
+
+```tsx
+import { GnomeProvider } from "@gnome-ui/react";
+
+export default function App() {
+  return (
+    <GnomeProvider
+      locale="en-US"
+      numberFormat={{ notation: "compact", compactDisplay: "short" }}
+      dateTimeFormat={{ dateStyle: "medium" }}
+    >
+      {/* CounterCard, StatCard, charts, CountDownTimer, etc. inherit this. */}
+    </GnomeProvider>
+  );
+}
+```
+
+Use compact notation for values like `1K`; omit `numberFormat` or set `notation: "standard"` for full values like `1,000`.
+
+```tsx
+<GnomeProvider locale="en-US" numberFormat={{ notation: "standard" }}>
+  {/* numbers render as 1,000 */}
+</GnomeProvider>
+```
+
+Custom components can consume the same defaults:
+
+```tsx
+import { useNumberFormatter, useDateTimeFormatter } from "@gnome-ui/react";
+
+function Metric({ value, date }: { value: number; date: Date }) {
+  const number = useNumberFormatter({ maximumFractionDigits: 1 });
+  const day = useDateTimeFormatter({ weekday: "short" });
+
+  return `${number.format(value)} · ${day.format(date)}`;
+}
+```
+
 ## Tree-shaking
 
 The package ships per-component entry points, so bundlers (webpack, Rollup, esbuild, Vite) can eliminate unused components automatically. Named imports from the root entry work with any bundler that respects `"sideEffects"`:

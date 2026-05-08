@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import styles from "./ContributionGraph.module.css";
-import { useLocale } from "../GnomeProvider/GnomeContext";
+import { useDateTimeFormatter } from "../GnomeProvider/GnomeContext";
 
 export interface ContributionDay {
   /** ISO 8601 date — "YYYY-MM-DD". */
@@ -48,16 +48,20 @@ export interface ContributionGraphProps {
 // Reference Sunday: 2000-01-02 is a Sunday (day index 0)
 const REF_SUNDAY = new Date(2000, 0, 2);
 
-function getShortMonth(monthIndex: number, locale: string | undefined): string {
-  return new Intl.DateTimeFormat(locale, { month: "short" }).format(
-    new Date(2000, monthIndex),
-  );
+function getShortMonth(
+  monthIndex: number,
+  formatter: Intl.DateTimeFormat,
+): string {
+  return formatter.format(new Date(2000, monthIndex));
 }
 
-function getShortDay(dayIndex: number, locale: string | undefined): string {
+function getShortDay(
+  dayIndex: number,
+  formatter: Intl.DateTimeFormat,
+): string {
   const date = new Date(REF_SUNDAY);
   date.setDate(REF_SUNDAY.getDate() + dayIndex);
-  return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(date);
+  return formatter.format(date);
 }
 
 const DAY_LABEL_WIDTH = 28;
@@ -83,13 +87,8 @@ function isoToLocal(iso: string): Date {
   return new Date(y, m - 1, d);
 }
 
-function fullDateLabel(iso: string, locale: string | undefined): string {
-  return new Intl.DateTimeFormat(locale, {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(isoToLocal(iso));
+function fullDateLabel(iso: string, formatter: Intl.DateTimeFormat): string {
+  return formatter.format(isoToLocal(iso));
 }
 
 interface GridCell {
@@ -115,7 +114,14 @@ export function ContributionGraph({
   tooltipContent,
   className,
 }: ContributionGraphProps) {
-  const locale = useLocale();
+  const monthFormatter = useDateTimeFormatter({ month: "short" });
+  const weekdayFormatter = useDateTimeFormatter({ weekday: "short" });
+  const fullDateFormatter = useDateTimeFormatter({
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   const stride = cellSize + cellGap;
   const svgRef = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -161,7 +167,10 @@ export function ContributionGraph({
 
       // Month label when the column starts a new month
       if (colStart.getMonth() !== lastMonth) {
-        labels.push({ col, month: getShortMonth(colStart.getMonth(), locale) });
+        labels.push({
+          col,
+          month: getShortMonth(colStart.getMonth(), monthFormatter),
+        });
         lastMonth = colStart.getMonth();
       }
 
@@ -182,16 +191,16 @@ export function ContributionGraph({
     }
 
     return { grid: gridResult, monthLabels: labels };
-  }, [countMap, maxCount, maxLevel, weeks, weekStartDay, locale]);
+  }, [countMap, maxCount, maxLevel, weeks, weekStartDay, monthFormatter]);
 
   // Always label Mon(1), Wed(3), Fri(5) — rows shift with weekStartDay
   const labelRows = useMemo(
     () =>
       [1, 3, 5].map((dayIndex) => ({
         row: (dayIndex - weekStartDay + 7) % 7,
-        label: getShortDay(dayIndex, locale),
+        label: getShortDay(dayIndex, weekdayFormatter),
       })),
-    [weekStartDay, locale],
+    [weekStartDay, weekdayFormatter],
   );
 
   const dayLabelW = showDayLabels ? DAY_LABEL_WIDTH : 0;
@@ -247,10 +256,11 @@ export function ContributionGraph({
   }
 
   function cellTooltip(cell: GridCell): string {
-    if (cell.future) return fullDateLabel(cell.iso, locale);
+    if (cell.future) return fullDateLabel(cell.iso, fullDateFormatter);
+    const formattedDate = fullDateLabel(cell.iso, fullDateFormatter);
     return (
       tooltipContent?.({ date: cell.iso, count: cell.count }) ??
-      `${cell.count} contribution${cell.count !== 1 ? "s" : ""} on ${fullDateLabel(cell.iso, locale)}`
+      `${cell.count} contribution${cell.count !== 1 ? "s" : ""} on ${formattedDate}`
     );
   }
 
