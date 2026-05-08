@@ -133,6 +133,12 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |--------|------|-------------|
 | ✅ | **High-contrast support** | Add `@media (prefers-contrast: more)` overrides to design tokens and all components — formalised in libadwaita 1.8 |
 
+### Cross-cutting — internationalization
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ✅ | **Provider-level Intl formatting** | `GnomeProvider` supplies `locale`, `dir`, `numberFormat`, and `dateTimeFormat`; `useNumberFormatter` and `useDateTimeFormatter` apply those defaults across `@gnome-ui/react`, `@gnome-ui/layout`, and `@gnome-ui/charts` |
+
 ---
 
 ## Tier 8 — Style-class Utilities & Composition Helpers
