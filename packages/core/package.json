@@ -16,5 +16,7 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "author": "pilmee <pilmee@gmail.com> (https://github.com/ElJijuna)",
+  "license": "MIT"
 }

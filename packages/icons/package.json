@@ -61,5 +61,7 @@
     "vite": "^8.0.3",
     "vite-magic-tree-shaking": "^1.0.0",
     "vite-plugin-dts": "^4.5.4"
-  }
+  },
+  "author": "pilmee <pilmee@gmail.com> (https://github.com/ElJijuna)",
+  "license": "MIT"
 }
