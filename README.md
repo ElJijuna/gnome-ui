@@ -116,7 +116,11 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 
 | Component | Description | Story |
 |-----------|-------------|-------|
-| `Layout` | Full-page shell with four named zones: `topBar`, `sidebar`, `children`, `bottomBar` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-layout--docs) |
+| `Layout` | Full-page shell with named zones: `header`/`topBar`, `sidebar`, `children`, `footer`/`bottomBar`; supports sidebar overlay, rail collapse, placement, and scroll modes | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-layout--docs) |
+| `AppHeader` | GNOME application header for `Layout.header` with leading, title/subtitle, navigation, search, and action slots | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-appheader--docs) |
+| `SidebarShell` | Full-height sidebar composition with fixed header/footer and scrollable `Sidebar` navigation | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-sidebarshell--docs) |
+| `PageContent` | Scroll-safe content container with GNOME page padding and optional Adwaita clamp widths | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-pagecontent--docs) |
+| `StatusBar` | Compact footer/status bar for `Layout.footer` with optional trailing status/actions | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-statusbar--docs) |
 | `AdaptiveLayout` | Responsive layout that adapts column structure to the available width | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-adaptivelayout--docs) |
 | `CounterCard` | Card displaying a labelled numeric count | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-countercard--docs) |
 | `StatCard` | Key metric card with unit, trend indicator, icon, and skeleton loading state | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-statcard--docs) |
