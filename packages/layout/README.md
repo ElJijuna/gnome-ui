@@ -85,14 +85,22 @@ when both are provided.
 
 #### Mobile sidebar overlay
 
-On viewports narrower than **640 px** the sidebar becomes a slide-in overlay panel. Two additional props control its visibility:
+On narrow viewports the sidebar becomes a slide-in overlay panel. The default
+breakpoint is **400 px**, matching GNOME split-view behaviour.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `sidebarOpen` | `boolean` | `false` | Whether the sidebar overlay is visible on mobile |
 | `onSidebarClose` | `() => void` | — | Called when the user taps the backdrop — use it to set `sidebarOpen` back to `false` |
+| `onSidebarOpenChange` | `(open, reason) => void` | — | Called for shell-driven open changes such as backdrop and Escape |
+| `sidebarPlacement` | `"start" \| "end"` | `"start"` | Places the sidebar on the leading or trailing edge |
+| `sidebarBreakpoint` | `"narrow" \| "medium" \| "wide"` | `"narrow"` | Overlay threshold: `400`, `550`, or `860` px |
+| `sidebarCollapseMode` | `"none" \| "rail" \| "overlay"` | `"none"` | Wide-layout collapse behaviour |
+| `sidebarCollapsed` | `boolean` | `false` | Applies shell-level collapsed sidebar styling |
+| `sidebarCollapsedWidth` | `number` | `56` | Rail width in pixels |
 
-On wider (desktop) viewports the sidebar is always visible in the layout flow and these props are ignored.
+On wider viewports the sidebar stays in layout flow unless
+`sidebarCollapseMode="overlay"` and `sidebarCollapsed` are both set.
 
 ```tsx
 import { useState } from "react";
@@ -140,6 +148,35 @@ export default function App() {
     </Layout>
   );
 }
+```
+
+---
+
+### `SidebarShell`
+
+Full-height sidebar composition for `Layout.sidebar`. It wraps the GNOME
+`Sidebar` with optional fixed header/footer areas and a scrollable navigation
+middle.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `header` | `ReactNode` | Fixed content above the navigation list. |
+| `children` | `ReactNode` | Navigation content, usually `SidebarSection` children. |
+| `footer` | `ReactNode` | Fixed content below the navigation list. |
+
+All `Sidebar` props such as `collapsed`, `searchable`, `filter`, `mode`, and
+`variant` pass through.
+
+```tsx
+import { SidebarShell } from "@gnome-ui/layout";
+import { SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
+
+<SidebarShell header={<Text variant="heading">Files</Text>} searchable>
+  <SidebarSection>
+    <SidebarItem label="Home" active />
+    <SidebarItem label="Starred" />
+  </SidebarSection>
+</SidebarShell>
 ```
 
 ---

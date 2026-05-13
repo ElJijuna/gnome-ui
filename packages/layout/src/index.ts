@@ -1,5 +1,13 @@
 export { Layout } from "./components/Layout";
-export type { LayoutHeight, LayoutProps, LayoutScroll } from "./components/Layout";
+export type {
+  LayoutHeight,
+  LayoutProps,
+  LayoutScroll,
+  LayoutSidebarBreakpoint,
+  LayoutSidebarCollapseMode,
+  LayoutSidebarOpenChangeReason,
+  LayoutSidebarPlacement,
+} from "./components/Layout";
 
 export { AppHeader } from "./components/AppHeader";
 export type { AppHeaderProps } from "./components/AppHeader";
@@ -10,6 +18,9 @@ export type {
   PageContentPadding,
   PageContentProps,
 } from "./components/PageContent";
+
+export { SidebarShell } from "./components/SidebarShell";
+export type { SidebarShellProps } from "./components/SidebarShell";
 
 export { StatusBar } from "./components/StatusBar";
 export type { StatusBarProps } from "./components/StatusBar";
