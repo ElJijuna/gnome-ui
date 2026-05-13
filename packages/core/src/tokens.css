@@ -98,7 +98,7 @@
   --gnome-purple-2: #c061cb;
   --gnome-purple-3: #9141ac;
   --gnome-purple-4: #813d9c;
-  --gnome-purple-5: #63452c;
+  --gnome-purple-5: #613583;
 
   /* Brown */
   --gnome-brown-1: #cdab8f;
@@ -195,6 +195,7 @@
 
   --gnome-line-height-body: 1.5;
   --gnome-line-height-heading: 1.2;
+  --gnome-line-height-title: var(--gnome-line-height-heading);
 
   /* ─── Spacing Scale (6px base grid) ─────────────────────────── */
 
@@ -272,6 +273,11 @@
   --gnome-active-overlay: rgba(0, 0, 0, 0.12);
   --gnome-border-subtle: rgba(0, 0, 0, 0.15);
   --gnome-divider-color: rgba(0, 0, 0, 0.07);
+
+  /* ─── Skeleton ───────────────────────────────────────────────── */
+
+  --gnome-skeleton-base-color: rgba(0, 0, 0, 0.09);
+  --gnome-skeleton-highlight-color: rgba(255, 255, 255, 0.55);
 }
 
 /* ─── oklch palette ──────────────────────────────────────────────────────────
@@ -326,7 +332,7 @@
     --gnome-purple-2: oklch(57.0% 0.193 309);
     --gnome-purple-3: oklch(46.0% 0.179 308);
     --gnome-purple-4: oklch(41.0% 0.168 308);
-    --gnome-purple-5: oklch(35.0% 0.048 55);
+    --gnome-purple-5: oklch(36.0% 0.157 307);
 
     /* Brown */
     --gnome-brown-1: oklch(74.0% 0.055 62);
@@ -397,6 +403,9 @@
     --gnome-active-overlay: rgba(255, 255, 255, 0.14);
     --gnome-border-subtle: rgba(255, 255, 255, 0.15);
     --gnome-divider-color: rgba(255, 255, 255, 0.07);
+
+    --gnome-skeleton-base-color: rgba(255, 255, 255, 0.12);
+    --gnome-skeleton-highlight-color: rgba(255, 255, 255, 0.18);
   }
 }
 

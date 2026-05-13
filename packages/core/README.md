@@ -87,7 +87,7 @@ Dark mode is handled automatically via `@media (prefers-color-scheme: dark)`.
 | `--gnome-font-size-title-3` | `1.25rem` |
 | `--gnome-font-size-title-4` | `1.125rem` |
 | `--gnome-font-size-body` | `1rem` |
-| `--gnome-font-size-caption` | `0.875rem` |
+| `--gnome-font-size-caption` | `0.75rem` |
 | `--gnome-font-weight-normal` | `400` |
 | `--gnome-font-weight-semibold` | `600` |
 | `--gnome-font-weight-bold` | `700` |
@@ -97,7 +97,7 @@ Dark mode is handled automatically via `@media (prefers-color-scheme: dark)`.
 | Token | Value |
 |-------|-------|
 | `--gnome-focus-ring-color` | `var(--gnome-accent-color)` |
-| `--gnome-focus-ring-width` | `2px` |
+| `--gnome-focus-ring-width` | `3px` |
 | `--gnome-focus-ring-offset` | `2px` |
 
 ### Motion
@@ -107,7 +107,7 @@ Dark mode is handled automatically via `@media (prefers-color-scheme: dark)`.
 | `--gnome-duration-fast` | `100ms` |
 | `--gnome-duration-normal` | `200ms` |
 | `--gnome-duration-slow` | `400ms` |
-| `--gnome-easing-default` | `ease` |
+| `--gnome-easing-default` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` |
 | `--gnome-easing-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
 
 ### Shadows
