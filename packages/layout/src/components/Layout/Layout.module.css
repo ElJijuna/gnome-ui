@@ -8,17 +8,37 @@
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
   background: var(--gnome-window-bg-color, #fafafa);
   font-family: var(--gnome-font-family, sans-serif);
   color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.heightViewport {
+  height: 100vh;
+}
+
+.heightParent {
+  height: 100%;
+}
+
+.scrollContent {
+  overflow: hidden;
+}
+
+.scrollPage {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.scrollNone {
+  overflow: hidden;
 }
 
 /* ── Top bar ──────────────────────────────────────────────────────────────── */
 
 .topBar {
   flex-shrink: 0;
+  display: block;
   background: var(--gnome-headerbar-bg-color, #ebebeb);
   border-bottom: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
 }
@@ -48,8 +68,26 @@
 
 .content {
   flex: 1;
-  overflow-y: auto;
   min-width: 0;
+}
+
+.scrollContent .content {
+  overflow-y: auto;
+}
+
+.scrollPage .body {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.scrollPage .content,
+.scrollNone .content {
+  overflow: visible;
+}
+
+.scrollNone .body {
+  overflow: hidden;
 }
 
 /* ── Mobile overlay behaviour (< 640 px) ──────────────────────────────────── */
