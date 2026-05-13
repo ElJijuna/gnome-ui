@@ -22,6 +22,9 @@ export type {
 export { SidebarShell } from "./components/SidebarShell";
 export type { SidebarShellProps } from "./components/SidebarShell";
 
+export { SidebarTrigger } from "./components/SidebarTrigger";
+export type { SidebarTriggerProps } from "./components/SidebarTrigger";
+
 export { StatusBar } from "./components/StatusBar";
 export type { StatusBarProps } from "./components/StatusBar";
 

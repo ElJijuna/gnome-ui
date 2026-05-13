@@ -19,13 +19,22 @@ export function SidebarShell({
   header,
   children,
   footer,
+  collapsed,
   className,
   ...sidebarProps
 }: SidebarShellProps) {
   return (
-    <div className={[styles.shell, className].filter(Boolean).join(" ")}>
+    <div
+      className={[
+        styles.shell,
+        collapsed ? styles.collapsed : null,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {header && <div className={styles.header}>{header}</div>}
-      <Sidebar className={styles.navigation} {...sidebarProps}>
+      <Sidebar className={styles.navigation} collapsed={collapsed} {...sidebarProps}>
         {children}
       </Sidebar>
       {footer && <div className={styles.footer}>{footer}</div>}
