@@ -1,8 +1,17 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import {
+  useEffect,
+  type CSSProperties,
+  type HTMLAttributes,
+  type ReactNode,
+} from "react";
 import styles from "./Layout.module.css";
 
 export type LayoutHeight = "viewport" | "parent";
 export type LayoutScroll = "content" | "page" | "none";
+export type LayoutSidebarBreakpoint = "narrow" | "medium" | "wide";
+export type LayoutSidebarCollapseMode = "none" | "rail" | "overlay";
+export type LayoutSidebarPlacement = "start" | "end";
+export type LayoutSidebarOpenChangeReason = "backdrop" | "escape" | "trigger";
 
 export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "height"> {
   /**
@@ -29,11 +38,43 @@ export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "heigh
    */
   sidebar?: ReactNode;
   /**
+   * Sidebar edge. `start` follows the text direction; `end` mirrors right-side
+   * sider layouts.
+   */
+  sidebarPlacement?: LayoutSidebarPlacement;
+  /**
+   * Breakpoint where the sidebar becomes an overlay.
+   * - `"narrow"` — 400 px, GNOME split-view threshold.
+   * - `"medium"` — 550 px, GNOME bottom-navigation threshold.
+   * - `"wide"` — 860 px, GNOME nested-layout threshold.
+   */
+  sidebarBreakpoint?: LayoutSidebarBreakpoint;
+  /**
    * Controls sidebar visibility **on narrow (mobile) viewports only**.
    * On wider viewports the sidebar is always visible regardless of this prop.
    * Defaults to `false`.
    */
   sidebarOpen?: boolean;
+  /**
+   * Collapse mode for the sidebar slot on wide layouts.
+   * - `"none"` — no shell-level collapse styling.
+   * - `"rail"` — sidebar remains in flow at `sidebarCollapsedWidth`.
+   * - `"overlay"` — collapsed sidebar is hidden until `sidebarOpen`.
+   */
+  sidebarCollapseMode?: LayoutSidebarCollapseMode;
+  /** Whether the sidebar is collapsed on wide layouts. */
+  sidebarCollapsed?: boolean;
+  /** Width used by `sidebarCollapseMode="rail"`. Defaults to `56`. */
+  sidebarCollapsedWidth?: number;
+  /**
+   * Called when the shell requests sidebar open-state changes, such as backdrop
+   * click or Escape. External triggers can call this same handler with
+   * `"trigger"` for symmetry.
+   */
+  onSidebarOpenChange?: (
+    open: boolean,
+    reason: LayoutSidebarOpenChangeReason,
+  ) => void;
   /**
    * Called when the user taps the backdrop behind the sidebar on mobile.
    * Use this to set `sidebarOpen` back to `false`.
@@ -108,7 +149,13 @@ export function Layout({
   topBar,
   header,
   sidebar,
+  sidebarPlacement = "start",
+  sidebarBreakpoint = "narrow",
   sidebarOpen = false,
+  sidebarCollapseMode = "none",
+  sidebarCollapsed = false,
+  sidebarCollapsedWidth = 56,
+  onSidebarOpenChange,
   onSidebarClose,
   children,
   bottomBar,
@@ -134,9 +181,41 @@ export function Layout({
   const bodyClass = [
     styles.body,
     sidebar && sidebarOpen ? styles.bodySidebarOpen : undefined,
+    sidebarPlacement === "end" ? styles.bodySidebarEnd : undefined,
+    sidebarBreakpoint === "medium" ? styles.breakpointMedium : undefined,
+    sidebarBreakpoint === "wide" ? styles.breakpointWide : styles.breakpointNarrow,
+    sidebarCollapseMode === "rail" ? styles.collapseRail : undefined,
+    sidebarCollapseMode === "overlay" ? styles.collapseOverlay : undefined,
+    sidebarCollapsed ? styles.sidebarCollapsed : undefined,
   ]
     .filter(Boolean)
     .join(" ");
+
+  const sidebarStyle = {
+    "--layout-sidebar-collapsed-width": `${sidebarCollapsedWidth}px`,
+  } as CSSProperties;
+
+  const closeSidebar = (reason: LayoutSidebarOpenChangeReason) => {
+    onSidebarOpenChange?.(false, reason);
+    onSidebarClose?.();
+  };
+
+  useEffect(() => {
+    if (!sidebar || !sidebarOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeSidebar("escape");
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [sidebar, sidebarOpen, onSidebarOpenChange, onSidebarClose]);
+
+  const sidebarSlot = sidebar && (
+    <aside className={styles.sidebar} style={sidebarStyle}>
+      {sidebar}
+    </aside>
+  );
 
   return (
     <div
@@ -146,18 +225,16 @@ export function Layout({
       {resolvedHeader && <header className={styles.topBar}>{resolvedHeader}</header>}
 
       <div className={bodyClass}>
+        {sidebar && sidebarPlacement === "start" && sidebarSlot}
         {sidebar && (
-          <>
-            <aside className={styles.sidebar}>{sidebar}</aside>
-            {/* Backdrop — visible on mobile when sidebar is open */}
-            <div
-              className={styles.backdrop}
-              onClick={onSidebarClose}
-              aria-hidden="true"
-            />
-          </>
+          <div
+            className={styles.backdrop}
+            onClick={() => closeSidebar("backdrop")}
+            aria-hidden="true"
+          />
         )}
         <main className={styles.content}>{children}</main>
+        {sidebar && sidebarPlacement === "end" && sidebarSlot}
       </div>
 
       {resolvedFooter && <footer className={styles.bottomBar}>{resolvedFooter}</footer>}

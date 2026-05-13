@@ -52,10 +52,22 @@
   min-height: 0;
 }
 
+.bodySidebarEnd {
+  flex-direction: row;
+}
+
 /* ── Sidebar slot ─────────────────────────────────────────────────────────── */
 
 .sidebar {
   flex-shrink: 0;
+}
+
+.collapseRail.sidebarCollapsed .sidebar > * {
+  width: var(--layout-sidebar-collapsed-width, 56px);
+}
+
+.collapseOverlay.sidebarCollapsed:not(.bodySidebarOpen) .sidebar {
+  display: none;
 }
 
 /* ── Backdrop (mobile only) ───────────────────────────────────────────────── */
@@ -90,32 +102,118 @@
   overflow: hidden;
 }
 
-/* ── Mobile overlay behaviour (< 640 px) ──────────────────────────────────── */
+/* ── Mobile overlay behaviour (GNOME breakpoints) ─────────────────────────── */
 
-@media (max-width: 639px) {
-  .body {
+.breakpointNarrow,
+.breakpointMedium,
+.breakpointWide {
+  --layout-sidebar-closed-transform: translateX(-100%);
+  --layout-sidebar-open-transform: translateX(0);
+}
+
+.bodySidebarEnd {
+  --layout-sidebar-closed-transform: translateX(100%);
+}
+
+@media (max-width: 400px) {
+  .breakpointNarrow {
     position: relative;  /* stacking context for absolute sidebar + backdrop */
     overflow-x: clip;    /* clip the sliding sidebar without creating a new scroll context */
   }
 
-  .sidebar {
+  .breakpointNarrow .sidebar {
     position: absolute;
     inset-block: 0;
     inset-inline-start: 0;
     z-index: 10;
-    transform: translateX(-100%);
+    transform: var(--layout-sidebar-closed-transform);
     transition: transform 0.25s ease;
     /* Make sure sidebar background is opaque so content doesn't bleed through */
     background: var(--gnome-sidebar-bg-color, var(--gnome-window-bg-color, #fafafa));
   }
 
+  .breakpointNarrow.bodySidebarEnd .sidebar {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+
   /* When open: slide in */
-  .bodySidebarOpen .sidebar {
-    transform: translateX(0);
+  .breakpointNarrow.bodySidebarOpen .sidebar {
+    transform: var(--layout-sidebar-open-transform);
   }
 
   /* Backdrop: covers the content area behind the sidebar */
-  .bodySidebarOpen .backdrop {
+  .breakpointNarrow.bodySidebarOpen .backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 550px) {
+  .breakpointMedium {
+    position: relative;
+    overflow-x: clip;
+  }
+
+  .breakpointMedium .sidebar {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 10;
+    transform: var(--layout-sidebar-closed-transform);
+    transition: transform 0.25s ease;
+    background: var(--gnome-sidebar-bg-color, var(--gnome-window-bg-color, #fafafa));
+  }
+
+  .breakpointMedium.bodySidebarEnd .sidebar {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+
+  .breakpointMedium.bodySidebarOpen .sidebar {
+    transform: var(--layout-sidebar-open-transform);
+  }
+
+  .breakpointMedium.bodySidebarOpen .backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 860px) {
+  .breakpointWide {
+    position: relative;
+    overflow-x: clip;
+  }
+
+  .breakpointWide .sidebar {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 10;
+    transform: var(--layout-sidebar-closed-transform);
+    transition: transform 0.25s ease;
+    background: var(--gnome-sidebar-bg-color, var(--gnome-window-bg-color, #fafafa));
+  }
+
+  .breakpointWide.bodySidebarEnd .sidebar {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+
+  .breakpointWide.bodySidebarOpen .sidebar {
+    transform: var(--layout-sidebar-open-transform);
+  }
+
+  .breakpointWide.bodySidebarOpen .backdrop {
     display: block;
     position: absolute;
     inset: 0;
@@ -137,6 +235,14 @@
 
 @media (max-width: 639px) and (prefers-reduced-motion: reduce) {
   .sidebar {
+    transition: none;
+  }
+}
+
+@media (max-width: 860px) and (prefers-reduced-motion: reduce) {
+  .breakpointNarrow .sidebar,
+  .breakpointMedium .sidebar,
+  .breakpointWide .sidebar {
     transition: none;
   }
 }

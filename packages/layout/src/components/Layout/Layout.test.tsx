@@ -222,5 +222,81 @@ describe("Layout", () => {
       fireEvent.click(backdrop);
       expect(onClose).toHaveBeenCalledTimes(1);
     });
+
+    it("calls onSidebarOpenChange with backdrop reason when the backdrop is clicked", () => {
+      const onOpenChange = vi.fn();
+      const { container } = render(
+        <Layout
+          sidebar={<nav>Nav</nav>}
+          sidebarOpen
+          onSidebarOpenChange={onOpenChange}
+        >
+          <p>Content</p>
+        </Layout>,
+      );
+      const backdrop = container.querySelector("[class*='backdrop']") as HTMLElement;
+      fireEvent.click(backdrop);
+      expect(onOpenChange).toHaveBeenCalledWith(false, "backdrop");
+    });
+
+    it("calls onSidebarOpenChange with escape reason when Escape is pressed", () => {
+      const onOpenChange = vi.fn();
+      render(
+        <Layout
+          sidebar={<nav>Nav</nav>}
+          sidebarOpen
+          onSidebarOpenChange={onOpenChange}
+        >
+          <p>Content</p>
+        </Layout>,
+      );
+      fireEvent.keyDown(document, { key: "Escape" });
+      expect(onOpenChange).toHaveBeenCalledWith(false, "escape");
+    });
+
+    it("applies end placement class when sidebarPlacement is end", () => {
+      const { container } = render(
+        <Layout sidebar={<nav>Nav</nav>} sidebarPlacement="end">
+          <p>Content</p>
+        </Layout>,
+      );
+      expect(container.querySelector("[class*='bodySidebarEnd']")).not.toBeNull();
+    });
+
+    it.each(["narrow", "medium", "wide"] as const)(
+      "applies %s sidebar breakpoint class",
+      (sidebarBreakpoint) => {
+        const { container } = render(
+          <Layout sidebar={<nav>Nav</nav>} sidebarBreakpoint={sidebarBreakpoint}>
+            <p>Content</p>
+          </Layout>,
+        );
+        const expectedClass = {
+          narrow: /breakpointNarrow/,
+          medium: /breakpointMedium/,
+          wide: /breakpointWide/,
+        }[sidebarBreakpoint];
+        expect(container.querySelector("[class*='body']")?.className).toMatch(expectedClass);
+      },
+    );
+
+    it("applies rail collapsed class and collapsed width variable", () => {
+      const { container } = render(
+        <Layout
+          sidebar={<nav>Nav</nav>}
+          sidebarCollapseMode="rail"
+          sidebarCollapsed
+          sidebarCollapsedWidth={64}
+        >
+          <p>Content</p>
+        </Layout>,
+      );
+      const body = container.querySelector("[class*='body']") as HTMLElement;
+      const aside = container.querySelector("aside") as HTMLElement;
+
+      expect(body.className).toMatch(/collapseRail/);
+      expect(body.className).toMatch(/sidebarCollapsed/);
+      expect(aside.style.getPropertyValue("--layout-sidebar-collapsed-width")).toBe("64px");
+    });
   });
 });

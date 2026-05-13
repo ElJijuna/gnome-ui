@@ -77,6 +77,11 @@
       "import": "./dist/components/QuickActions.js",
       "require": "./dist/components/QuickActions.cjs"
     },
+    "./components/SidebarShell": {
+      "types": "./dist/components/SidebarShell.d.ts",
+      "import": "./dist/components/SidebarShell.js",
+      "require": "./dist/components/SidebarShell.cjs"
+    },
     "./components/StatusBar": {
       "types": "./dist/components/StatusBar.d.ts",
       "import": "./dist/components/StatusBar.js",

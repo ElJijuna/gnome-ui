@@ -1,0 +1,47 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  width: clamp(180px, 25vw, 280px);
+  height: 100%;
+  min-height: 0;
+  background: var(--gnome-sidebar-bg-color, #ebebeb);
+  color: var(--gnome-sidebar-fg-color, rgba(0, 0, 0, 0.8));
+  border-inline-end: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+  overflow: hidden;
+}
+
+.header,
+.footer {
+  flex-shrink: 0;
+  padding: var(--gnome-space-1, 6px);
+}
+
+.header {
+  border-block-end: 1px solid var(--gnome-divider-color, rgba(0, 0, 0, 0.07));
+}
+
+.footer {
+  border-block-start: 1px solid var(--gnome-divider-color, rgba(0, 0, 0, 0.07));
+}
+
+.navigation {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  border-inline-end: 0;
+  background: transparent;
+}
+
+.navigation[class] {
+  width: 100%;
+}
+
+.shell:has(.navigation[class*="collapsed"]) {
+  width: 56px;
+}
+
+@supports not selector(:has(*)) {
+  .shell {
+    transition: width var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
+  }
+}
