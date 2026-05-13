@@ -1,0 +1,54 @@
+.appHeader {
+  width: 100%;
+}
+
+.center,
+.end,
+.actions {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.center {
+  justify-content: center;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.title {
+  min-width: 0;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.end {
+  justify-content: flex-end;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+.search {
+  flex: 1 1 220px;
+  min-width: 120px;
+  max-width: 360px;
+}
+
+.actions {
+  gap: var(--gnome-space-1, 6px);
+  flex-shrink: 0;
+}
+
+@media (max-width: 550px) {
+  .center {
+    gap: var(--gnome-space-1, 6px);
+  }
+
+  .navigation,
+  .search {
+    display: none;
+  }
+}
