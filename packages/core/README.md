@@ -118,6 +118,27 @@ Dark mode is handled automatically via `@media (prefers-color-scheme: dark)`.
 | `--gnome-shadow-md` | Popovers, dropdowns |
 | `--gnome-shadow-lg` | Dialogs, modals |
 
+### Layout
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--gnome-layout-sidebar-min-width` | `180px` | Minimum GNOME sidebar width |
+| `--gnome-layout-sidebar-default-width` | `240px` | Default standalone sidebar width |
+| `--gnome-layout-sidebar-max-width` | `280px` | Maximum GNOME sidebar width |
+| `--gnome-layout-sidebar-width` | `clamp(180px, 25%, 280px)` | Standard in-flow sidebar width |
+| `--gnome-layout-sidebar-overlay-width` | `clamp(180px, 75%, 280px)` | Overlay sidebar width on narrow screens |
+| `--gnome-layout-sidebar-rail-width` | `56px` | Collapsed icon-only sidebar rail |
+| `--gnome-layout-breakpoint-narrow` | `400px` | Split-view collapse threshold |
+| `--gnome-layout-breakpoint-medium` | `550px` | Bottom-navigation / compact shell threshold |
+| `--gnome-layout-breakpoint-wide` | `860px` | Nested-layout outer-pane threshold |
+| `--gnome-layout-content-padding` | `var(--gnome-space-4)` | Default page content padding |
+| `--gnome-layout-content-padding-compact` | `var(--gnome-space-2)` | Compact page content padding |
+| `--gnome-layout-content-padding-spacious` | `var(--gnome-space-5)` | Spacious page content padding |
+
+The breakpoint tokens document the shared GNOME thresholds. CSS media queries
+still use literal pixel values because custom properties are not valid in
+standard `@media` conditions.
+
 ### Misc
 
 | Token | Value |
