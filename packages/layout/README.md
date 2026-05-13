@@ -65,12 +65,23 @@ Full-page application shell with four named, optional zones:
 
 | Zone | Prop | Description |
 |------|------|-------------|
-| Top bar | `topBar` | Pinned header — typically a `Toolbar` or `HeaderBar`. Never scrolls. |
+| Header | `header` / `topBar` | Pinned header — typically a `Toolbar`, `HeaderBar`, or app header composition. Never scrolls when `scroll="content"`. |
 | Sidebar | `sidebar` | Fixed-width lateral navigation — typically a `Sidebar`. |
 | Content | `children` | Scrollable main area. Fills remaining space. |
-| Bottom bar | `bottomBar` | Pinned footer — typically a status `Toolbar`. Never scrolls. |
+| Footer | `footer` / `bottomBar` | Pinned footer — typically a status `Toolbar`. Never scrolls when `scroll="content"`. |
 
 All props of `<div>` are forwarded to the root element.
+
+`topBar` and `bottomBar` remain supported for existing apps. New code can use
+the shell-style aliases `header` and `footer`; the legacy names take precedence
+when both are provided.
+
+#### Height and scroll modes
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `height` | `"viewport" \| "parent"` | `"viewport"` | `viewport` fills the browser viewport (`100vh`); `parent` fills the containing element (`100%`) for nested layouts. |
+| `scroll` | `"content" \| "page" \| "none"` | `"content"` | `content` scrolls only the main area; `page` lets the whole shell scroll; `none` disables internal scrolling. |
 
 #### Mobile sidebar overlay
 
@@ -94,7 +105,7 @@ export default function App() {
 
   return (
     <Layout
-      topBar={
+      header={
         <Toolbar style={{ minHeight: 48, padding: "0 8px" }}>
           <Button
             variant="flat"
@@ -117,7 +128,7 @@ export default function App() {
       }
       sidebarOpen={sidebarOpen}
       onSidebarClose={() => setSidebarOpen(false)}
-      bottomBar={
+      footer={
         <Toolbar style={{ minHeight: 36, padding: "0 16px" }}>
           <Text variant="caption" color="dim">Ready</Text>
         </Toolbar>

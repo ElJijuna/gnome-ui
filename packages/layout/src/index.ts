@@ -1,5 +1,5 @@
 export { Layout } from "./components/Layout";
-export type { LayoutProps } from "./components/Layout";
+export type { LayoutHeight, LayoutProps, LayoutScroll } from "./components/Layout";
 
 export { CounterCard } from "./components/CounterCard";
 export type { CounterCardProps } from "./components/CounterCard";

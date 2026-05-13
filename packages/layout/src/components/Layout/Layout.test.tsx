@@ -17,6 +17,25 @@ describe("Layout", () => {
     expect(screen.getByText("App Header")).toBeInTheDocument();
   });
 
+  it("renders the header alias when provided", () => {
+    render(
+      <Layout header={<div>Alias Header</div>}>
+        <p>Content</p>
+      </Layout>,
+    );
+    expect(screen.getByText("Alias Header")).toBeInTheDocument();
+  });
+
+  it("prefers topBar over header when both are provided", () => {
+    render(
+      <Layout topBar={<div>Legacy Header</div>} header={<div>Alias Header</div>}>
+        <p>Content</p>
+      </Layout>,
+    );
+    expect(screen.getByText("Legacy Header")).toBeInTheDocument();
+    expect(screen.queryByText("Alias Header")).not.toBeInTheDocument();
+  });
+
   it("does not render a top-bar wrapper when topBar is omitted", () => {
     const { container } = render(
       <Layout><p>Content</p></Layout>,
@@ -50,6 +69,25 @@ describe("Layout", () => {
     expect(screen.getByText("Status bar")).toBeInTheDocument();
   });
 
+  it("renders the footer alias when provided", () => {
+    render(
+      <Layout footer={<div>Alias Footer</div>}>
+        <p>Content</p>
+      </Layout>,
+    );
+    expect(screen.getByText("Alias Footer")).toBeInTheDocument();
+  });
+
+  it("prefers bottomBar over footer when both are provided", () => {
+    render(
+      <Layout bottomBar={<div>Legacy Footer</div>} footer={<div>Alias Footer</div>}>
+        <p>Content</p>
+      </Layout>,
+    );
+    expect(screen.getByText("Legacy Footer")).toBeInTheDocument();
+    expect(screen.queryByText("Alias Footer")).not.toBeInTheDocument();
+  });
+
   it("does not render a bottom-bar wrapper when bottomBar is omitted", () => {
     const { container } = render(
       <Layout><p>Content</p></Layout>,
@@ -71,6 +109,23 @@ describe("Layout", () => {
     expect(screen.getByText("Sidebar")).toBeInTheDocument();
     expect(screen.getByText("Content")).toBeInTheDocument();
     expect(screen.getByText("Footer")).toBeInTheDocument();
+  });
+
+  it("uses semantic landmark elements for the shell zones", () => {
+    const { container } = render(
+      <Layout
+        header={<div>Header</div>}
+        sidebar={<div>Navigation</div>}
+        footer={<div>Footer</div>}
+      >
+        <p>Content</p>
+      </Layout>,
+    );
+
+    expect(container.querySelector("header")).not.toBeNull();
+    expect(container.querySelector("aside")).not.toBeNull();
+    expect(container.querySelector("main")).not.toBeNull();
+    expect(container.querySelector("footer")).not.toBeNull();
   });
 
   it("forwards className to the root element", () => {
@@ -97,6 +152,35 @@ describe("Layout", () => {
     );
     expect((container.firstChild as HTMLElement).style.height).toBe("500px");
   });
+
+  it("defaults to viewport height and content scrolling", () => {
+    const { container } = render(<Layout><p>Content</p></Layout>);
+    const root = container.firstChild as HTMLElement;
+    expect(root.className).toMatch(/heightViewport/);
+    expect(root.className).toMatch(/scrollContent/);
+  });
+
+  it("supports parent height for nested layouts", () => {
+    const { container } = render(
+      <Layout height="parent"><p>Content</p></Layout>,
+    );
+    expect((container.firstChild as HTMLElement).className).toMatch(/heightParent/);
+  });
+
+  it.each(["content", "page", "none"] as const)(
+    "supports the %s scroll model",
+    (scroll) => {
+      const { container } = render(
+        <Layout scroll={scroll}><p>Content</p></Layout>,
+      );
+      const expectedClass = {
+        content: /scrollContent/,
+        page: /scrollPage/,
+        none: /scrollNone/,
+      }[scroll];
+      expect((container.firstChild as HTMLElement).className).toMatch(expectedClass);
+    },
+  );
 
   describe("mobile sidebar overlay", () => {
     it("does not apply bodySidebarOpen class when sidebarOpen is false", () => {
