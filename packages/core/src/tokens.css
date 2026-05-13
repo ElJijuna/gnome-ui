@@ -217,6 +217,29 @@
 
   --gnome-blockquote-border-width: 3px;
 
+  /* ─── Layout tokens ─────────────────────────────────────────── */
+
+  --gnome-layout-sidebar-min-width: 180px;
+  --gnome-layout-sidebar-default-width: 240px;
+  --gnome-layout-sidebar-max-width: 280px;
+  --gnome-layout-sidebar-width: clamp(
+    var(--gnome-layout-sidebar-min-width),
+    25%,
+    var(--gnome-layout-sidebar-max-width)
+  );
+  --gnome-layout-sidebar-overlay-width: clamp(
+    var(--gnome-layout-sidebar-min-width),
+    75%,
+    var(--gnome-layout-sidebar-max-width)
+  );
+  --gnome-layout-sidebar-rail-width: 56px;
+  --gnome-layout-breakpoint-narrow: 400px;
+  --gnome-layout-breakpoint-medium: 550px;
+  --gnome-layout-breakpoint-wide: 860px;
+  --gnome-layout-content-padding: var(--gnome-space-4);
+  --gnome-layout-content-padding-compact: var(--gnome-space-2);
+  --gnome-layout-content-padding-spacious: var(--gnome-space-5);
+
   /* ─── Shadows ────────────────────────────────────────────────── */
 
   --gnome-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.12);
