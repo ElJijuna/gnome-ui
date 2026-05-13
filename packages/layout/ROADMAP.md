@@ -32,6 +32,12 @@ Sidebar vertical lista para usar: encabezado fijo, área de navegación
 scrollable basada en `Sidebar`, pie fijo y passthrough de props como
 `collapsed`, `searchable`, `filter`, `mode` y `variant`.
 
+### `SidebarTrigger`
+
+Botón de encabezado para controlar la sidebar con el mismo gesto en todos los
+tamaños: abre/cierra overlay en pantallas estrechas y alterna el rail colapsado
+en pantallas amplias.
+
 ### `StatusBar`
 
 Barra inferior compacta basada en `Toolbar`, pensada para estado, contadores,

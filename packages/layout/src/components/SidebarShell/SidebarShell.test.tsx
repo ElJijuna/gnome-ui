@@ -35,4 +35,9 @@ describe("SidebarShell", () => {
     const { container } = render(<SidebarShell className="custom-sidebar" />);
     expect(container.firstChild).toHaveClass("custom-sidebar");
   });
+
+  it("applies collapsed class to the shell root", () => {
+    const { container } = render(<SidebarShell collapsed />);
+    expect((container.firstChild as HTMLElement).className).toMatch(/collapsed/);
+  });
 });

@@ -115,13 +115,15 @@ import {
   Layout,
   PageContent,
   SidebarShell,
+  SidebarTrigger,
   StatusBar,
 } from "@gnome-ui/layout";
 import "@gnome-ui/layout/styles";
-import { Button, SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
+import { SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <Layout
@@ -129,18 +131,20 @@ export default function App() {
         <AppHeader
           title="My App"
           leading={
-            <Button
-              variant="flat"
-              aria-label="Toggle sidebar"
-              onClick={() => setSidebarOpen((v) => !v)}
-            >
-              ☰
-            </Button>
+            <SidebarTrigger
+              sidebarOpen={sidebarOpen}
+              sidebarCollapsed={sidebarCollapsed}
+              onSidebarOpenChange={setSidebarOpen}
+              onSidebarCollapsedChange={setSidebarCollapsed}
+            />
           }
         />
       }
       sidebar={
-        <SidebarShell header={<Text variant="heading">My App</Text>}>
+        <SidebarShell
+          header={<Text variant="heading">My App</Text>}
+          collapsed={sidebarCollapsed}
+        >
           <SidebarSection>
             <SidebarItem label="Home" active onClick={() => setSidebarOpen(false)} />
             <SidebarItem label="Settings" onClick={() => setSidebarOpen(false)} />
@@ -148,6 +152,8 @@ export default function App() {
         </SidebarShell>
       }
       sidebarOpen={sidebarOpen}
+      sidebarCollapsed={sidebarCollapsed}
+      sidebarCollapseMode="rail"
       onSidebarClose={() => setSidebarOpen(false)}
       footer={
         <StatusBar>
@@ -176,6 +182,8 @@ The current shell API adds a few improvements over the original
   scrolls.
 - `sidebarBreakpoint`, `sidebarPlacement`, and `sidebarCollapseMode` cover
   narrow overlays, right-side panels, and icon-only rail sidebars.
+- `SidebarTrigger` coordinates the same button with overlay open state on
+  narrow screens and rail collapse on wider screens.
 - Overlay sidebars move focus inside, trap `Tab`/`Shift+Tab`, close with
   `Escape`, and restore focus to the previous trigger.
 
@@ -206,6 +214,33 @@ import { SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
     <SidebarItem label="Starred" />
   </SidebarSection>
 </SidebarShell>
+```
+
+---
+
+### `SidebarTrigger`
+
+Header button that toggles the sidebar using the current layout mode. On
+overlay breakpoints it opens or closes the panel; on wider screens it toggles
+rail collapse.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `sidebarOpen` | `boolean` | Current overlay-open state. |
+| `sidebarCollapsed` | `boolean` | Current rail-collapsed state. |
+| `sidebarBreakpoint` | `"narrow" \| "medium" \| "wide"` | Same breakpoint used by `Layout`. |
+| `onSidebarOpenChange` | `(open, reason) => void` | Called when the trigger changes overlay state. |
+| `onSidebarCollapsedChange` | `(collapsed) => void` | Called when the trigger changes rail collapse. |
+
+```tsx
+import { SidebarTrigger } from "@gnome-ui/layout";
+
+<SidebarTrigger
+  sidebarOpen={sidebarOpen}
+  sidebarCollapsed={sidebarCollapsed}
+  onSidebarOpenChange={setSidebarOpen}
+  onSidebarCollapsedChange={setSidebarCollapsed}
+/>
 ```
 
 ---

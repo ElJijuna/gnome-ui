@@ -31,8 +31,8 @@ export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "heigh
    */
   topBar?: ReactNode;
   /**
-   * Header area — alias for `topBar` using the Ant-style / shell-style naming.
-   * Typically a `Toolbar`, `HeaderBar`, or future `AppHeader`.
+   * Header area — alias for `topBar` using shell-style naming.
+   * Typically a `Toolbar`, `HeaderBar`, or `AppHeader`.
    */
   header?: ReactNode;
   /**
@@ -107,8 +107,8 @@ export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "heigh
    */
   bottomBar?: ReactNode;
   /**
-   * Footer area — alias for `bottomBar` using the Ant-style / shell-style
-   * naming. Typically a compact `Toolbar` or status bar.
+   * Footer area — alias for `bottomBar` using shell-style naming. Typically a
+   * compact `Toolbar` or status bar.
    */
   footer?: ReactNode;
   /**

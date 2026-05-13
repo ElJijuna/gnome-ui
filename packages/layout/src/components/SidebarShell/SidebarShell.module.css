@@ -36,14 +36,12 @@
   width: 100%;
 }
 
-.shell:has(.navigation[class*="collapsed"]) {
+.collapsed {
   width: var(--gnome-layout-sidebar-rail-width, 56px);
 }
 
-@supports not selector(:has(*)) {
-  .shell {
-    transition: width var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
-  }
+.shell {
+  transition: width var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
 }
 
 @media (prefers-contrast: more) {

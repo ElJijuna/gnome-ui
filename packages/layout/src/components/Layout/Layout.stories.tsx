@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { GoHome, Settings, Star, Share } from "@gnome-ui/icons";
 import {
@@ -28,6 +28,7 @@ import { AppHeader as ShellAppHeader } from "../AppHeader";
 import { CounterCard } from "../CounterCard";
 import { PageContent } from "../PageContent";
 import { SidebarShell } from "../SidebarShell";
+import { SidebarTrigger } from "../SidebarTrigger";
 import { StatusBar } from "../StatusBar";
 import { UserCard } from "../UserCard";
 
@@ -274,10 +275,12 @@ function AppStatusBar() {
 function CookbookHeader({
   title = "Documents",
   subtitle,
+  leading,
   onToggleSidebar,
 }: {
   title?: string;
   subtitle?: string;
+  leading?: ReactNode;
   onToggleSidebar?: () => void;
 }) {
   return (
@@ -285,11 +288,12 @@ function CookbookHeader({
       title={title}
       subtitle={subtitle}
       leading={
-        onToggleSidebar ? (
+        leading ??
+        (onToggleSidebar ? (
           <Button variant="flat" aria-label="Toggle sidebar" onClick={onToggleSidebar}>
             ☰
           </Button>
-        ) : undefined
+        ) : undefined)
       }
       actions={<Button variant="flat">New</Button>}
     />
@@ -557,14 +561,21 @@ export const HeaderSidebar: StoryObj<typeof Layout> = {
     const [open, setOpen] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
 
-    function handleToggleSidebar() {
-      if (isSidebarOverlay("narrow")) setOpen((v) => !v);
-      else setCollapsed((v) => !v);
-    }
-
     return (
       <Layout
-        header={<CookbookHeader title="Workspace" onToggleSidebar={handleToggleSidebar} />}
+        header={
+          <CookbookHeader
+            title="Workspace"
+            leading={
+              <SidebarTrigger
+                sidebarOpen={open}
+                sidebarCollapsed={collapsed}
+                onSidebarOpenChange={setOpen}
+                onSidebarCollapsedChange={setCollapsed}
+              />
+            }
+          />
+        }
         sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarOpen={open}
         sidebarCollapseMode="rail"
@@ -580,25 +591,35 @@ export const HeaderSidebar: StoryObj<typeof Layout> = {
 };
 
 export const HeaderSidebarNested: StoryObj<typeof Layout> = {
-  name: "Header sidebar 2",
+  name: "Header sidebar nested",
   render: function HeaderSidebarNestedStory() {
     const [open, setOpen] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
 
-    function handleToggleSidebar() {
-      if (isSidebarOverlay("medium")) setOpen((v) => !v);
-      else setCollapsed((v) => !v);
-    }
-
     return (
       <Layout
-        header={<CookbookHeader title="Projects" subtitle="Planning" onToggleSidebar={handleToggleSidebar} />}
+        header={
+          <CookbookHeader
+            title="Projects"
+            subtitle="Planning"
+            leading={
+              <SidebarTrigger
+                sidebarOpen={open}
+                sidebarCollapsed={collapsed}
+                sidebarBreakpoint="medium"
+                onSidebarOpenChange={setOpen}
+                onSidebarCollapsedChange={setCollapsed}
+              />
+            }
+          />
+        }
         sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarOpen={open}
         sidebarBreakpoint="medium"
         sidebarCollapseMode="rail"
         sidebarCollapsed={collapsed}
         onSidebarOpenChange={setOpen}
+        onSidebarClose={() => setOpen(false)}
       >
         <PageContent as="section" maxWidth="xl">
           <Text variant="title-2">Planning</Text>
@@ -645,17 +666,23 @@ export const CustomSidebarTrigger: StoryObj<typeof Layout> = {
     const [collapsed, setCollapsed] = useState(false);
     const [open, setOpen] = useState(false);
 
-    function handleTrigger() {
-      if (isSidebarOverlay("narrow")) {
-        setOpen((v) => !v);
-      } else {
-        setCollapsed((v) => !v);
-      }
-    }
-
     return (
       <Layout
-        header={<CookbookHeader title="Custom Trigger" onToggleSidebar={handleTrigger} />}
+        header={
+          <CookbookHeader
+            title="Custom Trigger"
+            leading={
+              <SidebarTrigger
+                sidebarOpen={open}
+                sidebarCollapsed={collapsed}
+                onSidebarOpenChange={setOpen}
+                onSidebarCollapsedChange={setCollapsed}
+              >
+                Toggle
+              </SidebarTrigger>
+            }
+          />
+        }
         sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarCollapseMode="rail"
         sidebarCollapsed={collapsed}
@@ -675,14 +702,22 @@ export const ResponsiveSidebar: StoryObj<typeof Layout> = {
     const [open, setOpen] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
 
-    function handleToggleSidebar() {
-      if (isSidebarOverlay("medium")) setOpen((v) => !v);
-      else setCollapsed((v) => !v);
-    }
-
     return (
       <Layout
-        header={<CookbookHeader title="Responsive" onToggleSidebar={handleToggleSidebar} />}
+        header={
+          <CookbookHeader
+            title="Responsive"
+            leading={
+              <SidebarTrigger
+                sidebarOpen={open}
+                sidebarCollapsed={collapsed}
+                sidebarBreakpoint="medium"
+                onSidebarOpenChange={setOpen}
+                onSidebarCollapsedChange={setCollapsed}
+              />
+            }
+          />
+        }
         sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarOpen={open}
         sidebarBreakpoint="medium"
@@ -723,6 +758,23 @@ export const FixedSidebar: StoryObj<typeof Layout> = {
       footer={<StatusBar><Text variant="caption" color="dim">Sidebar stays pinned</Text></StatusBar>}
     >
       <CookbookContent title="Scrollable Content" rows={24} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const RTLPlacement: StoryObj<typeof Layout> = {
+  name: "RTL sidebar placement",
+  render: () => (
+    <Layout
+      dir="rtl"
+      header={<CookbookHeader title="RTL Layout" />}
+      sidebar={<CookbookSidebar />}
+      sidebarLabel="RTL navigation"
+      sidebarPlacement="start"
+      footer={<StatusBar><Text variant="caption" color="dim">Logical start placement</Text></StatusBar>}
+    >
+      <CookbookContent title="Right-to-left shell" rows={8} />
     </Layout>
   ),
   parameters: { controls: { disable: true } },

@@ -82,6 +82,11 @@
       "import": "./dist/components/SidebarShell.js",
       "require": "./dist/components/SidebarShell.cjs"
     },
+    "./components/SidebarTrigger": {
+      "types": "./dist/components/SidebarTrigger.d.ts",
+      "import": "./dist/components/SidebarTrigger.js",
+      "require": "./dist/components/SidebarTrigger.cjs"
+    },
     "./components/StatusBar": {
       "types": "./dist/components/StatusBar.d.ts",
       "import": "./dist/components/StatusBar.js",

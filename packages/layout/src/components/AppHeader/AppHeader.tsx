@@ -23,8 +23,8 @@ export interface AppHeaderProps extends Omit<HTMLAttributes<HTMLElement>, "title
  * Opinionated application header for `Layout` / shell compositions.
  *
  * It keeps the GNOME header-bar shape while giving app shells named slots that
- * map cleanly from Ant-style layout thinking: leading controls, title,
- * navigation, search, and trailing actions.
+ * map cleanly to application structure: leading controls, title, navigation,
+ * search, and trailing actions.
  */
 export function AppHeader({
   title,
