@@ -39,6 +39,17 @@ const userActions = [
   { label: "Sign Out",         onClick: () => alert("sign out"), variant: "destructive" as const },
 ];
 
+const sidebarBreakpointQuery = {
+  narrow: "(max-width: 400px)",
+  medium: "(max-width: 550px)",
+  wide: "(max-width: 860px)",
+} as const;
+
+function isSidebarOverlay(breakpoint: keyof typeof sidebarBreakpointQuery = "narrow") {
+  return typeof window !== "undefined" &&
+    window.matchMedia(sidebarBreakpointQuery[breakpoint]).matches;
+}
+
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
 function AppHeader({
@@ -346,7 +357,7 @@ function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
   const [contentView, setContentView] = useState("grid");
 
   function handleToggleSidebar() {
-    if (window.matchMedia("(max-width: 639px)").matches) {
+    if (isSidebarOverlay("narrow")) {
       // Mobile: only open/close the overlay — never change collapsed state.
       // Changing collapsed while the slide animation runs causes a width-change
       // mid-transition that makes the sidebar look like it expands before hiding.
@@ -540,12 +551,20 @@ export const HeaderSidebar: StoryObj<typeof Layout> = {
   name: "Header sidebar",
   render: function HeaderSidebarStory() {
     const [open, setOpen] = useState(false);
+    const [collapsed, setCollapsed] = useState(false);
+
+    function handleToggleSidebar() {
+      if (isSidebarOverlay("narrow")) setOpen((v) => !v);
+      else setCollapsed((v) => !v);
+    }
 
     return (
       <Layout
-        header={<CookbookHeader title="Workspace" onToggleSidebar={() => setOpen((v) => !v)} />}
-        sidebar={<CookbookSidebar onNavigate={() => setOpen(false)} />}
+        header={<CookbookHeader title="Workspace" onToggleSidebar={handleToggleSidebar} />}
+        sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarOpen={open}
+        sidebarCollapseMode="rail"
+        sidebarCollapsed={collapsed}
         onSidebarOpenChange={setOpen}
         footer={<StatusBar><Text variant="caption" color="dim">Connected</Text></StatusBar>}
       >
@@ -560,13 +579,21 @@ export const HeaderSidebarNested: StoryObj<typeof Layout> = {
   name: "Header sidebar 2",
   render: function HeaderSidebarNestedStory() {
     const [open, setOpen] = useState(false);
+    const [collapsed, setCollapsed] = useState(false);
+
+    function handleToggleSidebar() {
+      if (isSidebarOverlay("medium")) setOpen((v) => !v);
+      else setCollapsed((v) => !v);
+    }
 
     return (
       <Layout
-        header={<CookbookHeader title="Projects" subtitle="Planning" onToggleSidebar={() => setOpen((v) => !v)} />}
-        sidebar={<CookbookSidebar onNavigate={() => setOpen(false)} />}
+        header={<CookbookHeader title="Projects" subtitle="Planning" onToggleSidebar={handleToggleSidebar} />}
+        sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarOpen={open}
         sidebarBreakpoint="medium"
+        sidebarCollapseMode="rail"
+        sidebarCollapsed={collapsed}
         onSidebarOpenChange={setOpen}
       >
         <PageContent as="section" maxWidth="xl">
@@ -615,7 +642,7 @@ export const CustomSidebarTrigger: StoryObj<typeof Layout> = {
     const [open, setOpen] = useState(false);
 
     function handleTrigger() {
-      if (window.matchMedia("(max-width: 400px)").matches) {
+      if (isSidebarOverlay("narrow")) {
         setOpen((v) => !v);
       } else {
         setCollapsed((v) => !v);
@@ -641,14 +668,22 @@ export const CustomSidebarTrigger: StoryObj<typeof Layout> = {
 export const ResponsiveSidebar: StoryObj<typeof Layout> = {
   name: "Responsive sidebar",
   render: function ResponsiveSidebarStory() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
+    const [collapsed, setCollapsed] = useState(false);
+
+    function handleToggleSidebar() {
+      if (isSidebarOverlay("medium")) setOpen((v) => !v);
+      else setCollapsed((v) => !v);
+    }
 
     return (
       <Layout
-        header={<CookbookHeader title="Responsive" onToggleSidebar={() => setOpen((v) => !v)} />}
-        sidebar={<CookbookSidebar onNavigate={() => setOpen(false)} />}
+        header={<CookbookHeader title="Responsive" onToggleSidebar={handleToggleSidebar} />}
+        sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
         sidebarOpen={open}
         sidebarBreakpoint="medium"
+        sidebarCollapseMode="rail"
+        sidebarCollapsed={collapsed}
         onSidebarOpenChange={setOpen}
       >
         <CookbookContent title="Resize below 550 px" rows={10} />
