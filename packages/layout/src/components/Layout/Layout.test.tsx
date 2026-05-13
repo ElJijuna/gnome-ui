@@ -377,5 +377,68 @@ describe("Layout", () => {
       expect(body.className).toMatch(/sidebarCollapsed/);
       expect(aside.style.getPropertyValue("--layout-sidebar-collapsed-width")).toBe("64px");
     });
+
+    it("custom trigger collapses and expands a rail sidebar", () => {
+      function ControlledLayout() {
+        const [collapsed, setCollapsed] = useState(false);
+
+        return (
+          <>
+            <button
+              type="button"
+              onClick={() => setCollapsed((value) => !value)}
+            >
+              Toggle sidebar
+            </button>
+            <Layout
+              sidebar={<nav>Nav</nav>}
+              sidebarCollapseMode="rail"
+              sidebarCollapsed={collapsed}
+            >
+              <p>Content</p>
+            </Layout>
+          </>
+        );
+      }
+
+      const { container } = render(<ControlledLayout />);
+      const body = () => container.querySelector("[class*='body']") as HTMLElement;
+
+      expect(body().className).not.toMatch(/sidebarCollapsed/);
+      fireEvent.click(screen.getByRole("button", { name: "Toggle sidebar" }));
+      expect(body().className).toMatch(/sidebarCollapsed/);
+      fireEvent.click(screen.getByRole("button", { name: "Toggle sidebar" }));
+      expect(body().className).not.toMatch(/sidebarCollapsed/);
+    });
+
+    it("can close the mobile sidebar when a navigation item is selected", async () => {
+      function ControlledLayout() {
+        const [open, setOpen] = useState(true);
+
+        return (
+          <Layout
+            sidebar={
+              <button type="button" onClick={() => setOpen(false)}>
+                Home
+              </button>
+            }
+            sidebarOpen={open}
+            onSidebarOpenChange={setOpen}
+          >
+            <p>Content</p>
+          </Layout>
+        );
+      }
+
+      const { container } = render(<ControlledLayout />);
+      const body = () => container.querySelector("[class*='body']") as HTMLElement;
+
+      expect(body().className).toMatch(/bodySidebarOpen/);
+      fireEvent.click(screen.getByRole("button", { name: "Home" }));
+
+      await waitFor(() => {
+        expect(body().className).not.toMatch(/bodySidebarOpen/);
+      });
+    });
   });
 });
