@@ -22,7 +22,7 @@ Import the stylesheet once at the root of your app:
 
 ```tsx
 // main.tsx or App.tsx
-import "@gnome-ui/core/tokens";
+import "@gnome-ui/core/styles";
 import "@gnome-ui/charts/styles";
 ```
 
