@@ -1,7 +1,7 @@
 .shell {
   display: flex;
   flex-direction: column;
-  width: clamp(180px, 25vw, 280px);
+  width: var(--gnome-layout-sidebar-width, clamp(180px, 25%, 280px));
   height: 100%;
   min-height: 0;
   background: var(--gnome-sidebar-bg-color, #ebebeb);
@@ -37,7 +37,7 @@
 }
 
 .shell:has(.navigation[class*="collapsed"]) {
-  width: 56px;
+  width: var(--gnome-layout-sidebar-rail-width, 56px);
 }
 
 @supports not selector(:has(*)) {

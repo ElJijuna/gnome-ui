@@ -11,15 +11,15 @@
 }
 
 .paddingCompact {
-  padding: var(--gnome-space-2, 12px);
+  padding: var(--gnome-layout-content-padding-compact, var(--gnome-space-2, 12px));
 }
 
 .paddingNormal {
-  padding: var(--gnome-space-4, 24px);
+  padding: var(--gnome-layout-content-padding, var(--gnome-space-4, 24px));
 }
 
 .paddingSpacious {
-  padding: var(--gnome-space-5, 36px);
+  padding: var(--gnome-layout-content-padding-spacious, var(--gnome-space-5, 36px));
 }
 
 .clamped {
