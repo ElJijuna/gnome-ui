@@ -1,3 +1,25 @@
+## [1.42.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.41.0...@gnome-ui/react@1.42.0) (2026-05-13)
+
+### Features
+
+* **@gnome-ui/core:** add new layout sidebar tokens. ([0d35ecd](https://github.com/ElJijuna/gnome-ui/commit/0d35ecd9c393d9fbb1f744df00019a2b7a22653d))
+* **@gnome-ui/layout:** add app header content and status bar ([c404336](https://github.com/ElJijuna/gnome-ui/commit/c40433635a5a36ed75d7e2024918fee21f6686dc))
+* **@gnome-ui/layout:** add shell aliases and scroll modes ([9b1fdc4](https://github.com/ElJijuna/gnome-ui/commit/9b1fdc463118f5e9ab3089fc4c6c14564b6de8d4))
+* **@gnome-ui/layout:** add sidebar shell and collapse modes ([1695eae](https://github.com/ElJijuna/gnome-ui/commit/1695eaee3c137389e4745326c7416a8259611374))
+* **@gnome-ui/layout:** improve sidebar overlay accessibility ([eabd034](https://github.com/ElJijuna/gnome-ui/commit/eabd034b2c6336b9fada9ce22002329d8e621589))
+* **@gnome-ui/layout:** update with new layout sidebar tokens ([6ce18f0](https://github.com/ElJijuna/gnome-ui/commit/6ce18f0439922bd57de6b49d48dbf34ae169199c))
+* **@gnome-ui/react:** update componentes with new layout sidebar tokens. ([4a9346d](https://github.com/ElJijuna/gnome-ui/commit/4a9346d9fe31a225177a2a2eced6fee30f18981a))
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** add protection in breakpoints ([bc7b435](https://github.com/ElJijuna/gnome-ui/commit/bc7b435e2f4259ab44c28513c6242207e61b69d3))
+* **@gnome-ui/layout:** make sidebar trigger respond to breakpoint changes. ([4ba3bd0](https://github.com/ElJijuna/gnome-ui/commit/4ba3bd0da32905aea6960de7ed8312b8096b4636))
+
+### Documentation
+
+* **@gnome-ui/layout:** add layout parity stories ([2da9a29](https://github.com/ElJijuna/gnome-ui/commit/2da9a29bbe08ffcffc366a91981cf02f2d481be7))
+* **@gnome-ui/layout:** update docs ([b483efe](https://github.com/ElJijuna/gnome-ui/commit/b483efe738270c06076dede9f34ed3abece19665))
+
 ## [1.41.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.40.1...@gnome-ui/react@1.41.0) (2026-05-08)
 
 ### Features
