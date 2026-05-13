@@ -14,7 +14,7 @@
 }
 
 .expanded .sidebar {
-  width: var(--sidebar-width, clamp(180px, 25%, 280px));
+  width: var(--sidebar-width, var(--gnome-layout-sidebar-width, clamp(180px, 25%, 280px)));
   flex-shrink: 0;
   overflow-y: auto;
 }

@@ -19,14 +19,14 @@
 }
 
 .wide .sidebar {
-  width: var(--sidebar-width, clamp(180px, 25%, 280px));
+  width: var(--sidebar-width, var(--gnome-layout-sidebar-width, clamp(180px, 25%, 280px)));
   flex-shrink: 0;
   overflow-y: auto;
   transition: width 200ms var(--gnome-easing-default, ease);
 }
 
 .wide.collapsed .sidebar {
-  width: 56px;
+  width: var(--gnome-layout-sidebar-rail-width, 56px);
 }
 
 .wide .content {
@@ -46,7 +46,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: var(--sidebar-width, clamp(180px, 75%, 280px));
+  width: var(--sidebar-width, var(--gnome-layout-sidebar-overlay-width, clamp(180px, 75%, 280px)));
   overflow-y: auto;
   z-index: 100;
 
