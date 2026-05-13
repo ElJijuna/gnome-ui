@@ -1,3 +1,17 @@
+## [1.21.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.21.0...@gnome-ui/layout@1.21.1) (2026-05-13)
+
+### Features
+
+* **@gnome-ui/core:** add new tokens. ([53b87e4](https://github.com/ElJijuna/gnome-ui/commit/53b87e49aac002676bb67f39926e9bf7189218f8))
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** add styles into package.json ([5112fc7](https://github.com/ElJijuna/gnome-ui/commit/5112fc799f23e9414dec272a5b64a114f7a8c742))
+
+### Documentation
+
+* **@gnome-ui/charts:** update README ([094e708](https://github.com/ElJijuna/gnome-ui/commit/094e708e4213d38f7459ab2636fa156a04541629))
+
 ## [1.21.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.20.0...@gnome-ui/layout@1.21.0) (2026-05-13)
 
 ### Features
