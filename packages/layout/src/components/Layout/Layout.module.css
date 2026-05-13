@@ -63,7 +63,10 @@
 }
 
 .collapseRail.sidebarCollapsed .sidebar > * {
-  width: var(--layout-sidebar-collapsed-width, 56px);
+  width: var(
+    --layout-sidebar-collapsed-width,
+    var(--gnome-layout-sidebar-rail-width, 56px)
+  );
 }
 
 .collapseOverlay.sidebarCollapsed:not(.bodySidebarOpen) .sidebar {
