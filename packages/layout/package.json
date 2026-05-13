@@ -7,6 +7,11 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./components/AppHeader": {
+      "types": "./dist/components/AppHeader.d.ts",
+      "import": "./dist/components/AppHeader.js",
+      "require": "./dist/components/AppHeader.cjs"
+    },
     "./components/AdaptiveLayout": {
       "types": "./dist/components/AdaptiveLayout.d.ts",
       "import": "./dist/components/AdaptiveLayout.js",
@@ -62,10 +67,20 @@
       "import": "./dist/components/PanelCard.js",
       "require": "./dist/components/PanelCard.cjs"
     },
+    "./components/PageContent": {
+      "types": "./dist/components/PageContent.d.ts",
+      "import": "./dist/components/PageContent.js",
+      "require": "./dist/components/PageContent.cjs"
+    },
     "./components/QuickActions": {
       "types": "./dist/components/QuickActions.d.ts",
       "import": "./dist/components/QuickActions.js",
       "require": "./dist/components/QuickActions.cjs"
+    },
+    "./components/StatusBar": {
+      "types": "./dist/components/StatusBar.d.ts",
+      "import": "./dist/components/StatusBar.js",
+      "require": "./dist/components/StatusBar.cjs"
     },
     "./components/StatusIndicator": {
       "types": "./dist/components/StatusIndicator.d.ts",

@@ -1,6 +1,19 @@
 export { Layout } from "./components/Layout";
 export type { LayoutHeight, LayoutProps, LayoutScroll } from "./components/Layout";
 
+export { AppHeader } from "./components/AppHeader";
+export type { AppHeaderProps } from "./components/AppHeader";
+
+export { PageContent } from "./components/PageContent";
+export type {
+  PageContentMaxWidth,
+  PageContentPadding,
+  PageContentProps,
+} from "./components/PageContent";
+
+export { StatusBar } from "./components/StatusBar";
+export type { StatusBarProps } from "./components/StatusBar";
+
 export { CounterCard } from "./components/CounterCard";
 export type { CounterCardProps } from "./components/CounterCard";
 

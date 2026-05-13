@@ -144,6 +144,76 @@ export default function App() {
 
 ---
 
+### `AppHeader`
+
+Opinionated application header for `Layout.header`. It keeps the GNOME
+`HeaderBar` shape while exposing shell-friendly slots.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `title` | `ReactNode` | Header title. String titles render with `WindowTitle`. |
+| `subtitle` | `string` | Optional subtitle for string titles. |
+| `leading` | `ReactNode` | Leading controls, usually sidebar/back buttons. |
+| `navigation` | `ReactNode` | Optional top-level navigation such as `ViewSwitcher`. |
+| `search` | `ReactNode` | Optional search control. |
+| `actions` | `ReactNode` | Trailing actions, usually flat icon buttons or menus. |
+| `flat` | `boolean` | Blend the header into the window chrome. |
+
+```tsx
+import { AppHeader } from "@gnome-ui/layout";
+import { Button, SearchBar } from "@gnome-ui/react";
+
+<AppHeader
+  title="Files"
+  subtitle="Home"
+  leading={<Button variant="flat" aria-label="Toggle sidebar">☰</Button>}
+  search={<SearchBar inline open aria-label="Search files" />}
+  actions={<Button variant="flat">New Folder</Button>}
+/>
+```
+
+---
+
+### `PageContent`
+
+Scrollable page body for `Layout.children`. It provides GNOME page padding and
+optional Adwaita `Clamp` behaviour for readable widths.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | `ElementType` | `"main"` | Element to render. Use `section` when nested inside another `main`. |
+| `maxWidth` | `"none" \| "sm" \| "md" \| "lg" \| "xl" \| number` | `"none"` | Optional content clamp. |
+| `padding` | `"none" \| "compact" \| "normal" \| "spacious"` | `"normal"` | Responsive page padding. |
+
+```tsx
+import { PageContent } from "@gnome-ui/layout";
+
+<PageContent as="section" maxWidth="lg">
+  ...
+</PageContent>
+```
+
+---
+
+### `StatusBar`
+
+Compact footer/status bar for `Layout.footer`.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Leading status content. |
+| `trailing` | `ReactNode` | Optional trailing status or actions. |
+
+```tsx
+import { StatusBar } from "@gnome-ui/layout";
+
+<StatusBar trailing="GNOME Files 48.0">
+  1,248 items
+</StatusBar>
+```
+
+---
+
 ### `IconBadge`
 
 Rounded-square tinted icon container. Accepts the seven gnome-ui named colors or any hex value (`#rgb` / `#rrggbb`). In both cases the background is rendered at 15% opacity.

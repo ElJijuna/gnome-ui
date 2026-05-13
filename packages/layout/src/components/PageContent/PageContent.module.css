@@ -1,0 +1,38 @@
+.pageContent {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  color: var(--gnome-view-fg-color, var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8)));
+}
+
+.paddingNone {
+  padding: 0;
+}
+
+.paddingCompact {
+  padding: var(--gnome-space-2, 12px);
+}
+
+.paddingNormal {
+  padding: var(--gnome-space-4, 24px);
+}
+
+.paddingSpacious {
+  padding: var(--gnome-space-5, 36px);
+}
+
+.clamped {
+  display: block;
+}
+
+.clamp {
+  min-width: 0;
+}
+
+@media (max-width: 550px) {
+  .paddingNormal,
+  .paddingSpacious {
+    padding: var(--gnome-space-3, 18px);
+  }
+}
