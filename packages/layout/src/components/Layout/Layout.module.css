@@ -249,3 +249,14 @@
     transition: none;
   }
 }
+
+@media (prefers-contrast: more) {
+  .topBar,
+  .bottomBar {
+    border-block-width: 2px;
+  }
+
+  .backdrop {
+    background: rgba(0, 0, 0, 0.55);
+  }
+}

@@ -45,3 +45,20 @@
     transition: width var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
   }
 }
+
+@media (prefers-contrast: more) {
+  .shell {
+    border-inline-end-width: 2px;
+  }
+
+  .header,
+  .footer {
+    border-block-width: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell {
+    transition: none;
+  }
+}
