@@ -1,6 +1,7 @@
 import {
   useEffect,
   useRef,
+  useState,
   type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
@@ -13,6 +14,12 @@ export type LayoutSidebarBreakpoint = "narrow" | "medium" | "wide";
 export type LayoutSidebarCollapseMode = "none" | "rail" | "overlay";
 export type LayoutSidebarPlacement = "start" | "end";
 export type LayoutSidebarOpenChangeReason = "backdrop" | "escape" | "trigger";
+
+const sidebarBreakpointQuery: Record<LayoutSidebarBreakpoint, string> = {
+  narrow: "(max-width: 400px)",
+  medium: "(max-width: 550px)",
+  wide: "(max-width: 860px)",
+};
 
 export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "height"> {
   /**
@@ -174,8 +181,13 @@ export function Layout({
 }: LayoutProps) {
   const sidebarRef = useRef<HTMLElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const [sidebarMatchesOverlayBreakpoint, setSidebarMatchesOverlayBreakpoint] =
+    useState(false);
   const resolvedHeader = topBar ?? header;
   const resolvedFooter = bottomBar ?? footer;
+  const sidebarOverlayActive =
+    sidebarMatchesOverlayBreakpoint ||
+    (sidebarCollapseMode === "overlay" && sidebarCollapsed);
 
   const rootClass = [
     styles.layout,
@@ -210,7 +222,21 @@ export function Layout({
   };
 
   useEffect(() => {
-    if (!sidebar || !sidebarOpen) return undefined;
+    if (typeof window === "undefined" || !window.matchMedia) {
+      setSidebarMatchesOverlayBreakpoint(true);
+      return undefined;
+    }
+
+    const query = window.matchMedia(sidebarBreakpointQuery[sidebarBreakpoint]);
+    const updateMatch = () => setSidebarMatchesOverlayBreakpoint(query.matches);
+
+    updateMatch();
+    query.addEventListener?.("change", updateMatch);
+    return () => query.removeEventListener?.("change", updateMatch);
+  }, [sidebarBreakpoint]);
+
+  useEffect(() => {
+    if (!sidebar || !sidebarOpen || !sidebarOverlayActive) return undefined;
 
     previouslyFocusedRef.current = document.activeElement instanceof HTMLElement
       ? document.activeElement
@@ -279,7 +305,13 @@ export function Layout({
       }
       previouslyFocusedRef.current = null;
     };
-  }, [sidebar, sidebarOpen, onSidebarOpenChange, onSidebarClose]);
+  }, [
+    sidebar,
+    sidebarOpen,
+    sidebarOverlayActive,
+    onSidebarOpenChange,
+    onSidebarClose,
+  ]);
 
   const sidebarSlot = sidebar && (
     <aside
