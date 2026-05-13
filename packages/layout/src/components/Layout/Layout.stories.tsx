@@ -24,7 +24,11 @@ import {
   WrapBox,
 } from "@gnome-ui/react";
 import { Layout } from "./Layout";
+import { AppHeader as ShellAppHeader } from "../AppHeader";
 import { CounterCard } from "../CounterCard";
+import { PageContent } from "../PageContent";
+import { SidebarShell } from "../SidebarShell";
+import { StatusBar } from "../StatusBar";
 import { UserCard } from "../UserCard";
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -256,6 +260,82 @@ function AppStatusBar() {
   );
 }
 
+function CookbookHeader({
+  title = "Documents",
+  subtitle,
+  onToggleSidebar,
+}: {
+  title?: string;
+  subtitle?: string;
+  onToggleSidebar?: () => void;
+}) {
+  return (
+    <ShellAppHeader
+      title={title}
+      subtitle={subtitle}
+      leading={
+        onToggleSidebar ? (
+          <Button variant="flat" aria-label="Toggle sidebar" onClick={onToggleSidebar}>
+            ☰
+          </Button>
+        ) : undefined
+      }
+      actions={<Button variant="flat">New</Button>}
+    />
+  );
+}
+
+function CookbookSidebar({
+  collapsed = false,
+  onNavigate,
+}: {
+  collapsed?: boolean;
+  onNavigate?: () => void;
+}) {
+  return (
+    <SidebarShell
+      collapsed={collapsed}
+      header={<Text variant="heading">Workspace</Text>}
+      footer={<Button variant="flat" style={{ width: "100%" }}>Preferences</Button>}
+      aria-label="Workspace navigation"
+    >
+      <SidebarSection>
+        <SidebarItem label="Home" icon={GoHome} active onClick={onNavigate} />
+        <SidebarItem label="Starred" icon={Star} onClick={onNavigate} />
+        <SidebarItem label="Shared" icon={Share} onClick={onNavigate} />
+        <SidebarItem label="Settings" icon={Settings} onClick={onNavigate} />
+      </SidebarSection>
+    </SidebarShell>
+  );
+}
+
+function CookbookContent({
+  title = "Overview",
+  rows = 12,
+}: {
+  title?: string;
+  rows?: number;
+}) {
+  return (
+    <PageContent as="section" maxWidth="lg">
+      <Text variant="title-2">{title}</Text>
+      <Text variant="body" color="dim" style={{ marginTop: 8 }}>
+        A GNOME UI application shell pattern equivalent to an Ant Design layout example.
+      </Text>
+      <BoxedList style={{ marginTop: 24 }}>
+        {Array.from({ length: rows }, (_, index) => (
+          <ActionRow
+            key={index}
+            title={`Document ${index + 1}`}
+            subtitle="Updated recently"
+            interactive
+          />
+        ))}
+      </BoxedList>
+    </PageContent>
+  );
+}
+
 // ─── Full app composition ──────────────────────────────────────────────────────
 
 function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
@@ -418,4 +498,244 @@ export const ContentOnly: StoryObj<typeof Layout> = {
     </Layout>
   ),
   parameters: { controls: { disable: true } },
+};
+
+// ─── Ant Design Layout parity cookbook ────────────────────────────────────────
+
+export const BasicStructure: StoryObj<typeof Layout> = {
+  name: "Basic structure",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="Basic Shell" />}
+      footer={
+        <StatusBar trailing={<Text variant="caption" color="dim">Ready</Text>}>
+          <Text variant="caption" color="dim">Footer</Text>
+        </StatusBar>
+      }
+    >
+      <CookbookContent title="Content" rows={6} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const HeaderContentFooter: StoryObj<typeof Layout> = {
+  name: "Header content footer",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="Reports" subtitle="Q2 activity" />}
+      footer={
+        <StatusBar trailing={<Text variant="caption" color="dim">Synced</Text>}>
+          <Text variant="caption" color="dim">24 reports</Text>
+        </StatusBar>
+      }
+    >
+      <CookbookContent title="Reports" rows={10} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const HeaderSidebar: StoryObj<typeof Layout> = {
+  name: "Header sidebar",
+  render: function HeaderSidebarStory() {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <Layout
+        header={<CookbookHeader title="Workspace" onToggleSidebar={() => setOpen((v) => !v)} />}
+        sidebar={<CookbookSidebar onNavigate={() => setOpen(false)} />}
+        sidebarOpen={open}
+        onSidebarOpenChange={setOpen}
+        footer={<StatusBar><Text variant="caption" color="dim">Connected</Text></StatusBar>}
+      >
+        <CookbookContent title="Home" rows={10} />
+      </Layout>
+    );
+  },
+  parameters: { controls: { disable: true } },
+};
+
+export const HeaderSidebarNested: StoryObj<typeof Layout> = {
+  name: "Header sidebar 2",
+  render: function HeaderSidebarNestedStory() {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <Layout
+        header={<CookbookHeader title="Projects" subtitle="Planning" onToggleSidebar={() => setOpen((v) => !v)} />}
+        sidebar={<CookbookSidebar onNavigate={() => setOpen(false)} />}
+        sidebarOpen={open}
+        sidebarBreakpoint="medium"
+        onSidebarOpenChange={setOpen}
+      >
+        <PageContent as="section" maxWidth="xl">
+          <Text variant="title-2">Planning</Text>
+          <WrapBox childSpacing={24} lineSpacing={24} align="start" style={{ marginTop: 24 }}>
+            <Box spacing={8} style={{ flex: "1 1 280px", minWidth: 0 }}>
+              <Text variant="caption-heading" color="dim">Pinned</Text>
+              <BoxedList>
+                <ActionRow title="Roadmap" subtitle="Phase planning" interactive />
+                <ActionRow title="Design notes" subtitle="GNOME shell parity" interactive />
+              </BoxedList>
+            </Box>
+            <Box spacing={8} style={{ flex: "2 1 420px", minWidth: 0 }}>
+              <Text variant="caption-heading" color="dim">Activity</Text>
+              <BoxedList>
+                <ActionRow title="Layout updated" subtitle="Shell aliases and sidebar modes" />
+                <ActionRow title="Stories added" subtitle="Ant parity cookbook" />
+                <ActionRow title="Docs refreshed" subtitle="README and roadmap" />
+              </BoxedList>
+            </Box>
+          </WrapBox>
+        </PageContent>
+      </Layout>
+    );
+  },
+  parameters: { controls: { disable: true } },
+};
+
+export const SidebarOnly: StoryObj<typeof Layout> = {
+  name: "Sidebar only",
+  render: () => (
+    <Layout
+      sidebar={<CookbookSidebar />}
+      footer={<StatusBar><Text variant="caption" color="dim">Sidebar-first shell</Text></StatusBar>}
+    >
+      <CookbookContent title="Sidebar Navigation" rows={8} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const CustomSidebarTrigger: StoryObj<typeof Layout> = {
+  name: "Custom sidebar trigger",
+  render: function CustomSidebarTriggerStory() {
+    const [collapsed, setCollapsed] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    function handleTrigger() {
+      if (window.matchMedia("(max-width: 400px)").matches) {
+        setOpen((v) => !v);
+      } else {
+        setCollapsed((v) => !v);
+      }
+    }
+
+    return (
+      <Layout
+        header={<CookbookHeader title="Custom Trigger" onToggleSidebar={handleTrigger} />}
+        sidebar={<CookbookSidebar collapsed={collapsed} onNavigate={() => setOpen(false)} />}
+        sidebarCollapseMode="rail"
+        sidebarCollapsed={collapsed}
+        sidebarOpen={open}
+        onSidebarOpenChange={setOpen}
+      >
+        <CookbookContent title={collapsed ? "Rail sidebar" : "Expanded sidebar"} rows={8} />
+      </Layout>
+    );
+  },
+  parameters: { controls: { disable: true } },
+};
+
+export const ResponsiveSidebar: StoryObj<typeof Layout> = {
+  name: "Responsive sidebar",
+  render: function ResponsiveSidebarStory() {
+    const [open, setOpen] = useState(true);
+
+    return (
+      <Layout
+        header={<CookbookHeader title="Responsive" onToggleSidebar={() => setOpen((v) => !v)} />}
+        sidebar={<CookbookSidebar onNavigate={() => setOpen(false)} />}
+        sidebarOpen={open}
+        sidebarBreakpoint="medium"
+        onSidebarOpenChange={setOpen}
+      >
+        <CookbookContent title="Resize below 550 px" rows={10} />
+      </Layout>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: "mobile1" },
+    chromatic: { viewports: [390, 550, 860] },
+  },
+};
+
+export const FixedHeader: StoryObj<typeof Layout> = {
+  name: "Fixed header",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="Fixed Header" />}
+      footer={<StatusBar><Text variant="caption" color="dim">Only content scrolls</Text></StatusBar>}
+    >
+      <CookbookContent title="Long Content" rows={24} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const FixedSidebar: StoryObj<typeof Layout> = {
+  name: "Fixed sidebar",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="Fixed Sidebar" />}
+      sidebar={<CookbookSidebar />}
+      footer={<StatusBar><Text variant="caption" color="dim">Sidebar stays pinned</Text></StatusBar>}
+    >
+      <CookbookContent title="Scrollable Content" rows={24} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const NestedShell: StoryObj<typeof Layout> = {
+  name: "Nested layout",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="Parent Shell" />}
+      sidebar={<CookbookSidebar />}
+      footer={<StatusBar><Text variant="caption" color="dim">Parent footer</Text></StatusBar>}
+    >
+      <Layout
+        height="parent"
+        scroll="content"
+        header={<ShellAppHeader title="Nested View" actions={<Button variant="flat">Refresh</Button>} />}
+        footer={<StatusBar><Text variant="caption" color="dim">Nested footer</Text></StatusBar>}
+      >
+        <CookbookContent title="Nested Content" rows={16} />
+      </Layout>
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+};
+
+export const DarkModePreview: StoryObj<typeof Layout> = {
+  name: "Dark mode preview",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="Dark Preview" />}
+      sidebar={<CookbookSidebar />}
+      footer={<StatusBar><Text variant="caption" color="dim">Theme: dark</Text></StatusBar>}
+    >
+      <CookbookContent title="Dark Theme" rows={8} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+  globals: { theme: "dark", backgrounds: { value: "gnome-dark" } },
+};
+
+export const HighContrastPreview: StoryObj<typeof Layout> = {
+  name: "High contrast preview",
+  render: () => (
+    <Layout
+      header={<CookbookHeader title="High Contrast" />}
+      sidebar={<CookbookSidebar />}
+      footer={<StatusBar><Text variant="caption" color="dim">Theme: high contrast</Text></StatusBar>}
+    >
+      <CookbookContent title="High Contrast" rows={8} />
+    </Layout>
+  ),
+  parameters: { controls: { disable: true } },
+  globals: { theme: "high-contrast" },
 };
