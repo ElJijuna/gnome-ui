@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Layout } from "./Layout";
 
 describe("Layout", () => {
@@ -128,6 +129,16 @@ describe("Layout", () => {
     expect(container.querySelector("footer")).not.toBeNull();
   });
 
+  it("applies sidebarLabel to the sidebar landmark wrapper", () => {
+    render(
+      <Layout sidebar={<div>Navigation</div>} sidebarLabel="Primary navigation">
+        <p>Content</p>
+      </Layout>,
+    );
+
+    expect(screen.getByLabelText("Primary navigation")).toBeInTheDocument();
+  });
+
   it("forwards className to the root element", () => {
     const { container } = render(
       <Layout className="custom-shell"><p>Content</p></Layout>,
@@ -252,6 +263,74 @@ describe("Layout", () => {
       );
       fireEvent.keyDown(document, { key: "Escape" });
       expect(onOpenChange).toHaveBeenCalledWith(false, "escape");
+    });
+
+    it("moves focus into the sidebar when opened", () => {
+      render(
+        <Layout
+          sidebar={<button type="button">First sidebar action</button>}
+          sidebarOpen
+        >
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+
+      expect(screen.getByRole("button", { name: "First sidebar action" })).toHaveFocus();
+    });
+
+    it("keeps Tab focus inside the open sidebar", () => {
+      render(
+        <Layout
+          sidebar={
+            <>
+              <button type="button">First</button>
+              <button type="button">Last</button>
+            </>
+          }
+          sidebarOpen
+        >
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+
+      const first = screen.getByRole("button", { name: "First" });
+      const last = screen.getByRole("button", { name: "Last" });
+
+      last.focus();
+      fireEvent.keyDown(document, { key: "Tab" });
+      expect(first).toHaveFocus();
+
+      fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
+      expect(last).toHaveFocus();
+    });
+
+    it("restores focus when the open sidebar closes", async () => {
+      function ControlledLayout() {
+        const [open, setOpen] = useState(false);
+
+        return (
+          <>
+            <button type="button" onClick={() => setOpen(true)}>Trigger</button>
+            <Layout
+              sidebar={<button type="button">Sidebar action</button>}
+              sidebarOpen={open}
+              onSidebarOpenChange={setOpen}
+            >
+              <p>Content</p>
+            </Layout>
+          </>
+        );
+      }
+
+      render(<ControlledLayout />);
+      const trigger = screen.getByRole("button", { name: "Trigger" });
+
+      trigger.focus();
+      fireEvent.click(trigger);
+      expect(screen.getByRole("button", { name: "Sidebar action" })).toHaveFocus();
+      fireEvent.keyDown(document, { key: "Escape" });
+
+      await waitFor(() => expect(trigger).toHaveFocus());
     });
 
     it("applies end placement class when sidebarPlacement is end", () => {

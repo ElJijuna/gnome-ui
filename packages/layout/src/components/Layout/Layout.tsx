@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useRef,
   type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
@@ -42,6 +43,11 @@ export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "heigh
    * sider layouts.
    */
   sidebarPlacement?: LayoutSidebarPlacement;
+  /**
+   * Accessible label for the sidebar landmark wrapper. Provide this when the
+   * sidebar content does not include its own labelled `nav`.
+   */
+  sidebarLabel?: string;
   /**
    * Breakpoint where the sidebar becomes an overlay.
    * - `"narrow"` — 400 px, GNOME split-view threshold.
@@ -150,6 +156,7 @@ export function Layout({
   header,
   sidebar,
   sidebarPlacement = "start",
+  sidebarLabel,
   sidebarBreakpoint = "narrow",
   sidebarOpen = false,
   sidebarCollapseMode = "none",
@@ -165,6 +172,8 @@ export function Layout({
   className,
   ...props
 }: LayoutProps) {
+  const sidebarRef = useRef<HTMLElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const resolvedHeader = topBar ?? header;
   const resolvedFooter = bottomBar ?? footer;
 
@@ -201,18 +210,85 @@ export function Layout({
   };
 
   useEffect(() => {
-    if (!sidebar || !sidebarOpen) return;
+    if (!sidebar || !sidebarOpen) return undefined;
+
+    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+
+    const getFocusableElements = () => {
+      const sidebarElement = sidebarRef.current;
+      if (!sidebarElement) return [];
+
+      return Array.from(
+        sidebarElement.querySelectorAll<HTMLElement>(
+          [
+            "a[href]",
+            "button:not([disabled])",
+            "input:not([disabled])",
+            "select:not([disabled])",
+            "textarea:not([disabled])",
+            "[tabindex]:not([tabindex='-1'])",
+          ].join(","),
+        ),
+      ).filter((element) => !element.hasAttribute("hidden"));
+    };
+
+    const focusableElements = getFocusableElements();
+    (focusableElements[0] ?? sidebarRef.current)?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeSidebar("escape");
+      if (event.key === "Escape") {
+        closeSidebar("escape");
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const currentFocusableElements = getFocusableElements();
+      if (!currentFocusableElements.length) {
+        event.preventDefault();
+        sidebarRef.current?.focus();
+        return;
+      }
+
+      const firstElement = currentFocusableElements[0];
+      const lastElement = currentFocusableElements[currentFocusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      } else if (!sidebarRef.current?.contains(activeElement)) {
+        event.preventDefault();
+        firstElement.focus();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      if (
+        previouslyFocusedRef.current &&
+        document.contains(previouslyFocusedRef.current)
+      ) {
+        previouslyFocusedRef.current.focus();
+      }
+      previouslyFocusedRef.current = null;
+    };
   }, [sidebar, sidebarOpen, onSidebarOpenChange, onSidebarClose]);
 
   const sidebarSlot = sidebar && (
-    <aside className={styles.sidebar} style={sidebarStyle}>
+    <aside
+      ref={sidebarRef}
+      className={styles.sidebar}
+      style={sidebarStyle}
+      aria-label={sidebarLabel}
+      tabIndex={sidebarOpen ? -1 : undefined}
+    >
       {sidebar}
     </aside>
   );

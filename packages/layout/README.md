@@ -94,6 +94,7 @@ breakpoint is **400 px**, matching GNOME split-view behaviour.
 | `onSidebarClose` | `() => void` | — | Called when the user taps the backdrop — use it to set `sidebarOpen` back to `false` |
 | `onSidebarOpenChange` | `(open, reason) => void` | — | Called for shell-driven open changes such as backdrop and Escape |
 | `sidebarPlacement` | `"start" \| "end"` | `"start"` | Places the sidebar on the leading or trailing edge |
+| `sidebarLabel` | `string` | — | Accessible label for the sidebar landmark wrapper |
 | `sidebarBreakpoint` | `"narrow" \| "medium" \| "wide"` | `"narrow"` | Overlay threshold: `400`, `550`, or `860` px |
 | `sidebarCollapseMode` | `"none" \| "rail" \| "overlay"` | `"none"` | Wide-layout collapse behaviour |
 | `sidebarCollapsed` | `boolean` | `false` | Applies shell-level collapsed sidebar styling |
@@ -101,6 +102,11 @@ breakpoint is **400 px**, matching GNOME split-view behaviour.
 
 On wider viewports the sidebar stays in layout flow unless
 `sidebarCollapseMode="overlay"` and `sidebarCollapsed` are both set.
+
+When the sidebar overlay is open, focus moves into the sidebar, `Tab` and
+`Shift+Tab` remain inside it, and `Escape` requests close through
+`onSidebarOpenChange(false, "escape")`. Add `sidebarLabel` when the sidebar
+content does not provide a labelled `nav`.
 
 ```tsx
 import { useState } from "react";
