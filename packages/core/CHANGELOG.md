@@ -1,3 +1,13 @@
+## [1.42.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.41.0...@gnome-ui/core@1.42.0) (2026-05-13)
+
+### Features
+
+* **@gnome-ui/core:** add new tokens. ([53b87e4](https://github.com/ElJijuna/gnome-ui/commit/53b87e49aac002676bb67f39926e9bf7189218f8))
+
+### Documentation
+
+* **@gnome-ui/charts:** update README ([094e708](https://github.com/ElJijuna/gnome-ui/commit/094e708e4213d38f7459ab2636fa156a04541629))
+
 ## [1.41.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.40.1...@gnome-ui/core@1.41.0) (2026-05-13)
 
 ### Features
