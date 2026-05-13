@@ -110,9 +110,15 @@ content does not provide a labelled `nav`.
 
 ```tsx
 import { useState } from "react";
-import { Layout } from "@gnome-ui/layout";
+import {
+  AppHeader,
+  Layout,
+  PageContent,
+  SidebarShell,
+  StatusBar,
+} from "@gnome-ui/layout";
 import "@gnome-ui/layout/styles";
-import { Toolbar, Spacer, Button, Sidebar, SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
+import { Button, SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -120,41 +126,58 @@ export default function App() {
   return (
     <Layout
       header={
-        <Toolbar style={{ minHeight: 48, padding: "0 8px" }}>
-          <Button
-            variant="flat"
-            aria-label="Toggle sidebar"
-            onClick={() => setSidebarOpen((v) => !v)}
-          >
-            ☰
-          </Button>
-          <Text variant="heading">My App</Text>
-          <Spacer />
-        </Toolbar>
+        <AppHeader
+          title="My App"
+          leading={
+            <Button
+              variant="flat"
+              aria-label="Toggle sidebar"
+              onClick={() => setSidebarOpen((v) => !v)}
+            >
+              ☰
+            </Button>
+          }
+        />
       }
       sidebar={
-        <Sidebar>
+        <SidebarShell header={<Text variant="heading">My App</Text>}>
           <SidebarSection>
             <SidebarItem label="Home" active onClick={() => setSidebarOpen(false)} />
             <SidebarItem label="Settings" onClick={() => setSidebarOpen(false)} />
           </SidebarSection>
-        </Sidebar>
+        </SidebarShell>
       }
       sidebarOpen={sidebarOpen}
       onSidebarClose={() => setSidebarOpen(false)}
       footer={
-        <Toolbar style={{ minHeight: 36, padding: "0 16px" }}>
+        <StatusBar>
           <Text variant="caption" color="dim">Ready</Text>
-        </Toolbar>
+        </StatusBar>
       }
     >
-      <main style={{ padding: 24 }}>
+      <PageContent as="section" maxWidth="lg">
         <Text variant="title-2">Welcome</Text>
-      </main>
+      </PageContent>
     </Layout>
   );
 }
 ```
+
+#### Shell API improvements
+
+The current shell API adds a few improvements over the original
+`topBar`/`bottomBar` composition:
+
+- `header` and `footer` aliases make shell regions read naturally while keeping
+  `topBar` and `bottomBar` compatible with existing apps.
+- `height="parent"` makes nested shells possible without accidental double
+  `100vh` layouts.
+- `scroll="content"` keeps header/footer/sidebar fixed while only the main area
+  scrolls.
+- `sidebarBreakpoint`, `sidebarPlacement`, and `sidebarCollapseMode` cover
+  narrow overlays, right-side panels, and icon-only rail sidebars.
+- Overlay sidebars move focus inside, trap `Tab`/`Shift+Tab`, close with
+  `Escape`, and restore focus to the previous trigger.
 
 ---
 

@@ -331,7 +331,7 @@ function CookbookContent({
     <PageContent as="section" maxWidth="lg">
       <Text variant="title-2">{title}</Text>
       <Text variant="body" color="dim" style={{ marginTop: 8 }}>
-        A GNOME UI application shell pattern equivalent to an Ant Design layout example.
+        A GNOME UI application shell pattern using Adwaita structure and spacing.
       </Text>
       <BoxedList style={{ marginTop: 24 }}>
         {Array.from({ length: rows }, (_, index) => (
@@ -370,7 +370,7 @@ function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
 
   return (
     <Layout
-      topBar={
+      header={
         <AppHeader
           sidebarCollapsed={sidebarCollapsed}
           onToggleSidebar={handleToggleSidebar}
@@ -390,7 +390,7 @@ function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
       }
       sidebarOpen={sidebarOpen}
       onSidebarClose={() => setSidebarOpen(false)}
-      bottomBar={<AppStatusBar />}
+      footer={<AppStatusBar />}
     >
       <AppContent
         activeNav={activeNav}
@@ -417,10 +417,10 @@ named zones following the GNOME Human Interface Guidelines.
 
 | Zone | Prop | Behaviour |
 |------|------|-----------|
-| Top bar | \`topBar\` | Pinned header — never scrolls |
-| Sidebar | \`sidebar\` | Fixed-width lateral navigation |
+| Header | \`header\` / \`topBar\` | Pinned header — never scrolls |
+| Sidebar | \`sidebar\` | Fixed-width lateral navigation, overlay, or rail |
 | Content | \`children\` | Scrollable main area |
-| Bottom bar | \`bottomBar\` | Pinned footer — never scrolls |
+| Footer | \`footer\` / \`bottomBar\` | Pinned footer — never scrolls |
 
 **Install:**
 \`\`\`bash
@@ -432,10 +432,14 @@ npm install @gnome-ui/layout
 import { Layout } from "@gnome-ui/layout";
 import "@gnome-ui/layout/styles";
 
-<Layout topBar={<AppHeader />} sidebar={<AppSidebar />} bottomBar={<AppStatusBar />}>
+<Layout header={<AppHeader />} sidebar={<AppSidebar />} footer={<AppStatusBar />}>
   <AppContent />
 </Layout>
 \`\`\`
+
+The shell supports pinned headers and footers, scroll-contained content,
+sidebar overlays, rail collapse, right-side placement, GNOME breakpoints, and
+the project's \`--gnome-*\` design tokens.
         `,
       },
     },
@@ -457,14 +461,14 @@ export const FilesApplication: StoryObj<typeof Layout> = {
 export const Minimal: StoryObj<typeof Layout> = {
   render: () => (
     <Layout
-      topBar={
+      header={
         <Toolbar style={{ minHeight: 48, padding: "0 16px" }}>
           <Text variant="heading">My App</Text>
           <Spacer />
           <Button variant="suggested">Save</Button>
         </Toolbar>
       }
-      bottomBar={
+      footer={
         <Toolbar style={{ minHeight: 36, padding: "0 16px" }}>
           <Text variant="caption" color="dim">Ready</Text>
         </Toolbar>
@@ -511,7 +515,7 @@ export const ContentOnly: StoryObj<typeof Layout> = {
   parameters: { controls: { disable: true } },
 };
 
-// ─── Ant Design Layout parity cookbook ────────────────────────────────────────
+// ─── Application shell cookbook ────────────────────────────────────────────────
 
 export const BasicStructure: StoryObj<typeof Layout> = {
   name: "Basic structure",
@@ -603,14 +607,14 @@ export const HeaderSidebarNested: StoryObj<typeof Layout> = {
               <Text variant="caption-heading" color="dim">Pinned</Text>
               <BoxedList>
                 <ActionRow title="Roadmap" subtitle="Phase planning" interactive />
-                <ActionRow title="Design notes" subtitle="GNOME shell parity" interactive />
+                <ActionRow title="Design notes" subtitle="GNOME shell structure" interactive />
               </BoxedList>
             </Box>
             <Box spacing={8} style={{ flex: "2 1 420px", minWidth: 0 }}>
               <Text variant="caption-heading" color="dim">Activity</Text>
               <BoxedList>
                 <ActionRow title="Layout updated" subtitle="Shell aliases and sidebar modes" />
-                <ActionRow title="Stories added" subtitle="Ant parity cookbook" />
+                <ActionRow title="Stories added" subtitle="Application shell cookbook" />
                 <ActionRow title="Docs refreshed" subtitle="README and roadmap" />
               </BoxedList>
             </Box>

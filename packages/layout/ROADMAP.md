@@ -1,80 +1,66 @@
 # @gnome-ui/layout — Roadmap
 
-Componentes de layout de nivel de aplicación que componen primitivos de `@gnome-ui/react`
-siguiendo las GNOME Human Interface Guidelines y el patrón Adwaita.
+Componentes de layout de nivel de aplicación que componen primitivos de
+`@gnome-ui/react` siguiendo las GNOME Human Interface Guidelines y el patrón
+Adwaita.
 
 ---
 
-## En desarrollo
+## Implementado
+
+### `Layout`
+
+Shell de aplicación con zonas nombradas `header`/`topBar`, `sidebar`,
+`children`, `footer`/`bottomBar`. Soporta altura `viewport`/`parent`, modelos
+de scroll, sidebar overlay, rail collapse, placement `start`/`end`, foco
+contenido dentro del overlay y cierre por `Escape`/backdrop.
+
+### `AppHeader`
+
+Barra superior lista para usar con título/subtítulo, controles leading,
+navegación, búsqueda y acciones. Envuelve patrones de `HeaderBar` y
+`WindowTitle` en una pieza de layout opinionada.
+
+### `PageContent`
+
+Contenedor de página con padding GNOME, `as`, max-width opcional mediante
+`Clamp`, y tamaños `sm`/`md`/`lg`/`xl`/numérico.
+
+### `SidebarShell`
+
+Sidebar vertical lista para usar: encabezado fijo, área de navegación
+scrollable basada en `Sidebar`, pie fijo y passthrough de props como
+`collapsed`, `searchable`, `filter`, `mode` y `variant`.
+
+### `StatusBar`
+
+Barra inferior compacta basada en `Toolbar`, pensada para estado, contadores,
+acciones secundarias o metadata de aplicación.
 
 ### `UserCard`
 
 Panel de identidad de usuario para sidebars, popovers o páginas de perfil.
 
-```tsx
-<UserCard
-  name="Ada Lovelace"
-  email="ada@gnome.org"
-  avatarSrc="/avatar.jpg"
-  actions={[
-    { label: "View Profile",     onClick: () => {} },
-    { label: "Account Settings", onClick: () => {} },
-    { label: "Sign Out",         onClick: () => {}, variant: "destructive" },
-  ]}
-/>
-```
+### `DashboardGrid`
 
-**Composición interna:** `Avatar` + `Text` + lista de `Button` planos.  
-**Referencia Adwaita:** patrón de usuario en `AdwPreferencesGroup`.
+Grid responsivo de tarjetas con columnas fluidas, gap consistente y soporte
+para celdas de distintos tamaños (`span`).
 
 ---
 
 ## Backlog
 
-### `AppHeader`
-
-Barra superior lista para usar: logo, título de app, `SearchBar`, acciones y un `UserCard` en popover.
-Envuelve `HeaderBar` + `Toolbar` en una sola pieza de layout.
-
-**Por qué en layout:** combina primitivos de `@gnome-ui/react` con lógica de disposición (responsive collapse, avatar popover).
-
----
-
-### `PageContent`
-
-Contenedor de página con max-width centrado, padding horizontal responsivo y título opcional de sección.
-
-```tsx
-<PageContent title="Settings" maxWidth="md">
-  …
-</PageContent>
-```
-
-**Por qué en layout:** codifica las reglas de márgenes y anchos de la HIG en un solo componente.
-
----
-
-### `SidebarShell`
-
-Sidebar vertical lista para usar: encabezado con logo/título, área de navegación con scroll, pie de página fijo con `UserCard` y sección de acción.
-
-**Por qué en layout:** es un patrón de composición recurrente que va más allá de un componente primitivo.
-
----
-
 ### `EmptyState`
 
-Pantalla de estado vacío con ilustración SVG, título, descripción y CTA principal/secundario.  
-Versión más opinionada de `StatusPage` adaptada para paneles de contenido.
-
-**Por qué en layout:** ocupa el espacio de contenido (`children` de `Layout`) y su tamaño/centrado depende del contexto de layout.
-
----
+Pantalla de estado vacío con ilustración SVG, título, descripción y CTA
+principal/secundario. Versión más opinionada de `StatusPage` adaptada para
+paneles de contenido.
 
 ### `SplitLayout`
 
-Shell de dos columnas: lista/maestro en la izquierda, detalle en la derecha.  
-Colapsa a una sola columna en mobile (patrón `NavigationSplitView` pero al nivel de página).
+Shell de dos columnas: lista/maestro en la izquierda, detalle en la derecha.
+Colapsa a una sola columna en mobile (patrón `NavigationSplitView` pero al
+nivel de página).
 
 ```tsx
 <SplitLayout
@@ -84,30 +70,16 @@ Colapsa a una sola columna en mobile (patrón `NavigationSplitView` pero al nive
 />
 ```
 
-**Por qué en layout:** combina `NavigationSplitView` con lógica de breakpoint y transiciones.
-
----
-
-### ~~`DashboardGrid`~~ ✅ Implementado — issue [#82](https://github.com/ElJijuna/gnome-ui/issues/82)
-
-Grid responsivo de tarjetas con columnas fluidas, gap consistente y soporte para celdas de distintos tamaños (`span`).
-
----
-
 ### `DialogLayout`
 
-Shell interno para `Dialog`s grandes (preferencias, wizards): sección de navegación lateral + área de contenido scrollable + barra de acciones fija en el pie.
-
-**Por qué en layout:** es el mismo patrón que `Layout` pero scoped dentro de un modal; reutiliza las mismas zonas (`sidebar`, `content`, `bottomBar`).
-
----
+Shell interno para `Dialog`s grandes (preferencias, wizards): sección de
+navegación lateral + área de contenido scrollable + barra de acciones fija en
+el pie.
 
 ### `NotificationCenter`
 
-Panel lateral deslizable (right drawer) que lista notificaciones agrupadas por app.  
-Usa `OverlaySplitView` internamente.
-
-**Por qué en layout:** es un patrón de overlay de nivel de app, no un widget atómico.
+Panel lateral deslizable (right drawer) que lista notificaciones agrupadas por
+app. Usa `OverlaySplitView` internamente.
 
 ---
 
