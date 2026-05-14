@@ -1,3 +1,9 @@
+## [1.22.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.22.0...@gnome-ui/layout@1.22.1) (2026-05-14)
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** add missing component subpath exports ([db6a2cc](https://github.com/ElJijuna/gnome-ui/commit/db6a2cc274e8c940efd1e677abe8eced24c99869))
+
 ## [1.22.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.21.1...@gnome-ui/layout@1.22.0) (2026-05-14)
 
 ### Features
