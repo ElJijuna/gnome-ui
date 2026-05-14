@@ -35,22 +35,35 @@ const meta: Meta<typeof DashboardGrid> = {
     docs: {
       description: {
         component: `
-Responsive grid container for arranging dashboard widgets and panels.
+Responsive 12-column grid container for dashboard widgets and panels.
 
-Use \`columns\` to fix the column count, let it adapt automatically with \`"auto"\`,
-or map explicit column counts to responsive breakpoints.
-Wrap each widget in \`DashboardGrid.Item\` and set \`span\` to make it span multiple columns.
-Set \`layout="column"\` when the same children should stack vertically.
+## Breakpoints
+
+| Breakpoint | Min-width |
+|---|---|
+| xs | — (base) |
+| sm | 576px |
+| md | 768px |
+| lg | 992px |
+| xl | 1200px |
+| xxl | 1600px |
+
+## Usage
 
 \`\`\`tsx
 import { DashboardGrid } from "@gnome-ui/layout";
 
-<DashboardGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap="md">
-  <DashboardGrid.Item span={2}>
-    <StatCard ... />
+// Static layout
+<DashboardGrid columns={12} gap="md">
+  <DashboardGrid.Item span={6} offset={3}>
+    <Card />
   </DashboardGrid.Item>
-  <DashboardGrid.Item>
-    <ProgressCard ... />
+</DashboardGrid>
+
+// Responsive layout
+<DashboardGrid columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} gap={{ xs: "sm", md: "md" }}>
+  <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 4 }}>
+    <StatCard />
   </DashboardGrid.Item>
 </DashboardGrid>
 \`\`\`
@@ -59,13 +72,8 @@ import { DashboardGrid } from "@gnome-ui/layout";
     },
   },
   argTypes: {
-    columns: {
-      control: false,
-    },
-    gap: {
-      control: { type: "radio" },
-      options: ["sm", "md", "lg"],
-    },
+    columns: { control: false },
+    gap: { control: false },
     layout: {
       control: { type: "radio" },
       options: ["grid", "column"],
@@ -92,35 +100,29 @@ export const Default: Story = {
   ),
 };
 
-export const FixedColumns: Story = {
-  args: {
-    columns: 3,
-    gap: "md",
-  },
-  render: (args) => (
-    <DashboardGrid {...args}>
-      {["Stats", "Revenue", "Users", "Sessions", "Errors", "Uptime"].map(
-        (label) => (
-          <DashboardGrid.Item key={label}>
-            <Placeholder label={label} />
-          </DashboardGrid.Item>
-        ),
-      )}
+export const TwelveColumnGrid: Story = {
+  render: () => (
+    <DashboardGrid columns={12} gap="sm">
+      {Array.from({ length: 12 }, (_, i) => (
+        <DashboardGrid.Item key={i}>
+          <Placeholder label={String(i + 1)} height={60} />
+        </DashboardGrid.Item>
+      ))}
     </DashboardGrid>
   ),
   parameters: {
-    docs: { description: { story: "Fixed 3-column layout." } },
+    docs: {
+      description: {
+        story: "12-column base grid. Each item occupies one column.",
+      },
+    },
   },
 };
 
 export const ResponsiveColumns: Story = {
-  args: {
-    columns: { sm: 1, md: 2, lg: 3, xl: 4 },
-    gap: "md",
-  },
-  render: (args) => (
-    <DashboardGrid {...args}>
-      {["Users", "Revenue", "Sessions", "Errors", "Latency", "Uptime", "Jobs", "Storage"].map(
+  render: () => (
+    <DashboardGrid columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }} gap="md">
+      {["Users", "Revenue", "Sessions", "Errors", "Latency", "Uptime"].map(
         (label) => (
           <DashboardGrid.Item key={label}>
             <Placeholder label={label} />
@@ -133,7 +135,87 @@ export const ResponsiveColumns: Story = {
     docs: {
       description: {
         story:
-          "Explicit responsive columns: 1 on small screens, 2 at medium, 3 at large, and 4 at extra-large widths.",
+          "Responsive columns: 1 on mobile, 2 at sm, 3 at md, 4 at lg, 6 at xl.",
+      },
+    },
+  },
+};
+
+export const ResponsiveSpan: Story = {
+  render: () => (
+    <DashboardGrid columns={12} gap="md">
+      <DashboardGrid.Item span={{ xs: 12, md: 8 }}>
+        <Placeholder label="Main chart (xs=12, md=8)" height={200} />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={{ xs: 12, md: 4 }}>
+        <Placeholder label="Sidebar (xs=12, md=4)" height={200} />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 4 }}>
+        <Placeholder label="Stat A (xs=12, sm=6, md=4)" />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 4 }}>
+        <Placeholder label="Stat B (xs=12, sm=6, md=4)" />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 4 }}>
+        <Placeholder label="Stat C (xs=12, sm=6, md=4)" />
+      </DashboardGrid.Item>
+    </DashboardGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Each item declares its own responsive span. Resize the window to see the layout adapt.",
+      },
+    },
+  },
+};
+
+export const WithOffset: Story = {
+  render: () => (
+    <DashboardGrid columns={12} gap="md">
+      <DashboardGrid.Item span={6}>
+        <Placeholder label="span=6" height={80} />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={4} offset={2}>
+        <Placeholder label="span=4 offset=2" height={80} />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={8} offset={2}>
+        <Placeholder label="span=8 offset=2 (centered)" height={80} />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={4} offset={4}>
+        <Placeholder label="span=4 offset=4" height={80} />
+      </DashboardGrid.Item>
+    </DashboardGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Use `offset` to skip columns before an item. `offset={2}` on a 12-column grid pushes the item right by 2 columns.",
+      },
+    },
+  },
+};
+
+export const ResponsiveGap: Story = {
+  render: () => (
+    <DashboardGrid
+      columns={{ xs: 1, sm: 2, md: 3 }}
+      gap={{ xs: "sm", md: "md", xl: "lg" }}
+    >
+      {["A", "B", "C", "D", "E", "F"].map((label) => (
+        <DashboardGrid.Item key={label}>
+          <Placeholder label={label} height={80} />
+        </DashboardGrid.Item>
+      ))}
+    </DashboardGrid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Gap adapts to the breakpoint: `sm` at mobile, `md` at 768px+, `lg` at 1200px+.",
       },
     },
   },
@@ -147,7 +229,7 @@ export const ColumnLayout: Story = {
   render: (args) => (
     <DashboardGrid {...args}>
       {["Queue", "Workers", "Deployments"].map((label) => (
-        <DashboardGrid.Item key={label} span={3}>
+        <DashboardGrid.Item key={label}>
           <Placeholder label={label} height={88} />
         </DashboardGrid.Item>
       ))}
@@ -156,45 +238,57 @@ export const ColumnLayout: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "`layout=\"column\"` stacks children vertically and keeps using the same gap scale. Item `span` is harmless in this mode.",
+        story: "`layout=\"column\"` stacks children vertically.",
       },
     },
   },
 };
 
-export const WithSpanning: Story = {
-  args: {
-    columns: 3,
-    gap: "md",
-  },
-  render: (args) => (
-    <DashboardGrid {...args}>
-      <DashboardGrid.Item span={2}>
-        <Placeholder label="Revenue Chart (span 2)" height={200} />
+export const RealisticDashboard: Story = {
+  render: () => (
+    <DashboardGrid columns={12} gap="md">
+      {/* KPI row: 3 cols each on md+, full width on mobile */}
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 3 }}>
+        <Placeholder label="Total Users" height={100} />
       </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Quick Stats" height={200} />
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 3 }}>
+        <Placeholder label="Revenue" height={100} />
       </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Users" />
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 3 }}>
+        <Placeholder label="Active Sessions" height={100} />
       </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Sessions" />
+      <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 3 }}>
+        <Placeholder label="Error Rate" height={100} />
       </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Errors" />
+
+      {/* Chart + sidebar */}
+      <DashboardGrid.Item span={{ xs: 12, md: 8 }}>
+        <Placeholder label="Traffic Chart" height={240} />
       </DashboardGrid.Item>
-      <DashboardGrid.Item span={3}>
-        <Placeholder label="Activity Feed (span 3)" height={80} />
+      <DashboardGrid.Item span={{ xs: 12, md: 4 }}>
+        <Placeholder label="Top Pages" height={240} />
+      </DashboardGrid.Item>
+
+      {/* Half-width panels */}
+      <DashboardGrid.Item span={{ xs: 12, md: 6 }}>
+        <Placeholder label="Recent Events" height={160} />
+      </DashboardGrid.Item>
+      <DashboardGrid.Item span={{ xs: 12, md: 6 }}>
+        <Placeholder label="Device Breakdown" height={160} />
+      </DashboardGrid.Item>
+
+      {/* Centered narrow panel using offset */}
+      <DashboardGrid.Item span={{ xs: 12, md: 8 }} offset={2}>
+        <Placeholder label="System Status (offset=2 at md+)" height={80} />
       </DashboardGrid.Item>
     </DashboardGrid>
   ),
   parameters: {
+    layout: "padded",
     docs: {
       description: {
         story:
-          "Items can span multiple columns via the `span` prop on `DashboardGrid.Item`.",
+          "Full 12-column responsive dashboard with KPIs, charts, panels, and an offset-centered status bar.",
       },
     },
   },
@@ -221,45 +315,5 @@ export const GapVariants: Story = {
   ),
   parameters: {
     docs: { description: { story: "All three gap sizes side by side." } },
-  },
-};
-
-export const RealisticDashboard: Story = {
-  render: () => (
-    <DashboardGrid columns={4} gap="md">
-      <DashboardGrid.Item>
-        <Placeholder label="Total Users" height={100} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Revenue" height={100} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Active Sessions" height={100} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Error Rate" height={100} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item span={3}>
-        <Placeholder label="Traffic Chart (span 3)" height={220} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item>
-        <Placeholder label="Top Pages" height={220} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item span={2}>
-        <Placeholder label="Recent Events (span 2)" height={160} />
-      </DashboardGrid.Item>
-      <DashboardGrid.Item span={2}>
-        <Placeholder label="Device Breakdown (span 2)" height={160} />
-      </DashboardGrid.Item>
-    </DashboardGrid>
-  ),
-  parameters: {
-    layout: "padded",
-    docs: {
-      description: {
-        story:
-          "Realistic 4-column dashboard mixing full-width, half-width, and single-column panels.",
-      },
-    },
   },
 };

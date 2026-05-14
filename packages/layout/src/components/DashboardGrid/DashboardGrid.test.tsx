@@ -27,7 +27,7 @@ describe("DashboardGrid", () => {
       expect(grid.style.gridTemplateColumns).toBe("repeat(3, 1fr)");
     });
 
-    it.each([1, 2, 4] as const)(
+    it.each([1, 2, 6, 12] as const)(
       "applies repeat(%s, 1fr) for columns=%s",
       (cols) => {
         const { container } = render(<DashboardGrid columns={cols} />);
@@ -50,21 +50,23 @@ describe("DashboardGrid", () => {
 
     it("sets responsive column CSS variables for object columns", () => {
       const { container } = render(
-        <DashboardGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} />,
+        <DashboardGrid columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6, xxl: 12 }} />,
       );
       const grid = container.firstChild as HTMLElement;
 
-      expect(grid.style.getPropertyValue("--dashboard-grid-columns-sm")).toBe("1");
-      expect(grid.style.getPropertyValue("--dashboard-grid-columns-md")).toBe("2");
-      expect(grid.style.getPropertyValue("--dashboard-grid-columns-lg")).toBe("3");
-      expect(grid.style.getPropertyValue("--dashboard-grid-columns-xl")).toBe("4");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-xs")).toBe("1");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-sm")).toBe("2");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-md")).toBe("3");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-lg")).toBe("4");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-xl")).toBe("6");
+      expect(grid.style.getPropertyValue("--dashboard-grid-columns-xxl")).toBe("12");
       expect(grid.style.gridTemplateColumns).toBe("");
       expect(grid.className).toMatch(/responsive/);
     });
 
     it("preserves user inline styles with responsive columns", () => {
       const { container } = render(
-        <DashboardGrid columns={{ sm: 1, md: 2 }} style={{ maxWidth: 640 }} />,
+        <DashboardGrid columns={{ xs: 1, md: 2 }} style={{ maxWidth: 640 }} />,
       );
       const grid = container.firstChild as HTMLElement;
 
@@ -96,36 +98,46 @@ describe("DashboardGrid", () => {
 
   describe("gap prop", () => {
     it.each(["sm", "md", "lg"] as const)(
-      "applies gap class for gap='%s'",
+      "sets --dashboard-grid-gap-xs CSS variable for gap='%s'",
       (gap) => {
         const { container } = render(<DashboardGrid gap={gap} />);
         const grid = container.firstChild as HTMLElement;
-        expect(grid.className).toMatch(new RegExp(`gap${gap[0].toUpperCase() + gap.slice(1)}|gap-${gap}`));
+        expect(grid.style.getPropertyValue("--dashboard-grid-gap-xs")).not.toBe("");
       },
     );
 
-    it("defaults to md gap when gap is omitted", () => {
+    it("defaults to md gap (gnome-space-3 token)", () => {
       const { container } = render(<DashboardGrid />);
       const grid = container.firstChild as HTMLElement;
-      expect(grid.className).toMatch(/gapMd|gap-md/);
+      expect(grid.style.getPropertyValue("--dashboard-grid-gap-xs")).toContain(
+        "gnome-space-3",
+      );
+    });
+
+    it("sets per-breakpoint gap CSS variables for responsive gap", () => {
+      const { container } = render(
+        <DashboardGrid gap={{ xs: "sm", md: "md", xl: "lg" }} />,
+      );
+      const grid = container.firstChild as HTMLElement;
+      expect(grid.style.getPropertyValue("--dashboard-grid-gap-xs")).toContain("gnome-space-2");
+      expect(grid.style.getPropertyValue("--dashboard-grid-gap-md")).toContain("gnome-space-3");
+      expect(grid.style.getPropertyValue("--dashboard-grid-gap-xl")).toContain("gnome-space-4");
     });
   });
 
   describe("DashboardGrid.Item span prop", () => {
-    it("applies gridColumn span style for span > 1", () => {
+    it("sets --item-span-xs CSS variable for static span", () => {
       const { container } = render(
         <DashboardGrid>
-          <DashboardGrid.Item span={2}>Item</DashboardGrid.Item>
+          <DashboardGrid.Item span={4}>Item</DashboardGrid.Item>
         </DashboardGrid>,
       );
-      const item = container.querySelector("[class]")
-        ?.nextElementSibling as HTMLElement | null ??
-        container.querySelectorAll("div")[1] as HTMLElement;
-      expect(item.style.gridColumn).toBe("span 2");
+      const item = container.querySelectorAll("div")[1] as HTMLElement;
+      expect(item.style.getPropertyValue("--item-span-xs")).toBe("4");
     });
 
-    it.each([2, 3, 4] as const)(
-      "applies span %s to item",
+    it.each([2, 3, 6, 12] as const)(
+      "sets --item-span-xs to %s for span=%s",
       (span) => {
         const { container } = render(
           <DashboardGrid>
@@ -133,18 +145,64 @@ describe("DashboardGrid", () => {
           </DashboardGrid>,
         );
         const item = container.querySelectorAll("div")[1] as HTMLElement;
-        expect(item.style.gridColumn).toBe(`span ${span}`);
+        expect(item.style.getPropertyValue("--item-span-xs")).toBe(String(span));
       },
     );
 
-    it("does not apply gridColumn style for default span (1)", () => {
+    it("sets default span of 1 for items without explicit span", () => {
       const { container } = render(
         <DashboardGrid>
           <DashboardGrid.Item>Item</DashboardGrid.Item>
         </DashboardGrid>,
       );
       const item = container.querySelectorAll("div")[1] as HTMLElement;
-      expect(item.style.gridColumn).toBe("");
+      expect(item.style.getPropertyValue("--item-span-xs")).toBe("1");
+    });
+
+    it("sets per-breakpoint span CSS variables for responsive span", () => {
+      const { container } = render(
+        <DashboardGrid>
+          <DashboardGrid.Item span={{ xs: 12, sm: 6, md: 4, lg: 3 }}>Item</DashboardGrid.Item>
+        </DashboardGrid>,
+      );
+      const item = container.querySelectorAll("div")[1] as HTMLElement;
+      expect(item.style.getPropertyValue("--item-span-xs")).toBe("12");
+      expect(item.style.getPropertyValue("--item-span-sm")).toBe("6");
+      expect(item.style.getPropertyValue("--item-span-md")).toBe("4");
+      expect(item.style.getPropertyValue("--item-span-lg")).toBe("3");
+    });
+  });
+
+  describe("DashboardGrid.Item offset prop", () => {
+    it("sets --item-offset-xs and itemWithOffset class for offset > 0", () => {
+      const { container } = render(
+        <DashboardGrid>
+          <DashboardGrid.Item offset={3}>Item</DashboardGrid.Item>
+        </DashboardGrid>,
+      );
+      const item = container.querySelectorAll("div")[1] as HTMLElement;
+      expect(item.style.getPropertyValue("--item-offset-xs")).toBe("3");
+      expect(item.className).toMatch(/itemWithOffset/);
+    });
+
+    it("does not apply itemWithOffset class for offset=0", () => {
+      const { container } = render(
+        <DashboardGrid>
+          <DashboardGrid.Item offset={0}>Item</DashboardGrid.Item>
+        </DashboardGrid>,
+      );
+      const item = container.querySelectorAll("div")[1] as HTMLElement;
+      expect(item.className).not.toMatch(/itemWithOffset/);
+    });
+
+    it("does not apply itemWithOffset class when offset is omitted", () => {
+      const { container } = render(
+        <DashboardGrid>
+          <DashboardGrid.Item>Item</DashboardGrid.Item>
+        </DashboardGrid>,
+      );
+      const item = container.querySelectorAll("div")[1] as HTMLElement;
+      expect(item.className).not.toMatch(/itemWithOffset/);
     });
   });
 

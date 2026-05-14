@@ -71,13 +71,20 @@ export type { ErrorStateProps, ErrorStateType } from "./components/ErrorState";
 
 export { DashboardGrid } from "./components/DashboardGrid";
 export type {
+  DashboardGridBreakpoint,
   DashboardGridProps,
   DashboardGridItemProps,
   DashboardGridColumns,
   DashboardGridColumnCount,
   DashboardGridResponsiveColumns,
+  DashboardGridGapValue,
+  DashboardGridResponsiveGap,
   DashboardGridGap,
   DashboardGridLayout,
+  DashboardGridSpanCount,
+  DashboardGridResponsiveSpan,
+  DashboardGridSpan,
+  DashboardGridOffset,
 } from "./components/DashboardGrid";
 
 export { QuickActions } from "./components/QuickActions";
