@@ -1,3 +1,15 @@
+## [1.22.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.21.1...@gnome-ui/layout@1.22.0) (2026-05-14)
+
+### Features
+
+* **@gnome-ui/layout:** add MasonryGrid ([5d88b9e](https://github.com/ElJijuna/gnome-ui/commit/5d88b9ece18e874bb4922a51f6c699b32891b0fe))
+* **@gnome-ui/layout:** add Toast and Banner components ([9c78c89](https://github.com/ElJijuna/gnome-ui/commit/9c78c897d54b60603751e11c4dbd1d89920d8913))
+* **@gnome-ui/layout:** update Dashboard grid and support new sizes ([17f3cfd](https://github.com/ElJijuna/gnome-ui/commit/17f3cfd177f0ab8030410273a053511239b7e726))
+
+### Bug Fixes
+
+* **@gnome-ui/core:** apply Adwaita Sans to body via tokens.css ([b8ea02d](https://github.com/ElJijuna/gnome-ui/commit/b8ea02db2209cf2aa1a0411ad66ece107dce26db))
+
 ## [1.21.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.21.0...@gnome-ui/layout@1.21.1) (2026-05-13)
 
 ### Features
