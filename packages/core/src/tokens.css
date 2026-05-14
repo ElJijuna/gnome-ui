@@ -48,6 +48,12 @@
   font-display: swap;
 }
 
+/* ─── Base typography ─────────────────────────────────────────────────────── */
+
+body {
+  font-family: var(--gnome-font-family, "Adwaita Sans", Cantarell, "Inter", system-ui, sans-serif);
+}
+
 /**
  * GNOME / Adwaita Design Tokens
  * Based on GNOME Human Interface Guidelines and libadwaita CSS variables
