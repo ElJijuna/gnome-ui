@@ -1,0 +1,100 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.banner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--gnome-banner-bg, rgba(0, 0, 0, 0.05));
+  border-bottom: 1px solid var(--gnome-border-color, rgba(0, 0, 0, 0.12));
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--gnome-label-color, #1a1a1a);
+}
+
+/* ─── Type backgrounds ────────────────────────────────────────────────────── */
+
+.typeInfo    { background: rgba(53,  132, 228, 0.10); border-color: rgba(53,  132, 228, 0.28); }
+.typeSuccess { background: rgba(38,  162, 105, 0.10); border-color: rgba(38,  162, 105, 0.28); }
+.typeWarning { background: rgba(229, 165,  10, 0.10); border-color: rgba(229, 165,  10, 0.28); }
+.typeError   { background: rgba(224,  27,  36, 0.10); border-color: rgba(224,  27,  36, 0.28); }
+
+/* ─── Icon ────────────────────────────────────────────────────────────────── */
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.iconInfo    { background: var(--gnome-accent-color,  #3584e4); }
+.iconSuccess { background: var(--gnome-success-color, #26a269); }
+.iconWarning { background: var(--gnome-warning-color, #e5a50a); }
+.iconError   { background: var(--gnome-error-color,   #e01b24); }
+
+/* ─── Content ─────────────────────────────────────────────────────────────── */
+
+.content {
+  flex: 1;
+}
+
+/* ─── Action button ───────────────────────────────────────────────────────── */
+
+.action {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--gnome-border-color, rgba(0, 0, 0, 0.24));
+  cursor: pointer;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.action:hover { background: rgba(0, 0, 0, 0.06); }
+
+.action:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: 1px;
+}
+
+/* ─── Dismiss button ──────────────────────────────────────────────────────── */
+
+.dismiss {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gnome-dim-label-color, #77767b);
+  font-size: 13px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+
+.dismiss:hover {
+  background: rgba(0, 0, 0, 0.07);
+  color: var(--gnome-label-color, #1a1a1a);
+}
+
+.dismiss:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: 1px;
+}

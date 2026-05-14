@@ -647,6 +647,74 @@ import { QuickActions } from "@gnome-ui/layout";
 />
 ```
 
+---
+
+### `ToastProvider` / `useToast`
+
+Transient in-app notifications shown at the bottom-center of the screen, following GNOME HIG toast guidelines. Toasts auto-dismiss after a configurable timeout and are shown one at a time (queue-based).
+
+Wrap your app (or the relevant subtree) with `<ToastProvider>`, then call `useToast()` to show messages from any component.
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `show` | `(options: ToastOptions) => string` | Enqueues a toast and returns its id |
+| `dismiss` | `(id?: string) => void` | Dismisses the toast with the given id (or the current one if omitted) |
+| `dismissAll` | `() => void` | Clears the entire queue immediately |
+
+#### `ToastOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `title` | `string` | — | Toast message text |
+| `type` | `"default" \| "info" \| "success" \| "warning" \| "error"` | `"default"` | Visual variant |
+| `timeout` | `number` | `4000` | Auto-dismiss delay in ms. `0` = no auto-dismiss |
+| `action` | `{ label: string; onClick: () => void }` | — | Optional inline action button |
+| `id` | `string` | auto | Stable id for deduplication |
+
+```tsx
+import { ToastProvider, useToast } from "@gnome-ui/layout";
+
+// Wrap your app:
+<ToastProvider>
+  <App />
+</ToastProvider>
+
+// Inside any component:
+function SaveButton() {
+  const { show } = useToast();
+  return (
+    <button onClick={() => show({ title: "File saved", type: "success" })}>
+      Save
+    </button>
+  );
+}
+```
+
+---
+
+### `Banner`
+
+Persistent in-app message strip shown at the top of a view, following GNOME HIG banner guidelines. Use banners to communicate ongoing states — offline mode, read-only access, pending updates. They do not auto-dismiss. For individual events and short-lived messages, use `Toast` instead.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"default" \| "info" \| "success" \| "warning" \| "error"` | `"default"` | Visual variant |
+| `action` | `{ label: string; onClick: () => void }` | — | Optional inline action button |
+| `onDismiss` | `() => void` | — | Shows a close button; parent controls visibility |
+| `children` | `ReactNode` | — | Banner message content |
+
+```tsx
+import { Banner } from "@gnome-ui/layout";
+
+<Banner
+  type="warning"
+  action={{ label: "Reconnect", onClick: retry }}
+  onDismiss={() => setVisible(false)}
+>
+  Working offline — changes will sync when you reconnect
+</Banner>
+```
+
 ## License
 
 [MIT](../../LICENSE)

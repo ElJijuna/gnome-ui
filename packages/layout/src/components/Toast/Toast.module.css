@@ -1,0 +1,125 @@
+/* ─── Container (portal, fixed bottom-center) ─────────────────────────────── */
+
+.container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: max-content;
+  max-width: min(calc(100vw - 48px), 480px);
+  pointer-events: none;
+}
+
+/* ─── Toast card ──────────────────────────────────────────────────────────── */
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 14px;
+  border-radius: 12px;
+  background: var(--gnome-toast-bg, rgba(28, 28, 28, 0.96));
+  color: var(--gnome-toast-fg, #ffffff);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.28),
+    0 1px 4px rgba(0, 0, 0, 0.14);
+  pointer-events: all;
+  animation: toastIn 0.22s cubic-bezier(0.34, 1.4, 0.64, 1);
+  width: 100%;
+}
+
+.exiting {
+  animation: toastOut 0.2s ease forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0)   scale(1); }
+  to   { opacity: 0; transform: translateY(8px) scale(0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast, .exiting { animation: none; }
+}
+
+/* ─── Type dot ────────────────────────────────────────────────────────────── */
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotSuccess { background: var(--gnome-success-color, #26a269); }
+.dotError   { background: var(--gnome-error-color,   #e01b24); }
+.dotWarning { background: var(--gnome-warning-color, #e5a50a); }
+.dotInfo    { background: var(--gnome-accent-color,  #3584e4); }
+
+/* ─── Title ───────────────────────────────────────────────────────────────── */
+
+.title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Action button ───────────────────────────────────────────────────────── */
+
+.action {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gnome-accent-color, #78aeed);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.action:hover { background: rgba(255, 255, 255, 0.1); }
+.action:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: 1px;
+}
+
+/* ─── Close button ────────────────────────────────────────────────────────── */
+
+.close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+
+.close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: 1px;
+}
