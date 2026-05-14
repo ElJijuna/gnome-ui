@@ -507,30 +507,33 @@ const panelRef = useRef<PanelCardHandle>(null);
 
 ### `DashboardGrid`
 
-Responsive CSS Grid container for arranging dashboard widgets and panels.
+Responsive 12-column CSS Grid container for dashboard widgets and panels.
+
+#### Breakpoints
+
+| Key | Min-width |
+|-----|-----------|
+| `xs` | — (base) |
+| `sm` | 576 px |
+| `md` | 768 px |
+| `lg` | 992 px |
+| `xl` | 1200 px |
+| `xxl` | 1600 px |
+
+#### `DashboardGrid` props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `columns` | `1 \| 2 \| 3 \| 4 \| "auto" \| ResponsiveColumns` | `"auto"` | Column count. `"auto"` fills columns with `minmax(280px, 1fr)`. Objects map breakpoints to explicit counts. |
-| `gap` | `"sm" \| "md" \| "lg"` | `"md"` | Gap between items using core spacing tokens (`--gnome-space-2/3/4`). |
+| `columns` | `1–12 \| "auto" \| Partial<Record<Breakpoint, 1–12>>` | `"auto"` | Column count. `"auto"` fills columns with `minmax(280px, 1fr)`. An object maps breakpoints to explicit counts. |
+| `gap` | `"sm" \| "md" \| "lg" \| Partial<Record<Breakpoint, "sm" \| "md" \| "lg">>` | `"md"` | Gap between items — fixed or responsive. Uses `--gnome-space-2/3/4`. |
 | `layout` | `"grid" \| "column"` | `"grid"` | Render as a grid or as a vertical stack. |
-| `children` | `ReactNode` | — | `DashboardGrid.Item` elements. |
-
-#### Responsive columns
-
-| Key | Width |
-|-----|-------|
-| `sm` | Base / small screens |
-| `md` | `≥ 550px` |
-| `lg` | `≥ 860px` |
-| `xl` | `≥ 1200px` |
 
 #### `DashboardGrid.Item` props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `span` | `1 \| 2 \| 3 \| 4` | `1` | Number of columns the item spans in grid mode. Harmless in column mode. |
-| `children` | `ReactNode` | — | Widget content. |
+| `span` | `1–12 \| Partial<Record<Breakpoint, 1–12>>` | `1` | Column span — fixed or responsive per breakpoint. |
+| `offset` | `0–11` | `0` | Columns to skip before the item. |
 
 Both `DashboardGrid` and `DashboardGrid.Item` forward all `<div>` props
 to their root element.
@@ -538,25 +541,56 @@ to their root element.
 ```tsx
 import { DashboardGrid } from "@gnome-ui/layout";
 
-<DashboardGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap="md">
-  <DashboardGrid.Item span={2}>
-    <StatCard />
+// Responsive columns + responsive span
+<DashboardGrid columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} gap="md">
+  <DashboardGrid.Item span={{ xs: 12, md: 8 }}>
+    <Chart />
   </DashboardGrid.Item>
-  <DashboardGrid.Item>
-    <ProgressCard />
+  <DashboardGrid.Item span={{ xs: 12, md: 4 }}>
+    <Sidebar />
   </DashboardGrid.Item>
+</DashboardGrid>
+
+// Fixed 12-column layout with offset
+<DashboardGrid columns={12} gap="md">
+  <DashboardGrid.Item span={8} offset={2}>
+    <CenteredPanel />
+  </DashboardGrid.Item>
+</DashboardGrid>
+
+// Vertical stack
+<DashboardGrid layout="column" gap="md">
+  <DashboardGrid.Item><StatCard /></DashboardGrid.Item>
+  <DashboardGrid.Item><ActivityFeed /></DashboardGrid.Item>
 </DashboardGrid>
 ```
 
+---
+
+### `MasonryGrid`
+
+Masonry layout that distributes variable-height items across columns using a
+**shortest-column-first** algorithm — each new item is placed in the column
+with the least accumulated height, minimising gaps. Layout is computed in
+JavaScript via `ResizeObserver` and adapts automatically when the container
+or any item changes size.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `number \| Partial<Record<Breakpoint, number>>` | `3` | Column count — fixed or per breakpoint. |
+| `gap` | `"sm" \| "md" \| "lg" \| Partial<Record<Breakpoint, "sm" \| "md" \| "lg">>` | `"md"` | Gap between items — fixed or responsive. |
+| `fresh` | `boolean` | `false` | Attach a `ResizeObserver` to every child so the layout recomputes when any item grows or shrinks. |
+
+Uses the same breakpoints as `DashboardGrid` (xs / sm / md / lg / xl / xxl).
+
 ```tsx
-<DashboardGrid layout="column" gap="md">
-  <DashboardGrid.Item>
-    <StatCard />
-  </DashboardGrid.Item>
-  <DashboardGrid.Item>
-    <ActivityFeed />
-  </DashboardGrid.Item>
-</DashboardGrid>
+import { MasonryGrid } from "@gnome-ui/layout";
+
+<MasonryGrid columns={{ xs: 1, sm: 2, md: 3 }} gap="md">
+  <Card height={180} />
+  <Card height={260} />
+  <Card height={120} />
+</MasonryGrid>
 ```
 
 ---

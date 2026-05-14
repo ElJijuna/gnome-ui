@@ -1,0 +1,9 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.item {
+  box-sizing: border-box;
+  transition: top 0.25s ease, left 0.25s ease, width 0.25s ease;
+}

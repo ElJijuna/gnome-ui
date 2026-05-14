@@ -89,3 +89,6 @@ export type {
 
 export { QuickActions } from "./components/QuickActions";
 export type { QuickAction, QuickActionsProps } from "./components/QuickActions";
+
+export { MasonryGrid } from "./components/MasonryGrid";
+export type { MasonryGridProps, MasonryGridColumns } from "./components/MasonryGrid";
