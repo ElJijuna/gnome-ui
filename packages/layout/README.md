@@ -649,6 +649,34 @@ import { QuickActions } from "@gnome-ui/layout";
 
 ---
 
+### `SectionHeader`
+
+Title row for dashboard sections with optional subtitle and trailing action slot.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | Section title |
+| `subtitle` | `string` | — | Optional supporting text shown below the title |
+| `action` | `ReactNode` | — | Optional trailing action — button, link, or menu trigger |
+
+```tsx
+import { SectionHeader } from "@gnome-ui/layout";
+
+<SectionHeader
+  title="Recent Activity"
+  subtitle="Last 24 hours"
+  action={<Button variant="flat" size="sm">View all</Button>}
+/>
+```
+
+Per-component path:
+
+```tsx
+import { SectionHeader } from "@gnome-ui/layout/components/SectionHeader";
+```
+
+---
+
 ### `ToastProvider` / `useToast`
 
 Transient in-app notifications shown at the bottom-center of the screen, following GNOME HIG toast guidelines. Toasts auto-dismiss after a configurable timeout and are shown one at a time (queue-based).

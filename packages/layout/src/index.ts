@@ -103,3 +103,6 @@ export type {
 
 export { Banner } from "./components/Banner";
 export type { BannerType, BannerProps } from "./components/Banner";
+
+export { SectionHeader } from "./components/SectionHeader";
+export type { SectionHeaderProps } from "./components/SectionHeader";
