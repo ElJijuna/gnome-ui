@@ -76,3 +76,12 @@
   justify-content: space-between;
   align-items: center;
 }
+
+/* ─── Spinner loading ─────────────────────────────────────────────────────── */
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+}

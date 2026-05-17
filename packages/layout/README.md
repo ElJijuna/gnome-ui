@@ -444,6 +444,38 @@ import { UserCard } from "@gnome-ui/layout";
 
 ---
 
+### `EntityCard`
+
+Avatar/icon + title + optional badge, subtitle, description, trailing slot, and footer
+meta. Covers both compact grid cards and full-width list rows via additive optional props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `avatar` | `ReactNode` | — | Avatar slot — use `<IconBadge>` or `<Avatar>` |
+| `title` | `string` | — | Primary label |
+| `badge` | `ReactNode` | — | Inline node next to the title (e.g. status badge) |
+| `trailing` | `ReactNode` | — | Node pinned to the far right |
+| `subtitle` | `string` | — | Secondary line below the title |
+| `description` | `string` | — | Third line — longer description text |
+| `meta` | `[string?, string?]` | — | Up to two footer strings: first left-aligned, second right-aligned |
+| `interactive` | `boolean` | `true` | Delegates hover/active behavior to `Card` |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
+
+```tsx
+import { EntityCard } from "@gnome-ui/layout";
+import { IconBadge } from "@gnome-ui/layout";
+
+<EntityCard
+  avatar={<IconBadge color="blue" size="md">🌤</IconBadge>}
+  title="GNOME Weather"
+  subtitle="@alice_dev"
+  meta={["v4.8.0", "⭐ 203"]}
+/>
+```
+
+---
+
 ### `PanelCard`
 
 Card with a structured **header / body / footer** layout and built-in collapse/expand behaviour.

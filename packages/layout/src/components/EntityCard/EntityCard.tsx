@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import { Card, Text } from "@gnome-ui/react";
+import { Card, Skeleton, Spinner, Text } from "@gnome-ui/react";
+import type { LoadingType } from "../StatCard";
 import styles from "./EntityCard.module.css";
 
 export interface EntityCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -22,6 +23,10 @@ export interface EntityCardProps extends HTMLAttributes<HTMLDivElement> {
   meta?: [string?, string?];
   /** Delegates hover/active behavior to Card. Defaults to `true`. */
   interactive?: boolean;
+  /** Render a loading placeholder. */
+  loading?: boolean;
+  /** Loading placeholder style. Defaults to `"skeleton"`. */
+  loadingType?: LoadingType;
 }
 
 export function EntityCard({
@@ -33,10 +38,38 @@ export function EntityCard({
   description,
   meta,
   interactive = true,
+  loading = false,
+  loadingType = "skeleton",
   className,
   ...props
 }: EntityCardProps) {
   const hasMeta = meta && (meta[0] || meta[1]);
+
+  if (loading) {
+    const cardClass = [styles.card, className].filter(Boolean).join(" ");
+    if (loadingType === "spinner") {
+      return (
+        <Card interactive={false} className={cardClass} aria-busy="true" {...props}>
+          <div className={styles.spinnerWrapper}>
+            <Spinner size="md" />
+          </div>
+        </Card>
+      );
+    }
+    return (
+      <Card interactive={false} className={cardClass} aria-busy="true" {...props}>
+        <div className={styles.inner}>
+          <div className={styles.avatarSlot}>
+            <Skeleton variant="circle" size={40} />
+          </div>
+          <div className={styles.body}>
+            <Skeleton variant="rect" width={140} height={14} />
+            <Skeleton variant="rect" width={100} height={12} style={{ marginTop: 2 }} />
+          </div>
+        </div>
+      </Card>
+    );
+  }
 
   return (
     <Card
