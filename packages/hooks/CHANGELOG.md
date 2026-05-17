@@ -1,3 +1,68 @@
+## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.27.2...@gnome-ui/hooks@1.28.0) (2026-05-17)
+
+### Features
+
+* **@gnome-ui/charts:** format numbers with Intl.NumberFormat using GnomeProvider locale. ([3d66f95](https://github.com/ElJijuna/gnome-ui/commit/3d66f95703bcf3e04d295033243d92ce0df61c1d))
+* **@gnome-ui/core:** add new layout sidebar tokens. ([0d35ecd](https://github.com/ElJijuna/gnome-ui/commit/0d35ecd9c393d9fbb1f744df00019a2b7a22653d))
+* **@gnome-ui/core:** add new tokens. ([53b87e4](https://github.com/ElJijuna/gnome-ui/commit/53b87e49aac002676bb67f39926e9bf7189218f8))
+* **@gnome-ui/hooks:** add useHapticFeedback hook ([208a7b6](https://github.com/ElJijuna/gnome-ui/commit/208a7b63df169297d1871741cfa2caa94ccccb28)), closes [#81](https://github.com/ElJijuna/gnome-ui/issues/81)
+* **@gnome-ui/icons, @gnome-ui/react:** add simple-icons support to Icon component ([7b3e454](https://github.com/ElJijuna/gnome-ui/commit/7b3e454b96e4562ad06c4d4851310e87c380c8df))
+* **@gnome-ui/icons:** add Npm icon and fix Share icon ([6ae994e](https://github.com/ElJijuna/gnome-ui/commit/6ae994eb4400a54bba0636fc284b1d2d14b4eb45))
+* **@gnome-ui/icons:** add simple-icons support to Icon component ([dc7eb3f](https://github.com/ElJijuna/gnome-ui/commit/dc7eb3f66aaa381c0e768b45e6970ea16c4b8206))
+* **@gnome-ui/layout:** add app header content and status bar ([c404336](https://github.com/ElJijuna/gnome-ui/commit/c40433635a5a36ed75d7e2024918fee21f6686dc))
+* **@gnome-ui/layout:** add DashboardGrid component (closes [#82](https://github.com/ElJijuna/gnome-ui/issues/82)) ([feb03f3](https://github.com/ElJijuna/gnome-ui/commit/feb03f3b5c7dfdfcc7bab246f3471a1b320c9145))
+* **@gnome-ui/layout:** add locale toolbar to Storybook preview. ([29ada4b](https://github.com/ElJijuna/gnome-ui/commit/29ada4b4b7fef0a355bcb6b338e598f79e843533))
+* **@gnome-ui/layout:** add MasonryGrid ([5d88b9e](https://github.com/ElJijuna/gnome-ui/commit/5d88b9ece18e874bb4922a51f6c699b32891b0fe))
+* **@gnome-ui/layout:** add QuickActions component (closes [#86](https://github.com/ElJijuna/gnome-ui/issues/86)) ([fa55062](https://github.com/ElJijuna/gnome-ui/commit/fa55062068f87c93853f46018d08bca15daad776))
+* **@gnome-ui/layout:** add responsive DashboardGrid layouts (closes [#99](https://github.com/ElJijuna/gnome-ui/issues/99)) ([550f367](https://github.com/ElJijuna/gnome-ui/commit/550f367388f83609a54f4a4c94fd73f34a8276be))
+* **@gnome-ui/layout:** add shell aliases and scroll modes ([9b1fdc4](https://github.com/ElJijuna/gnome-ui/commit/9b1fdc463118f5e9ab3089fc4c6c14564b6de8d4))
+* **@gnome-ui/layout:** add sidebar shell and collapse modes ([1695eae](https://github.com/ElJijuna/gnome-ui/commit/1695eaee3c137389e4745326c7416a8259611374))
+* **@gnome-ui/layout:** add StatCard component (closes [#83](https://github.com/ElJijuna/gnome-ui/issues/83)) ([166b689](https://github.com/ElJijuna/gnome-ui/commit/166b6898a191b079f757ba46a9c3456cb9967af2))
+* **@gnome-ui/layout:** add Toast and Banner components ([9c78c89](https://github.com/ElJijuna/gnome-ui/commit/9c78c897d54b60603751e11c4dbd1d89920d8913))
+* **@gnome-ui/layout:** improve sidebar overlay accessibility ([eabd034](https://github.com/ElJijuna/gnome-ui/commit/eabd034b2c6336b9fada9ce22002329d8e621589))
+* **@gnome-ui/layout:** support hex colors in IconBadge ([95d599c](https://github.com/ElJijuna/gnome-ui/commit/95d599ccb6eb55424a520310b96dc725cf2cab83))
+* **@gnome-ui/layout:** update Dashboard grid and support new sizes ([17f3cfd](https://github.com/ElJijuna/gnome-ui/commit/17f3cfd177f0ab8030410273a053511239b7e726))
+* **@gnome-ui/layout:** update with new layout sidebar tokens ([6ce18f0](https://github.com/ElJijuna/gnome-ui/commit/6ce18f0439922bd57de6b49d48dbf34ae169199c))
+* **@gnome-ui/layout:** use Intl.NumberFormat with GnomeProvider locale in CounterCard and StatCard. ([2381936](https://github.com/ElJijuna/gnome-ui/commit/23819363e2e4792b34d67567a18571dfa0a5f37d))
+* **@gnome-ui/platform:** add hapticFeedback bridge channel ([6824770](https://github.com/ElJijuna/gnome-ui/commit/682477042bf7b1717772ce986e4875034775bead))
+* **@gnome-ui/react:** add AvatarRotator component. ([0ec5ec8](https://github.com/ElJijuna/gnome-ui/commit/0ec5ec826e02e9a0a38e64836a3a5dc0cc6358e4))
+* **@gnome-ui/react:** add componente IconButton, update Button to add class to use circular button and add refs prop, update Tooltip to export refs prop. ([a033b3c](https://github.com/ElJijuna/gnome-ui/commit/a033b3cadff68019a85097d68a145a186a7388e2))
+* **@gnome-ui/react:** add GnomeProvider with locale and dir context ([eb8fb53](https://github.com/ElJijuna/gnome-ui/commit/eb8fb53f01b557cc18ec8bb55369e11ffbdd6b64))
+* **@gnome-ui/react:** add locale toolbar to Storybook and WithLocale stories. ([fe068f9](https://github.com/ElJijuna/gnome-ui/commit/fe068f9442eea631ffe02411b169f9b5e9b7a209))
+* **@gnome-ui/react:** add provider Intl formatting hooks. ([f7de293](https://github.com/ElJijuna/gnome-ui/commit/f7de293fcd5941c03c7e079e84cc7271f1a3a19c))
+* **@gnome-ui/react:** add simple-icons support to Icon component ([a17286e](https://github.com/ElJijuna/gnome-ui/commit/a17286ec53fc07ceee3b95eeeb4a0d69f64558be))
+* **@gnome-ui/react:** update componentes with new layout sidebar tokens. ([4a9346d](https://github.com/ElJijuna/gnome-ui/commit/4a9346d9fe31a225177a2a2eced6fee30f18981a))
+* add new icon Npm and fix Share icon. ([68fcf36](https://github.com/ElJijuna/gnome-ui/commit/68fcf36ddf3b0b056175a32a63890bf7cfbd0dbc))
+* **react:** add Skeleton component ([c993481](https://github.com/ElJijuna/gnome-ui/commit/c993481e593b6e84ad4470bf3f1b4460f96c586e)), closes [#95](https://github.com/ElJijuna/gnome-ui/issues/95)
+* **storybook:** add accent color toolbar to react and layout packages ([832e1ab](https://github.com/ElJijuna/gnome-ui/commit/832e1abf397e8f8174284eeca36bb6f052a8c795))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** add missing component subpath exports. ([e4a8017](https://github.com/ElJijuna/gnome-ui/commit/e4a801732ab3094594785ebce698201d8a7512b3))
+* **@gnome-ui/charts:** remove redundant WithLocale stories covered by preview decorator. ([e5da5f9](https://github.com/ElJijuna/gnome-ui/commit/e5da5f9a8129ce03d8424db9b111af9abc128dd3))
+* **@gnome-ui/core:** apply Adwaita Sans to body via tokens.css ([b8ea02d](https://github.com/ElJijuna/gnome-ui/commit/b8ea02db2209cf2aa1a0411ad66ece107dce26db))
+* **@gnome-ui/layout:** add missing component subpath exports ([db6a2cc](https://github.com/ElJijuna/gnome-ui/commit/db6a2cc274e8c940efd1e677abe8eced24c99869))
+* **@gnome-ui/layout:** add protection in breakpoints ([bc7b435](https://github.com/ElJijuna/gnome-ui/commit/bc7b435e2f4259ab44c28513c6242207e61b69d3))
+* **@gnome-ui/layout:** add styles into package.json ([5112fc7](https://github.com/ElJijuna/gnome-ui/commit/5112fc799f23e9414dec272a5b64a114f7a8c742))
+* **@gnome-ui/layout:** externalize internal package dependencies. ([fcfee6a](https://github.com/ElJijuna/gnome-ui/commit/fcfee6a0323b3ceeb65a57b5c93c0f49444daf02))
+* **@gnome-ui/layout:** make sidebar trigger respond to breakpoint changes. ([4ba3bd0](https://github.com/ElJijuna/gnome-ui/commit/4ba3bd0da32905aea6960de7ed8312b8096b4636))
+* **@gnome-ui/react:** export ColorPicker. ([991c3a9](https://github.com/ElJijuna/gnome-ui/commit/991c3a9ac32b6021e653eceafd0c520a9db0fe01))
+* **@gnome-ui/react:** externalize internal package dependencies ([d2fcb4c](https://github.com/ElJijuna/gnome-ui/commit/d2fcb4c01209675c488f3c8776fc3b18f1a03a46))
+* **ci:** build react before charts workflows ([87a4f2f](https://github.com/ElJijuna/gnome-ui/commit/87a4f2f97b88aa4597e4245eeb1566be2ee8f33e))
+* **ci:** provide icons artifacts for dependent builds ([64f1c9a](https://github.com/ElJijuna/gnome-ui/commit/64f1c9a947b3947f06ca711967156354b9afdda1))
+* update package-lock.json ([a29bbc2](https://github.com/ElJijuna/gnome-ui/commit/a29bbc28c3a45f47c1af7591cd11ab47785ba524))
+
+### Refactoring
+
+* **@gnome-ui/layout:** use provider number formatting ([267b443](https://github.com/ElJijuna/gnome-ui/commit/267b44361067d7003cb8efbea92b03bf0093d995))
+
+### Documentation
+
+* **@gnome-ui/charts:** update README ([094e708](https://github.com/ElJijuna/gnome-ui/commit/094e708e4213d38f7459ab2636fa156a04541629))
+* **@gnome-ui/layout:** add layout parity stories ([2da9a29](https://github.com/ElJijuna/gnome-ui/commit/2da9a29bbe08ffcffc366a91981cf02f2d481be7))
+* **@gnome-ui/layout:** update docs ([b483efe](https://github.com/ElJijuna/gnome-ui/commit/b483efe738270c06076dede9f34ed3abece19665))
+* update README and ROADMAP. ([d88b65d](https://github.com/ElJijuna/gnome-ui/commit/d88b65d4ae7bca38c09c5c2e0414ec525f66553f))
+
 ## [1.27.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.27.1...@gnome-ui/hooks@1.27.2) (2026-05-02)
 
 ### Features
