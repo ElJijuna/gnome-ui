@@ -70,14 +70,41 @@ describe("StatCard", () => {
     expect(screen.getByText("0%")).toBeInTheDocument();
   });
 
-  it("renders a skeleton loading state", () => {
-    const { container } = render(
-      <StatCard label="Active Users" value={1284} loading data-testid="stat" />,
-    );
+  describe("loading", () => {
+    it("renders skeleton by default when loading={true}", () => {
+      const { container } = render(
+        <StatCard label="Active Users" value={1284} loading data-testid="stat" />,
+      );
 
-    expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
-    expect(screen.queryByText("Active Users")).toBeNull();
-    expect(container.querySelectorAll("[aria-hidden='true']").length).toBeGreaterThan(0);
+      expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
+      expect(screen.queryByText("Active Users")).toBeNull();
+      expect(container.querySelectorAll("[aria-hidden='true']").length).toBeGreaterThan(0);
+    });
+
+    it("renders skeleton when loadingType='skeleton' is explicit", () => {
+      const { container } = render(
+        <StatCard label="Active Users" value={1284} loading loadingType="skeleton" data-testid="stat" />,
+      );
+
+      expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
+      expect(container.querySelectorAll("[aria-hidden='true']").length).toBeGreaterThan(0);
+    });
+
+    it("renders spinner when loadingType='spinner'", () => {
+      render(
+        <StatCard label="Active Users" value={1284} loading loadingType="spinner" data-testid="stat" />,
+      );
+
+      expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
+      expect(screen.queryByText("Active Users")).toBeNull();
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("does not render spinner when not loading", () => {
+      render(<StatCard label="Active Users" value={1284} loadingType="spinner" />);
+      expect(screen.queryByRole("status")).toBeNull();
+      expect(screen.getByText("Active Users")).toBeInTheDocument();
+    });
   });
 
   it("forwards className, style, and data attributes to the root", () => {

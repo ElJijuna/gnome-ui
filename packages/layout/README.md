@@ -373,8 +373,8 @@ import { CounterCard } from "@gnome-ui/layout";
 
 ### `StatCard`
 
-Key metric card with optional unit, trend indicator, icon, and skeleton loading
-state. Use it for dashboard metrics that need context beyond a raw count.
+Key metric card with optional unit, trend indicator, icon, and loading state.
+Use it for dashboard metrics that need context beyond a raw count.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -383,7 +383,8 @@ state. Use it for dashboard metrics that need context beyond a raw count.
 | `unit` | `string` | — | Optional unit suffix |
 | `trend` | `{ direction: "up" \| "down" \| "neutral"; value: number; period?: string }` | — | Optional trend indicator |
 | `icon` | `ReactNode` | — | Optional visual element. Size and color are controlled by the node you pass in. |
-| `loading` | `boolean` | `false` | Render a skeleton placeholder state |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
 
 ```tsx
 import { Person } from "@gnome-ui/icons";

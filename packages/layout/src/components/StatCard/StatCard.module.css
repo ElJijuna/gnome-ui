@@ -83,3 +83,10 @@
 .loading {
   pointer-events: none;
 }
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 94px;
+}

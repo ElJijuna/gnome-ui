@@ -1,6 +1,8 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import { Card, Skeleton, Text, useNumberFormatter } from "@gnome-ui/react";
+import { Card, Skeleton, Spinner, Text, useNumberFormatter } from "@gnome-ui/react";
 import styles from "./StatCard.module.css";
+
+export type LoadingType = "skeleton" | "spinner";
 
 export type StatCardTrendDirection = "up" | "down" | "neutral";
 
@@ -21,8 +23,10 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   trend?: StatCardTrend;
   /** Optional visual element rendered in the top-right corner. */
   icon?: ReactNode;
-  /** Render a skeleton loading state. */
+  /** Render a loading placeholder. */
   loading?: boolean;
+  /** Loading placeholder style. Defaults to `"skeleton"`. */
+  loadingType?: LoadingType;
 }
 
 const TREND_SYMBOL: Record<StatCardTrendDirection, string> = {
@@ -38,20 +42,29 @@ export function StatCard({
   trend,
   icon,
   loading = false,
+  loadingType = "skeleton",
   className,
   ...props
 }: StatCardProps) {
   const numberFormat = useNumberFormatter();
 
   if (loading) {
+    const rootClass = [styles.card, styles.loading, className]
+      .filter(Boolean)
+      .join(" ");
+
+    if (loadingType === "spinner") {
+      return (
+        <Card className={rootClass} aria-busy="true" {...props}>
+          <div className={styles.spinnerWrapper}>
+            <Spinner size="md" />
+          </div>
+        </Card>
+      );
+    }
+
     return (
-      <Card
-        className={[styles.card, styles.loading, className]
-          .filter(Boolean)
-          .join(" ")}
-        aria-busy="true"
-        {...props}
-      >
+      <Card className={rootClass} aria-busy="true" {...props}>
         <div className={styles.header}>
           <Skeleton variant="rect" width={110} height={14} />
           {icon && <Skeleton variant="circle" size={30} />}

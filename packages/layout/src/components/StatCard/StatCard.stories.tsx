@@ -63,12 +63,33 @@ export const NeutralTrend: Story = {
   },
 };
 
-export const Loading: Story = {
+export const LoadingSkeleton: Story = {
   args: {
     label: "Requests",
     value: 0,
     loading: true,
+    loadingType: "skeleton",
     icon: <Icon icon={Applications} size="lg" />,
+  },
+  parameters: {
+    docs: {
+      description: { story: "Default loading state — skeleton placeholder matching the card shape." },
+    },
+  },
+};
+
+export const LoadingSpinner: Story = {
+  args: {
+    label: "Requests",
+    value: 0,
+    loading: true,
+    loadingType: "spinner",
+    icon: <Icon icon={Applications} size="lg" />,
+  },
+  parameters: {
+    docs: {
+      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton blocks." },
+    },
   },
 };
 

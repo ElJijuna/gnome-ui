@@ -33,6 +33,7 @@ export type { CounterCardProps } from "./components/CounterCard";
 
 export { StatCard } from "./components/StatCard";
 export type {
+  LoadingType,
   StatCardProps,
   StatCardTrend,
   StatCardTrendDirection,
