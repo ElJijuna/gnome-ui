@@ -1,5 +1,6 @@
 import { type HTMLAttributes, type ReactNode, useMemo, useState } from "react";
-import { Button, Skeleton, Text, useLocale } from "@gnome-ui/react";
+import { Button, Skeleton, Spinner, Text, useLocale } from "@gnome-ui/react";
+import type { LoadingType } from "../StatCard";
 import styles from "./ActivityFeed.module.css";
 
 export interface ActivityFeedItem {
@@ -15,8 +16,10 @@ export interface ActivityFeedProps extends HTMLAttributes<HTMLDivElement> {
   items: ActivityFeedItem[];
   /** Truncate the list after N items; a "Show more" button reveals the rest. */
   maxItems?: number;
-  /** Render skeleton placeholder rows while data loads. */
+  /** Render a loading placeholder. */
   loading?: boolean;
+  /** Loading placeholder style. Defaults to `"skeleton"`. */
+  loadingType?: LoadingType;
   /** Content shown when `items` is empty. */
   emptyState?: ReactNode;
 }
@@ -49,6 +52,7 @@ export function ActivityFeed({
   items,
   maxItems,
   loading = false,
+  loadingType = "skeleton",
   emptyState,
   className,
   ...props
@@ -61,12 +65,20 @@ export function ActivityFeed({
   );
 
   if (loading) {
+    const rootClass = [styles.root, className].filter(Boolean).join(" ");
+
+    if (loadingType === "spinner") {
+      return (
+        <div className={rootClass} aria-busy="true" {...props}>
+          <div className={styles.spinnerWrapper}>
+            <Spinner size="md" />
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div
-        className={[styles.root, className].filter(Boolean).join(" ")}
-        aria-busy="true"
-        {...props}
-      >
+      <div className={rootClass} aria-busy="true" {...props}>
         <ul className={styles.list} aria-label="Loading activity">
           {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
             <li key={i} className={styles.item}>

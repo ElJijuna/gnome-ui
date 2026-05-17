@@ -82,3 +82,12 @@
   justify-content: center;
   padding-top: 8px;
 }
+
+/* ─── Spinner loading ─────────────────────────────────────────────────── */
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}

@@ -165,6 +165,34 @@ describe("ActivityFeed", () => {
       );
       expect(screen.queryByText("Hidden label")).toBeNull();
     });
+
+    it("renders skeleton rows by default when loading={true}", () => {
+      const { container } = render(<ActivityFeed items={[]} loading />);
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(container.querySelector("ul")).toBeInTheDocument();
+    });
+
+    it("renders skeleton rows when loadingType='skeleton' is explicit", () => {
+      const { container } = render(
+        <ActivityFeed items={[]} loading loadingType="skeleton" />,
+      );
+      expect(container.querySelector("ul")).toBeInTheDocument();
+    });
+
+    it("renders spinner when loadingType='spinner'", () => {
+      const { container } = render(
+        <ActivityFeed items={[]} loading loadingType="spinner" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(container.querySelector("ul")).toBeNull();
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("does not render spinner when not loading", () => {
+      render(<ActivityFeed items={makeItems(2)} loadingType="spinner" />);
+      expect(screen.queryByRole("status")).toBeNull();
+      expect(screen.getByText("Event 1")).toBeInTheDocument();
+    });
   });
 
   describe("emptyState", () => {

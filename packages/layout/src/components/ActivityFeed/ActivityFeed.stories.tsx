@@ -99,14 +99,28 @@ export const WithMaxItems: Story = {
   },
 };
 
-export const Loading: Story = {
+export const LoadingSkeleton: Story = {
   args: {
     items: [],
     loading: true,
+    loadingType: "skeleton",
   },
   parameters: {
     docs: {
-      description: { story: "`loading` renders animated skeleton rows while data is fetched." },
+      description: { story: "Default loading state — animated skeleton rows." },
+    },
+  },
+};
+
+export const LoadingSpinner: Story = {
+  args: {
+    items: [],
+    loading: true,
+    loadingType: "spinner",
+  },
+  parameters: {
+    docs: {
+      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton rows." },
     },
   },
 };

@@ -659,7 +659,8 @@ skeleton loading state, and a "Show more" affordance.
 |------|------|---------|-------------|
 | `items` | `ActivityFeedItem[]` | — | Feed entries |
 | `maxItems` | `number` | — | Truncate after N items; a "Show more" button reveals the rest |
-| `loading` | `boolean` | `false` | Render animated skeleton rows |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
 | `emptyState` | `ReactNode` | — | Content shown when `items` is empty |
 
 #### `ActivityFeedItem`
