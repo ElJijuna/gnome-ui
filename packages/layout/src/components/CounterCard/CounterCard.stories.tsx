@@ -200,6 +200,36 @@ export const DashboardStats: Story = {
   },
 };
 
+// ─── Loading ──────────────────────────────────────────────────────────────────
+
+export const LoadingSkeleton: Story = {
+  args: {
+    label: "Documents",
+    value: 0,
+    loading: true,
+    loadingType: "skeleton",
+  },
+  parameters: {
+    docs: {
+      description: { story: "Default loading state — skeleton placeholders for label and value." },
+    },
+  },
+};
+
+export const LoadingSpinner: Story = {
+  args: {
+    label: "Documents",
+    value: 0,
+    loading: true,
+    loadingType: "spinner",
+  },
+  parameters: {
+    docs: {
+      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton blocks." },
+    },
+  },
+};
+
 // ─── No animation ─────────────────────────────────────────────────────────────
 
 export const NoAnimation: Story = {

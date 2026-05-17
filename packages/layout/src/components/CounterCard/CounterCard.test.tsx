@@ -133,6 +133,51 @@ describe("CounterCard", () => {
     });
   });
 
+  describe("loading", () => {
+    it("renders with aria-busy='true' when loading", () => {
+      const { container } = render(
+        <CounterCard label="Files" value={42} animated={false} loading />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("does not render the label text when loading", () => {
+      render(
+        <CounterCard label="HiddenLabel" value={42} animated={false} loading />,
+      );
+      expect(screen.queryByText("HiddenLabel")).toBeNull();
+    });
+
+    it("renders skeleton by default when loading={true}", () => {
+      const { container } = render(
+        <CounterCard label="Files" value={42} animated={false} loading />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.queryByRole("status")).toBeNull();
+    });
+
+    it("renders skeleton when loadingType='skeleton' is explicit", () => {
+      const { container } = render(
+        <CounterCard label="Files" value={42} animated={false} loading loadingType="skeleton" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("renders spinner when loadingType='spinner'", () => {
+      const { container } = render(
+        <CounterCard label="Files" value={42} animated={false} loading loadingType="spinner" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("does not render spinner when not loading", () => {
+      render(<CounterCard label="Files" value={42} animated={false} loadingType="spinner" />);
+      expect(screen.queryByRole("status")).toBeNull();
+      expect(screen.getByText("Files")).toBeInTheDocument();
+    });
+  });
+
   describe("HTML attribute forwarding", () => {
     it("forwards className to the Card root element", () => {
       const { container } = render(

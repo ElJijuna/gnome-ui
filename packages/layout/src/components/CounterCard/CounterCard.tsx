@@ -4,8 +4,9 @@ import {
   useState,
   type HTMLAttributes,
 } from "react";
-import { Card, Icon, Text, useNumberFormatter } from "@gnome-ui/react";
+import { Card, Icon, Skeleton, Spinner, Text, useNumberFormatter } from "@gnome-ui/react";
 import type { IconDefinition } from "@gnome-ui/icons";
+import type { LoadingType } from "../StatCard";
 import styles from "./CounterCard.module.css";
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
@@ -120,6 +121,10 @@ export interface CounterCardProps extends HTMLAttributes<HTMLDivElement> {
   color?: string;
   /** Short trend line rendered below the value in a muted success color. */
   trend?: string;
+  /** Render a loading placeholder. */
+  loading?: boolean;
+  /** Loading placeholder style. Defaults to `"skeleton"`. */
+  loadingType?: LoadingType;
 }
 
 export function CounterCard({
@@ -136,17 +141,54 @@ export function CounterCard({
   icon,
   color,
   trend,
+  loading = false,
+  loadingType = "skeleton",
   className,
   style,
   ...props
 }: CounterCardProps) {
-  const raw = useCountUp(value, duration, animated);
+  const raw = useCountUp(value, duration, animated && !loading);
   const numberFormat = useNumberFormatter({
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
 
   const formatted = format ? format(raw) : numberFormat.format(raw);
+
+  if (loading) {
+    const cardClass = [styles.card, className].filter(Boolean).join(" ");
+    if (loadingType === "spinner") {
+      return (
+        <Card
+          interactive={interactive}
+          className={cardClass}
+          style={style}
+          aria-busy="true"
+          {...props}
+        >
+          <div className={styles.spinnerWrapper}>
+            <Spinner size="md" />
+          </div>
+        </Card>
+      );
+    }
+    return (
+      <Card
+        interactive={interactive}
+        className={cardClass}
+        style={style}
+        aria-busy="true"
+        {...props}
+      >
+        <div className={styles.header}>
+          <Skeleton variant="rect" width={80} height={12} />
+          {icon && <Skeleton variant="rect" width={26} height={26} style={{ borderRadius: 7 }} />}
+        </div>
+        <Skeleton variant="rect" width={100} height={32} style={{ marginTop: 4 }} />
+        {trend && <Skeleton variant="rect" width={90} height={12} style={{ marginTop: 2 }} />}
+      </Card>
+    );
+  }
 
   const useColor = Boolean(color);
 

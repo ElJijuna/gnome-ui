@@ -361,6 +361,8 @@ Metric card with an animated numeric counter. Counts from `0` (or from the previ
 | `duration` | `number` | `1000` | Animation duration in ms |
 | `accent` | `boolean` | `false` | Render the value in the accent color |
 | `interactive` | `boolean` | `false` | Make the card clickable |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
 
 ```tsx
 import { CounterCard } from "@gnome-ui/layout";
