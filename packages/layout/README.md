@@ -476,6 +476,37 @@ import { IconBadge } from "@gnome-ui/layout";
 
 ---
 
+### `ApplicationCard`
+
+App detail header with avatar, name, badge, description, stat row, and actions.
+Designed for the MyApps `AppDetail` view — use `EntityCard` for list rows.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `avatar` | `ReactNode` | — | Avatar slot — use `<IconBadge size="xl">` |
+| `name` | `string` | — | Application name |
+| `badge` | `ReactNode` | — | Inline node next to the name (e.g. `<StatusBadge>`) |
+| `description` | `string` | — | Short description below the name |
+| `stats` | `ApplicationCardStat[]` | — | Horizontal key/value stat pairs |
+| `actions` | `ReactNode` | — | Action buttons below the stats row |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
+
+```tsx
+import { ApplicationCard } from "@gnome-ui/layout";
+
+<ApplicationCard
+  avatar={<IconBadge color="blue" size="xl">⛅</IconBadge>}
+  name="GNOME Weather"
+  badge={<StatusBadge variant="success">published</StatusBadge>}
+  description="The official weather app for the GNOME desktop."
+  stats={[{ label: "Version", value: "v4.8.1" }]}
+  actions={<Button variant="suggested">New Release</Button>}
+/>
+```
+
+---
+
 ### `PanelCard`
 
 Card with a structured **header / body / footer** layout and built-in collapse/expand behaviour.

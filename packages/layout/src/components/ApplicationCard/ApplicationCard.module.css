@@ -86,3 +86,12 @@
   gap: 8px;
   flex-wrap: wrap;
 }
+
+/* ─── Spinner loading ─────────────────────────────────────────────────────── */
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}

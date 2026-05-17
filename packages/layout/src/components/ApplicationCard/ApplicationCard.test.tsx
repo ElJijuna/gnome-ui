@@ -69,6 +69,45 @@ describe("ApplicationCard", () => {
     });
   });
 
+  describe("loading", () => {
+    it("renders with aria-busy='true' when loading", () => {
+      const { container } = render(<ApplicationCard avatar={avatar} name="GNOME Weather" loading />);
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("does not render the name when loading", () => {
+      render(<ApplicationCard avatar={avatar} name="GNOME Weather" loading />);
+      expect(screen.queryByText("GNOME Weather")).toBeNull();
+    });
+
+    it("renders skeleton by default when loading={true}", () => {
+      const { container } = render(<ApplicationCard avatar={avatar} name="T" loading />);
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.queryByRole("status")).toBeNull();
+    });
+
+    it("renders skeleton when loadingType='skeleton' is explicit", () => {
+      const { container } = render(
+        <ApplicationCard avatar={avatar} name="T" loading loadingType="skeleton" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("renders spinner when loadingType='spinner'", () => {
+      const { container } = render(
+        <ApplicationCard avatar={avatar} name="T" loading loadingType="spinner" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("does not render spinner when not loading", () => {
+      render(<ApplicationCard avatar={avatar} name="GNOME Weather" loadingType="spinner" />);
+      expect(screen.queryByRole("status")).toBeNull();
+      expect(screen.getByText("GNOME Weather")).toBeInTheDocument();
+    });
+  });
+
   describe("HTML attribute forwarding", () => {
     it("forwards data-testid to root element", () => {
       render(<ApplicationCard avatar={avatar} name="T" data-testid="appcard" />);

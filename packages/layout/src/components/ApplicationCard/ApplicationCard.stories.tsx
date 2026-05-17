@@ -83,6 +83,36 @@ export const MyAppsDetail: Story = {
   },
 };
 
+// ─── Loading ──────────────────────────────────────────────────────────────────
+
+export const LoadingSkeleton: Story = {
+  args: {
+    avatar: null,
+    name: "",
+    loading: true,
+    loadingType: "skeleton",
+  },
+  parameters: {
+    docs: {
+      description: { story: "Default loading state — skeleton for avatar, name, description, and stat rows." },
+    },
+  },
+};
+
+export const LoadingSpinner: Story = {
+  args: {
+    avatar: null,
+    name: "",
+    loading: true,
+    loadingType: "spinner",
+  },
+  parameters: {
+    docs: {
+      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton blocks." },
+    },
+  },
+};
+
 // ─── Without stats or actions ──────────────────────────────────────────────────
 
 export const Minimal: Story = {
