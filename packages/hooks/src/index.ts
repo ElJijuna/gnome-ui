@@ -8,3 +8,4 @@ export * from "./useColorScheme";
 export * from "./useFileChooser";
 export * from "./useClipboard";
 export * from "./useWindowState";
+export * from "./useHapticFeedback";

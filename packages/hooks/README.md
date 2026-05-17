@@ -52,6 +52,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs |
 | `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard with copy/paste helpers |
 | `useWindowState()` | `{ maximized, fullscreen, ... }` | Reactive window state with matching setters |
+| `useHapticFeedback()` | `{ trigger, isSupported, ... }` | Haptic feedback via feedbackd (native) or Vibration API (browser/PWA) |
 
 ## Examples
 
@@ -132,6 +133,44 @@ export function ThemeToggle() {
   );
 }
 ```
+
+### Trigger haptic feedback
+
+```tsx
+import { useHapticFeedback } from "@gnome-ui/hooks";
+
+export function SendButton() {
+  const { trigger, isSupported } = useHapticFeedback();
+
+  return (
+    <button
+      onClick={() => {
+        trigger("button-pressed");
+        sendMessage();
+      }}
+    >
+      Send
+    </button>
+  );
+}
+```
+
+Resolution order: **feedbackd** (via `window.webkit.messageHandlers` inside a
+WebKitGTK WebView) → **Vibration API** (browser / PWA) → no-op.
+
+Event names follow the [GNOME Event Naming Specification](https://honk.sigxcpu.org/projects/feedbackd/doc/Event-naming-spec-0.0.0.html).
+App-specific events must use the `x-` prefix:
+
+```ts
+trigger("x-myapp-task-complete");
+```
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `trigger(event)` | `(event: GnomeHapticEvent) => void` | Fire haptic feedback for the given event name |
+| `isSupported` | `boolean` | `true` if any haptic mechanism is available |
+| `isNativeSupported` | `boolean` | `true` inside a WebKitGTK WebView (feedbackd) |
+| `isVibrationApiSupported` | `boolean` | `true` when `navigator.vibrate` is available |
 
 ## License
 
