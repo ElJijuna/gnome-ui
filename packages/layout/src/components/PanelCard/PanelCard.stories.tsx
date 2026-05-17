@@ -263,6 +263,34 @@ export const ImperativeControl: Story = {
   },
 };
 
+// ─── Loading ──────────────────────────────────────────────────────────────────
+
+export const LoadingSkeleton: Story = {
+  args: {
+    title: "Project Files",
+    loading: true,
+    loadingType: "skeleton",
+  },
+  parameters: {
+    docs: {
+      description: { story: "Default loading state — header stays visible; body replaced with skeleton lines." },
+    },
+  },
+};
+
+export const LoadingSpinner: Story = {
+  args: {
+    title: "Project Files",
+    loading: true,
+    loadingType: "spinner",
+  },
+  parameters: {
+    docs: {
+      description: { story: "`loadingType=\"spinner\"` renders a centred spinner in the body area." },
+    },
+  },
+};
+
 // ─── WithBadgeInFooter ────────────────────────────────────────────────────────
 
 export const WithBadgeInFooter: Story = {

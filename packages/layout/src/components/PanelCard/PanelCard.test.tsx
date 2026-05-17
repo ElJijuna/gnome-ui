@@ -345,6 +345,67 @@ describe("PanelCard", () => {
     });
   });
 
+  // ── Loading ──────────────────────────────────────────────────────────────────
+
+  describe("loading", () => {
+    it("renders with aria-busy='true' when loading", () => {
+      const { container } = render(
+        <PanelCard title={TITLE} loading>{BODY_TEXT}</PanelCard>,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("still renders the header title when loading", () => {
+      render(<PanelCard title={TITLE} loading>{BODY_TEXT}</PanelCard>);
+      expect(screen.getByText(TITLE)).toBeInTheDocument();
+    });
+
+    it("does not render children when loading", () => {
+      render(<PanelCard title={TITLE} loading>{BODY_TEXT}</PanelCard>);
+      expect(screen.queryByText(BODY_TEXT)).toBeNull();
+    });
+
+    it("hides the footer when loading", () => {
+      render(
+        <PanelCard title={TITLE} loading footer={<span>{FOOTER_TEXT}</span>}>
+          {BODY_TEXT}
+        </PanelCard>,
+      );
+      expect(screen.queryByText(FOOTER_TEXT)).toBeNull();
+    });
+
+    it("renders skeleton by default when loading={true}", () => {
+      const { container } = render(
+        <PanelCard title={TITLE} loading>{BODY_TEXT}</PanelCard>,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.queryByRole("status")).toBeNull();
+    });
+
+    it("renders skeleton when loadingType='skeleton' is explicit", () => {
+      const { container } = render(
+        <PanelCard title={TITLE} loading loadingType="skeleton">{BODY_TEXT}</PanelCard>,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("renders spinner when loadingType='spinner'", () => {
+      const { container } = render(
+        <PanelCard title={TITLE} loading loadingType="spinner">{BODY_TEXT}</PanelCard>,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("does not render spinner when not loading", () => {
+      render(
+        <PanelCard title={TITLE} loadingType="spinner">{BODY_TEXT}</PanelCard>,
+      );
+      expect(screen.queryByRole("status")).toBeNull();
+      expect(screen.getByText(BODY_TEXT)).toBeInTheDocument();
+    });
+  });
+
   // ── HTML attribute forwarding ────────────────────────────────────────────────
 
   describe("HTML attribute forwarding", () => {

@@ -5,8 +5,9 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from "react";
-import { Card, Icon, Separator, Text } from "@gnome-ui/react";
+import { Card, Icon, Separator, Skeleton, Spinner, Text } from "@gnome-ui/react";
 import { PanDown, PanUp } from "@gnome-ui/icons";
+import type { LoadingType } from "../StatCard";
 import styles from "./PanelCard.module.css";
 
 // ─── Handle ───────────────────────────────────────────────────────────────────
@@ -59,6 +60,10 @@ export interface PanelCardProps extends Omit<HTMLAttributes<HTMLDivElement>, "ti
   footer?: ReactNode;
   /** Controls at the trailing edge of the footer bar. */
   footerActions?: ReactNode;
+  /** Render a loading placeholder in the body area. */
+  loading?: boolean;
+  /** Loading placeholder style. Defaults to `"skeleton"`. */
+  loadingType?: LoadingType;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -99,6 +104,8 @@ export const PanelCard = forwardRef<PanelCardHandle, PanelCardProps>(
       children,
       footer,
       footerActions,
+      loading = false,
+      loadingType = "skeleton",
       className,
       style,
       ...props
@@ -130,6 +137,7 @@ export const PanelCard = forwardRef<PanelCardHandle, PanelCardProps>(
         padding="none"
         className={[styles.root, className].filter(Boolean).join(" ")}
         style={style}
+        aria-busy={loading || undefined}
         {...props}
       >
         {/* ── Header ── */}
@@ -176,9 +184,25 @@ export const PanelCard = forwardRef<PanelCardHandle, PanelCardProps>(
         >
           <div className={styles.bodyInner}>
             <Separator />
-            <div className={styles.body}>{children}</div>
+            <div className={styles.body}>
+              {loading ? (
+                loadingType === "spinner" ? (
+                  <div className={styles.spinnerWrapper}>
+                    <Spinner size="md" />
+                  </div>
+                ) : (
+                  <>
+                    <Skeleton variant="rect" width={200} height={14} />
+                    <Skeleton variant="rect" width={160} height={14} style={{ marginTop: 8 }} />
+                    <Skeleton variant="rect" width={180} height={14} style={{ marginTop: 8 }} />
+                  </>
+                )
+              ) : (
+                children
+              )}
+            </div>
 
-            {hasFooter && (
+            {!loading && hasFooter && (
               <>
                 <Separator />
                 <div className={styles.footer}>

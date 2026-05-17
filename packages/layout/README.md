@@ -539,6 +539,8 @@ ref.current?.toggle();
 | `children` | `ReactNode` | — | Body content (collapsed/expanded with the panel) |
 | `footer` | `ReactNode` | — | Leading content in the footer bar (feedback text, badge…) |
 | `footerActions` | `ReactNode` | — | Trailing controls in the footer bar |
+| `loading` | `boolean` | `false` | Replace the body with a loading placeholder (header stays visible) |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
 
 The footer bar is only rendered when at least one of `footer` or `footerActions` is provided.
 
