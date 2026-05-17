@@ -1,3 +1,12 @@
+## [1.23.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.22.1...@gnome-ui/layout@1.23.0) (2026-05-17)
+
+### Features
+
+* **@gnome-ui/hooks:** add useHapticFeedback hook ([208a7b6](https://github.com/ElJijuna/gnome-ui/commit/208a7b63df169297d1871741cfa2caa94ccccb28)), closes [#81](https://github.com/ElJijuna/gnome-ui/issues/81)
+* **@gnome-ui/layout:** add ActivityFeed component (closes [#85](https://github.com/ElJijuna/gnome-ui/issues/85)) ([b6acc5a](https://github.com/ElJijuna/gnome-ui/commit/b6acc5a04cc2589dbff8ef877220cad0615aba9e))
+* **@gnome-ui/layout:** add SectionHeader component (closes [#88](https://github.com/ElJijuna/gnome-ui/issues/88)) ([b5d589d](https://github.com/ElJijuna/gnome-ui/commit/b5d589dcdf638a14c6c1f74e8ec502c428e84943))
+* **@gnome-ui/platform:** add hapticFeedback bridge channel ([6824770](https://github.com/ElJijuna/gnome-ui/commit/682477042bf7b1717772ce986e4875034775bead))
+
 ## [1.22.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.22.0...@gnome-ui/layout@1.22.1) (2026-05-14)
 
 ### Bug Fixes
