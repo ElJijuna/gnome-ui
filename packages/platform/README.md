@@ -39,6 +39,7 @@ npm install @gnome-ui/platform
 | `window` | Query and change window state (maximize, minimize, fullscreen) |
 | `clipboard` | Read and write the GDK clipboard (text, files, images) |
 | `portals` | Low-level XDG Desktop Portal access for Flatpak apps |
+| `hapticFeedback` | Trigger haptic feedback via feedbackd; falls back to Vibration API in browser/PWA |
 
 ## Bridge utilities
 
@@ -58,7 +59,8 @@ await postMessage("notifications", { title: "Hello", body: "World" });
 
 ### Native → Web events
 
-Subscribe to events dispatched by the GJS host. The host fires them by evaluating a `CustomEvent` in the WebView:
+Subscribe to events dispatched by the GJS host. The host fires them by
+evaluating a `CustomEvent` in the WebView:
 
 ```js
 // GJS side — dispatch an event to the web layer
@@ -80,7 +82,8 @@ const off = onNativeEvent("open-modal", (payload) => {
 off();
 ```
 
-All native events use the `gnome:` prefix internally — pass only the unprefixed name to `onNativeEvent`.
+All native events use the `gnome:` prefix internally — pass only the
+unprefixed name to `onNativeEvent`.
 
 ## Runtime detection
 

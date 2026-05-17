@@ -24,7 +24,8 @@ export type BridgeChannel =
   | "colorScheme"
   | "window"
   | "clipboard"
-  | "portals";
+  | "portals"
+  | "hapticFeedback";
 
 /** Returns true when running inside a WebKitGTK WebView with a GJS host. */
 export function isWebKitBridge(): boolean {
