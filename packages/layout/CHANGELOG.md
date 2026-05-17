@@ -1,3 +1,15 @@
+## [1.24.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.23.0...@gnome-ui/layout@1.24.0) (2026-05-17)
+
+### Features
+
+* **@gnome-ui/layout:** add loadingType prop to ActivityFeed (closes [#107](https://github.com/ElJijuna/gnome-ui/issues/107)) ([b723c2b](https://github.com/ElJijuna/gnome-ui/commit/b723c2b1fd7f1eb5c3ec5d64694e37a08827451b))
+* **@gnome-ui/layout:** add loadingType prop to ApplicationCard (closes [#111](https://github.com/ElJijuna/gnome-ui/issues/111)) ([bc1f39a](https://github.com/ElJijuna/gnome-ui/commit/bc1f39a862faef2624c275dd5e69c64c654639e5))
+* **@gnome-ui/layout:** add loadingType prop to CounterCard (closes [#108](https://github.com/ElJijuna/gnome-ui/issues/108)) ([e9e8e9f](https://github.com/ElJijuna/gnome-ui/commit/e9e8e9fe34487253b7a586058db22cd70f10eb7b))
+* **@gnome-ui/layout:** add loadingType prop to EntityCard (closes [#110](https://github.com/ElJijuna/gnome-ui/issues/110)) ([76a692d](https://github.com/ElJijuna/gnome-ui/commit/76a692dbba77976628c2ac3f3034852b198ddfb6))
+* **@gnome-ui/layout:** add loadingType prop to PanelCard (closes [#112](https://github.com/ElJijuna/gnome-ui/issues/112)) ([b9406a2](https://github.com/ElJijuna/gnome-ui/commit/b9406a2412e42210a84eaa6a95c37804187e3cfe))
+* **@gnome-ui/layout:** add loadingType prop to StatCard (closes [#106](https://github.com/ElJijuna/gnome-ui/issues/106)) ([f13027e](https://github.com/ElJijuna/gnome-ui/commit/f13027ed4e12f29d2ac4c99f65928748f63e5b71))
+* **@gnome-ui/layout:** add loadingType prop to UserCard (closes [#109](https://github.com/ElJijuna/gnome-ui/issues/109)) ([5f8ffac](https://github.com/ElJijuna/gnome-ui/commit/5f8ffaca95b2eaebdcde06f2db6d399be6649682))
+
 ## [1.23.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.22.1...@gnome-ui/layout@1.23.0) (2026-05-17)
 
 ### Features
