@@ -106,3 +106,6 @@ export type { BannerType, BannerProps } from "./components/Banner";
 
 export { SectionHeader } from "./components/SectionHeader";
 export type { SectionHeaderProps } from "./components/SectionHeader";
+
+export { ActivityFeed } from "./components/ActivityFeed";
+export type { ActivityFeedProps, ActivityFeedItem } from "./components/ActivityFeed";

@@ -1,0 +1,84 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gnome-separator-color, rgba(0, 0, 0, 0.12));
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+/* ─── Icon / dot ──────────────────────────────────────────────────────── */
+
+.icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gnome-accent-color, #3584e4);
+  margin-top: 6px;
+}
+
+/* ─── Body ────────────────────────────────────────────────────────────── */
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.description {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Timestamp ───────────────────────────────────────────────────────── */
+
+.timestamp {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ─── Show more ───────────────────────────────────────────────────────── */
+
+.showMore {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}

@@ -122,6 +122,11 @@
       "import": "./dist/components/SectionHeader.js",
       "require": "./dist/components/SectionHeader.cjs"
     },
+    "./components/ActivityFeed": {
+      "types": "./dist/components/ActivityFeed.d.ts",
+      "import": "./dist/components/ActivityFeed.js",
+      "require": "./dist/components/ActivityFeed.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",

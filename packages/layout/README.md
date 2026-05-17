@@ -649,6 +649,53 @@ import { QuickActions } from "@gnome-ui/layout";
 
 ---
 
+### `ActivityFeed`
+
+Chronological list of recent events with relative timestamps, optional icons,
+skeleton loading state, and a "Show more" affordance.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `ActivityFeedItem[]` | — | Feed entries |
+| `maxItems` | `number` | — | Truncate after N items; a "Show more" button reveals the rest |
+| `loading` | `boolean` | `false` | Render animated skeleton rows |
+| `emptyState` | `ReactNode` | — | Content shown when `items` is empty |
+
+#### `ActivityFeedItem`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Stable item key |
+| `label` | `string` | Event description |
+| `description` | `string` | Optional supporting text |
+| `timestamp` | `Date` | Event time; displayed as relative time ("2 minutes ago") |
+| `icon` | `ReactNode` | Optional icon rendered in a circular badge |
+
+```tsx
+import { ActivityFeed } from "@gnome-ui/layout";
+
+<ActivityFeed
+  items={[
+    {
+      id: "1",
+      label: "User logged in",
+      description: "admin@example.com",
+      timestamp: new Date(),
+    },
+  ]}
+  maxItems={5}
+  emptyState={<p>No recent activity</p>}
+/>
+```
+
+Per-component path:
+
+```tsx
+import { ActivityFeed } from "@gnome-ui/layout/components/ActivityFeed";
+```
+
+---
+
 ### `SectionHeader`
 
 Title row for dashboard sections with optional subtitle and trailing action slot.
