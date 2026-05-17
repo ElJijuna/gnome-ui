@@ -126,6 +126,45 @@ describe("UserCard", () => {
     });
   });
 
+  describe("loading", () => {
+    it("renders with aria-busy='true' when loading", () => {
+      const { container } = render(<UserCard name="Ada Lovelace" loading />);
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("does not render the name when loading", () => {
+      render(<UserCard name="Ada Lovelace" loading />);
+      expect(screen.queryByText("Ada Lovelace")).toBeNull();
+    });
+
+    it("renders skeleton by default when loading={true}", () => {
+      const { container } = render(<UserCard name="Ada Lovelace" loading />);
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.queryByRole("status")).toBeNull();
+    });
+
+    it("renders skeleton when loadingType='skeleton' is explicit", () => {
+      const { container } = render(
+        <UserCard name="Ada Lovelace" loading loadingType="skeleton" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+    });
+
+    it("renders spinner when loadingType='spinner'", () => {
+      const { container } = render(
+        <UserCard name="Ada Lovelace" loading loadingType="spinner" />,
+      );
+      expect(container.firstChild).toHaveAttribute("aria-busy", "true");
+      expect(screen.getByRole("status")).toBeInTheDocument();
+    });
+
+    it("does not render spinner when not loading", () => {
+      render(<UserCard name="Ada Lovelace" loadingType="spinner" />);
+      expect(screen.queryByRole("status")).toBeNull();
+      expect(screen.getByText("Ada Lovelace")).toBeInTheDocument();
+    });
+  });
+
   describe("HTML attribute forwarding", () => {
     it("forwards className to the root element", () => {
       const { container } = render(

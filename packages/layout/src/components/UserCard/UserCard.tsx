@@ -1,6 +1,7 @@
 import type { CSSProperties, HTMLAttributes } from "react";
-import { Avatar, Text, Separator } from "@gnome-ui/react";
+import { Avatar, Skeleton, Spinner, Text, Separator } from "@gnome-ui/react";
 import type { AvatarColor, AvatarSize } from "@gnome-ui/react";
+import type { LoadingType } from "../StatCard";
 import styles from "./UserCard.module.css";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -41,6 +42,10 @@ export interface UserCardProps extends HTMLAttributes<HTMLDivElement> {
   actions?: UserCardAction[];
   /** Minimum width of the card. Defaults to `200`. */
   minWidth?: number;
+  /** Render a loading placeholder. */
+  loading?: boolean;
+  /** Loading placeholder style. Defaults to `"skeleton"`. */
+  loadingType?: LoadingType;
   style?: CSSProperties;
   className?: string;
 }
@@ -69,6 +74,8 @@ export interface UserCardProps extends HTMLAttributes<HTMLDivElement> {
  * />
  * ```
  */
+const AVATAR_PX: Record<AvatarSize, number> = { sm: 24, md: 32, lg: 48, xl: 64 };
+
 export function UserCard({
   name,
   email,
@@ -78,11 +85,50 @@ export function UserCard({
   orientation = "vertical",
   actions = [],
   minWidth = 200,
+  loading = false,
+  loadingType = "skeleton",
   className,
   style,
   ...props
 }: UserCardProps) {
   const isVertical = orientation === "vertical";
+  const avatarPx = AVATAR_PX[avatarSize] ?? 32;
+
+  if (loading) {
+    const rootClass = [styles.root, className].filter(Boolean).join(" ");
+
+    if (loadingType === "spinner") {
+      return (
+        <div
+          className={rootClass}
+          style={{ minWidth, ...style }}
+          aria-busy="true"
+          {...props}
+        >
+          <div className={styles.spinnerWrapper}>
+            <Spinner size="md" />
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        className={rootClass}
+        style={{ minWidth, ...style }}
+        aria-busy="true"
+        {...props}
+      >
+        <div className={[styles.header, isVertical ? styles.headerVertical : null].filter(Boolean).join(" ")}>
+          <Skeleton variant="circle" size={avatarPx} />
+          <div className={[styles.identity, isVertical ? styles.identityVertical : null].filter(Boolean).join(" ")}>
+            <Skeleton variant="rect" width={120} height={14} />
+            <Skeleton variant="rect" width={160} height={12} style={{ marginTop: 2 }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Insert a separator before the first destructive action when there are
   // non-destructive actions above it.

@@ -180,6 +180,35 @@ export const InsidePopover: Story = {
   },
 };
 
+// ─── Loading ──────────────────────────────────────────────────────────────────
+
+export const LoadingSkeleton: Story = {
+  args: {
+    name: "Ada Lovelace",
+    email: "ada@gnome.org",
+    loading: true,
+    loadingType: "skeleton",
+  },
+  parameters: {
+    docs: {
+      description: { story: "Default loading state — skeleton for the avatar circle and identity lines." },
+    },
+  },
+};
+
+export const LoadingSpinner: Story = {
+  args: {
+    name: "Ada Lovelace",
+    loading: true,
+    loadingType: "spinner",
+  },
+  parameters: {
+    docs: {
+      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton rows." },
+    },
+  },
+};
+
 // ─── Only destructive actions ─────────────────────────────────────────────────
 
 export const OnlyDestructive: Story = {

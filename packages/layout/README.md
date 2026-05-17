@@ -425,6 +425,8 @@ The component has **no card chrome** — place it inside a `Popover` or wrap it 
 | `avatarSize` | `AvatarSize` | `"md"` | Avatar size |
 | `actions` | `UserCardAction[]` | `[]` | Action buttons; use `variant: "destructive"` for danger actions |
 | `minWidth` | `number` | `200` | Minimum card width in px |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
 
 ```tsx
 import { UserCard } from "@gnome-ui/layout";

@@ -105,3 +105,12 @@
   background-color: color-mix(in srgb, var(--gnome-destructive-color, #e01b24) 18%, transparent);
 }
 
+/* ─── Spinner loading ─────────────────────────────────────────────────────── */
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
