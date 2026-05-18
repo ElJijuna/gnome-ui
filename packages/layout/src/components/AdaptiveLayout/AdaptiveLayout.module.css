@@ -70,7 +70,6 @@
 .collapseBtn {
   width: 100%;
   min-width: fit-content;
-  border-radius: 0 !important;
 }
 
 /* ─── Sidebar separator ─────────────────────────────────────────────────────── */
@@ -227,5 +226,35 @@
 @media (prefers-color-scheme: dark) {
   .sheetItemBadge {
     background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ─── Glass (frosted) effect ────────────────────────────────────────────────── */
+
+.root[data-glass] {
+  --gnome-window-bg-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Sidebar, top bar, and fullRight wrapper — transparent, glass shows through */
+.root[data-glass] .fullRight,
+.root[data-glass] :global(nav),
+.root[data-glass] :global(header) {
+  background: transparent !important;
+}
+
+/* Content area stays opaque — reset variable so children render solid */
+.root[data-glass] .contentSlotFull {
+  --gnome-window-bg-color: #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  .root[data-glass] {
+    --gnome-window-bg-color: rgba(28, 28, 28, 0.55);
+  }
+
+  .root[data-glass] .contentSlotFull {
+    --gnome-window-bg-color: #242424;
   }
 }

@@ -105,6 +105,11 @@ export interface AdaptiveLayoutProps {
    * Defaults to `1` (fully opaque).
    */
   bgOpacity?: number;
+  /**
+   * Enables the glass (frosted) effect: semitransparent backgrounds + backdrop blur.
+   * Requires the parent element to have a background (e.g. a wallpaper on `<html>`).
+   */
+  glass?: boolean;
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -144,6 +149,7 @@ export function AdaptiveLayout({
   bgColor,
   bgShade = 3,
   bgOpacity = 1,
+  glass,
   sidebarPlacement = "inline",
   sidebarFooter,
   sidebarFooterCollapsed,
@@ -225,7 +231,7 @@ export function AdaptiveLayout({
   if (isMobile) {
     return (
       <>
-        <div className={styles.root} style={bgStyle}>
+        <div className={styles.root} style={bgStyle} data-glass={glass || undefined}>
           {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
           <div className={styles.contentSlot}>{children}</div>
 
@@ -377,7 +383,7 @@ export function AdaptiveLayout({
   // ── Tablet / Desktop ───────────────────────────────────────────────────────
   if (sidebarPlacement === "full") {
     return (
-      <div className={`${styles.root} ${styles.rootFull}`} style={bgStyle}>
+      <div className={`${styles.root} ${styles.rootFull}`} style={bgStyle} data-glass={glass || undefined}>
         {sidebarNav}
         <div className={styles.fullRight}>
           {topBar && <div className={`${styles.topBarSlot} ${styles.topBarSlotFull}`}>{topBar}</div>}
@@ -391,7 +397,7 @@ export function AdaptiveLayout({
   }
 
   return (
-    <div className={styles.root} style={bgStyle}>
+    <div className={styles.root} style={bgStyle} data-glass={glass || undefined}>
       {topBar && <div className={styles.topBarSlot}>{topBar}</div>}
 
       <div className={styles.body}>

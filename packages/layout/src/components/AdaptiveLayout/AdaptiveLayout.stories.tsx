@@ -42,6 +42,10 @@ const meta: Meta<typeof AdaptiveLayout> = {
       control: { type: "range", min: 0, max: 1, step: 0.05 },
       description: "Opacity of the background color (0–1)",
     },
+    glass: {
+      control: "boolean",
+      description: "Enables the frosted-glass effect: semitransparent backgrounds + backdrop blur. Requires a background behind the layout.",
+    },
   },
   parameters: {
     layout: "fullscreen",
@@ -243,11 +247,12 @@ export const Playground: Story = {
     bgColor: "white" as GnomeColor,
     bgShade: 3 as GnomeColorShade,
     bgOpacity: 1,
+    glass: false,
   },
   parameters: {
     docs: {
       description: {
-        story: "Interactive sandbox — use the **Controls** panel to experiment with all props: `sidebarPlacement`, `sidebarSeparators`, `showCollapseButton`, `bgColor`, `bgShade`, and `bgOpacity`.",
+        story: "Interactive sandbox — use the **Controls** panel to experiment with all props: `sidebarPlacement`, `sidebarSeparators`, `showCollapseButton`, `bgColor`, `bgShade`, `bgOpacity`, and `glass`.",
       },
     },
   },
@@ -297,6 +302,67 @@ export const SidebarFull: Story = {
     docs: {
       description: {
         story: "`sidebarPlacement=\"full\"`: sidebar occupies the full left column, top bar and content are stacked to its right.",
+      },
+    },
+  },
+};
+
+export const Glass: Story = {
+  render: function GlassStory() {
+    const [active, setActive] = useState("dashboard");
+    const activeItem = items.find((i) => i.id === active);
+
+    return (
+      <div style={{
+        backgroundImage: [
+          "linear-gradient(135deg, rgba(53,132,228,0.45) 0%, rgba(145,65,172,0.45) 50%, rgba(230,97,0,0.45) 100%)",
+          "url('https://picsum.photos/id/1067/1920/1080')",
+        ].join(", "),
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        overflow: "hidden",
+      }}>
+        <AdaptiveLayout
+          glass
+          items={items}
+          value={active}
+          onValueChange={setActive}
+          sidebarPlacement="full"
+          topBar={<HeaderBar title="Developer Portal" />}
+          sidebarHeader={
+            <UserCard
+              name="El Jijuna"
+              email="Developer"
+              orientation="horizontal"
+              avatarColor="red"
+              avatarSize="md"
+            />
+          }
+          sidebarHeaderCollapsed={
+            <div style={{ display: "flex", justifyContent: "center", padding: "10px 0" }}>
+              <Avatar name="El Jijuna" color="red" size="md" />
+            </div>
+          }
+        >
+          <div>
+            <p style={{ fontFamily: "var(--gnome-font-family)", fontSize: "1.5rem", fontWeight: 700, margin: "0 0 8px" }}>
+              {activeItem?.label}
+            </p>
+            <p style={{ fontFamily: "var(--gnome-font-family)", opacity: 0.6, margin: 0 }}>
+              The layout is frosted glass over the gradient background.
+              Set <code>glass</code> on any <code>AdaptiveLayout</code> that sits on top of a wallpaper or coloured parent.
+            </p>
+          </div>
+        </AdaptiveLayout>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "`glass` prop: the layout surfaces become semitransparent and blurred, letting the parent background show through. No external CSS needed — the effect is fully self-contained.",
       },
     },
   },
