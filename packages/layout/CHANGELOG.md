@@ -1,3 +1,9 @@
+## [1.25.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.24.0...@gnome-ui/layout@1.25.0) (2026-05-18)
+
+### Features
+
+* **@gnome-ui/layout:** add glass prop to AdaptiveLayout and fix collapse button border-radius. ([5ed7a36](https://github.com/ElJijuna/gnome-ui/commit/5ed7a368681a303b6b5231dbf1bb58e67aad7f21))
+
 ## [1.24.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.23.0...@gnome-ui/layout@1.24.0) (2026-05-17)
 
 ### Features
