@@ -119,6 +119,42 @@ function ThemeAwareImage() {
 - `useColorScheme()` — returns the value passed to `GnomeProvider` (`"light"`, `"dark"`, or `"system"`).
 - `useResolvedColorScheme()` — always returns `"light"` or `"dark"`, resolving `"system"` against the OS preference in real time.
 
+## Accent color
+
+Pass `accentColor` to `GnomeProvider` to set the app-wide accent color. The provider applies the correct CSS custom properties to `document.documentElement` automatically.
+
+Two types of values are accepted:
+
+| Value | Behavior |
+|-------|----------|
+| Named palette (`"blue"`, `"green"`, `"yellow"`, `"orange"`, `"red"`, `"purple"`, `"brown"`) | Theme-aware — uses the correct shade for light/dark mode automatically. Defaults to `"blue"`. |
+| Any CSS color string (`"#ff0000"`, `"oklch(…)"`, etc.) | Applied directly; same value in light and dark mode. |
+
+```tsx
+import { GnomeProvider } from "@gnome-ui/react";
+
+export default function App({ accentColor }) {
+  return (
+    <GnomeProvider accentColor={accentColor}>
+      {/* "green", "#a020f0", or any CSS color */}
+    </GnomeProvider>
+  );
+}
+```
+
+Consume the accent color in any component:
+
+```tsx
+import { useAccentColor } from "@gnome-ui/react";
+
+function AccentDot() {
+  const accent = useAccentColor(); // e.g. "green" or "#ff0000"
+  return <span style={{ background: accent }} />;
+}
+```
+
+- `useAccentColor()` — returns the raw value passed to `GnomeProvider` (named color or CSS string).
+
 ## Tree-shaking
 
 The package ships per-component entry points, so bundlers (webpack, Rollup, esbuild, Vite) can eliminate unused components automatically. Named imports from the root entry work with any bundler that respects `"sideEffects"`:

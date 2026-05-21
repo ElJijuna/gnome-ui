@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useReducer, type ReactNode } from "react";
-import { GnomeContext, type GnomeColorScheme, type GnomeDir } from "./GnomeContext";
+import {
+  GnomeContext,
+  type GnomeAccentColor,
+  type GnomeColorScheme,
+  type GnomeDir,
+} from "./GnomeContext";
+
+const NAMED_ACCENT_COLORS = new Set<string>([
+  "blue", "green", "yellow", "orange", "red", "purple", "brown",
+]);
 
 export interface GnomeProviderProps {
   /**
@@ -26,6 +35,13 @@ export interface GnomeProviderProps {
    * `document.documentElement` to force that theme.
    */
   colorScheme?: GnomeColorScheme;
+  /**
+   * Accent color. Accepts a named GNOME palette color (`"blue"`, `"green"`,
+   * `"yellow"`, `"orange"`, `"red"`, `"purple"`, `"brown"`) or any CSS color
+   * string (e.g. `"#ff0000"`). Named colors are theme-aware and use the
+   * correct shade for light/dark mode automatically. Defaults to `"blue"`.
+   */
+  accentColor?: GnomeAccentColor;
   children: ReactNode;
 }
 
@@ -34,13 +50,14 @@ function getSystemIsDark(): boolean {
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
-/** Provides locale, text direction, and color scheme to all descendant gnome-ui components. */
+/** Provides locale, text direction, color scheme, and accent color to all descendant gnome-ui components. */
 export function GnomeProvider({
   locale,
   dir = "ltr",
   numberFormat,
   dateTimeFormat,
   colorScheme = "system",
+  accentColor = "blue",
   children,
 }: GnomeProviderProps) {
   const [, forceUpdate] = useReducer((n: number) => n + 1, 0);
@@ -65,9 +82,26 @@ export function GnomeProvider({
     ? (getSystemIsDark() ? "dark" : "light")
     : colorScheme;
 
+  useEffect(() => {
+    const root = document.documentElement;
+    if (accentColor === "blue") {
+      root.style.removeProperty("--gnome-accent-color");
+      root.style.removeProperty("--gnome-accent-bg-color");
+      return;
+    }
+    if (NAMED_ACCENT_COLORS.has(accentColor)) {
+      const shade = resolvedColorScheme === "dark" ? "2" : "3";
+      root.style.setProperty("--gnome-accent-color", `var(--gnome-${accentColor}-${shade})`);
+      root.style.setProperty("--gnome-accent-bg-color", `var(--gnome-${accentColor}-3)`);
+    } else {
+      root.style.setProperty("--gnome-accent-color", accentColor);
+      root.style.setProperty("--gnome-accent-bg-color", accentColor);
+    }
+  }, [accentColor, resolvedColorScheme]);
+
   const value = useMemo(
-    () => ({ locale, dir, numberFormat, dateTimeFormat, colorScheme, resolvedColorScheme }),
-    [locale, dir, numberFormat, dateTimeFormat, colorScheme, resolvedColorScheme],
+    () => ({ locale, dir, numberFormat, dateTimeFormat, colorScheme, resolvedColorScheme, accentColor }),
+    [locale, dir, numberFormat, dateTimeFormat, colorScheme, resolvedColorScheme, accentColor],
   );
 
   return (

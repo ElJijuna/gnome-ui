@@ -270,5 +270,11 @@ export {
   useDateTimeFormatter,
   useColorScheme,
   useResolvedColorScheme,
+  useAccentColor,
 } from "./components/GnomeProvider/GnomeContext";
-export type { GnomeDir, GnomeColorScheme } from "./components/GnomeProvider/GnomeContext";
+export type {
+  GnomeDir,
+  GnomeColorScheme,
+  GnomeAccentColor,
+  GnomeNamedAccentColor,
+} from "./components/GnomeProvider/GnomeContext";

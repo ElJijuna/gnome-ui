@@ -2,6 +2,15 @@ import { createContext, useContext, useMemo } from "react";
 
 export type GnomeDir = "ltr" | "rtl";
 export type GnomeColorScheme = "light" | "dark" | "system";
+export type GnomeNamedAccentColor =
+  | "blue"
+  | "green"
+  | "yellow"
+  | "orange"
+  | "red"
+  | "purple"
+  | "brown";
+export type GnomeAccentColor = GnomeNamedAccentColor | (string & {});
 
 export interface GnomeContextValue {
   locale: string | undefined;
@@ -10,6 +19,7 @@ export interface GnomeContextValue {
   dateTimeFormat: Intl.DateTimeFormatOptions | undefined;
   colorScheme: GnomeColorScheme;
   resolvedColorScheme: "light" | "dark";
+  accentColor: GnomeAccentColor;
 }
 
 export const GnomeContext = createContext<GnomeContextValue>({
@@ -19,6 +29,7 @@ export const GnomeContext = createContext<GnomeContextValue>({
   dateTimeFormat: undefined,
   colorScheme: "system",
   resolvedColorScheme: "light",
+  accentColor: "blue",
 });
 
 /** Returns the locale set by the nearest `GnomeProvider`, or `undefined` to use the browser locale. */
@@ -63,4 +74,9 @@ export function useColorScheme(): GnomeColorScheme {
 /** Returns the resolved color scheme (`"light"` or `"dark"`), accounting for the system preference when `colorScheme` is `"system"`. */
 export function useResolvedColorScheme(): "light" | "dark" {
   return useContext(GnomeContext).resolvedColorScheme;
+}
+
+/** Returns the accent color set by the nearest `GnomeProvider`. Defaults to `"blue"`. */
+export function useAccentColor(): GnomeAccentColor {
+  return useContext(GnomeContext).accentColor;
 }
