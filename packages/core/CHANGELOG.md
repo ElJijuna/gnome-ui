@@ -1,3 +1,36 @@
+## [1.42.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.42.1...@gnome-ui/core@1.42.2) (2026-05-21)
+
+### Features
+
+* **@gnome-ui/hooks:** add useHapticFeedback hook ([208a7b6](https://github.com/ElJijuna/gnome-ui/commit/208a7b63df169297d1871741cfa2caa94ccccb28)), closes [#81](https://github.com/ElJijuna/gnome-ui/issues/81)
+* **@gnome-ui/icons:** add control version icons ([5d2212b](https://github.com/ElJijuna/gnome-ui/commit/5d2212b4413f3382207e5930b5da735985676e68))
+* **@gnome-ui/icons:** add full Adwaita symbolic icon set ([0336040](https://github.com/ElJijuna/gnome-ui/commit/0336040c2f371ebd26a73e09cd41aefc45b92e37))
+* **@gnome-ui/icons:** update git version icon gallery ([08cbb6e](https://github.com/ElJijuna/gnome-ui/commit/08cbb6e9d2e955abc87fd4f5760d1f40558c87c4))
+* **@gnome-ui/layout:** add ActivityFeed component (closes [#85](https://github.com/ElJijuna/gnome-ui/issues/85)) ([b6acc5a](https://github.com/ElJijuna/gnome-ui/commit/b6acc5a04cc2589dbff8ef877220cad0615aba9e))
+* **@gnome-ui/layout:** add glass prop to AdaptiveLayout and fix collapse button border-radius. ([5ed7a36](https://github.com/ElJijuna/gnome-ui/commit/5ed7a368681a303b6b5231dbf1bb58e67aad7f21))
+* **@gnome-ui/layout:** add loadingType prop to ActivityFeed (closes [#107](https://github.com/ElJijuna/gnome-ui/issues/107)) ([b723c2b](https://github.com/ElJijuna/gnome-ui/commit/b723c2b1fd7f1eb5c3ec5d64694e37a08827451b))
+* **@gnome-ui/layout:** add loadingType prop to ApplicationCard (closes [#111](https://github.com/ElJijuna/gnome-ui/issues/111)) ([bc1f39a](https://github.com/ElJijuna/gnome-ui/commit/bc1f39a862faef2624c275dd5e69c64c654639e5))
+* **@gnome-ui/layout:** add loadingType prop to CounterCard (closes [#108](https://github.com/ElJijuna/gnome-ui/issues/108)) ([e9e8e9f](https://github.com/ElJijuna/gnome-ui/commit/e9e8e9fe34487253b7a586058db22cd70f10eb7b))
+* **@gnome-ui/layout:** add loadingType prop to EntityCard (closes [#110](https://github.com/ElJijuna/gnome-ui/issues/110)) ([76a692d](https://github.com/ElJijuna/gnome-ui/commit/76a692dbba77976628c2ac3f3034852b198ddfb6))
+* **@gnome-ui/layout:** add loadingType prop to PanelCard (closes [#112](https://github.com/ElJijuna/gnome-ui/issues/112)) ([b9406a2](https://github.com/ElJijuna/gnome-ui/commit/b9406a2412e42210a84eaa6a95c37804187e3cfe))
+* **@gnome-ui/layout:** add loadingType prop to StatCard (closes [#106](https://github.com/ElJijuna/gnome-ui/issues/106)) ([f13027e](https://github.com/ElJijuna/gnome-ui/commit/f13027ed4e12f29d2ac4c99f65928748f63e5b71))
+* **@gnome-ui/layout:** add loadingType prop to UserCard (closes [#109](https://github.com/ElJijuna/gnome-ui/issues/109)) ([5f8ffac](https://github.com/ElJijuna/gnome-ui/commit/5f8ffaca95b2eaebdcde06f2db6d399be6649682))
+* **@gnome-ui/layout:** add SectionHeader component (closes [#88](https://github.com/ElJijuna/gnome-ui/issues/88)) ([b5d589d](https://github.com/ElJijuna/gnome-ui/commit/b5d589dcdf638a14c6c1f74e8ec502c428e84943))
+* **@gnome-ui/platform:** add hapticFeedback bridge channel ([6824770](https://github.com/ElJijuna/gnome-ui/commit/682477042bf7b1717772ce986e4875034775bead))
+* **@gnome-ui/react:** add accentColor support to GnomeProvider ([40f0b71](https://github.com/ElJijuna/gnome-ui/commit/40f0b71332436c8cafa60f96db3234b803a0e173))
+* **@gnome-ui/react:** add accentColor support to GnomeProvider ([cdf554d](https://github.com/ElJijuna/gnome-ui/commit/cdf554d978d29da5cdcb9efe749e49f62b262cf7))
+* **@gnome-ui/react:** add colorScheme support to GnomeProvider ([a636552](https://github.com/ElJijuna/gnome-ui/commit/a636552b17a283f7e2cd4589bd85f14ec7c7a5fa))
+
+### Bug Fixes
+
+* **@gnome-ui/core:** use white-alpha card-shade-color in dark mode ([7278f6f](https://github.com/ElJijuna/gnome-ui/commit/7278f6fa43fe15f1e936a9625393f53204234caa))
+* **@gnome-ui/layout:** add missing component subpath exports ([db6a2cc](https://github.com/ElJijuna/gnome-ui/commit/db6a2cc274e8c940efd1e677abe8eced24c99869))
+* **@gnome-ui/react:** fix Card interactive hover/active states for forced dark mode ([adb759a](https://github.com/ElJijuna/gnome-ui/commit/adb759a1c58d534366751db66ac9e213b83b78d5))
+
+### Refactoring
+
+* migrate Storybook previews to use GnomeProvider colorScheme and accentColor ([611ee49](https://github.com/ElJijuna/gnome-ui/commit/611ee49d31511243009cebb33a8c3f408b212238))
+
 ## [1.42.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.42.0...@gnome-ui/core@1.42.1) (2026-05-14)
 
 ### Features
