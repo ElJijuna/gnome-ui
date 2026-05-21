@@ -89,54 +89,29 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const { theme, accentColor } = context.globals;
+      const { locale, theme, accentColor } = context.globals;
+
+      // high-contrast variants are outside GnomeColorScheme — set data-theme
+      // manually after GnomeProvider's own effect removes it for "system"
       useEffect(() => {
-        if (theme) {
+        if (theme === "high-contrast" || theme === "high-contrast-dark") {
           document.documentElement.setAttribute("data-theme", theme);
-        } else {
-          document.documentElement.removeAttribute("data-theme");
         }
       }, [theme]);
-      useEffect(() => {
-        const styleId = "gnome-ui-accent";
-        let el = document.getElementById(styleId) as HTMLStyleElement | null;
-        if (!accentColor) {
-          el?.remove();
-          return;
-        }
-        if (!el) {
-          el = document.createElement("style");
-          el.id = styleId;
-          document.head.appendChild(el);
-        }
-        el.textContent = `
-          :root {
-            --gnome-accent-color: var(--gnome-${accentColor}-3);
-            --gnome-accent-bg-color: var(--gnome-${accentColor}-3);
-          }
-          @media (prefers-color-scheme: dark) {
-            :root { --gnome-accent-color: var(--gnome-${accentColor}-2); }
-          }
-          [data-theme="light"] {
-            --gnome-accent-color: var(--gnome-${accentColor}-3);
-            --gnome-accent-bg-color: var(--gnome-${accentColor}-3);
-          }
-          [data-theme="dark"] { --gnome-accent-color: var(--gnome-${accentColor}-2); }
-          @media (prefers-contrast: more) {
-            :root {
-              --gnome-accent-color: var(--gnome-${accentColor}-5);
-              --gnome-accent-bg-color: var(--gnome-${accentColor}-5);
-            }
-          }
-        `;
-      }, [accentColor]);
-      return <Story />;
+
+      const colorScheme =
+        theme === "light" || theme === "dark" ? theme : "system";
+
+      return (
+        <GnomeProvider
+          locale={locale || undefined}
+          colorScheme={colorScheme}
+          accentColor={accentColor || "blue"}
+        >
+          <Story />
+        </GnomeProvider>
+      );
     },
-    (Story, context) => (
-      <GnomeProvider locale={context.globals.locale || undefined}>
-        <Story />
-      </GnomeProvider>
-    ),
     (Story) => (
       <CenteredDecorator>
         <Story />

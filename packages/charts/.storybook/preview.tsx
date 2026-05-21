@@ -45,21 +45,23 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const { theme } = context.globals;
+      const { locale, theme } = context.globals;
+
       useEffect(() => {
-        if (theme) {
+        if (theme === "high-contrast" || theme === "high-contrast-dark") {
           document.documentElement.setAttribute("data-theme", theme);
-        } else {
-          document.documentElement.removeAttribute("data-theme");
         }
       }, [theme]);
-      return <Story />;
+
+      const colorScheme =
+        theme === "light" || theme === "dark" ? theme : "system";
+
+      return (
+        <GnomeProvider locale={locale || undefined} colorScheme={colorScheme}>
+          <Story />
+        </GnomeProvider>
+      );
     },
-    (Story, context) => (
-      <GnomeProvider locale={context.globals.locale || undefined}>
-        <Story />
-      </GnomeProvider>
-    ),
   ],
   parameters: {
     layout: "fullscreen",
