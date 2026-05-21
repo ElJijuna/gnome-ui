@@ -1,6 +1,6 @@
 # @gnome-ui/icons
 
-Framework-agnostic Adwaita symbolic icon definitions for the [gnome-ui](https://github.com/ElJijuna/gnome-ui) design system.
+Framework-agnostic icon definitions for the [gnome-ui](https://github.com/ElJijuna/gnome-ui) design system.
 
 Each icon is a plain JavaScript object (`IconDefinition`) containing SVG path data — no DOM, no React, no styles. UI framework adapters consume this shape to render inline SVGs.
 
@@ -114,8 +114,9 @@ type AnyIconDefinition = IconDefinition | RawPathIconDefinition;
 
 ## Available icons
 
-Most icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 × 16 viewBox.
+Most icons are Adwaita symbolic or Adwaita-style convenience glyphs — monochrome, `currentColor`-based, 16 × 16 viewBox.
 Version Control icons follow GitHub Octicons and use a 24 × 24 viewBox.
+Adwaita fullcolor assets are not bundled in this package yet; brand icons are listed separately under Third-party.
 
 ### Navigation
 
@@ -144,12 +145,12 @@ Version Control icons follow GitHub Octicons and use a 24 × 24 viewBox.
 | `Undo` | `edit-undo-symbolic` |
 | `Redo` | `edit-redo-symbolic` |
 | `Save` | `document-save-symbolic` |
-| `Document` | `document-symbolic` |
+| `Document` | Adwaita-style document glyph |
 | `DocumentOpen` | `document-open-symbolic` |
 | `Close` | `window-close-symbolic` |
 | `Search` | `system-search-symbolic` |
 | `Refresh` | `view-refresh-symbolic` |
-| `Share` | `emblem-shared-symbolic` |
+| `Share` | Adwaita-style share glyph |
 | `Attachment` | `mail-attachment-symbolic` |
 
 ### UI
@@ -184,7 +185,7 @@ Version Control icons follow GitHub Octicons and use a 24 × 24 viewBox.
 | Export | Symbolic name |
 |--------|--------------|
 | `Applications` | `view-app-grid-symbolic` |
-| `Notifications` | `notifications-symbolic` |
+| `Notifications` | Adwaita-style notification glyph |
 | `InputMouse` | `input-mouse-symbolic` |
 | `InputKeyboard` | `input-keyboard-symbolic` |
 | `InputTablet` | `input-tablet-symbolic` |
@@ -205,7 +206,7 @@ Version Control icons follow GitHub Octicons and use a 24 × 24 viewBox.
 |--------|--------------|
 | `Star` | `starred-symbolic` |
 | `StarOutline` | `non-starred-symbolic` |
-| `Heart` | `emblem-favorite-symbolic` |
+| `Heart` | Adwaita-style heart glyph |
 
 ### Media
 

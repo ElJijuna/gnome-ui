@@ -106,7 +106,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "All Adwaita symbolic icons exported by `@gnome-ui/icons`. Each icon is a framework-agnostic `IconDefinition` (viewBox + SVG paths) that can be consumed by any adapter.",
+          "`@gnome-ui/icons` exports framework-agnostic icon definitions. The main gallery separates Adwaita-style symbolic icons from GitHub Octicons and third-party brand/fullcolor previews.",
       },
     },
   },
@@ -155,7 +155,7 @@ export const DarkBackground: Story = {
 
 // ─── Individual icon stories by category ──────────────────────────────────────
 
-const categories: Record<string, string[]> = {
+const adwaitaSymbolicCategories: Record<string, string[]> = {
   Navigation: ["GoPrevious", "GoNext", "GoHome", "GoUp", "PanDown", "PanUp", "PanStart", "PanEnd"],
   Actions: ["Add", "Remove", "Delete", "Edit", "Copy", "Paste", "Cut", "Undo", "Redo", "Save", "DocumentOpen", "Close", "Search", "Refresh", "Share", "Attachment"],
   UI: ["OpenMenu", "ViewMore", "ViewSidebar", "ViewReveal", "ViewConceal", "Settings"],
@@ -164,6 +164,9 @@ const categories: Record<string, string[]> = {
   "System & Hardware": ["Applications", "Notifications", "InputMouse", "InputKeyboard", "InputTablet", "ColorManagement", "Printer", "Lock"],
   Misc: ["Star", "StarOutline", "Heart"],
   Media: ["MediaPlay", "MediaPause", "MediaSkipForward", "MediaSkipBackward"],
+};
+
+const githubOcticonCategories: Record<string, string[]> = {
   "Version Control": [
     "GitCommit",
     "GitBranch",
@@ -186,6 +189,11 @@ const categories: Record<string, string[]> = {
     "GitRepository",
     "GitTag",
   ],
+};
+
+const categories: Record<string, string[]> = {
+  ...adwaitaSymbolicCategories,
+  ...githubOcticonCategories,
 };
 
 function CategoryGrid({ category, size, color }: { category: string; size: number; color: string }) {
@@ -229,6 +237,71 @@ function CategoryGrid({ category, size, color }: { category: string; size: numbe
   );
 }
 
+function SectionedCategoryGrid({
+  title,
+  groups,
+  size,
+  color,
+}: {
+  title: string;
+  groups: Record<string, string[]>;
+  size: number;
+  color: string;
+}) {
+  return (
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+      <h2 style={{ marginBottom: "1.25rem", fontSize: "1rem", color: "#333" }}>{title}</h2>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        {Object.entries(groups).map(([category, names]) => {
+          const entries = names
+            .map((n) => [n, (icons as Record<string, IconDefinition>)[n]] as [string, IconDefinition])
+            .filter(([, def]) => def != null);
+
+          return (
+            <section key={category}>
+              <h3 style={{ margin: "0 0 0.75rem", fontSize: "0.875rem", color: "#666" }}>{category}</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+                {entries.map(([name, def]) => (
+                  <div
+                    key={name}
+                    title={name}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      padding: "0.75rem",
+                      borderRadius: "8px",
+                      border: "1px solid #e0e0e0",
+                      backgroundColor: "#fff",
+                      minWidth: "80px",
+                    }}
+                  >
+                    <Icon icon={def} size={size} color={color} />
+                    <span style={{ fontSize: "0.7rem", color: "#555", textAlign: "center" }}>{name}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export const AdwaitaSymbolicIcons: Story = {
+  name: "Adwaita Symbolic",
+  render: (args) => (
+    <SectionedCategoryGrid
+      title="Adwaita Symbolic"
+      groups={adwaitaSymbolicCategories}
+      size={args.size}
+      color={args.color}
+    />
+  ),
+};
+
 export const NavigationIcons: Story = {
   name: "Navigation",
   render: (args) => <CategoryGrid category="Navigation" size={args.size} color={args.color} />,
@@ -250,11 +323,11 @@ export const MediaIcons: Story = {
 };
 
 export const VersionControlIcons: Story = {
-  name: "Version Control",
+  name: "GitHub Octicons / Version Control",
   render: (args) => <CategoryGrid category="Version Control" size={args.size} color={args.color} />,
 };
 
-// ─── Third-party logos ────────────────────────────────────────────────────────
+// ─── Third-party brand/fullcolor previews ─────────────────────────────────────
 
 const thirdPartyEntries = Object.entries(thirdParty) as [string, IconDefinition][];
 
@@ -267,11 +340,11 @@ const PLATFORM_COLORS: Record<string, string> = {
 };
 
 export const ThirdPartyIcons: Story = {
-  name: "Third-party",
+  name: "Brand / Fullcolor Preview",
   render: (args) => (
     <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <p style={{ color: "#666", marginBottom: "0.5rem", fontSize: "0.875rem" }}>
-        Brand marks for third-party platforms. These follow the same{" "}
+        Brand marks for third-party platforms. These are single-color glyphs rendered here on brand-color surfaces, separate from Adwaita symbolic icons. They follow the same{" "}
         <code>IconDefinition</code> shape and work with{" "}
         <code>&lt;Icon&gt;</code> from <code>@gnome-ui/react</code>.
       </p>
@@ -305,7 +378,7 @@ export const ThirdPartyIcons: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Third-party platform logos (`GitHub`, `GitLab`, `Bitbucket`, `X`, `Npm`). Rendered with their brand colors for context — in production, pass `color` to `<Icon>` as needed.",
+        story: "Third-party platform logos (`GitHub`, `GitLab`, `Bitbucket`, `X`, `Npm`). Rendered as a fullcolor preview using brand-color surfaces; in production, pass `color` to `<Icon>` as needed.",
       },
     },
   },

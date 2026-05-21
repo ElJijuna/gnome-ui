@@ -92,9 +92,10 @@ export const InheritsColor: Story = {
 
 // ─── Full icon gallery ─────────────────────────────────────────────────────────
 
-const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icons.IconDefinition }> }> = [
+const CATEGORIES: Array<{ title: string; source: string; items: Array<{ name: string; icon: Icons.IconDefinition }> }> = [
   {
     title: "Navigation",
+    source: "Adwaita Symbolic",
     items: [
       { name: "GoPrevious",  icon: Icons.GoPrevious },
       { name: "GoNext",      icon: Icons.GoNext },
@@ -108,6 +109,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "Actions",
+    source: "Adwaita Symbolic",
     items: [
       { name: "Add",          icon: Icons.Add },
       { name: "Remove",       icon: Icons.Remove },
@@ -129,6 +131,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "UI",
+    source: "Adwaita Symbolic",
     items: [
       { name: "OpenMenu",    icon: Icons.OpenMenu },
       { name: "ViewMore",    icon: Icons.ViewMore },
@@ -140,6 +143,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "Status",
+    source: "Adwaita Symbolic",
     items: [
       { name: "Information", icon: Icons.Information },
       { name: "Warning",     icon: Icons.Warning },
@@ -149,6 +153,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "People & Identity",
+    source: "Adwaita Symbolic",
     items: [
       { name: "Person",        icon: Icons.Person },
       { name: "Accessibility", icon: Icons.Accessibility },
@@ -156,6 +161,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "System & Hardware",
+    source: "Adwaita Symbolic",
     items: [
       { name: "Applications",   icon: Icons.Applications },
       { name: "Notifications",  icon: Icons.Notifications },
@@ -169,6 +175,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "Misc",
+    source: "Adwaita Symbolic",
     items: [
       { name: "Star",        icon: Icons.Star },
       { name: "StarOutline", icon: Icons.StarOutline },
@@ -177,6 +184,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "Media",
+    source: "Adwaita Symbolic",
     items: [
       { name: "MediaPlay",         icon: Icons.MediaPlay },
       { name: "MediaPause",        icon: Icons.MediaPause },
@@ -186,6 +194,7 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
   },
   {
     title: "Version Control",
+    source: "GitHub Octicons",
     items: [
       { name: "GitCommit",              icon: Icons.GitCommit },
       { name: "GitBranch",              icon: Icons.GitBranch },
@@ -276,14 +285,14 @@ export const Gallery: Story = {
         {TOTAL} icons — click any icon to copy its import statement.
       </Text>
 
-      {CATEGORIES.map(({ title, items }) => (
-        <div key={title}>
+      {CATEGORIES.map(({ title, source, items }) => (
+        <div key={`${source}-${title}`}>
           <Text
             variant="caption-heading"
             color="dim"
             style={{ marginBottom: 8, paddingLeft: 4, display: "block" }}
           >
-            {title}
+            {source} / {title}
           </Text>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
             {items.map(({ name, icon }) => (
@@ -298,7 +307,7 @@ export const Gallery: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: `All **${TOTAL} icons** from \`@gnome-ui/icons\`, grouped by category. Click any icon to copy its import statement to the clipboard.`,
+        story: `All **${TOTAL} icons** from \`@gnome-ui/icons\`, grouped by source and category. Adwaita symbolic icons are separate from GitHub Octicons and brand/fullcolor examples. Click any icon to copy its import statement to the clipboard.`,
       },
     },
   },
