@@ -1,10 +1,17 @@
 .wrapper {
   position: relative;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
+  width: 100%;
   gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+.graphViewport {
+  width: 100%;
+  min-width: 0;
   overflow-x: auto;
-  max-width: 100%;
+  overflow-y: visible;
 }
 
 .svg {
@@ -22,14 +29,16 @@
 
 .cell {
   cursor: default;
-  transition: transform var(--gnome-transition-fast, 100ms) ease;
-  transform-box: fill-box;
-  transform-origin: center;
+  transition:
+    stroke-opacity var(--gnome-transition-fast, 100ms) ease,
+    stroke-width var(--gnome-transition-fast, 100ms) ease;
   outline: none;
 }
 
 .cell:not([aria-disabled="true"]):hover {
-  transform: scale(1.2);
+  stroke: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  stroke-opacity: 0.35;
+  stroke-width: 1;
 }
 
 .cell:not([aria-disabled="true"]) {
@@ -56,8 +65,9 @@
 }
 
 .tooltip {
-  position: absolute;
-  transform: translate(-50%, calc(-100% - 6px));
+  position: fixed;
+  box-sizing: border-box;
+  max-width: calc(100vw - 16px);
   background: var(--gnome-popover-bg-color, #fff);
   border: 1px solid var(--gnome-light-3, #deddda);
   border-radius: var(--gnome-radius-md, 8px);
@@ -67,8 +77,10 @@
   color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
   box-shadow: var(--gnome-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.12));
   pointer-events: none;
-  white-space: nowrap;
-  z-index: 10;
+  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: normal;
+  z-index: 10001;
 }
 
 .legend {
