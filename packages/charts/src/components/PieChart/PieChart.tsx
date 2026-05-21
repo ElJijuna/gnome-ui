@@ -28,7 +28,7 @@ export interface PieChartProps {
 
 const TOOLTIP_CONTENT_STYLE = {
   backgroundColor: "var(--gnome-popover-bg-color, #fff)",
-  border: "1px solid var(--gnome-light-3, #deddda)",
+  border: "1px solid var(--gnome-border-subtle, rgba(0,0,0,0.15))",
   borderRadius: "var(--gnome-radius-md, 8px)",
   fontFamily: "var(--gnome-font-family, system-ui)",
   fontSize: 12,

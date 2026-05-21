@@ -56,6 +56,21 @@
       "import": "./dist/components/TreeMap.js",
       "require": "./dist/components/TreeMap.cjs"
     },
+    "./components/SparkAreaChart": {
+      "types": "./dist/components/SparkAreaChart.d.ts",
+      "import": "./dist/components/SparkAreaChart.js",
+      "require": "./dist/components/SparkAreaChart.cjs"
+    },
+    "./components/SparkLineChart": {
+      "types": "./dist/components/SparkLineChart.d.ts",
+      "import": "./dist/components/SparkLineChart.js",
+      "require": "./dist/components/SparkLineChart.cjs"
+    },
+    "./components/SparkBarChart": {
+      "types": "./dist/components/SparkBarChart.d.ts",
+      "import": "./dist/components/SparkBarChart.js",
+      "require": "./dist/components/SparkBarChart.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",

@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import { useEffect } from "react";
 import { parameters as docsParameters } from "@storybook/addon-docs/preview";
 import { INITIAL_VIEWPORTS } from 'storybook/viewport';
+import "@gnome-ui/react/styles";
 import "@gnome-ui/core/styles";
 import { GnomeProvider } from "@gnome-ui/react";
 
@@ -38,14 +39,33 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    accentColor: {
+      description: "Accent color",
+      toolbar: {
+        title: "Accent",
+        icon: "circle",
+        items: [
+          { value: "", title: "Default (Blue)" },
+          { value: "blue",   title: "Blue" },
+          { value: "green",  title: "Green" },
+          { value: "yellow", title: "Yellow" },
+          { value: "orange", title: "Orange" },
+          { value: "red",    title: "Red" },
+          { value: "purple", title: "Purple" },
+          { value: "brown",  title: "Brown" },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   initialGlobals: {
     locale: "",
     theme: "",
+    accentColor: "",
   },
   decorators: [
     (Story, context) => {
-      const { locale, theme } = context.globals;
+      const { locale, theme, accentColor } = context.globals;
 
       useEffect(() => {
         if (theme === "high-contrast" || theme === "high-contrast-dark") {
@@ -57,7 +77,11 @@ const preview: Preview = {
         theme === "light" || theme === "dark" ? theme : "system";
 
       return (
-        <GnomeProvider locale={locale || undefined} colorScheme={colorScheme}>
+        <GnomeProvider
+          locale={locale || undefined}
+          colorScheme={colorScheme}
+          accentColor={accentColor || "blue"}
+        >
           <Story />
         </GnomeProvider>
       );

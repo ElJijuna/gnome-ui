@@ -39,6 +39,47 @@ import "@gnome-ui/charts/styles";
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 
+### Spark charts
+
+Minimal inline charts — no axes, no grid, no legend, no tooltip. Designed to be embedded inside Cards, table cells, list items, or any layout component.
+
+| Component | Description |
+|-----------|-------------|
+| `SparkAreaChart` | Compact area chart with optional gradient fill |
+| `SparkLineChart` | Compact line chart, no fill |
+| `SparkBarChart` | Compact bar chart with rounded bars |
+
+All spark components accept `data: number[]` directly or
+`Record<string, unknown>[]` with a `dataKey`. The default color is
+`var(--gnome-accent-color)` so it inherits the active accent automatically.
+
+```tsx
+import { SparkAreaChart, SparkLineChart, SparkBarChart } from "@gnome-ui/charts";
+import { Card, Text } from "@gnome-ui/react";
+
+// Simplest form — plain number array
+<SparkAreaChart data={[42, 58, 35, 72, 88, 93]} height={48} />
+
+// Embedded in a Card
+<Card>
+  <Text variant="caption" color="dim">Downloads</Text>
+  <Text variant="title-2">12,430</Text>
+  <SparkAreaChart
+    data={[42, 58, 35, 72, 88, 93]}
+    height={48}
+    aria-label="Downloads trend"
+  />
+</Card>
+
+// Object array with explicit dataKey
+<SparkLineChart
+  data={weeklyData}
+  dataKey="sessions"
+  color="var(--gnome-green-3)"
+  height={32}
+/>
+```
+
 All components use the Adwaita color palette (`GNOME_CHART_PALETTE`) and CSS custom
 properties for theming, and adapt automatically to light/dark mode.
 
@@ -282,6 +323,32 @@ const data = [
 | `height` | `number` | `400` | Chart height in px |
 | `showLabels` | `boolean` | `true` | Show name and value inside each tile |
 | `className` | `string` | — | Extra CSS class on the wrapper |
+
+`SparkAreaChart`, `SparkLineChart`, and `SparkBarChart` share these props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `number[] \| Record<string, unknown>[]` | — | Values to plot |
+| `dataKey` | `string` | `"value"` | Key to read when data is an object array |
+| `color` | `string` | `var(--gnome-accent-color)` | Stroke / fill color |
+| `height` | `number` | `40` | Chart height in px |
+| `strokeWidth` | `number` | `1.5` | Stroke width |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+| `aria-label` | `string` | — | Sets `role="img"` and an accessible label |
+
+`SparkAreaChart` also accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `gradient` | `boolean` | `true` | Gradient fill from color to transparent |
+| `fillOpacity` | `number` | `0.2` | Fill opacity when `gradient` is false |
+
+`SparkBarChart` also accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `barSize` | `number` | auto | Bar width in px |
+| `fillOpacity` | `number` | `0.85` | Bar fill opacity |
 
 ## Utilities
 

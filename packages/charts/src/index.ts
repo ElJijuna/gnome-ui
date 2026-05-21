@@ -23,3 +23,12 @@ export { CloudChart } from "./components/CloudChart";
 export type { CloudChartProps, CloudChartDataItem } from "./components/CloudChart";
 
 export { GNOME_CHART_PALETTE } from "./colors";
+
+export { SparkAreaChart } from "./components/SparkAreaChart";
+export type { SparkAreaChartProps } from "./components/SparkAreaChart";
+
+export { SparkLineChart } from "./components/SparkLineChart";
+export type { SparkLineChartProps } from "./components/SparkLineChart";
+
+export { SparkBarChart } from "./components/SparkBarChart";
+export type { SparkBarChartProps } from "./components/SparkBarChart";
