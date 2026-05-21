@@ -80,3 +80,21 @@
     );
   }
 }
+
+[data-theme="dark"] {
+  .interactive:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-card-bg-color, rgba(255, 255, 255, 0.08)) 85%,
+      white 15%
+    );
+  }
+
+  .interactive:active {
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-card-bg-color, rgba(255, 255, 255, 0.08)) 75%,
+      white 25%
+    );
+  }
+}
