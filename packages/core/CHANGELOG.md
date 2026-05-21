@@ -1,3 +1,14 @@
+## [1.42.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.42.2...@gnome-ui/core@1.42.3) (2026-05-21)
+
+### Features
+
+* **@gnome-ui/charts:** add SparkAreaChart, SparkLineChart, SparkBarChart and fix dark-mode tokens ([7a02ad5](https://github.com/ElJijuna/gnome-ui/commit/7a02ad5ae4e1c5576246da787934ab1c0480e05d))
+* **@gnome-ui/layout:** update AdaptiveLayout to light/dark mode and add compatibility support ([bb27ac1](https://github.com/ElJijuna/gnome-ui/commit/bb27ac1769ee4e3bdd2cc0d0d902336f1e188a4c))
+
+### Bug Fixes
+
+* **@gnome-ui/core:** update --gnome-card-shade-color in light mode from rgba(0,0,0,0.07) ([4b2bd4c](https://github.com/ElJijuna/gnome-ui/commit/4b2bd4c9ab5d5b3d287930fc062fd6416a3d03a5)), closes [#fafafa](https://github.com/ElJijuna/gnome-ui/issues/fafafa)
+
 ## [1.42.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.42.1...@gnome-ui/core@1.42.2) (2026-05-21)
 
 ### Features
