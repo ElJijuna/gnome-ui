@@ -1,3 +1,24 @@
+## [1.26.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.25.0...@gnome-ui/layout@1.26.0) (2026-05-21)
+
+### Features
+
+* **@gnome-ui/icons:** add control version icons ([5d2212b](https://github.com/ElJijuna/gnome-ui/commit/5d2212b4413f3382207e5930b5da735985676e68))
+* **@gnome-ui/icons:** add full Adwaita symbolic icon set ([0336040](https://github.com/ElJijuna/gnome-ui/commit/0336040c2f371ebd26a73e09cd41aefc45b92e37))
+* **@gnome-ui/icons:** update git version icon gallery ([08cbb6e](https://github.com/ElJijuna/gnome-ui/commit/08cbb6e9d2e955abc87fd4f5760d1f40558c87c4))
+* **@gnome-ui/layout:** update AdaptiveLayout to light/dark mode and add compatibility support ([bb27ac1](https://github.com/ElJijuna/gnome-ui/commit/bb27ac1769ee4e3bdd2cc0d0d902336f1e188a4c))
+* **@gnome-ui/react:** add accentColor support to GnomeProvider ([40f0b71](https://github.com/ElJijuna/gnome-ui/commit/40f0b71332436c8cafa60f96db3234b803a0e173))
+* **@gnome-ui/react:** add accentColor support to GnomeProvider ([cdf554d](https://github.com/ElJijuna/gnome-ui/commit/cdf554d978d29da5cdcb9efe749e49f62b262cf7))
+* **@gnome-ui/react:** add colorScheme support to GnomeProvider ([a636552](https://github.com/ElJijuna/gnome-ui/commit/a636552b17a283f7e2cd4589bd85f14ec7c7a5fa))
+
+### Bug Fixes
+
+* **@gnome-ui/core:** use white-alpha card-shade-color in dark mode ([7278f6f](https://github.com/ElJijuna/gnome-ui/commit/7278f6fa43fe15f1e936a9625393f53204234caa))
+* **@gnome-ui/react:** fix Card interactive hover/active states for forced dark mode ([adb759a](https://github.com/ElJijuna/gnome-ui/commit/adb759a1c58d534366751db66ac9e213b83b78d5))
+
+### Refactoring
+
+* migrate Storybook previews to use GnomeProvider colorScheme and accentColor ([611ee49](https://github.com/ElJijuna/gnome-ui/commit/611ee49d31511243009cebb33a8c3f408b212238))
+
 ## [1.25.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.24.0...@gnome-ui/layout@1.25.0) (2026-05-18)
 
 ### Features
