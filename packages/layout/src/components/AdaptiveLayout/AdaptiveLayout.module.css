@@ -229,19 +229,38 @@
   }
 }
 
+:global([data-theme="dark"]) .root,
+:global([data-theme="high-contrast-dark"]) .root {
+  background: var(--gnome-window-bg-color, #242424);
+  color: var(--gnome-window-fg-color, rgba(255, 255, 255, 0.87));
+}
+
+:global([data-theme="dark"]) .fullRight,
+:global([data-theme="high-contrast-dark"]) .fullRight {
+  background-color: var(--gnome-headerbar-bg-color, #303030);
+}
+
+:global([data-theme="dark"]) .contentSlotFull,
+:global([data-theme="high-contrast-dark"]) .contentSlotFull {
+  background-color: var(--gnome-window-bg-color, #242424);
+  border-color: var(--gnome-headerbar-border-color, rgba(255, 255, 255, 0.1));
+}
+
+:global([data-theme="dark"]) .sheetItemBadge,
+:global([data-theme="high-contrast-dark"]) .sheetItemBadge {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* ─── Glass (frosted) effect ────────────────────────────────────────────────── */
 
 .root[data-glass] {
-  --gnome-window-bg-color: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  /* Fallback: translucent, readable surfaces without relying on backdrop-filter. */
+  --gnome-window-bg-color: rgba(255, 255, 255, 0.86);
+  background-color: var(--gnome-window-bg-color, rgba(255, 255, 255, 0.86));
 }
 
-/* Sidebar, top bar, and fullRight wrapper — transparent, glass shows through */
-.root[data-glass] .fullRight,
-.root[data-glass] :global(nav),
-.root[data-glass] :global(header) {
-  background: transparent !important;
+.root[data-glass] .fullRight {
+  background-color: var(--gnome-window-bg-color, rgba(255, 255, 255, 0.86));
 }
 
 /* Content area stays opaque — reset variable so children render solid */
@@ -249,12 +268,50 @@
   --gnome-window-bg-color: #fafafa;
 }
 
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .root[data-glass] {
+    --gnome-window-bg-color: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  }
+
+  /* Sidebar, top bar, and fullRight wrapper — transparent, glass shows through */
+  .root[data-glass] .fullRight,
+  .root[data-glass] :global(nav),
+  .root[data-glass] :global(header) {
+    background: transparent !important;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .root[data-glass] {
-    --gnome-window-bg-color: rgba(28, 28, 28, 0.55);
+    --gnome-window-bg-color: rgba(28, 28, 28, 0.86);
   }
 
   .root[data-glass] .contentSlotFull {
     --gnome-window-bg-color: #242424;
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .root[data-glass] {
+      --gnome-window-bg-color: rgba(28, 28, 28, 0.55);
+    }
+  }
+}
+
+:global([data-theme="dark"]) .root[data-glass],
+:global([data-theme="high-contrast-dark"]) .root[data-glass] {
+  --gnome-window-bg-color: rgba(28, 28, 28, 0.86);
+}
+
+:global([data-theme="dark"]) .root[data-glass] .contentSlotFull,
+:global([data-theme="high-contrast-dark"]) .root[data-glass] .contentSlotFull {
+  --gnome-window-bg-color: #242424;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :global([data-theme="dark"]) .root[data-glass],
+  :global([data-theme="high-contrast-dark"]) .root[data-glass] {
+    --gnome-window-bg-color: rgba(28, 28, 28, 0.55);
   }
 }

@@ -307,6 +307,21 @@ describe("AdaptiveLayout — desktop (sidebar)", () => {
       const root = container.firstChild as HTMLElement;
       expect(root.style.background).toContain("color-mix");
     });
+
+    it("marks the root when glass is enabled", () => {
+      const { container } = render(
+        <AdaptiveLayout
+          items={ITEMS}
+          value="home"
+          onValueChange={vi.fn()}
+          glass
+        >
+          <p>Content</p>
+        </AdaptiveLayout>,
+      );
+      const root = container.firstChild as HTMLElement;
+      expect(root).toHaveAttribute("data-glass");
+    });
   });
 });
 
