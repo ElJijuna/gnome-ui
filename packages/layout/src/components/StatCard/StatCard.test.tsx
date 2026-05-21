@@ -31,6 +31,21 @@ describe("StatCard", () => {
     expect(screen.getByTestId("icon")).toBeInTheDocument();
   });
 
+  it("renders a decorative background chart behind the content", () => {
+    render(
+      <StatCard
+        label="Requests"
+        value="24.8k"
+        backgroundChart={<svg data-testid="background-chart" aria-label="Requests trend" />}
+      />,
+    );
+
+    const chart = screen.getByTestId("background-chart");
+    expect(chart).toBeInTheDocument();
+    expect(chart.parentElement).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getByLabelText("Requests: 24.8k")).toBeInTheDocument();
+  });
+
   it("renders an upward trend", () => {
     render(
       <StatCard

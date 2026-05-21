@@ -12,7 +12,7 @@ const meta: Meta<typeof StatCard> = {
     docs: {
       description: {
         component: `
-Metric card for dashboards with optional unit, trend indicator, icon, and loading state.
+Metric card for dashboards with optional unit, trend indicator, icon, background chart, and loading state.
 
 \`\`\`tsx
 import { StatCard } from "@gnome-ui/layout";
@@ -22,6 +22,17 @@ import { StatCard } from "@gnome-ui/layout";
   value={1284}
   unit="users"
   trend={{ direction: "up", value: 12, period: "vs last week" }}
+/>
+\`\`\`
+
+Pass a spark chart as a decorative background without coupling the card to a
+specific chart type:
+
+\`\`\`tsx
+<StatCard
+  label="Requests"
+  value="24.8k"
+  backgroundChart={<SparkAreaChart data={requestTrend} height={96} />}
 />
 \`\`\`
         `,
@@ -60,6 +71,36 @@ export const NeutralTrend: Story = {
     unit: "ms",
     icon: <Icon icon={Refresh} size="lg" />,
     trend: { direction: "neutral", value: 0, period: "stable" },
+  },
+};
+
+export const BackgroundChart: Story = {
+  args: {
+    label: "Requests",
+    value: "24.8k",
+    unit: "req",
+    trend: { direction: "up", value: 6, period: "today" },
+    backgroundChart: (
+      <svg viewBox="0 0 320 96" preserveAspectRatio="none" height="96" aria-hidden="true">
+        <path
+          d="M0 76 C32 66 46 74 68 56 C92 36 112 62 136 42 C160 22 178 54 206 34 C234 14 264 40 320 10 V96 H0 Z"
+          fill="color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 24%, transparent)"
+        />
+        <path
+          d="M0 76 C32 66 46 74 68 56 C92 36 112 62 136 42 C160 22 178 54 206 34 C234 14 264 40 320 10"
+          fill="none"
+          stroke="var(--gnome-accent-color, #3584e4)"
+          strokeWidth="2"
+        />
+      </svg>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "`backgroundChart` accepts a decorative React node, including spark charts from `@gnome-ui/charts`.",
+      },
+    },
   },
 };
 

@@ -375,8 +375,9 @@ import { CounterCard } from "@gnome-ui/layout";
 
 ### `StatCard`
 
-Key metric card with optional unit, trend indicator, icon, and loading state.
-Use it for dashboard metrics that need context beyond a raw count.
+Key metric card with optional unit, trend indicator, icon, decorative background
+chart, and loading state. Use it for dashboard metrics that need context beyond a
+raw count.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -385,6 +386,7 @@ Use it for dashboard metrics that need context beyond a raw count.
 | `unit` | `string` | — | Optional unit suffix |
 | `trend` | `{ direction: "up" \| "down" \| "neutral"; value: number; period?: string }` | — | Optional trend indicator |
 | `icon` | `ReactNode` | — | Optional visual element. Size and color are controlled by the node you pass in. |
+| `backgroundChart` | `ReactNode` | — | Decorative background visual, such as a spark chart from `@gnome-ui/charts`. |
 | `loading` | `boolean` | `false` | Render a loading placeholder |
 | `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
 
@@ -399,6 +401,27 @@ import { StatCard } from "@gnome-ui/layout";
   unit="users"
   icon={<Icon icon={Person} size="lg" />}
   trend={{ direction: "up", value: 12, period: "vs last week" }}
+/>
+```
+
+`backgroundChart` stays behind the metric content and is treated as decorative.
+Pass the spark chart you need rather than coupling `StatCard` to a specific
+chart type:
+
+```tsx
+import { SparkAreaChart } from "@gnome-ui/charts";
+import { StatCard } from "@gnome-ui/layout";
+
+<StatCard
+  label="Requests"
+  value="24.8k"
+  trend={{ direction: "up", value: 6, period: "today" }}
+  backgroundChart={
+    <SparkAreaChart
+      data={[18, 24, 20, 32, 40, 36, 52]}
+      height={96}
+    />
+  }
 />
 ```
 

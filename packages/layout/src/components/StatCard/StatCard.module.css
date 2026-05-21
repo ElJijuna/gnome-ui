@@ -1,9 +1,39 @@
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 0;
   padding: 20px !important;
+}
+
+.withBackgroundChart {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.backgroundChart {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 0;
+  display: flex;
+  align-items: flex-end;
+  height: min(72%, 116px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.backgroundChart > * {
+  width: 100%;
 }
 
 .header {

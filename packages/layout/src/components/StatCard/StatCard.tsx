@@ -23,6 +23,8 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   trend?: StatCardTrend;
   /** Optional visual element rendered in the top-right corner. */
   icon?: ReactNode;
+  /** Decorative chart or visual rendered behind the metric content. */
+  backgroundChart?: ReactNode;
   /** Render a loading placeholder. */
   loading?: boolean;
   /** Loading placeholder style. Defaults to `"skeleton"`. */
@@ -41,6 +43,7 @@ export function StatCard({
   unit,
   trend,
   icon,
+  backgroundChart,
   loading = false,
   loadingType = "skeleton",
   className,
@@ -81,51 +84,61 @@ export function StatCard({
 
   return (
     <Card
-      className={[styles.card, className].filter(Boolean).join(" ")}
+      className={[styles.card, backgroundChart ? styles.withBackgroundChart : null, className]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
     >
-      <div className={styles.header}>
-        <Text variant="caption" color="dim" className={styles.label}>
-          {label}
-        </Text>
-        {icon && (
-          <span className={styles.icon} aria-hidden="true">
-            {icon}
-          </span>
-        )}
-      </div>
+      {backgroundChart && (
+        <div className={styles.backgroundChart} aria-hidden="true">
+          {backgroundChart}
+        </div>
+      )}
 
-      <div
-        className={styles.valueRow}
-        aria-label={`${label}: ${accessibleValue}`}
-      >
-        <Text variant="title-2" as="span" className={styles.value}>
-          {displayValue}
-        </Text>
-        {unit && (
-          <Text variant="caption" as="span" color="dim" className={styles.unit}>
-            {unit}
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <Text variant="caption" color="dim" className={styles.label}>
+            {label}
+          </Text>
+          {icon && (
+            <span className={styles.icon} aria-hidden="true">
+              {icon}
+            </span>
+          )}
+        </div>
+
+        <div
+          className={styles.valueRow}
+          aria-label={`${label}: ${accessibleValue}`}
+        >
+          <Text variant="title-2" as="span" className={styles.value}>
+            {displayValue}
+          </Text>
+          {unit && (
+            <Text variant="caption" as="span" color="dim" className={styles.unit}>
+              {unit}
+            </Text>
+          )}
+        </div>
+
+        {trend && (
+          <Text
+            variant="caption"
+            as="span"
+            className={[styles.trend, styles[trend.direction]]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <span aria-hidden="true">{TREND_SYMBOL[trend.direction]}</span>
+            <span className={styles.trendValue}>
+              {`${trend.value > 0 ? "+" : ""}${numberFormat.format(trend.value)}%`}
+            </span>
+            {trend.period && (
+              <span className={styles.period}>{trend.period}</span>
+            )}
           </Text>
         )}
       </div>
-
-      {trend && (
-        <Text
-          variant="caption"
-          as="span"
-          className={[styles.trend, styles[trend.direction]]
-            .filter(Boolean)
-            .join(" ")}
-        >
-          <span aria-hidden="true">{TREND_SYMBOL[trend.direction]}</span>
-          <span className={styles.trendValue}>
-            {`${trend.value > 0 ? "+" : ""}${numberFormat.format(trend.value)}%`}
-          </span>
-          {trend.period && (
-            <span className={styles.period}>{trend.period}</span>
-          )}
-        </Text>
-      )}
     </Card>
   );
 }
