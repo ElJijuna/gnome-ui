@@ -1,0 +1,12 @@
+/* eslint-disable */
+import type { IconDefinition } from "../types.ts";
+
+/** x-office-calendar-symbolic.svg (mimetypes/x-office-calendar) */
+export const XOfficeCalendar: IconDefinition = {
+  viewBox: "0 0 16 16",
+  paths: [
+  {
+    d: "m 4 1 v 1 c -1.644531 0 -3 1.355469 -3 3 v 7 c 0 1.644531 1.355469 3 3 3 h 8 c 1.644531 0 3 -1.355469 3 -3 v -7 c 0 -1.644531 -1.355469 -3 -3 -3 v -1 h -2 v 1 h -4 v -1 z m 0 5 h 8 c 0.554688 0 1 0.445312 1 1 v 5 c 0 0.570312 -0.441406 0.886719 -1 1 h -8 c -0.570312 0 -1 -0.429688 -1 -1 v -5 c 0 -0.554688 0.445312 -1 1 -1 z m 3 1 v 1 h 2 v -1 z m 3 0 v 1 h 2 v -1 z m -6 2 v 1 h 2 v -1 z m 3 0 v 1 h 2 v -1 z m 3 0 v 1 h 2 v -1 z m -6 2 v 1 h 2 v -1 z m 3 0 v 1 h 2 v -1 z m 3 0 v 1 h 2 v -1 z m 0 0"
+  }
+],
+};

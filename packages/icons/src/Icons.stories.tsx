@@ -27,6 +27,7 @@ function Icon({ icon, size = 16, color = "currentColor" }: IconProps) {
           d={p.d}
           fillRule={p.fillRule}
           clipRule={p.clipRule}
+          transform={p.transform}
         />
       ))}
     </svg>
@@ -36,23 +37,56 @@ function Icon({ icon, size = 16, color = "currentColor" }: IconProps) {
 // ─── Gallery component ────────────────────────────────────────────────────────
 
 const iconEntries = Object.entries(icons) as [string, IconDefinition][];
+const versionControlIconNames = new Set([
+  "GitCommit",
+  "GitBranch",
+  "GitCompare",
+  "GitMerge",
+  "GitMergeQueue",
+  "GitFork",
+  "GitPullRequest",
+  "GitPullRequestClosed",
+  "GitPullRequestDraft",
+  "GitIssueOpened",
+  "GitIssueClosed",
+  "GitIssueDraft",
+  "GitIssueReopened",
+  "GitCodeReview",
+  "GitDiff",
+  "GitMilestone",
+  "GitProject",
+  "GitWorkflow",
+  "GitRepository",
+  "GitTag",
+]);
+const adwaitaSymbolicEntries = iconEntries.filter(([name]) => !versionControlIconNames.has(name));
 
 interface GalleryProps {
   size: number;
   color: string;
   filter: string;
+  surface: "light" | "dark";
 }
 
-function Gallery({ size, color, filter }: GalleryProps) {
+function Gallery({ size, color, filter, surface }: GalleryProps) {
   const filtered = filter
     ? iconEntries.filter(([name]) =>
         name.toLowerCase().includes(filter.toLowerCase())
       )
     : iconEntries;
+  const isDark = surface === "dark";
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <p style={{ color: "#666", marginBottom: "1.5rem", fontSize: "0.875rem" }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "2rem",
+        fontFamily: "sans-serif",
+        backgroundColor: isDark ? "#242424" : "transparent",
+        color: isDark ? "#f4f4f4" : "#1c1c1c",
+      }}
+    >
+      <p style={{ color: isDark ? "#cfcfcf" : "#666", marginBottom: "1.5rem", fontSize: "0.875rem" }}>
         {filtered.length} icon{filtered.length !== 1 ? "s" : ""}
         {filter ? ` matching "${filter}"` : ""}
       </p>
@@ -74,15 +108,15 @@ function Gallery({ size, color, filter }: GalleryProps) {
               gap: "0.5rem",
               padding: "0.75rem",
               borderRadius: "8px",
-              border: "1px solid #e0e0e0",
-              backgroundColor: "#fff",
+              border: isDark ? "1px solid #3d3d3d" : "1px solid #e0e0e0",
+              backgroundColor: isDark ? "#303030" : "#fff",
             }}
           >
             <Icon icon={def} size={size} color={color} />
             <span
               style={{
                 fontSize: "0.7rem",
-                color: "#555",
+                color: isDark ? "#d7d7d7" : "#555",
                 textAlign: "center",
                 wordBreak: "break-word",
               }}
@@ -92,6 +126,55 @@ function Gallery({ size, color, filter }: GalleryProps) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+function EntryGrid({
+  entries,
+  size,
+  color,
+}: {
+  entries: [string, IconDefinition][];
+  size: number;
+  color: string;
+}) {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+        gap: "1rem",
+      }}
+    >
+      {entries.map(([name, def]) => (
+        <div
+          key={name}
+          title={name}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.5rem",
+            padding: "0.75rem",
+            borderRadius: "8px",
+            border: "1px solid #e0e0e0",
+            backgroundColor: "#fff",
+          }}
+        >
+          <Icon icon={def} size={size} color={color} />
+          <span
+            style={{
+              fontSize: "0.7rem",
+              color: "#555",
+              textAlign: "center",
+              wordBreak: "break-word",
+            }}
+          >
+            {name}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -123,11 +206,16 @@ const meta = {
       control: "text",
       description: "Filter icons by name",
     },
+    surface: {
+      control: false,
+      table: { disable: true },
+    },
   },
   args: {
     size: 16,
     color: "#1c1c1c",
     filter: "",
+    surface: "light",
   },
 } satisfies Meta<typeof Gallery>;
 
@@ -147,7 +235,7 @@ export const LargeSize: Story = {
 
 export const DarkBackground: Story = {
   name: "Dark Background",
-  args: { color: "#ffffff" },
+  args: { color: "#ffffff", surface: "dark" },
   parameters: {
     backgrounds: { default: "gnome-dark" },
   },
@@ -292,6 +380,18 @@ function SectionedCategoryGrid({
 
 export const AdwaitaSymbolicIcons: Story = {
   name: "Adwaita Symbolic",
+  render: (args) => (
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+      <p style={{ color: "#666", marginBottom: "1.5rem", fontSize: "0.875rem" }}>
+        {adwaitaSymbolicEntries.length} Adwaita symbolic icons exported from <code>@gnome-ui/icons/icons</code>.
+      </p>
+      <EntryGrid entries={adwaitaSymbolicEntries} size={args.size} color={args.color} />
+    </div>
+  ),
+};
+
+export const CuratedAdwaitaSymbolicIcons: Story = {
+  name: "Curated Adwaita Symbolic",
   render: (args) => (
     <SectionedCategoryGrid
       title="Adwaita Symbolic"

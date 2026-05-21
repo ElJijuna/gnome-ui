@@ -3,7 +3,7 @@ import type { IconDefinition } from "../types.ts";
 import * as icons from "./index.ts";
 
 const VALID_RULE_VALUES = ["nonzero", "evenodd", "inherit"] as const;
-const VIEW_BOX_PATTERN = /^\d+ \d+ \d+ \d+$/;
+const VIEW_BOX_PATTERN = /^-?\d+(?:\.\d+)? -?\d+(?:\.\d+)? \d+(?:\.\d+)? \d+(?:\.\d+)?$/;
 
 const iconEntries = Object.entries(icons) as [string, IconDefinition][];
 

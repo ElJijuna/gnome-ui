@@ -57,7 +57,7 @@ export function Icon({
 
   const paths = isIconDefinition(icon)
     ? icon.paths.map((p, i) => (
-        <path key={i} d={p.d} fillRule={p.fillRule} clipRule={p.clipRule} />
+        <path key={i} d={p.d} fillRule={p.fillRule} clipRule={p.clipRule} transform={p.transform} />
       ))
     : [<path key={0} d={icon.path} />];
 

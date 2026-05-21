@@ -16,6 +16,7 @@ export interface IconPath {
   readonly d: string;
   readonly fillRule?: "nonzero" | "evenodd" | "inherit";
   readonly clipRule?: "nonzero" | "evenodd" | "inherit";
+  readonly transform?: string;
 }
 
 /**

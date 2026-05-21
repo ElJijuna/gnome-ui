@@ -92,133 +92,71 @@ export const InheritsColor: Story = {
 
 // ─── Full icon gallery ─────────────────────────────────────────────────────────
 
-const CATEGORIES: Array<{ title: string; source: string; items: Array<{ name: string; icon: Icons.IconDefinition }> }> = [
+const VERSION_CONTROL_NAMES = new Set([
+  "GitCommit",
+  "GitBranch",
+  "GitCompare",
+  "GitMerge",
+  "GitMergeQueue",
+  "GitFork",
+  "GitPullRequest",
+  "GitPullRequestClosed",
+  "GitPullRequestDraft",
+  "GitIssueOpened",
+  "GitIssueClosed",
+  "GitIssueDraft",
+  "GitIssueReopened",
+  "GitCodeReview",
+  "GitDiff",
+  "GitMilestone",
+  "GitProject",
+  "GitWorkflow",
+  "GitRepository",
+  "GitTag",
+]);
+
+const THIRD_PARTY_NAMES = new Set(["GitHub", "GitLab", "Bitbucket", "X", "Npm"]);
+
+type IconGalleryEntry = { name: string; icon: Icons.IconDefinition };
+type IconGalleryCategory = { title: string; source: string; items: IconGalleryEntry[] };
+
+function isIconDefinition(value: unknown): value is Icons.IconDefinition {
+  return (
+    typeof value === "object" &&
+    value != null &&
+    "viewBox" in value &&
+    "paths" in value &&
+    Array.isArray((value as { paths: unknown }).paths)
+  );
+}
+
+const exportedIconEntries = Object.entries(Icons)
+  .filter((entry): entry is [string, Icons.IconDefinition] => isIconDefinition(entry[1]))
+  .sort(([a], [b]) => a.localeCompare(b));
+
+const CATEGORIES: IconGalleryCategory[] = [
   {
-    title: "Navigation",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "GoPrevious",  icon: Icons.GoPrevious },
-      { name: "GoNext",      icon: Icons.GoNext },
-      { name: "GoHome",      icon: Icons.GoHome },
-      { name: "GoUp",        icon: Icons.GoUp },
-      { name: "PanDown",     icon: Icons.PanDown },
-      { name: "PanUp",       icon: Icons.PanUp },
-      { name: "PanStart",    icon: Icons.PanStart },
-      { name: "PanEnd",      icon: Icons.PanEnd },
-    ],
-  },
-  {
-    title: "Actions",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "Add",          icon: Icons.Add },
-      { name: "Remove",       icon: Icons.Remove },
-      { name: "Delete",       icon: Icons.Delete },
-      { name: "Edit",         icon: Icons.Edit },
-      { name: "Copy",         icon: Icons.Copy },
-      { name: "Paste",        icon: Icons.Paste },
-      { name: "Cut",          icon: Icons.Cut },
-      { name: "Undo",         icon: Icons.Undo },
-      { name: "Redo",         icon: Icons.Redo },
-      { name: "Save",         icon: Icons.Save },
-      { name: "DocumentOpen", icon: Icons.DocumentOpen },
-      { name: "Close",        icon: Icons.Close },
-      { name: "Search",       icon: Icons.Search },
-      { name: "Refresh",      icon: Icons.Refresh },
-      { name: "Share",        icon: Icons.Share },
-      { name: "Attachment",   icon: Icons.Attachment },
-    ],
-  },
-  {
-    title: "UI",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "OpenMenu",    icon: Icons.OpenMenu },
-      { name: "ViewMore",    icon: Icons.ViewMore },
-      { name: "ViewSidebar", icon: Icons.ViewSidebar },
-      { name: "ViewReveal",  icon: Icons.ViewReveal },
-      { name: "ViewConceal", icon: Icons.ViewConceal },
-      { name: "Settings",    icon: Icons.Settings },
-    ],
-  },
-  {
-    title: "Status",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "Information", icon: Icons.Information },
-      { name: "Warning",     icon: Icons.Warning },
-      { name: "Error",       icon: Icons.Error },
-      { name: "Check",       icon: Icons.Check },
-    ],
-  },
-  {
-    title: "People & Identity",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "Person",        icon: Icons.Person },
-      { name: "Accessibility", icon: Icons.Accessibility },
-    ],
-  },
-  {
-    title: "System & Hardware",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "Applications",   icon: Icons.Applications },
-      { name: "Notifications",  icon: Icons.Notifications },
-      { name: "InputMouse",     icon: Icons.InputMouse },
-      { name: "InputKeyboard",  icon: Icons.InputKeyboard },
-      { name: "InputTablet",    icon: Icons.InputTablet },
-      { name: "ColorManagement",icon: Icons.ColorManagement },
-      { name: "Printer",        icon: Icons.Printer },
-      { name: "Lock",           icon: Icons.Lock },
-    ],
-  },
-  {
-    title: "Misc",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "Star",        icon: Icons.Star },
-      { name: "StarOutline", icon: Icons.StarOutline },
-      { name: "Heart",       icon: Icons.Heart },
-    ],
-  },
-  {
-    title: "Media",
-    source: "Adwaita Symbolic",
-    items: [
-      { name: "MediaPlay",         icon: Icons.MediaPlay },
-      { name: "MediaPause",        icon: Icons.MediaPause },
-      { name: "MediaSkipForward",  icon: Icons.MediaSkipForward },
-      { name: "MediaSkipBackward", icon: Icons.MediaSkipBackward },
-    ],
+    title: "Symbolic",
+    source: "Adwaita",
+    items: exportedIconEntries
+      .filter(([name]) => !VERSION_CONTROL_NAMES.has(name) && !THIRD_PARTY_NAMES.has(name))
+      .map(([name, icon]) => ({ name, icon })),
   },
   {
     title: "Version Control",
     source: "GitHub Octicons",
-    items: [
-      { name: "GitCommit",              icon: Icons.GitCommit },
-      { name: "GitBranch",              icon: Icons.GitBranch },
-      { name: "GitCompare",             icon: Icons.GitCompare },
-      { name: "GitMerge",               icon: Icons.GitMerge },
-      { name: "GitMergeQueue",          icon: Icons.GitMergeQueue },
-      { name: "GitFork",                icon: Icons.GitFork },
-      { name: "GitPullRequest",         icon: Icons.GitPullRequest },
-      { name: "GitPullRequestClosed",   icon: Icons.GitPullRequestClosed },
-      { name: "GitPullRequestDraft",    icon: Icons.GitPullRequestDraft },
-      { name: "GitIssueOpened",         icon: Icons.GitIssueOpened },
-      { name: "GitIssueClosed",         icon: Icons.GitIssueClosed },
-      { name: "GitIssueDraft",          icon: Icons.GitIssueDraft },
-      { name: "GitIssueReopened",       icon: Icons.GitIssueReopened },
-      { name: "GitCodeReview",          icon: Icons.GitCodeReview },
-      { name: "GitDiff",                icon: Icons.GitDiff },
-      { name: "GitMilestone",           icon: Icons.GitMilestone },
-      { name: "GitProject",             icon: Icons.GitProject },
-      { name: "GitWorkflow",            icon: Icons.GitWorkflow },
-      { name: "GitRepository",          icon: Icons.GitRepository },
-      { name: "GitTag",                 icon: Icons.GitTag },
-    ],
+    items: exportedIconEntries
+      .filter(([name]) => VERSION_CONTROL_NAMES.has(name))
+      .map(([name, icon]) => ({ name, icon })),
   },
-];
+  {
+    title: "Brand / Fullcolor Preview",
+    source: "Third-party",
+    items: exportedIconEntries
+      .filter(([name]) => THIRD_PARTY_NAMES.has(name))
+      .map(([name, icon]) => ({ name, icon })),
+  },
+].filter((category) => category.items.length > 0);
 
 const TOTAL = CATEGORIES.reduce((n, c) => n + c.items.length, 0);
 
