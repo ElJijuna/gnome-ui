@@ -114,7 +114,8 @@ type AnyIconDefinition = IconDefinition | RawPathIconDefinition;
 
 ## Available icons
 
-All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 × 16 viewBox.
+Most icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 × 16 viewBox.
+Version Control icons follow GitHub Octicons and use a 24 × 24 viewBox.
 
 ### Navigation
 
@@ -220,12 +221,25 @@ All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 ×
 | Export | Description |
 |--------|-------------|
 | `GitCommit` | Commit node on a branch line |
-| `GitBranch` | Branch topology (base node, fork point, branch head) |
-| `GitMerge` | Two branches converging into one |
-| `GitFork` | One branch diverging into two |
-| `GitPullRequest` | Pull request (Π shape with downward arrow) |
-| `GitRepository` | Cylindrical database / repository |
-| `GitTag` | Tag label with eyelet |
+| `GitBranch` | Branch topology |
+| `GitCompare` | Compare branches |
+| `GitMerge` | Branch merge |
+| `GitMergeQueue` | Merge queue |
+| `GitFork` | Forked repository topology |
+| `GitPullRequest` | Open pull request |
+| `GitPullRequestClosed` | Closed pull request |
+| `GitPullRequestDraft` | Draft pull request |
+| `GitIssueOpened` | Open issue |
+| `GitIssueClosed` | Closed issue |
+| `GitIssueDraft` | Draft issue |
+| `GitIssueReopened` | Reopened issue |
+| `GitCodeReview` | Code review |
+| `GitDiff` | Diff |
+| `GitMilestone` | Milestone |
+| `GitProject` | GitHub project |
+| `GitWorkflow` | GitHub workflow |
+| `GitRepository` | Repository |
+| `GitTag` | Tag label |
 
 ### Third-party brand icons
 

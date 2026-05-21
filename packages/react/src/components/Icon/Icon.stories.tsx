@@ -184,6 +184,31 @@ const CATEGORIES: Array<{ title: string; items: Array<{ name: string; icon: Icon
       { name: "MediaSkipBackward", icon: Icons.MediaSkipBackward },
     ],
   },
+  {
+    title: "Version Control",
+    items: [
+      { name: "GitCommit",              icon: Icons.GitCommit },
+      { name: "GitBranch",              icon: Icons.GitBranch },
+      { name: "GitCompare",             icon: Icons.GitCompare },
+      { name: "GitMerge",               icon: Icons.GitMerge },
+      { name: "GitMergeQueue",          icon: Icons.GitMergeQueue },
+      { name: "GitFork",                icon: Icons.GitFork },
+      { name: "GitPullRequest",         icon: Icons.GitPullRequest },
+      { name: "GitPullRequestClosed",   icon: Icons.GitPullRequestClosed },
+      { name: "GitPullRequestDraft",    icon: Icons.GitPullRequestDraft },
+      { name: "GitIssueOpened",         icon: Icons.GitIssueOpened },
+      { name: "GitIssueClosed",         icon: Icons.GitIssueClosed },
+      { name: "GitIssueDraft",          icon: Icons.GitIssueDraft },
+      { name: "GitIssueReopened",       icon: Icons.GitIssueReopened },
+      { name: "GitCodeReview",          icon: Icons.GitCodeReview },
+      { name: "GitDiff",                icon: Icons.GitDiff },
+      { name: "GitMilestone",           icon: Icons.GitMilestone },
+      { name: "GitProject",             icon: Icons.GitProject },
+      { name: "GitWorkflow",            icon: Icons.GitWorkflow },
+      { name: "GitRepository",          icon: Icons.GitRepository },
+      { name: "GitTag",                 icon: Icons.GitTag },
+    ],
+  },
 ];
 
 const TOTAL = CATEGORIES.reduce((n, c) => n + c.items.length, 0);
