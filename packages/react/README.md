@@ -40,7 +40,7 @@ export default function App() {
 
 ## Provider & formatting
 
-`GnomeProvider` supplies locale, text direction, and default `Intl` formatting options to gnome-ui components. When `locale` is omitted, the browser locale is used.
+`GnomeProvider` supplies locale, text direction, color scheme, and default `Intl` formatting options to gnome-ui components. When `locale` is omitted, the browser locale is used.
 
 ```tsx
 import { GnomeProvider } from "@gnome-ui/react";
@@ -78,6 +78,46 @@ function Metric({ value, date }: { value: number; date: Date }) {
   return `${number.format(value)} · ${day.format(date)}`;
 }
 ```
+
+## Color scheme
+
+Pass `colorScheme` to `GnomeProvider` to control the app theme. The provider applies the `data-theme` attribute to `document.documentElement` automatically — no manual DOM manipulation needed.
+
+| Value | Behavior |
+|-------|----------|
+| `"system"` (default) | Follows the OS `prefers-color-scheme` preference |
+| `"light"` | Forces light theme |
+| `"dark"` | Forces dark theme |
+
+```tsx
+import { GnomeProvider } from "@gnome-ui/react";
+
+// Controlled by user preference stored in your app state/localStorage
+export default function App({ colorScheme }) {
+  return (
+    <GnomeProvider colorScheme={colorScheme}>
+      {/* all gnome-ui components respond automatically */}
+    </GnomeProvider>
+  );
+}
+```
+
+Consume the current scheme in any component:
+
+```tsx
+import { useColorScheme, useResolvedColorScheme } from "@gnome-ui/react";
+
+function ThemeAwareImage() {
+  const resolvedColorScheme = useResolvedColorScheme(); // "light" | "dark"
+
+  return (
+    <img src={resolvedColorScheme === "dark" ? "/logo-dark.svg" : "/logo.svg"} />
+  );
+}
+```
+
+- `useColorScheme()` — returns the value passed to `GnomeProvider` (`"light"`, `"dark"`, or `"system"`).
+- `useResolvedColorScheme()` — always returns `"light"` or `"dark"`, resolving `"system"` against the OS preference in real time.
 
 ## Tree-shaking
 

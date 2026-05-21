@@ -1,12 +1,15 @@
 import { createContext, useContext, useMemo } from "react";
 
 export type GnomeDir = "ltr" | "rtl";
+export type GnomeColorScheme = "light" | "dark" | "system";
 
 export interface GnomeContextValue {
   locale: string | undefined;
   dir: GnomeDir;
   numberFormat: Intl.NumberFormatOptions | undefined;
   dateTimeFormat: Intl.DateTimeFormatOptions | undefined;
+  colorScheme: GnomeColorScheme;
+  resolvedColorScheme: "light" | "dark";
 }
 
 export const GnomeContext = createContext<GnomeContextValue>({
@@ -14,6 +17,8 @@ export const GnomeContext = createContext<GnomeContextValue>({
   dir: "ltr",
   numberFormat: undefined,
   dateTimeFormat: undefined,
+  colorScheme: "system",
+  resolvedColorScheme: "light",
 });
 
 /** Returns the locale set by the nearest `GnomeProvider`, or `undefined` to use the browser locale. */
@@ -48,4 +53,14 @@ export function useDateTimeFormatter(
     () => new Intl.DateTimeFormat(locale, { ...dateTimeFormat, ...options }),
     [locale, dateTimeFormat, options],
   );
+}
+
+/** Returns the color scheme preference set by the nearest `GnomeProvider`. Defaults to `"system"`. */
+export function useColorScheme(): GnomeColorScheme {
+  return useContext(GnomeContext).colorScheme;
+}
+
+/** Returns the resolved color scheme (`"light"` or `"dark"`), accounting for the system preference when `colorScheme` is `"system"`. */
+export function useResolvedColorScheme(): "light" | "dark" {
+  return useContext(GnomeContext).resolvedColorScheme;
 }

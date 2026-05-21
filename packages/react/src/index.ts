@@ -268,5 +268,7 @@ export {
   useDir,
   useNumberFormatter,
   useDateTimeFormatter,
+  useColorScheme,
+  useResolvedColorScheme,
 } from "./components/GnomeProvider/GnomeContext";
-export type { GnomeDir } from "./components/GnomeProvider/GnomeContext";
+export type { GnomeDir, GnomeColorScheme } from "./components/GnomeProvider/GnomeContext";
