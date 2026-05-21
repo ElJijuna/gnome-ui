@@ -1,3 +1,16 @@
+## [1.27.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.26.0...@gnome-ui/layout@1.27.0) (2026-05-21)
+
+### Features
+
+* **@gnome-ui/charts:** add SparkAreaChart, SparkLineChart, SparkBarChart and fix dark-mode tokens ([7a02ad5](https://github.com/ElJijuna/gnome-ui/commit/7a02ad5ae4e1c5576246da787934ab1c0480e05d))
+* **@gnome-ui/layout:** update StatCard to support backgroundChart ([4e0b867](https://github.com/ElJijuna/gnome-ui/commit/4e0b867e2b22b6c3291db2c25e3f6b6c7fea83b9))
+* **@gnome-ui/react:** add component Drawer ([5e2817b](https://github.com/ElJijuna/gnome-ui/commit/5e2817be7da79426dde97e725d3e753f8e7d3284))
+* **@gnome-ui/react:** update ContributionGraph issues ([eae3fe7](https://github.com/ElJijuna/gnome-ui/commit/eae3fe7d08ce7850fb4dfbfc241a875e853f3cec))
+
+### Bug Fixes
+
+* **@gnome-ui/core:** update --gnome-card-shade-color in light mode from rgba(0,0,0,0.07) ([4b2bd4c](https://github.com/ElJijuna/gnome-ui/commit/4b2bd4c9ab5d5b3d287930fc062fd6416a3d03a5)), closes [#fafafa](https://github.com/ElJijuna/gnome-ui/issues/fafafa)
+
 ## [1.26.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.25.0...@gnome-ui/layout@1.26.0) (2026-05-21)
 
 ### Features
