@@ -252,6 +252,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`Toast`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-toast--docs) / `Toaster` | Non-blocking temporary notification with auto-dismiss, action, and queue support |
 | [`Dialog`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dialog--docs) | Blocking modal with title, body, focus trap, and configurable buttons |
 | [`BottomSheet`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-bottomsheet--docs) | Slide-up panel from the bottom of the viewport with drag handle and optional title |
+| [`Drawer`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-drawer--docs) | Slide-over panel that opens from the left or right with React content |
 | [`Tooltip`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tooltip--docs) | Floating informational label on hover/focus with auto-flip positioning |
 | [`Popover`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-popover--docs) | Floating interactive panel with arrow and auto-flip positioning |
 | [`Banner`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-banner--docs) | Persistent message strip with optional action and dismiss |

@@ -142,6 +142,11 @@
       "import": "./dist/components/Dialog.js",
       "require": "./dist/components/Dialog.cjs"
     },
+    "./components/Drawer": {
+      "types": "./dist/components/Drawer.d.ts",
+      "import": "./dist/components/Drawer.js",
+      "require": "./dist/components/Drawer.cjs"
+    },
     "./components/Dropdown": {
       "types": "./dist/components/Dropdown.d.ts",
       "import": "./dist/components/Dropdown.js",

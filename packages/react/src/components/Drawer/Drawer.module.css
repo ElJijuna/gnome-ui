@@ -1,0 +1,125 @@
+/* ─── Backdrop ─────────────────────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Drawer ──────────────────────────────────────────────────────────────── */
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  width: min(var(--gnome-drawer-width, var(--gnome-drawer-preset-width, 420px)), 100vw);
+  height: 100dvh;
+  min-width: 0;
+  overflow: hidden;
+
+  background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #fafafa));
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.classic {
+  --gnome-drawer-preset-width: 420px;
+}
+
+.wide {
+  --gnome-drawer-preset-width: 640px;
+}
+
+.left {
+  margin-right: auto;
+  border-radius: 0 var(--gnome-radius-xl, 16px) var(--gnome-radius-xl, 16px) 0;
+  box-shadow:
+    4px 0 24px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  animation: drawer-in-left var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+.right {
+  margin-left: auto;
+  border-radius: var(--gnome-radius-xl, 16px) 0 0 var(--gnome-radius-xl, 16px);
+  box-shadow:
+    -4px 0 24px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  animation: drawer-in-right var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes drawer-in-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes drawer-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.title {
+  flex-shrink: 0;
+  padding: var(--gnome-space-4, 24px) var(--gnome-space-4, 24px) var(--gnome-space-2, 12px);
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-title-4, 1.125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  line-height: var(--gnome-line-height-title, 1.3);
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--gnome-space-4, 24px);
+}
+
+.title + .content {
+  padding-top: 0;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .drawer {
+    background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #242424));
+  }
+
+  .left {
+    box-shadow:
+      4px 0 24px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .right {
+    box-shadow:
+      -4px 0 24px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ─── Reduced motion ──────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .left,
+  .right {
+    animation: none;
+  }
+}

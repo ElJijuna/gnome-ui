@@ -95,6 +95,7 @@ Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gn
 | `SearchBar` | Collapsible search bar with auto-focus, clear button, and optional filter row | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) |
 | `Toast` / `Toaster` | Non-blocking temporary notification with auto-dismiss, action, and queue support | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-toast--docs) |
 | `Dialog` | Blocking modal with title, body, focus trap, and configurable buttons | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dialog--docs) |
+| `Drawer` | Slide-over panel that opens from the left or right with React content | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-drawer--docs) |
 | `Tooltip` | Floating informational label on hover/focus with auto-flip positioning | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tooltip--docs) |
 | `StatusPage` | Empty-state page with icon, title, description, and optional actions | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) |
 | `Dropdown` | Expandable option list with keyboard nav, flip positioning, and descriptions | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dropdown--docs) |

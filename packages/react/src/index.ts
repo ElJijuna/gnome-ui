@@ -94,6 +94,9 @@ export type {
   AlertDialogResponseVariant,
 } from "./components/Dialog";
 
+export { Drawer } from "./components/Drawer";
+export type { DrawerProps, DrawerSide, DrawerSize } from "./components/Drawer";
+
 export { AboutDialog } from "./components/AboutDialog";
 export type { AboutDialogProps, AboutDialogLink } from "./components/AboutDialog";
 
