@@ -215,6 +215,18 @@ All icons are Adwaita symbolic icons — monochrome, `currentColor`-based, 16 ×
 | `MediaSkipForward` | `media-skip-forward-symbolic` |
 | `MediaSkipBackward` | `media-skip-backward-symbolic` |
 
+### Version Control
+
+| Export | Description |
+|--------|-------------|
+| `GitCommit` | Commit node on a branch line |
+| `GitBranch` | Branch topology (base node, fork point, branch head) |
+| `GitMerge` | Two branches converging into one |
+| `GitFork` | One branch diverging into two |
+| `GitPullRequest` | Pull request (Π shape with downward arrow) |
+| `GitRepository` | Cylindrical database / repository |
+| `GitTag` | Tag label with eyelet |
+
 ### Third-party brand icons
 
 Available via `@gnome-ui/icons` or the `@gnome-ui/icons/third-party` sub-path.

@@ -69,3 +69,12 @@ export { MediaPlay } from "./MediaPlay.ts";
 export { MediaPause } from "./MediaPause.ts";
 export { MediaSkipForward } from "./MediaSkipForward.ts";
 export { MediaSkipBackward } from "./MediaSkipBackward.ts";
+
+// ─── Version Control ──────────────────────────────────────────────────────────
+export { GitCommit } from "./GitCommit.ts";
+export { GitBranch } from "./GitBranch.ts";
+export { GitMerge } from "./GitMerge.ts";
+export { GitFork } from "./GitFork.ts";
+export { GitPullRequest } from "./GitPullRequest.ts";
+export { GitRepository } from "./GitRepository.ts";
+export { GitTag } from "./GitTag.ts";

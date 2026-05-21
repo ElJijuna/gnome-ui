@@ -164,6 +164,7 @@ const categories: Record<string, string[]> = {
   "System & Hardware": ["Applications", "Notifications", "InputMouse", "InputKeyboard", "InputTablet", "ColorManagement", "Printer", "Lock"],
   Misc: ["Star", "StarOutline", "Heart"],
   Media: ["MediaPlay", "MediaPause", "MediaSkipForward", "MediaSkipBackward"],
+  "Version Control": ["GitCommit", "GitBranch", "GitMerge", "GitFork", "GitPullRequest", "GitRepository", "GitTag"],
 };
 
 function CategoryGrid({ category, size, color }: { category: string; size: number; color: string }) {
@@ -225,6 +226,11 @@ export const StatusIcons: Story = {
 export const MediaIcons: Story = {
   name: "Media",
   render: (args) => <CategoryGrid category="Media" size={args.size} color={args.color} />,
+};
+
+export const VersionControlIcons: Story = {
+  name: "Version Control",
+  render: (args) => <CategoryGrid category="Version Control" size={args.size} color={args.color} />,
 };
 
 // ─── Third-party logos ────────────────────────────────────────────────────────
