@@ -387,7 +387,7 @@ body {
 
     --gnome-card-bg-color: #383838;
     --gnome-card-fg-color: rgba(255, 255, 255, 0.87);
-    --gnome-card-shade-color: rgba(0, 0, 0, 0.36);
+    --gnome-card-shade-color: rgba(255, 255, 255, 0.12);
 
     --gnome-headerbar-bg-color: #303030;
     --gnome-headerbar-fg-color: rgba(255, 255, 255, 0.87);
@@ -538,7 +538,7 @@ body {
 
   --gnome-card-bg-color: #383838;
   --gnome-card-fg-color: rgba(255, 255, 255, 0.87);
-  --gnome-card-shade-color: rgba(0, 0, 0, 0.36);
+  --gnome-card-shade-color: rgba(255, 255, 255, 0.12);
 
   --gnome-headerbar-bg-color: #303030;
   --gnome-headerbar-fg-color: rgba(255, 255, 255, 0.87);
