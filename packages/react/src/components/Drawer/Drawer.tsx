@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
+import { Button } from "../Button/Button";
 import { FOCUSABLE, trapFocus, useVisualViewport } from "../Dialog/dialogUtils";
 import styles from "./Drawer.module.css";
 
@@ -106,7 +107,22 @@ export function Drawer({
         onClick={(event) => event.stopPropagation()}
         {...props}
       >
-        {title && <div id={titleId} className={styles.title}>{title}</div>}
+        {title && (
+          <div id={titleId} className={styles.title}>
+            <span className={styles.titleText}>{title}</span>
+            {onClose && (
+              <Button
+                variant="flat"
+                shape="circular"
+                size="sm"
+                aria-label="Close"
+                onClick={onClose}
+              >
+                ✕
+              </Button>
+            )}
+          </div>
+        )}
         {body !== undefined && <div className={styles.content}>{body}</div>}
       </div>
     </div>

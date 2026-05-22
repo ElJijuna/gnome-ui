@@ -71,7 +71,15 @@
 
 .title {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
   padding: var(--gnome-space-4, 24px) var(--gnome-space-4, 24px) var(--gnome-space-2, 12px);
+}
+
+.titleText {
+  flex: 1;
+  min-width: 0;
 
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-title-4, 1.125rem);
@@ -100,6 +108,7 @@
   .drawer {
     background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #242424));
   }
+
 
   .left {
     box-shadow:
