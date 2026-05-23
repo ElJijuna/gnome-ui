@@ -202,9 +202,11 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`Avatar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatar--docs) | Circular user image with deterministic-color initials fallback |
 | [`AvatarRotator`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatarrotator--docs) | Single avatar surface that crossfades through multiple image sources |
 | [`Badge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) | Counter or status dot, optionally anchored over another element |
+| [`StatusBadge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statusbadge--docs) | Pill-shaped text label for entity status — published, beta, new, etc.; 6 variants |
 | [`Blockquote`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-blockquote--docs) | Styled pull-quote with left-border accent; default, info, warning, error, success variants; optional icon and attribution |
 | [`Spinner`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinner--docs) | Indeterminate loading indicator; sm/md/lg sizes |
 | [`ProgressBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-progressbar--docs) | Determinate (0–1) and indeterminate progress indicator |
+| [`SegmentedBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-segmentedbar--docs) | Multi-segment horizontal bar for proportional distributions (e.g. language breakdown); hover tooltip and highlight; auto color palette from GNOME tokens |
 | [`Skeleton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-skeleton--docs) | Content-shaped loading placeholder; rectangular, circular, and multi-line text variants with optional shimmer |
 | [`CountDownTimer`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-countdowntimer--docs) | Countdown timer showing remaining time until a specified date; `date`, `time`, or `datetime` formats; executes callback on completion |
 | [`StatusPage`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statuspage--docs) | Empty-state page with icon, title, description, and optional actions; `compact` prop for sidebars/popovers |
@@ -239,7 +241,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`PasswordEntryRow`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-passwordentryrow--docs) | `EntryRow` variant with show/hide password toggle |
 | [`SpinRow`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinrow--docs) | `ActionRow` with a built-in `SpinButton` for numeric values |
 | [`WrapBox`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-wrapbox--docs) | Wrapping flex container for tag/chip lists that flows across multiple lines — mirrors `AdwWrapBox` |
-| [`TabBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tabs--docs) / `TabItem` / `TabPanel` | Tab-based navigation with keyboard support, optional close buttons, and `inline` variant |
+| [`TabBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tabs--docs) / `TabItem` / `TabPanel` | Tab-based navigation with keyboard support, optional close buttons, `count` badge for unread indicators, and `inline` variant |
 | [`ViewSwitcher`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitcher--docs) / `ViewSwitcherItem` | Segmented pill control for switching between 2–4 top-level views |
 | [`ViewSwitcherSidebar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitchersidebar--docs) / `ViewSwitcherSidebarItem` | Sidebar-based view switcher — replaces `GtkStackSidebar` |
 | [`Carousel`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-carousel--docs) / `CarouselIndicatorDots` / `CarouselIndicatorLines` | Swipeable page carousel with dot or line indicators — mirrors `AdwCarousel` |

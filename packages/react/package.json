@@ -262,6 +262,11 @@
       "import": "./dist/components/ProgressBar.js",
       "require": "./dist/components/ProgressBar.cjs"
     },
+    "./components/SegmentedBar": {
+      "types": "./dist/components/SegmentedBar.d.ts",
+      "import": "./dist/components/SegmentedBar.js",
+      "require": "./dist/components/SegmentedBar.cjs"
+    },
     "./components/RadioButton": {
       "types": "./dist/components/RadioButton.d.ts",
       "import": "./dist/components/RadioButton.js",

@@ -41,6 +41,9 @@ export type { RadioButtonProps } from "./components/RadioButton";
 export { ProgressBar } from "./components/ProgressBar";
 export type { ProgressBarProps, ProgressBarVariant } from "./components/ProgressBar";
 
+export { SegmentedBar } from "./components/SegmentedBar";
+export type { SegmentedBarProps, SegmentedBarSegment } from "./components/SegmentedBar";
+
 export { Banner } from "./components/Banner";
 export type { BannerProps, BannerVariant } from "./components/Banner";
 
