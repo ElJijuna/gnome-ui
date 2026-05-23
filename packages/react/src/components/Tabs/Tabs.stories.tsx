@@ -243,10 +243,53 @@ export const InLayout: Story = {
   parameters: { controls: { disable: true } },
 };
 
+// ─── With badge/count ─────────────────────────────────────────────────────────
+
+export const WithBadge: Story = {
+  render: function WithBadgeStory() {
+    const tabs = [
+      { id: "inbox",    label: "Inbox",    count: 5 },
+      { id: "updates",  label: "Updates",  count: 150 },
+      { id: "sent",     label: "Sent",     count: 0 },
+      { id: "archived", label: "Archived" },
+    ];
+    const [active, setActive] = useState("inbox");
+    return (
+      <div>
+        <TabBar>
+          {tabs.map(({ id, label, count }) => (
+            <TabItem
+              key={id}
+              label={label}
+              count={count}
+              active={active === id}
+              panelId={`wb-panel-${id}`}
+              onClick={() => setActive(id)}
+            />
+          ))}
+        </TabBar>
+        {tabs.map(({ id, label }) => (
+          <TabPanel key={id} id={`wb-panel-${id}`} active={active === id} style={{ padding: 24 }}>
+            <Text variant="body" color="dim">{label} panel</Text>
+          </TabPanel>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: "Use `count` to show a badge with a number next to the tab label — useful for unread counts or pending items. Values above 99 render as \"99+\". Pass `count={0}` to show the badge with zero.",
+      },
+    },
+  },
+};
+
 // ─── Inline ───────────────────────────────────────────────────────────────────
 
 export const Inline: Story = {
-  render: () => {
+  render: function InlineStory() {
     const [active, setActive] = useState("overview");
     const tabs = [
       { id: "overview", label: "Overview" },
