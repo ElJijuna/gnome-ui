@@ -1,5 +1,9 @@
 # @gnome-ui/icons
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/public/assets/gnome-ui.png" alt="gnome-ui" width="120" />
+</p>
+
 Framework-agnostic icon definitions for the [gnome-ui](https://github.com/ElJijuna/gnome-ui) design system.
 
 Each icon is a plain JavaScript object (`IconDefinition`) containing SVG path data — no DOM, no React, no styles. UI framework adapters consume this shape to render inline SVGs.
