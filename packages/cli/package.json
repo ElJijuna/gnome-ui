@@ -1,0 +1,29 @@
+{
+  "name": "@gnome-ui/cli",
+  "version": "1.0.0",
+  "description": "CLI utilities for keeping GNOME UI packages up to date",
+  "type": "module",
+  "bin": {
+    "gnomeui": "./dist/index.js",
+    "gui": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "commander": "^14.0.2",
+    "npmjs-api-client": "^1.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  },
+  "author": "pilmee <pilmee@gmail.com> (https://github.com/ElJijuna)",
+  "license": "MIT"
+}
