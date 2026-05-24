@@ -1,5 +1,9 @@
 # @gnome-ui/core
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/public/assets/gnome-ui.png" alt="gnome-ui" width="120" />
+</p>
+
 Framework-agnostic CSS design tokens for the GNOME UI design system, based on the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/) and the [Adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/css-variables.html) design language.
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/core)](https://www.npmjs.com/package/@gnome-ui/core)
