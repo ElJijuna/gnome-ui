@@ -1,3 +1,23 @@
+## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.27.0...@gnome-ui/layout@1.28.0) (2026-05-24)
+
+### Features
+
+* **@gnome-ui/cli:** add a CLI in packages/cli to help validate and update @gnome-ui/* dependencies in consuming projects ([24c7888](https://github.com/ElJijuna/gnome-ui/commit/24c78889a380566846a3ff2961fff5eb0f7eb48b))
+* **@gnome-ui/cli:** update release workflow to add CLI ([a22bdbd](https://github.com/ElJijuna/gnome-ui/commit/a22bdbd7ff2f73791a464f37a3b4ca2d0bbf3c24))
+* **@gnome-ui/layout:** add ProfileCard component ([d374b21](https://github.com/ElJijuna/gnome-ui/commit/d374b214d16b13aa638d03bde9e802c94fb6c4ef))
+* **@gnome-ui/react:** add component SegmentedBar ([aa5d806](https://github.com/ElJijuna/gnome-ui/commit/aa5d806da01b4eed021b39386746c33af36cacb1))
+* **@gnome-ui/react:** update Tabs and TabItems to support count property and show badge with count value ([c78e4c5](https://github.com/ElJijuna/gnome-ui/commit/c78e4c56db7504b65a7d29e521cbd374001d9ce4))
+* **@gnome/react:** add close button in Drawer ([45e4ae3](https://github.com/ElJijuna/gnome-ui/commit/45e4ae3f3013947cdb05c0f9546e042432eb9ce1))
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** solved error in first render in MasonryGrid ([142cdae](https://github.com/ElJijuna/gnome-ui/commit/142cdae9ef2699eab72255ee8df5d97365765f70))
+* **@gnome-ui/react:** add vertical-align: middle to preserve centered content ([cfb9f9f](https://github.com/ElJijuna/gnome-ui/commit/cfb9f9f290599544143df23f1f39420137f64bfb))
+
+### Documentation
+
+* **@gnome-ui/cli:** add README ([5e89c03](https://github.com/ElJijuna/gnome-ui/commit/5e89c0346c7010b6b6be063c90f93cb1e0717bfa))
+
 ## [1.27.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.26.0...@gnome-ui/layout@1.27.0) (2026-05-21)
 
 ### Features
