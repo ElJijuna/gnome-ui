@@ -1,3 +1,9 @@
+## [1.28.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.28.0...@gnome-ui/layout@1.28.1) (2026-05-24)
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** add properties interactive and onClick in ProfileCard ([78bf5ab](https://github.com/ElJijuna/gnome-ui/commit/78bf5ab1cdbfee25066e12b692d881eaa3e90170))
+
 ## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.27.0...@gnome-ui/layout@1.28.0) (2026-05-24)
 
 ### Features
