@@ -1,5 +1,9 @@
 # @gnome-ui/hooks
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/public/assets/gnome-ui.png" alt="gnome-ui" width="120" />
+</p>
+
 React hooks that expose [@gnome-ui/platform](../platform/README.md) APIs
 as idiomatic React state.
 
