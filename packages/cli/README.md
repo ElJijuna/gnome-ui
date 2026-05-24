@@ -1,5 +1,9 @@
 # @gnome-ui/cli
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/public/assets/gnome-ui.png" alt="gnome-ui" width="120" />
+</p>
+
 Command-line tools for keeping GNOME UI packages up to date in consuming projects.
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/cli)](https://www.npmjs.com/package/@gnome-ui/cli)
