@@ -1,5 +1,9 @@
 # @gnome-ui/charts
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/public/assets/gnome-ui.png" alt="gnome-ui" width="120" />
+</p>
+
 Chart components for [@gnome-ui/react](../react/README.md), styled with GNOME Adwaita
 design tokens.
 
