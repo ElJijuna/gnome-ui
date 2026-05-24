@@ -1,5 +1,9 @@
 # @gnome-ui/platform
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/public/assets/gnome-ui.png" alt="gnome-ui" width="120" />
+</p>
+
 TypeScript API layer for communicating with the GNOME host process from a
 React app running inside a WebKitGTK WebView.
 
