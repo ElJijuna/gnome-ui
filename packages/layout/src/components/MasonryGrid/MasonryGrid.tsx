@@ -130,6 +130,10 @@ export function MasonryGrid({
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const prevSerialRef = useRef<string>("");
+  // Tracks the computed column width so items without a position yet can be
+  // pre-sized. This ensures offsetHeight is measured at the correct width,
+  // preventing a second-pass correction that would trigger the CSS transition.
+  const colWidthRef = useRef<number>(0);
 
   const [positions, setPositions] = useState<ItemPos[]>([]);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -147,6 +151,10 @@ export function MasonryGrid({
     const numCols = resolveColumns(cw, columns);
     const gapVal = resolveGapValue(cw, gap);
     const gapPx = gapToPx(gapVal);
+
+    // Store column width so hidden items can be pre-sized before measurement.
+    colWidthRef.current = (cw - gapPx * (numCols - 1)) / numCols;
+
     const heights = itemRefs.current.map((el) => el?.offsetHeight ?? 0);
 
     const { positions: newPos, containerHeight: newH } = computeLayout(
@@ -163,9 +171,10 @@ export function MasonryGrid({
 
     setPositions(newPos);
     setContainerHeight(newH);
-  // childArray.length is intentionally excluded from the exhaustive-deps rule
-  // because compute reads itemRefs (a ref) instead of childArray directly.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // Enable CSS transitions only after the first successful layout so items
+    // don't animate from (0, 0) to their initial positions on first paint.
+    container.dataset.settled = "";
   }, [columns, gap]);
 
   // Run after every render so new children are measured before first paint
@@ -211,7 +220,13 @@ export function MasonryGrid({
         const pos = positions[i];
         const itemStyle: CSSProperties = pos
           ? { position: "absolute", top: pos.top, left: pos.left, width: pos.width }
-          : { position: "absolute", visibility: "hidden" };
+          : {
+              position: "absolute",
+              visibility: "hidden",
+              // Pre-size hidden items so offsetHeight is measured at the correct
+              // column width on the first pass, avoiding a second-pass correction.
+              width: colWidthRef.current || undefined,
+            };
         return (
           <div
             key={i}

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MasonryGrid } from "./MasonryGrid";
 
@@ -129,6 +129,73 @@ describe("MasonryGrid", () => {
           </MasonryGrid>,
         ),
       ).not.toThrow();
+    });
+  });
+
+  describe("initial layout — transition suppression", () => {
+    // Restore clientWidth after each test so other tests are unaffected.
+    afterEach(() => {
+      Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+        configurable: true,
+        get() { return 0; },
+      });
+    });
+
+    it("does not have data-settled before the first layout is computed (zero-width container)", () => {
+      // jsdom returns clientWidth=0 by default — compute() bails, no layout yet.
+      const { container } = render(
+        <MasonryGrid columns={3}>
+          <div>A</div>
+          <div>B</div>
+        </MasonryGrid>,
+      );
+      expect(container.firstChild).not.toHaveAttribute("data-settled");
+    });
+
+    it("adds data-settled to the container after the first successful layout", () => {
+      // Give the container a real width so compute() can run.
+      Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+        configurable: true,
+        get() { return 900; },
+      });
+
+      const { container } = render(
+        <MasonryGrid columns={3}>
+          <div>A</div>
+          <div>B</div>
+          <div>C</div>
+        </MasonryGrid>,
+      );
+
+      expect(container.firstChild).toHaveAttribute("data-settled");
+    });
+
+    it("items without a computed position render with visibility:hidden before layout", () => {
+      // Zero-width container: positions never computed, items must stay hidden.
+      const { container } = render(
+        <MasonryGrid columns={3}>
+          <div>A</div>
+        </MasonryGrid>,
+      );
+      const item = container.querySelector("[style]") as HTMLElement;
+      expect(item?.style.visibility).toBe("hidden");
+    });
+
+    it("items are given their column width before first height measurement (pre-layout width)", () => {
+      Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+        configurable: true,
+        get() { return 900; },
+      });
+
+      const { container } = render(
+        <MasonryGrid columns={3} gap="md">
+          <div>A</div>
+        </MasonryGrid>,
+      );
+
+      // After layout, the single item should have a non-zero explicit width set.
+      const item = container.querySelector("[style]") as HTMLElement;
+      expect(parseFloat(item?.style.width ?? "0")).toBeGreaterThan(0);
     });
   });
 });

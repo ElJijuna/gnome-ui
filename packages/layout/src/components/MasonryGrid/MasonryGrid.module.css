@@ -5,5 +5,10 @@
 
 .item {
   box-sizing: border-box;
+}
+
+/* Transitions are enabled only after the first layout is committed so items
+   don't animate from (0, 0) to their initial positions on first paint. */
+.root[data-settled] .item {
   transition: top 0.25s ease, left 0.25s ease, width 0.25s ease;
 }
