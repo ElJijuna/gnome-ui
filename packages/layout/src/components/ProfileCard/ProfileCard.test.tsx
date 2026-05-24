@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { ProfileCard } from "./ProfileCard";
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -104,6 +105,43 @@ describe("ProfileCard", () => {
       render(<ProfileCard name="rcronald" username="@rcronald" loadingType="spinner" />);
       expect(screen.queryByRole("status")).toBeNull();
       expect(screen.getByText("rcronald")).toBeInTheDocument();
+    });
+  });
+
+  describe("interactive", () => {
+    it("renders as div by default (non-interactive)", () => {
+      const { container } = render(<ProfileCard name="rcronald" username="@rcronald" />);
+      expect(container.firstChild?.nodeName).toBe("DIV");
+    });
+
+    it("renders as button when interactive={true}", () => {
+      const { container } = render(
+        <ProfileCard name="rcronald" username="@rcronald" interactive />,
+      );
+      expect(container.firstChild?.nodeName).toBe("BUTTON");
+    });
+
+    it("calls onClick when the interactive card is clicked", async () => {
+      const handleClick = vi.fn();
+      render(
+        <ProfileCard
+          name="rcronald"
+          username="@rcronald"
+          interactive
+          onClick={handleClick}
+        />,
+      );
+      await userEvent.click(screen.getByRole("button"));
+      expect(handleClick).toHaveBeenCalledOnce();
+    });
+
+    it("does not call onClick when not interactive and card is clicked", async () => {
+      const handleClick = vi.fn();
+      const { container } = render(
+        <ProfileCard name="rcronald" username="@rcronald" onClick={handleClick} />,
+      );
+      await userEvent.click(container.firstChild as HTMLElement);
+      expect(handleClick).toHaveBeenCalledOnce();
     });
   });
 

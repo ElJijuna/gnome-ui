@@ -30,6 +30,10 @@ export interface ProfileCardProps extends HTMLAttributes<HTMLDivElement> {
   loading?: boolean;
   /** Loading placeholder style. Defaults to `"skeleton"`. */
   loadingType?: LoadingType;
+  /** When true the card becomes clickable (Adwaita `.activatable`). */
+  interactive?: boolean;
+  /** Click handler for interactive cards. */
+  onClick?: () => void;
 }
 
 export function ProfileCard({
