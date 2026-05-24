@@ -47,6 +47,7 @@ jobs:
             packages/platform/dist/
             packages/hooks/dist/
             packages/layout/dist/
+            packages/cli/dist/
 
   # ── 2a. Release @gnome-ui/core ─────────────────────────────────────────────
   release-core:
@@ -308,6 +309,41 @@ jobs:
 
       - name: Release
         working-directory: packages/react
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  # ── 4. Release @gnome-ui/cli ─────────────────────────────────────────────
+  release-cli:
+    name: Release @gnome-ui/cli
+    needs: release-react
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
+
+      - name: Build @gnome-ui/cli
+        run: npm run build --workspace=packages/cli
+
+      - name: Release
+        working-directory: packages/cli
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

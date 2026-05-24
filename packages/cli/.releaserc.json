@@ -1,0 +1,93 @@
+{
+  "tagFormat": "@gnome-ui/cli@${version}",
+  "branches": [
+    "main"
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "feat",     "release": false },
+          { "type": "fix",      "release": false },
+          { "type": "perf",     "release": false },
+          { "type": "refactor", "release": false },
+          { "breaking": true,   "release": false },
+          { "type": "feat",     "scope": "@gnome-ui/cli", "release": "minor" },
+          { "type": "fix",      "scope": "@gnome-ui/cli", "release": "patch" },
+          { "type": "perf",     "scope": "@gnome-ui/cli", "release": "patch" },
+          { "type": "refactor", "scope": "@gnome-ui/cli", "release": "patch" },
+          { "breaking": true,   "scope": "@gnome-ui/cli", "release": "major" }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "perf",
+              "section": "Performance"
+            },
+            {
+              "type": "refactor",
+              "section": "Refactoring"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation",
+              "hidden": false
+            },
+            {
+              "type": "chore",
+              "section": "Chores",
+              "hidden": true
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "."
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": "🎉 This change is included in `@gnome-ui/cli@${nextRelease.version}`.",
+        "releasedLabels": [
+          "released"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "package.json"
+        ],
+        "message": "chore(release): @gnome-ui/cli@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
