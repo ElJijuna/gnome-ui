@@ -213,10 +213,13 @@ export function Layout({
     '--layout-sidebar-collapsed-width': `${sidebarCollapsedWidth}px`,
   } as CSSProperties;
 
-  const closeSidebar = useCallback((reason: LayoutSidebarOpenChangeReason) => {
-    onSidebarOpenChange?.(false, reason);
-    onSidebarClose?.();
-  }, [onSidebarOpenChange, onSidebarClose]);
+  const closeSidebar = useCallback(
+    (reason: LayoutSidebarOpenChangeReason) => {
+      onSidebarOpenChange?.(false, reason);
+      onSidebarClose?.();
+    },
+    [onSidebarOpenChange, onSidebarClose],
+  );
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) {

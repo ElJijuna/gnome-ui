@@ -54,15 +54,18 @@ export function Toast({
     }
   }, []);
 
-  const startTimer = useCallback((ms: number) => {
-    if (ms <= 0 || !onDismiss) {
-      return;
-    }
+  const startTimer = useCallback(
+    (ms: number) => {
+      if (ms <= 0 || !onDismiss) {
+        return;
+      }
 
-    clearTimer();
-    startedAtRef.current = Date.now();
-    timerRef.current = setTimeout(() => onDismiss(), ms);
-  }, [onDismiss, clearTimer]);
+      clearTimer();
+      startedAtRef.current = Date.now();
+      timerRef.current = setTimeout(() => onDismiss(), ms);
+    },
+    [onDismiss, clearTimer],
+  );
 
   // Start auto-dismiss on mount
   useEffect(() => {
