@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode, useEffect, useRef } from 'react';
+import { type CSSProperties, type HTMLAttributes, type ReactNode, useEffect, useRef } from 'react';
 
 import { useBreakpoint } from '../../hooks/useBreakpoint';
 
@@ -166,7 +166,7 @@ export function OverlaySplitView({
       ]
         .filter(Boolean)
         .join(' ')}
-      style={{ '--sidebar-width': sidebarWidth, ...style } as React.CSSProperties}
+      style={{ '--sidebar-width': sidebarWidth, ...style } as CSSProperties}
       {...props}
     >
       {/* Backdrop — narrow mode only */}

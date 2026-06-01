@@ -6,6 +6,7 @@ import {
   type KeyboardEvent,
   type ReactElement,
   type ReactNode,
+  type RefObject,
   useCallback,
   useEffect,
   useId,
@@ -24,7 +25,7 @@ import styles from './PreferencesDialog.module.css';
 const FOCUSABLE =
   'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-function trapFocus(e: KeyboardEvent<HTMLDivElement>, ref: React.RefObject<HTMLDivElement | null>) {
+function trapFocus(e: KeyboardEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement | null>) {
   if (e.key !== 'Tab') {
     return;
   }

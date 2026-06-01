@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode, useId, useState } from 'react';
+import { type HTMLAttributes, type MouseEvent, type ReactNode, useId, useState } from 'react';
 
 import styles from './SwitchRow.module.css';
 
@@ -48,7 +48,7 @@ export function SwitchRow({
 
   const switchId = useId();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     const next = !checked;
 
     if (!isControlled) {

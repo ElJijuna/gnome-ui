@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { useEffect } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { ToastContextValue, ToastOptions } from './Toast';
@@ -22,7 +22,7 @@ function Trigger({
   return <button onClick={() => ctx.show(options)}>Show</button>;
 }
 
-function wrap(ui: React.ReactNode) {
+function wrap(ui: ReactNode) {
   return render(<ToastProvider>{ui}</ToastProvider>);
 }
 
