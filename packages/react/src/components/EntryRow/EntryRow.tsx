@@ -1,4 +1,4 @@
-import { type InputHTMLAttributes, type ReactNode, useId, useRef, useState } from 'react';
+import { type ChangeEvent, type InputHTMLAttributes, type ReactNode, useId, useRef, useState } from 'react';
 
 import styles from './EntryRow.module.css';
 
@@ -50,7 +50,7 @@ export function EntryRow({
 
   const floated = focused || inputValue.length > 0;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isControlled) {
       setUncontrolledValue(e.target.value);
     }

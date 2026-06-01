@@ -1,5 +1,6 @@
 import { Card, Text } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ReactNode } from 'react';
 
 import { GNOME_CHART_PALETTE } from './colors';
 import { SparkAreaChart } from './components/SparkAreaChart';
@@ -116,7 +117,7 @@ function MetricCard({
   label: string;
   value: string;
   trend: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <Card style={{ width: 200 }}>

@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
 import { useBreakpoint } from '../../hooks/useBreakpoint';
 
@@ -79,7 +79,7 @@ export function NavigationSplitView({
       className={[styles.root, isNarrow ? styles.collapsed : styles.expanded, className]
         .filter(Boolean)
         .join(' ')}
-      style={{ '--sidebar-width': sidebarWidth, ...style } as React.CSSProperties}
+      style={{ '--sidebar-width': sidebarWidth, ...style } as CSSProperties}
       {...props}
     >
       {/* Sidebar pane */}

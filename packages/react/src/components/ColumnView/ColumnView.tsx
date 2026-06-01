@@ -1,4 +1,4 @@
-import { type ReactNode, useRef, useState } from 'react';
+import { type CSSProperties, type KeyboardEvent, type ReactNode, useRef, useState } from 'react';
 
 import styles from './ColumnView.module.css';
 
@@ -122,7 +122,7 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
     }
   }
 
-  function handleRowKey(e: React.KeyboardEvent, index: number, key: string | number) {
+  function handleRowKey(e: KeyboardEvent, index: number, key: string | number) {
     const rows_els = tbodyRef.current?.querySelectorAll<HTMLTableRowElement>('tr') ?? [];
 
     if (e.key === 'ArrowDown') {
@@ -151,7 +151,7 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
     onSelectionChange(checked ? rows.map(rowKey) : []);
   }
 
-  const containerStyle: React.CSSProperties = height
+  const containerStyle: CSSProperties = height
     ? { height: typeof height === 'number' ? `${height}px` : height }
     : {};
 

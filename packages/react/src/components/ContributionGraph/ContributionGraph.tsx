@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from 'react';
+import type { KeyboardEvent, MouseEvent } from 'react';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { createPortal } from 'react-dom';
@@ -398,7 +398,7 @@ export function ContributionGraph({
     }
   }
 
-  function handleMouseEnter(e: React.MouseEvent<SVGRectElement>, text: string) {
+  function handleMouseEnter(e: MouseEvent<SVGRectElement>, text: string) {
     setTooltipPosition(null);
     setTooltip({
       target: e.currentTarget,

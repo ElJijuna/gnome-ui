@@ -1,6 +1,6 @@
 import { Search } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 
 import { Button } from '../Button';
 import { HeaderBar } from '../HeaderBar';
@@ -329,7 +329,7 @@ export const AutocompleteAsync: Story = {
     const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
     const [loading, setLoading] = useState(false);
 
-    async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    async function handleChange(e: ChangeEvent<HTMLInputElement>) {
       const q = e.target.value;
 
       setQuery(q);

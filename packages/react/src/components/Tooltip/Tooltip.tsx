@@ -1,6 +1,8 @@
 import {
   cloneElement,
+  type FocusEvent,
   type HTMLAttributes,
+  type MouseEvent,
   type ReactElement,
   type Ref,
   useCallback,
@@ -263,19 +265,19 @@ export function Tooltip({
       assignRef(childRef, node);
     },
     'aria-describedby': id,
-    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+    onMouseEnter: (e: MouseEvent<HTMLElement>) => {
       show();
       children.props.onMouseEnter?.(e);
     },
-    onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
+    onMouseLeave: (e: MouseEvent<HTMLElement>) => {
       hide();
       children.props.onMouseLeave?.(e);
     },
-    onFocus: (e: React.FocusEvent<HTMLElement>) => {
+    onFocus: (e: FocusEvent<HTMLElement>) => {
       show();
       children.props.onFocus?.(e);
     },
-    onBlur: (e: React.FocusEvent<HTMLElement>) => {
+    onBlur: (e: FocusEvent<HTMLElement>) => {
       hide();
       children.props.onBlur?.(e);
     },

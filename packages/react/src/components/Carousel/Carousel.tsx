@@ -1,6 +1,7 @@
 import {
   Children,
   type HTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
   useCallback,
   useEffect,
@@ -213,7 +214,7 @@ export function Carousel({
 
   // Keyboard navigation
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
+    (e: KeyboardEvent) => {
       const isForward =
         orientation === 'horizontal' ? e.key === 'ArrowRight' : e.key === 'ArrowDown';
       const isBack = orientation === 'horizontal' ? e.key === 'ArrowLeft' : e.key === 'ArrowUp';
