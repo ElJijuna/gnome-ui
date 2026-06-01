@@ -205,7 +205,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
         clearTimeout(autoTimerRef.current);
       }
     };
-  }, [current?.id, dismissCurrent, current.timeout, current]);
+  }, [current?.id, dismissCurrent, current?.timeout, current]);
 
   // Cleanup on unmount
   useEffect(() => {

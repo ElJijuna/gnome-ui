@@ -4,6 +4,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ActivityFeedItem } from './ActivityFeed';
 import { ActivityFeed } from './ActivityFeed';
 
+vi.mock('@gnome-ui/react', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@gnome-ui/react')>();
+  return { ...actual, useLocale: () => 'en' };
+});
+
+const renderWithLocale = render;
+
 const NOW = new Date('2025-06-01T12:00:00Z');
 
 function makeItem(overrides: Partial<ActivityFeedItem> = {}): ActivityFeedItem {
@@ -65,31 +72,31 @@ describe('ActivityFeed', () => {
 
   describe('timestamps', () => {
     it("shows 'now' for timestamps under 1 minute ago", () => {
-      render(<ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 30_000) })]} />);
+      renderWithLocale(<ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 30_000) })]} />);
       expect(screen.getByText('now')).toBeInTheDocument();
     });
 
     it('shows minutes for timestamps under 1 hour ago', () => {
-      render(
+      renderWithLocale(
         <ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 2 * 60_000) })]} />,
       );
       expect(screen.getByText('2 minutes ago')).toBeInTheDocument();
     });
 
     it("shows singular 'minute' for exactly 1 minute ago", () => {
-      render(<ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 60_000) })]} />);
+      renderWithLocale(<ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 60_000) })]} />);
       expect(screen.getByText('1 minute ago')).toBeInTheDocument();
     });
 
     it('shows hours for timestamps under 1 day ago', () => {
-      render(
+      renderWithLocale(
         <ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 3 * 3600_000) })]} />,
       );
       expect(screen.getByText('3 hours ago')).toBeInTheDocument();
     });
 
     it('shows days for timestamps over 1 day ago', () => {
-      render(
+      renderWithLocale(
         <ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 2 * 86400_000) })]} />,
       );
       expect(screen.getByText('2 days ago')).toBeInTheDocument();
