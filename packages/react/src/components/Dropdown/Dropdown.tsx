@@ -255,6 +255,7 @@ export function Dropdown<V extends string = string>({
         <ul
           ref={listRef}
           id={listboxId}
+          role="listbox"
           aria-labelledby={triggerId}
           tabIndex={-1}
           className={[styles.list, flipUp ? styles.listUp : styles.listDown]
@@ -266,6 +267,7 @@ export function Dropdown<V extends string = string>({
             <li
               key={opt.value}
               id={`${listboxId}-opt-${i}`}
+              role="option"
               aria-selected={opt.value === value}
               aria-disabled={opt.disabled}
               className={[

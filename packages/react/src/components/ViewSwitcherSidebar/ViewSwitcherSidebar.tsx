@@ -135,7 +135,7 @@ export function ViewSwitcherSidebar({
         {...props}
       >
         {header && <div className={styles.header}>{header}</div>}
-        <ul ref={groupRef} aria-label={ariaLabel} className={styles.list}>
+        <ul ref={groupRef} role="radiogroup" aria-label={ariaLabel} className={styles.list}>
           {children}
         </ul>
         {footer && <div className={styles.footer}>{footer}</div>}
