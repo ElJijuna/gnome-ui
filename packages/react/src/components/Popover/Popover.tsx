@@ -2,7 +2,7 @@ import {
   cloneElement,
   type HTMLAttributes,
   type KeyboardEvent,
-  type MouseEvent,
+  type MouseEvent as ReactMouseEvent,
   type ReactElement,
   type ReactNode,
   useCallback,
@@ -332,7 +332,7 @@ export function Popover({
     'aria-haspopup': 'dialog',
     'aria-expanded': open,
     'aria-controls': open ? popoverId : undefined,
-    onClick: (e: MouseEvent<HTMLElement>) => {
+    onClick: (e: ReactMouseEvent<HTMLElement>) => {
       toggle();
       children.props.onClick?.(e);
     },
