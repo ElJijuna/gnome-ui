@@ -1,4 +1,11 @@
-import { type ChangeEvent, type InputHTMLAttributes, type ReactNode, useId, useRef, useState } from 'react';
+import {
+  type ChangeEvent,
+  type InputHTMLAttributes,
+  type ReactNode,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 
 import styles from './EntryRow.module.css';
 
