@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { getRuntime } from "@gnome-ui/platform";
+import { getRuntime } from '@gnome-ui/platform';
+import { useMemo } from 'react';
 
 export interface PlatformInfo {
   /** True when running inside a WebKitGTK WebView with a GJS host (GNOME native app). */
@@ -24,11 +24,12 @@ export interface PlatformInfo {
 export function usePlatform(): PlatformInfo {
   return useMemo(() => {
     const { shell, browser } = getRuntime();
+
     return {
-      isGnomeWebView: shell === "webkitgtk-webview",
-      isPWA: shell === "pwa",
-      isElectron: shell === "electron",
-      isBrowser: shell === "browser",
+      isGnomeWebView: shell === 'webkitgtk-webview',
+      isPWA: shell === 'pwa',
+      isElectron: shell === 'electron',
+      isBrowser: shell === 'browser',
       isEpiphany: browser.epiphany,
     };
   }, []);

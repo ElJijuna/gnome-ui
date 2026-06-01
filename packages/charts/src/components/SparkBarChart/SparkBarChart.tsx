@@ -1,9 +1,4 @@
-import {
-  BarChart as RechartsBarChart,
-  Bar,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
+import { Bar, Cell, BarChart as RechartsBarChart, ResponsiveContainer } from 'recharts';
 
 type SparkData = number[] | Record<string, unknown>[];
 
@@ -20,33 +15,36 @@ export interface SparkBarChartProps {
   /** Fill opacity. Defaults to 0.85. */
   fillOpacity?: number;
   className?: string;
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 function normalize(data: SparkData, key: string): Record<string, unknown>[] {
-  if (!data.length) return [];
-  return typeof data[0] === "number"
+  if (!data.length) {
+    return [];
+  }
+
+  return typeof data[0] === 'number'
     ? (data as number[]).map((v) => ({ [key]: v }))
     : (data as Record<string, unknown>[]);
 }
 
 export function SparkBarChart({
   data,
-  dataKey = "value",
-  color = "var(--gnome-accent-color, #3584e4)",
+  dataKey = 'value',
+  color = 'var(--gnome-accent-color, #3584e4)',
   height = 40,
   barSize,
   fillOpacity = 0.85,
   className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
 }: SparkBarChartProps) {
   const normalized = normalize(data, dataKey);
 
   return (
     <div
-      style={{ width: "100%", height }}
+      style={{ width: '100%', height }}
       className={className}
-      role={ariaLabel ? "img" : undefined}
+      role={ariaLabel ? 'img' : undefined}
       aria-label={ariaLabel}
       aria-hidden={ariaLabel ? undefined : true}
     >

@@ -34,17 +34,32 @@
 }
 
 @keyframes toastIn {
-  from { opacity: 0; transform: translateY(14px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0)    scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes toastOut {
-  from { opacity: 1; transform: translateY(0)   scale(1); }
-  to   { opacity: 0; transform: translateY(8px) scale(0.97); }
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .toast, .exiting { animation: none; }
+  .toast,
+  .exiting {
+    animation: none;
+  }
 }
 
 /* ─── Type dot ────────────────────────────────────────────────────────────── */
@@ -56,10 +71,18 @@
   flex-shrink: 0;
 }
 
-.dotSuccess { background: var(--gnome-success-color, #26a269); }
-.dotError   { background: var(--gnome-error-color,   #e01b24); }
-.dotWarning { background: var(--gnome-warning-color, #e5a50a); }
-.dotInfo    { background: var(--gnome-accent-color,  #3584e4); }
+.dotSuccess {
+  background: var(--gnome-success-color, #26a269);
+}
+.dotError {
+  background: var(--gnome-error-color, #e01b24);
+}
+.dotWarning {
+  background: var(--gnome-warning-color, #e5a50a);
+}
+.dotInfo {
+  background: var(--gnome-accent-color, #3584e4);
+}
 
 /* ─── Title ───────────────────────────────────────────────────────────────── */
 
@@ -89,7 +112,9 @@
   white-space: nowrap;
 }
 
-.action:hover { background: rgba(255, 255, 255, 0.1); }
+.action:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 .action:focus-visible {
   outline: 2px solid var(--gnome-accent-color, #3584e4);
   outline-offset: 1px;
@@ -110,7 +135,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   padding: 0;
 }
 

@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { TextField } from "./TextField";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { TextField } from './TextField';
 
 const meta: Meta<typeof TextField> = {
-  title: "Components/TextField",
+  title: 'Components/TextField',
   component: TextField,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -24,15 +25,15 @@ Follows the Adwaita \`GtkEntry\` / \`.entry\` style class.
     },
   },
   argTypes: {
-    label: { control: "text" },
-    helperText: { control: "text" },
-    error: { control: "text" },
-    placeholder: { control: "text" },
-    disabled: { control: "boolean" },
+    label: { control: 'text' },
+    helperText: { control: 'text' },
+    error: { control: 'text' },
+    placeholder: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
   args: {
-    label: "Full name",
-    placeholder: "e.g. Jane Doe",
+    label: 'Full name',
+    placeholder: 'e.g. Jane Doe',
     disabled: false,
   },
   decorators: [
@@ -55,9 +56,9 @@ export const Default: Story = {};
 
 export const WithHelperText: Story = {
   args: {
-    label: "Username",
-    placeholder: "e.g. jdoe",
-    helperText: "Only letters, numbers, and underscores.",
+    label: 'Username',
+    placeholder: 'e.g. jdoe',
+    helperText: 'Only letters, numbers, and underscores.',
   },
 };
 
@@ -65,14 +66,15 @@ export const WithHelperText: Story = {
 
 export const Error: Story = {
   args: {
-    label: "Email",
-    defaultValue: "not-an-email",
-    error: "Enter a valid email address.",
+    label: 'Email',
+    defaultValue: 'not-an-email',
+    error: 'Enter a valid email address.',
   },
   parameters: {
     docs: {
       description: {
-        story: "Set `error` to apply the error border and show the message. It replaces `helperText` automatically.",
+        story:
+          'Set `error` to apply the error border and show the message. It replaces `helperText` automatically.',
       },
     },
   },
@@ -82,9 +84,9 @@ export const Error: Story = {
 
 export const Disabled: Story = {
   args: {
-    label: "Username",
-    defaultValue: "jdoe",
-    helperText: "Contact your admin to change your username.",
+    label: 'Username',
+    defaultValue: 'jdoe',
+    helperText: 'Contact your admin to change your username.',
     disabled: true,
   },
 };
@@ -94,13 +96,14 @@ export const Disabled: Story = {
 export const NoLabel: Story = {
   args: {
     label: undefined,
-    placeholder: "Search…",
-    "aria-label": "Search",
+    placeholder: 'Search…',
+    'aria-label': 'Search',
   },
   parameters: {
     docs: {
       description: {
-        story: "When no visible label is needed (e.g. inside a search bar), omit `label` and supply `aria-label` for accessibility.",
+        story:
+          'When no visible label is needed (e.g. inside a search bar), omit `label` and supply `aria-label` for accessibility.',
       },
     },
   },
@@ -110,19 +113,11 @@ export const NoLabel: Story = {
 
 export const FormExample: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <TextField label="Full name" placeholder="e.g. Jane Doe" />
       <TextField label="Email" placeholder="jane@example.com" type="email" />
-      <TextField
-        label="Password"
-        type="password"
-        helperText="Must be at least 8 characters."
-      />
-      <TextField
-        label="Confirm password"
-        type="password"
-        error="Passwords do not match."
-      />
+      <TextField label="Password" type="password" helperText="Must be at least 8 characters." />
+      <TextField label="Confirm password" type="password" error="Passwords do not match." />
     </div>
   ),
   parameters: { controls: { disable: true } },

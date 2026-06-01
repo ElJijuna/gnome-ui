@@ -1,12 +1,13 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { PathBar } from "./PathBar";
-import type { PathBarSegment } from "./PathBar";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import type { PathBarSegment } from './PathBar';
+import { PathBar } from './PathBar';
 
 const meta: Meta<typeof PathBar> = {
-  title: "Components/PathBar",
+  title: 'Components/PathBar',
   component: PathBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -42,10 +43,10 @@ type Story = StoryObj<typeof PathBar>;
 // ─── Shared segments ──────────────────────────────────────────────────────────
 
 const deepSegments: PathBarSegment[] = [
-  { label: "Home",      path: "/home"                            },
-  { label: "Documents", path: "/home/documents"                  },
-  { label: "Projects",  path: "/home/documents/projects"         },
-  { label: "gnome-ui",  path: "/home/documents/projects/gnome-ui" },
+  { label: 'Home', path: '/home' },
+  { label: 'Documents', path: '/home/documents' },
+  { label: 'Projects', path: '/home/documents/projects' },
+  { label: 'gnome-ui', path: '/home/documents/projects/gnome-ui' },
 ];
 
 // ─── Stories ──────────────────────────────────────────────────────────────────
@@ -60,7 +61,7 @@ export const Default: Story = {
 /** Only a single segment (root). No buttons, no separators. */
 export const Root: Story = {
   args: {
-    segments: [{ label: "Home", path: "/home" }],
+    segments: [{ label: 'Home', path: '/home' }],
   },
 };
 
@@ -68,8 +69,8 @@ export const Root: Story = {
 export const TwoLevels: Story = {
   args: {
     segments: [
-      { label: "Home",      path: "/home"           },
-      { label: "Documents", path: "/home/documents" },
+      { label: 'Home', path: '/home' },
+      { label: 'Documents', path: '/home/documents' },
     ],
   },
 };
@@ -84,12 +85,7 @@ export const Interactive: Story = {
       setCurrent(index);
     };
 
-    return (
-      <PathBar
-        segments={allSegments.slice(0, current + 1)}
-        onNavigate={handleNavigate}
-      />
-    );
+    return <PathBar segments={allSegments.slice(0, current + 1)} onNavigate={handleNavigate} />;
   },
   parameters: { controls: { disable: true } },
 };
@@ -107,9 +103,9 @@ export const WithIcons: Story = {
     );
 
     const segments: PathBarSegment[] = [
-      { label: "Home",      path: "/home",           icon: <FolderIcon /> },
-      { label: "Documents", path: "/home/documents", icon: <FolderIcon /> },
-      { label: "Projects",  path: "/home/documents/projects", icon: <FolderIcon /> },
+      { label: 'Home', path: '/home', icon: <FolderIcon /> },
+      { label: 'Documents', path: '/home/documents', icon: <FolderIcon /> },
+      { label: 'Projects', path: '/home/documents/projects', icon: <FolderIcon /> },
     ];
 
     return <PathBar segments={segments} />;

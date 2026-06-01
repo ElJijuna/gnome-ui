@@ -1,11 +1,12 @@
-import type { ButtonHTMLAttributes } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { useToggleGroup } from "./ToggleGroup";
-import styles from "./ToggleGroup.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import type { ButtonHTMLAttributes } from 'react';
 
-export interface ToggleGroupItemProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { Icon } from '../Icon';
+
+import { useToggleGroup } from './ToggleGroup';
+import styles from './ToggleGroup.module.css';
+
+export interface ToggleGroupItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** String identifier — used as the group's `value` when this item is selected. */
   name: string;
   /** Visible label. Omit for icon-only items (provide `aria-label` instead). */
@@ -47,7 +48,7 @@ export function ToggleGroupItem({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {icon && (

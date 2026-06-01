@@ -1,28 +1,37 @@
-import js from "@eslint/js";
-import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
+import reactRefresh from 'eslint-plugin-react-refresh';
+import eslintReactTsx from 'super-configs/eslint/react/tsx';
 
-export default tseslint.config(
-  { ignores: ["dist"] },
+export default [
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    plugins: {
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
-    },
+    ignores: [
+      'dist/**',
+      'coverage/**',
+      'storybook-static/**',
+      'node_modules/**',
+      '.turbo/**',
+      'packages/*/dist/**',
+      'packages/*/coverage/**',
+      'packages/*/storybook-static/**',
+      'packages/*/.turbo/**',
+    ],
+  },
+  ...eslintReactTsx,
+  {
+    name: 'gnome-ui/react-refresh',
+    files: ['**/*.{ts,tsx}'],
+    plugins: { 'react-refresh': reactRefresh },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      '@stylistic/brace-style': 'off',
+      '@stylistic/indent': 'off',
+      'import/order': 'off',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
-  }
-);
+  },
+  {
+    name: 'gnome-ui/storybook',
+    files: ['**/*.stories.{ts,tsx}'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'off',
+    },
+  },
+];

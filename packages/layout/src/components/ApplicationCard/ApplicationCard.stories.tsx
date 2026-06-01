@@ -1,14 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, StatusBadge } from "@gnome-ui/react";
-import { IconBadge } from "../IconBadge";
-import { ApplicationCard } from "./ApplicationCard";
+import { Button, StatusBadge } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { IconBadge } from '../IconBadge';
+
+import { ApplicationCard } from './ApplicationCard';
 
 const meta: Meta<typeof ApplicationCard> = {
-  title: "Layout/ApplicationCard",
+  title: 'Layout/ApplicationCard',
   component: ApplicationCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -42,29 +44,63 @@ type Story = StoryObj<typeof ApplicationCard>;
 // ─── Full — MyApps AppDetail ───────────────────────────────────────────────────
 
 const APPS = [
-  { id: "weather",  icon: "⛅", color: "#3584e4", name: "GNOME Weather",  status: "published" as const, desc: "The official weather app for the GNOME desktop.", version: "v4.8.1",  builds: 24, updated: "2 days ago" },
-  { id: "maps",     icon: "🗺",  color: "#33d17a", name: "GNOME Maps",    status: "published" as const, desc: "Explore and navigate the world.",                version: "v3.38.0", builds: 18, updated: "1 week ago" },
-  { id: "podcasts", icon: "🎙",  color: "#9141ac", name: "GNOME Podcasts",status: "beta" as const,      desc: "Listen to podcasts on GNOME.",                  version: "v0.5.1",  builds: 7,  updated: "3 weeks ago" },
+  {
+    id: 'weather',
+    icon: '⛅',
+    color: '#3584e4',
+    name: 'GNOME Weather',
+    status: 'published' as const,
+    desc: 'The official weather app for the GNOME desktop.',
+    version: 'v4.8.1',
+    builds: 24,
+    updated: '2 days ago',
+  },
+  {
+    id: 'maps',
+    icon: '🗺',
+    color: '#33d17a',
+    name: 'GNOME Maps',
+    status: 'published' as const,
+    desc: 'Explore and navigate the world.',
+    version: 'v3.38.0',
+    builds: 18,
+    updated: '1 week ago',
+  },
+  {
+    id: 'podcasts',
+    icon: '🎙',
+    color: '#9141ac',
+    name: 'GNOME Podcasts',
+    status: 'beta' as const,
+    desc: 'Listen to podcasts on GNOME.',
+    version: 'v0.5.1',
+    builds: 7,
+    updated: '3 weeks ago',
+  },
 ];
 
 export const MyAppsDetail: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, width: 480 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 480 }}>
       {APPS.map((app) => (
         <ApplicationCard
           key={app.id}
-          avatar={<IconBadge color={app.color as "blue"} size="xl">{app.icon}</IconBadge>}
+          avatar={
+            <IconBadge color={app.color as 'blue'} size="xl">
+              {app.icon}
+            </IconBadge>
+          }
           name={app.name}
           badge={
-            <StatusBadge variant={app.status === "published" ? "success" : "warning"}>
+            <StatusBadge variant={app.status === 'published' ? 'success' : 'warning'}>
               {app.status}
             </StatusBadge>
           }
           description={app.desc}
           stats={[
-            { label: "Version",      value: app.version },
-            { label: "Builds",       value: String(app.builds) },
-            { label: "Last updated", value: app.updated },
+            { label: 'Version', value: app.version },
+            { label: 'Builds', value: String(app.builds) },
+            { label: 'Last updated', value: app.updated },
           ]}
           actions={
             <>
@@ -78,7 +114,7 @@ export const MyAppsDetail: Story = {
   ),
   parameters: {
     docs: {
-      description: { story: "Full MyApps AppDetail variant — all props provided." },
+      description: { story: 'Full MyApps AppDetail variant — all props provided.' },
     },
   },
 };
@@ -88,13 +124,15 @@ export const MyAppsDetail: Story = {
 export const LoadingSkeleton: Story = {
   args: {
     avatar: null,
-    name: "",
+    name: '',
     loading: true,
-    loadingType: "skeleton",
+    loadingType: 'skeleton',
   },
   parameters: {
     docs: {
-      description: { story: "Default loading state — skeleton for avatar, name, description, and stat rows." },
+      description: {
+        story: 'Default loading state — skeleton for avatar, name, description, and stat rows.',
+      },
     },
   },
 };
@@ -102,13 +140,15 @@ export const LoadingSkeleton: Story = {
 export const LoadingSpinner: Story = {
   args: {
     avatar: null,
-    name: "",
+    name: '',
     loading: true,
-    loadingType: "spinner",
+    loadingType: 'spinner',
   },
   parameters: {
     docs: {
-      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton blocks." },
+      description: {
+        story: '`loadingType="spinner"` renders a centred spinner instead of skeleton blocks.',
+      },
     },
   },
 };
@@ -118,12 +158,12 @@ export const LoadingSpinner: Story = {
 export const Minimal: Story = {
   args: {
     avatar: <IconBadge size="xl">📦</IconBadge>,
-    name: "My Application",
-    description: "A short description of this application.",
+    name: 'My Application',
+    description: 'A short description of this application.',
   },
   parameters: {
     docs: {
-      description: { story: "Only `avatar`, `name`, and `description` — no stats or actions." },
+      description: { story: 'Only `avatar`, `name`, and `description` — no stats or actions.' },
     },
   },
 };
@@ -132,18 +172,22 @@ export const Minimal: Story = {
 
 export const WithStats: Story = {
   args: {
-    avatar: <IconBadge color="green" size="xl">🗺</IconBadge>,
-    name: "GNOME Maps",
-    description: "Explore and navigate the world.",
+    avatar: (
+      <IconBadge color="green" size="xl">
+        🗺
+      </IconBadge>
+    ),
+    name: 'GNOME Maps',
+    description: 'Explore and navigate the world.',
     stats: [
-      { label: "Version",      value: "v3.38.0" },
-      { label: "Builds",       value: "18" },
-      { label: "Last updated", value: "1 week ago" },
+      { label: 'Version', value: 'v3.38.0' },
+      { label: 'Builds', value: '18' },
+      { label: 'Last updated', value: '1 week ago' },
     ],
   },
   parameters: {
     docs: {
-      description: { story: "`stats` row without `actions`." },
+      description: { story: '`stats` row without `actions`.' },
     },
   },
 };

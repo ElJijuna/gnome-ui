@@ -1,2 +1,2 @@
-export { PathBar } from "./PathBar";
-export type { PathBarProps, PathBarSegment } from "./PathBar";
+export type { PathBarProps, PathBarSegment } from './PathBar';
+export { PathBar } from './PathBar';

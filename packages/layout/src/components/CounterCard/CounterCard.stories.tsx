@@ -1,15 +1,16 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@gnome-ui/react";
-import { Applications, Person, Refresh, Heart } from "@gnome-ui/icons";
-import { CounterCard } from "./CounterCard";
+import { Applications, Heart, Person, Refresh } from '@gnome-ui/icons';
+import { Button } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { CounterCard } from './CounterCard';
 
 const meta: Meta<typeof CounterCard> = {
-  title: "Layout/CounterCard",
+  title: 'Layout/CounterCard',
   component: CounterCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -38,13 +39,13 @@ type Story = StoryObj<typeof CounterCard>;
 
 export const Basic: Story = {
   args: {
-    label: "Documents",
+    label: 'Documents',
     value: 1248,
-    suffix: " files",
+    suffix: ' files',
   },
   parameters: {
     docs: {
-      description: { story: "A single counter card. Reload the page to watch the animation." },
+      description: { story: 'A single counter card. Reload the page to watch the animation.' },
     },
   },
 };
@@ -53,13 +54,13 @@ export const Basic: Story = {
 
 export const Accent: Story = {
   args: {
-    label: "Starred",
+    label: 'Starred',
     value: 3,
     accent: true,
   },
   parameters: {
     docs: {
-      description: { story: "`accent` renders the value in the theme accent color." },
+      description: { story: '`accent` renders the value in the theme accent color.' },
     },
   },
 };
@@ -68,17 +69,19 @@ export const Accent: Story = {
 
 export const PrefixSuffix: Story = {
   args: {
-    label: "Revenue",
+    label: 'Revenue',
     value: 9420.5,
-    prefix: "$",
-    suffix: " USD",
+    prefix: '$',
+    suffix: ' USD',
     decimals: 2,
     accent: true,
     duration: 1500,
   },
   parameters: {
     docs: {
-      description: { story: "`prefix` and `suffix` flank the number. `decimals` controls precision." },
+      description: {
+        story: '`prefix` and `suffix` flank the number. `decimals` controls precision.',
+      },
     },
   },
 };
@@ -87,14 +90,16 @@ export const PrefixSuffix: Story = {
 
 export const CustomFormat: Story = {
   args: {
-    label: "Disk used",
+    label: 'Disk used',
     value: 48.3,
     format: (n) => `${n.toFixed(1)} GB`,
     duration: 1200,
   },
   parameters: {
     docs: {
-      description: { story: "Pass a `format` function for full control over the displayed string." },
+      description: {
+        story: 'Pass a `format` function for full control over the displayed string.',
+      },
     },
   },
 };
@@ -105,20 +110,28 @@ export const Grid: Story = {
   render: () => (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 180px)",
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 180px)',
         gap: 16,
       }}
     >
-      <CounterCard label="Documents" value={1248}  suffix=" files"                  duration={900}  />
-      <CounterCard label="Starred"   value={3}                      accent           duration={700}  />
-      <CounterCard label="Shared"    value={24}     suffix=" items"                  duration={1000} />
-      <CounterCard label="Disk used" value={48.3}   format={(n) => `${n.toFixed(1)} GB`} duration={1100} />
+      <CounterCard label="Documents" value={1248} suffix=" files" duration={900} />
+      <CounterCard label="Starred" value={3} accent duration={700} />
+      <CounterCard label="Shared" value={24} suffix=" items" duration={1000} />
+      <CounterCard
+        label="Disk used"
+        value={48.3}
+        format={(n) => `${n.toFixed(1)} GB`}
+        duration={1100}
+      />
     </div>
   ),
   parameters: {
     docs: {
-      description: { story: "Typical dashboard grid — each card gets a slightly different duration for a staggered feel." },
+      description: {
+        story:
+          'Typical dashboard grid — each card gets a slightly different duration for a staggered feel.',
+      },
     },
   },
 };
@@ -126,16 +139,17 @@ export const Grid: Story = {
 // ─── Live value change ────────────────────────────────────────────────────────
 
 const PRESETS = [
-  { label: "Low",    value: 42    },
-  { label: "Medium", value: 1248  },
-  { label: "High",   value: 99999 },
+  { label: 'Low', value: 42 },
+  { label: 'Medium', value: 1248 },
+  { label: 'High', value: 99999 },
 ];
 
 export const LiveChange: Story = {
   render: function LiveChangeStory() {
     const [value, setValue] = useState(1248);
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "center" }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }}>
         <CounterCard
           label="Documents"
           value={value}
@@ -144,7 +158,7 @@ export const LiveChange: Story = {
           duration={900}
           style={{ width: 200 }}
         />
-        <div style={{ display: "flex", gap: 8 }}>
+        <div style={{ display: 'flex', gap: 8 }}>
           {PRESETS.map((p) => (
             <Button key={p.label} variant="flat" onClick={() => setValue(p.value)}>
               {p.label}
@@ -161,8 +175,8 @@ export const LiveChange: Story = {
     docs: {
       description: {
         story:
-          "When `value` changes while a previous animation is still running, the counter " +
-          "re-animates **from its current mid-point** — no jump, no restart from 0.",
+          'When `value` changes while a previous animation is still running, the counter ' +
+          're-animates **from its current mid-point** — no jump, no restart from 0.',
       },
     },
   },
@@ -171,15 +185,43 @@ export const LiveChange: Story = {
 // ─── Dashboard stats (icon + color + trend) ───────────────────────────────────
 
 const STATS = [
-  { label: "Published Apps",  value: 3,     format: undefined as ((v: number) => string) | undefined, icon: Applications, color: "#3584e4", trend: "↑ 1 this month" },
-  { label: "Total Downloads", value: 25700, format: (v: number) => `${(v / 1000).toFixed(1)}k`,       icon: Person,       color: "#33d17a", trend: "↑ 12% this week" },
-  { label: "API Calls Today", value: 1482,  format: undefined as ((v: number) => string) | undefined, icon: Refresh,      color: "#ff7800", trend: "↑ 340 from yesterday" },
-  { label: "Followers",       value: 128,   format: undefined as ((v: number) => string) | undefined, icon: Heart,        color: "#e01b24", trend: "↑ 8 this week" },
+  {
+    label: 'Published Apps',
+    value: 3,
+    format: undefined as ((v: number) => string) | undefined,
+    icon: Applications,
+    color: '#3584e4',
+    trend: '↑ 1 this month',
+  },
+  {
+    label: 'Total Downloads',
+    value: 25700,
+    format: (v: number) => `${(v / 1000).toFixed(1)}k`,
+    icon: Person,
+    color: '#33d17a',
+    trend: '↑ 12% this week',
+  },
+  {
+    label: 'API Calls Today',
+    value: 1482,
+    format: undefined as ((v: number) => string) | undefined,
+    icon: Refresh,
+    color: '#ff7800',
+    trend: '↑ 340 from yesterday',
+  },
+  {
+    label: 'Followers',
+    value: 128,
+    format: undefined as ((v: number) => string) | undefined,
+    icon: Heart,
+    color: '#e01b24',
+    trend: '↑ 8 this week',
+  },
 ];
 
 export const DashboardStats: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 180px)", gap: 12 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 180px)', gap: 12 }}>
       {STATS.map((s) => (
         <CounterCard
           key={s.label}
@@ -195,7 +237,10 @@ export const DashboardStats: Story = {
   ),
   parameters: {
     docs: {
-      description: { story: "`icon`, `color`, and `trend` props — mirrors the Developer Portal Dashboard STATS grid." },
+      description: {
+        story:
+          '`icon`, `color`, and `trend` props — mirrors the Developer Portal Dashboard STATS grid.',
+      },
     },
   },
 };
@@ -204,28 +249,30 @@ export const DashboardStats: Story = {
 
 export const LoadingSkeleton: Story = {
   args: {
-    label: "Documents",
+    label: 'Documents',
     value: 0,
     loading: true,
-    loadingType: "skeleton",
+    loadingType: 'skeleton',
   },
   parameters: {
     docs: {
-      description: { story: "Default loading state — skeleton placeholders for label and value." },
+      description: { story: 'Default loading state — skeleton placeholders for label and value.' },
     },
   },
 };
 
 export const LoadingSpinner: Story = {
   args: {
-    label: "Documents",
+    label: 'Documents',
     value: 0,
     loading: true,
-    loadingType: "spinner",
+    loadingType: 'spinner',
   },
   parameters: {
     docs: {
-      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton blocks." },
+      description: {
+        story: '`loadingType="spinner"` renders a centred spinner instead of skeleton blocks.',
+      },
     },
   },
 };
@@ -234,13 +281,15 @@ export const LoadingSpinner: Story = {
 
 export const NoAnimation: Story = {
   args: {
-    label: "Cached items",
+    label: 'Cached items',
     value: 5000,
     animated: false,
   },
   parameters: {
     docs: {
-      description: { story: "`animated={false}` shows the value instantly — useful inside tables or lists." },
+      description: {
+        story: '`animated={false}` shows the value instantly — useful inside tables or lists.',
+      },
     },
   },
 };

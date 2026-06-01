@@ -1,11 +1,12 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from "./Carousel";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from './Carousel';
 
 const meta: Meta<typeof Carousel> = {
-  title: "Components/Carousel",
+  title: 'Components/Carousel',
   component: Carousel,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -26,12 +27,12 @@ Pair with \`CarouselIndicatorDots\` or \`CarouselIndicatorLines\` for pagination
     },
   },
   argTypes: {
-    orientation: { control: "select", options: ["horizontal", "vertical"] },
-    loop: { control: "boolean" },
-    spacing: { control: "number" },
+    orientation: { control: 'select', options: ['horizontal', 'vertical'] },
+    loop: { control: 'boolean' },
+    spacing: { control: 'number' },
   },
   args: {
-    orientation: "horizontal",
+    orientation: 'horizontal',
     loop: false,
     spacing: 0,
   },
@@ -47,8 +48,8 @@ Pair with \`CarouselIndicatorDots\` or \`CarouselIndicatorLines\` for pagination
 export default meta;
 type Story = StoryObj<typeof Carousel>;
 
-const COLORS = ["#3584e4", "#e01b24", "#33d17a", "#ff7800", "#9141ac"];
-const LABELS = ["Blue", "Red", "Green", "Orange", "Purple"];
+const COLORS = ['#3584e4', '#e01b24', '#33d17a', '#ff7800', '#9141ac'];
+const LABELS = ['Blue', 'Red', 'Green', 'Orange', 'Purple'];
 
 function SlidePlaceholder({ label, color }: { label: string; color: string }) {
   return (
@@ -57,13 +58,13 @@ function SlidePlaceholder({ label, color }: { label: string; color: string }) {
         height: 200,
         background: color,
         borderRadius: 12,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#fff",
-        fontSize: "1.25rem",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff',
+        fontSize: '1.25rem',
         fontWeight: 700,
-        userSelect: "none",
+        userSelect: 'none',
       }}
     >
       {label}
@@ -76,6 +77,7 @@ function SlidePlaceholder({ label, color }: { label: string; color: string }) {
 export const WithDots: Story = {
   render: () => {
     const [page, setPage] = useState(0);
+
     return (
       <div>
         <Carousel page={page} onPageChanged={setPage}>
@@ -83,18 +85,16 @@ export const WithDots: Story = {
             <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
           ))}
         </Carousel>
-        <CarouselIndicatorDots
-          pages={COLORS.length}
-          currentPage={page}
-          onPageSelected={setPage}
-        />
+        <CarouselIndicatorDots pages={COLORS.length} currentPage={page} onPageSelected={setPage} />
       </div>
     );
   },
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Horizontal carousel with `CarouselIndicatorDots`. Click dots or use ← → keys." },
+      description: {
+        story: 'Horizontal carousel with `CarouselIndicatorDots`. Click dots or use ← → keys.',
+      },
     },
   },
 };
@@ -104,6 +104,7 @@ export const WithDots: Story = {
 export const WithLines: Story = {
   render: () => {
     const [page, setPage] = useState(0);
+
     return (
       <div>
         <Carousel page={page} onPageChanged={setPage}>
@@ -111,18 +112,16 @@ export const WithLines: Story = {
             <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
           ))}
         </Carousel>
-        <CarouselIndicatorLines
-          pages={COLORS.length}
-          currentPage={page}
-          onPageSelected={setPage}
-        />
+        <CarouselIndicatorLines pages={COLORS.length} currentPage={page} onPageSelected={setPage} />
       </div>
     );
   },
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Same carousel with `CarouselIndicatorLines` — preferred for longer decks." },
+      description: {
+        story: 'Same carousel with `CarouselIndicatorLines` — preferred for longer decks.',
+      },
     },
   },
 };
@@ -132,14 +131,20 @@ export const WithLines: Story = {
 export const Vertical: Story = {
   render: () => {
     const [page, setPage] = useState(0);
+
     return (
-      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-        <Carousel orientation="vertical" page={page} onPageChanged={setPage} style={{ height: 200 }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <Carousel
+          orientation="vertical"
+          page={page}
+          onPageChanged={setPage}
+          style={{ height: 200 }}
+        >
           {COLORS.map((c, i) => (
             <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
           ))}
         </Carousel>
-        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {COLORS.map((_, i) => (
             <button
               key={i}
@@ -147,10 +152,10 @@ export const Vertical: Story = {
               style={{
                 width: 3,
                 height: 24,
-                border: "none",
+                border: 'none',
                 borderRadius: 2,
-                background: i === page ? "#3584e4" : "rgba(0,0,0,0.2)",
-                cursor: "pointer",
+                background: i === page ? '#3584e4' : 'rgba(0,0,0,0.2)',
+                cursor: 'pointer',
                 padding: 0,
               }}
               aria-label={`Page ${i + 1}`}
@@ -163,7 +168,7 @@ export const Vertical: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Vertical orientation — scroll up/down or press ↑ ↓." },
+      description: { story: 'Vertical orientation — scroll up/down or press ↑ ↓.' },
     },
   },
 };
@@ -173,6 +178,7 @@ export const Vertical: Story = {
 export const Loop: Story = {
   render: () => {
     const [page, setPage] = useState(0);
+
     return (
       <div>
         <Carousel loop page={page} onPageChanged={setPage}>
@@ -180,18 +186,16 @@ export const Loop: Story = {
             <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
           ))}
         </Carousel>
-        <CarouselIndicatorDots
-          pages={COLORS.length}
-          currentPage={page}
-          onPageSelected={setPage}
-        />
+        <CarouselIndicatorDots pages={COLORS.length} currentPage={page} onPageSelected={setPage} />
       </div>
     );
   },
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "With `loop`: keyboard navigation wraps around on the last/first page." },
+      description: {
+        story: 'With `loop`: keyboard navigation wraps around on the last/first page.',
+      },
     },
   },
 };

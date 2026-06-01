@@ -1,7 +1,8 @@
-import type { HTMLAttributes } from "react";
-import styles from "./Separator.module.css";
+import type { HTMLAttributes } from 'react';
 
-export type SeparatorOrientation = "horizontal" | "vertical";
+import styles from './Separator.module.css';
+
+export type SeparatorOrientation = 'horizontal' | 'vertical';
 
 export interface SeparatorProps extends HTMLAttributes<HTMLHRElement> {
   /** Direction of the dividing line. Defaults to `"horizontal"`. */
@@ -16,20 +17,16 @@ export interface SeparatorProps extends HTMLAttributes<HTMLHRElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
-export function Separator({
-  orientation = "horizontal",
-  className,
-  ...props
-}: SeparatorProps) {
+export function Separator({ orientation = 'horizontal', className, ...props }: SeparatorProps) {
   const classes = [
     styles.separator,
-    orientation === "vertical" ? styles.vertical : styles.horizontal,
+    orientation === 'vertical' ? styles.vertical : styles.horizontal,
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
-  if (orientation === "vertical") {
+  if (orientation === 'vertical') {
     return (
       <div
         role="separator"

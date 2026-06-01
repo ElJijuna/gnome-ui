@@ -1,12 +1,13 @@
 import {
   createContext,
-  useContext,
-  useRef,
   type HTMLAttributes,
   type KeyboardEvent,
   type ReactNode,
-} from "react";
-import styles from "./ViewSwitcherSidebar.module.css";
+  useContext,
+  useRef,
+} from 'react';
+
+import styles from './ViewSwitcherSidebar.module.css';
 
 // ─── Context ──────────────────────────────────────────────────────────────────
 
@@ -16,15 +17,16 @@ interface ViewSwitcherSidebarContextValue {
   collapsed: boolean;
 }
 
-const ViewSwitcherSidebarContext =
-  createContext<ViewSwitcherSidebarContextValue | null>(null);
+const ViewSwitcherSidebarContext = createContext<ViewSwitcherSidebarContextValue | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useViewSwitcherSidebar() {
   const ctx = useContext(ViewSwitcherSidebarContext);
-  if (!ctx)
-    throw new Error(
-      "ViewSwitcherSidebarItem must be used inside ViewSwitcherSidebar",
-    );
+
+  if (!ctx) {
+    throw new Error('ViewSwitcherSidebarItem must be used inside ViewSwitcherSidebar');
+  }
+
   return ctx;
 }
 
@@ -36,7 +38,7 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
   /** Called with the new view name when the user selects an item. */
   onValueChange: (value: string) => void;
   /** Accessible label for the group. Defaults to `"Views"`. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   /**
    * When `true`, items render icon-only (labels hidden) and the sidebar
    * shrinks to its compact width. Used by `AdaptiveLayout` on tablet viewports.
@@ -76,7 +78,7 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
 export function ViewSwitcherSidebar({
   value,
   onValueChange,
-  "aria-label": ariaLabel = "Views",
+  'aria-label': ariaLabel = 'Views',
   collapsed = false,
   header,
   footer,
@@ -90,21 +92,27 @@ export function ViewSwitcherSidebar({
 
   function handleKeyDown(e: KeyboardEvent<HTMLElement>) {
     const items = Array.from(
-      groupRef.current?.querySelectorAll<HTMLButtonElement>(
-        "[role=radio]:not(:disabled)",
-      ) ?? [],
+      groupRef.current?.querySelectorAll<HTMLButtonElement>('[role=radio]:not(:disabled)') ?? [],
     );
-    const idx = items.findIndex((el) => el === document.activeElement);
-    if (idx === -1) return;
+    const activeElement = document.activeElement;
+    const idx = activeElement instanceof HTMLButtonElement ? items.indexOf(activeElement) : -1;
+
+    if (idx === -1) {
+      return;
+    }
 
     let next = idx;
-    if (e.key === "ArrowDown" || e.key === "ArrowRight")
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
       next = (idx + 1) % items.length;
-    else if (e.key === "ArrowUp" || e.key === "ArrowLeft")
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
       next = (idx - 1 + items.length) % items.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = items.length - 1;
-    else return;
+    } else if (e.key === 'Home') {
+      next = 0;
+    } else if (e.key === 'End') {
+      next = items.length - 1;
+    } else {
+      return;
+    }
 
     e.preventDefault();
     items[next].focus();
@@ -120,17 +128,14 @@ export function ViewSwitcherSidebar({
           !showHeaderSeparator ? styles.noHeaderSeparator : null,
           !showFooterSeparator ? styles.noFooterSeparator : null,
           className,
-        ].filter(Boolean).join(" ")}
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onKeyDown={handleKeyDown}
         {...props}
       >
         {header && <div className={styles.header}>{header}</div>}
-        <ul
-          ref={groupRef}
-          role="radiogroup"
-          aria-label={ariaLabel}
-          className={styles.list}
-        >
+        <ul ref={groupRef} aria-label={ariaLabel} className={styles.list}>
           {children}
         </ul>
         {footer && <div className={styles.footer}>{footer}</div>}

@@ -1,10 +1,12 @@
-import { useState, type ReactNode } from "react";
-import { Icon } from "../Icon";
-import { ViewReveal, ViewConceal } from "@gnome-ui/icons";
-import { EntryRow, type EntryRowProps } from "../EntryRow";
-import styles from "./PasswordEntryRow.module.css";
+import { ViewConceal, ViewReveal } from '@gnome-ui/icons';
+import { type ReactNode, useState } from 'react';
 
-export interface PasswordEntryRowProps extends Omit<EntryRowProps, "type" | "trailing"> {
+import { EntryRow, type EntryRowProps } from '../EntryRow';
+import { Icon } from '../Icon';
+
+import styles from './PasswordEntryRow.module.css';
+
+export interface PasswordEntryRowProps extends Omit<EntryRowProps, 'type' | 'trailing'> {
   /** Additional trailing widgets placed before the reveal button. */
   trailing?: ReactNode;
 }
@@ -29,22 +31,18 @@ export function PasswordEntryRow({ trailing, disabled, ...props }: PasswordEntry
         e.stopPropagation();
         setRevealed((v) => !v);
       }}
-      aria-label={revealed ? "Conceal password" : "Reveal password"}
+      aria-label={revealed ? 'Conceal password' : 'Reveal password'}
       aria-pressed={revealed}
       disabled={disabled}
     >
-      <Icon
-        icon={revealed ? ViewConceal : ViewReveal}
-        size="md"
-        aria-hidden
-      />
+      <Icon icon={revealed ? ViewConceal : ViewReveal} size="md" aria-hidden />
     </button>
   );
 
   return (
     <EntryRow
       {...props}
-      type={revealed ? "text" : "password"}
+      type={revealed ? 'text' : 'password'}
       disabled={disabled}
       trailing={
         <>

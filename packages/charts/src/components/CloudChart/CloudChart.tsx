@@ -1,5 +1,6 @@
-import { GNOME_CHART_PALETTE } from "../../colors";
-import styles from "./CloudChart.module.css";
+import { GNOME_CHART_PALETTE } from '../../colors';
+
+import styles from './CloudChart.module.css';
 
 export interface CloudChartDataItem {
   text: string;
@@ -13,7 +14,7 @@ export interface CloudChartProps {
   minFontSize?: number;
   maxFontSize?: number;
   className?: string;
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 export function CloudChart({
@@ -22,7 +23,7 @@ export function CloudChart({
   minFontSize = 12,
   maxFontSize = 48,
   className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
 }: CloudChartProps) {
   const values = data.map((d) => d.value);
   const min = Math.min(...values);
@@ -35,15 +36,14 @@ export function CloudChart({
       min === max
         ? (minFontSize + maxFontSize) / 2
         : minFontSize + ((item.value - min) / range) * (maxFontSize - minFontSize),
-    resolvedColor:
-      item.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length],
+    resolvedColor: item.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length],
   }));
 
   return (
     <div
       role="img"
       aria-label={ariaLabel ?? `Word cloud with ${data.length} terms`}
-      className={[styles.cloud, className].filter(Boolean).join(" ")}
+      className={[styles.cloud, className].filter(Boolean).join(' ')}
       style={{ minHeight: height }}
     >
       {words.map((word) => (

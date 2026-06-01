@@ -1,10 +1,10 @@
-import type { InputHTMLAttributes } from "react";
-import styles from "./Switch.module.css";
+import type { InputHTMLAttributes } from 'react';
 
-export interface SwitchProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
+import styles from './Switch.module.css';
+
+export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
   /** Accessible label. Required when no visible `<label>` is associated. */
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 /**
@@ -20,7 +20,7 @@ export function Switch({ className, ...props }: SwitchProps) {
     <input
       type="checkbox"
       role="switch"
-      className={[styles.switch, className].filter(Boolean).join(" ")}
+      className={[styles.switch, className].filter(Boolean).join(' ')}
       {...props}
     />
   );

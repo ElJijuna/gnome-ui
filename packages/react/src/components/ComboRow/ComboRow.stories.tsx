@@ -1,12 +1,14 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { ComboRow } from "./ComboRow";
-import { BoxedList } from "../BoxedList";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { BoxedList } from '../BoxedList';
+
+import { ComboRow } from './ComboRow';
 
 const meta: Meta<typeof ComboRow> = {
-  title: "Components/ComboRow",
+  title: 'Components/ComboRow',
   component: ComboRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -32,13 +34,13 @@ Use when the current value of a setting should be visible at a glance in the row
     ),
   ],
   args: {
-    title: "Appearance",
+    title: 'Appearance',
     options: [
-      { value: "light", label: "Light" },
-      { value: "dark", label: "Dark" },
-      { value: "system", label: "Follow System" },
+      { value: 'light', label: 'Light' },
+      { value: 'dark', label: 'Dark' },
+      { value: 'system', label: 'Follow System' },
     ],
-    defaultValue: "system",
+    defaultValue: 'system',
   },
 };
 
@@ -58,29 +60,29 @@ export const InBoxedList: Story = {
         title="Appearance"
         subtitle="Color scheme"
         options={[
-          { value: "light", label: "Light" },
-          { value: "dark", label: "Dark" },
-          { value: "system", label: "Follow System" },
+          { value: 'light', label: 'Light' },
+          { value: 'dark', label: 'Dark' },
+          { value: 'system', label: 'Follow System' },
         ]}
         defaultValue="system"
       />
       <ComboRow
         title="Text Size"
         options={[
-          { value: "small", label: "Small" },
-          { value: "default", label: "Default" },
-          { value: "large", label: "Large" },
-          { value: "larger", label: "Larger" },
+          { value: 'small', label: 'Small' },
+          { value: 'default', label: 'Default' },
+          { value: 'large', label: 'Large' },
+          { value: 'larger', label: 'Larger' },
         ]}
         defaultValue="default"
       />
       <ComboRow
         title="Language"
         options={[
-          { value: "en", label: "English" },
-          { value: "es", label: "Spanish" },
-          { value: "fr", label: "French" },
-          { value: "de", label: "German" },
+          { value: 'en', label: 'English' },
+          { value: 'es', label: 'Spanish' },
+          { value: 'fr', label: 'French' },
+          { value: 'de', label: 'German' },
         ]}
         defaultValue="en"
       />
@@ -90,7 +92,8 @@ export const InBoxedList: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Multiple `ComboRow` items inside a `BoxedList` — the selected value is visible at a glance.",
+        story:
+          'Multiple `ComboRow` items inside a `BoxedList` — the selected value is visible at a glance.',
       },
     },
   },
@@ -100,8 +103,8 @@ export const InBoxedList: Story = {
 
 export const Controlled: Story = {
   render: () => {
-    const [scheme, setScheme] = useState("system");
-    const [size, setSize] = useState("default");
+    const [scheme, setScheme] = useState('system');
+    const [size, setSize] = useState('default');
 
     return (
       <BoxedList>
@@ -109,9 +112,9 @@ export const Controlled: Story = {
           title="Appearance"
           subtitle={`Current: ${scheme}`}
           options={[
-            { value: "light", label: "Light" },
-            { value: "dark", label: "Dark" },
-            { value: "system", label: "Follow System" },
+            { value: 'light', label: 'Light' },
+            { value: 'dark', label: 'Dark' },
+            { value: 'system', label: 'Follow System' },
           ]}
           value={scheme}
           onValueChange={setScheme}
@@ -119,9 +122,9 @@ export const Controlled: Story = {
         <ComboRow
           title="Text Size"
           options={[
-            { value: "small", label: "Small" },
-            { value: "default", label: "Default" },
-            { value: "large", label: "Large" },
+            { value: 'small', label: 'Small' },
+            { value: 'default', label: 'Default' },
+            { value: 'large', label: 'Large' },
           ]}
           value={size}
           onValueChange={setSize}
@@ -132,7 +135,9 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Controlled mode — use `value` + `onValueChange` to manage selection externally." },
+      description: {
+        story: 'Controlled mode — use `value` + `onValueChange` to manage selection externally.',
+      },
     },
   },
 };
@@ -145,7 +150,10 @@ export const Disabled: Story = {
       <ComboRow
         title="Appearance"
         subtitle="Managed by your organization"
-        options={[{ value: "light", label: "Light" }, { value: "dark", label: "Dark" }]}
+        options={[
+          { value: 'light', label: 'Light' },
+          { value: 'dark', label: 'Dark' },
+        ]}
         defaultValue="light"
         disabled
       />

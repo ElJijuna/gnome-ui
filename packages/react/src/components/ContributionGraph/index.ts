@@ -1,5 +1,5 @@
-export { ContributionGraph } from "./ContributionGraph";
 export type {
-  ContributionGraphProps,
   ContributionDay,
-} from "./ContributionGraph";
+  ContributionGraphProps,
+} from './ContributionGraph';
+export { ContributionGraph } from './ContributionGraph';

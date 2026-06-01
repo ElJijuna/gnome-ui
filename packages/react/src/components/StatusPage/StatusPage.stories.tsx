@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Search, StarOutline, Error, Information, Delete, DocumentOpen,
-} from "@gnome-ui/icons";
-import { StatusPage } from "./StatusPage";
-import { Button } from "../Button";
-import { Popover } from "../Popover";
+import { Delete, DocumentOpen, Error, Information, Search, StarOutline } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Popover } from '../Popover';
+
+import { StatusPage } from './StatusPage';
 
 const meta: Meta<typeof StatusPage> = {
-  title: "Components/StatusPage",
+  title: 'Components/StatusPage',
   component: StatusPage,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -41,7 +41,7 @@ export const NoResults: Story = {
     <StatusPage
       icon={Search}
       title="No Results"
-      description='Try a different search term or check your spelling.'
+      description="Try a different search term or check your spelling."
     />
   ),
   parameters: { controls: { disable: true } },
@@ -63,7 +63,7 @@ export const EmptyCollection: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Empty collection with a suggested action that takes the user to content.",
+        story: 'Empty collection with a suggested action that takes the user to content.',
       },
     },
   },
@@ -106,7 +106,8 @@ export const AllDone: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `iconNode` for emoji or custom graphics instead of an `@gnome-ui/icons` definition.",
+        story:
+          'Use `iconNode` for emoji or custom graphics instead of an `@gnome-ui/icons` definition.',
       },
     },
   },
@@ -126,7 +127,7 @@ export const NoIcon: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Icon is optional — omit it for simpler messages." },
+      description: { story: 'Icon is optional — omit it for simpler messages.' },
     },
   },
 };
@@ -137,9 +138,9 @@ export const InCard: Story = {
   render: () => (
     <div
       style={{
-        border: "1px solid rgba(0,0,0,0.1)",
+        border: '1px solid rgba(0,0,0,0.1)',
         borderRadius: 12,
-        overflow: "hidden",
+        overflow: 'hidden',
         maxWidth: 400,
       }}
     >
@@ -147,7 +148,7 @@ export const InCard: Story = {
         icon={DocumentOpen}
         title="No Documents"
         description="Open a document to get started."
-        style={{ padding: "32px 24px" }}
+        style={{ padding: '32px 24px' }}
       >
         <Button variant="suggested">Open File…</Button>
       </StatusPage>
@@ -157,7 +158,7 @@ export const InCard: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "StatusPage inside a card — useful for panels and sidebar detail areas.",
+        story: 'StatusPage inside a card — useful for panels and sidebar detail areas.',
       },
     },
   },
@@ -183,15 +184,15 @@ export const Informational: Story = {
 
 export const Compact: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start" }}>
+    <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
       {/* Sidebar panel */}
       <div
         style={{
           width: 220,
-          border: "1px solid rgba(0,0,0,0.1)",
+          border: '1px solid rgba(0,0,0,0.1)',
           borderRadius: 12,
-          overflow: "hidden",
-          background: "var(--gnome-card-bg-color, #fff)",
+          overflow: 'hidden',
+          background: 'var(--gnome-card-bg-color, #fff)',
         }}
       >
         <StatusPage
@@ -211,7 +212,9 @@ export const Compact: Story = {
             title="No Favourites"
             description="Star items to save them here."
           >
-            <Button size="sm" variant="suggested">Browse</Button>
+            <Button size="sm" variant="suggested">
+              Browse
+            </Button>
           </StatusPage>
         }
       >
@@ -219,12 +222,37 @@ export const Compact: Story = {
       </Popover>
 
       {/* Comparison: default vs compact */}
-      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-        <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden", background: "var(--gnome-card-bg-color,#fff)", width: 200 }}>
-          <StatusPage icon={Information} title="Default" description="Full spacing and icon size." />
+      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+        <div
+          style={{
+            border: '1px solid rgba(0,0,0,0.1)',
+            borderRadius: 12,
+            overflow: 'hidden',
+            background: 'var(--gnome-card-bg-color,#fff)',
+            width: 200,
+          }}
+        >
+          <StatusPage
+            icon={Information}
+            title="Default"
+            description="Full spacing and icon size."
+          />
         </div>
-        <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden", background: "var(--gnome-card-bg-color,#fff)", width: 200 }}>
-          <StatusPage compact icon={Information} title="Compact" description="Reduced spacing and icon size." />
+        <div
+          style={{
+            border: '1px solid rgba(0,0,0,0.1)',
+            borderRadius: 12,
+            overflow: 'hidden',
+            background: 'var(--gnome-card-bg-color,#fff)',
+            width: 200,
+          }}
+        >
+          <StatusPage
+            compact
+            icon={Information}
+            title="Compact"
+            description="Reduced spacing and icon size."
+          />
         </div>
       </div>
     </div>
@@ -234,7 +262,7 @@ export const Compact: Story = {
     docs: {
       description: {
         story:
-          "Use `compact` for sidebars, popovers, and small panels where full spacing would overwhelm the context. Icon shrinks from 128 px to 64 px; title drops to `title-4` scale; padding and gaps are reduced.",
+          'Use `compact` for sidebars, popovers, and small panels where full spacing would overwhelm the context. Icon shrinks from 128 px to 64 px; title drops to `title-4` scale; padding and gaps are reduced.',
       },
     },
   },
@@ -257,7 +285,7 @@ export const DestructiveAction: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Destructive confirmation — use sparingly, prefer a Dialog for critical actions.",
+        story: 'Destructive confirmation — use sparingly, prefer a Dialog for critical actions.',
       },
     },
   },

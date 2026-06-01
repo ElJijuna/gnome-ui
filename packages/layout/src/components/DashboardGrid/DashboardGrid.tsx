@@ -1,14 +1,14 @@
-import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
-import styles from "./DashboardGrid.module.css";
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
+
+import styles from './DashboardGrid.module.css';
 
 // ─── Breakpoints ──────────────────────────────────────────────────────────────
-export type DashboardGridBreakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+export type DashboardGridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
-const BREAKPOINTS: DashboardGridBreakpoint[] = ["xs", "sm", "md", "lg", "xl", "xxl"];
+const BREAKPOINTS: DashboardGridBreakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 // ─── Columns ──────────────────────────────────────────────────────────────────
-export type DashboardGridColumnCount =
-  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type DashboardGridColumnCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export type DashboardGridResponsiveColumns = Partial<
   Record<DashboardGridBreakpoint, DashboardGridColumnCount>
@@ -16,11 +16,11 @@ export type DashboardGridResponsiveColumns = Partial<
 
 export type DashboardGridColumns =
   | DashboardGridColumnCount
-  | "auto"
+  | 'auto'
   | DashboardGridResponsiveColumns;
 
 // ─── Gap ──────────────────────────────────────────────────────────────────────
-export type DashboardGridGapValue = "sm" | "md" | "lg";
+export type DashboardGridGapValue = 'sm' | 'md' | 'lg';
 
 export type DashboardGridResponsiveGap = Partial<
   Record<DashboardGridBreakpoint, DashboardGridGapValue>
@@ -29,11 +29,10 @@ export type DashboardGridResponsiveGap = Partial<
 export type DashboardGridGap = DashboardGridGapValue | DashboardGridResponsiveGap;
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
-export type DashboardGridLayout = "grid" | "column";
+export type DashboardGridLayout = 'grid' | 'column';
 
 // ─── Span ────────────────────────────────────────────────────────────────────
-export type DashboardGridSpanCount =
-  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type DashboardGridSpanCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export type DashboardGridResponsiveSpan = Partial<
   Record<DashboardGridBreakpoint, DashboardGridSpanCount>
@@ -42,8 +41,7 @@ export type DashboardGridResponsiveSpan = Partial<
 export type DashboardGridSpan = DashboardGridSpanCount | DashboardGridResponsiveSpan;
 
 // ─── Offset ───────────────────────────────────────────────────────────────────
-export type DashboardGridOffset =
-  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type DashboardGridOffset = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 export interface DashboardGridProps extends HTMLAttributes<HTMLDivElement> {
@@ -66,55 +64,77 @@ export interface DashboardGridItemProps extends HTMLAttributes<HTMLDivElement> {
 
 // ─── Internal helpers ────────────────────────────────────────────────────────
 const GAP_TOKEN: Record<DashboardGridGapValue, string> = {
-  sm: "var(--gnome-space-2, 12px)",
-  md: "var(--gnome-space-3, 18px)",
-  lg: "var(--gnome-space-4, 24px)",
+  sm: 'var(--gnome-space-2, 12px)',
+  md: 'var(--gnome-space-3, 18px)',
+  lg: 'var(--gnome-space-4, 24px)',
 };
 
 function isObject(val: unknown): val is Record<string, unknown> {
-  return typeof val === "object" && val !== null;
+  return typeof val === 'object' && val !== null;
 }
 
 function buildColumnStyle(
   columns: DashboardGridColumns,
   layout: DashboardGridLayout,
 ): CSSProperties {
-  if (layout !== "grid") return {};
-  if (typeof columns === "number") {
+  if (layout !== 'grid') {
+    return {};
+  }
+
+  if (typeof columns === 'number') {
     return { gridTemplateColumns: `repeat(${columns}, 1fr)` };
   }
+
   if (isObject(columns)) {
     const vars: Record<string, unknown> = {};
+
     for (const bp of BREAKPOINTS) {
       const val = (columns as DashboardGridResponsiveColumns)[bp];
-      if (val !== undefined) vars[`--dashboard-grid-columns-${bp}`] = val;
+
+      if (val !== undefined) {
+        vars[`--dashboard-grid-columns-${bp}`] = val;
+      }
     }
+
     return vars as CSSProperties;
   }
+
   return {};
 }
 
 function buildGapStyle(gap: DashboardGridGap): CSSProperties {
-  if (typeof gap === "string") {
-    return { "--dashboard-grid-gap-xs": GAP_TOKEN[gap] } as CSSProperties;
+  if (typeof gap === 'string') {
+    return { '--dashboard-grid-gap-xs': GAP_TOKEN[gap] } as CSSProperties;
   }
+
   const vars: Record<string, unknown> = {};
+
   for (const bp of BREAKPOINTS) {
     const val = (gap as DashboardGridResponsiveGap)[bp];
-    if (val !== undefined) vars[`--dashboard-grid-gap-${bp}`] = GAP_TOKEN[val];
+
+    if (val !== undefined) {
+      vars[`--dashboard-grid-gap-${bp}`] = GAP_TOKEN[val];
+    }
   }
+
   return vars as CSSProperties;
 }
 
 function buildSpanStyle(span: DashboardGridSpan): CSSProperties {
-  if (typeof span === "number") {
-    return { "--item-span-xs": span } as CSSProperties;
+  if (typeof span === 'number') {
+    return { '--item-span-xs': span } as CSSProperties;
   }
+
   const vars: Record<string, unknown> = {};
+
   for (const bp of BREAKPOINTS) {
     const val = (span as DashboardGridResponsiveSpan)[bp];
-    if (val !== undefined) vars[`--item-span-${bp}`] = val;
+
+    if (val !== undefined) {
+      vars[`--item-span-${bp}`] = val;
+    }
   }
+
   return vars as CSSProperties;
 }
 
@@ -129,7 +149,7 @@ function DashboardGridItem({
 }: DashboardGridItemProps) {
   const itemStyle: CSSProperties = {
     ...buildSpanStyle(span),
-    ...(offset > 0 ? ({ "--item-offset-xs": offset } as CSSProperties) : null),
+    ...(offset > 0 ? ({ '--item-offset-xs': offset } as CSSProperties) : null),
     ...style,
   };
 
@@ -137,7 +157,7 @@ function DashboardGridItem({
     <div
       className={[styles.item, offset > 0 && styles.itemWithOffset, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       style={itemStyle}
       {...props}
     >
@@ -148,15 +168,15 @@ function DashboardGridItem({
 
 // ─── DashboardGrid ───────────────────────────────────────────────────────────
 export function DashboardGrid({
-  columns = "auto",
-  gap = "md",
-  layout = "grid",
+  columns = 'auto',
+  gap = 'md',
+  layout = 'grid',
   children,
   className,
   style,
   ...props
 }: DashboardGridProps) {
-  const isResponsiveColumns = layout === "grid" && isObject(columns);
+  const isResponsiveColumns = layout === 'grid' && isObject(columns);
 
   const gridStyle: CSSProperties = {
     ...buildColumnStyle(columns, layout),
@@ -168,13 +188,13 @@ export function DashboardGrid({
     <div
       className={[
         styles.grid,
-        layout === "column" && styles.column,
-        layout === "grid" && columns === "auto" && styles.auto,
+        layout === 'column' && styles.column,
+        layout === 'grid' && columns === 'auto' && styles.auto,
         isResponsiveColumns && styles.responsive,
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       style={gridStyle}
       {...props}
     >

@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { ProgressBar } from "./ProgressBar";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect, useState } from 'react';
+
+import { Text } from '../Text';
+
+import { ProgressBar } from './ProgressBar';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: "Components/ProgressBar",
+  title: 'Components/ProgressBar',
   component: ProgressBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -24,13 +26,13 @@ Determinate and indeterminate progress bar following the Adwaita style.
     },
   },
   argTypes: {
-    value: { control: { type: "range", min: 0, max: 1, step: 0.01 } },
-    variant: { control: "select", options: ["accent", "success", "warning", "error"] },
+    value: { control: { type: 'range', min: 0, max: 1, step: 0.01 } },
+    variant: { control: 'select', options: ['accent', 'success', 'warning', 'error'] },
   },
   args: {
     value: 0.6,
-    variant: "accent",
-    "aria-label": "Loading",
+    variant: 'accent',
+    'aria-label': 'Loading',
   },
   decorators: [
     (Story) => (
@@ -57,7 +59,7 @@ export const Indeterminate: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Omit `value` to show the pulsing indeterminate animation.",
+        story: 'Omit `value` to show the pulsing indeterminate animation.',
       },
     },
   },
@@ -67,10 +69,12 @@ export const Indeterminate: Story = {
 
 export const WithLabel: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Text variant="body">Downloading update…</Text>
-        <Text variant="body" color="dim">60 %</Text>
+        <Text variant="body" color="dim">
+          60 %
+        </Text>
       </div>
       <ProgressBar value={0.6} aria-label="Downloading update" />
     </div>
@@ -85,16 +89,22 @@ export const Animated: Story = {
     const [value, setValue] = useState(0);
 
     useEffect(() => {
-      if (value >= 1) return;
+      if (value >= 1) {
+        return;
+      }
+
       const id = setTimeout(() => setValue((v) => Math.min(1, v + 0.02)), 80);
+
       return () => clearTimeout(id);
     }, [value]);
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Text variant="body">{value < 1 ? "Installing…" : "Complete"}</Text>
-          <Text variant="body" color="dim">{Math.round(value * 100)} %</Text>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Text variant="body">{value < 1 ? 'Installing…' : 'Complete'}</Text>
+          <Text variant="body" color="dim">
+            {Math.round(value * 100)} %
+          </Text>
         </div>
         <ProgressBar value={value} aria-label="Installation progress" />
       </div>
@@ -104,7 +114,7 @@ export const Animated: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Live example — the fill transitions smoothly as `value` changes.",
+        story: 'Live example — the fill transitions smoothly as `value` changes.',
       },
     },
   },
@@ -114,11 +124,11 @@ export const Animated: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      <ProgressBar value={0.7} variant="accent"  aria-label="Accent"  />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <ProgressBar value={0.7} variant="accent" aria-label="Accent" />
       <ProgressBar value={0.7} variant="success" aria-label="Success" />
       <ProgressBar value={0.7} variant="warning" aria-label="Warning" />
-      <ProgressBar value={0.7} variant="error"   aria-label="Error"   />
+      <ProgressBar value={0.7} variant="error" aria-label="Error" />
     </div>
   ),
   parameters: { controls: { disable: true } },
@@ -129,18 +139,21 @@ export const Variants: Story = {
 export const MultipleBars: Story = {
   render: () => {
     const items = [
-      { label: "Music",     value: 0.82 },
-      { label: "Photos",    value: 0.45 },
-      { label: "Videos",    value: 0.91 },
-      { label: "Documents", value: 0.13 },
+      { label: 'Music', value: 0.82 },
+      { label: 'Photos', value: 0.45 },
+      { label: 'Videos', value: 0.91 },
+      { label: 'Documents', value: 0.13 },
     ];
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {items.map(({ label, value }) => (
-          <div key={label} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Text variant="caption">{label}</Text>
-              <Text variant="caption" color="dim">{Math.round(value * 100)} %</Text>
+              <Text variant="caption" color="dim">
+                {Math.round(value * 100)} %
+              </Text>
             </div>
             <ProgressBar value={value} aria-label={label} />
           </div>

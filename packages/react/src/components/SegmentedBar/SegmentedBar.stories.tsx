@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { SegmentedBar } from "./SegmentedBar";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Text } from '../Text';
+
+import { SegmentedBar } from './SegmentedBar';
 
 const meta: Meta<typeof SegmentedBar> = {
-  title: "Components/SegmentedBar",
+  title: 'Components/SegmentedBar',
   component: SegmentedBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -41,33 +43,43 @@ type Story = StoryObj<typeof SegmentedBar>;
 export const Default: Story = {
   render: function DefaultStory() {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 600 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 600 }}>
         <div>
           <Text variant="caption" color="dim" style={{ marginBottom: 8 }}>
             my-app repository
           </Text>
           <SegmentedBar
             values={[
-              { label: "TypeScript", value: 58.4, color: "#3178c6" },
-              { label: "JavaScript", value: 22.1, color: "#f7df1e" },
-              { label: "CSS",        value: 12.3, color: "#563d7c" },
-              { label: "HTML",       value: 5.8,  color: "#e44d26" },
-              { label: "Shell",      value: 1.4,  color: "#89e051" },
+              { label: 'TypeScript', value: 58.4, color: '#3178c6' },
+              { label: 'JavaScript', value: 22.1, color: '#f7df1e' },
+              { label: 'CSS', value: 12.3, color: '#563d7c' },
+              { label: 'HTML', value: 5.8, color: '#e44d26' },
+              { label: 'Shell', value: 1.4, color: '#89e051' },
             ]}
           />
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 16px" }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 16px' }}>
           {[
-            { label: "TypeScript", color: "#3178c6", pct: "58.4%" },
-            { label: "JavaScript", color: "#f7df1e", pct: "22.1%" },
-            { label: "CSS",        color: "#563d7c", pct: "12.3%" },
-            { label: "HTML",       color: "#e44d26", pct: "5.8%"  },
-            { label: "Shell",      color: "#89e051", pct: "1.4%"  },
+            { label: 'TypeScript', color: '#3178c6', pct: '58.4%' },
+            { label: 'JavaScript', color: '#f7df1e', pct: '22.1%' },
+            { label: 'CSS', color: '#563d7c', pct: '12.3%' },
+            { label: 'HTML', color: '#e44d26', pct: '5.8%' },
+            { label: 'Shell', color: '#89e051', pct: '1.4%' },
           ].map(({ label, color, pct }) => (
-            <span key={label} style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: color, flexShrink: 0 }} />
+            <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              <span
+                style={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: '50%',
+                  backgroundColor: color,
+                  flexShrink: 0,
+                }}
+              />
               <Text variant="caption">{label}</Text>
-              <Text variant="caption" color="dim">{pct}</Text>
+              <Text variant="caption" color="dim">
+                {pct}
+              </Text>
             </span>
           ))}
         </div>
@@ -78,7 +90,8 @@ export const Default: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Language distribution bar with explicit per-language colors, matching the common repository overview pattern.",
+        story:
+          'Language distribution bar with explicit per-language colors, matching the common repository overview pattern.',
       },
     },
   },
@@ -89,17 +102,18 @@ export const Default: Story = {
 export const AutoColors: Story = {
   render: function AutoColorsStory() {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 600 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 600 }}>
         <SegmentedBar
           values={[
-            { label: "Design",      value: 35 },
-            { label: "Engineering", value: 40 },
-            { label: "Marketing",   value: 15 },
-            { label: "Operations",  value: 10 },
+            { label: 'Design', value: 35 },
+            { label: 'Engineering', value: 40 },
+            { label: 'Marketing', value: 15 },
+            { label: 'Operations', value: 10 },
           ]}
         />
         <Text variant="caption" color="dim">
-          Colors assigned automatically from the GNOME token palette when no <code>color</code> prop is provided.
+          Colors assigned automatically from the GNOME token palette when no <code>color</code> prop
+          is provided.
         </Text>
       </div>
     );
@@ -108,7 +122,8 @@ export const AutoColors: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "When `color` is omitted, each segment receives a color from the GNOME design token palette (`--gnome-blue-3`, `--gnome-green-3`, `--gnome-purple-3`, …) cycling through 8 distinct colors.",
+        story:
+          'When `color` is omitted, each segment receives a color from the GNOME design token palette (`--gnome-blue-3`, `--gnome-green-3`, `--gnome-purple-3`, …) cycling through 8 distinct colors.',
       },
     },
   },
@@ -120,9 +135,7 @@ export const SingleSegment: Story = {
   render: function SingleSegmentStory() {
     return (
       <div style={{ maxWidth: 600 }}>
-        <SegmentedBar
-          values={[{ label: "Go", value: 100, color: "#00add8" }]}
-        />
+        <SegmentedBar values={[{ label: 'Go', value: 100, color: '#00add8' }]} />
       </div>
     );
   },
@@ -130,7 +143,7 @@ export const SingleSegment: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Edge case: a single segment at 100% fills the full bar with no gaps.",
+        story: 'Edge case: a single segment at 100% fills the full bar with no gaps.',
       },
     },
   },

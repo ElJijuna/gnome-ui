@@ -1,2 +1,2 @@
-export { CounterCard } from "./CounterCard";
-export type { CounterCardProps } from "./CounterCard";
+export type { CounterCardProps } from './CounterCard';
+export { CounterCard } from './CounterCard';

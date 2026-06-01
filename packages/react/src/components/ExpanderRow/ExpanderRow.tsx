@@ -1,6 +1,8 @@
-import { useState, Children, useId, type HTMLAttributes, type ReactNode } from "react";
-import { Separator } from "../Separator";
-import styles from "./ExpanderRow.module.css";
+import { Children, type HTMLAttributes, type ReactNode, useId, useState } from 'react';
+
+import { Separator } from '../Separator';
+
+import styles from './ExpanderRow.module.css';
 
 export interface ExpanderRowProps extends HTMLAttributes<HTMLDivElement> {
   /** Primary label. */
@@ -57,7 +59,11 @@ export function ExpanderRow({
 
   const toggle = () => {
     const next = !expanded;
-    if (!isControlled) setUncontrolledExpanded(next);
+
+    if (!isControlled) {
+      setUncontrolledExpanded(next);
+    }
+
     onExpandedChange?.(next);
   };
 
@@ -67,7 +73,7 @@ export function ExpanderRow({
     <div
       className={[styles.expanderRow, expanded ? styles.expanded : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {/* ─── Header (toggle button) ─────────────────────────────────────── */}
@@ -87,8 +93,19 @@ export function ExpanderRow({
 
         {trailing && <span className={styles.trailing}>{trailing}</span>}
 
-        <span className={[styles.chevronWrap, expanded ? styles.chevronOpen : null].filter(Boolean).join(" ")} aria-hidden="true">
-          <svg className={styles.chevron} width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <span
+          className={[styles.chevronWrap, expanded ? styles.chevronOpen : null]
+            .filter(Boolean)
+            .join(' ')}
+          aria-hidden="true"
+        >
+          <svg
+            className={styles.chevron}
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            focusable="false"
+          >
             <path
               d="M4 6l4 4 4-4"
               fill="none"
@@ -102,12 +119,7 @@ export function ExpanderRow({
       </button>
 
       {/* ─── Reveal panel ───────────────────────────────────────────────── */}
-      <div
-        id={panelId}
-        role="region"
-        aria-labelledby={headerId}
-        className={styles.panel}
-      >
+      <div id={panelId} role="region" aria-labelledby={headerId} className={styles.panel}>
         <div className={styles.panelInner}>
           {childItems.map((child, i) => (
             <div key={i} className={styles.childItem}>

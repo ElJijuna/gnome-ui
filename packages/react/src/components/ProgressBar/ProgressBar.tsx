@@ -1,7 +1,8 @@
-import type { HTMLAttributes } from "react";
-import styles from "./ProgressBar.module.css";
+import type { HTMLAttributes } from 'react';
 
-export type ProgressBarVariant = "accent" | "success" | "warning" | "error";
+import styles from './ProgressBar.module.css';
+
+export type ProgressBarVariant = 'accent' | 'success' | 'warning' | 'error';
 
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -18,9 +19,9 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
    */
   variant?: ProgressBarVariant;
   /** Accessible label describing what is loading. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   /** Associates the bar with a visible element that labels it. */
-  "aria-labelledby"?: string;
+  'aria-labelledby'?: string;
 }
 
 /**
@@ -36,10 +37,10 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function ProgressBar({
   value,
-  variant = "accent",
+  variant = 'accent',
   className,
-  "aria-label": ariaLabel,
-  "aria-labelledby": ariaLabelledBy,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   ...props
 }: ProgressBarProps) {
   const isIndeterminate = value === undefined || value === null;
@@ -54,17 +55,13 @@ export function ProgressBar({
       aria-valuenow={clamped !== undefined ? Math.round(percent!) : undefined}
       aria-valuemin={isIndeterminate ? undefined : 0}
       aria-valuemax={isIndeterminate ? undefined : 100}
-      className={[styles.track, className].filter(Boolean).join(" ")}
+      className={[styles.track, className].filter(Boolean).join(' ')}
       {...props}
     >
       <div
-        className={[
-          styles.fill,
-          styles[variant],
-          isIndeterminate ? styles.indeterminate : null,
-        ]
+        className={[styles.fill, styles[variant], isIndeterminate ? styles.indeterminate : null]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         style={!isIndeterminate ? { width: `${percent}%` } : undefined}
       />
     </div>

@@ -1,19 +1,20 @@
-import { useState, useMemo, type CSSProperties, type ReactNode } from "react";
-import { useBreakpoint } from "@gnome-ui/hooks";
+import { useBreakpoint } from '@gnome-ui/hooks';
+import type { IconDefinition } from '@gnome-ui/icons';
+import { PanEnd, PanStart } from '@gnome-ui/icons';
 import {
+  BottomSheet,
+  Box,
+  Button,
+  Icon,
+  Separator,
   ViewSwitcherBar,
   ViewSwitcherItem,
   ViewSwitcherSidebar,
   ViewSwitcherSidebarItem,
-  BottomSheet,
-  Icon,
-  Box,
-  Button,
-  Separator,
-} from "@gnome-ui/react";
-import { PanStart, PanEnd } from "@gnome-ui/icons";
-import type { IconDefinition } from "@gnome-ui/icons";
-import styles from "./AdaptiveLayout.module.css";
+} from '@gnome-ui/react';
+import { type CSSProperties, type ReactNode, useMemo, useState } from 'react';
+
+import styles from './AdaptiveLayout.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -35,7 +36,14 @@ export interface AdaptiveNavItem {
 }
 
 export type GnomeColor =
-  | "white" | "blue" | "green" | "yellow" | "orange" | "red" | "purple" | "brown";
+  | 'white'
+  | 'blue'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'purple'
+  | 'brown';
 
 export type GnomeColorShade = 1 | 2 | 3 | 4 | 5;
 
@@ -68,7 +76,7 @@ export interface AdaptiveLayoutProps {
    * - `"full"`: sidebar spans the full height on the left, top bar + content
    *   are stacked on the right — the sidebar effectively pushes everything to the right.
    */
-  sidebarPlacement?: "inline" | "full";
+  sidebarPlacement?: 'inline' | 'full';
   /**
    * Content rendered at the bottom of the sidebar, above the collapse button.
    * Typically a `UserCard`. Hidden on mobile.
@@ -118,8 +126,13 @@ const MAX_VISIBLE = 3;
 
 // ─── Mobile bar slot types ────────────────────────────────────────────────────
 
-type ItemSlot = { type: "item"; item: AdaptiveNavItem };
-type GroupSlot = { type: "group"; groupName: string; icon: IconDefinition; groupItems: AdaptiveNavItem[] };
+type ItemSlot = { type: 'item'; item: AdaptiveNavItem };
+type GroupSlot = {
+  type: 'group';
+  groupName: string;
+  icon: IconDefinition;
+  groupItems: AdaptiveNavItem[];
+};
 type BarSlot = ItemSlot | GroupSlot;
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -150,7 +163,7 @@ export function AdaptiveLayout({
   bgShade = 3,
   bgOpacity = 1,
   glass,
-  sidebarPlacement = "inline",
+  sidebarPlacement = 'inline',
   sidebarFooter,
   sidebarFooterCollapsed,
   showCollapseButton = true,
@@ -168,34 +181,42 @@ export function AdaptiveLayout({
   const sidebarCollapsed = userCollapsed ?? isTablet;
 
   const bgStyle: CSSProperties =
-    !bgColor || bgColor === "white"
+    !bgColor || bgColor === 'white'
       ? bgOpacity < 1
         ? { background: `rgba(255, 255, 255, ${bgOpacity})` }
         : {}
-      : { background: `color-mix(in srgb, var(--gnome-${bgColor}-${bgShade}) ${bgOpacity * 100}%, transparent)` };
+      : {
+          background: `color-mix(in srgb, var(--gnome-${bgColor}-${bgShade}) ${bgOpacity * 100}%, transparent)`,
+        };
 
   // ── Mobile: compute bar slots ──────────────────────────────────────────────
   const barSlots = useMemo<BarSlot[]>(() => {
     const slots: BarSlot[] = [];
     const seenGroups = new Set<string>();
+
     for (const item of items) {
       if (!item.group) {
-        slots.push({ type: "item", item });
+        slots.push({ type: 'item', item });
       } else if (!seenGroups.has(item.group)) {
         seenGroups.add(item.group);
         const groupItems = items.filter((i) => i.group === item.group);
-        slots.push({ type: "group", groupName: item.group, icon: groupItems[0].icon, groupItems });
+
+        slots.push({ type: 'group', groupName: item.group, icon: groupItems[0].icon, groupItems });
       }
     }
+
     return slots;
   }, [items]);
 
   const hasOverflow = barSlots.length > 4;
   const visibleSlots = hasOverflow ? barSlots.slice(0, MAX_VISIBLE) : barSlots;
-  const overflowSlots = hasOverflow ? barSlots.slice(MAX_VISIBLE) : [];
+  const overflowSlots = useMemo(
+    () => (hasOverflow ? barSlots.slice(MAX_VISIBLE) : []),
+    [hasOverflow, barSlots],
+  );
 
   const overflowItems = useMemo(
-    () => overflowSlots.flatMap((s) => (s.type === "item" ? [s.item] : s.groupItems)),
+    () => overflowSlots.flatMap((s) => (s.type === 'item' ? [s.item] : s.groupItems)),
     [overflowSlots],
   );
   const moreIsActive = overflowItems.some((i) => i.id === value);
@@ -219,9 +240,11 @@ export function AdaptiveLayout({
   }
 
   // ── Sidebar header node ────────────────────────────────────────────────────
-  const headerNode = <div className={styles.sidebarSlot}>{sidebarCollapsed
-    ? (sidebarHeaderCollapsed ?? sidebarHeader)
-    : sidebarHeader}</div>;
+  const headerNode = (
+    <div className={styles.sidebarSlot}>
+      {sidebarCollapsed ? (sidebarHeaderCollapsed ?? sidebarHeader) : sidebarHeader}
+    </div>
+  );
 
   // ── Sidebar items (ungrouped + grouped sections) ───────────────────────────
   const ungroupedItems = items.filter((i) => !i.group);
@@ -237,7 +260,7 @@ export function AdaptiveLayout({
 
           <ViewSwitcherBar>
             {visibleSlots.map((slot) => {
-              if (slot.type === "item") {
+              if (slot.type === 'item') {
                 return (
                   <ViewSwitcherItem
                     key={slot.item.id}
@@ -248,7 +271,9 @@ export function AdaptiveLayout({
                   />
                 );
               }
+
               const groupActive = slot.groupItems.some((i) => i.id === value);
+
               return (
                 <ViewSwitcherItem
                   key={slot.groupName}
@@ -264,37 +289,37 @@ export function AdaptiveLayout({
               <button
                 type="button"
                 className={[styles.moreBtn, moreIsActive ? styles.moreBtnActive : null]
-                  .filter(Boolean).join(" ")}
+                  .filter(Boolean)
+                  .join(' ')}
                 onClick={openMoreSheet}
                 aria-label="More navigation items"
               >
-                <span className={styles.moreDots} aria-hidden="true">···</span>
+                <span className={styles.moreDots} aria-hidden="true">
+                  ···
+                </span>
                 <span className={styles.moreLabel}>More</span>
               </button>
             )}
           </ViewSwitcherBar>
         </div>
 
-        <BottomSheet
-          open={sheetOpen}
-          title={sheetTitle}
-          onClose={() => setSheetOpen(false)}
-        >
+        <BottomSheet open={sheetOpen} title={sheetTitle} onClose={() => setSheetOpen(false)}>
           <ul className={styles.sheetList}>
             {sheetItems.map((item) => (
               <li key={item.id}>
                 <button
                   type="button"
-                  className={[
-                    styles.sheetItem,
-                    item.id === value ? styles.sheetItemActive : null,
-                  ].filter(Boolean).join(" ")}
+                  className={[styles.sheetItem, item.id === value ? styles.sheetItemActive : null]
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => handleSheetSelect(item.id)}
                 >
                   <Icon icon={item.icon} size="md" aria-hidden className={styles.sheetItemIcon} />
                   <span className={styles.sheetItemLabel}>{item.label}</span>
-                  {item.badge != null && (
-                    <span className={styles.sheetItemBadge}>{item.badge > 99 ? "99+" : item.badge}</span>
+                  {item.badge !== null && item.badge !== undefined && (
+                    <span className={styles.sheetItemBadge}>
+                      {item.badge > 99 ? '99+' : item.badge}
+                    </span>
                   )}
                 </button>
               </li>
@@ -326,7 +351,7 @@ export function AdaptiveLayout({
               variant="flat"
               className={styles.collapseBtn}
               onClick={() => setUserCollapsed(!sidebarCollapsed)}
-              aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               <Icon icon={sidebarCollapsed ? PanEnd : PanStart} size="sm" aria-hidden />
             </Button>
@@ -346,7 +371,7 @@ export function AdaptiveLayout({
       footer={collapseFooterNode}
       showHeaderSeparator={showHeaderSeparator}
       showFooterSeparator={false}
-      className={sidebarPlacement === "full" ? styles.sidebarNoRightBorder : undefined}
+      className={sidebarPlacement === 'full' ? styles.sidebarNoRightBorder : undefined}
     >
       {ungroupedItems.map((item) => (
         <ViewSwitcherSidebarItem
@@ -360,11 +385,10 @@ export function AdaptiveLayout({
 
       {groupNames.map((groupName) => {
         const groupItems = items.filter((i) => i.group === groupName);
+
         return (
           <li key={groupName} className={styles.sidebarGroup}>
-            {!sidebarCollapsed && (
-              <span className={styles.sidebarGroupLabel}>{groupName}</span>
-            )}
+            {!sidebarCollapsed && <span className={styles.sidebarGroupLabel}>{groupName}</span>}
             {groupItems.map((item) => (
               <ViewSwitcherSidebarItem
                 key={item.id}
@@ -381,16 +405,20 @@ export function AdaptiveLayout({
   );
 
   // ── Tablet / Desktop ───────────────────────────────────────────────────────
-  if (sidebarPlacement === "full") {
+  if (sidebarPlacement === 'full') {
     return (
-      <div className={`${styles.root} ${styles.rootFull}`} style={bgStyle} data-glass={glass || undefined}>
+      <div
+        className={`${styles.root} ${styles.rootFull}`}
+        style={bgStyle}
+        data-glass={glass || undefined}
+      >
         {sidebarNav}
         <div className={styles.fullRight}>
-          {topBar && <div className={`${styles.topBarSlot} ${styles.topBarSlotFull}`}>{topBar}</div>}
+          {topBar && (
+            <div className={`${styles.topBarSlot} ${styles.topBarSlotFull}`}>{topBar}</div>
+          )}
           <div className={`${styles.contentSlot} ${styles.contentSlotFull}`}>{children}</div>
-          <Box padding={6}>
-            {footer}
-          </Box>
+          <Box padding={6}>{footer}</Box>
         </div>
       </div>
     );

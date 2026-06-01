@@ -1,44 +1,39 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import dts from "vite-plugin-dts";
-import { resolve } from "path";
-import { fileURLToPath } from "node:url";
-import { generateEntries } from "vite-magic-tree-shaking";
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import { generateEntries } from 'vite-magic-tree-shaking';
+import dts from 'vite-plugin-dts';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ["src"],
-      exclude: ["src/**/*.stories.tsx"],
+      include: ['src'],
+      exclude: ['src/**/*.stories.tsx'],
       insertTypesEntry: true,
     }),
   ],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
+      '@': resolve(__dirname, 'src'),
     },
   },
   build: {
     lib: {
-      entry: generateEntries(__dirname, "src", { warnOnExportsMismatch: true }),
-      formats: ["es", "cjs"],
+      entry: generateEntries(__dirname, 'src', { warnOnExportsMismatch: true }),
+      formats: ['es', 'cjs'],
       fileName: (_, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
-      external: [
-        "@gnome-ui/react",
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "recharts",
-      ],
+      external: ['@gnome-ui/react', 'react', 'react-dom', 'react/jsx-runtime', 'recharts'],
       output: {
         preserveModules: true,
-        preserveModulesRoot: "src",
-        assetFileNames: "style.css",
+        preserveModulesRoot: 'src',
+        assetFileNames: 'style.css',
       },
     },
     cssCodeSplit: false,

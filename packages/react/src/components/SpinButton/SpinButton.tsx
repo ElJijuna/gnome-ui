@@ -1,8 +1,8 @@
-import { useCallback, type KeyboardEvent, type HTMLAttributes } from "react";
-import styles from "./SpinButton.module.css";
+import { type HTMLAttributes, type KeyboardEvent, useCallback } from 'react';
 
-export interface SpinButtonProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+import styles from './SpinButton.module.css';
+
+export interface SpinButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Current value. */
   value: number;
   /** Called when the value changes. */
@@ -18,14 +18,15 @@ export interface SpinButtonProps
   /** Disables the control. */
   disabled?: boolean;
   /** Accessible label. Required when no visible `<label>` is associated. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   /** Associates the control with a visible label element. */
-  "aria-labelledby"?: string;
+  'aria-labelledby'?: string;
 }
 
 function countDecimals(n: number): number {
   const s = n.toString();
-  const dot = s.indexOf(".");
+  const dot = s.indexOf('.');
+
   return dot === -1 ? 0 : s.length - dot - 1;
 }
 
@@ -50,8 +51,8 @@ export function SpinButton({
   decimals,
   disabled = false,
   className,
-  "aria-label": ariaLabel,
-  "aria-labelledby": ariaLabelledBy,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   ...props
 }: SpinButtonProps) {
   const dp = decimals ?? countDecimals(step);
@@ -64,12 +65,30 @@ export function SpinButton({
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
       switch (e.key) {
-        case "ArrowUp":   e.preventDefault(); set(value + step); break;
-        case "ArrowDown": e.preventDefault(); set(value - step); break;
-        case "PageUp":    e.preventDefault(); set(value + step * 10); break;
-        case "PageDown":  e.preventDefault(); set(value - step * 10); break;
-        case "Home":      e.preventDefault(); set(min); break;
-        case "End":       e.preventDefault(); set(max); break;
+        case 'ArrowUp':
+          e.preventDefault();
+          set(value + step);
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          set(value - step);
+          break;
+        case 'PageUp':
+          e.preventDefault();
+          set(value + step * 10);
+          break;
+        case 'PageDown':
+          e.preventDefault();
+          set(value - step * 10);
+          break;
+        case 'Home':
+          e.preventDefault();
+          set(min);
+          break;
+        case 'End':
+          e.preventDefault();
+          set(max);
+          break;
       }
     },
     [value, step, min, max, set],
@@ -88,7 +107,7 @@ export function SpinButton({
       onKeyDown={disabled ? undefined : handleKeyDown}
       className={[styles.spin, disabled ? styles.disabled : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       <button

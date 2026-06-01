@@ -1,11 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ButtonRow } from "./ButtonRow";
-import { BoxedList } from "../BoxedList";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { BoxedList } from '../BoxedList';
+
+import { ButtonRow } from './ButtonRow';
 
 const meta: Meta<typeof ButtonRow> = {
-  title: "Components/ButtonRow",
+  title: 'Components/ButtonRow',
   component: ButtonRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -35,15 +37,15 @@ that colour the title text accordingly.
   ],
   argTypes: {
     variant: {
-      control: "select",
-      options: ["default", "suggested", "destructive"],
+      control: 'select',
+      options: ['default', 'suggested', 'destructive'],
     },
-    title: { control: "text" },
-    disabled: { control: "boolean" },
+    title: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
   args: {
-    title: "Confirm",
-    variant: "default",
+    title: 'Confirm',
+    variant: 'default',
     disabled: false,
   },
 };
@@ -66,9 +68,13 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <BoxedList>
-      <ButtonRow title="Confirm" variant="default" onClick={() => alert("default")} />
-      <ButtonRow title="Save Changes" variant="suggested" onClick={() => alert("suggested")} />
-      <ButtonRow title="Delete Account" variant="destructive" onClick={() => alert("destructive")} />
+      <ButtonRow title="Confirm" variant="default" onClick={() => alert('default')} />
+      <ButtonRow title="Save Changes" variant="suggested" onClick={() => alert('suggested')} />
+      <ButtonRow
+        title="Delete Account"
+        variant="destructive"
+        onClick={() => alert('destructive')}
+      />
     </BoxedList>
   ),
   parameters: {
@@ -76,7 +82,7 @@ export const Variants: Story = {
     docs: {
       description: {
         story:
-          "`default` uses normal foreground colour. `suggested` uses the accent colour. `destructive` uses the destructive (red) colour.",
+          '`default` uses normal foreground colour. `suggested` uses the accent colour. `destructive` uses the destructive (red) colour.',
       },
     },
   },
@@ -91,13 +97,13 @@ export const WithIcons: Story = {
         title="Add Account"
         variant="suggested"
         leading={<span style={{ fontSize: 18 }}>＋</span>}
-        onClick={() => alert("add")}
+        onClick={() => alert('add')}
       />
       <ButtonRow
         title="Remove Device"
         variant="destructive"
         leading={<span style={{ fontSize: 18 }}>✕</span>}
-        onClick={() => alert("remove")}
+        onClick={() => alert('remove')}
       />
     </BoxedList>
   ),
@@ -105,7 +111,7 @@ export const WithIcons: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `leading` or `trailing` for optional icons. They inherit the variant colour.",
+        story: 'Use `leading` or `trailing` for optional icons. They inherit the variant colour.',
       },
     },
   },
@@ -129,16 +135,16 @@ export const Disabled: Story = {
 export const MixedInList: Story = {
   render: () => (
     <BoxedList>
-      <ButtonRow title="Export Data" variant="suggested" onClick={() => alert("export")} />
-      <ButtonRow title="Reset to Defaults" variant="default" onClick={() => alert("reset")} />
-      <ButtonRow title="Delete All Data" variant="destructive" onClick={() => alert("delete")} />
+      <ButtonRow title="Export Data" variant="suggested" onClick={() => alert('export')} />
+      <ButtonRow title="Reset to Defaults" variant="default" onClick={() => alert('reset')} />
+      <ButtonRow title="Delete All Data" variant="destructive" onClick={() => alert('delete')} />
     </BoxedList>
   ),
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Multiple `ButtonRow` items can be stacked inside a single `BoxedList`.",
+        story: 'Multiple `ButtonRow` items can be stacked inside a single `BoxedList`.',
       },
     },
   },

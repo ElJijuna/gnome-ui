@@ -1,6 +1,7 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Spacer, Toolbar } from "@gnome-ui/react";
-import styles from "./StatusBar.module.css";
+import { Spacer, Toolbar } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './StatusBar.module.css';
 
 export interface StatusBarProps extends HTMLAttributes<HTMLDivElement> {
   /** Leading status content. */
@@ -12,17 +13,9 @@ export interface StatusBarProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Compact footer/status bar for `Layout.footer`.
  */
-export function StatusBar({
-  children,
-  trailing,
-  className,
-  ...props
-}: StatusBarProps) {
+export function StatusBar({ children, trailing, className, ...props }: StatusBarProps) {
   return (
-    <Toolbar
-      className={[styles.statusBar, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <Toolbar className={[styles.statusBar, className].filter(Boolean).join(' ')} {...props}>
       {children}
       {trailing && (
         <>

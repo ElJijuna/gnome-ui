@@ -1,19 +1,21 @@
 import {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
   type ButtonHTMLAttributes,
-  type ReactNode,
   type KeyboardEvent,
-} from "react";
-import { createPortal } from "react-dom";
-import styles from "./SplitButton.module.css";
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-export type SplitButtonVariant = "default" | "suggested" | "destructive";
+import { createPortal } from 'react-dom';
+
+import styles from './SplitButton.module.css';
+
+export type SplitButtonVariant = 'default' | 'suggested' | 'destructive';
 
 export interface SplitButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /** Label shown in the primary button. */
   label: string;
   /** Visual style. Applies to both the primary and toggle halves. */
@@ -38,9 +40,9 @@ export interface SplitButtonProps
  */
 export function SplitButton({
   label,
-  variant = "default",
+  variant = 'default',
   dropdownContent,
-  dropdownLabel = "More options",
+  dropdownLabel = 'More options',
   disabled = false,
   onClick,
   className,
@@ -57,14 +59,22 @@ export function SplitButton({
 
   // Position dropdown below the toggle button
   const place = useCallback(() => {
-    if (!toggleRef.current || !panelRef.current) return;
+    if (!toggleRef.current || !panelRef.current) {
+      return;
+    }
+
     const triggerRect = toggleRef.current.getBoundingClientRect();
     const panelRect = panelRef.current.getBoundingClientRect();
     const vw = window.innerWidth;
 
     let left = triggerRect.right - panelRect.width;
-    if (left < 8) left = 8;
-    if (left + panelRect.width > vw - 8) left = vw - panelRect.width - 8;
+    if (left < 8) {
+      left = 8;
+    }
+
+    if (left + panelRect.width > vw - 8) {
+      left = vw - panelRect.width - 8;
+    }
 
     setDropdownStyle({
       top: triggerRect.bottom + 6,
@@ -73,22 +83,29 @@ export function SplitButton({
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     const id = requestAnimationFrame(() => {
       place();
-      window.addEventListener("scroll", place, { passive: true, capture: true });
-      window.addEventListener("resize", place, { passive: true });
+      window.addEventListener('scroll', place, { passive: true, capture: true });
+      window.addEventListener('resize', place, { passive: true });
     });
+
     return () => {
       cancelAnimationFrame(id);
-      window.removeEventListener("scroll", place, { capture: true });
-      window.removeEventListener("resize", place);
+      window.removeEventListener('scroll', place, { capture: true });
+      window.removeEventListener('resize', place);
     };
   }, [open, place]);
 
   // Close on outside click
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     const handler = (e: MouseEvent) => {
       if (
         !containerRef.current?.contains(e.target as Node) &&
@@ -97,25 +114,21 @@ export function SplitButton({
         close();
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+
+    document.addEventListener('mousedown', handler);
+
+    return () => document.removeEventListener('mousedown', handler);
   }, [open, close]);
 
   const handlePanelKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       e.stopPropagation();
       close();
       toggleRef.current?.focus();
     }
   };
 
-  const containerClass = [
-    styles.container,
-    styles[variant],
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const containerClass = [styles.container, styles[variant], className].filter(Boolean).join(' ');
 
   const panel = (
     <div
@@ -123,13 +136,17 @@ export function SplitButton({
       role="dialog"
       aria-label={dropdownLabel}
       tabIndex={-1}
-      className={[styles.dropdown, open ? styles.dropdownVisible : null]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.dropdown, open ? styles.dropdownVisible : null].filter(Boolean).join(' ')}
       style={
         Object.keys(dropdownStyle).length
-          ? { ...dropdownStyle, position: "fixed" }
-          : { visibility: "hidden", pointerEvents: "none", top: -9999, left: -9999, position: "fixed" }
+          ? { ...dropdownStyle, position: 'fixed' }
+          : {
+              visibility: 'hidden',
+              pointerEvents: 'none',
+              top: -9999,
+              left: -9999,
+              position: 'fixed',
+            }
       }
       onKeyDown={handlePanelKeyDown}
     >
@@ -140,12 +157,7 @@ export function SplitButton({
   return (
     <>
       <div ref={containerRef} className={containerClass}>
-        <button
-          className={styles.primary}
-          disabled={disabled}
-          onClick={onClick}
-          {...props}
-        >
+        <button className={styles.primary} disabled={disabled} onClick={onClick} {...props}>
           {label}
         </button>
 
@@ -180,10 +192,7 @@ export function SplitButton({
         </button>
       </div>
 
-      {open &&
-        (typeof document !== "undefined"
-          ? createPortal(panel, document.body)
-          : panel)}
+      {open && (typeof document !== 'undefined' ? createPortal(panel, document.body) : panel)}
     </>
   );
 }

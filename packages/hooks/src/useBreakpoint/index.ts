@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export interface BreakpointInfo {
   /** `true` when viewport width is below 480 px. */
@@ -9,17 +9,18 @@ export interface BreakpointInfo {
   isDesktop: boolean;
 }
 
-const MOBILE  = "(max-width: 479px)";
-const TABLET  = "(min-width: 480px) and (max-width: 1023px)";
-const DESKTOP = "(min-width: 1024px)";
+const MOBILE = '(max-width: 479px)';
+const TABLET = '(min-width: 480px) and (max-width: 1023px)';
+const DESKTOP = '(min-width: 1024px)';
 
 function getSnapshot(): BreakpointInfo {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return { isMobile: false, isTablet: false, isDesktop: true };
   }
+
   return {
-    isMobile:  window.matchMedia(MOBILE).matches,
-    isTablet:  window.matchMedia(TABLET).matches,
+    isMobile: window.matchMedia(MOBILE).matches,
+    isTablet: window.matchMedia(TABLET).matches,
     isDesktop: window.matchMedia(DESKTOP).matches,
   };
 }
@@ -41,8 +42,10 @@ export function useBreakpoint(): BreakpointInfo {
       window.matchMedia(DESKTOP),
     ];
     const handler = () => setState(getSnapshot());
-    queries.forEach((mql) => mql.addEventListener("change", handler));
-    return () => queries.forEach((mql) => mql.removeEventListener("change", handler));
+
+    queries.forEach((mql) => mql.addEventListener('change', handler));
+
+    return () => queries.forEach((mql) => mql.removeEventListener('change', handler));
   }, []);
 
   return state;

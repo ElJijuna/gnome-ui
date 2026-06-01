@@ -1,12 +1,14 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { CheckRow } from "./CheckRow";
-import { BoxedList } from "../BoxedList";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { BoxedList } from '../BoxedList';
+
+import { CheckRow } from './CheckRow';
 
 const meta: Meta<typeof CheckRow> = {
-  title: "Components/CheckRow",
+  title: 'Components/CheckRow',
   component: CheckRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -32,14 +34,14 @@ The entire row is a button — clicking anywhere toggles the checkbox. Use insid
     ),
   ],
   argTypes: {
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
-    title: { control: "text" },
-    subtitle: { control: "text" },
+    checked: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
   },
   args: {
-    title: "Enable feature",
-    subtitle: "Turn this feature on or off",
+    title: 'Enable feature',
+    subtitle: 'Turn this feature on or off',
     defaultChecked: false,
   },
 };
@@ -56,7 +58,11 @@ export const Default: Story = {};
 export const InBoxedList: Story = {
   render: () => (
     <BoxedList>
-      <CheckRow title="Send usage statistics" subtitle="Help improve the app anonymously" defaultChecked />
+      <CheckRow
+        title="Send usage statistics"
+        subtitle="Help improve the app anonymously"
+        defaultChecked
+      />
       <CheckRow title="Enable crash reports" subtitle="Automatically submit crash reports" />
       <CheckRow title="Beta features" subtitle="Try experimental functionality" />
     </BoxedList>
@@ -65,7 +71,7 @@ export const InBoxedList: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Multiple `CheckRow` items inside a `BoxedList` for multi-select settings.",
+        story: 'Multiple `CheckRow` items inside a `BoxedList` for multi-select settings.',
       },
     },
   },
@@ -81,16 +87,30 @@ export const Controlled: Story = {
 
     return (
       <BoxedList>
-        <CheckRow title="Send usage statistics" checked={items.stats} onCheckedChange={() => toggle("stats")} />
-        <CheckRow title="Enable crash reports" checked={items.crash} onCheckedChange={() => toggle("crash")} />
-        <CheckRow title="Beta features" checked={items.beta} onCheckedChange={() => toggle("beta")} />
+        <CheckRow
+          title="Send usage statistics"
+          checked={items.stats}
+          onCheckedChange={() => toggle('stats')}
+        />
+        <CheckRow
+          title="Enable crash reports"
+          checked={items.crash}
+          onCheckedChange={() => toggle('crash')}
+        />
+        <CheckRow
+          title="Beta features"
+          checked={items.beta}
+          onCheckedChange={() => toggle('beta')}
+        />
       </BoxedList>
     );
   },
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Controlled mode — manage state externally with `checked` + `onCheckedChange`." },
+      description: {
+        story: 'Controlled mode — manage state externally with `checked` + `onCheckedChange`.',
+      },
     },
   },
 };
@@ -100,7 +120,12 @@ export const Controlled: Story = {
 export const Disabled: Story = {
   render: () => (
     <BoxedList>
-      <CheckRow title="Crash reports" subtitle="Requires diagnostics permission" defaultChecked disabled />
+      <CheckRow
+        title="Crash reports"
+        subtitle="Requires diagnostics permission"
+        defaultChecked
+        disabled
+      />
       <CheckRow title="Beta features" subtitle="Not available in your region" disabled />
     </BoxedList>
   ),

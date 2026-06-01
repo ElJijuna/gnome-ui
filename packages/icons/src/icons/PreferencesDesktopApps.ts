@@ -1,12 +1,11 @@
-/* eslint-disable */
-import type { IconDefinition } from "../types.ts";
+import type { IconDefinition } from '../types.ts';
 
 /** preferences-desktop-apps-symbolic.svg (legacy/preferences-desktop-apps) */
 export const PreferencesDesktopApps: IconDefinition = {
-  viewBox: "0 0 16.006 16",
+  viewBox: '0 0 16.006 16',
   paths: [
-  {
-    d: "M1 0C.446 0 0 .446 0 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V1c0-.554-.446-1-1-1zm1 3h3v2H2zm7-3c-.554 0-1 .446-1 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V1c0-.554-.446-1-1-1zm1 3h3v2h-3zM1 8c-.554 0-1 .446-1 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V9c0-.554-.446-1-1-1zm1 3h3v2H2zm7-3c-.554 0-1 .446-1 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V9c0-.554-.446-1-1-1zm1 3h3v2h-3z"
-  }
-],
+    {
+      d: 'M1 0C.446 0 0 .446 0 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V1c0-.554-.446-1-1-1zm1 3h3v2H2zm7-3c-.554 0-1 .446-1 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V1c0-.554-.446-1-1-1zm1 3h3v2h-3zM1 8c-.554 0-1 .446-1 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V9c0-.554-.446-1-1-1zm1 3h3v2H2zm7-3c-.554 0-1 .446-1 1v5c0 .554.446 1 1 1h5c.554 0 1-.446 1-1V9c0-.554-.446-1-1-1zm1 3h3v2h-3z',
+    },
+  ],
 };

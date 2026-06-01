@@ -1,20 +1,14 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { createPortal } from "react-dom";
-import type { ReactNode } from "react";
-import styles from "./Toast.module.css";
+import type { ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
-const portalContainer =
-  typeof document !== "undefined" ? document.body : null;
+import { createPortal } from 'react-dom';
+
+import styles from './Toast.module.css';
+
+const portalContainer = typeof document !== 'undefined' ? document.body : null;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-export type ToastType = "default" | "success" | "error" | "warning" | "info";
+export type ToastType = 'default' | 'success' | 'error' | 'warning' | 'info';
 
 export interface ToastOptions {
   /** Short message text. Keep it to one line. */
@@ -62,7 +56,7 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 const EXIT_MS = 220;
 
 function genId() {
-  return typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+  return typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2);
 }
@@ -72,11 +66,11 @@ function cap(s: string) {
 }
 
 const TYPE_ARIA_LABEL: Record<ToastType, string> = {
-  default: "",
-  success: "Success",
-  error: "Error",
-  warning: "Warning",
-  info: "Info",
+  default: '',
+  success: 'Success',
+  error: 'Error',
+  warning: 'Warning',
+  info: 'Info',
 };
 
 // ─── Toast card ───────────────────────────────────────────────────────────────
@@ -94,14 +88,14 @@ function ToastCard({ entry, exiting, onDismiss }: ToastCardProps) {
 
   return (
     <div
-      className={[styles.toast, exiting && styles.exiting].filter(Boolean).join(" ")}
-      role={entry.type === "error" ? "alert" : "status"}
-      aria-live={entry.type === "error" ? "assertive" : "polite"}
+      className={[styles.toast, exiting && styles.exiting].filter(Boolean).join(' ')}
+      role={entry.type === 'error' ? 'alert' : 'status'}
+      aria-live={entry.type === 'error' ? 'assertive' : 'polite'}
       aria-atomic="true"
     >
-      {entry.type !== "default" && (
+      {entry.type !== 'default' && (
         <span
-          className={[styles.dot, styles[`dot${cap(entry.type)}`]].join(" ")}
+          className={[styles.dot, styles[`dot${cap(entry.type)}`]].join(' ')}
           aria-label={TYPE_ARIA_LABEL[entry.type]}
         />
       )}
@@ -111,12 +105,7 @@ function ToastCard({ entry, exiting, onDismiss }: ToastCardProps) {
           {entry.action.label}
         </button>
       )}
-      <button
-        type="button"
-        className={styles.close}
-        aria-label="Dismiss"
-        onClick={onDismiss}
-      >
+      <button type="button" className={styles.close} aria-label="Dismiss" onClick={onDismiss}>
         ✕
       </button>
     </div>
@@ -134,8 +123,13 @@ export function ToastProvider({ children }: ToastProviderProps) {
   const current = items[0] ?? null;
 
   const dismissCurrent = useCallback(() => {
-    if (!current) return;
-    if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
+    if (!current) {
+      return;
+    }
+
+    if (autoTimerRef.current) {
+      clearTimeout(autoTimerRef.current);
+    }
 
     setExitingId(current.id);
     exitTimerRef.current = setTimeout(() => {
@@ -147,7 +141,10 @@ export function ToastProvider({ children }: ToastProviderProps) {
   const dismiss = useCallback(
     (id?: string) => {
       const target = id ?? current?.id;
-      if (!target) return;
+
+      if (!target) {
+        return;
+      }
 
       if (target === current?.id) {
         dismissCurrent();
@@ -160,44 +157,66 @@ export function ToastProvider({ children }: ToastProviderProps) {
   );
 
   const dismissAll = useCallback(() => {
-    if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
-    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    if (autoTimerRef.current) {
+      clearTimeout(autoTimerRef.current);
+    }
+
+    if (exitTimerRef.current) {
+      clearTimeout(exitTimerRef.current);
+    }
+
     setExitingId(null);
     setItems([]);
   }, []);
 
   const show = useCallback((options: ToastOptions): string => {
     const id = options.id ?? genId();
+
     setItems((prev) => {
-      if (prev.some((item) => item.id === id)) return prev;
+      if (prev.some((item) => item.id === id)) {
+        return prev;
+      }
+
       return [
         ...prev,
         {
           id,
           title: options.title,
-          type: options.type ?? "default",
+          type: options.type ?? 'default',
           timeout: options.timeout ?? 4000,
           action: options.action,
         },
       ];
     });
+
     return id;
   }, []);
 
   // Auto-dismiss timer — resets whenever the displayed toast changes
   useEffect(() => {
-    if (!current || current.timeout === 0) return;
+    if (!current || current.timeout === 0) {
+      return;
+    }
+
     autoTimerRef.current = setTimeout(dismissCurrent, current.timeout);
+
     return () => {
-      if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
+      if (autoTimerRef.current) {
+        clearTimeout(autoTimerRef.current);
+      }
     };
-  }, [current?.id, dismissCurrent]);
+  }, [current?.id, dismissCurrent, current.timeout, current]);
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
-      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+      if (autoTimerRef.current) {
+        clearTimeout(autoTimerRef.current);
+      }
+
+      if (exitTimerRef.current) {
+        clearTimeout(exitTimerRef.current);
+      }
     };
   }, []);
 
@@ -223,8 +242,13 @@ export function ToastProvider({ children }: ToastProviderProps) {
 }
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
+// eslint-disable-next-line react-refresh/only-export-components
 export function useToast(): ToastContextValue {
   const ctx = useContext(ToastContext);
-  if (!ctx) throw new Error("useToast must be used inside <ToastProvider>");
+
+  if (!ctx) {
+    throw new Error('useToast must be used inside <ToastProvider>');
+  }
+
   return ctx;
 }

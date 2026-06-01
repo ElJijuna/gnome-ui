@@ -1,7 +1,8 @@
-import { useState, useId, type HTMLAttributes, type ReactNode } from "react";
-import styles from "./CheckRow.module.css";
+import { type HTMLAttributes, type ReactNode, useId, useState } from 'react';
 
-export interface CheckRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, "onChange"> {
+import styles from './CheckRow.module.css';
+
+export interface CheckRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Primary label. */
   title: string;
   /** Secondary line below the title. */
@@ -48,7 +49,11 @@ export function CheckRow({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const next = !checked;
-    if (!isControlled) setUncontrolledChecked(next);
+
+    if (!isControlled) {
+      setUncontrolledChecked(next);
+    }
+
     onCheckedChange?.(next);
     onClick?.(e);
   };
@@ -61,15 +66,25 @@ export function CheckRow({
       disabled={disabled}
       className={[styles.row, disabled ? styles.disabled : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       onClick={handleClick}
       {...props}
     >
       {/* Visual checkbox — aria-hidden since the button carries the role */}
       <span className={styles.checkboxWrap} aria-hidden="true">
-        <span className={[styles.checkbox, checked ? styles.checkboxChecked : null].filter(Boolean).join(" ")}>
+        <span
+          className={[styles.checkbox, checked ? styles.checkboxChecked : null]
+            .filter(Boolean)
+            .join(' ')}
+        >
           {checked && (
-            <svg className={styles.checkmark} width="12" height="12" viewBox="0 0 12 12" focusable="false">
+            <svg
+              className={styles.checkmark}
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              focusable="false"
+            >
               <path
                 d="M2 6l3 3 5-5"
                 fill="none"

@@ -1,14 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { WindowTitle } from "./WindowTitle";
-import { HeaderBar } from "../HeaderBar";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
-import { DocumentOpen } from "@gnome-ui/icons";
+import { DocumentOpen } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { HeaderBar } from '../HeaderBar';
+import { Icon } from '../Icon';
+
+import { WindowTitle } from './WindowTitle';
 
 const meta: Meta<typeof WindowTitle> = {
-  title: "Components/WindowTitle",
+  title: 'Components/WindowTitle',
   component: WindowTitle,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -36,12 +38,12 @@ Mirrors \`AdwWindowTitle\`.
     ),
   ],
   argTypes: {
-    title: { control: "text" },
-    subtitle: { control: "text" },
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
   },
   args: {
-    title: "Files",
-    subtitle: "/home/user/Documents",
+    title: 'Files',
+    subtitle: '/home/user/Documents',
   },
 };
 
@@ -51,22 +53,19 @@ type Story = StoryObj<typeof WindowTitle>;
 // ─── Default (in HeaderBar) ────────────────────────────────────────────────────
 
 export const Default: Story = {
-  render: (args) => (
-    <HeaderBar title={<WindowTitle {...args} />} />
-  ),
+  render: (args) => <HeaderBar title={<WindowTitle {...args} />} />,
 };
 
 // ─── Title only ────────────────────────────────────────────────────────────────
 
 export const TitleOnly: Story = {
-  render: () => (
-    <HeaderBar title={<WindowTitle title="Settings" />} />
-  ),
+  render: () => <HeaderBar title={<WindowTitle title="Settings" />} />,
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Without a `subtitle`, renders a single centred line — identical to a plain string title.",
+        story:
+          'Without a `subtitle`, renders a single centred line — identical to a plain string title.',
       },
     },
   },
@@ -78,7 +77,11 @@ export const WithActions: Story = {
   render: () => (
     <HeaderBar
       title={<WindowTitle title="Text Editor" subtitle="Untitled Document" />}
-      start={<Button variant="flat"><Icon icon={DocumentOpen} /></Button>}
+      start={
+        <Button variant="flat">
+          <Icon icon={DocumentOpen} />
+        </Button>
+      }
       end={<Button variant="suggested">Save</Button>}
     />
   ),
@@ -86,7 +89,8 @@ export const WithActions: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Typical header bar with start/end action buttons and a two-line `WindowTitle` in the centre.",
+        story:
+          'Typical header bar with start/end action buttons and a two-line `WindowTitle` in the centre.',
       },
     },
   },
@@ -109,7 +113,8 @@ export const LongSubtitle: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Long subtitles are truncated with an ellipsis to prevent overflowing the header bar.",
+        story:
+          'Long subtitles are truncated with an ellipsis to prevent overflowing the header bar.',
       },
     },
   },

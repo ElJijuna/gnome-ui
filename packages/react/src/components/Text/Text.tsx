@@ -1,43 +1,44 @@
-import type { ElementType, HTMLAttributes, ReactNode } from "react";
-import styles from "./Text.module.css";
+import type { ElementType, HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Text.module.css';
 
 export type TextVariant =
-  | "large-title"
-  | "title-1"
-  | "title-2"
-  | "title-3"
-  | "title-4"
-  | "heading"
-  | "body"
-  | "document"
-  | "caption"
-  | "caption-heading"
-  | "monospace"
-  | "numeric";
+  | 'large-title'
+  | 'title-1'
+  | 'title-2'
+  | 'title-3'
+  | 'title-4'
+  | 'heading'
+  | 'body'
+  | 'document'
+  | 'caption'
+  | 'caption-heading'
+  | 'monospace'
+  | 'numeric';
 
 export type TextColor =
-  | "default"
-  | "dim"
-  | "accent"
-  | "destructive"
-  | "success"
-  | "warning"
-  | "error";
+  | 'default'
+  | 'dim'
+  | 'accent'
+  | 'destructive'
+  | 'success'
+  | 'warning'
+  | 'error';
 
 /** Default HTML element rendered for each variant */
 const defaultElement: Record<TextVariant, ElementType> = {
-  "large-title": "h1",
-  "title-1": "h1",
-  "title-2": "h2",
-  "title-3": "h3",
-  "title-4": "h4",
-  heading: "h3",
-  body: "p",
-  document: "p",
-  caption: "span",
-  "caption-heading": "span",
-  monospace: "code",
-  numeric: "span",
+  'large-title': 'h1',
+  'title-1': 'h1',
+  'title-2': 'h2',
+  'title-3': 'h3',
+  'title-4': 'h4',
+  heading: 'h3',
+  body: 'p',
+  document: 'p',
+  caption: 'span',
+  'caption-heading': 'span',
+  monospace: 'code',
+  numeric: 'span',
 };
 
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -61,8 +62,8 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html
  */
 export function Text({
-  variant = "body",
-  color = "default",
+  variant = 'body',
+  color = 'default',
   as,
   className,
   children,
@@ -70,14 +71,9 @@ export function Text({
 }: TextProps) {
   const Tag = as ?? defaultElement[variant];
 
-  const classes = [
-    styles.text,
-    styles[variant],
-    styles[`color-${color}`],
-    className,
-  ]
+  const classes = [styles.text, styles[variant], styles[`color-${color}`], className]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
     <Tag className={classes} {...props}>

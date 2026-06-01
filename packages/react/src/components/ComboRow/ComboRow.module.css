@@ -115,7 +115,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .trigger:disabled {
@@ -128,7 +128,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 /* ─── Trigger label ─────────────────────────────────────────────────────────── */
@@ -185,8 +185,16 @@
 }
 
 @keyframes list-in {
-  from { opacity: 0; transform: scaleY(0.95); transform-origin: top center; }
-  to   { opacity: 1; transform: scaleY(1);    transform-origin: top center; }
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: top center;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top center;
+  }
 }
 
 .listDown {
@@ -199,8 +207,16 @@
 }
 
 @keyframes list-in-up {
-  from { opacity: 0; transform: scaleY(0.95); transform-origin: bottom center; }
-  to   { opacity: 1; transform: scaleY(1);    transform-origin: bottom center; }
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: bottom center;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom center;
+  }
 }
 
 /* ─── Option ────────────────────────────────────────────────────────────────── */

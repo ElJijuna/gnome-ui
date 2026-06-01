@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./ToolbarView.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './ToolbarView.module.css';
 
 export interface ToolbarViewProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -35,10 +36,7 @@ export function ToolbarView({
   ...props
 }: ToolbarViewProps) {
   return (
-    <div
-      className={[styles.toolbarView, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.toolbarView, className].filter(Boolean).join(' ')} {...props}>
       {topBar && <div className={styles.top}>{topBar}</div>}
       <div className={styles.content}>{children}</div>
       {bottomBar && <div className={styles.bottom}>{bottomBar}</div>}

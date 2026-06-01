@@ -1,23 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Icon } from "@gnome-ui/react";
-import {
-  Add,
-  Copy,
-  Delete,
-  DocumentOpen,
-  Edit,
-  Printer,
-  Save,
-  Share,
-} from "@gnome-ui/icons";
-import { QuickActions } from "./QuickActions";
+import { Add, Copy, Delete, DocumentOpen, Edit, Printer, Save, Share } from '@gnome-ui/icons';
+import { Icon } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { QuickActions } from './QuickActions';
 
 const meta: Meta<typeof QuickActions> = {
-  title: "Layout/QuickActions",
+  title: 'Layout/QuickActions',
   component: QuickActions,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -43,14 +35,25 @@ export default meta;
 type Story = StoryObj<typeof QuickActions>;
 
 const actions = [
-  { id: "new-file", label: "New File", icon: <Icon icon={Add} size="lg" />, onActivate: () => {} },
-  { id: "open", label: "Open", icon: <Icon icon={DocumentOpen} size="lg" />, onActivate: () => {} },
-  { id: "save", label: "Save", icon: <Icon icon={Save} size="lg" />, onActivate: () => {} },
-  { id: "share", label: "Share", icon: <Icon icon={Share} size="lg" />, onActivate: () => {} },
-  { id: "duplicate", label: "Duplicate", icon: <Icon icon={Copy} size="lg" />, onActivate: () => {} },
-  { id: "rename", label: "Rename", icon: <Icon icon={Edit} size="lg" />, onActivate: () => {} },
-  { id: "print", label: "Print", icon: <Icon icon={Printer} size="lg" />, onActivate: () => {} },
-  { id: "delete", label: "Delete", icon: <Icon icon={Delete} size="lg" />, disabled: true, onActivate: () => {} },
+  { id: 'new-file', label: 'New File', icon: <Icon icon={Add} size="lg" />, onActivate: () => {} },
+  { id: 'open', label: 'Open', icon: <Icon icon={DocumentOpen} size="lg" />, onActivate: () => {} },
+  { id: 'save', label: 'Save', icon: <Icon icon={Save} size="lg" />, onActivate: () => {} },
+  { id: 'share', label: 'Share', icon: <Icon icon={Share} size="lg" />, onActivate: () => {} },
+  {
+    id: 'duplicate',
+    label: 'Duplicate',
+    icon: <Icon icon={Copy} size="lg" />,
+    onActivate: () => {},
+  },
+  { id: 'rename', label: 'Rename', icon: <Icon icon={Edit} size="lg" />, onActivate: () => {} },
+  { id: 'print', label: 'Print', icon: <Icon icon={Printer} size="lg" />, onActivate: () => {} },
+  {
+    id: 'delete',
+    label: 'Delete',
+    icon: <Icon icon={Delete} size="lg" />,
+    disabled: true,
+    onActivate: () => {},
+  },
 ];
 
 export const DashboardShortcuts: Story = {

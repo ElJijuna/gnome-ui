@@ -1,6 +1,6 @@
-export { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from "./Carousel";
 export type {
-  CarouselProps,
   CarouselIndicatorDotsProps,
   CarouselIndicatorLinesProps,
-} from "./Carousel";
+  CarouselProps,
+} from './Carousel';
+export { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from './Carousel';

@@ -1,6 +1,8 @@
-import { createPortal } from "react-dom";
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Toast.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import { createPortal } from 'react-dom';
+
+import styles from './Toast.module.css';
 
 export interface ToasterProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -8,7 +10,7 @@ export interface ToasterProps extends HTMLAttributes<HTMLDivElement> {
    * - `bottom` (default) — bottom-center, following the GNOME HIG.
    * - `top` — top-center.
    */
-  position?: "bottom" | "top";
+  position?: 'bottom' | 'top';
   /** `<Toast>` elements to display. */
   children?: ReactNode;
   /**
@@ -32,7 +34,7 @@ export interface ToasterProps extends HTMLAttributes<HTMLDivElement> {
  * </Toaster>
  */
 export function Toaster({
-  position = "bottom",
+  position = 'bottom',
   children,
   container,
   className,
@@ -43,11 +45,11 @@ export function Toaster({
       aria-label="Notifications"
       className={[
         styles.toaster,
-        position === "top" ? styles.toasterTop : styles.toasterBottom,
+        position === 'top' ? styles.toasterTop : styles.toasterBottom,
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {children}
@@ -55,7 +57,9 @@ export function Toaster({
   );
 
   // During SSR document is not available — render inline
-  if (typeof document === "undefined") return node;
+  if (typeof document === 'undefined') {
+    return node;
+  }
 
   return createPortal(node, container ?? document.body);
 }

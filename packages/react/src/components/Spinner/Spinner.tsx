@@ -1,7 +1,8 @@
-import type { HTMLAttributes } from "react";
-import styles from "./Spinner.module.css";
+import type { HTMLAttributes } from 'react';
 
-export type SpinnerSize = "sm" | "md" | "lg";
+import styles from './Spinner.module.css';
+
+export type SpinnerSize = 'sm' | 'md' | 'lg';
 
 export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
   /** Size of the spinner. Defaults to `"md"`. */
@@ -22,20 +23,18 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html
  */
 export function Spinner({
-  size = "md",
-  label = "Loading\u2026",
+  size = 'md',
+  label = 'Loading\u2026',
   className,
   ...props
 }: SpinnerProps) {
-  const classes = [styles.spinner, styles[size], className]
-    .filter(Boolean)
-    .join(" ");
+  const classes = [styles.spinner, styles[size], className].filter(Boolean).join(' ');
 
   return (
     <span
       role="status"
       aria-label={label || undefined}
-      aria-hidden={label === "" ? true : undefined}
+      aria-hidden={label === '' ? true : undefined}
       className={classes}
       {...props}
     />

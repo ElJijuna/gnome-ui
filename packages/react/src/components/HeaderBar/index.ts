@@ -1,2 +1,2 @@
-export { HeaderBar } from "./HeaderBar";
-export type { HeaderBarProps } from "./HeaderBar";
+export type { HeaderBarProps } from './HeaderBar';
+export { HeaderBar } from './HeaderBar';

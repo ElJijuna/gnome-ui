@@ -1,15 +1,18 @@
 import {
-  useEffect,
-  useRef,
-  useCallback,
-  useId,
-  useState,
   type KeyboardEvent,
   type ReactNode,
-} from "react";
-import { createPortal } from "react-dom";
-import { FOCUSABLE, trapFocus, useVisualViewport } from "../Dialog/dialogUtils";
-import styles from "./AboutDialog.module.css";
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
+
+import { createPortal } from 'react-dom';
+
+import { FOCUSABLE, trapFocus, useVisualViewport } from '../Dialog/dialogUtils';
+
+import styles from './AboutDialog.module.css';
 
 export interface AboutDialogLink {
   label: string;
@@ -51,11 +54,11 @@ export interface AboutDialogProps {
   links?: AboutDialogLink[];
 }
 
-type AboutTab = "details" | "credits" | "legal";
+type AboutTab = 'details' | 'credits' | 'legal';
 const ABOUT_TAB_LABEL: Record<AboutTab, string> = {
-  details: "Details",
-  credits: "Credits",
-  legal: "Legal",
+  details: 'Details',
+  credits: 'Credits',
+  legal: 'Legal',
 };
 
 /**
@@ -86,37 +89,42 @@ export function AboutDialog({
   const titleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
   const viewportStyle = useVisualViewport();
-  const [activeTab, setActiveTab] = useState<AboutTab>("details");
+  const [activeTab, setActiveTab] = useState<AboutTab>('details');
 
   useEffect(() => {
     if (open) {
       previouslyFocused.current = document.activeElement;
       const el = dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE);
+
       el?.focus();
     } else {
       (previouslyFocused.current as HTMLElement | null)?.focus();
-      setActiveTab("details");
+      setActiveTab('details');
     }
   }, [open]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         e.preventDefault();
         onClose?.();
+
         return;
       }
+
       trapFocus(e, dialogRef);
     },
-    [onClose]
+    [onClose],
   );
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   const hasCredits = !!(developers?.length || designers?.length || artists?.length);
   const hasLegal = !!(copyright || licenseType || licenseText);
   const tabs = (
-    ["details", hasCredits && "credits", hasLegal && "legal"] as (AboutTab | false)[]
+    ['details', hasCredits && 'credits', hasLegal && 'legal'] as (AboutTab | false)[]
   ).filter(Boolean) as AboutTab[];
 
   const node = (
@@ -132,7 +140,9 @@ export function AboutDialog({
       >
         <div className={styles.header}>
           {applicationIcon && <div className={styles.icon}>{applicationIcon}</div>}
-          <div id={titleId} className={styles.appName}>{applicationName}</div>
+          <div id={titleId} className={styles.appName}>
+            {applicationName}
+          </div>
           {version && <div className={styles.version}>{version}</div>}
         </div>
 
@@ -145,7 +155,8 @@ export function AboutDialog({
                 role="tab"
                 aria-selected={activeTab === t}
                 className={[styles.tabBtn, activeTab === t ? styles.tabBtnActive : null]
-                  .filter(Boolean).join(" ")}
+                  .filter(Boolean)
+                  .join(' ')}
                 onClick={() => setActiveTab(t)}
               >
                 {ABOUT_TAB_LABEL[t]}
@@ -155,50 +166,78 @@ export function AboutDialog({
         )}
 
         <div className={styles.tabContent}>
-          {activeTab === "details" && (
+          {activeTab === 'details' && (
             <div className={styles.section}>
               {comments && <p className={styles.comments}>{comments}</p>}
               {(developerName || website || links?.length) && (
                 <dl className={styles.infoList}>
                   {developerName && (
-                    <><dt className={styles.infoLabel}>Developer</dt><dd className={styles.infoValue}>{developerName}</dd></>
+                    <>
+                      <dt className={styles.infoLabel}>Developer</dt>
+                      <dd className={styles.infoValue}>{developerName}</dd>
+                    </>
                   )}
                   {website && (
-                    <><dt className={styles.infoLabel}>Website</dt><dd className={styles.infoValue}>
-                      <a href={website} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                        {websiteLabel ?? website}
-                      </a>
-                    </dd></>
+                    <>
+                      <dt className={styles.infoLabel}>Website</dt>
+                      <dd className={styles.infoValue}>
+                        <a
+                          href={website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.link}
+                        >
+                          {websiteLabel ?? website}
+                        </a>
+                      </dd>
+                    </>
                   )}
                   {links?.map((l) => (
-                    <><dt key={`${l.label}-dt`} className={styles.infoLabel}>{l.label}</dt>
+                    <>
+                      <dt key={`${l.label}-dt`} className={styles.infoLabel}>
+                        {l.label}
+                      </dt>
                       <dd key={`${l.label}-dd`} className={styles.infoValue}>
-                        <a href={l.url} target="_blank" rel="noopener noreferrer" className={styles.link}>{l.url}</a>
-                      </dd></>
+                        <a
+                          href={l.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.link}
+                        >
+                          {l.url}
+                        </a>
+                      </dd>
+                    </>
                   ))}
                 </dl>
               )}
             </div>
           )}
 
-          {activeTab === "credits" && (
+          {activeTab === 'credits' && (
             <div className={styles.section}>
               {[
-                { heading: "Developers", list: developers },
-                { heading: "Designers", list: designers },
-                { heading: "Artists", list: artists },
-              ].filter((g) => g.list?.length).map(({ heading, list }) => (
-                <div key={heading} className={styles.creditGroup}>
-                  <h4 className={styles.creditTitle}>{heading}</h4>
-                  <ul className={styles.creditList}>
-                    {list!.map((name) => <li key={name} className={styles.creditItem}>{name}</li>)}
-                  </ul>
-                </div>
-              ))}
+                { heading: 'Developers', list: developers },
+                { heading: 'Designers', list: designers },
+                { heading: 'Artists', list: artists },
+              ]
+                .filter((g) => g.list?.length)
+                .map(({ heading, list }) => (
+                  <div key={heading} className={styles.creditGroup}>
+                    <h4 className={styles.creditTitle}>{heading}</h4>
+                    <ul className={styles.creditList}>
+                      {list?.map((name) => (
+                        <li key={name} className={styles.creditItem}>
+                          {name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
             </div>
           )}
 
-          {activeTab === "legal" && (
+          {activeTab === 'legal' && (
             <div className={styles.section}>
               {copyright && <p className={styles.copyright}>{copyright}</p>}
               {licenseType && <p className={styles.licenseType}>{licenseType}</p>}
@@ -208,7 +247,11 @@ export function AboutDialog({
         </div>
 
         <div className={styles.footer}>
-          <button type="button" className={[styles.btn, styles.btnDefault].join(" ")} onClick={onClose}>
+          <button
+            type="button"
+            className={[styles.btn, styles.btnDefault].join(' ')}
+            onClick={onClose}
+          >
             Close
           </button>
         </div>
@@ -216,6 +259,9 @@ export function AboutDialog({
     </div>
   );
 
-  if (typeof document === "undefined") return node;
+  if (typeof document === 'undefined') {
+    return node;
+  }
+
   return createPortal(node, document.body);
 }

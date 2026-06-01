@@ -30,7 +30,7 @@
   opacity: 0;
   transform: scale(0.94);
   transition:
-    opacity   var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
     transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
@@ -91,10 +91,18 @@
       0 0 0 1px rgba(0, 0, 0, 0.12);
   }
 
-  .top::after    { border-top-color:    var(--gnome-tooltip-bg-color, #c0bfbc); }
-  .bottom::after { border-bottom-color: var(--gnome-tooltip-bg-color, #c0bfbc); }
-  .left::after   { border-left-color:   var(--gnome-tooltip-bg-color, #c0bfbc); }
-  .right::after  { border-right-color:  var(--gnome-tooltip-bg-color, #c0bfbc); }
+  .top::after {
+    border-top-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+  .bottom::after {
+    border-bottom-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+  .left::after {
+    border-left-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+  .right::after {
+    border-right-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────────────── */

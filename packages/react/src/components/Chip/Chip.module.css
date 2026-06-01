@@ -32,7 +32,7 @@
   cursor: pointer;
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
-    border-color     var(--gnome-duration-fast) var(--gnome-easing-default);
+    border-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
 .selectable:hover:not(:disabled) {
@@ -47,7 +47,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 /* ─── Selected state ────────────────────────────────────────────────────────── */
@@ -149,7 +149,7 @@
     box-shadow:
       0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #242424),
       0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-        var(--gnome-focus-ring-color, #78aeed);
+      var(--gnome-focus-ring-color, #78aeed);
   }
 }
 

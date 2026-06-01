@@ -1,10 +1,11 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Timeline.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Timeline.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type TimelineOrientation = "vertical" | "horizontal";
-export type TimelineVariant = "default" | "dotted" | "none";
+export type TimelineOrientation = 'vertical' | 'horizontal';
+export type TimelineVariant = 'default' | 'dotted' | 'none';
 
 export interface TimelineItem {
   /** Icon rendered inside the timeline node. */
@@ -63,45 +64,35 @@ export interface TimelineProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function Timeline({
   items,
-  orientation = "vertical",
-  variant = "default",
+  orientation = 'vertical',
+  variant = 'default',
   className,
   ...props
 }: TimelineProps) {
-  const horizontal = orientation === "horizontal";
-  const showLine = variant !== "none";
+  const horizontal = orientation === 'horizontal';
+  const showLine = variant !== 'none';
 
   return (
     <div
       role="list"
-      className={[
-        styles.root,
-        horizontal ? styles.horizontal : styles.vertical,
-        className,
-      ]
+      className={[styles.root, horizontal ? styles.horizontal : styles.vertical, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {items.map((item, i) => {
         const isFirst = i === 0;
         const isLast = i === items.length - 1;
 
-        const lineClass = [
-          styles.line,
-          variant === "dotted" ? styles.lineDotted : null,
-        ]
+        const lineClass = [styles.line, variant === 'dotted' ? styles.lineDotted : null]
           .filter(Boolean)
-          .join(" ");
+          .join(' ');
 
         const node = (
           <div
-            className={[
-              styles.node,
-              item.icon ? styles.nodeWithIcon : styles.nodeDot,
-            ]
+            className={[styles.node, item.icon ? styles.nodeWithIcon : styles.nodeDot]
               .filter(Boolean)
-              .join(" ")}
+              .join(' ')}
           >
             {item.icon && (
               <span className={styles.iconWrap} aria-hidden="true">
@@ -130,27 +121,29 @@ export function Timeline({
                 <div
                   className={[
                     styles.line,
-                    variant === "dotted" ? styles.lineDotted : null,
-                    (isFirst || !showLine) ? styles.lineInvisible : null,
-                  ].filter(Boolean).join(" ")}
+                    variant === 'dotted' ? styles.lineDotted : null,
+                    isFirst || !showLine ? styles.lineInvisible : null,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                   aria-hidden="true"
                 />
                 {node}
                 <div
                   className={[
                     styles.line,
-                    variant === "dotted" ? styles.lineDotted : null,
-                    (isLast || !showLine) ? styles.lineInvisible : null,
-                  ].filter(Boolean).join(" ")}
+                    variant === 'dotted' ? styles.lineDotted : null,
+                    isLast || !showLine ? styles.lineInvisible : null,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                   aria-hidden="true"
                 />
               </div>
             ) : (
               <div className={styles.nodeTrack}>
                 {node}
-                {!isLast && showLine && (
-                  <div className={lineClass} aria-hidden="true" />
-                )}
+                {!isLast && showLine && <div className={lineClass} aria-hidden="true" />}
               </div>
             )}
 

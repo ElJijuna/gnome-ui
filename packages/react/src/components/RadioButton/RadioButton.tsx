@@ -1,10 +1,10 @@
-import type { InputHTMLAttributes } from "react";
-import styles from "./RadioButton.module.css";
+import type { InputHTMLAttributes } from 'react';
 
-export interface RadioButtonProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+import styles from './RadioButton.module.css';
+
+export interface RadioButtonProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   /** Accessible label. Required when no visible `<label>` is associated. */
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 /**
@@ -20,7 +20,7 @@ export function RadioButton({ className, ...props }: RadioButtonProps) {
   return (
     <input
       type="radio"
-      className={[styles.radio, className].filter(Boolean).join(" ")}
+      className={[styles.radio, className].filter(Boolean).join(' ')}
       {...props}
     />
   );

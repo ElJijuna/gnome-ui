@@ -1,11 +1,6 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  type ReactNode,
-  type HTMLAttributes,
-} from "react";
-import styles from "./NavigationView.module.css";
+import { createContext, type HTMLAttributes, type ReactNode, useContext, useState } from 'react';
+
+import styles from './NavigationView.module.css';
 
 // ─── Context ─────────────────────────────────────────────────────────────────
 
@@ -19,18 +14,19 @@ interface NavigationContextValue {
   /** Tag of the currently visible page. */
   currentTag: string;
   /** Direction of the last transition (`"forward"` or `"back"`). */
-  direction: "forward" | "back";
+  direction: 'forward' | 'back';
 }
 
 const NavigationContext = createContext<NavigationContextValue>({
-  navigate: () => { },
-  pop: () => { },
+  navigate: () => {},
+  pop: () => {},
   canGoBack: false,
-  currentTag: "",
-  direction: "forward",
+  currentTag: '',
+  direction: 'forward',
 });
 
 /** Access the nearest `NavigationView`'s navigation functions. */
+// eslint-disable-next-line react-refresh/only-export-components
 export function useNavigation() {
   return useContext(NavigationContext);
 }
@@ -49,25 +45,22 @@ export interface NavigationPageProps extends HTMLAttributes<HTMLDivElement> {
  * A single page inside a `NavigationView`.
  * Only visible when its `tag` matches the current page in the stack.
  */
-export function NavigationPage({
-  tag,
-  title,
-  children,
-  className,
-  ...props
-}: NavigationPageProps) {
+export function NavigationPage({ tag, title, children, className, ...props }: NavigationPageProps) {
   const { currentTag, direction } = useContext(NavigationContext);
-  if (currentTag !== tag) return null;
+
+  if (currentTag !== tag) {
+    return null;
+  }
 
   return (
     <div
       className={[
         styles.page,
-        direction === "forward" ? styles.enterForward : styles.enterBack,
+        direction === 'forward' ? styles.enterForward : styles.enterBack,
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       <div className={styles.pageHeader}>
@@ -117,25 +110,25 @@ export function NavigationView({
 
   const currentTag = stack[stack.length - 1];
   const canGoBack = stack.length > 1;
-  const [direction, setDirection] = useState<"forward" | "back">("forward");
+  const [direction, setDirection] = useState<'forward' | 'back'>('forward');
 
   const navigate = (tag: string) => {
-    setDirection("forward");
+    setDirection('forward');
     setStack((s) => [...s, tag]);
   };
 
   const pop = () => {
-    if (stack.length <= 1) return;
-    setDirection("back");
+    if (stack.length <= 1) {
+      return;
+    }
+
+    setDirection('back');
     setStack((s) => s.slice(0, -1));
   };
 
   return (
     <NavigationContext.Provider value={{ navigate, pop, canGoBack, currentTag, direction }}>
-      <div
-        className={[styles.view, className].filter(Boolean).join(" ")}
-        {...props}
-      >
+      <div className={[styles.view, className].filter(Boolean).join(' ')} {...props}>
         {children}
       </div>
     </NavigationContext.Provider>

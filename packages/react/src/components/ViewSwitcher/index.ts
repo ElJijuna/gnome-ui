@@ -1,5 +1,4 @@
-export { ViewSwitcher } from "./ViewSwitcher";
-export type { ViewSwitcherProps } from "./ViewSwitcher";
-
-export { ViewSwitcherItem } from "./ViewSwitcherItem";
-export type { ViewSwitcherItemProps } from "./ViewSwitcherItem";
+export type { ViewSwitcherProps } from './ViewSwitcher';
+export { ViewSwitcher } from './ViewSwitcher';
+export type { ViewSwitcherItemProps } from './ViewSwitcherItem';
+export { ViewSwitcherItem } from './ViewSwitcherItem';

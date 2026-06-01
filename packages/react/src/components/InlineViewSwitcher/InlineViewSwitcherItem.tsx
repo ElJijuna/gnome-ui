@@ -1,11 +1,12 @@
-import type { ButtonHTMLAttributes } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { useInlineViewSwitcher } from "./InlineViewSwitcher";
-import styles from "./InlineViewSwitcher.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import type { ButtonHTMLAttributes } from 'react';
 
-export interface InlineViewSwitcherItemProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { Icon } from '../Icon';
+
+import { useInlineViewSwitcher } from './InlineViewSwitcher';
+import styles from './InlineViewSwitcher.module.css';
+
+export interface InlineViewSwitcherItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** String identifier — used as the switcher's `value` when this item is active. */
   name: string;
   /** Visible label. */
@@ -47,7 +48,7 @@ export function InlineViewSwitcherItem({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {icon && (

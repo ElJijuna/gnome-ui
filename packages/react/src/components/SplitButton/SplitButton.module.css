@@ -41,7 +41,8 @@
 .toggle:focus-visible {
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
-    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color);
+    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width))
+    var(--gnome-focus-ring-color);
   position: relative;
   z-index: 1;
 }
@@ -206,7 +207,9 @@
   .toggle:focus-visible {
     box-shadow:
       0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
-      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color),
-      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width) + 1px) var(--gnome-window-bg-color);
+      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width))
+      var(--gnome-focus-ring-color),
+      0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width) + 1px)
+      var(--gnome-window-bg-color);
   }
 }

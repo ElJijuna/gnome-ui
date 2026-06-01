@@ -1,19 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ToolbarView } from "./ToolbarView";
-import { HeaderBar } from "../HeaderBar";
-import { Toolbar } from "../Toolbar";
-import { Button } from "../Button";
-import { Text } from "../Text";
-import { BoxedList } from "../BoxedList";
-import { ActionRow } from "../ActionRow";
-import { WindowTitle } from "../WindowTitle";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { HeaderBar } from '../HeaderBar';
+import { Text } from '../Text';
+import { Toolbar } from '../Toolbar';
+import { WindowTitle } from '../WindowTitle';
+
+import { ToolbarView } from './ToolbarView';
 
 const meta: Meta<typeof ToolbarView> = {
-  title: "Components/ToolbarView",
+  title: 'Components/ToolbarView',
   component: ToolbarView,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -44,9 +46,7 @@ export const Default: Story = {
   render: () => (
     <div style={{ height: 400 }}>
       <ToolbarView
-        topBar={
-          <HeaderBar title={<WindowTitle title="Files" subtitle="/home/user/Documents" />} />
-        }
+        topBar={<HeaderBar title={<WindowTitle title="Files" subtitle="/home/user/Documents" />} />}
       >
         <div style={{ padding: 16 }}>
           <BoxedList>
@@ -61,7 +61,8 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Scrollable content with a fixed `HeaderBar` at the top. Resize the preview to see scrolling behaviour.",
+        story:
+          'Scrollable content with a fixed `HeaderBar` at the top. Resize the preview to see scrolling behaviour.',
       },
     },
   },
@@ -78,7 +79,9 @@ export const TopAndBottomBars: Story = {
           <Toolbar>
             <Button variant="flat">Format</Button>
             <Button variant="flat">Insert</Button>
-            <Button variant="suggested" style={{ marginLeft: "auto" }}>Done</Button>
+            <Button variant="suggested" style={{ marginLeft: 'auto' }}>
+              Done
+            </Button>
           </Toolbar>
         }
       >
@@ -86,7 +89,8 @@ export const TopAndBottomBars: Story = {
           <Text variant="body">
             {Array.from({ length: 8 }, (_, i) => (
               <p key={i} style={{ marginBottom: 12 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
               </p>
             ))}
           </Text>
@@ -98,7 +102,8 @@ export const TopAndBottomBars: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Fixed `HeaderBar` at the top and an action `Toolbar` pinned to the bottom, with scrollable content in between.",
+        story:
+          'Fixed `HeaderBar` at the top and an action `Toolbar` pinned to the bottom, with scrollable content in between.',
       },
     },
   },
@@ -111,7 +116,7 @@ export const BottomBarOnly: Story = {
     <div style={{ height: 300 }}>
       <ToolbarView
         bottomBar={
-          <Toolbar style={{ justifyContent: "center", gap: 8 }}>
+          <Toolbar style={{ justifyContent: 'center', gap: 8 }}>
             <Button variant="flat">Cancel</Button>
             <Button variant="suggested">Apply</Button>
           </Toolbar>
@@ -131,7 +136,7 @@ export const BottomBarOnly: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Only a bottom action bar — no top bar. The content fills the remaining height.",
+        story: 'Only a bottom action bar — no top bar. The content fills the remaining height.',
       },
     },
   },

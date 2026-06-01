@@ -1,2 +1,2 @@
-export { RadialBarChart } from "./RadialBarChart";
-export type { RadialBarChartProps, RadialBarChartDataItem } from "./RadialBarChart";
+export type { RadialBarChartDataItem, RadialBarChartProps } from './RadialBarChart';
+export { RadialBarChart } from './RadialBarChart';

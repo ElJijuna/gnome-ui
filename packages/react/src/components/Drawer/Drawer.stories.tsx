@@ -1,15 +1,17 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Drawer } from "./Drawer";
-import { ActionRow } from "../ActionRow";
-import { BoxedList } from "../BoxedList";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { Drawer } from './Drawer';
 
 const meta: Meta<typeof Drawer> = {
-  title: "Components/Drawer",
+  title: 'Components/Drawer',
   component: Drawer,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -22,17 +24,17 @@ left or right, \`size\` for classic or wide widths, and pass the body through
     },
   },
   argTypes: {
-    open: { control: "boolean" },
-    side: { control: "inline-radio", options: ["left", "right"] },
-    size: { control: "inline-radio", options: ["classic", "wide"] },
-    title: { control: "text" },
-    closeOnBackdrop: { control: "boolean" },
+    open: { control: 'boolean' },
+    side: { control: 'inline-radio', options: ['left', 'right'] },
+    size: { control: 'inline-radio', options: ['classic', 'wide'] },
+    title: { control: 'text' },
+    closeOnBackdrop: { control: 'boolean' },
   },
   args: {
     open: false,
-    side: "right",
-    size: "classic",
-    title: "Details",
+    side: 'right',
+    size: 'classic',
+    title: 'Details',
     closeOnBackdrop: true,
   },
 };

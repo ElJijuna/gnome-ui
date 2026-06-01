@@ -1,5 +1,6 @@
-import type { AnchorHTMLAttributes, ReactNode } from "react";
-import styles from "./Link.module.css";
+import type { AnchorHTMLAttributes, ReactNode } from 'react';
+
+import styles from './Link.module.css';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -18,21 +19,14 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/controls/links.html
  */
-export function Link({
-  external = false,
-  children,
-  className,
-  target,
-  rel,
-  ...props
-}: LinkProps) {
-  const isExternal = external || target === "_blank";
+export function Link({ external = false, children, className, target, rel, ...props }: LinkProps) {
+  const isExternal = external || target === '_blank';
 
   return (
     <a
-      className={[styles.link, className].filter(Boolean).join(" ")}
-      target={isExternal ? "_blank" : target}
-      rel={isExternal ? "noopener noreferrer" : rel}
+      className={[styles.link, className].filter(Boolean).join(' ')}
+      target={isExternal ? '_blank' : target}
+      rel={isExternal ? 'noopener noreferrer' : rel}
       {...props}
     >
       {children}

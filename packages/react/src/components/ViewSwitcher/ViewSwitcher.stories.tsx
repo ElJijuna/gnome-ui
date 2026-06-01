@@ -1,16 +1,18 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { GoHome, Search, Star, MediaPlay } from "@gnome-ui/icons";
-import { ViewSwitcher } from "./ViewSwitcher";
-import { ViewSwitcherItem } from "./ViewSwitcherItem";
-import { HeaderBar } from "../HeaderBar";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import { GoHome, MediaPlay, Search, Star } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Button } from '../Button';
+import { HeaderBar } from '../HeaderBar';
+import { Text } from '../Text';
+
+import { ViewSwitcher } from './ViewSwitcher';
+import { ViewSwitcherItem } from './ViewSwitcherItem';
 
 const meta: Meta<typeof ViewSwitcher> = {
-  title: "Components/ViewSwitcher",
+  title: 'Components/ViewSwitcher',
   component: ViewSwitcher,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -40,10 +42,11 @@ type Story = StoryObj<typeof ViewSwitcher>;
 
 export const Default: Story = {
   render: function DefaultStory() {
-    const [view, setView] = useState("list");
+    const [view, setView] = useState('list');
+
     return (
       <ViewSwitcher aria-label="View mode">
-        {["List", "Grid", "Board"].map((v) => (
+        {['List', 'Grid', 'Board'].map((v) => (
           <ViewSwitcherItem
             key={v}
             label={v}
@@ -62,11 +65,12 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: function WithIconsStory() {
     const views = [
-      { id: "home",   label: "Home",   icon: GoHome },
-      { id: "music",  label: "Music",  icon: MediaPlay },
-      { id: "search", label: "Search", icon: Search },
+      { id: 'home', label: 'Home', icon: GoHome },
+      { id: 'music', label: 'Music', icon: MediaPlay },
+      { id: 'search', label: 'Search', icon: Search },
     ];
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState('home');
+
     return (
       <ViewSwitcher aria-label="Section">
         {views.map(({ id, label, icon }) => (
@@ -88,11 +92,12 @@ export const WithIcons: Story = {
 
 export const TwoOptions: Story = {
   render: function TwoStory() {
-    const [view, setView] = useState("day");
+    const [view, setView] = useState('day');
+
     return (
       <ViewSwitcher aria-label="Calendar view">
-        <ViewSwitcherItem label="Day"  active={view === "day"}  onClick={() => setView("day")} />
-        <ViewSwitcherItem label="Week" active={view === "week"} onClick={() => setView("week")} />
+        <ViewSwitcherItem label="Day" active={view === 'day'} onClick={() => setView('day')} />
+        <ViewSwitcherItem label="Week" active={view === 'week'} onClick={() => setView('week')} />
       </ViewSwitcher>
     );
   },
@@ -104,18 +109,18 @@ export const TwoOptions: Story = {
 export const InHeaderBar: Story = {
   render: function InHeaderBarStory() {
     const views = [
-      { id: "inbox",  label: "Inbox",   icon: GoHome },
-      { id: "sent",   label: "Sent",    icon: Star },
-      { id: "search", label: "Search",  icon: Search },
+      { id: 'inbox', label: 'Inbox', icon: GoHome },
+      { id: 'sent', label: 'Sent', icon: Star },
+      { id: 'search', label: 'Search', icon: Search },
     ];
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
 
     return (
       <div
         style={{
-          border: "1px solid rgba(0,0,0,0.1)",
+          border: '1px solid rgba(0,0,0,0.1)',
           borderRadius: 12,
-          overflow: "hidden",
+          overflow: 'hidden',
           maxWidth: 560,
         }}
       >
@@ -133,10 +138,14 @@ export const InHeaderBar: Story = {
               ))}
             </ViewSwitcher>
           }
-          end={<Button variant="flat" aria-label="Settings"><span style={{ fontSize: 16 }}>⚙</span></Button>}
+          end={
+            <Button variant="flat" aria-label="Settings">
+              <span style={{ fontSize: 16 }}>⚙</span>
+            </Button>
+          }
         />
         <div style={{ padding: 24 }}>
-          <Text variant="title-4">{views.find(v => v.id === active)?.label}</Text>
+          <Text variant="title-4">{views.find((v) => v.id === active)?.label}</Text>
           <Text variant="body" color="dim" style={{ marginTop: 8 }}>
             Content for the {active} view.
           </Text>
@@ -145,12 +154,12 @@ export const InHeaderBar: Story = {
     );
   },
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     controls: { disable: true },
     docs: {
       description: {
         story:
-          "The canonical GNOME pattern: pass `ViewSwitcher` as the `title` of `HeaderBar`. It is centered automatically by the 3-column grid layout.",
+          'The canonical GNOME pattern: pass `ViewSwitcher` as the `title` of `HeaderBar`. It is centered automatically by the 3-column grid layout.',
       },
     },
   },
@@ -160,19 +169,28 @@ export const InHeaderBar: Story = {
 
 export const WithDisabledItem: Story = {
   render: function DisabledStory() {
-    const [view, setView] = useState("overview");
+    const [view, setView] = useState('overview');
+
     return (
       <ViewSwitcher aria-label="Dashboard">
-        <ViewSwitcherItem label="Overview"  active={view === "overview"}  onClick={() => setView("overview")} />
-        <ViewSwitcherItem label="Analytics" active={view === "analytics"} onClick={() => setView("analytics")} />
-        <ViewSwitcherItem label="Reports"   disabled />
+        <ViewSwitcherItem
+          label="Overview"
+          active={view === 'overview'}
+          onClick={() => setView('overview')}
+        />
+        <ViewSwitcherItem
+          label="Analytics"
+          active={view === 'analytics'}
+          onClick={() => setView('analytics')}
+        />
+        <ViewSwitcherItem label="Reports" disabled />
       </ViewSwitcher>
     );
   },
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Disabled items are skipped by keyboard navigation." },
+      description: { story: 'Disabled items are skipped by keyboard navigation.' },
     },
   },
 };

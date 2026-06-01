@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Frame.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Frame.module.css';
 
 export interface FrameProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -16,10 +17,7 @@ export interface FrameProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function Frame({ children, className, ...props }: FrameProps) {
   return (
-    <div
-      className={[styles.frame, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.frame, className].filter(Boolean).join(' ')} {...props}>
       {children}
     </div>
   );

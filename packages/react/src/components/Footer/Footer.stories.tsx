@@ -1,14 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Footer } from "./Footer";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { Footer } from './Footer';
 
 const meta: Meta<typeof Footer> = {
-  title: "Components/Footer",
+  title: 'Components/Footer',
   component: Footer,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -27,7 +29,7 @@ Mirrors the \`HeaderBar\` pattern at the bottom of a view or window.
     },
   },
   argTypes: {
-    flat: { control: "boolean" },
+    flat: { control: 'boolean' },
   },
   args: {
     flat: false,
@@ -71,7 +73,7 @@ export const WithCenter: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Use `children` for centered content alongside the leading/trailing slots.",
+        story: 'Use `children` for centered content alongside the leading/trailing slots.',
       },
     },
   },
@@ -84,8 +86,12 @@ export const WithActions: Story = {
     start: <Text variant="caption">© 2024 GNOME Foundation</Text>,
     end: (
       <>
-        <Button variant="flat" size="sm">Help</Button>
-        <Button variant="flat" size="sm">About</Button>
+        <Button variant="flat" size="sm">
+          Help
+        </Button>
+        <Button variant="flat" size="sm">
+          About
+        </Button>
       </>
     ),
   },
@@ -102,7 +108,8 @@ export const Flat: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Use `flat` to remove the top border when the footer is visually separated by another element.",
+        story:
+          'Use `flat` to remove the top border when the footer is visually separated by another element.',
       },
     },
   },
@@ -114,13 +121,13 @@ export const InLayout: Story = {
   render: () => (
     <div
       style={{
-        border: "1px solid rgba(0,0,0,0.1)",
+        border: '1px solid rgba(0,0,0,0.1)',
         borderRadius: 12,
-        overflow: "hidden",
+        overflow: 'hidden',
         maxWidth: 480,
       }}
     >
-      <div style={{ padding: 24, fontFamily: "sans-serif", opacity: 0.4, minHeight: 120 }}>
+      <div style={{ padding: 24, fontFamily: 'sans-serif', opacity: 0.4, minHeight: 120 }}>
         View content area
       </div>
       <Footer
@@ -138,7 +145,7 @@ export const InLayout: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "The footer sits at the bottom of a view, spanning its full width.",
+        story: 'The footer sits at the bottom of a view, spanning its full width.',
       },
     },
   },

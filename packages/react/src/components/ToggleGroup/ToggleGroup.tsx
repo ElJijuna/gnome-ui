@@ -1,12 +1,13 @@
 import {
   createContext,
-  useContext,
-  useRef,
   type HTMLAttributes,
   type KeyboardEvent,
   type ReactNode,
-} from "react";
-import styles from "./ToggleGroup.module.css";
+  useContext,
+  useRef,
+} from 'react';
+
+import styles from './ToggleGroup.module.css';
 
 // ─── Context ──────────────────────────────────────────────────────────────────
 
@@ -17,9 +18,14 @@ interface ToggleGroupContextValue {
 
 const ToggleGroupContext = createContext<ToggleGroupContextValue | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useToggleGroup() {
   const ctx = useContext(ToggleGroupContext);
-  if (!ctx) throw new Error("ToggleGroupItem must be used inside ToggleGroup");
+
+  if (!ctx) {
+    throw new Error('ToggleGroupItem must be used inside ToggleGroup');
+  }
+
   return ctx;
 }
 
@@ -31,7 +37,7 @@ export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Called with the new value when a toggle is selected. */
   onValueChange: (value: string) => void;
   /** Accessible label for the group. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   children?: ReactNode;
 }
 
@@ -50,7 +56,7 @@ export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
 export function ToggleGroup({
   value,
   onValueChange,
-  "aria-label": ariaLabel = "Options",
+  'aria-label': ariaLabel = 'Options',
   children,
   className,
   ...props
@@ -59,21 +65,27 @@ export function ToggleGroup({
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     const items = Array.from(
-      groupRef.current?.querySelectorAll<HTMLButtonElement>(
-        "[role=radio]:not(:disabled)",
-      ) ?? [],
+      groupRef.current?.querySelectorAll<HTMLButtonElement>('[role=radio]:not(:disabled)') ?? [],
     );
-    const idx = items.findIndex((el) => el === document.activeElement);
-    if (idx === -1) return;
+    const activeElement = document.activeElement;
+    const idx = activeElement instanceof HTMLButtonElement ? items.indexOf(activeElement) : -1;
+
+    if (idx === -1) {
+      return;
+    }
 
     let next = idx;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown")
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       next = (idx + 1) % items.length;
-    else if (e.key === "ArrowLeft" || e.key === "ArrowUp")
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       next = (idx - 1 + items.length) % items.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = items.length - 1;
-    else return;
+    } else if (e.key === 'Home') {
+      next = 0;
+    } else if (e.key === 'End') {
+      next = items.length - 1;
+    } else {
+      return;
+    }
 
     e.preventDefault();
     items[next].focus();
@@ -87,7 +99,7 @@ export function ToggleGroup({
         role="radiogroup"
         aria-label={ariaLabel}
         onKeyDown={handleKeyDown}
-        className={[styles.group, className].filter(Boolean).join(" ")}
+        className={[styles.group, className].filter(Boolean).join(' ')}
         {...props}
       >
         {children}

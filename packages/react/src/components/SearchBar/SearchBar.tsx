@@ -1,26 +1,27 @@
+import { Close, Search } from '@gnome-ui/icons';
 import {
-  useRef,
-  useEffect,
-  useCallback,
-  useId,
-  useState,
-  type KeyboardEvent,
   type InputHTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
-} from "react";
-import { createPortal } from "react-dom";
-import { Search, Close } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { Spinner } from "../Spinner";
-import styles from "./SearchBar.module.css";
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
+
+import { Icon } from '../Icon';
+import { Spinner } from '../Spinner';
+
+import styles from './SearchBar.module.css';
 
 export interface Suggestion {
   id: string;
   label: string;
 }
 
-export interface SearchBarProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface SearchBarProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   /**
    * Whether the search bar is visible/expanded.
    * When `false` the bar collapses to zero height and is hidden from AT.
@@ -78,7 +79,7 @@ export function SearchBar({
   children,
   value,
   onChange,
-  placeholder = "Search…",
+  placeholder = 'Search…',
   disabled,
   inline = false,
   className,
@@ -86,29 +87,32 @@ export function SearchBar({
   onSuggestionSelect,
   loadingSuggestions = false,
   renderSuggestion,
-  suggestionsLabel = "Suggestions",
+  suggestionsLabel = 'Suggestions',
   ...props
 }: SearchBarProps) {
-  const inputRef   = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
 
-  const listboxId      = useId();
+  const listboxId = useId();
   const optionIdPrefix = useId();
 
-  const [activeIndex,  setActiveIndex]  = useState(-1);
-  const [dropdownPos,  setDropdownPos]  = useState<DropdownPos | null>(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [dropdownPos, setDropdownPos] = useState<DropdownPos | null>(null);
 
   const hasSuggestions = (suggestions?.length ?? 0) > 0;
-  const showDropdown   = open && (loadingSuggestions || hasSuggestions);
+  const showDropdown = open && (loadingSuggestions || hasSuggestions);
 
   // Reset active index whenever the suggestion list changes
-  useEffect(() => { setActiveIndex(-1); }, [suggestions]);
+  useEffect(() => {
+    setActiveIndex(-1);
+  }, []);
 
   // Auto-focus when opening
   useEffect(() => {
     if (open) {
       const id = requestAnimationFrame(() => inputRef.current?.focus());
+
       return () => cancelAnimationFrame(id);
     }
   }, [open]);
@@ -117,120 +121,132 @@ export function SearchBar({
   useEffect(() => {
     if (!showDropdown || !wrapperRef.current) {
       setDropdownPos(null);
+
       return;
     }
+
     function updatePos() {
-      if (!wrapperRef.current) return;
+      if (!wrapperRef.current) {
+        return;
+      }
+
       const r = wrapperRef.current.getBoundingClientRect();
+
       setDropdownPos({ top: r.bottom, left: r.left, width: r.width });
     }
     updatePos();
-    window.addEventListener("scroll", updatePos, { passive: true, capture: true });
-    window.addEventListener("resize", updatePos, { passive: true });
+    window.addEventListener('scroll', updatePos, { passive: true, capture: true });
+    window.addEventListener('resize', updatePos, { passive: true });
+
     return () => {
-      window.removeEventListener("scroll", updatePos, { capture: true });
-      window.removeEventListener("resize", updatePos);
+      window.removeEventListener('scroll', updatePos, { capture: true });
+      window.removeEventListener('resize', updatePos);
     };
   }, [showDropdown]);
 
   // Scroll the active option into view
   useEffect(() => {
-    if (activeIndex < 0 || !listboxRef.current) return;
-    (listboxRef.current.children[activeIndex] as HTMLElement | undefined)
-      ?.scrollIntoView({ block: "nearest" });
+    if (activeIndex < 0 || !listboxRef.current) {
+      return;
+    }
+
+    (listboxRef.current.children[activeIndex] as HTMLElement | undefined)?.scrollIntoView({
+      block: 'nearest',
+    });
   }, [activeIndex]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (showDropdown && hasSuggestions && suggestions) {
-        if (e.key === "ArrowDown") {
+        if (e.key === 'ArrowDown') {
           e.preventDefault();
           setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
+
           return;
         }
-        if (e.key === "ArrowUp") {
+
+        if (e.key === 'ArrowUp') {
           e.preventDefault();
           setActiveIndex((i) => Math.max(i - 1, -1));
+
           return;
         }
-        if (e.key === "Enter" && activeIndex >= 0) {
+
+        if (e.key === 'Enter' && activeIndex >= 0) {
           e.preventDefault();
           onSuggestionSelect?.(suggestions[activeIndex]);
+
           return;
         }
       }
-      if (e.key === "Escape") {
+
+      if (e.key === 'Escape') {
         e.preventDefault();
         onClose?.();
       }
+
       props.onKeyDown?.(e);
     },
-    [onClose, props, showDropdown, hasSuggestions, suggestions, activeIndex, onSuggestionSelect]
+    [onClose, props, showDropdown, hasSuggestions, suggestions, activeIndex, onSuggestionSelect],
   );
 
-  const hasValue       = value !== undefined && value !== "";
-  const activeOptionId = activeIndex >= 0 && suggestions?.[activeIndex]
-    ? `${optionIdPrefix}-${suggestions[activeIndex].id}`
-    : undefined;
+  const hasValue = value !== undefined && value !== '';
+  const activeOptionId =
+    activeIndex >= 0 && suggestions?.[activeIndex]
+      ? `${optionIdPrefix}-${suggestions[activeIndex].id}`
+      : undefined;
 
-  const dropdown = showDropdown && dropdownPos
-    ? createPortal(
-        <ul
-          ref={listboxRef}
-          role="listbox"
-          aria-label={suggestionsLabel}
-          id={listboxId}
-          className={styles.suggestionsPanel}
-          style={{ top: dropdownPos.top, left: dropdownPos.left, width: dropdownPos.width }}
-          onMouseDown={(e) => e.preventDefault()} // keep focus on input
-        >
-          {loadingSuggestions && (
-            <li role="presentation" className={styles.suggestionsLoading}>
-              <Spinner size="sm" label="Loading suggestions…" />
-            </li>
-          )}
-          {!loadingSuggestions &&
-            suggestions?.map((item, index) => (
-              <li
-                key={item.id}
-                id={`${optionIdPrefix}-${item.id}`}
-                role="option"
-                aria-selected={index === activeIndex}
-                className={[
-                  styles.suggestionItem,
-                  index === activeIndex ? styles.suggestionItemActive : null,
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(-1)}
-                onClick={() => onSuggestionSelect?.(item)}
-              >
-                {renderSuggestion ? renderSuggestion(item) : item.label}
+  const dropdown =
+    showDropdown && dropdownPos
+      ? createPortal(
+          <ul
+            ref={listboxRef}
+            aria-label={suggestionsLabel}
+            id={listboxId}
+            className={styles.suggestionsPanel}
+            style={{ top: dropdownPos.top, left: dropdownPos.left, width: dropdownPos.width }}
+            onMouseDown={(e) => e.preventDefault()} // keep focus on input
+          >
+            {loadingSuggestions && (
+              <li role="presentation" className={styles.suggestionsLoading}>
+                <Spinner size="sm" label="Loading suggestions…" />
               </li>
-            ))}
-        </ul>,
-        document.body
-      )
-    : null;
+            )}
+            {!loadingSuggestions &&
+              suggestions?.map((item, index) => (
+                <li
+                  key={item.id}
+                  id={`${optionIdPrefix}-${item.id}`}
+                  aria-selected={index === activeIndex}
+                  className={[
+                    styles.suggestionItem,
+                    index === activeIndex ? styles.suggestionItemActive : null,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(-1)}
+                  onClick={() => onSuggestionSelect?.(item)}
+                >
+                  {renderSuggestion ? renderSuggestion(item) : item.label}
+                </li>
+              ))}
+          </ul>,
+          document.body,
+        )
+      : null;
 
   return (
     <>
       <div
         ref={wrapperRef}
-        className={[styles.wrapper, open ? styles.open : null, className]
-          .filter(Boolean)
-          .join(" ")}
+        className={[styles.wrapper, open ? styles.open : null, className].filter(Boolean).join(' ')}
         aria-hidden={!open}
       >
         <div
-          className={[
-            styles.bar,
-            inline   ? styles.inline   : null,
-            disabled ? styles.disabled : null,
-          ]
+          className={[styles.bar, inline ? styles.inline : null, disabled ? styles.disabled : null]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
         >
           <span className={styles.searchIcon} aria-hidden>
             <Icon icon={Search} size="md" />
@@ -274,7 +290,7 @@ export function SearchBar({
         {children && <div className={styles.filterRow}>{children}</div>}
       </div>
 
-      {typeof document !== "undefined" && dropdown}
+      {typeof document !== 'undefined' && dropdown}
     </>
   );
 }

@@ -1,9 +1,10 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
-import styles from "./Button.module.css";
+import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from 'react';
 
-export type ButtonVariant = "default" | "suggested" | "destructive" | "flat" | "raised";
-export type ButtonSize = "sm" | "md" | "lg";
-export type ButtonShape = "default" | "pill" | "circular";
+import styles from './Button.module.css';
+
+export type ButtonVariant = 'default' | 'suggested' | 'destructive' | 'flat' | 'raised';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonShape = 'default' | 'pill' | 'circular';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style of the button. Follows GNOME HIG button types. */
@@ -35,27 +36,30 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/controls/buttons.html
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({
-  variant = "default",
-  size = "md",
-  shape = "default",
-  osd = false,
-  leadingIcon,
-  trailingIcon,
-  children,
-  className,
-  ...props
-}: ButtonProps, ref) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    variant = 'default',
+    size = 'md',
+    shape = 'default',
+    osd = false,
+    leadingIcon,
+    trailingIcon,
+    children,
+    className,
+    ...props
+  }: ButtonProps,
+  ref,
+) {
   const classes = [
     styles.button,
     styles[variant],
-    size !== "md" ? styles[size] : null,
-    shape !== "default" ? styles[shape] : null,
+    size !== 'md' ? styles[size] : null,
+    shape !== 'default' ? styles[shape] : null,
     osd ? styles.osd : null,
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
     <button ref={ref} className={classes} {...props}>

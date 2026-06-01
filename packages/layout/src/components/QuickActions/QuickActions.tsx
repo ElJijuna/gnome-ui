@@ -1,14 +1,15 @@
+import { Text } from '@gnome-ui/react';
 import {
-  useMemo,
-  useRef,
   type ButtonHTMLAttributes,
   type CSSProperties,
   type HTMLAttributes,
   type KeyboardEvent,
   type ReactNode,
-} from "react";
-import { Text } from "@gnome-ui/react";
-import styles from "./QuickActions.module.css";
+  useMemo,
+  useRef,
+} from 'react';
+
+import styles from './QuickActions.module.css';
 
 export interface QuickAction {
   id: string;
@@ -25,12 +26,10 @@ export interface QuickActionsProps extends HTMLAttributes<HTMLDivElement> {
   columns?: number;
 }
 
-function findNextEnabledIndex(
-  actions: QuickAction[],
-  currentIndex: number,
-  direction: 1 | -1,
-) {
-  if (actions.every((action) => action.disabled)) return currentIndex;
+function findNextEnabledIndex(actions: QuickAction[], currentIndex: number, direction: 1 | -1) {
+  if (actions.every((action) => action.disabled)) {
+    return currentIndex;
+  }
 
   let nextIndex = currentIndex;
   do {
@@ -42,7 +41,9 @@ function findNextEnabledIndex(
 
 function findLastEnabledIndex(actions: QuickAction[]) {
   for (let index = actions.length - 1; index >= 0; index -= 1) {
-    if (!actions[index]?.disabled) return index;
+    if (!actions[index]?.disabled) {
+      return index;
+    }
   }
 
   return -1;
@@ -66,47 +67,47 @@ export function QuickActions({
   };
 
   const handleKeyDown =
-    (index: number): ButtonHTMLAttributes<HTMLButtonElement>["onKeyDown"] =>
-      (event: KeyboardEvent<HTMLButtonElement>) => {
-        if (actions[index]?.disabled) return;
+    (index: number): ButtonHTMLAttributes<HTMLButtonElement>['onKeyDown'] =>
+    (event: KeyboardEvent<HTMLButtonElement>) => {
+      if (actions[index]?.disabled) {
+        return;
+      }
 
-        let nextIndex: number | null = null;
+      let nextIndex: number | null = null;
 
-        switch (event.key) {
-          case "ArrowRight":
-          case "ArrowDown":
-            nextIndex = findNextEnabledIndex(actions, index, 1);
-            break;
-          case "ArrowLeft":
-          case "ArrowUp":
-            nextIndex = findNextEnabledIndex(actions, index, -1);
-            break;
-          case "Home":
-            nextIndex = firstEnabledIndex;
-            break;
-          case "End":
-            nextIndex = findLastEnabledIndex(actions);
-            break;
-          default:
-            return;
-        }
+      switch (event.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+          nextIndex = findNextEnabledIndex(actions, index, 1);
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          nextIndex = findNextEnabledIndex(actions, index, -1);
+          break;
+        case 'Home':
+          nextIndex = firstEnabledIndex;
+          break;
+        case 'End':
+          nextIndex = findLastEnabledIndex(actions);
+          break;
+        default:
+          return;
+      }
 
-        if (nextIndex !== null && nextIndex >= 0) {
-          event.preventDefault();
-          focusAction(nextIndex);
-        }
-      };
+      if (nextIndex !== null && nextIndex >= 0) {
+        event.preventDefault();
+        focusAction(nextIndex);
+      }
+    };
 
   const rootStyle = {
-    "--quick-actions-columns": columns,
+    '--quick-actions-columns': columns,
     ...style,
   } as CSSProperties;
 
   return (
     <div
-      className={[styles.root, className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.root, className].filter(Boolean).join(' ')}
       style={rootStyle}
       role="group"
       {...props}
@@ -125,9 +126,7 @@ export function QuickActions({
           onKeyDown={handleKeyDown(index)}
         >
           <span aria-hidden="true">{action.icon}</span>
-          <Text variant="body">
-            {action.label}
-          </Text>
+          <Text variant="body">{action.label}</Text>
         </button>
       ))}
     </div>

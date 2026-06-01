@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./ViewSwitcherBar.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './ViewSwitcherBar.module.css';
 
 export interface ViewSwitcherBarProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -44,13 +45,15 @@ export function ViewSwitcherBar({
   className,
   ...props
 }: ViewSwitcherBarProps) {
-  if (!reveal) return null;
+  if (!reveal) {
+    return null;
+  }
 
   return (
     <div
       role="navigation"
       aria-label="Bottom navigation"
-      className={[styles.bar, className].filter(Boolean).join(" ")}
+      className={[styles.bar, className].filter(Boolean).join(' ')}
       {...props}
     >
       {children}

@@ -61,16 +61,24 @@
   left: 0;
 }
 
-.narrow.start .sidebarOpen  { transform: translateX(0); }
-.narrow.start .sidebarClosed { transform: translateX(-100%); }
+.narrow.start .sidebarOpen {
+  transform: translateX(0);
+}
+.narrow.start .sidebarClosed {
+  transform: translateX(-100%);
+}
 
 /* End (right) sidebar */
 .narrow.end .sidebar {
   right: 0;
 }
 
-.narrow.end .sidebarOpen  { transform: translateX(0); }
-.narrow.end .sidebarClosed { transform: translateX(100%); }
+.narrow.end .sidebarOpen {
+  transform: translateX(0);
+}
+.narrow.end .sidebarClosed {
+  transform: translateX(100%);
+}
 
 /* ─── Backdrop ───────────────────────────────────────────────────────────────── */
 

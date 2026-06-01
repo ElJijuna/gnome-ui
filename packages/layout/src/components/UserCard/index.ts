@@ -1,2 +1,2 @@
-export { UserCard } from "./UserCard";
-export type { UserCardProps, UserCardAction } from "./UserCard";
+export type { UserCardAction, UserCardProps } from './UserCard';
+export { UserCard } from './UserCard';

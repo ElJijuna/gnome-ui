@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Spacer } from "./Spacer";
-import { Toolbar } from "./Toolbar";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+
+import { Spacer } from './Spacer';
+import { Toolbar } from './Toolbar';
 
 const meta: Meta<typeof Spacer> = {
-  title: "Components/Spacer",
+  title: 'Components/Spacer',
   component: Spacer,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -32,7 +34,7 @@ Mirrors \`GtkSeparator\` with the \`.spacer\` style class.
       <div
         style={{
           maxWidth: 600,
-          background: "var(--gnome-headerbar-bg-color, #ebebeb)",
+          background: 'var(--gnome-headerbar-bg-color, #ebebeb)',
           borderRadius: 8,
         }}
       >
@@ -59,8 +61,7 @@ export const PushEnd: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story:
-          "A single `<Spacer />` pushes everything after it to the trailing edge.",
+        story: 'A single `<Spacer />` pushes everything after it to the trailing edge.',
       },
     },
   },
@@ -85,7 +86,7 @@ export const CenterGroup: Story = {
     docs: {
       description: {
         story:
-          "Two `<Spacer />` elements flanking a center group split the remaining space equally, centering the group.",
+          'Two `<Spacer />` elements flanking a center group split the remaining space equally, centering the group.',
       },
     },
   },
@@ -105,7 +106,7 @@ export const WithoutSpacer: Story = {
     docs: {
       description: {
         story:
-          "Without `<Spacer />` buttons stack at the leading edge with only the toolbar gap between them.",
+          'Without `<Spacer />` buttons stack at the leading edge with only the toolbar gap between them.',
       },
     },
   },

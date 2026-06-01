@@ -1,5 +1,6 @@
-import type { HTMLAttributes } from "react";
-import styles from "./WindowTitle.module.css";
+import type { HTMLAttributes } from 'react';
+
+import styles from './WindowTitle.module.css';
 
 export interface WindowTitleProps extends HTMLAttributes<HTMLDivElement> {
   /** Primary title — rendered in bold. */
@@ -25,10 +26,7 @@ export interface WindowTitleProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function WindowTitle({ title, subtitle, className, ...props }: WindowTitleProps) {
   return (
-    <div
-      className={[styles.windowTitle, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.windowTitle, className].filter(Boolean).join(' ')} {...props}>
       <span className={styles.title}>{title}</span>
       {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
     </div>

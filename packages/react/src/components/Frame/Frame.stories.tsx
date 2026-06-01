@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Frame } from "./Frame";
-import { BoxedList } from "../BoxedList";
-import { ActionRow } from "../ActionRow";
-import { Switch } from "../Switch";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+import { Switch } from '../Switch';
+
+import { Frame } from './Frame';
 
 const meta: Meta<typeof Frame> = {
-  title: "Components/Frame",
+  title: 'Components/Frame',
   component: Frame,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -42,7 +44,7 @@ type Story = StoryObj<typeof Frame>;
 export const Default: Story = {
   render: () => (
     <Frame>
-      <div style={{ padding: "24px", color: "var(--gnome-window-fg-color)" }}>
+      <div style={{ padding: '24px', color: 'var(--gnome-window-fg-color)' }}>
         Content inside a Frame
       </div>
     </Frame>
@@ -77,18 +79,18 @@ export const WrappingBoxedList: Story = {
 
 export const MediaPreview: Story = {
   render: () => (
-    <Frame style={{ aspectRatio: "16 / 9" }}>
+    <Frame style={{ aspectRatio: '16 / 9' }}>
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
           minHeight: 160,
-          background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "rgba(255,255,255,0.6)",
-          fontSize: "0.875rem",
+          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'rgba(255,255,255,0.6)',
+          fontSize: '0.875rem',
         }}
       >
         Preview area
@@ -99,8 +101,7 @@ export const MediaPreview: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story:
-          "Wrap a media or canvas area in a `Frame` to clip content to the rounded corners.",
+        story: 'Wrap a media or canvas area in a `Frame` to clip content to the rounded corners.',
       },
     },
   },
@@ -110,26 +111,40 @@ export const MediaPreview: Story = {
 
 export const FrameVsCard: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: 16, flexDirection: "column" }}>
+    <div style={{ display: 'flex', gap: 16, flexDirection: 'column' }}>
       <div>
-        <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+        <p
+          style={{
+            margin: '0 0 8px',
+            fontSize: '0.75rem',
+            opacity: 0.6,
+            color: 'var(--gnome-window-fg-color)',
+          }}
+        >
           Frame — border only, no background
         </p>
         <Frame>
-          <div style={{ padding: 16, color: "var(--gnome-window-fg-color)" }}>Content</div>
+          <div style={{ padding: 16, color: 'var(--gnome-window-fg-color)' }}>Content</div>
         </Frame>
       </div>
       <div>
-        <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+        <p
+          style={{
+            margin: '0 0 8px',
+            fontSize: '0.75rem',
+            opacity: 0.6,
+            color: 'var(--gnome-window-fg-color)',
+          }}
+        >
           Card — elevated surface with background
         </p>
         <div
           style={{
             padding: 16,
-            borderRadius: "var(--gnome-radius-md)",
-            background: "var(--gnome-card-bg-color, #fff)",
-            boxShadow: "var(--gnome-shadow-sm)",
-            color: "var(--gnome-window-fg-color)",
+            borderRadius: 'var(--gnome-radius-md)',
+            background: 'var(--gnome-card-bg-color, #fff)',
+            boxShadow: 'var(--gnome-shadow-sm)',
+            color: 'var(--gnome-window-fg-color)',
           }}
         >
           Content
@@ -142,7 +157,7 @@ export const FrameVsCard: Story = {
     docs: {
       description: {
         story:
-          "The key difference: `Frame` is transparent with only a border; `Card` has its own elevated background.",
+          'The key difference: `Frame` is transparent with only a border; `Card` has its own elevated background.',
       },
     },
   },

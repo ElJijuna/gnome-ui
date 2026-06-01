@@ -1,8 +1,8 @@
-import { useId, type InputHTMLAttributes } from "react";
-import styles from "./TextField.module.css";
+import { type InputHTMLAttributes, useId } from 'react';
 
-export interface TextFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "id"> {
+import styles from './TextField.module.css';
+
+export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id'> {
   /** Visible label rendered above the input. */
   label?: string;
   /** Helper text rendered below the input. Hidden when `error` is set. */
@@ -37,7 +37,7 @@ export function TextField({
   const helpId = `${id}-help`;
 
   return (
-    <div className={[styles.wrapper, disabled ? styles.disabled : null].filter(Boolean).join(" ")}>
+    <div className={[styles.wrapper, disabled ? styles.disabled : null].filter(Boolean).join(' ')}>
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}
@@ -49,22 +49,16 @@ export function TextField({
         disabled={disabled}
         aria-describedby={error || helperText ? helpId : undefined}
         aria-invalid={error ? true : undefined}
-        className={[
-          styles.input,
-          error ? styles.errorInput : null,
-          className,
-        ]
+        className={[styles.input, error ? styles.errorInput : null, className]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         {...props}
       />
 
       {(error || helperText) && (
         <span
           id={helpId}
-          className={[styles.hint, error ? styles.errorHint : null]
-            .filter(Boolean)
-            .join(" ")}
+          className={[styles.hint, error ? styles.errorHint : null].filter(Boolean).join(' ')}
         >
           {error ?? helperText}
         </span>

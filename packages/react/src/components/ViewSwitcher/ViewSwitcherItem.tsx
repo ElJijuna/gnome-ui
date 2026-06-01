@@ -1,10 +1,11 @@
-import type { ButtonHTMLAttributes } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import styles from "./ViewSwitcher.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import type { ButtonHTMLAttributes } from 'react';
 
-export interface ViewSwitcherItemProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { Icon } from '../Icon';
+
+import styles from './ViewSwitcher.module.css';
+
+export interface ViewSwitcherItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Display label. */
   label: string;
   /** Optional icon from `@gnome-ui/icons`. */
@@ -33,13 +34,7 @@ export function ViewSwitcherItem({
       aria-checked={active}
       tabIndex={active ? 0 : -1}
       disabled={disabled}
-      className={[
-        styles.item,
-        active ? styles.active : null,
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.item, active ? styles.active : null, className].filter(Boolean).join(' ')}
       {...props}
     >
       {icon && (

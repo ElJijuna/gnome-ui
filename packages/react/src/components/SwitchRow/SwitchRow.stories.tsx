@@ -1,12 +1,14 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { SwitchRow } from "./SwitchRow";
-import { BoxedList } from "../BoxedList";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { BoxedList } from '../BoxedList';
+
+import { SwitchRow } from './SwitchRow';
 
 const meta: Meta<typeof SwitchRow> = {
-  title: "Components/SwitchRow",
+  title: 'Components/SwitchRow',
   component: SwitchRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -34,14 +36,14 @@ This differs from \`ActionRow\` with a \`trailing\` switch: here the row itself 
     ),
   ],
   argTypes: {
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
-    title: { control: "text" },
-    subtitle: { control: "text" },
+    checked: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
   },
   args: {
-    title: "Wi-Fi",
-    subtitle: "Connect to wireless networks",
+    title: 'Wi-Fi',
+    subtitle: 'Connect to wireless networks',
     defaultChecked: true,
   },
 };
@@ -67,7 +69,7 @@ export const InBoxedList: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `SwitchRow` inside a `BoxedList` for the canonical GNOME settings appearance.",
+        story: 'Use `SwitchRow` inside a `BoxedList` for the canonical GNOME settings appearance.',
       },
     },
   },
@@ -78,11 +80,14 @@ export const InBoxedList: Story = {
 export const Controlled: Story = {
   render: () => {
     const [checked, setChecked] = useState(false);
+
     return (
       <BoxedList>
         <SwitchRow
           title="Automatic Updates"
-          subtitle={checked ? "Updates will install automatically" : "Updates require manual install"}
+          subtitle={
+            checked ? 'Updates will install automatically' : 'Updates require manual install'
+          }
           checked={checked}
           onCheckedChange={setChecked}
         />
@@ -93,7 +98,8 @@ export const Controlled: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `checked` + `onCheckedChange` for controlled mode. The subtitle can reflect current state.",
+        story:
+          'Use `checked` + `onCheckedChange` for controlled mode. The subtitle can reflect current state.',
       },
     },
   },

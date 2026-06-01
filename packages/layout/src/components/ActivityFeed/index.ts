@@ -1,2 +1,2 @@
-export { ActivityFeed } from "./ActivityFeed";
-export type { ActivityFeedProps, ActivityFeedItem } from "./ActivityFeed";
+export type { ActivityFeedItem, ActivityFeedProps } from './ActivityFeed';
+export { ActivityFeed } from './ActivityFeed';

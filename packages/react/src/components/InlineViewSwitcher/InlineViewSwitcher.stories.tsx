@@ -1,14 +1,16 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { InlineViewSwitcher } from "./InlineViewSwitcher";
-import { InlineViewSwitcherItem } from "./InlineViewSwitcherItem";
-import { Card } from "../Card";
-import { HeaderBar } from "../HeaderBar";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Card } from '../Card';
+import { HeaderBar } from '../HeaderBar';
+
+import { InlineViewSwitcher } from './InlineViewSwitcher';
+import { InlineViewSwitcherItem } from './InlineViewSwitcherItem';
 
 const meta: Meta<typeof InlineViewSwitcher> = {
-  title: "Components/InlineViewSwitcher",
+  title: 'Components/InlineViewSwitcher',
   component: InlineViewSwitcher,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -39,21 +41,29 @@ Compose with \`InlineViewSwitcherItem\`. Keyboard: **← →** cycle, **Home / E
   },
   decorators: [
     (Story) => (
-      <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 24, alignItems: "flex-start" }}>
+      <div
+        style={{
+          padding: 24,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+          alignItems: 'flex-start',
+        }}
+      >
         <Story />
       </div>
     ),
   ],
   argTypes: {
     variant: {
-      control: "select",
-      options: ["default", "flat", "round", "pill"],
+      control: 'select',
+      options: ['default', 'flat', 'round', 'pill'],
     },
-    value: { control: "text" },
+    value: { control: 'text' },
   },
   args: {
-    variant: "default",
-    value: "list",
+    variant: 'default',
+    value: 'list',
   },
 };
 
@@ -64,14 +74,10 @@ type Story = StoryObj<typeof InlineViewSwitcher>;
 
 export const Default: Story = {
   render: (args) => {
-    const [view, setView] = useState(args.value ?? "list");
+    const [view, setView] = useState(args.value ?? 'list');
+
     return (
-      <InlineViewSwitcher
-        {...args}
-        value={view}
-        onValueChange={setView}
-        aria-label="Layout"
-      >
+      <InlineViewSwitcher {...args} value={view} onValueChange={setView} aria-label="Layout">
         <InlineViewSwitcherItem name="list" label="List" />
         <InlineViewSwitcherItem name="grid" label="Grid" />
         <InlineViewSwitcherItem name="columns" label="Columns" />
@@ -84,14 +90,22 @@ export const Default: Story = {
 
 export const AllVariants: Story = {
   render: () => {
-    const [v1, setV1] = useState("list");
-    const [v2, setV2] = useState("list");
-    const [v3, setV3] = useState("list");
-    const [v4, setV4] = useState("apps");
+    const [v1, setV1] = useState('list');
+    const [v2, setV2] = useState('list');
+    const [v3, setV3] = useState('list');
+    const [v4, setV4] = useState('apps');
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 20, width: "100%" }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
         <div>
-          <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+          <p
+            style={{
+              margin: '0 0 8px',
+              fontSize: '0.75rem',
+              opacity: 0.6,
+              color: 'var(--gnome-window-fg-color)',
+            }}
+          >
             default
           </p>
           <InlineViewSwitcher value={v1} onValueChange={setV1} aria-label="Layout default">
@@ -102,11 +116,30 @@ export const AllVariants: Story = {
         </div>
 
         <div>
-          <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+          <p
+            style={{
+              margin: '0 0 8px',
+              fontSize: '0.75rem',
+              opacity: 0.6,
+              color: 'var(--gnome-window-fg-color)',
+            }}
+          >
             flat
           </p>
-          <div style={{ background: "var(--gnome-headerbar-bg-color, #ebebeb)", borderRadius: 8, padding: "4px 8px", display: "inline-flex" }}>
-            <InlineViewSwitcher variant="flat" value={v2} onValueChange={setV2} aria-label="Layout flat">
+          <div
+            style={{
+              background: 'var(--gnome-headerbar-bg-color, #ebebeb)',
+              borderRadius: 8,
+              padding: '4px 8px',
+              display: 'inline-flex',
+            }}
+          >
+            <InlineViewSwitcher
+              variant="flat"
+              value={v2}
+              onValueChange={setV2}
+              aria-label="Layout flat"
+            >
               <InlineViewSwitcherItem name="list" label="List" />
               <InlineViewSwitcherItem name="grid" label="Grid" />
               <InlineViewSwitcherItem name="columns" label="Columns" />
@@ -115,10 +148,22 @@ export const AllVariants: Story = {
         </div>
 
         <div>
-          <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+          <p
+            style={{
+              margin: '0 0 8px',
+              fontSize: '0.75rem',
+              opacity: 0.6,
+              color: 'var(--gnome-window-fg-color)',
+            }}
+          >
             round
           </p>
-          <InlineViewSwitcher variant="round" value={v3} onValueChange={setV3} aria-label="Layout round">
+          <InlineViewSwitcher
+            variant="round"
+            value={v3}
+            onValueChange={setV3}
+            aria-label="Layout round"
+          >
             <InlineViewSwitcherItem name="list" label="List" />
             <InlineViewSwitcherItem name="grid" label="Grid" />
             <InlineViewSwitcherItem name="columns" label="Columns" />
@@ -126,10 +171,22 @@ export const AllVariants: Story = {
         </div>
 
         <div>
-          <p style={{ margin: "0 0 8px", fontSize: "0.75rem", opacity: 0.6, color: "var(--gnome-window-fg-color)" }}>
+          <p
+            style={{
+              margin: '0 0 8px',
+              fontSize: '0.75rem',
+              opacity: 0.6,
+              color: 'var(--gnome-window-fg-color)',
+            }}
+          >
             pill
           </p>
-          <InlineViewSwitcher variant="pill" value={v4} onValueChange={setV4} aria-label="Following view">
+          <InlineViewSwitcher
+            variant="pill"
+            value={v4}
+            onValueChange={setV4}
+            aria-label="Following view"
+          >
             <InlineViewSwitcherItem name="apps" label="Apps" />
             <InlineViewSwitcherItem name="maintainers" label="Maintainers" />
           </InlineViewSwitcher>
@@ -140,7 +197,7 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "All four variants side by side in their natural contexts." },
+      description: { story: 'All four variants side by side in their natural contexts.' },
     },
   },
 };
@@ -149,16 +206,24 @@ export const AllVariants: Story = {
 
 export const InsideCard: Story = {
   render: () => {
-    const [view, setView] = useState("week");
+    const [view, setView] = useState('week');
     const labels: Record<string, string> = {
-      day: "Mon 27",
-      week: "Mar 24 – 30",
-      month: "March 2026",
+      day: 'Mon 27',
+      week: 'Mar 24 – 30',
+      month: 'March 2026',
     };
+
     return (
-      <Card style={{ width: 360, padding: "16px" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-          <span style={{ fontWeight: 600, color: "var(--gnome-window-fg-color)" }}>
+      <Card style={{ width: 360, padding: '16px' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 16,
+          }}
+        >
+          <span style={{ fontWeight: 600, color: 'var(--gnome-window-fg-color)' }}>
             {labels[view]}
           </span>
           <InlineViewSwitcher value={view} onValueChange={setView} aria-label="Calendar view">
@@ -167,7 +232,19 @@ export const InsideCard: Story = {
             <InlineViewSwitcherItem name="month" label="Month" />
           </InlineViewSwitcher>
         </div>
-        <div style={{ height: 80, background: "var(--gnome-window-bg-color, #fafafa)", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--gnome-window-fg-color)", opacity: 0.4, fontSize: "0.875rem" }}>
+        <div
+          style={{
+            height: 80,
+            background: 'var(--gnome-window-bg-color, #fafafa)',
+            borderRadius: 6,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--gnome-window-fg-color)',
+            opacity: 0.4,
+            fontSize: '0.875rem',
+          }}
+        >
           Calendar grid — {view} view
         </div>
       </Card>
@@ -177,7 +254,8 @@ export const InsideCard: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`default` variant inside a `Card` header — controls the view without leaving the surface.",
+        story:
+          '`default` variant inside a `Card` header — controls the view without leaving the surface.',
       },
     },
   },
@@ -187,7 +265,8 @@ export const InsideCard: Story = {
 
 export const FlatInHeaderBar: Story = {
   render: () => {
-    const [view, setView] = useState("list");
+    const [view, setView] = useState('list');
+
     return (
       <div style={{ width: 480 }}>
         <HeaderBar
@@ -211,7 +290,7 @@ export const FlatInHeaderBar: Story = {
     docs: {
       description: {
         story:
-          "`flat` variant used as the `HeaderBar` title — blends naturally with the header bar background. Prefer `ViewSwitcher` for top-level navigation; use this for secondary in-context switching.",
+          '`flat` variant used as the `HeaderBar` title — blends naturally with the header bar background. Prefer `ViewSwitcher` for top-level navigation; use this for secondary in-context switching.',
       },
     },
   },
@@ -221,9 +300,15 @@ export const FlatInHeaderBar: Story = {
 
 export const Round: Story = {
   render: () => {
-    const [mode, setMode] = useState("light");
+    const [mode, setMode] = useState('light');
+
     return (
-      <InlineViewSwitcher variant="round" value={mode} onValueChange={setMode} aria-label="Color scheme">
+      <InlineViewSwitcher
+        variant="round"
+        value={mode}
+        onValueChange={setMode}
+        aria-label="Color scheme"
+      >
         <InlineViewSwitcherItem name="light" label="Light" />
         <InlineViewSwitcherItem name="dark" label="Dark" />
         <InlineViewSwitcherItem name="auto" label="Auto" />
@@ -234,7 +319,8 @@ export const Round: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`round` variant — pill-shaped container with a solid accent active indicator. Good for prominent in-content choices.",
+        story:
+          '`round` variant — pill-shaped container with a solid accent active indicator. Good for prominent in-content choices.',
       },
     },
   },
@@ -244,7 +330,8 @@ export const Round: Story = {
 
 export const DisabledItems: Story = {
   render: () => {
-    const [view, setView] = useState("list");
+    const [view, setView] = useState('list');
+
     return (
       <InlineViewSwitcher value={view} onValueChange={setView} aria-label="Layout">
         <InlineViewSwitcherItem name="list" label="List" />
@@ -256,7 +343,7 @@ export const DisabledItems: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Individual items can be disabled while leaving others active." },
+      description: { story: 'Individual items can be disabled while leaving others active.' },
     },
   },
 };
@@ -265,9 +352,15 @@ export const DisabledItems: Story = {
 
 export const Pill: Story = {
   render: () => {
-    const [tab, setTab] = useState("apps");
+    const [tab, setTab] = useState('apps');
+
     return (
-      <InlineViewSwitcher variant="pill" value={tab} onValueChange={setTab} aria-label="Following view">
+      <InlineViewSwitcher
+        variant="pill"
+        value={tab}
+        onValueChange={setTab}
+        aria-label="Following view"
+      >
         <InlineViewSwitcherItem name="apps" label="Apps" />
         <InlineViewSwitcherItem name="maintainers" label="Maintainers" />
       </InlineViewSwitcher>
@@ -278,7 +371,7 @@ export const Pill: Story = {
     docs: {
       description: {
         story:
-          "`pill` variant — segmented-control style. Active item appears lifted with a card background and subtle shadow; no accent color is used. Ideal for tab-like switching in open content areas.",
+          '`pill` variant — segmented-control style. Active item appears lifted with a card background and subtle shadow; no accent color is used. Ideal for tab-like switching in open content areas.',
       },
     },
   },

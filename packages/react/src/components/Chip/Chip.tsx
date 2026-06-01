@@ -1,8 +1,10 @@
-import type { HTMLAttributes } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { Close } from "@gnome-ui/icons";
-import styles from "./Chip.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import { Close } from '@gnome-ui/icons';
+import type { HTMLAttributes } from 'react';
+
+import { Icon } from '../Icon';
+
+import styles from './Chip.module.css';
 
 export interface ChipProps extends HTMLAttributes<HTMLElement> {
   /** Text label displayed inside the chip. */
@@ -61,7 +63,7 @@ export function Chip({
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   const content = (
     <>
@@ -107,10 +109,7 @@ export function Chip({
   }
 
   return (
-    <span
-      className={chipClasses}
-      {...props}
-    >
+    <span className={chipClasses} {...props}>
       {content}
     </span>
   );

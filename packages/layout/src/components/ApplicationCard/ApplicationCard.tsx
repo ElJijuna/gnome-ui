@@ -1,7 +1,9 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Card, Skeleton, Spinner, Text } from "@gnome-ui/react";
-import type { LoadingType } from "../StatCard";
-import styles from "./ApplicationCard.module.css";
+import { Card, Skeleton, Spinner, Text } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import type { LoadingType } from '../StatCard';
+
+import styles from './ApplicationCard.module.css';
 
 export interface ApplicationCardStat {
   label: string;
@@ -35,13 +37,14 @@ export function ApplicationCard({
   stats,
   actions,
   loading = false,
-  loadingType = "skeleton",
+  loadingType = 'skeleton',
   className,
   ...props
 }: ApplicationCardProps) {
   if (loading) {
-    const cardClass = [styles.card, className].filter(Boolean).join(" ");
-    if (loadingType === "spinner") {
+    const cardClass = [styles.card, className].filter(Boolean).join(' ');
+
+    if (loadingType === 'spinner') {
       return (
         <Card className={cardClass} aria-busy="true" {...props}>
           <div className={styles.spinnerWrapper}>
@@ -50,6 +53,7 @@ export function ApplicationCard({
         </Card>
       );
     }
+
     return (
       <Card className={cardClass} aria-busy="true" {...props}>
         <div className={styles.header}>
@@ -74,16 +78,15 @@ export function ApplicationCard({
   }
 
   return (
-    <Card
-      className={[styles.card, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <Card className={[styles.card, className].filter(Boolean).join(' ')} {...props}>
       <div className={styles.header}>
         <div className={styles.avatarSlot}>{avatar}</div>
 
         <div className={styles.body}>
           <div className={styles.nameRow}>
-            <Text variant="title-2" className={styles.name}>{name}</Text>
+            <Text variant="title-2" className={styles.name}>
+              {name}
+            </Text>
             {badge && <span className={styles.badge}>{badge}</span>}
           </div>
 

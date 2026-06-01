@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./Button";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: 'Components/Button',
   component: Button,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -23,33 +24,32 @@ Button component following the [GNOME Human Interface Guidelines](https://develo
   },
   argTypes: {
     variant: {
-      control: "select",
-      options: ["default", "suggested", "destructive", "flat", "raised"],
-      description: "Visual style of the button.",
+      control: 'select',
+      options: ['default', 'suggested', 'destructive', 'flat', 'raised'],
+      description: 'Visual style of the button.',
     },
     size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
-      description: "Size of the button.",
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+      description: 'Size of the button.',
     },
     shape: {
-      control: "select",
-      options: ["default", "pill", "circular"],
-      description:
-        '"pill" for primary open-space actions, "circular" for icon-only buttons.',
+      control: 'select',
+      options: ['default', 'pill', 'circular'],
+      description: '"pill" for primary open-space actions, "circular" for icon-only buttons.',
     },
     disabled: {
-      control: "boolean",
+      control: 'boolean',
     },
     children: {
-      control: "text",
+      control: 'text',
     },
   },
   args: {
-    children: "Save Changes",
-    variant: "default",
-    size: "md",
-    shape: "default",
+    children: 'Save Changes',
+    variant: 'default',
+    size: 'md',
+    shape: 'default',
     disabled: false,
   },
 };
@@ -62,26 +62,26 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {};
 
 export const Suggested: Story = {
-  args: { variant: "suggested", children: "Apply" },
+  args: { variant: 'suggested', children: 'Apply' },
 };
 
 export const Destructive: Story = {
-  args: { variant: "destructive", children: "Delete File" },
+  args: { variant: 'destructive', children: 'Delete File' },
 };
 
 /** Flat buttons live inside header bars. The gray background simulates one. */
 export const Flat: Story = {
-  args: { variant: "flat", children: "Cancel" },
+  args: { variant: 'flat', children: 'Cancel' },
   decorators: [
     (Story) => (
       <div
         style={{
-          backgroundColor: "var(--gnome-headerbar-bg-color, #ebebeb)",
-          padding: "8px 12px",
-          borderRadius: "8px",
-          display: "flex",
-          gap: "8px",
-          alignItems: "center",
+          backgroundColor: 'var(--gnome-headerbar-bg-color, #ebebeb)',
+          padding: '8px 12px',
+          borderRadius: '8px',
+          display: 'flex',
+          gap: '8px',
+          alignItems: 'center',
         }}
       >
         <Story />
@@ -92,7 +92,7 @@ export const Flat: Story = {
     docs: {
       description: {
         story:
-          "Used inside header bars and toolbars. Shown here against a simulated header bar background.",
+          'Used inside header bars and toolbars. Shown here against a simulated header bar background.',
       },
     },
   },
@@ -101,34 +101,33 @@ export const Flat: Story = {
 // ─── Sizes ─────────────────────────────────────────────────────────────────────
 
 export const Small: Story = {
-  args: { size: "sm", children: "Compact" },
+  args: { size: 'sm', children: 'Compact' },
 };
 
 export const Large: Story = {
-  args: { size: "lg", variant: "suggested", children: "Get Started" },
+  args: { size: 'lg', variant: 'suggested', children: 'Get Started' },
 };
 
 // ─── Shapes ───────────────────────────────────────────────────────────────────
 
 export const Pill: Story = {
-  args: { shape: "pill", variant: "suggested", children: "New Document" },
+  args: { shape: 'pill', variant: 'suggested', children: 'New Document' },
   parameters: {
     docs: {
       description: {
         story:
-          "Pill buttons are used for primary actions in open space (e.g. welcome screens, empty states).",
+          'Pill buttons are used for primary actions in open space (e.g. welcome screens, empty states).',
       },
     },
   },
 };
 
 export const Circular: Story = {
-  args: { shape: "circular", variant: "suggested", children: "+" },
+  args: { shape: 'circular', variant: 'suggested', children: '+' },
   parameters: {
     docs: {
       description: {
-        story:
-          "Circular buttons are used for icon-only actions placed close together.",
+        story: 'Circular buttons are used for icon-only actions placed close together.',
       },
     },
   },
@@ -138,17 +137,17 @@ export const Circular: Story = {
 
 /** Raised buttons have explicit elevation inside flat/toolbar contexts. */
 export const Raised: Story = {
-  args: { variant: "raised", children: "Open" },
+  args: { variant: 'raised', children: 'Open' },
   decorators: [
     (Story) => (
       <div
         style={{
-          backgroundColor: "var(--gnome-headerbar-bg-color, #ebebeb)",
-          padding: "8px 12px",
-          borderRadius: "8px",
-          display: "flex",
-          gap: "8px",
-          alignItems: "center",
+          backgroundColor: 'var(--gnome-headerbar-bg-color, #ebebeb)',
+          padding: '8px 12px',
+          borderRadius: '8px',
+          display: 'flex',
+          gap: '8px',
+          alignItems: 'center',
         }}
       >
         <Story />
@@ -159,7 +158,7 @@ export const Raised: Story = {
     docs: {
       description: {
         story:
-          "Use `raised` inside toolbar or flat contexts to give a button explicit elevation — mirrors the `.raised` style class.",
+          'Use `raised` inside toolbar or flat contexts to give a button explicit elevation — mirrors the `.raised` style class.',
       },
     },
   },
@@ -169,18 +168,18 @@ export const Raised: Story = {
 
 /** OSD buttons are placed over images or media. */
 export const Osd: Story = {
-  args: { osd: true, children: "Play" },
+  args: { osd: true, children: 'Play' },
   decorators: [
     (Story) => (
       <div
         style={{
-          background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-          padding: "40px 24px",
-          borderRadius: "12px",
-          display: "flex",
-          gap: "8px",
-          alignItems: "center",
-          justifyContent: "center",
+          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+          padding: '40px 24px',
+          borderRadius: '12px',
+          display: 'flex',
+          gap: '8px',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Story />
@@ -191,7 +190,7 @@ export const Osd: Story = {
     docs: {
       description: {
         story:
-          "Use `osd` for buttons overlaid on media or images. Always dark semi-transparent regardless of system theme — mirrors the `.osd` style class.",
+          'Use `osd` for buttons overlaid on media or images. Always dark semi-transparent regardless of system theme — mirrors the `.osd` style class.',
       },
     },
   },
@@ -200,24 +199,24 @@ export const Osd: Story = {
 // ─── States ───────────────────────────────────────────────────────────────────
 
 export const Disabled: Story = {
-  args: { disabled: true, children: "Unavailable" },
+  args: { disabled: true, children: 'Unavailable' },
 };
 
 // ─── All Variants ─────────────────────────────────────────────────────────────
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "center" }}>
+    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
       <Button variant="default">Default</Button>
       <Button variant="suggested">Suggested</Button>
       <Button variant="destructive">Destructive</Button>
       <div
         style={{
-          backgroundColor: "var(--gnome-headerbar-bg-color, #ebebeb)",
-          padding: "4px 8px",
-          borderRadius: "6px",
-          display: "flex",
-          gap: "8px",
+          backgroundColor: 'var(--gnome-headerbar-bg-color, #ebebeb)',
+          padding: '4px 8px',
+          borderRadius: '6px',
+          display: 'flex',
+          gap: '8px',
         }}
       >
         <Button variant="flat">Flat</Button>
@@ -225,10 +224,10 @@ export const AllVariants: Story = {
       </div>
       <div
         style={{
-          background: "linear-gradient(135deg, #1a1a2e, #0f3460)",
-          padding: "4px 8px",
-          borderRadius: "6px",
-          display: "flex",
+          background: 'linear-gradient(135deg, #1a1a2e, #0f3460)',
+          padding: '4px 8px',
+          borderRadius: '6px',
+          display: 'flex',
         }}
       >
         <Button osd>OSD</Button>
@@ -240,7 +239,8 @@ export const AllVariants: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "All variants side by side. Flat is shown against its natural header bar background.",
+        story:
+          'All variants side by side. Flat is shown against its natural header bar background.',
       },
     },
   },

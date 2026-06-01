@@ -1,11 +1,12 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { useViewSwitcherSidebar } from "./ViewSwitcherSidebar";
-import styles from "./ViewSwitcherSidebar.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export interface ViewSwitcherSidebarItemProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { Icon } from '../Icon';
+
+import { useViewSwitcherSidebar } from './ViewSwitcherSidebar';
+import styles from './ViewSwitcherSidebar.module.css';
+
+export interface ViewSwitcherSidebarItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** String identifier — matched against the group's `value`. */
   name: string;
   /** View label. */
@@ -42,7 +43,7 @@ export function ViewSwitcherSidebarItem({
 }: ViewSwitcherSidebarItemProps) {
   const { value, onValueChange, collapsed } = useViewSwitcherSidebar();
   const active = value === name;
-  const trailing = suffix ?? (count != null ? count : null);
+  const trailing = suffix ?? (count !== null && count !== undefined ? count : null);
 
   return (
     <li className={styles.item}>
@@ -53,13 +54,9 @@ export function ViewSwitcherSidebarItem({
         tabIndex={active ? 0 : -1}
         disabled={disabled}
         onClick={() => onValueChange(name)}
-        className={[
-          styles.itemBtn,
-          active ? styles.active : null,
-          className,
-        ]
+        className={[styles.itemBtn, active ? styles.active : null, className]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         {...props}
       >
         {icon && (
@@ -68,10 +65,10 @@ export function ViewSwitcherSidebarItem({
           </span>
         )}
         {!collapsed && <span className={styles.itemLabel}>{label}</span>}
-        {!collapsed && trailing != null && (
+        {!collapsed && trailing !== null && trailing !== undefined && (
           <span className={styles.itemSuffix}>
-            {typeof trailing === "number" ? (
-              <span className={styles.count}>{trailing > 99 ? "99+" : trailing}</span>
+            {typeof trailing === 'number' ? (
+              <span className={styles.count}>{trailing > 99 ? '99+' : trailing}</span>
             ) : (
               trailing
             )}

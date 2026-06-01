@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./ActionRow.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './ActionRow.module.css';
 
 export interface ActionRowProps extends HTMLAttributes<HTMLDivElement> {
   /** Primary label. */
@@ -25,7 +26,7 @@ export interface ActionRowProps extends HTMLAttributes<HTMLDivElement> {
    * Use for read-only property display (e.g. "OS Version / Ubuntu 24.04").
    * Mirrors the `.property` style class.
    */
-  variant?: "default" | "property";
+  variant?: 'default' | 'property';
 }
 
 /**
@@ -43,12 +44,12 @@ export function ActionRow({
   leading,
   trailing,
   interactive = false,
-  variant = "default",
+  variant = 'default',
   className,
   ...props
 }: ActionRowProps) {
-  const Tag = interactive ? "button" : "div";
-  const property = variant === "property";
+  const Tag = interactive ? 'button' : 'div';
+  const property = variant === 'property';
 
   const classes = [
     styles.row,
@@ -57,7 +58,7 @@ export function ActionRow({
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
     <Tag className={classes} {...(props as HTMLAttributes<HTMLElement>)}>
@@ -65,7 +66,9 @@ export function ActionRow({
 
       <span className={styles.content}>
         <span className={property ? styles.propertyLabel : styles.title}>{title}</span>
-        {subtitle && <span className={property ? styles.propertyValue : styles.subtitle}>{subtitle}</span>}
+        {subtitle && (
+          <span className={property ? styles.propertyValue : styles.subtitle}>{subtitle}</span>
+        )}
       </span>
 
       {trailing && <span className={styles.trailing}>{trailing}</span>}

@@ -1,2 +1,2 @@
-export { CountDownTimer } from "./CountDownTimer";
-export type { CountDownTimerProps, CountDownVariant } from "./CountDownTimer";
+export type { CountDownTimerProps, CountDownVariant } from './CountDownTimer';
+export { CountDownTimer } from './CountDownTimer';

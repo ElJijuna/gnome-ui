@@ -1,8 +1,4 @@
-import {
-  AreaChart as RechartsAreaChart,
-  Area,
-  ResponsiveContainer,
-} from "recharts";
+import { Area, AreaChart as RechartsAreaChart, ResponsiveContainer } from 'recharts';
 
 type SparkData = number[] | Record<string, unknown>[];
 
@@ -21,43 +17,43 @@ export interface SparkAreaChartProps {
   /** Fill opacity when gradient is false. Defaults to 0.2. */
   fillOpacity?: number;
   className?: string;
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 function normalize(data: SparkData, key: string): Record<string, unknown>[] {
-  if (!data.length) return [];
-  return typeof data[0] === "number"
+  if (!data.length) {
+    return [];
+  }
+
+  return typeof data[0] === 'number'
     ? (data as number[]).map((v) => ({ [key]: v }))
     : (data as Record<string, unknown>[]);
 }
 
 export function SparkAreaChart({
   data,
-  dataKey = "value",
-  color = "var(--gnome-accent-color, #3584e4)",
+  dataKey = 'value',
+  color = 'var(--gnome-accent-color, #3584e4)',
   height = 40,
   strokeWidth = 1.5,
   gradient = true,
   fillOpacity = 0.2,
   className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
 }: SparkAreaChartProps) {
   const normalized = normalize(data, dataKey);
   const gradId = `spark-area-${dataKey}`;
 
   return (
     <div
-      style={{ width: "100%", height }}
+      style={{ width: '100%', height }}
       className={className}
-      role={ariaLabel ? "img" : undefined}
+      role={ariaLabel ? 'img' : undefined}
       aria-label={ariaLabel}
       aria-hidden={ariaLabel ? undefined : true}
     >
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsAreaChart
-          data={normalized}
-          margin={{ top: 2, right: 0, left: 0, bottom: 0 }}
-        >
+        <RechartsAreaChart data={normalized} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
           {gradient && (
             <defs>
               <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">

@@ -1,27 +1,29 @@
 import {
-  useEffect,
-  useRef,
-  useState,
   type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
-} from "react";
-import styles from "./Layout.module.css";
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-export type LayoutHeight = "viewport" | "parent";
-export type LayoutScroll = "content" | "page" | "none";
-export type LayoutSidebarBreakpoint = "narrow" | "medium" | "wide";
-export type LayoutSidebarCollapseMode = "none" | "rail" | "overlay";
-export type LayoutSidebarPlacement = "start" | "end";
-export type LayoutSidebarOpenChangeReason = "backdrop" | "escape" | "trigger";
+import styles from './Layout.module.css';
+
+export type LayoutHeight = 'viewport' | 'parent';
+export type LayoutScroll = 'content' | 'page' | 'none';
+export type LayoutSidebarBreakpoint = 'narrow' | 'medium' | 'wide';
+export type LayoutSidebarCollapseMode = 'none' | 'rail' | 'overlay';
+export type LayoutSidebarPlacement = 'start' | 'end';
+export type LayoutSidebarOpenChangeReason = 'backdrop' | 'escape' | 'trigger';
 
 const sidebarBreakpointQuery: Record<LayoutSidebarBreakpoint, string> = {
-  narrow: "(max-width: 400px)",
-  medium: "(max-width: 550px)",
-  wide: "(max-width: 860px)",
+  narrow: '(max-width: 400px)',
+  medium: '(max-width: 550px)',
+  wide: '(max-width: 860px)',
 };
 
-export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "height"> {
+export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'height'> {
   /**
    * Top bar area — typically a `Toolbar` or `HeaderBar` with logo, search,
    * and action buttons. Pinned to the top; never scrolls.
@@ -84,10 +86,7 @@ export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "heigh
    * click or Escape. External triggers can call this same handler with
    * `"trigger"` for symmetry.
    */
-  onSidebarOpenChange?: (
-    open: boolean,
-    reason: LayoutSidebarOpenChangeReason,
-  ) => void;
+  onSidebarOpenChange?: (open: boolean, reason: LayoutSidebarOpenChangeReason) => void;
   /**
    * Called when the user taps the backdrop behind the sidebar on mobile.
    * Use this to set `sidebarOpen` back to `false`.
@@ -162,11 +161,11 @@ export function Layout({
   topBar,
   header,
   sidebar,
-  sidebarPlacement = "start",
+  sidebarPlacement = 'start',
   sidebarLabel,
-  sidebarBreakpoint = "narrow",
+  sidebarBreakpoint = 'narrow',
   sidebarOpen = false,
-  sidebarCollapseMode = "none",
+  sidebarCollapseMode = 'none',
   sidebarCollapsed = false,
   sidebarCollapsedWidth = 56,
   onSidebarOpenChange,
@@ -174,56 +173,55 @@ export function Layout({
   children,
   bottomBar,
   footer,
-  height = "viewport",
-  scroll = "content",
+  height = 'viewport',
+  scroll = 'content',
   className,
   ...props
 }: LayoutProps) {
   const sidebarRef = useRef<HTMLElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
-  const [sidebarMatchesOverlayBreakpoint, setSidebarMatchesOverlayBreakpoint] =
-    useState(false);
+  const [sidebarMatchesOverlayBreakpoint, setSidebarMatchesOverlayBreakpoint] = useState(false);
   const resolvedHeader = topBar ?? header;
   const resolvedFooter = bottomBar ?? footer;
   const sidebarOverlayActive =
-    sidebarMatchesOverlayBreakpoint ||
-    (sidebarCollapseMode === "overlay" && sidebarCollapsed);
+    sidebarMatchesOverlayBreakpoint || (sidebarCollapseMode === 'overlay' && sidebarCollapsed);
 
   const rootClass = [
     styles.layout,
-    height === "parent" ? styles.heightParent : styles.heightViewport,
-    scroll === "page" ? styles.scrollPage : undefined,
-    scroll === "none" ? styles.scrollNone : styles.scrollContent,
+    height === 'parent' ? styles.heightParent : styles.heightViewport,
+    scroll === 'page' ? styles.scrollPage : undefined,
+    scroll === 'none' ? styles.scrollNone : styles.scrollContent,
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   const bodyClass = [
     styles.body,
     sidebar && sidebarOpen ? styles.bodySidebarOpen : undefined,
-    sidebarPlacement === "end" ? styles.bodySidebarEnd : undefined,
-    sidebarBreakpoint === "medium" ? styles.breakpointMedium : undefined,
-    sidebarBreakpoint === "wide" ? styles.breakpointWide : styles.breakpointNarrow,
-    sidebarCollapseMode === "rail" ? styles.collapseRail : undefined,
-    sidebarCollapseMode === "overlay" ? styles.collapseOverlay : undefined,
+    sidebarPlacement === 'end' ? styles.bodySidebarEnd : undefined,
+    sidebarBreakpoint === 'medium' ? styles.breakpointMedium : undefined,
+    sidebarBreakpoint === 'wide' ? styles.breakpointWide : styles.breakpointNarrow,
+    sidebarCollapseMode === 'rail' ? styles.collapseRail : undefined,
+    sidebarCollapseMode === 'overlay' ? styles.collapseOverlay : undefined,
     sidebarCollapsed ? styles.sidebarCollapsed : undefined,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   const sidebarStyle = {
-    "--layout-sidebar-collapsed-width": `${sidebarCollapsedWidth}px`,
+    '--layout-sidebar-collapsed-width': `${sidebarCollapsedWidth}px`,
   } as CSSProperties;
 
-  const closeSidebar = (reason: LayoutSidebarOpenChangeReason) => {
+  const closeSidebar = useCallback((reason: LayoutSidebarOpenChangeReason) => {
     onSidebarOpenChange?.(false, reason);
     onSidebarClose?.();
-  };
+  }, [onSidebarOpenChange, onSidebarClose]);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) {
+    if (typeof window === 'undefined' || !window.matchMedia) {
       setSidebarMatchesOverlayBreakpoint(true);
+
       return undefined;
     }
 
@@ -231,50 +229,61 @@ export function Layout({
     const updateMatch = () => setSidebarMatchesOverlayBreakpoint(query.matches);
 
     updateMatch();
-    query.addEventListener?.("change", updateMatch);
-    return () => query.removeEventListener?.("change", updateMatch);
+    query.addEventListener?.('change', updateMatch);
+
+    return () => query.removeEventListener?.('change', updateMatch);
   }, [sidebarBreakpoint]);
 
   useEffect(() => {
-    if (!sidebar || !sidebarOpen || !sidebarOverlayActive) return undefined;
+    if (!sidebar || !sidebarOpen || !sidebarOverlayActive) {
+      return undefined;
+    }
 
-    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement
-      ? document.activeElement
-      : null;
+    previouslyFocusedRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
     const getFocusableElements = () => {
       const sidebarElement = sidebarRef.current;
-      if (!sidebarElement) return [];
+
+      if (!sidebarElement) {
+        return [];
+      }
 
       return Array.from(
         sidebarElement.querySelectorAll<HTMLElement>(
           [
-            "a[href]",
-            "button:not([disabled])",
-            "input:not([disabled])",
-            "select:not([disabled])",
-            "textarea:not([disabled])",
+            'a[href]',
+            'button:not([disabled])',
+            'input:not([disabled])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
             "[tabindex]:not([tabindex='-1'])",
-          ].join(","),
+          ].join(','),
         ),
-      ).filter((element) => !element.hasAttribute("hidden"));
+      ).filter((element) => !element.hasAttribute('hidden'));
     };
 
     const focusableElements = getFocusableElements();
+
     (focusableElements[0] ?? sidebarRef.current)?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeSidebar("escape");
+      if (event.key === 'Escape') {
+        closeSidebar('escape');
+
         return;
       }
 
-      if (event.key !== "Tab") return;
+      if (event.key !== 'Tab') {
+        return;
+      }
 
       const currentFocusableElements = getFocusableElements();
+
       if (!currentFocusableElements.length) {
         event.preventDefault();
         sidebarRef.current?.focus();
+
         return;
       }
 
@@ -294,24 +303,17 @@ export function Layout({
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      if (
-        previouslyFocusedRef.current &&
-        document.contains(previouslyFocusedRef.current)
-      ) {
+      document.removeEventListener('keydown', handleKeyDown);
+      if (previouslyFocusedRef.current && document.contains(previouslyFocusedRef.current)) {
         previouslyFocusedRef.current.focus();
       }
+
       previouslyFocusedRef.current = null;
     };
-  }, [
-    sidebar,
-    sidebarOpen,
-    sidebarOverlayActive,
-    onSidebarOpenChange,
-    onSidebarClose,
-  ]);
+  }, [sidebar, sidebarOpen, sidebarOverlayActive, closeSidebar]);
 
   const sidebarSlot = sidebar && (
     <aside
@@ -326,23 +328,20 @@ export function Layout({
   );
 
   return (
-    <div
-      className={rootClass}
-      {...props}
-    >
+    <div className={rootClass} {...props}>
       {resolvedHeader && <header className={styles.topBar}>{resolvedHeader}</header>}
 
       <div className={bodyClass}>
-        {sidebar && sidebarPlacement === "start" && sidebarSlot}
+        {sidebar && sidebarPlacement === 'start' && sidebarSlot}
         {sidebar && (
           <div
             className={styles.backdrop}
-            onClick={() => closeSidebar("backdrop")}
+            onClick={() => closeSidebar('backdrop')}
             aria-hidden="true"
           />
         )}
         <main className={styles.content}>{children}</main>
-        {sidebar && sidebarPlacement === "end" && sidebarSlot}
+        {sidebar && sidebarPlacement === 'end' && sidebarSlot}
       </div>
 
       {resolvedFooter && <footer className={styles.bottomBar}>{resolvedFooter}</footer>}

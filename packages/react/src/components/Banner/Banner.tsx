@@ -1,7 +1,8 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Banner.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export type BannerVariant = "info" | "warning" | "error" | "success";
+import styles from './Banner.module.css';
+
+export type BannerVariant = 'info' | 'warning' | 'error' | 'success';
 
 export interface BannerProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -40,7 +41,7 @@ export interface BannerProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://developer.gnome.org/hig/patterns/feedback/banners.html
  */
 export function Banner({
-  variant = "info",
+  variant = 'info',
   children,
   actionLabel,
   onAction,
@@ -53,9 +54,7 @@ export function Banner({
     <div
       role="status"
       aria-live="polite"
-      className={[styles.banner, styles[variant], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.banner, styles[variant], className].filter(Boolean).join(' ')}
       {...props}
     >
       <span className={styles.message}>{children}</span>
@@ -67,7 +66,7 @@ export function Banner({
               type="button"
               className={[styles.actionBtn, styles[`actionBtn-${variant}`]]
                 .filter(Boolean)
-                .join(" ")}
+                .join(' ')}
               onClick={onAction}
             >
               {actionLabel}

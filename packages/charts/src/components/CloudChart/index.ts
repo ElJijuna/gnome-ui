@@ -1,2 +1,2 @@
-export { CloudChart } from "./CloudChart";
-export type { CloudChartProps, CloudChartDataItem } from "./CloudChart";
+export type { CloudChartDataItem, CloudChartProps } from './CloudChart';
+export { CloudChart } from './CloudChart';

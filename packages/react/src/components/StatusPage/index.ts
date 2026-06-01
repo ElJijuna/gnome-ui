@@ -1,2 +1,2 @@
-export { StatusPage } from "./StatusPage";
-export type { StatusPageProps } from "./StatusPage";
+export type { StatusPageProps } from './StatusPage';
+export { StatusPage } from './StatusPage';

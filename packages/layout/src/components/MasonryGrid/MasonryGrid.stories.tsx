@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { MasonryGrid } from "./MasonryGrid";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { MasonryGrid } from './MasonryGrid';
 
 const HEIGHTS = [180, 120, 260, 100, 200, 140, 300, 160, 220, 90, 170, 240];
 
@@ -7,14 +8,14 @@ const Card = ({ label, height }: { label: string; height: number }) => (
   <div
     style={{
       height,
-      background: "var(--gnome-card-bg, #f6f5f4)",
-      border: "1px solid var(--gnome-border-color, #deddda)",
+      background: 'var(--gnome-card-bg, #f6f5f4)',
+      border: '1px solid var(--gnome-border-color, #deddda)',
       borderRadius: 12,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       fontWeight: 500,
-      color: "var(--gnome-dim-label-color, #77767b)",
+      color: 'var(--gnome-dim-label-color, #77767b)',
       fontSize: 14,
     }}
   >
@@ -23,11 +24,11 @@ const Card = ({ label, height }: { label: string; height: number }) => (
 );
 
 const meta: Meta<typeof MasonryGrid> = {
-  title: "Layout/MasonryGrid",
+  title: 'Layout/MasonryGrid',
   component: MasonryGrid,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -55,10 +56,10 @@ import { MasonryGrid } from "@gnome-ui/layout";
   argTypes: {
     columns: { control: false },
     gap: {
-      control: { type: "radio" },
-      options: ["sm", "md", "lg"],
+      control: { type: 'radio' },
+      options: ['sm', 'md', 'lg'],
     },
-    fresh: { control: "boolean" },
+    fresh: { control: 'boolean' },
   },
 };
 
@@ -66,7 +67,7 @@ export default meta;
 type Story = StoryObj<typeof MasonryGrid>;
 
 export const Default: Story = {
-  args: { columns: 3, gap: "md" },
+  args: { columns: 3, gap: 'md' },
   render: (args) => (
     <MasonryGrid {...args}>
       {HEIGHTS.map((h, i) => (
@@ -88,7 +89,7 @@ export const ResponsiveColumns: Story = {
     docs: {
       description: {
         story:
-          "1 column on mobile, 2 at sm, 3 at md, 4 at lg. Resize the window to see the layout reflow.",
+          '1 column on mobile, 2 at sm, 3 at md, 4 at lg. Resize the window to see the layout reflow.',
       },
     },
   },
@@ -103,18 +104,16 @@ export const TwoColumns: Story = {
     </MasonryGrid>
   ),
   parameters: {
-    docs: { description: { story: "Fixed 2-column layout with large gap." } },
+    docs: { description: { story: 'Fixed 2-column layout with large gap.' } },
   },
 };
 
 export const GapVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
-      {(["sm", "md", "lg"] as const).map((gap) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+      {(['sm', 'md', 'lg'] as const).map((gap) => (
         <div key={gap}>
-          <p style={{ marginBottom: 8, fontWeight: 600, fontSize: 13 }}>
-            gap="{gap}"
-          </p>
+          <p style={{ marginBottom: 8, fontWeight: 600, fontSize: 13 }}>gap="{gap}"</p>
           <MasonryGrid columns={3} gap={gap}>
             {HEIGHTS.slice(0, 6).map((h, i) => (
               <Card key={i} label={`${i + 1}`} height={h} />
@@ -125,6 +124,6 @@ export const GapVariants: Story = {
     </div>
   ),
   parameters: {
-    docs: { description: { story: "All three gap sizes." } },
+    docs: { description: { story: 'All three gap sizes.' } },
   },
 };

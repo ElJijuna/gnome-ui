@@ -1,15 +1,15 @@
-import { useEffect, useRef, type InputHTMLAttributes } from "react";
-import styles from "./Checkbox.module.css";
+import { type InputHTMLAttributes, useEffect, useRef } from 'react';
 
-export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+import styles from './Checkbox.module.css';
+
+export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   /**
    * Indeterminate state — shown when only some children in a group are checked.
    * Takes visual precedence over `checked`.
    */
   indeterminate?: boolean;
   /** Accessible label. Required when no visible `<label>` is associated. */
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 /**
@@ -36,7 +36,7 @@ export function Checkbox({ indeterminate = false, className, ...props }: Checkbo
     <input
       ref={ref}
       type="checkbox"
-      className={[styles.checkbox, className].filter(Boolean).join(" ")}
+      className={[styles.checkbox, className].filter(Boolean).join(' ')}
       {...props}
     />
   );

@@ -1,19 +1,21 @@
 import {
-  useEffect,
-  useRef,
-  useCallback,
-  useId,
-  type KeyboardEvent,
   type HTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
-} from "react";
-import { createPortal } from "react-dom";
-import { trapFocus, FOCUSABLE, useVisualViewport } from "./dialogUtils";
-import styles from "./Dialog.module.css";
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+} from 'react';
+
+import { createPortal } from 'react-dom';
+
+import styles from './Dialog.module.css';
+import { FOCUSABLE, trapFocus, useVisualViewport } from './dialogUtils';
 
 // ─── AlertDialog types ────────────────────────────────────────────────────────
 
-export type AlertDialogResponseVariant = "default" | "suggested" | "destructive";
+export type AlertDialogResponseVariant = 'default' | 'suggested' | 'destructive';
 
 export interface AlertDialogResponse {
   /**
@@ -35,14 +37,14 @@ export interface DialogButton {
   /** Button label. */
   label: string;
   /** Visual variant. Defaults to `"default"`. */
-  variant?: "default" | "suggested" | "destructive";
+  variant?: 'default' | 'suggested' | 'destructive';
   /** Called when the button is clicked. */
   onClick: () => void;
   /** Whether the button is disabled. */
   disabled?: boolean;
 }
 
-export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Whether the dialog is visible. */
   open: boolean;
 
@@ -68,7 +70,7 @@ export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, "title
    * When using `role="alertdialog"`, prefer the `responses`/`onResponse` API
    * over `buttons`/`onClick` for semantic clarity.
    */
-  role?: "dialog" | "alertdialog";
+  role?: 'dialog' | 'alertdialog';
 
   /**
    * Response buttons (AlertDialog API). Alternative to `buttons` — each
@@ -106,7 +108,7 @@ export function Dialog({
   buttons = [],
   onClose,
   closeOnBackdrop = true,
-  role = "dialog",
+  role = 'dialog',
   responses,
   onResponse,
   className,
@@ -124,6 +126,7 @@ export function Dialog({
     if (open) {
       previouslyFocused.current = document.activeElement;
       const el = dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE);
+
       el?.focus();
     } else {
       (previouslyFocused.current as HTMLElement | null)?.focus();
@@ -132,8 +135,11 @@ export function Dialog({
 
   // ── Dismiss helpers ────────────────────────────────────────────────────────
   const dismissAlert = useCallback(() => {
-    const cancel = responses?.find((r) => r.variant !== "destructive" && !r.disabled);
-    if (cancel) onResponse?.(cancel.id);
+    const cancel = responses?.find((r) => r.variant !== 'destructive' && !r.disabled);
+
+    if (cancel) {
+      onResponse?.(cancel.id);
+    }
   }, [responses, onResponse]);
 
   const handleBackdrop = isAlert ? dismissAlert : closeOnBackdrop ? onClose : undefined;
@@ -141,18 +147,25 @@ export function Dialog({
   // ── Keyboard ───────────────────────────────────────────────────────────────
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         e.preventDefault();
-        if (isAlert) dismissAlert();
-        else onClose?.();
+        if (isAlert) {
+          dismissAlert();
+        } else {
+          onClose?.();
+        }
+
         return;
       }
+
       trapFocus(e, dialogRef);
     },
-    [isAlert, dismissAlert, onClose]
+    [isAlert, dismissAlert, onClose],
   );
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   // ── Render buttons (standard or alert) ────────────────────────────────────
   const renderButtons = () => {
@@ -164,7 +177,9 @@ export function Dialog({
               key={r.id}
               type="button"
               disabled={r.disabled}
-              className={[styles.btn, styles[`btn-${r.variant ?? "default"}`]].filter(Boolean).join(" ")}
+              className={[styles.btn, styles[`btn-${r.variant ?? 'default'}`]]
+                .filter(Boolean)
+                .join(' ')}
               onClick={() => onResponse?.(r.id)}
             >
               {r.label}
@@ -173,6 +188,7 @@ export function Dialog({
         </div>
       );
     }
+
     if (buttons.length > 0) {
       return (
         <div className={styles.footer}>
@@ -181,7 +197,9 @@ export function Dialog({
               key={btn.label}
               type="button"
               disabled={btn.disabled}
-              className={[styles.btn, styles[`btn-${btn.variant ?? "default"}`]].filter(Boolean).join(" ")}
+              className={[styles.btn, styles[`btn-${btn.variant ?? 'default'}`]]
+                .filter(Boolean)
+                .join(' ')}
               onClick={btn.onClick}
             >
               {btn.label}
@@ -190,6 +208,7 @@ export function Dialog({
         </div>
       );
     }
+
     return null;
   };
 
@@ -205,18 +224,25 @@ export function Dialog({
         role={role}
         aria-modal="true"
         aria-labelledby={titleId}
-        className={[styles.dialog, className].filter(Boolean).join(" ")}
+        className={[styles.dialog, className].filter(Boolean).join(' ')}
         onKeyDown={handleKeyDown}
         onClick={(e) => e.stopPropagation()}
         {...props}
       >
-        {title && <div id={titleId} className={styles.title}>{title}</div>}
+        {title && (
+          <div id={titleId} className={styles.title}>
+            {title}
+          </div>
+        )}
         {children && <div className={styles.body}>{children}</div>}
         {renderButtons()}
       </div>
     </div>
   );
 
-  if (typeof document === "undefined") return node;
+  if (typeof document === 'undefined') {
+    return node;
+  }
+
   return createPortal(node, document.body);
 }

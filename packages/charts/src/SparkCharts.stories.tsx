@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Card, Text } from "@gnome-ui/react";
-import { SparkAreaChart } from "./components/SparkAreaChart";
-import { SparkLineChart } from "./components/SparkLineChart";
-import { SparkBarChart } from "./components/SparkBarChart";
-import { GNOME_CHART_PALETTE } from "./colors";
+import { Card, Text } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { GNOME_CHART_PALETTE } from './colors';
+import { SparkAreaChart } from './components/SparkAreaChart';
+import { SparkBarChart } from './components/SparkBarChart';
+import { SparkLineChart } from './components/SparkLineChart';
 
 // ─── Sample data ─────────────────────────────────────────────────────────────
 
@@ -14,8 +15,8 @@ const OBJECTS = NUMBERS.map((v, i) => ({ day: `D${i + 1}`, sessions: v }));
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
-  title: "Charts/Spark",
-  parameters: { layout: "padded" },
+  title: 'Charts/Spark',
+  parameters: { layout: 'padded' },
 };
 
 export default meta;
@@ -24,7 +25,7 @@ type Story = StoryObj;
 // ─── SparkAreaChart ───────────────────────────────────────────────────────────
 
 export const Area: Story = {
-  name: "SparkAreaChart — numbers",
+  name: 'SparkAreaChart — numbers',
   render: () => (
     <div style={{ width: 200 }}>
       <SparkAreaChart data={NUMBERS} height={48} aria-label="Weekly trend" />
@@ -33,21 +34,16 @@ export const Area: Story = {
 };
 
 export const AreaObjects: Story = {
-  name: "SparkAreaChart — objects",
+  name: 'SparkAreaChart — objects',
   render: () => (
     <div style={{ width: 200 }}>
-      <SparkAreaChart
-        data={OBJECTS}
-        dataKey="sessions"
-        height={48}
-        aria-label="Daily sessions"
-      />
+      <SparkAreaChart data={OBJECTS} dataKey="sessions" height={48} aria-label="Daily sessions" />
     </div>
   ),
 };
 
 export const AreaNoGradient: Story = {
-  name: "SparkAreaChart — no gradient",
+  name: 'SparkAreaChart — no gradient',
   render: () => (
     <div style={{ width: 200 }}>
       <SparkAreaChart
@@ -64,7 +60,7 @@ export const AreaNoGradient: Story = {
 // ─── SparkLineChart ───────────────────────────────────────────────────────────
 
 export const Line: Story = {
-  name: "SparkLineChart",
+  name: 'SparkLineChart',
   render: () => (
     <div style={{ width: 200 }}>
       <SparkLineChart data={NUMBERS} height={48} aria-label="Weekly trend" />
@@ -75,7 +71,7 @@ export const Line: Story = {
 // ─── SparkBarChart ────────────────────────────────────────────────────────────
 
 export const Bar: Story = {
-  name: "SparkBarChart",
+  name: 'SparkBarChart',
   render: () => (
     <div style={{ width: 200 }}>
       <SparkBarChart data={NUMBERS} height={48} aria-label="Weekly trend" />
@@ -86,12 +82,12 @@ export const Bar: Story = {
 // ─── All colors ───────────────────────────────────────────────────────────────
 
 export const AllColors: Story = {
-  name: "Palette colors",
+  name: 'Palette colors',
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 12,
         width: 240,
       }}
@@ -127,12 +123,12 @@ function MetricCard({
       <Text variant="caption" color="dim">
         {label}
       </Text>
-      <Text variant="title-2" as="p" style={{ margin: "4px 0 2px" }}>
+      <Text variant="title-2" as="p" style={{ margin: '4px 0 2px' }}>
         {value}
       </Text>
       <Text
         variant="caption"
-        style={{ color: "var(--gnome-success-color, #2ec27e)", marginBottom: 8 }}
+        style={{ color: 'var(--gnome-success-color, #2ec27e)', marginBottom: 8 }}
       >
         {trend}
       </Text>
@@ -142,15 +138,11 @@ function MetricCard({
 }
 
 export const InCards: Story = {
-  name: "Embedded in Cards",
+  name: 'Embedded in Cards',
   render: () => (
-    <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
       <MetricCard label="Downloads" value="12,430" trend="↑ +8.4%">
-        <SparkAreaChart
-          data={NUMBERS}
-          height={48}
-          aria-label="Downloads trend"
-        />
+        <SparkAreaChart data={NUMBERS} height={48} aria-label="Downloads trend" />
       </MetricCard>
 
       <MetricCard label="Active users" value="3,841" trend="↑ +2.1%">

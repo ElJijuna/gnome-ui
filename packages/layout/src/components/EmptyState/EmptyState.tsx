@@ -1,6 +1,7 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Text } from "@gnome-ui/react";
-import styles from "./EmptyState.module.css";
+import { Text } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './EmptyState.module.css';
 
 export interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
   /** Illustrative icon displayed large and muted at the top. */
@@ -22,10 +23,7 @@ export function EmptyState({
   ...props
 }: EmptyStateProps) {
   return (
-    <div
-      className={[styles.root, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
       {icon && (
         <div className={styles.icon} aria-hidden="true">
           {icon}

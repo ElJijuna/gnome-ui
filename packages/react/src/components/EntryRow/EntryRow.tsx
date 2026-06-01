@@ -1,5 +1,6 @@
-import { useState, useId, useRef, type InputHTMLAttributes, type ReactNode } from "react";
-import styles from "./EntryRow.module.css";
+import { type InputHTMLAttributes, type ReactNode, useId, useRef, useState } from 'react';
+
+import styles from './EntryRow.module.css';
 
 export interface EntryRowProps extends InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -27,7 +28,7 @@ export interface EntryRowProps extends InputHTMLAttributes<HTMLInputElement> {
 export function EntryRow({
   title,
   value: controlledValue,
-  defaultValue = "",
+  defaultValue = '',
   onValueChange,
   leading,
   trailing,
@@ -50,7 +51,10 @@ export function EntryRow({
   const floated = focused || inputValue.length > 0;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isControlled) setUncontrolledValue(e.target.value);
+    if (!isControlled) {
+      setUncontrolledValue(e.target.value);
+    }
+
     onValueChange?.(e.target.value);
     onChange?.(e);
   };
@@ -64,7 +68,7 @@ export function EntryRow({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       onClick={() => inputRef.current?.focus()}
     >
       {leading && <span className={styles.leading}>{leading}</span>}
@@ -72,14 +76,14 @@ export function EntryRow({
       <span className={styles.fieldWrap}>
         <label
           htmlFor={inputId}
-          className={[styles.label, floated ? styles.labelFloated : null].filter(Boolean).join(" ")}
+          className={[styles.label, floated ? styles.labelFloated : null].filter(Boolean).join(' ')}
         >
           {title}
         </label>
         <input
           ref={inputRef}
           id={inputId}
-          className={[styles.input, floated ? styles.inputFloated : null].filter(Boolean).join(" ")}
+          className={[styles.input, floated ? styles.inputFloated : null].filter(Boolean).join(' ')}
           value={inputValue}
           disabled={disabled}
           onFocus={() => setFocused(true)}

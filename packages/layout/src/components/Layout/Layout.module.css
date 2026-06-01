@@ -63,10 +63,7 @@
 }
 
 .collapseRail.sidebarCollapsed .sidebar > * {
-  width: var(
-    --layout-sidebar-collapsed-width,
-    var(--gnome-layout-sidebar-rail-width, 56px)
-  );
+  width: var(--layout-sidebar-collapsed-width, var(--gnome-layout-sidebar-rail-width, 56px));
 }
 
 .collapseOverlay.sidebarCollapsed:not(.bodySidebarOpen) .sidebar {
@@ -120,8 +117,8 @@
 
 @media (max-width: 400px) {
   .breakpointNarrow {
-    position: relative;  /* stacking context for absolute sidebar + backdrop */
-    overflow-x: clip;    /* clip the sliding sidebar without creating a new scroll context */
+    position: relative; /* stacking context for absolute sidebar + backdrop */
+    overflow-x: clip; /* clip the sliding sidebar without creating a new scroll context */
   }
 
   .breakpointNarrow .sidebar {

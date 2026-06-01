@@ -1,7 +1,8 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Badge.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export type BadgeVariant = "accent" | "success" | "warning" | "error" | "neutral";
+import styles from './Badge.module.css';
+
+export type BadgeVariant = 'accent' | 'success' | 'warning' | 'error' | 'neutral';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -33,7 +34,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * @see https://developer.gnome.org/hig/patterns/feedback/badges.html
  */
 export function Badge({
-  variant = "accent",
+  variant = 'accent',
   dot = false,
   children,
   anchor,
@@ -50,7 +51,7 @@ export function Badge({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {!dot && children}

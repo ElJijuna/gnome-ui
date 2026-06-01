@@ -1,9 +1,10 @@
-import { useEffect, useRef, type HTMLAttributes, type ReactNode } from "react";
-import { useBreakpoint } from "../../hooks/useBreakpoint";
-import styles from "./OverlaySplitView.module.css";
+import { type HTMLAttributes, type ReactNode, useEffect, useRef } from 'react';
 
-export interface OverlaySplitViewProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
+import { useBreakpoint } from '../../hooks/useBreakpoint';
+
+import styles from './OverlaySplitView.module.css';
+
+export interface OverlaySplitViewProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content'> {
   /**
    * The sidebar pane.
    * On wide screens it sits beside the content.
@@ -32,7 +33,7 @@ export interface OverlaySplitViewProps
   /**
    * Which side the sidebar appears on. Defaults to `"start"` (left in LTR).
    */
-  sidebarPosition?: "start" | "end";
+  sidebarPosition?: 'start' | 'end';
   /**
    * Minimum sidebar width in px. Defaults to `180`.
    */
@@ -73,7 +74,7 @@ export function OverlaySplitView({
   showSidebar = false,
   onClose,
   collapsed = false,
-  sidebarPosition = "start",
+  sidebarPosition = 'start',
   minSidebarWidth = 180,
   maxSidebarWidth = 280,
   sidebarWidthFraction = 0.25,
@@ -84,51 +85,73 @@ export function OverlaySplitView({
   const { isNarrow } = useBreakpoint();
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  const sidebarWidth =
-    `clamp(${minSidebarWidth}px, ${sidebarWidthFraction * 100}%, ${maxSidebarWidth}px)`;
+  const sidebarWidth = `clamp(${minSidebarWidth}px, ${sidebarWidthFraction * 100}%, ${maxSidebarWidth}px)`;
 
   // Close on Escape in overlay mode
   useEffect(() => {
-    if (!isNarrow || !showSidebar) return;
+    if (!isNarrow || !showSidebar) {
+      return;
+    }
+
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose?.();
+      if (e.key === 'Escape') {
+        onClose?.();
+      }
     };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
+
+    document.addEventListener('keydown', handler);
+
+    return () => document.removeEventListener('keydown', handler);
   }, [isNarrow, showSidebar, onClose]);
 
   // Trap focus inside sidebar when open in overlay mode
   useEffect(() => {
-    if (!isNarrow || !showSidebar) return;
+    if (!isNarrow || !showSidebar) {
+      return;
+    }
+
     const first = sidebarRef.current?.querySelector<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
+
     first?.focus();
   }, [isNarrow, showSidebar]);
 
-  const isEnd = sidebarPosition === "end";
+  const isEnd = sidebarPosition === 'end';
 
   // Swipe-to-dismiss: drag the sidebar in the close direction to trigger onClose
   useEffect(() => {
-    if (!isNarrow || !showSidebar) return;
+    if (!isNarrow || !showSidebar) {
+      return;
+    }
+
     const el = sidebarRef.current;
-    if (!el) return;
+
+    if (!el) {
+      return;
+    }
 
     let startX = 0;
     const THRESHOLD = 80;
 
-    const onTouchStart = (e: TouchEvent) => { startX = e.touches[0].clientX; };
-    const onTouchEnd   = (e: TouchEvent) => {
+    const onTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
       const dx = e.changedTouches[0].clientX - startX;
       const closeSwipe = isEnd ? dx > THRESHOLD : dx < -THRESHOLD;
-      if (closeSwipe) onClose?.();
+
+      if (closeSwipe) {
+        onClose?.();
+      }
     };
 
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchend",   onTouchEnd,   { passive: true });
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
+
     return () => {
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchend",   onTouchEnd);
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchend', onTouchEnd);
     };
   }, [isNarrow, showSidebar, isEnd, onClose]);
 
@@ -142,8 +165,8 @@ export function OverlaySplitView({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
-      style={{ "--sidebar-width": sidebarWidth, ...style } as React.CSSProperties}
+        .join(' ')}
+      style={{ '--sidebar-width': sidebarWidth, ...style } as React.CSSProperties}
       {...props}
     >
       {/* Backdrop — narrow mode only */}
@@ -151,7 +174,7 @@ export function OverlaySplitView({
         <div
           className={[styles.backdrop, showSidebar ? styles.backdropVisible : null]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
           aria-hidden="true"
           onClick={onClose}
         />
@@ -162,21 +185,17 @@ export function OverlaySplitView({
         ref={sidebarRef}
         className={[
           styles.sidebar,
-          isNarrow
-            ? showSidebar ? styles.sidebarOpen : styles.sidebarClosed
-            : null,
+          isNarrow ? (showSidebar ? styles.sidebarOpen : styles.sidebarClosed) : null,
         ]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         aria-hidden={isNarrow && !showSidebar}
       >
         {sidebar}
       </div>
 
       {/* Content */}
-      <div className={styles.content}>
-        {content}
-      </div>
+      <div className={styles.content}>{content}</div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import type { HTMLAttributes } from "react";
-import styles from "./ShortcutLabel.module.css";
+import type { HTMLAttributes } from 'react';
+
+import styles from './ShortcutLabel.module.css';
 
 export interface ShortcutLabelProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -28,32 +29,32 @@ export interface ShortcutLabelProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const SYMBOL_MAP: Record<string, string> = {
-  ctrl:      "⌃",
-  control:   "⌃",
-  shift:     "⇧",
-  alt:       "⌥",
-  option:    "⌥",
-  super:     "⊞",
-  win:       "⊞",
-  cmd:       "⌘",
-  command:   "⌘",
-  meta:      "⌘",
-  up:        "↑",
-  down:      "↓",
-  left:      "←",
-  right:     "→",
-  enter:     "↵",
-  return:    "↵",
-  backspace: "⌫",
-  delete:    "⌦",
-  escape:    "⎋",
-  esc:       "⎋",
-  tab:       "⇥",
-  space:     "␣",
-  pageup:    "⇞",
-  pagedown:  "⇟",
-  home:      "⇱",
-  end:       "⇲",
+  ctrl: '⌃',
+  control: '⌃',
+  shift: '⇧',
+  alt: '⌥',
+  option: '⌥',
+  super: '⊞',
+  win: '⊞',
+  cmd: '⌘',
+  command: '⌘',
+  meta: '⌘',
+  up: '↑',
+  down: '↓',
+  left: '←',
+  right: '→',
+  enter: '↵',
+  return: '↵',
+  backspace: '⌫',
+  delete: '⌦',
+  escape: '⎋',
+  esc: '⎋',
+  tab: '⇥',
+  space: '␣',
+  pageup: '⇞',
+  pagedown: '⇟',
+  home: '⇱',
+  end: '⇲',
 };
 
 /**
@@ -67,19 +68,25 @@ const SYMBOL_MAP: Record<string, string> = {
  *
  * @see https://docs.gtk.org/gtk4/class.ShortcutLabel.html
  */
-export function ShortcutLabel({ shortcut, symbols = true, className, ...props }: ShortcutLabelProps) {
-  const tokens = shortcut.split("+").map((t) => t.trim()).filter(Boolean);
+export function ShortcutLabel({
+  shortcut,
+  symbols = true,
+  className,
+  ...props
+}: ShortcutLabelProps) {
+  const tokens = shortcut
+    .split('+')
+    .map((t) => t.trim())
+    .filter(Boolean);
 
   return (
     <span
-      className={[styles.label, className].filter(Boolean).join(" ")}
+      className={[styles.label, className].filter(Boolean).join(' ')}
       aria-label={shortcut}
       {...props}
     >
       {tokens.map((token, i) => {
-        const display = symbols
-          ? (SYMBOL_MAP[token.toLowerCase()] ?? token)
-          : token;
+        const display = symbols ? (SYMBOL_MAP[token.toLowerCase()] ?? token) : token;
 
         return (
           <kbd key={i} className={styles.key}>

@@ -1,13 +1,10 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type HTMLAttributes,
-} from "react";
-import { Card, Icon, Skeleton, Spinner, Text, useNumberFormatter } from "@gnome-ui/react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import type { LoadingType } from "../StatCard";
-import styles from "./CounterCard.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import { Card, Icon, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
+import { type HTMLAttributes, useEffect, useRef, useState } from 'react';
+
+import type { LoadingType } from '../StatCard';
+
+import styles from './CounterCard.module.css';
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
@@ -19,34 +16,38 @@ import styles from "./CounterCard.module.css";
 function useCountUp(target: number, duration: number, enabled: boolean): number {
   const [display, setDisplay] = useState(0);
   const displayRef = useRef(0);
-  const rafRef     = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const reducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!enabled || reducedMotion) {
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
+
       displayRef.current = target;
       setDisplay(target);
+
       return;
     }
 
-    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+    }
 
     const startValue = displayRef.current;
-    const startTime  = performance.now();
+    const startTime = performance.now();
 
     function tick(now: number) {
-      const elapsed  = now - startTime;
+      const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       // ease-out cubic — starts fast, decelerates at the end
-      const eased    = 1 - Math.pow(1 - progress, 3);
-      const value    = startValue + (target - startValue) * eased;
+      const eased = 1 - (1 - progress) ** 3;
+      const value = startValue + (target - startValue) * eased;
 
       displayRef.current = value;
       setDisplay(value);
@@ -142,7 +143,7 @@ export function CounterCard({
   color,
   trend,
   loading = false,
-  loadingType = "skeleton",
+  loadingType = 'skeleton',
   className,
   style,
   ...props
@@ -156,8 +157,9 @@ export function CounterCard({
   const formatted = format ? format(raw) : numberFormat.format(raw);
 
   if (loading) {
-    const cardClass = [styles.card, className].filter(Boolean).join(" ");
-    if (loadingType === "spinner") {
+    const cardClass = [styles.card, className].filter(Boolean).join(' ');
+
+    if (loadingType === 'spinner') {
       return (
         <Card
           interactive={interactive}
@@ -172,6 +174,7 @@ export function CounterCard({
         </Card>
       );
     }
+
     return (
       <Card
         interactive={interactive}
@@ -195,7 +198,7 @@ export function CounterCard({
   return (
     <Card
       interactive={interactive}
-      className={[styles.card, className].filter(Boolean).join(" ")}
+      className={[styles.card, className].filter(Boolean).join(' ')}
       style={style}
       {...props}
     >
@@ -209,7 +212,7 @@ export function CounterCard({
             style={{
               background: color
                 ? `color-mix(in srgb, ${color} 15%, transparent)`
-                : "var(--gnome-hover-overlay, rgba(0,0,0,0.06))",
+                : 'var(--gnome-hover-overlay, rgba(0,0,0,0.06))',
               color: color ?? undefined,
             }}
           >
@@ -218,16 +221,13 @@ export function CounterCard({
         )}
       </div>
       <span
-        className={[
-          styles.value,
-          useColor ? null : accent ? styles.accent : null,
-        ]
+        className={[styles.value, useColor ? null : accent ? styles.accent : null]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         style={useColor ? { color } : undefined}
         aria-live="polite"
         aria-atomic="true"
-        aria-label={`${label}: ${prefix ?? ""}${numberFormat.format(value)}${suffix ?? ""}`}
+        aria-label={`${label}: ${prefix ?? ''}${numberFormat.format(value)}${suffix ?? ''}`}
       >
         {prefix && <span className={styles.affix}>{prefix}</span>}
         <Text variant="title-2" as="span" className={styles.number}>

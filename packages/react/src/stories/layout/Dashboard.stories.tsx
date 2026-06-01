@@ -1,27 +1,28 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { GoHome, Settings, Star, Share } from "@gnome-ui/icons";
+import { GoHome, Settings, Share, Star } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
 import {
-  Toolbar,
-  Spacer,
-  Button,
-  SearchBar,
-  Avatar,
-  Popover,
-  Sidebar,
-  SidebarSection,
-  SidebarItem,
-  Card,
-  BoxedList,
   ActionRow,
-  ExpanderRow,
+  Avatar,
   Badge,
-  Text,
+  BoxedList,
+  Button,
+  Card,
+  ExpanderRow,
   InlineViewSwitcher,
   InlineViewSwitcherItem,
+  Popover,
+  SearchBar,
+  Sidebar,
+  SidebarItem,
+  SidebarSection,
+  Spacer,
   StatusPage,
   Switch,
-} from "../../index";
+  Text,
+  Toolbar,
+} from '../../index';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -40,28 +41,27 @@ function AvatarMenuItem({
       type="button"
       onClick={onClick}
       style={{
-        display: "block",
-        width: "100%",
-        padding: "8px 12px",
-        background: "transparent",
-        border: "none",
+        display: 'block',
+        width: '100%',
+        padding: '8px 12px',
+        background: 'transparent',
+        border: 'none',
         borderRadius: 6,
-        font: "inherit",
-        fontSize: "0.9375rem",
-        textAlign: "start",
-        cursor: "pointer",
+        font: 'inherit',
+        fontSize: '0.9375rem',
+        textAlign: 'start',
+        cursor: 'pointer',
         color: destructive
-          ? "var(--gnome-destructive-color, #e01b24)"
-          : "var(--gnome-window-fg-color, rgba(0,0,0,0.8))",
-        whiteSpace: "nowrap",
+          ? 'var(--gnome-destructive-color, #e01b24)'
+          : 'var(--gnome-window-fg-color, rgba(0,0,0,0.8))',
+        whiteSpace: 'nowrap',
       }}
       onMouseEnter={(e) =>
         ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-          "var(--gnome-hover-overlay)")
+          'var(--gnome-hover-overlay)')
       }
       onMouseLeave={(e) =>
-        ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-          "transparent")
+        ((e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent')
       }
     >
       {label}
@@ -73,43 +73,45 @@ function AvatarMenuItem({
 
 function Dashboard() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activeNav, setActiveNav] = useState("home");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [contentView, setContentView] = useState("grid");
+  const [activeNav, setActiveNav] = useState('home');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [contentView, setContentView] = useState('grid');
 
   const navItems = [
-    { id: "home",     label: "Home",     icon: GoHome,   badge: null },
-    { id: "starred",  label: "Starred",  icon: Star,     badge: 3 },
-    { id: "shared",   label: "Shared",   icon: Share,    badge: null },
-    { id: "settings", label: "Settings", icon: Settings, badge: null },
+    { id: 'home', label: 'Home', icon: GoHome, badge: null },
+    { id: 'starred', label: 'Starred', icon: Star, badge: 3 },
+    { id: 'shared', label: 'Shared', icon: Share, badge: null },
+    { id: 'settings', label: 'Settings', icon: Settings, badge: null },
   ];
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      height: "100vh",
-      background: "var(--gnome-window-bg-color, #fafafa)",
-      fontFamily: "var(--gnome-font-family)",
-      overflow: "hidden",
-    }}>
-
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        background: 'var(--gnome-window-bg-color, #fafafa)',
+        fontFamily: 'var(--gnome-font-family)',
+        overflow: 'hidden',
+      }}
+    >
       {/* ── Toolbar ─────────────────────────────────────────────────────── */}
-      <div style={{
-        background: "var(--gnome-headerbar-bg-color, #ebebeb)",
-        borderBottom: "1px solid var(--gnome-headerbar-border-color, rgba(0,0,0,0.12))",
-        flexShrink: 0,
-      }}>
-        <Toolbar style={{ minHeight: 48, padding: "0 8px" }}>
-
+      <div
+        style={{
+          background: 'var(--gnome-headerbar-bg-color, #ebebeb)',
+          borderBottom: '1px solid var(--gnome-headerbar-border-color, rgba(0,0,0,0.12))',
+          flexShrink: 0,
+        }}
+      >
+        <Toolbar style={{ minHeight: 48, padding: '0 8px' }}>
           {/* Left — toggle + logo + app name */}
           <Button
             variant="flat"
-            aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             onClick={() => setSidebarCollapsed((v) => !v)}
-            style={{ minWidth: "unset" }}
+            style={{ minWidth: 'unset' }}
           >
-            <span style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ display: 'flex', alignItems: 'center' }}>
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
                 <rect x="2" y="4" width="14" height="1.5" rx="0.75" fill="currentColor" />
                 <rect x="2" y="8.25" width="14" height="1.5" rx="0.75" fill="currentColor" />
@@ -118,22 +120,24 @@ function Dashboard() {
             </span>
           </Button>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginRight: 8 }}>
-            <div style={{
-              width: 28,
-              height: 28,
-              borderRadius: 8,
-              background: "var(--gnome-accent-bg-color, #3584e4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: 8 }}>
+            <div
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 8,
+                background: 'var(--gnome-accent-bg-color, #3584e4)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="white" aria-hidden>
                 <path d="M8 2L14 6V14H2V6L8 2Z" />
               </svg>
             </div>
-            <Text variant="heading" style={{ whiteSpace: "nowrap" }}>
+            <Text variant="heading" style={{ whiteSpace: 'nowrap' }}>
               Files
             </Text>
           </div>
@@ -141,45 +145,65 @@ function Dashboard() {
           <Spacer />
 
           {/* Center — search */}
-          <div style={{
-            flex: "1 1 auto",
-            maxWidth: 480,
-            display: "flex",
-            alignItems: "center",
-            background: "var(--gnome-card-bg-color, #fff)",
-            borderRadius: "var(--gnome-radius-md)",
-            border: "1px solid var(--gnome-light-3, #deddda)",
-            overflow: "hidden",
-          }}>
+          <div
+            style={{
+              flex: '1 1 auto',
+              maxWidth: 480,
+              display: 'flex',
+              alignItems: 'center',
+              background: 'var(--gnome-card-bg-color, #fff)',
+              borderRadius: 'var(--gnome-radius-md)',
+              border: '1px solid var(--gnome-light-3, #deddda)',
+              overflow: 'hidden',
+            }}
+          >
             <SearchBar
               inline
               open
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onClose={() => setSearchQuery("")}
-              onClear={() => setSearchQuery("")}
+              onClose={() => setSearchQuery('')}
+              onClear={() => setSearchQuery('')}
               placeholder="Search files…"
               aria-label="Search"
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
             />
           </div>
 
           <Spacer />
 
           {/* Right — action buttons + avatar dropdown */}
-          <Button variant="flat" aria-label="Refresh" style={{ minWidth: "unset" }}>
+          <Button variant="flat" aria-label="Refresh" style={{ minWidth: 'unset' }}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-              <path d="M9 3a6 6 0 1 0 5.66 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-              <path d="M14 3v4h-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <path
+                d="M9 3a6 6 0 1 0 5.66 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M14 3v4h-4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
             </svg>
           </Button>
 
-          <Button variant="flat" aria-label="Share" style={{ minWidth: "unset" }}>
+          <Button variant="flat" aria-label="Share" style={{ minWidth: 'unset' }}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
               <circle cx="14" cy="4" r="2" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="4"  cy="9" r="2" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="4" cy="9" r="2" stroke="currentColor" strokeWidth="1.5" />
               <circle cx="14" cy="14" r="2" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M6 10.5l6 2M6 7.5l6-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <path
+                d="M6 10.5l6 2M6 7.5l6-2"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
             </svg>
           </Button>
 
@@ -187,24 +211,36 @@ function Dashboard() {
             placement="bottom"
             content={
               <div style={{ minWidth: 180 }}>
-                <div style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "10px 12px 8px",
-                  borderBottom: "1px solid var(--gnome-divider-color, rgba(0,0,0,0.08))",
-                  marginBottom: 4,
-                }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '10px 12px 8px',
+                    borderBottom: '1px solid var(--gnome-divider-color, rgba(0,0,0,0.08))',
+                    marginBottom: 4,
+                  }}
+                >
                   <Avatar name="Ada Lovelace" size="sm" />
                   <div>
-                    <Text variant="body" style={{ fontWeight: 600, lineHeight: 1.2 }}>Ada Lovelace</Text>
-                    <Text variant="caption" color="dim">ada@gnome.org</Text>
+                    <Text variant="body" style={{ fontWeight: 600, lineHeight: 1.2 }}>
+                      Ada Lovelace
+                    </Text>
+                    <Text variant="caption" color="dim">
+                      ada@gnome.org
+                    </Text>
                   </div>
                 </div>
-                <AvatarMenuItem label="View Profile" onClick={() => alert("profile")} />
-                <AvatarMenuItem label="Account Settings" onClick={() => alert("settings")} />
-                <div style={{ height: 1, background: "var(--gnome-divider-color, rgba(0,0,0,0.08))", margin: "4px 0" }} />
-                <AvatarMenuItem label="Sign Out" destructive onClick={() => alert("sign out")} />
+                <AvatarMenuItem label="View Profile" onClick={() => alert('profile')} />
+                <AvatarMenuItem label="Account Settings" onClick={() => alert('settings')} />
+                <div
+                  style={{
+                    height: 1,
+                    background: 'var(--gnome-divider-color, rgba(0,0,0,0.08))',
+                    margin: '4px 0',
+                  }}
+                />
+                <AvatarMenuItem label="Sign Out" destructive onClick={() => alert('sign out')} />
               </div>
             }
           >
@@ -212,12 +248,12 @@ function Dashboard() {
               type="button"
               aria-label="User menu"
               style={{
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
                 padding: 2,
-                borderRadius: "50%",
-                display: "flex",
+                borderRadius: '50%',
+                display: 'flex',
               }}
             >
               <Avatar name="Ada Lovelace" size="sm" />
@@ -227,10 +263,9 @@ function Dashboard() {
       </div>
 
       {/* ── Body (sidebar + content) ─────────────────────────────────────── */}
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Sidebar — uses built-in collapsed prop */}
-        <Sidebar collapsed={sidebarCollapsed} style={{ height: "100%" }}>
+        <Sidebar collapsed={sidebarCollapsed} style={{ height: '100%' }}>
           <SidebarSection>
             {navItems.map(({ id, label, icon, badge }) => (
               <SidebarItem
@@ -246,46 +281,55 @@ function Dashboard() {
         </Sidebar>
 
         {/* Main content */}
-        <main style={{
-          flex: 1,
-          overflowY: "auto",
-          padding: 24,
-          display: "flex",
-          flexDirection: "column",
-          gap: 24,
-        }}>
-
+        <main
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: 24,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 24,
+          }}
+        >
           {/* Content header */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Text variant="title-2">
-              {navItems.find((n) => n.id === activeNav)?.label ?? "Home"}
+              {navItems.find((n) => n.id === activeNav)?.label ?? 'Home'}
             </Text>
             <InlineViewSwitcher
               value={contentView}
               onValueChange={setContentView}
               aria-label="Layout"
             >
-              <InlineViewSwitcherItem name="grid"    label="Grid" />
-              <InlineViewSwitcherItem name="list"    label="List" />
+              <InlineViewSwitcherItem name="grid" label="Grid" />
+              <InlineViewSwitcherItem name="list" label="List" />
               <InlineViewSwitcherItem name="details" label="Details" />
             </InlineViewSwitcher>
           </div>
 
-          {activeNav === "home" && (
+          {activeNav === 'home' && (
             <>
               {/* Summary cards */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 16 }}>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+                  gap: 16,
+                }}
+              >
                 {[
-                  { label: "Documents",  value: "1 248",   accent: false },
-                  { label: "Starred",    value: "3",       accent: true  },
-                  { label: "Shared",     value: "24",      accent: false },
-                  { label: "Trash",      value: "7 items", accent: false },
+                  { label: 'Documents', value: '1 248', accent: false },
+                  { label: 'Starred', value: '3', accent: true },
+                  { label: 'Shared', value: '24', accent: false },
+                  { label: 'Trash', value: '7 items', accent: false },
                 ].map(({ label, value, accent }) => (
                   <Card key={label} style={{ padding: 20 }}>
-                    <Text variant="caption" color="dim">{label}</Text>
+                    <Text variant="caption" color="dim">
+                      {label}
+                    </Text>
                     <Text
                       variant="title-2"
-                      style={{ color: accent ? "var(--gnome-accent-color, #3584e4)" : undefined }}
+                      style={{ color: accent ? 'var(--gnome-accent-color, #3584e4)' : undefined }}
                     >
                       {value}
                     </Text>
@@ -295,7 +339,11 @@ function Dashboard() {
 
               {/* Recent files */}
               <div>
-                <Text variant="caption-heading" color="dim" style={{ marginBottom: 8, paddingLeft: 4 }}>
+                <Text
+                  variant="caption-heading"
+                  color="dim"
+                  style={{ marginBottom: 8, paddingLeft: 4 }}
+                >
                   Recent
                 </Text>
                 <BoxedList>
@@ -322,41 +370,59 @@ function Dashboard() {
 
               {/* Expandable section */}
               <div>
-                <Text variant="caption-heading" color="dim" style={{ marginBottom: 8, paddingLeft: 4 }}>
+                <Text
+                  variant="caption-heading"
+                  color="dim"
+                  style={{ marginBottom: 8, paddingLeft: 4 }}
+                >
                   Devices
                 </Text>
                 <BoxedList>
-                  <ExpanderRow title="Home Server" subtitle="Connected · 1.2 TB free" defaultExpanded>
-                    <ActionRow variant="property" title="Hostname"    subtitle="homeserver.local" />
-                    <ActionRow variant="property" title="Protocol"    subtitle="SMB / CIFS" />
+                  <ExpanderRow
+                    title="Home Server"
+                    subtitle="Connected · 1.2 TB free"
+                    defaultExpanded
+                  >
+                    <ActionRow variant="property" title="Hostname" subtitle="homeserver.local" />
+                    <ActionRow variant="property" title="Protocol" subtitle="SMB / CIFS" />
                     <ActionRow variant="property" title="Mount point" subtitle="/mnt/home" />
                   </ExpanderRow>
                   <ExpanderRow title="USB Drive" subtitle="32 GB · FAT32">
                     <ActionRow variant="property" title="Capacity" subtitle="32 GB" />
-                    <ActionRow variant="property" title="Used"     subtitle="14.2 GB" />
+                    <ActionRow variant="property" title="Used" subtitle="14.2 GB" />
                   </ExpanderRow>
                 </BoxedList>
               </div>
             </>
           )}
 
-          {activeNav === "settings" && (
+          {activeNav === 'settings' && (
             <BoxedList>
-              <ActionRow title="Auto-sync" subtitle="Keep files up to date automatically" trailing={<Switch defaultChecked aria-label="Auto-sync" />} />
-              <ActionRow title="Show hidden files" trailing={<Switch aria-label="Hidden files" />} />
-              <ActionRow title="Sort by name" trailing={<Switch defaultChecked aria-label="Sort by name" />} />
+              <ActionRow
+                title="Auto-sync"
+                subtitle="Keep files up to date automatically"
+                trailing={<Switch defaultChecked aria-label="Auto-sync" />}
+              />
+              <ActionRow
+                title="Show hidden files"
+                trailing={<Switch aria-label="Hidden files" />}
+              />
+              <ActionRow
+                title="Sort by name"
+                trailing={<Switch defaultChecked aria-label="Sort by name" />}
+              />
             </BoxedList>
           )}
 
-          {(activeNav === "starred" || activeNav === "shared") && (
+          {(activeNav === 'starred' || activeNav === 'shared') && (
             <StatusPage
               compact
-              icon={activeNav === "starred" ? Star : Share}
-              title={activeNav === "starred" ? "No Starred Files" : "Nothing Shared"}
+              icon={activeNav === 'starred' ? Star : Share}
+              title={activeNav === 'starred' ? 'No Starred Files' : 'Nothing Shared'}
               description={
-                activeNav === "starred"
-                  ? "Star files to access them quickly from here."
-                  : "Files you share with others will appear here."
+                activeNav === 'starred'
+                  ? 'Star files to access them quickly from here.'
+                  : 'Files you share with others will appear here.'
               }
             />
           )}
@@ -364,12 +430,14 @@ function Dashboard() {
       </div>
 
       {/* ── Footer ──────────────────────────────────────────────────────── */}
-      <footer style={{
-        flexShrink: 0,
-        borderTop: "1px solid var(--gnome-headerbar-border-color, rgba(0,0,0,0.12))",
-        background: "var(--gnome-headerbar-bg-color, #ebebeb)",
-      }}>
-        <Toolbar style={{ minHeight: 36, padding: "0 16px" }}>
+      <footer
+        style={{
+          flexShrink: 0,
+          borderTop: '1px solid var(--gnome-headerbar-border-color, rgba(0,0,0,0.12))',
+          background: 'var(--gnome-headerbar-bg-color, #ebebeb)',
+        }}
+      >
+        <Toolbar style={{ minHeight: 36, padding: '0 16px' }}>
           <Text variant="caption" color="dim">
             1 248 items · 48.3 GB used of 1 TB
           </Text>
@@ -386,9 +454,9 @@ function Dashboard() {
 // ─── Meta ──────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
-  title: "Layout/Dashboard",
+  title: 'Layout/Dashboard',
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `

@@ -1,24 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { DashboardGrid } from "./DashboardGrid";
+import type { Meta, StoryObj } from '@storybook/react';
 
-const Placeholder = ({
-  label,
-  height = 120,
-}: {
-  label: string;
-  height?: number;
-}) => (
+import { DashboardGrid } from './DashboardGrid';
+
+const Placeholder = ({ label, height = 120 }: { label: string; height?: number }) => (
   <div
     style={{
       height,
-      background: "var(--gnome-card-bg, #f6f5f4)",
-      border: "1px solid var(--gnome-border-color, #deddda)",
+      background: 'var(--gnome-card-bg, #f6f5f4)',
+      border: '1px solid var(--gnome-border-color, #deddda)',
       borderRadius: 12,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       fontWeight: 500,
-      color: "var(--gnome-dim-label-color, #77767b)",
+      color: 'var(--gnome-dim-label-color, #77767b)',
       fontSize: 14,
     }}
   >
@@ -27,11 +22,11 @@ const Placeholder = ({
 );
 
 const meta: Meta<typeof DashboardGrid> = {
-  title: "Layout/DashboardGrid",
+  title: 'Layout/DashboardGrid',
   component: DashboardGrid,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -75,8 +70,8 @@ import { DashboardGrid } from "@gnome-ui/layout";
     columns: { control: false },
     gap: { control: false },
     layout: {
-      control: { type: "radio" },
-      options: ["grid", "column"],
+      control: { type: 'radio' },
+      options: ['grid', 'column'],
     },
   },
 };
@@ -86,12 +81,12 @@ type Story = StoryObj<typeof DashboardGrid>;
 
 export const Default: Story = {
   args: {
-    columns: "auto",
-    gap: "md",
+    columns: 'auto',
+    gap: 'md',
   },
   render: (args) => (
     <DashboardGrid {...args}>
-      {["Widget A", "Widget B", "Widget C", "Widget D"].map((label) => (
+      {['Widget A', 'Widget B', 'Widget C', 'Widget D'].map((label) => (
         <DashboardGrid.Item key={label}>
           <Placeholder label={label} />
         </DashboardGrid.Item>
@@ -113,7 +108,7 @@ export const TwelveColumnGrid: Story = {
   parameters: {
     docs: {
       description: {
-        story: "12-column base grid. Each item occupies one column.",
+        story: '12-column base grid. Each item occupies one column.',
       },
     },
   },
@@ -122,20 +117,17 @@ export const TwelveColumnGrid: Story = {
 export const ResponsiveColumns: Story = {
   render: () => (
     <DashboardGrid columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }} gap="md">
-      {["Users", "Revenue", "Sessions", "Errors", "Latency", "Uptime"].map(
-        (label) => (
-          <DashboardGrid.Item key={label}>
-            <Placeholder label={label} />
-          </DashboardGrid.Item>
-        ),
-      )}
+      {['Users', 'Revenue', 'Sessions', 'Errors', 'Latency', 'Uptime'].map((label) => (
+        <DashboardGrid.Item key={label}>
+          <Placeholder label={label} />
+        </DashboardGrid.Item>
+      ))}
     </DashboardGrid>
   ),
   parameters: {
     docs: {
       description: {
-        story:
-          "Responsive columns: 1 on mobile, 2 at sm, 3 at md, 4 at lg, 6 at xl.",
+        story: 'Responsive columns: 1 on mobile, 2 at sm, 3 at md, 4 at lg, 6 at xl.',
       },
     },
   },
@@ -165,7 +157,7 @@ export const ResponsiveSpan: Story = {
     docs: {
       description: {
         story:
-          "Each item declares its own responsive span. Resize the window to see the layout adapt.",
+          'Each item declares its own responsive span. Resize the window to see the layout adapt.',
       },
     },
   },
@@ -192,7 +184,7 @@ export const WithOffset: Story = {
     docs: {
       description: {
         story:
-          "Use `offset` to skip columns before an item. `offset={2}` on a 12-column grid pushes the item right by 2 columns.",
+          'Use `offset` to skip columns before an item. `offset={2}` on a 12-column grid pushes the item right by 2 columns.',
       },
     },
   },
@@ -200,11 +192,8 @@ export const WithOffset: Story = {
 
 export const ResponsiveGap: Story = {
   render: () => (
-    <DashboardGrid
-      columns={{ xs: 1, sm: 2, md: 3 }}
-      gap={{ xs: "sm", md: "md", xl: "lg" }}
-    >
-      {["A", "B", "C", "D", "E", "F"].map((label) => (
+    <DashboardGrid columns={{ xs: 1, sm: 2, md: 3 }} gap={{ xs: 'sm', md: 'md', xl: 'lg' }}>
+      {['A', 'B', 'C', 'D', 'E', 'F'].map((label) => (
         <DashboardGrid.Item key={label}>
           <Placeholder label={label} height={80} />
         </DashboardGrid.Item>
@@ -214,8 +203,7 @@ export const ResponsiveGap: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Gap adapts to the breakpoint: `sm` at mobile, `md` at 768px+, `lg` at 1200px+.",
+        story: 'Gap adapts to the breakpoint: `sm` at mobile, `md` at 768px+, `lg` at 1200px+.',
       },
     },
   },
@@ -223,12 +211,12 @@ export const ResponsiveGap: Story = {
 
 export const ColumnLayout: Story = {
   args: {
-    layout: "column",
-    gap: "md",
+    layout: 'column',
+    gap: 'md',
   },
   render: (args) => (
     <DashboardGrid {...args}>
-      {["Queue", "Workers", "Deployments"].map((label) => (
+      {['Queue', 'Workers', 'Deployments'].map((label) => (
         <DashboardGrid.Item key={label}>
           <Placeholder label={label} height={88} />
         </DashboardGrid.Item>
@@ -238,7 +226,7 @@ export const ColumnLayout: Story = {
   parameters: {
     docs: {
       description: {
-        story: "`layout=\"column\"` stacks children vertically.",
+        story: '`layout="column"` stacks children vertically.',
       },
     },
   },
@@ -284,11 +272,11 @@ export const RealisticDashboard: Story = {
     </DashboardGrid>
   ),
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         story:
-          "Full 12-column responsive dashboard with KPIs, charts, panels, and an offset-centered status bar.",
+          'Full 12-column responsive dashboard with KPIs, charts, panels, and an offset-centered status bar.',
       },
     },
   },
@@ -296,14 +284,12 @@ export const RealisticDashboard: Story = {
 
 export const GapVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-      {(["sm", "md", "lg"] as const).map((gap) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+      {(['sm', 'md', 'lg'] as const).map((gap) => (
         <div key={gap}>
-          <p style={{ marginBottom: 8, fontWeight: 600, fontSize: 13 }}>
-            gap="{gap}"
-          </p>
+          <p style={{ marginBottom: 8, fontWeight: 600, fontSize: 13 }}>gap="{gap}"</p>
           <DashboardGrid columns={3} gap={gap}>
-            {["A", "B", "C"].map((l) => (
+            {['A', 'B', 'C'].map((l) => (
               <DashboardGrid.Item key={l}>
                 <Placeholder label={l} height={80} />
               </DashboardGrid.Item>
@@ -314,6 +300,6 @@ export const GapVariants: Story = {
     </div>
   ),
   parameters: {
-    docs: { description: { story: "All three gap sizes side by side." } },
+    docs: { description: { story: 'All three gap sizes side by side.' } },
   },
 };

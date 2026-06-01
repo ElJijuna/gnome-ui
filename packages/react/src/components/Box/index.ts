@@ -1,2 +1,2 @@
-export { Box } from "./Box";
-export type { BoxProps, BoxOrientation, BoxAlign, BoxJustify, BoxSpacing, BoxPadding } from "./Box";
+export type { BoxAlign, BoxJustify, BoxOrientation, BoxPadding, BoxProps, BoxSpacing } from './Box';
+export { Box } from './Box';

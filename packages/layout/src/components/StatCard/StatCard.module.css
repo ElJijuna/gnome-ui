@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 8px;
   min-width: 0;
-  padding: 20px !important;
+  padding: 20px;
 }
 
 .withBackgroundChart {
@@ -69,12 +69,12 @@
   overflow-wrap: anywhere;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
-  line-height: 1 !important;
+  line-height: 1;
 }
 
 .unit {
   flex-shrink: 0;
-  line-height: 1 !important;
+  line-height: 1;
 }
 
 .trend {
@@ -98,15 +98,15 @@
 }
 
 .up {
-  color: var(--gnome-success-color, #26a269) !important;
+  color: var(--gnome-success-color, #26a269);
 }
 
 .down {
-  color: var(--gnome-error-color, #e01b24) !important;
+  color: var(--gnome-error-color, #e01b24);
 }
 
 .neutral {
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8)) !important;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
 }
 

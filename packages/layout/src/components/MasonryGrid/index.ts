@@ -1,2 +1,2 @@
-export { MasonryGrid } from "./MasonryGrid";
-export type { MasonryGridProps, MasonryGridColumns } from "./MasonryGrid";
+export type { MasonryGridColumns, MasonryGridProps } from './MasonryGrid';
+export { MasonryGrid } from './MasonryGrid';

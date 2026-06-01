@@ -1,6 +1,7 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Text } from "@gnome-ui/react";
-import styles from "./SectionHeader.module.css";
+import { Text } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './SectionHeader.module.css';
 
 export interface SectionHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /** Section title text. */
@@ -29,10 +30,7 @@ export function SectionHeader({
   ...props
 }: SectionHeaderProps) {
   return (
-    <div
-      className={[styles.root, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
       <div className={styles.text}>
         <Text variant="title-4" className={styles.title}>
           {title}

@@ -1,14 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { HeaderBar } from "./HeaderBar";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { HeaderBar } from './HeaderBar';
 
 const meta: Meta<typeof HeaderBar> = {
-  title: "Components/HeaderBar",
+  title: 'Components/HeaderBar',
   component: HeaderBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -28,11 +30,11 @@ Mirrors the Adwaita \`AdwHeaderBar\` pattern.
     },
   },
   argTypes: {
-    title: { control: "text" },
-    flat: { control: "boolean" },
+    title: { control: 'text' },
+    flat: { control: 'boolean' },
   },
   args: {
-    title: "Inbox",
+    title: 'Inbox',
     flat: false,
   },
 };
@@ -48,9 +50,17 @@ export const Default: Story = {};
 
 export const WithActions: Story = {
   args: {
-    title: "Contacts",
-    start: <Button variant="flat" aria-label="Back">← Back</Button>,
-    end: <Button variant="flat" aria-label="Add contact">+ Add</Button>,
+    title: 'Contacts',
+    start: (
+      <Button variant="flat" aria-label="Back">
+        ← Back
+      </Button>
+    ),
+    end: (
+      <Button variant="flat" aria-label="Add contact">
+        + Add
+      </Button>
+    ),
   },
 };
 
@@ -58,15 +68,23 @@ export const WithActions: Story = {
 
 export const MultipleActions: Story = {
   args: {
-    title: "Files",
+    title: 'Files',
     start: (
-      <Button variant="flat" aria-label="Toggle sidebar">☰</Button>
+      <Button variant="flat" aria-label="Toggle sidebar">
+        ☰
+      </Button>
     ),
     end: (
       <>
-        <Button variant="flat" aria-label="New folder">+ Folder</Button>
-        <Button variant="flat" aria-label="Search">⌕</Button>
-        <Button variant="flat" aria-label="View options">⋮</Button>
+        <Button variant="flat" aria-label="New folder">
+          + Folder
+        </Button>
+        <Button variant="flat" aria-label="Search">
+          ⌕
+        </Button>
+        <Button variant="flat" aria-label="View options">
+          ⋮
+        </Button>
       </>
     ),
   },
@@ -77,14 +95,15 @@ export const MultipleActions: Story = {
 
 export const Flat: Story = {
   args: {
-    title: "Settings",
+    title: 'Settings',
     flat: true,
     end: <Button variant="flat">Done</Button>,
   },
   parameters: {
     docs: {
       description: {
-        story: "Use `flat` for the topmost bar — removes the bottom border so it merges with the window chrome.",
+        story:
+          'Use `flat` for the topmost bar — removes the bottom border so it merges with the window chrome.',
       },
     },
   },
@@ -96,9 +115,11 @@ export const CustomTitle: Story = {
   render: () => (
     <HeaderBar
       title={
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
           <Text variant="heading">Music</Text>
-          <Text variant="caption" color="dim">42 songs</Text>
+          <Text variant="caption" color="dim">
+            42 songs
+          </Text>
         </div>
       }
       start={<Button variant="flat">← Back</Button>}
@@ -109,7 +130,7 @@ export const CustomTitle: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Pass a custom element to `title` for a two-line title (name + subtitle).",
+        story: 'Pass a custom element to `title` for a two-line title (name + subtitle).',
       },
     },
   },
@@ -121,27 +142,29 @@ export const InLayout: Story = {
   render: () => (
     <div
       style={{
-        border: "1px solid rgba(0,0,0,0.1)",
+        border: '1px solid rgba(0,0,0,0.1)',
         borderRadius: 12,
-        overflow: "hidden",
+        overflow: 'hidden',
         maxWidth: 480,
       }}
     >
       <HeaderBar
         title="Preferences"
         start={<Button variant="flat">← Back</Button>}
-        end={<Button variant="suggested" size="sm">Save</Button>}
+        end={
+          <Button variant="suggested" size="sm">
+            Save
+          </Button>
+        }
       />
-      <div style={{ padding: 24, fontFamily: "sans-serif", opacity: 0.4 }}>
-        View content area
-      </div>
+      <div style={{ padding: 24, fontFamily: 'sans-serif', opacity: 0.4 }}>View content area</div>
     </div>
   ),
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "The header bar sits at the top of a view, spanning its full width.",
+        story: 'The header bar sits at the top of a view, spanning its full width.',
       },
     },
   },

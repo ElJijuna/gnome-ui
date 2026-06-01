@@ -1,15 +1,17 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { BottomSheet } from "./BottomSheet";
-import { Button } from "../Button";
-import { BoxedList } from "../BoxedList";
-import { ActionRow } from "../ActionRow";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { BottomSheet } from './BottomSheet';
 
 const meta: Meta<typeof BottomSheet> = {
-  title: "Components/BottomSheet",
+  title: 'Components/BottomSheet',
   component: BottomSheet,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -28,13 +30,13 @@ Mirrors \`AdwBottomSheet\` (libadwaita 1.6+). Renders into a portal on
     },
   },
   argTypes: {
-    open: { control: "boolean" },
-    title: { control: "text" },
-    closeOnBackdrop: { control: "boolean" },
+    open: { control: 'boolean' },
+    title: { control: 'text' },
+    closeOnBackdrop: { control: 'boolean' },
   },
   args: {
     open: false,
-    title: "Actions",
+    title: 'Actions',
     closeOnBackdrop: true,
   },
 };
@@ -47,11 +49,14 @@ type Story = StoryObj<typeof BottomSheet>;
 export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Bottom Sheet</Button>
         <BottomSheet {...args} open={open} onClose={() => setOpen(false)}>
-          <Text variant="body" color="dim">Bottom sheet content goes here.</Text>
+          <Text variant="body" color="dim">
+            Bottom sheet content goes here.
+          </Text>
         </BottomSheet>
       </>
     );
@@ -64,14 +69,27 @@ export const Default: Story = {
 export const WithActions: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>Share…</Button>
         <BottomSheet open={open} title="Share via" onClose={() => setOpen(false)}>
           <BoxedList>
-            <ActionRow title="Copy link"      subtitle="Copy to clipboard"  onClick={() => setOpen(false)} />
-            <ActionRow title="Send by email"  subtitle="Open mail composer" onClick={() => setOpen(false)} />
-            <ActionRow title="Bluetooth"      subtitle="Send to nearby device" onClick={() => setOpen(false)} />
+            <ActionRow
+              title="Copy link"
+              subtitle="Copy to clipboard"
+              onClick={() => setOpen(false)}
+            />
+            <ActionRow
+              title="Send by email"
+              subtitle="Open mail composer"
+              onClick={() => setOpen(false)}
+            />
+            <ActionRow
+              title="Bluetooth"
+              subtitle="Send to nearby device"
+              onClick={() => setOpen(false)}
+            />
           </BoxedList>
         </BottomSheet>
       </>
@@ -80,7 +98,9 @@ export const WithActions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "A share sheet using `BoxedList` + `ActionRow` inside a `BottomSheet`." },
+      description: {
+        story: 'A share sheet using `BoxedList` + `ActionRow` inside a `BottomSheet`.',
+      },
     },
   },
 };
@@ -90,6 +110,7 @@ export const WithActions: Story = {
 export const NoBackdropClose: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open</Button>
@@ -99,9 +120,13 @@ export const NoBackdropClose: Story = {
           onClose={() => setOpen(false)}
           closeOnBackdrop={false}
         >
-          <Text variant="body" color="dim">This sheet can only be closed with the Escape key.</Text>
+          <Text variant="body" color="dim">
+            This sheet can only be closed with the Escape key.
+          </Text>
           <div style={{ marginTop: 16 }}>
-            <Button variant="suggested" onClick={() => setOpen(false)}>Done</Button>
+            <Button variant="suggested" onClick={() => setOpen(false)}>
+              Done
+            </Button>
           </div>
         </BottomSheet>
       </>
@@ -110,7 +135,9 @@ export const NoBackdropClose: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Set `closeOnBackdrop={false}` to prevent dismissal by tapping outside." },
+      description: {
+        story: 'Set `closeOnBackdrop={false}` to prevent dismissal by tapping outside.',
+      },
     },
   },
 };

@@ -1,16 +1,10 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./IconBadge.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export type IconBadgeColor =
-  | "blue"
-  | "green"
-  | "yellow"
-  | "orange"
-  | "red"
-  | "purple"
-  | "brown";
+import styles from './IconBadge.module.css';
 
-export type IconBadgeSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type IconBadgeColor = 'blue' | 'green' | 'yellow' | 'orange' | 'red' | 'purple' | 'brown';
+
+export type IconBadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export interface IconBadgeProps extends HTMLAttributes<HTMLDivElement> {
   color?: IconBadgeColor | (string & {});
@@ -20,7 +14,7 @@ export interface IconBadgeProps extends HTMLAttributes<HTMLDivElement> {
 
 export function IconBadge({
   color,
-  size = "md",
+  size = 'md',
   className,
   style,
   children,
@@ -37,7 +31,7 @@ export function IconBadge({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       style={{
         ...(isHex && {
           background: `color-mix(in srgb, ${color} 15%, transparent)`,

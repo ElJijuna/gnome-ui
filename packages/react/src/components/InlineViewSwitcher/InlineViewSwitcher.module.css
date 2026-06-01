@@ -32,7 +32,7 @@
 
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
-    box-shadow       var(--gnome-duration-fast) var(--gnome-easing-default);
+    box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
 .iconOnly {
@@ -77,14 +77,15 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #ffffff),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .default .active {
   background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 15%, transparent);
   color: var(--gnome-accent-color, #3584e4);
   font-weight: var(--gnome-font-weight-semibold, 600);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 40%, transparent);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 40%, transparent);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -106,13 +107,14 @@
     box-shadow:
       0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #383838),
       0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-        var(--gnome-focus-ring-color, #78aeed);
+      var(--gnome-focus-ring-color, #78aeed);
   }
 
   .default .active {
     background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 25%, transparent);
     color: var(--gnome-accent-color, #78aeed);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 50%, transparent);
+    box-shadow: inset 0 0 0 1px
+      color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 50%, transparent);
   }
 }
 
@@ -144,7 +146,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .flat .active {
@@ -197,7 +199,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #ffffff),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .round .active {
@@ -226,7 +228,7 @@
     box-shadow:
       0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #383838),
       0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-        var(--gnome-focus-ring-color, #78aeed);
+      var(--gnome-focus-ring-color, #78aeed);
   }
 }
 
@@ -259,7 +261,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .pill .active {
@@ -279,7 +281,7 @@
   }
 
   .pill .item:active:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.10);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .pill .active {

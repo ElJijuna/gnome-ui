@@ -1,11 +1,8 @@
-import {
-  useEffect,
-  useRef,
-  type HTMLAttributes,
-} from "react";
-import styles from "./TerminalView.module.css";
+import { type HTMLAttributes, useEffect, useRef } from 'react';
 
-export type TerminalVariant = "default" | "success" | "warning" | "destructive";
+import styles from './TerminalView.module.css';
+
+export type TerminalVariant = 'default' | 'success' | 'warning' | 'destructive';
 
 export interface TerminalViewProps extends HTMLAttributes<HTMLDivElement> {
   /** Lines of text to display. */
@@ -20,7 +17,7 @@ export interface TerminalViewProps extends HTMLAttributes<HTMLDivElement> {
 
 export function TerminalView({
   lines,
-  variant = "default",
+  variant = 'default',
   maxLines = 500,
   autoScroll = true,
   className,
@@ -31,15 +28,13 @@ export function TerminalView({
 
   useEffect(() => {
     if (autoScroll) {
-      bottomRef.current?.scrollIntoView({ block: "nearest" });
+      bottomRef.current?.scrollIntoView({ block: 'nearest' });
     }
-  }, [visibleLines.length, autoScroll]);
+  }, [autoScroll]);
 
   return (
     <div
-      className={[styles.terminal, styles[variant], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.terminal, styles[variant], className].filter(Boolean).join(' ')}
       {...props}
     >
       <pre className={styles.pre}>

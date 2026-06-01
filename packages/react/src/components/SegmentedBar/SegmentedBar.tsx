@@ -1,7 +1,9 @@
-import { useState, memo } from "react";
-import type { HTMLAttributes } from "react";
-import { Tooltip } from "../Tooltip";
-import styles from "./SegmentedBar.module.css";
+import type { HTMLAttributes } from 'react';
+import { memo, useState } from 'react';
+
+import { Tooltip } from '../Tooltip';
+
+import styles from './SegmentedBar.module.css';
 
 export interface SegmentedBarSegment {
   /** Category name shown in the tooltip. */
@@ -26,7 +28,7 @@ export interface SegmentedBarProps extends HTMLAttributes<HTMLDivElement> {
    * Accessible label for the bar as a whole.
    * Auto-generated from `values` when omitted (e.g. "TypeScript 45%, JavaScript 30%").
    */
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 const COLOR_COUNT = 8;
@@ -50,20 +52,20 @@ const COLOR_COUNT = 8;
 export const SegmentedBar = memo(function SegmentedBar({
   values,
   className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
   ...props
 }: SegmentedBarProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const total = values.reduce((sum, s) => sum + s.value, 0) || 100;
 
-  const defaultLabel = values.map((s) => `${s.label} ${s.value}%`).join(", ");
+  const defaultLabel = values.map((s) => `${s.label} ${s.value}%`).join(', ');
 
   return (
     <div
       role="img"
       aria-label={ariaLabel ?? defaultLabel}
-      className={[styles.track, className].filter(Boolean).join(" ")}
+      className={[styles.track, className].filter(Boolean).join(' ')}
       {...props}
     >
       {values.map((segment, i) => {
@@ -81,7 +83,7 @@ export const SegmentedBar = memo(function SegmentedBar({
                 activeIndex === i ? styles.highlighted : null,
               ]
                 .filter(Boolean)
-                .join(" ")}
+                .join(' ')}
               style={{
                 width,
                 ...(segment.color ? { backgroundColor: segment.color } : {}),

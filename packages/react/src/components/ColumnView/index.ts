@@ -1,8 +1,8 @@
-export { ColumnView } from "./ColumnView";
 export type {
-  ColumnViewProps,
   ColumnDef,
-  ColumnViewSortState,
+  ColumnViewProps,
   ColumnViewSelectionMode,
+  ColumnViewSortState,
   SortDirection,
-} from "./ColumnView";
+} from './ColumnView';
+export { ColumnView } from './ColumnView';

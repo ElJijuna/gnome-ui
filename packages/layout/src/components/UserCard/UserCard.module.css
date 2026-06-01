@@ -35,8 +35,8 @@
 }
 
 .name {
-  font-weight: var(--gnome-font-weight-semibold, 600) !important;
-  line-height: 1.25 !important;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -88,7 +88,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 /* ─── Destructive variant ────────────────────────────────────────────────────── */
@@ -113,4 +113,3 @@
   justify-content: center;
   min-height: 80px;
 }
-

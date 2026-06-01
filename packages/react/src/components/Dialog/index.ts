@@ -1,7 +1,7 @@
-export { Dialog } from "./Dialog";
 export type {
-  DialogProps,
-  DialogButton,
   AlertDialogResponse,
   AlertDialogResponseVariant,
-} from "./Dialog";
+  DialogButton,
+  DialogProps,
+} from './Dialog';
+export { Dialog } from './Dialog';

@@ -1,12 +1,11 @@
-/* eslint-disable */
-import type { IconDefinition } from "../types.ts";
+import type { IconDefinition } from '../types.ts';
 
 /** format-text-rich-symbolic.svg (actions/format-text-rich) */
 export const FormatTextRich: IconDefinition = {
-  viewBox: "0 0 16 16",
+  viewBox: '0 0 16 16',
   paths: [
-  {
-    d: "m 6.53125 1 l -3.539062 12 h -1 v 1 h 4 v -1 h -0.957032 l 0.894532 -3 h 3.125 l 0.890624 3 h -0.953124 v 1 h 5 v -1 h -0.660157 l -3.839843 -12 z m 0.960938 3.789062 l 1.261718 4.210938 h -2.527344 z m 0 0"
-  }
-],
+    {
+      d: 'm 6.53125 1 l -3.539062 12 h -1 v 1 h 4 v -1 h -0.957032 l 0.894532 -3 h 3.125 l 0.890624 3 h -0.953124 v 1 h 5 v -1 h -0.660157 l -3.839843 -12 z m 0.960938 3.789062 l 1.261718 4.210938 h -2.527344 z m 0 0',
+    },
+  ],
 };

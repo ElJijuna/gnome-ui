@@ -1,5 +1,6 @@
-import { type HTMLAttributes, type ReactNode } from "react";
-import styles from "./PreferencesPage.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './PreferencesPage.module.css';
 
 export interface PreferencesPageProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -34,11 +35,7 @@ export function PreferencesPage({
   ...props
 }: PreferencesPageProps) {
   return (
-    <div
-      className={[styles.page, className].filter(Boolean).join(" ")}
-      role="tabpanel"
-      {...props}
-    >
+    <div className={[styles.page, className].filter(Boolean).join(' ')} role="tabpanel" {...props}>
       <div className={styles.inner}>{children}</div>
     </div>
   );

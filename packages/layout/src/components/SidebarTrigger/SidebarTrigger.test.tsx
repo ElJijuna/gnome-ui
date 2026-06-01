@@ -1,13 +1,14 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { act, fireEvent, render, screen } from "@testing-library/react";
-import { SidebarTrigger } from "./SidebarTrigger";
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { SidebarTrigger } from './SidebarTrigger';
 
 const originalMatchMedia = window.matchMedia;
 
 function mockMatchMedia(matches: boolean) {
   window.matchMedia = vi.fn().mockImplementation(() => ({
     matches,
-    media: "",
+    media: '',
     onchange: null,
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
@@ -25,12 +26,12 @@ function mockMutableMatchMedia(matches: boolean) {
     get matches() {
       return currentMatches;
     },
-    media: "",
+    media: '',
     onchange: null,
-    addEventListener: (_event: "change", listener: (event: MediaQueryListEvent) => void) => {
+    addEventListener: (_event: 'change', listener: (event: MediaQueryListEvent) => void) => {
       listeners.add(listener);
     },
-    removeEventListener: (_event: "change", listener: (event: MediaQueryListEvent) => void) => {
+    removeEventListener: (_event: 'change', listener: (event: MediaQueryListEvent) => void) => {
       listeners.delete(listener);
     },
     addListener: vi.fn(),
@@ -41,14 +42,12 @@ function mockMutableMatchMedia(matches: boolean) {
   return {
     setMatches(nextMatches: boolean) {
       currentMatches = nextMatches;
-      listeners.forEach((listener) =>
-        listener({ matches: nextMatches } as MediaQueryListEvent),
-      );
+      listeners.forEach((listener) => listener({ matches: nextMatches } as MediaQueryListEvent));
     },
   };
 }
 
-describe("SidebarTrigger", () => {
+describe('SidebarTrigger', () => {
   beforeEach(() => {
     mockMatchMedia(false);
   });
@@ -57,7 +56,7 @@ describe("SidebarTrigger", () => {
     window.matchMedia = originalMatchMedia;
   });
 
-  it("toggles collapsed state on wide screens", () => {
+  it('toggles collapsed state on wide screens', () => {
     const onOpenChange = vi.fn();
     const onCollapsedChange = vi.fn();
 
@@ -70,13 +69,13 @@ describe("SidebarTrigger", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(onCollapsedChange).toHaveBeenCalledWith(true);
     expect(onOpenChange).not.toHaveBeenCalled();
   });
 
-  it("toggles open state on overlay breakpoints", () => {
+  it('toggles open state on overlay breakpoints', () => {
     mockMatchMedia(true);
     const onOpenChange = vi.fn();
     const onCollapsedChange = vi.fn();
@@ -90,13 +89,13 @@ describe("SidebarTrigger", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getByRole('button'));
 
-    expect(onOpenChange).toHaveBeenCalledWith(true, "trigger");
+    expect(onOpenChange).toHaveBeenCalledWith(true, 'trigger');
     expect(onCollapsedChange).not.toHaveBeenCalled();
   });
 
-  it("reacts when the viewport crosses the overlay breakpoint", () => {
+  it('reacts when the viewport crosses the overlay breakpoint', () => {
     const media = mockMutableMatchMedia(false);
     const onOpenChange = vi.fn();
     const onCollapsedChange = vi.fn();
@@ -113,13 +112,13 @@ describe("SidebarTrigger", () => {
     act(() => {
       media.setMatches(true);
     });
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getByRole('button'));
 
-    expect(onOpenChange).toHaveBeenCalledWith(true, "trigger");
+    expect(onOpenChange).toHaveBeenCalledWith(true, 'trigger');
     expect(onCollapsedChange).not.toHaveBeenCalled();
   });
 
-  it("forwards aria-label", () => {
+  it('forwards aria-label', () => {
     render(
       <SidebarTrigger
         aria-label="Toggle navigation"
@@ -130,10 +129,10 @@ describe("SidebarTrigger", () => {
       />,
     );
 
-    expect(screen.getByRole("button", { name: "Toggle navigation" })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Toggle navigation' })).toBeInTheDocument();
   });
 
-  it("describes the wide-screen action from collapsed state", () => {
+  it('describes the wide-screen action from collapsed state', () => {
     render(
       <SidebarTrigger
         sidebarOpen={false}
@@ -143,10 +142,10 @@ describe("SidebarTrigger", () => {
       />,
     );
 
-    expect(screen.getByRole("button", { name: "Hide sidebar" })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Hide sidebar' })).toBeInTheDocument();
   });
 
-  it("describes the overlay action from open state", () => {
+  it('describes the overlay action from open state', () => {
     mockMatchMedia(true);
 
     render(
@@ -158,6 +157,6 @@ describe("SidebarTrigger", () => {
       />,
     );
 
-    expect(screen.getByRole("button", { name: "Hide sidebar" })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Hide sidebar' })).toBeInTheDocument();
   });
 });

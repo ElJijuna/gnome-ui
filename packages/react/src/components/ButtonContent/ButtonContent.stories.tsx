@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ButtonContent } from "./ButtonContent";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
-import { DocumentOpen, Save, Delete, Copy, GoNext } from "@gnome-ui/icons";
+import { Copy, Delete, DocumentOpen, GoNext, Save } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Icon } from '../Icon';
+
+import { ButtonContent } from './ButtonContent';
 
 const meta: Meta<typeof ButtonContent> = {
-  title: "Components/ButtonContent",
+  title: 'Components/ButtonContent',
   component: ButtonContent,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -28,18 +30,18 @@ Mirrors \`AdwButtonContent\`.
   },
   decorators: [
     (Story) => (
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         <Story />
       </div>
     ),
   ],
   argTypes: {
-    label: { control: "text" },
-    iconPosition: { control: "radio", options: ["start", "end"] },
+    label: { control: 'text' },
+    iconPosition: { control: 'radio', options: ['start', 'end'] },
   },
   args: {
-    label: "Open",
-    iconPosition: "start",
+    label: 'Open',
+    iconPosition: 'start',
   },
 };
 
@@ -73,7 +75,8 @@ export const IconPositions: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Icon before the label (`iconPosition=\"start\"`) and icon after (`iconPosition=\"end\"`).",
+        story:
+          'Icon before the label (`iconPosition="start"`) and icon after (`iconPosition="end"`).',
       },
     },
   },
@@ -99,7 +102,7 @@ export const ButtonVariants: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`ButtonContent` inside `suggested`, `destructive`, and `flat` button variants.",
+        story: '`ButtonContent` inside `suggested`, `destructive`, and `flat` button variants.',
       },
     },
   },

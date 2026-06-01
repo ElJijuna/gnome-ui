@@ -1,7 +1,8 @@
-import type { ElementType, HTMLAttributes, ReactNode } from "react";
-import styles from "./Card.module.css";
+import type { ElementType, HTMLAttributes, ReactNode } from 'react';
 
-export type CardPadding = "none" | "sm" | "md" | "lg";
+import styles from './Card.module.css';
+
+export type CardPadding = 'none' | 'sm' | 'md' | 'lg';
 
 export interface CardProps extends HTMLAttributes<HTMLElement> {
   /**
@@ -27,13 +28,13 @@ export interface CardProps extends HTMLAttributes<HTMLElement> {
  */
 export function Card({
   interactive = false,
-  padding = "md",
+  padding = 'md',
   as,
   className,
   children,
   ...props
 }: CardProps) {
-  const Tag: ElementType = as ?? (interactive ? "button" : "div");
+  const Tag: ElementType = as ?? (interactive ? 'button' : 'div');
 
   const classes = [
     styles.card,
@@ -42,7 +43,7 @@ export function Card({
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
     <Tag className={classes} {...props}>

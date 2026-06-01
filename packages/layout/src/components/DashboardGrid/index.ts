@@ -1,17 +1,17 @@
-export { DashboardGrid } from "./DashboardGrid";
 export type {
   DashboardGridBreakpoint,
-  DashboardGridProps,
-  DashboardGridItemProps,
-  DashboardGridColumns,
   DashboardGridColumnCount,
-  DashboardGridResponsiveColumns,
-  DashboardGridGapValue,
-  DashboardGridResponsiveGap,
+  DashboardGridColumns,
   DashboardGridGap,
+  DashboardGridGapValue,
+  DashboardGridItemProps,
   DashboardGridLayout,
-  DashboardGridSpanCount,
+  DashboardGridOffset,
+  DashboardGridProps,
+  DashboardGridResponsiveColumns,
+  DashboardGridResponsiveGap,
   DashboardGridResponsiveSpan,
   DashboardGridSpan,
-  DashboardGridOffset,
-} from "./DashboardGrid";
+  DashboardGridSpanCount,
+} from './DashboardGrid';
+export { DashboardGrid } from './DashboardGrid';

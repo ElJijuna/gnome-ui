@@ -1,10 +1,11 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Card, Skeleton, Spinner, Text, useNumberFormatter } from "@gnome-ui/react";
-import styles from "./StatCard.module.css";
+import { Card, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export type LoadingType = "skeleton" | "spinner";
+import styles from './StatCard.module.css';
 
-export type StatCardTrendDirection = "up" | "down" | "neutral";
+export type LoadingType = 'skeleton' | 'spinner';
+
+export type StatCardTrendDirection = 'up' | 'down' | 'neutral';
 
 export interface StatCardTrend {
   direction: StatCardTrendDirection;
@@ -32,9 +33,9 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const TREND_SYMBOL: Record<StatCardTrendDirection, string> = {
-  up: "up",
-  down: "down",
-  neutral: "steady",
+  up: 'up',
+  down: 'down',
+  neutral: 'steady',
 };
 
 export function StatCard({
@@ -45,18 +46,16 @@ export function StatCard({
   icon,
   backgroundChart,
   loading = false,
-  loadingType = "skeleton",
+  loadingType = 'skeleton',
   className,
   ...props
 }: StatCardProps) {
   const numberFormat = useNumberFormatter();
 
   if (loading) {
-    const rootClass = [styles.card, styles.loading, className]
-      .filter(Boolean)
-      .join(" ");
+    const rootClass = [styles.card, styles.loading, className].filter(Boolean).join(' ');
 
-    if (loadingType === "spinner") {
+    if (loadingType === 'spinner') {
       return (
         <Card className={rootClass} aria-busy="true" {...props}>
           <div className={styles.spinnerWrapper}>
@@ -78,15 +77,14 @@ export function StatCard({
     );
   }
 
-  const displayValue =
-    typeof value === "number" ? numberFormat.format(value) : value;
+  const displayValue = typeof value === 'number' ? numberFormat.format(value) : value;
   const accessibleValue = unit ? `${displayValue} ${unit}` : displayValue;
 
   return (
     <Card
       className={[styles.card, backgroundChart ? styles.withBackgroundChart : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {backgroundChart && (
@@ -107,10 +105,7 @@ export function StatCard({
           )}
         </div>
 
-        <div
-          className={styles.valueRow}
-          aria-label={`${label}: ${accessibleValue}`}
-        >
+        <div className={styles.valueRow} aria-label={`${label}: ${accessibleValue}`}>
           <Text variant="title-2" as="span" className={styles.value}>
             {displayValue}
           </Text>
@@ -125,17 +120,13 @@ export function StatCard({
           <Text
             variant="caption"
             as="span"
-            className={[styles.trend, styles[trend.direction]]
-              .filter(Boolean)
-              .join(" ")}
+            className={[styles.trend, styles[trend.direction]].filter(Boolean).join(' ')}
           >
             <span aria-hidden="true">{TREND_SYMBOL[trend.direction]}</span>
             <span className={styles.trendValue}>
-              {`${trend.value > 0 ? "+" : ""}${numberFormat.format(trend.value)}%`}
+              {`${trend.value > 0 ? '+' : ''}${numberFormat.format(trend.value)}%`}
             </span>
-            {trend.period && (
-              <span className={styles.period}>{trend.period}</span>
-            )}
+            {trend.period && <span className={styles.period}>{trend.period}</span>}
           </Text>
         )}
       </div>

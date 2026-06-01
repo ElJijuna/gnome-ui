@@ -1,13 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ContributionGraph } from "./ContributionGraph";
-import type { ContributionDay } from "./ContributionGraph";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import type { ContributionDay } from './ContributionGraph';
+import { ContributionGraph } from './ContributionGraph';
 
 const meta: Meta<typeof ContributionGraph> = {
-  title: "Data Display/ContributionGraph",
+  title: 'Data Display/ContributionGraph',
   component: ContributionGraph,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -32,18 +33,22 @@ type Story = StoryObj<typeof ContributionGraph>;
 function generateData(days = 365): ContributionDay[] {
   const result: ContributionDay[] = [];
   const today = new Date();
+
   today.setHours(0, 0, 0, 0);
   // Use a simple deterministic pattern so the story is stable across renders
   for (let i = 0; i < days; i++) {
     const date = new Date(today);
+
     date.setDate(today.getDate() - i);
-    const iso = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    const iso = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     // ~40 % of days have activity; count varies by weekday and week
-    const seed = (i * 7 + i % 13) % 10;
+    const seed = (i * 7 + (i % 13)) % 10;
+
     if (seed > 5) {
-      result.push({ date: iso, count: (seed * 3) % 14 + 1 });
+      result.push({ date: iso, count: ((seed * 3) % 14) + 1 });
     }
   }
+
   return result;
 }
 
@@ -62,7 +67,7 @@ export const SundayStart: Story = {
   },
   parameters: {
     docs: {
-      description: { story: "Week columns start on Sunday instead of Monday." },
+      description: { story: 'Week columns start on Sunday instead of Monday.' },
     },
   },
 };
@@ -77,7 +82,7 @@ export const LargerCells: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Larger cells for touch-friendly or high-density displays.",
+        story: 'Larger cells for touch-friendly or high-density displays.',
       },
     },
   },
@@ -94,7 +99,7 @@ export const NoLabels: Story = {
     docs: {
       description: {
         story:
-          "All labels hidden — suitable for compact inline usage where surrounding context provides the date range.",
+          'All labels hidden — suitable for compact inline usage where surrounding context provides the date range.',
       },
     },
   },
@@ -109,7 +114,7 @@ export const WithClickHandler: Story = {
     docs: {
       description: {
         story:
-          "Pass `onDayClick` to make cells interactive. Keyboard users can activate cells with Enter or Space.",
+          'Pass `onDayClick` to make cells interactive. Keyboard users can activate cells with Enter or Space.',
       },
     },
   },

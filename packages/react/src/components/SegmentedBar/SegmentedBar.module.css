@@ -18,22 +18,42 @@
   cursor: default;
   transition:
     opacity var(--gnome-duration-fast, 150ms) var(--gnome-easing-default, ease),
-    filter  var(--gnome-duration-fast, 150ms) var(--gnome-easing-default, ease);
+    filter var(--gnome-duration-fast, 150ms) var(--gnome-easing-default, ease);
 }
 
-.dimmed      { opacity: 0.35; }
-.highlighted { filter: brightness(1.15); }
+.dimmed {
+  opacity: 0.35;
+}
+.highlighted {
+  filter: brightness(1.15);
+}
 
 /* ─── Default palette (GNOME tokens, cycling across color families) ─────────── */
 
-.color0 { background-color: var(--gnome-blue-3,   #3584e4); }
-.color1 { background-color: var(--gnome-green-3,  #33d17a); }
-.color2 { background-color: var(--gnome-purple-3, #9141ac); }
-.color3 { background-color: var(--gnome-orange-3, #ff7800); }
-.color4 { background-color: var(--gnome-red-3,    #e01b24); }
-.color5 { background-color: var(--gnome-brown-3,  #986a44); }
-.color6 { background-color: var(--gnome-blue-5,   #1a5fb4); }
-.color7 { background-color: var(--gnome-green-5,  #26a269); }
+.color0 {
+  background-color: var(--gnome-blue-3, #3584e4);
+}
+.color1 {
+  background-color: var(--gnome-green-3, #33d17a);
+}
+.color2 {
+  background-color: var(--gnome-purple-3, #9141ac);
+}
+.color3 {
+  background-color: var(--gnome-orange-3, #ff7800);
+}
+.color4 {
+  background-color: var(--gnome-red-3, #e01b24);
+}
+.color5 {
+  background-color: var(--gnome-brown-3, #986a44);
+}
+.color6 {
+  background-color: var(--gnome-blue-5, #1a5fb4);
+}
+.color7 {
+  background-color: var(--gnome-green-5, #26a269);
+}
 
 /* ─── Dark mode ─────────────────────────────────────────────────────────────── */
 

@@ -1,3 +1,8 @@
-export type { IconDefinition, IconPath, RawPathIconDefinition, AnyIconDefinition } from "./types.ts";
-export * from "./icons/index.ts";
-export * from "./third-party/index.ts";
+export * from './icons/index.ts';
+export * from './third-party/index.ts';
+export type {
+  AnyIconDefinition,
+  IconDefinition,
+  IconPath,
+  RawPathIconDefinition,
+} from './types.ts';

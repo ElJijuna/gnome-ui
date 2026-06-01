@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ShortcutLabel } from "./ShortcutLabel";
-import { BoxedList } from "../BoxedList";
-import { ActionRow } from "../ActionRow";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+
+import { ShortcutLabel } from './ShortcutLabel';
 
 const meta: Meta<typeof ShortcutLabel> = {
-  title: "Components/ShortcutLabel",
+  title: 'Components/ShortcutLabel',
   component: ShortcutLabel,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -28,11 +30,11 @@ Mirrors \`GtkShortcutLabel\`.
     },
   },
   argTypes: {
-    shortcut: { control: "text" },
-    symbols: { control: "boolean" },
+    shortcut: { control: 'text' },
+    symbols: { control: 'boolean' },
   },
   args: {
-    shortcut: "Ctrl+S",
+    shortcut: 'Ctrl+S',
     symbols: true,
   },
 };
@@ -48,7 +50,7 @@ export const Default: Story = {};
 
 export const CommonShortcuts: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       <ShortcutLabel shortcut="Ctrl+S" />
       <ShortcutLabel shortcut="Ctrl+Shift+Z" />
       <ShortcutLabel shortcut="Ctrl+Alt+Delete" />
@@ -61,7 +63,7 @@ export const CommonShortcuts: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "A range of common shortcuts showing modifier normalisation.",
+        story: 'A range of common shortcuts showing modifier normalisation.',
       },
     },
   },
@@ -71,7 +73,7 @@ export const CommonShortcuts: Story = {
 
 export const RawTokens: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       <ShortcutLabel shortcut="Ctrl+S" symbols={false} />
       <ShortcutLabel shortcut="Ctrl+Shift+Z" symbols={false} />
     </div>
@@ -80,7 +82,7 @@ export const RawTokens: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`symbols={false}` renders the raw token names without normalisation.",
+        story: '`symbols={false}` renders the raw token names without normalisation.',
       },
     },
   },
@@ -104,7 +106,8 @@ export const AsActionRowSuffix: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Typical use: keyboard shortcut displayed as the suffix of an `ActionRow` in a shortcuts list.",
+        story:
+          'Typical use: keyboard shortcut displayed as the suffix of an `ActionRow` in a shortcuts list.',
       },
     },
   },

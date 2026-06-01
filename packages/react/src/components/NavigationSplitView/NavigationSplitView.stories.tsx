@@ -1,21 +1,23 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { NavigationSplitView } from "./NavigationSplitView";
-import { Sidebar } from "../Sidebar";
-import { SidebarItem } from "../Sidebar/SidebarItem";
-import { HeaderBar } from "../HeaderBar";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
-import { Text } from "../Text";
-import { useBreakpoint } from "../../hooks/useBreakpoint";
-import { GoHome, Star, Search, Settings, GoPrevious } from "@gnome-ui/icons";
+import { GoHome, GoPrevious, Search, Settings, Star } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { useBreakpoint } from '../../hooks/useBreakpoint';
+import { Button } from '../Button';
+import { HeaderBar } from '../HeaderBar';
+import { Icon } from '../Icon';
+import { Sidebar } from '../Sidebar';
+import { SidebarItem } from '../Sidebar/SidebarItem';
+import { Text } from '../Text';
+
+import { NavigationSplitView } from './NavigationSplitView';
 
 const meta: Meta<typeof NavigationSplitView> = {
-  title: "Adaptive/NavigationSplitView",
+  title: 'Adaptive/NavigationSplitView',
   component: NavigationSplitView,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -39,55 +41,65 @@ export default meta;
 type Story = StoryObj<typeof NavigationSplitView>;
 
 const items = [
-  { id: "home",     label: "Home",     icon: GoHome },
-  { id: "starred",  label: "Starred",  icon: Star },
-  { id: "search",   label: "Search",   icon: Search },
-  { id: "settings", label: "Settings", icon: Settings },
+  { id: 'home', label: 'Home', icon: GoHome },
+  { id: 'starred', label: 'Starred', icon: Star },
+  { id: 'search', label: 'Search', icon: Search },
+  { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
 export const NarrowViewport: Story = {
   render: function NarrowStory() {
-    const [active, setActive]           = useState("home");
+    const [active, setActive] = useState('home');
     const [showContent, setShowContent] = useState(false);
-    const { isNarrow }                  = useBreakpoint();
+    const { isNarrow } = useBreakpoint();
 
     return (
-      <div style={{ height: 480, display: "flex", flexDirection: "column", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden" }}>
+      <div
+        style={{
+          height: 480,
+          display: 'flex',
+          flexDirection: 'column',
+          border: '1px solid rgba(0,0,0,0.1)',
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
         <HeaderBar
-          title={isNarrow && showContent
-            ? items.find(i => i.id === active)?.label
-            : "Mail"}
-          start={isNarrow && showContent
-            ? (
+          title={isNarrow && showContent ? items.find((i) => i.id === active)?.label : 'Mail'}
+          start={
+            isNarrow && showContent ? (
               <Button variant="flat" aria-label="Back" onClick={() => setShowContent(false)}>
                 <Icon icon={GoPrevious} size="md" aria-hidden />
                 Back
               </Button>
-            )
-            : undefined}
+            ) : undefined
+          }
         />
         <NavigationSplitView
           style={{ flex: 1 }}
           showContent={showContent}
           sidebar={
-            <Sidebar style={{ height: "100%" }}>
+            <Sidebar style={{ height: '100%' }}>
               {items.map(({ id, label, icon }) => (
                 <SidebarItem
                   key={id}
                   icon={icon}
                   label={label}
                   active={active === id}
-                  onClick={() => { setActive(id); setShowContent(true); }}
+                  onClick={() => {
+                    setActive(id);
+                    setShowContent(true);
+                  }}
                 />
               ))}
             </Sidebar>
           }
           content={
             <div style={{ padding: 24 }}>
-              <Text variant="title-3">{items.find(i => i.id === active)?.label}</Text>
+              <Text variant="title-3">{items.find((i) => i.id === active)?.label}</Text>
               <Text variant="body" color="dim" style={{ marginTop: 8 }}>
-                Tap an item in the sidebar list to drill into the detail view.
-                Use the Back button to return.
+                Tap an item in the sidebar list to drill into the detail view. Use the Back button
+                to return.
               </Text>
             </div>
           }
@@ -97,12 +109,12 @@ export const NarrowViewport: Story = {
   },
   parameters: {
     controls: { disable: true },
-    viewport: { defaultViewport: "mobile1" },
+    viewport: { defaultViewport: 'mobile1' },
     docs: {
       description: {
         story:
-          "Narrow viewport (≤ 400 px): only one pane is visible at a time. " +
-          "Tap an item to navigate to the content pane; use Back to return to the sidebar list.",
+          'Narrow viewport (≤ 400 px): only one pane is visible at a time. ' +
+          'Tap an item to navigate to the content pane; use Back to return to the sidebar list.',
       },
     },
   },
@@ -110,46 +122,57 @@ export const NarrowViewport: Story = {
 
 export const Default: Story = {
   render: function DefaultStory() {
-    const [active, setActive]           = useState("home");
+    const [active, setActive] = useState('home');
     const [showContent, setShowContent] = useState(false);
-    const { isNarrow }                  = useBreakpoint();
+    const { isNarrow } = useBreakpoint();
 
     return (
-      <div style={{ height: 480, display: "flex", flexDirection: "column", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden" }}>
+      <div
+        style={{
+          height: 480,
+          display: 'flex',
+          flexDirection: 'column',
+          border: '1px solid rgba(0,0,0,0.1)',
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
         <HeaderBar
-          title={isNarrow && showContent
-            ? items.find(i => i.id === active)?.label
-            : "Mail"}
-          start={isNarrow && showContent
-            ? (
+          title={isNarrow && showContent ? items.find((i) => i.id === active)?.label : 'Mail'}
+          start={
+            isNarrow && showContent ? (
               <Button variant="flat" aria-label="Back" onClick={() => setShowContent(false)}>
                 <Icon icon={GoPrevious} size="md" aria-hidden />
                 Back
               </Button>
-            )
-            : undefined}
+            ) : undefined
+          }
         />
         <NavigationSplitView
           style={{ flex: 1 }}
           showContent={showContent}
           sidebar={
-            <Sidebar style={{ height: "100%" }}>
+            <Sidebar style={{ height: '100%' }}>
               {items.map(({ id, label, icon }) => (
                 <SidebarItem
                   key={id}
                   icon={icon}
                   label={label}
                   active={active === id}
-                  onClick={() => { setActive(id); setShowContent(true); }}
+                  onClick={() => {
+                    setActive(id);
+                    setShowContent(true);
+                  }}
                 />
               ))}
             </Sidebar>
           }
           content={
             <div style={{ padding: 24 }}>
-              <Text variant="title-3">{items.find(i => i.id === active)?.label}</Text>
+              <Text variant="title-3">{items.find((i) => i.id === active)?.label}</Text>
               <Text variant="body" color="dim" style={{ marginTop: 8 }}>
-                Content for the {active} view. Resize the window below 400 px to see the layout collapse.
+                Content for the {active} view. Resize the window below 400 px to see the layout
+                collapse.
               </Text>
             </div>
           }
