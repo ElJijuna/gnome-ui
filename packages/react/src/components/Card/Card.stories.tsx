@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Card } from "./Card";
-import { Text } from "../Text";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { Card } from './Card';
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: 'Components/Card',
   component: Card,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -24,15 +26,15 @@ Card component following the [GNOME HIG containers](https://developer.gnome.org/
     },
   },
   argTypes: {
-    interactive: { control: "boolean" },
+    interactive: { control: 'boolean' },
     padding: {
-      control: "select",
-      options: ["none", "sm", "md", "lg"],
+      control: 'select',
+      options: ['none', 'sm', 'md', 'lg'],
     },
   },
   args: {
     interactive: false,
-    padding: "md",
+    padding: 'md',
   },
   decorators: [
     (Story) => (
@@ -64,11 +66,10 @@ export const Default: Story = {
 export const Interactive: Story = {
   args: { interactive: true },
   render: (args) => (
-    <Card {...args} onClick={() => alert("Card clicked")}>
+    <Card {...args} onClick={() => alert('Card clicked')}>
       <Text variant="heading">Clickable card</Text>
       <Text variant="body" color="dim" style={{ marginTop: 4 }}>
-        Rendered as a <code>&lt;button&gt;</code>. Hover and click to see the
-        activatable states.
+        Rendered as a <code>&lt;button&gt;</code>. Hover and click to see the activatable states.
       </Text>
     </Card>
   ),
@@ -76,7 +77,7 @@ export const Interactive: Story = {
     docs: {
       description: {
         story:
-          "Interactive cards render as `<button>` for correct keyboard navigation and screen reader support.",
+          'Interactive cards render as `<button>` for correct keyboard navigation and screen reader support.',
       },
     },
   },
@@ -86,8 +87,8 @@ export const Interactive: Story = {
 
 export const PaddingSizes: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      {(["none", "sm", "md", "lg"] as const).map((p) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {(['none', 'sm', 'md', 'lg'] as const).map((p) => (
         <Card key={p} padding={p}>
           <Text variant="caption-heading" color="dim">
             padding="{p}"
@@ -106,10 +107,9 @@ export const WithAction: Story = {
     <Card>
       <Text variant="heading">Storage almost full</Text>
       <Text variant="body" color="dim" style={{ marginTop: 4, marginBottom: 16 }}>
-        You have used 18.3 GB of your 20 GB quota. Free up space to continue
-        syncing files.
+        You have used 18.3 GB of your 20 GB quota. Free up space to continue syncing files.
       </Text>
-      <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+      <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
         <Button variant="flat">Later</Button>
         <Button variant="suggested">Manage Storage</Button>
       </div>
@@ -124,13 +124,13 @@ export const InteractiveGrid: Story = {
   render: () => (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
         gap: 12,
         maxWidth: 480,
       }}
     >
-      {["Files", "Music", "Photos", "Videos"].map((label) => (
+      {['Files', 'Music', 'Photos', 'Videos'].map((label) => (
         <Card key={label} interactive padding="md" onClick={() => {}}>
           <Text variant="heading">{label}</Text>
           <Text variant="caption" color="dim" style={{ marginTop: 2 }}>

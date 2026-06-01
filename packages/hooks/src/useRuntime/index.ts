@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { getRuntime } from "@gnome-ui/platform";
-import type { RuntimeInfo } from "@gnome-ui/platform";
+import type { RuntimeInfo } from '@gnome-ui/platform';
+import { getRuntime } from '@gnome-ui/platform';
+import { useMemo } from 'react';
 
 /**
  * Returns a snapshot of the current runtime environment.

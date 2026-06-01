@@ -1,9 +1,10 @@
-import { type HTMLAttributes, type ReactNode } from "react";
-import { useBreakpoint } from "../../hooks/useBreakpoint";
-import styles from "./NavigationSplitView.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export interface NavigationSplitViewProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
+import { useBreakpoint } from '../../hooks/useBreakpoint';
+
+import styles from './NavigationSplitView.module.css';
+
+export interface NavigationSplitViewProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content'> {
   /**
    * The sidebar / list pane (left side on wide screens).
    * On narrow screens this is the "list" view shown when `showContent` is false.
@@ -71,19 +72,14 @@ export function NavigationSplitView({
   const { isNarrow } = useBreakpoint();
 
   // CSS custom property drives the sidebar width clamp
-  const sidebarWidth =
-    `clamp(${minSidebarWidth}px, ${sidebarWidthFraction * 100}%, ${maxSidebarWidth}px)`;
+  const sidebarWidth = `clamp(${minSidebarWidth}px, ${sidebarWidthFraction * 100}%, ${maxSidebarWidth}px)`;
 
   return (
     <div
-      className={[
-        styles.root,
-        isNarrow ? styles.collapsed : styles.expanded,
-        className,
-      ]
+      className={[styles.root, isNarrow ? styles.collapsed : styles.expanded, className]
         .filter(Boolean)
-        .join(" ")}
-      style={{ "--sidebar-width": sidebarWidth, ...style } as React.CSSProperties}
+        .join(' ')}
+      style={{ '--sidebar-width': sidebarWidth, ...style } as React.CSSProperties}
       {...props}
     >
       {/* Sidebar pane */}
@@ -93,7 +89,7 @@ export function NavigationSplitView({
           isNarrow && showContent ? styles.paneHidden : styles.paneVisible,
         ]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         aria-hidden={isNarrow && showContent}
       >
         {sidebar}
@@ -109,7 +105,7 @@ export function NavigationSplitView({
           isNarrow && !showContent ? styles.paneHidden : styles.paneVisible,
         ]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         aria-hidden={isNarrow && !showContent}
       >
         {content}

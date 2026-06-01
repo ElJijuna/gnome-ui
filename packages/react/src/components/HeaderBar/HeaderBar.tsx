@@ -1,7 +1,8 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./HeaderBar.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export interface HeaderBarProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+import styles from './HeaderBar.module.css';
+
+export interface HeaderBarProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Centered title. Pass a string or a custom element. */
   title?: ReactNode;
   /** Controls placed at the leading (left) edge — back button, menu, etc. */
@@ -35,29 +36,19 @@ export function HeaderBar({
 }: HeaderBarProps) {
   return (
     <header
-      className={[styles.headerBar, flat ? styles.flat : null, className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.headerBar, flat ? styles.flat : null, className].filter(Boolean).join(' ')}
       {...props}
     >
       {/* Leading slot */}
-      <div className={styles.slot}>
-        {start}
-      </div>
+      <div className={styles.slot}>{start}</div>
 
       {/* Centered title */}
       <div className={styles.titleSlot} aria-live="polite">
-        {typeof title === "string" ? (
-          <span className={styles.title}>{title}</span>
-        ) : (
-          title
-        )}
+        {typeof title === 'string' ? <span className={styles.title}>{title}</span> : title}
       </div>
 
       {/* Trailing slot */}
-      <div className={[styles.slot, styles.slotEnd].filter(Boolean).join(" ")}>
-        {end}
-      </div>
+      <div className={[styles.slot, styles.slotEnd].filter(Boolean).join(' ')}>{end}</div>
     </header>
   );
 }

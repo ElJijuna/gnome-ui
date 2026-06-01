@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Footer.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Footer.module.css';
 
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   /** Content placed at the leading (left) edge — links, copyright, etc. */
@@ -23,30 +24,19 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/containers/header-bars.html
  */
-export function Footer({
-  start,
-  end,
-  children,
-  flat = false,
-  className,
-  ...props
-}: FooterProps) {
+export function Footer({ start, end, children, flat = false, className, ...props }: FooterProps) {
   return (
     <footer
-      className={[styles.footer, flat ? styles.flat : null, className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.footer, flat ? styles.flat : null, className].filter(Boolean).join(' ')}
       {...props}
     >
       <div className={styles.slot}>{start}</div>
 
-      {children != null && (
+      {children !== null && children !== undefined && (
         <div className={styles.center}>{children}</div>
       )}
 
-      <div className={[styles.slot, styles.slotEnd].filter(Boolean).join(" ")}>
-        {end}
-      </div>
+      <div className={[styles.slot, styles.slotEnd].filter(Boolean).join(' ')}>{end}</div>
     </footer>
   );
 }

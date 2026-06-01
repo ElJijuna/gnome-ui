@@ -1,11 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Separator } from "./Separator";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Text } from '../Text';
+
+import { Separator } from './Separator';
 
 const meta: Meta<typeof Separator> = {
-  title: "Components/Separator",
+  title: 'Components/Separator',
   component: Separator,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -22,10 +24,10 @@ Thin dividing line that separates groups of content.
     },
   },
   argTypes: {
-    orientation: { control: "radio", options: ["horizontal", "vertical"] },
+    orientation: { control: 'radio', options: ['horizontal', 'vertical'] },
   },
   args: {
-    orientation: "horizontal",
+    orientation: 'horizontal',
   },
 };
 
@@ -36,7 +38,7 @@ type Story = StoryObj<typeof Separator>;
 
 export const Horizontal: Story = {
   render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 320 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 320 }}>
       <Text variant="body">First section</Text>
       <Separator {...args} />
       <Text variant="body">Second section</Text>
@@ -47,9 +49,9 @@ export const Horizontal: Story = {
 // ─── Vertical ─────────────────────────────────────────────────────────────────
 
 export const Vertical: Story = {
-  args: { orientation: "vertical" },
+  args: { orientation: 'vertical' },
   render: (args) => (
-    <div style={{ display: "flex", alignItems: "center", gap: 12, height: 32 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, height: 32 }}>
       <Text variant="body">Files</Text>
       <Separator {...args} />
       <Text variant="body">Music</Text>
@@ -61,7 +63,7 @@ export const Vertical: Story = {
     docs: {
       description: {
         story:
-          "Vertical separators work inside flex rows. The line stretches to match the row height via `align-self: stretch`.",
+          'Vertical separators work inside flex rows. The line stretches to match the row height via `align-self: stretch`.',
       },
     },
   },
@@ -71,12 +73,13 @@ export const Vertical: Story = {
 
 export const InList: Story = {
   render: () => {
-    const items = ["Inbox", "Drafts", "Sent", "Trash"];
+    const items = ['Inbox', 'Drafts', 'Sent', 'Trash'];
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", maxWidth: 240 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 240 }}>
         {items.map((item, i) => (
           <div key={item}>
-            <div style={{ padding: "8px 12px" }}>
+            <div style={{ padding: '8px 12px' }}>
               <Text variant="body">{item}</Text>
             </div>
             {i < items.length - 1 && <Separator />}

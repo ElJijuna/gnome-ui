@@ -1,14 +1,15 @@
 import {
   createContext,
-  useContext,
-  useRef,
   type HTMLAttributes,
   type KeyboardEvent,
   type ReactNode,
-} from "react";
-import styles from "./InlineViewSwitcher.module.css";
+  useContext,
+  useRef,
+} from 'react';
 
-export type InlineViewSwitcherVariant = "default" | "flat" | "round" | "pill";
+import styles from './InlineViewSwitcher.module.css';
+
+export type InlineViewSwitcherVariant = 'default' | 'flat' | 'round' | 'pill';
 
 // ─── Internal context ──────────────────────────────────────────────────────────
 
@@ -17,15 +18,16 @@ interface InlineViewSwitcherContextValue {
   onValueChange: (value: string) => void;
 }
 
-const InlineViewSwitcherContext =
-  createContext<InlineViewSwitcherContextValue | null>(null);
+const InlineViewSwitcherContext = createContext<InlineViewSwitcherContextValue | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useInlineViewSwitcher() {
   const ctx = useContext(InlineViewSwitcherContext);
-  if (!ctx)
-    throw new Error(
-      "InlineViewSwitcherItem must be used inside InlineViewSwitcher",
-    );
+
+  if (!ctx) {
+    throw new Error('InlineViewSwitcherItem must be used inside InlineViewSwitcher');
+  }
+
   return ctx;
 }
 
@@ -45,7 +47,7 @@ export interface InlineViewSwitcherProps extends HTMLAttributes<HTMLDivElement> 
    */
   variant?: InlineViewSwitcherVariant;
   /** Accessible label for the group. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   children?: ReactNode;
 }
 
@@ -63,8 +65,8 @@ export interface InlineViewSwitcherProps extends HTMLAttributes<HTMLDivElement> 
 export function InlineViewSwitcher({
   value,
   onValueChange,
-  variant = "default",
-  "aria-label": ariaLabel = "View switcher",
+  variant = 'default',
+  'aria-label': ariaLabel = 'View switcher',
   children,
   className,
   ...props
@@ -73,21 +75,27 @@ export function InlineViewSwitcher({
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     const items = Array.from(
-      groupRef.current?.querySelectorAll<HTMLButtonElement>(
-        "[role=radio]:not(:disabled)",
-      ) ?? [],
+      groupRef.current?.querySelectorAll<HTMLButtonElement>('[role=radio]:not(:disabled)') ?? [],
     );
-    const idx = items.findIndex((el) => el === document.activeElement);
-    if (idx === -1) return;
+    const activeElement = document.activeElement;
+    const idx = activeElement instanceof HTMLButtonElement ? items.indexOf(activeElement) : -1;
+
+    if (idx === -1) {
+      return;
+    }
 
     let next = idx;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown")
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       next = (idx + 1) % items.length;
-    else if (e.key === "ArrowLeft" || e.key === "ArrowUp")
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       next = (idx - 1 + items.length) % items.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = items.length - 1;
-    else return;
+    } else if (e.key === 'Home') {
+      next = 0;
+    } else if (e.key === 'End') {
+      next = items.length - 1;
+    } else {
+      return;
+    }
 
     e.preventDefault();
     items[next].focus();
@@ -101,9 +109,7 @@ export function InlineViewSwitcher({
         role="radiogroup"
         aria-label={ariaLabel}
         onKeyDown={handleKeyDown}
-        className={[styles.switcher, styles[variant], className]
-          .filter(Boolean)
-          .join(" ")}
+        className={[styles.switcher, styles[variant], className].filter(Boolean).join(' ')}
         {...props}
       >
         {children}

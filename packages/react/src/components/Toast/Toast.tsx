@@ -1,14 +1,11 @@
-import {
-  useEffect,
-  useRef,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
-import { Close } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import styles from "./Toast.module.css";
+import { Close } from '@gnome-ui/icons';
+import { type HTMLAttributes, type ReactNode, useCallback, useEffect, useRef } from 'react';
 
-export interface ToastProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+import { Icon } from '../Icon';
+
+import styles from './Toast.module.css';
+
+export interface ToastProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** The notification message. Keep it short — one sentence. */
   title: ReactNode;
   /**
@@ -50,19 +47,22 @@ export function Toast({
   const remainingRef = useRef(duration);
   const startedAtRef = useRef<number>(0);
 
-  const clearTimer = () => {
+  const clearTimer = useCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
-  };
+  }, []);
 
-  const startTimer = (ms: number) => {
-    if (ms <= 0 || !onDismiss) return;
+  const startTimer = useCallback((ms: number) => {
+    if (ms <= 0 || !onDismiss) {
+      return;
+    }
+
     clearTimer();
     startedAtRef.current = Date.now();
     timerRef.current = setTimeout(() => onDismiss(), ms);
-  };
+  }, [onDismiss, clearTimer]);
 
   // Start auto-dismiss on mount
   useEffect(() => {
@@ -70,14 +70,15 @@ export function Toast({
       remainingRef.current = duration;
       startTimer(duration);
     }
+
     return clearTimer;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [duration]);
+  }, [duration, startTimer, clearTimer]);
 
   // Pause timer on hover/focus
   const handleMouseEnter = () => {
     if (timerRef.current) {
       const elapsed = Date.now() - startedAtRef.current;
+
       remainingRef.current = Math.max(0, remainingRef.current - elapsed);
       clearTimer();
     }
@@ -98,7 +99,7 @@ export function Toast({
       role="status"
       aria-live="polite"
       aria-atomic="true"
-      className={[styles.toast, className].filter(Boolean).join(" ")}
+      className={[styles.toast, className].filter(Boolean).join(' ')}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleMouseEnter}
@@ -110,11 +111,7 @@ export function Toast({
       {(actionLabel || dismissible) && (
         <span className={styles.actions}>
           {actionLabel && (
-            <button
-              type="button"
-              className={styles.actionBtn}
-              onClick={handleAction}
-            >
+            <button type="button" className={styles.actionBtn} onClick={handleAction}>
               {actionLabel}
             </button>
           )}
@@ -123,7 +120,10 @@ export function Toast({
               type="button"
               className={styles.dismissBtn}
               aria-label="Dismiss"
-              onClick={() => { clearTimer(); onDismiss?.(); }}
+              onClick={() => {
+                clearTimer();
+                onDismiss?.();
+              }}
             >
               <Icon icon={Close} size="md" aria-hidden />
             </button>

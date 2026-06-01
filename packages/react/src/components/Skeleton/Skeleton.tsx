@@ -1,7 +1,8 @@
-import type { CSSProperties, HTMLAttributes } from "react";
-import styles from "./Skeleton.module.css";
+import type { CSSProperties, HTMLAttributes } from 'react';
 
-export type SkeletonVariant = "rect" | "circle" | "text";
+import styles from './Skeleton.module.css';
+
+export type SkeletonVariant = 'rect' | 'circle' | 'text';
 
 export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /** Shape of the placeholder. Defaults to `"rect"`. */
@@ -22,7 +23,7 @@ export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 function toCssSize(value: number | string) {
-  return typeof value === "number" ? `${value}px` : value;
+  return typeof value === 'number' ? `${value}px` : value;
 }
 
 /**
@@ -32,8 +33,8 @@ function toCssSize(value: number | string) {
  * pragmatic web-style extension for layouts that benefit from placeholder shape.
  */
 export function Skeleton({
-  variant = "rect",
-  width = "100%",
+  variant = 'rect',
+  width = '100%',
   height = 16,
   size = 40,
   lines = 3,
@@ -42,32 +43,22 @@ export function Skeleton({
   style,
   ...props
 }: SkeletonProps) {
-  const classes = [
-    styles.skeleton,
-    styles[variant],
-    animated ? styles.animated : null,
-    className,
-  ]
+  const classes = [styles.skeleton, styles[variant], animated ? styles.animated : null, className]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
-  if (variant === "text") {
+  if (variant === 'text') {
     const lineCount = Math.max(1, Math.floor(lines));
 
     return (
-      <div
-        aria-hidden="true"
-        className={classes}
-        style={style}
-        {...props}
-      >
+      <div aria-hidden="true" className={classes} style={style} {...props}>
         {Array.from({ length: lineCount }, (_, index) => (
           <div
             key={index}
             className={styles.line}
             style={
               index === lineCount - 1
-                ? ({ "--skeleton-line-width": "60%" } as CSSProperties)
+                ? ({ '--skeleton-line-width': '60%' } as CSSProperties)
                 : undefined
             }
           />
@@ -77,16 +68,11 @@ export function Skeleton({
   }
 
   const shapeStyle: CSSProperties =
-    variant === "circle"
+    variant === 'circle'
       ? { width: `${size}px`, height: `${size}px` }
       : { width: toCssSize(width), height: toCssSize(height) };
 
   return (
-    <div
-      aria-hidden="true"
-      className={classes}
-      style={{ ...shapeStyle, ...style }}
-      {...props}
-    />
+    <div aria-hidden="true" className={classes} style={{ ...shapeStyle, ...style }} {...props} />
   );
 }

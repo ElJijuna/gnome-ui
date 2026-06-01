@@ -1,11 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Link } from "./Link";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Text } from '../Text';
+
+import { Link } from './Link';
 
 const meta: Meta<typeof Link> = {
-  title: "Components/Link",
+  title: 'Components/Link',
   component: Link,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -26,15 +28,15 @@ type Story = StoryObj<typeof Link>;
 
 export const Default: Story = {
   args: {
-    href: "#",
-    children: "Visit GNOME HIG",
+    href: '#',
+    children: 'Visit GNOME HIG',
   },
 };
 
 export const External: Story = {
   args: {
-    href: "https://developer.gnome.org/hig/",
-    children: "GNOME Human Interface Guidelines",
+    href: 'https://developer.gnome.org/hig/',
+    children: 'GNOME Human Interface Guidelines',
     external: true,
   },
 };
@@ -42,11 +44,11 @@ export const External: Story = {
 export const InlineText: Story = {
   render: () => (
     <Text variant="body">
-      Learn more about{" "}
+      Learn more about{' '}
       <Link href="https://developer.gnome.org/hig/" external>
         GNOME HIG
-      </Link>{" "}
-      before building your application. You can also read the{" "}
+      </Link>{' '}
+      before building your application. You can also read the{' '}
       <Link href="#">local documentation</Link>.
     </Text>
   ),

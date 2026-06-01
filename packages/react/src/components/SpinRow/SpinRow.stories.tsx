@@ -1,12 +1,14 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { SpinRow } from "./SpinRow";
-import { BoxedList } from "../BoxedList";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { BoxedList } from '../BoxedList';
+
+import { SpinRow } from './SpinRow';
 
 const meta: Meta<typeof SpinRow> = {
-  title: "Components/SpinRow",
+  title: 'Components/SpinRow',
   component: SpinRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -34,15 +36,15 @@ timeout durations, item counts, or font sizes.
     ),
   ],
   argTypes: {
-    title: { control: "text" },
-    subtitle: { control: "text" },
-    min: { control: "number" },
-    max: { control: "number" },
-    step: { control: "number" },
-    disabled: { control: "boolean" },
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
+    min: { control: 'number' },
+    max: { control: 'number' },
+    step: { control: 'number' },
+    disabled: { control: 'boolean' },
   },
   args: {
-    title: "Volume",
+    title: 'Volume',
     defaultValue: 50,
     min: 0,
     max: 100,
@@ -71,7 +73,7 @@ export const InBoxedList: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Multiple `SpinRow` items inside a `BoxedList`.",
+        story: 'Multiple `SpinRow` items inside a `BoxedList`.',
       },
     },
   },
@@ -96,7 +98,7 @@ export const Controlled: Story = {
         />
         <SpinRow
           title="Idle Delay"
-          subtitle={`${delay} minute${delay !== 1 ? "s" : ""}`}
+          subtitle={`${delay} minute${delay !== 1 ? 's' : ''}`}
           value={delay}
           onValueChange={setDelay}
           min={1}
@@ -108,7 +110,10 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Use `value` + `onValueChange` for controlled mode. The subtitle can reflect the current value." },
+      description: {
+        story:
+          'Use `value` + `onValueChange` for controlled mode. The subtitle can reflect the current value.',
+      },
     },
   },
 };
@@ -126,7 +131,8 @@ export const DecimalStep: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use a decimal `step` for fractional values — `decimals` is derived automatically from `step`.",
+        story:
+          'Use a decimal `step` for fractional values — `decimals` is derived automatically from `step`.',
       },
     },
   },

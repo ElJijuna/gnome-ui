@@ -1,21 +1,23 @@
+import type { IconDefinition } from '@gnome-ui/icons';
 import {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useContext,
   type ButtonHTMLAttributes,
   type DragEvent,
-  type ReactNode,
-  type MouseEvent,
   type KeyboardEvent,
-} from "react";
-import { createPortal } from "react-dom";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { Tooltip } from "../Tooltip";
-import { useSidebarCollapsed, SidebarFilterContext } from "./Sidebar";
-import styles from "./Sidebar.module.css";
+  type MouseEvent,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
+
+import { Icon } from '../Icon';
+import { Tooltip } from '../Tooltip';
+
+import { SidebarFilterContext, useSidebarCollapsed } from './Sidebar';
+import styles from './Sidebar.module.css';
 
 export interface SidebarMenuEntry {
   /** Label shown in the context menu. */
@@ -94,18 +96,24 @@ export function SidebarItem({
 
   // ── Filter visibility ────────────────────────────────────────────────────
   const isFiltered =
-    filterValue.length > 0 &&
-    !label.toLowerCase().includes(filterValue.toLowerCase());
+    filterValue.length > 0 && !label.toLowerCase().includes(filterValue.toLowerCase());
 
   // ── Drag-and-drop ────────────────────────────────────────────────────────
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e: DragEvent<HTMLButtonElement>) => {
-    if (!onDrop) return;
+    if (!onDrop) {
+      return;
+    }
+
     if (acceptTypes?.length) {
       const accepted = acceptTypes.some((t) => e.dataTransfer.types.includes(t));
-      if (!accepted) return;
+
+      if (!accepted) {
+        return;
+      }
     }
+
     e.preventDefault();
     setIsDragOver(true);
   };
@@ -113,7 +121,10 @@ export function SidebarItem({
   const handleDragLeave = () => setIsDragOver(false);
 
   const handleDrop = (e: DragEvent<HTMLButtonElement>) => {
-    if (!onDrop) return;
+    if (!onDrop) {
+      return;
+    }
+
     e.preventDefault();
     setIsDragOver(false);
     onDrop(e);
@@ -127,32 +138,48 @@ export function SidebarItem({
   const closeMenu = useCallback(() => setMenu(null), []);
 
   useEffect(() => {
-    if (!menu) return;
+    if (!menu) {
+      return;
+    }
+
     const handleClick = (e: globalThis.MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) closeMenu();
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        closeMenu();
+      }
     };
     const handleKey = (e: globalThis.KeyboardEvent) => {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
     };
-    document.addEventListener("mousedown", handleClick);
-    document.addEventListener("keydown", handleKey);
+
+    document.addEventListener('mousedown', handleClick);
+    document.addEventListener('keydown', handleKey);
+
     return () => {
-      document.removeEventListener("mousedown", handleClick);
-      document.removeEventListener("keydown", handleKey);
+      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('keydown', handleKey);
     };
   }, [menu, closeMenu]);
 
   const handleContextMenu = (e: MouseEvent<HTMLButtonElement>) => {
-    if (!menuItems?.length) return;
+    if (!menuItems?.length) {
+      return;
+    }
+
     e.preventDefault();
     openMenu(e.clientX, e.clientY);
   };
 
   const handleMenuKey = (e: KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === "ContextMenu" || (e.key === "F10" && e.shiftKey)) {
-      if (!menuItems?.length) return;
+    if (e.key === 'ContextMenu' || (e.key === 'F10' && e.shiftKey)) {
+      if (!menuItems?.length) {
+        return;
+      }
+
       e.preventDefault();
       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+
       openMenu(rect.right, rect.top);
     }
   };
@@ -161,7 +188,7 @@ export function SidebarItem({
   const button = (
     <button
       type="button"
-      aria-current={active ? "page" : undefined}
+      aria-current={active ? 'page' : undefined}
       aria-label={collapsed ? label : undefined}
       className={[
         styles.itemBtn,
@@ -171,7 +198,7 @@ export function SidebarItem({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       onContextMenu={handleContextMenu}
       onKeyDown={handleMenuKey}
       onDragOver={handleDragOver}
@@ -191,11 +218,17 @@ export function SidebarItem({
 
   return (
     <li className={styles.item} hidden={isFiltered || undefined}>
-      {effectiveTooltip
-        ? <Tooltip label={effectiveTooltip} placement="right">{button}</Tooltip>
-        : button}
+      {effectiveTooltip ? (
+        <Tooltip label={effectiveTooltip} placement="right">
+          {button}
+        </Tooltip>
+      ) : (
+        button
+      )}
 
-      {menu && menuItems?.length && typeof document !== "undefined" &&
+      {menu &&
+        menuItems?.length &&
+        typeof document !== 'undefined' &&
         createPortal(
           <div
             ref={menuRef}
@@ -214,7 +247,7 @@ export function SidebarItem({
                   entry.destructive ? styles.contextMenuDestructive : null,
                 ]
                   .filter(Boolean)
-                  .join(" ")}
+                  .join(' ')}
                 onClick={() => {
                   entry.onClick();
                   closeMenu();

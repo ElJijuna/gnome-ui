@@ -90,26 +90,18 @@
 }
 
 .itemBtn:hover:not(:disabled):not(.active) {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-sidebar-bg-color, #ebebeb) 88%,
-    black 12%
-  );
+  background-color: color-mix(in srgb, var(--gnome-sidebar-bg-color, #ebebeb) 88%, black 12%);
 }
 
 .itemBtn:active:not(:disabled):not(.active) {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-sidebar-bg-color, #ebebeb) 78%,
-    black 22%
-  );
+  background-color: color-mix(in srgb, var(--gnome-sidebar-bg-color, #ebebeb) 78%, black 22%);
 }
 
 .itemBtn:focus-visible {
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-sidebar-bg-color, #ebebeb),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .itemBtn:disabled {
@@ -202,19 +194,11 @@
   }
 
   .itemBtn:hover:not(:disabled):not(.active) {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-sidebar-bg-color, #303030) 85%,
-      white 15%
-    );
+    background-color: color-mix(in srgb, var(--gnome-sidebar-bg-color, #303030) 85%, white 15%);
   }
 
   .itemBtn:active:not(:disabled):not(.active) {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-sidebar-bg-color, #303030) 75%,
-      white 25%
-    );
+    background-color: color-mix(in srgb, var(--gnome-sidebar-bg-color, #303030) 75%, white 25%);
   }
 
   .count {

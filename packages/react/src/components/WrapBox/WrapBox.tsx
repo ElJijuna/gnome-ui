@@ -1,8 +1,15 @@
-import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
-import styles from "./WrapBox.module.css";
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
-export type WrapBoxJustify = "start" | "center" | "end" | "space-between" | "space-around" | "space-evenly";
-export type WrapBoxAlign = "start" | "center" | "end" | "stretch";
+import styles from './WrapBox.module.css';
+
+export type WrapBoxJustify =
+  | 'start'
+  | 'center'
+  | 'end'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly';
+export type WrapBoxAlign = 'start' | 'center' | 'end' | 'stretch';
 
 export interface WrapBoxProps extends HTMLAttributes<HTMLDivElement> {
   /** Gap between children on the same line. Default: `6`. */
@@ -33,36 +40,35 @@ export interface WrapBoxProps extends HTMLAttributes<HTMLDivElement> {
 export function WrapBox({
   childSpacing = 6,
   lineSpacing,
-  justify = "start",
-  align = "center",
+  justify = 'start',
+  align = 'center',
   wrapReverse = false,
   children,
   className,
   style,
   ...props
 }: WrapBoxProps) {
-  const gap = typeof childSpacing === "number" ? `${childSpacing}px` : childSpacing;
-  const rowGap = lineSpacing != null
-    ? (typeof lineSpacing === "number" ? `${lineSpacing}px` : lineSpacing)
-    : gap;
+  const gap = typeof childSpacing === 'number' ? `${childSpacing}px` : childSpacing;
+  const rowGap =
+    lineSpacing !== null && lineSpacing !== undefined
+      ? typeof lineSpacing === 'number'
+        ? `${lineSpacing}px`
+        : lineSpacing
+      : gap;
 
   const cssVars: CSSProperties = {
-    "--wrapbox-gap": gap,
-    "--wrapbox-row-gap": rowGap,
-    "--wrapbox-justify": justify,
-    "--wrapbox-align": align,
+    '--wrapbox-gap': gap,
+    '--wrapbox-row-gap': rowGap,
+    '--wrapbox-justify': justify,
+    '--wrapbox-align': align,
     ...style,
   } as CSSProperties;
 
   return (
     <div
-      className={[
-        styles.wrapBox,
-        wrapReverse ? styles.reverse : null,
-        className,
-      ]
+      className={[styles.wrapBox, wrapReverse ? styles.reverse : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       style={cssVars}
       {...props}
     >

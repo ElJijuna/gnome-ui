@@ -47,7 +47,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      currentColor;
+    currentColor;
 }
 
 /* ─── Dismiss button ───────────────────────────────────────────────────────── */
@@ -64,12 +64,16 @@
   border-radius: var(--gnome-radius-md, 8px);
   opacity: 0.6;
   transition:
-    opacity      var(--gnome-duration-fast) var(--gnome-easing-default),
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default),
     background-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
-.dismissBtn:hover  { opacity: 1; }
-.dismissBtn:active { opacity: 0.8; }
+.dismissBtn:hover {
+  opacity: 1;
+}
+.dismissBtn:active {
+  opacity: 0.8;
+}
 
 .dismissBtn:focus-visible {
   outline: none;
@@ -77,7 +81,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      currentColor;
+    currentColor;
 }
 
 /* ─── Variant: info ────────────────────────────────────────────────────────── */

@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Tooltip } from "./Tooltip";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
-import { Text } from "../Text";
-import {
-  Save, Delete, Edit, Copy, Settings, Search, Information,
-} from "@gnome-ui/icons";
+import { Copy, Delete, Edit, Information, Save, Search, Settings } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+
+import { Tooltip } from './Tooltip';
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Components/Tooltip",
+  title: 'Components/Tooltip',
   component: Tooltip,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -39,7 +39,7 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
   render: () => (
-    <div style={{ display: "flex", justifyContent: "center", padding: 48 }}>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: 48 }}>
       <Tooltip label="Save file (Ctrl+S)">
         <Button variant="flat" shape="circular" aria-label="Save">
           <Icon icon={Save} size="md" aria-hidden />
@@ -56,12 +56,12 @@ export const Placements: Story = {
   render: () => (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, auto)",
-        gridTemplateRows: "repeat(3, auto)",
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, auto)',
+        gridTemplateRows: 'repeat(3, auto)',
         gap: 12,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 48,
       }}
     >
@@ -91,7 +91,8 @@ export const Placements: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "All four placements. The tooltip flips automatically if there is not enough viewport space.",
+        story:
+          'All four placements. The tooltip flips automatically if there is not enough viewport space.',
       },
     },
   },
@@ -101,12 +102,12 @@ export const Placements: Story = {
 
 export const IconToolbar: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: 4, padding: 24 }}>
+    <div style={{ display: 'flex', gap: 4, padding: 24 }}>
       {[
-        { icon: Edit,     label: "Edit"   },
-        { icon: Copy,     label: "Copy"   },
-        { icon: Delete,   label: "Delete" },
-        { icon: Settings, label: "Settings" },
+        { icon: Edit, label: 'Edit' },
+        { icon: Copy, label: 'Copy' },
+        { icon: Delete, label: 'Delete' },
+        { icon: Settings, label: 'Settings' },
       ].map(({ icon, label }) => (
         <Tooltip key={label} label={label}>
           <Button variant="flat" shape="circular" aria-label={label}>
@@ -120,7 +121,8 @@ export const IconToolbar: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "The canonical use case: icon-only toolbar buttons where the tooltip provides the missing label.",
+        story:
+          'The canonical use case: icon-only toolbar buttons where the tooltip provides the missing label.',
       },
     },
   },
@@ -131,16 +133,19 @@ export const IconToolbar: Story = {
 export const OnText: Story = {
   render: () => (
     <div style={{ padding: 32 }}>
-      <Tooltip label="This is truncated — the full value is 'document-important-final-v3-FINAL.pdf'" placement="bottom">
+      <Tooltip
+        label="This is truncated — the full value is 'document-important-final-v3-FINAL.pdf'"
+        placement="bottom"
+      >
         <Text
           variant="body"
           style={{
             maxWidth: 180,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            cursor: "default",
-            display: "block",
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            cursor: 'default',
+            display: 'block',
           }}
         >
           document-important-final-v3-FINAL.pdf
@@ -152,7 +157,7 @@ export const OnText: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Tooltip can wrap any focusable or hoverable element, not just buttons.",
+        story: 'Tooltip can wrap any focusable or hoverable element, not just buttons.',
       },
     },
   },
@@ -162,7 +167,7 @@ export const OnText: Story = {
 
 export const NoDelay: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: 8, padding: 32 }}>
+    <div style={{ display: 'flex', gap: 8, padding: 32 }}>
       <Tooltip label="Appears instantly" delay={0}>
         <Button>Hover me (delay=0)</Button>
       </Tooltip>
@@ -175,7 +180,8 @@ export const NoDelay: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`delay={0}` makes the tooltip appear immediately. The default 500 ms delay avoids distracting flicker during normal mouse movement.",
+        story:
+          '`delay={0}` makes the tooltip appear immediately. The default 500 ms delay avoids distracting flicker during normal mouse movement.',
       },
     },
   },
@@ -185,9 +191,11 @@ export const NoDelay: Story = {
 
 export const KeyboardFocus: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: 8, padding: 32, flexDirection: "column" }}>
-      <Text variant="caption" color="dim">Tab into the buttons to see tooltips via keyboard</Text>
-      <div style={{ display: "flex", gap: 8 }}>
+    <div style={{ display: 'flex', gap: 8, padding: 32, flexDirection: 'column' }}>
+      <Text variant="caption" color="dim">
+        Tab into the buttons to see tooltips via keyboard
+      </Text>
+      <div style={{ display: 'flex', gap: 8 }}>
         <Tooltip label="Search the library" delay={0}>
           <Button variant="flat" shape="circular" aria-label="Search">
             <Icon icon={Search} size="md" aria-hidden />
@@ -205,7 +213,7 @@ export const KeyboardFocus: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Tooltips appear on keyboard focus too, making them accessible without a mouse.",
+        story: 'Tooltips appear on keyboard focus too, making them accessible without a mouse.',
       },
     },
   },

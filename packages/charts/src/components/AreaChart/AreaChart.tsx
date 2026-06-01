@@ -1,16 +1,18 @@
+import { useNumberFormatter } from '@gnome-ui/react';
 import {
-  AreaChart as RechartsAreaChart,
   Area,
+  CartesianGrid,
+  Legend,
+  AreaChart as RechartsAreaChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { useNumberFormatter } from "@gnome-ui/react";
-import { GNOME_CHART_PALETTE } from "../../colors";
-import styles from "./AreaChart.module.css";
+} from 'recharts';
+
+import { GNOME_CHART_PALETTE } from '../../colors';
+
+import styles from './AreaChart.module.css';
 
 export interface AreaChartSeries {
   dataKey: string;
@@ -32,23 +34,23 @@ export interface AreaChartProps {
 
 const AXIS_STYLE = {
   fontSize: 12,
-  fill: "var(--gnome-window-fg-color, rgba(0,0,0,0.8))",
-  fontFamily: "var(--gnome-font-family, system-ui)",
+  fill: 'var(--gnome-window-fg-color, rgba(0,0,0,0.8))',
+  fontFamily: 'var(--gnome-font-family, system-ui)',
 };
 
 const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: "var(--gnome-popover-bg-color, #fff)",
-  border: "1px solid var(--gnome-border-subtle, rgba(0,0,0,0.15))",
-  borderRadius: "var(--gnome-radius-md, 8px)",
-  fontFamily: "var(--gnome-font-family, system-ui)",
+  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
+  border: '1px solid var(--gnome-border-subtle, rgba(0,0,0,0.15))',
+  borderRadius: 'var(--gnome-radius-md, 8px)',
+  fontFamily: 'var(--gnome-font-family, system-ui)',
   fontSize: 12,
-  boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
 export function AreaChart({
   data,
   series,
-  xAxisKey = "name",
+  xAxisKey = 'name',
   height = 300,
   showGrid = true,
   showLegend = false,
@@ -60,20 +62,13 @@ export function AreaChart({
 
   const seriesWithColors = series.map((s, i) => ({
     ...s,
-    resolvedColor:
-      s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length],
+    resolvedColor: s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length],
   }));
 
   return (
-    <div
-      className={[styles.container, className].filter(Boolean).join(" ")}
-      style={{ height }}
-    >
+    <div className={[styles.container, className].filter(Boolean).join(' ')} style={{ height }}>
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsAreaChart
-          data={data}
-          margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
-        >
+        <RechartsAreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           {gradient && (
             <defs>
               {seriesWithColors.map((s) => (
@@ -85,14 +80,8 @@ export function AreaChart({
                   x2="0"
                   y2="1"
                 >
-                  <stop
-                    offset="5%"
-                    style={{ stopColor: s.resolvedColor, stopOpacity: 0.4 }}
-                  />
-                  <stop
-                    offset="95%"
-                    style={{ stopColor: s.resolvedColor, stopOpacity: 0 }}
-                  />
+                  <stop offset="5%" style={{ stopColor: s.resolvedColor, stopOpacity: 0.4 }} />
+                  <stop offset="95%" style={{ stopColor: s.resolvedColor, stopOpacity: 0 }} />
                 </linearGradient>
               ))}
             </defs>
@@ -107,7 +96,7 @@ export function AreaChart({
           <XAxis
             dataKey={xAxisKey}
             tick={AXIS_STYLE}
-            axisLine={{ stroke: "var(--gnome-border-subtle, rgba(0,0,0,0.15))" }}
+            axisLine={{ stroke: 'var(--gnome-border-subtle, rgba(0,0,0,0.15))' }}
             tickLine={false}
           />
           <YAxis
@@ -124,7 +113,7 @@ export function AreaChart({
           {showLegend && (
             <Legend
               wrapperStyle={{
-                fontFamily: "var(--gnome-font-family, system-ui)",
+                fontFamily: 'var(--gnome-font-family, system-ui)',
                 fontSize: 12,
               }}
             />
@@ -139,7 +128,7 @@ export function AreaChart({
               fill={gradient ? `url(#grad-${s.dataKey})` : s.resolvedColor}
               fillOpacity={gradient ? 1 : 0.15}
               strokeWidth={2}
-              stackId={stacked ? "stack" : undefined}
+              stackId={stacked ? 'stack' : undefined}
             />
           ))}
         </RechartsAreaChart>

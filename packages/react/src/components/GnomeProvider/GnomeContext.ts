@@ -1,15 +1,15 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo } from 'react';
 
-export type GnomeDir = "ltr" | "rtl";
-export type GnomeColorScheme = "light" | "dark" | "system";
+export type GnomeDir = 'ltr' | 'rtl';
+export type GnomeColorScheme = 'light' | 'dark' | 'system';
 export type GnomeNamedAccentColor =
-  | "blue"
-  | "green"
-  | "yellow"
-  | "orange"
-  | "red"
-  | "purple"
-  | "brown";
+  | 'blue'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'purple'
+  | 'brown';
 export type GnomeAccentColor = GnomeNamedAccentColor | (string & {});
 
 export interface GnomeContextValue {
@@ -18,18 +18,18 @@ export interface GnomeContextValue {
   numberFormat: Intl.NumberFormatOptions | undefined;
   dateTimeFormat: Intl.DateTimeFormatOptions | undefined;
   colorScheme: GnomeColorScheme;
-  resolvedColorScheme: "light" | "dark";
+  resolvedColorScheme: 'light' | 'dark';
   accentColor: GnomeAccentColor;
 }
 
 export const GnomeContext = createContext<GnomeContextValue>({
   locale: undefined,
-  dir: "ltr",
+  dir: 'ltr',
   numberFormat: undefined,
   dateTimeFormat: undefined,
-  colorScheme: "system",
-  resolvedColorScheme: "light",
-  accentColor: "blue",
+  colorScheme: 'system',
+  resolvedColorScheme: 'light',
+  accentColor: 'blue',
 });
 
 /** Returns the locale set by the nearest `GnomeProvider`, or `undefined` to use the browser locale. */
@@ -43,9 +43,7 @@ export function useDir(): GnomeDir {
 }
 
 /** Returns an `Intl.NumberFormat` configured from `GnomeProvider` defaults plus local overrides. */
-export function useNumberFormatter(
-  options?: Intl.NumberFormatOptions,
-): Intl.NumberFormat {
+export function useNumberFormatter(options?: Intl.NumberFormatOptions): Intl.NumberFormat {
   const { locale, numberFormat } = useContext(GnomeContext);
 
   return useMemo(
@@ -55,9 +53,7 @@ export function useNumberFormatter(
 }
 
 /** Returns an `Intl.DateTimeFormat` configured from `GnomeProvider` defaults plus local overrides. */
-export function useDateTimeFormatter(
-  options?: Intl.DateTimeFormatOptions,
-): Intl.DateTimeFormat {
+export function useDateTimeFormatter(options?: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
   const { locale, dateTimeFormat } = useContext(GnomeContext);
 
   return useMemo(
@@ -72,7 +68,7 @@ export function useColorScheme(): GnomeColorScheme {
 }
 
 /** Returns the resolved color scheme (`"light"` or `"dark"`), accounting for the system preference when `colorScheme` is `"system"`. */
-export function useResolvedColorScheme(): "light" | "dark" {
+export function useResolvedColorScheme(): 'light' | 'dark' {
   return useContext(GnomeContext).resolvedColorScheme;
 }
 

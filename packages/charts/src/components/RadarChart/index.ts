@@ -1,2 +1,2 @@
-export { RadarChart } from "./RadarChart";
-export type { RadarChartProps, RadarChartSeries } from "./RadarChart";
+export type { RadarChartProps, RadarChartSeries } from './RadarChart';
+export { RadarChart } from './RadarChart';

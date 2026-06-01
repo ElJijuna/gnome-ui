@@ -1,2 +1,2 @@
-export { SearchBar } from "./SearchBar";
-export type { SearchBarProps, Suggestion } from "./SearchBar";
+export type { SearchBarProps, Suggestion } from './SearchBar';
+export { SearchBar } from './SearchBar';

@@ -1,14 +1,16 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Chip } from "./Chip";
-import { WrapBox } from "../WrapBox";
-import { Text } from "../Text";
-import { Star, Search, Settings, GoHome } from "@gnome-ui/icons";
+import { GoHome, Search, Settings, Star } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Text } from '../Text';
+import { WrapBox } from '../WrapBox';
+
+import { Chip } from './Chip';
 
 const meta: Meta<typeof Chip> = {
-  title: "Components/Chip",
+  title: 'Components/Chip',
   component: Chip,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -45,19 +47,22 @@ export const Static: Story = {
 
 export const Removable: Story = {
   render: function RemovableStory() {
-    const [tags, setTags] = useState(["React", "TypeScript", "GNOME", "Adwaita", "libadwaita"]);
+    const [tags, setTags] = useState(['React', 'TypeScript', 'GNOME', 'Adwaita', 'libadwaita']);
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <WrapBox childSpacing={6} lineSpacing={6}>
-          {tags.map(t => (
+          {tags.map((t) => (
             <Chip
               key={t}
               label={t}
-              onRemove={() => setTags(prev => prev.filter(x => x !== t))}
+              onRemove={() => setTags((prev) => prev.filter((x) => x !== t))}
             />
           ))}
           {tags.length === 0 && (
-            <Text variant="caption" color="dim">No tags. Refresh the story to reset.</Text>
+            <Text variant="caption" color="dim">
+              No tags. Refresh the story to reset.
+            </Text>
           )}
         </WrapBox>
       </div>
@@ -68,20 +73,26 @@ export const Removable: Story = {
 
 export const Selectable: Story = {
   render: function SelectableStory() {
-    const options = ["Design", "Development", "Research", "Testing", "Documentation", "DevOps"];
-    const [selected, setSelected] = useState<Set<string>>(new Set(["Design", "Testing"]));
+    const options = ['Design', 'Development', 'Research', 'Testing', 'Documentation', 'DevOps'];
+    const [selected, setSelected] = useState<Set<string>>(new Set(['Design', 'Testing']));
 
     const toggle = (label: string) =>
-      setSelected(prev => {
+      setSelected((prev) => {
         const next = new Set(prev);
-        next.has(label) ? next.delete(label) : next.add(label);
+
+        if (next.has(label)) {
+          next.delete(label);
+        } else {
+          next.add(label);
+        }
+
         return next;
       });
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <WrapBox childSpacing={6} lineSpacing={6}>
-          {options.map(o => (
+          {options.map((o) => (
             <Chip
               key={o}
               label={o}
@@ -92,7 +103,7 @@ export const Selectable: Story = {
           ))}
         </WrapBox>
         <Text variant="caption" color="dim">
-          Selected: {[...selected].join(", ") || "none"}
+          Selected: {[...selected].join(', ') || 'none'}
         </Text>
       </div>
     );
@@ -125,12 +136,13 @@ export const Disabled: Story = {
 
 export const FilterBar: Story = {
   render: function FilterBarStory() {
-    const filters = ["All", "Unread", "Flagged", "Attachments", "From me"];
-    const [active, setActive] = useState("All");
+    const filters = ['All', 'Unread', 'Flagged', 'Attachments', 'From me'];
+    const [active, setActive] = useState('All');
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <WrapBox childSpacing={6}>
-          {filters.map(f => (
+          {filters.map((f) => (
             <Chip
               key={f}
               label={f}
@@ -140,7 +152,9 @@ export const FilterBar: Story = {
             />
           ))}
         </WrapBox>
-        <Text variant="caption" color="dim">Filter: {active}</Text>
+        <Text variant="caption" color="dim">
+          Filter: {active}
+        </Text>
       </div>
     );
   },

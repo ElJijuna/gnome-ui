@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ActionRow } from "./ActionRow";
-import { Switch } from "../Switch";
-import { Button } from "../Button";
-import { BoxedList } from "../BoxedList";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { Switch } from '../Switch';
+
+import { ActionRow } from './ActionRow';
 
 const meta: Meta<typeof ActionRow> = {
-  title: "Components/ActionRow",
+  title: 'Components/ActionRow',
   component: ActionRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -34,13 +36,13 @@ Mirrors the Adwaita \`AdwActionRow\` pattern — the fundamental building block 
     ),
   ],
   argTypes: {
-    interactive: { control: "boolean" },
-    title: { control: "text" },
-    subtitle: { control: "text" },
+    interactive: { control: 'boolean' },
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
   },
   args: {
-    title: "Wi-Fi",
-    subtitle: "Home Network",
+    title: 'Wi-Fi',
+    subtitle: 'Home Network',
     interactive: false,
   },
 };
@@ -57,7 +59,11 @@ export const Default: Story = {};
 export const WithSwitch: Story = {
   render: () => (
     <BoxedList>
-      <ActionRow title="Wi-Fi" subtitle="Home Network" trailing={<Switch defaultChecked aria-label="Wi-Fi" />} />
+      <ActionRow
+        title="Wi-Fi"
+        subtitle="Home Network"
+        trailing={<Switch defaultChecked aria-label="Wi-Fi" />}
+      />
       <ActionRow title="Bluetooth" subtitle="Off" trailing={<Switch aria-label="Bluetooth" />} />
       <ActionRow title="Airplane Mode" trailing={<Switch aria-label="Airplane Mode" />} />
     </BoxedList>
@@ -70,16 +76,27 @@ export const WithSwitch: Story = {
 export const Interactive: Story = {
   render: () => (
     <BoxedList>
-      <ActionRow interactive title="About" subtitle="Device information" onClick={() => alert("About")} />
-      <ActionRow interactive title="System" subtitle="Software updates" onClick={() => alert("System")} />
-      <ActionRow interactive title="Users" onClick={() => alert("Users")} />
+      <ActionRow
+        interactive
+        title="About"
+        subtitle="Device information"
+        onClick={() => alert('About')}
+      />
+      <ActionRow
+        interactive
+        title="System"
+        subtitle="Software updates"
+        onClick={() => alert('System')}
+      />
+      <ActionRow interactive title="Users" onClick={() => alert('Users')} />
     </BoxedList>
   ),
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Set `interactive` for rows that navigate or trigger an action. The row renders as `<button>`.",
+        story:
+          'Set `interactive` for rows that navigate or trigger an action. The row renders as `<button>`.',
       },
     },
   },
@@ -123,7 +140,7 @@ export const Property: Story = {
     docs: {
       description: {
         story:
-          "`variant=\"property\"` flips the visual hierarchy: the `title` shrinks to a dim caption label and the `subtitle` becomes the prominent value. Use for read-only property display — mirrors the `.property` style class.",
+          '`variant="property"` flips the visual hierarchy: the `title` shrinks to a dim caption label and the `subtitle` becomes the prominent value. Use for read-only property display — mirrors the `.property` style class.',
       },
     },
   },
@@ -134,8 +151,23 @@ export const Property: Story = {
 export const WithButton: Story = {
   render: () => (
     <BoxedList>
-      <ActionRow title="Storage" subtitle="18.3 GB of 20 GB used" trailing={<Button variant="flat" size="sm">Manage</Button>} />
-      <ActionRow title="Reset Settings" trailing={<Button variant="destructive" size="sm">Reset</Button>} />
+      <ActionRow
+        title="Storage"
+        subtitle="18.3 GB of 20 GB used"
+        trailing={
+          <Button variant="flat" size="sm">
+            Manage
+          </Button>
+        }
+      />
+      <ActionRow
+        title="Reset Settings"
+        trailing={
+          <Button variant="destructive" size="sm">
+            Reset
+          </Button>
+        }
+      />
     </BoxedList>
   ),
   parameters: { controls: { disable: true } },

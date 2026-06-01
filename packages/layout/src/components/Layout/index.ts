@@ -1,4 +1,3 @@
-export { Layout } from "./Layout";
 export type {
   LayoutHeight,
   LayoutProps,
@@ -7,4 +6,5 @@ export type {
   LayoutSidebarCollapseMode,
   LayoutSidebarOpenChangeReason,
   LayoutSidebarPlacement,
-} from "./Layout";
+} from './Layout';
+export { Layout } from './Layout';

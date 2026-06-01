@@ -1,24 +1,22 @@
 {
   "tagFormat": "@gnome-ui/hooks@${version}",
-  "branches": [
-    "main"
-  ],
+  "branches": ["main"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
         "preset": "conventionalcommits",
         "releaseRules": [
-          { "type": "feat",     "release": false },
-          { "type": "fix",      "release": false },
-          { "type": "perf",     "release": false },
+          { "type": "feat", "release": false },
+          { "type": "fix", "release": false },
+          { "type": "perf", "release": false },
           { "type": "refactor", "release": false },
-          { "breaking": true,   "release": false },
-          { "type": "feat",     "scope": "@gnome-ui/hooks", "release": "minor" },
-          { "type": "fix",      "scope": "@gnome-ui/hooks", "release": "patch" },
-          { "type": "perf",     "scope": "@gnome-ui/hooks", "release": "patch" },
+          { "breaking": true, "release": false },
+          { "type": "feat", "scope": "@gnome-ui/hooks", "release": "minor" },
+          { "type": "fix", "scope": "@gnome-ui/hooks", "release": "patch" },
+          { "type": "perf", "scope": "@gnome-ui/hooks", "release": "patch" },
           { "type": "refactor", "scope": "@gnome-ui/hooks", "release": "patch" },
-          { "breaking": true,   "scope": "@gnome-ui/hooks", "release": "major" }
+          { "breaking": true, "scope": "@gnome-ui/hooks", "release": "major" }
         ]
       }
     ],
@@ -74,18 +72,13 @@
       "@semantic-release/github",
       {
         "successComment": "\ud83c\udf89 This change is included in `@gnome-ui/hooks@${nextRelease.version}`.",
-        "releasedLabels": [
-          "released"
-        ]
+        "releasedLabels": ["released"]
       }
     ],
     [
       "@semantic-release/git",
       {
-        "assets": [
-          "CHANGELOG.md",
-          "package.json"
-        ],
+        "assets": ["CHANGELOG.md", "package.json"],
         "message": "chore(release): @gnome-ui/hooks@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]

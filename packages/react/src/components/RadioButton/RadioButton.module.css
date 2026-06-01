@@ -19,7 +19,7 @@
 
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
-    border-color     var(--gnome-duration-fast) var(--gnome-easing-default);
+    border-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
 /* ─── Inner dot (checked) ──────────────────────────────────────────────────── */
@@ -48,11 +48,7 @@
 
 .radio:not(:checked):hover {
   border-color: var(--gnome-light-5, #9a9996);
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-card-bg-color, #ffffff) 94%,
-    black 6%
-  );
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 94%, black 6%);
 }
 
 /* ─── Focus ────────────────────────────────────────────────────────────────── */
@@ -62,7 +58,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 /* ─── Disabled ─────────────────────────────────────────────────────────────── */
@@ -82,11 +78,7 @@
 
   .radio:not(:checked):hover {
     border-color: var(--gnome-light-4, #c0bfbc);
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-card-bg-color, #383838) 85%,
-      white 15%
-    );
+    background-color: color-mix(in srgb, var(--gnome-card-bg-color, #383838) 85%, white 15%);
   }
 }
 

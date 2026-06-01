@@ -1,22 +1,23 @@
-import type { HTMLAttributes } from "react";
-import styles from "./Avatar.module.css";
+import type { HTMLAttributes } from 'react';
 
-export type AvatarSize = "sm" | "md" | "lg" | "xl";
+import styles from './Avatar.module.css';
+
+export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Named color palette for the initials fallback.
  * Mirrors libadwaita's avatar color set.
  */
 export type AvatarColor =
-  | "blue"
-  | "green"
-  | "yellow"
-  | "orange"
-  | "red"
-  | "purple"
-  | "brown"
-  | "teal"
-  | "slate";
+  | 'blue'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'purple'
+  | 'brown'
+  | 'teal'
+  | 'slate';
 
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -38,15 +39,15 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const COLOR_LIST: AvatarColor[] = [
-  "blue",
-  "green",
-  "yellow",
-  "orange",
-  "red",
-  "purple",
-  "brown",
-  "teal",
-  "slate",
+  'blue',
+  'green',
+  'yellow',
+  'orange',
+  'red',
+  'purple',
+  'brown',
+  'teal',
+  'slate',
 ];
 
 /** Stable, non-cryptographic hash → index into COLOR_LIST. */
@@ -55,18 +56,23 @@ function nameToColor(name: string): AvatarColor {
   for (let i = 0; i < name.length; i++) {
     hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
   }
+
   return COLOR_LIST[hash % COLOR_LIST.length];
 }
 
 /** Extract up to 2 initials from a name string. */
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return "";
-  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
-  return (
-    parts[0].charAt(0).toUpperCase() +
-    parts[parts.length - 1].charAt(0).toUpperCase()
-  );
+
+  if (parts.length === 0) {
+    return '';
+  }
+
+  if (parts.length === 1) {
+    return parts[0].charAt(0).toUpperCase();
+  }
+
+  return parts[0].charAt(0).toUpperCase() + parts[parts.length - 1].charAt(0).toUpperCase();
 }
 
 /**
@@ -78,15 +84,15 @@ function getInitials(name: string): string {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Avatar.html
  */
 export function Avatar({
-  name = "",
+  name = '',
   src,
   alt,
-  size = "md",
+  size = 'md',
   color,
   className,
   ...props
 }: AvatarProps) {
-  const resolvedColor = color ?? (name ? nameToColor(name) : "blue");
+  const resolvedColor = color ?? (name ? nameToColor(name) : 'blue');
   const initials = getInitials(name);
 
   const classes = [
@@ -96,15 +102,10 @@ export function Avatar({
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
-    <span
-      role="img"
-      aria-label={alt ?? name ?? "Avatar"}
-      className={classes}
-      {...props}
-    >
+    <span role="img" aria-label={alt ?? name ?? 'Avatar'} className={classes} {...props}>
       {src ? (
         <img src={src} alt={alt ?? name} className={styles.image} />
       ) : (

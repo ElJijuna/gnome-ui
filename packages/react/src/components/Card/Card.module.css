@@ -9,10 +9,18 @@
 
 /* ─── Padding ─────────────────────────────────────────────────── */
 
-.padding-none { padding: 0; }
-.padding-sm   { padding: var(--gnome-space-2); }
-.padding-md   { padding: var(--gnome-space-4); }
-.padding-lg   { padding: var(--gnome-space-5); }
+.padding-none {
+  padding: 0;
+}
+.padding-sm {
+  padding: var(--gnome-space-2);
+}
+.padding-md {
+  padding: var(--gnome-space-4);
+}
+.padding-lg {
+  padding: var(--gnome-space-5);
+}
 
 /* ─── Interactive (activatable) ───────────────────────────────── */
 
@@ -35,26 +43,18 @@
 }
 
 .interactive:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-card-bg-color, #ffffff) 94%,
-    black 6%
-  );
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 94%, black 6%);
 }
 
 .interactive:active {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-card-bg-color, #ffffff) 88%,
-    black 12%
-  );
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 88%, black 12%);
 }
 
 .interactive:focus-visible {
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 .interactive:disabled {

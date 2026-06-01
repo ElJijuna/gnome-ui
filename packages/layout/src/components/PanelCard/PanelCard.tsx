@@ -1,14 +1,16 @@
+import { PanDown, PanUp } from '@gnome-ui/icons';
+import { Card, Icon, Separator, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import {
   forwardRef,
-  useImperativeHandle,
-  useState,
   type HTMLAttributes,
   type ReactNode,
-} from "react";
-import { Card, Icon, Separator, Skeleton, Spinner, Text } from "@gnome-ui/react";
-import { PanDown, PanUp } from "@gnome-ui/icons";
-import type { LoadingType } from "../StatCard";
-import styles from "./PanelCard.module.css";
+  useImperativeHandle,
+  useState,
+} from 'react';
+
+import type { LoadingType } from '../StatCard';
+
+import styles from './PanelCard.module.css';
 
 // ─── Handle ───────────────────────────────────────────────────────────────────
 
@@ -21,7 +23,7 @@ export interface PanelCardHandle {
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
-export interface PanelCardProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface PanelCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   // ── Header ──────────────────────────────────────────────────────────────────
   /** Icon placed at the leading edge of the header. */
   icon?: ReactNode;
@@ -92,130 +94,123 @@ export interface PanelCardProps extends Omit<HTMLAttributes<HTMLDivElement>, "ti
  * </PanelCard>
  * ```
  */
-export const PanelCard = forwardRef<PanelCardHandle, PanelCardProps>(
-  function PanelCard(
-    {
-      icon,
-      title,
-      headerActions,
-      defaultExpanded = true,
-      collapsible = true,
-      onExpandedChange,
-      children,
-      footer,
-      footerActions,
-      loading = false,
-      loadingType = "skeleton",
-      className,
-      style,
-      ...props
-    },
-    ref,
-  ) {
-    const [expanded, setExpanded] = useState(defaultExpanded);
-
-    const setAndNotify = (next: boolean) => {
-      setExpanded(next);
-      onExpandedChange?.(next);
-    };
-
-    useImperativeHandle(ref, () => ({
-      expand: () => setAndNotify(true),
-      collapse: () => setAndNotify(false),
-      toggle: () =>
-        setExpanded((prev) => {
-          const next = !prev;
-          onExpandedChange?.(next);
-          return next;
-        }),
-    }));
-
-    const hasFooter = footer !== undefined || footerActions !== undefined;
-
-    return (
-      <Card
-        padding="none"
-        className={[styles.root, className].filter(Boolean).join(" ")}
-        style={style}
-        aria-busy={loading || undefined}
-        {...props}
-      >
-        {/* ── Header ── */}
-        <div className={styles.header}>
-          {icon && <span className={styles.icon}>{icon}</span>}
-
-          <div className={styles.title}>
-            {typeof title === "string" ? (
-              <Text variant="heading" className={styles.titleText}>
-                {title}
-              </Text>
-            ) : (
-              title
-            )}
-          </div>
-
-          <div className={styles.trailing}>
-            {headerActions && (
-              <div className={styles.headerActions}>{headerActions}</div>
-            )}
-            {collapsible && (
-              <button
-                type="button"
-                className={styles.toggle}
-                onClick={() => setAndNotify(!expanded)}
-                aria-expanded={expanded}
-                aria-label={expanded ? "Collapse panel" : "Expand panel"}
-              >
-                <Icon icon={expanded ? PanUp : PanDown} size="sm" />
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* ── Body + Footer (collapsible zone) ── */}
-        <div
-          className={[
-            styles.bodyWrapper,
-            !expanded ? styles.bodyCollapsed : null,
-          ]
-            .filter(Boolean)
-            .join(" ")}
-          aria-hidden={!expanded || undefined}
-        >
-          <div className={styles.bodyInner}>
-            <Separator />
-            <div className={styles.body}>
-              {loading ? (
-                loadingType === "spinner" ? (
-                  <div className={styles.spinnerWrapper}>
-                    <Spinner size="md" />
-                  </div>
-                ) : (
-                  <>
-                    <Skeleton variant="rect" width={200} height={14} />
-                    <Skeleton variant="rect" width={160} height={14} style={{ marginTop: 8 }} />
-                    <Skeleton variant="rect" width={180} height={14} style={{ marginTop: 8 }} />
-                  </>
-                )
-              ) : (
-                children
-              )}
-            </div>
-
-            {!loading && hasFooter && (
-              <>
-                <Separator />
-                <div className={styles.footer}>
-                  <div className={styles.footerContent}>{footer}</div>
-                  {footerActions && (
-                    <div className={styles.footerActions}>{footerActions}</div>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      </Card>
-    );
+export const PanelCard = forwardRef<PanelCardHandle, PanelCardProps>(function PanelCard(
+  {
+    icon,
+    title,
+    headerActions,
+    defaultExpanded = true,
+    collapsible = true,
+    onExpandedChange,
+    children,
+    footer,
+    footerActions,
+    loading = false,
+    loadingType = 'skeleton',
+    className,
+    style,
+    ...props
   },
-);
+  ref,
+) {
+  const [expanded, setExpanded] = useState(defaultExpanded);
+
+  const setAndNotify = (next: boolean) => {
+    setExpanded(next);
+    onExpandedChange?.(next);
+  };
+
+  useImperativeHandle(ref, () => ({
+    expand: () => setAndNotify(true),
+    collapse: () => setAndNotify(false),
+    toggle: () =>
+      setExpanded((prev) => {
+        const next = !prev;
+
+        onExpandedChange?.(next);
+
+        return next;
+      }),
+  }));
+
+  const hasFooter = footer !== undefined || footerActions !== undefined;
+
+  return (
+    <Card
+      padding="none"
+      className={[styles.root, className].filter(Boolean).join(' ')}
+      style={style}
+      aria-busy={loading || undefined}
+      {...props}
+    >
+      {/* ── Header ── */}
+      <div className={styles.header}>
+        {icon && <span className={styles.icon}>{icon}</span>}
+
+        <div className={styles.title}>
+          {typeof title === 'string' ? (
+            <Text variant="heading" className={styles.titleText}>
+              {title}
+            </Text>
+          ) : (
+            title
+          )}
+        </div>
+
+        <div className={styles.trailing}>
+          {headerActions && <div className={styles.headerActions}>{headerActions}</div>}
+          {collapsible && (
+            <button
+              type="button"
+              className={styles.toggle}
+              onClick={() => setAndNotify(!expanded)}
+              aria-expanded={expanded}
+              aria-label={expanded ? 'Collapse panel' : 'Expand panel'}
+            >
+              <Icon icon={expanded ? PanUp : PanDown} size="sm" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* ── Body + Footer (collapsible zone) ── */}
+      <div
+        className={[styles.bodyWrapper, !expanded ? styles.bodyCollapsed : null]
+          .filter(Boolean)
+          .join(' ')}
+        aria-hidden={!expanded || undefined}
+      >
+        <div className={styles.bodyInner}>
+          <Separator />
+          <div className={styles.body}>
+            {loading ? (
+              loadingType === 'spinner' ? (
+                <div className={styles.spinnerWrapper}>
+                  <Spinner size="md" />
+                </div>
+              ) : (
+                <>
+                  <Skeleton variant="rect" width={200} height={14} />
+                  <Skeleton variant="rect" width={160} height={14} style={{ marginTop: 8 }} />
+                  <Skeleton variant="rect" width={180} height={14} style={{ marginTop: 8 }} />
+                </>
+              )
+            ) : (
+              children
+            )}
+          </div>
+
+          {!loading && hasFooter && (
+            <>
+              <Separator />
+              <div className={styles.footer}>
+                <div className={styles.footerContent}>{footer}</div>
+                {footerActions && <div className={styles.footerActions}>{footerActions}</div>}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
+});

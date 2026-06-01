@@ -1,18 +1,20 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { AvatarRotator } from "./AvatarRotator";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Text } from '../Text';
+
+import { AvatarRotator } from './AvatarRotator';
 
 const avatarSources = [
-  "https://i.pravatar.cc/128?img=5",
-  "https://i.pravatar.cc/128?img=32",
-  "https://i.pravatar.cc/128?img=47",
-  "https://i.pravatar.cc/128?img=56",
+  'https://i.pravatar.cc/128?img=5',
+  'https://i.pravatar.cc/128?img=32',
+  'https://i.pravatar.cc/128?img=47',
+  'https://i.pravatar.cc/128?img=56',
 ];
 
 const meta: Meta<typeof AvatarRotator> = {
-  title: "Components/AvatarRotator",
+  title: 'Components/AvatarRotator',
   component: AvatarRotator,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -28,16 +30,16 @@ Single avatar surface that crossfades through multiple image sources.
     },
   },
   argTypes: {
-    size: { control: "select", options: ["sm", "md", "lg", "xl"] },
-    name: { control: "text" },
-    interval: { control: "number" },
-    transitionDuration: { control: "number" },
-    pauseOnHover: { control: "boolean" },
+    size: { control: 'select', options: ['sm', 'md', 'lg', 'xl'] },
+    name: { control: 'text' },
+    interval: { control: 'number' },
+    transitionDuration: { control: 'number' },
+    pauseOnHover: { control: 'boolean' },
   },
   args: {
-    name: "Ada Lovelace",
+    name: 'Ada Lovelace',
     avatars: avatarSources,
-    size: "lg",
+    size: 'lg',
     interval: 2200,
     transitionDuration: 260,
     pauseOnHover: true,
@@ -55,23 +57,18 @@ export const Default: Story = {};
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-      {(["sm", "md", "lg", "xl"] as const).map((size) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
         <div
           key={size}
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             gap: 8,
           }}
         >
-          <AvatarRotator
-            name="Ada Lovelace"
-            avatars={avatarSources}
-            size={size}
-            interval={1800}
-          />
+          <AvatarRotator name="Ada Lovelace" avatars={avatarSources} size={size} interval={1800} />
           <Text variant="caption" color="dim">
             {size}
           </Text>
@@ -86,16 +83,16 @@ export const Sizes: Story = {
 
 export const Fallback: Story = {
   args: {
-    name: "Ada Lovelace",
+    name: 'Ada Lovelace',
     avatars: [],
-    color: "purple",
-    size: "lg",
+    color: 'purple',
+    size: 'lg',
   },
   parameters: {
     docs: {
       description: {
         story:
-          "When no usable image source is provided, `AvatarRotator` falls back to the regular `Avatar` initials behavior.",
+          'When no usable image source is provided, `AvatarRotator` falls back to the regular `Avatar` initials behavior.',
       },
     },
   },
@@ -112,7 +109,7 @@ export const Controlled: Story = {
     docs: {
       description: {
         story:
-          "Use `activeIndex` when the visible avatar should be driven by external state instead of automatic rotation.",
+          'Use `activeIndex` when the visible avatar should be driven by external state instead of automatic rotation.',
       },
     },
   },

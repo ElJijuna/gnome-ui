@@ -1,16 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { BoxedList } from "./BoxedList";
-import { ActionRow } from "../ActionRow";
-import { Switch } from "../Switch";
-import { Button } from "../Button";
-import { Text } from "../Text";
-import { Box } from "../Box";
-import { WrapBox } from "../WrapBox";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { ActionRow } from '../ActionRow';
+import { Box } from '../Box';
+import { Button } from '../Button';
+import { Switch } from '../Switch';
+import { Text } from '../Text';
+import { WrapBox } from '../WrapBox';
+
+import { BoxedList } from './BoxedList';
 
 const meta: Meta<typeof BoxedList> = {
-  title: "Components/BoxedList",
+  title: 'Components/BoxedList',
   component: BoxedList,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -38,13 +40,13 @@ Mirrors the Adwaita \`.boxed-list\` style class on \`GtkListBox\`.
   ],
   argTypes: {
     variant: {
-      control: "select",
-      options: ["default", "separate"],
-      description: "`separate` renders each child as its own standalone card.",
+      control: 'select',
+      options: ['default', 'separate'],
+      description: '`separate` renders each child as its own standalone card.',
     },
   },
   args: {
-    variant: "default",
+    variant: 'default',
   },
 };
 
@@ -56,7 +58,11 @@ type Story = StoryObj<typeof BoxedList>;
 export const Default: Story = {
   render: (args) => (
     <BoxedList {...args}>
-      <ActionRow title="Wi-Fi" subtitle="Home Network" trailing={<Switch defaultChecked aria-label="Wi-Fi" />} />
+      <ActionRow
+        title="Wi-Fi"
+        subtitle="Home Network"
+        trailing={<Switch defaultChecked aria-label="Wi-Fi" />}
+      />
       <ActionRow title="Bluetooth" subtitle="Off" trailing={<Switch aria-label="Bluetooth" />} />
       <ActionRow title="VPN" subtitle="Not connected" trailing={<Switch aria-label="VPN" />} />
     </BoxedList>
@@ -68,7 +74,7 @@ export const Default: Story = {
 export const SimpleRows: Story = {
   render: () => (
     <BoxedList>
-      {["About", "System", "Users", "Date & Time"].map((label) => (
+      {['About', 'System', 'Users', 'Date & Time'].map((label) => (
         <ActionRow key={label} interactive title={label} onClick={() => {}} />
       ))}
     </BoxedList>
@@ -81,9 +87,24 @@ export const SimpleRows: Story = {
 export const WithActions: Story = {
   render: () => (
     <BoxedList>
-      <ActionRow title="Automatic Updates" subtitle="Install updates automatically" trailing={<Switch defaultChecked aria-label="Automatic Updates" />} />
-      <ActionRow title="Usage & Diagnostics" subtitle="Help improve GNOME" trailing={<Switch aria-label="Usage & Diagnostics" />} />
-      <ActionRow title="Reset Settings" trailing={<Button variant="destructive" size="sm">Reset</Button>} />
+      <ActionRow
+        title="Automatic Updates"
+        subtitle="Install updates automatically"
+        trailing={<Switch defaultChecked aria-label="Automatic Updates" />}
+      />
+      <ActionRow
+        title="Usage & Diagnostics"
+        subtitle="Help improve GNOME"
+        trailing={<Switch aria-label="Usage & Diagnostics" />}
+      />
+      <ActionRow
+        title="Reset Settings"
+        trailing={
+          <Button variant="destructive" size="sm">
+            Reset
+          </Button>
+        }
+      />
     </BoxedList>
   ),
   parameters: { controls: { disable: true } },
@@ -100,18 +121,8 @@ export const Separate: Story = {
         subtitle="Display, sound, power"
         onClick={() => {}}
       />
-      <ActionRow
-        interactive
-        title="Wi-Fi"
-        subtitle="Home Network"
-        onClick={() => {}}
-      />
-      <ActionRow
-        interactive
-        title="Bluetooth"
-        subtitle="Off"
-        onClick={() => {}}
-      />
+      <ActionRow interactive title="Wi-Fi" subtitle="Home Network" onClick={() => {}} />
+      <ActionRow interactive title="Bluetooth" subtitle="Off" onClick={() => {}} />
     </BoxedList>
   ),
   parameters: {
@@ -119,7 +130,7 @@ export const Separate: Story = {
     docs: {
       description: {
         story:
-          "`variant=\"separate\"` renders each child as its own standalone rounded card. Use when rows are independent items rather than a continuous grouped list — mirrors `.boxed-list-separate`.",
+          '`variant="separate"` renders each child as its own standalone rounded card. Use when rows are independent items rather than a continuous grouped list — mirrors `.boxed-list-separate`.',
       },
     },
   },
@@ -135,8 +146,16 @@ export const LabelledSections: Story = {
           Network
         </Text>
         <BoxedList>
-          <ActionRow title="Wi-Fi" subtitle="Home Network" trailing={<Switch defaultChecked aria-label="Wi-Fi" />} />
-          <ActionRow title="Ethernet" subtitle="Connected" trailing={<Switch defaultChecked aria-label="Ethernet" />} />
+          <ActionRow
+            title="Wi-Fi"
+            subtitle="Home Network"
+            trailing={<Switch defaultChecked aria-label="Wi-Fi" />}
+          />
+          <ActionRow
+            title="Ethernet"
+            subtitle="Connected"
+            trailing={<Switch defaultChecked aria-label="Ethernet" />}
+          />
         </BoxedList>
       </Box>
       <Box>
@@ -144,8 +163,14 @@ export const LabelledSections: Story = {
           Privacy
         </Text>
         <BoxedList>
-          <ActionRow title="Location Services" trailing={<Switch aria-label="Location Services" />} />
-          <ActionRow title="Usage & Diagnostics" trailing={<Switch aria-label="Usage & Diagnostics" />} />
+          <ActionRow
+            title="Location Services"
+            trailing={<Switch aria-label="Location Services" />}
+          />
+          <ActionRow
+            title="Usage & Diagnostics"
+            trailing={<Switch aria-label="Usage & Diagnostics" />}
+          />
         </BoxedList>
       </Box>
     </WrapBox>
@@ -154,7 +179,8 @@ export const LabelledSections: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use a `caption-heading` label above each list to group related sections in a settings view.",
+        story:
+          'Use a `caption-heading` label above each list to group related sections in a settings view.',
       },
     },
   },

@@ -1,2 +1,2 @@
-export { IconBadge } from "./IconBadge";
-export type { IconBadgeProps, IconBadgeColor, IconBadgeSize } from "./IconBadge";
+export type { IconBadgeColor, IconBadgeProps, IconBadgeSize } from './IconBadge';
+export { IconBadge } from './IconBadge';

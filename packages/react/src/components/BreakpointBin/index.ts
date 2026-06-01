@@ -1,6 +1,6 @@
-export { BreakpointBin } from "./BreakpointBin";
 export type {
   BreakpointBinProps,
-  BreakpointDefinition,
   BreakpointBinState,
-} from "./BreakpointBin";
+  BreakpointDefinition,
+} from './BreakpointBin';
+export { BreakpointBin } from './BreakpointBin';

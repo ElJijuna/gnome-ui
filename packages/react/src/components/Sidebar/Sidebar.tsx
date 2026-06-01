@@ -1,29 +1,34 @@
 import {
+  Children,
   createContext,
+  type HTMLAttributes,
+  isValidElement,
+  type ReactNode,
   useContext,
   useState,
-  isValidElement,
-  Children,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
-import { SearchBar } from "../SearchBar";
-import { StatusPage } from "../StatusPage";
-import { useBreakpoint } from "../../hooks/useBreakpoint";
-import styles from "./Sidebar.module.css";
+} from 'react';
+
+import { useBreakpoint } from '../../hooks/useBreakpoint';
+import { SearchBar } from '../SearchBar';
+import { StatusPage } from '../StatusPage';
+
+import styles from './Sidebar.module.css';
 
 // ─── Contexts ─────────────────────────────────────────────────────────────────
 
 /** Provides the collapsed state to all descendant `SidebarItem` components. */
+// eslint-disable-next-line react-refresh/only-export-components
 export const SidebarCollapsedContext = createContext(false);
 
 /** Returns `true` when the nearest `Sidebar` is in collapsed (icon-only) mode. */
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSidebarCollapsed() {
   return useContext(SidebarCollapsedContext);
 }
 
 /** Provides the active filter string to all descendant `SidebarItem` components. */
-export const SidebarFilterContext = createContext("");
+// eslint-disable-next-line react-refresh/only-export-components
+export const SidebarFilterContext = createContext('');
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -31,27 +36,34 @@ export const SidebarFilterContext = createContext("");
 function countMatchingItems(children: ReactNode, filter: string): number {
   let count = 0;
   Children.forEach(children, (child) => {
-    if (!isValidElement(child)) return;
+    if (!isValidElement(child)) {
+      return;
+    }
+
     const props = child.props as Record<string, unknown>;
-    if (typeof props.label === "string") {
-      if (props.label.toLowerCase().includes(filter.toLowerCase())) count++;
+
+    if (typeof props.label === 'string') {
+      if (props.label.toLowerCase().includes(filter.toLowerCase())) {
+        count++;
+      }
     } else if (props.children) {
       count += countMatchingItems(props.children as ReactNode, filter);
     }
   });
+
   return count;
 }
 
 // ─── Variant map ──────────────────────────────────────────────────────────────
 
 const variantClass: Record<string, string> = {
-  blue: "variantBlue",
-  green: "variantGreen",
-  red: "variantRed",
-  yellow: "variantYellow",
-  black: "variantBlack",
-  transparent: "variantTransparent",
-  blurred: "variantBlurred",
+  blue: 'variantBlue',
+  green: 'variantGreen',
+  red: 'variantRed',
+  yellow: 'variantYellow',
+  black: 'variantBlack',
+  transparent: 'variantTransparent',
+  blurred: 'variantBlurred',
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -85,7 +97,7 @@ export interface SidebarProps extends HTMLAttributes<HTMLElement> {
    * When omitted the sidebar auto-switches to `"page"` at ≤ 400 sp,
    * mirroring `AdwSidebar` mobile behaviour.
    */
-  mode?: "sidebar" | "page";
+  mode?: 'sidebar' | 'page';
   /**
    * Visual style variant for the sidebar background.
    * - `"classic"` — default GNOME gray
@@ -94,7 +106,7 @@ export interface SidebarProps extends HTMLAttributes<HTMLElement> {
    * - `"transparent"` — no background, inherits parent
    * - `"blurred"` — frosted glass (backdrop-filter blur), like macOS
    */
-  variant?: "classic" | "blue" | "green" | "red" | "yellow" | "black" | "transparent" | "blurred";
+  variant?: 'classic' | 'blue' | 'green' | 'red' | 'yellow' | 'black' | 'transparent' | 'blurred';
 }
 
 /**
@@ -115,23 +127,26 @@ export function Sidebar({
   filter: controlledFilter,
   onFilterChange,
   mode,
-  variant = "classic",
+  variant = 'classic',
   className,
   ...props
 }: SidebarProps) {
-  const [internalFilter, setInternalFilter] = useState("");
+  const [internalFilter, setInternalFilter] = useState('');
   const { isNarrow } = useBreakpoint();
 
   const isControlled = controlledFilter !== undefined;
   const filterValue = isControlled ? controlledFilter : internalFilter;
 
   const handleFilterChange = (v: string) => {
-    if (!isControlled) setInternalFilter(v);
+    if (!isControlled) {
+      setInternalFilter(v);
+    }
+
     onFilterChange?.(v);
   };
 
   const isFilterActive = filterValue.length > 0;
-  const effectiveMode = mode ?? (isNarrow ? "page" : "sidebar");
+  const effectiveMode = mode ?? (isNarrow ? 'page' : 'sidebar');
   const hasMatches = !isFilterActive || countMatchingItems(children, filterValue) > 0;
 
   return (
@@ -141,12 +156,12 @@ export function Sidebar({
           className={[
             styles.sidebar,
             collapsed ? styles.collapsed : null,
-            effectiveMode === "page" ? styles.pageMode : null,
-            variant !== "classic" ? styles[variantClass[variant]] : null,
+            effectiveMode === 'page' ? styles.pageMode : null,
+            variant !== 'classic' ? styles[variantClass[variant]] : null,
             className,
           ]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
           {...props}
         >
           {searchable && (
@@ -155,19 +170,15 @@ export function Sidebar({
                 open
                 value={filterValue}
                 onChange={(e) => handleFilterChange(e.target.value)}
-                onClose={() => handleFilterChange("")}
-                onClear={() => handleFilterChange("")}
+                onClose={() => handleFilterChange('')}
+                onClear={() => handleFilterChange('')}
                 inline
               />
             </div>
           )}
 
           {isFilterActive && !hasMatches ? (
-            <StatusPage
-              title="No Results"
-              description="No items match your search."
-              compact
-            />
+            <StatusPage title="No Results" description="No items match your search." compact />
           ) : (
             children
           )}

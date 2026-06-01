@@ -1,2 +1,2 @@
-export { ToolbarView } from "./ToolbarView";
-export type { ToolbarViewProps } from "./ToolbarView";
+export type { ToolbarViewProps } from './ToolbarView';
+export { ToolbarView } from './ToolbarView';

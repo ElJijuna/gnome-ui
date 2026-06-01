@@ -1,7 +1,9 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Card, Skeleton, Spinner, Text } from "@gnome-ui/react";
-import type { LoadingType } from "../StatCard";
-import styles from "./EntityCard.module.css";
+import { Card, Skeleton, Spinner, Text } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import type { LoadingType } from '../StatCard';
+
+import styles from './EntityCard.module.css';
 
 export interface EntityCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Avatar slot — any ReactNode. Use `<IconBadge>` or `<Avatar>` here. */
@@ -39,15 +41,16 @@ export function EntityCard({
   meta,
   interactive = true,
   loading = false,
-  loadingType = "skeleton",
+  loadingType = 'skeleton',
   className,
   ...props
 }: EntityCardProps) {
   const hasMeta = meta && (meta[0] || meta[1]);
 
   if (loading) {
-    const cardClass = [styles.card, className].filter(Boolean).join(" ");
-    if (loadingType === "spinner") {
+    const cardClass = [styles.card, className].filter(Boolean).join(' ');
+
+    if (loadingType === 'spinner') {
       return (
         <Card interactive={false} className={cardClass} aria-busy="true" {...props}>
           <div className={styles.spinnerWrapper}>
@@ -56,6 +59,7 @@ export function EntityCard({
         </Card>
       );
     }
+
     return (
       <Card interactive={false} className={cardClass} aria-busy="true" {...props}>
         <div className={styles.inner}>
@@ -74,7 +78,7 @@ export function EntityCard({
   return (
     <Card
       interactive={interactive}
-      className={[styles.card, className].filter(Boolean).join(" ")}
+      className={[styles.card, className].filter(Boolean).join(' ')}
       {...props}
     >
       <div className={styles.inner}>
@@ -103,8 +107,16 @@ export function EntityCard({
 
       {hasMeta && (
         <div className={styles.footer}>
-          {meta[0] && <Text variant="caption" color="dim">{meta[0]}</Text>}
-          {meta[1] && <Text variant="caption" color="dim">{meta[1]}</Text>}
+          {meta[0] && (
+            <Text variant="caption" color="dim">
+              {meta[0]}
+            </Text>
+          )}
+          {meta[1] && (
+            <Text variant="caption" color="dim">
+              {meta[1]}
+            </Text>
+          )}
         </div>
       )}
     </Card>

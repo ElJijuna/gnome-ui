@@ -1,11 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar } from "./Avatar";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Text } from '../Text';
+
+import { Avatar } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {
-  title: "Components/Avatar",
+  title: 'Components/Avatar',
   component: Avatar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -22,17 +24,17 @@ Circular avatar following the Adwaita \`AdwAvatar\` pattern.
     },
   },
   argTypes: {
-    size: { control: "select", options: ["sm", "md", "lg", "xl"] },
+    size: { control: 'select', options: ['sm', 'md', 'lg', 'xl'] },
     color: {
-      control: "select",
-      options: ["blue", "green", "yellow", "orange", "red", "purple", "brown", "teal", "slate"],
+      control: 'select',
+      options: ['blue', 'green', 'yellow', 'orange', 'red', 'purple', 'brown', 'teal', 'slate'],
     },
-    name: { control: "text" },
-    src: { control: "text" },
+    name: { control: 'text' },
+    src: { control: 'text' },
   },
   args: {
-    name: "Jane Doe",
-    size: "md",
+    name: 'Jane Doe',
+    size: 'md',
   },
 };
 
@@ -47,11 +49,16 @@ export const Default: Story = {};
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-      {(["sm", "md", "lg", "xl"] as const).map((s) => (
-        <div key={s} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
+        <div
+          key={s}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}
+        >
           <Avatar name="Jane Doe" size={s} />
-          <Text variant="caption" color="dim">{s}</Text>
+          <Text variant="caption" color="dim">
+            {s}
+          </Text>
         </div>
       ))}
     </div>
@@ -63,22 +70,27 @@ export const Sizes: Story = {
 
 export const Colors: Story = {
   render: () => (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-      {(["blue", "green", "yellow", "orange", "red", "purple", "brown", "teal", "slate"] as const).map(
-        (c) => (
-          <div key={c} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <Avatar name="AB" color={c} size="lg" />
-            <Text variant="caption" color="dim">{c}</Text>
-          </div>
-        )
-      )}
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+      {(
+        ['blue', 'green', 'yellow', 'orange', 'red', 'purple', 'brown', 'teal', 'slate'] as const
+      ).map((c) => (
+        <div
+          key={c}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+        >
+          <Avatar name="AB" color={c} size="lg" />
+          <Text variant="caption" color="dim">
+            {c}
+          </Text>
+        </div>
+      ))}
     </div>
   ),
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "All nine named colors available for the initials fallback.",
+        story: 'All nine named colors available for the initials fallback.',
       },
     },
   },
@@ -88,13 +100,19 @@ export const Colors: Story = {
 
 export const AutoColor: Story = {
   render: () => {
-    const names = ["Alice Martin", "Bob Smith", "Carol White", "David Brown", "Eva Green"];
+    const names = ['Alice Martin', 'Bob Smith', 'Carol White', 'David Brown', 'Eva Green'];
+
     return (
-      <div style={{ display: "flex", gap: 12 }}>
+      <div style={{ display: 'flex', gap: 12 }}>
         {names.map((n) => (
-          <div key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+          <div
+            key={n}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+          >
             <Avatar name={n} size="lg" />
-            <Text variant="caption" color="dim">{n.split(" ")[0]}</Text>
+            <Text variant="caption" color="dim">
+              {n.split(' ')[0]}
+            </Text>
           </div>
         ))}
       </div>
@@ -105,7 +123,7 @@ export const AutoColor: Story = {
     docs: {
       description: {
         story:
-          "When `color` is omitted, a stable background color is derived from the `name` string — the same name always produces the same color.",
+          'When `color` is omitted, a stable background color is derived from the `name` string — the same name always produces the same color.',
       },
     },
   },
@@ -115,14 +133,14 @@ export const AutoColor: Story = {
 
 export const WithImage: Story = {
   args: {
-    name: "Jane Doe",
-    src: "https://i.pravatar.cc/128?img=47",
-    size: "lg",
+    name: 'Jane Doe',
+    src: 'https://i.pravatar.cc/128?img=47',
+    size: 'lg',
   },
   parameters: {
     docs: {
       description: {
-        story: "When `src` is provided the initials layer is replaced by the image.",
+        story: 'When `src` is provided the initials layer is replaced by the image.',
       },
     },
   },
@@ -133,18 +151,21 @@ export const WithImage: Story = {
 export const InList: Story = {
   render: () => {
     const contacts = [
-      { name: "Alice Martin",  msg: "See you tomorrow!" },
-      { name: "Bob Smith",     msg: "The build is ready." },
-      { name: "Carol White",   msg: "Thanks for the review." },
+      { name: 'Alice Martin', msg: 'See you tomorrow!' },
+      { name: 'Bob Smith', msg: 'The build is ready.' },
+      { name: 'Carol White', msg: 'Thanks for the review.' },
     ];
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 320 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 320 }}>
         {contacts.map(({ name, msg }) => (
-          <div key={name} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <Avatar name={name} size="md" />
             <div>
               <Text variant="heading">{name}</Text>
-              <Text variant="caption" color="dim" style={{ marginTop: 2 }}>{msg}</Text>
+              <Text variant="caption" color="dim" style={{ marginTop: 2 }}>
+                {msg}
+              </Text>
             </div>
           </div>
         ))}

@@ -1,33 +1,42 @@
+import type { IconDefinition } from '@gnome-ui/icons';
+import { PanDown, PanUp } from '@gnome-ui/icons';
 import {
+  Children,
   forwardRef,
-  useImperativeHandle,
-  useState,
+  type HTMLAttributes,
+  isValidElement,
+  type ReactNode,
   useContext,
   useId,
-  isValidElement,
-  Children,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { PanDown, PanUp } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { useSidebarCollapsed, SidebarFilterContext } from "./Sidebar";
-import styles from "./Sidebar.module.css";
+  useImperativeHandle,
+  useState,
+} from 'react';
+
+import { Icon } from '../Icon';
+
+import { SidebarFilterContext, useSidebarCollapsed } from './Sidebar';
+import styles from './Sidebar.module.css';
 
 // ─── Filter helper ────────────────────────────────────────────────────────────
 
 function countMatchingItems(children: ReactNode, filter: string): number {
   let count = 0;
   Children.forEach(children, (child) => {
-    if (!isValidElement(child)) return;
+    if (!isValidElement(child)) {
+      return;
+    }
+
     const props = child.props as Record<string, unknown>;
-    if (typeof props.label === "string") {
-      if (props.label.toLowerCase().includes(filter.toLowerCase())) count++;
+
+    if (typeof props.label === 'string') {
+      if (props.label.toLowerCase().includes(filter.toLowerCase())) {
+        count++;
+      }
     } else if (props.children) {
       count += countMatchingItems(props.children as ReactNode, filter);
     }
   });
+
   return count;
 }
 
@@ -98,7 +107,10 @@ export const SidebarSection = forwardRef<SidebarSectionHandle, SidebarSectionPro
     const bodyId = useId();
 
     const setAndNotify = (next: boolean) => {
-      if (!isControlled) setInternalOpen(next);
+      if (!isControlled) {
+        setInternalOpen(next);
+      }
+
       onOpenChange?.(next);
     };
 
@@ -112,7 +124,9 @@ export const SidebarSection = forwardRef<SidebarSectionHandle, SidebarSectionPro
     const hasVisibleChildren =
       filterValue.length === 0 || countMatchingItems(children, filterValue) > 0;
 
-    if (!hasVisibleChildren) return null;
+    if (!hasVisibleChildren) {
+      return null;
+    }
 
     // In rail mode the body is always visible
     const isOpen = sidebarCollapsed ? true : open;
@@ -120,12 +134,9 @@ export const SidebarSection = forwardRef<SidebarSectionHandle, SidebarSectionPro
     const showHeader = !!(title || icon || (collapsible && !sidebarCollapsed));
 
     return (
-      <section
-        className={[styles.section, className].filter(Boolean).join(" ")}
-        {...props}
-      >
-        {showHeader && (
-          collapsible && !sidebarCollapsed ? (
+      <section className={[styles.section, className].filter(Boolean).join(' ')} {...props}>
+        {showHeader &&
+          (collapsible && !sidebarCollapsed ? (
             <button
               type="button"
               className={styles.sectionHeader}
@@ -152,23 +163,17 @@ export const SidebarSection = forwardRef<SidebarSectionHandle, SidebarSectionPro
               )}
               {title && <span className={styles.sectionTitle}>{title}</span>}
             </div>
-          )
-        )}
+          ))}
 
         <div
           id={bodyId}
-          className={[
-            styles.sectionBody,
-            !isOpen ? styles.sectionBodyCollapsed : null,
-          ]
+          className={[styles.sectionBody, !isOpen ? styles.sectionBodyCollapsed : null]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
           aria-hidden={!isOpen || undefined}
         >
           <div className={styles.sectionBodyInner}>
-            <ul role="list" className={styles.list}>
-              {children}
-            </ul>
+            <ul className={styles.list}>{children}</ul>
           </div>
         </div>
       </section>

@@ -1,16 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { PreferencesPage } from "./PreferencesPage";
-import { PreferencesGroup } from "../PreferencesGroup";
-import { BoxedList } from "../BoxedList";
-import { SwitchRow } from "../SwitchRow";
-import { ComboRow } from "../ComboRow";
-import { SpinRow } from "../SpinRow";
-import { EntryRow } from "../EntryRow";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { BoxedList } from '../BoxedList';
+import { ComboRow } from '../ComboRow';
+import { EntryRow } from '../EntryRow';
+import { PreferencesGroup } from '../PreferencesGroup';
+import { SpinRow } from '../SpinRow';
+import { SwitchRow } from '../SwitchRow';
+
+import { PreferencesPage } from './PreferencesPage';
 
 const meta: Meta<typeof PreferencesPage> = {
-  title: "Components/PreferencesPage",
+  title: 'Components/PreferencesPage',
   component: PreferencesPage,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -31,12 +33,12 @@ Mirrors \`AdwPreferencesPage\`.
     },
   },
   argTypes: {
-    title: { control: "text" },
-    iconName: { control: "text" },
+    title: { control: 'text' },
+    iconName: { control: 'text' },
   },
   args: {
-    title: "General",
-    iconName: "preferences-system-symbolic",
+    title: 'General',
+    iconName: 'preferences-system-symbolic',
   },
 };
 
@@ -47,7 +49,16 @@ type Story = StoryObj<typeof PreferencesPage>;
 
 export const Default: Story = {
   render: (args) => (
-    <div style={{ height: 500, display: "flex", flexDirection: "column", border: "1px solid var(--gnome-borders-color)", borderRadius: 12, overflow: "hidden" }}>
+    <div
+      style={{
+        height: 500,
+        display: 'flex',
+        flexDirection: 'column',
+        border: '1px solid var(--gnome-borders-color)',
+        borderRadius: 12,
+        overflow: 'hidden',
+      }}
+    >
       <PreferencesPage {...args}>
         <PreferencesGroup title="Appearance">
           <BoxedList>
@@ -55,9 +66,9 @@ export const Default: Story = {
             <ComboRow
               title="Text size"
               options={[
-                { value: "small", label: "Small" },
-                { value: "medium", label: "Medium" },
-                { value: "large", label: "Large" },
+                { value: 'small', label: 'Small' },
+                { value: 'medium', label: 'Medium' },
+                { value: 'large', label: 'Large' },
               ]}
               defaultValue="medium"
             />
@@ -78,7 +89,16 @@ export const Default: Story = {
 
 export const MultipleGroups: Story = {
   render: () => (
-    <div style={{ height: 560, display: "flex", flexDirection: "column", border: "1px solid var(--gnome-borders-color)", borderRadius: 12, overflow: "hidden" }}>
+    <div
+      style={{
+        height: 560,
+        display: 'flex',
+        flexDirection: 'column',
+        border: '1px solid var(--gnome-borders-color)',
+        borderRadius: 12,
+        overflow: 'hidden',
+      }}
+    >
       <PreferencesPage title="Advanced">
         <PreferencesGroup title="Network">
           <BoxedList>
@@ -86,15 +106,18 @@ export const MultipleGroups: Story = {
             <SpinRow title="Timeout (seconds)" min={5} max={120} step={5} defaultValue={30} />
           </BoxedList>
         </PreferencesGroup>
-        <PreferencesGroup title="Updates" description="Configure how the application checks for updates.">
+        <PreferencesGroup
+          title="Updates"
+          description="Configure how the application checks for updates."
+        >
           <BoxedList>
             <SwitchRow title="Automatic updates" defaultChecked />
             <ComboRow
               title="Update channel"
               options={[
-                { value: "stable", label: "Stable" },
-                { value: "beta", label: "Beta" },
-                { value: "nightly", label: "Nightly" },
+                { value: 'stable', label: 'Stable' },
+                { value: 'beta', label: 'Beta' },
+                { value: 'nightly', label: 'Nightly' },
               ]}
               defaultValue="stable"
             />
@@ -113,7 +136,8 @@ export const MultipleGroups: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "A page with multiple `PreferencesGroup` sections, demonstrating vertical scrolling.",
+        story:
+          'A page with multiple `PreferencesGroup` sections, demonstrating vertical scrolling.',
       },
     },
   },

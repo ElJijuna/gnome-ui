@@ -50,21 +50,35 @@
 /* ─── Enter animations ──────────────────────────────────────────────────────── */
 
 .enterForward {
-  animation: slide-in-right var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+  animation: slide-in-right var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease)
+    both;
 }
 
 .enterBack {
-  animation: slide-in-left var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+  animation: slide-in-left var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease)
+    both;
 }
 
 @keyframes slide-in-right {
-  from { transform: translateX(40px); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-left {
-  from { transform: translateX(-40px); opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
+  from {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* ─── Reduced motion ────────────────────────────────────────────────────────── */

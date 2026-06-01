@@ -1,7 +1,9 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import styles from "./StatusPage.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import { Icon } from '../Icon';
+
+import styles from './StatusPage.module.css';
 
 export interface StatusPageProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -52,15 +54,17 @@ export function StatusPage({
   ...props
 }: StatusPageProps) {
   const iconSize = compact ? 64 : 128;
-  const iconContent = icon
-    ? <Icon icon={icon} width={iconSize} height={iconSize} aria-hidden />
-    : iconNode ?? null;
+  const iconContent = icon ? (
+    <Icon icon={icon} width={iconSize} height={iconSize} aria-hidden />
+  ) : (
+    (iconNode ?? null)
+  );
 
   return (
     <div
       className={[styles.page, compact ? styles.compact : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {iconContent && (
@@ -71,13 +75,9 @@ export function StatusPage({
 
       <p className={styles.title}>{title}</p>
 
-      {description && (
-        <p className={styles.description}>{description}</p>
-      )}
+      {description && <p className={styles.description}>{description}</p>}
 
-      {children && (
-        <div className={styles.actions}>{children}</div>
-      )}
+      {children && <div className={styles.actions}>{children}</div>}
     </div>
   );
 }

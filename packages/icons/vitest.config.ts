@@ -1,11 +1,11 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     globals: true,
     passWithNoTests: true,
     typecheck: {
-      tsconfig: "./tsconfig.test.json",
+      tsconfig: './tsconfig.test.json',
     },
   },
 });

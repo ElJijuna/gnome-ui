@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Toolbar.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Toolbar.module.css';
 
 export interface ToolbarProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -20,10 +21,7 @@ export interface ToolbarProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function Toolbar({ children, className, ...props }: ToolbarProps) {
   return (
-    <div
-      className={[styles.toolbar, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.toolbar, className].filter(Boolean).join(' ')} {...props}>
       {children}
     </div>
   );

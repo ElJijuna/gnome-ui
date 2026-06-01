@@ -1,17 +1,17 @@
-import { useRef, useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Text, Badge } from "@gnome-ui/react";
-import { DocumentOpen, Settings, Star, Information } from "@gnome-ui/icons";
-import { Icon } from "@gnome-ui/react";
-import { PanelCard } from "./PanelCard";
-import type { PanelCardHandle } from "./PanelCard";
+import { DocumentOpen, Information, Settings, Star } from '@gnome-ui/icons';
+import { Badge, Button, Icon, Text } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useRef, useState } from 'react';
+
+import type { PanelCardHandle } from './PanelCard';
+import { PanelCard } from './PanelCard';
 
 const meta: Meta<typeof PanelCard> = {
-  title: "Layout/PanelCard",
+  title: 'Layout/PanelCard',
   component: PanelCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -55,7 +55,7 @@ type Story = StoryObj<typeof PanelCard>;
 
 export const Default: Story = {
   args: {
-    title: "Panel Title",
+    title: 'Panel Title',
     children: (
       <Text variant="body" color="dim">
         Panel body content. Collapse and expand using the chevron in the header.
@@ -65,7 +65,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Minimal panel: title + body + chevron. Starts expanded.",
+        story: 'Minimal panel: title + body + chevron. Starts expanded.',
       },
     },
   },
@@ -81,8 +81,12 @@ export const Full: Story = {
         title="Project Files"
         headerActions={
           <>
-            <Button variant="flat" size="sm">Rename</Button>
-            <Button variant="flat" size="sm">Delete</Button>
+            <Button variant="flat" size="sm">
+              Rename
+            </Button>
+            <Button variant="flat" size="sm">
+              Delete
+            </Button>
           </>
         }
         footer={
@@ -97,8 +101,8 @@ export const Full: Story = {
         }
       >
         <Text variant="body" color="dim">
-          All four zones are populated: header icon, title, header actions,
-          body content, footer feedback, and footer actions.
+          All four zones are populated: header icon, title, header actions, body content, footer
+          feedback, and footer actions.
         </Text>
       </PanelCard>
     </div>
@@ -106,7 +110,8 @@ export const Full: Story = {
   parameters: {
     docs: {
       description: {
-        story: "All four zones populated: icon, title, header actions, body, footer feedback, and footer actions.",
+        story:
+          'All four zones populated: icon, title, header actions, body, footer feedback, and footer actions.',
       },
     },
   },
@@ -121,7 +126,11 @@ export const DefaultCollapsed: Story = {
         title="Collapsed by default"
         icon={<Icon icon={Settings} />}
         defaultExpanded={false}
-        footer={<Text variant="caption" color="dim">Ready</Text>}
+        footer={
+          <Text variant="caption" color="dim">
+            Ready
+          </Text>
+        }
       >
         <Text variant="body">This content starts hidden.</Text>
       </PanelCard>
@@ -130,7 +139,8 @@ export const DefaultCollapsed: Story = {
   parameters: {
     docs: {
       description: {
-        story: "`defaultExpanded={false}` starts the panel collapsed. Click the chevron to reveal the body.",
+        story:
+          '`defaultExpanded={false}` starts the panel collapsed. Click the chevron to reveal the body.',
       },
     },
   },
@@ -144,11 +154,15 @@ export const WithoutFooter: Story = {
       <PanelCard
         icon={<Icon icon={Star} />}
         title="Starred Items"
-        headerActions={<Button variant="flat" size="sm">Edit</Button>}
+        headerActions={
+          <Button variant="flat" size="sm">
+            Edit
+          </Button>
+        }
       >
         <Text variant="body" color="dim">
-          No footer zone — omit both `footer` and `footerActions` and the
-          footer bar is not rendered.
+          No footer zone — omit both `footer` and `footerActions` and the footer bar is not
+          rendered.
         </Text>
       </PanelCard>
     </div>
@@ -156,7 +170,8 @@ export const WithoutFooter: Story = {
   parameters: {
     docs: {
       description: {
-        story: "When neither `footer` nor `footerActions` is provided the footer bar is not rendered.",
+        story:
+          'When neither `footer` nor `footerActions` is provided the footer bar is not rendered.',
       },
     },
   },
@@ -170,11 +185,14 @@ export const NonCollapsible: Story = {
       <PanelCard
         title="Always visible"
         collapsible={false}
-        footer={<Text variant="caption" color="dim">Read-only panel</Text>}
+        footer={
+          <Text variant="caption" color="dim">
+            Read-only panel
+          </Text>
+        }
       >
         <Text variant="body" color="dim">
-          `collapsible={false}` hides the chevron toggle — the body is always
-          visible.
+          `collapsible={false}` hides the chevron toggle — the body is always visible.
         </Text>
       </PanelCard>
     </div>
@@ -182,7 +200,7 @@ export const NonCollapsible: Story = {
   parameters: {
     docs: {
       description: {
-        story: "`collapsible={false}` removes the chevron and locks the panel open.",
+        story: '`collapsible={false}` removes the chevron and locks the panel open.',
       },
     },
   },
@@ -199,14 +217,14 @@ export const ImperativeControl: Story = {
       setLog((prev) => [`${new Date().toLocaleTimeString()} — ${msg}`, ...prev.slice(0, 4)]);
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 16, width: 480 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 480 }}>
         {/* External controls */}
-        <div style={{ display: "flex", gap: 8 }}>
+        <div style={{ display: 'flex', gap: 8 }}>
           <Button
             variant="flat"
             onClick={() => {
               ref.current?.expand();
-              push("expand()");
+              push('expand()');
             }}
           >
             Expand
@@ -215,7 +233,7 @@ export const ImperativeControl: Story = {
             variant="flat"
             onClick={() => {
               ref.current?.collapse();
-              push("collapse()");
+              push('collapse()');
             }}
           >
             Collapse
@@ -224,7 +242,7 @@ export const ImperativeControl: Story = {
             variant="suggested"
             onClick={() => {
               ref.current?.toggle();
-              push("toggle()");
+              push('toggle()');
             }}
           >
             Toggle
@@ -238,14 +256,13 @@ export const ImperativeControl: Story = {
           onExpandedChange={(open) => push(`onExpandedChange(${open})`)}
           footer={
             <Text variant="caption" color="dim">
-              {log[0] ?? "No events yet"}
+              {log[0] ?? 'No events yet'}
             </Text>
           }
         >
           <Text variant="body" color="dim">
-            The buttons above call <code>ref.current?.expand()</code>,{" "}
-            <code>collapse()</code>, and <code>toggle()</code>. The
-            `onExpandedChange` callback logs each state transition in the
+            The buttons above call <code>ref.current?.expand()</code>, <code>collapse()</code>, and{' '}
+            <code>toggle()</code>. The `onExpandedChange` callback logs each state transition in the
             footer.
           </Text>
         </PanelCard>
@@ -256,8 +273,8 @@ export const ImperativeControl: Story = {
     docs: {
       description: {
         story:
-          "External buttons drive the panel via `ref.current.expand/collapse/toggle()`. " +
-          "`onExpandedChange` fires on every transition and is displayed in the footer.",
+          'External buttons drive the panel via `ref.current.expand/collapse/toggle()`. ' +
+          '`onExpandedChange` fires on every transition and is displayed in the footer.',
       },
     },
   },
@@ -267,26 +284,28 @@ export const ImperativeControl: Story = {
 
 export const LoadingSkeleton: Story = {
   args: {
-    title: "Project Files",
+    title: 'Project Files',
     loading: true,
-    loadingType: "skeleton",
+    loadingType: 'skeleton',
   },
   parameters: {
     docs: {
-      description: { story: "Default loading state — header stays visible; body replaced with skeleton lines." },
+      description: {
+        story: 'Default loading state — header stays visible; body replaced with skeleton lines.',
+      },
     },
   },
 };
 
 export const LoadingSpinner: Story = {
   args: {
-    title: "Project Files",
+    title: 'Project Files',
     loading: true,
-    loadingType: "spinner",
+    loadingType: 'spinner',
   },
   parameters: {
     docs: {
-      description: { story: "`loadingType=\"spinner\"` renders a centred spinner in the body area." },
+      description: { story: '`loadingType="spinner"` renders a centred spinner in the body area.' },
     },
   },
 };
@@ -300,21 +319,27 @@ export const WithBadgeInFooter: Story = {
         icon={<Icon icon={Information} />}
         title="Notifications"
         footer={
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Badge variant="accent">3 new</Badge>
-            <Text variant="caption" color="dim">Last checked just now</Text>
+            <Text variant="caption" color="dim">
+              Last checked just now
+            </Text>
           </div>
         }
         footerActions={
           <>
-            <Button variant="flat" size="sm">Dismiss</Button>
-            <Button variant="suggested" size="sm">View all</Button>
+            <Button variant="flat" size="sm">
+              Dismiss
+            </Button>
+            <Button variant="suggested" size="sm">
+              View all
+            </Button>
           </>
         }
       >
         <Text variant="body" color="dim">
-          The `footer` slot accepts any ReactNode — here a `Badge` combined
-          with a caption provides rich feedback at a glance.
+          The `footer` slot accepts any ReactNode — here a `Badge` combined with a caption provides
+          rich feedback at a glance.
         </Text>
       </PanelCard>
     </div>
@@ -322,7 +347,8 @@ export const WithBadgeInFooter: Story = {
   parameters: {
     docs: {
       description: {
-        story: "The `footer` slot accepts any `ReactNode` — use `Badge`, `Spinner`, or rich markup for contextual feedback.",
+        story:
+          'The `footer` slot accepts any `ReactNode` — use `Badge`, `Spinner`, or rich markup for contextual feedback.',
       },
     },
   },

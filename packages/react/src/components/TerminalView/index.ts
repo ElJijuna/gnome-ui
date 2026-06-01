@@ -1,2 +1,2 @@
-export { TerminalView } from "./TerminalView";
-export type { TerminalViewProps, TerminalVariant } from "./TerminalView";
+export type { TerminalVariant, TerminalViewProps } from './TerminalView';
+export { TerminalView } from './TerminalView';

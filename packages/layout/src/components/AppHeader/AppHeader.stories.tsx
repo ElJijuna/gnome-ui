@@ -1,18 +1,20 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, SearchBar, Text, ViewSwitcher, ViewSwitcherItem } from "@gnome-ui/react";
-import { AppHeader } from "./AppHeader";
-import { Layout } from "../Layout";
-import { PageContent } from "../PageContent";
-import { StatusBar } from "../StatusBar";
+import { Button, SearchBar, Text, ViewSwitcher, ViewSwitcherItem } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Layout } from '../Layout';
+import { PageContent } from '../PageContent';
+import { StatusBar } from '../StatusBar';
+
+import { AppHeader } from './AppHeader';
 
 const meta: Meta<typeof AppHeader> = {
-  title: "Layout/AppHeader",
+  title: 'Layout/AppHeader',
   component: AppHeader,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
-        component: "GNOME application header with named shell slots.",
+        component: 'GNOME application header with named shell slots.',
       },
     },
   },
@@ -23,17 +25,25 @@ type Story = StoryObj<typeof AppHeader>;
 
 export const Basic: Story = {
   args: {
-    title: "Files",
-    subtitle: "Home",
-    leading: <Button variant="flat" aria-label="Toggle sidebar">☰</Button>,
+    title: 'Files',
+    subtitle: 'Home',
+    leading: (
+      <Button variant="flat" aria-label="Toggle sidebar">
+        ☰
+      </Button>
+    ),
     actions: <Button variant="flat">New Folder</Button>,
   },
 };
 
 export const WithNavigationAndSearch: Story = {
   args: {
-    title: "Documents",
-    leading: <Button variant="flat" aria-label="Back">‹</Button>,
+    title: 'Documents',
+    leading: (
+      <Button variant="flat" aria-label="Back">
+        ‹
+      </Button>
+    ),
     navigation: (
       <ViewSwitcher aria-label="Document view">
         <ViewSwitcherItem label="Recent" active />
@@ -41,7 +51,11 @@ export const WithNavigationAndSearch: Story = {
       </ViewSwitcher>
     ),
     search: <SearchBar inline open placeholder="Search documents" aria-label="Search documents" />,
-    actions: <Button variant="flat" aria-label="Open menu">⋮</Button>,
+    actions: (
+      <Button variant="flat" aria-label="Open menu">
+        ⋮
+      </Button>
+    ),
   },
 };
 
@@ -52,13 +66,25 @@ export const InLayout: Story = {
         <AppHeader
           title="Files"
           subtitle="Home"
-          leading={<Button variant="flat" aria-label="Toggle sidebar">☰</Button>}
+          leading={
+            <Button variant="flat" aria-label="Toggle sidebar">
+              ☰
+            </Button>
+          }
           actions={<Button variant="flat">New Folder</Button>}
         />
       }
       footer={
-        <StatusBar trailing={<Text variant="caption" color="dim">GNOME Files 48.0</Text>}>
-          <Text variant="caption" color="dim">1,248 items</Text>
+        <StatusBar
+          trailing={
+            <Text variant="caption" color="dim">
+              GNOME Files 48.0
+            </Text>
+          }
+        >
+          <Text variant="caption" color="dim">
+            1,248 items
+          </Text>
         </StatusBar>
       }
     >

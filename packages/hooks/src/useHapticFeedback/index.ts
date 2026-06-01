@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { isWebKitBridge, postMessage } from "@gnome-ui/platform";
+import { isWebKitBridge, postMessage } from '@gnome-ui/platform';
+import { useMemo } from 'react';
 
 /**
  * GNOME haptic event name following the
@@ -7,14 +7,14 @@ import { isWebKitBridge, postMessage } from "@gnome-ui/platform";
  * Third-party / app-specific events must use the `x-` prefix (e.g. `"x-myapp-success"`).
  */
 export type GnomeHapticEvent =
-  | "button-pressed"
-  | "button-released"
-  | "window-close"
-  | "message-new-instant"
-  | "message-new-sms"
-  | "phone-incoming-call"
-  | "alarm-clock-elapsed"
-  | "battery-low"
+  | 'button-pressed'
+  | 'button-released'
+  | 'window-close'
+  | 'message-new-instant'
+  | 'message-new-sms'
+  | 'phone-incoming-call'
+  | 'alarm-clock-elapsed'
+  | 'battery-low'
   | (string & {});
 
 export interface UseHapticFeedbackResult {
@@ -28,14 +28,14 @@ export interface UseHapticFeedbackResult {
 }
 
 const VIBRATION_PATTERNS: Record<string, number[]> = {
-  "button-pressed": [10],
-  "button-released": [5],
-  "window-close": [50],
-  "message-new-instant": [50, 50, 50],
-  "message-new-sms": [50, 50, 50],
-  "phone-incoming-call": [200, 100, 200],
-  "alarm-clock-elapsed": [300, 100, 300],
-  "battery-low": [100, 50, 100],
+  'button-pressed': [10],
+  'button-released': [5],
+  'window-close': [50],
+  'message-new-instant': [50, 50, 50],
+  'message-new-sms': [50, 50, 50],
+  'phone-incoming-call': [200, 100, 200],
+  'alarm-clock-elapsed': [300, 100, 300],
+  'battery-low': [100, 50, 100],
 };
 
 const VIBRATION_FALLBACK = [30];
@@ -65,15 +65,15 @@ export function useHapticFeedback(): UseHapticFeedbackResult {
   return useMemo(() => {
     const isNativeSupported = isWebKitBridge();
     const isVibrationApiSupported =
-      typeof navigator !== "undefined" &&
-      typeof navigator.vibrate === "function";
+      typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function';
     const isSupported = isNativeSupported || isVibrationApiSupported;
 
     function trigger(event: GnomeHapticEvent): void {
       if (isNativeSupported) {
-        postMessage("hapticFeedback", { event });
+        postMessage('hapticFeedback', { event });
       } else if (isVibrationApiSupported) {
         const pattern = VIBRATION_PATTERNS[event] ?? VIBRATION_FALLBACK;
+
         navigator.vibrate(pattern);
       }
     }

@@ -1,7 +1,8 @@
-import type { HTMLAttributes } from "react";
-import styles from "./Toolbar.module.css";
+import type { HTMLAttributes } from 'react';
 
-export interface SpacerProps extends HTMLAttributes<HTMLDivElement> {}
+import styles from './Toolbar.module.css';
+
+export type SpacerProps = HTMLAttributes<HTMLDivElement>;
 
 /**
  * Invisible `flex: 1` filler for `Toolbar` and `HeaderBar`.
@@ -22,7 +23,7 @@ export function Spacer({ className, ...props }: SpacerProps) {
   return (
     <div
       aria-hidden="true"
-      className={[styles.spacer, className].filter(Boolean).join(" ")}
+      className={[styles.spacer, className].filter(Boolean).join(' ')}
       {...props}
     />
   );

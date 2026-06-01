@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { PasswordEntryRow } from "./PasswordEntryRow";
-import { BoxedList } from "../BoxedList";
-import { EntryRow } from "../EntryRow";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { BoxedList } from '../BoxedList';
+import { EntryRow } from '../EntryRow';
+
+import { PasswordEntryRow } from './PasswordEntryRow';
 
 const meta: Meta<typeof PasswordEntryRow> = {
-  title: "Components/PasswordEntryRow",
+  title: 'Components/PasswordEntryRow',
   component: PasswordEntryRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -33,12 +35,12 @@ entered text. Use inside a \`BoxedList\` for password settings fields.
     ),
   ],
   argTypes: {
-    title: { control: "text" },
-    disabled: { control: "boolean" },
+    title: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
   args: {
-    title: "Password",
-    defaultValue: "",
+    title: 'Password',
+    defaultValue: '',
   },
 };
 
@@ -63,7 +65,8 @@ export const InBoxedList: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Typical sign-up form combining `EntryRow` and `PasswordEntryRow` inside a `BoxedList`.",
+        story:
+          'Typical sign-up form combining `EntryRow` and `PasswordEntryRow` inside a `BoxedList`.',
       },
     },
   },
@@ -82,7 +85,7 @@ export const PreFilled: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Click the eye button to reveal the masked password.",
+        story: 'Click the eye button to reveal the masked password.',
       },
     },
   },

@@ -1,13 +1,8 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./StatusBadge.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export type StatusBadgeVariant =
-  | "success"
-  | "warning"
-  | "error"
-  | "new"
-  | "accent"
-  | "neutral";
+import styles from './StatusBadge.module.css';
+
+export type StatusBadgeVariant = 'success' | 'warning' | 'error' | 'new' | 'accent' | 'neutral';
 
 export interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -36,16 +31,14 @@ export interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * ```
  */
 export function StatusBadge({
-  variant = "neutral",
+  variant = 'neutral',
   className,
   children,
   ...props
 }: StatusBadgeProps) {
   return (
     <span
-      className={[styles.badge, styles[variant], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.badge, styles[variant], className].filter(Boolean).join(' ')}
       {...props}
     >
       {children}

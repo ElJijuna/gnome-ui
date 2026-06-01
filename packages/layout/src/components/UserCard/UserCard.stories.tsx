@@ -1,13 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Card, Popover, Avatar } from "@gnome-ui/react";
-import { UserCard } from "./UserCard";
+import { Avatar, Card, Popover } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { UserCard } from './UserCard';
 
 const meta: Meta<typeof UserCard> = {
-  title: "Layout/UserCard",
+  title: 'Layout/UserCard',
   component: UserCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -43,22 +44,25 @@ export default meta;
 type Story = StoryObj<typeof UserCard>;
 
 const defaultActions = [
-  { label: "View Profile",     onClick: () => alert("profile")  },
-  { label: "Account Settings", onClick: () => alert("settings") },
-  { label: "Sign Out",         onClick: () => alert("sign out"), variant: "destructive" as const },
+  { label: 'View Profile', onClick: () => alert('profile') },
+  { label: 'Account Settings', onClick: () => alert('settings') },
+  { label: 'Sign Out', onClick: () => alert('sign out'), variant: 'destructive' as const },
 ];
 
 // ─── Default (vertical) ───────────────────────────────────────────────────────
 
 export const Default: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
     actions: defaultActions,
   },
   parameters: {
     docs: {
-      description: { story: "Default orientation (`vertical`): avatar centered on top, identity below, actions at the bottom." },
+      description: {
+        story:
+          'Default orientation (`vertical`): avatar centered on top, identity below, actions at the bottom.',
+      },
     },
   },
 };
@@ -67,14 +71,17 @@ export const Default: Story = {
 
 export const Horizontal: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
-    orientation: "horizontal",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
+    orientation: 'horizontal',
     actions: defaultActions,
   },
   parameters: {
     docs: {
-      description: { story: "`orientation=\"horizontal\"` places the avatar on the left — suited for popovers and compact sidebar footers." },
+      description: {
+        story:
+          '`orientation="horizontal"` places the avatar on the left — suited for popovers and compact sidebar footers.',
+      },
     },
   },
 };
@@ -83,12 +90,12 @@ export const Horizontal: Story = {
 
 export const NoEmail: Story = {
   args: {
-    name: "Ada Lovelace",
+    name: 'Ada Lovelace',
     actions: defaultActions,
   },
   parameters: {
     docs: {
-      description: { story: "Without `email` the identity row collapses to a single line." },
+      description: { story: 'Without `email` the identity row collapses to a single line.' },
     },
   },
 };
@@ -97,12 +104,15 @@ export const NoEmail: Story = {
 
 export const NoActions: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
   },
   parameters: {
     docs: {
-      description: { story: "Without `actions` only the identity header is rendered — useful as a read-only profile snippet." },
+      description: {
+        story:
+          'Without `actions` only the identity header is rendered — useful as a read-only profile snippet.',
+      },
     },
   },
 };
@@ -111,14 +121,14 @@ export const NoActions: Story = {
 
 export const LargeAvatar: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
-    avatarSize: "lg",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
+    avatarSize: 'lg',
     actions: defaultActions,
   },
   parameters: {
     docs: {
-      description: { story: "`avatarSize=\"lg\"` suits a standalone profile card." },
+      description: { story: '`avatarSize="lg"` suits a standalone profile card.' },
     },
   },
 };
@@ -127,7 +137,7 @@ export const LargeAvatar: Story = {
 
 export const InsideCard: Story = {
   render: () => (
-    <Card style={{ width: 240, padding: 0, overflow: "hidden" }}>
+    <Card style={{ width: 240, padding: 0, overflow: 'hidden' }}>
       <UserCard
         name="Ada Lovelace"
         email="ada@gnome.org"
@@ -138,7 +148,10 @@ export const InsideCard: Story = {
   ),
   parameters: {
     docs: {
-      description: { story: "Wrap in `<Card padding=\"none\">` for a standalone profile card in a sidebar footer or settings page." },
+      description: {
+        story:
+          'Wrap in `<Card padding="none">` for a standalone profile card in a sidebar footer or settings page.',
+      },
     },
   },
 };
@@ -149,24 +162,18 @@ export const InsidePopover: Story = {
   render: () => (
     <Popover
       placement="bottom"
-      content={
-        <UserCard
-          name="Ada Lovelace"
-          email="ada@gnome.org"
-          actions={defaultActions}
-        />
-      }
+      content={<UserCard name="Ada Lovelace" email="ada@gnome.org" actions={defaultActions} />}
     >
       <button
         type="button"
         aria-label="User menu"
         style={{
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
           padding: 2,
-          borderRadius: "50%",
-          display: "flex",
+          borderRadius: '50%',
+          display: 'flex',
         }}
       >
         <Avatar name="Ada Lovelace" size="sm" />
@@ -175,7 +182,10 @@ export const InsidePopover: Story = {
   ),
   parameters: {
     docs: {
-      description: { story: "The most common use-case: `UserCard` as the `content` of a `Popover` triggered by an avatar button." },
+      description: {
+        story:
+          'The most common use-case: `UserCard` as the `content` of a `Popover` triggered by an avatar button.',
+      },
     },
   },
 };
@@ -184,27 +194,31 @@ export const InsidePopover: Story = {
 
 export const LoadingSkeleton: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
     loading: true,
-    loadingType: "skeleton",
+    loadingType: 'skeleton',
   },
   parameters: {
     docs: {
-      description: { story: "Default loading state — skeleton for the avatar circle and identity lines." },
+      description: {
+        story: 'Default loading state — skeleton for the avatar circle and identity lines.',
+      },
     },
   },
 };
 
 export const LoadingSpinner: Story = {
   args: {
-    name: "Ada Lovelace",
+    name: 'Ada Lovelace',
     loading: true,
-    loadingType: "spinner",
+    loadingType: 'spinner',
   },
   parameters: {
     docs: {
-      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton rows." },
+      description: {
+        story: '`loadingType="spinner"` renders a centred spinner instead of skeleton rows.',
+      },
     },
   },
 };
@@ -213,16 +227,18 @@ export const LoadingSpinner: Story = {
 
 export const OnlyDestructive: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
     actions: [
-      { label: "Sign Out",      onClick: () => {}, variant: "destructive" },
-      { label: "Delete Account",onClick: () => {}, variant: "destructive" },
+      { label: 'Sign Out', onClick: () => {}, variant: 'destructive' },
+      { label: 'Delete Account', onClick: () => {}, variant: 'destructive' },
     ],
   },
   parameters: {
     docs: {
-      description: { story: "When all actions are destructive no auto-separator is inserted between them." },
+      description: {
+        story: 'When all actions are destructive no auto-separator is inserted between them.',
+      },
     },
   },
 };
@@ -231,15 +247,15 @@ export const OnlyDestructive: Story = {
 
 export const WithAvatarImage: Story = {
   args: {
-    name: "Ada Lovelace",
-    email: "ada@gnome.org",
-    avatarSrc: "https://i.pravatar.cc/64?u=ada",
-    avatarSize: "lg",
+    name: 'Ada Lovelace',
+    email: 'ada@gnome.org',
+    avatarSrc: 'https://i.pravatar.cc/64?u=ada',
+    avatarSize: 'lg',
     actions: defaultActions,
   },
   parameters: {
     docs: {
-      description: { story: "Pass `avatarSrc` to show a photo instead of initials." },
+      description: { story: 'Pass `avatarSrc` to show a photo instead of initials.' },
     },
   },
 };

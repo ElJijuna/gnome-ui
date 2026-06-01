@@ -1,16 +1,17 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, SidebarSection, SidebarItem, Text } from "@gnome-ui/react";
-import { GoHome, Settings, Star } from "@gnome-ui/icons";
-import { SidebarShell } from "./SidebarShell";
+import { GoHome, Settings, Star } from '@gnome-ui/icons';
+import { Button, SidebarItem, SidebarSection, Text } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { SidebarShell } from './SidebarShell';
 
 const meta: Meta<typeof SidebarShell> = {
-  title: "Layout/SidebarShell",
+  title: 'Layout/SidebarShell',
   component: SidebarShell,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
-        component: "Full-height GNOME sidebar with fixed header/footer and scrollable navigation.",
+        component: 'Full-height GNOME sidebar with fixed header/footer and scrollable navigation.',
       },
     },
   },
@@ -21,10 +22,14 @@ type Story = StoryObj<typeof SidebarShell>;
 
 export const Standard: Story = {
   render: () => (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: '100vh' }}>
       <SidebarShell
         header={<Text variant="heading">Files</Text>}
-        footer={<Button variant="flat" style={{ width: "100%" }}>Preferences</Button>}
+        footer={
+          <Button variant="flat" style={{ width: '100%' }}>
+            Preferences
+          </Button>
+        }
         aria-label="Files navigation"
       >
         <SidebarSection>
@@ -39,7 +44,7 @@ export const Standard: Story = {
 
 export const Collapsed: Story = {
   render: () => (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: '100vh' }}>
       <SidebarShell collapsed aria-label="Files navigation">
         <SidebarSection>
           <SidebarItem label="Home" icon={GoHome} active />
@@ -53,7 +58,7 @@ export const Collapsed: Story = {
 
 export const Searchable: Story = {
   render: () => (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: '100vh' }}>
       <SidebarShell searchable header={<Text variant="heading">Files</Text>}>
         <SidebarSection>
           <SidebarItem label="Home" icon={GoHome} active />

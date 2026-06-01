@@ -34,7 +34,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 /* ─── Disabled ───────────────────────────────────────────────────────────────── */
@@ -79,7 +79,7 @@
   pointer-events: none;
 
   transition:
-    transform  var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
     box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 

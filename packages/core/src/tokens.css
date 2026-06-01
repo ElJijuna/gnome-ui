@@ -187,12 +187,12 @@ body {
   --gnome-font-family-mono: "Adwaita Mono", "Source Code Pro", monospace;
 
   /* GNOME recommends relative units (rem/em) for accessibility */
-  --gnome-font-size-caption: 0.75rem;   /* ~12px */
-  --gnome-font-size-body: 1rem;         /* ~16px (base) */
-  --gnome-font-size-title-4: 1.125rem;  /* ~18px */
-  --gnome-font-size-title-3: 1.25rem;   /* ~20px */
-  --gnome-font-size-title-2: 1.5rem;    /* ~24px */
-  --gnome-font-size-title-1: 1.875rem;  /* ~30px */
+  --gnome-font-size-caption: 0.75rem; /* ~12px */
+  --gnome-font-size-body: 1rem; /* ~16px (base) */
+  --gnome-font-size-title-4: 1.125rem; /* ~18px */
+  --gnome-font-size-title-3: 1.25rem; /* ~20px */
+  --gnome-font-size-title-2: 1.5rem; /* ~24px */
+  --gnome-font-size-title-1: 1.875rem; /* ~30px */
   --gnome-font-size-large-title: 2.25rem; /* ~36px */
 
   --gnome-font-weight-normal: 400;
@@ -205,19 +205,19 @@ body {
 
   /* ─── Spacing Scale (6px base grid) ─────────────────────────── */
 
-  --gnome-space-1: 6px;    /* xs — icon-label gap, inline spacing */
-  --gnome-space-2: 12px;   /* sm — label-to-component gap */
-  --gnome-space-3: 18px;   /* md — group separation */
-  --gnome-space-4: 24px;   /* lg — section padding */
-  --gnome-space-5: 36px;   /* xl — dialog/page padding */
-  --gnome-space-6: 48px;   /* 2xl */
+  --gnome-space-1: 6px; /* xs — icon-label gap, inline spacing */
+  --gnome-space-2: 12px; /* sm — label-to-component gap */
+  --gnome-space-3: 18px; /* md — group separation */
+  --gnome-space-4: 24px; /* lg — section padding */
+  --gnome-space-5: 36px; /* xl — dialog/page padding */
+  --gnome-space-6: 48px; /* 2xl */
 
   /* ─── Border Radius ─────────────────────────────────────────── */
 
-  --gnome-radius-sm: 4px;     /* small inline elements */
-  --gnome-radius-md: 8px;     /* default for most components */
-  --gnome-radius-lg: 12px;    /* cards, popovers */
-  --gnome-radius-xl: 15px;    /* windows */
+  --gnome-radius-sm: 4px; /* small inline elements */
+  --gnome-radius-md: 8px; /* default for most components */
+  --gnome-radius-lg: 12px; /* cards, popovers */
+  --gnome-radius-xl: 15px; /* windows */
   --gnome-radius-pill: 9999px; /* pill buttons, circular buttons */
 
   /* ─── Component tokens ──────────────────────────────────────── */
@@ -251,7 +251,9 @@ body {
 
   --gnome-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.12);
   --gnome-shadow-md: 0 2px 6px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  --gnome-shadow-lg: 0 3px 9px 1px rgba(0, 0, 0, 0.1), 0 2px 6px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(28, 31, 31, 0.9);
+  --gnome-shadow-lg:
+    0 3px 9px 1px rgba(0, 0, 0, 0.1), 0 2px 6px 2px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(28, 31, 31, 0.9);
 
   /* ─── Opacity ────────────────────────────────────────────────── */
 
@@ -362,13 +364,13 @@ body {
     --gnome-dark-5: oklch(0% 0 0);
 
     /* Surface colors — light mode */
-    --gnome-window-bg-color:    oklch(98.1% 0 0);
-    --gnome-view-bg-color:      oklch(100% 0 0);
-    --gnome-card-bg-color:      oklch(100% 0 0);
+    --gnome-window-bg-color: oklch(98.1% 0 0);
+    --gnome-view-bg-color: oklch(100% 0 0);
+    --gnome-card-bg-color: oklch(100% 0 0);
     --gnome-headerbar-bg-color: oklch(93.3% 0 0);
-    --gnome-sidebar-bg-color:   oklch(93.3% 0 0);
-    --gnome-popover-bg-color:   oklch(100% 0 0);
-    --gnome-dialog-bg-color:    oklch(98.1% 0 0);
+    --gnome-sidebar-bg-color: oklch(93.3% 0 0);
+    --gnome-popover-bg-color: oklch(100% 0 0);
+    --gnome-dialog-bg-color: oklch(98.1% 0 0);
   }
 }
 
@@ -418,13 +420,13 @@ body {
 @supports (color: oklch(0 0 0)) {
   @media (prefers-color-scheme: dark) {
     :root {
-      --gnome-window-bg-color:    oklch(17.9% 0 0);
-      --gnome-view-bg-color:      oklch(15.1% 0 0);
-      --gnome-card-bg-color:      oklch(26.8% 0 0);
+      --gnome-window-bg-color: oklch(17.9% 0 0);
+      --gnome-view-bg-color: oklch(15.1% 0 0);
+      --gnome-card-bg-color: oklch(26.8% 0 0);
       --gnome-headerbar-bg-color: oklch(22.7% 0 0);
-      --gnome-sidebar-bg-color:   oklch(22.7% 0 0);
-      --gnome-popover-bg-color:   oklch(26.8% 0 0);
-      --gnome-dialog-bg-color:    oklch(17.9% 0 0);
+      --gnome-sidebar-bg-color: oklch(22.7% 0 0);
+      --gnome-popover-bg-color: oklch(26.8% 0 0);
+      --gnome-dialog-bg-color: oklch(17.9% 0 0);
     }
   }
 }
@@ -563,13 +565,13 @@ body {
 
 @supports (color: oklch(0 0 0)) {
   [data-theme="dark"] {
-    --gnome-window-bg-color:    oklch(17.9% 0 0);
-    --gnome-view-bg-color:      oklch(15.1% 0 0);
-    --gnome-card-bg-color:      oklch(26.8% 0 0);
+    --gnome-window-bg-color: oklch(17.9% 0 0);
+    --gnome-view-bg-color: oklch(15.1% 0 0);
+    --gnome-card-bg-color: oklch(26.8% 0 0);
     --gnome-headerbar-bg-color: oklch(22.7% 0 0);
-    --gnome-sidebar-bg-color:   oklch(22.7% 0 0);
-    --gnome-popover-bg-color:   oklch(26.8% 0 0);
-    --gnome-dialog-bg-color:    oklch(17.9% 0 0);
+    --gnome-sidebar-bg-color: oklch(22.7% 0 0);
+    --gnome-popover-bg-color: oklch(26.8% 0 0);
+    --gnome-dialog-bg-color: oklch(17.9% 0 0);
   }
 }
 
@@ -610,13 +612,13 @@ body {
 
 @supports (color: oklch(0 0 0)) {
   [data-theme="light"] {
-    --gnome-window-bg-color:    oklch(98.1% 0 0);
-    --gnome-view-bg-color:      oklch(100% 0 0);
-    --gnome-card-bg-color:      oklch(100% 0 0);
+    --gnome-window-bg-color: oklch(98.1% 0 0);
+    --gnome-view-bg-color: oklch(100% 0 0);
+    --gnome-card-bg-color: oklch(100% 0 0);
     --gnome-headerbar-bg-color: oklch(93.3% 0 0);
-    --gnome-sidebar-bg-color:   oklch(93.3% 0 0);
-    --gnome-popover-bg-color:   oklch(100% 0 0);
-    --gnome-dialog-bg-color:    oklch(98.1% 0 0);
+    --gnome-sidebar-bg-color: oklch(93.3% 0 0);
+    --gnome-popover-bg-color: oklch(100% 0 0);
+    --gnome-dialog-bg-color: oklch(98.1% 0 0);
   }
 }
 
@@ -711,13 +713,13 @@ body {
 
 @supports (color: oklch(0 0 0)) {
   [data-theme="high-contrast-dark"] {
-    --gnome-window-bg-color:    oklch(17.9% 0 0);
-    --gnome-view-bg-color:      oklch(15.1% 0 0);
-    --gnome-card-bg-color:      oklch(26.8% 0 0);
+    --gnome-window-bg-color: oklch(17.9% 0 0);
+    --gnome-view-bg-color: oklch(15.1% 0 0);
+    --gnome-card-bg-color: oklch(26.8% 0 0);
     --gnome-headerbar-bg-color: oklch(22.7% 0 0);
-    --gnome-sidebar-bg-color:   oklch(22.7% 0 0);
-    --gnome-popover-bg-color:   oklch(26.8% 0 0);
-    --gnome-dialog-bg-color:    oklch(17.9% 0 0);
+    --gnome-sidebar-bg-color: oklch(22.7% 0 0);
+    --gnome-popover-bg-color: oklch(26.8% 0 0);
+    --gnome-dialog-bg-color: oklch(17.9% 0 0);
   }
 }
 

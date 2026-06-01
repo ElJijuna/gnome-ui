@@ -1,12 +1,14 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { AboutDialog } from "./AboutDialog";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Button } from '../Button';
+
+import { AboutDialog } from './AboutDialog';
 
 const meta: Meta<typeof AboutDialog> = {
-  title: "Components/AboutDialog",
+  title: 'Components/AboutDialog',
   component: AboutDialog,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -30,6 +32,7 @@ type Story = StoryObj<typeof AboutDialog>;
 export const Default: Story = {
   render: function DefaultStory() {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>About Files</Button>
@@ -41,8 +44,8 @@ export const Default: Story = {
           developerName="GNOME Project"
           website="https://apps.gnome.org/Nautilus/"
           websiteLabel="Files on GNOME Apps"
-          developers={["Carlos Soriano", "António Fernandes", "Corey Berla"]}
-          designers={["Allan Day", "Jakub Steiner"]}
+          developers={['Carlos Soriano', 'António Fernandes', 'Corey Berla']}
+          designers={['Allan Day', 'Jakub Steiner']}
           copyright="© 2024 The GNOME Project"
           licenseType="GPL-3.0-or-later"
           onClose={() => setOpen(false)}
@@ -54,7 +57,7 @@ export const Default: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Full about dialog with Details, Credits, and Legal tabs.",
+        story: 'Full about dialog with Details, Credits, and Legal tabs.',
       },
     },
   },
@@ -63,6 +66,7 @@ export const Default: Story = {
 export const DetailsOnly: Story = {
   render: function DetailsOnlyStory() {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>About App</Button>
@@ -81,7 +85,7 @@ export const DetailsOnly: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Only the Details tab is shown — no credits or legal content supplied.",
+        story: 'Only the Details tab is shown — no credits or legal content supplied.',
       },
     },
   },

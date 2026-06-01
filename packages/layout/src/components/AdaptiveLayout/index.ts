@@ -1,2 +1,2 @@
-export { AdaptiveLayout } from "./AdaptiveLayout";
-export type { AdaptiveLayoutProps, AdaptiveNavItem } from "./AdaptiveLayout";
+export type { AdaptiveLayoutProps, AdaptiveNavItem } from './AdaptiveLayout';
+export { AdaptiveLayout } from './AdaptiveLayout';

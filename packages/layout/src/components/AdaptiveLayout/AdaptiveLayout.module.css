@@ -39,7 +39,7 @@
 }
 
 .topBarSlotFull > * {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 /* ─── Content area ──────────────────────────────────────────────────────────── */
@@ -57,7 +57,6 @@
   background-color: var(--gnome-window-bg-color);
   padding: var(--gnome-space-2);
 }
-
 
 /* ─── Sidebar footer slot ───────────────────────────────────────────────────── */
 
@@ -92,7 +91,7 @@
 /* ─── Sidebar: no right border in full mode ─────────────────────────────────── */
 
 .sidebarNoRightBorder {
-  border-right: none !important;
+  border-right: none;
 }
 
 /* ─── Sidebar group section ─────────────────────────────────────────────────── */
@@ -138,7 +137,9 @@
   transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
-.moreBtn:hover { opacity: 1; }
+.moreBtn:hover {
+  opacity: 1;
+}
 
 .moreBtnActive {
   opacity: 1;
@@ -279,7 +280,7 @@
   .root[data-glass] .fullRight,
   .root[data-glass] :global(nav),
   .root[data-glass] :global(header) {
-    background: transparent !important;
+    background: transparent;
   }
 }
 

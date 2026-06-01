@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Text } from "./Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Text } from './Text';
 
 const meta: Meta<typeof Text> = {
-  title: "Components/Text",
+  title: 'Components/Text',
   component: Text,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -35,32 +36,32 @@ Use the \`as\` prop to override the rendered HTML element without changing the v
   },
   argTypes: {
     variant: {
-      control: "select",
+      control: 'select',
       options: [
-        "large-title",
-        "title-1",
-        "title-2",
-        "title-3",
-        "title-4",
-        "heading",
-        "body",
-        "document",
-        "caption",
-        "caption-heading",
-        "monospace",
-        "numeric",
+        'large-title',
+        'title-1',
+        'title-2',
+        'title-3',
+        'title-4',
+        'heading',
+        'body',
+        'document',
+        'caption',
+        'caption-heading',
+        'monospace',
+        'numeric',
       ],
     },
     color: {
-      control: "select",
-      options: ["default", "dim", "accent", "destructive", "success", "warning", "error"],
+      control: 'select',
+      options: ['default', 'dim', 'accent', 'destructive', 'success', 'warning', 'error'],
     },
-    children: { control: "text" },
+    children: { control: 'text' },
   },
   args: {
-    variant: "body",
-    color: "default",
-    children: "The quick brown fox jumps over the lazy dog",
+    variant: 'body',
+    color: 'default',
+    children: 'The quick brown fox jumps over the lazy dog',
   },
 };
 
@@ -75,7 +76,7 @@ export const Playground: Story = {};
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "8px" }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '8px' }}>
       <Text variant="large-title">Large Title</Text>
       <Text variant="title-1">Title 1</Text>
       <Text variant="title-2">Title 2</Text>
@@ -83,7 +84,10 @@ export const AllVariants: Story = {
       <Text variant="title-4">Title 4</Text>
       <Text variant="heading">Heading</Text>
       <Text variant="body">Body — The quick brown fox jumps over the lazy dog.</Text>
-      <Text variant="document">Document — Longer reading content with slightly more line height for comfortable reading of paragraphs.</Text>
+      <Text variant="document">
+        Document — Longer reading content with slightly more line height for comfortable reading of
+        paragraphs.
+      </Text>
       <Text variant="caption">Caption — supplementary text</Text>
       <Text variant="caption-heading">Caption Heading</Text>
       <Text variant="monospace">monospace: console.log("hello world")</Text>
@@ -97,14 +101,28 @@ export const AllVariants: Story = {
 
 export const Colors: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      <Text variant="body" color="default">Default</Text>
-      <Text variant="body" color="dim">Dim — secondary information</Text>
-      <Text variant="body" color="accent">Accent — interactive or highlighted</Text>
-      <Text variant="body" color="destructive">Destructive — danger or error action</Text>
-      <Text variant="body" color="success">Success — positive outcome</Text>
-      <Text variant="body" color="warning">Warning — cautionary state</Text>
-      <Text variant="body" color="error">Error — problem state</Text>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Text variant="body" color="default">
+        Default
+      </Text>
+      <Text variant="body" color="dim">
+        Dim — secondary information
+      </Text>
+      <Text variant="body" color="accent">
+        Accent — interactive or highlighted
+      </Text>
+      <Text variant="body" color="destructive">
+        Destructive — danger or error action
+      </Text>
+      <Text variant="body" color="success">
+        Success — positive outcome
+      </Text>
+      <Text variant="body" color="warning">
+        Warning — cautionary state
+      </Text>
+      <Text variant="body" color="error">
+        Error — problem state
+      </Text>
     </div>
   ),
   parameters: { controls: { disable: true } },
@@ -114,17 +132,24 @@ export const Colors: Story = {
 
 export const PolymorphicAs: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      <Text variant="body" as="span">body rendered as &lt;span&gt; (inline)</Text>
-      <Text variant="title-1" as="h2">title-1 rendered as &lt;h2&gt; (semantic override)</Text>
-      <Text variant="caption" color="dim" as="label">caption rendered as &lt;label&gt;</Text>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Text variant="body" as="span">
+        body rendered as &lt;span&gt; (inline)
+      </Text>
+      <Text variant="title-1" as="h2">
+        title-1 rendered as &lt;h2&gt; (semantic override)
+      </Text>
+      <Text variant="caption" color="dim" as="label">
+        caption rendered as &lt;label&gt;
+      </Text>
     </div>
   ),
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `as` to override the HTML element without changing the visual style. Useful for correct document semantics.",
+        story:
+          'Use `as` to override the HTML element without changing the visual style. Useful for correct document semantics.',
       },
     },
   },

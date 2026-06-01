@@ -1,9 +1,10 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { BoxedList } from "./BoxedList";
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
-describe("BoxedList", () => {
-  it("renders children as list items", () => {
+import { BoxedList } from './BoxedList';
+
+describe('BoxedList', () => {
+  it('renders children as list items', () => {
     render(
       <BoxedList>
         <div>First row</div>
@@ -11,13 +12,13 @@ describe("BoxedList", () => {
       </BoxedList>,
     );
 
-    expect(screen.getByRole("list")).toBeInTheDocument();
-    expect(screen.getAllByRole("listitem")).toHaveLength(2);
-    expect(screen.getByText("First row")).toBeInTheDocument();
-    expect(screen.getByText("Second row")).toBeInTheDocument();
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+    expect(screen.getByText('First row')).toBeInTheDocument();
+    expect(screen.getByText('Second row')).toBeInTheDocument();
   });
 
-  it("filters out empty children", () => {
+  it('filters out empty children', () => {
     render(
       <BoxedList>
         {null}
@@ -26,10 +27,10 @@ describe("BoxedList", () => {
       </BoxedList>,
     );
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(1);
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
   });
 
-  it("inserts separators between default rows", () => {
+  it('inserts separators between default rows', () => {
     const { container } = render(
       <BoxedList>
         <div>First row</div>
@@ -40,7 +41,7 @@ describe("BoxedList", () => {
     expect(container.querySelector("[aria-hidden='true']")).toBeInTheDocument();
   });
 
-  it("applies separate variant without separators", () => {
+  it('applies separate variant without separators', () => {
     const { container } = render(
       <BoxedList variant="separate">
         <div>First row</div>
@@ -52,13 +53,13 @@ describe("BoxedList", () => {
     expect(container.querySelector("[aria-hidden='true']")).toBeNull();
   });
 
-  it("forwards className and data attributes", () => {
+  it('forwards className and data attributes', () => {
     render(
       <BoxedList className="custom-list" data-testid="list">
         <div>Row</div>
       </BoxedList>,
     );
 
-    expect(screen.getByTestId("list")).toHaveClass("custom-list");
+    expect(screen.getByTestId('list')).toHaveClass('custom-list');
   });
 });

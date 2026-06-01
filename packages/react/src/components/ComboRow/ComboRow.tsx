@@ -1,5 +1,15 @@
-import { useState, useRef, useId, useEffect, useCallback, type HTMLAttributes, type KeyboardEvent, type ReactNode } from "react";
-import styles from "./ComboRow.module.css";
+import {
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
+
+import styles from './ComboRow.module.css';
 
 export interface ComboRowOption<V extends string = string> {
   value: V;
@@ -8,7 +18,7 @@ export interface ComboRowOption<V extends string = string> {
 }
 
 export interface ComboRowProps<V extends string = string>
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Primary label. */
   title: string;
   /** Secondary line below the title. */
@@ -64,18 +74,26 @@ export function ComboRow<V extends string = string>({
   const selected = options.find((o) => o.value === value);
 
   const computeFlip = useCallback(() => {
-    if (!triggerRef.current) return;
+    if (!triggerRef.current) {
+      return;
+    }
+
     const rect = triggerRef.current.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
     const listH = Math.min(options.length * 44 + 8, 260);
+
     setFlipUp(spaceBelow < listH && rect.top > listH);
   }, [options.length]);
 
   const openList = useCallback(() => {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
+
     computeFlip();
     setOpen(true);
     const idx = options.findIndex((o) => o.value === value && !o.disabled);
+
     setActiveIndex(idx >= 0 ? idx : options.findIndex((o) => !o.disabled));
   }, [disabled, computeFlip, options, value]);
 
@@ -87,8 +105,14 @@ export function ComboRow<V extends string = string>({
 
   const selectOption = useCallback(
     (opt: ComboRowOption<V>) => {
-      if (opt.disabled) return;
-      if (!isControlled) setUncontrolledValue(opt.value);
+      if (opt.disabled) {
+        return;
+      }
+
+      if (!isControlled) {
+        setUncontrolledValue(opt.value);
+      }
+
       onValueChange?.(opt.value);
       closeList();
     },
@@ -96,13 +120,20 @@ export function ComboRow<V extends string = string>({
   );
 
   useEffect(() => {
-    if (!open || activeIndex < 0 || !listRef.current) return;
+    if (!open || activeIndex < 0 || !listRef.current) {
+      return;
+    }
+
     const item = listRef.current.children[activeIndex] as HTMLElement | undefined;
-    item?.scrollIntoView({ block: "nearest" });
+
+    item?.scrollIntoView({ block: 'nearest' });
   }, [activeIndex, open]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     const handler = (e: MouseEvent) => {
       if (
         !triggerRef.current?.contains(e.target as Node) &&
@@ -111,26 +142,26 @@ export function ComboRow<V extends string = string>({
         closeList();
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+
+    document.addEventListener('mousedown', handler);
+
+    return () => document.removeEventListener('mousedown', handler);
   }, [open, closeList]);
 
   const handleTriggerKeyDown = useCallback(
     (e: KeyboardEvent<HTMLButtonElement>) => {
       switch (e.key) {
-        case "Enter":
-        case " ":
-        case "ArrowDown":
+        case 'Enter':
+        case ' ':
+        case 'ArrowDown':
           e.preventDefault();
           openList();
           break;
-        case "ArrowUp":
+        case 'ArrowUp':
           e.preventDefault();
           computeFlip();
           setOpen(true);
-          setActiveIndex(
-            options.reduce((last, o, i) => (!o.disabled ? i : last), -1),
-          );
+          setActiveIndex(options.reduce((last, o, i) => (!o.disabled ? i : last), -1));
           break;
       }
     },
@@ -146,34 +177,39 @@ export function ComboRow<V extends string = string>({
       const currentPos = enabledIndexes.indexOf(activeIndex);
 
       switch (e.key) {
-        case "ArrowDown": {
+        case 'ArrowDown': {
           e.preventDefault();
           const next = enabledIndexes[Math.min(currentPos + 1, enabledIndexes.length - 1)];
+
           setActiveIndex(next ?? activeIndex);
           break;
         }
-        case "ArrowUp": {
+        case 'ArrowUp': {
           e.preventDefault();
           const prev = enabledIndexes[Math.max(currentPos - 1, 0)];
+
           setActiveIndex(prev ?? activeIndex);
           break;
         }
-        case "Home":
+        case 'Home':
           e.preventDefault();
           setActiveIndex(enabledIndexes[0] ?? -1);
           break;
-        case "End":
+        case 'End':
           e.preventDefault();
           setActiveIndex(enabledIndexes[enabledIndexes.length - 1] ?? -1);
           break;
-        case "Enter":
-        case " ": {
+        case 'Enter':
+        case ' ': {
           e.preventDefault();
-          if (activeIndex >= 0) selectOption(options[activeIndex]);
+          if (activeIndex >= 0) {
+            selectOption(options[activeIndex]);
+          }
+
           break;
         }
-        case "Escape":
-        case "Tab":
+        case 'Escape':
+        case 'Tab':
           closeList();
           break;
       }
@@ -185,7 +221,7 @@ export function ComboRow<V extends string = string>({
     <div
       className={[styles.row, disabled ? styles.disabled : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {leading && <span className={styles.leading}>{leading}</span>}
@@ -209,16 +245,19 @@ export function ComboRow<V extends string = string>({
             open && activeIndex >= 0 ? `${listboxId}-opt-${activeIndex}` : undefined
           }
           disabled={disabled}
-          className={[styles.trigger, open ? styles.triggerOpen : null].filter(Boolean).join(" ")}
+          className={[styles.trigger, open ? styles.triggerOpen : null].filter(Boolean).join(' ')}
           onClick={() => (open ? closeList() : openList())}
           onKeyDown={handleTriggerKeyDown}
         >
-          <span className={[styles.triggerLabel, !selected ? styles.placeholder : null]
-            .filter(Boolean).join(" ")}>
-            {selected?.label ?? "—"}
+          <span
+            className={[styles.triggerLabel, !selected ? styles.placeholder : null]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            {selected?.label ?? '—'}
           </span>
           <svg
-            className={[styles.chevron, open ? styles.chevronOpen : null].filter(Boolean).join(" ")}
+            className={[styles.chevron, open ? styles.chevronOpen : null].filter(Boolean).join(' ')}
             width="16"
             height="16"
             viewBox="0 0 16 16"
@@ -240,19 +279,17 @@ export function ComboRow<V extends string = string>({
           <ul
             ref={listRef}
             id={listboxId}
-            role="listbox"
             aria-labelledby={triggerId}
             tabIndex={-1}
             className={[styles.list, flipUp ? styles.listUp : styles.listDown]
               .filter(Boolean)
-              .join(" ")}
+              .join(' ')}
             onKeyDown={handleListKeyDown}
           >
             {options.map((opt, i) => (
               <li
                 key={opt.value}
                 id={`${listboxId}-opt-${i}`}
-                role="option"
                 aria-selected={opt.value === value}
                 aria-disabled={opt.disabled}
                 className={[
@@ -262,13 +299,20 @@ export function ComboRow<V extends string = string>({
                   opt.disabled ? styles.optionDisabled : null,
                 ]
                   .filter(Boolean)
-                  .join(" ")}
+                  .join(' ')}
                 onMouseEnter={() => !opt.disabled && setActiveIndex(i)}
                 onClick={() => selectOption(opt)}
               >
                 <span className={styles.optionLabel}>{opt.label}</span>
                 {opt.value === value && (
-                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false" className={styles.checkIcon}>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                    className={styles.checkIcon}
+                  >
                     <path
                       d="M3 8l4 4 6-6"
                       fill="none"

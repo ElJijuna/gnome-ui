@@ -1,8 +1,10 @@
-import { Children, type HTMLAttributes, type ReactNode } from "react";
-import { Separator } from "../Separator";
-import styles from "./BoxedList.module.css";
+import { Children, type HTMLAttributes, type ReactNode } from 'react';
 
-export type BoxedListVariant = "default" | "separate";
+import { Separator } from '../Separator';
+
+import styles from './BoxedList.module.css';
+
+export type BoxedListVariant = 'default' | 'separate';
 
 export interface BoxedListProps extends HTMLAttributes<HTMLUListElement> {
   children?: ReactNode;
@@ -27,16 +29,15 @@ export interface BoxedListProps extends HTMLAttributes<HTMLUListElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html#boxed-lists-cards
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
-export function BoxedList({ children, variant = "default", className, ...props }: BoxedListProps) {
+export function BoxedList({ children, variant = 'default', className, ...props }: BoxedListProps) {
   const items = Children.toArray(children).filter(Boolean);
-  const separate = variant === "separate";
+  const separate = variant === 'separate';
 
   return (
     <ul
-      role="list"
       className={[styles.list, separate ? styles.separate : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {items.map((child, i) => (

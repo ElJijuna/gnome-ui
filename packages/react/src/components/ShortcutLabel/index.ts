@@ -1,2 +1,2 @@
-export { ShortcutLabel } from "./ShortcutLabel";
-export type { ShortcutLabelProps } from "./ShortcutLabel";
+export type { ShortcutLabelProps } from './ShortcutLabel';
+export { ShortcutLabel } from './ShortcutLabel';

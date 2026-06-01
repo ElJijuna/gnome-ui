@@ -1,12 +1,8 @@
-import {
-  useEffect,
-  useMemo,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-} from "react";
-import { Avatar, type AvatarColor, type AvatarSize } from "../Avatar";
-import styles from "./AvatarRotator.module.css";
+import { type CSSProperties, type HTMLAttributes, useEffect, useMemo, useState } from 'react';
+
+import { Avatar, type AvatarColor, type AvatarSize } from '../Avatar';
+
+import styles from './AvatarRotator.module.css';
 
 export interface AvatarRotatorProps extends HTMLAttributes<HTMLSpanElement> {
   /** Full name used for the accessible label and initials fallback. */
@@ -37,7 +33,10 @@ export interface AvatarRotatorProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 function clampIndex(index: number, length: number) {
-  if (length <= 0) return 0;
+  if (length <= 0) {
+    return 0;
+  }
+
   return ((index % length) + length) % length;
 }
 
@@ -45,14 +44,19 @@ function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return;
+    }
 
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     setPrefersReducedMotion(query.matches);
 
     const handleChange = () => setPrefersReducedMotion(query.matches);
-    query.addEventListener?.("change", handleChange);
-    return () => query.removeEventListener?.("change", handleChange);
+
+    query.addEventListener?.('change', handleChange);
+
+    return () => query.removeEventListener?.('change', handleChange);
   }, []);
 
   return prefersReducedMotion;
@@ -65,10 +69,10 @@ function usePrefersReducedMotion() {
  * timing, crossfade animation, and pause behavior.
  */
 export function AvatarRotator({
-  name = "",
+  name = '',
   avatars = [],
   alt,
-  size = "md",
+  size = 'md',
   color,
   interval = 3000,
   transitionDuration = 240,
@@ -84,27 +88,33 @@ export function AvatarRotator({
   onBlur,
   ...props
 }: AvatarRotatorProps) {
-  const sources = useMemo(
-    () => avatars.map((src) => src.trim()).filter(Boolean),
-    [avatars],
-  );
+  const sources = useMemo(() => avatars.map((src) => src.trim()).filter(Boolean), [avatars]);
   const isControlled = activeIndex !== undefined;
   const [internalIndex, setInternalIndex] = useState(defaultActiveIndex);
   const [isPaused, setIsPaused] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const currentIndex = clampIndex(
-    isControlled ? activeIndex : internalIndex,
-    sources.length,
-  );
+  const currentIndex = clampIndex(isControlled ? activeIndex : internalIndex, sources.length);
 
   useEffect(() => {
-    if (sources.length <= 1) return;
-    if (interval <= 0) return;
-    if (isPaused || prefersReducedMotion) return;
+    if (sources.length <= 1) {
+      return;
+    }
+
+    if (interval <= 0) {
+      return;
+    }
+
+    if (isPaused || prefersReducedMotion) {
+      return;
+    }
 
     const timer = window.setInterval(() => {
       const nextIndex = clampIndex(currentIndex + 1, sources.length);
-      if (!isControlled) setInternalIndex(nextIndex);
+
+      if (!isControlled) {
+        setInternalIndex(nextIndex);
+      }
+
       onIndexChange?.(nextIndex);
     }, interval);
 
@@ -133,34 +143,44 @@ export function AvatarRotator({
     );
   }
 
-  const label = alt ?? name ?? "Avatar";
+  const label = alt ?? name ?? 'Avatar';
   const transitionStyle = {
     ...style,
-    "--avatar-rotator-duration": `${Math.max(0, transitionDuration)}ms`,
+    '--avatar-rotator-duration': `${Math.max(0, transitionDuration)}ms`,
   } as CSSProperties;
 
   return (
     <span
       role="img"
       aria-label={label}
-      className={[styles.rotator, styles[size], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.rotator, styles[size], className].filter(Boolean).join(' ')}
       style={transitionStyle}
       onMouseEnter={(event) => {
-        if (pauseOnHover) setIsPaused(true);
+        if (pauseOnHover) {
+          setIsPaused(true);
+        }
+
         onMouseEnter?.(event);
       }}
       onMouseLeave={(event) => {
-        if (pauseOnHover) setIsPaused(false);
+        if (pauseOnHover) {
+          setIsPaused(false);
+        }
+
         onMouseLeave?.(event);
       }}
       onFocus={(event) => {
-        if (pauseOnHover) setIsPaused(true);
+        if (pauseOnHover) {
+          setIsPaused(true);
+        }
+
         onFocus?.(event);
       }}
       onBlur={(event) => {
-        if (pauseOnHover) setIsPaused(false);
+        if (pauseOnHover) {
+          setIsPaused(false);
+        }
+
         onBlur?.(event);
       }}
       {...props}
@@ -173,12 +193,9 @@ export function AvatarRotator({
           alt=""
           size={size}
           aria-hidden="true"
-          className={[
-            styles.layer,
-            index === currentIndex ? styles.active : null,
-          ]
+          className={[styles.layer, index === currentIndex ? styles.active : null]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
         />
       ))}
     </span>

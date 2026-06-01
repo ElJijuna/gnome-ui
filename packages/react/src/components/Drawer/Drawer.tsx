@@ -1,21 +1,24 @@
 import {
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type ReactNode,
   useCallback,
   useEffect,
   useId,
   useRef,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type ReactNode,
-} from "react";
-import { createPortal } from "react-dom";
-import { Button } from "../Button/Button";
-import { FOCUSABLE, trapFocus, useVisualViewport } from "../Dialog/dialogUtils";
-import styles from "./Drawer.module.css";
+} from 'react';
 
-export type DrawerSide = "left" | "right";
-export type DrawerSize = "classic" | "wide";
+import { createPortal } from 'react-dom';
 
-export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, "content" | "title"> {
+import { Button } from '../Button/Button';
+import { FOCUSABLE, trapFocus, useVisualViewport } from '../Dialog/dialogUtils';
+
+import styles from './Drawer.module.css';
+
+export type DrawerSide = 'left' | 'right';
+export type DrawerSize = 'classic' | 'wide';
+
+export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content' | 'title'> {
   /** Whether the drawer is visible. */
   open: boolean;
   /** Edge that the drawer slides in from. Defaults to `"right"`. */
@@ -42,8 +45,8 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, "conte
  */
 export function Drawer({
   open,
-  side = "right",
-  size = "classic",
+  side = 'right',
+  size = 'classic',
   title,
   content,
   children,
@@ -69,9 +72,10 @@ export function Drawer({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         event.preventDefault();
         onClose?.();
+
         return;
       }
 
@@ -80,7 +84,9 @@ export function Drawer({
     [onClose],
   );
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   const node = (
     <div
@@ -97,12 +103,12 @@ export function Drawer({
         data-size={size}
         className={[
           styles.drawer,
-          side === "left" ? styles.left : styles.right,
-          size === "wide" ? styles.wide : styles.classic,
+          side === 'left' ? styles.left : styles.right,
+          size === 'wide' ? styles.wide : styles.classic,
           className,
         ]
           .filter(Boolean)
-          .join(" ")}
+          .join(' ')}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         {...props}
@@ -128,6 +134,9 @@ export function Drawer({
     </div>
   );
 
-  if (typeof document === "undefined") return node;
+  if (typeof document === 'undefined') {
+    return node;
+  }
+
   return createPortal(node, document.body);
 }

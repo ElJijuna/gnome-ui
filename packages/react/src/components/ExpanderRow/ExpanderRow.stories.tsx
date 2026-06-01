@@ -1,15 +1,17 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { ExpanderRow } from "./ExpanderRow";
-import { ActionRow } from "../ActionRow";
-import { BoxedList } from "../BoxedList";
-import { Switch } from "../Switch";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { Switch } from '../Switch';
+
+import { ExpanderRow } from './ExpanderRow';
 
 const meta: Meta<typeof ExpanderRow> = {
-  title: "Components/ExpanderRow",
+  title: 'Components/ExpanderRow',
   component: ExpanderRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -38,13 +40,13 @@ expand state.
     ),
   ],
   argTypes: {
-    title: { control: "text" },
-    subtitle: { control: "text" },
-    defaultExpanded: { control: "boolean" },
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
+    defaultExpanded: { control: 'boolean' },
   },
   args: {
-    title: "Network",
-    subtitle: "Wi-Fi, VPN",
+    title: 'Network',
+    subtitle: 'Wi-Fi, VPN',
     defaultExpanded: false,
   },
 };
@@ -72,8 +74,14 @@ export const DefaultExpanded: Story = {
   render: () => (
     <BoxedList>
       <ExpanderRow title="Display" subtitle="Resolution, refresh rate" defaultExpanded>
-        <ActionRow title="Resolution" trailing={<span style={{ fontSize: "0.875rem", opacity: 0.6 }}>1920 × 1080</span>} />
-        <ActionRow title="Refresh Rate" trailing={<span style={{ fontSize: "0.875rem", opacity: 0.6 }}>60 Hz</span>} />
+        <ActionRow
+          title="Resolution"
+          trailing={<span style={{ fontSize: '0.875rem', opacity: 0.6 }}>1920 × 1080</span>}
+        />
+        <ActionRow
+          title="Refresh Rate"
+          trailing={<span style={{ fontSize: '0.875rem', opacity: 0.6 }}>60 Hz</span>}
+        />
         <ActionRow title="Night Light" trailing={<Switch aria-label="Night Light" />} />
       </ExpanderRow>
     </BoxedList>
@@ -81,7 +89,7 @@ export const DefaultExpanded: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Use `defaultExpanded` to open the row on first render." },
+      description: { story: 'Use `defaultExpanded` to open the row on first render.' },
     },
   },
 };
@@ -98,7 +106,10 @@ export const WithLeadingIcon: Story = {
       >
         <ActionRow title="Location Services" trailing={<Switch aria-label="Location" />} />
         <ActionRow title="Camera" trailing={<Switch defaultChecked aria-label="Camera" />} />
-        <ActionRow title="Microphone" trailing={<Switch defaultChecked aria-label="Microphone" />} />
+        <ActionRow
+          title="Microphone"
+          trailing={<Switch defaultChecked aria-label="Microphone" />}
+        />
       </ExpanderRow>
     </BoxedList>
   ),
@@ -113,11 +124,7 @@ export const WithTrailing: Story = {
       <ExpanderRow
         title="Notifications"
         trailing={
-          <Switch
-            defaultChecked
-            aria-label="Notifications"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <Switch defaultChecked aria-label="Notifications" onClick={(e) => e.stopPropagation()} />
         }
       >
         <ActionRow title="Sound" trailing={<Switch defaultChecked aria-label="Sound" />} />
@@ -159,7 +166,7 @@ export const MultipleExpanders: Story = {
     docs: {
       description: {
         story:
-          "Multiple `ExpanderRow` and `ActionRow` items can coexist freely inside a `BoxedList`.",
+          'Multiple `ExpanderRow` and `ActionRow` items can coexist freely inside a `BoxedList`.',
       },
     },
   },
@@ -170,10 +177,11 @@ export const MultipleExpanders: Story = {
 export const Controlled: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <Button variant="flat" onClick={() => setOpen((v) => !v)}>
-          {open ? "Collapse" : "Expand"} externally
+          {open ? 'Collapse' : 'Expand'} externally
         </Button>
         <BoxedList>
           <ExpanderRow
@@ -194,7 +202,7 @@ export const Controlled: Story = {
     docs: {
       description: {
         story:
-          "Use `expanded` + `onExpandedChange` for controlled mode — the expand state can be driven externally.",
+          'Use `expanded` + `onExpandedChange` for controlled mode — the expand state can be driven externally.',
       },
     },
   },

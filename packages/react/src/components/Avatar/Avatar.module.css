@@ -54,27 +54,53 @@
   font-size: 0.42em;
 }
 
-.sm .initials  { font-size: 0.5em; }
-.md .initials  { font-size: 0.60em; }
-.lg .initials  { font-size: 1.0em; }
-.xl .initials  { font-size: 1.40em; }
+.sm .initials {
+  font-size: 0.5em;
+}
+.md .initials {
+  font-size: 0.6em;
+}
+.lg .initials {
+  font-size: 1em;
+}
+.xl .initials {
+  font-size: 1.4em;
+}
 
 /* ─── Color variants (initials fallback) ───────────────────────────────────── */
 
-.color-blue   { background-color: var(--gnome-blue-3,   #3584e4); }
-.color-green  { background-color: var(--gnome-green-4,  #2ec27e); }
+.color-blue {
+  background-color: var(--gnome-blue-3, #3584e4);
+}
+.color-green {
+  background-color: var(--gnome-green-4, #2ec27e);
+}
 .color-yellow {
   background-color: var(--gnome-yellow-4, #f5c211);
   /* yellow needs dark initials for contrast */
 }
-.color-yellow .initials { color: rgba(0, 0, 0, 0.8); }
+.color-yellow .initials {
+  color: rgba(0, 0, 0, 0.8);
+}
 
-.color-orange { background-color: var(--gnome-orange-4, #e66100); }
-.color-red    { background-color: var(--gnome-red-3,    #e01b24); }
-.color-purple { background-color: var(--gnome-purple-3, #9141ac); }
-.color-brown  { background-color: var(--gnome-brown-3,  #986a44); }
-.color-teal   { background-color: #2190a4; }
-.color-slate  { background-color: var(--gnome-dark-2,   #5e5c64); }
+.color-orange {
+  background-color: var(--gnome-orange-4, #e66100);
+}
+.color-red {
+  background-color: var(--gnome-red-3, #e01b24);
+}
+.color-purple {
+  background-color: var(--gnome-purple-3, #9141ac);
+}
+.color-brown {
+  background-color: var(--gnome-brown-3, #986a44);
+}
+.color-teal {
+  background-color: #2190a4;
+}
+.color-slate {
+  background-color: var(--gnome-dark-2, #5e5c64);
+}
 
 /* ─── Dark mode ring ───────────────────────────────────────────────────────── */
 

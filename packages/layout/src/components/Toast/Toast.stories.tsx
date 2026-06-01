@@ -1,12 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { ToastProvider, useToast } from "./Toast";
-import type { ToastOptions, ToastType } from "./Toast";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import type { ToastOptions, ToastType } from './Toast';
+import { ToastProvider, useToast } from './Toast';
 
 const meta: Meta = {
-  title: "Layout/Toast",
+  title: 'Layout/Toast',
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -47,14 +48,15 @@ type Story = StoryObj;
 // ─── Interactive demo ────────────────────────────────────────────────────────
 function Demo({ options }: { options: ToastOptions }) {
   const { show } = useToast();
+
   return (
     <button
       style={{
-        padding: "8px 16px",
+        padding: '8px 16px',
         borderRadius: 8,
-        border: "1px solid var(--gnome-border-color, rgba(0,0,0,0.15))",
-        background: "var(--gnome-card-bg, #f6f5f4)",
-        cursor: "pointer",
+        border: '1px solid var(--gnome-border-color, rgba(0,0,0,0.15))',
+        background: 'var(--gnome-card-bg, #f6f5f4)',
+        cursor: 'pointer',
         fontSize: 14,
         fontWeight: 500,
       }}
@@ -68,7 +70,7 @@ function Demo({ options }: { options: ToastOptions }) {
 export const Default: Story = {
   render: () => (
     <ToastProvider>
-      <Demo options={{ title: "File saved" }} />
+      <Demo options={{ title: 'File saved' }} />
     </ToastProvider>
   ),
 };
@@ -78,8 +80,8 @@ export const WithAction: Story = {
     <ToastProvider>
       <Demo
         options={{
-          title: "Message deleted",
-          action: { label: "Undo", onClick: () => {} },
+          title: 'Message deleted',
+          action: { label: 'Undo', onClick: () => {} },
         }}
       />
     </ToastProvider>
@@ -87,7 +89,7 @@ export const WithAction: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Include at most one action button, directly relevant to the message.",
+        story: 'Include at most one action button, directly relevant to the message.',
       },
     },
   },
@@ -96,26 +98,27 @@ export const WithAction: Story = {
 export const Types: Story = {
   render: () => {
     const types: { type: ToastType; title: string }[] = [
-      { type: "default", title: "Settings updated" },
-      { type: "success", title: "Upload complete" },
-      { type: "info",    title: "New version available" },
-      { type: "warning", title: "Disk space is low" },
-      { type: "error",   title: "Connection failed" },
+      { type: 'default', title: 'Settings updated' },
+      { type: 'success', title: 'Upload complete' },
+      { type: 'info', title: 'New version available' },
+      { type: 'warning', title: 'Disk space is low' },
+      { type: 'error', title: 'Connection failed' },
     ];
 
     function TypeButtons() {
       const { show } = useToast();
+
       return (
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {types.map(({ type, title }) => (
             <button
               key={type}
               style={{
-                padding: "8px 14px",
+                padding: '8px 14px',
                 borderRadius: 8,
-                border: "1px solid var(--gnome-border-color, rgba(0,0,0,0.15))",
-                background: "var(--gnome-card-bg, #f6f5f4)",
-                cursor: "pointer",
+                border: '1px solid var(--gnome-border-color, rgba(0,0,0,0.15))',
+                background: 'var(--gnome-card-bg, #f6f5f4)',
+                cursor: 'pointer',
                 fontSize: 13,
                 fontWeight: 500,
               }}
@@ -137,7 +140,8 @@ export const Types: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Each type adds a colored dot indicator. Use types sparingly — the message copy should convey the meaning.",
+        story:
+          'Each type adds a colored dot indicator. Use types sparingly — the message copy should convey the meaning.',
       },
     },
   },
@@ -148,10 +152,10 @@ export const Persistent: Story = {
     <ToastProvider>
       <Demo
         options={{
-          title: "You are now offline",
-          type: "warning",
+          title: 'You are now offline',
+          type: 'warning',
           timeout: 0,
-          action: { label: "Dismiss", onClick: () => {} },
+          action: { label: 'Dismiss', onClick: () => {} },
         }}
       />
     </ToastProvider>
@@ -159,7 +163,8 @@ export const Persistent: Story = {
   parameters: {
     docs: {
       description: {
-        story: "`timeout: 0` disables auto-dismiss. The user must manually close it. Prefer `Banner` for truly persistent states.",
+        story:
+          '`timeout: 0` disables auto-dismiss. The user must manually close it. Prefer `Banner` for truly persistent states.',
       },
     },
   },
@@ -173,19 +178,20 @@ export const Queue: Story = {
 
       const enqueue = () => {
         const next = count + 1;
+
         setCount(next);
         show({ title: `Notification ${next}`, timeout: 2500 });
       };
 
       return (
-        <div style={{ display: "flex", gap: 8 }}>
+        <div style={{ display: 'flex', gap: 8 }}>
           <button
             style={{
-              padding: "8px 16px",
+              padding: '8px 16px',
               borderRadius: 8,
-              border: "1px solid var(--gnome-border-color, rgba(0,0,0,0.15))",
-              background: "var(--gnome-card-bg, #f6f5f4)",
-              cursor: "pointer",
+              border: '1px solid var(--gnome-border-color, rgba(0,0,0,0.15))',
+              background: 'var(--gnome-card-bg, #f6f5f4)',
+              cursor: 'pointer',
               fontSize: 14,
             }}
             onClick={enqueue}
@@ -194,13 +200,13 @@ export const Queue: Story = {
           </button>
           <button
             style={{
-              padding: "8px 16px",
+              padding: '8px 16px',
               borderRadius: 8,
-              border: "1px solid rgba(224,27,36,0.4)",
-              background: "rgba(224,27,36,0.06)",
-              cursor: "pointer",
+              border: '1px solid rgba(224,27,36,0.4)',
+              background: 'rgba(224,27,36,0.06)',
+              cursor: 'pointer',
               fontSize: 14,
-              color: "#e01b24",
+              color: '#e01b24',
             }}
             onClick={dismissAll}
           >
@@ -219,7 +225,8 @@ export const Queue: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Toasts are queued and shown one at a time. `dismissAll()` clears the entire queue immediately.",
+        story:
+          'Toasts are queued and shown one at a time. `dismissAll()` clears the entire queue immediately.',
       },
     },
   },

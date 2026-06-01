@@ -1,7 +1,8 @@
-import { useState, useId, type HTMLAttributes, type ReactNode } from "react";
-import styles from "./SwitchRow.module.css";
+import { type HTMLAttributes, type ReactNode, useId, useState } from 'react';
 
-export interface SwitchRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, "onChange"> {
+import styles from './SwitchRow.module.css';
+
+export interface SwitchRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /** Primary label. */
   title: string;
   /** Secondary line below the title. */
@@ -49,7 +50,11 @@ export function SwitchRow({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const next = !checked;
-    if (!isControlled) setUncontrolledChecked(next);
+
+    if (!isControlled) {
+      setUncontrolledChecked(next);
+    }
+
     onCheckedChange?.(next);
     onClick?.(e);
   };
@@ -62,7 +67,7 @@ export function SwitchRow({
       disabled={disabled}
       className={[styles.row, disabled ? styles.disabled : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       onClick={handleClick}
       {...props}
     >
@@ -75,7 +80,11 @@ export function SwitchRow({
 
       {/* Visual switch indicator — aria-hidden since the button carries the role */}
       <span className={styles.switchTrack} aria-hidden="true">
-        <span className={[styles.switchThumb, checked ? styles.switchThumbOn : null].filter(Boolean).join(" ")} />
+        <span
+          className={[styles.switchThumb, checked ? styles.switchThumbOn : null]
+            .filter(Boolean)
+            .join(' ')}
+        />
       </span>
     </button>
   );

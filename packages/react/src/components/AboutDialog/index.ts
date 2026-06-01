@@ -1,2 +1,2 @@
-export { AboutDialog } from "./AboutDialog";
-export type { AboutDialogProps, AboutDialogLink } from "./AboutDialog";
+export type { AboutDialogLink, AboutDialogProps } from './AboutDialog';
+export { AboutDialog } from './AboutDialog';

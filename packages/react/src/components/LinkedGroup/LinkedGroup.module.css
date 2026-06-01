@@ -13,7 +13,7 @@
 /* ─── Strip inner border-radius from all children ───────────────────────────── */
 
 .linked > :global(*) {
-  border-radius: 0 !important;
+  border-radius: 0;
   flex-shrink: 0;
 }
 
@@ -32,25 +32,25 @@
 /* ─── Restore radius — first child ─────────────────────────────────────────── */
 
 .linked:not(.vertical) > :global(*:first-child) {
-  border-top-left-radius: var(--gnome-radius-md) !important;
-  border-bottom-left-radius: var(--gnome-radius-md) !important;
+  border-top-left-radius: var(--gnome-radius-md);
+  border-bottom-left-radius: var(--gnome-radius-md);
 }
 
 .linked.vertical > :global(*:first-child) {
-  border-top-left-radius: var(--gnome-radius-md) !important;
-  border-top-right-radius: var(--gnome-radius-md) !important;
+  border-top-left-radius: var(--gnome-radius-md);
+  border-top-right-radius: var(--gnome-radius-md);
 }
 
 /* ─── Restore radius — last child ──────────────────────────────────────────── */
 
 .linked:not(.vertical) > :global(*:last-child) {
-  border-top-right-radius: var(--gnome-radius-md) !important;
-  border-bottom-right-radius: var(--gnome-radius-md) !important;
+  border-top-right-radius: var(--gnome-radius-md);
+  border-bottom-right-radius: var(--gnome-radius-md);
 }
 
 .linked.vertical > :global(*:last-child) {
-  border-bottom-left-radius: var(--gnome-radius-md) !important;
-  border-bottom-right-radius: var(--gnome-radius-md) !important;
+  border-bottom-left-radius: var(--gnome-radius-md);
+  border-bottom-right-radius: var(--gnome-radius-md);
 }
 
 /* ─── Bring hovered / focused child to the front so its border shows ────────── */

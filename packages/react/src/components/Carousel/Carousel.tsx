@@ -1,13 +1,14 @@
 import {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
   Children,
   type HTMLAttributes,
   type ReactNode,
-} from "react";
-import styles from "./Carousel.module.css";
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+
+import styles from './Carousel.module.css';
 
 // ─── CarouselIndicatorDots ────────────────────────────────────────────────────
 
@@ -33,7 +34,7 @@ export function CarouselIndicatorDots({
 }: CarouselIndicatorDotsProps) {
   return (
     <div
-      className={[styles.indicatorDots, className].filter(Boolean).join(" ")}
+      className={[styles.indicatorDots, className].filter(Boolean).join(' ')}
       role="tablist"
       aria-label="Carousel pages"
       {...props}
@@ -47,7 +48,7 @@ export function CarouselIndicatorDots({
           aria-label={`Page ${i + 1}`}
           className={[styles.dot, i === currentPage ? styles.dotActive : null]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
           onClick={() => onPageSelected?.(i)}
         />
       ))}
@@ -79,7 +80,7 @@ export function CarouselIndicatorLines({
 }: CarouselIndicatorLinesProps) {
   return (
     <div
-      className={[styles.indicatorLines, className].filter(Boolean).join(" ")}
+      className={[styles.indicatorLines, className].filter(Boolean).join(' ')}
       role="tablist"
       aria-label="Carousel pages"
       {...props}
@@ -93,7 +94,7 @@ export function CarouselIndicatorLines({
           aria-label={`Page ${i + 1}`}
           className={[styles.line, i === currentPage ? styles.lineActive : null]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
           onClick={() => onPageSelected?.(i)}
         />
       ))}
@@ -109,7 +110,7 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * Scroll orientation.
    * @default "horizontal"
    */
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
   /**
    * Gap between pages in px.
    * @default 0
@@ -142,7 +143,7 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
  */
 export function Carousel({
   children,
-  orientation = "horizontal",
+  orientation = 'horizontal',
   spacing = 0,
   loop = false,
   onPageChanged,
@@ -156,95 +157,107 @@ export function Carousel({
   const isControlled = controlledPage !== undefined;
   const currentPage = isControlled ? controlledPage : internalPage;
 
-  // Scroll to the controlled page when it changes externally
-  useEffect(() => {
-    if (!isControlled) return;
-    scrollToPage(controlledPage, "smooth");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [controlledPage]);
-
   const scrollToPage = useCallback(
-    (index: number, behavior: ScrollBehavior = "smooth") => {
+    (index: number, behavior: ScrollBehavior = 'smooth') => {
       const el = scrollRef.current;
-      if (!el) return;
-      if (orientation === "horizontal") {
+
+      if (!el) {
+        return;
+      }
+
+      if (orientation === 'horizontal') {
         el.scrollTo({ left: el.clientWidth * index, behavior });
       } else {
         el.scrollTo({ top: el.clientHeight * index, behavior });
       }
     },
-    [orientation]
+    [orientation],
   );
+
+  // Scroll to the controlled page when it changes externally
+  useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
+
+    scrollToPage(controlledPage, 'smooth');
+  }, [controlledPage, scrollToPage, isControlled]);
 
   // Detect page changes via IntersectionObserver on each child
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) return;
+
+    if (!el) {
+      return;
+    }
 
     const handleScroll = () => {
       const pages = Array.from(el.children) as HTMLElement[];
-      const size = orientation === "horizontal" ? el.clientWidth : el.clientHeight;
-      const scroll = orientation === "horizontal" ? el.scrollLeft : el.scrollTop;
+      const size = orientation === 'horizontal' ? el.clientWidth : el.clientHeight;
+      const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
       const idx = Math.round(scroll / (size || 1));
       const clamped = Math.max(0, Math.min(idx, pageCount - 1));
-      if (!isControlled) setInternalPage(clamped);
+
+      if (!isControlled) {
+        setInternalPage(clamped);
+      }
+
       onPageChanged?.(clamped);
       void pages; // suppress lint
     };
 
-    el.addEventListener("scroll", handleScroll, { passive: true });
-    return () => el.removeEventListener("scroll", handleScroll);
+    el.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => el.removeEventListener('scroll', handleScroll);
   }, [orientation, pageCount, isControlled, onPageChanged]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       const isForward =
-        orientation === "horizontal" ? e.key === "ArrowRight" : e.key === "ArrowDown";
-      const isBack =
-        orientation === "horizontal" ? e.key === "ArrowLeft" : e.key === "ArrowUp";
+        orientation === 'horizontal' ? e.key === 'ArrowRight' : e.key === 'ArrowDown';
+      const isBack = orientation === 'horizontal' ? e.key === 'ArrowLeft' : e.key === 'ArrowUp';
 
       if (isForward) {
         e.preventDefault();
         const next = loop
           ? (currentPage + 1) % pageCount
           : Math.min(currentPage + 1, pageCount - 1);
+
         scrollToPage(next);
-        if (!isControlled) setInternalPage(next);
+        if (!isControlled) {
+          setInternalPage(next);
+        }
+
         onPageChanged?.(next);
       } else if (isBack) {
         e.preventDefault();
         const prev = loop
           ? (currentPage - 1 + pageCount) % pageCount
           : Math.max(currentPage - 1, 0);
+
         scrollToPage(prev);
-        if (!isControlled) setInternalPage(prev);
+        if (!isControlled) {
+          setInternalPage(prev);
+        }
+
         onPageChanged?.(prev);
       }
     },
-    [currentPage, pageCount, loop, orientation, scrollToPage, isControlled, onPageChanged]
+    [currentPage, pageCount, loop, orientation, scrollToPage, isControlled, onPageChanged],
   );
 
-  const isHorizontal = orientation === "horizontal";
+  const isHorizontal = orientation === 'horizontal';
 
   return (
     <div
       ref={scrollRef}
       role="region"
       aria-roledescription="carousel"
-      tabIndex={0}
-      className={[
-        styles.carousel,
-        isHorizontal ? styles.horizontal : styles.vertical,
-        className,
-      ]
+      className={[styles.carousel, isHorizontal ? styles.horizontal : styles.vertical, className]
         .filter(Boolean)
-        .join(" ")}
-      style={
-        isHorizontal
-          ? { columnGap: spacing || undefined }
-          : { rowGap: spacing || undefined }
-      }
+        .join(' ')}
+      style={isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }}
       onKeyDown={handleKeyDown}
       {...props}
     >

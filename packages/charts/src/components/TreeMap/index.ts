@@ -1,2 +1,2 @@
-export { TreeMap } from "./TreeMap";
-export type { TreeMapProps, TreeMapDataItem } from "./TreeMap";
+export type { TreeMapDataItem, TreeMapProps } from './TreeMap';
+export { TreeMap } from './TreeMap';

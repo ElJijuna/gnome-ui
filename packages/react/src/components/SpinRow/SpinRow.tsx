@@ -1,7 +1,15 @@
-import { useState, useId, useCallback, type HTMLAttributes, type ReactNode, type KeyboardEvent } from "react";
-import styles from "./SpinRow.module.css";
+import {
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type ReactNode,
+  useCallback,
+  useId,
+  useState,
+} from 'react';
 
-export interface SpinRowProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+import styles from './SpinRow.module.css';
+
+export interface SpinRowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Primary label. */
   title: string;
   /** Secondary line below the title. */
@@ -28,7 +36,8 @@ export interface SpinRowProps extends Omit<HTMLAttributes<HTMLDivElement>, "onCh
 
 function countDecimals(n: number): number {
   const s = n.toString();
-  const dot = s.indexOf(".");
+  const dot = s.indexOf('.');
+
   return dot === -1 ? 0 : s.length - dot - 1;
 }
 
@@ -72,7 +81,11 @@ export function SpinRow({
   const set = useCallback(
     (next: number) => {
       const clamped = parseFloat(clamp(next, min, max).toFixed(dp));
-      if (!isControlled) setUncontrolledValue(clamped);
+
+      if (!isControlled) {
+        setUncontrolledValue(clamped);
+      }
+
       onValueChange?.(clamped);
     },
     [isControlled, min, max, dp, onValueChange],
@@ -81,12 +94,30 @@ export function SpinRow({
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
       switch (e.key) {
-        case "ArrowUp":   e.preventDefault(); set(value + step); break;
-        case "ArrowDown": e.preventDefault(); set(value - step); break;
-        case "PageUp":    e.preventDefault(); set(value + step * 10); break;
-        case "PageDown":  e.preventDefault(); set(value - step * 10); break;
-        case "Home":      e.preventDefault(); set(min); break;
-        case "End":       e.preventDefault(); set(max); break;
+        case 'ArrowUp':
+          e.preventDefault();
+          set(value + step);
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          set(value - step);
+          break;
+        case 'PageUp':
+          e.preventDefault();
+          set(value + step * 10);
+          break;
+        case 'PageDown':
+          e.preventDefault();
+          set(value - step * 10);
+          break;
+        case 'Home':
+          e.preventDefault();
+          set(min);
+          break;
+        case 'End':
+          e.preventDefault();
+          set(max);
+          break;
       }
     },
     [value, step, min, max, set],
@@ -96,7 +127,7 @@ export function SpinRow({
     <div
       className={[styles.row, disabled ? styles.disabled : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {leading && <span className={styles.leading}>{leading}</span>}
@@ -124,7 +155,10 @@ export function SpinRow({
           aria-hidden="true"
           disabled={disabled || value <= min}
           className={styles.spinBtn}
-          onClick={(e) => { e.stopPropagation(); set(value - step); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            set(value - step);
+          }}
         >
           −
         </button>
@@ -139,7 +173,10 @@ export function SpinRow({
           aria-hidden="true"
           disabled={disabled || value >= max}
           className={styles.spinBtn}
-          onClick={(e) => { e.stopPropagation(); set(value + step); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            set(value + step);
+          }}
         >
           +
         </button>

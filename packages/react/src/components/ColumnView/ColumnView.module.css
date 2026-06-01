@@ -124,19 +124,11 @@
 }
 
 .rowSelected {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-accent-color, #3584e4) 15%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 15%, transparent);
 }
 
 .rowSelected:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-accent-color, #3584e4) 22%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 22%, transparent);
 }
 
 /* ─── Cell ──────────────────────────────────────────────────────────────────── */

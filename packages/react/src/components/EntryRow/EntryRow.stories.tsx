@@ -1,13 +1,15 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { EntryRow } from "./EntryRow";
-import { BoxedList } from "../BoxedList";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+
+import { EntryRow } from './EntryRow';
 
 const meta: Meta<typeof EntryRow> = {
-  title: "Components/EntryRow",
+  title: 'Components/EntryRow',
   component: EntryRow,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -35,12 +37,12 @@ settings that require free-form text input.
     ),
   ],
   argTypes: {
-    title: { control: "text" },
-    disabled: { control: "boolean" },
+    title: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
   args: {
-    title: "Name",
-    defaultValue: "",
+    title: 'Name',
+    defaultValue: '',
   },
 };
 
@@ -65,7 +67,8 @@ export const InBoxedList: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Multiple `EntryRow` fields inside a `BoxedList`. The label floats when a field is focused or has content.",
+        story:
+          'Multiple `EntryRow` fields inside a `BoxedList`. The label floats when a field is focused or has content.',
       },
     },
   },
@@ -75,8 +78,8 @@ export const InBoxedList: Story = {
 
 export const Controlled: Story = {
   render: () => {
-    const [name, setName] = useState("Jane Smith");
-    const [email, setEmail] = useState("");
+    const [name, setName] = useState('Jane Smith');
+    const [email, setEmail] = useState('');
 
     return (
       <BoxedList>
@@ -88,7 +91,7 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Use `value` + `onValueChange` for controlled mode." },
+      description: { story: 'Use `value` + `onValueChange` for controlled mode.' },
     },
   },
 };
@@ -97,7 +100,7 @@ export const Controlled: Story = {
 
 export const WithTrailing: Story = {
   render: () => {
-    const [value, setValue] = useState("https://example.com");
+    const [value, setValue] = useState('https://example.com');
 
     return (
       <BoxedList>
@@ -123,7 +126,7 @@ export const WithTrailing: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `trailing` for action widgets like copy or clear buttons.",
+        story: 'Use `trailing` for action widgets like copy or clear buttons.',
       },
     },
   },

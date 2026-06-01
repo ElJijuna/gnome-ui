@@ -1,12 +1,11 @@
-/* eslint-disable */
-import type { IconDefinition } from "../types.ts";
+import type { IconDefinition } from '../types.ts';
 
 /** orientation-landscape-inverse-symbolic.svg (status/orientation-landscape-inverse) */
 export const OrientationLandscapeInverse: IconDefinition = {
-  viewBox: "0 0 16 16",
+  viewBox: '0 0 16 16',
   paths: [
-  {
-    d: "m 2.125 13.082031 c -0.613281 0 -1.113281 -0.5 -1.113281 -1.113281 v -7.847656 c 0 -0.617188 0.5 -1.113282 1.113281 -1.113282 h 11.738281 c 0.617188 0 1.117188 0.496094 1.117188 1.113282 v 7.847656 c 0 0.613281 -0.5 1.113281 -1.117188 1.113281 z m 5.84375 -3 l 4 -4.042969 h -8 z m 0 0"
-  }
-],
+    {
+      d: 'm 2.125 13.082031 c -0.613281 0 -1.113281 -0.5 -1.113281 -1.113281 v -7.847656 c 0 -0.617188 0.5 -1.113282 1.113281 -1.113282 h 11.738281 c 0.617188 0 1.117188 0.496094 1.117188 1.113282 v 7.847656 c 0 0.613281 -0.5 1.113281 -1.117188 1.113281 z m 5.84375 -3 l 4 -4.042969 h -8 z m 0 0',
+    },
+  ],
 };

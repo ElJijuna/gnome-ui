@@ -26,7 +26,10 @@
   .grid {
     --_gap: var(
       --dashboard-grid-gap-lg,
-      var(--dashboard-grid-gap-md, var(--dashboard-grid-gap-sm, var(--dashboard-grid-gap-xs, var(--gnome-space-3, 18px))))
+      var(
+        --dashboard-grid-gap-md,
+        var(--dashboard-grid-gap-sm, var(--dashboard-grid-gap-xs, var(--gnome-space-3, 18px)))
+      )
     );
   }
 }
@@ -37,7 +40,10 @@
       --dashboard-grid-gap-xl,
       var(
         --dashboard-grid-gap-lg,
-        var(--dashboard-grid-gap-md, var(--dashboard-grid-gap-sm, var(--dashboard-grid-gap-xs, var(--gnome-space-3, 18px))))
+        var(
+          --dashboard-grid-gap-md,
+          var(--dashboard-grid-gap-sm, var(--dashboard-grid-gap-xs, var(--gnome-space-3, 18px)))
+        )
       )
     );
   }
@@ -51,7 +57,10 @@
         --dashboard-grid-gap-xl,
         var(
           --dashboard-grid-gap-lg,
-          var(--dashboard-grid-gap-md, var(--dashboard-grid-gap-sm, var(--dashboard-grid-gap-xs, var(--gnome-space-3, 18px))))
+          var(
+            --dashboard-grid-gap-md,
+            var(--dashboard-grid-gap-sm, var(--dashboard-grid-gap-xs, var(--gnome-space-3, 18px)))
+          )
         )
       )
     );
@@ -80,63 +89,75 @@
 @media (min-width: 576px) {
   .responsive {
     grid-template-columns: repeat(
-      var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1)),
-      minmax(0, 1fr)
-    );
+        var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1)),
+        minmax(0, 1fr)
+      );
   }
 }
 
 @media (min-width: 768px) {
   .responsive {
     grid-template-columns: repeat(
-      var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1))),
-      minmax(0, 1fr)
-    );
+        var(
+          --dashboard-grid-columns-md,
+          var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1))
+        ),
+        minmax(0, 1fr)
+      );
   }
 }
 
 @media (min-width: 992px) {
   .responsive {
     grid-template-columns: repeat(
-      var(
-        --dashboard-grid-columns-lg,
-        var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1)))
-      ),
-      minmax(0, 1fr)
-    );
+        var(
+          --dashboard-grid-columns-lg,
+          var(
+            --dashboard-grid-columns-md,
+            var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1))
+          )
+        ),
+        minmax(0, 1fr)
+      );
   }
 }
 
 @media (min-width: 1200px) {
   .responsive {
     grid-template-columns: repeat(
-      var(
-        --dashboard-grid-columns-xl,
         var(
-          --dashboard-grid-columns-lg,
-          var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1)))
-        )
-      ),
-      minmax(0, 1fr)
-    );
+          --dashboard-grid-columns-xl,
+          var(
+            --dashboard-grid-columns-lg,
+            var(
+              --dashboard-grid-columns-md,
+              var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1))
+            )
+          )
+        ),
+        minmax(0, 1fr)
+      );
   }
 }
 
 @media (min-width: 1600px) {
   .responsive {
     grid-template-columns: repeat(
-      var(
-        --dashboard-grid-columns-xxl,
         var(
-          --dashboard-grid-columns-xl,
+          --dashboard-grid-columns-xxl,
           var(
-            --dashboard-grid-columns-lg,
-            var(--dashboard-grid-columns-md, var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1)))
+            --dashboard-grid-columns-xl,
+            var(
+              --dashboard-grid-columns-lg,
+              var(
+                --dashboard-grid-columns-md,
+                var(--dashboard-grid-columns-sm, var(--dashboard-grid-columns-xs, 1))
+              )
+            )
           )
-        )
-      ),
-      minmax(0, 1fr)
-    );
+        ),
+        minmax(0, 1fr)
+      );
   }
 }
 
@@ -149,19 +170,20 @@
 }
 
 @media (min-width: 576px) {
-  .item { --_span: var(--item-span-sm, var(--item-span-xs, 1)); }
+  .item {
+    --_span: var(--item-span-sm, var(--item-span-xs, 1));
+  }
 }
 
 @media (min-width: 768px) {
-  .item { --_span: var(--item-span-md, var(--item-span-sm, var(--item-span-xs, 1))); }
+  .item {
+    --_span: var(--item-span-md, var(--item-span-sm, var(--item-span-xs, 1)));
+  }
 }
 
 @media (min-width: 992px) {
   .item {
-    --_span: var(
-      --item-span-lg,
-      var(--item-span-md, var(--item-span-sm, var(--item-span-xs, 1)))
-    );
+    --_span: var(--item-span-lg, var(--item-span-md, var(--item-span-sm, var(--item-span-xs, 1))));
   }
 }
 

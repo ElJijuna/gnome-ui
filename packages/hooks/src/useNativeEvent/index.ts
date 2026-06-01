@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
-import { onNativeEvent } from "@gnome-ui/platform";
-import type { NativeEventHandler } from "@gnome-ui/platform";
+import type { NativeEventHandler } from '@gnome-ui/platform';
+import { onNativeEvent } from '@gnome-ui/platform';
+import { useEffect, useRef } from 'react';
 
 /**
  * Subscribe to a native event dispatched by the GJS host.
@@ -19,13 +19,11 @@ import type { NativeEventHandler } from "@gnome-ui/platform";
  *   setOpen(true);
  * });
  */
-export function useNativeEvent<T = unknown>(
-  type: string,
-  handler: NativeEventHandler<T>
-): void {
+export function useNativeEvent<T = unknown>(type: string, handler: NativeEventHandler<T>): void {
   // Keep a stable ref so the effect does not re-subscribe on every render
   // when the handler is defined inline.
   const handlerRef = useRef(handler);
+
   handlerRef.current = handler;
 
   useEffect(() => {

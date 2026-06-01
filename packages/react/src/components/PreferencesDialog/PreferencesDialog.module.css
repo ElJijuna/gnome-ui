@@ -17,8 +17,12 @@
 }
 
 @keyframes backdrop-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ─── Dialog card ───────────────────────────────────────────────────────────── */
@@ -65,7 +69,8 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--gnome-space-2, 12px);
-  padding: var(--gnome-space-2, 12px) var(--gnome-space-2, 12px) var(--gnome-space-2, 12px) var(--gnome-space-3, 16px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-2, 12px) var(--gnome-space-2, 12px)
+    var(--gnome-space-3, 16px);
   border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
   flex-shrink: 0;
 }
@@ -84,8 +89,9 @@
   font-size: 0.875rem;
   color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
   opacity: 0.6;
-  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
-              opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
   order: -1;
 }
 
@@ -124,8 +130,9 @@
   font-size: var(--gnome-font-size-body, 1rem);
   line-height: 1.5;
   width: 180px;
-  transition: border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
-              box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
 .searchInput::placeholder {
@@ -135,7 +142,8 @@
 .searchInput:focus {
   outline: none;
   border-color: var(--gnome-accent-color, #3584e4);
-  box-shadow: 0 0 0 var(--gnome-focus-ring-width, 3px) color-mix(in srgb, var(--gnome-accent-color, #3584e4) 30%, transparent);
+  box-shadow: 0 0 0 var(--gnome-focus-ring-width, 3px)
+    color-mix(in srgb, var(--gnome-accent-color, #3584e4) 30%, transparent);
 }
 
 /* ─── Body ──────────────────────────────────────────────────────────────────── */

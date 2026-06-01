@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./ButtonContent.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './ButtonContent.module.css';
 
 export interface ButtonContentProps extends HTMLAttributes<HTMLSpanElement> {
   /** Icon element placed before the label. */
@@ -10,7 +11,7 @@ export interface ButtonContentProps extends HTMLAttributes<HTMLSpanElement> {
    * Position of the icon relative to the label.
    * Defaults to `"start"`.
    */
-  iconPosition?: "start" | "end";
+  iconPosition?: 'start' | 'end';
 }
 
 /**
@@ -33,25 +34,27 @@ export interface ButtonContentProps extends HTMLAttributes<HTMLSpanElement> {
 export function ButtonContent({
   icon,
   label,
-  iconPosition = "start",
+  iconPosition = 'start',
   className,
   ...props
 }: ButtonContentProps) {
   return (
     <span
-      className={[
-        styles.content,
-        iconPosition === "end" ? styles.iconEnd : null,
-        className,
-      ].filter(Boolean).join(" ")}
+      className={[styles.content, iconPosition === 'end' ? styles.iconEnd : null, className]
+        .filter(Boolean)
+        .join(' ')}
       {...props}
     >
-      {icon && iconPosition === "start" && (
-        <span className={styles.icon} aria-hidden="true">{icon}</span>
+      {icon && iconPosition === 'start' && (
+        <span className={styles.icon} aria-hidden="true">
+          {icon}
+        </span>
       )}
       <span className={styles.label}>{label}</span>
-      {icon && iconPosition === "end" && (
-        <span className={styles.icon} aria-hidden="true">{icon}</span>
+      {icon && iconPosition === 'end' && (
+        <span className={styles.icon} aria-hidden="true">
+          {icon}
+        </span>
       )}
     </span>
   );

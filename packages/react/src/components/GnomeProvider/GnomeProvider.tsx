@@ -1,13 +1,20 @@
-import { useEffect, useMemo, useReducer, type ReactNode } from "react";
+import { type ReactNode, useEffect, useMemo, useReducer } from 'react';
+
 import {
-  GnomeContext,
   type GnomeAccentColor,
   type GnomeColorScheme,
+  GnomeContext,
   type GnomeDir,
-} from "./GnomeContext";
+} from './GnomeContext';
 
 const NAMED_ACCENT_COLORS = new Set<string>([
-  "blue", "green", "yellow", "orange", "red", "purple", "brown",
+  'blue',
+  'green',
+  'yellow',
+  'orange',
+  'red',
+  'purple',
+  'brown',
 ]);
 
 export interface GnomeProviderProps {
@@ -46,67 +53,79 @@ export interface GnomeProviderProps {
 }
 
 function getSystemIsDark(): boolean {
-  return typeof window !== "undefined" &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
 /** Provides locale, text direction, color scheme, and accent color to all descendant gnome-ui components. */
 export function GnomeProvider({
   locale,
-  dir = "ltr",
+  dir = 'ltr',
   numberFormat,
   dateTimeFormat,
-  colorScheme = "system",
-  accentColor = "blue",
+  colorScheme = 'system',
+  accentColor = 'blue',
   children,
 }: GnomeProviderProps) {
   const [, forceUpdate] = useReducer((n: number) => n + 1, 0);
 
   useEffect(() => {
-    if (colorScheme !== "system") return;
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    mq.addEventListener("change", forceUpdate);
-    return () => mq.removeEventListener("change", forceUpdate);
-  }, [colorScheme]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (colorScheme === "system") {
-      root.removeAttribute("data-theme");
-    } else {
-      root.setAttribute("data-theme", colorScheme);
-    }
-  }, [colorScheme]);
-
-  const resolvedColorScheme = colorScheme === "system"
-    ? (getSystemIsDark() ? "dark" : "light")
-    : colorScheme;
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (accentColor === "blue") {
-      root.style.removeProperty("--gnome-accent-color");
-      root.style.removeProperty("--gnome-accent-bg-color");
+    if (colorScheme !== 'system') {
       return;
     }
-    if (NAMED_ACCENT_COLORS.has(accentColor)) {
-      const shade = resolvedColorScheme === "dark" ? "2" : "3";
-      root.style.setProperty("--gnome-accent-color", `var(--gnome-${accentColor}-${shade})`);
-      root.style.setProperty("--gnome-accent-bg-color", `var(--gnome-${accentColor}-3)`);
+
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+    mq.addEventListener('change', forceUpdate);
+
+    return () => mq.removeEventListener('change', forceUpdate);
+  }, [colorScheme]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (colorScheme === 'system') {
+      root.removeAttribute('data-theme');
     } else {
-      root.style.setProperty("--gnome-accent-color", accentColor);
-      root.style.setProperty("--gnome-accent-bg-color", accentColor);
+      root.setAttribute('data-theme', colorScheme);
+    }
+  }, [colorScheme]);
+
+  const resolvedColorScheme =
+    colorScheme === 'system' ? (getSystemIsDark() ? 'dark' : 'light') : colorScheme;
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (accentColor === 'blue') {
+      root.style.removeProperty('--gnome-accent-color');
+      root.style.removeProperty('--gnome-accent-bg-color');
+
+      return;
+    }
+
+    if (NAMED_ACCENT_COLORS.has(accentColor)) {
+      const shade = resolvedColorScheme === 'dark' ? '2' : '3';
+
+      root.style.setProperty('--gnome-accent-color', `var(--gnome-${accentColor}-${shade})`);
+      root.style.setProperty('--gnome-accent-bg-color', `var(--gnome-${accentColor}-3)`);
+    } else {
+      root.style.setProperty('--gnome-accent-color', accentColor);
+      root.style.setProperty('--gnome-accent-bg-color', accentColor);
     }
   }, [accentColor, resolvedColorScheme]);
 
   const value = useMemo(
-    () => ({ locale, dir, numberFormat, dateTimeFormat, colorScheme, resolvedColorScheme, accentColor }),
+    () => ({
+      locale,
+      dir,
+      numberFormat,
+      dateTimeFormat,
+      colorScheme,
+      resolvedColorScheme,
+      accentColor,
+    }),
     [locale, dir, numberFormat, dateTimeFormat, colorScheme, resolvedColorScheme, accentColor],
   );
 
-  return (
-    <GnomeContext.Provider value={value}>
-      {children}
-    </GnomeContext.Provider>
-  );
+  return <GnomeContext.Provider value={value}>{children}</GnomeContext.Provider>;
 }

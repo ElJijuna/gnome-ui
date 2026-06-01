@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
 /** GNOME HIG standard spacing values (matches GtkBox spacing tokens). */
 export type BoxSpacing = 3 | 6 | 12 | 18 | 24 | 32 | 48;
@@ -6,15 +6,15 @@ export type BoxSpacing = 3 | 6 | 12 | 18 | 24 | 32 | 48;
 /** Alias of `BoxSpacing` for use as a padding scale. */
 export type BoxPadding = BoxSpacing;
 
-export type BoxOrientation = "horizontal" | "vertical";
-export type BoxAlign = "start" | "center" | "end" | "stretch" | "baseline";
+export type BoxOrientation = 'horizontal' | 'vertical';
+export type BoxAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
 export type BoxJustify =
-  | "start"
-  | "center"
-  | "end"
-  | "space-between"
-  | "space-around"
-  | "space-evenly";
+  | 'start'
+  | 'center'
+  | 'end'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly';
 
 export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -81,26 +81,27 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://developer.gnome.org/hig/guidelines/spacing.html
  */
 export function Box({
-  orientation = "vertical",
+  orientation = 'vertical',
   spacing = 6,
   align,
-  justify = "start",
+  justify = 'start',
   padding,
   className,
   style,
   children,
   ...props
 }: BoxProps) {
-  const defaultAlign: BoxAlign =
-    orientation === "horizontal" ? "center" : "stretch";
+  const defaultAlign: BoxAlign = orientation === 'horizontal' ? 'center' : 'stretch';
 
   const resolvedStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: orientation === "horizontal" ? "row" : "column",
-    gap: typeof spacing === "number" ? `${spacing}px` : spacing,
+    display: 'flex',
+    flexDirection: orientation === 'horizontal' ? 'row' : 'column',
+    gap: typeof spacing === 'number' ? `${spacing}px` : spacing,
     alignItems: align ?? defaultAlign,
     justifyContent: justify,
-    ...(padding !== undefined && { padding: typeof padding === "number" ? `${padding}px` : padding }),
+    ...(padding !== undefined && {
+      padding: typeof padding === 'number' ? `${padding}px` : padding,
+    }),
     ...style,
   };
 

@@ -1,14 +1,15 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { ColumnView } from "./ColumnView";
-import type { ColumnDef, ColumnViewSortState, SortDirection } from "./ColumnView";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import type { ColumnDef, ColumnViewSortState, SortDirection } from './ColumnView';
+import { ColumnView } from './ColumnView';
 
 const meta: Meta<typeof ColumnView> = {
-  title: "Data Display/ColumnView",
+  title: 'Data Display/ColumnView',
   component: ColumnView,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -39,44 +40,40 @@ interface FileRow {
 }
 
 const FILES: FileRow[] = [
-  { id: 1, name: "Documents", type: "Folder", size: "—", modified: "2 days ago" },
-  { id: 2, name: "Downloads", type: "Folder", size: "—", modified: "Today" },
-  { id: 3, name: "Pictures", type: "Folder", size: "—", modified: "Last week" },
-  { id: 4, name: "Music", type: "Folder", size: "—", modified: "1 month ago" },
-  { id: 5, name: "report.pdf", type: "PDF", size: "1.2 MB", modified: "Yesterday" },
-  { id: 6, name: "photo.jpg", type: "Image", size: "3.8 MB", modified: "3 days ago" },
-  { id: 7, name: "notes.txt", type: "Text", size: "4 KB", modified: "Today" },
-  { id: 8, name: "backup.zip", type: "Archive", "size": "48 MB", modified: "Last month" },
+  { id: 1, name: 'Documents', type: 'Folder', size: '—', modified: '2 days ago' },
+  { id: 2, name: 'Downloads', type: 'Folder', size: '—', modified: 'Today' },
+  { id: 3, name: 'Pictures', type: 'Folder', size: '—', modified: 'Last week' },
+  { id: 4, name: 'Music', type: 'Folder', size: '—', modified: '1 month ago' },
+  { id: 5, name: 'report.pdf', type: 'PDF', size: '1.2 MB', modified: 'Yesterday' },
+  { id: 6, name: 'photo.jpg', type: 'Image', size: '3.8 MB', modified: '3 days ago' },
+  { id: 7, name: 'notes.txt', type: 'Text', size: '4 KB', modified: 'Today' },
+  { id: 8, name: 'backup.zip', type: 'Archive', size: '48 MB', modified: 'Last month' },
 ];
 
 const FILE_COLUMNS: ColumnDef<FileRow>[] = [
-  { id: "name", header: "Name", cell: (r) => r.name, sortable: true, width: "40%" },
-  { id: "type", header: "Type", cell: (r) => r.type, sortable: true },
-  { id: "size", header: "Size", cell: (r) => r.size, align: "end" },
-  { id: "modified", header: "Modified", cell: (r) => r.modified, sortable: true },
+  { id: 'name', header: 'Name', cell: (r) => r.name, sortable: true, width: '40%' },
+  { id: 'type', header: 'Type', cell: (r) => r.type, sortable: true },
+  { id: 'size', header: 'Size', cell: (r) => r.size, align: 'end' },
+  { id: 'modified', header: 'Modified', cell: (r) => r.modified, sortable: true },
 ];
 
 export const Default: Story = {
   render: () => (
-    <ColumnView
-      columns={FILE_COLUMNS}
-      rows={FILES}
-      rowKey={(r) => r.id}
-      ariaLabel="Files"
-    />
+    <ColumnView columns={FILE_COLUMNS} rows={FILES} rowKey={(r) => r.id} ariaLabel="Files" />
   ),
 };
 
 export const WithSort: Story = {
   render: () => {
     const [sort, setSort] = useState<ColumnViewSortState>({
-      columnId: "name",
-      direction: "asc",
+      columnId: 'name',
+      direction: 'asc',
     });
 
     const sorted = [...FILES].sort((a, b) => {
-      const dir = sort.direction === "asc" ? 1 : -1;
+      const dir = sort.direction === 'asc' ? 1 : -1;
       const key = sort.columnId as keyof FileRow;
+
       return String(a[key]).localeCompare(String(b[key])) * dir;
     });
 
@@ -95,7 +92,7 @@ export const WithSort: Story = {
     docs: {
       description: {
         story:
-          "Controlled sort state. Click a column header to sort; click again to toggle direction.",
+          'Controlled sort state. Click a column header to sort; click again to toggle direction.',
       },
     },
   },
@@ -104,6 +101,7 @@ export const WithSort: Story = {
 export const SingleSelection: Story = {
   render: () => {
     const [selected, setSelected] = useState<(string | number)[]>([]);
+
     return (
       <ColumnView
         columns={FILE_COLUMNS}
@@ -120,7 +118,7 @@ export const SingleSelection: Story = {
     docs: {
       description: {
         story:
-          "Click a row to select it; click again to deselect. Use ↑/↓ to navigate, Space/Enter to toggle.",
+          'Click a row to select it; click again to deselect. Use ↑/↓ to navigate, Space/Enter to toggle.',
       },
     },
   },
@@ -129,6 +127,7 @@ export const SingleSelection: Story = {
 export const MultipleSelection: Story = {
   render: () => {
     const [selected, setSelected] = useState<(string | number)[]>([2, 5]);
+
     return (
       <ColumnView
         columns={FILE_COLUMNS}
@@ -145,7 +144,7 @@ export const MultipleSelection: Story = {
     docs: {
       description: {
         story:
-          "Checkbox column added automatically. Header checkbox selects/deselects all rows and shows indeterminate state for partial selection.",
+          'Checkbox column added automatically. Header checkbox selects/deselects all rows and shows indeterminate state for partial selection.',
       },
     },
   },
@@ -153,12 +152,13 @@ export const MultipleSelection: Story = {
 
 export const FixedHeight: Story = {
   render: () => {
-    const [sort, setSort] = useState<ColumnViewSortState>({ columnId: "name", direction: "asc" });
+    const [sort, setSort] = useState<ColumnViewSortState>({ columnId: 'name', direction: 'asc' });
     const [selected, setSelected] = useState<(string | number)[]>([]);
 
     const sorted = [...FILES].sort((a, b) => {
-      const dir = sort.direction === "asc" ? 1 : -1;
+      const dir = sort.direction === 'asc' ? 1 : -1;
       const key = sort.columnId as keyof FileRow;
+
       return String(a[key]).localeCompare(String(b[key])) * dir;
     });
 
@@ -181,7 +181,7 @@ export const FixedHeight: Story = {
     docs: {
       description: {
         story:
-          "Fixed `height` enables vertical scroll with a sticky header. Combines sort and single selection.",
+          'Fixed `height` enables vertical scroll with a sticky header. Combines sort and single selection.',
       },
     },
   },
@@ -189,16 +189,11 @@ export const FixedHeight: Story = {
 
 export const EmptyState: Story = {
   render: () => (
-    <ColumnView
-      columns={FILE_COLUMNS}
-      rows={[]}
-      rowKey={(r) => r.id}
-      ariaLabel="Files — empty"
-    />
+    <ColumnView columns={FILE_COLUMNS} rows={[]} rowKey={(r) => r.id} ariaLabel="Files — empty" />
   ),
   parameters: {
     docs: {
-      description: { story: "When `rows` is empty the default \"No items\" label is shown." },
+      description: { story: 'When `rows` is empty the default "No items" label is shown.' },
     },
   },
 };
@@ -211,9 +206,7 @@ export const CustomEmptyState: Story = {
       rowKey={(r) => r.id}
       ariaLabel="Search results"
       emptyState={
-        <span style={{ fontStyle: "italic", opacity: 0.6 }}>
-          No files match your search.
-        </span>
+        <span style={{ fontStyle: 'italic', opacity: 0.6 }}>No files match your search.</span>
       }
     />
   ),

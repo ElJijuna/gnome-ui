@@ -1,2 +1,2 @@
-export { ShortcutsDialog } from "./ShortcutsDialog";
-export type { ShortcutsDialogProps, ShortcutsSection, ShortcutEntry } from "./ShortcutsDialog";
+export type { ShortcutEntry, ShortcutsDialogProps, ShortcutsSection } from './ShortcutsDialog';
+export { ShortcutsDialog } from './ShortcutsDialog';

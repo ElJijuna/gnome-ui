@@ -6,11 +6,7 @@
   gap: 2px;
   padding: 3px;
   border-radius: var(--gnome-radius-pill);
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-headerbar-bg-color, #ebebeb) 75%,
-    black 25%
-  );
+  background-color: color-mix(in srgb, var(--gnome-headerbar-bg-color, #ebebeb) 75%, black 25%);
 }
 
 /* ─── Item ─────────────────────────────────────────────────────────────────── */
@@ -39,7 +35,7 @@
 
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
-    color            var(--gnome-duration-fast) var(--gnome-easing-default);
+    color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
 .item:hover:not(:disabled):not(.active) {
@@ -58,9 +54,9 @@
 .item:focus-visible {
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px)
-      color-mix(in srgb, var(--gnome-headerbar-bg-color, #ebebeb) 75%, black 25%),
+    color-mix(in srgb, var(--gnome-headerbar-bg-color, #ebebeb) 75%, black 25%),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-      var(--gnome-focus-ring-color, #3584e4);
+    var(--gnome-focus-ring-color, #3584e4);
 }
 
 /* ─── Active item ──────────────────────────────────────────────────────────── */
@@ -89,11 +85,7 @@
 
 @media (prefers-color-scheme: dark) {
   .switcher {
-    background-color: color-mix(
-      in srgb,
-      var(--gnome-headerbar-bg-color, #303030) 70%,
-      black 30%
-    );
+    background-color: color-mix(in srgb, var(--gnome-headerbar-bg-color, #303030) 70%, black 30%);
   }
 
   .item:hover:not(:disabled):not(.active) {

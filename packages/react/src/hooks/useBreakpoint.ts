@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
 /**
  * GNOME / libadwaita canonical breakpoints (in CSS px, assuming 1 sp = 1 px at 1× density).
@@ -45,23 +45,26 @@ export interface BreakpointState {
  * // isMedium → true when viewport ≤ 550 px (use ViewSwitcherBar instead)
  */
 export function useBreakpoint(): BreakpointState {
-  const getState = (): BreakpointState => {
-    const width = typeof window !== "undefined" ? window.innerWidth : 1280;
+  const getState = useCallback((): BreakpointState => {
+    const width = typeof window !== 'undefined' ? window.innerWidth : 1280;
+
     return {
       isNarrow: width <= GNOME_BREAKPOINTS.narrow,
       isMedium: width <= GNOME_BREAKPOINTS.medium,
-      isWide:   width <= GNOME_BREAKPOINTS.wide,
+      isWide: width <= GNOME_BREAKPOINTS.wide,
       width,
     };
-  };
+  }, []);
 
   const [state, setState] = useState<BreakpointState>(getState);
 
   useEffect(() => {
     const handler = () => setState(getState());
-    window.addEventListener("resize", handler, { passive: true });
-    return () => window.removeEventListener("resize", handler);
-  }, []);
+
+    window.addEventListener('resize', handler, { passive: true });
+
+    return () => window.removeEventListener('resize', handler);
+  }, [getState]);
 
   return state;
 }

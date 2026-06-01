@@ -1,25 +1,36 @@
-import { useState, useRef } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
 import {
-  GoHome, Search, Settings, Star, Delete,
-  ViewMore, MediaPlay, Share, Add, Applications, DocumentOpen,
-} from "@gnome-ui/icons";
-import { Sidebar } from "./Sidebar";
-import { SidebarSection } from "./SidebarSection";
-import type { SidebarSectionHandle } from "./SidebarSection";
-import { SidebarItem } from "./SidebarItem";
-import { Badge } from "../Badge";
-import { HeaderBar } from "../HeaderBar";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
-import { Text } from "../Text";
+  Add,
+  Applications,
+  Delete,
+  DocumentOpen,
+  GoHome,
+  MediaPlay,
+  Search,
+  Settings,
+  Share,
+  Star,
+  ViewMore,
+} from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useRef, useState } from 'react';
+
+import { Badge } from '../Badge';
+import { Button } from '../Button';
+import { HeaderBar } from '../HeaderBar';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+
+import { Sidebar } from './Sidebar';
+import { SidebarItem } from './SidebarItem';
+import type { SidebarSectionHandle } from './SidebarSection';
+import { SidebarSection } from './SidebarSection';
 
 const meta: Meta<typeof Sidebar> = {
-  title: "Components/Sidebar",
+  title: 'Components/Sidebar',
   component: Sidebar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -40,15 +51,15 @@ All previous \`Sidebar\` / \`SidebarItem\` usage is fully backward compatible.
     },
   },
   argTypes: {
-    collapsed:  { control: "boolean" },
-    searchable: { control: "boolean" },
+    collapsed: { control: 'boolean' },
+    searchable: { control: 'boolean' },
     mode: {
-      control: "select",
-      options: ["sidebar", "page"],
+      control: 'select',
+      options: ['sidebar', 'page'],
     },
     variant: {
-      control: "select",
-      options: ["classic", "blue", "green", "red", "yellow", "black", "transparent", "blurred"],
+      control: 'select',
+      options: ['classic', 'blue', 'green', 'red', 'yellow', 'black', 'transparent', 'blurred'],
     },
   },
   args: {
@@ -66,9 +77,9 @@ export const Default: Story = {
   render: (args) => (
     <Sidebar {...args} style={{ height: 320 }}>
       <SidebarSection>
-        <SidebarItem icon={GoHome}   label="Home"     active />
-        <SidebarItem icon={Star}     label="Starred" />
-        <SidebarItem icon={Search}   label="Search" />
+        <SidebarItem icon={GoHome} label="Home" active />
+        <SidebarItem icon={Star} label="Starred" />
+        <SidebarItem icon={Search} label="Search" />
         <SidebarItem icon={Settings} label="Settings" />
       </SidebarSection>
     </Sidebar>
@@ -79,22 +90,65 @@ export const Default: Story = {
 
 export const WithSections: Story = {
   render: function WithSectionsStory() {
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
       <Sidebar style={{ height: 400 }}>
         <SidebarSection title="Mailboxes">
-          <SidebarItem icon={GoHome}    label="Inbox"   active={active === "inbox"}   onClick={() => setActive("inbox")}   suffix={<Badge variant="accent">12</Badge>} />
-          <SidebarItem icon={Share}     label="Sent"    active={active === "sent"}    onClick={() => setActive("sent")} />
-          <SidebarItem icon={Delete}    label="Trash"   active={active === "trash"}   onClick={() => setActive("trash")}  suffix={<Badge variant="neutral">4</Badge>} />
+          <SidebarItem
+            icon={GoHome}
+            label="Inbox"
+            active={active === 'inbox'}
+            onClick={() => setActive('inbox')}
+            suffix={<Badge variant="accent">12</Badge>}
+          />
+          <SidebarItem
+            icon={Share}
+            label="Sent"
+            active={active === 'sent'}
+            onClick={() => setActive('sent')}
+          />
+          <SidebarItem
+            icon={Delete}
+            label="Trash"
+            active={active === 'trash'}
+            onClick={() => setActive('trash')}
+            suffix={<Badge variant="neutral">4</Badge>}
+          />
         </SidebarSection>
         <SidebarSection title="Tags">
-          <SidebarItem icon={Star}      label="Work"     active={active === "work"}    onClick={() => setActive("work")} />
-          <SidebarItem icon={Star}      label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
-          <SidebarItem icon={Star}      label="Finance"  active={active === "finance"} onClick={() => setActive("finance")} />
+          <SidebarItem
+            icon={Star}
+            label="Work"
+            active={active === 'work'}
+            onClick={() => setActive('work')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Personal"
+            active={active === 'personal'}
+            onClick={() => setActive('personal')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Finance"
+            active={active === 'finance'}
+            onClick={() => setActive('finance')}
+          />
         </SidebarSection>
         <SidebarSection title="Accounts">
-          <SidebarItem icon={Settings}  label="alice@example.com" active={active === "alice"} onClick={() => setActive("alice")} />
-          <SidebarItem icon={Settings}  label="bob@example.com"   active={active === "bob"}   onClick={() => setActive("bob")} />
+          <SidebarItem
+            icon={Settings}
+            label="alice@example.com"
+            active={active === 'alice'}
+            onClick={() => setActive('alice')}
+          />
+          <SidebarItem
+            icon={Settings}
+            label="bob@example.com"
+            active={active === 'bob'}
+            onClick={() => setActive('bob')}
+          />
         </SidebarSection>
       </Sidebar>
     );
@@ -108,13 +162,27 @@ export const WithSuffix: Story = {
   render: () => (
     <Sidebar style={{ height: 320 }}>
       <SidebarSection>
-        <SidebarItem icon={GoHome}   label="Inbox"    active suffix={<Badge variant="accent">12</Badge>} />
-        <SidebarItem icon={Star}     label="Starred"         suffix={<Badge variant="neutral">4</Badge>} />
-        <SidebarItem icon={MediaPlay} label="Podcasts"       suffix={
-          <Button variant="flat" shape="circular" aria-label="New episode" style={{ width: 24, height: 24, minWidth: 0 }}>
-            <Icon icon={Add} size="sm" aria-hidden />
-          </Button>
-        } />
+        <SidebarItem
+          icon={GoHome}
+          label="Inbox"
+          active
+          suffix={<Badge variant="accent">12</Badge>}
+        />
+        <SidebarItem icon={Star} label="Starred" suffix={<Badge variant="neutral">4</Badge>} />
+        <SidebarItem
+          icon={MediaPlay}
+          label="Podcasts"
+          suffix={
+            <Button
+              variant="flat"
+              shape="circular"
+              aria-label="New episode"
+              style={{ width: 24, height: 24, minWidth: 0 }}
+            >
+              <Icon icon={Add} size="sm" aria-hidden />
+            </Button>
+          }
+        />
         <SidebarItem icon={Settings} label="Settings" />
       </SidebarSection>
     </Sidebar>
@@ -128,9 +196,9 @@ export const WithTooltips: Story = {
   render: () => (
     <Sidebar style={{ height: 280, width: 52 }}>
       <SidebarSection>
-        <SidebarItem icon={GoHome}   label="" tooltip="Home"     active />
-        <SidebarItem icon={Search}   label="" tooltip="Search" />
-        <SidebarItem icon={Star}     label="" tooltip="Starred" />
+        <SidebarItem icon={GoHome} label="" tooltip="Home" active />
+        <SidebarItem icon={Search} label="" tooltip="Search" />
+        <SidebarItem icon={Star} label="" tooltip="Starred" />
         <SidebarItem icon={Settings} label="" tooltip="Settings" />
       </SidebarSection>
     </Sidebar>
@@ -138,7 +206,7 @@ export const WithTooltips: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Icon-only sidebar (narrow width). Hover to see the tooltip." },
+      description: { story: 'Icon-only sidebar (narrow width). Hover to see the tooltip.' },
     },
   },
 };
@@ -147,33 +215,52 @@ export const WithTooltips: Story = {
 
 export const WithContextMenu: Story = {
   render: function ContextMenuStory() {
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState('home');
+
     return (
-      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
         <Sidebar style={{ height: 280 }}>
           <SidebarSection>
             <SidebarItem
-              icon={GoHome} label="Home" active={active === "home"} onClick={() => setActive("home")}
+              icon={GoHome}
+              label="Home"
+              active={active === 'home'}
+              onClick={() => setActive('home')}
               menuItems={[
-                { label: "Open in new window", onClick: () => alert("Open in new window") },
-                { label: "Add to favourites",  onClick: () => alert("Add to favourites") },
+                { label: 'Open in new window', onClick: () => alert('Open in new window') },
+                { label: 'Add to favourites', onClick: () => alert('Add to favourites') },
               ]}
             />
             <SidebarItem
-              icon={Star} label="Documents" active={active === "docs"} onClick={() => setActive("docs")}
+              icon={Star}
+              label="Documents"
+              active={active === 'docs'}
+              onClick={() => setActive('docs')}
               menuItems={[
-                { label: "Rename",  onClick: () => alert("Rename") },
-                { label: "Share",   onClick: () => alert("Share") },
-                { label: "Delete",  onClick: () => alert("Delete"), destructive: true },
+                { label: 'Rename', onClick: () => alert('Rename') },
+                { label: 'Share', onClick: () => alert('Share') },
+                { label: 'Delete', onClick: () => alert('Delete'), destructive: true },
               ]}
             />
             <SidebarItem
-              icon={Search} label="Search" active={active === "search"} onClick={() => setActive("search")}
+              icon={Search}
+              label="Search"
+              active={active === 'search'}
+              onClick={() => setActive('search')}
               menuItems={[
-                { label: "Clear history", onClick: () => alert("Clear history"), destructive: true },
+                {
+                  label: 'Clear history',
+                  onClick: () => alert('Clear history'),
+                  destructive: true,
+                },
               ]}
             />
-            <SidebarItem icon={Settings} label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+            <SidebarItem
+              icon={Settings}
+              label="Settings"
+              active={active === 'settings'}
+              onClick={() => setActive('settings')}
+            />
           </SidebarSection>
         </Sidebar>
         <Text variant="caption" color="dim" style={{ paddingTop: 12 }}>
@@ -190,20 +277,54 @@ export const WithContextMenu: Story = {
 export const Collapsible: Story = {
   render: function CollapsibleStory() {
     const [collapsed, setCollapsed] = useState(false);
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState('home');
+
     return (
-      <div style={{ display: "flex", height: 320, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden" }}>
-        <Sidebar collapsed={collapsed} style={{ height: "100%" }}>
+      <div
+        style={{
+          display: 'flex',
+          height: 320,
+          border: '1px solid rgba(0,0,0,0.1)',
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
+        <Sidebar collapsed={collapsed} style={{ height: '100%' }}>
           <SidebarSection>
-            <SidebarItem icon={GoHome}    label="Home"     active={active === "home"}     onClick={() => setActive("home")} />
-            <SidebarItem icon={Star}      label="Starred"  active={active === "starred"}  onClick={() => setActive("starred")}  suffix={<Badge variant="accent">3</Badge>} />
-            <SidebarItem icon={Search}    label="Search"   active={active === "search"}   onClick={() => setActive("search")} />
-            <SidebarItem icon={Settings}  label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+            <SidebarItem
+              icon={GoHome}
+              label="Home"
+              active={active === 'home'}
+              onClick={() => setActive('home')}
+            />
+            <SidebarItem
+              icon={Star}
+              label="Starred"
+              active={active === 'starred'}
+              onClick={() => setActive('starred')}
+              suffix={<Badge variant="accent">3</Badge>}
+            />
+            <SidebarItem
+              icon={Search}
+              label="Search"
+              active={active === 'search'}
+              onClick={() => setActive('search')}
+            />
+            <SidebarItem
+              icon={Settings}
+              label="Settings"
+              active={active === 'settings'}
+              onClick={() => setActive('settings')}
+            />
           </SidebarSection>
         </Sidebar>
-        <main style={{ flex: 1, padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
-          <Button variant="flat" onClick={() => setCollapsed((v) => !v)} style={{ alignSelf: "flex-start" }}>
-            {collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        <main style={{ flex: 1, padding: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <Button
+            variant="flat"
+            onClick={() => setCollapsed((v) => !v)}
+            style={{ alignSelf: 'flex-start' }}
+          >
+            {collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           </Button>
           <Text variant="caption" color="dim">
             Active: <strong>{active}</strong>
@@ -216,7 +337,8 @@ export const Collapsible: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Toggle `collapsed` to switch between full and icon-only (rail) mode. Tooltips appear automatically on hover when collapsed.",
+        story:
+          'Toggle `collapsed` to switch between full and icon-only (rail) mode. Tooltips appear automatically on hover when collapsed.',
       },
     },
   },
@@ -226,19 +348,56 @@ export const Collapsible: Story = {
 
 export const Searchable: Story = {
   render: function SearchableStory() {
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
       <Sidebar style={{ height: 380 }} searchable>
         <SidebarSection title="Mailboxes">
-          <SidebarItem icon={GoHome}   label="Inbox"    active={active === "inbox"}    onClick={() => setActive("inbox")}   suffix={<Badge variant="accent">12</Badge>} />
-          <SidebarItem icon={Share}    label="Sent"     active={active === "sent"}     onClick={() => setActive("sent")} />
-          <SidebarItem icon={Delete}   label="Trash"    active={active === "trash"}    onClick={() => setActive("trash")} />
-          <SidebarItem icon={Settings} label="Drafts"   active={active === "drafts"}   onClick={() => setActive("drafts")} />
+          <SidebarItem
+            icon={GoHome}
+            label="Inbox"
+            active={active === 'inbox'}
+            onClick={() => setActive('inbox')}
+            suffix={<Badge variant="accent">12</Badge>}
+          />
+          <SidebarItem
+            icon={Share}
+            label="Sent"
+            active={active === 'sent'}
+            onClick={() => setActive('sent')}
+          />
+          <SidebarItem
+            icon={Delete}
+            label="Trash"
+            active={active === 'trash'}
+            onClick={() => setActive('trash')}
+          />
+          <SidebarItem
+            icon={Settings}
+            label="Drafts"
+            active={active === 'drafts'}
+            onClick={() => setActive('drafts')}
+          />
         </SidebarSection>
         <SidebarSection title="Tags">
-          <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")} />
-          <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
-          <SidebarItem icon={Star} label="Finance"  active={active === "finance"}  onClick={() => setActive("finance")} />
+          <SidebarItem
+            icon={Star}
+            label="Work"
+            active={active === 'work'}
+            onClick={() => setActive('work')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Personal"
+            active={active === 'personal'}
+            onClick={() => setActive('personal')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Finance"
+            active={active === 'finance'}
+            onClick={() => setActive('finance')}
+          />
         </SidebarSection>
       </Sidebar>
     );
@@ -247,7 +406,8 @@ export const Searchable: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Add `searchable` to render a built-in search bar. Items are filtered by label as you type. When no items match, a status page is shown.",
+        story:
+          'Add `searchable` to render a built-in search bar. Items are filtered by label as you type. When no items match, a status page is shown.',
       },
     },
   },
@@ -257,20 +417,48 @@ export const Searchable: Story = {
 
 export const AdaptiveMode: Story = {
   render: function AdaptiveModeStory() {
-    const [mode, setMode] = useState<"sidebar" | "page">("sidebar");
-    const [active, setActive] = useState("home");
+    const [mode, setMode] = useState<'sidebar' | 'page'>('sidebar');
+    const [active, setActive] = useState('home');
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        <div style={{ display: "flex", gap: 8 }}>
-          <Button variant={mode === "sidebar" ? "suggested" : "flat"} onClick={() => setMode("sidebar")}>sidebar</Button>
-          <Button variant={mode === "page" ? "suggested" : "flat"} onClick={() => setMode("page")}>page</Button>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Button
+            variant={mode === 'sidebar' ? 'suggested' : 'flat'}
+            onClick={() => setMode('sidebar')}
+          >
+            sidebar
+          </Button>
+          <Button variant={mode === 'page' ? 'suggested' : 'flat'} onClick={() => setMode('page')}>
+            page
+          </Button>
         </div>
         <Sidebar mode={mode} style={{ height: 280 }}>
           <SidebarSection>
-            <SidebarItem icon={GoHome}    label="Home"     active={active === "home"}     onClick={() => setActive("home")} />
-            <SidebarItem icon={Star}      label="Starred"  active={active === "starred"}  onClick={() => setActive("starred")} />
-            <SidebarItem icon={Search}    label="Search"   active={active === "search"}   onClick={() => setActive("search")} />
-            <SidebarItem icon={Settings}  label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+            <SidebarItem
+              icon={GoHome}
+              label="Home"
+              active={active === 'home'}
+              onClick={() => setActive('home')}
+            />
+            <SidebarItem
+              icon={Star}
+              label="Starred"
+              active={active === 'starred'}
+              onClick={() => setActive('starred')}
+            />
+            <SidebarItem
+              icon={Search}
+              label="Search"
+              active={active === 'search'}
+              onClick={() => setActive('search')}
+            />
+            <SidebarItem
+              icon={Settings}
+              label="Settings"
+              active={active === 'settings'}
+              onClick={() => setActive('settings')}
+            />
           </SidebarSection>
         </Sidebar>
       </div>
@@ -280,7 +468,8 @@ export const AdaptiveMode: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Toggle `mode` between `\"sidebar\"` (fixed panel) and `\"page\"` (full-width boxed list). When `mode` is omitted, the sidebar auto-switches to `\"page\"` at ≤ 400 sp.",
+        story:
+          'Toggle `mode` between `"sidebar"` (fixed panel) and `"page"` (full-width boxed list). When `mode` is omitted, the sidebar auto-switches to `"page"` at ≤ 400 sp.',
       },
     },
   },
@@ -291,36 +480,57 @@ export const AdaptiveMode: Story = {
 export const DropTargets: Story = {
   render: function DropTargetsStory() {
     const [lastDrop, setLastDrop] = useState<string | null>(null);
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
-      <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+      <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
         <Sidebar style={{ height: 280 }}>
           <SidebarSection title="Mailboxes">
-            <SidebarItem icon={GoHome}  label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")}
-              onDrop={() => setLastDrop("Inbox")} acceptTypes={["text/plain"]} />
-            <SidebarItem icon={Share}   label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")}
-              onDrop={() => setLastDrop("Sent")}  acceptTypes={["text/plain"]} />
-            <SidebarItem icon={Delete}  label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")}
-              onDrop={() => setLastDrop("Trash")} acceptTypes={["text/plain"]} />
+            <SidebarItem
+              icon={GoHome}
+              label="Inbox"
+              active={active === 'inbox'}
+              onClick={() => setActive('inbox')}
+              onDrop={() => setLastDrop('Inbox')}
+              acceptTypes={['text/plain']}
+            />
+            <SidebarItem
+              icon={Share}
+              label="Sent"
+              active={active === 'sent'}
+              onClick={() => setActive('sent')}
+              onDrop={() => setLastDrop('Sent')}
+              acceptTypes={['text/plain']}
+            />
+            <SidebarItem
+              icon={Delete}
+              label="Trash"
+              active={active === 'trash'}
+              onClick={() => setActive('trash')}
+              onDrop={() => setLastDrop('Trash')}
+              acceptTypes={['text/plain']}
+            />
           </SidebarSection>
         </Sidebar>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 12 }}>
           <div
             draggable
-            onDragStart={(e) => e.dataTransfer.setData("text/plain", "message")}
+            onDragStart={(e) => e.dataTransfer.setData('text/plain', 'message')}
             style={{
-              padding: "8px 16px",
+              padding: '8px 16px',
               borderRadius: 8,
-              background: "var(--gnome-card-bg-color, #fff)",
-              border: "1px solid rgba(0,0,0,0.12)",
-              cursor: "grab",
-              userSelect: "none",
+              background: 'var(--gnome-card-bg-color, #fff)',
+              border: '1px solid rgba(0,0,0,0.12)',
+              cursor: 'grab',
+              userSelect: 'none',
             }}
           >
             Drag me onto a mailbox →
           </div>
           {lastDrop && (
-            <Text variant="caption" color="dim">Dropped into: <strong>{lastDrop}</strong></Text>
+            <Text variant="caption" color="dim">
+              Dropped into: <strong>{lastDrop}</strong>
+            </Text>
           )}
         </div>
       </div>
@@ -330,7 +540,8 @@ export const DropTargets: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `onDrop` and `acceptTypes` to turn rows into drag-and-drop targets. Drag the pill onto a mailbox row to see it highlighted and the drop registered.",
+        story:
+          'Use `onDrop` and `acceptTypes` to turn rows into drag-and-drop targets. Drag the pill onto a mailbox row to see it highlighted and the drop registered.',
       },
     },
   },
@@ -338,24 +549,64 @@ export const DropTargets: Story = {
 
 // ─── Variants ─────────────────────────────────────────────────────────────────
 
-const VARIANTS = ["classic", "blue", "green", "red", "yellow", "black", "transparent", "blurred"] as const;
+const VARIANTS = [
+  'classic',
+  'blue',
+  'green',
+  'red',
+  'yellow',
+  'black',
+  'transparent',
+  'blurred',
+] as const;
 
 export const Variants: Story = {
   render: function VariantsStory() {
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState('home');
+
     return (
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 16, padding: 16, background: "var(--gnome-window-bg-color, #f6f5f4)" }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 16,
+          padding: 16,
+          background: 'var(--gnome-window-bg-color, #f6f5f4)',
+        }}
+      >
         {VARIANTS.map((variant) => (
-          <div key={variant} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          <div key={variant} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             <Sidebar variant={variant} style={{ height: 200, borderRadius: 12 }}>
               <SidebarSection>
-                <SidebarItem icon={GoHome}    label="Home"     active={active === "home"}     onClick={() => setActive("home")} />
-                <SidebarItem icon={Star}      label="Starred"  active={active === "starred"}  onClick={() => setActive("starred")} />
-                <SidebarItem icon={Search}    label="Search"   active={active === "search"}   onClick={() => setActive("search")} />
-                <SidebarItem icon={Settings}  label="Settings" active={active === "settings"} onClick={() => setActive("settings")} />
+                <SidebarItem
+                  icon={GoHome}
+                  label="Home"
+                  active={active === 'home'}
+                  onClick={() => setActive('home')}
+                />
+                <SidebarItem
+                  icon={Star}
+                  label="Starred"
+                  active={active === 'starred'}
+                  onClick={() => setActive('starred')}
+                />
+                <SidebarItem
+                  icon={Search}
+                  label="Search"
+                  active={active === 'search'}
+                  onClick={() => setActive('search')}
+                />
+                <SidebarItem
+                  icon={Settings}
+                  label="Settings"
+                  active={active === 'settings'}
+                  onClick={() => setActive('settings')}
+                />
               </SidebarSection>
             </Sidebar>
-            <Text variant="caption" color="dim" style={{ textAlign: "center" }}>{variant}</Text>
+            <Text variant="caption" color="dim" style={{ textAlign: 'center' }}>
+              {variant}
+            </Text>
           </div>
         ))}
       </div>
@@ -365,7 +616,8 @@ export const Variants: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "All available `variant` values. `blurred` requires a non-opaque parent background to show the frosted-glass effect.",
+        story:
+          'All available `variant` values. `blurred` requires a non-opaque parent background to show the frosted-glass effect.',
       },
     },
   },
@@ -375,9 +627,20 @@ export const Variants: Story = {
 
 export const InLayout: Story = {
   render: function LayoutStory() {
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
-      <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: 12, overflow: "hidden", display: "flex", flexDirection: "column", height: 440, maxWidth: 700 }}>
+      <div
+        style={{
+          border: '1px solid rgba(0,0,0,0.1)',
+          borderRadius: 12,
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          height: 440,
+          maxWidth: 700,
+        }}
+      >
         <HeaderBar
           title="Mail"
           end={
@@ -386,23 +649,58 @@ export const InLayout: Story = {
             </Button>
           }
         />
-        <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-          <Sidebar style={{ height: "100%" }}>
+        <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+          <Sidebar style={{ height: '100%' }}>
             <SidebarSection title="Mailboxes">
-              <SidebarItem icon={GoHome}  label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")}  suffix={<Badge variant="accent">12</Badge>}
-                menuItems={[{ label: "Mark all as read", onClick: () => {} }, { label: "Empty folder", onClick: () => {}, destructive: true }]} />
-              <SidebarItem icon={Share}   label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")} />
-              <SidebarItem icon={Delete}  label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")} suffix={<Badge variant="neutral">4</Badge>}
-                menuItems={[{ label: "Empty Trash", onClick: () => {}, destructive: true }]} />
+              <SidebarItem
+                icon={GoHome}
+                label="Inbox"
+                active={active === 'inbox'}
+                onClick={() => setActive('inbox')}
+                suffix={<Badge variant="accent">12</Badge>}
+                menuItems={[
+                  { label: 'Mark all as read', onClick: () => {} },
+                  { label: 'Empty folder', onClick: () => {}, destructive: true },
+                ]}
+              />
+              <SidebarItem
+                icon={Share}
+                label="Sent"
+                active={active === 'sent'}
+                onClick={() => setActive('sent')}
+              />
+              <SidebarItem
+                icon={Delete}
+                label="Trash"
+                active={active === 'trash'}
+                onClick={() => setActive('trash')}
+                suffix={<Badge variant="neutral">4</Badge>}
+                menuItems={[{ label: 'Empty Trash', onClick: () => {}, destructive: true }]}
+              />
             </SidebarSection>
             <SidebarSection title="Tags">
-              <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")}
-                menuItems={[{ label: "Rename tag", onClick: () => {} }, { label: "Delete tag", onClick: () => {}, destructive: true }]} />
-              <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
+              <SidebarItem
+                icon={Star}
+                label="Work"
+                active={active === 'work'}
+                onClick={() => setActive('work')}
+                menuItems={[
+                  { label: 'Rename tag', onClick: () => {} },
+                  { label: 'Delete tag', onClick: () => {}, destructive: true },
+                ]}
+              />
+              <SidebarItem
+                icon={Star}
+                label="Personal"
+                active={active === 'personal'}
+                onClick={() => setActive('personal')}
+              />
             </SidebarSection>
           </Sidebar>
-          <main style={{ flex: 1, padding: 24, overflow: "auto" }}>
-            <Text variant="title-3" style={{ textTransform: "capitalize" }}>{active}</Text>
+          <main style={{ flex: 1, padding: 24, overflow: 'auto' }}>
+            <Text variant="title-3" style={{ textTransform: 'capitalize' }}>
+              {active}
+            </Text>
             <Text variant="body" color="dim" style={{ marginTop: 8 }}>
               Content area. Right-click sidebar items to see the context menu.
             </Text>
@@ -418,43 +716,37 @@ export const InLayout: Story = {
 
 export const SectionWithIcon: Story = {
   render: function SectionWithIconStory() {
-    const [active, setActive] = useState("shared");
+    const [active, setActive] = useState('shared');
+
     return (
       <Sidebar style={{ height: 280 }}>
         <SidebarSection title="Network" icon={Applications}>
-          <SidebarItem icon={Share}  label="Shared"  active={active === "shared"}  onClick={() => setActive("shared")} />
-          <SidebarItem icon={Star}   label="Starred" active={active === "starred"} onClick={() => setActive("starred")} />
+          <SidebarItem
+            icon={Share}
+            label="Shared"
+            active={active === 'shared'}
+            onClick={() => setActive('shared')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Starred"
+            active={active === 'starred'}
+            onClick={() => setActive('starred')}
+          />
         </SidebarSection>
         <SidebarSection title="Local" icon={DocumentOpen}>
-          <SidebarItem icon={GoHome}    label="Home"      active={active === "home"}     onClick={() => setActive("home")} />
-          <SidebarItem icon={Settings}  label="Settings"  active={active === "settings"} onClick={() => setActive("settings")} />
-        </SidebarSection>
-      </Sidebar>
-    );
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: { story: "Use `icon` on `SidebarSection` to render an icon left of the section title." },
-    },
-  },
-};
-
-// ─── SidebarSection: collapsible (uncontrolled) ──────────────────────────────
-
-export const CollapsibleSection: Story = {
-  render: function CollapsibleStory() {
-    const [active, setActive] = useState("inbox");
-    return (
-      <Sidebar style={{ height: 360 }}>
-        <SidebarSection title="Mailboxes" icon={GoHome} collapsible defaultOpen>
-          <SidebarItem icon={GoHome}   label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")}  suffix={<Badge variant="accent">12</Badge>} />
-          <SidebarItem icon={Share}    label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")} />
-          <SidebarItem icon={Delete}   label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")} />
-        </SidebarSection>
-        <SidebarSection title="Tags" icon={Star} collapsible defaultOpen={false}>
-          <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")} />
-          <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
+          <SidebarItem
+            icon={GoHome}
+            label="Home"
+            active={active === 'home'}
+            onClick={() => setActive('home')}
+          />
+          <SidebarItem
+            icon={Settings}
+            label="Settings"
+            active={active === 'settings'}
+            onClick={() => setActive('settings')}
+          />
         </SidebarSection>
       </Sidebar>
     );
@@ -463,7 +755,64 @@ export const CollapsibleSection: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Add `collapsible` to let users toggle a section. `defaultOpen={false}` starts it collapsed.",
+        story: 'Use `icon` on `SidebarSection` to render an icon left of the section title.',
+      },
+    },
+  },
+};
+
+// ─── SidebarSection: collapsible (uncontrolled) ──────────────────────────────
+
+export const CollapsibleSection: Story = {
+  render: function CollapsibleStory() {
+    const [active, setActive] = useState('inbox');
+
+    return (
+      <Sidebar style={{ height: 360 }}>
+        <SidebarSection title="Mailboxes" icon={GoHome} collapsible defaultOpen>
+          <SidebarItem
+            icon={GoHome}
+            label="Inbox"
+            active={active === 'inbox'}
+            onClick={() => setActive('inbox')}
+            suffix={<Badge variant="accent">12</Badge>}
+          />
+          <SidebarItem
+            icon={Share}
+            label="Sent"
+            active={active === 'sent'}
+            onClick={() => setActive('sent')}
+          />
+          <SidebarItem
+            icon={Delete}
+            label="Trash"
+            active={active === 'trash'}
+            onClick={() => setActive('trash')}
+          />
+        </SidebarSection>
+        <SidebarSection title="Tags" icon={Star} collapsible defaultOpen={false}>
+          <SidebarItem
+            icon={Star}
+            label="Work"
+            active={active === 'work'}
+            onClick={() => setActive('work')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Personal"
+            active={active === 'personal'}
+            onClick={() => setActive('personal')}
+          />
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Add `collapsible` to let users toggle a section. `defaultOpen={false}` starts it collapsed.',
       },
     },
   },
@@ -474,9 +823,10 @@ export const CollapsibleSection: Story = {
 export const CollapsibleSectionControlled: Story = {
   render: function ControlledStory() {
     const [open, setOpen] = useState(true);
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
-      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
         <Sidebar style={{ height: 280 }}>
           <SidebarSection
             title="Mailboxes"
@@ -485,16 +835,33 @@ export const CollapsibleSectionControlled: Story = {
             open={open}
             onOpenChange={setOpen}
           >
-            <SidebarItem icon={GoHome}  label="Inbox" active={active === "inbox"} onClick={() => setActive("inbox")} />
-            <SidebarItem icon={Share}   label="Sent"  active={active === "sent"}  onClick={() => setActive("sent")} />
-            <SidebarItem icon={Delete}  label="Trash" active={active === "trash"} onClick={() => setActive("trash")} />
+            <SidebarItem
+              icon={GoHome}
+              label="Inbox"
+              active={active === 'inbox'}
+              onClick={() => setActive('inbox')}
+            />
+            <SidebarItem
+              icon={Share}
+              label="Sent"
+              active={active === 'sent'}
+              onClick={() => setActive('sent')}
+            />
+            <SidebarItem
+              icon={Delete}
+              label="Trash"
+              active={active === 'trash'}
+              onClick={() => setActive('trash')}
+            />
           </SidebarSection>
         </Sidebar>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 12 }}>
           <Button variant="flat" onClick={() => setOpen((v) => !v)}>
-            {open ? "Collapse section" : "Expand section"}
+            {open ? 'Collapse section' : 'Expand section'}
           </Button>
-          <Text variant="caption" color="dim">open: <strong>{String(open)}</strong></Text>
+          <Text variant="caption" color="dim">
+            open: <strong>{String(open)}</strong>
+          </Text>
         </div>
       </div>
     );
@@ -503,7 +870,8 @@ export const CollapsibleSectionControlled: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Controlled mode: drive `open` externally with `onOpenChange`. The external button and the section header both toggle the same state.",
+        story:
+          'Controlled mode: drive `open` externally with `onOpenChange`. The external button and the section header both toggle the same state.',
       },
     },
   },
@@ -514,20 +882,42 @@ export const CollapsibleSectionControlled: Story = {
 export const CollapsibleSectionWithRef: Story = {
   render: function RefStory() {
     const sectionRef = useRef<SidebarSectionHandle>(null);
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
-      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
         <Sidebar style={{ height: 280 }}>
           <SidebarSection ref={sectionRef} title="Mailboxes" icon={GoHome} collapsible>
-            <SidebarItem icon={GoHome}  label="Inbox" active={active === "inbox"} onClick={() => setActive("inbox")} />
-            <SidebarItem icon={Share}   label="Sent"  active={active === "sent"}  onClick={() => setActive("sent")} />
-            <SidebarItem icon={Delete}  label="Trash" active={active === "trash"} onClick={() => setActive("trash")} />
+            <SidebarItem
+              icon={GoHome}
+              label="Inbox"
+              active={active === 'inbox'}
+              onClick={() => setActive('inbox')}
+            />
+            <SidebarItem
+              icon={Share}
+              label="Sent"
+              active={active === 'sent'}
+              onClick={() => setActive('sent')}
+            />
+            <SidebarItem
+              icon={Delete}
+              label="Trash"
+              active={active === 'trash'}
+              onClick={() => setActive('trash')}
+            />
           </SidebarSection>
         </Sidebar>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 12 }}>
-          <Button variant="flat" onClick={() => sectionRef.current?.expand()}>expand()</Button>
-          <Button variant="flat" onClick={() => sectionRef.current?.collapse()}>collapse()</Button>
-          <Button variant="flat" onClick={() => sectionRef.current?.toggle()}>toggle()</Button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 12 }}>
+          <Button variant="flat" onClick={() => sectionRef.current?.expand()}>
+            expand()
+          </Button>
+          <Button variant="flat" onClick={() => sectionRef.current?.collapse()}>
+            collapse()
+          </Button>
+          <Button variant="flat" onClick={() => sectionRef.current?.toggle()}>
+            toggle()
+          </Button>
         </div>
       </div>
     );
@@ -536,7 +926,8 @@ export const CollapsibleSectionWithRef: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Drive the section imperatively via `ref`. Use `expand()`, `collapse()`, and `toggle()` from outside the component.",
+        story:
+          'Drive the section imperatively via `ref`. Use `expand()`, `collapse()`, and `toggle()` from outside the component.',
       },
     },
   },
@@ -547,21 +938,37 @@ export const CollapsibleSectionWithRef: Story = {
 export const CollapsibleSectionInRailMode: Story = {
   render: function RailStory() {
     const [collapsed, setCollapsed] = useState(false);
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
-      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
         <Sidebar collapsed={collapsed} style={{ height: 300 }}>
           <SidebarSection title="Mailboxes" icon={GoHome} collapsible defaultOpen={false}>
-            <SidebarItem icon={GoHome}  label="Inbox" active={active === "inbox"} onClick={() => setActive("inbox")} />
-            <SidebarItem icon={Share}   label="Sent"  active={active === "sent"}  onClick={() => setActive("sent")} />
-            <SidebarItem icon={Delete}  label="Trash" active={active === "trash"} onClick={() => setActive("trash")} />
+            <SidebarItem
+              icon={GoHome}
+              label="Inbox"
+              active={active === 'inbox'}
+              onClick={() => setActive('inbox')}
+            />
+            <SidebarItem
+              icon={Share}
+              label="Sent"
+              active={active === 'sent'}
+              onClick={() => setActive('sent')}
+            />
+            <SidebarItem
+              icon={Delete}
+              label="Trash"
+              active={active === 'trash'}
+              onClick={() => setActive('trash')}
+            />
           </SidebarSection>
         </Sidebar>
         <div style={{ paddingTop: 12 }}>
           <Button variant="flat" onClick={() => setCollapsed((v) => !v)}>
-            {collapsed ? "Expand sidebar" : "Collapse sidebar (rail)"}
+            {collapsed ? 'Expand sidebar' : 'Collapse sidebar (rail)'}
           </Button>
-          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: 'block' }}>
             In rail mode the body is always visible, even when defaultOpen is false.
           </Text>
         </div>
@@ -572,7 +979,8 @@ export const CollapsibleSectionInRailMode: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "When the sidebar is in rail (icon-only) mode, collapsible sections always show their body — there's no title row to tap. The chevron is hidden.",
+        story:
+          "When the sidebar is in rail (icon-only) mode, collapsible sections always show their body — there's no title row to tap. The chevron is hidden.",
       },
     },
   },
@@ -582,18 +990,49 @@ export const CollapsibleSectionInRailMode: Story = {
 
 export const CollapsibleSectionWithFilter: Story = {
   render: function FilterStory() {
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
       <Sidebar style={{ height: 360 }} searchable>
         <SidebarSection title="Mailboxes" icon={GoHome} collapsible>
-          <SidebarItem icon={GoHome}   label="Inbox"  active={active === "inbox"}  onClick={() => setActive("inbox")} />
-          <SidebarItem icon={Share}    label="Sent"   active={active === "sent"}   onClick={() => setActive("sent")} />
-          <SidebarItem icon={Delete}   label="Trash"  active={active === "trash"}  onClick={() => setActive("trash")} />
+          <SidebarItem
+            icon={GoHome}
+            label="Inbox"
+            active={active === 'inbox'}
+            onClick={() => setActive('inbox')}
+          />
+          <SidebarItem
+            icon={Share}
+            label="Sent"
+            active={active === 'sent'}
+            onClick={() => setActive('sent')}
+          />
+          <SidebarItem
+            icon={Delete}
+            label="Trash"
+            active={active === 'trash'}
+            onClick={() => setActive('trash')}
+          />
         </SidebarSection>
         <SidebarSection title="Tags" icon={Star} collapsible>
-          <SidebarItem icon={Star} label="Work"     active={active === "work"}     onClick={() => setActive("work")} />
-          <SidebarItem icon={Star} label="Personal" active={active === "personal"} onClick={() => setActive("personal")} />
-          <SidebarItem icon={Star} label="Finance"  active={active === "finance"}  onClick={() => setActive("finance")} />
+          <SidebarItem
+            icon={Star}
+            label="Work"
+            active={active === 'work'}
+            onClick={() => setActive('work')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Personal"
+            active={active === 'personal'}
+            onClick={() => setActive('personal')}
+          />
+          <SidebarItem
+            icon={Star}
+            label="Finance"
+            active={active === 'finance'}
+            onClick={() => setActive('finance')}
+          />
         </SidebarSection>
       </Sidebar>
     );
@@ -602,7 +1041,8 @@ export const CollapsibleSectionWithFilter: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "When a filter is active, sections with no matching items are hidden entirely. Try searching for \"finance\" or \"trash\".",
+        story:
+          'When a filter is active, sections with no matching items are hidden entirely. Try searching for "finance" or "trash".',
       },
     },
   },

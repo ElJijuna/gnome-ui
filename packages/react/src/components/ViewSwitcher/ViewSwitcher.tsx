@@ -1,15 +1,11 @@
-import {
-  useRef,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type ReactNode,
-} from "react";
-import styles from "./ViewSwitcher.module.css";
+import { type HTMLAttributes, type KeyboardEvent, type ReactNode, useRef } from 'react';
+
+import styles from './ViewSwitcher.module.css';
 
 export interface ViewSwitcherProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   /** Accessible label for the group. */
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 /**
@@ -27,28 +23,34 @@ export interface ViewSwitcherProps extends HTMLAttributes<HTMLDivElement> {
 export function ViewSwitcher({
   children,
   className,
-  "aria-label": ariaLabel = "View switcher",
+  'aria-label': ariaLabel = 'View switcher',
   ...props
 }: ViewSwitcherProps) {
   const groupRef = useRef<HTMLDivElement>(null);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     const items = Array.from(
-      groupRef.current?.querySelectorAll<HTMLButtonElement>(
-        "[role=radio]:not(:disabled)",
-      ) ?? [],
+      groupRef.current?.querySelectorAll<HTMLButtonElement>('[role=radio]:not(:disabled)') ?? [],
     );
-    const idx = items.findIndex((el) => el === document.activeElement);
-    if (idx === -1) return;
+    const activeElement = document.activeElement;
+    const idx = activeElement instanceof HTMLButtonElement ? items.indexOf(activeElement) : -1;
+
+    if (idx === -1) {
+      return;
+    }
 
     let next = idx;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown")
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       next = (idx + 1) % items.length;
-    else if (e.key === "ArrowLeft" || e.key === "ArrowUp")
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       next = (idx - 1 + items.length) % items.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = items.length - 1;
-    else return;
+    } else if (e.key === 'Home') {
+      next = 0;
+    } else if (e.key === 'End') {
+      next = items.length - 1;
+    } else {
+      return;
+    }
 
     e.preventDefault();
     items[next].focus();
@@ -61,7 +63,7 @@ export function ViewSwitcher({
       role="radiogroup"
       aria-label={ariaLabel}
       onKeyDown={handleKeyDown}
-      className={[styles.switcher, className].filter(Boolean).join(" ")}
+      className={[styles.switcher, className].filter(Boolean).join(' ')}
       {...props}
     >
       {children}

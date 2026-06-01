@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Clamp.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Clamp.module.css';
 
 export interface ClampProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -32,16 +33,10 @@ export interface ClampProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html
  */
-export function Clamp({
-  maximumSize = 600,
-  children,
-  className,
-  style,
-  ...props
-}: ClampProps) {
+export function Clamp({ maximumSize = 600, children, className, style, ...props }: ClampProps) {
   return (
     <div
-      className={[styles.clamp, className].filter(Boolean).join(" ")}
+      className={[styles.clamp, className].filter(Boolean).join(' ')}
       style={{ maxWidth: maximumSize, ...style }}
       {...props}
     >

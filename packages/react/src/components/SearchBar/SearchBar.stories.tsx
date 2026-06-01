@@ -1,16 +1,18 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { SearchBar, type Suggestion } from "./SearchBar";
-import { HeaderBar } from "../HeaderBar";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
-import { Text } from "../Text";
-import { Search } from "@gnome-ui/icons";
+import { Search } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Button } from '../Button';
+import { HeaderBar } from '../HeaderBar';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+
+import { SearchBar, type Suggestion } from './SearchBar';
 
 const meta: Meta<typeof SearchBar> = {
-  title: "Components/SearchBar",
+  title: 'Components/SearchBar',
   component: SearchBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -38,18 +40,14 @@ type Story = StoryObj<typeof SearchBar>;
 export const Default: Story = {
   render: function DefaultStory() {
     const [open, setOpen] = useState(true);
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
 
     return (
       <div style={{ maxWidth: 480 }}>
         <div style={{ marginBottom: 8 }}>
-          <Button
-            variant="flat"
-            aria-pressed={open}
-            onClick={() => setOpen((o) => !o)}
-          >
+          <Button variant="flat" aria-pressed={open} onClick={() => setOpen((o) => !o)}>
             <Icon icon={Search} size="md" aria-hidden />
-            {open ? "Hide search" : "Show search"}
+            {open ? 'Hide search' : 'Show search'}
           </Button>
         </div>
         <SearchBar
@@ -57,10 +55,10 @@ export const Default: Story = {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onClose={() => setOpen(false)}
-          onClear={() => setQuery("")}
+          onClear={() => setQuery('')}
         />
         {query && (
-          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: 'block' }}>
             Searching for: <strong>{query}</strong>
           </Text>
         )}
@@ -75,9 +73,9 @@ export const Default: Story = {
 export const InHeaderBar: Story = {
   render: function InHeaderBarStory() {
     const [searchOpen, setSearchOpen] = useState(false);
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
 
-    const items = ["Inbox", "Drafts", "Sent", "Trash"];
+    const items = ['Inbox', 'Drafts', 'Sent', 'Trash'];
     const filtered = query
       ? items.filter((i) => i.toLowerCase().includes(query.toLowerCase()))
       : items;
@@ -85,14 +83,14 @@ export const InHeaderBar: Story = {
     return (
       <div
         style={{
-          border: "1px solid rgba(0,0,0,0.1)",
+          border: '1px solid rgba(0,0,0,0.1)',
           borderRadius: 12,
-          overflow: "hidden",
+          overflow: 'hidden',
           maxWidth: 480,
         }}
       >
         <HeaderBar
-          title={searchOpen ? undefined : "Mail"}
+          title={searchOpen ? undefined : 'Mail'}
           end={
             <Button
               variant="flat"
@@ -100,7 +98,9 @@ export const InHeaderBar: Story = {
               aria-pressed={searchOpen}
               onClick={() => {
                 setSearchOpen((o) => !o);
-                if (searchOpen) setQuery("");
+                if (searchOpen) {
+                  setQuery('');
+                }
               }}
             >
               <Icon icon={Search} size="md" aria-hidden />
@@ -111,8 +111,11 @@ export const InHeaderBar: Story = {
           open={searchOpen}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onClose={() => { setSearchOpen(false); setQuery(""); }}
-          onClear={() => setQuery("")}
+          onClose={() => {
+            setSearchOpen(false);
+            setQuery('');
+          }}
+          onClear={() => setQuery('')}
           placeholder="Search mail…"
         />
         <div style={{ padding: 16 }}>
@@ -121,27 +124,29 @@ export const InHeaderBar: Story = {
               <div
                 key={item}
                 style={{
-                  padding: "8px 0",
-                  borderBottom: "1px solid rgba(0,0,0,0.08)",
+                  padding: '8px 0',
+                  borderBottom: '1px solid rgba(0,0,0,0.08)',
                 }}
               >
                 <Text variant="body">{item}</Text>
               </div>
             ))
           ) : (
-            <Text variant="body" color="dim">No results for "{query}"</Text>
+            <Text variant="body" color="dim">
+              No results for "{query}"
+            </Text>
           )}
         </div>
       </div>
     );
   },
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     controls: { disable: true },
     docs: {
       description: {
         story:
-          "The canonical GNOME pattern: a search button in the `HeaderBar` toggles the `SearchBar` below it. Escape closes the bar.",
+          'The canonical GNOME pattern: a search button in the `HeaderBar` toggles the `SearchBar` below it. Escape closes the bar.',
       },
     },
   },
@@ -152,14 +157,14 @@ export const InHeaderBar: Story = {
 export const WithFilterChips: Story = {
   render: function FilterStory() {
     const [open, setOpen] = useState(true);
-    const [query, setQuery] = useState("");
-    const [activeFilter, setActiveFilter] = useState("all");
+    const [query, setQuery] = useState('');
+    const [activeFilter, setActiveFilter] = useState('all');
 
     const filters = [
-      { id: "all", label: "All" },
-      { id: "read", label: "Read" },
-      { id: "unread", label: "Unread" },
-      { id: "flagged", label: "Flagged" },
+      { id: 'all', label: 'All' },
+      { id: 'read', label: 'Read' },
+      { id: 'unread', label: 'Unread' },
+      { id: 'flagged', label: 'Flagged' },
     ];
 
     return (
@@ -169,15 +174,15 @@ export const WithFilterChips: Story = {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onClose={() => setOpen(false)}
-          onClear={() => setQuery("")}
+          onClear={() => setQuery('')}
           placeholder="Search…"
         >
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {filters.map((f) => (
               <Button
                 key={f.id}
-                variant={activeFilter === f.id ? "suggested" : "flat"}
-                style={{ borderRadius: 999, padding: "2px 12px", fontSize: "0.8125rem" }}
+                variant={activeFilter === f.id ? 'suggested' : 'flat'}
+                style={{ borderRadius: 999, padding: '2px 12px', fontSize: '0.8125rem' }}
                 onClick={() => setActiveFilter(f.id)}
               >
                 {f.label}
@@ -192,8 +197,7 @@ export const WithFilterChips: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story:
-          "Pass filter chips as `children` — they appear in a second row below the input.",
+        story: 'Pass filter chips as `children` — they appear in a second row below the input.',
       },
     },
   },
@@ -204,7 +208,7 @@ export const WithFilterChips: Story = {
 export const InitiallyClosed: Story = {
   render: function ClosedStory() {
     const [open, setOpen] = useState(false);
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
 
     return (
       <div style={{ maxWidth: 480 }}>
@@ -217,8 +221,11 @@ export const InitiallyClosed: Story = {
           open={open}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onClose={() => { setOpen(false); setQuery(""); }}
-          onClear={() => setQuery("")}
+          onClose={() => {
+            setOpen(false);
+            setQuery('');
+          }}
+          onClear={() => setQuery('')}
         />
       </div>
     );
@@ -227,7 +234,7 @@ export const InitiallyClosed: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Starts closed. Input auto-focuses when the bar opens.",
+        story: 'Starts closed. Input auto-focuses when the bar opens.',
       },
     },
   },
@@ -249,20 +256,20 @@ export const Disabled: Story = {
 // ─── Autocomplete (sync) ──────────────────────────────────────────────────────
 
 const CITIES: Suggestion[] = [
-  { id: "ams", label: "Amsterdam" },
-  { id: "bcn", label: "Barcelona" },
-  { id: "ber", label: "Berlin" },
-  { id: "lon", label: "London" },
-  { id: "mad", label: "Madrid" },
-  { id: "par", label: "Paris" },
-  { id: "rom", label: "Rome" },
-  { id: "vie", label: "Vienna" },
+  { id: 'ams', label: 'Amsterdam' },
+  { id: 'bcn', label: 'Barcelona' },
+  { id: 'ber', label: 'Berlin' },
+  { id: 'lon', label: 'London' },
+  { id: 'mad', label: 'Madrid' },
+  { id: 'par', label: 'Paris' },
+  { id: 'rom', label: 'Rome' },
+  { id: 'vie', label: 'Vienna' },
 ];
 
 export const Autocomplete: Story = {
   render: function AutocompleteStory() {
-    const [open, setOpen]   = useState(true);
-    const [query, setQuery] = useState("");
+    const [open, setOpen] = useState(true);
+    const [query, setQuery] = useState('');
 
     const suggestions = query
       ? CITIES.filter((c) => c.label.toLowerCase().startsWith(query.toLowerCase()))
@@ -274,14 +281,19 @@ export const Autocomplete: Story = {
           open={open}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onClose={() => { setOpen(false); setQuery(""); }}
-          onClear={() => setQuery("")}
+          onClose={() => {
+            setOpen(false);
+            setQuery('');
+          }}
+          onClear={() => setQuery('')}
           placeholder="Search cities…"
           suggestions={suggestions}
-          onSuggestionSelect={(s) => { setQuery(s.label); }}
+          onSuggestionSelect={(s) => {
+            setQuery(s.label);
+          }}
         />
         {query && (
-          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: 'block' }}>
             Searching for: <strong>{query}</strong>
           </Text>
         )}
@@ -293,8 +305,8 @@ export const Autocomplete: Story = {
     docs: {
       description: {
         story:
-          "Sync autocomplete: suggestions are filtered client-side on each keystroke. " +
-          "Use `↓ ↑` to navigate, `Enter` to select, `Escape` to close.",
+          'Sync autocomplete: suggestions are filtered client-side on each keystroke. ' +
+          'Use `↓ ↑` to navigate, `Enter` to select, `Escape` to close.',
       },
     },
   },
@@ -305,26 +317,32 @@ export const Autocomplete: Story = {
 function fakeFetch(q: string): Promise<Suggestion[]> {
   return new Promise((resolve) =>
     setTimeout(() => {
-      resolve(
-        CITIES.filter((c) => c.label.toLowerCase().startsWith(q.toLowerCase()))
-      );
-    }, 600)
+      resolve(CITIES.filter((c) => c.label.toLowerCase().startsWith(q.toLowerCase())));
+    }, 600),
   );
 }
 
 export const AutocompleteAsync: Story = {
   render: function AsyncStory() {
-    const [open, setOpen]             = useState(true);
-    const [query, setQuery]           = useState("");
+    const [open, setOpen] = useState(true);
+    const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-    const [loading, setLoading]       = useState(false);
+    const [loading, setLoading] = useState(false);
 
     async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       const q = e.target.value;
+
       setQuery(q);
-      if (!q) { setSuggestions([]); setLoading(false); return; }
+      if (!q) {
+        setSuggestions([]);
+        setLoading(false);
+
+        return;
+      }
+
       setLoading(true);
       const results = await fakeFetch(q);
+
       setSuggestions(results);
       setLoading(false);
     }
@@ -335,15 +353,25 @@ export const AutocompleteAsync: Story = {
           open={open}
           value={query}
           onChange={handleChange}
-          onClose={() => { setOpen(false); setQuery(""); setSuggestions([]); }}
-          onClear={() => { setQuery(""); setSuggestions([]); }}
+          onClose={() => {
+            setOpen(false);
+            setQuery('');
+            setSuggestions([]);
+          }}
+          onClear={() => {
+            setQuery('');
+            setSuggestions([]);
+          }}
           placeholder="Search cities…"
           suggestions={suggestions}
           loadingSuggestions={loading}
-          onSuggestionSelect={(s) => { setQuery(s.label); setSuggestions([]); }}
+          onSuggestionSelect={(s) => {
+            setQuery(s.label);
+            setSuggestions([]);
+          }}
         />
         {query && !loading && (
-          <Text variant="caption" color="dim" style={{ marginTop: 8, display: "block" }}>
+          <Text variant="caption" color="dim" style={{ marginTop: 8, display: 'block' }}>
             Searching for: <strong>{query}</strong>
           </Text>
         )}
@@ -355,8 +383,8 @@ export const AutocompleteAsync: Story = {
     docs: {
       description: {
         story:
-          "Async autocomplete: results are fetched with a simulated 600 ms delay. " +
-          "A spinner appears in the popover while loading.",
+          'Async autocomplete: results are fetched with a simulated 600 ms delay. ' +
+          'A spinner appears in the popover while loading.',
       },
     },
   },
@@ -366,15 +394,16 @@ export const AutocompleteAsync: Story = {
 
 export const Inline: Story = {
   render: () => {
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
+
     return (
       <div
         style={{
-          border: "1px solid var(--gnome-light-3, rgba(0,0,0,0.1))",
+          border: '1px solid var(--gnome-light-3, rgba(0,0,0,0.1))',
           borderRadius: 12,
-          overflow: "hidden",
+          overflow: 'hidden',
           maxWidth: 480,
-          background: "var(--gnome-card-bg-color, #fff)",
+          background: 'var(--gnome-card-bg-color, #fff)',
         }}
       >
         <SearchBar
@@ -382,11 +411,18 @@ export const Inline: Story = {
           open
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onClose={() => setQuery("")}
-          onClear={() => setQuery("")}
+          onClose={() => setQuery('')}
+          onClear={() => setQuery('')}
           placeholder="Search inside card…"
         />
-        <div style={{ padding: 16, color: "var(--gnome-window-fg-color)", opacity: 0.5, fontSize: "0.875rem" }}>
+        <div
+          style={{
+            padding: 16,
+            color: 'var(--gnome-window-fg-color)',
+            opacity: 0.5,
+            fontSize: '0.875rem',
+          }}
+        >
           Card content area
         </div>
       </div>
@@ -397,7 +433,7 @@ export const Inline: Story = {
     docs: {
       description: {
         story:
-          "Use `inline` to remove the header-bar background so the bar blends into any surface — cards, content areas, or custom containers.",
+          'Use `inline` to remove the header-bar background so the bar blends into any surface — cards, content areas, or custom containers.',
       },
     },
   },

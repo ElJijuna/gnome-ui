@@ -1,19 +1,21 @@
 import {
-  useState,
-  useRef,
-  useId,
-  useEffect,
-  useCallback,
   cloneElement,
-  type ReactElement,
   type HTMLAttributes,
-  type ReactNode,
   type KeyboardEvent,
-} from "react";
-import { createPortal } from "react-dom";
-import styles from "./Popover.module.css";
+  type ReactElement,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 
-export type PopoverPlacement = "top" | "bottom" | "left" | "right";
+import { createPortal } from 'react-dom';
+
+import styles from './Popover.module.css';
+
+export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 export interface PopoverProps {
   /**
@@ -65,38 +67,53 @@ const ARROW_HALF = 6; // half of the 12 px arrow
 function computePosition(
   trigger: DOMRect,
   popover: DOMRect,
-  preferred: PopoverPlacement
+  preferred: PopoverPlacement,
 ): Position {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
 
   const order: PopoverPlacement[] = [
     preferred,
-    preferred === "top"    ? "bottom"
-    : preferred === "bottom" ? "top"
-    : preferred === "left"   ? "right"
-    : "left",
-    "bottom", "top", "left", "right",
+    preferred === 'top'
+      ? 'bottom'
+      : preferred === 'bottom'
+        ? 'top'
+        : preferred === 'left'
+          ? 'right'
+          : 'left',
+    'bottom',
+    'top',
+    'left',
+    'right',
   ];
 
   // De-duplicate while preserving order
   const candidates = [...new Set(order)];
 
   function calcRaw(p: PopoverPlacement): { top: number; left: number } {
-    if (p === "bottom") return {
-      top:  trigger.bottom + GAP,
-      left: trigger.left + trigger.width / 2 - popover.width / 2,
-    };
-    if (p === "top") return {
-      top:  trigger.top - popover.height - GAP,
-      left: trigger.left + trigger.width / 2 - popover.width / 2,
-    };
-    if (p === "left") return {
-      top:  trigger.top + trigger.height / 2 - popover.height / 2,
-      left: trigger.left - popover.width - GAP,
-    };
+    if (p === 'bottom') {
+      return {
+        top: trigger.bottom + GAP,
+        left: trigger.left + trigger.width / 2 - popover.width / 2,
+      };
+    }
+
+    if (p === 'top') {
+      return {
+        top: trigger.top - popover.height - GAP,
+        left: trigger.left + trigger.width / 2 - popover.width / 2,
+      };
+    }
+
+    if (p === 'left') {
+      return {
+        top: trigger.top + trigger.height / 2 - popover.height / 2,
+        left: trigger.left - popover.width - GAP,
+      };
+    }
+
     return {
-      top:  trigger.top + trigger.height / 2 - popover.height / 2,
+      top: trigger.top + trigger.height / 2 - popover.height / 2,
       left: trigger.right + GAP,
     };
   }
@@ -104,15 +121,17 @@ function computePosition(
   // First pass: find a placement that fits both axes perfectly.
   for (const p of candidates) {
     const { top, left } = calcRaw(p);
-    const fitsH = left >= MARGIN && left + popover.width  <= vw - MARGIN;
-    const fitsV = top  >= MARGIN && top  + popover.height <= vh - MARGIN;
+    const fitsH = left >= MARGIN && left + popover.width <= vw - MARGIN;
+    const fitsV = top >= MARGIN && top + popover.height <= vh - MARGIN;
+
     if (fitsH && fitsV) {
       // Always use pixel arrowOffset (never rely on CSS left:50%) so the arrow
       // points exactly at the trigger center regardless of sub-pixel rounding.
       const arrowOffset =
-        p === "top" || p === "bottom"
-          ? trigger.left + trigger.width  / 2 - left
-          : trigger.top  + trigger.height / 2 - top;
+        p === 'top' || p === 'bottom'
+          ? trigger.left + trigger.width / 2 - left
+          : trigger.top + trigger.height / 2 - top;
+
       return { top, left, placement: p, arrowOffset };
     }
   }
@@ -121,38 +140,45 @@ function computePosition(
   // shift the arrow so it still points at the trigger center.
   for (const p of candidates) {
     const { top, left } = calcRaw(p);
-    const fitsV = top  >= MARGIN && top  + popover.height <= vh - MARGIN;
-    const fitsH = left >= MARGIN && left + popover.width  <= vw - MARGIN;
+    const fitsV = top >= MARGIN && top + popover.height <= vh - MARGIN;
+    const fitsH = left >= MARGIN && left + popover.width <= vw - MARGIN;
 
-    if ((p === "top" || p === "bottom") && fitsV) {
+    if ((p === 'top' || p === 'bottom') && fitsV) {
       const clampedLeft = Math.max(MARGIN, Math.min(left, vw - popover.width - MARGIN));
       const rawOffset = trigger.left + trigger.width / 2 - clampedLeft;
+
       return {
-        top, left: clampedLeft, placement: p,
+        top,
+        left: clampedLeft,
+        placement: p,
         arrowOffset: Math.max(ARROW_HALF + 4, Math.min(rawOffset, popover.width - ARROW_HALF - 4)),
       };
     }
 
-    if ((p === "left" || p === "right") && fitsH) {
+    if ((p === 'left' || p === 'right') && fitsH) {
       const clampedTop = Math.max(MARGIN, Math.min(top, vh - popover.height - MARGIN));
       const rawOffset = trigger.top + trigger.height / 2 - clampedTop;
+
       return {
-        top: clampedTop, left, placement: p,
+        top: clampedTop,
+        left,
+        placement: p,
         arrowOffset: Math.max(ARROW_HALF + 4, Math.min(rawOffset, popover.height - ARROW_HALF - 4)),
       };
     }
   }
 
   // Fallback: clamp bottom placement and shift arrow to match trigger.
-  const fbTop  = trigger.bottom + GAP;
+  const fbTop = trigger.bottom + GAP;
   const fbLeft = trigger.left + trigger.width / 2 - popover.width / 2;
-  const clampedTop  = Math.max(MARGIN, Math.min(fbTop,  vh - popover.height - MARGIN));
-  const clampedLeft = Math.max(MARGIN, Math.min(fbLeft, vw - popover.width  - MARGIN));
+  const clampedTop = Math.max(MARGIN, Math.min(fbTop, vh - popover.height - MARGIN));
+  const clampedLeft = Math.max(MARGIN, Math.min(fbLeft, vw - popover.width - MARGIN));
   const rawArrowOffset = trigger.left + trigger.width / 2 - clampedLeft;
+
   return {
     top: clampedTop,
     left: clampedLeft,
-    placement: "bottom",
+    placement: 'bottom',
     arrowOffset: Math.max(ARROW_HALF + 4, Math.min(rawArrowOffset, popover.width - ARROW_HALF - 4)),
   };
 }
@@ -174,7 +200,7 @@ function computePosition(
  */
 export function Popover({
   content,
-  placement: preferredPlacement = "bottom",
+  placement: preferredPlacement = 'bottom',
   open: controlledOpen,
   onClose,
   onOpenChange,
@@ -186,10 +212,10 @@ export function Popover({
 
   const [pos, setPos] = useState<Position | null>(null);
 
-  const triggerId  = useId();
-  const popoverId  = useId();
+  const triggerId = useId();
+  const popoverId = useId();
   const triggerRef = useRef<HTMLElement>(null);
-  const panelRef   = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<Element | null>(null);
 
   const close = useCallback(() => {
@@ -198,6 +224,7 @@ export function Popover({
     } else {
       setUncontrolledOpen(false);
     }
+
     onOpenChange?.(false);
   }, [isControlled, onClose, onOpenChange]);
 
@@ -205,37 +232,47 @@ export function Popover({
     if (open) {
       close();
     } else {
-      if (!isControlled) setUncontrolledOpen(true);
+      if (!isControlled) {
+        setUncontrolledOpen(true);
+      }
+
       onOpenChange?.(true);
     }
   }, [open, close, isControlled, onOpenChange]);
 
   // Position panel
   const place = useCallback(() => {
-    if (!triggerRef.current || !panelRef.current) return;
+    if (!triggerRef.current || !panelRef.current) {
+      return;
+    }
+
     setPos(
       computePosition(
         triggerRef.current.getBoundingClientRect(),
         panelRef.current.getBoundingClientRect(),
-        preferredPlacement
-      )
+        preferredPlacement,
+      ),
     );
   }, [preferredPlacement]);
 
   // Reposition on open, scroll, resize
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     // Two RAF: first lets panel mount with hidden styles so we can measure it;
     // second applies the measured position.
     const id = requestAnimationFrame(() => {
       place();
-      window.addEventListener("scroll", place, { passive: true, capture: true });
-      window.addEventListener("resize", place, { passive: true });
+      window.addEventListener('scroll', place, { passive: true, capture: true });
+      window.addEventListener('resize', place, { passive: true });
     });
+
     return () => {
       cancelAnimationFrame(id);
-      window.removeEventListener("scroll", place, { capture: true });
-      window.removeEventListener("resize", place);
+      window.removeEventListener('scroll', place, { capture: true });
+      window.removeEventListener('resize', place);
     };
   }, [open, place]);
 
@@ -245,8 +282,9 @@ export function Popover({
       previouslyFocused.current = document.activeElement;
       requestAnimationFrame(() => {
         const first = panelRef.current?.querySelector<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         );
+
         (first ?? panelRef.current)?.focus();
       });
     } else {
@@ -257,7 +295,10 @@ export function Popover({
 
   // Close on outside pointer
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     const handler = (e: MouseEvent) => {
       if (
         !triggerRef.current?.contains(e.target as Node) &&
@@ -266,25 +307,30 @@ export function Popover({
         close();
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+
+    document.addEventListener('mousedown', handler);
+
+    return () => document.removeEventListener('mousedown', handler);
   }, [open, close]);
 
   // Escape key
   const handlePanelKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === "Escape") { e.stopPropagation(); close(); }
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        close();
+      }
     },
-    [close]
+    [close],
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const trigger = cloneElement(children as any, {
     ref: triggerRef,
     id: triggerId,
-    "aria-haspopup": "dialog",
-    "aria-expanded": open,
-    "aria-controls": open ? popoverId : undefined,
+    'aria-haspopup': 'dialog',
+    'aria-expanded': open,
+    'aria-controls': open ? popoverId : undefined,
     onClick: (e: React.MouseEvent<HTMLElement>) => {
       toggle();
       children.props.onClick?.(e);
@@ -304,11 +350,11 @@ export function Popover({
         open && pos ? styles.visible : null,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       style={
         pos
           ? { top: pos.top, left: pos.left }
-          : { visibility: "hidden", pointerEvents: "none", top: -9999, left: -9999 }
+          : { visibility: 'hidden', pointerEvents: 'none', top: -9999, left: -9999 }
       }
       onKeyDown={handlePanelKeyDown}
     >
@@ -318,9 +364,9 @@ export function Popover({
         aria-hidden="true"
         style={
           pos?.arrowOffset !== undefined
-            ? pos.placement === "top" || pos.placement === "bottom"
+            ? pos.placement === 'top' || pos.placement === 'bottom'
               ? { left: pos.arrowOffset - ARROW_HALF, marginLeft: 0 }
-              : { top:  pos.arrowOffset - ARROW_HALF, marginTop: 0 }
+              : { top: pos.arrowOffset - ARROW_HALF, marginTop: 0 }
             : undefined
         }
       />
@@ -331,10 +377,7 @@ export function Popover({
   return (
     <>
       {trigger}
-      {open &&
-        (typeof document !== "undefined"
-          ? createPortal(panel, document.body)
-          : panel)}
+      {open && (typeof document !== 'undefined' ? createPortal(panel, document.body) : panel)}
     </>
   );
 }

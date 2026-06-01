@@ -1,14 +1,16 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Dialog } from "./Dialog";
-import { AboutDialog } from "../AboutDialog";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { AboutDialog } from '../AboutDialog';
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { Dialog } from './Dialog';
 
 const meta: Meta<typeof Dialog> = {
-  title: "Components/Dialog",
+  title: 'Components/Dialog',
   component: Dialog,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -40,12 +42,14 @@ export const AlertDialog: Story = {
 
     return (
       <>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Button variant="destructive" onClick={() => setOpen(true)}>
             Delete file
           </Button>
           {result && (
-            <Text variant="caption" color="dim">{result}</Text>
+            <Text variant="caption" color="dim">
+              {result}
+            </Text>
           )}
         </div>
         <Dialog
@@ -53,16 +57,25 @@ export const AlertDialog: Story = {
           title="Delete File?"
           buttons={[
             {
-              label: "Cancel",
-              onClick: () => { setOpen(false); setResult("Cancelled"); },
+              label: 'Cancel',
+              onClick: () => {
+                setOpen(false);
+                setResult('Cancelled');
+              },
             },
             {
-              label: "Delete",
-              variant: "destructive",
-              onClick: () => { setOpen(false); setResult("Deleted"); },
+              label: 'Delete',
+              variant: 'destructive',
+              onClick: () => {
+                setOpen(false);
+                setResult('Deleted');
+              },
             },
           ]}
-          onClose={() => { setOpen(false); setResult("Dismissed"); }}
+          onClose={() => {
+            setOpen(false);
+            setResult('Dismissed');
+          }}
         />
       </>
     );
@@ -71,7 +84,7 @@ export const AlertDialog: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Confirmation dialog for a destructive action. Cancel is always the safe default.",
+        story: 'Confirmation dialog for a destructive action. Cancel is always the safe default.',
       },
     },
   },
@@ -90,8 +103,8 @@ export const WithBody: Story = {
           open={open}
           title="Discard Changes?"
           buttons={[
-            { label: "Cancel",  onClick: () => setOpen(false) },
-            { label: "Discard", variant: "destructive", onClick: () => setOpen(false) },
+            { label: 'Cancel', onClick: () => setOpen(false) },
+            { label: 'Discard', variant: 'destructive', onClick: () => setOpen(false) },
           ]}
           onClose={() => setOpen(false)}
         >
@@ -117,13 +130,10 @@ export const Informational: Story = {
         <Dialog
           open={open}
           title="About Files"
-          buttons={[
-            { label: "Close", variant: "suggested", onClick: () => setOpen(false) },
-          ]}
+          buttons={[{ label: 'Close', variant: 'suggested', onClick: () => setOpen(false) }]}
           onClose={() => setOpen(false)}
         >
-          Files is a file manager for the GNOME desktop.
-          Version 45.0 · Licensed under GPL-3.0.
+          Files is a file manager for the GNOME desktop. Version 45.0 · Licensed under GPL-3.0.
         </Dialog>
       </>
     );
@@ -132,7 +142,8 @@ export const Informational: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Single-button informational dialog. The suggested variant highlights the primary close action.",
+        story:
+          'Single-button informational dialog. The suggested variant highlights the primary close action.',
       },
     },
   },
@@ -145,25 +156,30 @@ export const MultipleButtons: Story = {
     const [open, setOpen] = useState(false);
     const [result, setResult] = useState<string | null>(null);
 
-    const close = (r: string) => { setOpen(false); setResult(r); };
+    const close = (r: string) => {
+      setOpen(false);
+      setResult(r);
+    };
 
     return (
       <>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Button onClick={() => setOpen(true)}>Close document</Button>
           {result && (
-            <Text variant="caption" color="dim">Chose: {result}</Text>
+            <Text variant="caption" color="dim">
+              Chose: {result}
+            </Text>
           )}
         </div>
         <Dialog
           open={open}
           title="Save Changes?"
           buttons={[
-            { label: "Cancel",           onClick: () => close("Cancel") },
-            { label: "Discard",          variant: "destructive", onClick: () => close("Discard") },
-            { label: "Save",             variant: "suggested",   onClick: () => close("Save") },
+            { label: 'Cancel', onClick: () => close('Cancel') },
+            { label: 'Discard', variant: 'destructive', onClick: () => close('Discard') },
+            { label: 'Save', variant: 'suggested', onClick: () => close('Save') },
           ]}
-          onClose={() => close("Dismissed")}
+          onClose={() => close('Dismissed')}
         >
           Do you want to save your changes before closing?
         </Dialog>
@@ -174,7 +190,8 @@ export const MultipleButtons: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Three-button dialog: cancel · destructive · suggested. Each button occupies a full-width row.",
+        story:
+          'Three-button dialog: cancel · destructive · suggested. Each button occupies a full-width row.',
       },
     },
   },
@@ -186,21 +203,31 @@ export const AlertDestructive: Story = {
   render: function AlertStory() {
     const [open, setOpen] = useState(false);
     const [result, setResult] = useState<string | null>(null);
+
     return (
       <>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          <Button variant="destructive" onClick={() => setOpen(true)}>Delete file…</Button>
-          {result && <Text variant="caption" color="dim">Response: <strong>{result}</strong></Text>}
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <Button variant="destructive" onClick={() => setOpen(true)}>
+            Delete file…
+          </Button>
+          {result && (
+            <Text variant="caption" color="dim">
+              Response: <strong>{result}</strong>
+            </Text>
+          )}
         </div>
         <Dialog
           open={open}
           role="alertdialog"
           title="Delete File?"
           responses={[
-            { id: "cancel", label: "Cancel",  variant: "default" },
-            { id: "delete", label: "Delete",  variant: "destructive" },
+            { id: 'cancel', label: 'Cancel', variant: 'default' },
+            { id: 'delete', label: 'Delete', variant: 'destructive' },
           ]}
-          onResponse={(id) => { setResult(id); setOpen(false); }}
+          onResponse={(id) => {
+            setResult(id);
+            setOpen(false);
+          }}
         >
           The file will be permanently deleted and cannot be recovered.
         </Dialog>
@@ -211,7 +238,8 @@ export const AlertDestructive: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`role=\"alertdialog\"` + `responses` + `onResponse`. Escape fires the non-destructive response.",
+        story:
+          '`role="alertdialog"` + `responses` + `onResponse`. Escape fires the non-destructive response.',
       },
     },
   },
@@ -223,22 +251,30 @@ export const AlertSaveChanges: Story = {
   render: function SaveStory() {
     const [open, setOpen] = useState(false);
     const [result, setResult] = useState<string | null>(null);
+
     return (
       <>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Button onClick={() => setOpen(true)}>Close document…</Button>
-          {result && <Text variant="caption" color="dim">Response: <strong>{result}</strong></Text>}
+          {result && (
+            <Text variant="caption" color="dim">
+              Response: <strong>{result}</strong>
+            </Text>
+          )}
         </div>
         <Dialog
           open={open}
           role="alertdialog"
           title="Save Changes?"
           responses={[
-            { id: "discard", label: "Discard", variant: "destructive" },
-            { id: "cancel",  label: "Cancel",  variant: "default" },
-            { id: "save",    label: "Save",    variant: "suggested" },
+            { id: 'discard', label: 'Discard', variant: 'destructive' },
+            { id: 'cancel', label: 'Cancel', variant: 'default' },
+            { id: 'save', label: 'Save', variant: 'suggested' },
           ]}
-          onResponse={(id) => { setResult(id); setOpen(false); }}
+          onResponse={(id) => {
+            setResult(id);
+            setOpen(false);
+          }}
         >
           If you close without saving, your changes will be lost.
         </Dialog>
@@ -248,7 +284,7 @@ export const AlertSaveChanges: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Three-response alert: destructive · cancel · suggested." },
+      description: { story: 'Three-response alert: destructive · cancel · suggested.' },
     },
   },
 };
@@ -258,6 +294,7 @@ export const AlertSaveChanges: Story = {
 export const About: Story = {
   render: function AboutStory() {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>About Files</Button>
@@ -269,8 +306,8 @@ export const About: Story = {
           developerName="GNOME Project"
           website="https://apps.gnome.org/Nautilus/"
           websiteLabel="Files on GNOME Apps"
-          developers={["Carlos Soriano", "António Fernandes", "Corey Berla"]}
-          designers={["Allan Day", "Jakub Steiner"]}
+          developers={['Carlos Soriano', 'António Fernandes', 'Corey Berla']}
+          designers={['Allan Day', 'Jakub Steiner']}
           copyright="© 2024 The GNOME Project"
           licenseType="GPL-3.0-or-later"
           onClose={() => setOpen(false)}
@@ -282,7 +319,7 @@ export const About: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "For app-info dialogs use `<AboutDialog />` — a dedicated standalone component.",
+        story: 'For app-info dialogs use `<AboutDialog />` — a dedicated standalone component.',
       },
     },
   },
@@ -301,9 +338,7 @@ export const NoBackdropClose: Story = {
           open={open}
           title="Action Required"
           closeOnBackdrop={false}
-          buttons={[
-            { label: "Acknowledge", variant: "suggested", onClick: () => setOpen(false) },
-          ]}
+          buttons={[{ label: 'Acknowledge', variant: 'suggested', onClick: () => setOpen(false) }]}
           onClose={() => setOpen(false)}
         >
           You must acknowledge this notice to continue. Clicking outside will not close this dialog.
@@ -315,7 +350,7 @@ export const NoBackdropClose: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`closeOnBackdrop={false}` — the user must click a button. Escape still works.",
+        story: '`closeOnBackdrop={false}` — the user must click a button. Escape still works.',
       },
     },
   },

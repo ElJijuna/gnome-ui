@@ -1,5 +1,6 @@
-import { type HTMLAttributes, type ReactNode } from "react";
-import styles from "./PathBar.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './PathBar.module.css';
 
 export interface PathBarSegment {
   /** Display label for this path segment. */
@@ -37,12 +38,13 @@ export function PathBar({ segments, onNavigate, className, ...props }: PathBarPr
   return (
     <nav
       aria-label="Breadcrumb"
-      className={[styles.pathBar, className].filter(Boolean).join(" ")}
+      className={[styles.pathBar, className].filter(Boolean).join(' ')}
       {...props}
     >
       <ol className={styles.list} aria-label="Path segments">
         {segments.map((segment, index) => {
           const isCurrent = index === segments.length - 1;
+
           return (
             <li key={segment.path} className={styles.item}>
               {/* Separator chevron (not before the first segment) */}
@@ -63,12 +65,11 @@ export function PathBar({ segments, onNavigate, className, ...props }: PathBarPr
 
               {isCurrent ? (
                 /* Current folder — non-interactive */
-                <span
-                  className={styles.current}
-                  aria-current="page"
-                >
+                <span className={styles.current} aria-current="page">
                   {segment.icon && (
-                    <span className={styles.icon} aria-hidden="true">{segment.icon}</span>
+                    <span className={styles.icon} aria-hidden="true">
+                      {segment.icon}
+                    </span>
                   )}
                   {segment.label}
                 </span>
@@ -80,7 +81,9 @@ export function PathBar({ segments, onNavigate, className, ...props }: PathBarPr
                   onClick={() => onNavigate?.(segment.path, index)}
                 >
                   {segment.icon && (
-                    <span className={styles.icon} aria-hidden="true">{segment.icon}</span>
+                    <span className={styles.icon} aria-hidden="true">
+                      {segment.icon}
+                    </span>
                   )}
                   {segment.label}
                 </button>

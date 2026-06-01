@@ -1,2 +1,2 @@
-export { NavigationSplitView } from "./NavigationSplitView";
-export type { NavigationSplitViewProps } from "./NavigationSplitView";
+export type { NavigationSplitViewProps } from './NavigationSplitView';
+export { NavigationSplitView } from './NavigationSplitView';

@@ -1,12 +1,14 @@
 import {
-  RadialBarChart as RechartsRadialBarChart,
-  RadialBar,
   Legend,
-  Tooltip,
+  RadialBar,
+  RadialBarChart as RechartsRadialBarChart,
   ResponsiveContainer,
-} from "recharts";
-import { GNOME_CHART_PALETTE } from "../../colors";
-import styles from "./RadialBarChart.module.css";
+  Tooltip,
+} from 'recharts';
+
+import { GNOME_CHART_PALETTE } from '../../colors';
+
+import styles from './RadialBarChart.module.css';
 
 export interface RadialBarChartDataItem {
   label: string;
@@ -21,16 +23,16 @@ export interface RadialBarChartProps {
   showLabels?: boolean;
   showLegend?: boolean;
   className?: string;
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: "var(--gnome-popover-bg-color, #fff)",
-  border: "1px solid var(--gnome-light-3, #deddda)",
-  borderRadius: "var(--gnome-radius-md, 8px)",
-  fontFamily: "var(--gnome-font-family, system-ui)",
+  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
+  border: '1px solid var(--gnome-light-3, #deddda)',
+  borderRadius: 'var(--gnome-radius-md, 8px)',
+  fontFamily: 'var(--gnome-font-family, system-ui)',
   fontSize: 12,
-  boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
 function ArcLabel(props: {
@@ -42,19 +44,27 @@ function ArcLabel(props: {
   name?: string;
 }) {
   const { cx, cy, midAngle, innerRadius, outerRadius, name } = props;
+
   if (
-    cx == null ||
-    cy == null ||
-    midAngle == null ||
-    innerRadius == null ||
-    outerRadius == null
+    cx === null ||
+    cx === undefined ||
+    cy === null ||
+    cy === undefined ||
+    midAngle === null ||
+    midAngle === undefined ||
+    innerRadius === null ||
+    innerRadius === undefined ||
+    outerRadius === null ||
+    outerRadius === undefined
   ) {
     return <g />;
   }
+
   const RADIAN = Math.PI / 180;
   const r = innerRadius + (outerRadius - innerRadius) / 2;
   const x = cx + r * Math.cos(-midAngle * RADIAN);
   const y = cy + r * Math.sin(-midAngle * RADIAN);
+
   return (
     <text
       x={x}
@@ -73,11 +83,11 @@ function ArcLabel(props: {
 export function RadialBarChart({
   data,
   height = 400,
-  innerRadius = "20%",
+  innerRadius = '20%',
   showLabels = false,
   showLegend = false,
   className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
 }: RadialBarChartProps) {
   const chartData = data.map((item, i) => ({
     name: item.label,
@@ -89,10 +99,9 @@ export function RadialBarChart({
     <div
       role="img"
       aria-label={
-        ariaLabel ??
-        `Radial bar chart: ${data.map((d) => `${d.label} ${d.value}`).join(", ")}`
+        ariaLabel ?? `Radial bar chart: ${data.map((d) => `${d.label} ${d.value}`).join(', ')}`
       }
-      className={[styles.container, className].filter(Boolean).join(" ")}
+      className={[styles.container, className].filter(Boolean).join(' ')}
       style={{ height }}
     >
       <ResponsiveContainer width="100%" height="100%">
@@ -106,7 +115,7 @@ export function RadialBarChart({
         >
           <RadialBar
             dataKey="value"
-            background={{ fill: "var(--gnome-light-3, #deddda)" }}
+            background={{ fill: 'var(--gnome-light-3, #deddda)' }}
             label={showLabels ? ArcLabel : undefined}
           />
           <Tooltip contentStyle={TOOLTIP_CONTENT_STYLE} />
@@ -114,7 +123,7 @@ export function RadialBarChart({
             <Legend
               iconSize={10}
               wrapperStyle={{
-                fontFamily: "var(--gnome-font-family, system-ui)",
+                fontFamily: 'var(--gnome-font-family, system-ui)',
                 fontSize: 12,
               }}
             />

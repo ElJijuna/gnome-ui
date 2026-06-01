@@ -1,10 +1,9 @@
-export { useBreakpoint, GNOME_BREAKPOINTS } from "./useBreakpoint";
-export type { BreakpointState, GnomeBreakpointName } from "./useBreakpoint";
-
+export type { GnomeDir } from '../components/GnomeProvider/GnomeContext';
 export {
-  useLocale,
-  useDir,
-  useNumberFormatter,
   useDateTimeFormatter,
-} from "../components/GnomeProvider/GnomeContext";
-export type { GnomeDir } from "../components/GnomeProvider/GnomeContext";
+  useDir,
+  useLocale,
+  useNumberFormatter,
+} from '../components/GnomeProvider/GnomeContext';
+export type { BreakpointState, GnomeBreakpointName } from './useBreakpoint';
+export { GNOME_BREAKPOINTS, useBreakpoint } from './useBreakpoint';

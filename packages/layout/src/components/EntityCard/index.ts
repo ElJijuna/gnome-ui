@@ -1,2 +1,2 @@
-export { EntityCard } from "./EntityCard";
-export type { EntityCardProps } from "./EntityCard";
+export type { EntityCardProps } from './EntityCard';
+export { EntityCard } from './EntityCard';

@@ -1,9 +1,10 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./Blockquote.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './Blockquote.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type BlockquoteVariant = "default" | "info" | "warning" | "error" | "success";
+export type BlockquoteVariant = 'default' | 'info' | 'warning' | 'error' | 'success';
 
 export interface BlockquoteProps extends HTMLAttributes<HTMLQuoteElement> {
   /**
@@ -47,7 +48,7 @@ export interface BlockquoteProps extends HTMLAttributes<HTMLQuoteElement> {
  * ```
  */
 export function Blockquote({
-  variant = "default",
+  variant = 'default',
   icon,
   cite,
   children,
@@ -56,9 +57,7 @@ export function Blockquote({
 }: BlockquoteProps) {
   return (
     <blockquote
-      className={[styles.blockquote, styles[variant], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.blockquote, styles[variant], className].filter(Boolean).join(' ')}
       {...props}
     >
       <div className={styles.body}>

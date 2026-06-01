@@ -28,7 +28,8 @@
   border-radius: 2px;
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
-    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width)) var(--gnome-focus-ring-color);
+    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width))
+    var(--gnome-focus-ring-color);
 }
 
 /* ─── External indicator ──────────────────────────────────────── */

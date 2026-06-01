@@ -1,2 +1,2 @@
-export { NavigationView, NavigationPage, useNavigation } from "./NavigationView";
-export type { NavigationViewProps, NavigationPageProps } from "./NavigationView";
+export type { NavigationPageProps, NavigationViewProps } from './NavigationView';
+export { NavigationPage, NavigationView, useNavigation } from './NavigationView';

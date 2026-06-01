@@ -131,7 +131,7 @@
   opacity: 0.55;
 
   transition:
-    opacity          var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
     background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 

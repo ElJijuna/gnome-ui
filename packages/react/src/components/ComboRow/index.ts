@@ -1,2 +1,2 @@
-export { ComboRow } from "./ComboRow";
-export type { ComboRowProps, ComboRowOption } from "./ComboRow";
+export type { ComboRowOption, ComboRowProps } from './ComboRow';
+export { ComboRow } from './ComboRow';

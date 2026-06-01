@@ -1,7 +1,7 @@
-export { StatCard } from "./StatCard";
 export type {
   LoadingType,
   StatCardProps,
   StatCardTrend,
   StatCardTrendDirection,
-} from "./StatCard";
+} from './StatCard';
+export { StatCard } from './StatCard';

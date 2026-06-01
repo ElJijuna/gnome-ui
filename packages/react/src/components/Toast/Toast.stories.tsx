@@ -1,14 +1,16 @@
-import { useState, useCallback } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Toast } from "./Toast";
-import { Toaster } from "./Toaster";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useCallback, useState } from 'react';
+
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { Toast } from './Toast';
+import { Toaster } from './Toaster';
 
 const meta: Meta<typeof Toast> = {
-  title: "Components/Toast",
+  title: 'Components/Toast',
   component: Toast,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -39,18 +41,14 @@ type Story = StoryObj<typeof Toast>;
 export const Default: Story = {
   render: function DefaultStory() {
     const [show, setShow] = useState(false);
+
     return (
       <>
         <Button variant="suggested" onClick={() => setShow(true)}>
           Show toast
         </Button>
         <Toaster>
-          {show && (
-            <Toast
-              title="File saved successfully"
-              onDismiss={() => setShow(false)}
-            />
-          )}
+          {show && <Toast title="File saved successfully" onDismiss={() => setShow(false)} />}
         </Toaster>
       </>
     );
@@ -65,16 +63,21 @@ export const WithAction: Story = {
     const [show, setShow] = useState(false);
     const [undone, setUndone] = useState(false);
 
-    const trigger = () => { setShow(true); setUndone(false); };
+    const trigger = () => {
+      setShow(true);
+      setUndone(false);
+    };
 
     return (
       <>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Button variant="destructive" onClick={trigger}>
             Delete item
           </Button>
           {undone && (
-            <Text variant="caption" color="dim">Deletion undone</Text>
+            <Text variant="caption" color="dim">
+              Deletion undone
+            </Text>
           )}
         </div>
         <Toaster>
@@ -82,7 +85,9 @@ export const WithAction: Story = {
             <Toast
               title="Item deleted"
               actionLabel="Undo"
-              onAction={() => { setUndone(true); }}
+              onAction={() => {
+                setUndone(true);
+              }}
               onDismiss={() => setShow(false)}
             />
           )}
@@ -94,7 +99,8 @@ export const WithAction: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Action button dismisses the toast and calls `onAction`. Clicking Undo here marks the deletion as reversed.",
+        story:
+          'Action button dismisses the toast and calls `onAction`. Clicking Undo here marks the deletion as reversed.',
       },
     },
   },
@@ -105,6 +111,7 @@ export const WithAction: Story = {
 export const Persistent: Story = {
   render: function PersistentStory() {
     const [show, setShow] = useState(false);
+
     return (
       <>
         <Button onClick={() => setShow(true)}>Show persistent toast</Button>
@@ -125,7 +132,8 @@ export const Persistent: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`duration={0}` disables auto-dismiss. The dismiss (×) button is the only way to close it.",
+        story:
+          '`duration={0}` disables auto-dismiss. The dismiss (×) button is the only way to close it.',
       },
     },
   },
@@ -141,10 +149,8 @@ export const Queue: Story = {
 
     const add = useCallback(() => {
       const id = ++nextId;
-      setToasts((prev) => [
-        ...prev,
-        { id, title: `Notification #${id}` },
-      ]);
+
+      setToasts((prev) => [...prev, { id, title: `Notification #${id}` }]);
     }, []);
 
     const remove = useCallback((id: number) => {
@@ -156,12 +162,7 @@ export const Queue: Story = {
         <Button onClick={add}>Add notification</Button>
         <Toaster>
           {toasts.map((t) => (
-            <Toast
-              key={t.id}
-              title={t.title}
-              dismissible
-              onDismiss={() => remove(t.id)}
-            />
+            <Toast key={t.id} title={t.title} dismissible onDismiss={() => remove(t.id)} />
           ))}
         </Toaster>
       </>
@@ -171,7 +172,8 @@ export const Queue: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Multiple toasts stack vertically inside `<Toaster>`. Each auto-dismisses independently.",
+        story:
+          'Multiple toasts stack vertically inside `<Toaster>`. Each auto-dismisses independently.',
       },
     },
   },
@@ -182,6 +184,7 @@ export const Queue: Story = {
 export const TopPosition: Story = {
   render: function TopStory() {
     const [show, setShow] = useState(false);
+
     return (
       <>
         <Button onClick={() => setShow(true)}>Show top toast</Button>
@@ -202,7 +205,7 @@ export const TopPosition: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`<Toaster position=\"top\">` places the stack at the top-center of the viewport.",
+        story: '`<Toaster position="top">` places the stack at the top-center of the viewport.',
       },
     },
   },

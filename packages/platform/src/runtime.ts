@@ -7,16 +7,16 @@
  */
 
 export type Shell =
-  | "browser"          // regular browser tab
-  | "pwa"              // installed PWA / standalone display-mode
-  | "electron"         // Electron shell
-  | "webkitgtk-webview"; // embedded WebKitGTK WebView with GJS host
+  | 'browser' // regular browser tab
+  | 'pwa' // installed PWA / standalone display-mode
+  | 'electron' // Electron shell
+  | 'webkitgtk-webview'; // embedded WebKitGTK WebView with GJS host
 
 export type Engine =
-  | "webkit"    // WebKitGTK, Epiphany, Safari
-  | "blink"     // Chromium, Chrome, Edge, Brave
-  | "gecko"     // Firefox
-  | "unknown";
+  | 'webkit' // WebKitGTK, Epiphany, Safari
+  | 'blink' // Chromium, Chrome, Edge, Brave
+  | 'gecko' // Firefox
+  | 'unknown';
 
 export interface RuntimeBrowser {
   epiphany: boolean;
@@ -43,40 +43,51 @@ export interface RuntimeInfo {
 }
 
 function detectShell(): Shell {
-  if (typeof window === "undefined") return "browser";
+  if (typeof window === 'undefined') {
+    return 'browser';
+  }
 
   // Electron exposes process.versions.electron on the renderer window
   if (
-    typeof (window as Window & { process?: { versions?: { electron?: string } } })
-      .process?.versions?.electron === "string"
+    typeof (window as Window & { process?: { versions?: { electron?: string } } }).process?.versions
+      ?.electron === 'string'
   ) {
-    return "electron";
+    return 'electron';
   }
 
   // WebKitGTK embedded WebView: GJS host registers message handlers
-  if (typeof window.webkit?.messageHandlers === "object") {
-    return "webkitgtk-webview";
+  if (typeof window.webkit?.messageHandlers === 'object') {
+    return 'webkitgtk-webview';
   }
 
   // Installed PWA / standalone display-mode
   if (
-    window.matchMedia("(display-mode: standalone)").matches ||
+    window.matchMedia('(display-mode: standalone)').matches ||
     (navigator as Navigator & { standalone?: boolean }).standalone === true
   ) {
-    return "pwa";
+    return 'pwa';
   }
 
-  return "browser";
+  return 'browser';
 }
 
 function detectEngine(ua: string): Engine {
   // Blink: Chrome / Chromium / Edge / Brave all include "Chrome" in the UA
-  if (/Chrome\//.test(ua)) return "blink";
+  if (/Chrome\//.test(ua)) {
+    return 'blink';
+  }
+
   // Gecko: Firefox
-  if (/Gecko\//.test(ua) && /Firefox\//.test(ua)) return "gecko";
+  if (/Gecko\//.test(ua) && /Firefox\//.test(ua)) {
+    return 'gecko';
+  }
+
   // WebKit: Safari, Epiphany, WebKitGTK
-  if (/AppleWebKit\//.test(ua)) return "webkit";
-  return "unknown";
+  if (/AppleWebKit\//.test(ua)) {
+    return 'webkit';
+  }
+
+  return 'unknown';
 }
 
 function detectBrowser(ua: string): RuntimeBrowser {
@@ -86,16 +97,13 @@ function detectBrowser(ua: string): RuntimeBrowser {
     edge: /Edg\//.test(ua),
     // Brave exposes navigator.brave at runtime — UA alone is not reliable
     brave:
-      typeof (navigator as Navigator & { brave?: { isBrave?: unknown } })
-        .brave?.isBrave !== "undefined",
+      typeof (navigator as Navigator & { brave?: { isBrave?: unknown } }).brave?.isBrave !==
+      'undefined',
     // Chrome: present but not Edge/Brave
     chrome: /Chrome\//.test(ua) && !/Edg\//.test(ua),
     firefox: /Firefox\//.test(ua),
     // Safari: WebKit-based but not Blink and not Epiphany
-    safari:
-      /Safari\//.test(ua) &&
-      !/Chrome\//.test(ua) &&
-      !/Epiphany\//.test(ua),
+    safari: /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/Epiphany\//.test(ua),
   };
 }
 
@@ -106,6 +114,7 @@ function detectOS(ua: string): RuntimeOS {
   const linux = /Linux/.test(ua) && !android;
   const mac = /Macintosh/.test(ua);
   const windows = /Windows/.test(ua);
+
   return { android, ios, linux, mac, windows };
 }
 
@@ -116,10 +125,11 @@ let cached: RuntimeInfo | undefined;
  * The result is memoized — call once at app startup or inside a hook.
  */
 export function getRuntime(): RuntimeInfo {
-  if (cached) return cached;
+  if (cached) {
+    return cached;
+  }
 
-  const ua =
-    typeof navigator !== "undefined" ? navigator.userAgent : "";
+  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 
   cached = {
     shell: detectShell(),

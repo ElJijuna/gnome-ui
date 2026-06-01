@@ -1,13 +1,15 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { WrapBox } from "./WrapBox";
-import { Chip } from "../Chip";
-import { Star, Settings, GoHome, Search } from "@gnome-ui/icons";
+import { GoHome, Search, Settings, Star } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Chip } from '../Chip';
+
+import { WrapBox } from './WrapBox';
 
 const meta: Meta<typeof WrapBox> = {
-  title: "Components/WrapBox",
+  title: 'Components/WrapBox',
   component: WrapBox,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -31,16 +33,27 @@ export default meta;
 type Story = StoryObj<typeof WrapBox>;
 
 const tags = [
-  "React", "TypeScript", "GNOME", "Adwaita", "libadwaita",
-  "GTK", "CSS", "Accessibility", "Dark mode", "Responsive",
-  "Components", "Design system",
+  'React',
+  'TypeScript',
+  'GNOME',
+  'Adwaita',
+  'libadwaita',
+  'GTK',
+  'CSS',
+  'Accessibility',
+  'Dark mode',
+  'Responsive',
+  'Components',
+  'Design system',
 ];
 
 export const Default: Story = {
   render: () => (
     <div style={{ maxWidth: 480, padding: 16 }}>
       <WrapBox childSpacing={6} lineSpacing={6}>
-        {tags.map(t => <Chip key={t} label={t} />)}
+        {tags.map((t) => (
+          <Chip key={t} label={t} />
+        ))}
       </WrapBox>
     </div>
   ),
@@ -51,7 +64,9 @@ export const Centered: Story = {
   render: () => (
     <div style={{ maxWidth: 480, padding: 16 }}>
       <WrapBox childSpacing={6} lineSpacing={6} justify="center">
-        {tags.map(t => <Chip key={t} label={t} />)}
+        {tags.map((t) => (
+          <Chip key={t} label={t} />
+        ))}
       </WrapBox>
     </div>
   ),
@@ -62,7 +77,9 @@ export const SpaceBetween: Story = {
   render: () => (
     <div style={{ maxWidth: 480, padding: 16 }}>
       <WrapBox childSpacing={6} lineSpacing={8} justify="space-between">
-        {tags.map(t => <Chip key={t} label={t} />)}
+        {tags.map((t) => (
+          <Chip key={t} label={t} />
+        ))}
       </WrapBox>
     </div>
   ),
@@ -89,14 +106,15 @@ export const WithIcons: Story = {
 export const Removable: Story = {
   render: function RemovableStory() {
     const [items, setItems] = useState(tags);
+
     return (
       <div style={{ maxWidth: 480, padding: 16 }}>
         <WrapBox childSpacing={6} lineSpacing={6}>
-          {items.map(t => (
+          {items.map((t) => (
             <Chip
               key={t}
               label={t}
-              onRemove={() => setItems(prev => prev.filter(x => x !== t))}
+              onRemove={() => setItems((prev) => prev.filter((x) => x !== t))}
             />
           ))}
         </WrapBox>
@@ -108,17 +126,24 @@ export const Removable: Story = {
 
 export const Selectable: Story = {
   render: function SelectableStory() {
-    const [selected, setSelected] = useState<Set<string>>(new Set(["React", "GNOME"]));
+    const [selected, setSelected] = useState<Set<string>>(new Set(['React', 'GNOME']));
     const toggle = (t: string) =>
-      setSelected(prev => {
+      setSelected((prev) => {
         const next = new Set(prev);
-        next.has(t) ? next.delete(t) : next.add(t);
+
+        if (next.has(t)) {
+          next.delete(t);
+        } else {
+          next.add(t);
+        }
+
         return next;
       });
+
     return (
       <div style={{ maxWidth: 480, padding: 16 }}>
         <WrapBox childSpacing={6} lineSpacing={6}>
-          {tags.map(t => (
+          {tags.map((t) => (
             <Chip
               key={t}
               label={t}

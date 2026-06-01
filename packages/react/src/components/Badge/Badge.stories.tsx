@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Badge } from "./Badge";
-import { Avatar } from "../Avatar";
-import { Button } from "../Button";
-import { Text } from "../Text";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Avatar } from '../Avatar';
+import { Button } from '../Button';
+import { Text } from '../Text';
+
+import { Badge } from './Badge';
 
 const meta: Meta<typeof Badge> = {
-  title: "Components/Badge",
+  title: 'Components/Badge',
   component: Badge,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -25,14 +27,14 @@ Counter or status indicator, optionally overlaid on another element.
     },
   },
   argTypes: {
-    variant: { control: "select", options: ["accent", "success", "warning", "error", "neutral"] },
-    dot: { control: "boolean" },
-    children: { control: "text" },
+    variant: { control: 'select', options: ['accent', 'success', 'warning', 'error', 'neutral'] },
+    dot: { control: 'boolean' },
+    children: { control: 'text' },
   },
   args: {
-    variant: "accent",
+    variant: 'accent',
     dot: false,
-    children: "3",
+    children: '3',
   },
 };
 
@@ -47,11 +49,16 @@ export const Default: Story = {};
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-      {(["accent", "success", "warning", "error", "neutral"] as const).map((v) => (
-        <div key={v} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      {(['accent', 'success', 'warning', 'error', 'neutral'] as const).map((v) => (
+        <div
+          key={v}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+        >
           <Badge variant={v}>3</Badge>
-          <Text variant="caption" color="dim">{v}</Text>
+          <Text variant="caption" color="dim">
+            {v}
+          </Text>
         </div>
       ))}
     </div>
@@ -63,11 +70,16 @@ export const Variants: Story = {
 
 export const Dots: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-      {(["accent", "success", "warning", "error", "neutral"] as const).map((v) => (
-        <div key={v} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      {(['accent', 'success', 'warning', 'error', 'neutral'] as const).map((v) => (
+        <div
+          key={v}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}
+        >
           <Badge variant={v} dot />
-          <Text variant="caption" color="dim">{v}</Text>
+          <Text variant="caption" color="dim">
+            {v}
+          </Text>
         </div>
       ))}
     </div>
@@ -75,7 +87,9 @@ export const Dots: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: "Use `dot` for binary status indicators (online, unread) with no count." },
+      description: {
+        story: 'Use `dot` for binary status indicators (online, unread) with no count.',
+      },
     },
   },
 };
@@ -84,18 +98,26 @@ export const Dots: Story = {
 
 export const AnchoredOnAvatar: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
-        <Badge variant="error" anchor={<Avatar name="Jane Doe" size="lg" />}>5</Badge>
-        <Text variant="caption" color="dim">unread</Text>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+        <Badge variant="error" anchor={<Avatar name="Jane Doe" size="lg" />}>
+          5
+        </Badge>
+        <Text variant="caption" color="dim">
+          unread
+        </Text>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
         <Badge variant="success" dot anchor={<Avatar name="Bob Smith" size="lg" />} />
-        <Text variant="caption" color="dim">online</Text>
+        <Text variant="caption" color="dim">
+          online
+        </Text>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
         <Badge variant="neutral" dot anchor={<Avatar name="Carol White" size="lg" />} />
-        <Text variant="caption" color="dim">offline</Text>
+        <Text variant="caption" color="dim">
+          offline
+        </Text>
       </div>
     </div>
   ),
@@ -106,9 +128,13 @@ export const AnchoredOnAvatar: Story = {
 
 export const AnchoredOnButton: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-      <Badge variant="error" anchor={<Button variant="flat">Notifications</Button>}>12</Badge>
-      <Badge variant="accent" anchor={<Button variant="default">Inbox</Button>}>99+</Badge>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+      <Badge variant="error" anchor={<Button variant="flat">Notifications</Button>}>
+        12
+      </Badge>
+      <Badge variant="accent" anchor={<Button variant="default">Inbox</Button>}>
+        99+
+      </Badge>
     </div>
   ),
   parameters: { controls: { disable: true } },
@@ -118,9 +144,11 @@ export const AnchoredOnButton: Story = {
 
 export const OverflowCount: Story = {
   render: () => (
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
       {[1, 9, 42, 100, 999].map((n) => (
-        <Badge key={n} variant="accent">{n > 99 ? "99+" : n}</Badge>
+        <Badge key={n} variant="accent">
+          {n > 99 ? '99+' : n}
+        </Badge>
       ))}
     </div>
   ),

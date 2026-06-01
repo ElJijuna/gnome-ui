@@ -1,17 +1,13 @@
-import {
-  useRef,
-  type CSSProperties,
-  type HTMLAttributes,
-  type KeyboardEvent,
-} from "react";
-import styles from "./ColorPicker.module.css";
+import { type CSSProperties, type HTMLAttributes, type KeyboardEvent, useRef } from 'react';
+
+import styles from './ColorPicker.module.css';
 
 // ─── ColorSwatch ─────────────────────────────────────────────────────────────
 
-export type ColorSwatchSize = "sm" | "md" | "lg";
+export type ColorSwatchSize = 'sm' | 'md' | 'lg';
 
 export interface ColorSwatchProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, "onClick" | "onSelect"> {
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'onSelect'> {
   /** CSS color value displayed as the swatch background. */
   color: string;
   /** Whether this swatch is the currently selected color. */
@@ -21,7 +17,7 @@ export interface ColorSwatchProps
   /** Called when the user clicks or activates the swatch. */
   onSelect?: (color: string) => void;
   /** Accessible label. Defaults to the color value. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   disabled?: boolean;
 }
 
@@ -34,12 +30,12 @@ export interface ColorSwatchProps
 export function ColorSwatch({
   color,
   selected = false,
-  size = "md",
+  size = 'md',
   onSelect,
   disabled = false,
   className,
   style,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
   ...props
 }: ColorSwatchProps) {
   return (
@@ -56,18 +52,13 @@ export function ColorSwatch({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
-      style={{ "--swatch-color": color, ...style } as CSSProperties}
+        .join(' ')}
+      style={{ '--swatch-color': color, ...style } as CSSProperties}
       onClick={() => onSelect?.(color)}
       {...props}
     >
       {selected && (
-        <svg
-          className={styles.checkmark}
-          viewBox="0 0 16 16"
-          fill="none"
-          aria-hidden="true"
-        >
+        <svg className={styles.checkmark} viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path
             d="M3 8l3.5 3.5L13 5"
             stroke="white"
@@ -91,19 +82,20 @@ export interface ColorPickerColor {
 }
 
 /** Default Adwaita-named palette (matches Avatar color set). */
+// eslint-disable-next-line react-refresh/only-export-components
 export const GNOME_PALETTE: ColorPickerColor[] = [
-  { value: "#3584e4", label: "Blue"   },
-  { value: "#2ec27e", label: "Green"  },
-  { value: "#f6d32d", label: "Yellow" },
-  { value: "#ff7800", label: "Orange" },
-  { value: "#e01b24", label: "Red"    },
-  { value: "#9141ac", label: "Purple" },
-  { value: "#986a44", label: "Brown"  },
-  { value: "#2190a4", label: "Teal"   },
-  { value: "#5e5c64", label: "Slate"  },
+  { value: '#3584e4', label: 'Blue' },
+  { value: '#2ec27e', label: 'Green' },
+  { value: '#f6d32d', label: 'Yellow' },
+  { value: '#ff7800', label: 'Orange' },
+  { value: '#e01b24', label: 'Red' },
+  { value: '#9141ac', label: 'Purple' },
+  { value: '#986a44', label: 'Brown' },
+  { value: '#2190a4', label: 'Teal' },
+  { value: '#5e5c64', label: 'Slate' },
 ];
 
-export interface ColorPickerProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface ColorPickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Currently selected color value. */
   value?: string;
   /** Called when the user selects a color. */
@@ -148,10 +140,10 @@ export function ColorPicker({
   onChange,
   colors = GNOME_PALETTE,
   allowCustom = false,
-  size = "md",
+  size = 'md',
   className,
   style,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
   ...props
 }: ColorPickerProps) {
   const customInputRef = useRef<HTMLInputElement>(null);
@@ -163,38 +155,42 @@ export function ColorPicker({
   // Arrow-key navigation within the radiogroup.
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     const all = Array.from(
-      e.currentTarget.querySelectorAll<HTMLButtonElement>(
-        `[role="radio"]:not([disabled])`
-      )
+      e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="radio"]:not([disabled])'),
     );
     const focused = document.activeElement as HTMLButtonElement;
     const idx = all.indexOf(focused);
-    if (idx === -1) return;
+
+    if (idx === -1) {
+      return;
+    }
 
     let next = -1;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault();
       next = (idx + 1) % all.length;
-    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault();
       next = (idx - 1 + all.length) % all.length;
     }
+
     if (next >= 0) {
       all[next].focus();
       const color = all[next].dataset.color;
-      if (color) onChange?.(color);
+
+      if (color) {
+        onChange?.(color);
+      }
     }
   }
 
   // Decide whether the current `value` is a custom (not in palette) color.
-  const isCustom =
-    value !== undefined && !colors.some((c) => c.value === value);
+  const isCustom = value !== undefined && !colors.some((c) => c.value === value);
 
   return (
     <div
       role="radiogroup"
-      aria-label={ariaLabel ?? "Color"}
-      className={[styles.picker, className].filter(Boolean).join(" ")}
+      aria-label={ariaLabel ?? 'Color'}
+      className={[styles.picker, className].filter(Boolean).join(' ')}
       style={style}
       onKeyDown={handleKeyDown}
       {...props}
@@ -233,7 +229,7 @@ export function ColorPicker({
             aria-label="Choose custom color"
             className={[styles.swatch, styles[`swatch-${size}`], styles.customButton]
               .filter(Boolean)
-              .join(" ")}
+              .join(' ')}
             tabIndex={isCustom ? -1 : -1}
             onClick={() => customInputRef.current?.click()}
           >
@@ -250,7 +246,7 @@ export function ColorPicker({
           <input
             ref={customInputRef}
             type="color"
-            value={isCustom && value ? value : "#000000"}
+            value={isCustom && value ? value : '#000000'}
             className={styles.nativeInput}
             aria-hidden="true"
             tabIndex={-1}

@@ -1,7 +1,9 @@
-import { type HTMLAttributes, type ReactNode, useMemo, useState } from "react";
-import { Button, Skeleton, Spinner, Text, useLocale } from "@gnome-ui/react";
-import type { LoadingType } from "../StatCard";
-import styles from "./ActivityFeed.module.css";
+import { Button, Skeleton, Spinner, Text, useLocale } from '@gnome-ui/react';
+import { type HTMLAttributes, type ReactNode, useMemo, useState } from 'react';
+
+import type { LoadingType } from '../StatCard';
+
+import styles from './ActivityFeed.module.css';
 
 export interface ActivityFeedItem {
   id: string;
@@ -28,10 +30,19 @@ function formatRelativeTime(date: Date, rtf: Intl.RelativeTimeFormat): string {
   const diffMs = date.getTime() - Date.now();
   const absSec = Math.abs(diffMs) / 1000;
 
-  if (absSec < 60) return rtf.format(0, "second");
-  if (absSec < 3_600) return rtf.format(Math.round(diffMs / 60_000), "minute");
-  if (absSec < 86_400) return rtf.format(Math.round(diffMs / 3_600_000), "hour");
-  return rtf.format(Math.round(diffMs / 86_400_000), "day");
+  if (absSec < 60) {
+    return rtf.format(0, 'second');
+  }
+
+  if (absSec < 3_600) {
+    return rtf.format(Math.round(diffMs / 60_000), 'minute');
+  }
+
+  if (absSec < 86_400) {
+    return rtf.format(Math.round(diffMs / 3_600_000), 'hour');
+  }
+
+  return rtf.format(Math.round(diffMs / 86_400_000), 'day');
 }
 
 const SKELETON_COUNT = 4;
@@ -52,22 +63,19 @@ export function ActivityFeed({
   items,
   maxItems,
   loading = false,
-  loadingType = "skeleton",
+  loadingType = 'skeleton',
   emptyState,
   className,
   ...props
 }: ActivityFeedProps) {
   const [expanded, setExpanded] = useState(false);
   const locale = useLocale();
-  const rtf = useMemo(
-    () => new Intl.RelativeTimeFormat(locale, { numeric: "auto" }),
-    [locale],
-  );
+  const rtf = useMemo(() => new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }), [locale]);
 
   if (loading) {
-    const rootClass = [styles.root, className].filter(Boolean).join(" ");
+    const rootClass = [styles.root, className].filter(Boolean).join(' ');
 
-    if (loadingType === "spinner") {
+    if (loadingType === 'spinner') {
       return (
         <div className={rootClass} aria-busy="true" {...props}>
           <div className={styles.spinnerWrapper}>
@@ -97,10 +105,7 @@ export function ActivityFeed({
 
   if (items.length === 0) {
     return (
-      <div
-        className={[styles.root, className].filter(Boolean).join(" ")}
-        {...props}
-      >
+      <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
         {emptyState ?? null}
       </div>
     );
@@ -111,10 +116,7 @@ export function ActivityFeed({
   const hiddenCount = items.length - (maxItems ?? items.length);
 
   return (
-    <div
-      className={[styles.root, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
       <ul className={styles.list}>
         {visible.map((item) => (
           <li key={item.id} className={styles.item}>

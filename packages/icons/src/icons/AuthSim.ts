@@ -1,12 +1,11 @@
-/* eslint-disable */
-import type { IconDefinition } from "../types.ts";
+import type { IconDefinition } from '../types.ts';
 
 /** auth-sim-symbolic.svg (devices/auth-sim) */
 export const AuthSim: IconDefinition = {
-  viewBox: "0 0 16 16",
+  viewBox: '0 0 16 16',
   paths: [
-  {
-    d: "m 4 0 c -2 0 -2 2 -2 2 v 12 c 0 2 2 2 2 2 h 8 s 2 0 2 -2 v -11 l -3 -3 z m 1 6 l 1 0.007812 v 2 h -2 v -1.007812 s 0 -1 1 -1 z m 6 0 c 1 0 1 1 1 1 l -0.003906 1 h -2 v -2 z m -4 0.007812 h 2 v 2 h -2 z m -3 2.996094 h 8 v 3.996094 c 0 1 -1 1 -1 1 l -1 -0.003906 v -2.996094 h -6 z m 6 2 h 2 v -0.003906 h -2 z m -6 1 h 2 v 2 l -1 -0.003906 c -1 0 -1 -1 -1 -1 z m 3 0 h 2 v 2 h -2 z m 0 0"
-  }
-],
+    {
+      d: 'm 4 0 c -2 0 -2 2 -2 2 v 12 c 0 2 2 2 2 2 h 8 s 2 0 2 -2 v -11 l -3 -3 z m 1 6 l 1 0.007812 v 2 h -2 v -1.007812 s 0 -1 1 -1 z m 6 0 c 1 0 1 1 1 1 l -0.003906 1 h -2 v -2 z m -4 0.007812 h 2 v 2 h -2 z m -3 2.996094 h 8 v 3.996094 c 0 1 -1 1 -1 1 l -1 -0.003906 v -2.996094 h -6 z m 6 2 h 2 v -0.003906 h -2 z m -6 1 h 2 v 2 l -1 -0.003906 c -1 0 -1 -1 -1 -1 z m 3 0 h 2 v 2 h -2 z m 0 0',
+    },
+  ],
 };

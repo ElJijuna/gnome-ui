@@ -1,9 +1,11 @@
-import { memo } from "react";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
-import type { IconDefinition } from "@gnome-ui/icons";
-import { Icon } from "../Icon";
-import { Badge } from "../Badge";
-import styles from "./Tabs.module.css";
+import type { IconDefinition } from '@gnome-ui/icons';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { memo } from 'react';
+
+import { Badge } from '../Badge';
+import { Icon } from '../Icon';
+
+import styles from './Tabs.module.css';
 
 export interface TabItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Tab label. */
@@ -38,7 +40,7 @@ export const TabItem = memo(function TabItem({
   active = false,
   panelId,
   onClose,
-  closeLabel = "Close tab",
+  closeLabel = 'Close tab',
   count,
   className,
   disabled,
@@ -59,7 +61,7 @@ export const TabItem = memo(function TabItem({
         className,
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {icon && (
@@ -70,9 +72,7 @@ export const TabItem = memo(function TabItem({
       <span className={styles.tabLabel}>{label}</span>
 
       {count !== undefined && (
-        <Badge className={styles.tabBadge}>
-          {count > 99 ? "99+" : count}
-        </Badge>
+        <Badge className={styles.tabBadge}>{count > 99 ? '99+' : count}</Badge>
       )}
 
       {onClose && (
@@ -80,7 +80,10 @@ export const TabItem = memo(function TabItem({
           type="button"
           aria-label={closeLabel}
           className={styles.closeBtn}
-          onClick={(e) => { e.stopPropagation(); onClose(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
         >
           ×
         </button>

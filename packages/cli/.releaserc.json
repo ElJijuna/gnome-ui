@@ -1,24 +1,22 @@
 {
   "tagFormat": "@gnome-ui/cli@${version}",
-  "branches": [
-    "main"
-  ],
+  "branches": ["main"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
         "preset": "conventionalcommits",
         "releaseRules": [
-          { "type": "feat",     "release": false },
-          { "type": "fix",      "release": false },
-          { "type": "perf",     "release": false },
+          { "type": "feat", "release": false },
+          { "type": "fix", "release": false },
+          { "type": "perf", "release": false },
           { "type": "refactor", "release": false },
-          { "breaking": true,   "release": false },
-          { "type": "feat",     "scope": "@gnome-ui/cli", "release": "minor" },
-          { "type": "fix",      "scope": "@gnome-ui/cli", "release": "patch" },
-          { "type": "perf",     "scope": "@gnome-ui/cli", "release": "patch" },
+          { "breaking": true, "release": false },
+          { "type": "feat", "scope": "@gnome-ui/cli", "release": "minor" },
+          { "type": "fix", "scope": "@gnome-ui/cli", "release": "patch" },
+          { "type": "perf", "scope": "@gnome-ui/cli", "release": "patch" },
           { "type": "refactor", "scope": "@gnome-ui/cli", "release": "patch" },
-          { "breaking": true,   "scope": "@gnome-ui/cli", "release": "major" }
+          { "breaking": true, "scope": "@gnome-ui/cli", "release": "major" }
         ]
       }
     ],
@@ -74,18 +72,13 @@
       "@semantic-release/github",
       {
         "successComment": "🎉 This change is included in `@gnome-ui/cli@${nextRelease.version}`.",
-        "releasedLabels": [
-          "released"
-        ]
+        "releasedLabels": ["released"]
       }
     ],
     [
       "@semantic-release/git",
       {
-        "assets": [
-          "CHANGELOG.md",
-          "package.json"
-        ],
+        "assets": ["CHANGELOG.md", "package.json"],
         "message": "chore(release): @gnome-ui/cli@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]

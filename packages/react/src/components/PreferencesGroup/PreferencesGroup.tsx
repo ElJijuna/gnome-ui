@@ -1,5 +1,6 @@
-import { type HTMLAttributes, type ReactNode } from "react";
-import styles from "./PreferencesGroup.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './PreferencesGroup.module.css';
 
 export interface PreferencesGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Group heading. */
@@ -34,10 +35,7 @@ export function PreferencesGroup({
   const hasHeader = title || description || headerSuffix;
 
   return (
-    <div
-      className={[styles.group, className].filter(Boolean).join(" ")}
-      {...props}
-    >
+    <div className={[styles.group, className].filter(Boolean).join(' ')} {...props}>
       {hasHeader && (
         <div className={styles.header}>
           <div className={styles.headerText}>

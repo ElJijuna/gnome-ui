@@ -1,5 +1,6 @@
-import { type ReactNode, useRef, useState } from "react";
-import styles from "./ColumnView.module.css";
+import { type ReactNode, useRef, useState } from 'react';
+
+import styles from './ColumnView.module.css';
 
 export interface ColumnDef<TRow> {
   id: string;
@@ -8,17 +9,17 @@ export interface ColumnDef<TRow> {
   sortable?: boolean;
   /** CSS width value — e.g. "200px", "30%". */
   width?: string;
-  align?: "start" | "center" | "end";
+  align?: 'start' | 'center' | 'end';
 }
 
-export type SortDirection = "asc" | "desc";
+export type SortDirection = 'asc' | 'desc';
 
 export interface ColumnViewSortState {
   columnId: string;
   direction: SortDirection;
 }
 
-export type ColumnViewSelectionMode = "none" | "single" | "multiple";
+export type ColumnViewSelectionMode = 'none' | 'single' | 'multiple';
 
 export interface ColumnViewProps<TRow extends object = Record<string, unknown>> {
   columns: ColumnDef<TRow>[];
@@ -56,9 +57,9 @@ function SortChevron({ direction }: { direction: SortDirection | null }) {
       aria-hidden="true"
       className={direction ? styles.sortActive : styles.sortNeutral}
     >
-      {direction === "asc" ? (
+      {direction === 'asc' ? (
         <path d="M5 2 L9 8 L1 8 Z" fill="currentColor" />
-      ) : direction === "desc" ? (
+      ) : direction === 'desc' ? (
         <path d="M5 8 L1 2 L9 2 Z" fill="currentColor" />
       ) : (
         <>
@@ -74,7 +75,7 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
   columns,
   rows,
   rowKey,
-  selectionMode = "none",
+  selectionMode = 'none',
   selectedRows = [],
   onSelectionChange,
   sortState,
@@ -87,85 +88,94 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
   const tbodyRef = useRef<HTMLTableSectionElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const selectedSet = new Set(selectedRows);
-  const hasCheckbox = selectionMode === "multiple";
+  const hasCheckbox = selectionMode === 'multiple';
   const colSpan = columns.length + (hasCheckbox ? 1 : 0);
 
   function handleSort(colId: string) {
-    if (!onSort) return;
+    if (!onSort) {
+      return;
+    }
+
     const next: SortDirection =
-      sortState?.columnId === colId && sortState.direction === "asc"
-        ? "desc"
-        : "asc";
+      sortState?.columnId === colId && sortState.direction === 'asc' ? 'desc' : 'asc';
+
     onSort(colId, next);
   }
 
   function toggleRow(key: string | number) {
-    if (selectionMode === "none" || !onSelectionChange) return;
-    if (selectionMode === "single") {
+    if (selectionMode === 'none' || !onSelectionChange) {
+      return;
+    }
+
+    if (selectionMode === 'single') {
       onSelectionChange(selectedSet.has(key) ? [] : [key]);
     } else {
       const next = new Set(selectedSet);
-      next.has(key) ? next.delete(key) : next.add(key);
+
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+
       onSelectionChange([...next]);
     }
   }
 
-  function handleRowKey(
-    e: React.KeyboardEvent,
-    index: number,
-    key: string | number,
-  ) {
-    const rows_els =
-      tbodyRef.current?.querySelectorAll<HTMLTableRowElement>("tr") ?? [];
-    if (e.key === "ArrowDown") {
+  function handleRowKey(e: React.KeyboardEvent, index: number, key: string | number) {
+    const rows_els = tbodyRef.current?.querySelectorAll<HTMLTableRowElement>('tr') ?? [];
+
+    if (e.key === 'ArrowDown') {
       e.preventDefault();
       const next = Math.min(rows.length - 1, index + 1);
+
       setFocusedIndex(next);
       rows_els[next]?.focus();
-    } else if (e.key === "ArrowUp") {
+    } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       const prev = Math.max(0, index - 1);
+
       setFocusedIndex(prev);
       rows_els[prev]?.focus();
-    } else if (e.key === " " || e.key === "Enter") {
+    } else if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
       toggleRow(key);
     }
   }
 
   function handleSelectAll(checked: boolean) {
-    if (!onSelectionChange) return;
+    if (!onSelectionChange) {
+      return;
+    }
+
     onSelectionChange(checked ? rows.map(rowKey) : []);
   }
 
   const containerStyle: React.CSSProperties = height
-    ? { height: typeof height === "number" ? `${height}px` : height }
+    ? { height: typeof height === 'number' ? `${height}px` : height }
     : {};
 
   return (
-    <div className={[styles.outer, className].filter(Boolean).join(" ")}>
+    <div className={[styles.outer, className].filter(Boolean).join(' ')}>
       <div className={styles.scroll} style={containerStyle}>
         <table
           className={styles.table}
-          role="grid"
           aria-label={ariaLabel}
-          aria-multiselectable={selectionMode === "multiple" || undefined}
+          aria-multiselectable={selectionMode === 'multiple' || undefined}
         >
           <thead className={styles.thead}>
             <tr>
               {hasCheckbox && (
-                <th className={[styles.th, styles.checkboxCol].join(" ")}>
+                <th className={[styles.th, styles.checkboxCol].join(' ')}>
                   <input
                     type="checkbox"
                     className={styles.checkbox}
-                    checked={
-                      rows.length > 0 && selectedRows.length === rows.length
-                    }
+                    checked={rows.length > 0 && selectedRows.length === rows.length}
                     ref={(el) => {
-                      if (el)
+                      if (el) {
                         el.indeterminate =
-                          selectedRows.length > 0 &&
-                          selectedRows.length < rows.length;
+                          selectedRows.length > 0 && selectedRows.length < rows.length;
+                      }
                     }}
                     onChange={(e) => handleSelectAll(e.target.checked)}
                     aria-label="Select all rows"
@@ -174,38 +184,34 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
               )}
               {columns.map((col) => {
                 const isSorted = sortState?.columnId === col.id;
+
                 return (
                   <th
                     key={col.id}
                     className={[styles.th, col.align ? ALIGN[col.align] : null]
                       .filter(Boolean)
-                      .join(" ")}
+                      .join(' ')}
                     style={col.width ? { width: col.width } : undefined}
                     aria-sort={
                       isSorted
-                        ? sortState!.direction === "asc"
-                          ? "ascending"
-                          : "descending"
+                        ? sortState?.direction === 'asc'
+                          ? 'ascending'
+                          : 'descending'
                         : col.sortable
-                          ? "none"
+                          ? 'none'
                           : undefined
                     }
                   >
                     {col.sortable && onSort ? (
                       <button
                         type="button"
-                        className={[
-                          styles.sortBtn,
-                          isSorted ? styles.sortBtnActive : null,
-                        ]
+                        className={[styles.sortBtn, isSorted ? styles.sortBtnActive : null]
                           .filter(Boolean)
-                          .join(" ")}
+                          .join(' ')}
                         onClick={() => handleSort(col.id)}
                       >
                         <span>{col.header}</span>
-                        <SortChevron
-                          direction={isSorted ? sortState!.direction : null}
-                        />
+                        <SortChevron direction={isSorted ? sortState?.direction : null} />
                       </button>
                     ) : (
                       <span className={styles.headerLabel}>{col.header}</span>
@@ -220,36 +226,32 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
             {rows.length === 0 ? (
               <tr>
                 <td colSpan={colSpan} className={styles.emptyCell}>
-                  {emptyState ?? (
-                    <span className={styles.emptyLabel}>No items</span>
-                  )}
+                  {emptyState ?? <span className={styles.emptyLabel}>No items</span>}
                 </td>
               </tr>
             ) : (
               rows.map((row, index) => {
                 const key = rowKey(row);
                 const isSelected = selectedSet.has(key);
+
                 return (
                   <tr
                     key={key}
                     className={[
                       styles.row,
                       isSelected ? styles.rowSelected : null,
-                      selectionMode !== "none" ? styles.rowSelectable : null,
+                      selectionMode !== 'none' ? styles.rowSelectable : null,
                     ]
                       .filter(Boolean)
-                      .join(" ")}
-                    role="row"
-                    aria-selected={
-                      selectionMode !== "none" ? isSelected : undefined
-                    }
+                      .join(' ')}
+                    aria-selected={selectionMode !== 'none' ? isSelected : undefined}
                     tabIndex={focusedIndex === index ? 0 : -1}
                     onClick={() => toggleRow(key)}
                     onKeyDown={(e) => handleRowKey(e, index, key)}
                     onFocus={() => setFocusedIndex(index)}
                   >
                     {hasCheckbox && (
-                      <td className={[styles.td, styles.checkboxCol].join(" ")}>
+                      <td className={[styles.td, styles.checkboxCol].join(' ')}>
                         <input
                           type="checkbox"
                           className={styles.checkbox}
@@ -264,13 +266,9 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
                     {columns.map((col) => (
                       <td
                         key={col.id}
-                        className={[
-                          styles.td,
-                          col.align ? ALIGN[col.align] : null,
-                        ]
+                        className={[styles.td, col.align ? ALIGN[col.align] : null]
                           .filter(Boolean)
-                          .join(" ")}
-                        role="gridcell"
+                          .join(' ')}
                       >
                         {col.cell(row, index)}
                       </td>

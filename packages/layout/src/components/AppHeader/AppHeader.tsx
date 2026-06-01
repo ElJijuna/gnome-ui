@@ -1,8 +1,9 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { HeaderBar, WindowTitle } from "@gnome-ui/react";
-import styles from "./AppHeader.module.css";
+import { HeaderBar, WindowTitle } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export interface AppHeaderProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+import styles from './AppHeader.module.css';
+
+export interface AppHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Primary title shown in the header. */
   title?: ReactNode;
   /** Optional subtitle shown below a string title. */
@@ -38,33 +39,27 @@ export function AppHeader({
   ...props
 }: AppHeaderProps) {
   const titleNode =
-    typeof title === "string" ? (
-      <WindowTitle title={title} subtitle={subtitle} />
-    ) : (
-      title
-    );
+    typeof title === 'string' ? <WindowTitle title={title} subtitle={subtitle} /> : title;
 
-  const center = titleNode || navigation
-    ? (
-        <div className={styles.center}>
-          {titleNode && <div className={styles.title}>{titleNode}</div>}
-          {navigation && <div className={styles.navigation}>{navigation}</div>}
-        </div>
-      )
-    : undefined;
+  const center =
+    titleNode || navigation ? (
+      <div className={styles.center}>
+        {titleNode && <div className={styles.title}>{titleNode}</div>}
+        {navigation && <div className={styles.navigation}>{navigation}</div>}
+      </div>
+    ) : undefined;
 
-  const end = search || actions
-    ? (
-        <div className={styles.end}>
-          {search && <div className={styles.search}>{search}</div>}
-          {actions && <div className={styles.actions}>{actions}</div>}
-        </div>
-      )
-    : undefined;
+  const end =
+    search || actions ? (
+      <div className={styles.end}>
+        {search && <div className={styles.search}>{search}</div>}
+        {actions && <div className={styles.actions}>{actions}</div>}
+      </div>
+    ) : undefined;
 
   return (
     <HeaderBar
-      className={[styles.appHeader, className].filter(Boolean).join(" ")}
+      className={[styles.appHeader, className].filter(Boolean).join(' ')}
       start={leading}
       title={center}
       end={end}

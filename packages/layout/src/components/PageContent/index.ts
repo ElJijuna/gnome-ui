@@ -1,6 +1,6 @@
-export { PageContent } from "./PageContent";
 export type {
   PageContentMaxWidth,
   PageContentPadding,
   PageContentProps,
-} from "./PageContent";
+} from './PageContent';
+export { PageContent } from './PageContent';

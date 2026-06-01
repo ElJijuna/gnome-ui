@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Blockquote } from "./Blockquote";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Blockquote } from './Blockquote';
 
 const meta: Meta<typeof Blockquote> = {
-  title: "Components/Blockquote",
+  title: 'Components/Blockquote',
   component: Blockquote,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -27,17 +28,16 @@ content. Five visual variants map to the same severity scale used by
   },
   argTypes: {
     variant: {
-      control: "select",
-      options: ["default", "info", "warning", "error", "success"],
+      control: 'select',
+      options: ['default', 'info', 'warning', 'error', 'success'],
     },
-    cite: { control: "text" },
-    children: { control: "text" },
+    cite: { control: 'text' },
+    children: { control: 'text' },
   },
   args: {
-    variant: "default",
-    children:
-      "The best way to predict the future is to invent it.",
-    cite: "Alan Kay",
+    variant: 'default',
+    children: 'The best way to predict the future is to invent it.',
+    cite: 'Alan Kay',
   },
   decorators: [
     (Story) => (
@@ -59,7 +59,7 @@ export const Default: Story = {};
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 560 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 560 }}>
       <Blockquote variant="default" cite="Alan Kay">
         The best way to predict the future is to invent it.
       </Blockquote>
@@ -84,7 +84,7 @@ export const Variants: Story = {
 
 export const WithIcon: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 560 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 560 }}>
       <Blockquote
         variant="info"
         icon={
@@ -116,12 +116,12 @@ export const WithIcon: Story = {
 export const NoCite: Story = {
   args: {
     cite: undefined,
-    children: "Simplicity is the ultimate sophistication.",
+    children: 'Simplicity is the ultimate sophistication.',
   },
   parameters: {
     docs: {
       description: {
-        story: "Omit `cite` when the source is unknown or attribution is not needed.",
+        story: 'Omit `cite` when the source is unknown or attribution is not needed.',
       },
     },
   },
@@ -131,17 +131,17 @@ export const NoCite: Story = {
 
 export const LongQuote: Story = {
   args: {
-    variant: "info",
-    cite: "Donald Knuth, The Art of Computer Programming",
+    variant: 'info',
+    cite: 'Donald Knuth, The Art of Computer Programming',
     children:
-      "Programs are meant to be read by humans and only incidentally for computers to execute. " +
-      "We should write programs that read well, with meaningful names and clean structure, " +
-      "as if they were prose addressed to another programmer.",
+      'Programs are meant to be read by humans and only incidentally for computers to execute. ' +
+      'We should write programs that read well, with meaningful names and clean structure, ' +
+      'as if they were prose addressed to another programmer.',
   },
   parameters: {
     docs: {
       description: {
-        story: "The component wraps naturally; no fixed height or truncation is applied.",
+        story: 'The component wraps naturally; no fixed height or truncation is applied.',
       },
     },
   },
@@ -155,20 +155,19 @@ export const RichCite: Story = {
       variant="default"
       cite={
         <span>
-          Ada Lovelace,{" "}
-          <em>Notes on the Analytical Engine</em>, 1842
+          Ada Lovelace, <em>Notes on the Analytical Engine</em>, 1842
         </span>
       }
     >
-      The Analytical Engine has no pretensions whatever to originate anything.
-      It can only do what we know how to order it to perform.
+      The Analytical Engine has no pretensions whatever to originate anything. It can only do what
+      we know how to order it to perform.
     </Blockquote>
   ),
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`cite` accepts any `ReactNode`, so you can include inline formatting like `<em>`.",
+        story: '`cite` accepts any `ReactNode`, so you can include inline formatting like `<em>`.',
       },
     },
   },

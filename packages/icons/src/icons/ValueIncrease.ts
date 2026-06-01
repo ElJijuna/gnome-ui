@@ -1,12 +1,11 @@
-/* eslint-disable */
-import type { IconDefinition } from "../types.ts";
+import type { IconDefinition } from '../types.ts';
 
 /** value-increase-symbolic.svg (actions/value-increase) */
 export const ValueIncrease: IconDefinition = {
-  viewBox: "0 0 16 16",
+  viewBox: '0 0 16 16',
   paths: [
-  {
-    d: "m 7 3 v 4 h -4 v 2 h 4 v 4 h 2 v -4 h 4 v -2 h -4 v -4 z m 0 0"
-  }
-],
+    {
+      d: 'm 7 3 v 4 h -4 v 2 h 4 v 4 h 2 v -4 h 4 v -2 h -4 v -4 z m 0 0',
+    },
+  ],
 };

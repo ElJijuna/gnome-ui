@@ -1,14 +1,16 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { SidebarTrigger } from "./SidebarTrigger";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { SidebarTrigger } from './SidebarTrigger';
 
 const meta: Meta<typeof SidebarTrigger> = {
-  title: "Layout/SidebarTrigger",
+  title: 'Layout/SidebarTrigger',
   component: SidebarTrigger,
   parameters: {
     docs: {
       description: {
-        component: "Header button that opens overlay sidebars on narrow screens and toggles rail collapse on wider screens.",
+        component:
+          'Header button that opens overlay sidebars on narrow screens and toggles rail collapse on wider screens.',
       },
     },
   },

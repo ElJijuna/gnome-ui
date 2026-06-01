@@ -24,9 +24,9 @@
   gap: 2px;
 
   /* Override the horizontal pill style from ViewSwitcherItem */
-  border-radius: 0 !important;
-  padding: 6px 4px !important;
-  font-size: var(--gnome-font-size-caption, 0.8125rem) !important;
+  border-radius: 0;
+  padding: 6px 4px;
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
   min-height: 52px;
 }
 

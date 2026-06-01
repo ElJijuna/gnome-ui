@@ -1,14 +1,14 @@
 import {
-  useRef,
-  useCallback,
-  type PointerEvent,
-  type KeyboardEvent,
   type HTMLAttributes,
-} from "react";
-import styles from "./Slider.module.css";
+  type KeyboardEvent,
+  type PointerEvent,
+  useCallback,
+  useRef,
+} from 'react';
 
-export interface SliderProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+import styles from './Slider.module.css';
+
+export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Current value. Must be between `min` and `max`. */
   value: number;
   /** Called when the value changes. */
@@ -32,11 +32,11 @@ export interface SliderProps
    */
   marks?: Array<{ value: number; label?: string }>;
   /** Accessible label. Required when no visible `<label>` is present. */
-  "aria-label"?: string;
+  'aria-label'?: string;
   /** Associates the control with a visible label element. */
-  "aria-labelledby"?: string;
+  'aria-labelledby'?: string;
   /** `id` of an element that describes the current value (e.g. a live region). */
-  "aria-describedby"?: string;
+  'aria-describedby'?: string;
 }
 
 function clamp(v: number, min: number, max: number) {
@@ -49,7 +49,8 @@ function snapToStep(v: number, min: number, step: number, decimals: number) {
 
 function countDecimals(n: number) {
   const s = n.toString();
-  const dot = s.indexOf(".");
+  const dot = s.indexOf('.');
+
   return dot === -1 ? 0 : s.length - dot - 1;
 }
 
@@ -72,9 +73,9 @@ export function Slider({
   disabled = false,
   marks,
   className,
-  "aria-label": ariaLabel,
-  "aria-labelledby": ariaLabelledBy,
-  "aria-describedby": ariaDescribedBy,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
   ...props
 }: SliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -84,30 +85,40 @@ export function Slider({
 
   const setFromX = useCallback(
     (clientX: number) => {
-      if (!trackRef.current) return;
+      if (!trackRef.current) {
+        return;
+      }
+
       const { left, width } = trackRef.current.getBoundingClientRect();
       const raw = ((clientX - left) / width) * (max - min) + min;
+
       onChange(clamp(snapToStep(raw, min, step, dp), min, max));
     },
-    [min, max, step, dp, onChange]
+    [min, max, step, dp, onChange],
   );
 
   // Pointer drag — capture on the thumb, move anywhere
   const handlePointerDown = useCallback(
     (e: PointerEvent<HTMLDivElement>) => {
-      if (disabled) return;
+      if (disabled) {
+        return;
+      }
+
       e.currentTarget.setPointerCapture(e.pointerId);
       setFromX(e.clientX);
     },
-    [disabled, setFromX]
+    [disabled, setFromX],
   );
 
   const handlePointerMove = useCallback(
     (e: PointerEvent<HTMLDivElement>) => {
-      if (!e.currentTarget.hasPointerCapture(e.pointerId)) return;
+      if (!e.currentTarget.hasPointerCapture(e.pointerId)) {
+        return;
+      }
+
       setFromX(e.clientX);
     },
-    [setFromX]
+    [setFromX],
   );
 
   // Keyboard
@@ -117,44 +128,41 @@ export function Slider({
         e.preventDefault();
         onChange(clamp(snapToStep(next, min, step, dp), min, max));
       };
+
       switch (e.key) {
-        case "ArrowRight":
-        case "ArrowUp":
+        case 'ArrowRight':
+        case 'ArrowUp':
           set(value + step);
           break;
-        case "ArrowLeft":
-        case "ArrowDown":
+        case 'ArrowLeft':
+        case 'ArrowDown':
           set(value - step);
           break;
-        case "PageUp":
+        case 'PageUp':
           set(value + step * 10);
           break;
-        case "PageDown":
+        case 'PageDown':
           set(value - step * 10);
           break;
-        case "Home":
+        case 'Home':
           set(min);
           break;
-        case "End":
+        case 'End':
           set(max);
           break;
       }
     },
-    [value, step, min, max, dp, onChange]
+    [value, step, min, max, dp, onChange],
   );
 
-  const hasMarks   = marks && marks.length > 0;
-  const hasLabels  = hasMarks && marks.some((m) => m.label);
+  const hasMarks = marks && marks.length > 0;
+  const hasLabels = hasMarks && marks.some((m) => m.label);
 
   return (
     <div
-      className={[
-        styles.wrapper,
-        hasLabels ? styles.hasLabels : null,
-        className,
-      ]
+      className={[styles.wrapper, hasLabels ? styles.hasLabels : null, className]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
       {...props}
     >
       {/* Accessible slider */}
@@ -169,9 +177,7 @@ export function Slider({
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
         aria-disabled={disabled || undefined}
-        className={[styles.track, disabled ? styles.disabled : null]
-          .filter(Boolean)
-          .join(" ")}
+        className={[styles.track, disabled ? styles.disabled : null].filter(Boolean).join(' ')}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onKeyDown={disabled ? undefined : handleKeyDown}
@@ -180,16 +186,13 @@ export function Slider({
         <div className={styles.fill} style={{ width: `${pct}%` }} />
 
         {/* Thumb */}
-        <div
-          className={styles.thumb}
-          style={{ left: `${pct}%` }}
-          aria-hidden="true"
-        />
+        <div className={styles.thumb} style={{ left: `${pct}%` }} aria-hidden="true" />
 
         {/* Tick marks */}
         {hasMarks &&
           marks.map((m) => {
             const mPct = ((clamp(m.value, min, max) - min) / (max - min)) * 100;
+
             return (
               <div
                 key={m.value}
@@ -206,12 +209,9 @@ export function Slider({
         <div className={styles.labels} aria-hidden="true">
           {marks.map((m) => {
             const mPct = ((clamp(m.value, min, max) - min) / (max - min)) * 100;
+
             return (
-              <span
-                key={m.value}
-                className={styles.markLabel}
-                style={{ left: `${mPct}%` }}
-              >
+              <span key={m.value} className={styles.markLabel} style={{ left: `${mPct}%` }}>
                 {m.label}
               </span>
             );

@@ -1,7 +1,8 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
-import styles from "./ButtonRow.module.css";
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type ButtonRowVariant = "default" | "suggested" | "destructive";
+import styles from './ButtonRow.module.css';
+
+export type ButtonRowVariant = 'default' | 'suggested' | 'destructive';
 
 export interface ButtonRowProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Label displayed centered in the row. */
@@ -25,19 +26,13 @@ export interface ButtonRowProps extends ButtonHTMLAttributes<HTMLButtonElement> 
  */
 export function ButtonRow({
   title,
-  variant = "default",
+  variant = 'default',
   leading,
   trailing,
   className,
   ...props
 }: ButtonRowProps) {
-  const classes = [
-    styles.row,
-    styles[variant],
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const classes = [styles.row, styles[variant], className].filter(Boolean).join(' ');
 
   return (
     <button className={classes} {...props}>

@@ -1,21 +1,23 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { PreferencesDialog } from "./PreferencesDialog";
-import { PreferencesPage } from "../PreferencesPage";
-import { PreferencesGroup } from "../PreferencesGroup";
-import { BoxedList } from "../BoxedList";
-import { SwitchRow } from "../SwitchRow";
-import { ComboRow } from "../ComboRow";
-import { EntryRow } from "../EntryRow";
-import { SpinRow } from "../SpinRow";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { ComboRow } from '../ComboRow';
+import { EntryRow } from '../EntryRow';
+import { PreferencesGroup } from '../PreferencesGroup';
+import { PreferencesPage } from '../PreferencesPage';
+import { SpinRow } from '../SpinRow';
+import { SwitchRow } from '../SwitchRow';
+
+import { PreferencesDialog } from './PreferencesDialog';
 
 const meta: Meta<typeof PreferencesDialog> = {
-  title: "Components/PreferencesDialog",
+  title: 'Components/PreferencesDialog',
   component: PreferencesDialog,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -54,9 +56,12 @@ type Story = StoryObj<typeof PreferencesDialog>;
 export const SinglePage: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
+
     return (
       <>
-        <Button variant="suggested" onClick={() => setOpen(true)}>Open Preferences</Button>
+        <Button variant="suggested" onClick={() => setOpen(true)}>
+          Open Preferences
+        </Button>
         <PreferencesDialog open={open} onClose={() => setOpen(false)}>
           <PreferencesPage title="General">
             <PreferencesGroup title="Appearance">
@@ -65,9 +70,9 @@ export const SinglePage: Story = {
                 <ComboRow
                   title="Text size"
                   options={[
-                    { value: "small", label: "Small" },
-                    { value: "medium", label: "Medium" },
-                    { value: "large", label: "Large" },
+                    { value: 'small', label: 'Small' },
+                    { value: 'medium', label: 'Medium' },
+                    { value: 'large', label: 'Large' },
                   ]}
                   defaultValue="medium"
                 />
@@ -88,7 +93,8 @@ export const SinglePage: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "With a single `PreferencesPage` the sidebar is hidden and the full width is given to the page content.",
+        story:
+          'With a single `PreferencesPage` the sidebar is hidden and the full width is given to the page content.',
       },
     },
   },
@@ -99,9 +105,12 @@ export const SinglePage: Story = {
 export const MultiplePages: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
+
     return (
       <>
-        <Button variant="suggested" onClick={() => setOpen(true)}>Open Preferences</Button>
+        <Button variant="suggested" onClick={() => setOpen(true)}>
+          Open Preferences
+        </Button>
         <PreferencesDialog open={open} onClose={() => setOpen(false)}>
           <PreferencesPage title="General" iconName="preferences-system-symbolic">
             <PreferencesGroup title="Appearance">
@@ -110,9 +119,9 @@ export const MultiplePages: Story = {
                 <ComboRow
                   title="Text size"
                   options={[
-                    { value: "small", label: "Small" },
-                    { value: "medium", label: "Medium" },
-                    { value: "large", label: "Large" },
+                    { value: 'small', label: 'Small' },
+                    { value: 'medium', label: 'Medium' },
+                    { value: 'large', label: 'Large' },
                   ]}
                   defaultValue="medium"
                 />
@@ -123,10 +132,10 @@ export const MultiplePages: Story = {
                 <ComboRow
                   title="Language"
                   options={[
-                    { value: "en", label: "English" },
-                    { value: "es", label: "Español" },
-                    { value: "fr", label: "Français" },
-                    { value: "de", label: "Deutsch" },
+                    { value: 'en', label: 'English' },
+                    { value: 'es', label: 'Español' },
+                    { value: 'fr', label: 'Français' },
+                    { value: 'de', label: 'Deutsch' },
                   ]}
                   defaultValue="en"
                 />
@@ -138,7 +147,11 @@ export const MultiplePages: Story = {
             <PreferencesGroup title="Data collection" description="Control how your data is used.">
               <BoxedList>
                 <SwitchRow title="Usage statistics" subtitle="Send anonymous usage data" />
-                <SwitchRow title="Crash reports" subtitle="Automatically send crash reports" defaultChecked />
+                <SwitchRow
+                  title="Crash reports"
+                  subtitle="Automatically send crash reports"
+                  defaultChecked
+                />
               </BoxedList>
             </PreferencesGroup>
             <PreferencesGroup title="Location">
@@ -170,7 +183,8 @@ export const MultiplePages: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Three pages — General, Privacy, Advanced. The sidebar appears on the left for navigation between pages.",
+        story:
+          'Three pages — General, Privacy, Advanced. The sidebar appears on the left for navigation between pages.',
       },
     },
   },
@@ -181,6 +195,7 @@ export const MultiplePages: Story = {
 export const WithoutSearch: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
+
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open (no search)</Button>
@@ -200,7 +215,7 @@ export const WithoutSearch: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`searchable={false}` hides the search input from the header.",
+        story: '`searchable={false}` hides the search input from the header.',
       },
     },
   },

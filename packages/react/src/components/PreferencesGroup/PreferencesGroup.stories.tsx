@@ -1,15 +1,17 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { PreferencesGroup } from "./PreferencesGroup";
-import { BoxedList } from "../BoxedList";
-import { SwitchRow } from "../SwitchRow";
-import { ComboRow } from "../ComboRow";
-import { ActionRow } from "../ActionRow";
-import { Button } from "../Button";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { ActionRow } from '../ActionRow';
+import { BoxedList } from '../BoxedList';
+import { Button } from '../Button';
+import { ComboRow } from '../ComboRow';
+import { SwitchRow } from '../SwitchRow';
+
+import { PreferencesGroup } from './PreferencesGroup';
 
 const meta: Meta<typeof PreferencesGroup> = {
-  title: "Components/PreferencesGroup",
+  title: 'Components/PreferencesGroup',
   component: PreferencesGroup,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -38,12 +40,12 @@ Mirrors \`AdwPreferencesGroup\`.
     ),
   ],
   argTypes: {
-    title: { control: "text" },
-    description: { control: "text" },
+    title: { control: 'text' },
+    description: { control: 'text' },
   },
   args: {
-    title: "Appearance",
-    description: "",
+    title: 'Appearance',
+    description: '',
   },
 };
 
@@ -60,9 +62,9 @@ export const Default: Story = {
         <ComboRow
           title="Text size"
           options={[
-            { value: "small", label: "Small" },
-            { value: "medium", label: "Medium" },
-            { value: "large", label: "Large" },
+            { value: 'small', label: 'Small' },
+            { value: 'medium', label: 'Medium' },
+            { value: 'large', label: 'Large' },
           ]}
           defaultValue="medium"
         />
@@ -75,12 +77,12 @@ export const Default: Story = {
 
 export const WithDescription: Story = {
   render: () => (
-    <PreferencesGroup
-      title="Privacy"
-      description="Control how your data is used and shared."
-    >
+    <PreferencesGroup title="Privacy" description="Control how your data is used and shared.">
       <BoxedList>
-        <SwitchRow title="Usage statistics" subtitle="Send anonymous usage data to improve the app" />
+        <SwitchRow
+          title="Usage statistics"
+          subtitle="Send anonymous usage data to improve the app"
+        />
         <SwitchRow title="Crash reports" subtitle="Automatically send crash reports" />
       </BoxedList>
     </PreferencesGroup>
@@ -89,7 +91,7 @@ export const WithDescription: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "A `description` provides additional context below the group title.",
+        story: 'A `description` provides additional context below the group title.',
       },
     },
   },
@@ -101,7 +103,11 @@ export const WithHeaderSuffix: Story = {
   render: () => (
     <PreferencesGroup
       title="Keyboard shortcuts"
-      headerSuffix={<Button variant="flat" style={{ padding: "4px 8px", fontSize: "0.875rem" }}>Reset all</Button>}
+      headerSuffix={
+        <Button variant="flat" style={{ padding: '4px 8px', fontSize: '0.875rem' }}>
+          Reset all
+        </Button>
+      }
     >
       <BoxedList>
         <ActionRow title="New window" subtitle="Open a new application window" />
@@ -113,7 +119,8 @@ export const WithHeaderSuffix: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "`headerSuffix` places a widget at the trailing edge of the title row — typically a reset button.",
+        story:
+          '`headerSuffix` places a widget at the trailing edge of the title row — typically a reset button.',
       },
     },
   },
@@ -134,7 +141,7 @@ export const NoTitle: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Without a `title` the group renders without a header — just the content.",
+        story: 'Without a `title` the group renders without a header — just the content.',
       },
     },
   },

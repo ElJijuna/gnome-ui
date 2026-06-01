@@ -1,11 +1,11 @@
 import {
-  useState,
-  useEffect,
-  useRef,
+  type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
-  type CSSProperties,
-} from "react";
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 // ─── Public types ─────────────────────────────────────────────────────────────
 
@@ -32,8 +32,7 @@ export interface BreakpointBinState {
   width: number;
 }
 
-export interface BreakpointBinProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface BreakpointBinProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /**
    * Breakpoint definitions sorted by `maxWidth` ascending.
    * The active breakpoint is the smallest `maxWidth` ≥ the container's current width.
@@ -94,13 +93,17 @@ export function BreakpointBin({
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+
+    if (!el) {
+      return;
+    }
 
     // Sort breakpoints ascending so we find the smallest matching threshold
     const sorted = [...breakpoints].sort((a, b) => a.maxWidth - b.maxWidth);
 
     const evaluate = (width: number): BreakpointBinState => {
       const match = sorted.find((bp) => width <= bp.maxWidth) ?? null;
+
       return { activeBreakpoint: match?.name ?? null, width };
     };
 
@@ -109,17 +112,21 @@ export function BreakpointBin({
 
     const observer = new ResizeObserver((entries) => {
       const entry = entries[0];
-      if (!entry) return;
+
+      if (!entry) {
+        return;
+      }
+
       // contentBoxSize is more reliable than contentRect for inline-size
-      const width =
-        entry.contentBoxSize?.[0]?.inlineSize ?? entry.contentRect.width;
+      const width = entry.contentBoxSize?.[0]?.inlineSize ?? entry.contentRect.width;
+
       setState(evaluate(width));
     });
 
     observer.observe(el);
+
     return () => observer.disconnect();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(breakpoints)]);
+  }, [breakpoints]);
 
   const containerStyle: CSSProperties = {
     // Ensure the container establishes a containing block

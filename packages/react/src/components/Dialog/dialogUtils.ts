@@ -1,4 +1,4 @@
-import { useState, useEffect, type CSSProperties, type KeyboardEvent, RefObject } from "react";
+import { type CSSProperties, type KeyboardEvent, type RefObject, useEffect, useState } from 'react';
 
 export const FOCUSABLE =
   'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -21,6 +21,7 @@ export function useVisualViewport(): CSSProperties {
 
     const update = (): void => {
       const { offsetLeft: left, offsetTop: top, width, height } = visualViewport;
+
       setStyle({
         top,
         left,
@@ -30,12 +31,12 @@ export function useVisualViewport(): CSSProperties {
     };
 
     update();
-    visualViewport.addEventListener("resize", update);
-    visualViewport.addEventListener("scroll", update);
+    visualViewport.addEventListener('resize', update);
+    visualViewport.addEventListener('scroll', update);
 
     return () => {
-      visualViewport.removeEventListener("resize", update);
-      visualViewport.removeEventListener("scroll", update);
+      visualViewport.removeEventListener('resize', update);
+      visualViewport.removeEventListener('scroll', update);
     };
   }, []);
 
@@ -43,7 +44,7 @@ export function useVisualViewport(): CSSProperties {
 }
 
 export function trapFocus(e: KeyboardEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement | null>) {
-  if (e.key !== "Tab") {
+  if (e.key !== 'Tab') {
     return;
   }
 

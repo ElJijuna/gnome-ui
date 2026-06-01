@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import styles from "./LinkedGroup.module.css";
+import type { HTMLAttributes, ReactNode } from 'react';
+
+import styles from './LinkedGroup.module.css';
 
 export interface LinkedGroupProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -31,19 +32,10 @@ export interface LinkedGroupProps extends HTMLAttributes<HTMLDivElement> {
  *   <Button>Paste</Button>
  * </LinkedGroup>
  */
-export function LinkedGroup({
-  children,
-  vertical = false,
-  className,
-  ...props
-}: LinkedGroupProps) {
-  const classes = [
-    styles.linked,
-    vertical ? styles.vertical : null,
-    className,
-  ]
+export function LinkedGroup({ children, vertical = false, className, ...props }: LinkedGroupProps) {
+  const classes = [styles.linked, vertical ? styles.vertical : null, className]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
     <div className={classes} {...props}>

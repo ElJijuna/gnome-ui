@@ -51,36 +51,20 @@
 
 .info {
   border-color: var(--gnome-accent-bg-color, #3584e4);
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-accent-bg-color, #3584e4) 8%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 8%, transparent);
 }
 
 .warning {
   border-color: var(--gnome-warning-bg-color, #f6d32d);
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-warning-bg-color, #f6d32d) 14%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--gnome-warning-bg-color, #f6d32d) 14%, transparent);
 }
 
 .error {
   border-color: var(--gnome-error-bg-color, #e01b24);
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-error-bg-color, #e01b24) 8%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--gnome-error-bg-color, #e01b24) 8%, transparent);
 }
 
 .success {
   border-color: var(--gnome-success-bg-color, #2ec27e);
-  background-color: color-mix(
-    in srgb,
-    var(--gnome-success-bg-color, #2ec27e) 8%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--gnome-success-bg-color, #2ec27e) 8%, transparent);
 }

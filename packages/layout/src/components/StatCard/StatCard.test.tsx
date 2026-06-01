@@ -1,37 +1,32 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { StatCard } from "./StatCard";
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
-describe("StatCard", () => {
-  it("renders the label and formatted numeric value", () => {
+import { StatCard } from './StatCard';
+
+describe('StatCard', () => {
+  it('renders the label and formatted numeric value', () => {
     render(<StatCard label="Active Users" value={1284} />);
 
-    expect(screen.getByText("Active Users")).toBeInTheDocument();
-    expect(screen.getByText("1,284")).toBeInTheDocument();
-    expect(screen.getByLabelText("Active Users: 1,284")).toBeInTheDocument();
+    expect(screen.getByText('Active Users')).toBeInTheDocument();
+    expect(screen.getByText('1,284')).toBeInTheDocument();
+    expect(screen.getByLabelText('Active Users: 1,284')).toBeInTheDocument();
   });
 
-  it("renders string values and unit suffixes", () => {
+  it('renders string values and unit suffixes', () => {
     render(<StatCard label="Uptime" value="99.9" unit="%" />);
 
-    expect(screen.getByText("99.9")).toBeInTheDocument();
-    expect(screen.getByText("%")).toBeInTheDocument();
-    expect(screen.getByLabelText("Uptime: 99.9 %")).toBeInTheDocument();
+    expect(screen.getByText('99.9')).toBeInTheDocument();
+    expect(screen.getByText('%')).toBeInTheDocument();
+    expect(screen.getByLabelText('Uptime: 99.9 %')).toBeInTheDocument();
   });
 
-  it("renders the optional icon without exposing it as the button label", () => {
-    render(
-      <StatCard
-        label="Projects"
-        value={24}
-        icon={<span data-testid="icon">P</span>}
-      />,
-    );
+  it('renders the optional icon without exposing it as the button label', () => {
+    render(<StatCard label="Projects" value={24} icon={<span data-testid="icon">P</span>} />);
 
-    expect(screen.getByTestId("icon")).toBeInTheDocument();
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
   });
 
-  it("renders a decorative background chart behind the content", () => {
+  it('renders a decorative background chart behind the content', () => {
     render(
       <StatCard
         label="Requests"
@@ -40,89 +35,97 @@ describe("StatCard", () => {
       />,
     );
 
-    const chart = screen.getByTestId("background-chart");
+    const chart = screen.getByTestId('background-chart');
+
     expect(chart).toBeInTheDocument();
-    expect(chart.parentElement).toHaveAttribute("aria-hidden", "true");
-    expect(screen.getByLabelText("Requests: 24.8k")).toBeInTheDocument();
+    expect(chart.parentElement).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.getByLabelText('Requests: 24.8k')).toBeInTheDocument();
   });
 
-  it("renders an upward trend", () => {
+  it('renders an upward trend', () => {
     render(
       <StatCard
         label="Active Users"
         value={1284}
-        trend={{ direction: "up", value: 12, period: "vs last week" }}
+        trend={{ direction: 'up', value: 12, period: 'vs last week' }}
       />,
     );
 
-    expect(screen.getByText("+12%")).toBeInTheDocument();
-    expect(screen.getByText("vs last week")).toBeInTheDocument();
+    expect(screen.getByText('+12%')).toBeInTheDocument();
+    expect(screen.getByText('vs last week')).toBeInTheDocument();
   });
 
-  it("renders a downward trend", () => {
+  it('renders a downward trend', () => {
     render(
       <StatCard
         label="Errors"
         value={8}
-        trend={{ direction: "down", value: -4, period: "vs yesterday" }}
+        trend={{ direction: 'down', value: -4, period: 'vs yesterday' }}
       />,
     );
 
-    expect(screen.getByText("-4%")).toBeInTheDocument();
-    expect(screen.getByText("vs yesterday")).toBeInTheDocument();
+    expect(screen.getByText('-4%')).toBeInTheDocument();
+    expect(screen.getByText('vs yesterday')).toBeInTheDocument();
   });
 
-  it("renders a neutral trend", () => {
+  it('renders a neutral trend', () => {
     render(
-      <StatCard
-        label="Latency"
-        value={42}
-        unit="ms"
-        trend={{ direction: "neutral", value: 0 }}
-      />,
+      <StatCard label="Latency" value={42} unit="ms" trend={{ direction: 'neutral', value: 0 }} />,
     );
 
-    expect(screen.getByText("0%")).toBeInTheDocument();
+    expect(screen.getByText('0%')).toBeInTheDocument();
   });
 
-  describe("loading", () => {
-    it("renders skeleton by default when loading={true}", () => {
+  describe('loading', () => {
+    it('renders skeleton by default when loading={true}', () => {
       const { container } = render(
         <StatCard label="Active Users" value={1284} loading data-testid="stat" />,
       );
 
-      expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
-      expect(screen.queryByText("Active Users")).toBeNull();
+      expect(screen.getByTestId('stat')).toHaveAttribute('aria-busy', 'true');
+      expect(screen.queryByText('Active Users')).toBeNull();
       expect(container.querySelectorAll("[aria-hidden='true']").length).toBeGreaterThan(0);
     });
 
     it("renders skeleton when loadingType='skeleton' is explicit", () => {
       const { container } = render(
-        <StatCard label="Active Users" value={1284} loading loadingType="skeleton" data-testid="stat" />,
+        <StatCard
+          label="Active Users"
+          value={1284}
+          loading
+          loadingType="skeleton"
+          data-testid="stat"
+        />,
       );
 
-      expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
+      expect(screen.getByTestId('stat')).toHaveAttribute('aria-busy', 'true');
       expect(container.querySelectorAll("[aria-hidden='true']").length).toBeGreaterThan(0);
     });
 
     it("renders spinner when loadingType='spinner'", () => {
       render(
-        <StatCard label="Active Users" value={1284} loading loadingType="spinner" data-testid="stat" />,
+        <StatCard
+          label="Active Users"
+          value={1284}
+          loading
+          loadingType="spinner"
+          data-testid="stat"
+        />,
       );
 
-      expect(screen.getByTestId("stat")).toHaveAttribute("aria-busy", "true");
-      expect(screen.queryByText("Active Users")).toBeNull();
-      expect(screen.getByRole("status")).toBeInTheDocument();
+      expect(screen.getByTestId('stat')).toHaveAttribute('aria-busy', 'true');
+      expect(screen.queryByText('Active Users')).toBeNull();
+      expect(screen.getByRole('status')).toBeInTheDocument();
     });
 
-    it("does not render spinner when not loading", () => {
+    it('does not render spinner when not loading', () => {
       render(<StatCard label="Active Users" value={1284} loadingType="spinner" />);
-      expect(screen.queryByRole("status")).toBeNull();
-      expect(screen.getByText("Active Users")).toBeInTheDocument();
+      expect(screen.queryByRole('status')).toBeNull();
+      expect(screen.getByText('Active Users')).toBeInTheDocument();
     });
   });
 
-  it("forwards className, style, and data attributes to the root", () => {
+  it('forwards className, style, and data attributes to the root', () => {
     render(
       <StatCard
         label="Revenue"
@@ -133,8 +136,9 @@ describe("StatCard", () => {
       />,
     );
 
-    const root = screen.getByTestId("stat");
-    expect(root).toHaveClass("custom-stat");
-    expect(root).toHaveStyle({ width: "240px" });
+    const root = screen.getByTestId('stat');
+
+    expect(root).toHaveClass('custom-stat');
+    expect(root).toHaveStyle({ width: '240px' });
   });
 });

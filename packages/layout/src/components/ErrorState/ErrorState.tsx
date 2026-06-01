@@ -1,9 +1,10 @@
-import type { HTMLAttributes, ReactNode } from "react";
-import { Icon, Text } from "@gnome-ui/react";
-import { Warning, Lock, Search } from "@gnome-ui/icons";
-import styles from "./ErrorState.module.css";
+import { Lock, Search, Warning } from '@gnome-ui/icons';
+import { Icon, Text } from '@gnome-ui/react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
-export type ErrorStateType = "generic" | "network" | "permission" | "not-found";
+import styles from './ErrorState.module.css';
+
+export type ErrorStateType = 'generic' | 'network' | 'permission' | 'not-found';
 
 export interface ErrorStateProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -22,30 +23,27 @@ export interface ErrorStateProps extends HTMLAttributes<HTMLDivElement> {
   action?: ReactNode;
 }
 
-const PRESETS: Record<
-  ErrorStateType,
-  { icon: ReactNode; title: string }
-> = {
+const PRESETS: Record<ErrorStateType, { icon: ReactNode; title: string }> = {
   generic: {
     icon: <Icon icon={Warning} size="lg" />,
-    title: "Something went wrong",
+    title: 'Something went wrong',
   },
   network: {
     icon: <Icon icon={Warning} size="lg" />,
-    title: "No connection",
+    title: 'No connection',
   },
   permission: {
     icon: <Icon icon={Lock} size="lg" />,
-    title: "Access denied",
+    title: 'Access denied',
   },
-  "not-found": {
+  'not-found': {
     icon: <Icon icon={Search} size="lg" />,
-    title: "Not found",
+    title: 'Not found',
   },
 };
 
 export function ErrorState({
-  type = "generic",
+  type = 'generic',
   icon,
   title,
   description,
@@ -58,11 +56,8 @@ export function ErrorState({
   const resolvedTitle = title ?? preset.title;
 
   return (
-    <div
-      className={[styles.root, className].filter(Boolean).join(" ")}
-      {...props}
-    >
-      <div className={[styles.icon, styles[type]].join(" ")} aria-hidden="true">
+    <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
+      <div className={[styles.icon, styles[type]].join(' ')} aria-hidden="true">
         {resolvedIcon}
       </div>
       <Text variant="heading" className={styles.title}>

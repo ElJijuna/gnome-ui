@@ -1,23 +1,23 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { Button, type ButtonProps } from "@gnome-ui/react";
-import type {
-  LayoutSidebarBreakpoint,
-  LayoutSidebarOpenChangeReason,
-} from "../Layout";
+import { Button, type ButtonProps } from '@gnome-ui/react';
+import { type ReactNode, useEffect, useState } from 'react';
+
+import type { LayoutSidebarBreakpoint, LayoutSidebarOpenChangeReason } from '../Layout';
 
 const sidebarBreakpointQuery: Record<LayoutSidebarBreakpoint, string> = {
-  narrow: "(max-width: 400px)",
-  medium: "(max-width: 550px)",
-  wide: "(max-width: 860px)",
+  narrow: '(max-width: 400px)',
+  medium: '(max-width: 550px)',
+  wide: '(max-width: 860px)',
 };
 
 function matchesSidebarOverlay(breakpoint: LayoutSidebarBreakpoint) {
-  return typeof window !== "undefined" &&
-    typeof window.matchMedia === "function" &&
-    window.matchMedia(sidebarBreakpointQuery[breakpoint]).matches;
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia(sidebarBreakpointQuery[breakpoint]).matches
+  );
 }
 
-export interface SidebarTriggerProps extends Omit<ButtonProps, "onClick"> {
+export interface SidebarTriggerProps extends Omit<ButtonProps, 'onClick'> {
   /** Current overlay-open state. */
   sidebarOpen: boolean;
   /** Current rail-collapsed state. */
@@ -25,10 +25,7 @@ export interface SidebarTriggerProps extends Omit<ButtonProps, "onClick"> {
   /** Breakpoint at which the sidebar becomes an overlay. */
   sidebarBreakpoint?: LayoutSidebarBreakpoint;
   /** Called when the trigger toggles overlay open state. */
-  onSidebarOpenChange: (
-    open: boolean,
-    reason: LayoutSidebarOpenChangeReason,
-  ) => void;
+  onSidebarOpenChange: (open: boolean, reason: LayoutSidebarOpenChangeReason) => void;
   /** Called when the trigger toggles rail collapse state. */
   onSidebarCollapsedChange: (collapsed: boolean) => void;
   /** Button contents. Defaults to a menu glyph. */
@@ -44,22 +41,21 @@ export interface SidebarTriggerProps extends Omit<ButtonProps, "onClick"> {
 export function SidebarTrigger({
   sidebarOpen,
   sidebarCollapsed,
-  sidebarBreakpoint = "narrow",
+  sidebarBreakpoint = 'narrow',
   onSidebarOpenChange,
   onSidebarCollapsedChange,
-  children = "☰",
-  "aria-label": ariaLabel,
-  variant = "flat",
+  children = '☰',
+  'aria-label': ariaLabel,
+  variant = 'flat',
   ...props
 }: SidebarTriggerProps) {
-  const [overlay, setOverlay] = useState(() =>
-    matchesSidebarOverlay(sidebarBreakpoint),
-  );
+  const [overlay, setOverlay] = useState(() => matchesSidebarOverlay(sidebarBreakpoint));
   const sidebarVisible = overlay ? sidebarOpen : !sidebarCollapsed;
 
   useEffect(() => {
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
       setOverlay(false);
+
       return undefined;
     }
 
@@ -67,13 +63,14 @@ export function SidebarTrigger({
     const updateOverlay = () => setOverlay(mediaQuery.matches);
 
     updateOverlay();
-    mediaQuery.addEventListener?.("change", updateOverlay);
-    return () => mediaQuery.removeEventListener?.("change", updateOverlay);
+    mediaQuery.addEventListener?.('change', updateOverlay);
+
+    return () => mediaQuery.removeEventListener?.('change', updateOverlay);
   }, [sidebarBreakpoint]);
 
   const handleClick = () => {
     if (overlay) {
-      onSidebarOpenChange(!sidebarOpen, "trigger");
+      onSidebarOpenChange(!sidebarOpen, 'trigger');
     } else {
       onSidebarCollapsedChange(!sidebarCollapsed);
     }
@@ -84,7 +81,7 @@ export function SidebarTrigger({
       {...props}
       type="button"
       variant={variant}
-      aria-label={ariaLabel ?? (sidebarVisible ? "Hide sidebar" : "Show sidebar")}
+      aria-label={ariaLabel ?? (sidebarVisible ? 'Hide sidebar' : 'Show sidebar')}
       onClick={handleClick}
     >
       {children}

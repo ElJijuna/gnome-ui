@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { LinkedGroup } from "./LinkedGroup";
-import { Button } from "../Button";
-import { TextField } from "../TextField";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from '../Button';
+import { TextField } from '../TextField';
+
+import { LinkedGroup } from './LinkedGroup';
 
 const meta: Meta<typeof LinkedGroup> = {
-  title: "Components/LinkedGroup",
+  title: 'Components/LinkedGroup',
   component: LinkedGroup,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -34,13 +36,21 @@ libadwaita \`.linked\` style class.
   },
   decorators: [
     (Story) => (
-      <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
+      <div
+        style={{
+          padding: '24px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16,
+          alignItems: 'flex-start',
+        }}
+      >
         <Story />
       </div>
     ),
   ],
   argTypes: {
-    vertical: { control: "boolean" },
+    vertical: { control: 'boolean' },
   },
   args: {
     vertical: false,
@@ -76,7 +86,7 @@ export const Suggested: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "All children share the same `variant`. Works with any Button variant.",
+        story: 'All children share the same `variant`. Works with any Button variant.',
       },
     },
   },
@@ -96,7 +106,7 @@ export const ZoomControls: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "A common use case: zoom controls where − and + are tightly coupled.",
+        story: 'A common use case: zoom controls where − and + are tightly coupled.',
       },
     },
   },
@@ -116,7 +126,7 @@ export const SearchWithButton: Story = {
     docs: {
       description: {
         story:
-          "Mix different widget types that belong together — a text field and a submit button rendered as one unit.",
+          'Mix different widget types that belong together — a text field and a submit button rendered as one unit.',
       },
     },
   },
@@ -137,7 +147,7 @@ export const Vertical: Story = {
     docs: {
       description: {
         story:
-          "Use `vertical` to stack children in a column. Border collapse and radius restoration apply to top/bottom edges.",
+          'Use `vertical` to stack children in a column. Border collapse and radius restoration apply to top/bottom edges.',
       },
     },
   },
@@ -149,12 +159,12 @@ export const InsideToolbar: Story = {
   render: () => (
     <div
       style={{
-        background: "var(--gnome-headerbar-bg-color, #ebebeb)",
+        background: 'var(--gnome-headerbar-bg-color, #ebebeb)',
         borderRadius: 8,
-        width: "100%",
+        width: '100%',
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: 6 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: 6 }}>
         <Button variant="flat">←</Button>
         <Button variant="flat">→</Button>
         <LinkedGroup>
@@ -172,7 +182,7 @@ export const InsideToolbar: Story = {
     docs: {
       description: {
         story:
-          "`LinkedGroup` inside a `Toolbar` — the connected group stands out from the surrounding flat buttons.",
+          '`LinkedGroup` inside a `Toolbar` — the connected group stands out from the surrounding flat buttons.',
       },
     },
   },

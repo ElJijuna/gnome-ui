@@ -1,12 +1,8 @@
-import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  type KeyboardEvent,
-} from "react";
-import { createPortal } from "react-dom";
-import styles from "./ShortcutsDialog.module.css";
+import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
+
+import { createPortal } from 'react-dom';
+
+import styles from './ShortcutsDialog.module.css';
 
 // ─── Public types ─────────────────────────────────────────────────────────────
 
@@ -59,10 +55,10 @@ const FOCUSABLE =
 export function ShortcutsDialog({
   open,
   onClose,
-  title = "Keyboard Shortcuts",
+  title = 'Keyboard Shortcuts',
   sections,
 }: ShortcutsDialogProps) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const dialogRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const previouslyFocused = useRef<Element | null>(null);
@@ -75,7 +71,7 @@ export function ShortcutsDialog({
       // Focus the search field after mount
       requestAnimationFrame(() => searchRef.current?.focus());
     } else {
-      setQuery("");
+      setQuery('');
       (previouslyFocused.current as HTMLElement | null)?.focus();
     }
   }, [open]);
@@ -83,17 +79,24 @@ export function ShortcutsDialog({
   // Focus trap + Escape
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         e.preventDefault();
         onClose();
+
         return;
       }
-      if (e.key !== "Tab") return;
+
+      if (e.key !== 'Tab') {
+        return;
+      }
 
       const focusable = Array.from(
         dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? [],
       );
-      if (focusable.length === 0) return;
+
+      if (focusable.length === 0) {
+        return;
+      }
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -113,7 +116,9 @@ export function ShortcutsDialog({
     [onClose],
   );
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   // Filter sections by query
   const q = query.trim().toLowerCase();
@@ -130,11 +135,7 @@ export function ShortcutsDialog({
     .filter((s) => s.shortcuts.length > 0);
 
   const node = (
-    <div
-      className={styles.backdrop}
-      onClick={onClose}
-      aria-hidden="true"
-    >
+    <div className={styles.backdrop} onClick={onClose} aria-hidden="true">
       <div
         ref={dialogRef}
         role="dialog"
@@ -149,19 +150,16 @@ export function ShortcutsDialog({
           <span id={titleId.current} className={styles.title}>
             {title}
           </span>
-          <button
-            type="button"
-            className={styles.closeBtn}
-            aria-label="Close"
-            onClick={onClose}
-          >
+          <button type="button" className={styles.closeBtn} aria-label="Close" onClick={onClose}>
             ×
           </button>
         </div>
 
         {/* ── Search ── */}
         <div className={styles.searchRow}>
-          <span className={styles.searchIcon} aria-hidden="true">⌕</span>
+          <span className={styles.searchIcon} aria-hidden="true">
+            ⌕
+          </span>
           <input
             ref={searchRef}
             type="search"
@@ -176,7 +174,10 @@ export function ShortcutsDialog({
               type="button"
               className={styles.searchClear}
               aria-label="Clear search"
-              onClick={() => { setQuery(""); searchRef.current?.focus(); }}
+              onClick={() => {
+                setQuery('');
+                searchRef.current?.focus();
+              }}
             >
               ×
             </button>
@@ -193,13 +194,15 @@ export function ShortcutsDialog({
                 <h3 className={styles.sectionTitle}>{section.title}</h3>
                 <ul className={styles.list}>
                   {section.shortcuts.map((shortcut) => (
-                    <li key={shortcut.description} className={styles.row} role="listitem">
-                      <span className={styles.keys} aria-label={shortcut.keys.join(" + ")}>
+                    <li key={shortcut.description} className={styles.row}>
+                      <span className={styles.keys} aria-label={shortcut.keys.join(' + ')}>
                         {shortcut.keys.map((key, i) => (
                           <span key={i} className={styles.keyCap}>
                             <kbd>{key}</kbd>
                             {i < shortcut.keys.length - 1 && (
-                              <span className={styles.plus} aria-hidden="true">+</span>
+                              <span className={styles.plus} aria-hidden="true">
+                                +
+                              </span>
                             )}
                           </span>
                         ))}
@@ -216,6 +219,9 @@ export function ShortcutsDialog({
     </div>
   );
 
-  if (typeof document === "undefined") return node;
+  if (typeof document === 'undefined') {
+    return node;
+  }
+
   return createPortal(node, document.body);
 }

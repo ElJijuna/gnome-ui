@@ -1,14 +1,16 @@
+import { useNumberFormatter } from '@gnome-ui/react';
 import {
-  PieChart as RechartsPieChart,
-  Pie,
   Cell,
   Legend,
-  Tooltip,
+  Pie,
+  PieChart as RechartsPieChart,
   ResponsiveContainer,
-} from "recharts";
-import { useNumberFormatter } from "@gnome-ui/react";
-import { GNOME_CHART_PALETTE } from "../../colors";
-import styles from "./PieChart.module.css";
+  Tooltip,
+} from 'recharts';
+
+import { GNOME_CHART_PALETTE } from '../../colors';
+
+import styles from './PieChart.module.css';
 
 export interface PieChartDataItem {
   label: string;
@@ -23,16 +25,16 @@ export interface PieChartProps {
   showLabels?: boolean;
   showLegend?: boolean;
   className?: string;
-  "aria-label"?: string;
+  'aria-label'?: string;
 }
 
 const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: "var(--gnome-popover-bg-color, #fff)",
-  border: "1px solid var(--gnome-border-subtle, rgba(0,0,0,0.15))",
-  borderRadius: "var(--gnome-radius-md, 8px)",
-  fontFamily: "var(--gnome-font-family, system-ui)",
+  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
+  border: '1px solid var(--gnome-border-subtle, rgba(0,0,0,0.15))',
+  borderRadius: 'var(--gnome-radius-md, 8px)',
+  fontFamily: 'var(--gnome-font-family, system-ui)',
   fontSize: 12,
-  boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
 const RADIAN = Math.PI / 180;
@@ -46,25 +48,33 @@ function SliceLabel(props: {
   percent?: number;
 }) {
   const { cx, cy, midAngle, outerRadius, name, percent } = props;
+
   if (
-    cx == null ||
-    cy == null ||
-    midAngle == null ||
-    outerRadius == null ||
-    percent == null ||
+    cx === null ||
+    cx === undefined ||
+    cy === null ||
+    cy === undefined ||
+    midAngle === null ||
+    midAngle === undefined ||
+    outerRadius === null ||
+    outerRadius === undefined ||
+    percent === null ||
+    percent === undefined ||
     percent < 0.04
   ) {
     return <g />;
   }
+
   const radius = outerRadius + 20;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
   return (
     <text
       x={x}
       y={y}
       fill="var(--gnome-window-fg-color, rgba(0,0,0,0.8))"
-      textAnchor={x > cx ? "start" : "end"}
+      textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
       fontSize={11}
       fontFamily="var(--gnome-font-family, system-ui)"
@@ -81,7 +91,7 @@ export function PieChart({
   showLabels = false,
   showLegend = false,
   className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
 }: PieChartProps) {
   const formatNumber = useNumberFormatter().format;
 
@@ -96,9 +106,9 @@ export function PieChart({
       role="img"
       aria-label={
         ariaLabel ??
-        `Pie chart: ${data.map((d) => `${d.label} ${formatNumber(d.value)}`).join(", ")}`
+        `Pie chart: ${data.map((d) => `${d.label} ${formatNumber(d.value)}`).join(', ')}`
       }
-      className={[styles.container, className].filter(Boolean).join(" ")}
+      className={[styles.container, className].filter(Boolean).join(' ')}
       style={{ height }}
     >
       <ResponsiveContainer width="100%" height="100%">
@@ -111,7 +121,7 @@ export function PieChart({
             <Legend
               iconSize={10}
               wrapperStyle={{
-                fontFamily: "var(--gnome-font-family, system-ui)",
+                fontFamily: 'var(--gnome-font-family, system-ui)',
                 fontSize: 12,
               }}
             />
@@ -120,7 +130,7 @@ export function PieChart({
             data={chartData}
             dataKey="value"
             nameKey="name"
-            innerRadius={donut ? "45%" : 0}
+            innerRadius={donut ? '45%' : 0}
             outerRadius="80%"
             paddingAngle={2}
             label={showLabels ? SliceLabel : false}

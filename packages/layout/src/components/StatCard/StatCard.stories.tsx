@@ -1,14 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Icon } from "@gnome-ui/react";
-import { Applications, Error, Person, Refresh } from "@gnome-ui/icons";
-import { StatCard } from "./StatCard";
+import { Applications, Error, Person, Refresh } from '@gnome-ui/icons';
+import { Icon } from '@gnome-ui/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { StatCard } from './StatCard';
 
 const meta: Meta<typeof StatCard> = {
-  title: "Layout/StatCard",
+  title: 'Layout/StatCard',
   component: StatCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "padded",
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -46,40 +47,40 @@ type Story = StoryObj<typeof StatCard>;
 
 export const UpTrend: Story = {
   args: {
-    label: "Active Users",
+    label: 'Active Users',
     value: 1284,
-    unit: "users",
+    unit: 'users',
     icon: <Icon icon={Person} size="lg" />,
-    trend: { direction: "up", value: 12, period: "vs last week" },
+    trend: { direction: 'up', value: 12, period: 'vs last week' },
   },
 };
 
 export const DownTrend: Story = {
   args: {
-    label: "Error Rate",
+    label: 'Error Rate',
     value: 2.4,
-    unit: "%",
+    unit: '%',
     icon: <Icon icon={Error} size="lg" />,
-    trend: { direction: "down", value: -8, period: "vs yesterday" },
+    trend: { direction: 'down', value: -8, period: 'vs yesterday' },
   },
 };
 
 export const NeutralTrend: Story = {
   args: {
-    label: "Latency",
+    label: 'Latency',
     value: 42,
-    unit: "ms",
+    unit: 'ms',
     icon: <Icon icon={Refresh} size="lg" />,
-    trend: { direction: "neutral", value: 0, period: "stable" },
+    trend: { direction: 'neutral', value: 0, period: 'stable' },
   },
 };
 
 export const BackgroundChart: Story = {
   args: {
-    label: "Requests",
-    value: "24.8k",
-    unit: "req",
-    trend: { direction: "up", value: 6, period: "today" },
+    label: 'Requests',
+    value: '24.8k',
+    unit: 'req',
+    trend: { direction: 'up', value: 6, period: 'today' },
     backgroundChart: (
       <svg viewBox="0 0 320 96" preserveAspectRatio="none" height="96" aria-hidden="true">
         <path
@@ -98,7 +99,8 @@ export const BackgroundChart: Story = {
   parameters: {
     docs: {
       description: {
-        story: "`backgroundChart` accepts a decorative React node, including spark charts from `@gnome-ui/charts`.",
+        story:
+          '`backgroundChart` accepts a decorative React node, including spark charts from `@gnome-ui/charts`.',
       },
     },
   },
@@ -106,63 +108,74 @@ export const BackgroundChart: Story = {
 
 export const LoadingSkeleton: Story = {
   args: {
-    label: "Requests",
+    label: 'Requests',
     value: 0,
     loading: true,
-    loadingType: "skeleton",
+    loadingType: 'skeleton',
     icon: <Icon icon={Applications} size="lg" />,
   },
   parameters: {
     docs: {
-      description: { story: "Default loading state — skeleton placeholder matching the card shape." },
+      description: {
+        story: 'Default loading state — skeleton placeholder matching the card shape.',
+      },
     },
   },
 };
 
 export const LoadingSpinner: Story = {
   args: {
-    label: "Requests",
+    label: 'Requests',
     value: 0,
     loading: true,
-    loadingType: "spinner",
+    loadingType: 'spinner',
     icon: <Icon icon={Applications} size="lg" />,
   },
   parameters: {
     docs: {
-      description: { story: "`loadingType=\"spinner\"` renders a centred spinner instead of skeleton blocks." },
+      description: {
+        story: '`loadingType="spinner"` renders a centred spinner instead of skeleton blocks.',
+      },
     },
   },
 };
 
 export const Dashboard: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 16, width: 880 }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+        gap: 16,
+        width: 880,
+      }}
+    >
       <StatCard
         label="Active Users"
         value={1284}
         unit="users"
         icon={<Icon icon={Person} size="lg" />}
-        trend={{ direction: "up", value: 12, period: "vs last week" }}
+        trend={{ direction: 'up', value: 12, period: 'vs last week' }}
       />
       <StatCard
         label="Requests"
         value="24.8k"
         icon={<Icon icon={Applications} size="lg" />}
-        trend={{ direction: "up", value: 6, period: "today" }}
+        trend={{ direction: 'up', value: 6, period: 'today' }}
       />
       <StatCard
         label="Error Rate"
         value={2.4}
         unit="%"
         icon={<Icon icon={Error} size="lg" />}
-        trend={{ direction: "down", value: -8, period: "vs yesterday" }}
+        trend={{ direction: 'down', value: -8, period: 'vs yesterday' }}
       />
       <StatCard
         label="Latency"
         value={42}
         unit="ms"
         icon={<Icon icon={Refresh} size="lg" />}
-        trend={{ direction: "neutral", value: 0, period: "stable" }}
+        trend={{ direction: 'neutral', value: 0, period: 'stable' }}
       />
     </div>
   ),

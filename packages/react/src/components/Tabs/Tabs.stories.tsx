@@ -1,17 +1,19 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { GoHome, Search, Star, Settings, MediaPlay } from "@gnome-ui/icons";
-import { TabBar } from "./TabBar";
-import { TabItem } from "./TabItem";
-import { TabPanel } from "./TabPanel";
-import { Text } from "../Text";
+import { GoHome, MediaPlay, Search, Settings, Star } from '@gnome-ui/icons';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Text } from '../Text';
+
+import { TabBar } from './TabBar';
+import { TabItem } from './TabItem';
+import { TabPanel } from './TabPanel';
 
 const meta: Meta<typeof TabBar> = {
-  title: "Components/Tabs",
+  title: 'Components/Tabs',
   component: TabBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -41,8 +43,9 @@ type Story = StoryObj<typeof TabBar>;
 
 export const Default: Story = {
   render: function DefaultStory() {
-    const tabs = ["Files", "Music", "Photos"];
-    const [active, setActive] = useState("Files");
+    const tabs = ['Files', 'Music', 'Photos'];
+    const [active, setActive] = useState('Files');
+
     return (
       <div>
         <TabBar>
@@ -58,7 +61,9 @@ export const Default: Story = {
         </TabBar>
         {tabs.map((t) => (
           <TabPanel key={t} id={`panel-${t}`} active={active === t} style={{ padding: 24 }}>
-            <Text variant="body" color="dim">Content for {t}</Text>
+            <Text variant="body" color="dim">
+              Content for {t}
+            </Text>
           </TabPanel>
         ))}
       </div>
@@ -72,11 +77,12 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: function WithIconsStory() {
     const tabs = [
-      { id: "home",    label: "Home",    icon: GoHome },
-      { id: "search",  label: "Search",  icon: Search },
-      { id: "starred", label: "Starred", icon: Star },
+      { id: 'home', label: 'Home', icon: GoHome },
+      { id: 'search', label: 'Search', icon: Search },
+      { id: 'starred', label: 'Starred', icon: Star },
     ];
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState('home');
+
     return (
       <div>
         <TabBar>
@@ -93,7 +99,9 @@ export const WithIcons: Story = {
         </TabBar>
         {tabs.map(({ id, label }) => (
           <TabPanel key={id} id={`wi-panel-${id}`} active={active === id} style={{ padding: 24 }}>
-            <Text variant="body" color="dim">{label} panel</Text>
+            <Text variant="body" color="dim">
+              {label} panel
+            </Text>
           </TabPanel>
         ))}
       </div>
@@ -107,17 +115,20 @@ export const WithIcons: Story = {
 export const Closeable: Story = {
   render: function CloseableStory() {
     const [tabs, setTabs] = useState([
-      { id: "files",  label: "Files" },
-      { id: "music",  label: "Music" },
-      { id: "photos", label: "Photos" },
-      { id: "videos", label: "Videos" },
+      { id: 'files', label: 'Files' },
+      { id: 'music', label: 'Music' },
+      { id: 'photos', label: 'Photos' },
+      { id: 'videos', label: 'Videos' },
     ]);
-    const [active, setActive] = useState("files");
+    const [active, setActive] = useState('files');
 
     function close(id: string) {
       const next = tabs.filter((t) => t.id !== id);
+
       setTabs(next);
-      if (active === id && next.length > 0) setActive(next[0].id);
+      if (active === id && next.length > 0) {
+        setActive(next[0].id);
+      }
     }
 
     return (
@@ -136,7 +147,9 @@ export const Closeable: Story = {
         </TabBar>
         {tabs.map(({ id, label }) => (
           <TabPanel key={id} id={`cl-panel-${id}`} active={active === id} style={{ padding: 24 }}>
-            <Text variant="body" color="dim">{label} panel</Text>
+            <Text variant="body" color="dim">
+              {label} panel
+            </Text>
           </TabPanel>
         ))}
       </div>
@@ -146,7 +159,8 @@ export const Closeable: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Pass `onClose` to show the × button. The last tab never shows a close button here to prevent leaving an empty bar.",
+        story:
+          'Pass `onClose` to show the × button. The last tab never shows a close button here to prevent leaving an empty bar.',
       },
     },
   },
@@ -157,16 +171,17 @@ export const Closeable: Story = {
 export const Scrollable: Story = {
   render: function ScrollableStory() {
     const tabs = [
-      { id: "home", label: "Home", icon: GoHome },
-      { id: "music", label: "Music", icon: MediaPlay },
-      { id: "search", label: "Search", icon: Search },
-      { id: "starred", label: "Starred", icon: Star },
-      { id: "settings", label: "Settings", icon: Settings },
-      { id: "extra1", label: "Downloads" },
-      { id: "extra2", label: "Documents" },
-      { id: "extra3", label: "Pictures" },
+      { id: 'home', label: 'Home', icon: GoHome },
+      { id: 'music', label: 'Music', icon: MediaPlay },
+      { id: 'search', label: 'Search', icon: Search },
+      { id: 'starred', label: 'Starred', icon: Star },
+      { id: 'settings', label: 'Settings', icon: Settings },
+      { id: 'extra1', label: 'Downloads' },
+      { id: 'extra2', label: 'Documents' },
+      { id: 'extra3', label: 'Pictures' },
     ];
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState('home');
+
     return (
       <div style={{ maxWidth: 480 }}>
         <TabBar>
@@ -183,7 +198,9 @@ export const Scrollable: Story = {
         </TabBar>
         {tabs.map(({ id, label }) => (
           <TabPanel key={id} id={`sc-panel-${id}`} active={active === id} style={{ padding: 24 }}>
-            <Text variant="body" color="dim">{label} panel</Text>
+            <Text variant="body" color="dim">
+              {label} panel
+            </Text>
           </TabPanel>
         ))}
       </div>
@@ -193,7 +210,7 @@ export const Scrollable: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "When tabs overflow the bar scrolls horizontally (scrollbar hidden via CSS).",
+        story: 'When tabs overflow the bar scrolls horizontally (scrollbar hidden via CSS).',
       },
     },
   },
@@ -204,17 +221,18 @@ export const Scrollable: Story = {
 export const InLayout: Story = {
   render: function LayoutStory() {
     const tabs = [
-      { id: "overview", label: "Overview" },
-      { id: "commits",  label: "Commits" },
-      { id: "files",    label: "Files" },
+      { id: 'overview', label: 'Overview' },
+      { id: 'commits', label: 'Commits' },
+      { id: 'files', label: 'Files' },
     ];
-    const [active, setActive] = useState("overview");
+    const [active, setActive] = useState('overview');
+
     return (
       <div
         style={{
-          border: "1px solid rgba(0,0,0,0.1)",
+          border: '1px solid rgba(0,0,0,0.1)',
           borderRadius: 12,
-          overflow: "hidden",
+          overflow: 'hidden',
           maxWidth: 560,
         }}
       >
@@ -248,12 +266,13 @@ export const InLayout: Story = {
 export const WithBadge: Story = {
   render: function WithBadgeStory() {
     const tabs = [
-      { id: "inbox",    label: "Inbox",    count: 5 },
-      { id: "updates",  label: "Updates",  count: 150 },
-      { id: "sent",     label: "Sent",     count: 0 },
-      { id: "archived", label: "Archived" },
+      { id: 'inbox', label: 'Inbox', count: 5 },
+      { id: 'updates', label: 'Updates', count: 150 },
+      { id: 'sent', label: 'Sent', count: 0 },
+      { id: 'archived', label: 'Archived' },
     ];
-    const [active, setActive] = useState("inbox");
+    const [active, setActive] = useState('inbox');
+
     return (
       <div>
         <TabBar>
@@ -270,7 +289,9 @@ export const WithBadge: Story = {
         </TabBar>
         {tabs.map(({ id, label }) => (
           <TabPanel key={id} id={`wb-panel-${id}`} active={active === id} style={{ padding: 24 }}>
-            <Text variant="body" color="dim">{label} panel</Text>
+            <Text variant="body" color="dim">
+              {label} panel
+            </Text>
           </TabPanel>
         ))}
       </div>
@@ -280,7 +301,8 @@ export const WithBadge: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: "Use `count` to show a badge with a number next to the tab label — useful for unread counts or pending items. Values above 99 render as \"99+\". Pass `count={0}` to show the badge with zero.",
+        story:
+          'Use `count` to show a badge with a number next to the tab label — useful for unread counts or pending items. Values above 99 render as "99+". Pass `count={0}` to show the badge with zero.',
       },
     },
   },
@@ -290,20 +312,21 @@ export const WithBadge: Story = {
 
 export const Inline: Story = {
   render: function InlineStory() {
-    const [active, setActive] = useState("overview");
+    const [active, setActive] = useState('overview');
     const tabs = [
-      { id: "overview", label: "Overview" },
-      { id: "files", label: "Files" },
-      { id: "history", label: "History" },
+      { id: 'overview', label: 'Overview' },
+      { id: 'files', label: 'Files' },
+      { id: 'history', label: 'History' },
     ];
+
     return (
       <div
         style={{
-          border: "1px solid var(--gnome-light-3, rgba(0,0,0,0.1))",
+          border: '1px solid var(--gnome-light-3, rgba(0,0,0,0.1))',
           borderRadius: 12,
-          overflow: "hidden",
+          overflow: 'hidden',
           maxWidth: 560,
-          background: "var(--gnome-card-bg-color, #fff)",
+          background: 'var(--gnome-card-bg-color, #fff)',
         }}
       >
         <TabBar inline aria-label="Document sections">
@@ -318,7 +341,12 @@ export const Inline: Story = {
           ))}
         </TabBar>
         {tabs.map(({ id, label }) => (
-          <TabPanel key={id} id={`inline-panel-${id}`} active={active === id} style={{ padding: 24 }}>
+          <TabPanel
+            key={id}
+            id={`inline-panel-${id}`}
+            active={active === id}
+            style={{ padding: 24 }}
+          >
             <Text variant="title-4">{label}</Text>
             <Text variant="body" color="dim" style={{ marginTop: 8 }}>
               Content for the {label.toLowerCase()} tab.
@@ -333,7 +361,7 @@ export const Inline: Story = {
     docs: {
       description: {
         story:
-          "Use `inline` to remove the header-bar background so the tab bar blends into any surface — cards, content areas, or custom containers.",
+          'Use `inline` to remove the header-bar background so the tab bar blends into any surface — cards, content areas, or custom containers.',
       },
     },
   },
