@@ -1,3 +1,19 @@
+## [1.45.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.45.0...@gnome-ui/react@1.45.1) (2026-06-02)
+
+### Features
+
+* **@gnome-ui/cli:** update release workflow to add CLI ([a22bdbd](https://github.com/ElJijuna/gnome-ui/commit/a22bdbd7ff2f73791a464f37a3b4ca2d0bbf3c24))
+* **@gnome-ui/layout:** add ProfileCard component ([d374b21](https://github.com/ElJijuna/gnome-ui/commit/d374b214d16b13aa638d03bde9e802c94fb6c4ef))
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** add properties interactive and onClick in ProfileCard ([78bf5ab](https://github.com/ElJijuna/gnome-ui/commit/78bf5ab1cdbfee25066e12b692d881eaa3e90170))
+* **@gnome-ui/layout:** fix lint errors in ActivityFeed test ([f6b30a5](https://github.com/ElJijuna/gnome-ui/commit/f6b30a572efd34dade620e1fa98e42b1dc9b768a))
+* **@gnome-ui/layout:** resolve build and test failures from updated shared configs ([5cac3c1](https://github.com/ElJijuna/gnome-ui/commit/5cac3c1b03cc45dde64406eac6d431ef662b241d))
+* **@gnome-ui/layout:** solved error in first render in MasonryGrid ([142cdae](https://github.com/ElJijuna/gnome-ui/commit/142cdae9ef2699eab72255ee8df5d97365765f70))
+* **@gnome-ui/react:** resolve build and test failures from updated shared configs ([77beb08](https://github.com/ElJijuna/gnome-ui/commit/77beb08ed177030b3abdf5718b33a836bae622f6))
+* replace React.X namespace with direct named imports ([955a1f2](https://github.com/ElJijuna/gnome-ui/commit/955a1f2f4002a52ea517e5610a4a3b574ae4c99e))
+
 ## [1.45.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.44.0...@gnome-ui/react@1.45.0) (2026-05-24)
 
 ### Features
