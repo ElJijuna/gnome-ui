@@ -5,7 +5,8 @@ import type { ActivityFeedItem } from './ActivityFeed';
 import { ActivityFeed } from './ActivityFeed';
 
 vi.mock('@gnome-ui/react', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@gnome-ui/react')>();
+  const actual = await importOriginal();
+
   return { ...actual, useLocale: () => 'en' };
 });
 
