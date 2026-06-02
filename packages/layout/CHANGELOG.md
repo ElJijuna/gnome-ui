@@ -1,3 +1,12 @@
+## [1.28.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.28.1...@gnome-ui/layout@1.28.2) (2026-06-02)
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** fix lint errors in ActivityFeed test ([f6b30a5](https://github.com/ElJijuna/gnome-ui/commit/f6b30a572efd34dade620e1fa98e42b1dc9b768a))
+* **@gnome-ui/layout:** resolve build and test failures from updated shared configs ([5cac3c1](https://github.com/ElJijuna/gnome-ui/commit/5cac3c1b03cc45dde64406eac6d431ef662b241d))
+* **@gnome-ui/react:** resolve build and test failures from updated shared configs ([77beb08](https://github.com/ElJijuna/gnome-ui/commit/77beb08ed177030b3abdf5718b33a836bae622f6))
+* replace React.X namespace with direct named imports ([955a1f2](https://github.com/ElJijuna/gnome-ui/commit/955a1f2f4002a52ea517e5610a4a3b574ae4c99e))
+
 ## [1.28.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.28.0...@gnome-ui/layout@1.28.1) (2026-05-24)
 
 ### Bug Fixes
