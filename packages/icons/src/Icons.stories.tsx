@@ -12,7 +12,7 @@ interface IconProps {
   color?: string;
 }
 
-function Icon({ icon, size = 16, color = 'currentColor' }: IconProps) {
+const Icon = ({ icon, size = 16, color = 'currentColor' }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ function Icon({ icon, size = 16, color = 'currentColor' }: IconProps) {
       ))}
     </svg>
   );
-}
+};
 
 // ─── Gallery component ────────────────────────────────────────────────────────
 
@@ -63,7 +63,7 @@ interface GalleryProps {
   surface: 'light' | 'dark';
 }
 
-function Gallery({ size, color, filter, surface }: GalleryProps) {
+const Gallery = ({ size, color, filter, surface }: GalleryProps) => {
   const filtered = filter
     ? iconEntries.filter(([name]) => name.toLowerCase().includes(filter.toLowerCase()))
     : iconEntries;
@@ -123,9 +123,9 @@ function Gallery({ size, color, filter, surface }: GalleryProps) {
       </div>
     </div>
   );
-}
+};
 
-function EntryGrid({
+const EntryGrid = ({
   entries,
   size,
   color,
@@ -133,7 +133,7 @@ function EntryGrid({
   entries: [string, IconDefinition][];
   size: number;
   color: string;
-}) {
+}) => {
   return (
     <div
       style={{
@@ -172,7 +172,7 @@ function EntryGrid({
       ))}
     </div>
   );
-}
+};
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
@@ -305,7 +305,7 @@ const categories: Record<string, string[]> = {
   ...githubOcticonCategories,
 };
 
-function CategoryGrid({
+const CategoryGrid = ({
   category,
   size,
   color,
@@ -313,7 +313,7 @@ function CategoryGrid({
   category: string;
   size: number;
   color: string;
-}) {
+}) => {
   const names = categories[category] ?? [];
   const entries = names
     .map((n) => [n, (icons as Record<string, IconDefinition>)[n]] as [string, IconDefinition])
@@ -352,9 +352,9 @@ function CategoryGrid({
       </div>
     </div>
   );
-}
+};
 
-function SectionedCategoryGrid({
+const SectionedCategoryGrid = ({
   title,
   groups,
   size,
@@ -364,7 +364,7 @@ function SectionedCategoryGrid({
   groups: Record<string, string[]>;
   size: number;
   color: string;
-}) {
+}) => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h2 style={{ marginBottom: '1.25rem', fontSize: '1rem', color: '#333' }}>{title}</h2>
@@ -411,7 +411,7 @@ function SectionedCategoryGrid({
       </div>
     </div>
   );
-}
+};
 
 export const AdwaitaSymbolicIcons: Story = {
   name: 'Adwaita Symbolic',
