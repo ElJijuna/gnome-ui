@@ -101,7 +101,7 @@ export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Dialog.html
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.AlertDialog.html
  */
-export function Dialog({
+export const Dialog = ({
   open,
   title,
   children,
@@ -113,7 +113,7 @@ export function Dialog({
   onResponse,
   className,
   ...props
-}: DialogProps) {
+}: DialogProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
@@ -245,4 +245,4 @@ export function Dialog({
   }
 
   return createPortal(node, document.body);
-}
+};

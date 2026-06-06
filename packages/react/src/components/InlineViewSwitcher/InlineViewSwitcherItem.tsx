@@ -21,14 +21,14 @@ export interface InlineViewSwitcherItemProps extends ButtonHTMLAttributes<HTMLBu
  * Can be icon-only, label-only, or icon + label. For icon-only items always
  * provide an `aria-label` so screen readers can identify the view.
  */
-export function InlineViewSwitcherItem({
+export const InlineViewSwitcherItem = ({
   name,
   label,
   icon,
   disabled,
   className,
   ...props
-}: InlineViewSwitcherItemProps) {
+}: InlineViewSwitcherItemProps) => {
   const { value, onValueChange } = useInlineViewSwitcher();
   const active = value === name;
   const iconOnly = icon && !label;
@@ -59,4 +59,4 @@ export function InlineViewSwitcherItem({
       {label && <span className={styles.itemLabel}>{label}</span>}
     </button>
   );
-}
+};

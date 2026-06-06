@@ -34,7 +34,7 @@ export interface PathBarProps extends HTMLAttributes<HTMLElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/nav/search.html
  */
-export function PathBar({ segments, onNavigate, className, ...props }: PathBarProps) {
+export const PathBar = ({ segments, onNavigate, className, ...props }: PathBarProps) => {
   return (
     <nav
       aria-label="Breadcrumb"
@@ -94,4 +94,4 @@ export function PathBar({ segments, onNavigate, className, ...props }: PathBarPr
       </ol>
     </nav>
   );
-}
+};

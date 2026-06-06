@@ -56,7 +56,7 @@ function clamp(v: number, min: number, max: number): number {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SpinRow.html
  */
-export function SpinRow({
+export const SpinRow = ({
   title,
   subtitle,
   leading,
@@ -70,7 +70,7 @@ export function SpinRow({
   disabled = false,
   className,
   ...props
-}: SpinRowProps) {
+}: SpinRowProps) => {
   const isControlled = controlledValue !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
   const value = isControlled ? controlledValue : uncontrolledValue;
@@ -183,4 +183,4 @@ export function SpinRow({
       </div>
     </div>
   );
-}
+};

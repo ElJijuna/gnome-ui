@@ -83,7 +83,7 @@ function getInitials(name: string): string {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Avatar.html
  */
-export function Avatar({
+export const Avatar = ({
   name = '',
   src,
   alt,
@@ -91,7 +91,7 @@ export function Avatar({
   color,
   className,
   ...props
-}: AvatarProps) {
+}: AvatarProps) => {
   const resolvedColor = color ?? (name ? nameToColor(name) : 'blue');
   const initials = getInitials(name);
 
@@ -115,4 +115,4 @@ export function Avatar({
       )}
     </span>
   );
-}
+};

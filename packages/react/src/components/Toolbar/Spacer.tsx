@@ -19,7 +19,7 @@ export type SpacerProps = HTMLAttributes<HTMLDivElement>;
  *   <Button variant="flat">Done</Button>
  * </Toolbar>
  */
-export function Spacer({ className, ...props }: SpacerProps) {
+export const Spacer = ({ className, ...props }: SpacerProps) => {
   return (
     <div
       aria-hidden="true"
@@ -27,4 +27,4 @@ export function Spacer({ className, ...props }: SpacerProps) {
       {...props}
     />
   );
-}
+};

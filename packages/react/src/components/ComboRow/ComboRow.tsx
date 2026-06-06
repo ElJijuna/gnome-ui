@@ -46,7 +46,7 @@ export interface ComboRowProps<V extends string = string>
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ComboRow.html
  */
-export function ComboRow<V extends string = string>({
+export const ComboRow = <V extends string = string>({
   title,
   subtitle,
   leading,
@@ -57,7 +57,7 @@ export function ComboRow<V extends string = string>({
   disabled = false,
   className,
   ...props
-}: ComboRowProps<V>) {
+}: ComboRowProps<V>) => {
   const isControlled = controlledValue !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState<V | undefined>(defaultValue);
   const value = isControlled ? controlledValue : uncontrolledValue;
@@ -330,4 +330,4 @@ export function ComboRow<V extends string = string>({
       </div>
     </div>
   );
-}
+};

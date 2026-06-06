@@ -41,7 +41,7 @@ export interface BottomSheetProps extends Omit<HTMLAttributes<HTMLDivElement>, '
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.BottomSheet.html
  */
-export function BottomSheet({
+export const BottomSheet = ({
   open,
   title,
   children,
@@ -49,7 +49,7 @@ export function BottomSheet({
   closeOnBackdrop = true,
   className,
   ...props
-}: BottomSheetProps) {
+}: BottomSheetProps) => {
   const sheetRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
@@ -149,4 +149,4 @@ export function BottomSheet({
   }
 
   return createPortal(node, document.body);
-}
+};

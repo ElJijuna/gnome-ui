@@ -42,7 +42,7 @@ function clamp(value: number, min: number, max: number): number {
  *
  * @see https://developer.gnome.org/hig/patterns/controls/spin-buttons.html
  */
-export function SpinButton({
+export const SpinButton = ({
   value,
   onChange,
   min = 0,
@@ -54,7 +54,7 @@ export function SpinButton({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   ...props
-}: SpinButtonProps) {
+}: SpinButtonProps) => {
   const dp = decimals ?? countDecimals(step);
 
   const set = useCallback(
@@ -137,4 +137,4 @@ export function SpinButton({
       </button>
     </div>
   );
-}
+};

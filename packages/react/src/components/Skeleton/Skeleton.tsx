@@ -32,7 +32,7 @@ function toCssSize(value: number | string) {
  * GNOME HIG recommends `Spinner` or `ProgressBar` for loading states; this is a
  * pragmatic web-style extension for layouts that benefit from placeholder shape.
  */
-export function Skeleton({
+export const Skeleton = ({
   variant = 'rect',
   width = '100%',
   height = 16,
@@ -42,7 +42,7 @@ export function Skeleton({
   className,
   style,
   ...props
-}: SkeletonProps) {
+}: SkeletonProps) => {
   const classes = [styles.skeleton, styles[variant], animated ? styles.animated : null, className]
     .filter(Boolean)
     .join(' ');
@@ -75,4 +75,4 @@ export function Skeleton({
   return (
     <div aria-hidden="true" className={classes} style={{ ...shapeStyle, ...style }} {...props} />
   );
-}
+};

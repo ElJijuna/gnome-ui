@@ -33,7 +33,7 @@ interface TimeRemaining {
  *
  * @see https://developer.gnome.org/hig/patterns/
  */
-export function CountDownTimer({
+export const CountDownTimer = ({
   start: _start,
   end,
   format = 'time',
@@ -41,7 +41,7 @@ export function CountDownTimer({
   action,
   className,
   ...props
-}: CountDownTimerProps) {
+}: CountDownTimerProps) => {
   const dateFormatter = useDateTimeFormatter();
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining | null>(null);
   const [hasExecutedAction, setHasExecutedAction] = useState(false);
@@ -145,4 +145,4 @@ export function CountDownTimer({
       <span className={styles.value}>{formatTime()}</span>
     </div>
   );
-}
+};

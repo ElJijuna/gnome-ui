@@ -42,7 +42,7 @@ export interface ChipProps extends HTMLAttributes<HTMLElement> {
  *
  * Pair with `WrapBox` for multi-chip layouts.
  */
-export function Chip({
+export const Chip = ({
   label,
   icon,
   onRemove,
@@ -52,7 +52,7 @@ export function Chip({
   disabled = false,
   className,
   ...props
-}: ChipProps) {
+}: ChipProps) => {
   const isInteractive = selectable && !onRemove;
 
   const chipClasses = [
@@ -113,4 +113,4 @@ export function Chip({
       {content}
     </span>
   );
-}
+};

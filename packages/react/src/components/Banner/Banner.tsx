@@ -40,7 +40,7 @@ export interface BannerProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Banner.html
  * @see https://developer.gnome.org/hig/patterns/feedback/banners.html
  */
-export function Banner({
+export const Banner = ({
   variant = 'info',
   children,
   actionLabel,
@@ -49,7 +49,7 @@ export function Banner({
   onDismiss,
   className,
   ...props
-}: BannerProps) {
+}: BannerProps) => {
   return (
     <div
       role="status"
@@ -95,4 +95,4 @@ export function Banner({
       )}
     </div>
   );
-}
+};

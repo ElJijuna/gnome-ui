@@ -30,7 +30,7 @@ export interface SwitchRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, 
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SwitchRow.html
  */
-export function SwitchRow({
+export const SwitchRow = ({
   title,
   subtitle,
   leading,
@@ -41,7 +41,7 @@ export function SwitchRow({
   className,
   onClick,
   ...props
-}: SwitchRowProps) {
+}: SwitchRowProps) => {
   const isControlled = controlledChecked !== undefined;
   const [uncontrolledChecked, setUncontrolledChecked] = useState(defaultChecked);
   const checked = isControlled ? controlledChecked : uncontrolledChecked;
@@ -88,4 +88,4 @@ export function SwitchRow({
       </span>
     </button>
   );
-}
+};

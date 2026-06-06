@@ -27,7 +27,7 @@ export interface ColorSwatchProps
  * Can be used standalone or composed inside `ColorPicker`.
  * Shows a white checkmark when `selected`.
  */
-export function ColorSwatch({
+export const ColorSwatch = ({
   color,
   selected = false,
   size = 'md',
@@ -37,7 +37,7 @@ export function ColorSwatch({
   style,
   'aria-label': ariaLabel,
   ...props
-}: ColorSwatchProps) {
+}: ColorSwatchProps) => {
   return (
     <button
       type="button"
@@ -70,7 +70,7 @@ export function ColorSwatch({
       )}
     </button>
   );
-}
+};
 
 // ─── ColorPicker ─────────────────────────────────────────────────────────────
 
@@ -135,7 +135,7 @@ export interface ColorPickerProps extends Omit<HTMLAttributes<HTMLDivElement>, '
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ColorButton.html
  */
-export function ColorPicker({
+export const ColorPicker = ({
   value,
   onChange,
   colors = GNOME_PALETTE,
@@ -145,7 +145,7 @@ export function ColorPicker({
   style,
   'aria-label': ariaLabel,
   ...props
-}: ColorPickerProps) {
+}: ColorPickerProps) => {
   const customInputRef = useRef<HTMLInputElement>(null);
 
   // Roving tabindex: only the selected (or first) swatch is in the tab order.
@@ -256,4 +256,4 @@ export function ColorPicker({
       )}
     </div>
   );
-}
+};

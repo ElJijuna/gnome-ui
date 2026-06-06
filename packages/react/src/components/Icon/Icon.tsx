@@ -41,7 +41,7 @@ function isIconDefinition(icon: AnyIconDefinition): icon is IconDefinition {
  * import { siGithub } from "simple-icons";
  * <Icon icon={siGithub} label="GitHub" />
  */
-export function Icon({ icon, size = 'md', label, width, height, ...props }: IconProps) {
+export const Icon = ({ icon, size = 'md', label, width, height, ...props }: IconProps) => {
   const px = SIZE_MAP[size];
 
   const resolvedViewBox = isIconDefinition(icon) ? icon.viewBox : (icon.viewBox ?? '0 0 24 24');
@@ -68,4 +68,4 @@ export function Icon({ icon, size = 'md', label, width, height, ...props }: Icon
       {paths}
     </svg>
   );
-}
+};

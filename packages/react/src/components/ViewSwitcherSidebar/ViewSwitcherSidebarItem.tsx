@@ -31,7 +31,7 @@ export interface ViewSwitcherSidebarItemProps extends ButtonHTMLAttributes<HTMLB
  * Renders as `role="radio"`. Only the active item is in the natural Tab order;
  * all others use `tabIndex={-1}` and are reached via arrow-key navigation.
  */
-export function ViewSwitcherSidebarItem({
+export const ViewSwitcherSidebarItem = ({
   name,
   label,
   icon,
@@ -40,7 +40,7 @@ export function ViewSwitcherSidebarItem({
   disabled,
   className,
   ...props
-}: ViewSwitcherSidebarItemProps) {
+}: ViewSwitcherSidebarItemProps) => {
   const { value, onValueChange, collapsed } = useViewSwitcherSidebar();
   const active = value === name;
   const trailing = suffix ?? (count !== null && count !== undefined ? count : null);
@@ -77,4 +77,4 @@ export function ViewSwitcherSidebarItem({
       </button>
     </li>
   );
-}
+};

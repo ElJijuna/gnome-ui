@@ -43,7 +43,7 @@ export interface StatusPageProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.StatusPage.html
  * @see https://developer.gnome.org/hig/patterns/feedback/empty-states.html
  */
-export function StatusPage({
+export const StatusPage = ({
   icon,
   iconNode,
   title,
@@ -52,7 +52,7 @@ export function StatusPage({
   compact = false,
   className,
   ...props
-}: StatusPageProps) {
+}: StatusPageProps) => {
   const iconSize = compact ? 64 : 128;
   const iconContent = icon ? (
     <Icon icon={icon} width={iconSize} height={iconSize} aria-hidden />
@@ -80,4 +80,4 @@ export function StatusPage({
       {children && <div className={styles.actions}>{children}</div>}
     </div>
   );
-}
+};

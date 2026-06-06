@@ -33,7 +33,7 @@ export interface ToastProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Toast.html
  */
-export function Toast({
+export const Toast = ({
   title,
   duration = 3000,
   onDismiss,
@@ -42,7 +42,7 @@ export function Toast({
   dismissible = false,
   className,
   ...props
-}: ToastProps) {
+}: ToastProps) => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const remainingRef = useRef(duration);
   const startedAtRef = useRef<number>(0);
@@ -135,4 +135,4 @@ export function Toast({
       )}
     </div>
   );
-}
+};

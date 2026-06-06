@@ -2,8 +2,8 @@ import {
   cloneElement,
   type HTMLAttributes,
   type KeyboardEvent,
-  type MouseEvent as ReactMouseEvent,
   type ReactElement,
+  type MouseEvent as ReactMouseEvent,
   type ReactNode,
   useCallback,
   useEffect,
@@ -199,14 +199,14 @@ function computePosition(
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Popover.html
  */
-export function Popover({
+export const Popover = ({
   content,
   placement: preferredPlacement = 'bottom',
   open: controlledOpen,
   onClose,
   onOpenChange,
   children,
-}: PopoverProps) {
+}: PopoverProps) => {
   const isControlled = controlledOpen !== undefined;
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
   const open = isControlled ? controlledOpen : uncontrolledOpen;
@@ -381,4 +381,4 @@ export function Popover({
       {open && (typeof document !== 'undefined' ? createPortal(panel, document.body) : panel)}
     </>
   );
-}
+};

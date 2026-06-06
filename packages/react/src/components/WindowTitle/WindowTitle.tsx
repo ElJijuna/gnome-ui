@@ -24,11 +24,11 @@ export interface WindowTitleProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.WindowTitle.html
  */
-export function WindowTitle({ title, subtitle, className, ...props }: WindowTitleProps) {
+export const WindowTitle = ({ title, subtitle, className, ...props }: WindowTitleProps) => {
   return (
     <div className={[styles.windowTitle, className].filter(Boolean).join(' ')} {...props}>
       <span className={styles.title}>{title}</span>
       {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
     </div>
   );
-}
+};

@@ -45,7 +45,13 @@ export interface NavigationPageProps extends HTMLAttributes<HTMLDivElement> {
  * A single page inside a `NavigationView`.
  * Only visible when its `tag` matches the current page in the stack.
  */
-export function NavigationPage({ tag, title, children, className, ...props }: NavigationPageProps) {
+export const NavigationPage = ({
+  tag,
+  title,
+  children,
+  className,
+  ...props
+}: NavigationPageProps) => {
   const { currentTag, direction } = useContext(NavigationContext);
 
   if (currentTag !== tag) {
@@ -69,7 +75,7 @@ export function NavigationPage({ tag, title, children, className, ...props }: Na
       <div className={styles.pageContent}>{children}</div>
     </div>
   );
-}
+};
 
 // ─── NavigationView ───────────────────────────────────────────────────────────
 
@@ -100,12 +106,12 @@ export interface NavigationViewProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.NavigationView.html
  */
-export function NavigationView({
+export const NavigationView = ({
   initialPage,
   children,
   className,
   ...props
-}: NavigationViewProps) {
+}: NavigationViewProps) => {
   const [stack, setStack] = useState<string[]>([initialPage]);
 
   const currentTag = stack[stack.length - 1];
@@ -133,4 +139,4 @@ export function NavigationView({
       </div>
     </NavigationContext.Provider>
   );
-}
+};

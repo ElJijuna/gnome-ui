@@ -19,7 +19,14 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/controls/links.html
  */
-export function Link({ external = false, children, className, target, rel, ...props }: LinkProps) {
+export const Link = ({
+  external = false,
+  children,
+  className,
+  target,
+  rel,
+  ...props
+}: LinkProps) => {
   const isExternal = external || target === '_blank';
 
   return (
@@ -37,4 +44,4 @@ export function Link({ external = false, children, className, target, rel, ...pr
       )}
     </a>
   );
-}
+};

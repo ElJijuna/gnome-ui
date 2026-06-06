@@ -72,7 +72,7 @@ interface DropdownPos {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SearchBar.html
  */
-export function SearchBar({
+export const SearchBar = ({
   open,
   onClose,
   onClear,
@@ -89,7 +89,7 @@ export function SearchBar({
   renderSuggestion,
   suggestionsLabel = 'Suggestions',
   ...props
-}: SearchBarProps) {
+}: SearchBarProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
@@ -293,4 +293,4 @@ export function SearchBar({
       {typeof document !== 'undefined' && dropdown}
     </>
   );
-}
+};

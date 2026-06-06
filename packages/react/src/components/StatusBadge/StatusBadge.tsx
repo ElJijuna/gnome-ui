@@ -30,12 +30,12 @@ export interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * <StatusBadge variant="new">new</StatusBadge>
  * ```
  */
-export function StatusBadge({
+export const StatusBadge = ({
   variant = 'neutral',
   className,
   children,
   ...props
-}: StatusBadgeProps) {
+}: StatusBadgeProps) => {
   return (
     <span
       className={[styles.badge, styles[variant], className].filter(Boolean).join(' ')}
@@ -44,4 +44,4 @@ export function StatusBadge({
       {children}
     </span>
   );
-}
+};

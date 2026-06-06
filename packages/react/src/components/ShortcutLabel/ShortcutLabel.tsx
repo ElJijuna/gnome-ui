@@ -68,12 +68,12 @@ const SYMBOL_MAP: Record<string, string> = {
  *
  * @see https://docs.gtk.org/gtk4/class.ShortcutLabel.html
  */
-export function ShortcutLabel({
+export const ShortcutLabel = ({
   shortcut,
   symbols = true,
   className,
   ...props
-}: ShortcutLabelProps) {
+}: ShortcutLabelProps) => {
   const tokens = shortcut
     .split('+')
     .map((t) => t.trim())
@@ -96,4 +96,4 @@ export function ShortcutLabel({
       })}
     </span>
   );
-}
+};

@@ -24,14 +24,14 @@ export interface ButtonRowProps extends ButtonHTMLAttributes<HTMLButtonElement> 
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ButtonRow.html
  */
-export function ButtonRow({
+export const ButtonRow = ({
   title,
   variant = 'default',
   leading,
   trailing,
   className,
   ...props
-}: ButtonRowProps) {
+}: ButtonRowProps) => {
   const classes = [styles.row, styles[variant], className].filter(Boolean).join(' ');
 
   return (
@@ -41,4 +41,4 @@ export function ButtonRow({
       {trailing && <span className={styles.trailing}>{trailing}</span>}
     </button>
   );
-}
+};

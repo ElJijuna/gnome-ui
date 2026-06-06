@@ -51,7 +51,7 @@ type Story = StoryObj<typeof Carousel>;
 const COLORS = ['#3584e4', '#e01b24', '#33d17a', '#ff7800', '#9141ac'];
 const LABELS = ['Blue', 'Red', 'Green', 'Orange', 'Purple'];
 
-function SlidePlaceholder({ label, color }: { label: string; color: string }) {
+const SlidePlaceholder = ({ label, color }: { label: string; color: string }) => {
   return (
     <div
       style={{
@@ -70,7 +70,7 @@ function SlidePlaceholder({ label, color }: { label: string; color: string }) {
       {label}
     </div>
   );
-}
+};
 
 // ─── With dots ─────────────────────────────────────────────────────────────────
 

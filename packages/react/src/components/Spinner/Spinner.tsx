@@ -22,12 +22,12 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html
  */
-export function Spinner({
+export const Spinner = ({
   size = 'md',
   label = 'Loading\u2026',
   className,
   ...props
-}: SpinnerProps) {
+}: SpinnerProps) => {
   const classes = [styles.spinner, styles[size], className].filter(Boolean).join(' ');
 
   return (
@@ -39,4 +39,4 @@ export function Spinner({
       {...props}
     />
   );
-}
+};

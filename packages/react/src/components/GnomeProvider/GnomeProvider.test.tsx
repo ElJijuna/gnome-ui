@@ -23,17 +23,17 @@ function mockMatchMedia(matches: boolean) {
   });
 }
 
-function FormattedNumber({ value }: { value: number }) {
+const FormattedNumber = ({ value }: { value: number }) => {
   const formatter = useNumberFormatter();
 
   return <span>{formatter.format(value)}</span>;
-}
+};
 
-function FormattedMonth({ value }: { value: Date }) {
+const FormattedMonth = ({ value }: { value: Date }) => {
   const formatter = useDateTimeFormatter({ month: 'short' });
 
   return <span>{formatter.format(value)}</span>;
-}
+};
 
 describe('GnomeProvider colorScheme', () => {
   afterEach(() => {
@@ -72,9 +72,10 @@ describe('GnomeProvider colorScheme', () => {
 
   it('exposes colorScheme via useColorScheme', () => {
     mockMatchMedia(false);
-    function Reader() {
+    const Reader = () => {
       return <span>{useColorScheme()}</span>;
-    }
+    };
+
     render(
       <GnomeProvider colorScheme="dark">
         <Reader />
@@ -85,9 +86,10 @@ describe('GnomeProvider colorScheme', () => {
 
   it('resolves system to light when OS is light', () => {
     mockMatchMedia(false);
-    function Reader() {
+    const Reader = () => {
       return <span>{useResolvedColorScheme()}</span>;
-    }
+    };
+
     render(
       <GnomeProvider colorScheme="system">
         <Reader />
@@ -98,9 +100,10 @@ describe('GnomeProvider colorScheme', () => {
 
   it('resolves system to dark when OS is dark', () => {
     mockMatchMedia(true);
-    function Reader() {
+    const Reader = () => {
       return <span>{useResolvedColorScheme()}</span>;
-    }
+    };
+
     render(
       <GnomeProvider colorScheme="system">
         <Reader />
@@ -172,9 +175,10 @@ describe('GnomeProvider accentColor', () => {
 
   it('exposes accentColor via useAccentColor', () => {
     mockMatchMedia(false);
-    function Reader() {
+    const Reader = () => {
       return <span>{useAccentColor()}</span>;
-    }
+    };
+
     render(
       <GnomeProvider accentColor="red">
         <Reader />

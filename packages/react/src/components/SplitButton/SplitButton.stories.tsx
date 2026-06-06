@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SplitButton } from './SplitButton';
 
 /** Simple menu item helper for story dropdown content. */
-function MenuItem({ label, onClick }: { label: string; onClick?: () => void }) {
+const MenuItem = ({ label, onClick }: { label: string; onClick?: () => void }) => {
   return (
     <button
       onClick={onClick}
@@ -32,7 +32,7 @@ function MenuItem({ label, onClick }: { label: string; onClick?: () => void }) {
       {label}
     </button>
   );
-}
+};
 
 const sampleMenu = (
   <div>

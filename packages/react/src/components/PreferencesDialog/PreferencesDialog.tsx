@@ -98,14 +98,14 @@ export interface PreferencesDialogProps extends Omit<HTMLAttributes<HTMLDivEleme
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesDialog.html
  */
-export function PreferencesDialog({
+export const PreferencesDialog = ({
   open,
   onClose,
   children,
   searchable = true,
   className,
   ...props
-}: PreferencesDialogProps) {
+}: PreferencesDialogProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
@@ -254,4 +254,4 @@ export function PreferencesDialog({
     </div>,
     document.body,
   );
-}
+};

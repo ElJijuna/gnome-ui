@@ -15,10 +15,10 @@ export interface FrameProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/style-classes.html#frame-style-class
  */
-export function Frame({ children, className, ...props }: FrameProps) {
+export const Frame = ({ children, className, ...props }: FrameProps) => {
   return (
     <div className={[styles.frame, className].filter(Boolean).join(' ')} {...props}>
       {children}
     </div>
   );
-}
+};

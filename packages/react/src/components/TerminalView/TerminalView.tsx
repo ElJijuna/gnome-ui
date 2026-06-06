@@ -15,14 +15,14 @@ export interface TerminalViewProps extends HTMLAttributes<HTMLDivElement> {
   autoScroll?: boolean;
 }
 
-export function TerminalView({
+export const TerminalView = ({
   lines,
   variant = 'default',
   maxLines = 500,
   autoScroll = true,
   className,
   ...props
-}: TerminalViewProps) {
+}: TerminalViewProps) => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const visibleLines = lines.slice(-maxLines);
 
@@ -47,4 +47,4 @@ export function TerminalView({
       </pre>
     </div>
   );
-}
+};

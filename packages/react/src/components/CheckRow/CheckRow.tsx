@@ -29,7 +29,7 @@ export interface CheckRowProps extends Omit<HTMLAttributes<HTMLButtonElement>, '
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.CheckButton.html
  */
-export function CheckRow({
+export const CheckRow = ({
   title,
   subtitle,
   leading,
@@ -40,7 +40,7 @@ export function CheckRow({
   className,
   onClick,
   ...props
-}: CheckRowProps) {
+}: CheckRowProps) => {
   const isControlled = controlledChecked !== undefined;
   const [uncontrolledChecked, setUncontrolledChecked] = useState(defaultChecked);
   const checked = isControlled ? controlledChecked : uncontrolledChecked;
@@ -106,4 +106,4 @@ export function CheckRow({
       </span>
     </button>
   );
-}
+};

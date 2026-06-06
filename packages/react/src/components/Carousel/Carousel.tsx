@@ -26,13 +26,13 @@ export interface CarouselIndicatorDotsProps extends HTMLAttributes<HTMLDivElemen
  * Dot-style page indicator for `Carousel`.
  * Mirrors `AdwCarouselIndicatorDots`.
  */
-export function CarouselIndicatorDots({
+export const CarouselIndicatorDots = ({
   pages,
   currentPage,
   onPageSelected,
   className,
   ...props
-}: CarouselIndicatorDotsProps) {
+}: CarouselIndicatorDotsProps) => {
   return (
     <div
       className={[styles.indicatorDots, className].filter(Boolean).join(' ')}
@@ -55,7 +55,7 @@ export function CarouselIndicatorDots({
       ))}
     </div>
   );
-}
+};
 
 // ─── CarouselIndicatorLines ───────────────────────────────────────────────────
 
@@ -72,13 +72,13 @@ export interface CarouselIndicatorLinesProps extends HTMLAttributes<HTMLDivEleme
  * Line-style page indicator for `Carousel`.
  * Mirrors `AdwCarouselIndicatorLines`.
  */
-export function CarouselIndicatorLines({
+export const CarouselIndicatorLines = ({
   pages,
   currentPage,
   onPageSelected,
   className,
   ...props
-}: CarouselIndicatorLinesProps) {
+}: CarouselIndicatorLinesProps) => {
   return (
     <div
       className={[styles.indicatorLines, className].filter(Boolean).join(' ')}
@@ -101,7 +101,7 @@ export function CarouselIndicatorLines({
       ))}
     </div>
   );
-}
+};
 
 // ─── Carousel ─────────────────────────────────────────────────────────────────
 
@@ -142,7 +142,7 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Carousel.html
  */
-export function Carousel({
+export const Carousel = ({
   children,
   orientation = 'horizontal',
   spacing = 0,
@@ -151,7 +151,7 @@ export function Carousel({
   page: controlledPage,
   className,
   ...props
-}: CarouselProps) {
+}: CarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const pageCount = Children.count(children);
   const [internalPage, setInternalPage] = useState(0);
@@ -275,4 +275,4 @@ export function Carousel({
       ))}
     </div>
   );
-}
+};

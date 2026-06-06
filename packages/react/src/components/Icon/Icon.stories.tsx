@@ -169,7 +169,7 @@ const CATEGORIES: IconGalleryCategory[] = [
 
 const TOTAL = CATEGORIES.reduce((n, c) => n + c.items.length, 0);
 
-function IconTile({ name, icon }: { name: string; icon: Icons.IconDefinition }) {
+const IconTile = ({ name, icon }: { name: string; icon: Icons.IconDefinition }) => {
   const [copied, setCopied] = useState(false);
 
   function handleClick() {
@@ -226,7 +226,7 @@ function IconTile({ name, icon }: { name: string; icon: Icons.IconDefinition }) 
       </span>
     </button>
   );
-}
+};
 
 export const Gallery: Story = {
   render: () => (

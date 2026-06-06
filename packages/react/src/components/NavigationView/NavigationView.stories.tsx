@@ -43,7 +43,7 @@ type Story = StoryObj<typeof NavigationView>;
 
 // ─── Inner pages (use hook) ────────────────────────────────────────────────────
 
-function HomePage() {
+const HomePage = () => {
   const { navigate } = useNavigation();
 
   return (
@@ -58,9 +58,9 @@ function HomePage() {
       </BoxedList>
     </div>
   );
-}
+};
 
-function DetailPage({ name }: { name: string }) {
+const DetailPage = ({ name }: { name: string }) => {
   const { pop, canGoBack } = useNavigation();
 
   return (
@@ -75,7 +75,7 @@ function DetailPage({ name }: { name: string }) {
       )}
     </div>
   );
-}
+};
 
 // ─── Default ───────────────────────────────────────────────────────────────────
 
@@ -117,7 +117,7 @@ export const Default: Story = {
 
 // ─── Deep stack ────────────────────────────────────────────────────────────────
 
-function LevelPage({ level }: { level: number }) {
+const LevelPage = ({ level }: { level: number }) => {
   const { navigate, pop, canGoBack } = useNavigation();
 
   return (
@@ -135,7 +135,7 @@ function LevelPage({ level }: { level: number }) {
       </div>
     </div>
   );
-}
+};
 
 export const DeepStack: Story = {
   render: () => (

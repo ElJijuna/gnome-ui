@@ -27,7 +27,7 @@ import {
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
 /** Menu item inside the avatar popover dropdown. */
-function AvatarMenuItem({
+const AvatarMenuItem = ({
   label,
   destructive = false,
   onClick,
@@ -35,7 +35,7 @@ function AvatarMenuItem({
   label: string;
   destructive?: boolean;
   onClick?: () => void;
-}) {
+}) => {
   return (
     <button
       type="button"
@@ -67,11 +67,11 @@ function AvatarMenuItem({
       {label}
     </button>
   );
-}
+};
 
 // ─── Dashboard component ───────────────────────────────────────────────────────
 
-function Dashboard() {
+const Dashboard = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
@@ -449,7 +449,7 @@ function Dashboard() {
       </footer>
     </div>
   );
-}
+};
 
 // ─── Meta ──────────────────────────────────────────────────────────────────────
 

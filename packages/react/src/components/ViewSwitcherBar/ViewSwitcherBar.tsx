@@ -39,12 +39,12 @@ export interface ViewSwitcherBarProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcherBar.html
  */
-export function ViewSwitcherBar({
+export const ViewSwitcherBar = ({
   children,
   reveal = true,
   className,
   ...props
-}: ViewSwitcherBarProps) {
+}: ViewSwitcherBarProps) => {
   if (!reveal) {
     return null;
   }
@@ -59,4 +59,4 @@ export function ViewSwitcherBar({
       {children}
     </div>
   );
-}
+};

@@ -23,7 +23,7 @@ export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElemen
  *
  * @see https://developer.gnome.org/hig/patterns/controls/text-fields.html
  */
-export function TextField({
+export const TextField = ({
   label,
   helperText,
   error,
@@ -31,7 +31,7 @@ export function TextField({
   className,
   disabled,
   ...props
-}: TextFieldProps) {
+}: TextFieldProps) => {
   const autoId = useId();
   const id = idProp ?? autoId;
   const helpId = `${id}-help`;
@@ -65,4 +65,4 @@ export function TextField({
       )}
     </div>
   );
-}
+};

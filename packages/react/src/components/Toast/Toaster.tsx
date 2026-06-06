@@ -33,13 +33,13 @@ export interface ToasterProps extends HTMLAttributes<HTMLDivElement> {
  *   ))}
  * </Toaster>
  */
-export function Toaster({
+export const Toaster = ({
   position = 'bottom',
   children,
   container,
   className,
   ...props
-}: ToasterProps) {
+}: ToasterProps) => {
   const node = (
     <div
       aria-label="Notifications"
@@ -62,4 +62,4 @@ export function Toaster({
   }
 
   return createPortal(node, container ?? document.body);
-}
+};

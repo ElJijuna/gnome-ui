@@ -38,7 +38,7 @@ export interface ExpanderRowProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ExpanderRow.html
  */
-export function ExpanderRow({
+export const ExpanderRow = ({
   title,
   subtitle,
   leading,
@@ -49,7 +49,7 @@ export function ExpanderRow({
   onExpandedChange,
   className,
   ...props
-}: ExpanderRowProps) {
+}: ExpanderRowProps) => {
   const isControlled = controlledExpanded !== undefined;
   const [uncontrolledExpanded, setUncontrolledExpanded] = useState(defaultExpanded);
   const expanded = isControlled ? controlledExpanded : uncontrolledExpanded;
@@ -131,4 +131,4 @@ export function ExpanderRow({
       </div>
     </div>
   );
-}
+};

@@ -37,7 +37,7 @@ export interface WrapBoxProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.WrapBox.html
  */
-export function WrapBox({
+export const WrapBox = ({
   childSpacing = 6,
   lineSpacing,
   justify = 'start',
@@ -47,7 +47,7 @@ export function WrapBox({
   className,
   style,
   ...props
-}: WrapBoxProps) {
+}: WrapBoxProps) => {
   const gap = typeof childSpacing === 'number' ? `${childSpacing}px` : childSpacing;
   const rowGap =
     lineSpacing !== null && lineSpacing !== undefined
@@ -75,4 +75,4 @@ export function WrapBox({
       {children}
     </div>
   );
-}
+};

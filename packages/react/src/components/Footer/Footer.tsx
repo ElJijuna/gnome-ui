@@ -24,7 +24,14 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/containers/header-bars.html
  */
-export function Footer({ start, end, children, flat = false, className, ...props }: FooterProps) {
+export const Footer = ({
+  start,
+  end,
+  children,
+  flat = false,
+  className,
+  ...props
+}: FooterProps) => {
   return (
     <footer
       className={[styles.footer, flat ? styles.flat : null, className].filter(Boolean).join(' ')}
@@ -39,4 +46,4 @@ export function Footer({ start, end, children, flat = false, className, ...props
       <div className={[styles.slot, styles.slotEnd].filter(Boolean).join(' ')}>{end}</div>
     </footer>
   );
-}
+};

@@ -58,7 +58,7 @@ export interface NavigationSplitViewProps extends Omit<HTMLAttributes<HTMLDivEle
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.NavigationSplitView.html
  */
-export function NavigationSplitView({
+export const NavigationSplitView = ({
   sidebar,
   content,
   showContent = false,
@@ -68,7 +68,7 @@ export function NavigationSplitView({
   className,
   style,
   ...props
-}: NavigationSplitViewProps) {
+}: NavigationSplitViewProps) => {
   const { isNarrow } = useBreakpoint();
 
   // CSS custom property drives the sidebar width clamp
@@ -112,4 +112,4 @@ export function NavigationSplitView({
       </div>
     </div>
   );
-}
+};

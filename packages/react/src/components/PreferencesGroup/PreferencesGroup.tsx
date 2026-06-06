@@ -24,14 +24,14 @@ export interface PreferencesGroupProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html
  */
-export function PreferencesGroup({
+export const PreferencesGroup = ({
   title,
   description,
   headerSuffix,
   children,
   className,
   ...props
-}: PreferencesGroupProps) {
+}: PreferencesGroupProps) => {
   const hasHeader = title || description || headerSuffix;
 
   return (
@@ -48,4 +48,4 @@ export function PreferencesGroup({
       <div className={styles.content}>{children}</div>
     </div>
   );
-}
+};

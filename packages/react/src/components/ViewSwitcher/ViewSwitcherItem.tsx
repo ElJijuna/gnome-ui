@@ -19,14 +19,14 @@ export interface ViewSwitcherItemProps extends ButtonHTMLAttributes<HTMLButtonEl
  *
  * Renders as `role="radio"` so the group has proper radiogroup semantics.
  */
-export function ViewSwitcherItem({
+export const ViewSwitcherItem = ({
   label,
   icon,
   active = false,
   className,
   disabled,
   ...props
-}: ViewSwitcherItemProps) {
+}: ViewSwitcherItemProps) => {
   return (
     <button
       type="button"
@@ -45,4 +45,4 @@ export function ViewSwitcherItem({
       <span className={styles.itemLabel}>{label}</span>
     </button>
   );
-}
+};

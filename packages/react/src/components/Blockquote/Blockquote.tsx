@@ -47,14 +47,14 @@ export interface BlockquoteProps extends HTMLAttributes<HTMLQuoteElement> {
  * </Blockquote>
  * ```
  */
-export function Blockquote({
+export const Blockquote = ({
   variant = 'default',
   icon,
   cite,
   children,
   className,
   ...props
-}: BlockquoteProps) {
+}: BlockquoteProps) => {
   return (
     <blockquote
       className={[styles.blockquote, styles[variant], className].filter(Boolean).join(' ')}
@@ -76,4 +76,4 @@ export function Blockquote({
       )}
     </blockquote>
   );
-}
+};

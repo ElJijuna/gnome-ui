@@ -26,14 +26,14 @@ export interface HeaderBarProps extends Omit<HTMLAttributes<HTMLElement>, 'title
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html
  * @see https://developer.gnome.org/hig/patterns/containers/header-bars.html
  */
-export function HeaderBar({
+export const HeaderBar = ({
   title,
   start,
   end,
   flat = false,
   className,
   ...props
-}: HeaderBarProps) {
+}: HeaderBarProps) => {
   return (
     <header
       className={[styles.headerBar, flat ? styles.flat : null, className].filter(Boolean).join(' ')}
@@ -51,4 +51,4 @@ export function HeaderBar({
       <div className={[styles.slot, styles.slotEnd].filter(Boolean).join(' ')}>{end}</div>
     </header>
   );
-}
+};
