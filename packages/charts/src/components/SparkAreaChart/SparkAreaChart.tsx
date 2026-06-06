@@ -30,7 +30,7 @@ function normalize(data: SparkData, key: string): Record<string, unknown>[] {
     : (data as Record<string, unknown>[]);
 }
 
-export function SparkAreaChart({
+export const SparkAreaChart = ({
   data,
   dataKey = 'value',
   color = 'var(--gnome-accent-color, #3584e4)',
@@ -40,7 +40,7 @@ export function SparkAreaChart({
   fillOpacity = 0.2,
   className,
   'aria-label': ariaLabel,
-}: SparkAreaChartProps) {
+}: SparkAreaChartProps) => {
   const normalized = normalize(data, dataKey);
   const gradId = `spark-area-${dataKey}`;
 
@@ -76,4 +76,4 @@ export function SparkAreaChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

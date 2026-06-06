@@ -45,7 +45,7 @@ const TOOLTIP_CONTENT_STYLE = {
   boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
-export function LineChart({
+export const LineChart = ({
   data,
   series,
   xAxisKey = 'name',
@@ -53,7 +53,7 @@ export function LineChart({
   showGrid = true,
   showLegend = false,
   className,
-}: LineChartProps) {
+}: LineChartProps) => {
   const formatNumber = useNumberFormatter().format;
 
   return (
@@ -108,4 +108,4 @@ export function LineChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

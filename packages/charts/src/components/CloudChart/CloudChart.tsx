@@ -17,14 +17,14 @@ export interface CloudChartProps {
   'aria-label'?: string;
 }
 
-export function CloudChart({
+export const CloudChart = ({
   data,
   height = 300,
   minFontSize = 12,
   maxFontSize = 48,
   className,
   'aria-label': ariaLabel,
-}: CloudChartProps) {
+}: CloudChartProps) => {
   const values = data.map((d) => d.value);
   const min = Math.min(...values);
   const max = Math.max(...values);
@@ -61,4 +61,4 @@ export function CloudChart({
       ))}
     </div>
   );
-}
+};

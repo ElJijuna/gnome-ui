@@ -26,7 +26,7 @@ function normalize(data: SparkData, key: string): Record<string, unknown>[] {
     : (data as Record<string, unknown>[]);
 }
 
-export function SparkLineChart({
+export const SparkLineChart = ({
   data,
   dataKey = 'value',
   color = 'var(--gnome-accent-color, #3584e4)',
@@ -34,7 +34,7 @@ export function SparkLineChart({
   strokeWidth = 1.5,
   className,
   'aria-label': ariaLabel,
-}: SparkLineChartProps) {
+}: SparkLineChartProps) => {
   const normalized = normalize(data, dataKey);
 
   return (
@@ -59,4 +59,4 @@ export function SparkLineChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

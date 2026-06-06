@@ -45,7 +45,7 @@ const TOOLTIP_CONTENT_STYLE = {
   boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
-export function RadarChart({
+export const RadarChart = ({
   data,
   series,
   angleKey = 'name',
@@ -54,7 +54,7 @@ export function RadarChart({
   showLegend = false,
   className,
   'aria-label': ariaLabel,
-}: RadarChartProps) {
+}: RadarChartProps) => {
   return (
     <div
       role="img"
@@ -97,4 +97,4 @@ export function RadarChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

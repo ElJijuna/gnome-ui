@@ -108,7 +108,7 @@ export const AllColors: Story = {
 
 // ─── In Cards ─────────────────────────────────────────────────────────────────
 
-function MetricCard({
+const MetricCard = ({
   label,
   value,
   trend,
@@ -118,7 +118,7 @@ function MetricCard({
   value: string;
   trend: string;
   children: ReactNode;
-}) {
+}) => {
   return (
     <Card style={{ width: 200 }}>
       <Text variant="caption" color="dim">
@@ -136,7 +136,7 @@ function MetricCard({
       {children}
     </Card>
   );
-}
+};
 
 export const InCards: Story = {
   name: 'Embedded in Cards',

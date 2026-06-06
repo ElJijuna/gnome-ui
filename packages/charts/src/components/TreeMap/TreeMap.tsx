@@ -55,7 +55,7 @@ interface TileProps {
   formatNumber: (value: number) => string;
 }
 
-function Tile({
+const Tile = ({
   x,
   y,
   width,
@@ -66,7 +66,7 @@ function Tile({
   colorMap,
   showLabels,
   formatNumber,
-}: TileProps) {
+}: TileProps) => {
   const colorKey = group ?? name;
   const fill = colorMap.get(colorKey) ?? GNOME_CHART_PALETTE[0];
   const showText = showLabels && width > 40 && height > 24;
@@ -118,9 +118,9 @@ function Tile({
       )}
     </g>
   );
-}
+};
 
-export function TreeMap({ data, height = 400, showLabels = true, className }: TreeMapProps) {
+export const TreeMap = ({ data, height = 400, showLabels = true, className }: TreeMapProps) => {
   const formatNumber = useNumberFormatter().format;
 
   const colorMap = buildColorMap(data);
@@ -163,4 +163,4 @@ export function TreeMap({ data, height = 400, showLabels = true, className }: Tr
       </ResponsiveContainer>
     </div>
   );
-}
+};
