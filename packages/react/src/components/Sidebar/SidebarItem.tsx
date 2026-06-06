@@ -227,7 +227,7 @@ export function SidebarItem({
       )}
 
       {menu &&
-        menuItems?.length &&
+        !!menuItems?.length &&
         typeof document !== 'undefined' &&
         createPortal(
           <div
