@@ -64,7 +64,7 @@ function countDecimals(n: number) {
  *
  * @see https://developer.gnome.org/hig/patterns/controls/sliders.html
  */
-export function Slider({
+export const Slider = ({
   value,
   onChange,
   min = 0,
@@ -77,7 +77,7 @@ export function Slider({
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
   ...props
-}: SliderProps) {
+}: SliderProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const dp = countDecimals(step);
 
@@ -220,4 +220,4 @@ export function Slider({
       )}
     </div>
   );
-}
+};

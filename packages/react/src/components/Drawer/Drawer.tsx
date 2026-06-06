@@ -43,7 +43,7 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'conte
  * The drawer is controlled through `open`, renders into `document.body`, and
  * accepts its body as either `content` or `children`.
  */
-export function Drawer({
+export const Drawer = ({
   open,
   side = 'right',
   size = 'classic',
@@ -54,7 +54,7 @@ export function Drawer({
   closeOnBackdrop = true,
   className,
   ...props
-}: DrawerProps) {
+}: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
@@ -139,4 +139,4 @@ export function Drawer({
   }
 
   return createPortal(node, document.body);
-}
+};

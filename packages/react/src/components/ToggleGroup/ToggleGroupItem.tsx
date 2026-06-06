@@ -21,14 +21,14 @@ export interface ToggleGroupItemProps extends ButtonHTMLAttributes<HTMLButtonEle
  * Can be icon-only, label-only, or icon + label. For icon-only items always
  * provide an `aria-label` so screen readers can identify the option.
  */
-export function ToggleGroupItem({
+export const ToggleGroupItem = ({
   name,
   label,
   icon,
   disabled,
   className,
   ...props
-}: ToggleGroupItemProps) {
+}: ToggleGroupItemProps) => {
   const { value, onValueChange } = useToggleGroup();
   const active = value === name;
   const iconOnly = icon && !label;
@@ -59,4 +59,4 @@ export function ToggleGroupItem({
       {label && <span className={styles.itemLabel}>{label}</span>}
     </button>
   );
-}
+};

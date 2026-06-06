@@ -39,7 +39,7 @@ export interface SplitButtonProps
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SplitButton.html
  */
-export function SplitButton({
+export const SplitButton = ({
   label,
   variant = 'default',
   dropdownContent,
@@ -48,7 +48,7 @@ export function SplitButton({
   onClick,
   className,
   ...props
-}: SplitButtonProps) {
+}: SplitButtonProps) => {
   const [open, setOpen] = useState(false);
   const [dropdownStyle, setDropdownStyle] = useState<CSSProperties>({});
 
@@ -196,4 +196,4 @@ export function SplitButton({
       {open && (typeof document !== 'undefined' ? createPortal(panel, document.body) : panel)}
     </>
   );
-}
+};

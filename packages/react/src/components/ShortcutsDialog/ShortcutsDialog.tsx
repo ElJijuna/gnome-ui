@@ -52,12 +52,12 @@ const FOCUSABLE =
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ShortcutsDialog.html
  */
-export function ShortcutsDialog({
+export const ShortcutsDialog = ({
   open,
   onClose,
   title = 'Keyboard Shortcuts',
   sections,
-}: ShortcutsDialogProps) {
+}: ShortcutsDialogProps) => {
   const [query, setQuery] = useState('');
   const dialogRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -224,4 +224,4 @@ export function ShortcutsDialog({
   }
 
   return createPortal(node, document.body);
-}
+};

@@ -75,7 +75,7 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
  * </ViewSwitcherSidebar>
  * ```
  */
-export function ViewSwitcherSidebar({
+export const ViewSwitcherSidebar = ({
   value,
   onValueChange,
   'aria-label': ariaLabel = 'Views',
@@ -87,7 +87,7 @@ export function ViewSwitcherSidebar({
   children,
   className,
   ...props
-}: ViewSwitcherSidebarProps) {
+}: ViewSwitcherSidebarProps) => {
   const groupRef = useRef<HTMLUListElement>(null);
 
   function handleKeyDown(e: KeyboardEvent<HTMLElement>) {
@@ -142,4 +142,4 @@ export function ViewSwitcherSidebar({
       </nav>
     </ViewSwitcherSidebarContext.Provider>
   );
-}
+};

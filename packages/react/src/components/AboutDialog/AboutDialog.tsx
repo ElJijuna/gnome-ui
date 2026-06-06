@@ -67,7 +67,7 @@ const ABOUT_TAB_LABEL: Record<AboutTab, string> = {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.AboutDialog.html
  */
-export function AboutDialog({
+export const AboutDialog = ({
   open,
   onClose,
   applicationName,
@@ -84,7 +84,7 @@ export function AboutDialog({
   licenseType,
   licenseText,
   links,
-}: AboutDialogProps) {
+}: AboutDialogProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
@@ -264,4 +264,4 @@ export function AboutDialog({
   }
 
   return createPortal(node, document.body);
-}
+};

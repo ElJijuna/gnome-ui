@@ -48,7 +48,7 @@ const ALIGN: Record<string, string> = {
   end: styles.alignEnd,
 };
 
-function SortChevron({ direction }: { direction: SortDirection | null }) {
+const SortChevron = ({ direction }: { direction: SortDirection | null }) => {
   return (
     <svg
       width="10"
@@ -69,9 +69,9 @@ function SortChevron({ direction }: { direction: SortDirection | null }) {
       )}
     </svg>
   );
-}
+};
 
-export function ColumnView<TRow extends object = Record<string, unknown>>({
+export const ColumnView = <TRow extends object = Record<string, unknown>>({
   columns,
   rows,
   rowKey,
@@ -84,7 +84,7 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
   emptyState,
   className,
   ariaLabel,
-}: ColumnViewProps<TRow>) {
+}: ColumnViewProps<TRow>) => {
   const tbodyRef = useRef<HTMLTableSectionElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const selectedSet = new Set(selectedRows);
@@ -282,4 +282,4 @@ export function ColumnView<TRow extends object = Record<string, unknown>>({
       </div>
     </div>
   );
-}
+};

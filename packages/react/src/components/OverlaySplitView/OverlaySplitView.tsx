@@ -68,7 +68,7 @@ export interface OverlaySplitViewProps extends Omit<HTMLAttributes<HTMLDivElemen
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.OverlaySplitView.html
  */
-export function OverlaySplitView({
+export const OverlaySplitView = ({
   sidebar,
   content,
   showSidebar = false,
@@ -81,7 +81,7 @@ export function OverlaySplitView({
   className,
   style,
   ...props
-}: OverlaySplitViewProps) {
+}: OverlaySplitViewProps) => {
   const { isNarrow } = useBreakpoint();
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -198,4 +198,4 @@ export function OverlaySplitView({
       <div className={styles.content}>{content}</div>
     </div>
   );
-}
+};

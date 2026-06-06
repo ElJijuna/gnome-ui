@@ -78,13 +78,13 @@ export interface BreakpointBinProps extends Omit<HTMLAttributes<HTMLDivElement>,
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.BreakpointBin.html
  */
-export function BreakpointBin({
+export const BreakpointBin = ({
   breakpoints,
   children,
   className,
   style,
   ...props
-}: BreakpointBinProps) {
+}: BreakpointBinProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<BreakpointBinState>({
     activeBreakpoint: null,
@@ -146,4 +146,4 @@ export function BreakpointBin({
       {children(state)}
     </div>
   );
-}
+};

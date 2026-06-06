@@ -62,7 +62,7 @@ export interface InlineViewSwitcherProps extends HTMLAttributes<HTMLDivElement> 
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.InlineViewSwitcher.html
  */
-export function InlineViewSwitcher({
+export const InlineViewSwitcher = ({
   value,
   onValueChange,
   variant = 'default',
@@ -70,7 +70,7 @@ export function InlineViewSwitcher({
   children,
   className,
   ...props
-}: InlineViewSwitcherProps) {
+}: InlineViewSwitcherProps) => {
   const groupRef = useRef<HTMLDivElement>(null);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
@@ -116,4 +116,4 @@ export function InlineViewSwitcher({
       </div>
     </InlineViewSwitcherContext.Provider>
   );
-}
+};

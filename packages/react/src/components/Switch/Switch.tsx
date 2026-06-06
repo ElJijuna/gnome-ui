@@ -15,7 +15,7 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
  *
  * @see https://developer.gnome.org/hig/patterns/controls/switches.html
  */
-export function Switch({ className, ...props }: SwitchProps) {
+export const Switch = ({ className, ...props }: SwitchProps) => {
   return (
     <input
       type="checkbox"
@@ -24,4 +24,4 @@ export function Switch({ className, ...props }: SwitchProps) {
       {...props}
     />
   );
-}
+};

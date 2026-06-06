@@ -121,7 +121,7 @@ interface GridCell {
   future: boolean;
 }
 
-export function ContributionGraph({
+export const ContributionGraph = ({
   data,
   maxLevel = 4,
   cellSize = 12,
@@ -138,7 +138,7 @@ export function ContributionGraph({
   onDayClick,
   tooltipContent,
   className,
-}: ContributionGraphProps) {
+}: ContributionGraphProps) => {
   const monthFormatter = useDateTimeFormatter({ month: 'short' });
   const weekdayFormatter = useDateTimeFormatter({ weekday: 'short' });
   const fullDateFormatter = useDateTimeFormatter({
@@ -549,4 +549,4 @@ export function ContributionGraph({
       )}
     </div>
   );
-}
+};

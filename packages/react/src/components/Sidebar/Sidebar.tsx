@@ -120,7 +120,7 @@ export interface SidebarProps extends HTMLAttributes<HTMLElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Sidebar.html
  */
-export function Sidebar({
+export const Sidebar = ({
   children,
   collapsed = false,
   searchable,
@@ -130,7 +130,7 @@ export function Sidebar({
   variant = 'classic',
   className,
   ...props
-}: SidebarProps) {
+}: SidebarProps) => {
   const [internalFilter, setInternalFilter] = useState('');
   const { isNarrow } = useBreakpoint();
 
@@ -186,4 +186,4 @@ export function Sidebar({
       </SidebarFilterContext.Provider>
     </SidebarCollapsedContext.Provider>
   );
-}
+};

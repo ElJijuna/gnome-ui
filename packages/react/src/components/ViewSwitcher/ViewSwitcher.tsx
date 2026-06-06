@@ -20,12 +20,12 @@ export interface ViewSwitcherProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html
  * @see https://developer.gnome.org/hig/patterns/nav/view-switchers.html
  */
-export function ViewSwitcher({
+export const ViewSwitcher = ({
   children,
   className,
   'aria-label': ariaLabel = 'View switcher',
   ...props
-}: ViewSwitcherProps) {
+}: ViewSwitcherProps) => {
   const groupRef = useRef<HTMLDivElement>(null);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
@@ -69,4 +69,4 @@ export function ViewSwitcher({
       {children}
     </div>
   );
-}
+};

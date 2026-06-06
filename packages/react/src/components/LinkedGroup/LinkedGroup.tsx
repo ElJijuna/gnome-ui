@@ -32,7 +32,12 @@ export interface LinkedGroupProps extends HTMLAttributes<HTMLDivElement> {
  *   <Button>Paste</Button>
  * </LinkedGroup>
  */
-export function LinkedGroup({ children, vertical = false, className, ...props }: LinkedGroupProps) {
+export const LinkedGroup = ({
+  children,
+  vertical = false,
+  className,
+  ...props
+}: LinkedGroupProps) => {
   const classes = [styles.linked, vertical ? styles.vertical : null, className]
     .filter(Boolean)
     .join(' ');
@@ -42,4 +47,4 @@ export function LinkedGroup({ children, vertical = false, className, ...props }:
       {children}
     </div>
   );
-}
+};

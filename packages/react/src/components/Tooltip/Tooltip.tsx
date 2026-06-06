@@ -169,12 +169,12 @@ function computePosition(
  *
  * @see https://developer.gnome.org/hig/patterns/feedback/tooltips.html
  */
-export function Tooltip({
+export const Tooltip = ({
   label,
   placement: preferredPlacement = 'top',
   delay = 500,
   children,
-}: TooltipProps) {
+}: TooltipProps) => {
   const id = useId();
   const [visible, setVisible] = useState(false);
   const [pos, setPos] = useState<Position | null>(null);
@@ -309,4 +309,4 @@ export function Tooltip({
       {typeof document !== 'undefined' ? createPortal(tooltip, document.body) : tooltip}
     </>
   );
-}
+};

@@ -61,14 +61,14 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
  * @see https://developer.gnome.org/hig/guidelines/typography.html
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html
  */
-export function Text({
+export const Text = ({
   variant = 'body',
   color = 'default',
   as,
   className,
   children,
   ...props
-}: TextProps) {
+}: TextProps) => {
   const Tag = as ?? defaultElement[variant];
 
   const classes = [styles.text, styles[variant], styles[`color-${color}`], className]
@@ -80,4 +80,4 @@ export function Text({
       {children}
     </Tag>
   );
-}
+};

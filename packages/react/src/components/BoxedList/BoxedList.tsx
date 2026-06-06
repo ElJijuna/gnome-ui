@@ -29,7 +29,12 @@ export interface BoxedListProps extends HTMLAttributes<HTMLUListElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html#boxed-lists-cards
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
-export function BoxedList({ children, variant = 'default', className, ...props }: BoxedListProps) {
+export const BoxedList = ({
+  children,
+  variant = 'default',
+  className,
+  ...props
+}: BoxedListProps) => {
   const items = Children.toArray(children).filter(Boolean);
   const separate = variant === 'separate';
 
@@ -48,4 +53,4 @@ export function BoxedList({ children, variant = 'default', className, ...props }
       ))}
     </ul>
   );
-}
+};

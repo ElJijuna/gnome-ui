@@ -38,7 +38,7 @@ export interface ActionRowProps extends HTMLAttributes<HTMLDivElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ActionRow.html
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
-export function ActionRow({
+export const ActionRow = ({
   title,
   subtitle,
   leading,
@@ -47,7 +47,7 @@ export function ActionRow({
   variant = 'default',
   className,
   ...props
-}: ActionRowProps) {
+}: ActionRowProps) => {
   const Tag = interactive ? 'button' : 'div';
   const property = variant === 'property';
 
@@ -74,4 +74,4 @@ export function ActionRow({
       {trailing && <span className={styles.trailing}>{trailing}</span>}
     </Tag>
   );
-}
+};

@@ -33,14 +33,14 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/feedback/badges.html
  */
-export function Badge({
+export const Badge = ({
   variant = 'accent',
   dot = false,
   children,
   anchor,
   className,
   ...props
-}: BadgeProps) {
+}: BadgeProps) => {
   const badgeEl = (
     <span
       className={[
@@ -68,4 +68,4 @@ export function Badge({
   }
 
   return badgeEl;
-}
+};

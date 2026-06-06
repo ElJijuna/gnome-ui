@@ -62,13 +62,13 @@ export interface TimelineProps extends HTMLAttributes<HTMLDivElement> {
  * <Timeline orientation="horizontal" variant="dotted" items={steps} />
  * ```
  */
-export function Timeline({
+export const Timeline = ({
   items,
   orientation = 'vertical',
   variant = 'default',
   className,
   ...props
-}: TimelineProps) {
+}: TimelineProps) => {
   const horizontal = orientation === 'horizontal';
   const showLine = variant !== 'none';
 
@@ -154,4 +154,4 @@ export function Timeline({
       })}
     </div>
   );
-}
+};

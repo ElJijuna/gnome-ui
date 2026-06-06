@@ -21,13 +21,13 @@ export interface TabBarProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/nav/tabs.html
  */
-export function TabBar({
+export const TabBar = ({
   children,
   className,
   inline = false,
   'aria-label': ariaLabel = 'Tabs',
   ...props
-}: TabBarProps) {
+}: TabBarProps) => {
   const listRef = useRef<HTMLDivElement>(null);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
@@ -74,4 +74,4 @@ export function TabBar({
       </div>
     </div>
   );
-}
+};

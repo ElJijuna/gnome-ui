@@ -23,7 +23,7 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
  *
  * @see https://developer.gnome.org/hig/patterns/controls/checkboxes.html
  */
-export function Checkbox({ indeterminate = false, className, ...props }: CheckboxProps) {
+export const Checkbox = ({ indeterminate = false, className, ...props }: CheckboxProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -40,4 +40,4 @@ export function Checkbox({ indeterminate = false, className, ...props }: Checkbo
       {...props}
     />
   );
-}
+};

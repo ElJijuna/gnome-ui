@@ -16,7 +16,7 @@ export interface RadioButtonProps extends Omit<InputHTMLAttributes<HTMLInputElem
  *
  * @see https://developer.gnome.org/hig/patterns/controls/radio-buttons.html
  */
-export function RadioButton({ className, ...props }: RadioButtonProps) {
+export const RadioButton = ({ className, ...props }: RadioButtonProps) => {
   return (
     <input
       type="radio"
@@ -24,4 +24,4 @@ export function RadioButton({ className, ...props }: RadioButtonProps) {
       {...props}
     />
   );
-}
+};

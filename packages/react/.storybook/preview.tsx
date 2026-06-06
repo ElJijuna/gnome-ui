@@ -9,7 +9,7 @@ import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 
 import { GnomeProvider } from '../src/components/GnomeProvider/GnomeProvider';
 
-function CenteredDecorator({ children }: { children: ReactNode }) {
+const CenteredDecorator = ({ children }: { children: ReactNode }) => {
   return (
     <div
       style={{
@@ -29,7 +29,7 @@ function CenteredDecorator({ children }: { children: ReactNode }) {
       <div style={{ flex: '1 1 0%', minWidth: 0 }}>{children}</div>
     </div>
   );
-}
+};
 
 const preview: Preview = {
   globalTypes: {

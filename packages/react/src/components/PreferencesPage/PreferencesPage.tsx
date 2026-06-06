@@ -27,16 +27,16 @@ export interface PreferencesPageProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesPage.html
  */
-export function PreferencesPage({
+export const PreferencesPage = ({
   title: _title,
   iconName: _iconName,
   children,
   className,
   ...props
-}: PreferencesPageProps) {
+}: PreferencesPageProps) => {
   return (
     <div className={[styles.page, className].filter(Boolean).join(' ')} role="tabpanel" {...props}>
       <div className={styles.inner}>{children}</div>
     </div>
   );
-}
+};

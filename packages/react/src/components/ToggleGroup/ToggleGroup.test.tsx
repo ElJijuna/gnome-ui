@@ -5,13 +5,13 @@ import { describe, expect, it, vi } from 'vitest';
 import { ToggleGroup } from './ToggleGroup';
 import { ToggleGroupItem } from './ToggleGroupItem';
 
-function Fixture({
+const Fixture = ({
   initial = 'list',
   onChange,
 }: {
   initial?: string;
   onChange?: (v: string) => void;
-}) {
+}) => {
   const [value, setValue] = useState(initial);
 
   return (
@@ -28,7 +28,7 @@ function Fixture({
       <ToggleGroupItem name="cards" label="Cards" />
     </ToggleGroup>
   );
-}
+};
 
 describe('ToggleGroup', () => {
   describe('rendering', () => {

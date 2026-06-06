@@ -76,7 +76,7 @@ export interface SidebarItemProps extends ButtonHTMLAttributes<HTMLButtonElement
  *   and the `label` does not match (case-insensitive substring).
  * - `onDrop` / `acceptTypes` — HTML5 drag-and-drop target support.
  */
-export function SidebarItem({
+export const SidebarItem = ({
   label,
   icon,
   active = false,
@@ -88,7 +88,7 @@ export function SidebarItem({
   acceptTypes,
   className,
   ...props
-}: SidebarItemProps) {
+}: SidebarItemProps) => {
   const collapsed = useSidebarCollapsed();
   const filterValue = useContext(SidebarFilterContext);
   const trailing = suffix ?? badge;
@@ -261,4 +261,4 @@ export function SidebarItem({
         )}
     </li>
   );
-}
+};

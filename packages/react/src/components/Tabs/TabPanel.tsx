@@ -14,7 +14,7 @@ export interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
  * Content panel associated with a `TabItem`.
  * Hidden panels are kept in the DOM but visually hidden.
  */
-export function TabPanel({ id, active = false, className, children, ...props }: TabPanelProps) {
+export const TabPanel = ({ id, active = false, className, children, ...props }: TabPanelProps) => {
   return (
     <div
       id={id}
@@ -26,4 +26,4 @@ export function TabPanel({ id, active = false, className, children, ...props }: 
       {children}
     </div>
   );
-}
+};

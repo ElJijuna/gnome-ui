@@ -17,7 +17,7 @@ export interface SeparatorProps extends HTMLAttributes<HTMLHRElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
-export function Separator({ orientation = 'horizontal', className, ...props }: SeparatorProps) {
+export const Separator = ({ orientation = 'horizontal', className, ...props }: SeparatorProps) => {
   const classes = [
     styles.separator,
     orientation === 'vertical' ? styles.vertical : styles.horizontal,
@@ -38,4 +38,4 @@ export function Separator({ orientation = 'horizontal', className, ...props }: S
   }
 
   return <hr className={classes} {...props} />;
-}
+};

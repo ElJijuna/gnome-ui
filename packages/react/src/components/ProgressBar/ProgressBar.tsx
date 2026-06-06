@@ -35,14 +35,14 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://developer.gnome.org/hig/patterns/feedback/progress.html
  */
-export function ProgressBar({
+export const ProgressBar = ({
   value,
   variant = 'accent',
   className,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   ...props
-}: ProgressBarProps) {
+}: ProgressBarProps) => {
   const isIndeterminate = value === undefined || value === null;
   const clamped = isIndeterminate ? undefined : Math.min(1, Math.max(0, value));
   const percent = clamped !== undefined ? clamped * 100 : undefined;
@@ -66,4 +66,4 @@ export function ProgressBar({
       />
     </div>
   );
-}
+};

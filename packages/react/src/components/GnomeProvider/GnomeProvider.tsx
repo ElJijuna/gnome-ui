@@ -57,7 +57,7 @@ function getSystemIsDark(): boolean {
 }
 
 /** Provides locale, text direction, color scheme, and accent color to all descendant gnome-ui components. */
-export function GnomeProvider({
+export const GnomeProvider = ({
   locale,
   dir = 'ltr',
   numberFormat,
@@ -65,7 +65,7 @@ export function GnomeProvider({
   colorScheme = 'system',
   accentColor = 'blue',
   children,
-}: GnomeProviderProps) {
+}: GnomeProviderProps) => {
   const [, forceUpdate] = useReducer((n: number) => n + 1, 0);
 
   useEffect(() => {
@@ -128,4 +128,4 @@ export function GnomeProvider({
   );
 
   return <GnomeContext.Provider value={value}>{children}</GnomeContext.Provider>;
-}
+};

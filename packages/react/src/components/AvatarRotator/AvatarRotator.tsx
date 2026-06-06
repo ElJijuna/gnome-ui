@@ -68,7 +68,7 @@ function usePrefersReducedMotion() {
  * Keeps `Avatar` focused on rendering one identity, while this component owns
  * timing, crossfade animation, and pause behavior.
  */
-export function AvatarRotator({
+export const AvatarRotator = ({
   name = '',
   avatars = [],
   alt,
@@ -87,7 +87,7 @@ export function AvatarRotator({
   onFocus,
   onBlur,
   ...props
-}: AvatarRotatorProps) {
+}: AvatarRotatorProps) => {
   const sources = useMemo(() => avatars.map((src) => src.trim()).filter(Boolean), [avatars]);
   const isControlled = activeIndex !== undefined;
   const [internalIndex, setInternalIndex] = useState(defaultActiveIndex);
@@ -200,4 +200,4 @@ export function AvatarRotator({
       ))}
     </span>
   );
-}
+};

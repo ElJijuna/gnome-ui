@@ -26,14 +26,14 @@ export interface CardProps extends HTMLAttributes<HTMLElement> {
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
-export function Card({
+export const Card = ({
   interactive = false,
   padding = 'md',
   as,
   className,
   children,
   ...props
-}: CardProps) {
+}: CardProps) => {
   const Tag: ElementType = as ?? (interactive ? 'button' : 'div');
 
   const classes = [
@@ -50,4 +50,4 @@ export function Card({
       {children}
     </Tag>
   );
-}
+};

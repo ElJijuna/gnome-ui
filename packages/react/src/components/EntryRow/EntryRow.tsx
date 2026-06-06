@@ -32,7 +32,7 @@ export interface EntryRowProps extends InputHTMLAttributes<HTMLInputElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.EntryRow.html
  */
-export function EntryRow({
+export const EntryRow = ({
   title,
   value: controlledValue,
   defaultValue = '',
@@ -44,7 +44,7 @@ export function EntryRow({
   id: externalId,
   onChange,
   ...props
-}: EntryRowProps) {
+}: EntryRowProps) => {
   const generatedId = useId();
   const inputId = externalId ?? generatedId;
 
@@ -103,4 +103,4 @@ export function EntryRow({
       {trailing && <span className={styles.trailing}>{trailing}</span>}
     </div>
   );
-}
+};

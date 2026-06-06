@@ -50,7 +50,7 @@ export interface DropdownProps<V extends string = string>
  *
  * @see https://developer.gnome.org/hig/patterns/controls/drop-down-lists.html
  */
-export function Dropdown<V extends string = string>({
+export const Dropdown = <V extends string = string>({
   options,
   value,
   onChange,
@@ -58,7 +58,7 @@ export function Dropdown<V extends string = string>({
   disabled,
   className,
   ...props
-}: DropdownProps<V>) {
+}: DropdownProps<V>) => {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [flipUp, setFlipUp] = useState(false);
@@ -294,4 +294,4 @@ export function Dropdown<V extends string = string>({
       )}
     </div>
   );
-}
+};

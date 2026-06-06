@@ -53,14 +53,14 @@ export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToggleGroup.html
  */
-export function ToggleGroup({
+export const ToggleGroup = ({
   value,
   onValueChange,
   'aria-label': ariaLabel = 'Options',
   children,
   className,
   ...props
-}: ToggleGroupProps) {
+}: ToggleGroupProps) => {
   const groupRef = useRef<HTMLDivElement>(null);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
@@ -106,4 +106,4 @@ export function ToggleGroup({
       </div>
     </ToggleGroupContext.Provider>
   );
-}
+};

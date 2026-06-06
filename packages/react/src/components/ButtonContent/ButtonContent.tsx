@@ -31,13 +31,13 @@ export interface ButtonContentProps extends HTMLAttributes<HTMLSpanElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ButtonContent.html
  */
-export function ButtonContent({
+export const ButtonContent = ({
   icon,
   label,
   iconPosition = 'start',
   className,
   ...props
-}: ButtonContentProps) {
+}: ButtonContentProps) => {
   return (
     <span
       className={[styles.content, iconPosition === 'end' ? styles.iconEnd : null, className]
@@ -58,4 +58,4 @@ export function ButtonContent({
       )}
     </span>
   );
-}
+};

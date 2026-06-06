@@ -252,7 +252,7 @@ export const Controlled: Story = {
 
 // ─── Edge detection ───────────────────────────────────────────────────────────
 
-function QuickSettingsContent() {
+const QuickSettingsContent = () => {
   const [wifi, setWifi] = useState(true);
   const [bluetooth, setBluetooth] = useState(false);
   const [brightness, setBrightness] = useState(70);
@@ -292,7 +292,7 @@ function QuickSettingsContent() {
       </div>
     </div>
   );
-}
+};
 
 export const EdgeDetection: Story = {
   render: () => (

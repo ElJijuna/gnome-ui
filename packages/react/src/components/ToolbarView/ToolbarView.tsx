@@ -28,13 +28,13 @@ export interface ToolbarViewProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToolbarView.html
  */
-export function ToolbarView({
+export const ToolbarView = ({
   topBar,
   bottomBar,
   children,
   className,
   ...props
-}: ToolbarViewProps) {
+}: ToolbarViewProps) => {
   return (
     <div className={[styles.toolbarView, className].filter(Boolean).join(' ')} {...props}>
       {topBar && <div className={styles.top}>{topBar}</div>}
@@ -42,4 +42,4 @@ export function ToolbarView({
       {bottomBar && <div className={styles.bottom}>{bottomBar}</div>}
     </div>
   );
-}
+};

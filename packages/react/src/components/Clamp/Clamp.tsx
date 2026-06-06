@@ -33,7 +33,7 @@ export interface ClampProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html
  */
-export function Clamp({ maximumSize = 600, children, className, style, ...props }: ClampProps) {
+export const Clamp = ({ maximumSize = 600, children, className, style, ...props }: ClampProps) => {
   return (
     <div
       className={[styles.clamp, className].filter(Boolean).join(' ')}
@@ -43,4 +43,4 @@ export function Clamp({ maximumSize = 600, children, className, style, ...props 
       {children}
     </div>
   );
-}
+};

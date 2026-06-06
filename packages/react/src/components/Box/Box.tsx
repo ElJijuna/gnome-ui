@@ -80,7 +80,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://developer.gnome.org/hig/guidelines/spacing.html
  */
-export function Box({
+export const Box = ({
   orientation = 'vertical',
   spacing = 6,
   align,
@@ -90,7 +90,7 @@ export function Box({
   style,
   children,
   ...props
-}: BoxProps) {
+}: BoxProps) => {
   const defaultAlign: BoxAlign = orientation === 'horizontal' ? 'center' : 'stretch';
 
   const resolvedStyle: CSSProperties = {
@@ -110,4 +110,4 @@ export function Box({
       {children}
     </div>
   );
-}
+};

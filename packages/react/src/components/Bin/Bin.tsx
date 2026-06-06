@@ -17,6 +17,6 @@ export interface BinProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Bin.html
  */
-export function Bin({ children, ...props }: BinProps) {
+export const Bin = ({ children, ...props }: BinProps) => {
   return <div {...props}>{children}</div>;
-}
+};
