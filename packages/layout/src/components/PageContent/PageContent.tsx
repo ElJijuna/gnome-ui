@@ -49,14 +49,14 @@ function resolveMaxWidth(maxWidth: PageContentMaxWidth) {
  * It provides the GNOME page padding rhythm and optional Adwaita `Clamp`
  * behaviour for readable content widths.
  */
-export function PageContent({
+export const PageContent = ({
   as: Component = 'main',
   maxWidth = 'none',
   padding = 'normal',
   children,
   className,
   ...props
-}: PageContentProps) {
+}: PageContentProps) => {
   const maximumSize = resolveMaxWidth(maxWidth);
 
   return (
@@ -80,4 +80,4 @@ export function PageContent({
       )}
     </Component>
   );
-}
+};

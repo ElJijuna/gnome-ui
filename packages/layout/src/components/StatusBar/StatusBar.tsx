@@ -13,7 +13,7 @@ export interface StatusBarProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Compact footer/status bar for `Layout.footer`.
  */
-export function StatusBar({ children, trailing, className, ...props }: StatusBarProps) {
+export const StatusBar = ({ children, trailing, className, ...props }: StatusBarProps) => {
   return (
     <Toolbar className={[styles.statusBar, className].filter(Boolean).join(' ')} {...props}>
       {children}
@@ -25,4 +25,4 @@ export function StatusBar({ children, trailing, className, ...props }: StatusBar
       )}
     </Toolbar>
   );
-}
+};

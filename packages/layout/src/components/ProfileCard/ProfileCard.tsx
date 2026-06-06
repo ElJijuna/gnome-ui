@@ -38,7 +38,7 @@ export interface ProfileCardProps extends HTMLAttributes<HTMLDivElement> {
   onClick?: () => void;
 }
 
-export function ProfileCard({
+export const ProfileCard = ({
   name,
   username,
   avatarSrc,
@@ -50,7 +50,7 @@ export function ProfileCard({
   loadingType = 'skeleton',
   className,
   ...props
-}: ProfileCardProps) {
+}: ProfileCardProps) => {
   if (loading) {
     const rootClass = [styles.card, className].filter(Boolean).join(' ');
 
@@ -128,4 +128,4 @@ export function ProfileCard({
       </div>
     </Card>
   );
-}
+};

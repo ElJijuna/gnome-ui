@@ -6,13 +6,13 @@ import type { ToastContextValue, ToastOptions } from './Toast';
 import { ToastProvider, useToast } from './Toast';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-function Trigger({
+const Trigger = ({
   options,
   onReady,
 }: {
   options: ToastOptions;
   onReady?: (ctx: ToastContextValue) => void;
-}) {
+}) => {
   const ctx = useToast();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Trigger({
   }, [onReady, ctx]);
 
   return <button onClick={() => ctx.show(options)}>Show</button>;
-}
+};
 
 function wrap(ui: ReactNode) {
   return render(<ToastProvider>{ui}</ToastProvider>);
@@ -96,7 +96,7 @@ describe('toast queue', () => {
   });
 
   it('queues subsequent toasts and shows them in order', () => {
-    function MultiTrigger() {
+    const MultiTrigger = () => {
       const { show } = useToast();
 
       return (
@@ -105,7 +105,7 @@ describe('toast queue', () => {
           <button onClick={() => show({ title: 'Second', timeout: 0 })}>B</button>
         </>
       );
-    }
+    };
 
     render(
       <ToastProvider>
@@ -161,13 +161,13 @@ describe('toast queue', () => {
   });
 
   it('deduplicates toasts with the same id', () => {
-    function DedupTrigger() {
+    const DedupTrigger = () => {
       const { show } = useToast();
 
       return (
         <button onClick={() => show({ id: 'stable', title: 'Same', timeout: 0 })}>Show</button>
       );
-    }
+    };
 
     render(
       <ToastProvider>

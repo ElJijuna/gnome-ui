@@ -42,7 +42,7 @@ const PRESETS: Record<ErrorStateType, { icon: ReactNode; title: string }> = {
   },
 };
 
-export function ErrorState({
+export const ErrorState = ({
   type = 'generic',
   icon,
   title,
@@ -50,7 +50,7 @@ export function ErrorState({
   action,
   className,
   ...props
-}: ErrorStateProps) {
+}: ErrorStateProps) => {
   const preset = PRESETS[type];
   const resolvedIcon = icon ?? preset.icon;
   const resolvedTitle = title ?? preset.title;
@@ -71,4 +71,4 @@ export function ErrorState({
       {action && <div className={styles.action}>{action}</div>}
     </div>
   );
-}
+};

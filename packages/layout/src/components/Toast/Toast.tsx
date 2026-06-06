@@ -80,7 +80,7 @@ interface ToastCardProps {
   onDismiss: () => void;
 }
 
-function ToastCard({ entry, exiting, onDismiss }: ToastCardProps) {
+const ToastCard = ({ entry, exiting, onDismiss }: ToastCardProps) => {
   const handleAction = () => {
     entry.action?.onClick();
     onDismiss();
@@ -110,10 +110,10 @@ function ToastCard({ entry, exiting, onDismiss }: ToastCardProps) {
       </button>
     </div>
   );
-}
+};
 
 // ─── Provider ────────────────────────────────────────────────────────────────
-export function ToastProvider({ children }: ToastProviderProps) {
+export const ToastProvider = ({ children }: ToastProviderProps) => {
   const [items, setItems] = useState<ToastEntry[]>([]);
   const [exitingId, setExitingId] = useState<string | null>(null);
 
@@ -239,7 +239,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
         )}
     </ToastContext.Provider>
   );
-}
+};
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
 // eslint-disable-next-line react-refresh/only-export-components

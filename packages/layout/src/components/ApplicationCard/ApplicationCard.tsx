@@ -29,7 +29,7 @@ export interface ApplicationCardProps extends HTMLAttributes<HTMLDivElement> {
   loadingType?: LoadingType;
 }
 
-export function ApplicationCard({
+export const ApplicationCard = ({
   avatar,
   name,
   badge,
@@ -40,7 +40,7 @@ export function ApplicationCard({
   loadingType = 'skeleton',
   className,
   ...props
-}: ApplicationCardProps) {
+}: ApplicationCardProps) => {
   if (loading) {
     const cardClass = [styles.card, className].filter(Boolean).join(' ');
 
@@ -114,4 +114,4 @@ export function ApplicationCard({
       {actions && <div className={styles.actions}>{actions}</div>}
     </Card>
   );
-}
+};

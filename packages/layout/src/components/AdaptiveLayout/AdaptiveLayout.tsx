@@ -150,7 +150,7 @@ type BarSlot = ItemSlot | GroupSlot;
  * Mobile overflow: when there are more than 4 bar slots the first 3 are shown
  * and a "More" button opens a `BottomSheet` for the rest.
  */
-export function AdaptiveLayout({
+export const AdaptiveLayout = ({
   items,
   value,
   onValueChange,
@@ -170,7 +170,7 @@ export function AdaptiveLayout({
   showHeaderSeparator = true,
   showCollapseButtonSeparator = false,
   showFooterSeparator = true,
-}: AdaptiveLayoutProps) {
+}: AdaptiveLayoutProps) => {
   const { isMobile, isTablet } = useBreakpoint();
   const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -442,4 +442,4 @@ export function AdaptiveLayout({
       </div>
     </div>
   );
-}
+};

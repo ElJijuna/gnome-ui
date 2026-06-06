@@ -128,7 +128,7 @@ export interface CounterCardProps extends HTMLAttributes<HTMLDivElement> {
   loadingType?: LoadingType;
 }
 
-export function CounterCard({
+export const CounterCard = ({
   label,
   value,
   prefix,
@@ -147,7 +147,7 @@ export function CounterCard({
   className,
   style,
   ...props
-}: CounterCardProps) {
+}: CounterCardProps) => {
   const raw = useCountUp(value, duration, animated && !loading);
   const numberFormat = useNumberFormatter({
     minimumFractionDigits: decimals,
@@ -242,4 +242,4 @@ export function CounterCard({
       )}
     </Card>
   );
-}
+};

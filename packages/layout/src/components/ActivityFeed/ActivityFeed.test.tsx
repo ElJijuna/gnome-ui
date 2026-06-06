@@ -73,7 +73,9 @@ describe('ActivityFeed', () => {
 
   describe('timestamps', () => {
     it("shows 'now' for timestamps under 1 minute ago", () => {
-      renderWithLocale(<ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 30_000) })]} />);
+      renderWithLocale(
+        <ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 30_000) })]} />,
+      );
       expect(screen.getByText('now')).toBeInTheDocument();
     });
 
@@ -85,7 +87,9 @@ describe('ActivityFeed', () => {
     });
 
     it("shows singular 'minute' for exactly 1 minute ago", () => {
-      renderWithLocale(<ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 60_000) })]} />);
+      renderWithLocale(
+        <ActivityFeed items={[makeItem({ timestamp: new Date(NOW.getTime() - 60_000) })]} />,
+      );
       expect(screen.getByText('1 minute ago')).toBeInTheDocument();
     });
 

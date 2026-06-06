@@ -85,7 +85,7 @@ const NAV_ITEMS: NavItem[] = [
 
 // ─── Sub-page: Accessibility → Seeing ─────────────────────────────────────────
 
-function SeeingPage() {
+const SeeingPage = () => {
   return (
     <div style={{ padding: '16px 16px 32px', display: 'flex', flexDirection: 'column', gap: 24 }}>
       {/* Screen Reader */}
@@ -176,11 +176,11 @@ function SeeingPage() {
       </PreferencesGroup>
     </div>
   );
-}
+};
 
 // ─── Placeholder for other pages ───────────────────────────────────────────────
 
-function PlaceholderPage({ title }: { title: string }) {
+const PlaceholderPage = ({ title }: { title: string }) => {
   return (
     <div
       style={{
@@ -196,11 +196,11 @@ function PlaceholderPage({ title }: { title: string }) {
       </Text>
     </div>
   );
-}
+};
 
 // ─── Dual header (same pattern as FileManager) ─────────────────────────────────
 
-function DualHeader({
+const DualHeader = ({
   sidebarCollapsed,
   onToggleSidebar,
   activeLabel,
@@ -212,7 +212,7 @@ function DualHeader({
   activeLabel: string;
   subPage: string | null;
   onBack: () => void;
-}) {
+}) => {
   const sidebarW = sidebarCollapsed ? 56 : 240;
 
   return (
@@ -324,11 +324,11 @@ function DualHeader({
       </div>
     </div>
   );
-}
+};
 
 // ─── Full app ──────────────────────────────────────────────────────────────────
 
-function SettingsApp() {
+const SettingsApp = () => {
   const [active, setActive] = useState<NavId>('accessibility');
   const [subPage, setSubPage] = useState<string | null>('Seeing');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -386,7 +386,7 @@ function SettingsApp() {
       )}
     </Layout>
   );
-}
+};
 
 // ─── Meta ──────────────────────────────────────────────────────────────────────
 

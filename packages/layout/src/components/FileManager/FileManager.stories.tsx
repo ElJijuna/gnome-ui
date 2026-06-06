@@ -121,7 +121,7 @@ function segmentsForPath(path: string): PathBarSegment[] {
 
 // ─── Inline file icons ─────────────────────────────────────────────────────────
 
-function FolderIcon() {
+const FolderIcon = () => {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden>
       <path
@@ -130,9 +130,9 @@ function FolderIcon() {
       />
     </svg>
   );
-}
+};
 
-function DocumentIcon() {
+const DocumentIcon = () => {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden>
       <rect
@@ -153,9 +153,9 @@ function DocumentIcon() {
       />
     </svg>
   );
-}
+};
 
-function ImageIcon() {
+const ImageIcon = () => {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden>
       <rect x="6" y="6" width="28" height="28" rx="4" fill="#c084fc" />
@@ -169,9 +169,9 @@ function ImageIcon() {
       />
     </svg>
   );
-}
+};
 
-function ArchiveIcon() {
+const ArchiveIcon = () => {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden>
       <rect
@@ -186,9 +186,9 @@ function ArchiveIcon() {
       <rect x="14" y="18" width="12" height="7" rx="1.5" fill="white" opacity="0.8" />
     </svg>
   );
-}
+};
 
-function FileIcon({ type }: { type: FileEntry['type'] }) {
+const FileIcon = ({ type }: { type: FileEntry['type'] }) => {
   switch (type) {
     case 'folder':
       return <FolderIcon />;
@@ -199,7 +199,7 @@ function FileIcon({ type }: { type: FileEntry['type'] }) {
     case 'archive':
       return <ArchiveIcon />;
   }
-}
+};
 
 // ─── Dual header bar ───────────────────────────────────────────────────────────
 //
@@ -215,7 +215,7 @@ const userActions = [
   { label: 'Sign Out', onClick: () => {}, variant: 'destructive' as const },
 ];
 
-function DualHeaderBar({
+const DualHeaderBar = ({
   sidebarCollapsed,
   onToggleSidebar,
   segments,
@@ -233,7 +233,7 @@ function DualHeaderBar({
   canGoForward: boolean;
   onBack: () => void;
   onForward: () => void;
-}) {
+}) => {
   const sidebarW = sidebarCollapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH;
 
   return (
@@ -358,11 +358,11 @@ function DualHeaderBar({
       </Toolbar>
     </div>
   );
-}
+};
 
 // ─── Sidebar ───────────────────────────────────────────────────────────────────
 
-function FileManagerSidebar({
+const FileManagerSidebar = ({
   collapsed,
   currentPath,
   onNavigate,
@@ -370,7 +370,7 @@ function FileManagerSidebar({
   collapsed: boolean;
   currentPath: string;
   onNavigate: (path: string) => void;
-}) {
+}) => {
   const places = [
     { id: '/home', label: 'Home', icon: GoHome },
     { id: '/home/documents', label: 'Documents', icon: ViewSidebar },
@@ -411,11 +411,11 @@ function FileManagerSidebar({
       </SidebarSection>
     </Sidebar>
   );
-}
+};
 
 // ─── File views ────────────────────────────────────────────────────────────────
 
-function FileGrid({ files, onOpen }: { files: FileEntry[]; onOpen: (f: FileEntry) => void }) {
+const FileGrid = ({ files, onOpen }: { files: FileEntry[]; onOpen: (f: FileEntry) => void }) => {
   return (
     <div
       style={{
@@ -480,9 +480,9 @@ function FileGrid({ files, onOpen }: { files: FileEntry[]; onOpen: (f: FileEntry
       ))}
     </div>
   );
-}
+};
 
-function FileList({ files, onOpen }: { files: FileEntry[]; onOpen: (f: FileEntry) => void }) {
+const FileList = ({ files, onOpen }: { files: FileEntry[]; onOpen: (f: FileEntry) => void }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {files.map((file, i) => (
@@ -538,11 +538,11 @@ function FileList({ files, onOpen }: { files: FileEntry[]; onOpen: (f: FileEntry
       ))}
     </div>
   );
-}
+};
 
 // ─── Full app ──────────────────────────────────────────────────────────────────
 
-function FileManagerApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
+const FileManagerApp = ({ startMobileOpen = false }: { startMobileOpen?: boolean }) => {
   const [currentPath, setCurrentPath] = useState('/home');
   const [history, setHistory] = useState(['/home']);
   const [historyIndex, setHistoryIndex] = useState(0);
@@ -664,7 +664,7 @@ function FileManagerApp({ startMobileOpen = false }: { startMobileOpen?: boolean
       </div>
     </Layout>
   );
-}
+};
 
 // ─── Meta ──────────────────────────────────────────────────────────────────────
 

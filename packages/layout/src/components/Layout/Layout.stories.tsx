@@ -56,7 +56,7 @@ function isSidebarOverlay(breakpoint: keyof typeof sidebarBreakpointQuery = 'nar
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
-function AppHeader({
+const AppHeader = ({
   sidebarCollapsed,
   onToggleSidebar,
   searchQuery,
@@ -66,7 +66,7 @@ function AppHeader({
   onToggleSidebar: () => void;
   searchQuery: string;
   onSearchChange: (v: string) => void;
-}) {
+}) => {
   return (
     <Toolbar style={{ minHeight: 48, padding: '0 8px' }}>
       <Button
@@ -176,9 +176,9 @@ function AppHeader({
       </Popover>
     </Toolbar>
   );
-}
+};
 
-function AppSidebar({
+const AppSidebar = ({
   collapsed,
   activeNav,
   onNavChange,
@@ -186,7 +186,7 @@ function AppSidebar({
   collapsed: boolean;
   activeNav: string;
   onNavChange: (id: string) => void;
-}) {
+}) => {
   const navItems = [
     { id: 'home', label: 'Home', icon: GoHome, badge: null },
     { id: 'starred', label: 'Starred', icon: Star, badge: 3 },
@@ -210,9 +210,9 @@ function AppSidebar({
       </SidebarSection>
     </Sidebar>
   );
-}
+};
 
-function AppContent({
+const AppContent = ({
   activeNav,
   contentView,
   onViewChange,
@@ -220,7 +220,7 @@ function AppContent({
   activeNav: string;
   contentView: string;
   onViewChange: (v: string) => void;
-}) {
+}) => {
   const titles: Record<string, string> = {
     home: 'Home',
     starred: 'Starred',
@@ -330,9 +330,9 @@ function AppContent({
       )}
     </div>
   );
-}
+};
 
-function AppStatusBar() {
+const AppStatusBar = () => {
   return (
     <Toolbar style={{ minHeight: 36, padding: '0 16px' }}>
       <Text variant="caption" color="dim">
@@ -344,9 +344,9 @@ function AppStatusBar() {
       </Text>
     </Toolbar>
   );
-}
+};
 
-function CookbookHeader({
+const CookbookHeader = ({
   title = 'Documents',
   subtitle,
   leading,
@@ -356,7 +356,7 @@ function CookbookHeader({
   subtitle?: string;
   leading?: ReactNode;
   onToggleSidebar?: () => void;
-}) {
+}) => {
   return (
     <ShellAppHeader
       title={title}
@@ -372,15 +372,15 @@ function CookbookHeader({
       actions={<Button variant="flat">New</Button>}
     />
   );
-}
+};
 
-function CookbookSidebar({
+const CookbookSidebar = ({
   collapsed = false,
   onNavigate,
 }: {
   collapsed?: boolean;
   onNavigate?: () => void;
-}) {
+}) => {
   return (
     <SidebarShell
       collapsed={collapsed}
@@ -400,9 +400,9 @@ function CookbookSidebar({
       </SidebarSection>
     </SidebarShell>
   );
-}
+};
 
-function CookbookContent({ title = 'Overview', rows = 12 }: { title?: string; rows?: number }) {
+const CookbookContent = ({ title = 'Overview', rows = 12 }: { title?: string; rows?: number }) => {
   return (
     <PageContent as="section" maxWidth="lg">
       <Text variant="title-2">{title}</Text>
@@ -421,11 +421,11 @@ function CookbookContent({ title = 'Overview', rows = 12 }: { title?: string; ro
       </BoxedList>
     </PageContent>
   );
-}
+};
 
 // ─── Full app composition ──────────────────────────────────────────────────────
 
-function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
+const FilesApp = ({ startMobileOpen = false }: { startMobileOpen?: boolean }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(startMobileOpen);
   const [activeNav, setActiveNav] = useState('home');
@@ -471,7 +471,7 @@ function FilesApp({ startMobileOpen = false }: { startMobileOpen?: boolean }) {
       <AppContent activeNav={activeNav} contentView={contentView} onViewChange={setContentView} />
     </Layout>
   );
-}
+};
 
 // ─── Meta ──────────────────────────────────────────────────────────────────────
 

@@ -38,7 +38,7 @@ export interface SidebarTriggerProps extends Omit<ButtonProps, 'onClick'> {
  * On overlay breakpoints it opens/closes the sidebar. On wider screens it
  * toggles icon-only rail collapse.
  */
-export function SidebarTrigger({
+export const SidebarTrigger = ({
   sidebarOpen,
   sidebarCollapsed,
   sidebarBreakpoint = 'narrow',
@@ -48,7 +48,7 @@ export function SidebarTrigger({
   'aria-label': ariaLabel,
   variant = 'flat',
   ...props
-}: SidebarTriggerProps) {
+}: SidebarTriggerProps) => {
   const [overlay, setOverlay] = useState(() => matchesSidebarOverlay(sidebarBreakpoint));
   const sidebarVisible = overlay ? sidebarOpen : !sidebarCollapsed;
 
@@ -87,4 +87,4 @@ export function SidebarTrigger({
       {children}
     </Button>
   );
-}
+};

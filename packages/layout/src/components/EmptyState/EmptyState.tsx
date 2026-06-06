@@ -14,14 +14,14 @@ export interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
   action?: ReactNode;
 }
 
-export function EmptyState({
+export const EmptyState = ({
   icon,
   title,
   description,
   action,
   className,
   ...props
-}: EmptyStateProps) {
+}: EmptyStateProps) => {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
       {icon && (
@@ -40,4 +40,4 @@ export function EmptyState({
       {action && <div className={styles.action}>{action}</div>}
     </div>
   );
-}
+};

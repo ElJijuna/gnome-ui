@@ -31,7 +31,7 @@ export interface EntityCardProps extends HTMLAttributes<HTMLDivElement> {
   loadingType?: LoadingType;
 }
 
-export function EntityCard({
+export const EntityCard = ({
   avatar,
   title,
   badge,
@@ -44,7 +44,7 @@ export function EntityCard({
   loadingType = 'skeleton',
   className,
   ...props
-}: EntityCardProps) {
+}: EntityCardProps) => {
   const hasMeta = meta && (meta[0] || meta[1]);
 
   if (loading) {
@@ -121,4 +121,4 @@ export function EntityCard({
       )}
     </Card>
   );
-}
+};

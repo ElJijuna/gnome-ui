@@ -78,7 +78,7 @@ export interface UserCardProps extends HTMLAttributes<HTMLDivElement> {
  */
 const AVATAR_PX: Record<AvatarSize, number> = { sm: 24, md: 32, lg: 48, xl: 64 };
 
-export function UserCard({
+export const UserCard = ({
   name,
   email,
   avatarSrc,
@@ -92,7 +92,7 @@ export function UserCard({
   className,
   style,
   ...props
-}: UserCardProps) {
+}: UserCardProps) => {
   const isVertical = orientation === 'vertical';
   const avatarPx = AVATAR_PX[avatarSize] ?? 32;
 
@@ -191,4 +191,4 @@ export function UserCard({
       )}
     </div>
   );
-}
+};
