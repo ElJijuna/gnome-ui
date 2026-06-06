@@ -35,14 +35,14 @@ const TOOLTIP_CONTENT_STYLE = {
   boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
-function ArcLabel(props: {
+const ArcLabel = (props: {
   cx?: number;
   cy?: number;
   midAngle?: number;
   innerRadius?: number;
   outerRadius?: number;
   name?: string;
-}) {
+}) => {
   const { cx, cy, midAngle, innerRadius, outerRadius, name } = props;
 
   if (
@@ -78,9 +78,9 @@ function ArcLabel(props: {
       {name}
     </text>
   );
-}
+};
 
-export function RadialBarChart({
+export const RadialBarChart = ({
   data,
   height = 400,
   innerRadius = '20%',
@@ -88,7 +88,7 @@ export function RadialBarChart({
   showLegend = false,
   className,
   'aria-label': ariaLabel,
-}: RadialBarChartProps) {
+}: RadialBarChartProps) => {
   const chartData = data.map((item, i) => ({
     name: item.label,
     value: item.value,
@@ -132,4 +132,4 @@ export function RadialBarChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

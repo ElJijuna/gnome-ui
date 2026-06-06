@@ -39,14 +39,14 @@ const TOOLTIP_CONTENT_STYLE = {
 
 const RADIAN = Math.PI / 180;
 
-function SliceLabel(props: {
+const SliceLabel = (props: {
   cx?: number;
   cy?: number;
   midAngle?: number;
   outerRadius?: number;
   name?: string;
   percent?: number;
-}) {
+}) => {
   const { cx, cy, midAngle, outerRadius, name, percent } = props;
 
   if (
@@ -82,9 +82,9 @@ function SliceLabel(props: {
       {name}
     </text>
   );
-}
+};
 
-export function PieChart({
+export const PieChart = ({
   data,
   height = 400,
   donut = false,
@@ -92,7 +92,7 @@ export function PieChart({
   showLegend = false,
   className,
   'aria-label': ariaLabel,
-}: PieChartProps) {
+}: PieChartProps) => {
   const formatNumber = useNumberFormatter().format;
 
   const chartData = data.map((item, i) => ({
@@ -149,4 +149,4 @@ export function PieChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

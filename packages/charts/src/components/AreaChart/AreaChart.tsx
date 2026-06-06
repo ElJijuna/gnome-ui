@@ -47,7 +47,7 @@ const TOOLTIP_CONTENT_STYLE = {
   boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
-export function AreaChart({
+export const AreaChart = ({
   data,
   series,
   xAxisKey = 'name',
@@ -57,7 +57,7 @@ export function AreaChart({
   stacked = false,
   gradient = false,
   className,
-}: AreaChartProps) {
+}: AreaChartProps) => {
   const formatNumber = useNumberFormatter().format;
 
   const seriesWithColors = series.map((s, i) => ({
@@ -135,4 +135,4 @@ export function AreaChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};

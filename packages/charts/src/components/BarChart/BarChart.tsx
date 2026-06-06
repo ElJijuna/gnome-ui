@@ -45,7 +45,7 @@ const TOOLTIP_CONTENT_STYLE = {
   boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
-export function BarChart({
+export const BarChart = ({
   data,
   series,
   xAxisKey = 'name',
@@ -53,7 +53,7 @@ export function BarChart({
   showGrid = true,
   showLegend = false,
   className,
-}: BarChartProps) {
+}: BarChartProps) => {
   const formatNumber = useNumberFormatter().format;
 
   return (
@@ -106,4 +106,4 @@ export function BarChart({
       </ResponsiveContainer>
     </div>
   );
-}
+};
