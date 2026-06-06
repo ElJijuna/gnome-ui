@@ -40,14 +40,14 @@ const TYPE_ARIA: Record<BannerType, string> = {
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function Banner({
+export const Banner = ({
   type = 'default',
   action,
   onDismiss,
   children,
   className,
   ...props
-}: BannerProps) {
+}: BannerProps) => {
   const icon = TYPE_ICONS[type];
 
   return (
@@ -78,4 +78,4 @@ export function Banner({
       )}
     </div>
   );
-}
+};

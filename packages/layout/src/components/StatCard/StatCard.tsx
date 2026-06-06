@@ -38,7 +38,7 @@ const TREND_SYMBOL: Record<StatCardTrendDirection, string> = {
   neutral: 'steady',
 };
 
-export function StatCard({
+export const StatCard = ({
   label,
   value,
   unit,
@@ -49,7 +49,7 @@ export function StatCard({
   loadingType = 'skeleton',
   className,
   ...props
-}: StatCardProps) {
+}: StatCardProps) => {
   const numberFormat = useNumberFormatter();
 
   if (loading) {
@@ -132,4 +132,4 @@ export function StatCard({
       </div>
     </Card>
   );
-}
+};

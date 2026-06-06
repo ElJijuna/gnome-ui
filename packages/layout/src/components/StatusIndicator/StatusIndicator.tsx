@@ -26,14 +26,14 @@ const STATUS_LABELS: Record<StatusIndicatorStatus, string> = {
   loading: 'Loading',
 };
 
-export function StatusIndicator({
+export const StatusIndicator = ({
   status,
   label,
   description,
   size = 'md',
   className,
   ...props
-}: StatusIndicatorProps) {
+}: StatusIndicatorProps) => {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
       <div
@@ -53,4 +53,4 @@ export function StatusIndicator({
       </div>
     </div>
   );
-}
+};

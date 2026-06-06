@@ -12,14 +12,14 @@ export interface IconBadgeProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function IconBadge({
+export const IconBadge = ({
   color,
   size = 'md',
   className,
   style,
   children,
   ...props
-}: IconBadgeProps) {
+}: IconBadgeProps) => {
   const isHex = color ? /^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(color) : false;
 
   return (
@@ -44,4 +44,4 @@ export function IconBadge({
       {children}
     </div>
   );
-}
+};

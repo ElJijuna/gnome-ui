@@ -81,7 +81,7 @@ export const WithAction: Story = {
 
 export const Dismissible: Story = {
   render: () => {
-    function Demo() {
+    const Demo = () => {
       const [visible, setVisible] = useState(true);
 
       if (!visible) {
@@ -101,7 +101,7 @@ export const Dismissible: Story = {
           A new version of this app is available.
         </Banner>
       );
-    }
+    };
 
     return <Demo />;
   },

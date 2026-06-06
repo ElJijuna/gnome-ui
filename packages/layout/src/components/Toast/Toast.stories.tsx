@@ -46,7 +46,7 @@ export default meta;
 type Story = StoryObj;
 
 // ─── Interactive demo ────────────────────────────────────────────────────────
-function Demo({ options }: { options: ToastOptions }) {
+const Demo = ({ options }: { options: ToastOptions }) => {
   const { show } = useToast();
 
   return (
@@ -65,7 +65,7 @@ function Demo({ options }: { options: ToastOptions }) {
       Show toast
     </button>
   );
-}
+};
 
 export const Default: Story = {
   render: () => (
@@ -105,7 +105,7 @@ export const Types: Story = {
       { type: 'error', title: 'Connection failed' },
     ];
 
-    function TypeButtons() {
+    const TypeButtons = () => {
       const { show } = useToast();
 
       return (
@@ -129,7 +129,7 @@ export const Types: Story = {
           ))}
         </div>
       );
-    }
+    };
 
     return (
       <ToastProvider>
@@ -172,7 +172,7 @@ export const Persistent: Story = {
 
 export const Queue: Story = {
   render: () => {
-    function QueueDemo() {
+    const QueueDemo = () => {
       const { show, dismissAll } = useToast();
       const [count, setCount] = useState(0);
 
@@ -214,7 +214,7 @@ export const Queue: Story = {
           </button>
         </div>
       );
-    }
+    };
 
     return (
       <ToastProvider>

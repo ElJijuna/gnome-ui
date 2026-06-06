@@ -139,14 +139,14 @@ function buildSpanStyle(span: DashboardGridSpan): CSSProperties {
 }
 
 // ─── DashboardGridItem ────────────────────────────────────────────────────────
-function DashboardGridItem({
+const DashboardGridItem = ({
   span = 1,
   offset = 0,
   children,
   className,
   style,
   ...props
-}: DashboardGridItemProps) {
+}: DashboardGridItemProps) => {
   const itemStyle: CSSProperties = {
     ...buildSpanStyle(span),
     ...(offset > 0 ? ({ '--item-offset-xs': offset } as CSSProperties) : null),
@@ -164,10 +164,10 @@ function DashboardGridItem({
       {children}
     </div>
   );
-}
+};
 
 // ─── DashboardGrid ───────────────────────────────────────────────────────────
-export function DashboardGrid({
+export const DashboardGrid = ({
   columns = 'auto',
   gap = 'md',
   layout = 'grid',
@@ -175,7 +175,7 @@ export function DashboardGrid({
   className,
   style,
   ...props
-}: DashboardGridProps) {
+}: DashboardGridProps) => {
   const isResponsiveColumns = layout === 'grid' && isObject(columns);
 
   const gridStyle: CSSProperties = {
@@ -201,6 +201,6 @@ export function DashboardGrid({
       {children}
     </div>
   );
-}
+};
 
 DashboardGrid.Item = DashboardGridItem;

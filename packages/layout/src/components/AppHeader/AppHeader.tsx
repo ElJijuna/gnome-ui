@@ -27,7 +27,7 @@ export interface AppHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'title
  * map cleanly to application structure: leading controls, title, navigation,
  * search, and trailing actions.
  */
-export function AppHeader({
+export const AppHeader = ({
   title,
   subtitle,
   leading,
@@ -37,7 +37,7 @@ export function AppHeader({
   flat = false,
   className,
   ...props
-}: AppHeaderProps) {
+}: AppHeaderProps) => {
   const titleNode =
     typeof title === 'string' ? <WindowTitle title={title} subtitle={subtitle} /> : title;
 
@@ -67,4 +67,4 @@ export function AppHeader({
       {...props}
     />
   );
-}
+};

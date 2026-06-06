@@ -59,7 +59,7 @@ const SKELETON_COUNT = 4;
  *   maxItems={5}
  * />
  */
-export function ActivityFeed({
+export const ActivityFeed = ({
   items,
   maxItems,
   loading = false,
@@ -67,7 +67,7 @@ export function ActivityFeed({
   emptyState,
   className,
   ...props
-}: ActivityFeedProps) {
+}: ActivityFeedProps) => {
   const [expanded, setExpanded] = useState(false);
   const locale = useLocale();
   const rtf = useMemo(() => new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }), [locale]);
@@ -158,4 +158,4 @@ export function ActivityFeed({
       )}
     </div>
   );
-}
+};

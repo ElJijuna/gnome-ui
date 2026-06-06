@@ -157,7 +157,7 @@ export interface LayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'heigh
  * @see https://developer.gnome.org/hig/patterns/containers/header-bars.html
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToolbarView.html
  */
-export function Layout({
+export const Layout = ({
   topBar,
   header,
   sidebar,
@@ -177,7 +177,7 @@ export function Layout({
   scroll = 'content',
   className,
   ...props
-}: LayoutProps) {
+}: LayoutProps) => {
   const sidebarRef = useRef<HTMLElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const [sidebarMatchesOverlayBreakpoint, setSidebarMatchesOverlayBreakpoint] = useState(false);
@@ -350,4 +350,4 @@ export function Layout({
       {resolvedFooter && <footer className={styles.bottomBar}>{resolvedFooter}</footer>}
     </div>
   );
-}
+};

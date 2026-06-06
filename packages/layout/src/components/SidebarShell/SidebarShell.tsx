@@ -16,14 +16,14 @@ export interface SidebarShellProps extends Omit<SidebarProps, 'children'> {
  * Full-height sidebar composition with fixed header/footer and scrollable
  * GNOME `Sidebar` navigation in the middle.
  */
-export function SidebarShell({
+export const SidebarShell = ({
   header,
   children,
   footer,
   collapsed,
   className,
   ...sidebarProps
-}: SidebarShellProps) {
+}: SidebarShellProps) => {
   return (
     <div
       className={[styles.shell, collapsed ? styles.collapsed : null, className]
@@ -37,4 +37,4 @@ export function SidebarShell({
       {footer && <div className={styles.footer}>{footer}</div>}
     </div>
   );
-}
+};

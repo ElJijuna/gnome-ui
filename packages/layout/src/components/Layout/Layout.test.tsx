@@ -321,7 +321,7 @@ describe('Layout', () => {
     });
 
     it('restores focus when the open sidebar closes', async () => {
-      function ControlledLayout() {
+      const ControlledLayout = () => {
         const [open, setOpen] = useState(false);
 
         return (
@@ -338,7 +338,7 @@ describe('Layout', () => {
             </Layout>
           </>
         );
-      }
+      };
 
       render(<ControlledLayout />);
       const trigger = screen.getByRole('button', { name: 'Trigger' });
@@ -400,7 +400,7 @@ describe('Layout', () => {
     });
 
     it('custom trigger collapses and expands a rail sidebar', () => {
-      function ControlledLayout() {
+      const ControlledLayout = () => {
         const [collapsed, setCollapsed] = useState(false);
 
         return (
@@ -417,7 +417,7 @@ describe('Layout', () => {
             </Layout>
           </>
         );
-      }
+      };
 
       const { container } = render(<ControlledLayout />);
       const body = () => container.querySelector("[class*='body']") as HTMLElement;
@@ -430,7 +430,7 @@ describe('Layout', () => {
     });
 
     it('can close the mobile sidebar when a navigation item is selected', async () => {
-      function ControlledLayout() {
+      const ControlledLayout = () => {
         const [open, setOpen] = useState(true);
 
         return (
@@ -446,7 +446,7 @@ describe('Layout', () => {
             <p>Content</p>
           </Layout>
         );
-      }
+      };
 
       const { container } = render(<ControlledLayout />);
       const body = () => container.querySelector("[class*='body']") as HTMLElement;

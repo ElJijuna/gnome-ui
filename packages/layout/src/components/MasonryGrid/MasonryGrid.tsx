@@ -126,7 +126,7 @@ function computeLayout(
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export function MasonryGrid({
+export const MasonryGrid = ({
   columns = 3,
   gap = 'md',
   fresh = false,
@@ -134,7 +134,7 @@ export function MasonryGrid({
   className,
   style,
   ...props
-}: MasonryGridProps) {
+}: MasonryGridProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const prevSerialRef = useRef<string>('');
@@ -273,4 +273,4 @@ export function MasonryGrid({
       })}
     </div>
   );
-}
+};

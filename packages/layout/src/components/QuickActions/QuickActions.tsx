@@ -49,13 +49,13 @@ function findLastEnabledIndex(actions: QuickAction[]) {
   return -1;
 }
 
-export function QuickActions({
+export const QuickActions = ({
   actions,
   columns = 4,
   className,
   style,
   ...props
-}: QuickActionsProps) {
+}: QuickActionsProps) => {
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const firstEnabledIndex = useMemo(
     () => actions.findIndex((action) => !action.disabled),
@@ -131,4 +131,4 @@ export function QuickActions({
       ))}
     </div>
   );
-}
+};

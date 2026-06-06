@@ -22,13 +22,13 @@ export interface SectionHeaderProps extends HTMLAttributes<HTMLDivElement> {
  *   action={<Button variant="flat" size="sm">View all</Button>}
  * />
  */
-export function SectionHeader({
+export const SectionHeader = ({
   title,
   subtitle,
   action,
   className,
   ...props
-}: SectionHeaderProps) {
+}: SectionHeaderProps) => {
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')} {...props}>
       <div className={styles.text}>
@@ -44,4 +44,4 @@ export function SectionHeader({
       {action && <div className={styles.action}>{action}</div>}
     </div>
   );
-}
+};
