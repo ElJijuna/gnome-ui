@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { LineChart } from './LineChart';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof LineChart> = {
   title: 'Charts/LineChart',
   component: LineChart,
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;

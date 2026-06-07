@@ -6,6 +6,7 @@ import { GNOME_CHART_PALETTE } from './colors';
 import { SparkAreaChart } from './components/SparkAreaChart';
 import { SparkBarChart } from './components/SparkBarChart';
 import { SparkLineChart } from './components/SparkLineChart';
+import readme from './README.md?raw';
 
 // ─── Sample data ─────────────────────────────────────────────────────────────
 
@@ -17,7 +18,11 @@ const OBJECTS = NUMBERS.map((v, i) => ({ day: `D${i + 1}`, sessions: v }));
 
 const meta: Meta = {
   title: 'Charts/Spark',
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;

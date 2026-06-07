@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PieChart } from './PieChart';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof PieChart> = {
   title: 'Charts/PieChart',
   component: PieChart,
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;

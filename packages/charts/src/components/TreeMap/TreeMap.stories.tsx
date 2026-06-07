@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
+import readme from './README.md?raw';
 import { TreeMap } from './TreeMap';
 
 const meta: Meta<typeof TreeMap> = {
   title: 'Charts/TreeMap',
   component: TreeMap,
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;
