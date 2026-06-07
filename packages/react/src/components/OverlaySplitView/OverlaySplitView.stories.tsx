@@ -11,6 +11,7 @@ import { SidebarItem } from '../Sidebar/SidebarItem';
 import { Text } from '../Text';
 
 import { OverlaySplitView } from './OverlaySplitView';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof OverlaySplitView> = {
   title: 'Adaptive/OverlaySplitView',
@@ -20,18 +21,7 @@ const meta: Meta<typeof OverlaySplitView> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: `
-Sidebar + content layout where the sidebar becomes a slide-over **overlay** on narrow screens (≤ 400 px), mirroring \`AdwOverlaySplitView\`.
-
-- **Wide (> 400 px):** sidebar and content are side-by-side. \`showSidebar\` is ignored.
-- **Narrow (≤ 400 px):** content fills full width; sidebar slides in as an overlay when \`showSidebar\` is true.
-
-### Guidelines
-- Use when the sidebar is contextual and not always needed (e.g. document outline, filters).
-- A hamburger / menu button in the HeaderBar typically toggles it on narrow screens.
-- Backdrop click and Escape close the overlay. Provide an \`onClose\` handler.
-- Prefer \`NavigationSplitView\` for primary list → detail navigation.
-      `,
+        component: readme,
       },
     },
   },

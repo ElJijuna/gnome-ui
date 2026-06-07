@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Card } from '../Card';
-
+import readme from './README.md?raw';
 import { Skeleton } from './Skeleton';
 
 const meta: Meta<typeof Skeleton> = {
@@ -11,13 +11,7 @@ const meta: Meta<typeof Skeleton> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Content-shaped loading placeholder for skeleton screens.
-
-GNOME HIG recommends \`Spinner\` and \`ProgressBar\` for loading states. \`Skeleton\`
-is provided as a pragmatic web-style extension for dashboards and data-heavy
-views where placeholders reduce layout shift.
-        `,
+        component: readme,
       },
     },
   },

@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import { Text } from '../Text';
 
 import { Dialog } from './Dialog';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
@@ -14,17 +15,7 @@ const meta: Meta<typeof Dialog> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Blocking modal dialog — two modes in one component.
-
-**Standard** — \`title\` + \`children\` + \`buttons[]\`.
-
-**Alert** (\`role="alertdialog"\` + \`responses[]\` + \`onResponse\`) — for confirmations
-and destructive-action warnings. Screen readers announce it immediately.
-Escape / backdrop fire the first non-destructive response. Mirrors \`AdwAlertDialog\`.
-
-For the app-info dialog, use \`<AboutDialog />\` instead.
-        `,
+        component: readme,
       },
     },
   },

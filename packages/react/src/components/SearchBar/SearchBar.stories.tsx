@@ -6,7 +6,7 @@ import { Button } from '../Button';
 import { HeaderBar } from '../HeaderBar';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
-
+import readme from './README.md?raw';
 import { SearchBar, type Suggestion } from './SearchBar';
 
 const meta: Meta<typeof SearchBar> = {
@@ -16,17 +16,7 @@ const meta: Meta<typeof SearchBar> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Collapsible search bar following the Adwaita \`AdwSearchBar\` pattern.
-
-### Guidelines
-- Toggle visibility with the \`open\` prop — the bar slides in/out with a CSS transition.
-- Place it directly below a \`HeaderBar\` (the canonical GNOME pattern).
-- Pass \`onClose\` to handle Escape key and any "close search" trigger in your UI.
-- Use \`onClear\` to reset the search query when the × button is clicked.
-- The input auto-focuses when \`open\` becomes \`true\`.
-- Optional \`children\` render a filter-chip row below the input.
-        `,
+        component: readme,
       },
     },
   },

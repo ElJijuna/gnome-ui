@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Text } from '../Text';
-
+import readme from './README.md?raw';
 import { Separator } from './Separator';
 
 const meta: Meta<typeof Separator> = {
@@ -11,15 +11,7 @@ const meta: Meta<typeof Separator> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Thin dividing line that separates groups of content.
-
-### Guidelines
-- Use to visually group related items without adding heavy structure.
-- Prefer \`horizontal\` (default) between stacked sections.
-- Use \`vertical\` inside flex rows — e.g. between toolbar actions or header bar buttons.
-- Don't overuse separators; whitespace and headings are often enough.
-        `,
+        component: readme,
       },
     },
   },

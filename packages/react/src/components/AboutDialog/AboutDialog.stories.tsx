@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '../Button';
 
 import { AboutDialog } from './AboutDialog';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof AboutDialog> = {
   title: 'Components/AboutDialog',
@@ -12,15 +13,7 @@ const meta: Meta<typeof AboutDialog> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Standard app info dialog with details, credits, and legal tabs.
-Mirrors \`AdwAboutDialog\`.
-
-Provide \`applicationName\` plus any combination of \`version\`, \`comments\`,
-\`developerName\`, \`website\`, \`developers\`, \`designers\`, \`artists\`,
-\`copyright\`, \`licenseType\`, and \`licenseText\`.
-Credits and Legal tabs appear automatically when their content is supplied.
-        `,
+        component: readme,
       },
     },
   },

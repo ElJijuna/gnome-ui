@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
-
+import readme from './README.md?raw';
 import { Spacer } from './Spacer';
 import { Toolbar } from './Toolbar';
 
@@ -12,20 +12,7 @@ const meta: Meta<typeof Spacer> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Invisible \`flex: 1\` filler for \`Toolbar\` and \`HeaderBar\`.
-
-Place between leading and trailing button groups to push trailing items to the
-far end of the row. Multiple \`Spacer\` elements within the same flex container
-share the available space equally, which can be used to center a middle group.
-
-Mirrors \`GtkSeparator\` with the \`.spacer\` style class.
-
-### Guidelines
-- Has no visual appearance — it is purely a layout primitive.
-- Use inside any \`display: flex\` row container (\`Toolbar\`, \`HeaderBar\` slots, custom bars).
-- Avoid using outside a flex context; it has no effect.
-        `,
+        component: readme,
       },
     },
   },

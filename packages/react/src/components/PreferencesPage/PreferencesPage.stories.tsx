@@ -8,6 +8,7 @@ import { SpinRow } from '../SpinRow';
 import { SwitchRow } from '../SwitchRow';
 
 import { PreferencesPage } from './PreferencesPage';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof PreferencesPage> = {
   title: 'Components/PreferencesPage',
@@ -16,19 +17,7 @@ const meta: Meta<typeof PreferencesPage> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Scrollable page composed of \`PreferencesGroup\` sections.
-
-Use as a child of \`PreferencesDialog\`. Each page appears as a labelled
-navigation entry in the dialog sidebar.
-
-Mirrors \`AdwPreferencesPage\`.
-
-### Usage
-- \`title\` is used as the sidebar navigation label.
-- \`iconName\` optionally places an icon next to the title in the sidebar.
-- Put \`PreferencesGroup\` children inside to build the page layout.
-        `,
+        component: readme,
       },
     },
   },

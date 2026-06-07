@@ -7,7 +7,7 @@ import { HeaderBar } from '../HeaderBar';
 import { Text } from '../Text';
 import { ViewSwitcher } from '../ViewSwitcher';
 import { ViewSwitcherItem } from '../ViewSwitcher/ViewSwitcherItem';
-
+import readme from './README.md?raw';
 import { ViewSwitcherBar } from './ViewSwitcherBar';
 
 const meta: Meta<typeof ViewSwitcherBar> = {
@@ -18,15 +18,7 @@ const meta: Meta<typeof ViewSwitcherBar> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: `
-Bottom navigation bar for \`ViewSwitcher\` items on narrow screens (≤ 550 px), mirroring \`AdwViewSwitcherBar\`.
-
-Use in tandem with a header-bar \`ViewSwitcher\`:
-- **Wide (> 550 px):** show \`ViewSwitcher\` in the \`HeaderBar\`, hide the bar (\`reveal={false}\`).
-- **Narrow (≤ 550 px):** hide the header switcher, set \`reveal={true}\`.
-
-Pair with \`useBreakpoint().isMedium\` to automate the switch.
-        `,
+        component: readme,
       },
     },
   },
