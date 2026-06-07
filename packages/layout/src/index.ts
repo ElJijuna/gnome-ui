@@ -55,14 +55,14 @@ export type {
 export { PageContent } from './components/PageContent';
 export type { PanelCardHandle, PanelCardProps } from './components/PanelCard';
 export { PanelCard } from './components/PanelCard';
-export type { ProgressCardProps } from './components/ProgressCard';
-export { ProgressCard } from './components/ProgressCard';
 export type {
   ProfileCardProps,
   ProfileCardStat,
   ProfileCardStatus,
 } from './components/ProfileCard';
 export { ProfileCard } from './components/ProfileCard';
+export type { ProgressCardProps } from './components/ProgressCard';
+export { ProgressCard } from './components/ProgressCard';
 export type { QuickAction, QuickActionsProps } from './components/QuickActions';
 export { QuickActions } from './components/QuickActions';
 export type { SectionHeaderProps } from './components/SectionHeader';

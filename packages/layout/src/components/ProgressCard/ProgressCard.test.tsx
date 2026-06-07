@@ -51,7 +51,9 @@ describe('ProgressCard', () => {
   });
 
   it('renders without icon when omitted', () => {
-    const { container } = render(<ProgressCard label="Storage" used={42.5} total={128} unit="GB" />);
+    const { container } = render(
+      <ProgressCard label="Storage" used={42.5} total={128} unit="GB" />,
+    );
 
     expect(container.querySelector('[aria-hidden="true"]')).toBeNull();
   });
@@ -101,7 +103,9 @@ describe('ProgressCard', () => {
 
   // ── Loading skeleton ───────────────────────────────────────────────────────
   it('renders skeleton and aria-busy when loading=true', () => {
-    render(<ProgressCard label="Storage" used={42} total={128} unit="GB" loading data-testid="card" />);
+    render(
+      <ProgressCard label="Storage" used={42} total={128} unit="GB" loading data-testid="card" />,
+    );
 
     expect(screen.getByTestId('card')).toHaveAttribute('aria-busy', 'true');
     expect(screen.queryByText('Storage')).toBeNull();
