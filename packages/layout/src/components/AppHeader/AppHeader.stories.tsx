@@ -6,6 +6,7 @@ import { PageContent } from '../PageContent';
 import { StatusBar } from '../StatusBar';
 
 import { AppHeader } from './AppHeader';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof AppHeader> = {
   title: 'Layout/AppHeader',
@@ -14,7 +15,7 @@ const meta: Meta<typeof AppHeader> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'GNOME application header with named shell slots.',
+        component: readme,
       },
     },
   },

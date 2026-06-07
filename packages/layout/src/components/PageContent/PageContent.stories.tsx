@@ -2,6 +2,7 @@ import { ActionRow, BoxedList, Text } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PageContent } from './PageContent';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof PageContent> = {
   title: 'Layout/PageContent',
@@ -10,7 +11,7 @@ const meta: Meta<typeof PageContent> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Page content container with GNOME spacing and optional clamp.',
+        component: readme,
       },
     },
   },
