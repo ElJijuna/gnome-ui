@@ -1,3 +1,29 @@
+## [1.45.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.45.1...@gnome-ui/react@1.45.2) (2026-06-07)
+
+### Features
+
+* **@gnome-ui/charts:** add README.md files for chart components and update storybook configurations ([c78954e](https://github.com/ElJijuna/gnome-ui/commit/c78954ed765062ff872ecdd52edd82d3b1d85b35))
+
+### Bug Fixes
+
+* **@gnome-ui/hooks:** refine export statements in hooks and improve menuItems check in SidebarItem ([7b9df4a](https://github.com/ElJijuna/gnome-ui/commit/7b9df4a9e7019445eab0b9138faecedda7b1e5e3))
+* **@gnome-ui/hooks:** update export statements for useHapticFeedback for clarity ([f4f09bc](https://github.com/ElJijuna/gnome-ui/commit/f4f09bcb74fa8c5fd924a2436b35486c87ba8b16))
+
+### Refactoring
+
+* **@gnome-ui/charts:** convert function components to arrow function syntax for consistency ([a38ec82](https://github.com/ElJijuna/gnome-ui/commit/a38ec828a18aa3e879b37a0e26700a288e0b64ab))
+* **@gnome-ui/icons:** convert function components to arrow function syntax for consistency ([ae2ce24](https://github.com/ElJijuna/gnome-ui/commit/ae2ce24202019059acc1bed34087840c9e81ac80))
+* **@gnome-ui/layout:** components to use arrow function syntax for consistency ([68afaa5](https://github.com/ElJijuna/gnome-ui/commit/68afaa534952b8276e6bc3353f4a44dff961c95f))
+* **@gnome-ui/layout:** extract component docs to README.md files ([4ab10b7](https://github.com/ElJijuna/gnome-ui/commit/4ab10b7c447520bf503cde84df7bd193012e0315))
+* **@gnome-ui/react:** convert function components to arrow function syntax for consistency ([2e93690](https://github.com/ElJijuna/gnome-ui/commit/2e9369021679f5e651351c78a989525dc984dd2b))
+* **@gnome-ui/react:** extract component docs to README.md files ([d11a3af](https://github.com/ElJijuna/gnome-ui/commit/d11a3af76e4b29f3a5afb659d87ddb12f0e48924))
+
+### Documentation
+
+* **@gnome-ui/icons:** add README.md for icon definitions and usage guidelines ([38312e5](https://github.com/ElJijuna/gnome-ui/commit/38312e554ad7c830d419065d319791e3064e47ca))
+* **@gnome-ui/react:** add README.md for component usage and guidelines ([ae2bfc7](https://github.com/ElJijuna/gnome-ui/commit/ae2bfc7b7c9e3c6a0efa8b65dc06ab645f978afc))
+* **layout:** add README.md files for AppHeader, PageContent, SidebarShell, SidebarTrigger, and StatusBar components ([2f5661d](https://github.com/ElJijuna/gnome-ui/commit/2f5661d9a29eddb5400329c734886864addb4719))
+
 ## [1.45.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.45.0...@gnome-ui/react@1.45.1) (2026-06-02)
 
 ### Features
