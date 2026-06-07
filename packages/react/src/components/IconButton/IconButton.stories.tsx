@@ -2,11 +2,15 @@ import { Delete, Refresh, Save, Search, Settings } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { IconButton } from './IconButton';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof IconButton> = {
   title: 'Components/IconButton',
   component: IconButton,
   tags: ['autodocs'],
+  parameters: {
+    docs: { description: { component: readme } },
+  },
   argTypes: {
     variant: {
       control: 'select',
