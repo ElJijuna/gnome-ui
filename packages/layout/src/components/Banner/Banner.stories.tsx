@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import type { BannerType } from './Banner';
 import { Banner } from './Banner';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Banner> = {
   title: 'Layout/Banner',
@@ -12,20 +13,7 @@ const meta: Meta<typeof Banner> = {
     layout: 'padded',
     docs: {
       description: {
-        component: `
-Persistent in-app message strip shown at the top of a view, following GNOME HIG banner guidelines.
-
-Use banners to communicate **ongoing states** — offline mode, read-only access, pending updates.
-They do not auto-dismiss. For individual events and short-lived messages, use \`Toast\` instead.
-
-\`\`\`tsx
-import { Banner } from "@gnome-ui/layout";
-
-<Banner type="warning" action={{ label: "Reconnect", onClick: retry }}>
-  Working offline — changes will sync when you reconnect
-</Banner>
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },

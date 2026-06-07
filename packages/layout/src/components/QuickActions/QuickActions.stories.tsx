@@ -3,6 +3,7 @@ import { Icon } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { QuickActions } from './QuickActions';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof QuickActions> = {
   title: 'Layout/QuickActions',
@@ -12,20 +13,7 @@ const meta: Meta<typeof QuickActions> = {
     layout: 'padded',
     docs: {
       description: {
-        component: `
-Grid of shortcut action buttons for dashboards, file managers, and control panels.
-
-\`\`\`tsx
-import { QuickActions } from "@gnome-ui/layout";
-
-<QuickActions
-  actions={[
-    { id: "new-file", label: "New File", icon: <AddIcon />, onActivate: createFile },
-    { id: "share", label: "Share", icon: <ShareIcon />, onActivate: share },
-  ]}
-/>
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },
