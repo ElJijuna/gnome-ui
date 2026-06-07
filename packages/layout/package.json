@@ -82,6 +82,11 @@
       "import": "./dist/components/PageContent.js",
       "require": "./dist/components/PageContent.cjs"
     },
+    "./components/ProgressCard": {
+      "types": "./dist/components/ProgressCard.d.ts",
+      "import": "./dist/components/ProgressCard.js",
+      "require": "./dist/components/ProgressCard.cjs"
+    },
     "./components/QuickActions": {
       "types": "./dist/components/QuickActions.d.ts",
       "import": "./dist/components/QuickActions.js",

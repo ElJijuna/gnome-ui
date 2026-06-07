@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 24px;
+}
+
+.label {
+  display: block;
+  min-width: 0;
+}
+
+.icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.usage {
+  display: block;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
