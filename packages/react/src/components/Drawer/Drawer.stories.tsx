@@ -7,6 +7,7 @@ import { Button } from '../Button';
 import { Text } from '../Text';
 
 import { Drawer } from './Drawer';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',
@@ -15,11 +16,7 @@ const meta: Meta<typeof Drawer> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Slide-over panel for supplementary React content. Use \`side\` to open from the
-left or right, \`size\` for classic or wide widths, and pass the body through
-\`children\` or the \`content\` prop.
-        `,
+        component: readme,
       },
     },
   },

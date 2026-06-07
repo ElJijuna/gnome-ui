@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Text } from '../Text';
-
+import readme from './README.md?raw';
 import { Switch } from './Switch';
 
 const meta: Meta<typeof Switch> = {
@@ -11,15 +11,7 @@ const meta: Meta<typeof Switch> = {
   parameters: {
     docs: {
       description: {
-        component: `
-On/off toggle following the Adwaita switch style.
-
-### Guidelines
-- Use switches for settings that take effect immediately — no Save button needed.
-- Prefer switches over checkboxes in settings UIs (GNOME HIG preference).
-- Always pair with a visible label (via \`<label>\`) or supply \`aria-label\`.
-- Place the switch at the trailing end of the row, aligned to the right.
-        `,
+        component: readme,
       },
     },
   },

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Text } from '../Text';
 
 import { Avatar } from './Avatar';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
@@ -11,15 +12,7 @@ const meta: Meta<typeof Avatar> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Circular avatar following the Adwaita \`AdwAvatar\` pattern.
-
-### Guidelines
-- Provide a \`name\` whenever possible — it generates the initials fallback and a deterministic background color.
-- Use \`src\` for a real photo; the initials layer is hidden automatically.
-- Always ensure the \`name\` or \`alt\` prop conveys who the avatar represents for screen readers.
-- Prefer \`"md"\` (32 px) in lists and \`"lg"\`/\`"xl"\` in profile headers.
-        `,
+        component: readme,
       },
     },
   },

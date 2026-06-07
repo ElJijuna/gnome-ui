@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Text } from '../Text';
-
+import readme from './README.md?raw';
 import { ToggleGroup } from './ToggleGroup';
 import { ToggleGroupItem } from './ToggleGroupItem';
 
@@ -14,18 +14,7 @@ const meta: Meta<typeof ToggleGroup> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Mutually-exclusive group of toggle buttons for in-place option selection.
-
-Mirrors \`AdwToggleGroup\` (libadwaita 1.7 / GNOME 48).
-
-Use for formatting controls, alignment selectors, and toolbar view modes —
-wherever a \`ViewSwitcher\` would be too heavy or doesn't belong in a HeaderBar.
-
-- Items can be **icon-only**, **label-only**, or **icon + label**.
-- For icon-only items, always provide an \`aria-label\` for screen readers.
-- Keyboard: ← / → cycle through items, Home / End jump to first / last.
-        `,
+        component: readme,
       },
     },
   },

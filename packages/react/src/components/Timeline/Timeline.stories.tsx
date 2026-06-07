@@ -14,7 +14,7 @@ import { Badge } from '../Badge';
 import { Card } from '../Card';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
-
+import readme from './README.md?raw';
 import type { TimelineItem } from './Timeline';
 import { Timeline } from './Timeline';
 
@@ -26,26 +26,7 @@ const meta: Meta<typeof Timeline> = {
     layout: 'centered',
     docs: {
       description: {
-        component: `
-Ordered sequence of events connected by a visual timeline.
-
-Supports two orientations — **vertical** (activity feed, history log) and
-**horizontal** (stepper, progress indicator) — and three connector styles.
-
-\`\`\`tsx
-import { Timeline } from "@gnome-ui/react";
-
-<Timeline
-  items={[
-    {
-      leading: <Text variant="caption" color="dim">10:32</Text>,
-      icon: <Icon icon={Check} />,
-      content: <Text variant="body">Document approved</Text>,
-    },
-  ]}
-/>
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },

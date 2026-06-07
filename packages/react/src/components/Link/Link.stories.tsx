@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Text } from '../Text';
 
 import { Link } from './Link';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Link> = {
   title: 'Components/Link',
@@ -11,13 +12,7 @@ const meta: Meta<typeof Link> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Inline hyperlink following GNOME HIG.
-
-- Accent-coloured text with an animated underline on hover.
-- \`external\` prop (or \`target="_blank"\`) opens in a new tab safely and appends a visual ↗ indicator.
-- Fully keyboard accessible with a focus ring.
-        `,
+        component: readme,
       },
     },
   },

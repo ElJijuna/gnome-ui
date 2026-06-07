@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Text } from '../Text';
 
 import { AvatarRotator } from './AvatarRotator';
+import readme from './README.md?raw';
 
 const avatarSources = [
   'https://i.pravatar.cc/128?img=5',
@@ -18,14 +19,7 @@ const meta: Meta<typeof AvatarRotator> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Single avatar surface that crossfades through multiple image sources.
-
-### Guidelines
-- Use when one person or entity has several possible avatar images and the UI should keep a single avatar footprint.
-- Keep the rotation interval calm enough that it does not distract from adjacent content.
-- Provide \`name\` or \`alt\` so the rotating surface has a stable accessible label.
-        `,
+        component: readme,
       },
     },
   },

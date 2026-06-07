@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
+import readme from './README.md?raw';
 import type { StatusBadgeVariant } from './StatusBadge';
 import { StatusBadge } from './StatusBadge';
 
@@ -11,18 +11,7 @@ const meta: Meta<typeof StatusBadge> = {
     layout: 'centered',
     docs: {
       description: {
-        component: `
-Pill-shaped text label for entity status. Use for human-readable state labels
-like \`published\`, \`beta\`, or \`new\` — not for numeric counts (use \`Badge\` for those).
-
-\`\`\`tsx
-import { StatusBadge } from "@gnome-ui/react";
-
-<StatusBadge variant="success">published</StatusBadge>
-<StatusBadge variant="warning">beta</StatusBadge>
-<StatusBadge variant="new">new</StatusBadge>
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },

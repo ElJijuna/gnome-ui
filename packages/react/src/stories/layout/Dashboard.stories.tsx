@@ -1,7 +1,6 @@
 import { GoHome, Settings, Share, Star } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-
 import {
   ActionRow,
   Avatar,
@@ -23,6 +22,7 @@ import {
   Text,
   Toolbar,
 } from '../../index';
+import readme from './README.md?raw';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -459,19 +459,7 @@ const meta: Meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: `
-Full-page dashboard layout demonstrating the composition of components following
-the GNOME Human Interface Guidelines.
-
-**Includes:**
-- \`Toolbar\` with logo, inline \`SearchBar\`, action buttons, and avatar \`Popover\`
-- Collapsible \`Sidebar\` with \`SidebarItem\`, \`Badge\`, and auto-tooltip on collapse
-- Content area with \`Card\`, \`BoxedList\`, \`ActionRow\`, \`ExpanderRow\`, \`InlineViewSwitcher\`, and \`StatusPage\`
-- Footer \`Toolbar\` with status text
-
-**Toggle the sidebar** with the hamburger button at the top-left.
-**Switch navigation sections** with the sidebar items.
-        `,
+        component: readme,
       },
     },
   },

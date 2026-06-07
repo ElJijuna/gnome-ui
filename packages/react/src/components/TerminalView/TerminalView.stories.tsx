@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useRef, useState } from 'react';
-
+import readme from './README.md?raw';
 import { TerminalView } from './TerminalView';
 
 const meta: Meta<typeof TerminalView> = {
@@ -11,16 +11,7 @@ const meta: Meta<typeof TerminalView> = {
     layout: 'padded',
     docs: {
       description: {
-        component: `
-Scrollable terminal-style output area styled after GNOME Terminal.
-Intended for displaying logs, command output, or read-only text content.
-
-\`\`\`tsx
-import { TerminalView } from "@gnome-ui/react";
-
-<TerminalView lines={["$ npm install", "added 42 packages"]} />
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },

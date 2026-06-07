@@ -6,6 +6,7 @@ import { Text } from '../Text';
 import { WrapBox } from '../WrapBox';
 
 import { Chip } from './Chip';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
@@ -14,17 +15,7 @@ const meta: Meta<typeof Chip> = {
   parameters: {
     docs: {
       description: {
-        component: `
-Compact pill-shaped label for tags, filters, and selection states.
-
-Three usage modes:
-
-- **Static** — visual label only. No interaction.
-- **Removable** — add \`onRemove\` to show a × button that removes the chip.
-- **Selectable** — add \`selectable\` + \`selected\` + \`onToggle\` for toggle behaviour.
-
-Pair with \`WrapBox\` for multi-chip layouts.
-        `,
+        component: readme,
       },
     },
   },
