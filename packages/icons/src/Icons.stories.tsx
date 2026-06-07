@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import * as icons from './icons/index.ts';
+import readme from './README.md?raw';
 import * as thirdParty from './third-party/index.ts';
 import type { IconDefinition } from './types.ts';
 
@@ -183,8 +184,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component:
-          '`@gnome-ui/icons` exports framework-agnostic icon definitions. The main gallery separates Adwaita-style symbolic icons from GitHub Octicons and third-party brand/fullcolor previews.',
+        component: readme,
       },
     },
   },
