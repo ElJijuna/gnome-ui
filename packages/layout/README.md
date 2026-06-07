@@ -437,6 +437,37 @@ import { StatCard } from "@gnome-ui/layout/components/StatCard";
 
 ---
 
+### `ProgressCard`
+
+Resource usage card with a labeled progress bar. Composes `Card` and
+`ProgressBar` from `@gnome-ui/react`. The fill color shifts automatically at
+usage thresholds: accent (< 75%), warning (≥ 75%), error (≥ 90%).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Resource name shown above the bar |
+| `used` | `number` | — | Amount currently used |
+| `total` | `number` | — | Total capacity |
+| `unit` | `string` | — | Unit label appended to the usage text (e.g. `"GB"`, `"%"`) |
+| `icon` | `ReactNode` | — | Optional leading icon (rendered as decorative) |
+| `loading` | `boolean` | `false` | Render a loading placeholder |
+| `loadingType` | `"skeleton" \| "spinner"` | `"skeleton"` | Loading placeholder style |
+
+```tsx
+import { ProgressCard } from "@gnome-ui/layout";
+
+<ProgressCard label="Storage" used={42.5} total={128} unit="GB" />
+<ProgressCard label="Memory"  used={96}   total={128} unit="GB" icon={<MemoryIcon />} />
+```
+
+Per-component path:
+
+```tsx
+import { ProgressCard } from "@gnome-ui/layout/components/ProgressCard";
+```
+
+---
+
 ### `UserCard`
 
 User identity panel for popovers, sidebar footers, and profile pages. Renders an `Avatar`, a display name, an optional sub-line, and a list of action buttons. A separator is automatically inserted before the first `"destructive"` action when non-destructive actions precede it.

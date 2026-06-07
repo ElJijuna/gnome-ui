@@ -77,6 +77,12 @@ Tarjeta de métrica con valor numérico formateado, tendencia direccional
 Tarjeta de métrica con contador animado (ease-out cúbico de 0 al valor destino).
 Respeta `prefers-reduced-motion`.
 
+### `ProgressCard`
+
+Tarjeta de uso de recursos con barra de progreso etiquetada. El color del relleno
+cambia automáticamente según umbrales: accent (< 75%), warning (≥ 75%),
+error (≥ 90%). Soporta estado de carga con skeleton o spinner.
+
 ### `EntityCard`
 
 Tarjeta de entidad genérica con avatar, título, subtítulo, metadatos y acciones.
