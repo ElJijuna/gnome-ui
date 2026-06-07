@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/icons",
-  "version": "1.42.0",
+  "version": "1.42.1",
   "description": "Framework-agnostic icon definitions for gnome-ui",
   "type": "module",
   "main": "./dist/index.cjs",
