@@ -1,3 +1,9 @@
+## [1.32.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.31.0...@gnome-ui/charts@1.32.0) (2026-06-07)
+
+### Features
+
+* **@gnome-ui/charts:** add ComposedChart, FunnelChart, and ScatterChart components with documentation and tests ([0bd359c](https://github.com/ElJijuna/gnome-ui/commit/0bd359c61628de02e6bd4fbe4278a3e0b17ed913))
+
 ## [1.31.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.30.0...@gnome-ui/charts@1.31.0) (2026-06-07)
 
 ### Features
