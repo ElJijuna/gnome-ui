@@ -388,9 +388,20 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ✅ | **`LineChart`** | Multi-series time-series line chart |
-| ✅ | **`BarChart`** | Grouped and stacked bar chart |
-| ✅ | **`AreaChart`** | Filled-area chart for cumulative data |
+| ✅ | **`LineChart`** | Multi-series time-series line chart with optional grid and legend |
+| ✅ | **`BarChart`** | Grouped bar chart for categorical comparisons |
+| ✅ | **`AreaChart`** | Filled-area chart with stacking and gradient fill options |
+| ✅ | **`PieChart`** | Pie and donut chart for part-to-whole comparisons |
+| ✅ | **`RadarChart`** | Radar/spider chart for multi-attribute comparisons across subjects |
+| ✅ | **`RadialBarChart`** | Concentric arc bars for multiple circular progress metrics |
+| ✅ | **`TreeMap`** | Proportional rectangles for hierarchical data with optional grouping |
+| ✅ | **`CloudChart`** | Word/tag cloud with value-proportional font sizing |
+| ✅ | **`SparkLineChart`** | Minimal inline line sparkline for embedding in cards and tables |
+| ✅ | **`SparkAreaChart`** | Minimal inline area sparkline with optional gradient fill |
+| ✅ | **`SparkBarChart`** | Minimal inline bar sparkline for compact trend display |
+| ✅ | **`ScatterChart`** | Scatter/bubble chart for correlation between two numeric variables; `ZAxis` encodes a third dimension as bubble size |
+| ✅ | **`FunnelChart`** | Funnel visualization for conversion rates and sales pipelines |
+| ✅ | **`ComposedChart`** | Mixed chart combining bars, lines, and areas on shared axes |
 
 ---
 
