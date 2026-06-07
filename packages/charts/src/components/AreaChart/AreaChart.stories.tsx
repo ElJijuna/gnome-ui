@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AreaChart } from './AreaChart';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof AreaChart> = {
   title: 'Charts/AreaChart',
   component: AreaChart,
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;

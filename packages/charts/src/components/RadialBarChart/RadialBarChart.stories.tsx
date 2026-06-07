@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { RadialBarChart } from './RadialBarChart';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof RadialBarChart> = {
   title: 'Charts/RadialBarChart',
   component: RadialBarChart,
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;

@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { BarChart } from './BarChart';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof BarChart> = {
   title: 'Charts/BarChart',
   component: BarChart,
-  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: { description: { component: readme } },
+  },
 };
 
 export default meta;
