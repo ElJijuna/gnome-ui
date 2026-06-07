@@ -1,3 +1,68 @@
+## [1.28.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.28.0...@gnome-ui/hooks@1.28.1) (2026-06-07)
+
+### Features
+
+* **@gnome-ui/charts:** add README.md files for chart components and update storybook configurations ([c78954e](https://github.com/ElJijuna/gnome-ui/commit/c78954ed765062ff872ecdd52edd82d3b1d85b35))
+* **@gnome-ui/charts:** add SparkAreaChart, SparkLineChart, SparkBarChart and fix dark-mode tokens ([7a02ad5](https://github.com/ElJijuna/gnome-ui/commit/7a02ad5ae4e1c5576246da787934ab1c0480e05d))
+* **@gnome-ui/cli:** add a CLI in packages/cli to help validate and update @gnome-ui/* dependencies in consuming projects ([24c7888](https://github.com/ElJijuna/gnome-ui/commit/24c78889a380566846a3ff2961fff5eb0f7eb48b))
+* **@gnome-ui/cli:** update release workflow to add CLI ([a22bdbd](https://github.com/ElJijuna/gnome-ui/commit/a22bdbd7ff2f73791a464f37a3b4ca2d0bbf3c24))
+* **@gnome-ui/icons:** add control version icons ([5d2212b](https://github.com/ElJijuna/gnome-ui/commit/5d2212b4413f3382207e5930b5da735985676e68))
+* **@gnome-ui/icons:** add full Adwaita symbolic icon set ([0336040](https://github.com/ElJijuna/gnome-ui/commit/0336040c2f371ebd26a73e09cd41aefc45b92e37))
+* **@gnome-ui/icons:** update git version icon gallery ([08cbb6e](https://github.com/ElJijuna/gnome-ui/commit/08cbb6e9d2e955abc87fd4f5760d1f40558c87c4))
+* **@gnome-ui/layout:** add ActivityFeed component (closes [#85](https://github.com/ElJijuna/gnome-ui/issues/85)) ([b6acc5a](https://github.com/ElJijuna/gnome-ui/commit/b6acc5a04cc2589dbff8ef877220cad0615aba9e))
+* **@gnome-ui/layout:** add glass prop to AdaptiveLayout and fix collapse button border-radius. ([5ed7a36](https://github.com/ElJijuna/gnome-ui/commit/5ed7a368681a303b6b5231dbf1bb58e67aad7f21))
+* **@gnome-ui/layout:** add loadingType prop to ActivityFeed (closes [#107](https://github.com/ElJijuna/gnome-ui/issues/107)) ([b723c2b](https://github.com/ElJijuna/gnome-ui/commit/b723c2b1fd7f1eb5c3ec5d64694e37a08827451b))
+* **@gnome-ui/layout:** add loadingType prop to ApplicationCard (closes [#111](https://github.com/ElJijuna/gnome-ui/issues/111)) ([bc1f39a](https://github.com/ElJijuna/gnome-ui/commit/bc1f39a862faef2624c275dd5e69c64c654639e5))
+* **@gnome-ui/layout:** add loadingType prop to CounterCard (closes [#108](https://github.com/ElJijuna/gnome-ui/issues/108)) ([e9e8e9f](https://github.com/ElJijuna/gnome-ui/commit/e9e8e9fe34487253b7a586058db22cd70f10eb7b))
+* **@gnome-ui/layout:** add loadingType prop to EntityCard (closes [#110](https://github.com/ElJijuna/gnome-ui/issues/110)) ([76a692d](https://github.com/ElJijuna/gnome-ui/commit/76a692dbba77976628c2ac3f3034852b198ddfb6))
+* **@gnome-ui/layout:** add loadingType prop to PanelCard (closes [#112](https://github.com/ElJijuna/gnome-ui/issues/112)) ([b9406a2](https://github.com/ElJijuna/gnome-ui/commit/b9406a2412e42210a84eaa6a95c37804187e3cfe))
+* **@gnome-ui/layout:** add loadingType prop to StatCard (closes [#106](https://github.com/ElJijuna/gnome-ui/issues/106)) ([f13027e](https://github.com/ElJijuna/gnome-ui/commit/f13027ed4e12f29d2ac4c99f65928748f63e5b71))
+* **@gnome-ui/layout:** add loadingType prop to UserCard (closes [#109](https://github.com/ElJijuna/gnome-ui/issues/109)) ([5f8ffac](https://github.com/ElJijuna/gnome-ui/commit/5f8ffaca95b2eaebdcde06f2db6d399be6649682))
+* **@gnome-ui/layout:** add ProfileCard component ([d374b21](https://github.com/ElJijuna/gnome-ui/commit/d374b214d16b13aa638d03bde9e802c94fb6c4ef))
+* **@gnome-ui/layout:** add SectionHeader component (closes [#88](https://github.com/ElJijuna/gnome-ui/issues/88)) ([b5d589d](https://github.com/ElJijuna/gnome-ui/commit/b5d589dcdf638a14c6c1f74e8ec502c428e84943))
+* **@gnome-ui/layout:** update AdaptiveLayout to light/dark mode and add compatibility support ([bb27ac1](https://github.com/ElJijuna/gnome-ui/commit/bb27ac1769ee4e3bdd2cc0d0d902336f1e188a4c))
+* **@gnome-ui/layout:** update StatCard to support backgroundChart ([4e0b867](https://github.com/ElJijuna/gnome-ui/commit/4e0b867e2b22b6c3291db2c25e3f6b6c7fea83b9))
+* **@gnome-ui/react:** add accentColor support to GnomeProvider ([40f0b71](https://github.com/ElJijuna/gnome-ui/commit/40f0b71332436c8cafa60f96db3234b803a0e173))
+* **@gnome-ui/react:** add accentColor support to GnomeProvider ([cdf554d](https://github.com/ElJijuna/gnome-ui/commit/cdf554d978d29da5cdcb9efe749e49f62b262cf7))
+* **@gnome-ui/react:** add colorScheme support to GnomeProvider ([a636552](https://github.com/ElJijuna/gnome-ui/commit/a636552b17a283f7e2cd4589bd85f14ec7c7a5fa))
+* **@gnome-ui/react:** add component Drawer ([5e2817b](https://github.com/ElJijuna/gnome-ui/commit/5e2817be7da79426dde97e725d3e753f8e7d3284))
+* **@gnome-ui/react:** add component SegmentedBar ([aa5d806](https://github.com/ElJijuna/gnome-ui/commit/aa5d806da01b4eed021b39386746c33af36cacb1))
+* **@gnome-ui/react:** update ContributionGraph issues ([eae3fe7](https://github.com/ElJijuna/gnome-ui/commit/eae3fe7d08ce7850fb4dfbfc241a875e853f3cec))
+* **@gnome-ui/react:** update Tabs and TabItems to support count property and show badge with count value ([c78e4c5](https://github.com/ElJijuna/gnome-ui/commit/c78e4c56db7504b65a7d29e521cbd374001d9ce4))
+* **@gnome/react:** add close button in Drawer ([45e4ae3](https://github.com/ElJijuna/gnome-ui/commit/45e4ae3f3013947cdb05c0f9546e042432eb9ce1))
+
+### Bug Fixes
+
+* **@gnome-ui/core:** update --gnome-card-shade-color in light mode from rgba(0,0,0,0.07) ([4b2bd4c](https://github.com/ElJijuna/gnome-ui/commit/4b2bd4c9ab5d5b3d287930fc062fd6416a3d03a5)), closes [#fafafa](https://github.com/ElJijuna/gnome-ui/issues/fafafa)
+* **@gnome-ui/core:** use white-alpha card-shade-color in dark mode ([7278f6f](https://github.com/ElJijuna/gnome-ui/commit/7278f6fa43fe15f1e936a9625393f53204234caa))
+* **@gnome-ui/hooks:** refine export statements in hooks and improve menuItems check in SidebarItem ([7b9df4a](https://github.com/ElJijuna/gnome-ui/commit/7b9df4a9e7019445eab0b9138faecedda7b1e5e3))
+* **@gnome-ui/hooks:** update export statements for useHapticFeedback for clarity ([f4f09bc](https://github.com/ElJijuna/gnome-ui/commit/f4f09bcb74fa8c5fd924a2436b35486c87ba8b16))
+* **@gnome-ui/layout:** add properties interactive and onClick in ProfileCard ([78bf5ab](https://github.com/ElJijuna/gnome-ui/commit/78bf5ab1cdbfee25066e12b692d881eaa3e90170))
+* **@gnome-ui/layout:** fix lint errors in ActivityFeed test ([f6b30a5](https://github.com/ElJijuna/gnome-ui/commit/f6b30a572efd34dade620e1fa98e42b1dc9b768a))
+* **@gnome-ui/layout:** resolve build and test failures from updated shared configs ([5cac3c1](https://github.com/ElJijuna/gnome-ui/commit/5cac3c1b03cc45dde64406eac6d431ef662b241d))
+* **@gnome-ui/layout:** solved error in first render in MasonryGrid ([142cdae](https://github.com/ElJijuna/gnome-ui/commit/142cdae9ef2699eab72255ee8df5d97365765f70))
+* **@gnome-ui/react:** add vertical-align: middle to preserve centered content ([cfb9f9f](https://github.com/ElJijuna/gnome-ui/commit/cfb9f9f290599544143df23f1f39420137f64bfb))
+* **@gnome-ui/react:** fix Card interactive hover/active states for forced dark mode ([adb759a](https://github.com/ElJijuna/gnome-ui/commit/adb759a1c58d534366751db66ac9e213b83b78d5))
+* **@gnome-ui/react:** resolve build and test failures from updated shared configs ([77beb08](https://github.com/ElJijuna/gnome-ui/commit/77beb08ed177030b3abdf5718b33a836bae622f6))
+* replace React.X namespace with direct named imports ([955a1f2](https://github.com/ElJijuna/gnome-ui/commit/955a1f2f4002a52ea517e5610a4a3b574ae4c99e))
+
+### Refactoring
+
+* **@gnome-ui/charts:** convert function components to arrow function syntax for consistency ([a38ec82](https://github.com/ElJijuna/gnome-ui/commit/a38ec828a18aa3e879b37a0e26700a288e0b64ab))
+* **@gnome-ui/icons:** convert function components to arrow function syntax for consistency ([ae2ce24](https://github.com/ElJijuna/gnome-ui/commit/ae2ce24202019059acc1bed34087840c9e81ac80))
+* **@gnome-ui/layout:** components to use arrow function syntax for consistency ([68afaa5](https://github.com/ElJijuna/gnome-ui/commit/68afaa534952b8276e6bc3353f4a44dff961c95f))
+* **@gnome-ui/layout:** extract component docs to README.md files ([4ab10b7](https://github.com/ElJijuna/gnome-ui/commit/4ab10b7c447520bf503cde84df7bd193012e0315))
+* **@gnome-ui/react:** convert function components to arrow function syntax for consistency ([2e93690](https://github.com/ElJijuna/gnome-ui/commit/2e9369021679f5e651351c78a989525dc984dd2b))
+* **@gnome-ui/react:** extract component docs to README.md files ([d11a3af](https://github.com/ElJijuna/gnome-ui/commit/d11a3af76e4b29f3a5afb659d87ddb12f0e48924))
+* migrate Storybook previews to use GnomeProvider colorScheme and accentColor ([611ee49](https://github.com/ElJijuna/gnome-ui/commit/611ee49d31511243009cebb33a8c3f408b212238))
+
+### Documentation
+
+* **@gnome-ui/cli:** add README ([5e89c03](https://github.com/ElJijuna/gnome-ui/commit/5e89c0346c7010b6b6be063c90f93cb1e0717bfa))
+* **@gnome-ui/icons:** add README.md for icon definitions and usage guidelines ([38312e5](https://github.com/ElJijuna/gnome-ui/commit/38312e554ad7c830d419065d319791e3064e47ca))
+* **@gnome-ui/react:** add README.md for component usage and guidelines ([ae2bfc7](https://github.com/ElJijuna/gnome-ui/commit/ae2bfc7b7c9e3c6a0efa8b65dc06ab645f978afc))
+* **layout:** add README.md files for AppHeader, PageContent, SidebarShell, SidebarTrigger, and StatusBar components ([2f5661d](https://github.com/ElJijuna/gnome-ui/commit/2f5661d9a29eddb5400329c734886864addb4719))
+
 ## [1.28.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/hooks@1.27.2...@gnome-ui/hooks@1.28.0) (2026-05-17)
 
 ### Features
