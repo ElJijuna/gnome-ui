@@ -1,7 +1,7 @@
 import { GoHome, Settings, Star } from '@gnome-ui/icons';
 import { Button, SidebarItem, SidebarSection, Text } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
-
+import readme from './README.md?raw';
 import { SidebarShell } from './SidebarShell';
 
 const meta: Meta<typeof SidebarShell> = {
@@ -11,7 +11,7 @@ const meta: Meta<typeof SidebarShell> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Full-height GNOME sidebar with fixed header/footer and scrollable navigation.',
+        component: readme,
       },
     },
   },

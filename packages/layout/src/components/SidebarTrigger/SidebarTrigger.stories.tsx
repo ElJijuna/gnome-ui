@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-
+import readme from './README.md?raw';
 import { SidebarTrigger } from './SidebarTrigger';
 
 const meta: Meta<typeof SidebarTrigger> = {
@@ -9,8 +9,7 @@ const meta: Meta<typeof SidebarTrigger> = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Header button that opens overlay sidebars on narrow screens and toggles rail collapse on wider screens.',
+        component: readme,
       },
     },
   },

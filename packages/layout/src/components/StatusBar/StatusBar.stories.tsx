@@ -1,6 +1,6 @@
 import { Text } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
-
+import readme from './README.md?raw';
 import { StatusBar } from './StatusBar';
 
 const meta: Meta<typeof StatusBar> = {
@@ -10,7 +10,7 @@ const meta: Meta<typeof StatusBar> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Compact footer/status bar for application shells.',
+        component: readme,
       },
     },
   },
