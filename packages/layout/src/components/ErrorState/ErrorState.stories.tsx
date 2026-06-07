@@ -2,6 +2,7 @@ import { Button } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ErrorState } from './ErrorState';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof ErrorState> = {
   title: 'Layout/ErrorState',
@@ -11,23 +12,7 @@ const meta: Meta<typeof ErrorState> = {
     layout: 'centered',
     docs: {
       description: {
-        component: `
-Error state with four presets that set a default icon and title.
-All defaults can be overridden via \`icon\` and \`title\` props.
-
-Icon color uses \`--gnome-warning-color\` for \`generic\`/\`network\`
-and \`--gnome-error-color\` for \`permission\`/\`not-found\`.
-
-\`\`\`tsx
-import { ErrorState } from "@gnome-ui/layout";
-
-<ErrorState
-  type="network"
-  description="Check your connection and try again."
-  action={<Button variant="suggested" onClick={retry}>Try again</Button>}
-/>
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },

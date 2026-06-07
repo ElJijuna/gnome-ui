@@ -1,6 +1,6 @@
 import { Button } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
-
+import readme from './README.md?raw';
 import { SectionHeader } from './SectionHeader';
 
 const meta: Meta<typeof SectionHeader> = {
@@ -11,19 +11,7 @@ const meta: Meta<typeof SectionHeader> = {
     layout: 'padded',
     docs: {
       description: {
-        component: `
-Title row for dashboard sections with optional subtitle and trailing action slot.
-
-\`\`\`tsx
-import { SectionHeader } from "@gnome-ui/layout";
-
-<SectionHeader
-  title="Recent Activity"
-  subtitle="Last 24 hours"
-  action={<Button variant="flat" size="sm">View all</Button>}
-/>
-\`\`\`
-        `,
+        component: readme,
       },
     },
   },
