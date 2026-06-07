@@ -1,3 +1,18 @@
+## [1.29.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.28.3...@gnome-ui/layout@1.29.0) (2026-06-07)
+
+### Features
+
+* **@gnome-ui/charts:** add ComposedChart, FunnelChart, and ScatterChart components with documentation and tests ([0bd359c](https://github.com/ElJijuna/gnome-ui/commit/0bd359c61628de02e6bd4fbe4278a3e0b17ed913))
+* **@gnome-ui/layout:** add ProgressCard component with styles, stories, tests, and documentation (closes [#84](https://github.com/ElJijuna/gnome-ui/issues/84)) ([ed36a87](https://github.com/ElJijuna/gnome-ui/commit/ed36a87f0d922d2705cab90cde53b3a5ca5d5b14))
+
+### Bug Fixes
+
+* **@gnome-ui/layout:** sort ProgressCard exports alphabetically and fix line length in tests ([9d7b75a](https://github.com/ElJijuna/gnome-ui/commit/9d7b75a25a787b2e6bb92d8de817eea99ae20c44))
+
+### Documentation
+
+* **@gnome-ui/layout:** add ProgressCard documentation to README.md and ROADMAP.md ([570c921](https://github.com/ElJijuna/gnome-ui/commit/570c921eacd8ccf6f68584bc88c5ca920157144e))
+
 ## [1.28.3](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.28.2...@gnome-ui/layout@1.28.3) (2026-06-07)
 
 ### Features
