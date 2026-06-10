@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { ScatterChart } from './ScatterChart';
 import readme from './README.md?raw';
+import { ScatterChart } from './ScatterChart';
 
 const meta: Meta<typeof ScatterChart> = {
   title: 'Charts/ScatterChart',
