@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 
 import { GNOME_CHART_PALETTE } from '../../colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
 
 import styles from './RadarChart.module.css';
 
@@ -34,15 +35,6 @@ const AXIS_STYLE = {
   fontSize: 12,
   fill: 'var(--gnome-window-fg-color, rgba(0,0,0,0.8))',
   fontFamily: 'var(--gnome-font-family, system-ui)',
-};
-
-const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
-  border: '1px solid var(--gnome-light-3, #deddda)',
-  borderRadius: 'var(--gnome-radius-md, 8px)',
-  fontFamily: 'var(--gnome-font-family, system-ui)',
-  fontSize: 12,
-  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
 export const RadarChart = ({
@@ -73,7 +65,7 @@ export const RadarChart = ({
           <PolarGrid stroke="var(--gnome-light-3, #deddda)" />
           <PolarAngleAxis dataKey={angleKey} tick={AXIS_STYLE} />
           <PolarRadiusAxis tick={AXIS_STYLE} axisLine={false} tickLine={false} />
-          <Tooltip contentStyle={TOOLTIP_CONTENT_STYLE} />
+          <Tooltip contentStyle={GNOME_TOOLTIP_STYLE} itemStyle={GNOME_TOOLTIP_ITEM_STYLE} />
           {showLegend && (
             <Legend
               wrapperStyle={{

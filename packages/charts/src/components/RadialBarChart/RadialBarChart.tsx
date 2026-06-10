@@ -7,6 +7,7 @@ import {
 } from 'recharts';
 
 import { GNOME_CHART_PALETTE } from '../../colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
 
 import styles from './RadialBarChart.module.css';
 
@@ -25,15 +26,6 @@ export interface RadialBarChartProps {
   className?: string;
   'aria-label'?: string;
 }
-
-const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
-  border: '1px solid var(--gnome-light-3, #deddda)',
-  borderRadius: 'var(--gnome-radius-md, 8px)',
-  fontFamily: 'var(--gnome-font-family, system-ui)',
-  fontSize: 12,
-  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-};
 
 const ArcLabel = (props: {
   cx?: number;
@@ -119,7 +111,7 @@ export const RadialBarChart = ({
             background={{ fill: 'var(--gnome-light-3, #deddda)' }}
             label={showLabels ? ArcLabel : undefined}
           />
-          <Tooltip contentStyle={TOOLTIP_CONTENT_STYLE} />
+          <Tooltip contentStyle={GNOME_TOOLTIP_STYLE} itemStyle={GNOME_TOOLTIP_ITEM_STYLE} />
           {showLegend && (
             <Legend
               iconSize={10}

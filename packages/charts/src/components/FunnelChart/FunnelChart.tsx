@@ -8,6 +8,7 @@ import {
 } from 'recharts';
 
 import { GNOME_CHART_PALETTE } from '../../colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
 
 import styles from './FunnelChart.module.css';
 
@@ -23,15 +24,6 @@ export interface FunnelChartProps {
   showLabels?: boolean;
   className?: string;
 }
-
-const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
-  border: '1px solid var(--gnome-border-subtle, rgba(0,0,0,0.15))',
-  borderRadius: 'var(--gnome-radius-md, 8px)',
-  fontFamily: 'var(--gnome-font-family, system-ui)',
-  fontSize: 12,
-  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-};
 
 const LABEL_STYLE = {
   fontSize: 12,
@@ -62,7 +54,8 @@ export const FunnelChart = ({
       <ResponsiveContainer width="100%" height="100%">
         <RechartsFunnelChart accessibilityLayer margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <Tooltip
-            contentStyle={TOOLTIP_CONTENT_STYLE}
+            contentStyle={GNOME_TOOLTIP_STYLE}
+            itemStyle={GNOME_TOOLTIP_ITEM_STYLE}
             formatter={(value: number, name: string) => [formatNumber(value), name]}
           />
           <Funnel dataKey="value" data={coloredData} isAnimationActive>

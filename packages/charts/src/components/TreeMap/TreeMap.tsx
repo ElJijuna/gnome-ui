@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import { ResponsiveContainer, Tooltip, Treemap } from 'recharts';
 
 import { GNOME_CHART_PALETTE } from '../../colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
 
 import styles from './TreeMap.module.css';
 
@@ -18,15 +19,6 @@ export interface TreeMapProps {
   showLabels?: boolean;
   className?: string;
 }
-
-const TOOLTIP_CONTENT_STYLE = {
-  backgroundColor: 'var(--gnome-popover-bg-color, #fff)',
-  border: '1px solid var(--gnome-light-3, #deddda)',
-  borderRadius: 'var(--gnome-radius-md, 8px)',
-  fontFamily: 'var(--gnome-font-family, system-ui)',
-  fontSize: 12,
-  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-};
 
 function buildColorMap(data: TreeMapDataItem[]): Map<string, string> {
   const keys: string[] = [];
@@ -156,7 +148,8 @@ export const TreeMap = ({ data, height = 400, showLabels = true, className }: Tr
           }
         >
           <Tooltip
-            contentStyle={TOOLTIP_CONTENT_STYLE}
+            contentStyle={GNOME_TOOLTIP_STYLE}
+            itemStyle={GNOME_TOOLTIP_ITEM_STYLE}
             formatter={(value: number, name: string) => [formatNumber(value), name]}
           />
         </Treemap>
