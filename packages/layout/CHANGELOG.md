@@ -1,3 +1,22 @@
+## [1.30.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.29.0...@gnome-ui/layout@1.30.0) (2026-06-10)
+
+### Features
+
+* **@gnome-ui/charts:** add accessibilityLayer prop to various chart components ([b4ec955](https://github.com/ElJijuna/gnome-ui/commit/b4ec9553ac0ea208b68b2600ec02effb2342fbbc))
+* **@gnome-ui/charts:** add legend position prop to chart components ([6d47528](https://github.com/ElJijuna/gnome-ui/commit/6d47528ca4cbff3e72f7ddaa40ac0196df94aaad))
+* **@gnome-ui/charts:** unify tooltip styles across chart components ([5ace364](https://github.com/ElJijuna/gnome-ui/commit/5ace3645e224a9d266cfdcc2cc88da2c94208a4f))
+* **@gnome-ui/layout:** add LoadingStatus component for improved accessibility in loading states ([9436f81](https://github.com/ElJijuna/gnome-ui/commit/9436f812f3d089352a4a1bdd29ca8cb5726aa548))
+* **@gnome-ui/react:** add tests and body scroll lock functionality to AboutDialog, BottomSheet, Dialog, and ShortcutsDialog components ([f3b070d](https://github.com/ElJijuna/gnome-ui/commit/f3b070db07ce414526a42e0c5e2d8016e2cd246b))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** reorder import statements in ScatterChart stories for consistency ([27e0640](https://github.com/ElJijuna/gnome-ui/commit/27e064046ed6fc012e707f1577eca0523a4bd772))
+* **@gnome-ui/cli:** add security note to onNativeEvent documentation regarding untrusted payloads ([0a700e1](https://github.com/ElJijuna/gnome-ui/commit/0a700e152b6e0ec7016ee5af2580ad7fd61db042))
+
+### Documentation
+
+* **@gnome-ui/charts:** add legend position control to all chart components ([6724733](https://github.com/ElJijuna/gnome-ui/commit/672473392fc936b5159c2d5cd74901539a72cffb))
+
 ## [1.29.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.28.3...@gnome-ui/layout@1.29.0) (2026-06-07)
 
 ### Features
