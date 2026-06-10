@@ -1,6 +1,7 @@
 import { Card, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './ApplicationCard.module.css';
@@ -56,6 +57,7 @@ export const ApplicationCard = ({
 
     return (
       <Card className={cardClass} aria-busy="true" {...props}>
+        <LoadingStatus />
         <div className={styles.header}>
           <div className={styles.avatarSlot}>
             <Skeleton variant="circle" size={64} />

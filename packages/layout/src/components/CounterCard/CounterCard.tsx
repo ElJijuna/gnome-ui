@@ -2,6 +2,7 @@ import type { IconDefinition } from '@gnome-ui/icons';
 import { Card, Icon, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
 import { type HTMLAttributes, useEffect, useRef, useState } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './CounterCard.module.css';
@@ -183,6 +184,7 @@ export const CounterCard = ({
         aria-busy="true"
         {...props}
       >
+        <LoadingStatus />
         <div className={styles.header}>
           <Skeleton variant="rect" width={80} height={12} />
           {icon && <Skeleton variant="rect" width={26} height={26} style={{ borderRadius: 7 }} />}

@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './PanelCard.module.css';
@@ -190,6 +191,7 @@ export const PanelCard = forwardRef<PanelCardHandle, PanelCardProps>(function Pa
                 </div>
               ) : (
                 <>
+                  <LoadingStatus />
                   <Skeleton variant="rect" width={200} height={14} />
                   <Skeleton variant="rect" width={160} height={14} style={{ marginTop: 8 }} />
                   <Skeleton variant="rect" width={180} height={14} style={{ marginTop: 8 }} />

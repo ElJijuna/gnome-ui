@@ -95,7 +95,7 @@ describe('ProfileCard', () => {
 
     it('renders skeleton by default when loading={true}', () => {
       render(<ProfileCard name="rcronald" username="@rcronald" loading />);
-      expect(screen.queryByRole('status')).toBeNull();
+      expect(screen.getByRole('status')).toHaveTextContent('Loading…');
     });
 
     it("renders spinner when loadingType='spinner'", () => {

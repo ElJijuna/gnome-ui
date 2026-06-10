@@ -2,6 +2,7 @@ import type { AvatarColor, AvatarSize } from '@gnome-ui/react';
 import { Avatar, Separator, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import type { CSSProperties, HTMLAttributes } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './UserCard.module.css';
@@ -111,6 +112,7 @@ export const UserCard = ({
 
     return (
       <div className={rootClass} style={{ minWidth, ...style }} aria-busy="true" {...props}>
+        <LoadingStatus />
         <div
           className={[styles.header, isVertical ? styles.headerVertical : null]
             .filter(Boolean)

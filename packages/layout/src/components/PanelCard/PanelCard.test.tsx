@@ -383,7 +383,7 @@ describe('PanelCard', () => {
       );
 
       expect(container.firstChild).toHaveAttribute('aria-busy', 'true');
-      expect(screen.queryByRole('status')).toBeNull();
+      expect(screen.getByRole('status')).toHaveTextContent('Loading…');
     });
 
     it("renders skeleton when loadingType='skeleton' is explicit", () => {

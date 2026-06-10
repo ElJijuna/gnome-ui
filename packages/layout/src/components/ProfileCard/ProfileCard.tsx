@@ -2,6 +2,7 @@ import type { AvatarColor } from '@gnome-ui/react';
 import { Avatar, Card, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './ProfileCard.module.css';
@@ -66,6 +67,7 @@ export const ProfileCard = ({
 
     return (
       <Card className={rootClass} aria-busy="true" {...props}>
+        <LoadingStatus />
         <div className={styles.content}>
           <Skeleton variant="circle" size={48} />
           <div className={styles.identity}>
