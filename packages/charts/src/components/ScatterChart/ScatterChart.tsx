@@ -71,7 +71,7 @@ export const ScatterChart = ({
       aria-label="Scatter chart"
     >
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsScatterChart margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+        <RechartsScatterChart accessibilityLayer margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           {showGrid && (
             <CartesianGrid
               strokeDasharray="3 3"

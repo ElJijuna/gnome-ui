@@ -53,7 +53,11 @@ export const SparkAreaChart = ({
       aria-hidden={ariaLabel ? undefined : true}
     >
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsAreaChart data={normalized} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
+        <RechartsAreaChart
+          accessibilityLayer
+          data={normalized}
+          margin={{ top: 2, right: 0, left: 0, bottom: 0 }}
+        >
           {gradient && (
             <defs>
               <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">

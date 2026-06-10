@@ -60,7 +60,7 @@ export const FunnelChart = ({
       aria-label="Funnel chart"
     >
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsFunnelChart margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
+        <RechartsFunnelChart accessibilityLayer margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <Tooltip
             contentStyle={TOOLTIP_CONTENT_STYLE}
             formatter={(value: number, name: string) => [formatNumber(value), name]}

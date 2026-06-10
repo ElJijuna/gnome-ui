@@ -46,7 +46,11 @@ export const SparkLineChart = ({
       aria-hidden={ariaLabel ? undefined : true}
     >
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsLineChart data={normalized} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
+        <RechartsLineChart
+          accessibilityLayer
+          data={normalized}
+          margin={{ top: 2, right: 0, left: 0, bottom: 0 }}
+        >
           <Line
             type="monotone"
             dataKey={dataKey}

@@ -50,6 +50,7 @@ export const SparkBarChart = ({
     >
       <ResponsiveContainer width="100%" height="100%">
         <RechartsBarChart
+          accessibilityLayer
           data={normalized}
           margin={{ top: 2, right: 0, left: 0, bottom: 0 }}
           barSize={barSize}

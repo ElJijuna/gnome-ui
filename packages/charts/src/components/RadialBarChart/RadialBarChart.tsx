@@ -106,6 +106,7 @@ export const RadialBarChart = ({
     >
       <ResponsiveContainer width="100%" height="100%">
         <RechartsRadialBarChart
+          accessibilityLayer
           data={chartData}
           innerRadius={innerRadius}
           outerRadius="90%"

@@ -62,7 +62,11 @@ export const ComposedChart = ({
   return (
     <div className={[styles.container, className].filter(Boolean).join(' ')} style={{ height }}>
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsComposedChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+        <RechartsComposedChart
+          accessibilityLayer
+          data={data}
+          margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
+        >
           {showGrid && (
             <CartesianGrid
               strokeDasharray="3 3"
