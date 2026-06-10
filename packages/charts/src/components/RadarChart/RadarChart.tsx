@@ -65,7 +65,11 @@ export const RadarChart = ({
       style={{ height }}
     >
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsRadarChart data={data} margin={{ top: 8, right: 24, left: 24, bottom: 8 }}>
+        <RechartsRadarChart
+          accessibilityLayer
+          data={data}
+          margin={{ top: 8, right: 24, left: 24, bottom: 8 }}
+        >
           <PolarGrid stroke="var(--gnome-light-3, #deddda)" />
           <PolarAngleAxis dataKey={angleKey} tick={AXIS_STYLE} />
           <PolarRadiusAxis tick={AXIS_STYLE} axisLine={false} tickLine={false} />

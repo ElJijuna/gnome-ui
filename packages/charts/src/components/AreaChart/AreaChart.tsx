@@ -68,7 +68,11 @@ export const AreaChart = ({
   return (
     <div className={[styles.container, className].filter(Boolean).join(' ')} style={{ height }}>
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsAreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+        <RechartsAreaChart
+          accessibilityLayer
+          data={data}
+          margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
+        >
           {gradient && (
             <defs>
               {seriesWithColors.map((s) => (
