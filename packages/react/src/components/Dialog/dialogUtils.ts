@@ -43,6 +43,28 @@ export function useVisualViewport(): CSSProperties {
   return style;
 }
 
+/**
+ * Locks body scroll while `locked` is true so the page behind a modal cannot
+ * scroll. Restores the previous inline `overflow` on unlock, which keeps
+ * stacked dialogs from clobbering each other.
+ */
+export function useBodyScrollLock(locked: boolean): void {
+  useEffect(() => {
+    if (!locked || typeof document === 'undefined') {
+      return;
+    }
+
+    const { body } = document;
+    const previous = body.style.overflow;
+
+    body.style.overflow = 'hidden';
+
+    return () => {
+      body.style.overflow = previous;
+    };
+  }, [locked]);
+}
+
 export function trapFocus(e: KeyboardEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement | null>) {
   if (e.key !== 'Tab') {
     return;

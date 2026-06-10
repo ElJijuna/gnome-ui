@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -112,6 +113,19 @@ export const Dropdown = <V extends string = string>({
     },
     [onChange, closeList],
   );
+
+  // Refine the flip with the real list height once it has rendered — the
+  // pre-open estimate can't account for option descriptions or wrapped labels.
+  useLayoutEffect(() => {
+    if (!open || !triggerRef.current || !listRef.current) {
+      return;
+    }
+
+    const rect = triggerRef.current.getBoundingClientRect();
+    const listH = listRef.current.offsetHeight;
+
+    setFlipUp(window.innerHeight - rect.bottom < listH && rect.top > listH);
+  }, [open]);
 
   // Scroll active item into view
   useEffect(() => {

@@ -10,7 +10,7 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import { FOCUSABLE, trapFocus, useVisualViewport } from '../Dialog/dialogUtils';
+import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from '../Dialog/dialogUtils';
 
 import styles from './AboutDialog.module.css';
 
@@ -91,6 +91,8 @@ export const AboutDialog = ({
   const viewportStyle = useVisualViewport();
   const [activeTab, setActiveTab] = useState<AboutTab>('details');
 
+  useBodyScrollLock(open);
+
   useEffect(() => {
     if (open) {
       previouslyFocused.current = document.activeElement;
@@ -128,7 +130,7 @@ export const AboutDialog = ({
   ).filter(Boolean) as AboutTab[];
 
   const node = (
-    <div className={styles.backdrop} style={viewportStyle} onClick={onClose} aria-hidden="true">
+    <div className={styles.backdrop} style={viewportStyle} onClick={onClose}>
       <div
         ref={dialogRef}
         role="dialog"

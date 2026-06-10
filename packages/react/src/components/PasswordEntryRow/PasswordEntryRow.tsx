@@ -20,7 +20,14 @@ export interface PasswordEntryRowProps extends Omit<EntryRowProps, 'type' | 'tra
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PasswordEntryRow.html
  */
-export const PasswordEntryRow = ({ trailing, disabled, ...props }: PasswordEntryRowProps) => {
+export const PasswordEntryRow = ({
+  trailing,
+  disabled,
+  // "current-password" lets password managers and mobile keyboards offer the
+  // saved credential; pass "new-password" for registration / change forms.
+  autoComplete = 'current-password',
+  ...props
+}: PasswordEntryRowProps) => {
   const [revealed, setRevealed] = useState(false);
 
   const revealButton = (
@@ -42,6 +49,7 @@ export const PasswordEntryRow = ({ trailing, disabled, ...props }: PasswordEntry
   return (
     <EntryRow
       {...props}
+      autoComplete={autoComplete}
       type={revealed ? 'text' : 'password'}
       disabled={disabled}
       trailing={
