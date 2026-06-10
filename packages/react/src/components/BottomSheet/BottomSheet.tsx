@@ -10,6 +10,8 @@ import {
 
 import { createPortal } from 'react-dom';
 
+import { useBodyScrollLock } from '../Dialog/dialogUtils';
+
 import styles from './BottomSheet.module.css';
 
 const FOCUSABLE =
@@ -53,6 +55,8 @@ export const BottomSheet = ({
   const sheetRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
+
+  useBodyScrollLock(open);
 
   // Save / restore focus
   useEffect(() => {
@@ -111,11 +115,7 @@ export const BottomSheet = ({
   }
 
   const node = (
-    <div
-      className={styles.backdrop}
-      onClick={closeOnBackdrop ? onClose : undefined}
-      aria-hidden="true"
-    >
+    <div className={styles.backdrop} onClick={closeOnBackdrop ? onClose : undefined}>
       <div
         ref={sheetRef}
         role="dialog"

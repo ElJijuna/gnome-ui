@@ -11,7 +11,7 @@ import {
 import { createPortal } from 'react-dom';
 
 import styles from './Dialog.module.css';
-import { FOCUSABLE, trapFocus, useVisualViewport } from './dialogUtils';
+import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from './dialogUtils';
 
 // ─── AlertDialog types ────────────────────────────────────────────────────────
 
@@ -121,6 +121,8 @@ export const Dialog = ({
   const isAlert = !!responses;
   const viewportStyle = useVisualViewport();
 
+  useBodyScrollLock(open);
+
   // ── Focus management ───────────────────────────────────────────────────────
   useEffect(() => {
     if (open) {
@@ -213,17 +215,12 @@ export const Dialog = ({
   };
 
   const node = (
-    <div
-      className={styles.backdrop}
-      style={viewportStyle}
-      onClick={handleBackdrop}
-      aria-hidden="true"
-    >
+    <div className={styles.backdrop} style={viewportStyle} onClick={handleBackdrop}>
       <div
         ref={dialogRef}
         role={role}
         aria-modal="true"
-        aria-labelledby={titleId}
+        aria-labelledby={title ? titleId : undefined}
         className={[styles.dialog, className].filter(Boolean).join(' ')}
         onKeyDown={handleKeyDown}
         onClick={(e) => e.stopPropagation()}

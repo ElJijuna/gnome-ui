@@ -2,6 +2,8 @@ import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from 're
 
 import { createPortal } from 'react-dom';
 
+import { useBodyScrollLock } from '../Dialog/dialogUtils';
+
 import styles from './ShortcutsDialog.module.css';
 
 // ─── Public types ─────────────────────────────────────────────────────────────
@@ -63,6 +65,8 @@ export const ShortcutsDialog = ({
   const searchRef = useRef<HTMLInputElement>(null);
   const previouslyFocused = useRef<Element | null>(null);
   const titleId = useRef(`shortcuts-title-${Math.random().toString(36).slice(2, 9)}`);
+
+  useBodyScrollLock(open);
 
   // Save / restore focus
   useEffect(() => {
@@ -135,7 +139,7 @@ export const ShortcutsDialog = ({
     .filter((s) => s.shortcuts.length > 0);
 
   const node = (
-    <div className={styles.backdrop} onClick={onClose} aria-hidden="true">
+    <div className={styles.backdrop} onClick={onClose}>
       <div
         ref={dialogRef}
         role="dialog"
