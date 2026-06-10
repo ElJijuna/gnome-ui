@@ -11,6 +11,19 @@ const meta: Meta<typeof LineChart> = {
     layout: 'padded',
     docs: { description: { component: readme } },
   },
+  argTypes: {
+    data: { control: false },
+    series: { control: false },
+    className: { control: false },
+    height: { control: { type: 'number', min: 100, max: 800, step: 50 } },
+    showGrid: { control: 'boolean' },
+    showLegend: { control: 'boolean' },
+    legendPosition: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+      if: { arg: 'showLegend' },
+    },
+  },
 };
 
 export default meta;
@@ -31,6 +44,8 @@ export const Default: Story = {
     data: WEEKLY_DATA,
     series: [{ dataKey: 'cpu', name: 'CPU %' }],
     xAxisKey: 'day',
+    showLegend: false,
+    legendPosition: 'bottom',
   },
 };
 
@@ -43,6 +58,7 @@ export const MultiSeries: Story = {
     ],
     xAxisKey: 'day',
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 

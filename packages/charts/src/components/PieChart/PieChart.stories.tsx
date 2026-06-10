@@ -11,6 +11,19 @@ const meta: Meta<typeof PieChart> = {
     layout: 'padded',
     docs: { description: { component: readme } },
   },
+  argTypes: {
+    data: { control: false },
+    className: { control: false },
+    height: { control: { type: 'number', min: 100, max: 800, step: 50 } },
+    donut: { control: 'boolean' },
+    showLabels: { control: 'boolean' },
+    showLegend: { control: 'boolean' },
+    legendPosition: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+      if: { arg: 'showLegend' },
+    },
+  },
 };
 
 export default meta;
@@ -27,6 +40,8 @@ const BROWSER_DATA = [
 export const Default: Story = {
   args: {
     data: BROWSER_DATA,
+    showLegend: false,
+    legendPosition: 'bottom',
   },
 };
 
@@ -41,6 +56,7 @@ export const WithLegend: Story = {
   args: {
     data: BROWSER_DATA,
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 
@@ -49,6 +65,7 @@ export const Donut: Story = {
     data: BROWSER_DATA,
     donut: true,
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 
