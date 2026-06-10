@@ -11,6 +11,18 @@ const meta: Meta<typeof RadialBarChart> = {
     layout: 'padded',
     docs: { description: { component: readme } },
   },
+  argTypes: {
+    data: { control: false },
+    className: { control: false },
+    height: { control: { type: 'number', min: 100, max: 800, step: 50 } },
+    showLabels: { control: 'boolean' },
+    showLegend: { control: 'boolean' },
+    legendPosition: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+      if: { arg: 'showLegend' },
+    },
+  },
 };
 
 export default meta;
@@ -26,6 +38,8 @@ const RESOURCE_DATA = [
 export const Default: Story = {
   args: {
     data: RESOURCE_DATA,
+    showLegend: false,
+    legendPosition: 'bottom',
   },
 };
 
@@ -40,6 +54,7 @@ export const WithLegend: Story = {
   args: {
     data: RESOURCE_DATA,
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 
@@ -48,6 +63,7 @@ export const DonutGap: Story = {
     data: RESOURCE_DATA,
     innerRadius: '40%',
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 

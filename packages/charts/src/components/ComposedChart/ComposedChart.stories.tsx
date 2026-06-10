@@ -11,6 +11,19 @@ const meta: Meta<typeof ComposedChart> = {
     layout: 'padded',
     docs: { description: { component: readme } },
   },
+  argTypes: {
+    data: { control: false },
+    series: { control: false },
+    className: { control: false },
+    height: { control: { type: 'number', min: 100, max: 800, step: 50 } },
+    showGrid: { control: 'boolean' },
+    showLegend: { control: 'boolean' },
+    legendPosition: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+      if: { arg: 'showLegend' },
+    },
+  },
 };
 
 export default meta;
@@ -30,6 +43,7 @@ export const Default: Story = {
     data: MONTHLY_DATA,
     xAxisKey: 'month',
     showLegend: true,
+    legendPosition: 'bottom',
     series: [
       { dataKey: 'revenue', type: 'bar', name: 'Revenue' },
       { dataKey: 'expenses', type: 'area', name: 'Expenses' },
@@ -43,6 +57,7 @@ export const BarAndLine: Story = {
     data: MONTHLY_DATA,
     xAxisKey: 'month',
     showLegend: true,
+    legendPosition: 'bottom',
     series: [
       { dataKey: 'revenue', type: 'bar', name: 'Revenue' },
       { dataKey: 'profit', type: 'line', name: 'Profit' },

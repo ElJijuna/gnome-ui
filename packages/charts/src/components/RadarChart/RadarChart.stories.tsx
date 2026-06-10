@@ -11,6 +11,19 @@ const meta: Meta<typeof RadarChart> = {
     layout: 'padded',
     docs: { description: { component: readme } },
   },
+  argTypes: {
+    data: { control: false },
+    series: { control: false },
+    className: { control: false },
+    height: { control: { type: 'number', min: 100, max: 800, step: 50 } },
+    filled: { control: 'boolean' },
+    showLegend: { control: 'boolean' },
+    legendPosition: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+      if: { arg: 'showLegend' },
+    },
+  },
 };
 
 export default meta;
@@ -30,6 +43,8 @@ export const Default: Story = {
     data: SKILLS_DATA,
     series: [{ dataKey: 'alice', name: 'Alice' }],
     angleKey: 'skill',
+    showLegend: false,
+    legendPosition: 'bottom',
   },
 };
 
@@ -42,6 +57,7 @@ export const MultiSeries: Story = {
     ],
     angleKey: 'skill',
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 
@@ -55,6 +71,7 @@ export const Filled: Story = {
     angleKey: 'skill',
     filled: true,
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 

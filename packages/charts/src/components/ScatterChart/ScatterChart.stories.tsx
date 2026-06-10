@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import readme from './README.md?raw';
+
 import { ScatterChart } from './ScatterChart';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof ScatterChart> = {
   title: 'Charts/ScatterChart',
@@ -9,6 +10,19 @@ const meta: Meta<typeof ScatterChart> = {
   parameters: {
     layout: 'padded',
     docs: { description: { component: readme } },
+  },
+  argTypes: {
+    series: { control: false },
+    bubbleRange: { control: false },
+    className: { control: false },
+    height: { control: { type: 'number', min: 100, max: 800, step: 50 } },
+    showGrid: { control: 'boolean' },
+    showLegend: { control: 'boolean' },
+    legendPosition: {
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+      if: { arg: 'showLegend' },
+    },
   },
 };
 
@@ -28,14 +42,11 @@ const CORRELATION_DATA = [
 
 export const Default: Story = {
   args: {
-    series: [
-      {
-        name: 'Observations',
-        data: CORRELATION_DATA,
-      },
-    ],
+    series: [{ name: 'Observations', data: CORRELATION_DATA }],
     xLabel: 'Input',
     yLabel: 'Output',
+    showLegend: false,
+    legendPosition: 'bottom',
   },
 };
 
@@ -62,6 +73,7 @@ export const MultiSeries: Story = {
       },
     ],
     showLegend: true,
+    legendPosition: 'bottom',
   },
 };
 
