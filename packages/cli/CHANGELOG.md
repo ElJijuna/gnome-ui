@@ -1,3 +1,48 @@
+## [1.0.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/cli@1.0.0...@gnome-ui/cli@1.0.1) (2026-06-10)
+
+### Features
+
+* **@gnome-ui/charts:** add accessibilityLayer prop to various chart components ([b4ec955](https://github.com/ElJijuna/gnome-ui/commit/b4ec9553ac0ea208b68b2600ec02effb2342fbbc))
+* **@gnome-ui/charts:** add ComposedChart, FunnelChart, and ScatterChart components with documentation and tests ([0bd359c](https://github.com/ElJijuna/gnome-ui/commit/0bd359c61628de02e6bd4fbe4278a3e0b17ed913))
+* **@gnome-ui/charts:** add legend position prop to chart components ([6d47528](https://github.com/ElJijuna/gnome-ui/commit/6d47528ca4cbff3e72f7ddaa40ac0196df94aaad))
+* **@gnome-ui/charts:** add README.md files for chart components and update storybook configurations ([c78954e](https://github.com/ElJijuna/gnome-ui/commit/c78954ed765062ff872ecdd52edd82d3b1d85b35))
+* **@gnome-ui/charts:** unify tooltip styles across chart components ([5ace364](https://github.com/ElJijuna/gnome-ui/commit/5ace3645e224a9d266cfdcc2cc88da2c94208a4f))
+* **@gnome-ui/layout:** add LoadingStatus component for improved accessibility in loading states ([9436f81](https://github.com/ElJijuna/gnome-ui/commit/9436f812f3d089352a4a1bdd29ca8cb5726aa548))
+* **@gnome-ui/layout:** add ProfileCard component ([d374b21](https://github.com/ElJijuna/gnome-ui/commit/d374b214d16b13aa638d03bde9e802c94fb6c4ef))
+* **@gnome-ui/layout:** add ProgressCard component with styles, stories, tests, and documentation (closes [#84](https://github.com/ElJijuna/gnome-ui/issues/84)) ([ed36a87](https://github.com/ElJijuna/gnome-ui/commit/ed36a87f0d922d2705cab90cde53b3a5ca5d5b14))
+* **@gnome-ui/react:** add tests and body scroll lock functionality to AboutDialog, BottomSheet, Dialog, and ShortcutsDialog components ([f3b070d](https://github.com/ElJijuna/gnome-ui/commit/f3b070db07ce414526a42e0c5e2d8016e2cd246b))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** reorder import statements in ScatterChart stories for consistency ([27e0640](https://github.com/ElJijuna/gnome-ui/commit/27e064046ed6fc012e707f1577eca0523a4bd772))
+* **@gnome-ui/cli:** add security note to onNativeEvent documentation regarding untrusted payloads ([0a700e1](https://github.com/ElJijuna/gnome-ui/commit/0a700e152b6e0ec7016ee5af2580ad7fd61db042))
+* **@gnome-ui/hooks:** refine export statements in hooks and improve menuItems check in SidebarItem ([7b9df4a](https://github.com/ElJijuna/gnome-ui/commit/7b9df4a9e7019445eab0b9138faecedda7b1e5e3))
+* **@gnome-ui/hooks:** update export statements for useHapticFeedback for clarity ([f4f09bc](https://github.com/ElJijuna/gnome-ui/commit/f4f09bcb74fa8c5fd924a2436b35486c87ba8b16))
+* **@gnome-ui/layout:** add properties interactive and onClick in ProfileCard ([78bf5ab](https://github.com/ElJijuna/gnome-ui/commit/78bf5ab1cdbfee25066e12b692d881eaa3e90170))
+* **@gnome-ui/layout:** fix lint errors in ActivityFeed test ([f6b30a5](https://github.com/ElJijuna/gnome-ui/commit/f6b30a572efd34dade620e1fa98e42b1dc9b768a))
+* **@gnome-ui/layout:** resolve build and test failures from updated shared configs ([5cac3c1](https://github.com/ElJijuna/gnome-ui/commit/5cac3c1b03cc45dde64406eac6d431ef662b241d))
+* **@gnome-ui/layout:** solved error in first render in MasonryGrid ([142cdae](https://github.com/ElJijuna/gnome-ui/commit/142cdae9ef2699eab72255ee8df5d97365765f70))
+* **@gnome-ui/layout:** sort ProgressCard exports alphabetically and fix line length in tests ([9d7b75a](https://github.com/ElJijuna/gnome-ui/commit/9d7b75a25a787b2e6bb92d8de817eea99ae20c44))
+* **@gnome-ui/react:** resolve build and test failures from updated shared configs ([77beb08](https://github.com/ElJijuna/gnome-ui/commit/77beb08ed177030b3abdf5718b33a836bae622f6))
+* replace React.X namespace with direct named imports ([955a1f2](https://github.com/ElJijuna/gnome-ui/commit/955a1f2f4002a52ea517e5610a4a3b574ae4c99e))
+
+### Refactoring
+
+* **@gnome-ui/charts:** convert function components to arrow function syntax for consistency ([a38ec82](https://github.com/ElJijuna/gnome-ui/commit/a38ec828a18aa3e879b37a0e26700a288e0b64ab))
+* **@gnome-ui/icons:** convert function components to arrow function syntax for consistency ([ae2ce24](https://github.com/ElJijuna/gnome-ui/commit/ae2ce24202019059acc1bed34087840c9e81ac80))
+* **@gnome-ui/layout:** components to use arrow function syntax for consistency ([68afaa5](https://github.com/ElJijuna/gnome-ui/commit/68afaa534952b8276e6bc3353f4a44dff961c95f))
+* **@gnome-ui/layout:** extract component docs to README.md files ([4ab10b7](https://github.com/ElJijuna/gnome-ui/commit/4ab10b7c447520bf503cde84df7bd193012e0315))
+* **@gnome-ui/react:** convert function components to arrow function syntax for consistency ([2e93690](https://github.com/ElJijuna/gnome-ui/commit/2e9369021679f5e651351c78a989525dc984dd2b))
+* **@gnome-ui/react:** extract component docs to README.md files ([d11a3af](https://github.com/ElJijuna/gnome-ui/commit/d11a3af76e4b29f3a5afb659d87ddb12f0e48924))
+
+### Documentation
+
+* **@gnome-ui/charts:** add legend position control to all chart components ([6724733](https://github.com/ElJijuna/gnome-ui/commit/672473392fc936b5159c2d5cd74901539a72cffb))
+* **@gnome-ui/icons:** add README.md for icon definitions and usage guidelines ([38312e5](https://github.com/ElJijuna/gnome-ui/commit/38312e554ad7c830d419065d319791e3064e47ca))
+* **@gnome-ui/layout:** add ProgressCard documentation to README.md and ROADMAP.md ([570c921](https://github.com/ElJijuna/gnome-ui/commit/570c921eacd8ccf6f68584bc88c5ca920157144e))
+* **@gnome-ui/react:** add README.md for component usage and guidelines ([ae2bfc7](https://github.com/ElJijuna/gnome-ui/commit/ae2bfc7b7c9e3c6a0efa8b65dc06ab645f978afc))
+* **layout:** add README.md files for AppHeader, PageContent, SidebarShell, SidebarTrigger, and StatusBar components ([2f5661d](https://github.com/ElJijuna/gnome-ui/commit/2f5661d9a29eddb5400329c734886864addb4719))
+
 ## 1.0.0 (2026-05-24)
 
 ### Features
