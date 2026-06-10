@@ -10,6 +10,7 @@ import {
 
 import { GNOME_CHART_PALETTE } from '../../colors';
 import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
+import { type ChartLegendPosition, getLegendProps } from '../../types/legend';
 
 import styles from './PieChart.module.css';
 
@@ -25,6 +26,8 @@ export interface PieChartProps {
   donut?: boolean;
   showLabels?: boolean;
   showLegend?: boolean;
+  /** Position of the legend when `showLegend` is true. Defaults to `"bottom"`. */
+  legendPosition?: ChartLegendPosition;
   className?: string;
   'aria-label'?: string;
 }
@@ -82,6 +85,7 @@ export const PieChart = ({
   donut = false,
   showLabels = false,
   showLegend = false,
+  legendPosition = 'bottom',
   className,
   'aria-label': ariaLabel,
 }: PieChartProps) => {
@@ -113,6 +117,7 @@ export const PieChart = ({
           {showLegend && (
             <Legend
               iconSize={10}
+              {...getLegendProps(legendPosition)}
               wrapperStyle={{
                 fontFamily: 'var(--gnome-font-family, system-ui)',
                 fontSize: 12,

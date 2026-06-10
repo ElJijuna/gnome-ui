@@ -13,6 +13,7 @@ import {
 
 import { GNOME_CHART_PALETTE } from '../../colors';
 import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
+import { type ChartLegendPosition, getLegendProps } from '../../types/legend';
 
 import styles from './ScatterChart.module.css';
 
@@ -32,6 +33,8 @@ export interface ScatterChartProps {
   height?: number;
   showGrid?: boolean;
   showLegend?: boolean;
+  /** Position of the legend when `showLegend` is true. Defaults to `"bottom"`. */
+  legendPosition?: ChartLegendPosition;
   bubbleRange?: [number, number];
   className?: string;
 }
@@ -49,6 +52,7 @@ export const ScatterChart = ({
   height = 300,
   showGrid = true,
   showLegend = false,
+  legendPosition = 'bottom',
   bubbleRange = [40, 400],
   className,
 }: ScatterChartProps) => {
@@ -98,6 +102,7 @@ export const ScatterChart = ({
           />
           {showLegend && (
             <Legend
+              {...getLegendProps(legendPosition)}
               wrapperStyle={{
                 fontFamily: 'var(--gnome-font-family, system-ui)',
                 fontSize: 12,
