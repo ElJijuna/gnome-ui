@@ -11,6 +11,7 @@ import {
 
 import { GNOME_CHART_PALETTE } from '../../colors';
 import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
+import { type ChartLegendPosition, getLegendProps } from '../../types/legend';
 
 import styles from './RadarChart.module.css';
 
@@ -27,6 +28,8 @@ export interface RadarChartProps {
   height?: number;
   filled?: boolean;
   showLegend?: boolean;
+  /** Position of the legend when `showLegend` is true. Defaults to `"bottom"`. */
+  legendPosition?: ChartLegendPosition;
   className?: string;
   'aria-label'?: string;
 }
@@ -44,6 +47,7 @@ export const RadarChart = ({
   height = 400,
   filled = false,
   showLegend = false,
+  legendPosition = 'bottom',
   className,
   'aria-label': ariaLabel,
 }: RadarChartProps) => {
@@ -68,6 +72,7 @@ export const RadarChart = ({
           <Tooltip contentStyle={GNOME_TOOLTIP_STYLE} itemStyle={GNOME_TOOLTIP_ITEM_STYLE} />
           {showLegend && (
             <Legend
+              {...getLegendProps(legendPosition)}
               wrapperStyle={{
                 fontFamily: 'var(--gnome-font-family, system-ui)',
                 fontSize: 12,
