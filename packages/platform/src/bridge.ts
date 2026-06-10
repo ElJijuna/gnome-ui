@@ -68,6 +68,13 @@ export type NativeEventHandler<T = unknown> = (payload: T) => void;
  * Subscribe to a native event dispatched by the GJS host.
  * Returns an unsubscribe function — call it to clean up.
  *
+ * **Security note:** events arrive as plain DOM `CustomEvent`s, so any script
+ * running in the page can forge them — there is no way to verify the sender.
+ * Treat payloads as untrusted input: validate their shape, and never gate a
+ * privileged action (e.g. granting access, executing commands) solely on
+ * receiving one of these events. This matters especially if the WebView ever
+ * renders third-party content.
+ *
  * @example
  * const off = onNativeEvent("open-modal", (payload) => openModal(payload.id));
  * // later:
