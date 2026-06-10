@@ -133,7 +133,7 @@ describe('UserCard', () => {
       const { container } = render(<UserCard name="Ada Lovelace" loading />);
 
       expect(container.firstChild).toHaveAttribute('aria-busy', 'true');
-      expect(screen.queryByRole('status')).toBeNull();
+      expect(screen.getByRole('status')).toHaveTextContent('Loading…');
     });
 
     it("renders skeleton when loadingType='skeleton' is explicit", () => {

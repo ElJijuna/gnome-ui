@@ -1,6 +1,8 @@
 import { Card, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
+
 import styles from './StatCard.module.css';
 
 export type LoadingType = 'skeleton' | 'spinner';
@@ -67,6 +69,7 @@ export const StatCard = ({
 
     return (
       <Card className={rootClass} aria-busy="true" {...props}>
+        <LoadingStatus />
         <div className={styles.header}>
           <Skeleton variant="rect" width={110} height={14} />
           {icon && <Skeleton variant="circle" size={30} />}

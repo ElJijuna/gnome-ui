@@ -45,6 +45,8 @@ export type {
   LayoutSidebarPlacement,
 } from './components/Layout';
 export { Layout } from './components/Layout';
+export type { LoadingStatusProps } from './components/LoadingStatus';
+export { LoadingStatus } from './components/LoadingStatus';
 export type { MasonryGridColumns, MasonryGridProps } from './components/MasonryGrid';
 export { MasonryGrid } from './components/MasonryGrid';
 export type {

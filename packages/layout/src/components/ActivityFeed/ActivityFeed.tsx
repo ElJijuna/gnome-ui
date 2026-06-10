@@ -1,6 +1,7 @@
 import { Button, Skeleton, Spinner, Text, useLocale } from '@gnome-ui/react';
 import { type HTMLAttributes, type ReactNode, useMemo, useState } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './ActivityFeed.module.css';
@@ -87,6 +88,7 @@ export const ActivityFeed = ({
 
     return (
       <div className={rootClass} aria-busy="true" {...props}>
+        <LoadingStatus />
         <ul className={styles.list} aria-label="Loading activity">
           {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
             <li key={i} className={styles.item}>

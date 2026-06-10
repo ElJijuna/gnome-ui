@@ -1,6 +1,7 @@
 import { Card, ProgressBar, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './ProgressCard.module.css';
@@ -60,6 +61,7 @@ export const ProgressCard = ({
 
     return (
       <Card className={cardClass} aria-busy="true" {...props}>
+        <LoadingStatus />
         <div className={styles.header}>
           <Skeleton variant="rect" width={90} height={14} />
           {icon && <Skeleton variant="circle" size={24} />}

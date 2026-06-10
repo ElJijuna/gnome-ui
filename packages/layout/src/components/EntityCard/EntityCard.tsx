@@ -1,6 +1,7 @@
 import { Card, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
+import { LoadingStatus } from '../LoadingStatus';
 import type { LoadingType } from '../StatCard';
 
 import styles from './EntityCard.module.css';
@@ -62,6 +63,7 @@ export const EntityCard = ({
 
     return (
       <Card interactive={false} className={cardClass} aria-busy="true" {...props}>
+        <LoadingStatus />
         <div className={styles.inner}>
           <div className={styles.avatarSlot}>
             <Skeleton variant="circle" size={40} />
