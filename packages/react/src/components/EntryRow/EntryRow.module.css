@@ -5,7 +5,7 @@
   align-items: center;
   gap: var(--gnome-space-2, 12px);
   padding: 0 var(--gnome-space-4, 24px);
-  min-height: 52px;
+  min-height: 56px;
   width: 100%;
   cursor: text;
   color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
@@ -53,7 +53,7 @@
   justify-content: center;
   flex: 1;
   min-width: 0;
-  min-height: 52px;
+  min-height: 56px;
 }
 
 /* ─── Floating label ────────────────────────────────────────────────────────── */
@@ -80,7 +80,7 @@
 
 /* When floated (focused or has value) the label moves up */
 .labelFloated {
-  top: 10px;
+  top: 6px;
   transform: translateY(0);
   font-size: var(--gnome-font-size-caption, 0.75rem);
   opacity: 0.7;
@@ -105,7 +105,7 @@
 
   /* Hide until floated — the label is the placeholder */
   opacity: 0;
-  padding-top: 18px;
+  padding-top: 24px;
   padding-bottom: 4px;
 
   transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
