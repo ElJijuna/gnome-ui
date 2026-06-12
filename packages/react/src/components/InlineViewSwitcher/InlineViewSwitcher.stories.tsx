@@ -1,3 +1,4 @@
+import { Share, Star, ViewAppGrid, ViewGrid, ViewList } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
@@ -38,6 +39,10 @@ const meta: Meta<typeof InlineViewSwitcher> = {
     variant: {
       control: 'select',
       options: ['default', 'flat', 'round', 'pill'],
+    },
+    overflow: {
+      control: 'select',
+      options: ['wrap', 'scroll', 'compact', 'menu'],
     },
     value: { control: 'text' },
   },
@@ -352,6 +357,72 @@ export const Pill: Story = {
       description: {
         story:
           '`pill` variant — segmented-control style. Active item appears lifted with a card background and subtle shadow; no accent color is used. Ideal for tab-like switching in open content areas.',
+      },
+    },
+  },
+};
+
+// ─── Overflow playground ───────────────────────────────────────────────────────
+
+export const OverflowPlayground: Story = {
+  args: {
+    overflow: 'scroll',
+    variant: 'default',
+    value: 'list',
+  },
+  argTypes: {
+    overflow: {
+      control: 'select',
+      options: ['wrap', 'scroll', 'compact', 'menu'],
+      description: 'Strategy when items do not fit horizontally.',
+    },
+    variant: {
+      control: 'select',
+      options: ['default', 'flat', 'round', 'pill'],
+    },
+  },
+  render: (args) => {
+    const [view, setView] = useState(args.value ?? 'list');
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16,
+          width: '100%',
+          alignSelf: 'stretch',
+        }}
+      >
+        <InlineViewSwitcher
+          {...args}
+          value={view}
+          onValueChange={setView}
+          aria-label="Library view"
+        >
+          <InlineViewSwitcherItem name="list" label="List" icon={ViewList} />
+          <InlineViewSwitcherItem name="grid" label="Grid" icon={ViewGrid} />
+          <InlineViewSwitcherItem name="gallery" label="Gallery" icon={ViewAppGrid} />
+          <InlineViewSwitcherItem name="starred" label="Starred" icon={Star} />
+          <InlineViewSwitcherItem name="shared" label="Shared" icon={Share} />
+        </InlineViewSwitcher>
+        <p
+          style={{
+            margin: 0,
+            fontSize: '0.875rem',
+            color: 'var(--gnome-window-fg-color)',
+          }}
+        >
+          Active view: <strong>{view}</strong>
+        </p>
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Switch between overflow strategies using the **overflow** control. `scroll` scrolls horizontally, `compact` collapses to icon-only, `menu` shows the active item and opens a BottomSheet.',
       },
     },
   },

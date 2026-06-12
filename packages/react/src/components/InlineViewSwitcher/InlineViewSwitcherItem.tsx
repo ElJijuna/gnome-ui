@@ -29,9 +29,11 @@ export const InlineViewSwitcherItem = ({
   className,
   ...props
 }: InlineViewSwitcherItemProps) => {
-  const { value, onValueChange } = useInlineViewSwitcher();
+  const { value, onValueChange, compact } = useInlineViewSwitcher();
   const active = value === name;
-  const iconOnly = icon && !label;
+  // In compact mode, hide the label when an icon is present as a fallback
+  const showLabel = !!label && !(compact && icon);
+  const isIconOnly = !!icon && !showLabel;
 
   return (
     <button
@@ -44,7 +46,7 @@ export const InlineViewSwitcherItem = ({
       className={[
         styles.item,
         active ? styles.active : null,
-        iconOnly ? styles.iconOnly : null,
+        isIconOnly ? styles.iconOnly : null,
         className,
       ]
         .filter(Boolean)
@@ -56,7 +58,9 @@ export const InlineViewSwitcherItem = ({
           <Icon icon={icon} size="md" aria-hidden />
         </span>
       )}
-      {label && <span className={styles.itemLabel}>{label}</span>}
+      {showLabel && <span className={styles.itemLabel}>{label}</span>}
     </button>
   );
 };
+
+InlineViewSwitcherItem.displayName = 'InlineViewSwitcherItem';
