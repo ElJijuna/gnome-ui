@@ -1,3 +1,14 @@
+## [1.48.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.47.0...@gnome-ui/react@1.48.0) (2026-06-12)
+
+### Features
+
+* **@gnome-ui/react:** implement overflow strategies in InlineViewSwitcher and enhance styles for better UX ([e2f329c](https://github.com/ElJijuna/gnome-ui/commit/e2f329c33bc7a7c44222d9be6145abec2829ff9a))
+
+### Bug Fixes
+
+* **@gnome-ui/react:** EntryRow adjust min-height and label positioning for consistency ([e198242](https://github.com/ElJijuna/gnome-ui/commit/e19824202e856e9bab61a67b8f66f9d33ce36277))
+* **@gnome-ui/react:** improve readability by formatting conditional returns in InlineViewSwitcher ([1bc9ccf](https://github.com/ElJijuna/gnome-ui/commit/1bc9ccf587db29faa26b48fc988cab624470eaa0))
+
 ## [1.47.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.46.0...@gnome-ui/react@1.47.0) (2026-06-12)
 
 ### Features
