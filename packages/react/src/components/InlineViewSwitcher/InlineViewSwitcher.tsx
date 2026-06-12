@@ -109,7 +109,9 @@ export const InlineViewSwitcher = ({
       return;
     }
     const el = groupRef.current;
-    if (!el) {return;}
+    if (!el) {
+      return;
+    }
 
     const check = () => {
       setIsOverflowing((prev) => {
@@ -144,17 +146,22 @@ export const InlineViewSwitcher = ({
 
   // Track active item position for the sliding indicator
   useLayoutEffect(() => {
-    if (inMenuMode) {return;}
+    if (inMenuMode) {
+      return;
+    }
     const group = groupRef.current;
-    if (!group) {return;}
+    if (!group) {
+      return;
+    }
     const activeEl = group.querySelector<HTMLElement>('[aria-checked="true"]');
-    if (!activeEl) {return;}
+    if (!activeEl) {
+      return;
+    }
 
     setIndicatorStyle({
       width: activeEl.offsetWidth,
       transform: `translateX(${activeEl.offsetLeft}px)`,
     });
-     
   }, [value, inMenuMode, compact]);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
