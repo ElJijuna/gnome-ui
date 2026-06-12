@@ -191,6 +191,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`SpinButton`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-spinbutton--docs) | Numeric input with −/+ buttons, keyboard nav, decimal support |
 | [`Slider`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-slider--docs) | Draggable range control with tick marks, decimal steps, and keyboard nav |
 | [`Dropdown`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dropdown--docs) | Expandable option list with keyboard nav, flip positioning, and descriptions |
+| [`ScrollToTop`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-scrolltotop--docs) | Fixed-position OSD button that scrolls to the top; auto-hides below a scroll threshold (`visible="auto"`), six anchor positions, semi-transparent until hovered |
 | [`SearchBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-searchbar--docs) | Collapsible search bar with auto-focus, clear button, filter row, `inline` variant, and autocomplete popover (`suggestions` / `loadingSuggestions`) |
 | [`Link`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-link--docs) | Inline hyperlink with accent colour, animated underline, and external-URL variant |
 | [`ToggleGroup`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-togglegroup--docs) / `ToggleGroupItem` | Mutually-exclusive toggle buttons; icon-only, label-only, or icon + label |

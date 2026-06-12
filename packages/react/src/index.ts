@@ -156,6 +156,12 @@ export type { ProgressBarProps, ProgressBarVariant } from './components/Progress
 export { ProgressBar } from './components/ProgressBar';
 export type { RadioButtonProps } from './components/RadioButton';
 export { RadioButton } from './components/RadioButton';
+export type {
+  ScrollToTopPosition,
+  ScrollToTopProps,
+  ScrollToTopVisible,
+} from './components/ScrollToTop';
+export { ScrollToTop } from './components/ScrollToTop';
 export type { SearchBarProps } from './components/SearchBar';
 export { SearchBar } from './components/SearchBar';
 export type { SegmentedBarProps, SegmentedBarSegment } from './components/SegmentedBar';

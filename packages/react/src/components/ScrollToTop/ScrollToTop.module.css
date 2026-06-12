@@ -1,0 +1,50 @@
+.root {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Position variants — 24px edge spacing via --gnome-space-4 */
+.bottom_right {
+  bottom: var(--gnome-space-4, 24px);
+  right: var(--gnome-space-4, 24px);
+}
+
+.bottom_left {
+  bottom: var(--gnome-space-4, 24px);
+  left: var(--gnome-space-4, 24px);
+}
+
+.bottom_center {
+  bottom: var(--gnome-space-4, 24px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top_right {
+  top: var(--gnome-space-4, 24px);
+  right: var(--gnome-space-4, 24px);
+}
+
+.top_left {
+  top: var(--gnome-space-4, 24px);
+  left: var(--gnome-space-4, 24px);
+}
+
+.top_center {
+  top: var(--gnome-space-4, 24px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Re-enable pointer events and apply hover opacity on the button */
+.root > button {
+  pointer-events: auto;
+  opacity: 0.5;
+  transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.root > button:hover,
+.root > button:focus-visible {
+  opacity: 1;
+}
