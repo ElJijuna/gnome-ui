@@ -1,0 +1,75 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  margin: calc(var(--gnome-space-1, 6px) * -1);
+  padding: var(--gnome-space-1, 6px);
+  font-family: var(--gnome-font-family);
+}
+
+.section + .section {
+  margin-top: var(--gnome-space-1, 6px);
+  padding-top: var(--gnome-space-1, 6px);
+  border-top: 1px solid var(--gnome-border-color, rgba(0, 0, 0, 0.12));
+}
+
+.item {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  width: 100%;
+  min-height: 34px;
+  padding: 6px var(--gnome-space-1, 6px);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  text-align: start;
+  background: transparent;
+  border: 0;
+  border-radius: var(--gnome-radius-sm, 6px);
+  cursor: pointer;
+}
+
+.withIcon {
+  grid-template-columns: 16px 1fr auto;
+}
+
+.item:hover:not(:disabled),
+.item:focus-visible {
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.item:focus {
+  outline: none;
+}
+
+.item:disabled {
+  cursor: default;
+  opacity: var(--gnome-opacity-disabled, 0.45);
+}
+
+.destructive {
+  color: var(--gnome-destructive-color, #e01b24);
+}
+
+.icon {
+  color: currentColor;
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shortcut {
+  color: currentColor;
+  opacity: var(--gnome-opacity-dim, 0.55);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  .section + .section {
+    border-top-color: rgba(255, 255, 255, 0.12);
+  }
+}

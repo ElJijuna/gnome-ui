@@ -1,0 +1,49 @@
+.windowHandle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+}
+
+.control {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: var(--gnome-radius-sm, 6px);
+  cursor: pointer;
+}
+
+.control:hover {
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.control:active {
+  background-color: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.control:focus {
+  outline: none;
+}
+
+.control:focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: var(--gnome-focus-ring-offset, 2px);
+}
+
+.close:hover {
+  color: #ffffff;
+  background-color: var(--gnome-destructive-color, #e01b24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control {
+    transition: none;
+  }
+}

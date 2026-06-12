@@ -12,6 +12,11 @@
       "import": "./dist/components/AboutDialog.js",
       "require": "./dist/components/AboutDialog.cjs"
     },
+    "./components/AlertDialog": {
+      "types": "./dist/components/AlertDialog.d.ts",
+      "import": "./dist/components/AlertDialog.js",
+      "require": "./dist/components/AlertDialog.cjs"
+    },
     "./components/ActionRow": {
       "types": "./dist/components/ActionRow.d.ts",
       "import": "./dist/components/ActionRow.js",
@@ -242,6 +247,11 @@
       "import": "./dist/components/Popover.js",
       "require": "./dist/components/Popover.cjs"
     },
+    "./components/PopoverMenu": {
+      "types": "./dist/components/PopoverMenu.d.ts",
+      "import": "./dist/components/PopoverMenu.js",
+      "require": "./dist/components/PopoverMenu.cjs"
+    },
     "./components/PreferencesDialog": {
       "types": "./dist/components/PreferencesDialog.d.ts",
       "import": "./dist/components/PreferencesDialog.js",
@@ -377,6 +387,11 @@
       "import": "./dist/components/Toast.js",
       "require": "./dist/components/Toast.cjs"
     },
+    "./components/ToastOverlay": {
+      "types": "./dist/components/ToastOverlay.d.ts",
+      "import": "./dist/components/ToastOverlay.js",
+      "require": "./dist/components/ToastOverlay.cjs"
+    },
     "./components/ToggleGroup": {
       "types": "./dist/components/ToggleGroup.d.ts",
       "import": "./dist/components/ToggleGroup.js",
@@ -416,6 +431,11 @@
       "types": "./dist/components/WindowTitle.d.ts",
       "import": "./dist/components/WindowTitle.js",
       "require": "./dist/components/WindowTitle.cjs"
+    },
+    "./components/WindowHandle": {
+      "types": "./dist/components/WindowHandle.d.ts",
+      "import": "./dist/components/WindowHandle.js",
+      "require": "./dist/components/WindowHandle.cjs"
     },
     "./components/WrapBox": {
       "types": "./dist/components/WrapBox.d.ts",

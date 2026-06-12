@@ -29,10 +29,10 @@ Objetivo: completar las piezas mínimas para una app GNOME desktop real.
 
 | Status | Component | Acción |
 |--------|-----------|--------|
-| ⬜ | **WindowHandle** | Crear controles de ventana integrados con `@gnome-ui/platform/window`: minimize, maximize/restore, close. |
-| ⬜ | **AlertDialog** | Extraer un wrapper dedicado sobre `Dialog` para la API `title`, `message`, `responses`, `onResponse`; la base `role="alertdialog"` ya existe en `Dialog`. |
-| ⬜ | **ToastOverlay** | Crear wrapper de posicionamiento para que `Toast`/`Toaster` funcionen como overlay de una vista, no solo como cola global. |
-| ⬜ | **PopoverMenu** | Crear menú contextual con secciones, iconos, shortcuts, acciones deshabilitadas y separadores. |
+| ✅ | **WindowHandle** | Crear controles de ventana integrados con callbacks y `data-window-action`: minimize, maximize/restore, close. |
+| ✅ | **AlertDialog** | Extraer un wrapper dedicado sobre `Dialog` para la API `title`, `message`, `responses`, `onResponse`; la base `role="alertdialog"` ya existe en `Dialog`. |
+| ✅ | **ToastOverlay** | Crear wrapper de posicionamiento para que `Toast` funcione como overlay local de una vista, no solo como cola global. |
+| ✅ | **PopoverMenu** | Crear menú contextual con secciones, iconos, shortcuts, acciones deshabilitadas y separadores. |
 
 ### Fase 3 — Navegación adaptativa
 

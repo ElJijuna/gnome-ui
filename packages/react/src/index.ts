@@ -2,6 +2,8 @@
 
 export type { AboutDialogLink, AboutDialogProps } from './components/AboutDialog';
 export { AboutDialog } from './components/AboutDialog';
+export type { AlertDialogProps } from './components/AlertDialog';
+export { AlertDialog } from './components/AlertDialog';
 export type { ActionRowProps } from './components/ActionRow';
 export { ActionRow } from './components/ActionRow';
 export type { AvatarColor, AvatarProps, AvatarSize } from './components/Avatar';
@@ -146,6 +148,8 @@ export type { PathBarProps, PathBarSegment } from './components/PathBar';
 export { PathBar } from './components/PathBar';
 export type { PopoverPlacement, PopoverProps } from './components/Popover';
 export { Popover } from './components/Popover';
+export type { PopoverMenuItem, PopoverMenuProps, PopoverMenuSection } from './components/PopoverMenu';
+export { PopoverMenu } from './components/PopoverMenu';
 export type { PreferencesDialogProps } from './components/PreferencesDialog';
 export { PreferencesDialog } from './components/PreferencesDialog';
 export type { PreferencesGroupProps } from './components/PreferencesGroup';
@@ -226,6 +230,8 @@ export type {
 export { Timeline } from './components/Timeline';
 export type { ToasterProps, ToastProps } from './components/Toast';
 export { Toast, Toaster } from './components/Toast';
+export type { ToastOverlayProps } from './components/ToastOverlay';
+export { ToastOverlay } from './components/ToastOverlay';
 export type { ToggleGroupItemProps, ToggleGroupProps } from './components/ToggleGroup';
 export { ToggleGroup, ToggleGroupItem } from './components/ToggleGroup';
 export type { SpacerProps, ToolbarProps } from './components/Toolbar';
@@ -245,6 +251,8 @@ export type {
 export { ViewSwitcherSidebar, ViewSwitcherSidebarItem } from './components/ViewSwitcherSidebar';
 export type { WindowTitleProps } from './components/WindowTitle';
 export { WindowTitle } from './components/WindowTitle';
+export type { WindowHandleProps } from './components/WindowHandle';
+export { WindowHandle } from './components/WindowHandle';
 export type { WrapBoxAlign, WrapBoxJustify, WrapBoxProps } from './components/WrapBox';
 export { WrapBox } from './components/WrapBox';
 export type { BreakpointState, GnomeBreakpointName } from './hooks/useBreakpoint';

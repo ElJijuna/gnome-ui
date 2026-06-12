@@ -1,0 +1,30 @@
+.overlay {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+.stack {
+  position: absolute;
+  left: 50%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  width: min(100% - 24px, 480px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.stack > * {
+  pointer-events: auto;
+}
+
+.bottom {
+  bottom: var(--gnome-space-4, 24px);
+}
+
+.top {
+  top: var(--gnome-space-4, 24px);
+}
