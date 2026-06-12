@@ -6,6 +6,58 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 ---
 
+## Plan de Acción por Fases
+
+Plan operativo para convertir el inventario actual en una librería lista para construir una app GNOME completa.
+
+### Fase 1 — Fundamentos sólidos
+
+Objetivo: asegurar que las primitivas base sean confiables antes de agregar más superficie pública.
+
+| Status | Área | Acción |
+|--------|------|--------|
+| ✅ | **GnomeProvider** | Auditar temas claro/oscuro, `system`, `resolvedColorScheme`, accent colors nombrados y CSS custom properties. |
+| ✅ | **Box** | Validar que `spacing` y `padding` soporten la escala GNOME HIG: 3, 6, 12, 18, 24, 32, 48 px. |
+| ✅ | **Clamp** | Validar `maximumSize` y corregir `tighteningThreshold` para que afecte el ancho fluido. |
+| ✅ | **Bin** | Validar que sea un contenedor neutro sin estilos visuales propios y con forwarding de atributos. |
+| ✅ | **Text** | Validar los 12 estilos tipográficos: `large-title`, `title-1`…`title-4`, `heading`, `body`, `document`, `caption`, `caption-heading`, `monospace`, `numeric`. |
+| ✅ | **Icon** | Validar soporte de `@gnome-ui/icons`, iconos tipo `simple-icons`, viewBox custom y herencia por `currentColor`. |
+
+### Fase 2 — Componentes críticos faltantes
+
+Objetivo: completar las piezas mínimas para una app GNOME desktop real.
+
+| Status | Component | Acción |
+|--------|-----------|--------|
+| ⬜ | **WindowHandle** | Crear controles de ventana integrados con `@gnome-ui/platform/window`: minimize, maximize/restore, close. |
+| ⬜ | **AlertDialog** | Extraer un wrapper dedicado sobre `Dialog` para la API `title`, `message`, `responses`, `onResponse`; la base `role="alertdialog"` ya existe en `Dialog`. |
+| ⬜ | **ToastOverlay** | Crear wrapper de posicionamiento para que `Toast`/`Toaster` funcionen como overlay de una vista, no solo como cola global. |
+| ⬜ | **PopoverMenu** | Crear menú contextual con secciones, iconos, shortcuts, acciones deshabilitadas y separadores. |
+
+### Fase 3 — Navegación adaptativa
+
+Objetivo: que la navegación funcione bien en móvil y desktop con patrones libadwaita.
+
+| Status | Component | Acción |
+|--------|-----------|--------|
+| ⬜ | **TabOverview** | Vista de cuadrícula de pestañas para pantallas estrechas. |
+| ⬜ | **Squeezer** | Mostrar el primer layout hijo que quepa; útil para toolbars adaptativas. |
+| ⬜ | **Flap** | Layout lateral adaptable entre overlay y push. |
+| ⬜ | **NavigationSplitView** | Re-evaluar implementación actual y usar `Flap` internamente si reduce duplicación y mejora adaptación. |
+
+### Fase 4 — Preferencias y perfil
+
+Objetivo: completar flujos frecuentes de settings, perfil e información de app.
+
+| Status | Component | Acción |
+|--------|-----------|--------|
+| ⬜ | **AvatarChooser** | Upload/cambio de imagen con preview, fallback de iniciales y callbacks controlados. |
+| ✅ | **AboutDialog** | Ya existe como componente dedicado; mantenerlo en auditoría de docs/stories. |
+| ⬜ | **PreferencesDialog search** | Agregar búsqueda interna de preferencias por página, grupo y filas. |
+| ⬜ | **PreferencesRow** | Crear fila genérica que permita cualquier widget trailing custom. |
+
+---
+
 ## Tier 1 — Base
 
 > Foundation components. Everything else depends on these.

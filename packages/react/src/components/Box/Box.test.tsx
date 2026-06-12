@@ -37,6 +37,17 @@ describe('Box', () => {
     expect((container.firstChild as HTMLElement).style.gap).toBe('12px');
   });
 
+  it.each([3, 6, 12, 18, 24, 32, 48] as const)(
+    'supports the GNOME HIG spacing token %ipx',
+    (spacing) => {
+      const { container } = render(<Box spacing={spacing} padding={spacing} />);
+      const element = container.firstChild as HTMLElement;
+
+      expect(element.style.gap).toBe(`${spacing}px`);
+      expect(element.style.padding).toBe(`${spacing}px`);
+    },
+  );
+
   it('applies padding when provided', () => {
     const { container } = render(<Box padding={6} />);
 

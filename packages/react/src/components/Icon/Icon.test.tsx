@@ -65,6 +65,12 @@ describe('Icon', () => {
 
     expect(container.querySelectorAll('path').length).toBeGreaterThan(0);
   });
+
+  it('inherits color through currentColor fill', () => {
+    const { container } = render(<Icon icon={Add} />);
+
+    expect(container.querySelector('svg')).toHaveAttribute('fill', 'currentColor');
+  });
 });
 
 describe('Icon — RawPathIconDefinition (simple-icons compatible)', () => {

@@ -25,6 +25,12 @@ describe('Clamp', () => {
     expect((container.firstChild as HTMLElement).style.maxWidth).toBe('800px');
   });
 
+  it('uses tighteningThreshold as fractional width', () => {
+    const { container } = render(<Clamp tighteningThreshold={0.9} />);
+
+    expect((container.firstChild as HTMLElement).style.width).toBe('90%');
+  });
+
   it('forwards className', () => {
     const { container } = render(<Clamp className="narrow" />);
 

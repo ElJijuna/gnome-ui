@@ -33,11 +33,18 @@ export interface ClampProps extends HTMLAttributes<HTMLDivElement> {
  *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html
  */
-export const Clamp = ({ maximumSize = 600, children, className, style, ...props }: ClampProps) => {
+export const Clamp = ({
+  maximumSize = 600,
+  tighteningThreshold = 1,
+  children,
+  className,
+  style,
+  ...props
+}: ClampProps) => {
   return (
     <div
       className={[styles.clamp, className].filter(Boolean).join(' ')}
-      style={{ maxWidth: maximumSize, ...style }}
+      style={{ width: `${tighteningThreshold * 100}%`, maxWidth: maximumSize, ...style }}
       {...props}
     >
       {children}
