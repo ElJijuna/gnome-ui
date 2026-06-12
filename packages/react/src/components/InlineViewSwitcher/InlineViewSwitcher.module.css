@@ -3,6 +3,22 @@
 .switcher {
   display: inline-flex;
   align-items: stretch;
+  position: relative;
+}
+
+/* ─── Sliding indicator ─────────────────────────────────────────────────────── */
+
+.indicator {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  border-radius: calc(var(--gnome-radius-md) - 2px);
+  pointer-events: none;
+  z-index: 0;
+  transition:
+    transform 160ms cubic-bezier(0.34, 1.2, 0.64, 1),
+    width 160ms var(--gnome-easing-default, ease);
 }
 
 /* ─── Item base ─────────────────────────────────────────────────────────────── */
@@ -33,6 +49,9 @@
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
     box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
+
+  position: relative;
+  z-index: 1;
 }
 
 .iconOnly {
@@ -80,12 +99,15 @@
     var(--gnome-focus-ring-color, #3584e4);
 }
 
-.default .active {
+.default .indicator {
   background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 15%, transparent);
-  color: var(--gnome-accent-color, #3584e4);
-  font-weight: var(--gnome-font-weight-semibold, 600);
   box-shadow: inset 0 0 0 1px
     color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 40%, transparent);
+}
+
+.default .active {
+  color: var(--gnome-accent-color, #3584e4);
+  font-weight: var(--gnome-font-weight-semibold, 600);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -110,11 +132,14 @@
       var(--gnome-focus-ring-color, #78aeed);
   }
 
-  .default .active {
+  .default .indicator {
     background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 25%, transparent);
-    color: var(--gnome-accent-color, #78aeed);
     box-shadow: inset 0 0 0 1px
       color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 50%, transparent);
+  }
+
+  .default .active {
+    color: var(--gnome-accent-color, #78aeed);
   }
 }
 
@@ -149,8 +174,11 @@
     var(--gnome-focus-ring-color, #3584e4);
 }
 
-.flat .active {
+.flat .indicator {
   background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 15%, transparent);
+}
+
+.flat .active {
   color: var(--gnome-accent-color, #3584e4);
   font-weight: var(--gnome-font-weight-semibold, 600);
 }
@@ -160,8 +188,11 @@
     color: var(--gnome-window-fg-color, rgba(255, 255, 255, 0.6));
   }
 
-  .flat .active {
+  .flat .indicator {
     background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 25%, transparent);
+  }
+
+  .flat .active {
     color: var(--gnome-accent-color, #78aeed);
   }
 }
@@ -202,11 +233,14 @@
     var(--gnome-focus-ring-color, #3584e4);
 }
 
-.round .active {
+.round .indicator {
   background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+.round .active {
   color: var(--gnome-accent-fg-color, #ffffff);
   font-weight: var(--gnome-font-weight-semibold, 600);
-  box-shadow: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -264,9 +298,15 @@
     var(--gnome-focus-ring-color, #3584e4);
 }
 
-.pill .active {
+.pill .indicator {
   background-color: var(--gnome-card-bg-color, #ffffff);
   box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.12));
+  border-radius: var(--gnome-radius-pill, 9999px);
+  top: 3px;
+  bottom: 3px;
+}
+
+.pill .active {
   font-weight: var(--gnome-font-weight-semibold, 600);
   color: var(--gnome-window-fg-color);
 }
@@ -284,7 +324,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  .pill .active {
+  .pill .indicator {
     background-color: var(--gnome-card-bg-color, #383838);
     box-shadow: none;
   }
@@ -297,10 +337,152 @@
   cursor: not-allowed;
 }
 
+/* ─── Overflow: detect (compact / menu) — must be display:flex so clientWidth is constrained ── */
+
+.overflowDetect {
+  display: flex;
+  min-width: 0;
+  width: 100%;
+}
+
+/* ─── Overflow: scroll ──────────────────────────────────────────────────────── */
+
+.overflowScroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.overflowScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflowScroll .item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ─── Overflow: compact (icon-only) ─────────────────────────────────────────── */
+
+.compact .itemLabel {
+  display: none;
+}
+
+/* ─── Overflow: menu trigger ────────────────────────────────────────────────── */
+
+.menuTrigger {
+  gap: var(--gnome-space-1, 6px);
+}
+
+.menuChevron {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-left: 2px;
+}
+
+/* ─── Overflow: menu BottomSheet list ───────────────────────────────────────── */
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0;
+}
+
+.menuListItem {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-3, 16px);
+  border-radius: var(--gnome-radius-md);
+
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  text-align: left;
+  width: 100%;
+
+  transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.menuListItem:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.menuListItem:active:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.menuListItem:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+.menuListItemActive {
+  color: var(--gnome-accent-color, #3584e4);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.menuListItemIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.menuListItemLabel {
+  flex: 1;
+}
+
+.menuListItemCheck {
+  color: var(--gnome-accent-color, #3584e4);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .menuListItem:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .menuListItem:active:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .menuListItem:focus-visible {
+    box-shadow:
+      0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #1e1e1e),
+      0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+      var(--gnome-focus-ring-color, #78aeed);
+  }
+
+  .menuListItemActive {
+    color: var(--gnome-accent-color, #78aeed);
+  }
+
+  .menuListItemCheck {
+    color: var(--gnome-accent-color, #78aeed);
+  }
+}
+
 /* ─── Reduced motion ────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .item {
+  .item,
+  .indicator,
+  .menuListItem {
     transition: none;
   }
 }

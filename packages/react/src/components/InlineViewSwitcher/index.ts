@@ -1,4 +1,5 @@
 export type {
+  InlineViewSwitcherOverflow,
   InlineViewSwitcherProps,
   InlineViewSwitcherVariant,
 } from './InlineViewSwitcher';
