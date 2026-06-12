@@ -1,3 +1,14 @@
+## [1.47.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.46.0...@gnome-ui/react@1.47.0) (2026-06-12)
+
+### Features
+
+* **@gnome-ui/charts:** enhance spark charts with multi-series support and hover emphasis ([98e6802](https://github.com/ElJijuna/gnome-ui/commit/98e68024e6be62e0e3802ff3bd220069a277f0b7))
+* **@gnome-ui/react:** add ScrollToTop component with visibility control and styling ([5892257](https://github.com/ElJijuna/gnome-ui/commit/5892257cd0f0c75447562af676cfa1de4a82f471))
+
+### Bug Fixes
+
+* update semantic-release to version 25.0.5 in package.json and package-lock.json ([e628370](https://github.com/ElJijuna/gnome-ui/commit/e62837045a5e6caa947bdd34874ca6ba87d77727))
+
 ## [1.46.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.45.2...@gnome-ui/react@1.46.0) (2026-06-10)
 
 ### Features
