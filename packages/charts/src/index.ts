@@ -19,7 +19,7 @@ export type { RadialBarChartDataItem, RadialBarChartProps } from './components/R
 export { RadialBarChart } from './components/RadialBarChart';
 export type { ScatterChartProps, ScatterChartSeries } from './components/ScatterChart';
 export { ScatterChart } from './components/ScatterChart';
-export type { SparkAreaChartProps } from './components/SparkAreaChart';
+export type { SparkAreaChartProps, SparkSeries } from './components/SparkAreaChart';
 export { SparkAreaChart } from './components/SparkAreaChart';
 export type { SparkBarChartProps } from './components/SparkBarChart';
 export { SparkBarChart } from './components/SparkBarChart';

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Bar, Cell, BarChart as RechartsBarChart, ResponsiveContainer } from 'recharts';
 
 type SparkData = number[] | Record<string, unknown>[];
@@ -14,6 +15,13 @@ export interface SparkBarChartProps {
   barSize?: number;
   /** Fill opacity. Defaults to 0.85. */
   fillOpacity?: number;
+  /**
+   * Enable hover-based emphasis.
+   *
+   * When `true`, moving the pointer over the chart raises the bars to full
+   * opacity (1.0). At rest the bars stay at `fillOpacity` (default 0.85).
+   */
+  highlighted?: boolean;
   className?: string;
   'aria-label'?: string;
 }
@@ -35,9 +43,13 @@ export const SparkBarChart = ({
   height = 40,
   barSize,
   fillOpacity = 0.85,
+  highlighted = false,
   className,
   'aria-label': ariaLabel,
 }: SparkBarChartProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const resolvedOpacity = highlighted && isHovered ? 1 : fillOpacity;
+
   const normalized = normalize(data, dataKey);
 
   return (
@@ -47,6 +59,8 @@ export const SparkBarChart = ({
       role={ariaLabel ? 'img' : undefined}
       aria-label={ariaLabel}
       aria-hidden={ariaLabel ? undefined : true}
+      onMouseEnter={highlighted ? () => setIsHovered(true) : undefined}
+      onMouseLeave={highlighted ? () => setIsHovered(false) : undefined}
     >
       <ResponsiveContainer width="100%" height="100%">
         <RechartsBarChart
@@ -58,7 +72,7 @@ export const SparkBarChart = ({
           <Bar
             dataKey={dataKey}
             fill={color}
-            fillOpacity={fillOpacity}
+            fillOpacity={resolvedOpacity}
             radius={[2, 2, 0, 0]}
             isAnimationActive={false}
           >

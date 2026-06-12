@@ -1,10 +1,15 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { SparkLineChart } from './SparkLineChart';
 
 const NUMBERS = [42, 58, 35, 72, 61];
 const OBJECTS = NUMBERS.map((v, i) => ({ day: `D${i}`, sessions: v }));
+const MULTI_DATA = [
+  { sent: 42, received: 18 },
+  { sent: 58, received: 30 },
+  { sent: 35, received: 22 },
+];
 
 describe('SparkLineChart', () => {
   describe('rendering', () => {
@@ -61,6 +66,76 @@ describe('SparkLineChart', () => {
       const { container } = render(<SparkLineChart data={NUMBERS} className="my-spark" />);
 
       expect(container.querySelector('div')).toHaveClass('my-spark');
+    });
+  });
+
+  describe('series', () => {
+    it('renders without crashing with series prop', () => {
+      const { container } = render(
+        <SparkLineChart data={MULTI_DATA} series={[{ key: 'sent' }, { key: 'received' }]} />,
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('renders without crashing with custom colors per series', () => {
+      const { container } = render(
+        <SparkLineChart
+          data={MULTI_DATA}
+          series={[
+            { key: 'sent', color: '#3584e4' },
+            { key: 'received', color: '#e01b24' },
+          ]}
+        />,
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+  });
+
+  describe('highlighted', () => {
+    it('renders without crashing when highlighted is enabled', () => {
+      const { container } = render(<SparkLineChart data={NUMBERS} highlighted />);
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('container mouseenter and mouseleave do not throw', () => {
+      const { container } = render(<SparkLineChart data={NUMBERS} highlighted />);
+      const wrapper = container.querySelector('div')!;
+
+      expect(() => {
+        fireEvent.mouseEnter(wrapper);
+        fireEvent.mouseLeave(wrapper);
+      }).not.toThrow();
+    });
+
+    it('multi-series with highlighted renders without crashing', () => {
+      const { container } = render(
+        <SparkLineChart
+          data={MULTI_DATA}
+          series={[{ key: 'sent' }, { key: 'received' }]}
+          highlighted
+        />,
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('multi-series container mouseenter and mouseleave do not throw', () => {
+      const { container } = render(
+        <SparkLineChart
+          data={MULTI_DATA}
+          series={[{ key: 'sent' }, { key: 'received' }]}
+          highlighted
+        />,
+      );
+      const wrapper = container.querySelector('div')!;
+
+      expect(() => {
+        fireEvent.mouseEnter(wrapper);
+        fireEvent.mouseLeave(wrapper);
+      }).not.toThrow();
     });
   });
 });

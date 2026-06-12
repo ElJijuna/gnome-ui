@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { SparkBarChart } from './SparkBarChart';
@@ -67,6 +67,34 @@ describe('SparkBarChart', () => {
       const { container } = render(<SparkBarChart data={NUMBERS} className="my-spark" />);
 
       expect(container.querySelector('div')).toHaveClass('my-spark');
+    });
+  });
+
+  describe('highlighted', () => {
+    it('renders without crashing when highlighted is enabled', () => {
+      const { container } = render(<SparkBarChart data={NUMBERS} highlighted />);
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('container mouseenter and mouseleave do not throw', () => {
+      const { container } = render(<SparkBarChart data={NUMBERS} highlighted />);
+      const wrapper = container.querySelector('div')!;
+
+      expect(() => {
+        fireEvent.mouseEnter(wrapper);
+        fireEvent.mouseLeave(wrapper);
+      }).not.toThrow();
+    });
+
+    it('container has no hover handlers when highlighted is false', () => {
+      const { container } = render(<SparkBarChart data={NUMBERS} highlighted={false} />);
+      const wrapper = container.querySelector('div')!;
+
+      expect(() => {
+        fireEvent.mouseEnter(wrapper);
+        fireEvent.mouseLeave(wrapper);
+      }).not.toThrow();
     });
   });
 });
