@@ -26,14 +26,18 @@
   flex-direction: row;
   overflow: scroll hidden;
   scroll-snap-type: x mandatory;
-  touch-action: pan-x;
+
+  /* pan-y: browser handles vertical page scroll; we handle horizontal drag */
+  touch-action: pan-y;
 }
 
 .vertical {
   flex-direction: column;
   overflow: hidden scroll;
   scroll-snap-type: y mandatory;
-  touch-action: pan-y;
+
+  /* pan-x: browser handles horizontal page scroll; we handle vertical drag */
+  touch-action: pan-x;
 }
 
 /* Active mouse drag state */
@@ -49,7 +53,6 @@
 .slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   min-width: 0;
   min-height: 0;
 }

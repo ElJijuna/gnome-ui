@@ -172,6 +172,7 @@ export const Carousel = ({
   const draggingRef = useRef(false);
   const hasDraggedRef = useRef(false);
   const dragStartRef = useRef({ pos: 0, scroll: 0, time: 0 });
+  const snapRestoreTimerRef = useRef(0);
 
   // Scroll distance per page: (containerSize - spacing*(visibleSlides-1)) / visibleSlides + spacing
   // Simplifies to: (containerSize + spacing) / visibleSlides
@@ -263,11 +264,12 @@ export const Carousel = ({
     [currentPage, pageCount, loop, orientation, scrollToPage, isControlled, onPageChanged],
   );
 
-  // ── Mouse drag ────────────────────────────────────────────────────────────
+  // ── Drag (mouse + touch + pen) ───────────────────────────────────────────
 
   const handlePointerDown = useCallback(
     (e: PointerEvent<HTMLDivElement>) => {
-      if (e.pointerType !== 'mouse' || e.button !== 0) {
+      // Ignore non-primary mouse buttons
+      if (e.pointerType === 'mouse' && e.button !== 0) {
         return;
       }
       const el = scrollRef.current;
@@ -275,6 +277,12 @@ export const Carousel = ({
         return;
       }
 
+      // Disable scroll-snap immediately via DOM — not via React state, which would
+      // only apply after the next render, letting scroll-snap fight the first moves.
+      window.clearTimeout(snapRestoreTimerRef.current);
+      el.style.scrollSnapType = 'none';
+
+      // Capture so pointermove/up fire even when the pointer leaves the element
       e.currentTarget.setPointerCapture(e.pointerId);
       draggingRef.current = true;
       hasDraggedRef.current = false;
@@ -290,7 +298,7 @@ export const Carousel = ({
 
   const handlePointerMove = useCallback(
     (e: PointerEvent<HTMLDivElement>) => {
-      if (e.pointerType !== 'mouse' || !draggingRef.current) {
+      if (!draggingRef.current) {
         return;
       }
       const el = scrollRef.current;
@@ -305,10 +313,23 @@ export const Carousel = ({
         hasDraggedRef.current = true;
       }
 
+      // Apply boundary resistance: dampen movement past first/last slide
+      const maxScroll =
+        orientation === 'horizontal'
+          ? el.scrollWidth - el.clientWidth
+          : el.scrollHeight - el.clientHeight;
+      let newScroll = dragStartRef.current.scroll + delta;
+
+      if (newScroll < 0) {
+        newScroll *= 0.3;
+      } else if (newScroll > maxScroll) {
+        newScroll = maxScroll + (newScroll - maxScroll) * 0.3;
+      }
+
       if (orientation === 'horizontal') {
-        el.scrollLeft = dragStartRef.current.scroll + delta;
+        el.scrollLeft = newScroll;
       } else {
-        el.scrollTop = dragStartRef.current.scroll + delta;
+        el.scrollTop = newScroll;
       }
     },
     [orientation],
@@ -316,20 +337,18 @@ export const Carousel = ({
 
   const handlePointerUp = useCallback(
     (e: PointerEvent<HTMLDivElement>) => {
-      if (e.pointerType !== 'mouse' || !draggingRef.current) {
+      if (!draggingRef.current) {
         return;
       }
 
       draggingRef.current = false;
       setIsDragging(false);
 
-      if (!hasDraggedRef.current) {
-        return;
-      }
-
       const el = scrollRef.current;
 
-      if (!el) {
+      if (!hasDraggedRef.current || !el) {
+        // No real drag — restore snap immediately
+        el?.style.removeProperty('scroll-snap-type');
         return;
       }
 
@@ -361,15 +380,25 @@ export const Carousel = ({
         target = Math.max(0, Math.min(target, pageCount - 1));
       }
 
+      // Scroll to target while snap is still disabled, then re-enable once settled
       scrollToPage(target);
       if (!isControlled) {
         setInternalPage(target);
       }
-
       onPageChanged?.(target);
+
+      // Re-enable snap after the smooth scroll animation completes (~300 ms)
+      snapRestoreTimerRef.current = window.setTimeout(() => {
+        el.style.removeProperty('scroll-snap-type');
+      }, 350);
     },
     [orientation, getPageSize, loop, pageCount, scrollToPage, isControlled, onPageChanged],
   );
+
+  // Clean up the snap-restore timer on unmount
+  useEffect(() => {
+    return () => window.clearTimeout(snapRestoreTimerRef.current);
+  }, []);
 
   // Prevent click events that fire after a drag (e.g. links/buttons inside slides)
   const handleClick = useCallback((e: MouseEvent) => {
@@ -402,10 +431,7 @@ export const Carousel = ({
       ]
         .filter(Boolean)
         .join(' ')}
-      style={{
-        ...(isDragging ? { scrollSnapType: 'none' } : undefined),
-        ...(isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }),
-      }}
+      style={isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }}
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
