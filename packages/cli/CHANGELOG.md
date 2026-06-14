@@ -1,3 +1,35 @@
+## [1.0.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/cli@1.0.1...@gnome-ui/cli@1.0.2) (2026-06-14)
+
+### Features
+
+* **@gnome-ui/charts:** enhance spark charts with multi-series support and hover emphasis ([98e6802](https://github.com/ElJijuna/gnome-ui/commit/98e68024e6be62e0e3802ff3bd220069a277f0b7))
+* **@gnome-ui/react:** add AvatarGroup component with overflow handling and styling ([858821d](https://github.com/ElJijuna/gnome-ui/commit/858821d705809a6328613e5c5b58d40e98f03ff9))
+* **@gnome-ui/react:** add color prop to Icon component with palette options and update documentation ([8c08879](https://github.com/ElJijuna/gnome-ui/commit/8c088799be83d31bf00a233685226fbe4ca4a1d5))
+* **@gnome-ui/react:** add Modal component with styling, documentation, and tests ([cee43d9](https://github.com/ElJijuna/gnome-ui/commit/cee43d9a73206e40ae6f257d87b5f0d7d30fcfe6))
+* **@gnome-ui/react:** add ScrollToTop component with visibility control and styling ([5892257](https://github.com/ElJijuna/gnome-ui/commit/5892257cd0f0c75447562af676cfa1de4a82f471))
+* **@gnome-ui/react:** implement drag-to-dismiss functionality in BottomSheet with animations ([2ba2f53](https://github.com/ElJijuna/gnome-ui/commit/2ba2f531969dee25476cbe235eb99d091f54f536))
+* **@gnome-ui/react:** implement overflow strategies in InlineViewSwitcher and enhance styles for better UX ([e2f329c](https://github.com/ElJijuna/gnome-ui/commit/e2f329c33bc7a7c44222d9be6145abec2829ff9a))
+
+### Bug Fixes
+
+* **@gnome-ui/react:** EntryRow adjust min-height and label positioning for consistency ([e198242](https://github.com/ElJijuna/gnome-ui/commit/e19824202e856e9bab61a67b8f66f9d33ce36277))
+* **@gnome-ui/react:** improve readability by formatting conditional returns in InlineViewSwitcher ([1bc9ccf](https://github.com/ElJijuna/gnome-ui/commit/1bc9ccf587db29faa26b48fc988cab624470eaa0))
+* update semantic-release to version 25.0.5 in package.json and package-lock.json ([e628370](https://github.com/ElJijuna/gnome-ui/commit/e62837045a5e6caa947bdd34874ca6ba87d77727))
+
+### Refactoring
+
+* **@gnome-ui/cli:** improve error handling in main function and destructure parse result ([6ed0844](https://github.com/ElJijuna/gnome-ui/commit/6ed08448adc4673481f1130954857a86f0322240))
+* **@gnome-ui/core:** color definitions in tokens.css for consistency and brevity ([530b542](https://github.com/ElJijuna/gnome-ui/commit/530b542836ea4cde856c0cc140d4c2145f1a6f34)), closes [#ffffff](https://github.com/ElJijuna/gnome-ui/issues/ffffff) [#fff](https://github.com/ElJijuna/gnome-ui/issues/fff)
+* **@gnome-ui/core:** consolidate shadow definition for improved clarity ([8cfa1cf](https://github.com/ElJijuna/gnome-ui/commit/8cfa1cfcfe961f42f7b8c7bdd1fa2ef80f450e68))
+* **@gnome-ui/layout:** CSS color definitions to use the new RGB syntax with alpha values ([0ba5091](https://github.com/ElJijuna/gnome-ui/commit/0ba5091d2bc70a04ddf303cc1ed78789744dabe2))
+* **@gnome-ui/layout:** destructure className for improved readability in test case ([6799570](https://github.com/ElJijuna/gnome-ui/commit/67995700ec136556efd25cc04ef18003baa38331))
+* **@gnome-ui/react:** add visibleSlides prop to Carousel for flexible slide display ([edaaae8](https://github.com/ElJijuna/gnome-ui/commit/edaaae8dbb29eb824cf252ee36c625380eeb82b0))
+* **@gnome-ui/react:** CSS styles across components to use modern color functions and improve consistency ([97ff25b](https://github.com/ElJijuna/gnome-ui/commit/97ff25b21de8a17772b85f5fd7afe781f44c4400))
+* **@gnome-ui/react:** destructure variables for improved readability in multiple components ([9af61d4](https://github.com/ElJijuna/gnome-ui/commit/9af61d437e2757d0e4dd3d4f01688582aaf6bcc2))
+* **@gnome-ui/react:** enhance Carousel component with improved drag handling and touch gestures ([aad631c](https://github.com/ElJijuna/gnome-ui/commit/aad631cf0cffb516a5a88064bcabc037a0ce459e))
+* **@gnome-ui/react:** enhance Carousel drag handling with improved touch and mouse interactions ([8a94086](https://github.com/ElJijuna/gnome-ui/commit/8a94086ecb8509919800a0310994bdac6b9337a3))
+* **stylelint:** format declaration-block-no-duplicate-properties rule for improved readability ([fe8f748](https://github.com/ElJijuna/gnome-ui/commit/fe8f748a3663b4fc908b5243d9c7a557e92d1420))
+
 ## [1.0.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/cli@1.0.0...@gnome-ui/cli@1.0.1) (2026-06-10)
 
 ### Features
