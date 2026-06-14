@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 import { Text } from '../Text';
 
-import { Icon } from './Icon';
+import { Icon, type IconColor } from './Icon';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
@@ -19,6 +20,10 @@ const meta: Meta<typeof Icon> = {
   },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    color: {
+      control: 'select',
+      options: ['default', 'blue', 'green', 'yellow', 'orange', 'red', 'purple', 'brown'],
+    },
     label: { control: 'text' },
   },
   args: {
@@ -76,6 +81,37 @@ export const InheritsColor: Story = {
     docs: {
       description: {
         story: 'Icons use `currentColor` — set `color` on the parent to tint them.',
+      },
+    },
+  },
+};
+
+// ─── Palette colors ────────────────────────────────────────────────────────────
+
+const PALETTE_COLORS: IconColor[] = ['blue', 'green', 'yellow', 'orange', 'red', 'purple', 'brown'];
+
+export const Colors: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+      {PALETTE_COLORS.map((c) => (
+        <div
+          key={c}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}
+        >
+          <Icon icon={Icons.Star} size="lg" color={c} label={c} />
+          <Text variant="caption" color="dim">
+            {c}
+          </Text>
+        </div>
+      ))}
+    </div>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Pass `color` to apply a named GNOME palette token directly. Omit (or use `"default"`) to inherit `currentColor` from the parent.',
       },
     },
   },

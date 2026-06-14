@@ -2,7 +2,7 @@ import { Add } from '@gnome-ui/icons';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { Icon } from './Icon';
+import { Icon, type IconColor } from './Icon';
 
 describe('Icon', () => {
   it('renders an SVG element', () => {
@@ -109,6 +109,41 @@ describe('Icon — RawPathIconDefinition (simple-icons compatible)', () => {
 
     expect(container.querySelector('svg')).toBeInTheDocument();
     expect(container.querySelector('path')).toHaveAttribute('d', rawPath);
+  });
+
+  // ─── color prop ───────────────────────────────────────────────────────────────
+
+  it('applies the correct color class for each palette color', () => {
+    const colors: IconColor[] = ['blue', 'green', 'yellow', 'orange', 'red', 'purple', 'brown'];
+
+    for (const color of colors) {
+      const { container, unmount } = render(<Icon icon={Add} color={color} />);
+
+      expect(container.querySelector('svg')?.getAttribute('class')).toMatch(
+        new RegExp(`color-${color}`),
+      );
+      unmount();
+    }
+  });
+
+  it('adds no color class when color is omitted', () => {
+    const { container } = render(<Icon icon={Add} />);
+
+    expect(container.querySelector('svg')?.getAttribute('class') ?? '').not.toMatch(/color-/);
+  });
+
+  it('adds no color class when color is "default"', () => {
+    const { container } = render(<Icon icon={Add} color="default" />);
+
+    expect(container.querySelector('svg')?.getAttribute('class') ?? '').not.toMatch(/color-/);
+  });
+
+  it('merges the color class with a caller-provided className', () => {
+    const { container } = render(<Icon icon={Add} color="red" className="custom" />);
+    const cls = container.querySelector('svg')?.getAttribute('class') ?? '';
+
+    expect(cls).toMatch(/color-red/);
+    expect(cls).toMatch(/custom/);
   });
 
   it('gives precedence to paths when both path and paths are present', () => {

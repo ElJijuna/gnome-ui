@@ -122,7 +122,7 @@ export type { GnomeProviderProps } from './components/GnomeProvider/GnomeProvide
 export { GnomeProvider } from './components/GnomeProvider/GnomeProvider';
 export type { HeaderBarProps } from './components/HeaderBar';
 export { HeaderBar } from './components/HeaderBar';
-export type { IconProps, IconSize } from './components/Icon';
+export type { IconColor, IconProps, IconSize } from './components/Icon';
 export { Icon } from './components/Icon';
 export type { IconButtonProps, IconButtonSize, IconButtonVariant } from './components/IconButton';
 export { IconButton } from './components/IconButton';
