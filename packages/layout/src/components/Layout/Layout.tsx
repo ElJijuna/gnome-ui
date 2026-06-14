@@ -290,9 +290,9 @@ export const Layout = ({
         return;
       }
 
-      const firstElement = currentFocusableElements[0];
+      const [firstElement] = currentFocusableElements;
       const lastElement = currentFocusableElements[currentFocusableElements.length - 1];
-      const activeElement = document.activeElement;
+      const { activeElement } = document;
 
       if (event.shiftKey && activeElement === firstElement) {
         event.preventDefault();

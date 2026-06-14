@@ -41,7 +41,6 @@
   width: var(--gnome-layout-sidebar-rail-width, 56px);
 }
 
-
 @media (prefers-contrast: more) {
   .shell {
     border-inline-end-width: 2px;

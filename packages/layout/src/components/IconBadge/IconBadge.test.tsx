@@ -65,7 +65,7 @@ describe('IconBadge', () => {
 
     it('does not apply a color CSS class when hex is provided', () => {
       const { container } = render(<IconBadge color="#ff0000">🔴</IconBadge>);
-      const className = (container.firstChild as HTMLElement).className;
+      const { className } = container.firstChild as HTMLElement;
 
       expect(className).not.toMatch(/blue|green|red|orange|yellow|purple|brown/);
     });
