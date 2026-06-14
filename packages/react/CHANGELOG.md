@@ -1,3 +1,12 @@
+## [1.49.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.48.0...@gnome-ui/react@1.49.0) (2026-06-14)
+
+### Features
+
+* **@gnome-ui/react:** add AvatarGroup component with overflow handling and styling ([858821d](https://github.com/ElJijuna/gnome-ui/commit/858821d705809a6328613e5c5b58d40e98f03ff9))
+* **@gnome-ui/react:** add color prop to Icon component with palette options and update documentation ([8c08879](https://github.com/ElJijuna/gnome-ui/commit/8c088799be83d31bf00a233685226fbe4ca4a1d5))
+* **@gnome-ui/react:** add Modal component with styling, documentation, and tests ([cee43d9](https://github.com/ElJijuna/gnome-ui/commit/cee43d9a73206e40ae6f257d87b5f0d7d30fcfe6))
+* **@gnome-ui/react:** implement drag-to-dismiss functionality in BottomSheet with animations ([2ba2f53](https://github.com/ElJijuna/gnome-ui/commit/2ba2f531969dee25476cbe235eb99d091f54f536))
+
 ## [1.48.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.47.0...@gnome-ui/react@1.48.0) (2026-06-12)
 
 ### Features
