@@ -2,6 +2,8 @@ import {
   Children,
   type HTMLAttributes,
   type KeyboardEvent,
+  type MouseEvent,
+  type PointerEvent,
   type ReactNode,
   useCallback,
   useEffect,
@@ -135,8 +137,8 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
  * Swipeable content carousel.
  *
  * Mirrors `AdwCarousel`. Uses CSS scroll-snapping for smooth, native-feeling
- * page transitions. Supports keyboard navigation (arrow keys) and touch/mouse
- * drag via the browser's native scroll handling.
+ * page transitions. Supports keyboard navigation (arrow keys), touch/mouse drag,
+ * and velocity-based flick gestures.
  *
  * Pair with `CarouselIndicatorDots` or `CarouselIndicatorLines` for pagination UI.
  *
@@ -155,24 +157,38 @@ export const Carousel = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const pageCount = Children.count(children);
   const [internalPage, setInternalPage] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const isControlled = controlledPage !== undefined;
   const currentPage = isControlled ? controlledPage : internalPage;
+
+  // Refs for drag state — avoids stale closures in pointer handlers
+  const draggingRef = useRef(false);
+  const hasDraggedRef = useRef(false);
+  const dragStartRef = useRef({ pos: 0, scroll: 0, time: 0 });
+
+  // Each page occupies (clientSize + spacing) scroll pixels
+  const getPageSize = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) {
+      return 1;
+    }
+    return (orientation === 'horizontal' ? el.clientWidth : el.clientHeight) + spacing;
+  }, [orientation, spacing]);
 
   const scrollToPage = useCallback(
     (index: number, behavior: ScrollBehavior = 'smooth') => {
       const el = scrollRef.current;
-
       if (!el) {
         return;
       }
-
+      const offset = getPageSize() * index;
       if (orientation === 'horizontal') {
-        el.scrollTo({ left: el.clientWidth * index, behavior });
+        el.scrollTo({ left: offset, behavior });
       } else {
-        el.scrollTo({ top: el.clientHeight * index, behavior });
+        el.scrollTo({ top: offset, behavior });
       }
     },
-    [orientation],
+    [orientation, getPageSize],
   );
 
   // Scroll to the controlled page when it changes externally
@@ -180,73 +196,180 @@ export const Carousel = ({
     if (!isControlled) {
       return;
     }
-
     scrollToPage(controlledPage, 'smooth');
   }, [controlledPage, scrollToPage, isControlled]);
 
-  // Detect page changes via IntersectionObserver on each child
+  // Detect page changes from native scroll (touch) — skipped during mouse drag
   useEffect(() => {
     const el = scrollRef.current;
-
     if (!el) {
       return;
     }
 
     const handleScroll = () => {
-      const pages = Array.from(el.children) as HTMLElement[];
-      const size = orientation === 'horizontal' ? el.clientWidth : el.clientHeight;
+      if (draggingRef.current) {
+        return;
+      }
+      const pageSize = getPageSize();
       const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
-      const idx = Math.round(scroll / (size || 1));
+      const idx = Math.round(scroll / pageSize);
       const clamped = Math.max(0, Math.min(idx, pageCount - 1));
-
       if (!isControlled) {
         setInternalPage(clamped);
       }
-
       onPageChanged?.(clamped);
-      void pages; // suppress lint
     };
 
     el.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => el.removeEventListener('scroll', handleScroll);
-  }, [orientation, pageCount, isControlled, onPageChanged]);
+  }, [orientation, pageCount, isControlled, onPageChanged, getPageSize]);
 
-  // Keyboard navigation
+  // ── Keyboard navigation ───────────────────────────────────────────────────
+
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
+    (e: KeyboardEvent<HTMLDivElement>) => {
       const isForward =
         orientation === 'horizontal' ? e.key === 'ArrowRight' : e.key === 'ArrowDown';
       const isBack = orientation === 'horizontal' ? e.key === 'ArrowLeft' : e.key === 'ArrowUp';
 
-      if (isForward) {
-        e.preventDefault();
-        const next = loop
+      if (!isForward && !isBack) {
+        return;
+      }
+      e.preventDefault();
+
+      const next = isForward
+        ? loop
           ? (currentPage + 1) % pageCount
-          : Math.min(currentPage + 1, pageCount - 1);
-
-        scrollToPage(next);
-        if (!isControlled) {
-          setInternalPage(next);
-        }
-
-        onPageChanged?.(next);
-      } else if (isBack) {
-        e.preventDefault();
-        const prev = loop
+          : Math.min(currentPage + 1, pageCount - 1)
+        : loop
           ? (currentPage - 1 + pageCount) % pageCount
           : Math.max(currentPage - 1, 0);
 
-        scrollToPage(prev);
-        if (!isControlled) {
-          setInternalPage(prev);
-        }
-
-        onPageChanged?.(prev);
+      scrollToPage(next);
+      if (!isControlled) {
+        setInternalPage(next);
       }
+      onPageChanged?.(next);
     },
     [currentPage, pageCount, loop, orientation, scrollToPage, isControlled, onPageChanged],
   );
+
+  // ── Mouse drag ────────────────────────────────────────────────────────────
+
+  const handlePointerDown = useCallback(
+    (e: PointerEvent<HTMLDivElement>) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) {
+        return;
+      }
+      const el = scrollRef.current;
+      if (!el) {
+        return;
+      }
+
+      e.currentTarget.setPointerCapture(e.pointerId);
+      draggingRef.current = true;
+      hasDraggedRef.current = false;
+      setIsDragging(true);
+      dragStartRef.current = {
+        pos: orientation === 'horizontal' ? e.clientX : e.clientY,
+        scroll: orientation === 'horizontal' ? el.scrollLeft : el.scrollTop,
+        time: Date.now(),
+      };
+    },
+    [orientation],
+  );
+
+  const handlePointerMove = useCallback(
+    (e: PointerEvent<HTMLDivElement>) => {
+      if (e.pointerType !== 'mouse' || !draggingRef.current) {
+        return;
+      }
+      const el = scrollRef.current;
+      if (!el) {
+        return;
+      }
+
+      const pos = orientation === 'horizontal' ? e.clientX : e.clientY;
+      const delta = dragStartRef.current.pos - pos;
+
+      if (Math.abs(delta) > 4) {
+        hasDraggedRef.current = true;
+      }
+
+      if (orientation === 'horizontal') {
+        el.scrollLeft = dragStartRef.current.scroll + delta;
+      } else {
+        el.scrollTop = dragStartRef.current.scroll + delta;
+      }
+    },
+    [orientation],
+  );
+
+  const handlePointerUp = useCallback(
+    (e: PointerEvent<HTMLDivElement>) => {
+      if (e.pointerType !== 'mouse' || !draggingRef.current) {
+        return;
+      }
+
+      draggingRef.current = false;
+      setIsDragging(false);
+
+      if (!hasDraggedRef.current) {
+        return;
+      }
+
+      const el = scrollRef.current;
+
+      if (!el) {
+        return;
+      }
+
+      const isCancel = e.type === 'pointercancel';
+      const pos = isCancel
+        ? dragStartRef.current.pos
+        : orientation === 'horizontal'
+          ? e.clientX
+          : e.clientY;
+
+      const delta = dragStartRef.current.pos - pos;
+      const elapsed = Math.max(Date.now() - dragStartRef.current.time, 1);
+      const velocity = isCancel ? 0 : delta / elapsed; // px/ms, positive = forward
+      const pageSize = getPageSize();
+      const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
+
+      let target: number;
+      if (Math.abs(velocity) > 0.3) {
+        // Flick gesture — advance in the swipe direction
+        target = velocity > 0 ? Math.ceil(scroll / pageSize) : Math.floor(scroll / pageSize);
+      } else {
+        // Slow drag — snap to nearest page
+        target = Math.round(scroll / pageSize);
+      }
+
+      if (loop) {
+        target = ((target % pageCount) + pageCount) % pageCount;
+      } else {
+        target = Math.max(0, Math.min(target, pageCount - 1));
+      }
+
+      scrollToPage(target);
+      if (!isControlled) {
+        setInternalPage(target);
+      }
+
+      onPageChanged?.(target);
+    },
+    [orientation, getPageSize, loop, pageCount, scrollToPage, isControlled, onPageChanged],
+  );
+
+  // Prevent click events that fire after a drag (e.g. links/buttons inside slides)
+  const handleClick = useCallback((e: MouseEvent) => {
+    if (hasDraggedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      hasDraggedRef.current = false;
+    }
+  }, []);
 
   const isHorizontal = orientation === 'horizontal';
 
@@ -255,11 +378,25 @@ export const Carousel = ({
       ref={scrollRef}
       role="region"
       aria-roledescription="carousel"
-      className={[styles.carousel, isHorizontal ? styles.horizontal : styles.vertical, className]
+      tabIndex={0}
+      className={[
+        styles.carousel,
+        isHorizontal ? styles.horizontal : styles.vertical,
+        isDragging ? styles.dragging : null,
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
-      style={isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }}
+      style={{
+        ...(isDragging ? { scrollSnapType: 'none' } : undefined),
+        ...(isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }),
+      }}
       onKeyDown={handleKeyDown}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onClick={handleClick}
       {...props}
     >
       {Children.map(children, (child, i) => (

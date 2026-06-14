@@ -3,10 +3,10 @@
 .carousel {
   display: flex;
   overflow: hidden;
-  scroll-snap-type: both mandatory;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   outline: none;
   width: 100%;
+  cursor: grab;
 }
 
 .carousel:focus-visible {
@@ -21,12 +21,22 @@
   flex-direction: row;
   overflow: scroll hidden;
   scroll-snap-type: x mandatory;
+  touch-action: pan-x;
 }
 
 .vertical {
   flex-direction: column;
   overflow: hidden scroll;
   scroll-snap-type: y mandatory;
+  touch-action: pan-y;
+}
+
+/* Active mouse drag state */
+.dragging {
+  cursor: grabbing;
+  user-select: none;
+
+  /* scroll-snap-type is disabled via inline style during drag */
 }
 
 /* ─── Slide ─────────────────────────────────────────────────────────────────── */
