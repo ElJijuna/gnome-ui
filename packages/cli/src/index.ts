@@ -77,12 +77,14 @@ program
     await handleUpdate();
   });
 
-main().catch((error: unknown) => {
+try {
+  await main();
+} catch (error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
 
   console.error(colors.red(`\n${message}`));
   process.exitCode = 1;
-});
+}
 
 async function main() {
   await program.parseAsync(process.argv);
@@ -153,7 +155,7 @@ async function loadProjectContext(cwd: string): Promise<ProjectContext> {
 
 function findPackageJson(startPath: string) {
   let currentPath = startPath;
-  const root = parse(startPath).root;
+  const { root } = parse(startPath);
 
   while (true) {
     const candidate = join(currentPath, 'package.json');
