@@ -7,6 +7,11 @@
   outline: none;
   width: 100%;
   cursor: grab;
+  scrollbar-width: none; /* Firefox */
+}
+
+.carousel::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Edge */
 }
 
 .carousel:focus-visible {

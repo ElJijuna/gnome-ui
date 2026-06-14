@@ -10,20 +10,24 @@ const meta: Meta<typeof Carousel> = {
   tags: ['autodocs'],
   parameters: {
     docs: {
-      description: {
-        component: readme,
-      },
+      description: { component: readme },
     },
   },
   argTypes: {
     orientation: { control: 'select', options: ['horizontal', 'vertical'] },
     loop: { control: 'boolean' },
-    spacing: { control: 'number' },
+    spacing: { control: { type: 'number', min: 0, max: 48, step: 4 } },
+    visibleSlides: { control: { type: 'number', min: 1, max: 3, step: 0.5 } },
+    // managed internally by each story
+    page: { table: { disable: true } },
+    onPageChanged: { table: { disable: true } },
+    children: { table: { disable: true } },
   },
   args: {
     orientation: 'horizontal',
     loop: false,
     spacing: 0,
+    visibleSlides: 1,
   },
   decorators: [
     (Story) => (
@@ -40,150 +44,96 @@ type Story = StoryObj<typeof Carousel>;
 const COLORS = ['#3584e4', '#e01b24', '#33d17a', '#ff7800', '#9141ac'];
 const LABELS = ['Blue', 'Red', 'Green', 'Orange', 'Purple'];
 
-const SlidePlaceholder = ({ label, color }: { label: string; color: string }) => {
-  return (
-    <div
-      style={{
-        height: 200,
-        background: color,
-        borderRadius: 12,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#fff',
-        fontSize: '1.25rem',
-        fontWeight: 700,
-        userSelect: 'none',
-      }}
-    >
-      {label}
-    </div>
-  );
-};
+const SlidePlaceholder = ({ label, color }: { label: string; color: string }) => (
+  <div
+    style={{
+      height: 200,
+      background: color,
+      borderRadius: 12,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#fff',
+      fontSize: '1.25rem',
+      fontWeight: 700,
+      userSelect: 'none',
+    }}
+  >
+    {label}
+  </div>
+);
 
-// ─── With dots ─────────────────────────────────────────────────────────────────
+// ─── WithDots ─────────────────────────────────────────────────────────────────
 
 export const WithDots: Story = {
-  render: () => {
+  render: (args) => {
     const [page, setPage] = useState(0);
+    const isVertical = args.orientation === 'vertical';
 
     return (
-      <div>
-        <Carousel page={page} onPageChanged={setPage}>
-          {COLORS.map((c, i) => (
-            <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
-          ))}
-        </Carousel>
-        <CarouselIndicatorDots pages={COLORS.length} currentPage={page} onPageSelected={setPage} />
-      </div>
-    );
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Horizontal carousel with `CarouselIndicatorDots`. Click dots or use ← → keys.',
-      },
-    },
-  },
-};
-
-// ─── With lines ────────────────────────────────────────────────────────────────
-
-export const WithLines: Story = {
-  render: () => {
-    const [page, setPage] = useState(0);
-
-    return (
-      <div>
-        <Carousel page={page} onPageChanged={setPage}>
-          {COLORS.map((c, i) => (
-            <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
-          ))}
-        </Carousel>
-        <CarouselIndicatorLines pages={COLORS.length} currentPage={page} onPageSelected={setPage} />
-      </div>
-    );
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Same carousel with `CarouselIndicatorLines` — preferred for longer decks.',
-      },
-    },
-  },
-};
-
-// ─── Vertical ─────────────────────────────────────────────────────────────────
-
-export const Vertical: Story = {
-  render: () => {
-    const [page, setPage] = useState(0);
-
-    return (
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+      <div style={isVertical ? { display: 'flex', gap: 8, alignItems: 'flex-start' } : undefined}>
         <Carousel
-          orientation="vertical"
+          {...args}
           page={page}
           onPageChanged={setPage}
-          style={{ height: 200 }}
+          style={isVertical ? { height: 200 } : undefined}
         >
           {COLORS.map((c, i) => (
             <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
           ))}
         </Carousel>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {COLORS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setPage(i)}
-              style={{
-                width: 3,
-                height: 24,
-                border: 'none',
-                borderRadius: 2,
-                background: i === page ? '#3584e4' : 'rgba(0,0,0,0.2)',
-                cursor: 'pointer',
-                padding: 0,
-              }}
-              aria-label={`Page ${i + 1}`}
-            />
-          ))}
-        </div>
+        <CarouselIndicatorDots
+          pages={COLORS.length}
+          currentPage={page}
+          onPageSelected={setPage}
+          style={isVertical ? { flexDirection: 'column', padding: '0 12px' } : undefined}
+        />
       </div>
     );
   },
   parameters: {
-    controls: { disable: true },
     docs: {
-      description: { story: 'Vertical orientation — scroll up/down or press ↑ ↓.' },
+      description: {
+        story:
+          'Carousel paired with `CarouselIndicatorDots`. Use the controls panel to explore `orientation`, `spacing`, `visibleSlides`, and `loop`.',
+      },
     },
   },
 };
 
-// ─── Loop ─────────────────────────────────────────────────────────────────────
+// ─── WithLines ────────────────────────────────────────────────────────────────
 
-export const Loop: Story = {
-  render: () => {
+export const WithLines: Story = {
+  render: (args) => {
     const [page, setPage] = useState(0);
+    const isVertical = args.orientation === 'vertical';
 
     return (
-      <div>
-        <Carousel loop page={page} onPageChanged={setPage}>
+      <div style={isVertical ? { display: 'flex', gap: 8, alignItems: 'flex-start' } : undefined}>
+        <Carousel
+          {...args}
+          page={page}
+          onPageChanged={setPage}
+          style={isVertical ? { height: 200 } : undefined}
+        >
           {COLORS.map((c, i) => (
             <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
           ))}
         </Carousel>
-        <CarouselIndicatorDots pages={COLORS.length} currentPage={page} onPageSelected={setPage} />
+        <CarouselIndicatorLines
+          pages={COLORS.length}
+          currentPage={page}
+          onPageSelected={setPage}
+          style={isVertical ? { flexDirection: 'column', padding: '0 12px' } : undefined}
+        />
       </div>
     );
   },
   parameters: {
-    controls: { disable: true },
     docs: {
       description: {
-        story: 'With `loop`: keyboard navigation wraps around on the last/first page.',
+        story:
+          'Same carousel with `CarouselIndicatorLines` — preferred for longer decks. All controls apply.',
       },
     },
   },

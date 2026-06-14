@@ -124,6 +124,12 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   loop?: boolean;
+  /**
+   * Number of slides visible at once. Supports fractional values (e.g. `1.5`)
+   * to peek at the edge of the next slide.
+   * @default 1
+   */
+  visibleSlides?: number;
   /** Called whenever the visible page changes. */
   onPageChanged?: (index: number) => void;
   /**
@@ -149,6 +155,7 @@ export const Carousel = ({
   orientation = 'horizontal',
   spacing = 0,
   loop = false,
+  visibleSlides = 1,
   onPageChanged,
   page: controlledPage,
   className,
@@ -166,14 +173,16 @@ export const Carousel = ({
   const hasDraggedRef = useRef(false);
   const dragStartRef = useRef({ pos: 0, scroll: 0, time: 0 });
 
-  // Each page occupies (clientSize + spacing) scroll pixels
+  // Scroll distance per page: (containerSize - spacing*(visibleSlides-1)) / visibleSlides + spacing
+  // Simplifies to: (containerSize + spacing) / visibleSlides
   const getPageSize = useCallback(() => {
     const el = scrollRef.current;
     if (!el) {
       return 1;
     }
-    return (orientation === 'horizontal' ? el.clientWidth : el.clientHeight) + spacing;
-  }, [orientation, spacing]);
+    const containerSize = orientation === 'horizontal' ? el.clientWidth : el.clientHeight;
+    return (containerSize + spacing) / visibleSlides;
+  }, [orientation, spacing, visibleSlides]);
 
   const scrollToPage = useCallback(
     (index: number, behavior: ScrollBehavior = 'smooth') => {
@@ -373,6 +382,12 @@ export const Carousel = ({
 
   const isHorizontal = orientation === 'horizontal';
 
+  // Slide width when showing more than one at a time
+  const slideFlexBasis =
+    visibleSlides !== 1
+      ? `calc((100% - ${spacing * (visibleSlides - 1)}px) / ${visibleSlides})`
+      : undefined;
+
   return (
     <div
       ref={scrollRef}
@@ -406,6 +421,7 @@ export const Carousel = ({
           role="group"
           aria-roledescription="slide"
           aria-label={`${i + 1} of ${pageCount}`}
+          style={slideFlexBasis ? { flex: `0 0 ${slideFlexBasis}` } : undefined}
         >
           {child}
         </div>
