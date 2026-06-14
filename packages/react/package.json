@@ -217,6 +217,11 @@
       "import": "./dist/components/LinkedGroup.js",
       "require": "./dist/components/LinkedGroup.cjs"
     },
+    "./components/Modal": {
+      "types": "./dist/components/Modal.d.ts",
+      "import": "./dist/components/Modal.js",
+      "require": "./dist/components/Modal.cjs"
+    },
     "./components/NavigationSplitView": {
       "types": "./dist/components/NavigationSplitView.d.ts",
       "import": "./dist/components/NavigationSplitView.js",

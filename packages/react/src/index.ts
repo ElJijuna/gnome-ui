@@ -136,6 +136,8 @@ export type { LinkProps } from './components/Link';
 export { Link } from './components/Link';
 export type { LinkedGroupProps } from './components/LinkedGroup';
 export { LinkedGroup } from './components/LinkedGroup';
+export type { ModalAction, ModalProps } from './components/Modal';
+export { Modal } from './components/Modal';
 export type { NavigationSplitViewProps } from './components/NavigationSplitView';
 export { NavigationSplitView } from './components/NavigationSplitView';
 export type { NavigationPageProps, NavigationViewProps } from './components/NavigationView';

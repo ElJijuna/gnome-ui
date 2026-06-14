@@ -205,6 +205,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`Text`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-text--docs) | 12 Adwaita type styles: large-title, title-1…4, heading, body, caption… |
 | [`Icon`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-icon--docs) | Inline SVG icon. Accepts `@gnome-ui/icons` definitions, [`simple-icons`](https://simpleicons.org/) icons, or any `{ path }` object; inherits `currentColor` |
 | [`Avatar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatar--docs) | Circular user image with deterministic-color initials fallback |
+| [`AvatarGroup`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatargroup--docs) | Overlapping stack of avatars with configurable max visible count and `+N` overflow indicator |
 | [`AvatarRotator`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-avatarrotator--docs) | Single avatar surface that crossfades through multiple image sources |
 | [`Badge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-badge--docs) | Counter or status dot, optionally anchored over another element |
 | [`StatusBadge`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-statusbadge--docs) | Pill-shaped text label for entity status — published, beta, new, etc.; 6 variants |
@@ -258,6 +259,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 |-----------|-------------|
 | [`Toast`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-toast--docs) / `Toaster` | Non-blocking temporary notification with auto-dismiss, action, and queue support |
 | [`Dialog`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-dialog--docs) | Blocking modal with title, body, focus trap, and configurable buttons |
+| [`Modal`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-modal--docs) | Large overlay for rich content, forms, and settings; scrollable body, header bar with close button and optional primary/secondary actions |
 | [`BottomSheet`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-bottomsheet--docs) | Slide-up panel from the bottom of the viewport with drag handle and optional title |
 | [`Drawer`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-drawer--docs) | Slide-over panel that opens from the left or right with React content |
 | [`Tooltip`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-tooltip--docs) | Floating informational label on hover/focus with auto-flip positioning |
