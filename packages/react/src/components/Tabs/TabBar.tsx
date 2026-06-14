@@ -34,7 +34,7 @@ export const TabBar = ({
     const tabs = Array.from(
       listRef.current?.querySelectorAll<HTMLButtonElement>('[role=tab]:not(:disabled)') ?? [],
     );
-    const activeElement = document.activeElement;
+    const { activeElement } = document;
     const idx = activeElement instanceof HTMLButtonElement ? tabs.indexOf(activeElement) : -1;
 
     if (idx === -1) {

@@ -94,7 +94,7 @@ export const ViewSwitcherSidebar = ({
     const items = Array.from(
       groupRef.current?.querySelectorAll<HTMLButtonElement>('[role=radio]:not(:disabled)') ?? [],
     );
-    const activeElement = document.activeElement;
+    const { activeElement } = document;
     const idx = activeElement instanceof HTMLButtonElement ? items.indexOf(activeElement) : -1;
 
     if (idx === -1) {

@@ -139,7 +139,7 @@ export const BottomSheet = ({
         return;
       }
 
-      const first = focusable[0];
+      const [first] = focusable;
       const last = focusable[focusable.length - 1];
 
       if (e.shiftKey) {

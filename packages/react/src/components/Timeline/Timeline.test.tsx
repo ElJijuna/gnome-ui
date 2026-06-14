@@ -126,7 +126,7 @@ describe('Timeline', () => {
 
     it('first item left line has lineInvisible class', () => {
       const { container } = render(<Timeline items={basicItems} orientation="horizontal" />);
-      const firstItem = container.querySelectorAll("[role='listitem']")[0];
+      const [firstItem] = container.querySelectorAll("[role='listitem']");
       const nodeTrack = firstItem.querySelector("[class*='nodeTrack']")!;
       const leftLine = nodeTrack.firstElementChild as HTMLElement;
 

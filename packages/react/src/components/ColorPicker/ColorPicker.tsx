@@ -175,7 +175,7 @@ export const ColorPicker = ({
 
     if (next >= 0) {
       all[next].focus();
-      const color = all[next].dataset.color;
+      const { color } = all[next].dataset;
 
       if (color) {
         onChange?.(color);

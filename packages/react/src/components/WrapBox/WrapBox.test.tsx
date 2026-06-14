@@ -21,28 +21,28 @@ describe('WrapBox', () => {
 
   it('applies childSpacing as CSS variable', () => {
     const { container } = render(<WrapBox childSpacing={12} />);
-    const style = (container.firstChild as HTMLElement).style;
+    const { style } = container.firstChild as HTMLElement;
 
     expect(style.getPropertyValue('--wrapbox-gap')).toBe('12px');
   });
 
   it('applies lineSpacing as separate row-gap variable', () => {
     const { container } = render(<WrapBox childSpacing={6} lineSpacing={12} />);
-    const style = (container.firstChild as HTMLElement).style;
+    const { style } = container.firstChild as HTMLElement;
 
     expect(style.getPropertyValue('--wrapbox-row-gap')).toBe('12px');
   });
 
   it('applies justify as CSS variable', () => {
     const { container } = render(<WrapBox justify="center" />);
-    const style = (container.firstChild as HTMLElement).style;
+    const { style } = container.firstChild as HTMLElement;
 
     expect(style.getPropertyValue('--wrapbox-justify')).toBe('center');
   });
 
   it('applies align as CSS variable', () => {
     const { container } = render(<WrapBox align="start" />);
-    const style = (container.firstChild as HTMLElement).style;
+    const { style } = container.firstChild as HTMLElement;
 
     expect(style.getPropertyValue('--wrapbox-align')).toBe('start');
   });

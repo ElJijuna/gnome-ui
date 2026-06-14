@@ -33,7 +33,7 @@ describe('IconButton', () => {
   ] as const)('applies %s variant', (variant) => {
     render(<IconButton icon={Settings} label="Settings" variant={variant} />);
 
-    const className = screen.getByRole('button').className;
+    const { className } = screen.getByRole('button');
 
     expect(className).toMatch(variant === 'osd' ? /osd/ : new RegExp(variant));
   });

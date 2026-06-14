@@ -111,7 +111,7 @@ export const BreakpointBin = ({
     setState(evaluate(el.offsetWidth));
 
     const observer = new ResizeObserver((entries) => {
-      const entry = entries[0];
+      const [entry] = entries;
 
       if (!entry) {
         return;
