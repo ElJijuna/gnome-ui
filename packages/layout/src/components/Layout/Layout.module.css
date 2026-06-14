@@ -10,7 +10,7 @@
   flex-direction: column;
   background: var(--gnome-window-bg-color, #fafafa);
   font-family: var(--gnome-font-family, sans-serif);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .heightViewport {
@@ -26,8 +26,7 @@
 }
 
 .scrollPage {
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden auto;
 }
 
 .scrollNone {
@@ -40,7 +39,7 @@
   flex-shrink: 0;
   display: block;
   background: var(--gnome-headerbar-bg-color, #ebebeb);
-  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgb(0 0 0 / 0.12));
 }
 
 /* ── Body (sidebar + content) ─────────────────────────────────────────────── */
@@ -115,7 +114,7 @@
   --layout-sidebar-closed-transform: translateX(100%);
 }
 
-@media (max-width: 400px) {
+@media (width <= 400px) {
   .breakpointNarrow {
     position: relative; /* stacking context for absolute sidebar + backdrop */
     overflow-x: clip; /* clip the sliding sidebar without creating a new scroll context */
@@ -128,13 +127,13 @@
     z-index: 10;
     transform: var(--layout-sidebar-closed-transform);
     transition: transform 0.25s ease;
+
     /* Make sure sidebar background is opaque so content doesn't bleed through */
     background: var(--gnome-sidebar-bg-color, var(--gnome-window-bg-color, #fafafa));
   }
 
   .breakpointNarrow.bodySidebarEnd .sidebar {
-    inset-inline-start: auto;
-    inset-inline-end: 0;
+    inset-inline: auto 0;
   }
 
   /* When open: slide in */
@@ -148,12 +147,12 @@
     position: absolute;
     inset: 0;
     z-index: 9;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgb(0 0 0 / 0.35);
     cursor: pointer;
   }
 }
 
-@media (max-width: 550px) {
+@media (width <= 550px) {
   .breakpointMedium {
     position: relative;
     overflow-x: clip;
@@ -170,8 +169,7 @@
   }
 
   .breakpointMedium.bodySidebarEnd .sidebar {
-    inset-inline-start: auto;
-    inset-inline-end: 0;
+    inset-inline: auto 0;
   }
 
   .breakpointMedium.bodySidebarOpen .sidebar {
@@ -183,12 +181,12 @@
     position: absolute;
     inset: 0;
     z-index: 9;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgb(0 0 0 / 0.35);
     cursor: pointer;
   }
 }
 
-@media (max-width: 860px) {
+@media (width <= 860px) {
   .breakpointWide {
     position: relative;
     overflow-x: clip;
@@ -205,8 +203,7 @@
   }
 
   .breakpointWide.bodySidebarEnd .sidebar {
-    inset-inline-start: auto;
-    inset-inline-end: 0;
+    inset-inline: auto 0;
   }
 
   .breakpointWide.bodySidebarOpen .sidebar {
@@ -218,7 +215,7 @@
     position: absolute;
     inset: 0;
     z-index: 9;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgb(0 0 0 / 0.35);
     cursor: pointer;
   }
 }
@@ -228,18 +225,18 @@
 .bottomBar {
   flex-shrink: 0;
   background: var(--gnome-headerbar-bg-color, #ebebeb);
-  border-top: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+  border-top: 1px solid var(--gnome-headerbar-border-color, rgb(0 0 0 / 0.12));
 }
 
 /* ─── Reduced motion ────────────────────────────────────────────────────────── */
 
-@media (max-width: 639px) and (prefers-reduced-motion: reduce) {
+@media (width <= 639px) and (prefers-reduced-motion: reduce) {
   .sidebar {
     transition: none;
   }
 }
 
-@media (max-width: 860px) and (prefers-reduced-motion: reduce) {
+@media (width <= 860px) and (prefers-reduced-motion: reduce) {
   .breakpointNarrow .sidebar,
   .breakpointMedium .sidebar,
   .breakpointWide .sidebar {
@@ -254,6 +251,6 @@
   }
 
   .backdrop {
-    background: rgba(0, 0, 0, 0.55);
+    background: rgb(0 0 0 / 0.55);
   }
 }

@@ -42,7 +42,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 550px) {
+@media (width <= 550px) {
   .center {
     gap: var(--gnome-space-1, 6px);
   }

@@ -38,7 +38,7 @@
 }
 
 .dot.offline {
-  background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
 }
 
@@ -52,6 +52,7 @@
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.3;
   }

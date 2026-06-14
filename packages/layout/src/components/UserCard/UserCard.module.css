@@ -70,17 +70,17 @@
   line-height: var(--gnome-line-height-body, 1.5);
   text-align: start;
   cursor: pointer;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   white-space: nowrap;
   transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
 .action:hover {
-  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
 }
 
 .action:active {
-  background-color: var(--gnome-active-overlay, rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.12));
 }
 
 .action:focus-visible {

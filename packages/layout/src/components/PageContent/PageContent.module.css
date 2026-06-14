@@ -3,7 +3,7 @@
   width: 100%;
   min-width: 0;
   min-height: 0;
-  color: var(--gnome-view-fg-color, var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8)));
+  color: var(--gnome-view-fg-color, var(--gnome-window-fg-color, rgb(0 0 0 / 0.8)));
 }
 
 .paddingNone {
@@ -30,7 +30,7 @@
   min-width: 0;
 }
 
-@media (max-width: 550px) {
+@media (width <= 550px) {
   .paddingNormal,
   .paddingSpacious {
     padding: var(--gnome-space-3, 18px);

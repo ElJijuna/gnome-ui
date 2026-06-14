@@ -16,7 +16,7 @@
   align-items: flex-start;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid var(--gnome-separator-color, rgba(0, 0, 0, 0.12));
+  border-bottom: 1px solid var(--gnome-separator-color, rgb(0 0 0 / 0.12));
 }
 
 .item:last-child {
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+  background: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
 }
 
 .dot {

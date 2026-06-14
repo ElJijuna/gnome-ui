@@ -1,7 +1,7 @@
 .statusBar {
   min-height: 36px;
   padding-inline: var(--gnome-space-3, 18px);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .trailing {

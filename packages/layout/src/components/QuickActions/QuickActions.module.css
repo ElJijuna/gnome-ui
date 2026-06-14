@@ -9,10 +9,10 @@
   appearance: none;
   min-width: 0;
   min-height: 84px;
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.07));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
   border-radius: 8px;
-  background: var(--gnome-card-bg-color, #ffffff);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   font: inherit;
   display: flex;
   flex-direction: column;
@@ -27,13 +27,13 @@
 .action:hover:not(:disabled) {
   background:
     linear-gradient(var(--gnome-hover-overlay), var(--gnome-hover-overlay)),
-    var(--gnome-card-bg-color, #ffffff);
+    var(--gnome-card-bg-color, #fff);
 }
 
 .action:active:not(:disabled) {
   background:
     linear-gradient(var(--gnome-active-overlay), var(--gnome-active-overlay)),
-    var(--gnome-card-bg-color, #ffffff);
+    var(--gnome-card-bg-color, #fff);
 }
 
 .action:focus-visible {
@@ -46,7 +46,7 @@
   opacity: 0.45;
 }
 
-@media (max-width: 520px) {
+@media (width <= 520px) {
   .root {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

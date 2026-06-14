@@ -52,7 +52,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 2px solid var(--gnome-card-bg-color, #ffffff);
+  border: 2px solid var(--gnome-card-bg-color, #fff);
 }
 
 .online {
@@ -70,7 +70,7 @@
 .offline {
   background-color: color-mix(
     in srgb,
-    var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8)) 45%,
+    var(--gnome-window-fg-color, rgb(0 0 0 / 0.8)) 45%,
     transparent
   );
 }
