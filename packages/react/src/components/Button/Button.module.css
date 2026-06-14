@@ -70,8 +70,8 @@
 
 /* Default — slight raised appearance with visible border */
 .default {
-  background-color: var(--gnome-card-bg-color, #ffffff);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   border-color: var(--gnome-light-3, #deddda);
   box-shadow: var(--gnome-shadow-sm);
 }
@@ -88,16 +88,16 @@
 @media (prefers-color-scheme: dark) {
   .default {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
     box-shadow: none;
   }
 
   .default:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgb(255 255 255 / 0.08);
   }
 
   .default:active:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgb(255 255 255 / 0.14);
     box-shadow: none;
   }
 }
@@ -136,7 +136,7 @@
 .flat {
   background-color: transparent;
   border-color: transparent;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .flat:hover:not(:disabled) {
@@ -149,8 +149,8 @@
 
 /* Raised — explicit raised look inside flat/toolbar contexts */
 .raised {
-  background-color: var(--gnome-card-bg-color, #ffffff);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   border-color: var(--gnome-light-3, #deddda);
   box-shadow: var(--gnome-shadow-sm);
 }
@@ -167,44 +167,43 @@
 @media (prefers-color-scheme: dark) {
   .raised {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
     box-shadow: var(--gnome-shadow-sm);
   }
 
   .raised:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgb(255 255 255 / 0.08);
   }
 
   .raised:active:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgb(255 255 255 / 0.14);
     box-shadow: none;
   }
 }
 
 /* OSD — dark semi-transparent overlay style for media/image contexts */
 .osd {
-  background-color: rgba(0, 0, 0, 0.65);
-  color: rgba(255, 255, 255, 0.95);
-  border-color: rgba(255, 255, 255, 0.12);
+  background-color: rgb(0 0 0 / 0.65);
+  color: rgb(255 255 255 / 0.95);
+  border-color: rgb(255 255 255 / 0.12);
   box-shadow: none;
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .osd:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgb(0 0 0 / 0.75);
   filter: none;
 }
 
 .osd:active:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgb(0 0 0 / 0.85);
   filter: none;
 }
 
 @media (prefers-color-scheme: dark) {
   .osd {
-    background-color: rgba(0, 0, 0, 0.65);
-    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgb(0 0 0 / 0.65);
+    border-color: rgb(255 255 255 / 0.1);
   }
 }
 

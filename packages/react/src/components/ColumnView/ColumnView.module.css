@@ -1,9 +1,10 @@
 /* ─── Outer container (border + radius, no overflow to preserve sticky) ────── */
 
 .outer {
-  border: 1px solid var(--gnome-divider-color, rgba(0, 0, 0, 0.15));
+  border: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.15));
   border-radius: var(--gnome-radius-lg, 12px);
-  background: var(--gnome-card-bg-color, #ffffff);
+  background: var(--gnome-card-bg-color, #fff);
+
   /* overflow:clip clips to border-radius without creating a scroll ctx */
   overflow: clip;
 }
@@ -29,9 +30,10 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  background: var(--gnome-card-bg-color, #ffffff);
+  background: var(--gnome-card-bg-color, #fff);
+
   /* Separator below sticky header */
-  box-shadow: 0 1px 0 var(--gnome-divider-color, rgba(0, 0, 0, 0.15));
+  box-shadow: 0 1px 0 var(--gnome-divider-color, rgb(0 0 0 / 0.15));
 }
 
 .th {
@@ -46,7 +48,7 @@
 }
 
 .headerLabel {
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.55;
 }
 
@@ -64,7 +66,7 @@
   font: inherit;
   font-size: var(--gnome-font-size-caption, 0.75rem);
   font-weight: 700;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.55;
   outline: none;
   border-radius: var(--gnome-radius-sm, 4px);
@@ -91,13 +93,13 @@
 }
 
 .sortNeutral {
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 /* ─── Body ──────────────────────────────────────────────────────────────────── */
 
 .tbody {
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
 }
 
 /* ─── Row ───────────────────────────────────────────────────────────────────── */
@@ -116,11 +118,11 @@
 }
 
 .rowSelectable:hover {
-  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.07));
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.07));
 }
 
 .rowSelectable:active {
-  background-color: var(--gnome-active-overlay, rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.12));
 }
 
 .rowSelected {
@@ -183,7 +185,7 @@
 .emptyLabel {
   font-family: var(--gnome-font-family, system-ui);
   font-size: var(--gnome-font-size-body, 1rem);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.55;
 }
 
@@ -195,7 +197,7 @@
   }
 
   .row + .row .td {
-    border-top: 1px solid var(--gnome-divider-color, rgba(0, 0, 0, 0.15));
+    border-top: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.15));
   }
 
   .sortBtn {

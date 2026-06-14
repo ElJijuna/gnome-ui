@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   /* align-self defaults to stretch — fills full row height so the line
      reaches the next item's node without a gap */
 }
@@ -147,12 +148,12 @@
   width: 2px;
   flex: 1;
   min-height: 16px;
-  background: var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  background: var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
 }
 
 .vertical .lineDotted {
   background: none;
-  border-left: 2px dotted var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  border-left: 2px dotted var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
   width: 0;
 }
 
@@ -160,12 +161,12 @@
 .horizontal .line {
   flex: 1;
   height: 2px;
-  background: var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  background: var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
 }
 
 .horizontal .lineDotted {
   background: none;
-  border-top: 2px dotted var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  border-top: 2px dotted var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
   height: 0;
   flex: 1;
 }
@@ -175,14 +176,14 @@
 @media (prefers-color-scheme: dark) {
   .vertical .line,
   .horizontal .line {
-    background: var(--gnome-border-subtle, rgba(255, 255, 255, 0.15));
+    background: var(--gnome-border-subtle, rgb(255 255 255 / 0.15));
   }
 
   .vertical .lineDotted {
-    border-left-color: var(--gnome-border-subtle, rgba(255, 255, 255, 0.15));
+    border-left-color: var(--gnome-border-subtle, rgb(255 255 255 / 0.15));
   }
 
   .horizontal .lineDotted {
-    border-top-color: var(--gnome-border-subtle, rgba(255, 255, 255, 0.15));
+    border-top-color: var(--gnome-border-subtle, rgb(255 255 255 / 0.15));
   }
 }

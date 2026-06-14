@@ -14,7 +14,6 @@
 .primary,
 .toggle {
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   outline: none;
   font: inherit;
@@ -23,15 +22,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body);
   font-weight: var(--gnome-font-weight-semibold);
   line-height: 1;
   white-space: nowrap;
-
   min-height: 34px;
-
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
     box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
@@ -87,10 +83,10 @@
 /* ─── Variant: default ──────────────────────────────────────────────────────── */
 
 .default {
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border-color: var(--gnome-light-3, #deddda);
   box-shadow: var(--gnome-shadow-sm);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .default .primary:hover:not(:disabled),
@@ -110,12 +106,12 @@
 @media (prefers-color-scheme: dark) {
   .default {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
     box-shadow: none;
   }
 
   .default .separator {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: rgb(255 255 255 / 0.12);
   }
 }
 
@@ -138,7 +134,7 @@
 }
 
 .suggested .separator {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 0.25);
 }
 
 /* ─── Variant: destructive ──────────────────────────────────────────────────── */
@@ -160,7 +156,7 @@
 }
 
 .destructive .separator {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 0.25);
 }
 
 /* ─── Dropdown panel ────────────────────────────────────────────────────────── */
@@ -169,13 +165,11 @@
   position: fixed;
   z-index: var(--gnome-z-popover, 1000);
   min-width: 160px;
-
-  background-color: var(--gnome-popover-bg-color, #ffffff);
-  border: 1px solid var(--gnome-popover-border-color, rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-popover-bg-color, #fff);
+  border: 1px solid var(--gnome-popover-border-color, rgb(0 0 0 / 0.12));
   border-radius: var(--gnome-radius-md);
-  box-shadow: var(--gnome-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.18));
+  box-shadow: var(--gnome-shadow-md, 0 4px 16px rgb(0 0 0 / 0.18));
   padding: var(--gnome-space-1, 6px);
-
   opacity: 0;
   transform: translateY(-4px);
   transition:
@@ -191,7 +185,7 @@
 @media (prefers-color-scheme: dark) {
   .dropdown {
     background-color: var(--gnome-popover-bg-color, #2d2d2d);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgb(255 255 255 / 0.1);
   }
 }
 

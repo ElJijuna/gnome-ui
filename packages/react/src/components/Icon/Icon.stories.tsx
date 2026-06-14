@@ -190,11 +190,10 @@ const TOTAL = CATEGORIES.reduce((n, c) => n + c.items.length, 0);
 const IconTile = ({ name, icon }: { name: string; icon: Icons.IconDefinition }) => {
   const [copied, setCopied] = useState(false);
 
-  function handleClick() {
-    navigator.clipboard.writeText(`import { ${name} } from "@gnome-ui/icons";`).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    });
+  async function handleClick() {
+    await navigator.clipboard.writeText(`import { ${name} } from "@gnome-ui/icons";`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   }
 
   return (

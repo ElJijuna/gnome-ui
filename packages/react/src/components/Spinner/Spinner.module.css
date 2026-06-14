@@ -4,7 +4,7 @@
   display: inline-block;
   border-radius: 50%;
   border-style: solid;
-  border-color: var(--gnome-spinner-track-color, rgba(0, 0, 0, 0.15));
+  border-color: var(--gnome-spinner-track-color, rgb(0 0 0 / 0.15));
   border-top-color: var(--gnome-accent-color, #3584e4);
   animation: spin 0.75s linear infinite;
   flex-shrink: 0;
@@ -42,7 +42,7 @@
 
 @media (prefers-color-scheme: dark) {
   .spinner {
-    border-color: var(--gnome-spinner-track-color, rgba(255, 255, 255, 0.15));
+    border-color: var(--gnome-spinner-track-color, rgb(255 255 255 / 0.15));
     border-top-color: var(--gnome-accent-color, #3584e4);
   }
 }

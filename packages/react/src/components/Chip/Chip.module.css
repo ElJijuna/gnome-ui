@@ -4,23 +4,19 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-
   padding: 3px 10px;
   border-radius: var(--gnome-radius-pill);
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-caption, 0.875rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: 1.4;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   white-space: nowrap;
-
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border: 1px solid var(--gnome-light-3, #deddda);
 
   /* Not a button by default */
   appearance: none;
-  -webkit-appearance: none;
   cursor: default;
   user-select: none;
   outline: none;
@@ -36,11 +32,11 @@
 }
 
 .selectable:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 85%, black);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 85%, black);
 }
 
 .selectable:active:not(:disabled) {
-  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 70%, black);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 70%, black);
 }
 
 .selectable:focus-visible {
@@ -92,16 +88,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   background: transparent;
   padding: 0;
   margin-inline-end: -4px;
   cursor: pointer;
   outline: none;
-
   color: inherit;
   opacity: 0.6;
   border-radius: var(--gnome-radius-pill);
@@ -124,7 +117,7 @@
 @media (prefers-color-scheme: dark) {
   .chip {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
   }
 
   .selectable:hover:not(:disabled) {

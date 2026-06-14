@@ -14,25 +14,20 @@
   justify-content: space-between;
   gap: var(--gnome-space-1, 6px);
   width: 100%;
-
   padding: 7px var(--gnome-space-2, 12px);
   min-height: 36px;
-
   appearance: none;
-  background-color: var(--gnome-card-bg-color, #ffffff);
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  background-color: var(--gnome-card-bg-color, #fff);
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
   border-radius: var(--gnome-radius-md, 8px);
-  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.08));
-
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.08));
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   cursor: pointer;
   user-select: none;
   text-align: left;
-
   transition:
     background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
     border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
@@ -40,7 +35,7 @@
 }
 
 .trigger:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 90%, black 10%);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 90%, black 10%);
 }
 
 .trigger:focus {
@@ -86,7 +81,7 @@
 
 .chevron {
   flex-shrink: 0;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
   transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
@@ -102,22 +97,18 @@
   left: 0;
   right: 0;
   z-index: 1000;
-
   margin: 0;
   padding: 4px 0;
   list-style: none;
-
-  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #ffffff));
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #fff));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
   border-radius: var(--gnome-radius-md, 8px);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.12),
-    0 1px 3px rgba(0, 0, 0, 0.08);
-
+    0 4px 16px rgb(0 0 0 / 0.12),
+    0 1px 3px rgb(0 0 0 / 0.08);
   max-height: 280px;
   overflow-y: auto;
   overscroll-behavior: contain;
-
   animation: list-in var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease) both;
 }
 
@@ -127,6 +118,7 @@
     transform: scaleY(0.95);
     transform-origin: top center;
   }
+
   to {
     opacity: 1;
     transform: scaleY(1);
@@ -149,6 +141,7 @@
     transform: scaleY(0.95);
     transform-origin: bottom center;
   }
+
   to {
     opacity: 1;
     transform: scaleY(1);
@@ -164,14 +157,11 @@
   gap: var(--gnome-space-2, 12px);
   padding: 8px var(--gnome-space-2, 12px);
   min-height: 40px;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   cursor: pointer;
   user-select: none;
-
   transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
@@ -225,20 +215,20 @@
 @media (prefers-color-scheme: dark) {
   .trigger {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
     box-shadow: none;
   }
 
   .trigger:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgb(255 255 255 / 0.08);
   }
 
   .list {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgb(255 255 255 / 0.1);
     box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      0 1px 3px rgba(0, 0, 0, 0.3);
+      0 4px 16px rgb(0 0 0 / 0.4),
+      0 1px 3px rgb(0 0 0 / 0.3);
   }
 }
 

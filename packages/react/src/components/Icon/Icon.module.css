@@ -1,8 +1,8 @@
 /* ─── Palette color overrides ───────────────────────────────────────────────── */
-/* Applied via the `color` prop. Each class sets the CSS `color` property so   */
-/* the SVG's fill="currentColor" resolves to the palette token.                */
 
-/* stylelint-disable selector-class-pattern */
+/* Applied via the `color` prop. Each class sets the CSS `color` property so   */
+
+/* the SVG's fill="currentColor" resolves to the palette token.                */
 
 .color-blue {
   color: var(--gnome-blue-3, #3584e4);
@@ -31,5 +31,3 @@
 .color-brown {
   color: var(--gnome-brown-3, #986a44);
 }
-
-/* stylelint-enable selector-class-pattern */

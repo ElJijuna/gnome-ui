@@ -19,16 +19,13 @@
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-
   background-color: var(--swatch-color, #3584e4);
 
   /* Unselected: subtle inner shadow for depth */
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
-
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.15);
   transition:
     transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
     box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
-
   outline: none;
 }
 
@@ -38,10 +35,12 @@
   width: 22px;
   height: 22px;
 }
+
 .swatch-md {
   width: 30px;
   height: 30px;
 }
+
 .swatch-lg {
   width: 38px;
   height: 38px;
@@ -57,7 +56,7 @@
 
 .swatch:focus-visible {
   box-shadow:
-    inset 0 0 0 1px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgb(0 0 0 / 0.15),
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
     var(--gnome-focus-ring-color, #3584e4);
@@ -69,13 +68,13 @@
 .swatchSelected {
   transform: scale(1.05);
   box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+    inset 0 0 0 2px rgb(255 255 255 / 0.9),
     0 0 0 2px var(--swatch-color);
 }
 
 .swatchSelected:focus-visible {
   box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+    inset 0 0 0 2px rgb(255 255 255 / 0.9),
     0 0 0 2px var(--swatch-color),
     0 0 0 calc(2px + var(--gnome-focus-ring-offset, 2px)) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(2px + var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
@@ -96,21 +95,22 @@
   width: 55%;
   height: 55%;
   flex-shrink: 0;
+
   /* Drop shadow so the check reads on light-colored swatches (yellow, etc.) */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.35));
 }
 
 /* ─── Custom "+" button ──────────────────────────────────────────────────── */
 
 .customButton {
-  background-color: var(--gnome-card-bg-color, #ffffff);
-  border: 1.5px dashed var(--gnome-card-shade-color, rgba(0, 0, 0, 0.2));
+  background-color: var(--gnome-card-bg-color, #fff);
+  border: 1.5px dashed var(--gnome-card-shade-color, rgb(0 0 0 / 0.2));
   box-shadow: none;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.6));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.6));
 }
 
 .customButton:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 88%, black 12%);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 88%, black 12%);
   transform: scale(1.08);
 }
 
@@ -133,24 +133,24 @@
 
 @media (prefers-color-scheme: dark) {
   .swatch {
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
   }
 
   .swatchSelected {
     box-shadow:
-      inset 0 0 0 2px rgba(255, 255, 255, 0.85),
+      inset 0 0 0 2px rgb(255 255 255 / 0.85),
       0 0 0 2px var(--swatch-color);
   }
 
   .customButton {
-    border-color: rgba(255, 255, 255, 0.25);
-    color: rgba(255, 255, 255, 0.7);
+    border-color: rgb(255 255 255 / 0.25);
+    color: rgb(255 255 255 / 0.7);
   }
 
   .customButton:hover:not(:disabled) {
     background-color: color-mix(
       in srgb,
-      var(--gnome-card-bg-color, rgba(255, 255, 255, 0.08)) 80%,
+      var(--gnome-card-bg-color, rgb(255 255 255 / 0.08)) 80%,
       white 20%
     );
   }

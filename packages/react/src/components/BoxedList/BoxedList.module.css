@@ -4,9 +4,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-
-  background-color: var(--gnome-card-bg-color, #ffffff);
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
   border: 1px solid var(--gnome-divider-color);
   border-radius: var(--gnome-radius-lg);
 }
@@ -44,7 +43,7 @@
 }
 
 .separateItem {
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border: 1px solid var(--gnome-divider-color);
   border-radius: var(--gnome-radius-lg);
   overflow: hidden;

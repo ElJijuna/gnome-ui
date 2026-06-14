@@ -27,7 +27,7 @@
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-semibold, 600);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .description {
@@ -35,7 +35,7 @@
   font-size: var(--gnome-font-size-caption, 0.75rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
 }
 

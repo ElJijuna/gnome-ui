@@ -4,15 +4,11 @@
   position: fixed;
   inset: 0;
   z-index: 10000;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(0 0 0 / 0.5);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-
   animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
 }
 
@@ -20,6 +16,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -32,17 +29,13 @@
   flex-direction: column;
   width: min(540px, calc(100vw - 48px));
   max-height: min(640px, 90dvh);
-
   background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #fafafa));
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   border-radius: var(--gnome-radius-xl, 16px);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(0, 0, 0, 0.08);
-
+    0 8px 32px rgb(0 0 0 / 0.25),
+    0 0 0 1px rgb(0 0 0 / 0.08);
   overflow: hidden;
-
   animation: dialog-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
 }
 
@@ -56,6 +49,7 @@
     opacity: 0;
     transform: scale(0.94) translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -71,7 +65,7 @@
   gap: var(--gnome-space-2, 12px);
   padding: var(--gnome-space-2, 12px) var(--gnome-space-2, 12px) var(--gnome-space-2, 12px)
     var(--gnome-space-3, 16px);
-  border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
   flex-shrink: 0;
 }
 
@@ -87,7 +81,7 @@
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.6;
   transition:
     background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
@@ -96,7 +90,7 @@
 }
 
 .closeBtn:hover {
-  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  background-color: color-mix(in srgb, currentcolor 10%, transparent);
   opacity: 1;
 }
 
@@ -121,10 +115,10 @@
 
 .searchInput {
   appearance: none;
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
   border-radius: var(--gnome-radius-md, 8px);
-  background-color: var(--gnome-card-bg-color, rgba(0, 0, 0, 0.04));
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-card-bg-color, rgb(0 0 0 / 0.04));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   padding: 5px var(--gnome-space-2, 12px);
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
@@ -160,7 +154,7 @@
 .sidebar {
   width: 200px;
   flex-shrink: 0;
-  border-right: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  border-right: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
   overflow-y: auto;
   padding: var(--gnome-space-2, 12px) var(--gnome-space-2, 12px);
 }
@@ -186,17 +180,15 @@
   align-items: center;
   gap: var(--gnome-space-2, 12px);
   text-align: left;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
 .navItem:hover:not(.navItemActive) {
-  background-color: color-mix(in srgb, currentColor 6%, transparent);
+  background-color: color-mix(in srgb, currentcolor 6%, transparent);
 }
 
 .navItemActive {
@@ -238,27 +230,27 @@
 
 @media (prefers-color-scheme: dark) {
   .backdrop {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgb(0 0 0 / 0.65);
   }
 
   .dialog {
     background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #242424));
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.08);
+      0 8px 32px rgb(0 0 0 / 0.5),
+      0 0 0 1px rgb(255 255 255 / 0.08);
   }
 
   .header {
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgb(255 255 255 / 0.08);
   }
 
   .sidebar {
-    border-right-color: rgba(255, 255, 255, 0.08);
+    border-right-color: rgb(255 255 255 / 0.08);
   }
 
   .searchInput {
-    background-color: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgb(255 255 255 / 0.06);
+    border-color: rgb(255 255 255 / 0.15);
   }
 }
 
@@ -282,7 +274,7 @@
 @media (prefers-contrast: more) {
   .dialog {
     box-shadow: none;
-    border: 2px solid var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    border: 2px solid var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   }
 
   .header {

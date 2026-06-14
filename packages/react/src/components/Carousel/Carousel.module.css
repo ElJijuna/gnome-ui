@@ -19,15 +19,13 @@
 
 .horizontal {
   flex-direction: row;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: scroll hidden;
   scroll-snap-type: x mandatory;
 }
 
 .vertical {
   flex-direction: column;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden scroll;
   scroll-snap-type: y mandatory;
 }
 
@@ -59,7 +57,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.2;
   transition:
     opacity var(--gnome-duration-fast) var(--gnome-easing-default),
@@ -98,7 +96,7 @@
   width: 24px;
   height: 3px;
   border-radius: 2px;
-  background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.2;
   transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
 }

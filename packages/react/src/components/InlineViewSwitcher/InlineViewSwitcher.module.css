@@ -25,31 +25,25 @@
 
 .item {
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   background: transparent;
   font: inherit;
   cursor: pointer;
   outline: none;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--gnome-space-1, 6px);
-
   padding: 4px var(--gnome-space-2, 12px);
   min-height: 28px;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   white-space: nowrap;
-
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
     box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
-
   position: relative;
   z-index: 1;
 }
@@ -72,7 +66,7 @@
 /* ─── Variant: default ──────────────────────────────────────────────────────── */
 
 .default {
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border: 1px solid var(--gnome-light-3, #deddda);
   border-radius: var(--gnome-radius-md);
   box-shadow: var(--gnome-shadow-sm);
@@ -84,17 +78,17 @@
   border-radius: calc(var(--gnome-radius-md) - 2px);
 }
 
-.default .item:hover:not(:disabled):not(.active) {
-  background-color: rgba(0, 0, 0, 0.06);
+.default .item:hover:not(:disabled, .active) {
+  background-color: rgb(0 0 0 / 0.06);
 }
 
-.default .item:active:not(:disabled):not(.active) {
-  background-color: rgba(0, 0, 0, 0.12);
+.default .item:active:not(:disabled, .active) {
+  background-color: rgb(0 0 0 / 0.12);
 }
 
 .default .item:focus-visible {
   box-shadow:
-    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #ffffff),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #fff),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
     var(--gnome-focus-ring-color, #3584e4);
 }
@@ -113,16 +107,16 @@
 @media (prefers-color-scheme: dark) {
   .default {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
     box-shadow: none;
   }
 
-  .default .item:hover:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.08);
+  .default .item:hover:not(:disabled, .active) {
+    background-color: rgb(255 255 255 / 0.08);
   }
 
-  .default .item:active:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.14);
+  .default .item:active:not(:disabled, .active) {
+    background-color: rgb(255 255 255 / 0.14);
   }
 
   .default .item:focus-visible {
@@ -156,14 +150,14 @@
 
 .flat .item {
   border-radius: calc(var(--gnome-radius-md) - 2px);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.6));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.6));
 }
 
-.flat .item:hover:not(:disabled):not(.active) {
+.flat .item:hover:not(:disabled, .active) {
   background-color: var(--gnome-hover-overlay);
 }
 
-.flat .item:active:not(:disabled):not(.active) {
+.flat .item:active:not(:disabled, .active) {
   background-color: var(--gnome-active-overlay);
 }
 
@@ -185,7 +179,7 @@
 
 @media (prefers-color-scheme: dark) {
   .flat .item {
-    color: var(--gnome-window-fg-color, rgba(255, 255, 255, 0.6));
+    color: var(--gnome-window-fg-color, rgb(255 255 255 / 0.6));
   }
 
   .flat .indicator {
@@ -200,7 +194,7 @@
 /* ─── Variant: round ────────────────────────────────────────────────────────── */
 
 .round {
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border: 1px solid var(--gnome-light-3, #deddda);
   border-radius: var(--gnome-radius-pill, 9999px);
   box-shadow: var(--gnome-shadow-sm);
@@ -218,17 +212,17 @@
   min-width: 28px;
 }
 
-.round .item:hover:not(:disabled):not(.active) {
-  background-color: rgba(0, 0, 0, 0.06);
+.round .item:hover:not(:disabled, .active) {
+  background-color: rgb(0 0 0 / 0.06);
 }
 
-.round .item:active:not(:disabled):not(.active) {
-  background-color: rgba(0, 0, 0, 0.12);
+.round .item:active:not(:disabled, .active) {
+  background-color: rgb(0 0 0 / 0.12);
 }
 
 .round .item:focus-visible {
   box-shadow:
-    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #ffffff),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-card-bg-color, #fff),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
     var(--gnome-focus-ring-color, #3584e4);
 }
@@ -239,23 +233,23 @@
 }
 
 .round .active {
-  color: var(--gnome-accent-fg-color, #ffffff);
+  color: var(--gnome-accent-fg-color, #fff);
   font-weight: var(--gnome-font-weight-semibold, 600);
 }
 
 @media (prefers-color-scheme: dark) {
   .round {
     background-color: var(--gnome-card-bg-color, #383838);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(255 255 255 / 0.12);
     box-shadow: none;
   }
 
-  .round .item:hover:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.08);
+  .round .item:hover:not(:disabled, .active) {
+    background-color: rgb(255 255 255 / 0.08);
   }
 
-  .round .item:active:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.14);
+  .round .item:active:not(:disabled, .active) {
+    background-color: rgb(255 255 255 / 0.14);
   }
 
   .round .item:focus-visible {
@@ -269,7 +263,7 @@
 /* ─── Variant: pill ─────────────────────────────────────────────────────────── */
 
 .pill {
-  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
   border: none;
   border-radius: var(--gnome-radius-pill, 9999px);
   box-shadow: none;
@@ -283,12 +277,12 @@
   color: var(--gnome-window-fg-color);
 }
 
-.pill .item:hover:not(:disabled):not(.active) {
-  background-color: rgba(0, 0, 0, 0.04);
+.pill .item:hover:not(:disabled, .active) {
+  background-color: rgb(0 0 0 / 0.04);
 }
 
-.pill .item:active:not(:disabled):not(.active) {
-  background-color: rgba(0, 0, 0, 0.08);
+.pill .item:active:not(:disabled, .active) {
+  background-color: rgb(0 0 0 / 0.08);
 }
 
 .pill .item:focus-visible {
@@ -299,8 +293,8 @@
 }
 
 .pill .indicator {
-  background-color: var(--gnome-card-bg-color, #ffffff);
-  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-card-bg-color, #fff);
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.12));
   border-radius: var(--gnome-radius-pill, 9999px);
   top: 3px;
   bottom: 3px;
@@ -313,15 +307,15 @@
 
 @media (prefers-color-scheme: dark) {
   .pill {
-    background-color: var(--gnome-hover-overlay, rgba(255, 255, 255, 0.08));
+    background-color: var(--gnome-hover-overlay, rgb(255 255 255 / 0.08));
   }
 
-  .pill .item:hover:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.05);
+  .pill .item:hover:not(:disabled, .active) {
+    background-color: rgb(255 255 255 / 0.05);
   }
 
-  .pill .item:active:not(:disabled):not(.active) {
-    background-color: rgba(255, 255, 255, 0.1);
+  .pill .item:active:not(:disabled, .active) {
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .pill .indicator {
@@ -349,8 +343,7 @@
 
 .overflowScroll {
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
@@ -394,34 +387,30 @@
 
 .menuListItem {
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   background: transparent;
   font: inherit;
   cursor: pointer;
   outline: none;
-
   display: flex;
   align-items: center;
   gap: var(--gnome-space-2, 12px);
   padding: var(--gnome-space-2, 12px) var(--gnome-space-3, 16px);
   border-radius: var(--gnome-radius-md);
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   text-align: left;
   width: 100%;
-
   transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
 .menuListItem:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: rgb(0 0 0 / 0.06);
 }
 
 .menuListItem:active:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: rgb(0 0 0 / 0.12);
 }
 
 .menuListItem:focus-visible {
@@ -454,11 +443,11 @@
 
 @media (prefers-color-scheme: dark) {
   .menuListItem:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgb(255 255 255 / 0.08);
   }
 
   .menuListItem:active:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgb(255 255 255 / 0.14);
   }
 
   .menuListItem:focus-visible {

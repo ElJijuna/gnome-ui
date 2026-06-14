@@ -66,13 +66,13 @@
 
 .divider {
   width: 1px;
-  background-color: var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  background-color: var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
   flex-shrink: 0;
 }
 
 @media (prefers-color-scheme: dark) {
   .divider {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgb(255 255 255 / 0.08);
   }
 }
 

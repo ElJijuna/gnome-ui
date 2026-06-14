@@ -13,12 +13,10 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-
   font-family: var(--gnome-font-family);
   font-size: 0.6875rem; /* 11px — keeps it compact */
   font-weight: var(--gnome-font-weight-semibold, 600);
   line-height: 1;
-
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
@@ -56,27 +54,27 @@
 
 .accent {
   background-color: var(--gnome-accent-bg-color, #3584e4);
-  color: var(--gnome-accent-fg-color, #ffffff);
+  color: var(--gnome-accent-fg-color, #fff);
 }
 
 .success {
   background-color: var(--gnome-success-bg-color, #2ec27e);
-  color: var(--gnome-success-fg-color, #ffffff);
+  color: var(--gnome-success-fg-color, #fff);
 }
 
 .warning {
   background-color: var(--gnome-warning-bg-color, #f6d32d);
-  color: var(--gnome-warning-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-warning-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .error {
   background-color: var(--gnome-error-bg-color, #e01b24);
-  color: var(--gnome-error-fg-color, #ffffff);
+  color: var(--gnome-error-fg-color, #fff);
 }
 
 .neutral {
   background-color: var(--gnome-light-4, #c0bfbc);
-  color: rgba(0, 0, 0, 0.8);
+  color: rgb(0 0 0 / 0.8);
 }
 
 /* ─── Dark mode ────────────────────────────────────────────────────────────── */
@@ -88,6 +86,6 @@
 
   .neutral {
     background-color: var(--gnome-dark-2, #5e5c64);
-    color: rgba(255, 255, 255, 0.87);
+    color: rgb(255 255 255 / 0.87);
   }
 }

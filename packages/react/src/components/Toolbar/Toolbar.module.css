@@ -5,14 +5,12 @@
 
 .toolbar {
   display: flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
   align-items: center;
-  flex-wrap: nowrap;
   gap: var(--gnome-space-1, 6px);
   padding: var(--gnome-space-1, 6px);
   min-height: 46px;
-
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   font-family: var(--gnome-font-family);
 }
 

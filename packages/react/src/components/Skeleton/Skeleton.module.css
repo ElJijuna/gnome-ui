@@ -1,8 +1,8 @@
 /* Base */
 
 .skeleton {
-  --skeleton-base: var(--gnome-skeleton-base-color, rgba(0, 0, 0, 0.09));
-  --skeleton-highlight: var(--gnome-skeleton-highlight-color, rgba(255, 255, 255, 0.55));
+  --skeleton-base: var(--gnome-skeleton-base-color, rgb(0 0 0 / 0.09));
+  --skeleton-highlight: var(--gnome-skeleton-highlight-color, rgb(255 255 255 / 0.55));
 
   position: relative;
   display: block;
@@ -68,8 +68,8 @@
 
 @media (prefers-color-scheme: dark) {
   .skeleton {
-    --skeleton-base: var(--gnome-skeleton-base-color, rgba(255, 255, 255, 0.12));
-    --skeleton-highlight: var(--gnome-skeleton-highlight-color, rgba(255, 255, 255, 0.18));
+    --skeleton-base: var(--gnome-skeleton-base-color, rgb(255 255 255 / 0.12));
+    --skeleton-highlight: var(--gnome-skeleton-highlight-color, rgb(255 255 255 / 0.18));
   }
 }
 

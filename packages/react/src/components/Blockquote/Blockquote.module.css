@@ -46,7 +46,7 @@
 /* ─── Variants ────────────────────────────────────────────────────────────── */
 
 .default {
-  border-color: var(--gnome-border-subtle, rgba(0, 0, 0, 0.15));
+  border-color: var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
 }
 
 .info {

@@ -2,21 +2,17 @@
 
 .checkbox {
   appearance: none;
-  -webkit-appearance: none;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   cursor: pointer;
-
   width: 18px;
   height: 18px;
   border-radius: var(--gnome-radius-sm, 4px);
-
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border: 1.5px solid var(--gnome-light-4, #c0bfbc);
-
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
     border-color var(--gnome-duration-fast) var(--gnome-easing-default);
@@ -38,10 +34,11 @@
 
 .checkbox:checked::before {
   opacity: 1;
+
   /* SVG checkmark rendered via clip-path */
   width: 10px;
   height: 7px;
-  background-color: #ffffff;
+  background-color: #fff;
   clip-path: polygon(14% 44%, 0 58%, 36% 100%, 100% 12%, 84% 0%, 36% 68%);
 }
 
@@ -56,7 +53,7 @@
   opacity: 1;
   width: 10px;
   height: 2px;
-  background-color: #ffffff;
+  background-color: #fff;
   clip-path: none;
   border-radius: 1px;
 }
@@ -73,9 +70,9 @@
 
 /* ─── Hover ────────────────────────────────────────────────────────────────── */
 
-.checkbox:not(:checked):not(:indeterminate):hover {
+.checkbox:not(:checked, :indeterminate):hover {
   border-color: var(--gnome-light-5, #9a9996);
-  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 94%, black 6%);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 94%, black 6%);
 }
 
 /* ─── Disabled ─────────────────────────────────────────────────────────────── */
@@ -93,7 +90,7 @@
     border-color: var(--gnome-dark-1, #77767b);
   }
 
-  .checkbox:not(:checked):not(:indeterminate):hover {
+  .checkbox:not(:checked, :indeterminate):hover {
     border-color: var(--gnome-light-4, #c0bfbc);
     background-color: color-mix(in srgb, var(--gnome-card-bg-color, #383838) 85%, white 15%);
   }
@@ -104,11 +101,11 @@
 @media (prefers-contrast: more) {
   .checkbox {
     border-width: 2px;
-    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   }
 
-  .checkbox:not(:checked):not(:indeterminate):hover {
-    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  .checkbox:not(:checked, :indeterminate):hover {
+    border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
     background-color: var(--gnome-hover-overlay);
   }
 }

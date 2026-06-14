@@ -3,14 +3,14 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 .frame {
-  border: 1px solid var(--gnome-borders, rgba(0, 0, 0, 0.12));
+  border: 1px solid var(--gnome-borders, rgb(0 0 0 / 0.12));
   border-radius: var(--gnome-radius-md);
   overflow: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
   .frame {
-    border-color: var(--gnome-borders, rgba(255, 255, 255, 0.12));
+    border-color: var(--gnome-borders, rgb(255 255 255 / 0.12));
   }
 }
 

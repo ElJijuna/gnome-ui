@@ -11,14 +11,12 @@
 
   /* Reset button */
   appearance: none;
-  -webkit-appearance: none;
   background: transparent;
   border: none;
   font: inherit;
   outline: none;
   cursor: pointer;
   text-align: center;
-
   transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
@@ -66,12 +64,12 @@
 /* ─── Variants ─────────────────────────────────────────────────────────────── */
 
 .default .title {
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .default .leading,
 .default .trailing {
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .suggested .title {

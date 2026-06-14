@@ -47,7 +47,7 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-    currentColor;
+    currentcolor;
 }
 
 /* ─── Dismiss button ───────────────────────────────────────────────────────── */
@@ -71,6 +71,7 @@
 .dismissBtn:hover {
   opacity: 1;
 }
+
 .dismissBtn:active {
   opacity: 0.8;
 }
@@ -81,61 +82,65 @@
   box-shadow:
     0 0 0 var(--gnome-focus-ring-offset, 2px) transparent,
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
-    currentColor;
+    currentcolor;
 }
 
 /* ─── Variant: info ────────────────────────────────────────────────────────── */
 
 .info {
   background-color: var(--gnome-accent-bg-color, #3584e4);
-  color: var(--gnome-accent-fg-color, #ffffff);
+  color: var(--gnome-accent-fg-color, #fff);
 }
 
 .actionBtn-info:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgb(255 255 255 / 0.15);
 }
+
 .actionBtn-info:active {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 0.25);
 }
 
 /* ─── Variant: warning ─────────────────────────────────────────────────────── */
 
 .warning {
   background-color: var(--gnome-warning-bg-color, #f6d32d);
-  color: var(--gnome-warning-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-warning-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .actionBtn-warning:hover {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgb(0 0 0 / 0.08);
 }
+
 .actionBtn-warning:active {
-  background-color: rgba(0, 0, 0, 0.14);
+  background-color: rgb(0 0 0 / 0.14);
 }
 
 /* ─── Variant: error ───────────────────────────────────────────────────────── */
 
 .error {
   background-color: var(--gnome-error-bg-color, #e01b24);
-  color: var(--gnome-error-fg-color, #ffffff);
+  color: var(--gnome-error-fg-color, #fff);
 }
 
 .actionBtn-error:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgb(255 255 255 / 0.15);
 }
+
 .actionBtn-error:active {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 0.25);
 }
 
 /* ─── Variant: success ─────────────────────────────────────────────────────── */
 
 .success {
   background-color: var(--gnome-success-bg-color, #2ec27e);
-  color: var(--gnome-success-fg-color, #ffffff);
+  color: var(--gnome-success-fg-color, #fff);
 }
 
 .actionBtn-success:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgb(255 255 255 / 0.15);
 }
+
 .actionBtn-success:active {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 0.25);
 }

@@ -4,15 +4,11 @@
   position: fixed;
   inset: 0;
   z-index: 10000;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background-color: var(--gnome-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
+  background-color: var(--gnome-dialog-backdrop-color, rgb(0 0 0 / 0.5));
   backdrop-filter: blur(var(--gnome-dialog-backdrop-blur, 4px));
-  -webkit-backdrop-filter: blur(var(--gnome-dialog-backdrop-blur, 4px));
-
   animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
 }
 
@@ -20,6 +16,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -33,17 +30,13 @@
   max-height: min(640px, 90dvh);
   display: flex;
   flex-direction: column;
-
   background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #fafafa));
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   border-radius: var(--gnome-radius-xl, 16px);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(0, 0, 0, 0.08);
-
+    0 8px 32px rgb(0 0 0 / 0.25),
+    0 0 0 1px rgb(0 0 0 / 0.08);
   overflow: hidden;
-
   animation: dialog-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
 }
 
@@ -52,6 +45,7 @@
     opacity: 0;
     transform: scale(0.92) translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -95,7 +89,7 @@
 
 .tabBar {
   display: flex;
-  border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
   padding: 0 var(--gnome-space-3, 16px);
   gap: 4px;
 }
@@ -108,10 +102,9 @@
   padding: 8px var(--gnome-space-2, 12px);
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.6;
   transition:
     opacity var(--gnome-duration-fast) var(--gnome-easing-default),
@@ -235,7 +228,7 @@
   margin: 0;
   padding: var(--gnome-space-2, 12px);
   border-radius: var(--gnome-radius-md, 8px);
-  background: var(--gnome-card-bg-color, rgba(0, 0, 0, 0.04));
+  background: var(--gnome-card-bg-color, rgb(0 0 0 / 0.04));
   font-family: monospace;
   font-size: 0.8rem;
   line-height: 1.5;
@@ -248,25 +241,22 @@
 .footer {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  border-top: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
 }
 
 .btn {
   appearance: none;
   border: none;
-  border-bottom: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.08));
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.08));
   background: transparent;
   width: 100%;
   padding: 14px var(--gnome-space-4, 24px);
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-
   cursor: pointer;
   text-align: center;
-
   transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
@@ -275,11 +265,11 @@
 }
 
 .btn:hover:not(:disabled) {
-  background-color: color-mix(in srgb, currentColor 6%, transparent);
+  background-color: color-mix(in srgb, currentcolor 6%, transparent);
 }
 
 .btn:active:not(:disabled) {
-  background-color: color-mix(in srgb, currentColor 12%, transparent);
+  background-color: color-mix(in srgb, currentcolor 12%, transparent);
 }
 
 .btn:focus {
@@ -301,16 +291,16 @@
   .dialog {
     background-color: var(--gnome-dialog-bg-color, var(--gnome-window-bg-color, #242424));
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.08);
+      0 8px 32px rgb(0 0 0 / 0.5),
+      0 0 0 1px rgb(255 255 255 / 0.08);
   }
 
   .footer {
-    border-top-color: rgba(255, 255, 255, 0.08);
+    border-top-color: rgb(255 255 255 / 0.08);
   }
 
   .btn {
-    border-bottom-color: rgba(255, 255, 255, 0.06);
+    border-bottom-color: rgb(255 255 255 / 0.06);
   }
 }
 

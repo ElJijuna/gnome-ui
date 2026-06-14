@@ -10,8 +10,8 @@
 .item {
   /* Separate-ring so overlapping avatars stay visually distinct */
   box-shadow:
-    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
-    0 0 0 2px #ffffff;
+    inset 0 0 0 1px rgb(0 0 0 / 0.08),
+    0 0 0 2px #fff;
   flex-shrink: 0;
 }
 
@@ -49,11 +49,11 @@
   user-select: none;
   background-color: var(--gnome-dark-2, #5e5c64);
   box-shadow:
-    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
-    0 0 0 2px #ffffff;
+    inset 0 0 0 1px rgb(0 0 0 / 0.08),
+    0 0 0 2px #fff;
   font-family: var(--gnome-font-family);
   font-weight: var(--gnome-font-weight-semibold);
-  color: #ffffff;
+  color: #fff;
   line-height: 1;
 }
 
@@ -112,13 +112,13 @@
 @media (prefers-color-scheme: dark) {
   .item {
     box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px rgb(255 255 255 / 0.08),
       0 0 0 2px #242424;
   }
 
   .overflow {
     box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px rgb(255 255 255 / 0.08),
       0 0 0 2px #242424;
   }
 }

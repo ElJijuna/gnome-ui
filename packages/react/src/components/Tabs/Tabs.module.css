@@ -2,7 +2,7 @@
 
 .bar {
   background-color: var(--gnome-headerbar-bg-color, #ebebeb);
-  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgba(0, 0, 0, 0.12));
+  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgb(0 0 0 / 0.12));
 }
 
 /* ─── Tab list ─────────────────────────────────────────────────────────────── */
@@ -25,13 +25,11 @@
 
 .tab {
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   background: transparent;
   font: inherit;
   cursor: pointer;
   outline: none;
-
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -40,13 +38,11 @@
   min-width: 80px;
   max-width: 200px;
   white-space: nowrap;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
-  color: var(--gnome-headerbar-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-headerbar-fg-color, rgb(0 0 0 / 0.8));
   opacity: 0.7;
-
   border-radius: var(--gnome-radius-md, 8px) var(--gnome-radius-md, 8px) 0 0;
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
@@ -125,13 +121,11 @@
 
 .closeBtn {
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   background: transparent;
   font: inherit;
   cursor: pointer;
   padding: 0;
-
   flex-shrink: 0;
   display: flex;
   align-items: center;

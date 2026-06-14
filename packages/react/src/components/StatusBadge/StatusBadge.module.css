@@ -18,30 +18,30 @@
 
 .success {
   background-color: var(--gnome-success-bg-color, #2ec27e);
-  color: var(--gnome-success-fg-color, #ffffff);
+  color: var(--gnome-success-fg-color, #fff);
 }
 
 .warning {
   background-color: var(--gnome-warning-bg-color, #f6d32d);
-  color: var(--gnome-warning-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-warning-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .error {
   background-color: var(--gnome-error-bg-color, #e01b24);
-  color: var(--gnome-error-fg-color, #ffffff);
+  color: var(--gnome-error-fg-color, #fff);
 }
 
 .new {
   background-color: var(--gnome-new-bg-color, #9141ac);
-  color: var(--gnome-new-fg-color, #ffffff);
+  color: var(--gnome-new-fg-color, #fff);
 }
 
 .accent {
   background-color: var(--gnome-accent-bg-color, #3584e4);
-  color: var(--gnome-accent-fg-color, #ffffff);
+  color: var(--gnome-accent-fg-color, #fff);
 }
 
 .neutral {
-  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.08));
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.08));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }

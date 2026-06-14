@@ -4,7 +4,6 @@
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-
   transition:
     max-height var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease),
     opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
@@ -21,11 +20,9 @@
   display: flex;
   align-items: center;
   gap: var(--gnome-space-1, 6px);
-
   padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
-
   background-color: var(--gnome-headerbar-bg-color, #ebebeb);
-  border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
+  border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgb(0 0 0 / 0.12));
 }
 
 .disabled {
@@ -38,7 +35,7 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
 }
 
@@ -50,27 +47,24 @@
 
   /* Reset browser search input */
   appearance: none;
-  -webkit-appearance: none;
-
   border: none;
   background: transparent;
   outline: none;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .input::placeholder {
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
 }
 
 /* Hide webkit search cancel button — we render our own */
 .input::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 .input:focus {
@@ -84,29 +78,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 24px;
   height: 24px;
-
   appearance: none;
   border: none;
   background: transparent;
   border-radius: var(--gnome-radius-sm, 6px);
   padding: 0;
   cursor: pointer;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
-
   transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
 .clearButton:hover:not(:disabled) {
   opacity: 1;
-  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  background-color: color-mix(in srgb, currentcolor 10%, transparent);
 }
 
 .clearButton:active:not(:disabled) {
-  background-color: color-mix(in srgb, currentColor 18%, transparent);
+  background-color: color-mix(in srgb, currentcolor 18%, transparent);
 }
 
 .clearButton:focus {
@@ -126,9 +117,8 @@
   flex-wrap: wrap;
   gap: var(--gnome-space-1, 6px);
   padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
-
   background-color: var(--gnome-headerbar-bg-color, #ebebeb);
-  border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
+  border-bottom: 1px solid var(--gnome-headerbar-shade-color, rgb(0 0 0 / 0.12));
 }
 
 /* ─── Suggestions popover ───────────────────────────────────────────────────── */
@@ -139,20 +129,16 @@
   margin: 0;
   padding: var(--gnome-space-1, 6px);
   list-style: none;
-
-  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #ffffff));
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.1));
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #fff));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
   border-top: none;
   border-radius: 0 0 var(--gnome-radius-lg, 12px) var(--gnome-radius-lg, 12px);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.14),
-    0 1px 4px rgba(0, 0, 0, 0.08);
-
+    0 4px 20px rgb(0 0 0 / 0.14),
+    0 1px 4px rgb(0 0 0 / 0.08);
   max-height: 280px;
   overflow-y: auto;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
 }
@@ -168,7 +154,6 @@
   border-radius: var(--gnome-radius-sm, 6px);
   cursor: pointer;
   user-select: none;
-
   transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
 }
 
@@ -184,10 +169,10 @@
 @media (prefers-color-scheme: dark) {
   .suggestionsPanel {
     background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #383838));
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgb(255 255 255 / 0.1);
     box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.4),
-      0 1px 4px rgba(0, 0, 0, 0.3);
+      0 4px 24px rgb(0 0 0 / 0.4),
+      0 1px 4px rgb(0 0 0 / 0.3);
   }
 }
 
@@ -210,7 +195,7 @@
   .bar,
   .filterRow {
     background-color: var(--gnome-headerbar-bg-color, #303030);
-    border-bottom-color: rgba(0, 0, 0, 0.35);
+    border-bottom-color: rgb(0 0 0 / 0.35);
   }
 }
 

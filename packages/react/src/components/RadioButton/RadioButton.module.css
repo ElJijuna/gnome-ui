@@ -2,21 +2,17 @@
 
 .radio {
   appearance: none;
-  -webkit-appearance: none;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   cursor: pointer;
-
   width: 18px;
   height: 18px;
   border-radius: var(--gnome-radius-pill);
-
-  background-color: var(--gnome-card-bg-color, #ffffff);
+  background-color: var(--gnome-card-bg-color, #fff);
   border: 1.5px solid var(--gnome-light-4, #c0bfbc);
-
   transition:
     background-color var(--gnome-duration-fast) var(--gnome-easing-default),
     border-color var(--gnome-duration-fast) var(--gnome-easing-default);
@@ -30,7 +26,7 @@
   width: 6px;
   height: 6px;
   border-radius: var(--gnome-radius-pill);
-  background-color: #ffffff;
+  background-color: #fff;
   opacity: 0;
   transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
 }
@@ -48,7 +44,7 @@
 
 .radio:not(:checked):hover {
   border-color: var(--gnome-light-5, #9a9996);
-  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #ffffff) 94%, black 6%);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 94%, black 6%);
 }
 
 /* ─── Focus ────────────────────────────────────────────────────────────────── */
@@ -87,11 +83,11 @@
 @media (prefers-contrast: more) {
   .radio {
     border-width: 2px;
-    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   }
 
   .radio:not(:checked):hover {
-    border-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+    border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
     background-color: var(--gnome-hover-overlay);
   }
 }

@@ -8,8 +8,7 @@
   min-height: 56px;
   width: 100%;
   cursor: text;
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
   transition: box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
@@ -34,7 +33,7 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 .trailing {
@@ -64,13 +63,11 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.55));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
   opacity: var(--gnome-opacity-dim, 0.55);
-
   transition:
     top var(--gnome-duration-fast) var(--gnome-easing-default),
     transform var(--gnome-duration-fast) var(--gnome-easing-default),
@@ -96,18 +93,16 @@
   padding: 0;
   margin: 0;
   width: 100%;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
 
   /* Hide until floated — the label is the placeholder */
   opacity: 0;
   padding-top: 24px;
   padding-bottom: 4px;
-
   transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 

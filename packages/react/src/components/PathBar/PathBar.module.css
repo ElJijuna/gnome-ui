@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.35));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.35));
   opacity: 0.5;
   margin: 0 1px;
 }
@@ -51,7 +51,7 @@
   background: transparent;
   font-family: inherit;
   font-size: var(--gnome-font-size-body, 1rem);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
@@ -61,11 +61,11 @@
 }
 
 .segment:hover {
-  background-color: var(--gnome-hover-overlay, rgba(0, 0, 0, 0.06));
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
 }
 
 .segment:active {
-  background-color: var(--gnome-active-overlay, rgba(0, 0, 0, 0.12));
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.12));
 }
 
 .segment:focus-visible {
@@ -86,7 +86,7 @@
   font-family: inherit;
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-semibold, 600);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -113,10 +113,10 @@
 
 @media (prefers-color-scheme: dark) {
   .segment:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgb(255 255 255 / 0.08);
   }
 
   .segment:active {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgb(255 255 255 / 0.14);
   }
 }

@@ -2,7 +2,7 @@
 
 .terminal {
   background-color: var(--gnome-dark-4, #241f31);
-  color: var(--gnome-view-fg-color, rgba(255, 255, 255, 0.87));
+  color: var(--gnome-view-fg-color, rgb(255 255 255 / 0.87));
   border-radius: var(--gnome-radius-default, 6px);
   overflow-y: auto;
   max-height: 400px;
@@ -12,7 +12,7 @@
 
   /* Adwaita-style thin scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-color: rgb(255 255 255 / 0.2) transparent;
 }
 
 .pre {
@@ -31,8 +31,8 @@
 @media (prefers-color-scheme: light) {
   .terminal {
     background-color: var(--gnome-light-2, #f6f5f4);
-    color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+    scrollbar-color: rgb(0 0 0 / 0.2) transparent;
   }
 }
 

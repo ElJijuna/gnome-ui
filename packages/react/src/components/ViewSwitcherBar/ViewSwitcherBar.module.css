@@ -3,15 +3,13 @@
 .bar {
   display: flex;
   align-items: stretch;
-
   width: 100%;
   min-height: 52px;
-
   background-color: var(--gnome-headerbar-bg-color, #ebebeb);
-  border-top: 1px solid var(--gnome-headerbar-shade-color, rgba(0, 0, 0, 0.12));
+  border-top: 1px solid var(--gnome-headerbar-shade-color, rgb(0 0 0 / 0.12));
 
   /* Safe-area inset for mobile browsers */
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 /* Each child (ViewSwitcherItem) fills equal width */
@@ -35,6 +33,6 @@
 @media (prefers-color-scheme: dark) {
   .bar {
     background-color: var(--gnome-headerbar-bg-color, #303030);
-    border-top-color: rgba(0, 0, 0, 0.3);
+    border-top-color: rgb(0 0 0 / 0.3);
   }
 }

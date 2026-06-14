@@ -3,26 +3,21 @@
 .tooltip {
   position: fixed;
   z-index: 10500; /* above Dialog (10000) and Toaster (9999) */
-
   max-width: 240px;
   padding: 4px var(--gnome-space-2, 12px);
-
   background-color: var(--gnome-tooltip-bg-color, #3d3d3d);
-  color: var(--gnome-tooltip-fg-color, #ffffff);
-
+  color: var(--gnome-tooltip-fg-color, #fff);
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-caption, 0.8125rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
   text-align: center;
   white-space: pre-wrap;
-  word-break: break-word;
-
+  overflow-wrap: anywhere;
   border-radius: var(--gnome-radius-sm, 6px);
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
-
+    0 2px 8px rgb(0 0 0 / 0.2),
+    0 0 0 1px rgb(255 255 255 / 0.06);
   pointer-events: none;
   user-select: none;
 
@@ -85,21 +80,24 @@
 @media (prefers-color-scheme: dark) {
   .tooltip {
     background-color: var(--gnome-tooltip-bg-color, #c0bfbc);
-    color: var(--gnome-tooltip-fg-color, rgba(0, 0, 0, 0.8));
+    color: var(--gnome-tooltip-fg-color, rgb(0 0 0 / 0.8));
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(0, 0, 0, 0.12);
+      0 2px 8px rgb(0 0 0 / 0.4),
+      0 0 0 1px rgb(0 0 0 / 0.12);
   }
 
   .top::after {
     border-top-color: var(--gnome-tooltip-bg-color, #c0bfbc);
   }
+
   .bottom::after {
     border-bottom-color: var(--gnome-tooltip-bg-color, #c0bfbc);
   }
+
   .left::after {
     border-left-color: var(--gnome-tooltip-bg-color, #c0bfbc);
   }
+
   .right::after {
     border-right-color: var(--gnome-tooltip-bg-color, #c0bfbc);
   }

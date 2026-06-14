@@ -7,7 +7,7 @@
   padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
   min-height: 52px;
   width: 100%;
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
   text-align: start;
 }
 
@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 /* ─── Text content ──────────────────────────────────────────────────────────── */
@@ -42,7 +42,7 @@
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,7 +53,7 @@
   font-size: var(--gnome-font-size-caption, 0.75rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.55));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
   opacity: var(--gnome-opacity-dim, 0.55);
   white-space: nowrap;
   overflow: hidden;
@@ -66,17 +66,14 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-
-  background-color: var(--gnome-view-bg-color, #ffffff);
-  border: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
   border-radius: var(--gnome-radius-md, 8px);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.06);
   overflow: hidden;
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-body, 1rem);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   transition:
     box-shadow var(--gnome-duration-fast) var(--gnome-easing-default),
     border-color var(--gnome-duration-fast) var(--gnome-easing-default);
@@ -89,7 +86,7 @@
 .spin:focus-visible {
   border-color: var(--gnome-accent-color, #3584e4);
   box-shadow:
-    inset 0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 2px rgb(0 0 0 / 0.06),
     0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
     0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
     var(--gnome-focus-ring-color, #3584e4);
@@ -99,7 +96,6 @@
 
 .spinBtn {
   appearance: none;
-  -webkit-appearance: none;
   border: none;
   background: transparent;
   font: inherit;
@@ -107,23 +103,21 @@
   line-height: 1;
   cursor: pointer;
   color: inherit;
-
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 34px;
   flex-shrink: 0;
-
   transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
 .spinBtn:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--gnome-view-bg-color, #ffffff) 90%, black 10%);
+  background-color: color-mix(in srgb, var(--gnome-view-bg-color, #fff) 90%, black 10%);
 }
 
 .spinBtn:active:not(:disabled) {
-  background-color: color-mix(in srgb, var(--gnome-view-bg-color, #ffffff) 80%, black 20%);
+  background-color: color-mix(in srgb, var(--gnome-view-bg-color, #fff) 80%, black 20%);
 }
 
 .spinBtn:disabled {
@@ -132,11 +126,11 @@
 }
 
 .spinBtn:first-child {
-  border-right: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.12));
+  border-right: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
 }
 
 .spinBtn:last-child {
-  border-left: 1px solid var(--gnome-card-shade-color, rgba(0, 0, 0, 0.12));
+  border-left: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
 }
 
 /* ─── Value display ─────────────────────────────────────────────────────────── */
@@ -155,8 +149,8 @@
 @media (prefers-color-scheme: dark) {
   .spin {
     background-color: var(--gnome-view-bg-color, #1e1e1e);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
   }
 
   .spinBtn:hover:not(:disabled) {

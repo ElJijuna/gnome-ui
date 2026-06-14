@@ -7,17 +7,14 @@
   padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
   min-height: 52px;
   width: 100%;
-
   appearance: none;
-  -webkit-appearance: none;
   background: transparent;
   border: none;
   font: inherit;
   outline: none;
   cursor: pointer;
   text-align: start;
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
-
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
   transition: background-color var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
@@ -59,7 +56,7 @@
   width: 20px;
   height: 20px;
   border-radius: var(--gnome-radius-sm, 4px);
-  border: 1.5px solid var(--gnome-border-subtle, rgba(0, 0, 0, 0.25));
+  border: 1.5px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.25));
   background-color: transparent;
   color: transparent;
   transition:
@@ -71,7 +68,7 @@
 .checkboxChecked {
   background-color: var(--gnome-accent-bg-color, #3584e4);
   border-color: var(--gnome-accent-bg-color, #3584e4);
-  color: #ffffff;
+  color: #fff;
 }
 
 .checkmark {
@@ -85,7 +82,7 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
 }
 
 /* ─── Text content ──────────────────────────────────────────────────────────── */
@@ -103,7 +100,7 @@
   font-size: var(--gnome-font-size-body, 1rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-card-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -114,7 +111,7 @@
   font-size: var(--gnome-font-size-caption, 0.75rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   line-height: var(--gnome-line-height-body, 1.5);
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.55));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
   opacity: var(--gnome-opacity-dim, 0.55);
   white-space: nowrap;
   overflow: hidden;

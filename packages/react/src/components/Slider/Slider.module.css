@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
   /* Vertical space for thumb overflow */
   padding: 10px 0;
 }
@@ -18,14 +19,11 @@
   position: relative;
   width: 100%;
   height: 6px;
-
-  background-color: var(--gnome-card-shade-color, rgba(0, 0, 0, 0.15));
+  background-color: var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
   border-radius: var(--gnome-radius-pill, 9999px);
-
   cursor: pointer;
   touch-action: none; /* prevent scroll interference during drag */
   user-select: none;
-
   outline: none;
 }
 
@@ -53,9 +51,7 @@
   left: 0;
   height: 100%;
   border-radius: var(--gnome-radius-pill, 9999px);
-
   background-color: var(--gnome-accent-bg-color, #3584e4);
-
   pointer-events: none;
 }
 
@@ -64,20 +60,17 @@
 .thumb {
   position: absolute;
   top: 50%;
+
   /* Translate left by half thumb width so it centres on the left edge of .fill */
   transform: translate(-50%, -50%);
-
   width: 22px;
   height: 22px;
   border-radius: var(--gnome-radius-pill, 9999px);
-
   background-color: var(--gnome-accent-bg-color, #3584e4);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.25),
+    0 1px 3px rgb(0 0 0 / 0.25),
     0 0 0 2px var(--gnome-window-bg-color, #fafafa);
-
   pointer-events: none;
-
   transition:
     transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
     box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
@@ -88,7 +81,7 @@
 .track:active .thumb {
   transform: translate(-50%, -50%) scale(1.18);
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.3),
+    0 2px 6px rgb(0 0 0 / 0.3),
     0 0 0 2px var(--gnome-window-bg-color, #fafafa);
 }
 
@@ -98,11 +91,9 @@
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-
   width: 4px;
   height: 4px;
   border-radius: 50%;
-
   background-color: var(--gnome-window-bg-color, #fafafa);
   pointer-events: none;
 }
@@ -119,13 +110,11 @@
 .markLabel {
   position: absolute;
   transform: translateX(-50%);
-
   font-family: var(--gnome-font-family);
   font-size: var(--gnome-font-size-caption, 0.8125rem);
   line-height: 1;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   opacity: var(--gnome-opacity-dim, 0.55);
-
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
@@ -135,19 +124,19 @@
 
 @media (prefers-color-scheme: dark) {
   .track {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgb(255 255 255 / 0.15);
   }
 
   .thumb {
     box-shadow:
-      0 1px 4px rgba(0, 0, 0, 0.5),
+      0 1px 4px rgb(0 0 0 / 0.5),
       0 0 0 2px var(--gnome-window-bg-color, #242424);
   }
 
   .track:focus-visible .thumb,
   .track:active .thumb {
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.6),
+      0 2px 8px rgb(0 0 0 / 0.6),
       0 0 0 2px var(--gnome-window-bg-color, #242424);
   }
 
