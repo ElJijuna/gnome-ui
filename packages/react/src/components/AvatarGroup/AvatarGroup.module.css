@@ -1,0 +1,124 @@
+/* ─── Group ─────────────────────────────────────────────────────────────────── */
+
+.group {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ─── Item (each Avatar wrapper) ───────────────────────────────────────────── */
+
+.item {
+  /* Separate-ring so overlapping avatars stay visually distinct */
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 0 0 2px #ffffff;
+  flex-shrink: 0;
+}
+
+.item:not(:first-child) {
+  margin-inline-start: -6px;
+}
+
+/* ─── Size-specific overlap offsets ────────────────────────────────────────── */
+
+.sm .item:not(:first-child) {
+  margin-inline-start: -6px;
+}
+
+.md .item:not(:first-child) {
+  margin-inline-start: -8px;
+}
+
+.lg .item:not(:first-child) {
+  margin-inline-start: -12px;
+}
+
+.xl .item:not(:first-child) {
+  margin-inline-start: -16px;
+}
+
+/* ─── Overflow chip ─────────────────────────────────────────────────────────── */
+
+.overflow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--gnome-radius-pill);
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  background-color: var(--gnome-dark-2, #5e5c64);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 0 0 2px #ffffff;
+  font-family: var(--gnome-font-family);
+  font-weight: var(--gnome-font-weight-semibold);
+  color: #ffffff;
+  line-height: 1;
+}
+
+.overflow:not(:first-child) {
+  margin-inline-start: -6px;
+}
+
+.sm.overflow:not(:first-child),
+.sm .overflow:not(:first-child) {
+  margin-inline-start: -6px;
+}
+
+.md.overflow:not(:first-child),
+.md .overflow:not(:first-child) {
+  margin-inline-start: -8px;
+}
+
+.lg.overflow:not(:first-child),
+.lg .overflow:not(:first-child) {
+  margin-inline-start: -12px;
+}
+
+.xl.overflow:not(:first-child),
+.xl .overflow:not(:first-child) {
+  margin-inline-start: -16px;
+}
+
+/* ─── Overflow sizes ────────────────────────────────────────────────────────── */
+
+.sm.overflow {
+  width: 24px;
+  height: 24px;
+  font-size: 0.5rem;
+}
+
+.md.overflow {
+  width: 32px;
+  height: 32px;
+  font-size: 0.6rem;
+}
+
+.lg.overflow {
+  width: 48px;
+  height: 48px;
+  font-size: 0.875rem;
+}
+
+.xl.overflow {
+  width: 64px;
+  height: 64px;
+  font-size: 1.1rem;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .item {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 0 2px #242424;
+  }
+
+  .overflow {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 0 2px #242424;
+  }
+}

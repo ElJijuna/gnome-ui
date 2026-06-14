@@ -6,6 +6,8 @@ export type { ActionRowProps } from './components/ActionRow';
 export { ActionRow } from './components/ActionRow';
 export type { AvatarColor, AvatarProps, AvatarSize } from './components/Avatar';
 export { Avatar } from './components/Avatar';
+export type { AvatarGroupItem, AvatarGroupProps } from './components/AvatarGroup';
+export { AvatarGroup } from './components/AvatarGroup';
 export type { AvatarRotatorProps } from './components/AvatarRotator';
 export { AvatarRotator } from './components/AvatarRotator';
 export type { BadgeProps, BadgeVariant } from './components/Badge';
