@@ -96,6 +96,34 @@ export const WithActions: Story = {
   },
 };
 
+// ─── Drag to close ───────────────────────────────────────────────────────────
+
+export const DragToClose: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Bottom Sheet</Button>
+        <BottomSheet open={open} title="Drag to close" onClose={() => setOpen(false)}>
+          <Text variant="body" color="dim">
+            Grab the handle bar and drag downward past 150 px to dismiss.
+          </Text>
+        </BottomSheet>
+      </>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Drag the handle bar downward past **150 px** to dismiss. Releasing before the threshold snaps the sheet back.',
+      },
+    },
+  },
+};
+
 // ─── No backdrop close ────────────────────────────────────────────────────────
 
 export const NoBackdropClose: Story = {

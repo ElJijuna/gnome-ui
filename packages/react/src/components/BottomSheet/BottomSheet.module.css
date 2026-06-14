@@ -16,12 +16,25 @@
   animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
 }
 
+.backdrop.closing {
+  animation: backdrop-out var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
 @keyframes backdrop-in {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -40,7 +53,22 @@
     0 -4px 24px rgba(0, 0, 0, 0.18),
     0 0 0 1px rgba(0, 0, 0, 0.06);
 
+  /* Snap-back transition after releasing a partial drag */
+  transition: transform 200ms var(--gnome-easing-default, ease);
+  will-change: transform;
+}
+
+.sheet.entering {
   animation: sheet-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+.sheet.closing {
+  animation: sheet-out var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+/* Disable transition while actively dragging so the sheet follows the pointer instantly */
+.sheet.dragging {
+  transition: none;
 }
 
 @keyframes sheet-in {
@@ -52,6 +80,15 @@
   }
 }
 
+@keyframes sheet-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
 /* ─── Handle bar ────────────────────────────────────────────────────────────── */
 
 .handle {
@@ -59,6 +96,13 @@
   align-items: center;
   justify-content: center;
   padding: var(--gnome-space-2, 12px) 0 var(--gnome-space-1, 6px);
+  cursor: grab;
+  /* Prevents the browser from hijacking the pointer for scroll while dragging */
+  touch-action: none;
+}
+
+.handle:active {
+  cursor: grabbing;
 }
 
 .handleBar {
@@ -67,6 +111,7 @@
   border-radius: 2px;
   background-color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
   opacity: 0.2;
+  pointer-events: none;
 }
 
 /* ─── Title ─────────────────────────────────────────────────────────────────── */
@@ -107,7 +152,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .backdrop,
-  .sheet {
+  .sheet,
+  .backdrop.closing,
+  .sheet.entering,
+  .sheet.closing,
+  .sheet.dragging {
     animation: none;
+    transition: none;
   }
 }

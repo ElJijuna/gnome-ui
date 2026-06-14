@@ -278,8 +278,26 @@ describe('InlineViewSwitcher', () => {
   // ─── overflow="menu" ─────────────────────────────────────────────────────────
 
   describe('overflow="menu"', () => {
-    beforeEach(mockResizeObserver);
-    afterEach(() => vi.unstubAllGlobals());
+    beforeEach(() => {
+      mockResizeObserver();
+      vi.stubGlobal(
+        'matchMedia',
+        vi.fn().mockImplementation((query: string) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
+        })),
+      );
+    });
+    afterEach(() => {
+      vi.unstubAllGlobals();
+      vi.useRealTimers();
+    });
 
     function renderMenuSwitcher(value = 'list') {
       const onValueChange = vi.fn();
@@ -319,11 +337,18 @@ describe('InlineViewSwitcher', () => {
     });
 
     it('calls onValueChange and closes the sheet on item selection', () => {
+      vi.useFakeTimers();
+
       const { container, onValueChange } = renderMenuSwitcher('list');
       simulateOverflow(container.firstElementChild!);
       fireEvent.click(screen.getByRole('button'));
       fireEvent.click(screen.getByRole('radio', { name: 'Grid' }));
       expect(onValueChange).toHaveBeenCalledWith('grid');
+
+      act(() => {
+        vi.runAllTimers();
+      });
+
       expect(screen.queryByRole('dialog')).toBeNull();
     });
 
