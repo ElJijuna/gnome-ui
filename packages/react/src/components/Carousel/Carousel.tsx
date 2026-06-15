@@ -576,7 +576,6 @@ export const Carousel = ({
         ...style,
         display: 'flex',
         flexDirection: INDICATOR_FLEX_DIR[indicatorPosition],
-        ...(isSide ? { alignItems: 'center' } : undefined),
       }}
       {...props}
     >
