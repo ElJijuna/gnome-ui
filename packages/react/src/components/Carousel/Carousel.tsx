@@ -552,10 +552,6 @@ export const Carousel = ({
         isHoveringRef.current = false;
       }}
       onKeyDown={handleKeyDown}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
       onClick={handleClick}
       {...(showIndicator ? {} : props)}
     >
@@ -572,6 +568,10 @@ export const Carousel = ({
             // slides would cause the carousel to stop mid-group.
             ...(vSlides > 1 && i % vSlides !== 0 ? { scrollSnapAlign: 'none' } : undefined),
           }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
           {child}
         </div>

@@ -352,7 +352,8 @@ describe('Carousel', () => {
       const onPageChanged = vi.fn();
       const carousel = renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
 
-      fireEvent.pointerDown(carousel.getByRole('region'), { clientX: 0, pointerId: 1 });
+      // Drag events live on slide wrappers (role="group"), not the scroll container
+      fireEvent.pointerDown(carousel.getAllByRole('group')[0], { clientX: 0, pointerId: 1 });
 
       act(() => {
         vi.advanceTimersByTime(3000);
