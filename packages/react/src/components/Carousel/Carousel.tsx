@@ -173,6 +173,9 @@ export const Carousel = ({
   const hasDraggedRef = useRef(false);
   const dragStartRef = useRef({ pos: 0, scroll: 0, time: 0 });
   const snapRestoreTimerRef = useRef(0);
+  // Suppresses handleScroll feedback during programmatic scrolls (e.g. dot clicks)
+  const isProgrammaticScrollRef = useRef(false);
+  const programmaticScrollTimerRef = useRef(0);
 
   // Scroll distance per page: (containerSize - spacing*(visibleSlides-1)) / visibleSlides + spacing
   // Simplifies to: (containerSize + spacing) / visibleSlides
@@ -182,7 +185,8 @@ export const Carousel = ({
       return 1;
     }
     const containerSize = orientation === 'horizontal' ? el.clientWidth : el.clientHeight;
-    return (containerSize + spacing) / visibleSlides;
+    const size = (containerSize + spacing) / visibleSlides;
+    return size > 0 ? size : 1;
   }, [orientation, spacing, visibleSlides]);
 
   const scrollToPage = useCallback(
@@ -191,6 +195,16 @@ export const Carousel = ({
       if (!el) {
         return;
       }
+      // Suppress handleScroll feedback while the animation runs
+      isProgrammaticScrollRef.current = true;
+      window.clearTimeout(programmaticScrollTimerRef.current);
+      programmaticScrollTimerRef.current = window.setTimeout(
+        () => {
+          isProgrammaticScrollRef.current = false;
+        },
+        behavior === 'smooth' ? 400 : 50,
+      );
+
       const offset = getPageSize() * index;
       if (orientation === 'horizontal') {
         el.scrollTo({ left: offset, behavior });
@@ -217,7 +231,7 @@ export const Carousel = ({
     }
 
     const handleScroll = () => {
-      if (draggingRef.current) {
+      if (draggingRef.current || isProgrammaticScrollRef.current) {
         return;
       }
       const pageSize = getPageSize();
@@ -395,9 +409,12 @@ export const Carousel = ({
     [orientation, getPageSize, loop, pageCount, scrollToPage, isControlled, onPageChanged],
   );
 
-  // Clean up the snap-restore timer on unmount
+  // Clean up timers on unmount
   useEffect(() => {
-    return () => window.clearTimeout(snapRestoreTimerRef.current);
+    return () => {
+      window.clearTimeout(snapRestoreTimerRef.current);
+      window.clearTimeout(programmaticScrollTimerRef.current);
+    };
   }, []);
 
   // Prevent click events that fire after a drag (e.g. links/buttons inside slides)

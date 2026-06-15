@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState, type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 
 import { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from './Carousel';
 import readme from './README.md?raw';
@@ -73,10 +73,7 @@ const SlidePlaceholder = ({ label, color }: { label: string; color: string }) =>
   </div>
 );
 
-const CarouselWithIndicator = ({
-  indicator,
-  ...args
-}: CarouselStoryArgs) => {
+const CarouselWithIndicator = ({ indicator, ...args }: CarouselStoryArgs) => {
   const [page, setPage] = useState(0);
   const isVertical = args.orientation === 'vertical';
 
