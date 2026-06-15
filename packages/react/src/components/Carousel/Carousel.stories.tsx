@@ -22,6 +22,8 @@ const meta: Meta<CarouselStoryArgs> = {
     loop: { control: 'boolean' },
     spacing: { control: { type: 'number', min: 0, max: 48, step: 4 } },
     visibleSlides: { control: { type: 'number', min: 1, max: 3, step: 0.5 } },
+    autoPlay: { control: 'boolean' },
+    interval: { control: { type: 'number', min: 500, max: 10000, step: 500 } },
     indicator: {
       control: 'select',
       options: ['dots', 'lines', 'none'],
@@ -37,6 +39,8 @@ const meta: Meta<CarouselStoryArgs> = {
     loop: false,
     spacing: 0,
     visibleSlides: 1,
+    autoPlay: false,
+    interval: 3000,
     indicator: 'dots',
   },
   decorators: [

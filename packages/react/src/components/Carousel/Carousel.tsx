@@ -137,6 +137,18 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * When omitted the carousel manages page state internally.
    */
   page?: number;
+  /**
+   * Automatically advance to the next slide. Pauses while the pointer
+   * hovers over the carousel or during drag.
+   * @default false
+   */
+  autoPlay?: boolean;
+  /**
+   * Milliseconds between automatic slide transitions.
+   * Only used when `autoPlay` is `true`.
+   * @default 3000
+   */
+  interval?: number;
 }
 
 /**
@@ -158,6 +170,8 @@ export const Carousel = ({
   visibleSlides = 1,
   onPageChanged,
   page: controlledPage,
+  autoPlay = false,
+  interval = 3000,
   className,
   ...props
 }: CarouselProps) => {
@@ -176,6 +190,12 @@ export const Carousel = ({
   // Suppresses handleScroll feedback during programmatic scrolls (e.g. dot clicks)
   const isProgrammaticScrollRef = useRef(false);
   const programmaticScrollTimerRef = useRef(0);
+  // Auto-play: always-fresh snapshot of currentPage to avoid stale closure in setInterval
+  const currentPageRef = useRef(currentPage);
+  const isHoveringRef = useRef(false);
+  useEffect(() => {
+    currentPageRef.current = currentPage;
+  });
 
   // Scroll distance per page: (containerSize - spacing*(visibleSlides-1)) / visibleSlides + spacing
   // Simplifies to: (containerSize + spacing) / visibleSlides
@@ -409,6 +429,33 @@ export const Carousel = ({
     [orientation, getPageSize, loop, pageCount, scrollToPage, isControlled, onPageChanged],
   );
 
+  // Auto-play: advance one slide every `interval` ms, pausing on hover/drag
+  useEffect(() => {
+    if (!autoPlay || interval <= 0) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      if (draggingRef.current || isHoveringRef.current) {
+        return;
+      }
+      const page = currentPageRef.current;
+      if (!loop && page >= pageCount - 1) {
+        return;
+      }
+      const next = loop ? (page + 1) % pageCount : page + 1;
+      // Update ref immediately so back-to-back ticks see the correct page
+      currentPageRef.current = next;
+      scrollToPage(next);
+      if (!isControlled) {
+        setInternalPage(next);
+      }
+      onPageChanged?.(next);
+    }, interval);
+
+    return () => window.clearInterval(timer);
+  }, [autoPlay, interval, loop, pageCount, scrollToPage, isControlled, onPageChanged]);
+
   // Clean up timers on unmount
   useEffect(() => {
     return () => {
@@ -449,6 +496,12 @@ export const Carousel = ({
         .filter(Boolean)
         .join(' ')}
       style={isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }}
+      onMouseEnter={() => {
+        isHoveringRef.current = true;
+      }}
+      onMouseLeave={() => {
+        isHoveringRef.current = false;
+      }}
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}

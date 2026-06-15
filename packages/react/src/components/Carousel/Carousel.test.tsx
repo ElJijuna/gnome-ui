@@ -224,4 +224,141 @@ describe('Carousel', () => {
       expect(onPageChanged).toHaveBeenCalledWith(0);
     });
   });
+
+  // ── autoPlay ──────────────────────────────────────────────────────────────
+
+  describe('autoPlay', () => {
+    it('advances to the next slide after the interval', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+
+      renderCarousel({ autoPlay: true, interval: 3000, onPageChanged });
+
+      act(() => {
+        vi.advanceTimersByTime(3000);
+      });
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('respects a custom interval', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+
+      renderCarousel({ autoPlay: true, interval: 1500, onPageChanged });
+
+      act(() => {
+        vi.advanceTimersByTime(1499);
+      });
+      expect(onPageChanged).not.toHaveBeenCalled();
+
+      act(() => {
+        vi.advanceTimersByTime(1);
+      });
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('does not advance when autoPlay is false', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+
+      renderCarousel({ autoPlay: false, interval: 3000, onPageChanged });
+
+      act(() => {
+        vi.advanceTimersByTime(10000);
+      });
+
+      expect(onPageChanged).not.toHaveBeenCalled();
+    });
+
+    it('keeps advancing across multiple slides', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+
+      renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      act(() => {
+        vi.advanceTimersByTime(2000);
+      });
+
+      expect(onPageChanged).toHaveBeenNthCalledWith(1, 1);
+      expect(onPageChanged).toHaveBeenNthCalledWith(2, 2);
+    });
+
+    it('stops at the last slide without loop', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+
+      renderCarousel({ autoPlay: true, interval: 1000, loop: false, onPageChanged });
+
+      // Advance past all slides
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
+
+      const calls = onPageChanged.mock.calls.map(([p]) => p);
+      expect(calls).toEqual([1, 2]); // stops at 2, never goes to 3
+    });
+
+    it('wraps to the first slide with loop enabled', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+
+      renderCarousel({ autoPlay: true, interval: 1000, loop: true, onPageChanged });
+
+      act(() => {
+        vi.advanceTimersByTime(3000);
+      });
+
+      expect(onPageChanged).toHaveBeenNthCalledWith(1, 1);
+      expect(onPageChanged).toHaveBeenNthCalledWith(2, 2);
+      expect(onPageChanged).toHaveBeenNthCalledWith(3, 0); // wraps
+    });
+
+    it('pauses while the pointer hovers over the carousel', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      const carousel = renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      fireEvent.mouseEnter(carousel.getByRole('region'));
+
+      act(() => {
+        vi.advanceTimersByTime(3000);
+      });
+
+      expect(onPageChanged).not.toHaveBeenCalled();
+    });
+
+    it('resumes after the pointer leaves the carousel', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      const carousel = renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      fireEvent.mouseEnter(carousel.getByRole('region'));
+      act(() => {
+        vi.advanceTimersByTime(2000);
+      });
+      fireEvent.mouseLeave(carousel.getByRole('region'));
+
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('pauses during drag', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      const carousel = renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      fireEvent.pointerDown(carousel.getByRole('region'), { clientX: 0, pointerId: 1 });
+
+      act(() => {
+        vi.advanceTimersByTime(3000);
+      });
+
+      expect(onPageChanged).not.toHaveBeenCalled();
+    });
+  });
 });
