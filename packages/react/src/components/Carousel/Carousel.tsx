@@ -1,5 +1,6 @@
 import {
   Children,
+  type CSSProperties,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -12,6 +13,15 @@ import {
 } from 'react';
 
 import styles from './Carousel.module.css';
+
+type IndicatorPosition = 'top' | 'bottom' | 'left' | 'right';
+
+const INDICATOR_FLEX_DIR: Record<IndicatorPosition, CSSProperties['flexDirection']> = {
+  bottom: 'column',
+  top: 'column-reverse',
+  left: 'row-reverse',
+  right: 'row',
+};
 
 // ─── CarouselIndicatorDots ────────────────────────────────────────────────────
 
@@ -149,6 +159,18 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * @default 3000
    */
   interval?: number;
+  /**
+   * Page indicator rendered alongside the carousel.
+   * - `'dots'`: small circular dots (`CarouselIndicatorDots`)
+   * - `'lines'`: short line segments (`CarouselIndicatorLines`)
+   * - `'none'` or omitted: no indicator
+   */
+  indicator?: 'dots' | 'lines' | 'none';
+  /**
+   * Position of the indicator relative to the carousel.
+   * @default 'bottom'
+   */
+  indicatorPosition?: IndicatorPosition;
 }
 
 /**
@@ -172,7 +194,10 @@ export const Carousel = ({
   page: controlledPage,
   autoPlay = false,
   interval = 3000,
+  indicator,
+  indicatorPosition = 'bottom',
   className,
+  style,
   ...props
 }: CarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -474,6 +499,8 @@ export const Carousel = ({
   }, []);
 
   const isHorizontal = orientation === 'horizontal';
+  const showIndicator = indicator === 'dots' || indicator === 'lines';
+  const isSide = indicatorPosition === 'left' || indicatorPosition === 'right';
 
   // Slide width when showing more than one at a time
   const slideFlexBasis =
@@ -481,7 +508,7 @@ export const Carousel = ({
       ? `calc((100% - ${spacing * (visibleSlides - 1)}px) / ${visibleSlides})`
       : undefined;
 
-  return (
+  const scrollContainer = (
     <div
       ref={scrollRef}
       role="region"
@@ -491,11 +518,14 @@ export const Carousel = ({
         styles.carousel,
         isHorizontal ? styles.horizontal : styles.vertical,
         isDragging ? styles.dragging : null,
-        className,
+        showIndicator ? null : className,
       ]
         .filter(Boolean)
         .join(' ')}
-      style={isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }}
+      style={{
+        ...(isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }),
+        ...(showIndicator && (isSide ? { flex: '1 1 0', width: 'auto' } : { flex: '1 1 auto' })),
+      }}
       onMouseEnter={() => {
         isHoveringRef.current = true;
       }}
@@ -508,7 +538,7 @@ export const Carousel = ({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
       onClick={handleClick}
-      {...props}
+      {...(showIndicator ? {} : props)}
     >
       {Children.map(children, (child, i) => (
         <div
@@ -522,6 +552,51 @@ export const Carousel = ({
           {child}
         </div>
       ))}
+    </div>
+  );
+
+  if (!showIndicator) {
+    return scrollContainer;
+  }
+
+  const onPageSelected = (i: number) => {
+    scrollToPage(i);
+    if (!isControlled) setInternalPage(i);
+    onPageChanged?.(i);
+  };
+
+  const indicatorStyle: CSSProperties | undefined = isSide
+    ? { flexDirection: 'column', padding: '0 12px' }
+    : undefined;
+
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'flex',
+        flexDirection: INDICATOR_FLEX_DIR[indicatorPosition],
+        ...(isSide ? { alignItems: 'center' } : undefined),
+      }}
+      {...props}
+    >
+      {scrollContainer}
+      {indicator === 'dots' && (
+        <CarouselIndicatorDots
+          pages={pageCount}
+          currentPage={currentPage}
+          onPageSelected={onPageSelected}
+          style={indicatorStyle}
+        />
+      )}
+      {indicator === 'lines' && (
+        <CarouselIndicatorLines
+          pages={pageCount}
+          currentPage={currentPage}
+          onPageSelected={onPageSelected}
+          style={indicatorStyle}
+        />
+      )}
     </div>
   );
 };

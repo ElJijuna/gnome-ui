@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { type ComponentProps, useState } from 'react';
+import { type ComponentProps } from 'react';
 
-import { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from './Carousel';
+import { Carousel } from './Carousel';
 import readme from './README.md?raw';
 
-type CarouselStoryArgs = ComponentProps<typeof Carousel> & {
-  indicator: 'dots' | 'lines' | 'none';
-};
+type Story = StoryObj<ComponentProps<typeof Carousel>>;
 
-const meta: Meta<CarouselStoryArgs> = {
+const meta: Meta<ComponentProps<typeof Carousel>> = {
   title: 'Components/Carousel',
   component: Carousel,
   tags: ['autodocs'],
@@ -29,7 +27,11 @@ const meta: Meta<CarouselStoryArgs> = {
       options: ['dots', 'lines', 'none'],
       description: 'Page indicator style rendered alongside the carousel.',
     },
-    // managed internally by each story
+    indicatorPosition: {
+      control: 'select',
+      options: ['bottom', 'top', 'left', 'right'],
+      description: 'Where the indicator appears relative to the carousel.',
+    },
     page: { table: { disable: true } },
     onPageChanged: { table: { disable: true } },
     children: { table: { disable: true } },
@@ -42,6 +44,7 @@ const meta: Meta<CarouselStoryArgs> = {
     autoPlay: false,
     interval: 3000,
     indicator: 'dots',
+    indicatorPosition: 'bottom',
   },
   decorators: [
     (Story) => (
@@ -53,7 +56,6 @@ const meta: Meta<CarouselStoryArgs> = {
 };
 
 export default meta;
-type Story = StoryObj<CarouselStoryArgs>;
 
 const COLORS = ['#3584e4', '#e01b24', '#33d17a', '#ff7800', '#9141ac'];
 const LABELS = ['Blue', 'Red', 'Green', 'Orange', 'Purple'];
@@ -77,52 +79,27 @@ const SlidePlaceholder = ({ label, color }: { label: string; color: string }) =>
   </div>
 );
 
-const CarouselWithIndicator = ({ indicator, ...args }: CarouselStoryArgs) => {
-  const [page, setPage] = useState(0);
-  const isVertical = args.orientation === 'vertical';
-
-  return (
-    <div style={isVertical ? { display: 'flex', gap: 8, alignItems: 'flex-start' } : undefined}>
-      <Carousel
-        {...args}
-        page={page}
-        onPageChanged={setPage}
-        style={isVertical ? { height: 200 } : undefined}
-      >
-        {COLORS.map((c, i) => (
-          <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
-        ))}
-      </Carousel>
-      {indicator === 'dots' && (
-        <CarouselIndicatorDots
-          pages={COLORS.length}
-          currentPage={page}
-          onPageSelected={setPage}
-          style={isVertical ? { flexDirection: 'column', padding: '0 12px' } : undefined}
-        />
-      )}
-      {indicator === 'lines' && (
-        <CarouselIndicatorLines
-          pages={COLORS.length}
-          currentPage={page}
-          onPageSelected={setPage}
-          style={isVertical ? { flexDirection: 'column', padding: '0 12px' } : undefined}
-        />
-      )}
-    </div>
-  );
-};
+const renderCarousel = (args: ComponentProps<typeof Carousel>) => (
+  <Carousel
+    {...args}
+    style={args.orientation === 'vertical' ? { height: 200, ...args.style } : args.style}
+  >
+    {COLORS.map((c, i) => (
+      <SlidePlaceholder key={i} label={LABELS[i]} color={c} />
+    ))}
+  </Carousel>
+);
 
 // ─── WithDots ─────────────────────────────────────────────────────────────────
 
 export const WithDots: Story = {
-  render: (args) => <CarouselWithIndicator {...args} />,
-  args: { indicator: 'dots' },
+  render: renderCarousel,
+  args: { indicator: 'dots', indicatorPosition: 'bottom' },
   parameters: {
     docs: {
       description: {
         story:
-          'Carousel paired with `CarouselIndicatorDots`. Use the **indicator** control to switch to lines or hide the indicator entirely.',
+          'Carousel with built-in `CarouselIndicatorDots`. Use **indicator** to switch style and **indicatorPosition** to reposition it.',
       },
     },
   },
@@ -131,8 +108,8 @@ export const WithDots: Story = {
 // ─── WithLines ────────────────────────────────────────────────────────────────
 
 export const WithLines: Story = {
-  render: (args) => <CarouselWithIndicator {...args} />,
-  args: { indicator: 'lines' },
+  render: renderCarousel,
+  args: { indicator: 'lines', indicatorPosition: 'bottom' },
   parameters: {
     docs: {
       description: {
