@@ -1,3 +1,23 @@
+## [1.50.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.49.1...@gnome-ui/react@1.50.0) (2026-06-15)
+
+### Features
+
+* **@gnome-ui/react:** add autoPlay and interval props to Carousel for automatic slide transitions ([ebbdd82](https://github.com/ElJijuna/gnome-ui/commit/ebbdd822952f238cfb03a00ca7c9992b64ab75fd))
+* **@gnome-ui/react:** add indicator and indicatorPosition props to Carousel for flexible display options ([0247826](https://github.com/ElJijuna/gnome-ui/commit/0247826df9edbb7d4879ac575dce4e8778a9aeb6))
+* **@gnome-ui/react:** update visibleSlides prop to support integer values and enhance Carousel functionality with new tests ([972b2d3](https://github.com/ElJijuna/gnome-ui/commit/972b2d337230d8b372ebaf89e1d4531f6979b5b6))
+
+### Bug Fixes
+
+* **@gnome-ui/react:** ensure overflow is hidden for slides in Carousel component ([e67f59c](https://github.com/ElJijuna/gnome-ui/commit/e67f59c73d8954f62b0728ca68aed316f46afcc8))
+* **@gnome-ui/react:** fix dot-click feedback loop in controlled ([9200f63](https://github.com/ElJijuna/gnome-ui/commit/9200f637a2c796580ea547436887d15c08e724ec))
+* **@gnome-ui/react:** improve code readability by formatting conditional expressions in Carousel component ([a84d2e3](https://github.com/ElJijuna/gnome-ui/commit/a84d2e328b8ca673bfeb78037b31348fc777ccba))
+* **@gnome-ui/react:** remove unnecessary alignment style from Carousel component ([8f432a2](https://github.com/ElJijuna/gnome-ui/commit/8f432a255b3ea1d2c4eb6d71ba70fa8628931c98))
+* **@gnome-ui/react:** update pointer event handling in Carousel component for improved interaction ([fc39646](https://github.com/ElJijuna/gnome-ui/commit/fc396462dd680ffe4889f8bea7e27ad1d102f6e3))
+
+### Refactoring
+
+* **@gnome-ui/react:** enhance Carousel stories with indicator control for flexible display options ([251af9c](https://github.com/ElJijuna/gnome-ui/commit/251af9c4d908b4e8fc943e54c9591fb16d124ca5))
+
 ## [1.49.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.49.0...@gnome-ui/react@1.49.1) (2026-06-14)
 
 ### Refactoring
