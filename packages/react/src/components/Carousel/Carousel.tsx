@@ -523,9 +523,7 @@ export const Carousel = ({
 
   // Slide width when showing more than one at a time
   const slideFlexBasis =
-    vSlides !== 1
-      ? `calc((100% - ${spacing * (vSlides - 1)}px) / ${vSlides})`
-      : undefined;
+    vSlides !== 1 ? `calc((100% - ${spacing * (vSlides - 1)}px) / ${vSlides})` : undefined;
 
   const scrollContainer = (
     <div
@@ -585,7 +583,9 @@ export const Carousel = ({
 
   const onPageSelected = (i: number) => {
     scrollToPage(i);
-    if (!isControlled) setInternalPage(i);
+    if (!isControlled) {
+      setInternalPage(i);
+    }
     onPageChanged?.(i);
   };
 

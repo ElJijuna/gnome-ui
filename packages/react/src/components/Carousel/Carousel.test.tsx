@@ -406,7 +406,9 @@ describe('Carousel', () => {
       vi.useFakeTimers();
       const onPageChanged = vi.fn();
       renderWith5Slides({ autoPlay: true, interval: 1000, visibleSlides: 2, onPageChanged });
-      act(() => { vi.advanceTimersByTime(5000); });
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
       const calls = onPageChanged.mock.calls.map(([p]) => p);
       expect(calls).toEqual([1, 2]); // stops at 2 (last group), never reaches 3
     });
