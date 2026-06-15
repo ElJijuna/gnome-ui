@@ -17,7 +17,8 @@ const CenteredDecorator = ({ children }: { children: ReactNode }) => {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem',
-        minHeight: '6rem',
+        minHeight: '100vh',
+        backgroundColor: 'var(--gnome-window-bg-color)',
       }}
     >
       {/*
