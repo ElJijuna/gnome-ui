@@ -19,7 +19,7 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
     orientation: { control: 'select', options: ['horizontal', 'vertical'] },
     loop: { control: 'boolean' },
     spacing: { control: { type: 'number', min: 0, max: 48, step: 4 } },
-    visibleSlides: { control: { type: 'number', min: 1, max: 3, step: 0.5 } },
+    visibleSlides: { control: { type: 'number', min: 1, max: 5, step: 1 } },
     autoPlay: { control: 'boolean' },
     interval: { control: { type: 'number', min: 500, max: 10000, step: 500 } },
     indicator: {

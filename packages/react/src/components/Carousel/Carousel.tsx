@@ -135,8 +135,8 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    */
   loop?: boolean;
   /**
-   * Number of slides visible at once. Supports fractional values (e.g. `1.5`)
-   * to peek at the edge of the next slide.
+   * Number of slides visible at once (integer ≥ 1). Navigation advances one
+   * full group at a time, and the indicator shows one dot/line per group.
    * @default 1
    */
   visibleSlides?: number;
@@ -201,7 +201,9 @@ export const Carousel = ({
   ...props
 }: CarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const pageCount = Children.count(children);
+  const vSlides = Math.max(1, Math.floor(visibleSlides)); // enforce integer
+  const slideCount = Children.count(children);
+  const pageCount = Math.ceil(slideCount / vSlides);
   const [internalPage, setInternalPage] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const isControlled = controlledPage !== undefined;
@@ -222,17 +224,19 @@ export const Carousel = ({
     currentPageRef.current = currentPage;
   });
 
-  // Scroll distance per page: (containerSize - spacing*(visibleSlides-1)) / visibleSlides + spacing
-  // Simplifies to: (containerSize + spacing) / visibleSlides
+  // Scroll distance per page = one full group = containerSize + spacing.
+  // Each slide is (containerSize - spacing*(vSlides-1)) / vSlides wide, so
+  // vSlides slides + (vSlides-1) gaps = containerSize, plus the inter-group
+  // gap gives containerSize + spacing.
   const getPageSize = useCallback(() => {
     const el = scrollRef.current;
     if (!el) {
       return 1;
     }
     const containerSize = orientation === 'horizontal' ? el.clientWidth : el.clientHeight;
-    const size = (containerSize + spacing) / visibleSlides;
+    const size = containerSize + spacing;
     return size > 0 ? size : 1;
-  }, [orientation, spacing, visibleSlides]);
+  }, [orientation, spacing]);
 
   const scrollToPage = useCallback(
     (index: number, behavior: ScrollBehavior = 'smooth') => {
@@ -424,10 +428,25 @@ export const Carousel = ({
       const pageSize = getPageSize();
       const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
 
+      const maxScroll =
+        orientation === 'horizontal'
+          ? el.scrollWidth - el.clientWidth
+          : el.scrollHeight - el.clientHeight;
+
       let target: number;
       if (Math.abs(velocity) > 0.3) {
-        // Flick gesture — advance in the swipe direction
-        target = velocity > 0 ? Math.ceil(scroll / pageSize) : Math.floor(scroll / pageSize);
+        const rawTarget =
+          velocity > 0 ? Math.ceil(scroll / pageSize) : Math.floor(scroll / pageSize);
+        // In loop mode the browser clamps scroll to [0, maxScroll], so a backward
+        // flick from page 0 and a forward flick from the last page both produce a
+        // rawTarget stuck at the boundary. Detect and wrap explicitly.
+        if (loop && velocity < 0 && rawTarget === 0 && scroll <= 0) {
+          target = pageCount - 1;
+        } else if (loop && velocity > 0 && rawTarget === pageCount - 1 && scroll >= maxScroll) {
+          target = 0;
+        } else {
+          target = rawTarget;
+        }
       } else {
         // Slow drag — snap to nearest page
         target = Math.round(scroll / pageSize);
@@ -504,8 +523,8 @@ export const Carousel = ({
 
   // Slide width when showing more than one at a time
   const slideFlexBasis =
-    visibleSlides !== 1
-      ? `calc((100% - ${spacing * (visibleSlides - 1)}px) / ${visibleSlides})`
+    vSlides !== 1
+      ? `calc((100% - ${spacing * (vSlides - 1)}px) / ${vSlides})`
       : undefined;
 
   const scrollContainer = (
@@ -546,8 +565,13 @@ export const Carousel = ({
           className={styles.slide}
           role="group"
           aria-roledescription="slide"
-          aria-label={`${i + 1} of ${pageCount}`}
-          style={slideFlexBasis ? { flex: `0 0 ${slideFlexBasis}` } : undefined}
+          aria-label={`${i + 1} of ${slideCount}`}
+          style={{
+            ...(slideFlexBasis ? { flex: `0 0 ${slideFlexBasis}` } : undefined),
+            // Only the first slide of each group is a snap target; intermediate
+            // slides would cause the carousel to stop mid-group.
+            ...(vSlides > 1 && i % vSlides !== 0 ? { scrollSnapAlign: 'none' } : undefined),
+          }}
         >
           {child}
         </div>

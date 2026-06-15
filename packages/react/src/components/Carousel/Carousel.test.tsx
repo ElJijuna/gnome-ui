@@ -361,4 +361,53 @@ describe('Carousel', () => {
       expect(onPageChanged).not.toHaveBeenCalled();
     });
   });
+
+  // ── visibleSlides group paging ────────────────────────────────────────────
+
+  describe('visibleSlides group paging', () => {
+    const renderWith5Slides = (props: ComponentProps<typeof Carousel> = {}) =>
+      render(
+        <Carousel {...props}>
+          <div>Slide 1</div>
+          <div>Slide 2</div>
+          <div>Slide 3</div>
+          <div>Slide 4</div>
+          <div>Slide 5</div>
+        </Carousel>,
+      );
+
+    it('shows ceil(slides/visibleSlides) indicator dots', () => {
+      renderWith5Slides({ visibleSlides: 2, indicator: 'dots' });
+      expect(screen.getAllByRole('tab')).toHaveLength(3); // ceil(5/2) = 3
+    });
+
+    it('shows 2 indicator dots for 5 slides with visibleSlides=3', () => {
+      renderWith5Slides({ visibleSlides: 3, indicator: 'dots' });
+      expect(screen.getAllByRole('tab')).toHaveLength(2); // ceil(5/3) = 2
+    });
+
+    it('clamps at last group on ArrowRight without loop', () => {
+      const onPageChanged = vi.fn();
+      // 5 slides, visibleSlides=2 → 3 pages (0, 1, 2)
+      renderWith5Slides({ page: 2, visibleSlides: 2, onPageChanged });
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    it('wraps from last group to first with loop', () => {
+      const onPageChanged = vi.fn();
+      renderWith5Slides({ page: 2, visibleSlides: 2, onPageChanged, loop: true });
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
+      expect(onPageChanged).toHaveBeenCalledWith(0);
+    });
+
+    it('autoPlay stops at last group without loop', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      renderWith5Slides({ autoPlay: true, interval: 1000, visibleSlides: 2, onPageChanged });
+      act(() => { vi.advanceTimersByTime(5000); });
+      const calls = onPageChanged.mock.calls.map(([p]) => p);
+      expect(calls).toEqual([1, 2]); // stops at 2 (last group), never reaches 3
+    });
+  });
 });
