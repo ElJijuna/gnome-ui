@@ -1,3 +1,10 @@
+## [1.50.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.50.0...@gnome-ui/react@1.50.1) (2026-06-30)
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** add missing exports for ComposedChart, FunnelChart, and ScatterChart components in package.json ([09bacd0](https://github.com/ElJijuna/gnome-ui/commit/09bacd0df294496599c86da610a1c9df9da5a764))
+* **@gnome-ui/react:** add missing exports for ScrollToTop component in package.json ([4c654ab](https://github.com/ElJijuna/gnome-ui/commit/4c654abb8e94e9e9643c6f35cb168308137cc6ec))
+
 ## [1.50.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.49.1...@gnome-ui/react@1.50.0) (2026-06-15)
 
 ### Features
