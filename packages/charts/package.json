@@ -31,6 +31,16 @@
       "import": "./dist/components/CloudChart.js",
       "require": "./dist/components/CloudChart.cjs"
     },
+    "./components/ComposedChart": {
+      "types": "./dist/components/ComposedChart.d.ts",
+      "import": "./dist/components/ComposedChart.js",
+      "require": "./dist/components/ComposedChart.cjs"
+    },
+    "./components/FunnelChart": {
+      "types": "./dist/components/FunnelChart.d.ts",
+      "import": "./dist/components/FunnelChart.js",
+      "require": "./dist/components/FunnelChart.cjs"
+    },
     "./components/LineChart": {
       "types": "./dist/components/LineChart.d.ts",
       "import": "./dist/components/LineChart.js",
@@ -50,6 +60,11 @@
       "types": "./dist/components/RadialBarChart.d.ts",
       "import": "./dist/components/RadialBarChart.js",
       "require": "./dist/components/RadialBarChart.cjs"
+    },
+    "./components/ScatterChart": {
+      "types": "./dist/components/ScatterChart.d.ts",
+      "import": "./dist/components/ScatterChart.js",
+      "require": "./dist/components/ScatterChart.cjs"
     },
     "./components/TreeMap": {
       "types": "./dist/components/TreeMap.d.ts",
