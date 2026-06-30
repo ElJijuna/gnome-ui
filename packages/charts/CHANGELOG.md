@@ -1,3 +1,43 @@
+## [1.34.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.34.0...@gnome-ui/charts@1.34.1) (2026-06-30)
+
+### Features
+
+* **@gnome-ui/react:** add autoPlay and interval props to Carousel for automatic slide transitions ([ebbdd82](https://github.com/ElJijuna/gnome-ui/commit/ebbdd822952f238cfb03a00ca7c9992b64ab75fd))
+* **@gnome-ui/react:** add AvatarGroup component with overflow handling and styling ([858821d](https://github.com/ElJijuna/gnome-ui/commit/858821d705809a6328613e5c5b58d40e98f03ff9))
+* **@gnome-ui/react:** add color prop to Icon component with palette options and update documentation ([8c08879](https://github.com/ElJijuna/gnome-ui/commit/8c088799be83d31bf00a233685226fbe4ca4a1d5))
+* **@gnome-ui/react:** add indicator and indicatorPosition props to Carousel for flexible display options ([0247826](https://github.com/ElJijuna/gnome-ui/commit/0247826df9edbb7d4879ac575dce4e8778a9aeb6))
+* **@gnome-ui/react:** add Modal component with styling, documentation, and tests ([cee43d9](https://github.com/ElJijuna/gnome-ui/commit/cee43d9a73206e40ae6f257d87b5f0d7d30fcfe6))
+* **@gnome-ui/react:** implement drag-to-dismiss functionality in BottomSheet with animations ([2ba2f53](https://github.com/ElJijuna/gnome-ui/commit/2ba2f531969dee25476cbe235eb99d091f54f536))
+* **@gnome-ui/react:** implement overflow strategies in InlineViewSwitcher and enhance styles for better UX ([e2f329c](https://github.com/ElJijuna/gnome-ui/commit/e2f329c33bc7a7c44222d9be6145abec2829ff9a))
+* **@gnome-ui/react:** update visibleSlides prop to support integer values and enhance Carousel functionality with new tests ([972b2d3](https://github.com/ElJijuna/gnome-ui/commit/972b2d337230d8b372ebaf89e1d4531f6979b5b6))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** add missing exports for ComposedChart, FunnelChart, and ScatterChart components in package.json ([09bacd0](https://github.com/ElJijuna/gnome-ui/commit/09bacd0df294496599c86da610a1c9df9da5a764))
+* **@gnome-ui/react:** add missing exports for ScrollToTop component in package.json ([4c654ab](https://github.com/ElJijuna/gnome-ui/commit/4c654abb8e94e9e9643c6f35cb168308137cc6ec))
+* **@gnome-ui/react:** ensure overflow is hidden for slides in Carousel component ([e67f59c](https://github.com/ElJijuna/gnome-ui/commit/e67f59c73d8954f62b0728ca68aed316f46afcc8))
+* **@gnome-ui/react:** EntryRow adjust min-height and label positioning for consistency ([e198242](https://github.com/ElJijuna/gnome-ui/commit/e19824202e856e9bab61a67b8f66f9d33ce36277))
+* **@gnome-ui/react:** fix dot-click feedback loop in controlled ([9200f63](https://github.com/ElJijuna/gnome-ui/commit/9200f637a2c796580ea547436887d15c08e724ec))
+* **@gnome-ui/react:** improve code readability by formatting conditional expressions in Carousel component ([a84d2e3](https://github.com/ElJijuna/gnome-ui/commit/a84d2e328b8ca673bfeb78037b31348fc777ccba))
+* **@gnome-ui/react:** improve readability by formatting conditional returns in InlineViewSwitcher ([1bc9ccf](https://github.com/ElJijuna/gnome-ui/commit/1bc9ccf587db29faa26b48fc988cab624470eaa0))
+* **@gnome-ui/react:** remove unnecessary alignment style from Carousel component ([8f432a2](https://github.com/ElJijuna/gnome-ui/commit/8f432a255b3ea1d2c4eb6d71ba70fa8628931c98))
+* **@gnome-ui/react:** update pointer event handling in Carousel component for improved interaction ([fc39646](https://github.com/ElJijuna/gnome-ui/commit/fc396462dd680ffe4889f8bea7e27ad1d102f6e3))
+
+### Refactoring
+
+* **@gnome-ui/cli:** improve error handling in main function and destructure parse result ([6ed0844](https://github.com/ElJijuna/gnome-ui/commit/6ed08448adc4673481f1130954857a86f0322240))
+* **@gnome-ui/core:** color definitions in tokens.css for consistency and brevity ([530b542](https://github.com/ElJijuna/gnome-ui/commit/530b542836ea4cde856c0cc140d4c2145f1a6f34)), closes [#ffffff](https://github.com/ElJijuna/gnome-ui/issues/ffffff) [#fff](https://github.com/ElJijuna/gnome-ui/issues/fff)
+* **@gnome-ui/core:** consolidate shadow definition for improved clarity ([8cfa1cf](https://github.com/ElJijuna/gnome-ui/commit/8cfa1cfcfe961f42f7b8c7bdd1fa2ef80f450e68))
+* **@gnome-ui/layout:** CSS color definitions to use the new RGB syntax with alpha values ([0ba5091](https://github.com/ElJijuna/gnome-ui/commit/0ba5091d2bc70a04ddf303cc1ed78789744dabe2))
+* **@gnome-ui/layout:** destructure className for improved readability in test case ([6799570](https://github.com/ElJijuna/gnome-ui/commit/67995700ec136556efd25cc04ef18003baa38331))
+* **@gnome-ui/react:** add visibleSlides prop to Carousel for flexible slide display ([edaaae8](https://github.com/ElJijuna/gnome-ui/commit/edaaae8dbb29eb824cf252ee36c625380eeb82b0))
+* **@gnome-ui/react:** CSS styles across components to use modern color functions and improve consistency ([97ff25b](https://github.com/ElJijuna/gnome-ui/commit/97ff25b21de8a17772b85f5fd7afe781f44c4400))
+* **@gnome-ui/react:** destructure variables for improved readability in multiple components ([9af61d4](https://github.com/ElJijuna/gnome-ui/commit/9af61d437e2757d0e4dd3d4f01688582aaf6bcc2))
+* **@gnome-ui/react:** enhance Carousel component with improved drag handling and touch gestures ([aad631c](https://github.com/ElJijuna/gnome-ui/commit/aad631cf0cffb516a5a88064bcabc037a0ce459e))
+* **@gnome-ui/react:** enhance Carousel drag handling with improved touch and mouse interactions ([8a94086](https://github.com/ElJijuna/gnome-ui/commit/8a94086ecb8509919800a0310994bdac6b9337a3))
+* **@gnome-ui/react:** enhance Carousel stories with indicator control for flexible display options ([251af9c](https://github.com/ElJijuna/gnome-ui/commit/251af9c4d908b4e8fc943e54c9591fb16d124ca5))
+* **stylelint:** format declaration-block-no-duplicate-properties rule for improved readability ([fe8f748](https://github.com/ElJijuna/gnome-ui/commit/fe8f748a3663b4fc908b5243d9c7a557e92d1420))
+
 ## [1.34.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.33.0...@gnome-ui/charts@1.34.0) (2026-06-12)
 
 ### Features
