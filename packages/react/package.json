@@ -282,6 +282,11 @@
       "import": "./dist/components/RadioButton.js",
       "require": "./dist/components/RadioButton.cjs"
     },
+    "./components/ScrollToTop": {
+      "types": "./dist/components/ScrollToTop.d.ts",
+      "import": "./dist/components/ScrollToTop.js",
+      "require": "./dist/components/ScrollToTop.cjs"
+    },
     "./components/SearchBar": {
       "types": "./dist/components/SearchBar.d.ts",
       "import": "./dist/components/SearchBar.js",
