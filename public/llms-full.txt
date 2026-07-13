@@ -5284,6 +5284,36 @@ and `false-positive`.
 
 ---
 
+Source: packages/react/src/components/VulnerabilitySummary/README.md
+
+# VulnerabilitySummary
+
+Executive severity-count summary for vulnerability reports, scan results, and
+security dashboards.
+
+```tsx
+import { VulnerabilitySummary } from "@gnome-ui/react";
+
+<VulnerabilitySummary
+  counts={{
+    critical: 3,
+    high: 12,
+    medium: 40,
+    low: 8,
+  }}
+  description="Container image scan"
+/>
+```
+
+The component accepts `none`, `minimal`, `low`, `medium`, `high`, and
+`critical` counts. `minimal` is included for external scanner compatibility,
+such as Google Artifact Registry / Grafeas.
+
+Use `showZeroCounts` when a report needs a fixed severity layout even when some
+severities have no findings. Negative counts are clamped to zero.
+
+---
+
 Source: packages/react/src/components/WindowTitle/README.md
 
 Two-line title + subtitle widget for use inside a `HeaderBar`.

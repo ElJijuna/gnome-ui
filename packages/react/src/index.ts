@@ -293,6 +293,16 @@ export {
   VULNERABILITY_FINDING_STATUS_LABELS,
   VulnerabilityFinding,
 } from './components/VulnerabilityFinding';
+export type {
+  VulnerabilitySummaryCounts,
+  VulnerabilitySummaryItem,
+  VulnerabilitySummaryProps,
+} from './components/VulnerabilitySummary';
+export {
+  getVulnerabilitySummaryItems,
+  getVulnerabilitySummaryTotal,
+  VulnerabilitySummary,
+} from './components/VulnerabilitySummary';
 export type { WindowTitleProps } from './components/WindowTitle';
 export { WindowTitle } from './components/WindowTitle';
 export type { WrapBoxAlign, WrapBoxJustify, WrapBoxProps } from './components/WrapBox';

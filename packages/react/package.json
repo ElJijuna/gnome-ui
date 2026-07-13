@@ -462,6 +462,11 @@
       "import": "./dist/components/VulnerabilityFinding.js",
       "require": "./dist/components/VulnerabilityFinding.cjs"
     },
+    "./components/VulnerabilitySummary": {
+      "types": "./dist/components/VulnerabilitySummary.d.ts",
+      "import": "./dist/components/VulnerabilitySummary.js",
+      "require": "./dist/components/VulnerabilitySummary.cjs"
+    },
     "./components/WindowTitle": {
       "types": "./dist/components/WindowTitle.d.ts",
       "import": "./dist/components/WindowTitle.js",
