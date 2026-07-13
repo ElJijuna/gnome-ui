@@ -147,6 +147,11 @@
       "import": "./dist/components/CvssScore.js",
       "require": "./dist/components/CvssScore.cjs"
     },
+    "./components/CveIdentifier": {
+      "types": "./dist/components/CveIdentifier.d.ts",
+      "import": "./dist/components/CveIdentifier.js",
+      "require": "./dist/components/CveIdentifier.cjs"
+    },
     "./components/Dialog": {
       "types": "./dist/components/Dialog.d.ts",
       "import": "./dist/components/Dialog.js",

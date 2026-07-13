@@ -84,6 +84,15 @@ export type {
 export { ContributionGraph } from './components/ContributionGraph';
 export type { CountDownTimerProps, CountDownVariant } from './components/CountDownTimer';
 export { CountDownTimer } from './components/CountDownTimer';
+export type { CveIdentifierProps, CveLinkSource } from './components/CveIdentifier';
+export {
+  CVE_ID_PATTERN,
+  CveIdentifier,
+  getCveUrl,
+  getCveYear,
+  isCveId,
+  normalizeCveId,
+} from './components/CveIdentifier';
 export type { CvssScoreProps, CvssSeverity } from './components/CvssScore';
 export {
   CVSS_SCORE_MAX,

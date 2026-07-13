@@ -1,0 +1,63 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.identifier {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--gnome-border-color, rgb(0 0 0 / 0.12));
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 650;
+  line-height: 1.35;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+a.identifier {
+  cursor: pointer;
+  transition:
+    background-color var(--gnome-duration-fast, 150ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 150ms) var(--gnome-easing-default, ease);
+}
+
+a.identifier:hover {
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+  background-color: var(--gnome-selected-overlay, rgb(53 132 228 / 0.14));
+}
+
+.identifier:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fff),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 2px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Invalid identifier ──────────────────────────────────────────────────── */
+
+.invalid {
+  border-color: var(--gnome-warning-bg-color, #f6d32d);
+  background-color: rgb(246 211 45 / 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .identifier {
+    border-color: var(--gnome-border-color, rgb(255 255 255 / 0.14));
+    background-color: var(--gnome-hover-overlay, rgb(255 255 255 / 0.08));
+    color: var(--gnome-window-fg-color, rgb(255 255 255 / 0.87));
+  }
+
+  .invalid {
+    background-color: rgb(248 228 92 / 0.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.identifier {
+    transition: none;
+  }
+}
