@@ -1,0 +1,62 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 2px 8px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  font-family: var(--gnome-font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* ─── Severity levels ─────────────────────────────────────────────────────── */
+
+.none {
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.08));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.minimal {
+  background-color: var(--gnome-blue-1, #99c1f1);
+  color: rgb(0 0 0 / 0.8);
+}
+
+.low {
+  background-color: var(--gnome-blue-3, #3584e4);
+  color: #fff;
+}
+
+.medium {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+  color: var(--gnome-warning-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.high {
+  background-color: var(--gnome-orange-3, #ff7800);
+  color: rgb(0 0 0 / 0.8);
+}
+
+.critical {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+  color: var(--gnome-error-fg-color, #fff);
+}
+
+@media (prefers-color-scheme: dark) {
+  .none {
+    background-color: var(--gnome-dark-2, #5e5c64);
+    color: rgb(255 255 255 / 0.87);
+  }
+
+  .minimal {
+    background-color: var(--gnome-blue-5, #1a5fb4);
+    color: #fff;
+  }
+
+  .high {
+    color: #fff;
+  }
+}

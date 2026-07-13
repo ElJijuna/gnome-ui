@@ -342,6 +342,11 @@
       "import": "./dist/components/SplitButton.js",
       "require": "./dist/components/SplitButton.cjs"
     },
+    "./components/SeverityBadge": {
+      "types": "./dist/components/SeverityBadge.d.ts",
+      "import": "./dist/components/SeverityBadge.js",
+      "require": "./dist/components/SeverityBadge.cjs"
+    },
     "./components/StatusBadge": {
       "types": "./dist/components/StatusBadge.d.ts",
       "import": "./dist/components/StatusBadge.js",

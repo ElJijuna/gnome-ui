@@ -172,6 +172,13 @@ export type { SegmentedBarProps, SegmentedBarSegment } from './components/Segmen
 export { SegmentedBar } from './components/SegmentedBar';
 export type { SeparatorOrientation, SeparatorProps } from './components/Separator';
 export { Separator } from './components/Separator';
+export type { SeverityBadgeProps, VulnerabilitySeverity } from './components/SeverityBadge';
+export {
+  SeverityBadge,
+  VULNERABILITY_SEVERITIES,
+  VULNERABILITY_SEVERITY_LABELS,
+  VULNERABILITY_SEVERITY_RANK,
+} from './components/SeverityBadge';
 export type { ShortcutLabelProps } from './components/ShortcutLabel';
 export { ShortcutLabel } from './components/ShortcutLabel';
 export type {

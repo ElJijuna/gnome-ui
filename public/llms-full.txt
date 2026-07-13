@@ -4694,6 +4694,28 @@ Thin dividing line that separates groups of content.
 
 ---
 
+Source: packages/react/src/components/SeverityBadge/README.md
+
+Pill-shaped label for vulnerability severities in security reports, CVE tables,
+dashboards, and scanner results.
+
+```tsx
+import { SeverityBadge } from "@gnome-ui/react";
+
+<SeverityBadge severity="critical" />
+<SeverityBadge severity="minimal" />
+```
+
+Supported severities are ordered as:
+
+`none < minimal < low < medium < high < critical`
+
+`minimal` is included for external scanner compatibility, such as Google
+Artifact Registry / Grafeas. CVSS qualitative ratings should continue to use
+the official `none`, `low`, `medium`, `high`, and `critical` levels.
+
+---
+
 Source: packages/react/src/components/ShortcutLabel/README.md
 
 Read-only display of a keyboard shortcut with per-key key-cap styling.
