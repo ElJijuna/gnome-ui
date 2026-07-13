@@ -104,6 +104,15 @@ export {
 } from './components/CvssScore';
 export type { CvssVectorMetric, CvssVectorProps, ParsedCvssVector } from './components/CvssVector';
 export { CvssVector, parseCvssVector } from './components/CvssVector';
+export type { CweIdentifierProps, CweLinkSource } from './components/CweIdentifier';
+export {
+  CWE_ID_PATTERN,
+  CweIdentifier,
+  getCweNumber,
+  getCweUrl,
+  isCweId,
+  normalizeCweId,
+} from './components/CweIdentifier';
 export type {
   AlertDialogResponse,
   AlertDialogResponseVariant,

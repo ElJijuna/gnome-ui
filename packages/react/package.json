@@ -157,6 +157,11 @@
       "import": "./dist/components/CveIdentifier.js",
       "require": "./dist/components/CveIdentifier.cjs"
     },
+    "./components/CweIdentifier": {
+      "types": "./dist/components/CweIdentifier.d.ts",
+      "import": "./dist/components/CweIdentifier.js",
+      "require": "./dist/components/CweIdentifier.cjs"
+    },
     "./components/Dialog": {
       "types": "./dist/components/Dialog.d.ts",
       "import": "./dist/components/Dialog.js",
