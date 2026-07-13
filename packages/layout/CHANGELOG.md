@@ -1,3 +1,37 @@
+## [1.31.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.30.1...@gnome-ui/layout@1.31.0) (2026-07-13)
+
+### Features
+
+* **@gnome-ui/layout:** add ChartCard component with styles, stories, tests, and documentation ([62ad0de](https://github.com/ElJijuna/gnome-ui/commit/62ad0deaea6c56277fdc39824606305bbc42f1b0))
+* **@gnome-ui/react:** add AffectedPackage component with styles, stories, tests, and documentation ([9339ff0](https://github.com/ElJijuna/gnome-ui/commit/9339ff0f56e6c16252b1da3a5d58c3da1274432f))
+* **@gnome-ui/react:** add autoPlay and interval props to Carousel for automatic slide transitions ([ebbdd82](https://github.com/ElJijuna/gnome-ui/commit/ebbdd822952f238cfb03a00ca7c9992b64ab75fd))
+* **@gnome-ui/react:** add CveIdentifier component with styles, stories, tests, and documentation ([7c91d60](https://github.com/ElJijuna/gnome-ui/commit/7c91d60f2023e37585ddcc9662b1eb10d67f4fc2))
+* **@gnome-ui/react:** add CvssScore component with styles, stories, tests, and documentation ([ad4f78b](https://github.com/ElJijuna/gnome-ui/commit/ad4f78bdd825d78276b6ce202d010de1871e1133))
+* **@gnome-ui/react:** add CvssVector component with styles, stories, tests, and documentation ([ba83499](https://github.com/ElJijuna/gnome-ui/commit/ba8349965c1d2526f3e47b6925bb35563bbb675d))
+* **@gnome-ui/react:** add CweIdentifier component with styles, stories, tests, and documentation ([2ff0a04](https://github.com/ElJijuna/gnome-ui/commit/2ff0a04b87e2583e5088e72e4bfdc56496fb9981))
+* **@gnome-ui/react:** add documentation for CvssScore component with usage examples ([93bb608](https://github.com/ElJijuna/gnome-ui/commit/93bb608ac41bb4fd8d3fe9f32842632e30a8b89c))
+* **@gnome-ui/react:** add indicator and indicatorPosition props to Carousel for flexible display options ([0247826](https://github.com/ElJijuna/gnome-ui/commit/0247826df9edbb7d4879ac575dce4e8778a9aeb6))
+* **@gnome-ui/react:** add SecurityMetric component with styles, stories, tests, and documentation ([bea715a](https://github.com/ElJijuna/gnome-ui/commit/bea715a891390e1e1dcbb8391b3e5f50ab6add93))
+* **@gnome-ui/react:** add SeverityBadge component with styles, documentation, and tests ([15dccf1](https://github.com/ElJijuna/gnome-ui/commit/15dccf1d5f27e2d50de0408b80838f8c5a7b77b1))
+* **@gnome-ui/react:** add VulnerabilityFinding component with styles, stories, tests, and documentation ([c217084](https://github.com/ElJijuna/gnome-ui/commit/c217084b5099a7f4612352b21a5a26917c34df90))
+* **@gnome-ui/react:** add VulnerabilitySummary component with styles, stories, tests, and documentation ([8404b9e](https://github.com/ElJijuna/gnome-ui/commit/8404b9ea38315c31d643e89101cd6d0c270306c4))
+* **@gnome-ui/react:** update visibleSlides prop to support integer values and enhance Carousel functionality with new tests ([972b2d3](https://github.com/ElJijuna/gnome-ui/commit/972b2d337230d8b372ebaf89e1d4531f6979b5b6))
+* add gnome-ui documentation and generation script ([eff61f8](https://github.com/ElJijuna/gnome-ui/commit/eff61f8e60cf6a04938f2f0e89d23ddcb01863be))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** add missing exports for ComposedChart, FunnelChart, and ScatterChart components in package.json ([09bacd0](https://github.com/ElJijuna/gnome-ui/commit/09bacd0df294496599c86da610a1c9df9da5a764))
+* **@gnome-ui/react:** add missing exports for ScrollToTop component in package.json ([4c654ab](https://github.com/ElJijuna/gnome-ui/commit/4c654abb8e94e9e9643c6f35cb168308137cc6ec))
+* **@gnome-ui/react:** ensure overflow is hidden for slides in Carousel component ([e67f59c](https://github.com/ElJijuna/gnome-ui/commit/e67f59c73d8954f62b0728ca68aed316f46afcc8))
+* **@gnome-ui/react:** fix dot-click feedback loop in controlled ([9200f63](https://github.com/ElJijuna/gnome-ui/commit/9200f637a2c796580ea547436887d15c08e724ec))
+* **@gnome-ui/react:** improve code readability by formatting conditional expressions in Carousel component ([a84d2e3](https://github.com/ElJijuna/gnome-ui/commit/a84d2e328b8ca673bfeb78037b31348fc777ccba))
+* **@gnome-ui/react:** remove unnecessary alignment style from Carousel component ([8f432a2](https://github.com/ElJijuna/gnome-ui/commit/8f432a255b3ea1d2c4eb6d71ba70fa8628931c98))
+* **@gnome-ui/react:** update pointer event handling in Carousel component for improved interaction ([fc39646](https://github.com/ElJijuna/gnome-ui/commit/fc396462dd680ffe4889f8bea7e27ad1d102f6e3))
+
+### Refactoring
+
+* **@gnome-ui/react:** enhance Carousel stories with indicator control for flexible display options ([251af9c](https://github.com/ElJijuna/gnome-ui/commit/251af9c4d908b4e8fc943e54c9591fb16d124ca5))
+
 ## [1.30.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.30.0...@gnome-ui/layout@1.30.1) (2026-06-14)
 
 ### Features
