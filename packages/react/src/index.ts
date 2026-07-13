@@ -84,6 +84,15 @@ export type {
 export { ContributionGraph } from './components/ContributionGraph';
 export type { CountDownTimerProps, CountDownVariant } from './components/CountDownTimer';
 export { CountDownTimer } from './components/CountDownTimer';
+export type { CvssScoreProps, CvssSeverity } from './components/CvssScore';
+export {
+  CVSS_SCORE_MAX,
+  CVSS_SCORE_MIN,
+  CvssScore,
+  clampCvssScore,
+  formatCvssScore,
+  getCvssSeverity,
+} from './components/CvssScore';
 export type {
   AlertDialogResponse,
   AlertDialogResponseVariant,

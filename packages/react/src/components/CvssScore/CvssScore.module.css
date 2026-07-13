@@ -1,0 +1,68 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  vertical-align: middle;
+  font-family: var(--gnome-font-family);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  white-space: nowrap;
+}
+
+.score {
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.max {
+  margin-inline-start: -4px;
+  color: var(--gnome-secondary-fg-color, rgb(0 0 0 / 0.55));
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* ─── Severity accent ─────────────────────────────────────────────────────── */
+
+.none .score {
+  color: var(--gnome-secondary-fg-color, rgb(0 0 0 / 0.55));
+}
+
+.minimal .score,
+.low .score {
+  color: var(--gnome-blue-4, #1c71d8);
+}
+
+.medium .score {
+  color: var(--gnome-yellow-5, #9c6e03);
+}
+
+.high .score {
+  color: var(--gnome-orange-4, #e66100);
+}
+
+.critical .score {
+  color: var(--gnome-error-bg-color, #e01b24);
+}
+
+@media (prefers-color-scheme: dark) {
+  .root {
+    color: var(--gnome-window-fg-color, rgb(255 255 255 / 0.87));
+  }
+
+  .max,
+  .none .score {
+    color: var(--gnome-secondary-fg-color, rgb(255 255 255 / 0.55));
+  }
+
+  .medium .score {
+    color: var(--gnome-yellow-2, #f8e45c);
+  }
+
+  .high .score {
+    color: var(--gnome-orange-2, #ffbe6f);
+  }
+}

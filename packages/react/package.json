@@ -142,6 +142,11 @@
       "import": "./dist/components/CountDownTimer.js",
       "require": "./dist/components/CountDownTimer.cjs"
     },
+    "./components/CvssScore": {
+      "types": "./dist/components/CvssScore.d.ts",
+      "import": "./dist/components/CvssScore.js",
+      "require": "./dist/components/CvssScore.cjs"
+    },
     "./components/Dialog": {
       "types": "./dist/components/Dialog.d.ts",
       "import": "./dist/components/Dialog.js",
