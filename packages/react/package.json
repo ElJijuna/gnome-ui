@@ -302,6 +302,11 @@
       "import": "./dist/components/SearchBar.js",
       "require": "./dist/components/SearchBar.cjs"
     },
+    "./components/SecurityMetric": {
+      "types": "./dist/components/SecurityMetric.d.ts",
+      "import": "./dist/components/SecurityMetric.js",
+      "require": "./dist/components/SecurityMetric.cjs"
+    },
     "./components/Separator": {
       "types": "./dist/components/Separator.d.ts",
       "import": "./dist/components/Separator.js",

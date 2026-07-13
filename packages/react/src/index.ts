@@ -186,6 +186,8 @@ export type {
 export { ScrollToTop } from './components/ScrollToTop';
 export type { SearchBarProps } from './components/SearchBar';
 export { SearchBar } from './components/SearchBar';
+export type { SecurityMetricProps, SecurityMetricTrend } from './components/SecurityMetric';
+export { SecurityMetric } from './components/SecurityMetric';
 export type { SegmentedBarProps, SegmentedBarSegment } from './components/SegmentedBar';
 export { SegmentedBar } from './components/SegmentedBar';
 export type { SeparatorOrientation, SeparatorProps } from './components/Separator';
