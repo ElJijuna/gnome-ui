@@ -1,3 +1,20 @@
+## [1.51.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.50.1...@gnome-ui/react@1.51.0) (2026-07-13)
+
+### Features
+
+* **@gnome-ui/layout:** add ChartCard component with styles, stories, tests, and documentation ([62ad0de](https://github.com/ElJijuna/gnome-ui/commit/62ad0deaea6c56277fdc39824606305bbc42f1b0))
+* **@gnome-ui/react:** add AffectedPackage component with styles, stories, tests, and documentation ([9339ff0](https://github.com/ElJijuna/gnome-ui/commit/9339ff0f56e6c16252b1da3a5d58c3da1274432f))
+* **@gnome-ui/react:** add CveIdentifier component with styles, stories, tests, and documentation ([7c91d60](https://github.com/ElJijuna/gnome-ui/commit/7c91d60f2023e37585ddcc9662b1eb10d67f4fc2))
+* **@gnome-ui/react:** add CvssScore component with styles, stories, tests, and documentation ([ad4f78b](https://github.com/ElJijuna/gnome-ui/commit/ad4f78bdd825d78276b6ce202d010de1871e1133))
+* **@gnome-ui/react:** add CvssVector component with styles, stories, tests, and documentation ([ba83499](https://github.com/ElJijuna/gnome-ui/commit/ba8349965c1d2526f3e47b6925bb35563bbb675d))
+* **@gnome-ui/react:** add CweIdentifier component with styles, stories, tests, and documentation ([2ff0a04](https://github.com/ElJijuna/gnome-ui/commit/2ff0a04b87e2583e5088e72e4bfdc56496fb9981))
+* **@gnome-ui/react:** add documentation for CvssScore component with usage examples ([93bb608](https://github.com/ElJijuna/gnome-ui/commit/93bb608ac41bb4fd8d3fe9f32842632e30a8b89c))
+* **@gnome-ui/react:** add SecurityMetric component with styles, stories, tests, and documentation ([bea715a](https://github.com/ElJijuna/gnome-ui/commit/bea715a891390e1e1dcbb8391b3e5f50ab6add93))
+* **@gnome-ui/react:** add SeverityBadge component with styles, documentation, and tests ([15dccf1](https://github.com/ElJijuna/gnome-ui/commit/15dccf1d5f27e2d50de0408b80838f8c5a7b77b1))
+* **@gnome-ui/react:** add VulnerabilityFinding component with styles, stories, tests, and documentation ([c217084](https://github.com/ElJijuna/gnome-ui/commit/c217084b5099a7f4612352b21a5a26917c34df90))
+* **@gnome-ui/react:** add VulnerabilitySummary component with styles, stories, tests, and documentation ([8404b9e](https://github.com/ElJijuna/gnome-ui/commit/8404b9ea38315c31d643e89101cd6d0c270306c4))
+* add gnome-ui documentation and generation script ([eff61f8](https://github.com/ElJijuna/gnome-ui/commit/eff61f8e60cf6a04938f2f0e89d23ddcb01863be))
+
 ## [1.50.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.50.0...@gnome-ui/react@1.50.1) (2026-06-30)
 
 ### Bug Fixes
