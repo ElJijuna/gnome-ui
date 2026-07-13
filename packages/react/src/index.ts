@@ -274,6 +274,14 @@ export type {
   ViewSwitcherSidebarProps,
 } from './components/ViewSwitcherSidebar';
 export { ViewSwitcherSidebar, ViewSwitcherSidebarItem } from './components/ViewSwitcherSidebar';
+export type {
+  VulnerabilityFindingProps,
+  VulnerabilityFindingStatus,
+} from './components/VulnerabilityFinding';
+export {
+  VULNERABILITY_FINDING_STATUS_LABELS,
+  VulnerabilityFinding,
+} from './components/VulnerabilityFinding';
 export type { WindowTitleProps } from './components/WindowTitle';
 export { WindowTitle } from './components/WindowTitle';
 export type { WrapBoxAlign, WrapBoxJustify, WrapBoxProps } from './components/WrapBox';

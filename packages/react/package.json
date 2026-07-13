@@ -447,6 +447,11 @@
       "import": "./dist/components/ViewSwitcherSidebar.js",
       "require": "./dist/components/ViewSwitcherSidebar.cjs"
     },
+    "./components/VulnerabilityFinding": {
+      "types": "./dist/components/VulnerabilityFinding.d.ts",
+      "import": "./dist/components/VulnerabilityFinding.js",
+      "require": "./dist/components/VulnerabilityFinding.cjs"
+    },
     "./components/WindowTitle": {
       "types": "./dist/components/WindowTitle.d.ts",
       "import": "./dist/components/WindowTitle.js",
