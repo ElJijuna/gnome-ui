@@ -1,0 +1,167 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px 12px;
+}
+
+.titleBlock {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.title,
+.subtitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.headerEnd {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  min-width: 0;
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 5px;
+  min-width: 0;
+  line-height: 1;
+}
+
+.value {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  line-height: 1;
+}
+
+.unit {
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.trend {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  max-width: 100%;
+}
+
+.trendValue {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.period {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  overflow-wrap: anywhere;
+}
+
+.up {
+  color: var(--gnome-success-color, #26a269);
+}
+
+.down {
+  color: var(--gnome-error-color, #e01b24);
+}
+
+.neutral {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.chart {
+  display: flex;
+  min-height: var(--chart-card-chart-min-height, 220px);
+  padding: 14px 16px 16px;
+}
+
+.chart > * {
+  width: 100%;
+}
+
+.stateChart {
+  align-items: center;
+  justify-content: center;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  text-align: center;
+}
+
+.errorState {
+  color: var(--gnome-error-color, #e01b24);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+}
+
+.loading {
+  pointer-events: none;
+}
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--chart-card-chart-min-height, 220px);
+}
+
+@media (width <= 520px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .headerEnd {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .metric {
+    align-items: flex-start;
+  }
+}

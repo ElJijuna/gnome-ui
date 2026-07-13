@@ -8,6 +8,8 @@ export type { ApplicationCardProps, ApplicationCardStat } from './components/App
 export { ApplicationCard } from './components/ApplicationCard';
 export type { BannerProps, BannerType } from './components/Banner';
 export { Banner } from './components/Banner';
+export type { ChartCardProps } from './components/ChartCard';
+export { ChartCard } from './components/ChartCard';
 export type { CounterCardProps } from './components/CounterCard';
 export { CounterCard } from './components/CounterCard';
 export type {

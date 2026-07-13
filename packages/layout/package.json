@@ -27,6 +27,11 @@
       "import": "./dist/components/Banner.js",
       "require": "./dist/components/Banner.cjs"
     },
+    "./components/ChartCard": {
+      "types": "./dist/components/ChartCard.d.ts",
+      "import": "./dist/components/ChartCard.js",
+      "require": "./dist/components/ChartCard.cjs"
+    },
     "./components/CounterCard": {
       "types": "./dist/components/CounterCard.d.ts",
       "import": "./dist/components/CounterCard.js",
@@ -66,6 +71,11 @@
       "types": "./dist/components/Layout.d.ts",
       "import": "./dist/components/Layout.js",
       "require": "./dist/components/Layout.cjs"
+    },
+    "./components/LoadingStatus": {
+      "types": "./dist/components/LoadingStatus.d.ts",
+      "import": "./dist/components/LoadingStatus.js",
+      "require": "./dist/components/LoadingStatus.cjs"
     },
     "./components/MasonryGrid": {
       "types": "./dist/components/MasonryGrid.d.ts",
