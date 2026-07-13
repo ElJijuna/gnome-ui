@@ -1,0 +1,34 @@
+# gnome-ui
+
+> React 19 component library implementing the GNOME Human Interface Guidelines and Adwaita design language. Use this index to choose the correct package, install it, and find authoritative API examples.
+
+gnome-ui is a TypeScript monorepo. Prefer public package exports over source-file imports. Import each package stylesheet once. `@gnome-ui/react` provides UI primitives and `GnomeProvider`; `@gnome-ui/layout` provides application shells and dashboard compositions; `@gnome-ui/charts` provides visualizations; `@gnome-ui/core` provides framework-agnostic CSS tokens; `@gnome-ui/icons` provides icon definitions; `@gnome-ui/platform` and `@gnome-ui/hooks` expose GNOME host integrations.
+
+## Start here
+
+- [Project overview](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/README.md): Packages, installation, quick start, and development commands.
+- [Complete LLM documentation](https://gnome-ui.org/llms-full.txt): Consolidated package and component documentation for one-shot context.
+- [Component index](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/COMPONENT_INDEX.md): Public component inventory, package boundaries, and implementation guidance.
+- [Live Storybook](https://gnome-ui.org/): Interactive examples and generated prop documentation.
+
+## Packages
+
+- [@gnome-ui/react](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/react/README.md): React primitives, adaptive widgets, providers, and formatting hooks.
+- [@gnome-ui/layout](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/layout/README.md): Application shells, page layout, dashboard grids, cards, and state compositions.
+- [@gnome-ui/charts](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/charts/README.md): Adwaita-styled charts and compact spark charts.
+- [@gnome-ui/core](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/core/README.md): CSS design tokens without a framework dependency.
+- [@gnome-ui/icons](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/icons/README.md): Tree-shakeable SVG icon definitions.
+- [@gnome-ui/platform](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/platform/README.md): TypeScript bridge for GNOME host APIs and WebKitGTK.
+- [@gnome-ui/hooks](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/hooks/README.md): React hooks wrapping platform and runtime APIs.
+- [@gnome-ui/cli](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/packages/cli/README.md): Project setup and dependency verification CLI.
+
+## Design and architecture
+
+- [GNOME implementation guidelines](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/GNOME_GUIDELINES.md): Design rules and expected GNOME behavior.
+- [Architecture](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/ARCHITECTURE.md): Package responsibilities and dependency boundaries.
+- [Contributing](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/CONTRIBUTING.md): Repository workflow and quality requirements.
+
+## Optional
+
+- [Roadmap](https://raw.githubusercontent.com/ElJijuna/gnome-ui/main/ROADMAP.md): Planned components; do not treat roadmap APIs as released.
+- [GitHub repository](https://github.com/ElJijuna/gnome-ui): Source, releases, and issue tracker.

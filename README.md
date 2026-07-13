@@ -67,6 +67,10 @@ Compact notation renders values like `1K`; standard notation renders values like
 
 Live examples and documentation: **[Storybook →](https://eljijuna.github.io/gnome-ui/)**
 
+AI assistants and coding agents can use [`llms.txt`](https://gnome-ui.org/llms.txt)
+for a compact documentation index or
+[`llms-full.txt`](https://gnome-ui.org/llms-full.txt) for complete context.
+
 | Component | Description | Story |
 |-----------|-------------|-------|
 | `Button` | Default, Suggested, Destructive, Flat, Pill, Circular | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/components-button--docs) |

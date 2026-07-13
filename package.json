@@ -18,6 +18,8 @@
     "lint:css:fix": "stylelint \"packages/*/src/**/*.css\" --fix",
     "format": "biome check --write .",
     "format:check": "biome check .",
+    "llms:generate": "node scripts/generate-llms.mjs",
+    "llms:check": "node scripts/generate-llms.mjs --check",
     "check": "npm run lint && npm run lint:css && npm run format:check && npm run typecheck",
     "test": "turbo test"
   },

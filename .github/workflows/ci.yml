@@ -24,6 +24,9 @@ jobs:
 
       - run: npm run lint
 
+      - name: Check LLM documentation
+        run: npm run llms:check
+
   typecheck:
     name: Typecheck
     runs-on: ubuntu-latest
