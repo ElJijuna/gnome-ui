@@ -4,6 +4,16 @@ export type { AboutDialogLink, AboutDialogProps } from './components/AboutDialog
 export { AboutDialog } from './components/AboutDialog';
 export type { ActionRowProps } from './components/ActionRow';
 export { ActionRow } from './components/ActionRow';
+export type {
+  AffectedPackageProps,
+  PackageCoordinate,
+  PackageEcosystem,
+} from './components/AffectedPackage';
+export {
+  AffectedPackage,
+  formatPackageCoordinate,
+  getPackageUrl,
+} from './components/AffectedPackage';
 export type { AvatarColor, AvatarProps, AvatarSize } from './components/Avatar';
 export { Avatar } from './components/Avatar';
 export type { AvatarGroupItem, AvatarGroupProps } from './components/AvatarGroup';

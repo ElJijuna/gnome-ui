@@ -17,6 +17,11 @@
       "import": "./dist/components/ActionRow.js",
       "require": "./dist/components/ActionRow.cjs"
     },
+    "./components/AffectedPackage": {
+      "types": "./dist/components/AffectedPackage.d.ts",
+      "import": "./dist/components/AffectedPackage.js",
+      "require": "./dist/components/AffectedPackage.cjs"
+    },
     "./components/Avatar": {
       "types": "./dist/components/Avatar.d.ts",
       "import": "./dist/components/Avatar.js",

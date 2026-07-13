@@ -1,0 +1,134 @@
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+.package {
+  display: block;
+  font-family: var(--gnome-font-family);
+}
+
+.surface {
+  --affected-package-bg: #fff;
+  --affected-package-fg: #241f31;
+  --affected-package-muted-fg: #5e5c64;
+  --affected-package-subtle-fg: #77767b;
+  --affected-package-pill-bg: #deddda;
+  --affected-package-pill-fg: #241f31;
+  --affected-package-border: rgb(0 0 0 / 0.14);
+
+  display: grid;
+  box-sizing: border-box;
+  gap: var(--gnome-space-4, 16px);
+  min-width: min(100%, 320px);
+  padding: var(--gnome-space-4, 16px);
+  border: 1px solid var(--gnome-card-shade-color, var(--affected-package-border));
+  border-radius: var(--gnome-radius-lg, 12px);
+  background: var(--gnome-card-bg-color, var(--affected-package-bg));
+  color: var(--affected-package-fg);
+  font-family: var(--gnome-font-family);
+  color-scheme: light;
+  -webkit-text-fill-color: var(--affected-package-fg);
+}
+
+.surface *,
+.surface *::before,
+.surface *::after {
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gnome-space-3, 12px);
+  min-width: 0;
+}
+
+.ecosystem {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 2px 10px;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 999px;
+  background: var(--affected-package-pill-bg);
+  color: var(--affected-package-pill-fg);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  -webkit-text-fill-color: var(--affected-package-pill-fg);
+}
+
+.name {
+  min-width: 0;
+  color: var(--affected-package-fg);
+  font-family: var(--gnome-monospace-font-family, monospace);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  -webkit-text-fill-color: var(--affected-package-fg);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gnome-space-3, 12px) var(--gnome-space-5, 20px);
+  min-width: 0;
+  margin: 0;
+}
+
+.metaItem {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.metaItem dt {
+  color: var(--affected-package-subtle-fg);
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  -webkit-text-fill-color: var(--affected-package-subtle-fg);
+}
+
+.metaItem dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--affected-package-fg);
+  font-family: var(--gnome-monospace-font-family, monospace);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  -webkit-text-fill-color: var(--affected-package-fg);
+}
+
+.purl {
+  color: inherit;
+  font: inherit;
+  -webkit-text-fill-color: currentcolor;
+}
+
+@media (prefers-color-scheme: dark) {
+  .surface {
+    --affected-package-bg: rgb(36 36 36 / 0.88);
+    --affected-package-fg: rgb(255 255 255 / 0.92);
+    --affected-package-muted-fg: rgb(255 255 255 / 0.72);
+    --affected-package-subtle-fg: rgb(255 255 255 / 0.62);
+    --affected-package-pill-bg: rgb(255 255 255 / 0.1);
+    --affected-package-pill-fg: rgb(255 255 255 / 0.92);
+    --affected-package-border: rgb(255 255 255 / 0.14);
+
+    border-color: var(--gnome-card-shade-color, var(--affected-package-border));
+    background: var(--gnome-card-bg-color, var(--affected-package-bg));
+    color-scheme: dark;
+  }
+
+  .ecosystem {
+    border-color: rgb(255 255 255 / 0.12);
+  }
+}
