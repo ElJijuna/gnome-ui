@@ -102,6 +102,8 @@ export {
   formatCvssScore,
   getCvssSeverity,
 } from './components/CvssScore';
+export type { CvssVectorMetric, CvssVectorProps, ParsedCvssVector } from './components/CvssVector';
+export { CvssVector, parseCvssVector } from './components/CvssVector';
 export type {
   AlertDialogResponse,
   AlertDialogResponseVariant,

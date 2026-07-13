@@ -147,6 +147,11 @@
       "import": "./dist/components/CvssScore.js",
       "require": "./dist/components/CvssScore.cjs"
     },
+    "./components/CvssVector": {
+      "types": "./dist/components/CvssVector.d.ts",
+      "import": "./dist/components/CvssVector.js",
+      "require": "./dist/components/CvssVector.cjs"
+    },
     "./components/CveIdentifier": {
       "types": "./dist/components/CveIdentifier.d.ts",
       "import": "./dist/components/CveIdentifier.js",
