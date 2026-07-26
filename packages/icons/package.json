@@ -34,8 +34,8 @@
   ],
   "scripts": {
     "prebuild": "vite-magic validate",
-    "build": "tsc && vite build",
-    "typecheck": "tsc --noEmit",
+    "build": "tsc6 && vite build",
+    "typecheck": "tsc6 --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
