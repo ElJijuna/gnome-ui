@@ -6,6 +6,18 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 ---
 
+## Next Package Priorities
+
+> Framework expansion will proceed in this order. Both packages build on the
+> framework-agnostic tokens and themes provided by `@gnome-ui/core`.
+
+| Priority | Status | Package | Description |
+|----------|--------|---------|-------------|
+| 1 | ⬜ | **`@gnome-ui/web-components`** | Framework-agnostic Custom Elements for behavior-rich GNOME widgets. Prefer semantic HTML and light DOM, expose standard DOM events, preserve accessibility, and remain compatible with htmx and server-rendered fragments. |
+| 2 | ⬜ | **`@gnome-ui/angular`** | Angular package built after the Web Components foundation. Provide standalone components, Angular Forms integration where applicable, and reuse `@gnome-ui/core` tokens plus Web Components rather than duplicating styling and behavior. |
+
+---
+
 ## Tier 1 — Base
 
 > Foundation components. Everything else depends on these.
