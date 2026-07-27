@@ -37,8 +37,8 @@ describe('GnomeToastElement', () => {
     const toast = renderToast();
     const dismissListener = vi.fn<(event: CustomEvent<GnomeToastDismissDetail>) => void>();
     const changeListener = vi.fn<(event: CustomEvent<GnomeToastOpenChangeDetail>) => void>();
-    toast.addEventListener('gnome-dismiss', dismissListener as EventListener);
-    toast.addEventListener('gnome-open-change', changeListener as EventListener);
+    toast.addEventListener('gnome-dismiss', dismissListener);
+    toast.addEventListener('gnome-open-change', changeListener);
 
     toast.show();
     vi.advanceTimersByTime(1000);
@@ -101,6 +101,48 @@ describe('GnomeToastElement', () => {
     vi.advanceTimersByTime(999);
     expect(toast.open).toBe(true);
     vi.advanceTimersByTime(1);
+    expect(toast.open).toBe(false);
+  });
+
+  it('stays paused until both pointer and focus interactions end', () => {
+    vi.useFakeTimers();
+    const toast = renderToast();
+    const action = toast.querySelector<HTMLButtonElement>('[data-action]');
+    toast.show();
+
+    vi.advanceTimersByTime(400);
+    toast.dispatchEvent(new Event('pointerenter'));
+    action?.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    toast.dispatchEvent(new Event('pointerleave'));
+    vi.advanceTimersByTime(1000);
+
+    expect(toast.open).toBe(true);
+
+    action?.dispatchEvent(
+      new FocusEvent('focusout', {
+        bubbles: true,
+        relatedTarget: document.body,
+      }),
+    );
+    vi.advanceTimersByTime(599);
+    expect(toast.open).toBe(true);
+    vi.advanceTimersByTime(1);
+    expect(toast.open).toBe(false);
+  });
+
+  it('does not restart a changed duration while interaction is paused', () => {
+    vi.useFakeTimers();
+    const toast = renderToast();
+    toast.show();
+    toast.dispatchEvent(new Event('pointerenter'));
+
+    toast.duration = 500;
+    vi.advanceTimersByTime(1000);
+
+    expect(toast.open).toBe(true);
+
+    toast.dispatchEvent(new Event('pointerleave'));
+    vi.advanceTimersByTime(500);
     expect(toast.open).toBe(false);
   });
 });

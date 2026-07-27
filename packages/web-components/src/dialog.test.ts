@@ -53,7 +53,7 @@ describe('GnomeDialogElement', () => {
   it('closes on Escape and restores focus', async () => {
     const { dialog, trigger } = renderDialog();
     const closeListener = vi.fn<(event: CustomEvent<GnomeDialogCloseDetail>) => void>();
-    dialog.addEventListener('gnome-close', closeListener as EventListener);
+    dialog.addEventListener('gnome-close', closeListener);
     dialog.show();
     await Promise.resolve();
 
@@ -112,5 +112,69 @@ describe('GnomeDialogElement', () => {
 
     document.body.append(dialog);
     expect(document.body.style.overflow).toBe('hidden');
+  });
+
+  it('makes content outside the modal inert and restores its previous state', () => {
+    const alreadyInert = document.createElement('aside');
+    alreadyInert.inert = true;
+    document.body.append(alreadyInert);
+    const { dialog, trigger } = renderDialog();
+
+    dialog.show();
+
+    expect(trigger.inert).toBe(true);
+    expect(alreadyInert.inert).toBe(true);
+
+    dialog.close();
+
+    expect(trigger.inert).toBe(false);
+    expect(alreadyInert.inert).toBe(true);
+  });
+
+  it('isolates background nodes inserted while the modal is open', async () => {
+    const { dialog } = renderDialog();
+    dialog.show();
+    const lateBackground = document.createElement('button');
+
+    document.body.append(lateBackground);
+    await Promise.resolve();
+
+    expect(lateBackground.inert).toBe(true);
+  });
+
+  it('refreshes its surface and accessible relationships after a light-DOM swap', async () => {
+    const { dialog } = renderDialog();
+    dialog.show();
+    const originalSurface = dialog.querySelector<HTMLElement>('[data-slot="dialog-surface"]');
+    const replacement = document.createElement('article');
+    replacement.dataset.slot = 'dialog-surface';
+    replacement.innerHTML = `
+      <h2 data-slot="dialog-title">Updated title</h2>
+      <p data-slot="dialog-description">Updated description</p>
+      <button type="button">Continue</button>
+    `;
+
+    originalSurface?.replaceWith(replacement);
+    await Promise.resolve();
+
+    const title = replacement.querySelector<HTMLElement>('[data-slot="dialog-title"]');
+    const description = replacement.querySelector<HTMLElement>('[data-slot="dialog-description"]');
+    expect(replacement.hidden).toBe(false);
+    expect(replacement.getAttribute('role')).toBe('dialog');
+    expect(replacement.getAttribute('aria-labelledby')).toBe(title?.id);
+    expect(replacement.getAttribute('aria-describedby')).toBe(description?.id);
+  });
+
+  it('removes stale accessible relationships when dynamic labels disappear', async () => {
+    const { dialog } = renderDialog();
+    const surface = dialog.querySelector<HTMLElement>('[data-slot="dialog-surface"]');
+    dialog.show();
+
+    dialog.querySelector('[data-slot="dialog-title"]')?.remove();
+    dialog.querySelector('[data-slot="dialog-description"]')?.remove();
+    await Promise.resolve();
+
+    expect(surface?.hasAttribute('aria-labelledby')).toBe(false);
+    expect(surface?.hasAttribute('aria-describedby')).toBe(false);
   });
 });

@@ -176,6 +176,16 @@ npm run build-storybook --workspace @gnome-ui/web-components
 The deployed catalog is available under `/web-components/` alongside the
 other package Storybooks.
 
+Run the real-browser interaction tests against Storybook:
+
+```bash
+npm run test:browser --workspace @gnome-ui/web-components
+```
+
+These Playwright checks cover modal isolation and focus, popover repositioning
+after resize, and the toast's combined pointer/focus pause behavior. They also
+run in the repository CI workflow.
+
 ## Releases
 
 The package follows the repository semantic-release workflow. Release commits

@@ -1,6 +1,8 @@
 node_modules
 dist
 storybook-static
+packages/web-components/playwright-report
+packages/web-components/test-results
 .turbo
 .DS_Store
 *.local

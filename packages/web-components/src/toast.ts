@@ -15,6 +15,17 @@ export interface GnomeToastDismissDetail {
   reason: GnomeToastDismissReason;
 }
 
+export interface GnomeToastActionDetail {
+  action: string;
+}
+
+export interface GnomeToastEventMap extends HTMLElementEventMap {
+  'gnome-action': CustomEvent<GnomeToastActionDetail>;
+  'gnome-before-dismiss': CustomEvent<GnomeToastDismissDetail>;
+  'gnome-dismiss': CustomEvent<GnomeToastDismissDetail>;
+  'gnome-open-change': CustomEvent<GnomeToastOpenChangeDetail>;
+}
+
 /**
  * Timed, accessible notification with pause-on-hover and pause-on-focus.
  *
@@ -24,12 +35,65 @@ export interface GnomeToastDismissDetail {
 export class GnomeToastElement extends HTMLElementBase {
   static readonly observedAttributes = ['duration', 'open'];
 
+  addEventListener<K extends keyof GnomeToastEventMap>(
+    type: K,
+    listener: (this: GnomeToastElement, event: GnomeToastEventMap[K]) => void,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject | null,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: unknown,
+    options?: boolean | AddEventListenerOptions,
+  ) {
+    if (listener === null) {
+      return;
+    }
+
+    super.addEventListener(
+      type,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    );
+  }
+
+  removeEventListener<K extends keyof GnomeToastEventMap>(
+    type: K,
+    listener: (this: GnomeToastElement, event: GnomeToastEventMap[K]) => void,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject | null,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: unknown,
+    options?: boolean | EventListenerOptions,
+  ) {
+    if (listener === null) {
+      return;
+    }
+
+    super.removeEventListener(
+      type,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    );
+  }
+
   #connected = false;
   #isOpen = false;
   #pendingDismissReason: GnomeToastDismissReason = 'attribute';
   #remaining = 0;
   #startedAt = 0;
   #timer: ReturnType<typeof setTimeout> | null = null;
+  #pauseReasons = new Set<'focus' | 'pointer'>();
 
   connectedCallback() {
     this.#connected = true;
@@ -44,20 +108,21 @@ export class GnomeToastElement extends HTMLElementBase {
 
     this.setAttribute('aria-atomic', 'true');
     this.addEventListener('click', this.#handleClick);
-    this.addEventListener('focusin', this.#pause);
+    this.addEventListener('focusin', this.#handleFocusIn);
     this.addEventListener('focusout', this.#handleFocusOut);
-    this.addEventListener('pointerenter', this.#pause);
-    this.addEventListener('pointerleave', this.#resume);
+    this.addEventListener('pointerenter', this.#handlePointerEnter);
+    this.addEventListener('pointerleave', this.#handlePointerLeave);
     this.#syncOpen(false);
   }
 
   disconnectedCallback() {
     this.#connected = false;
     this.removeEventListener('click', this.#handleClick);
-    this.removeEventListener('focusin', this.#pause);
+    this.removeEventListener('focusin', this.#handleFocusIn);
     this.removeEventListener('focusout', this.#handleFocusOut);
-    this.removeEventListener('pointerenter', this.#pause);
-    this.removeEventListener('pointerleave', this.#resume);
+    this.removeEventListener('pointerenter', this.#handlePointerEnter);
+    this.removeEventListener('pointerleave', this.#handlePointerLeave);
+    this.#pauseReasons.clear();
     this.#clearTimer();
     this.#isOpen = false;
   }
@@ -153,7 +218,7 @@ export class GnomeToastElement extends HTMLElementBase {
     this.#clearTimer();
     this.#remaining = duration;
 
-    if (duration === 0) {
+    if (duration === 0 || this.#pauseReasons.size > 0) {
       return;
     }
 
@@ -168,27 +233,48 @@ export class GnomeToastElement extends HTMLElementBase {
     }
   }
 
-  #pause = () => {
+  #pause(reason: 'focus' | 'pointer') {
+    const wasPaused = this.#pauseReasons.size > 0;
+    this.#pauseReasons.add(reason);
+
+    if (wasPaused) {
+      return;
+    }
+
     if (!this.#timer) {
       return;
     }
 
     this.#remaining = Math.max(0, this.#remaining - (Date.now() - this.#startedAt));
     this.#clearTimer();
-  };
+  }
 
-  #resume = () => {
-    if (!this.open || this.duration === 0 || this.#timer) {
+  #resume(reason: 'focus' | 'pointer') {
+    this.#pauseReasons.delete(reason);
+
+    if (this.#pauseReasons.size > 0 || !this.open || this.duration === 0 || this.#timer) {
       return;
     }
 
     this.#startedAt = Date.now();
     this.#timer = setTimeout(() => this.dismiss('timeout'), this.#remaining);
+  }
+
+  #handleFocusIn = () => {
+    this.#pause('focus');
+  };
+
+  #handlePointerEnter = () => {
+    this.#pause('pointer');
+  };
+
+  #handlePointerLeave = () => {
+    this.#resume('pointer');
   };
 
   #handleFocusOut = (event: FocusEvent) => {
     if (!(event.relatedTarget instanceof Node) || !this.contains(event.relatedTarget)) {
-      this.#resume();
+      this.#resume('focus');
     }
   };
 
@@ -204,7 +290,7 @@ export class GnomeToastElement extends HTMLElementBase {
     }
 
     if (control.hasAttribute('data-action')) {
-      const shouldDismiss = emit(
+      const shouldDismiss = emit<GnomeToastActionDetail>(
         this,
         'gnome-action',
         {

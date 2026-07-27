@@ -53,7 +53,7 @@ function renderPopover(args: PopoverArgs) {
   story.append(demo);
 
   popover.addEventListener('gnome-open-change', (event) => {
-    const { open } = (event as CustomEvent<{ open: boolean }>).detail;
+    const { open } = event.detail;
     eventOutput.textContent = open ? `Popover opened at ${popover.placement}.` : 'Popover closed.';
   });
 

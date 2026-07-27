@@ -62,11 +62,11 @@ function renderToast(args: ToastArgs) {
 
   trigger.addEventListener('click', () => toast.show());
   toast.addEventListener('gnome-action', (event) => {
-    const { action } = (event as CustomEvent<{ action: string }>).detail;
+    const { action } = event.detail;
     eventOutput.textContent = `Action selected: ${action}.`;
   });
   toast.addEventListener('gnome-dismiss', (event) => {
-    const { reason } = (event as CustomEvent<{ reason: string }>).detail;
+    const { reason } = event.detail;
     eventOutput.textContent = `Toast dismissed: ${reason}.`;
   });
 

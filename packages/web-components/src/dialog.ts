@@ -4,6 +4,7 @@ import {
   ensureId,
   focusFirst,
   HTMLElementBase,
+  isolateModal,
   lockBodyScroll,
   trapFocus,
 } from './internal/dom';
@@ -18,6 +19,12 @@ export interface GnomeDialogCloseDetail {
   reason: GnomeDialogCloseReason;
 }
 
+export interface GnomeDialogEventMap extends HTMLElementEventMap {
+  'gnome-cancel': CustomEvent<GnomeDialogCloseDetail>;
+  'gnome-close': CustomEvent<GnomeDialogCloseDetail>;
+  'gnome-open-change': CustomEvent<GnomeDialogOpenChangeDetail>;
+}
+
 /**
  * Accessible modal dialog with light-DOM composition.
  *
@@ -28,19 +35,73 @@ export interface GnomeDialogCloseDetail {
 export class GnomeDialogElement extends HTMLElementBase {
   static readonly observedAttributes = ['alert', 'aria-label', 'open'];
 
+  addEventListener<K extends keyof GnomeDialogEventMap>(
+    type: K,
+    listener: (this: GnomeDialogElement, event: GnomeDialogEventMap[K]) => void,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject | null,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: unknown,
+    options?: boolean | AddEventListenerOptions,
+  ) {
+    if (listener === null) {
+      return;
+    }
+
+    super.addEventListener(
+      type,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    );
+  }
+
+  removeEventListener<K extends keyof GnomeDialogEventMap>(
+    type: K,
+    listener: (this: GnomeDialogElement, event: GnomeDialogEventMap[K]) => void,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject | null,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: unknown,
+    options?: boolean | EventListenerOptions,
+  ) {
+    if (listener === null) {
+      return;
+    }
+
+    super.removeEventListener(
+      type,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    );
+  }
+
   #connected = false;
   #isOpen = false;
   #pendingCloseReason: GnomeDialogCloseReason = 'attribute';
   #previouslyFocused: HTMLElement | null = null;
+  #releaseModalIsolation: (() => void) | null = null;
   #releaseScrollLock: (() => void) | null = null;
   #surface: HTMLElement | null = null;
+  #mutationObserver: MutationObserver | null = null;
 
   connectedCallback() {
     this.#connected = true;
-    this.#surface = this.#findOrCreateSurface();
+    this.#refreshContent();
+    this.#observeContent();
     this.addEventListener('click', this.#handleClick);
     this.addEventListener('keydown', this.#handleKeyDown);
-    this.#applyAccessibility();
     this.#syncOpen(false);
   }
 
@@ -48,6 +109,10 @@ export class GnomeDialogElement extends HTMLElementBase {
     this.#connected = false;
     this.removeEventListener('click', this.#handleClick);
     this.removeEventListener('keydown', this.#handleKeyDown);
+    this.#mutationObserver?.disconnect();
+    this.#mutationObserver = null;
+    this.#releaseModalIsolation?.();
+    this.#releaseModalIsolation = null;
     this.#releaseScrollLock?.();
     this.#releaseScrollLock = null;
     this.#isOpen = false;
@@ -135,6 +200,9 @@ export class GnomeDialogElement extends HTMLElementBase {
 
     surface.setAttribute('role', this.hasAttribute('alert') ? 'alertdialog' : 'dialog');
     surface.setAttribute('aria-modal', 'true');
+    surface.removeAttribute('aria-labelledby');
+    surface.removeAttribute('aria-label');
+    surface.removeAttribute('aria-describedby');
 
     const title = this.querySelector<HTMLElement>('[data-slot="dialog-title"]');
     const description = this.querySelector<HTMLElement>('[data-slot="dialog-description"]');
@@ -142,14 +210,41 @@ export class GnomeDialogElement extends HTMLElementBase {
 
     if (title) {
       surface.setAttribute('aria-labelledby', ensureId(title, 'gnome-dialog-title'));
-      surface.removeAttribute('aria-label');
     } else if (label) {
       surface.setAttribute('aria-label', label);
-      surface.removeAttribute('aria-labelledby');
     }
 
     if (description) {
       surface.setAttribute('aria-describedby', ensureId(description, 'gnome-dialog-description'));
+    }
+  }
+
+  #observeContent() {
+    this.#mutationObserver?.disconnect();
+    this.#mutationObserver = new MutationObserver(() => this.#refreshContent());
+    this.#mutationObserver.observe(this, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  #refreshContent() {
+    const previousSurface = this.#surface;
+    this.#surface = this.#findOrCreateSurface();
+    this.#applyAccessibility();
+    this.#surface.dataset.state = this.open ? 'open' : 'closed';
+    this.#surface.hidden = !this.open;
+
+    if (
+      this.open &&
+      previousSurface !== this.#surface &&
+      !this.#surface.contains(document.activeElement)
+    ) {
+      queueMicrotask(() => {
+        if (this.open && this.#surface) {
+          focusFirst(this.#surface);
+        }
+      });
     }
   }
 
@@ -174,6 +269,7 @@ export class GnomeDialogElement extends HTMLElementBase {
       this.#applyAccessibility();
       this.#previouslyFocused =
         document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      this.#releaseModalIsolation ??= isolateModal(this);
       this.#releaseScrollLock = lockBodyScroll();
 
       queueMicrotask(() => {
@@ -182,6 +278,8 @@ export class GnomeDialogElement extends HTMLElementBase {
         }
       });
     } else {
+      this.#releaseModalIsolation?.();
+      this.#releaseModalIsolation = null;
       this.#releaseScrollLock?.();
       this.#releaseScrollLock = null;
 

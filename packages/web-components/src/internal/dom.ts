@@ -119,3 +119,116 @@ export function lockBodyScroll() {
     }
   };
 }
+
+interface InertState {
+  count: number;
+  wasInert: boolean;
+}
+
+const inertStates = new WeakMap<HTMLElement, InertState>();
+
+function acquireInert(element: HTMLElement) {
+  const state = inertStates.get(element);
+
+  if (state) {
+    state.count += 1;
+    return;
+  }
+
+  inertStates.set(element, {
+    count: 1,
+    wasInert: Boolean(element.inert),
+  });
+  element.inert = true;
+}
+
+function releaseInert(element: HTMLElement) {
+  const state = inertStates.get(element);
+
+  if (!state) {
+    return;
+  }
+
+  state.count -= 1;
+
+  if (state.count > 0) {
+    return;
+  }
+
+  element.inert = state.wasInert;
+  inertStates.delete(element);
+}
+
+function getOutsideBranches(modal: HTMLElement) {
+  const branches = new Set<HTMLElement>();
+  let current: HTMLElement | null = modal;
+
+  while (current?.parentElement) {
+    const parent: HTMLElement = current.parentElement;
+
+    for (const sibling of parent.children) {
+      if (sibling !== current && sibling instanceof HTMLElement) {
+        branches.add(sibling);
+      }
+    }
+
+    if (parent === document.body) {
+      break;
+    }
+
+    current = parent;
+  }
+
+  return [...branches];
+}
+
+/**
+ * Makes every branch outside a modal inert until the returned cleanup runs.
+ * Reference counting preserves pre-existing inert state and supports nesting.
+ */
+export function isolateModal(modal: HTMLElement) {
+  const isolated = new Set<HTMLElement>();
+
+  const refresh = () => {
+    const outsideBranches = new Set(getOutsideBranches(modal));
+
+    for (const branch of isolated) {
+      if (!outsideBranches.has(branch)) {
+        releaseInert(branch);
+        isolated.delete(branch);
+      }
+    }
+
+    for (const branch of outsideBranches) {
+      if (!isolated.has(branch)) {
+        acquireInert(branch);
+        isolated.add(branch);
+      }
+    }
+  };
+
+  refresh();
+
+  const observer = new MutationObserver(refresh);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  let released = false;
+
+  return () => {
+    if (released) {
+      return;
+    }
+
+    released = true;
+    observer.disconnect();
+
+    for (const branch of isolated) {
+      releaseInert(branch);
+    }
+
+    isolated.clear();
+  };
+}

@@ -81,7 +81,7 @@ function renderDialog(args: DialogArgs) {
   cancel.addEventListener('click', () => dialog.close());
   confirm.addEventListener('click', () => dialog.close());
   dialog.addEventListener('gnome-open-change', (event) => {
-    const { open } = (event as CustomEvent<{ open: boolean }>).detail;
+    const { open } = event.detail;
     eventOutput.textContent = open ? 'Dialog opened.' : 'Dialog closed and focus restored.';
   });
 

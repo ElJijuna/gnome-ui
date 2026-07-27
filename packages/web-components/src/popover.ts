@@ -16,6 +16,12 @@ export interface GnomePopoverCloseDetail {
   reason: GnomePopoverCloseReason;
 }
 
+export interface GnomePopoverEventMap extends HTMLElementEventMap {
+  'gnome-cancel': CustomEvent<GnomePopoverCloseDetail>;
+  'gnome-close': CustomEvent<GnomePopoverCloseDetail>;
+  'gnome-open-change': CustomEvent<GnomePopoverOpenChangeDetail>;
+}
+
 export interface GnomePopoverPosition {
   arrowOffset: number;
   left: number;
@@ -154,12 +160,65 @@ export function computePopoverPosition(
 export class GnomePopoverElement extends HTMLElementBase {
   static readonly observedAttributes = ['open', 'placement'];
 
+  addEventListener<K extends keyof GnomePopoverEventMap>(
+    type: K,
+    listener: (this: GnomePopoverElement, event: GnomePopoverEventMap[K]) => void,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject | null,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: unknown,
+    options?: boolean | AddEventListenerOptions,
+  ) {
+    if (listener === null) {
+      return;
+    }
+
+    super.addEventListener(
+      type,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    );
+  }
+
+  removeEventListener<K extends keyof GnomePopoverEventMap>(
+    type: K,
+    listener: (this: GnomePopoverElement, event: GnomePopoverEventMap[K]) => void,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject | null,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: unknown,
+    options?: boolean | EventListenerOptions,
+  ) {
+    if (listener === null) {
+      return;
+    }
+
+    super.removeEventListener(
+      type,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    );
+  }
+
   #connected = false;
   #content: HTMLElement | null = null;
   #isOpen = false;
   #pendingCloseReason: GnomePopoverCloseReason = 'attribute';
   #previouslyFocused: HTMLElement | null = null;
   #restoreFocusAfterClose = false;
+  #resizeObserver: ResizeObserver | null = null;
   #trigger: HTMLElement | null = null;
 
   connectedCallback() {
@@ -175,6 +234,7 @@ export class GnomePopoverElement extends HTMLElementBase {
     this.removeEventListener('click', this.#handleClick);
     this.removeEventListener('keydown', this.#handleKeyDown);
     this.#removeGlobalListeners();
+    this.#stopObservingGeometry();
     this.#isOpen = false;
   }
 
@@ -298,6 +358,7 @@ export class GnomePopoverElement extends HTMLElementBase {
       this.#previouslyFocused =
         document.activeElement instanceof HTMLElement ? document.activeElement : null;
       this.#addGlobalListeners();
+      this.#observeGeometry();
 
       queueMicrotask(() => {
         if (this.open && this.#content) {
@@ -307,6 +368,7 @@ export class GnomePopoverElement extends HTMLElementBase {
       });
     } else {
       this.#removeGlobalListeners();
+      this.#stopObservingGeometry();
 
       if (this.#restoreFocusAfterClose && this.#previouslyFocused?.isConnected) {
         this.#previouslyFocused.focus();
@@ -358,6 +420,27 @@ export class GnomePopoverElement extends HTMLElementBase {
     document.removeEventListener('pointerdown', this.#handleOutsidePointer);
     window.removeEventListener('resize', this.#applyPosition);
     window.removeEventListener('scroll', this.#applyPosition, true);
+  }
+
+  #observeGeometry() {
+    this.#stopObservingGeometry();
+
+    if (
+      typeof ResizeObserver === 'undefined' ||
+      !this.#trigger ||
+      !this.#content
+    ) {
+      return;
+    }
+
+    this.#resizeObserver = new ResizeObserver(() => this.#applyPosition());
+    this.#resizeObserver.observe(this.#trigger);
+    this.#resizeObserver.observe(this.#content);
+  }
+
+  #stopObservingGeometry() {
+    this.#resizeObserver?.disconnect();
+    this.#resizeObserver = null;
   }
 
   #handleOutsidePointer = (event: PointerEvent) => {

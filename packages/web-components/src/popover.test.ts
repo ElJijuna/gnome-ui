@@ -46,7 +46,7 @@ describe('GnomePopoverElement', () => {
   it('closes on Escape and restores trigger focus', async () => {
     const { content, popover, trigger } = renderPopover();
     const closeListener = vi.fn<(event: CustomEvent<GnomePopoverCloseDetail>) => void>();
-    popover.addEventListener('gnome-close', closeListener as EventListener);
+    popover.addEventListener('gnome-close', closeListener);
     trigger?.click();
     await Promise.resolve();
 
@@ -93,5 +93,46 @@ describe('GnomePopoverElement', () => {
     document.body.dispatchEvent(new Event('pointerdown', { bubbles: true }));
 
     expect(popover.open).toBe(false);
+  });
+
+  it('repositions when the trigger or content is resized', async () => {
+    let resizeCallback: ResizeObserverCallback | undefined;
+    const observe = vi.fn();
+    const disconnect = vi.fn();
+
+    class ResizeObserverMock {
+      constructor(callback: ResizeObserverCallback) {
+        resizeCallback = callback;
+      }
+
+      observe = observe;
+      disconnect = disconnect;
+    }
+
+    vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+    const { content, popover, trigger } = renderPopover();
+    vi.spyOn(trigger as HTMLElement, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(20, 20, 40, 20),
+    );
+    vi.spyOn(content as HTMLElement, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(0, 0, 100, 60),
+    );
+
+    popover.show();
+    await Promise.resolve();
+
+    expect(observe).toHaveBeenCalledWith(trigger);
+    expect(observe).toHaveBeenCalledWith(content);
+    const initialLeft = content?.style.left;
+
+    vi.spyOn(trigger as HTMLElement, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(120, 20, 40, 20),
+    );
+    resizeCallback?.([], {} as ResizeObserver);
+
+    expect(content?.style.left).not.toBe(initialLeft);
+
+    popover.close();
+    expect(disconnect).toHaveBeenCalled();
   });
 });

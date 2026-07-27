@@ -75,3 +75,6 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+      - name: Run web components browser tests
+        run: npm run test:browser --workspace @gnome-ui/web-components
