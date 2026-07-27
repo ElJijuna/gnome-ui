@@ -260,9 +260,36 @@ jobs:
           name: storybook-charts
           path: packages/charts/storybook-static/
 
+  build-storybook-web-components:
+    name: Build Storybook (@gnome-ui/web-components)
+    needs: build-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build Storybook
+        run: npm run build-storybook --workspace packages/web-components
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storybook-web-components
+          path: packages/web-components/storybook-static/
+
   combine-and-deploy:
     name: Combine & Deploy to GitHub Pages
-    needs: [build-storybook-react, build-storybook-layout, build-storybook-charts, build-storybook-icons]
+    needs:
+      - build-storybook-react
+      - build-storybook-layout
+      - build-storybook-charts
+      - build-storybook-icons
+      - build-storybook-web-components
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -287,6 +314,11 @@ jobs:
         with:
           name: storybook-icons
           path: site/icons/
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: storybook-web-components
+          path: site/web-components/
 
       - uses: actions/upload-pages-artifact@v3
         with:

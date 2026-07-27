@@ -1,0 +1,74 @@
+{
+  "name": "@gnome-ui/web-components",
+  "version": "0.1.0",
+  "description": "Framework-agnostic GNOME UI Web Components built with native Custom Elements",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dialog": {
+      "types": "./dist/dialog.d.ts",
+      "import": "./dist/dialog.js",
+      "require": "./dist/dialog.cjs"
+    },
+    "./popover": {
+      "types": "./dist/popover.d.ts",
+      "import": "./dist/popover.js",
+      "require": "./dist/popover.cjs"
+    },
+    "./toast": {
+      "types": "./dist/toast.d.ts",
+      "import": "./dist/toast.js",
+      "require": "./dist/toast.cjs"
+    },
+    "./styles": {
+      "types": "./src/style.d.ts",
+      "default": "./dist/style.css"
+    }
+  },
+  "sideEffects": [
+    "dist/*.js",
+    "dist/*.cjs",
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "src/style.d.ts"
+  ],
+  "scripts": {
+    "build": "tsc6 && vite build",
+    "typecheck": "tsc6 --noEmit && tsc6 --noEmit -p .storybook/tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6010",
+    "build-storybook": "storybook build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@gnome-ui/core": "*"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
+    "@storybook/web-components-vite": "10.4.4",
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.4",
+    "jsdom": "^29.0.2",
+    "lit": "^3.3.3",
+    "storybook": "10.4.4",
+    "vite": "^8.0.16",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.1.4"
+  },
+  "author": "pilmee <pilmee@gmail.com> (https://github.com/ElJijuna)",
+  "license": "MIT"
+}

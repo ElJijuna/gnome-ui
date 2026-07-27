@@ -48,6 +48,7 @@ jobs:
             packages/hooks/dist/
             packages/layout/dist/
             packages/cli/dist/
+            packages/web-components/dist/
 
   # ── 2a. Release @gnome-ui/core ─────────────────────────────────────────────
   release-core:
@@ -80,10 +81,45 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-  # ── 2b. Release @gnome-ui/icons ────────────────────────────────────────────
+  # ── 2b. Release @gnome-ui/web-components ─────────────────────────────────
+  release-web-components:
+    name: Release @gnome-ui/web-components
+    needs: release-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: .
+
+      - name: Build @gnome-ui/web-components
+        run: npm run build --workspace=packages/web-components
+
+      - name: Release
+        working-directory: packages/web-components
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  # ── 2c. Release @gnome-ui/icons ────────────────────────────────────────────
   release-icons:
     name: Release @gnome-ui/icons
-    needs: release-core
+    needs: release-web-components
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

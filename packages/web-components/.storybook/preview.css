@@ -1,0 +1,73 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--gnome-window-bg-color, #fafafa);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-family: var(--gnome-font-family, "Adwaita Sans", Cantarell, system-ui, sans-serif);
+}
+
+.wc-story {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: var(--gnome-space-4, 24px);
+}
+
+.wc-story__demo {
+  display: grid;
+  justify-items: start;
+  gap: var(--gnome-space-2, 12px);
+  width: min(100%, 36rem);
+}
+
+.wc-story__event {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-small, 0.875rem);
+}
+
+.wc-story :is(button, input) {
+  min-height: 36px;
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 9px);
+  background: var(--gnome-button-bg-color, rgb(0 0 0 / 0.08));
+  color: inherit;
+  font: inherit;
+}
+
+.wc-story button {
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+  cursor: pointer;
+}
+
+.wc-story button:hover {
+  background: var(--gnome-button-hover-bg-color, rgb(0 0 0 / 0.12));
+}
+
+.wc-story :is(button, input):focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: var(--gnome-focus-ring-offset, 2px);
+}
+
+.wc-story label {
+  display: grid;
+  gap: var(--gnome-space-1, 6px);
+  width: 100%;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.wc-story input {
+  width: 100%;
+  padding-inline: var(--gnome-space-2, 12px);
+  background: var(--gnome-entry-bg-color, #fff);
+}
+
+.wc-story [data-slot="popover-content"]:not([hidden]) {
+  display: grid;
+  gap: var(--gnome-space-1, 6px);
+}

@@ -13,7 +13,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Package | Description |
 |----------|--------|---------|-------------|
-| 1 | ⬜ | **`@gnome-ui/web-components`** | Framework-agnostic Custom Elements for behavior-rich GNOME widgets. Prefer semantic HTML and light DOM, expose standard DOM events, preserve accessibility, and remain compatible with htmx and server-rendered fragments. |
+| 1 | 🚧 | **`@gnome-ui/web-components`** | Framework-agnostic Custom Elements for behavior-rich GNOME widgets. Initial proof set: `gnome-dialog`, `gnome-toast`, and `gnome-popover`; uses semantic HTML and light DOM, exposes standard DOM events, preserves accessibility, and remains compatible with htmx and server-rendered fragments. |
 | 2 | ⬜ | **`@gnome-ui/angular`** | Angular package built after the Web Components foundation. Provide standalone components, Angular Forms integration where applicable, and reuse `@gnome-ui/core` tokens plus Web Components rather than duplicating styling and behavior. |
 
 ---

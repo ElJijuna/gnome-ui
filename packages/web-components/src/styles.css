@@ -1,0 +1,224 @@
+/* Import @gnome-ui/core/styles before this stylesheet to provide the tokens. */
+
+gnome-dialog,
+gnome-popover,
+gnome-toast {
+  box-sizing: border-box;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-family: var(--gnome-font-family, "Adwaita Sans", Cantarell, system-ui, sans-serif);
+  font-size: var(--gnome-font-size-body, 1rem);
+}
+
+gnome-dialog *,
+gnome-popover *,
+gnome-toast * {
+  box-sizing: border-box;
+}
+
+/* Dialog */
+
+gnome-dialog {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: none;
+  place-items: center;
+  overflow: auto;
+  padding: var(--gnome-space-3, 18px);
+  background: var(--gnome-dialog-backdrop-color, rgb(0 0 0 / 0.5));
+  backdrop-filter: blur(var(--gnome-dialog-backdrop-blur, 4px));
+}
+
+gnome-dialog[open] {
+  display: grid;
+}
+
+gnome-dialog [data-slot="dialog-surface"] {
+  width: min(100%, 32rem);
+  max-height: min(90vh, 48rem);
+  overflow: auto;
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-xl, 15px);
+  background: var(--gnome-dialog-bg-color, #fafafa);
+  box-shadow: var(--gnome-shadow-lg, 0 8px 32px rgb(0 0 0 / 0.3));
+  color: var(--gnome-dialog-fg-color, rgb(0 0 0 / 0.8));
+  outline: none;
+}
+
+gnome-dialog [data-slot="dialog-surface"]:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4),
+    var(--gnome-shadow-lg, 0 8px 32px rgb(0 0 0 / 0.3));
+}
+
+gnome-dialog [data-slot="dialog-header"],
+gnome-dialog [data-slot="dialog-body"],
+gnome-dialog [data-slot="dialog-actions"] {
+  padding-inline: var(--gnome-space-4, 24px);
+}
+
+gnome-dialog [data-slot="dialog-header"] {
+  padding-block: var(--gnome-space-3, 18px) var(--gnome-space-2, 12px);
+  text-align: center;
+}
+
+gnome-dialog [data-slot="dialog-title"] {
+  margin: 0;
+  font-size: var(--gnome-font-size-title-4, 1.125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  line-height: var(--gnome-line-height-title, 1.2);
+}
+
+gnome-dialog [data-slot="dialog-description"] {
+  margin: var(--gnome-space-1, 6px) 0 0;
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-dialog [data-slot="dialog-body"] {
+  padding-block: var(--gnome-space-2, 12px);
+}
+
+gnome-dialog [data-slot="dialog-actions"] {
+  display: flex;
+  justify-content: end;
+  gap: var(--gnome-space-1, 6px);
+  padding-block: var(--gnome-space-2, 12px) var(--gnome-space-3, 18px);
+}
+
+/* Toast */
+
+gnome-toast {
+  display: none;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  width: fit-content;
+  max-width: min(32rem, calc(100vw - 2 * var(--gnome-space-3, 18px)));
+  min-height: 44px;
+  padding: var(--gnome-space-2, 12px);
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-lg, 12px);
+  background: var(--gnome-card-bg-color, #fff);
+  box-shadow: var(--gnome-shadow-md, 0 2px 8px rgb(0 0 0 / 0.2));
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-toast[open] {
+  display: flex;
+}
+
+gnome-toast[variant="success"] {
+  border-inline-start: 4px solid var(--gnome-success-color, #2ec27e);
+}
+
+gnome-toast[variant="warning"] {
+  border-inline-start: 4px solid var(--gnome-warning-color, #e5a50a);
+}
+
+gnome-toast[variant="error"] {
+  border-inline-start: 4px solid var(--gnome-error-color, #e01b24);
+}
+
+gnome-toast [data-slot="toast-title"] {
+  flex: 1;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+gnome-toast [data-slot="toast-actions"] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+}
+
+/* Popover */
+
+gnome-popover {
+  display: contents;
+}
+
+gnome-popover [data-slot="popover-content"] {
+  position: fixed;
+  z-index: 900;
+  width: max-content;
+  max-width: min(24rem, calc(100vw - 16px));
+  max-height: calc(100vh - 16px);
+  overflow: auto;
+  padding: var(--gnome-space-2, 12px);
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-lg, 12px);
+  background: var(--gnome-popover-bg-color, #fff);
+  box-shadow: var(--gnome-shadow-md, 0 2px 8px rgb(0 0 0 / 0.2));
+  color: var(--gnome-popover-fg-color, rgb(0 0 0 / 0.8));
+  outline: none;
+}
+
+gnome-popover [data-slot="popover-content"]::before {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  background: var(--gnome-popover-bg-color, #fff);
+  content: "";
+  transform: rotate(45deg);
+}
+
+gnome-popover [data-slot="popover-content"][data-placement="bottom"]::before {
+  top: -7px;
+  left: calc(var(--gnome-popover-arrow-offset) - 6px);
+  border-width: 1px 0 0 1px;
+}
+
+gnome-popover [data-slot="popover-content"][data-placement="top"]::before {
+  bottom: -7px;
+  left: calc(var(--gnome-popover-arrow-offset) - 6px);
+  border-width: 0 1px 1px 0;
+}
+
+gnome-popover [data-slot="popover-content"][data-placement="left"]::before {
+  top: calc(var(--gnome-popover-arrow-offset) - 6px);
+  right: -7px;
+  border-width: 1px 1px 0 0;
+}
+
+gnome-popover [data-slot="popover-content"][data-placement="right"]::before {
+  top: calc(var(--gnome-popover-arrow-offset) - 6px);
+  left: -7px;
+  border-width: 0 0 1px 1px;
+}
+
+gnome-popover [data-slot="popover-content"]:focus-visible,
+gnome-toast :is(button, a, input, select, textarea):focus-visible,
+gnome-dialog :is(button, a, input, select, textarea):focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: var(--gnome-focus-ring-offset, 2px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  gnome-dialog[data-state="open"] [data-slot="dialog-surface"],
+  gnome-toast[data-state="open"],
+  gnome-popover [data-slot="popover-content"][data-state="open"] {
+    animation: gnome-web-component-enter var(--gnome-duration-fast, 100ms)
+      var(--gnome-easing-default, ease-out);
+  }
+}
+
+@keyframes gnome-web-component-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-contrast: more) {
+  gnome-dialog [data-slot="dialog-surface"],
+  gnome-toast,
+  gnome-popover [data-slot="popover-content"] {
+    border-width: 2px;
+  }
+}

@@ -15,19 +15,22 @@ graph TD
     HOOKS["@gnome-ui/hooks\nReact hooks\nuseSettings · useNotification · useColorScheme\nuseFileChooser · useClipboard · useWindowState"]
     REACT["@gnome-ui/react\nUI components\n(Button, Dialog, Sidebar, …)"]
     CHARTS["@gnome-ui/charts\nChart components\n(AreaChart, BarChart, LineChart)"]
+    WEB_COMPONENTS["@gnome-ui/web-components\nNative Custom Elements\n(Dialog, Toast, Popover)"]
   end
 
-  APP["Your App (React)"]
+  APP["Your App (React, HTML, or htmx)"]
 
   GNOME -->|WebKit bridge / XDG Portals| PLATFORM
   PLATFORM --> HOOKS
   CORE --> REACT
   CORE --> CHARTS
   CORE --> HOOKS
+  CORE --> WEB_COMPONENTS
   ICONS --> REACT
   REACT --> APP
   CHARTS --> APP
   HOOKS --> APP
+  WEB_COMPONENTS --> APP
 ```
 
 ## Package roles
@@ -40,6 +43,7 @@ graph TD
 | `@gnome-ui/hooks` | React hooks that surface `platform` APIs | Yes | Via platform |
 | `@gnome-ui/react` | Full Adwaita UI component library | Yes | No |
 | `@gnome-ui/charts` | Recharts-based chart components styled with Adwaita tokens | Yes | No |
+| `@gnome-ui/web-components` | Native, light-DOM Custom Elements for framework-agnostic apps | No | No |
 
 ## Communication model
 
@@ -68,6 +72,7 @@ When neither bridge is available (unit tests, standard browsers) every call fall
 @gnome-ui/core  →  @gnome-ui/platform  →  @gnome-ui/hooks
                 →  @gnome-ui/icons     →  @gnome-ui/react
                                         →  @gnome-ui/charts
+                →  @gnome-ui/web-components
 ```
 
 `@gnome-ui/hooks` depends on both `@gnome-ui/platform` (runtime) and `@gnome-ui/core` (tokens for any bundled UI).
