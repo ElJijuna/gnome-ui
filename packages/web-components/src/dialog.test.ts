@@ -142,6 +142,45 @@ describe('GnomeDialogElement', () => {
     expect(lateBackground.inert).toBe(true);
   });
 
+  it('keeps only the topmost stacked dialog interactive', async () => {
+    const { dialog: firstDialog } = renderDialog();
+    firstDialog.show();
+    await Promise.resolve();
+
+    const secondDialog = document.createElement('gnome-dialog');
+    secondDialog.innerHTML = `
+      <section data-slot="dialog-surface">
+        <h2 data-slot="dialog-title">Second dialog</h2>
+        <button type="button" autofocus>Second action</button>
+      </section>
+    `;
+    document.body.append(secondDialog);
+    await Promise.resolve();
+
+    expect(secondDialog.inert).toBe(true);
+
+    secondDialog.show();
+    await Promise.resolve();
+
+    expect(firstDialog.inert).toBe(true);
+    expect(secondDialog.inert).toBe(false);
+    expect(document.activeElement?.textContent).toBe('Second action');
+
+    firstDialog.dispatchEvent(
+      new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
+    );
+    expect(firstDialog.open).toBe(true);
+
+    secondDialog.dispatchEvent(
+      new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
+    );
+
+    expect(secondDialog.open).toBe(false);
+    expect(firstDialog.inert).toBe(false);
+    expect(firstDialog.open).toBe(true);
+    expect(document.activeElement?.textContent).toBe('Cancel');
+  });
+
   it('refreshes its surface and accessible relationships after a light-DOM swap', async () => {
     const { dialog } = renderDialog();
     dialog.show();

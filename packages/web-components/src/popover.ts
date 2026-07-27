@@ -218,7 +218,9 @@ export class GnomePopoverElement extends HTMLElementBase {
   #pendingCloseReason: GnomePopoverCloseReason = 'attribute';
   #previouslyFocused: HTMLElement | null = null;
   #restoreFocusAfterClose = false;
+  #partsObserver: MutationObserver | null = null;
   #resizeObserver: ResizeObserver | null = null;
+  #generatedLabelledBy = new WeakMap<HTMLElement, string>();
   #trigger: HTMLElement | null = null;
 
   connectedCallback() {
@@ -226,6 +228,7 @@ export class GnomePopoverElement extends HTMLElementBase {
     this.addEventListener('click', this.#handleClick);
     this.addEventListener('keydown', this.#handleKeyDown);
     this.#syncParts();
+    this.#observeParts();
     this.#syncOpen(false);
   }
 
@@ -233,6 +236,8 @@ export class GnomePopoverElement extends HTMLElementBase {
     this.#connected = false;
     this.removeEventListener('click', this.#handleClick);
     this.removeEventListener('keydown', this.#handleKeyDown);
+    this.#partsObserver?.disconnect();
+    this.#partsObserver = null;
     this.#removeGlobalListeners();
     this.#stopObservingGeometry();
     this.#isOpen = false;
@@ -306,10 +311,31 @@ export class GnomePopoverElement extends HTMLElementBase {
   }
 
   #syncParts() {
-    this.#trigger = this.querySelector<HTMLElement>('[data-slot="popover-trigger"]');
-    this.#content = this.querySelector<HTMLElement>('[data-slot="popover-content"]');
+    const previousTrigger = this.#trigger;
+    const previousContent = this.#content;
+    const trigger = this.querySelector<HTMLElement>('[data-slot="popover-trigger"]');
+    const content = this.querySelector<HTMLElement>('[data-slot="popover-content"]');
+
+    if (previousTrigger && previousTrigger !== trigger) {
+      this.#clearTriggerAccessibility(previousTrigger);
+    }
+
+    if (previousContent && previousContent !== content) {
+      this.#clearGeneratedLabel(previousContent);
+    }
+
+    this.#trigger = trigger;
+    this.#content = content;
 
     if (!this.#trigger || !this.#content) {
+      if (this.#trigger) {
+        this.#clearTriggerAccessibility(this.#trigger);
+      }
+
+      if (this.#content) {
+        this.#clearGeneratedLabel(this.#content);
+      }
+
       return;
     }
 
@@ -324,13 +350,101 @@ export class GnomePopoverElement extends HTMLElementBase {
       this.#content.setAttribute('role', 'dialog');
     }
 
-    if (!this.#content.hasAttribute('aria-label')) {
-      this.#content.setAttribute('aria-labelledby', triggerId);
-    }
+    this.#syncContentLabel(this.#content, triggerId);
 
     if (!this.#content.hasAttribute('tabindex')) {
       this.#content.tabIndex = -1;
     }
+  }
+
+  #clearTriggerAccessibility(trigger: HTMLElement) {
+    trigger.removeAttribute('aria-haspopup');
+    trigger.removeAttribute('aria-expanded');
+    trigger.removeAttribute('aria-controls');
+  }
+
+  #clearGeneratedLabel(content: HTMLElement) {
+    const generatedLabel = this.#generatedLabelledBy.get(content);
+
+    if (
+      generatedLabel &&
+      content.getAttribute('aria-labelledby') === generatedLabel
+    ) {
+      content.removeAttribute('aria-labelledby');
+    }
+
+    this.#generatedLabelledBy.delete(content);
+  }
+
+  #syncContentLabel(content: HTMLElement, triggerId: string) {
+    const generatedLabel = this.#generatedLabelledBy.get(content);
+    const labelledBy = content.getAttribute('aria-labelledby');
+
+    if (content.hasAttribute('aria-label')) {
+      this.#clearGeneratedLabel(content);
+      return;
+    }
+
+    if (!labelledBy || labelledBy === generatedLabel) {
+      content.setAttribute('aria-labelledby', triggerId);
+      this.#generatedLabelledBy.set(content, triggerId);
+    } else {
+      this.#generatedLabelledBy.delete(content);
+    }
+  }
+
+  #observeParts() {
+    this.#partsObserver?.disconnect();
+    this.#partsObserver = new MutationObserver(() => this.#refreshParts());
+    this.#partsObserver.observe(this, {
+      attributes: true,
+      attributeFilter: ['aria-label', 'data-slot', 'id'],
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  #refreshParts() {
+    const previousTrigger = this.#trigger;
+    const previousContent = this.#content;
+    this.#syncParts();
+
+    if (this.#trigger) {
+      this.#trigger.setAttribute('aria-expanded', String(this.open));
+    }
+
+    if (this.#content) {
+      this.#content.dataset.state = this.open ? 'open' : 'closed';
+      this.#content.hidden = !this.open;
+    }
+
+    if (!this.open) {
+      return;
+    }
+
+    if (!this.#trigger || !this.#content) {
+      this.#stopObservingGeometry();
+      return;
+    }
+
+    if (
+      previousTrigger !== this.#trigger ||
+      previousContent !== this.#content
+    ) {
+      this.#observeGeometry();
+    }
+
+    queueMicrotask(() => {
+      if (!this.open || !this.#content) {
+        return;
+      }
+
+      this.#applyPosition();
+
+      if (previousContent !== this.#content) {
+        focusFirst(this.#content);
+      }
+    });
   }
 
   #syncOpen(emitChange: boolean) {

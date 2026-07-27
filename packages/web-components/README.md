@@ -73,7 +73,9 @@ is safe; registration occurs only when the Custom Elements registry exists.
 ```
 
 `close-on-backdrop` is opt-in. Escape and backdrop requests emit a cancelable
-`gnome-cancel` event before closing.
+`gnome-cancel` event before closing. Dialogs can be stacked; only the most
+recently opened dialog remains interactive, and closing it restores the
+previous modal and its focus.
 
 ## Toast
 
@@ -132,6 +134,10 @@ fragments without `htmx.process()`:
   </section>
 </gnome-dialog>
 ```
+
+Dialog and Popover observe light-DOM swaps while open. Replacing Popover
+trigger or content fragments refreshes `aria-controls`, `aria-expanded`, the
+accessible name relationship, positioning, and focus without reopening it.
 
 ## Events
 

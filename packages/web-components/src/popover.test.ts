@@ -135,4 +135,47 @@ describe('GnomePopoverElement', () => {
     popover.close();
     expect(disconnect).toHaveBeenCalled();
   });
+
+  it('rewires ARIA relationships when htmx replaces open popover parts', async () => {
+    const { content, popover, trigger: originalTrigger } = renderPopover();
+    popover.show();
+    await Promise.resolve();
+
+    const replacementTrigger = document.createElement('button');
+    replacementTrigger.type = 'button';
+    replacementTrigger.dataset.slot = 'popover-trigger';
+    replacementTrigger.textContent = 'Updated options';
+    originalTrigger?.replaceWith(replacementTrigger);
+    await Promise.resolve();
+
+    expect(originalTrigger?.hasAttribute('aria-haspopup')).toBe(false);
+    expect(originalTrigger?.hasAttribute('aria-expanded')).toBe(false);
+    expect(originalTrigger?.hasAttribute('aria-controls')).toBe(false);
+    expect(replacementTrigger.getAttribute('aria-haspopup')).toBe('dialog');
+    expect(replacementTrigger.getAttribute('aria-expanded')).toBe('true');
+    expect(replacementTrigger.getAttribute('aria-controls')).toBe(content?.id);
+    expect(content?.getAttribute('aria-labelledby')).toBe(replacementTrigger.id);
+
+    content?.setAttribute('aria-label', 'Explicit actions');
+    await Promise.resolve();
+
+    expect(content?.hasAttribute('aria-labelledby')).toBe(false);
+
+    const replacementContent = document.createElement('section');
+    replacementContent.dataset.slot = 'popover-content';
+    replacementContent.innerHTML =
+      '<button type="button">Updated action</button>';
+    content?.replaceWith(replacementContent);
+    await Promise.resolve();
+
+    expect(replacementTrigger.getAttribute('aria-controls')).toBe(
+      replacementContent.id,
+    );
+    expect(replacementContent.getAttribute('role')).toBe('dialog');
+    expect(replacementContent.getAttribute('aria-labelledby')).toBe(
+      replacementTrigger.id,
+    );
+    expect(replacementContent.hidden).toBe(false);
+    expect(document.activeElement?.textContent).toBe('Updated action');
+  });
 });

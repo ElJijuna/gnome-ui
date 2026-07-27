@@ -120,43 +120,37 @@ export function lockBodyScroll() {
   };
 }
 
-interface InertState {
-  count: number;
+interface ManagedInertState {
   wasInert: boolean;
 }
 
-const inertStates = new WeakMap<HTMLElement, InertState>();
+const managedInertStates = new WeakMap<HTMLElement, ManagedInertState>();
+const managedInertElements = new Set<HTMLElement>();
+const modalStack: HTMLElement[] = [];
+let modalObserver: MutationObserver | null = null;
 
-function acquireInert(element: HTMLElement) {
-  const state = inertStates.get(element);
-
-  if (state) {
-    state.count += 1;
+function manageInert(element: HTMLElement) {
+  if (managedInertStates.has(element)) {
     return;
   }
 
-  inertStates.set(element, {
-    count: 1,
+  managedInertStates.set(element, {
     wasInert: Boolean(element.inert),
   });
+  managedInertElements.add(element);
   element.inert = true;
 }
 
-function releaseInert(element: HTMLElement) {
-  const state = inertStates.get(element);
+function restoreInert(element: HTMLElement) {
+  const state = managedInertStates.get(element);
 
   if (!state) {
     return;
   }
 
-  state.count -= 1;
-
-  if (state.count > 0) {
-    return;
-  }
-
   element.inert = state.wasInert;
-  inertStates.delete(element);
+  managedInertStates.delete(element);
+  managedInertElements.delete(element);
 }
 
 function getOutsideBranches(modal: HTMLElement) {
@@ -182,38 +176,53 @@ function getOutsideBranches(modal: HTMLElement) {
   return [...branches];
 }
 
+function refreshModalIsolation() {
+  for (let index = modalStack.length - 1; index >= 0; index -= 1) {
+    if (!modalStack[index].isConnected) {
+      modalStack.splice(index, 1);
+    }
+  }
+
+  const topModal = modalStack[modalStack.length - 1];
+  const outsideBranches = new Set(
+    topModal ? getOutsideBranches(topModal) : [],
+  );
+
+  for (const element of managedInertElements) {
+    if (!outsideBranches.has(element)) {
+      restoreInert(element);
+    }
+  }
+
+  for (const branch of outsideBranches) {
+    manageInert(branch);
+  }
+
+  for (const modal of modalStack) {
+    modal.toggleAttribute('data-modal-top', modal === topModal);
+  }
+}
+
+export function isTopModal(modal: HTMLElement) {
+  return modalStack[modalStack.length - 1] === modal;
+}
+
 /**
  * Makes every branch outside a modal inert until the returned cleanup runs.
- * Reference counting preserves pre-existing inert state and supports nesting.
+ * A shared stack keeps only the topmost modal interactive while preserving
+ * pre-existing inert state.
  */
 export function isolateModal(modal: HTMLElement) {
-  const isolated = new Set<HTMLElement>();
+  modalStack.push(modal);
+  refreshModalIsolation();
 
-  const refresh = () => {
-    const outsideBranches = new Set(getOutsideBranches(modal));
-
-    for (const branch of isolated) {
-      if (!outsideBranches.has(branch)) {
-        releaseInert(branch);
-        isolated.delete(branch);
-      }
-    }
-
-    for (const branch of outsideBranches) {
-      if (!isolated.has(branch)) {
-        acquireInert(branch);
-        isolated.add(branch);
-      }
-    }
-  };
-
-  refresh();
-
-  const observer = new MutationObserver(refresh);
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  if (!modalObserver) {
+    modalObserver = new MutationObserver(refreshModalIsolation);
+    modalObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
 
   let released = false;
 
@@ -223,12 +232,18 @@ export function isolateModal(modal: HTMLElement) {
     }
 
     released = true;
-    observer.disconnect();
+    const modalIndex = modalStack.lastIndexOf(modal);
 
-    for (const branch of isolated) {
-      releaseInert(branch);
+    if (modalIndex >= 0) {
+      modalStack.splice(modalIndex, 1);
     }
 
-    isolated.clear();
+    modal.removeAttribute('data-modal-top');
+    refreshModalIsolation();
+
+    if (modalStack.length === 0) {
+      modalObserver?.disconnect();
+      modalObserver = null;
+    }
   };
 }

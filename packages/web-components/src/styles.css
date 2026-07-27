@@ -33,6 +33,10 @@ gnome-dialog[open] {
   display: grid;
 }
 
+gnome-dialog[data-modal-top] {
+  z-index: 1001;
+}
+
 gnome-dialog [data-slot="dialog-surface"] {
   width: min(100%, 32rem);
   max-height: min(90vh, 48rem);

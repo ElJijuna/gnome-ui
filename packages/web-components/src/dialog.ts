@@ -5,6 +5,7 @@ import {
   focusFirst,
   HTMLElementBase,
   isolateModal,
+  isTopModal,
   lockBodyScroll,
   trapFocus,
 } from './internal/dom';
@@ -237,11 +238,12 @@ export class GnomeDialogElement extends HTMLElementBase {
 
     if (
       this.open &&
+      isTopModal(this) &&
       previousSurface !== this.#surface &&
       !this.#surface.contains(document.activeElement)
     ) {
       queueMicrotask(() => {
-        if (this.open && this.#surface) {
+        if (this.open && this.#surface && isTopModal(this)) {
           focusFirst(this.#surface);
         }
       });
@@ -273,7 +275,7 @@ export class GnomeDialogElement extends HTMLElementBase {
       this.#releaseScrollLock = lockBodyScroll();
 
       queueMicrotask(() => {
-        if (this.open && this.#surface) {
+        if (this.open && this.#surface && isTopModal(this)) {
           focusFirst(this.#surface);
         }
       });
@@ -302,13 +304,18 @@ export class GnomeDialogElement extends HTMLElementBase {
   }
 
   #handleClick = (event: MouseEvent) => {
-    if (event.target === this && this.open && this.hasAttribute('close-on-backdrop')) {
+    if (
+      event.target === this &&
+      this.open &&
+      isTopModal(this) &&
+      this.hasAttribute('close-on-backdrop')
+    ) {
       this.requestClose('backdrop');
     }
   };
 
   #handleKeyDown = (event: KeyboardEvent) => {
-    if (!this.open || !this.#surface) {
+    if (!this.open || !this.#surface || !isTopModal(this)) {
       return;
     }
 
