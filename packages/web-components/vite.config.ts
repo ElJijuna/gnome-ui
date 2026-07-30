@@ -31,6 +31,7 @@ export default defineConfig({
         'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
         slider: resolve(packageRoot, 'src/slider.ts'),
         'spin-button': resolve(packageRoot, 'src/spin-button.ts'),
+        spinner: resolve(packageRoot, 'src/spinner.ts'),
         switch: resolve(packageRoot, 'src/switch.ts'),
         'text-field': resolve(packageRoot, 'src/text-field.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),

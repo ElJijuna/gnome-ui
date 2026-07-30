@@ -8,6 +8,7 @@ gnome-popover,
 gnome-radio-group,
 gnome-slider,
 gnome-spin-button,
+gnome-spinner,
 gnome-switch,
 gnome-text-field,
 gnome-toast {
@@ -25,6 +26,7 @@ gnome-popover *,
 gnome-radio-group *,
 gnome-slider *,
 gnome-spin-button *,
+gnome-spinner *,
 gnome-switch *,
 gnome-text-field *,
 gnome-toast * {
@@ -728,6 +730,55 @@ gnome-spin-button:has([data-slot="spin-button-control"]:focus-visible) {
       :disabled
     ) {
     background-color: color-mix(in srgb, var(--gnome-view-bg-color, #1e1e1e) 75%, white 25%);
+  }
+}
+
+/* Spinner */
+
+gnome-spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  border-style: solid;
+  border-color: var(--gnome-spinner-track-color, rgb(0 0 0 / 0.15));
+  border-radius: 50%;
+  border-top-color: var(--gnome-accent-color, #3584e4);
+  animation: gnome-spinner-spin 0.75s linear infinite;
+}
+
+gnome-spinner[data-size="sm"] {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+gnome-spinner[data-size="md"] {
+  width: 24px;
+  height: 24px;
+  border-width: 2.5px;
+}
+
+gnome-spinner[data-size="lg"] {
+  width: 36px;
+  height: 36px;
+  border-width: 3px;
+}
+
+@keyframes gnome-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-spinner {
+    border-color: var(--gnome-spinner-track-color, rgb(255 255 255 / 0.15));
+    border-top-color: var(--gnome-accent-color, #3584e4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-spinner {
+    animation-duration: 2s;
   }
 }
 

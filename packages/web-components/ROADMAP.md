@@ -39,6 +39,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-text-field>` | `TextField` |
 | ✅ | `<gnome-spin-button>` | `SpinButton` |
 | ✅ | `<gnome-slider>` | `Slider` |
+| ✅ | `<gnome-spinner>` | `Spinner` |
 
 ---
 
@@ -65,7 +66,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
-| 7 | ⬜ | `<gnome-spinner>` | `Spinner` | `role="status"`, respects `prefers-reduced-motion` |
+| 7 | ✅ | `<gnome-spinner>` | `Spinner` | `role="status"`, respects `prefers-reduced-motion`; no light-DOM children, no interaction |
 | 8 | ⬜ | `<gnome-progress-bar>` | `ProgressBar` | Wraps `<progress>` for determinate; ARIA `role="progressbar"` for indeterminate |
 | 9 | ⬜ | `<gnome-badge>` | `Badge` | Pure CSS host, no JS behavior beyond variant/attribute reflection |
 | 10 | ⬜ | `<gnome-avatar>` | `Avatar` | `<img>` with initials/icon fallback on load error |

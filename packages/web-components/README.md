@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains eleven framework-agnostic components:
+The package currently contains twelve framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -19,6 +19,8 @@ The package currently contains eleven framework-agnostic components:
   CSS-driven accent fill.
 - `<gnome-spin-button>` — styled native `<input type="number">` with
   decrement/increment buttons wired to `stepDown()`/`stepUp()`.
+- `<gnome-spinner>` — presentational indeterminate loading indicator with
+  `role="status"`.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
 - `<gnome-text-field>` — styled native text input/textarea with label and
@@ -56,6 +58,7 @@ import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/radio-group';
 import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
+import '@gnome-ui/web-components/spinner';
 import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/text-field';
 import '@gnome-ui/web-components/toast';
@@ -297,6 +300,23 @@ host's own `disabled` attribute is set).
 `value` proxies to the control's `valueAsNumber`; `focus()` delegates to it
 as well.
 
+## Spinner
+
+```html
+<gnome-spinner size="lg"></gnome-spinner>
+<gnome-spinner label="Fetching results…"></gnome-spinner>
+<gnome-spinner label=""></gnome-spinner>
+<!-- silenced: a sibling already announces the loading state -->
+```
+
+`gnome-spinner` is purely presentational — no light-DOM children, no
+interaction. The host itself is the spinning ring, and manages its own
+ARIA: `role="status"` (unless the consumer already set a `role`) and
+`aria-label` from the `label` attribute, defaulting to `"Loading…"`. Set
+`label=""` to silence it (`aria-hidden="true"`) when a sibling element
+already announces the loading state. `size` accepts `"sm" | "md" | "lg"`
+(default `"md"`). The animation respects `prefers-reduced-motion`.
+
 ## Dialog
 
 ```html
@@ -468,6 +488,8 @@ the accessible name relationship, positioning, and focus without reopening it.
   `aria-hidden` and excluded from the tab order.
 - Sliders rely entirely on the native `<input type="range">` for keyboard
   interaction, pointer/touch dragging, and screen-reader semantics.
+- Spinners default to `role="status"` and an accessible label, and can be
+  silenced with `label=""` when a sibling already announces loading state.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -508,8 +530,9 @@ popover repositioning after resize, switch and checkbox keyboard toggling
 (including indeterminate resolution), radio group keyboard cycling and
 group-level disabling, text field label/hint wiring and validation state,
 spin button stepping and bounds-based button disabling, slider keyboard
-interaction and fill computation, and the toast's combined pointer/focus
-pause behavior. They also run in the repository CI workflow.
+interaction and fill computation, spinner ARIA state and reduced-motion
+animation duration, and the toast's combined pointer/focus pause behavior.
+They also run in the repository CI workflow.
 
 ## Releases
 

@@ -46,6 +46,11 @@ export {
 } from './radio-group';
 export { GnomeSliderElement, registerGnomeSlider } from './slider';
 export { GnomeSpinButtonElement, registerGnomeSpinButton } from './spin-button';
+export {
+  GnomeSpinnerElement,
+  type GnomeSpinnerSize,
+  registerGnomeSpinner,
+} from './spinner';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
 export { GnomeTextFieldElement, registerGnomeTextField } from './text-field';
 export {

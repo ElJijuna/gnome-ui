@@ -52,6 +52,11 @@
       "import": "./dist/spin-button.js",
       "require": "./dist/spin-button.cjs"
     },
+    "./spinner": {
+      "types": "./dist/spinner.d.ts",
+      "import": "./dist/spinner.js",
+      "require": "./dist/spinner.cjs"
+    },
     "./switch": {
       "types": "./dist/switch.d.ts",
       "import": "./dist/switch.js",
