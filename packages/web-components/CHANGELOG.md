@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.0.0...@gnome-ui/web-components@1.1.0) (2026-07-30)
+
+### Features
+
+* **@gnome-ui/web-components:** add gnome-button component with customizable variants, sizes, and loading states ([b43ad28](https://github.com/ElJijuna/gnome-ui/commit/b43ad28707f36b34063778e173f707eb0ab043b4))
+* **@gnome-ui/web-components:** add gnome-menu component with keyboard navigation and accessibility features ([ecccdf9](https://github.com/ElJijuna/gnome-ui/commit/ecccdf922c7d9ce5f4d23602afb26d806c83661f))
+
 ## 1.0.0 (2026-07-27)
 
 ### Features
