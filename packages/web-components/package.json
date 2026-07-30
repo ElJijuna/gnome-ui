@@ -22,6 +22,11 @@
       "import": "./dist/badge.js",
       "require": "./dist/badge.cjs"
     },
+    "./banner": {
+      "types": "./dist/banner.d.ts",
+      "import": "./dist/banner.js",
+      "require": "./dist/banner.cjs"
+    },
     "./button": {
       "types": "./dist/button.d.ts",
       "import": "./dist/button.js",

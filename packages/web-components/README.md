@@ -3,12 +3,15 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains seventeen framework-agnostic components:
+The package currently contains eighteen framework-agnostic components:
 
 - `<gnome-avatar>` — circular image or name-derived initials fallback,
   driven by the composed `<img>`'s own `error` event.
 - `<gnome-badge>` — pure CSS counter/status indicator, optionally anchored
   over another element.
+- `<gnome-banner>` — persistent top-of-view message strip with
+  `data-action`/`data-dismiss` descendants and `gnome-action`/`gnome-dismiss`
+  events.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
 - `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
@@ -454,6 +457,43 @@ accepts `"horizontal" | "vertical"` (default `"horizontal"`; `aria-orientation`
 is only set for `"vertical"`, matching the ARIA default). Color comes
 entirely from design tokens and adapts to dark mode automatically.
 
+## Banner
+
+```html
+<gnome-banner variant="warning">
+  <span data-slot="banner-message">Your session will expire in 5 minutes.</span>
+  <span data-slot="banner-actions">
+    <button type="button" data-action="extend">Extend session</button>
+    <button type="button" data-dismiss aria-label="Dismiss">×</button>
+  </span>
+</gnome-banner>
+
+<script type="module">
+  document.querySelector('gnome-banner').addEventListener('gnome-action', (event) => {
+    if (event.detail.action === 'extend') {
+      // Extend the session.
+    }
+  });
+</script>
+```
+
+`gnome-banner` is a persistent message strip, meant to sit at the top of a
+view until the user acts or dismisses it. `variant` (`"info" | "warning" |
+"error" | "success"`, default `"info"`) is a plain attribute read directly
+by CSS, same as `gnome-badge`/`gnome-toast` — there is no JS state to keep
+in sync. The host sets `role="status"`/`aria-live="polite"` itself
+(guarded, like every other auto-managed ARIA attribute in this package).
+
+Mark a descendant `data-action` to emit `gnome-action` with
+`{ action: string }` (the button's own `data-action` value, or `"default"`
+if empty) — unlike `gnome-toast`, clicking one does **not** dismiss the
+banner, since a banner persists until its underlying condition is
+resolved, not just until the next action. Mark a descendant `data-dismiss`
+to call `dismiss()`, which fires a cancelable `gnome-before-dismiss`
+followed by `gnome-dismiss` and hides the banner (`hidden`) rather than
+removing it from the DOM — remove it yourself in a `gnome-dismiss` listener
+if that's what you want.
+
 ## Dialog
 
 ```html
@@ -599,8 +639,9 @@ the accessible name relationship, positioning, and focus without reopening it.
 | `gnome-select` | Menu | Yes | `{ item, value }` |
 | `gnome-change` | Radio Group | No | `{ value }` |
 | `gnome-action` | Toast | Yes | `{ action }` |
-| `gnome-before-dismiss` | Toast | Yes | `{ reason }` |
-| `gnome-dismiss` | Toast | No | `{ reason }` |
+| `gnome-action` | Banner | No — clicking an action never dismisses the banner | `{ action }` |
+| `gnome-before-dismiss` | Toast, Banner | Yes | `{ reason }` |
+| `gnome-dismiss` | Toast, Banner | No | `{ reason }` |
 
 ## Accessibility
 

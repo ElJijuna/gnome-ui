@@ -25,6 +25,7 @@ export default defineConfig({
         index: resolve(packageRoot, 'src/index.ts'),
         avatar: resolve(packageRoot, 'src/avatar.ts'),
         badge: resolve(packageRoot, 'src/badge.ts'),
+        banner: resolve(packageRoot, 'src/banner.ts'),
         button: resolve(packageRoot, 'src/button.ts'),
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),

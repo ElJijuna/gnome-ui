@@ -10,6 +10,15 @@ export {
 } from './avatar';
 export { GnomeBadgeElement, type GnomeBadgeVariant, registerGnomeBadge } from './badge';
 export {
+  type GnomeBannerActionDetail,
+  type GnomeBannerDismissDetail,
+  type GnomeBannerDismissReason,
+  GnomeBannerElement,
+  type GnomeBannerEventMap,
+  type GnomeBannerVariant,
+  registerGnomeBanner,
+} from './banner';
+export {
   GnomeButtonElement,
   type GnomeButtonShape,
   type GnomeButtonSize,

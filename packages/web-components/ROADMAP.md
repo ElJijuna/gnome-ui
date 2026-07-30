@@ -45,6 +45,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-avatar>` | `Avatar` |
 | ✅ | `<gnome-skeleton>` | `Skeleton` |
 | ✅ | `<gnome-separator>` | `Separator` |
+| ✅ | `<gnome-banner>` | `Banner` |
 
 ---
 
@@ -84,7 +85,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
-| 13 | ⬜ | `<gnome-banner>` | `Banner` | Persistent top-of-view message; `gnome-dismiss` |
+| 13 | ✅ | `<gnome-banner>` | `Banner` | `variant` is a plain attribute read by CSS (no JS sync needed), same as `gnome-badge`/`gnome-toast`. `data-action`/`data-dismiss` descendants mirror `gnome-toast`'s click-delegation, but unlike toast an action click never auto-dismisses — a banner persists until its underlying condition is resolved |
 | 14 | ⬜ | `<gnome-tooltip>` | `Tooltip` | Reuses `internal/floating.ts` from `gnome-popover`; hover/focus triggered, no focus trap |
 
 ---
