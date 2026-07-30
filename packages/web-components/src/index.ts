@@ -44,6 +44,7 @@ export {
   type GnomeRadioGroupEventMap,
   registerGnomeRadioGroup,
 } from './radio-group';
+export { GnomeSpinButtonElement, registerGnomeSpinButton } from './spin-button';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
 export { GnomeTextFieldElement, registerGnomeTextField } from './text-field';
 export {

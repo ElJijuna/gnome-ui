@@ -42,6 +42,11 @@
       "import": "./dist/radio-group.js",
       "require": "./dist/radio-group.cjs"
     },
+    "./spin-button": {
+      "types": "./dist/spin-button.d.ts",
+      "import": "./dist/spin-button.js",
+      "require": "./dist/spin-button.cjs"
+    },
     "./switch": {
       "types": "./dist/switch.d.ts",
       "import": "./dist/switch.js",

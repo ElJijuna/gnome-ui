@@ -29,6 +29,7 @@ export default defineConfig({
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
         'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
+        'spin-button': resolve(packageRoot, 'src/spin-button.ts'),
         switch: resolve(packageRoot, 'src/switch.ts'),
         'text-field': resolve(packageRoot, 'src/text-field.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),

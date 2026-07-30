@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains nine framework-agnostic components:
+The package currently contains ten framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -15,6 +15,8 @@ The package currently contains nine framework-agnostic components:
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
   native radio inputs, with a normalized `value`/`gnome-change` API.
+- `<gnome-spin-button>` — styled native `<input type="number">` with
+  decrement/increment buttons wired to `stepDown()`/`stepUp()`.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
 - `<gnome-text-field>` — styled native text input/textarea with label and
@@ -50,6 +52,7 @@ import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/radio-group';
+import '@gnome-ui/web-components/spin-button';
 import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/text-field';
 import '@gnome-ui/web-components/toast';
@@ -227,6 +230,43 @@ relationships and state:
 `checkValidity()`, `reportValidity()`, `setCustomValidity()`, and `validity`
 delegate to it as well, so standard HTML5 form validation keeps working.
 
+## Spin Button
+
+```html
+<gnome-spin-button>
+  <button type="button" data-slot="spin-button-decrement" aria-hidden="true" tabindex="-1">
+    −
+  </button>
+  <input
+    type="number"
+    data-slot="spin-button-control"
+    aria-label="Volume"
+    min="0"
+    max="10"
+    value="5"
+  />
+  <button type="button" data-slot="spin-button-increment" aria-hidden="true" tabindex="-1">
+    +
+  </button>
+</gnome-spin-button>
+```
+
+Unlike the React `SpinButton` (a synthetic `role="spinbutton"` widget),
+`gnome-spin-button` composes a real `<input type="number">` marked
+`data-slot="spin-button-control"` — native `min`/`max`/`step` constraint
+validation, typing, and ArrowUp/ArrowDown stepping all keep working. The
+decrement/increment buttons (`data-slot="spin-button-decrement"` /
+`data-slot="spin-button-increment"`) are marked `aria-hidden="true"` and
+`tabindex="-1"` since the native control is already the single keyboard-
+and screen-reader-facing target; the host wires their clicks to the
+control's `stepDown()`/`stepUp()`, dispatches `input`/`change` on the
+control afterward, and keeps each button's `disabled` state in sync with
+the control's bounds (and with each other, and the control itself, when the
+host's own `disabled` attribute is set).
+
+`value` proxies to the control's `valueAsNumber`; `focus()` delegates to it
+as well.
+
 ## Dialog
 
 ```html
@@ -393,6 +433,9 @@ the accessible name relationship, positioning, and focus without reopening it.
   group-level disabling.
 - Text fields link label and hint to the control via `for`/`id` and
   `aria-describedby`, and reflect `invalid` state as `aria-invalid`.
+- Spin buttons rely on the native `<input type="number">` for keyboard
+  interaction and screen-reader semantics; the step buttons are
+  `aria-hidden` and excluded from the tab order.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -432,8 +475,9 @@ modal isolation and focus, menu keyboard navigation and fragment replacement,
 popover repositioning after resize, switch and checkbox keyboard toggling
 (including indeterminate resolution), radio group keyboard cycling and
 group-level disabling, text field label/hint wiring and validation state,
-and the toast's combined pointer/focus pause behavior. They also run in the
-repository CI workflow.
+spin button stepping and bounds-based button disabling, and the toast's
+combined pointer/focus pause behavior. They also run in the repository CI
+workflow.
 
 ## Releases
 

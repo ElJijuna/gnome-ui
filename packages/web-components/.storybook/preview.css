@@ -166,3 +166,31 @@ body {
   border-radius: var(--gnome-radius-md, 8px);
   background: var(--gnome-view-bg-color, #fff);
 }
+
+.wc-story
+  gnome-spin-button
+  :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]) {
+  min-height: 36px;
+  width: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.wc-story gnome-spin-button [data-slot="spin-button-decrement"] {
+  border-inline-end: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+}
+
+.wc-story gnome-spin-button [data-slot="spin-button-increment"] {
+  border-inline-start: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+}
+
+.wc-story gnome-spin-button [data-slot="spin-button-control"] {
+  width: auto;
+  min-height: 0;
+  padding: 0 var(--gnome-space-2, 12px);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}

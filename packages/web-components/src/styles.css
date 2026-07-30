@@ -6,6 +6,7 @@ gnome-dialog,
 gnome-menu,
 gnome-popover,
 gnome-radio-group,
+gnome-spin-button,
 gnome-switch,
 gnome-text-field,
 gnome-toast {
@@ -21,6 +22,7 @@ gnome-dialog *,
 gnome-menu *,
 gnome-popover *,
 gnome-radio-group *,
+gnome-spin-button *,
 gnome-switch *,
 gnome-text-field *,
 gnome-toast * {
@@ -464,6 +466,122 @@ gnome-text-field[invalid] [data-slot="text-field-hint"] {
     background-color: var(--gnome-view-bg-color, #1e1e1e);
     border-color: var(--gnome-border-subtle);
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
+  }
+}
+
+/* Spin Button */
+
+gnome-spin-button {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  background-color: var(--gnome-view-bg-color, #fff);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.06);
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-spin-button[data-disabled] {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-spin-button :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]) {
+  appearance: none;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-spin-button [data-slot="spin-button-decrement"] {
+  border-inline-end: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+}
+
+gnome-spin-button [data-slot="spin-button-increment"] {
+  border-inline-start: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+}
+
+gnome-spin-button
+  :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]):hover:not(
+    :disabled
+  ) {
+  background-color: color-mix(in srgb, var(--gnome-view-bg-color, #fff) 90%, black 10%);
+}
+
+gnome-spin-button
+  :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]):active:not(
+    :disabled
+  ) {
+  background-color: color-mix(in srgb, var(--gnome-view-bg-color, #fff) 80%, black 20%);
+}
+
+gnome-spin-button
+  :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]):disabled {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-spin-button [data-slot="spin-button-control"] {
+  appearance: textfield;
+  flex: 1;
+  min-width: 56px;
+  padding: 0 var(--gnome-space-2, 12px);
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+gnome-spin-button [data-slot="spin-button-control"]::-webkit-inner-spin-button,
+gnome-spin-button [data-slot="spin-button-control"]::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+gnome-spin-button [data-slot="spin-button-control"]:focus {
+  outline: none;
+}
+
+gnome-spin-button:has([data-slot="spin-button-control"]:focus-visible) {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-spin-button {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
+  }
+
+  gnome-spin-button
+    :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]):hover:not(
+      :disabled
+    ) {
+    background-color: color-mix(in srgb, var(--gnome-view-bg-color, #1e1e1e) 85%, white 15%);
+  }
+
+  gnome-spin-button
+    :is([data-slot="spin-button-decrement"], [data-slot="spin-button-increment"]):active:not(
+      :disabled
+    ) {
+    background-color: color-mix(in srgb, var(--gnome-view-bg-color, #1e1e1e) 75%, white 25%);
   }
 }
 
@@ -914,6 +1032,11 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
   }
 
   gnome-text-field [data-slot="text-field-control"] {
+    border-width: 2px;
+    box-shadow: none;
+  }
+
+  gnome-spin-button {
     border-width: 2px;
     box-shadow: none;
   }

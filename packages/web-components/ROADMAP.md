@@ -37,6 +37,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-checkbox>` | `Checkbox` |
 | ✅ | `<gnome-radio-group>` | `RadioButton` |
 | ✅ | `<gnome-text-field>` | `TextField` |
+| ✅ | `<gnome-spin-button>` | `SpinButton` |
 
 ---
 
@@ -51,7 +52,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 2 | ✅ | `<gnome-checkbox>` | `Checkbox` | Wraps `<input type="checkbox">`; host applies `indeterminate` imperatively since it has no HTML attribute equivalent |
 | 3 | ✅ | `<gnome-radio-group>` | `RadioButton` | Native same-name radios already provide exclusivity and arrow-key cycling; host adds shared/auto-generated `name`, group-level `disabled`, and a `value`/`gnome-change` API |
 | 4 | ✅ | `<gnome-text-field>` | `TextField` | Wraps `<input>`/`<textarea>`; links label (`for`/`id`) and hint (`aria-describedby`); delegates `focus()`/`validity`/`checkValidity()` |
-| 5 | ⬜ | `<gnome-spin-button>` | `SpinButton` | Wraps `<input type="number">` with +/− step buttons |
+| 5 | ✅ | `<gnome-spin-button>` | `SpinButton` | Deliberately deviates from the React version (a synthetic `role="spinbutton"` widget) to wrap a real `<input type="number">`; step buttons call `stepDown()`/`stepUp()` and are `aria-hidden`/untabbable |
 | 6 | ⬜ | `<gnome-slider>` | `Slider` | Wraps `<input type="range">`; custom track/fill styling only |
 
 ---
