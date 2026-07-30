@@ -1,3 +1,18 @@
+## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.1.0...@gnome-ui/web-components@1.2.0) (2026-07-30)
+
+### Features
+
+* **@gnome-ui/web-components:** add gnome-avatar component with image fallback, initials generation, and customizable attributes ([d45d815](https://github.com/ElJijuna/gnome-ui/commit/d45d8154e1720ac24270e0db22210b6678c785a7))
+* **@gnome-ui/web-components:** add gnome-badge component with variant, dot, and anchored attributes, including styles and tests ([8b8516c](https://github.com/ElJijuna/gnome-ui/commit/8b8516c594ab1b37f61bdc9f9aa9b9905db696f9))
+* **@gnome-ui/web-components:** add gnome-checkbox component with support for indeterminate state and accessibility features ([4d496ef](https://github.com/ElJijuna/gnome-ui/commit/4d496ef803b6b7a58280be2b40ada2fdb9aea5bd))
+* **@gnome-ui/web-components:** add gnome-progress-bar component with determinate and indeterminate states, ARIA support, and styling ([0cffa86](https://github.com/ElJijuna/gnome-ui/commit/0cffa86f2884e8874b8ed29ba189bf90fd630983))
+* **@gnome-ui/web-components:** add gnome-radio-group component with support for native radio inputs and accessibility features ([15ab87d](https://github.com/ElJijuna/gnome-ui/commit/15ab87df045353c7e5ebf1d77e34854bd797c517))
+* **@gnome-ui/web-components:** add gnome-slider component with native range input support and accessibility features ([143b663](https://github.com/ElJijuna/gnome-ui/commit/143b663a5d3805adc2980dfcb5237c344360e775))
+* **@gnome-ui/web-components:** add gnome-spin-button component with increment/decrement functionality and accessibility features ([d5ff227](https://github.com/ElJijuna/gnome-ui/commit/d5ff2277f89236629959420e8a24554548d16d69))
+* **@gnome-ui/web-components:** add gnome-spinner component with accessibility features and CSS animations ([714fb86](https://github.com/ElJijuna/gnome-ui/commit/714fb866e53b5996a14bb5d45f5600707e98eaf5))
+* **@gnome-ui/web-components:** add gnome-switch component with native toggle semantics and accessibility features ([a4ef936](https://github.com/ElJijuna/gnome-ui/commit/a4ef93608483f22388063069dc25ffd6d1a2b339))
+* **@gnome-ui/web-components:** add gnome-text-field component with label, hint, and validation support ([0a9e009](https://github.com/ElJijuna/gnome-ui/commit/0a9e009c5957b8cfe4e4f8aebe786b03acd548d4))
+
 ## [1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.0.0...@gnome-ui/web-components@1.1.0) (2026-07-30)
 
 ### Features
