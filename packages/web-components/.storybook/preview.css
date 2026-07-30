@@ -194,3 +194,11 @@ body {
   border-radius: 0;
   background: transparent;
 }
+
+.wc-story gnome-slider [data-slot="slider-control"] {
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}

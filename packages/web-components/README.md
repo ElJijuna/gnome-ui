@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains ten framework-agnostic components:
+The package currently contains eleven framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -15,6 +15,8 @@ The package currently contains ten framework-agnostic components:
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
   native radio inputs, with a normalized `value`/`gnome-change` API.
+- `<gnome-slider>` — styled native `<input type="range">` with a
+  CSS-driven accent fill.
 - `<gnome-spin-button>` — styled native `<input type="number">` with
   decrement/increment buttons wired to `stepDown()`/`stepUp()`.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
@@ -52,6 +54,7 @@ import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/radio-group';
+import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
 import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/text-field';
@@ -229,6 +232,33 @@ relationships and state:
 `value` proxies to the native control's `value`; `focus()`,
 `checkValidity()`, `reportValidity()`, `setCustomValidity()`, and `validity`
 delegate to it as well, so standard HTML5 form validation keeps working.
+
+## Slider
+
+```html
+<gnome-slider>
+  <input
+    type="range"
+    data-slot="slider-control"
+    aria-label="Brightness"
+    min="0"
+    max="100"
+    value="50"
+  />
+</gnome-slider>
+```
+
+Unlike the React `Slider` (a synthetic `role="slider"` widget built on
+pointer-event handlers), `gnome-slider` composes a real
+`<input type="range">` marked `data-slot="slider-control"` — native
+pointer/touch dragging, ArrowLeft/Right/Up/Down, Home/End, Page Up/Down,
+and form participation all keep working without any JS. The host only
+recomputes a `--gnome-slider-fill` custom property on every `input` event
+so CSS can paint the accent-colored fill up to the thumb on WebKit/Blink
+(Firefox paints it natively via `::-moz-range-progress`).
+
+`value` proxies to the control's `valueAsNumber`; `focus()` delegates to
+it as well.
 
 ## Spin Button
 
@@ -436,6 +466,8 @@ the accessible name relationship, positioning, and focus without reopening it.
 - Spin buttons rely on the native `<input type="number">` for keyboard
   interaction and screen-reader semantics; the step buttons are
   `aria-hidden` and excluded from the tab order.
+- Sliders rely entirely on the native `<input type="range">` for keyboard
+  interaction, pointer/touch dragging, and screen-reader semantics.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -475,9 +507,9 @@ modal isolation and focus, menu keyboard navigation and fragment replacement,
 popover repositioning after resize, switch and checkbox keyboard toggling
 (including indeterminate resolution), radio group keyboard cycling and
 group-level disabling, text field label/hint wiring and validation state,
-spin button stepping and bounds-based button disabling, and the toast's
-combined pointer/focus pause behavior. They also run in the repository CI
-workflow.
+spin button stepping and bounds-based button disabling, slider keyboard
+interaction and fill computation, and the toast's combined pointer/focus
+pause behavior. They also run in the repository CI workflow.
 
 ## Releases
 

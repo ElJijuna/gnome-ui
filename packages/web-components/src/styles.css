@@ -6,6 +6,7 @@ gnome-dialog,
 gnome-menu,
 gnome-popover,
 gnome-radio-group,
+gnome-slider,
 gnome-spin-button,
 gnome-switch,
 gnome-text-field,
@@ -22,6 +23,7 @@ gnome-dialog *,
 gnome-menu *,
 gnome-popover *,
 gnome-radio-group *,
+gnome-slider *,
 gnome-spin-button *,
 gnome-switch *,
 gnome-text-field *,
@@ -466,6 +468,150 @@ gnome-text-field[invalid] [data-slot="text-field-hint"] {
     background-color: var(--gnome-view-bg-color, #1e1e1e);
     border-color: var(--gnome-border-subtle);
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
+  }
+}
+
+/* Slider */
+
+gnome-slider {
+  display: block;
+  width: 100%;
+  padding-block: 10px;
+}
+
+gnome-slider[data-disabled] {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-slider [data-slot="slider-control"] {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+gnome-slider [data-slot="slider-control"]:focus {
+  outline: none;
+}
+
+gnome-slider [data-slot="slider-control"]:disabled {
+  cursor: not-allowed;
+}
+
+/* WebKit/Blink track + fill (custom property computed on every input event) */
+gnome-slider [data-slot="slider-control"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background: linear-gradient(
+    to right,
+    var(--gnome-accent-bg-color, #3584e4) 0%,
+    var(--gnome-accent-bg-color, #3584e4) var(--gnome-slider-fill, 0%),
+    var(--gnome-card-shade-color, rgb(0 0 0 / 0.15)) var(--gnome-slider-fill, 0%),
+    var(--gnome-card-shade-color, rgb(0 0 0 / 0.15)) 100%
+  );
+}
+
+gnome-slider [data-slot="slider-control"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -8px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 0.25),
+    0 0 0 2px var(--gnome-window-bg-color, #fafafa);
+  transition:
+    transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-slider [data-slot="slider-control"]:focus-visible::-webkit-slider-thumb,
+gnome-slider [data-slot="slider-control"]:active::-webkit-slider-thumb {
+  transform: scale(1.18);
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 0.3),
+    0 0 0 2px var(--gnome-window-bg-color, #fafafa);
+}
+
+/* Firefox track + native progress fill */
+gnome-slider [data-slot="slider-control"]::-moz-range-track {
+  height: 6px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
+}
+
+gnome-slider [data-slot="slider-control"]::-moz-range-progress {
+  height: 6px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-slider [data-slot="slider-control"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 0.25),
+    0 0 0 2px var(--gnome-window-bg-color, #fafafa);
+  transition:
+    transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-slider [data-slot="slider-control"]:focus-visible::-moz-range-thumb,
+gnome-slider [data-slot="slider-control"]:active::-moz-range-thumb {
+  transform: scale(1.18);
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 0.3),
+    0 0 0 2px var(--gnome-window-bg-color, #fafafa);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-slider [data-slot="slider-control"]::-webkit-slider-runnable-track {
+    background: linear-gradient(
+      to right,
+      var(--gnome-accent-bg-color, #3584e4) 0%,
+      var(--gnome-accent-bg-color, #3584e4) var(--gnome-slider-fill, 0%),
+      rgb(255 255 255 / 0.15) var(--gnome-slider-fill, 0%),
+      rgb(255 255 255 / 0.15) 100%
+    );
+  }
+
+  gnome-slider [data-slot="slider-control"]::-webkit-slider-thumb {
+    box-shadow:
+      0 1px 4px rgb(0 0 0 / 0.5),
+      0 0 0 2px var(--gnome-window-bg-color, #242424);
+  }
+
+  gnome-slider [data-slot="slider-control"]:focus-visible::-webkit-slider-thumb,
+  gnome-slider [data-slot="slider-control"]:active::-webkit-slider-thumb {
+    box-shadow:
+      0 2px 8px rgb(0 0 0 / 0.6),
+      0 0 0 2px var(--gnome-window-bg-color, #242424);
+  }
+
+  gnome-slider [data-slot="slider-control"]::-moz-range-track {
+    background-color: rgb(255 255 255 / 0.15);
+  }
+
+  gnome-slider [data-slot="slider-control"]::-moz-range-thumb {
+    box-shadow:
+      0 1px 4px rgb(0 0 0 / 0.5),
+      0 0 0 2px var(--gnome-window-bg-color, #242424);
+  }
+
+  gnome-slider [data-slot="slider-control"]:focus-visible::-moz-range-thumb,
+  gnome-slider [data-slot="slider-control"]:active::-moz-range-thumb {
+    box-shadow:
+      0 2px 8px rgb(0 0 0 / 0.6),
+      0 0 0 2px var(--gnome-window-bg-color, #242424);
   }
 }
 
@@ -1039,5 +1185,13 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
   gnome-spin-button {
     border-width: 2px;
     box-shadow: none;
+  }
+
+  gnome-slider [data-slot="slider-control"]::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  }
+
+  gnome-slider [data-slot="slider-control"]::-moz-range-thumb {
+    box-shadow: 0 0 0 2px var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   }
 }

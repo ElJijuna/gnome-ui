@@ -42,6 +42,11 @@
       "import": "./dist/radio-group.js",
       "require": "./dist/radio-group.cjs"
     },
+    "./slider": {
+      "types": "./dist/slider.d.ts",
+      "import": "./dist/slider.js",
+      "require": "./dist/slider.cjs"
+    },
     "./spin-button": {
       "types": "./dist/spin-button.d.ts",
       "import": "./dist/spin-button.js",
