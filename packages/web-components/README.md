@@ -3,10 +3,12 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains six framework-agnostic components:
+The package currently contains seven framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
+- `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
+  `indeterminate` support.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
@@ -39,6 +41,7 @@ Granular entry points register only one element:
 
 ```ts
 import '@gnome-ui/web-components/button';
+import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
@@ -81,6 +84,46 @@ The host accepts:
 Consumer-owned `disabled` and `aria-busy` values are restored when the state
 ends or htmx replaces the control. The host's `focus()` and `click()` methods
 delegate to the native button.
+
+## Checkbox
+
+```html
+<label>
+  <gnome-checkbox>
+    <input type="checkbox" data-slot="checkbox-control" />
+  </gnome-checkbox>
+  Select item
+</label>
+
+<script type="module">
+  const checkbox = document.querySelector('gnome-checkbox');
+  const control = checkbox.querySelector('input');
+
+  control.addEventListener('change', () => {
+    console.log('Selected:', control.checked);
+  });
+
+  // "Select all" pattern: apply indeterminate on the host, not the input.
+  checkbox.indeterminate = true;
+</script>
+```
+
+`gnome-checkbox` composes a native light-DOM `<input type="checkbox">`.
+Native form participation, the `checked` property, and `change`/`input`
+events continue to work normally — listen on the input directly or on the
+host.
+
+`indeterminate` has no HTML attribute equivalent, so the host applies it to
+the control imperatively whenever the `indeterminate` attribute or property
+is set on `<gnome-checkbox>`. As with native checkboxes, user interaction
+(a click or Space) resolves the visual indeterminate state on the control;
+update the host's `indeterminate` property again if your "select all" logic
+still considers the group mixed.
+
+The host accepts a boolean `disabled` attribute, which disables the native
+control while preserving any disabled state the consumer set directly on it
+once the host's `disabled` attribute is removed. `focus()` and `click()`
+delegate to the native control.
 
 ## Switch
 
@@ -272,6 +315,8 @@ the accessible name relationship, positioning, and focus without reopening it.
 - Switches retain native checkbox semantics and form participation; the
   consumer must add `role="switch"` and an accessible name (a `<label>` or
   `aria-label`).
+- Checkboxes retain native checkbox semantics and form participation,
+  including the `indeterminate` visual state.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -308,9 +353,9 @@ npm run test:browser --workspace @gnome-ui/web-components
 
 These Playwright checks cover native button form behavior and loading state,
 modal isolation and focus, menu keyboard navigation and fragment replacement,
-popover repositioning after resize, switch keyboard toggling, and the toast's
-combined pointer/focus pause behavior. They also run in the repository CI
-workflow.
+popover repositioning after resize, switch and checkbox keyboard toggling
+(including indeterminate resolution), and the toast's combined pointer/focus
+pause behavior. They also run in the repository CI workflow.
 
 ## Releases
 

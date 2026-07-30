@@ -132,5 +132,19 @@ body {
   min-height: 0;
   padding: 0;
   border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+.wc-story gnome-switch [data-slot="switch-control"]:not(:checked) {
   background: var(--gnome-light-4, #c0bfbc);
+}
+
+.wc-story gnome-checkbox [data-slot="checkbox-control"] {
+  width: 18px;
+  min-height: 0;
+  padding: 0;
+  border-radius: var(--gnome-radius-sm, 4px);
+}
+
+.wc-story gnome-checkbox [data-slot="checkbox-control"]:not(:checked, :indeterminate) {
+  background: var(--gnome-card-bg-color, #fff);
 }

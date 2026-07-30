@@ -1,6 +1,7 @@
 /* Import @gnome-ui/core/styles before this stylesheet to provide the tokens. */
 
 gnome-button,
+gnome-checkbox,
 gnome-dialog,
 gnome-menu,
 gnome-popover,
@@ -13,6 +14,7 @@ gnome-toast {
 }
 
 gnome-button *,
+gnome-checkbox *,
 gnome-dialog *,
 gnome-menu *,
 gnome-popover *,
@@ -200,6 +202,98 @@ gnome-button[data-loading] [data-slot="button-control"]::before {
   border-inline-end-color: transparent;
   border-radius: 50%;
   content: "";
+}
+
+/* Checkbox */
+
+gnome-checkbox {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+gnome-checkbox [data-slot="checkbox-control"] {
+  appearance: none;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid var(--gnome-light-4, #c0bfbc);
+  border-radius: var(--gnome-radius-sm, 4px);
+  background-color: var(--gnome-card-bg-color, #fff);
+  cursor: pointer;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+  vertical-align: middle;
+}
+
+gnome-checkbox [data-slot="checkbox-control"]::before {
+  display: block;
+  content: "";
+  opacity: 0;
+  transition: opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-checkbox [data-slot="checkbox-control"]:checked {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-checkbox [data-slot="checkbox-control"]:checked::before {
+  width: 10px;
+  height: 7px;
+  background-color: #fff;
+  clip-path: polygon(14% 44%, 0 58%, 36% 100%, 100% 12%, 84% 0%, 36% 68%);
+  opacity: 1;
+}
+
+gnome-checkbox [data-slot="checkbox-control"]:indeterminate {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-checkbox [data-slot="checkbox-control"]:indeterminate::before {
+  width: 10px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 1px;
+  clip-path: none;
+  opacity: 1;
+}
+
+gnome-checkbox [data-slot="checkbox-control"]:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-checkbox [data-slot="checkbox-control"]:not(:checked, :indeterminate):hover {
+  border-color: var(--gnome-light-5, #9a9996);
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 94%, black 6%);
+}
+
+gnome-checkbox[data-disabled] [data-slot="checkbox-control"],
+gnome-checkbox [data-slot="checkbox-control"]:disabled {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-checkbox [data-slot="checkbox-control"] {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: var(--gnome-dark-1, #77767b);
+  }
+
+  gnome-checkbox [data-slot="checkbox-control"]:not(:checked, :indeterminate):hover {
+    border-color: var(--gnome-light-4, #c0bfbc);
+    background-color: color-mix(in srgb, var(--gnome-card-bg-color, #383838) 85%, white 15%);
+  }
 }
 
 /* Dialog */
@@ -626,5 +720,15 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
 
   gnome-switch [data-slot="switch-control"]::before {
     box-shadow: none;
+  }
+
+  gnome-checkbox [data-slot="checkbox-control"] {
+    border-width: 2px;
+    border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  }
+
+  gnome-checkbox [data-slot="checkbox-control"]:not(:checked, :indeterminate):hover {
+    border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+    background-color: var(--gnome-hover-overlay);
   }
 }

@@ -7,6 +7,7 @@ export {
   type GnomeButtonVariant,
   registerGnomeButton,
 } from './button';
+export { GnomeCheckboxElement, registerGnomeCheckbox } from './checkbox';
 export {
   type GnomeDialogCloseDetail,
   type GnomeDialogCloseReason,
