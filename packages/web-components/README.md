@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains five framework-agnostic components:
+The package currently contains six framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -11,6 +11,8 @@ The package currently contains five framework-agnostic components:
   focus restoration.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
+- `<gnome-switch>` — styled native on/off toggle with preserved form
+  behavior and native `change`/`input` events.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
   pause-on-hover/focus.
 - `<gnome-popover>` — trigger relationships, adaptive positioning, outside
@@ -40,6 +42,7 @@ import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
+import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/toast';
 ```
 
@@ -78,6 +81,38 @@ The host accepts:
 Consumer-owned `disabled` and `aria-busy` values are restored when the state
 ends or htmx replaces the control. The host's `focus()` and `click()` methods
 delegate to the native button.
+
+## Switch
+
+```html
+<label>
+  Wi-Fi
+  <gnome-switch>
+    <input type="checkbox" role="switch" data-slot="switch-control" />
+  </gnome-switch>
+</label>
+
+<script type="module">
+  const control = document.querySelector('gnome-switch input');
+
+  control.addEventListener('change', () => {
+    console.log('Wi-Fi is now', control.checked ? 'on' : 'off');
+  });
+</script>
+```
+
+`gnome-switch` composes a native light-DOM `<input type="checkbox">` instead
+of reimplementing toggle semantics on the custom element. The consumer marks
+it `role="switch"` and `data-slot="switch-control"`; native form
+participation, the `checked` property, and `change`/`input` events continue
+to work normally — listen on the input directly or on the host, since light
+DOM lets the events bubble through either.
+
+The host accepts a boolean `disabled` attribute, which disables the native
+control while preserving any disabled state the consumer set directly on it
+once the host's `disabled` attribute is removed. `gnomeSwitch.checked` proxies
+to the native control's `checked` property; `focus()` and `click()` delegate
+to it as well.
 
 ## Dialog
 
@@ -234,6 +269,9 @@ the accessible name relationship, positioning, and focus without reopening it.
   icon-only controls still require an explicit accessible name.
 - Menus expose the WAI-ARIA menu pattern, support directional navigation and
   typeahead, skip disabled items, and restore focus after dismissal.
+- Switches retain native checkbox semantics and form participation; the
+  consumer must add `role="switch"` and an accessible name (a `<label>` or
+  `aria-label`).
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -270,8 +308,9 @@ npm run test:browser --workspace @gnome-ui/web-components
 
 These Playwright checks cover native button form behavior and loading state,
 modal isolation and focus, menu keyboard navigation and fragment replacement,
-popover repositioning after resize, and the toast's combined pointer/focus
-pause behavior. They also run in the repository CI workflow.
+popover repositioning after resize, switch keyboard toggling, and the toast's
+combined pointer/focus pause behavior. They also run in the repository CI
+workflow.
 
 ## Releases
 

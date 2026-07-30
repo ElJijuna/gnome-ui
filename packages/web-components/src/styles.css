@@ -4,6 +4,7 @@ gnome-button,
 gnome-dialog,
 gnome-menu,
 gnome-popover,
+gnome-switch,
 gnome-toast {
   box-sizing: border-box;
   color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
@@ -15,6 +16,7 @@ gnome-button *,
 gnome-dialog *,
 gnome-menu *,
 gnome-popover *,
+gnome-switch *,
 gnome-toast * {
   box-sizing: border-box;
 }
@@ -490,6 +492,81 @@ gnome-popover [data-slot="popover-content"][data-placement="right"]::before {
   border-width: 0 0 1px 1px;
 }
 
+/* Switch */
+
+gnome-switch {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+gnome-switch [data-slot="switch-control"] {
+  appearance: none;
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 56px;
+  height: 28px;
+  margin: 0;
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-light-4, #c0bfbc);
+  cursor: pointer;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+  vertical-align: middle;
+}
+
+gnome-switch [data-slot="switch-control"]::before {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  content: "";
+  transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-switch [data-slot="switch-control"]:checked {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-switch [data-slot="switch-control"]:checked::before {
+  transform: translateX(28px);
+}
+
+gnome-switch [data-slot="switch-control"]:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-switch[data-disabled] [data-slot="switch-control"],
+gnome-switch [data-slot="switch-control"]:disabled {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-switch [data-slot="switch-control"] {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+
+  gnome-switch [data-slot="switch-control"]::before {
+    background-color: var(--gnome-light-3, #deddda);
+  }
+
+  gnome-switch [data-slot="switch-control"]:checked::before {
+    background-color: #fff;
+  }
+}
+
 gnome-popover [data-slot="popover-content"]:focus-visible,
 gnome-menu [data-slot="menu-content"]:focus-visible,
 gnome-toast :is(button, a, input, select, textarea):focus-visible,
@@ -541,5 +618,13 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
   gnome-toast,
   gnome-popover [data-slot="popover-content"] {
     border-width: 2px;
+  }
+
+  gnome-switch [data-slot="switch-control"] {
+    border-width: 2px;
+  }
+
+  gnome-switch [data-slot="switch-control"]::before {
+    box-shadow: none;
   }
 }

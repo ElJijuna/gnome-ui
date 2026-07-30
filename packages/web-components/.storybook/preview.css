@@ -126,3 +126,11 @@ body {
   display: grid;
   gap: var(--gnome-space-1, 6px);
 }
+
+.wc-story gnome-switch [data-slot="switch-control"] {
+  width: 56px;
+  min-height: 0;
+  padding: 0;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background: var(--gnome-light-4, #c0bfbc);
+}

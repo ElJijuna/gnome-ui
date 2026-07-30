@@ -33,6 +33,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-menu>` | `Dropdown` (menu semantics) |
 | ✅ | `<gnome-toast>` | `Toast` |
 | ✅ | `<gnome-popover>` | `Popover` |
+| ✅ | `<gnome-switch>` | `Switch` |
 
 ---
 
@@ -43,7 +44,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
-| 1 | ⬜ | `<gnome-switch>` | `Switch` | Wraps `<input type="checkbox" role="switch">`; `gnome-change` mirrors native `change` |
+| 1 | ✅ | `<gnome-switch>` | `Switch` | Wraps `<input type="checkbox" role="switch">`; native `change`/`input` events bubble through the light-DOM host, no custom event needed |
 | 2 | ⬜ | `<gnome-checkbox>` | `Checkbox` | Wraps `<input type="checkbox">`; host manages `indeterminate` (not settable via attribute) |
 | 3 | ⬜ | `<gnome-radio-group>` | `RadioButton` | Host groups native `<input type="radio">` children sharing a `name`; emits `gnome-change` with selected value |
 | 4 | ⬜ | `<gnome-text-field>` | `TextField` | Wraps `<input>`/`<textarea>`; label/helper/error slots; delegates `focus()`/`validity` |

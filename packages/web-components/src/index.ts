@@ -37,6 +37,7 @@ export {
   type GnomePopoverPosition,
   registerGnomePopover,
 } from './popover';
+export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
 export {
   type GnomeToastActionDetail,
   type GnomeToastDismissDetail,
