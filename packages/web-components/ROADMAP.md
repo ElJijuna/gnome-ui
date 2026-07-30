@@ -46,6 +46,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-skeleton>` | `Skeleton` |
 | ✅ | `<gnome-separator>` | `Separator` |
 | ✅ | `<gnome-banner>` | `Banner` |
+| ✅ | `<gnome-tooltip>` | `Tooltip` |
 
 ---
 
@@ -86,7 +87,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
 | 13 | ✅ | `<gnome-banner>` | `Banner` | `variant` is a plain attribute read by CSS (no JS sync needed), same as `gnome-badge`/`gnome-toast`. `data-action`/`data-dismiss` descendants mirror `gnome-toast`'s click-delegation, but unlike toast an action click never auto-dismisses — a banner persists until its underlying condition is resolved |
-| 14 | ⬜ | `<gnome-tooltip>` | `Tooltip` | Reuses `internal/floating.ts` from `gnome-popover`; hover/focus triggered, no focus trap |
+| 14 | ✅ | `<gnome-tooltip>` | `Tooltip` | Reuses `computeFloatingPosition` from `internal/floating.ts`, same as `gnome-popover`. Content is never `hidden` — it stays laid out with `opacity: 0` so the fade/scale transition can animate (impossible from `display: none`), which as a side effect keeps `aria-describedby` content in the accessibility tree at all times, unlike the React version's `visibility: hidden` fallback |
 
 ---
 

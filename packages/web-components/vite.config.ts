@@ -41,6 +41,7 @@ export default defineConfig({
         switch: resolve(packageRoot, 'src/switch.ts'),
         'text-field': resolve(packageRoot, 'src/text-field.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),
+        tooltip: resolve(packageRoot, 'src/tooltip.ts'),
       },
       formats: ['es', 'cjs'],
       fileName: (format, entryName) => (format === 'cjs' ? `${entryName}.cjs` : `${entryName}.js`),

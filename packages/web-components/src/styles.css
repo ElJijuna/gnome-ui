@@ -17,7 +17,8 @@ gnome-spin-button,
 gnome-spinner,
 gnome-switch,
 gnome-text-field,
-gnome-toast {
+gnome-toast,
+gnome-tooltip {
   box-sizing: border-box;
   color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   font-family: var(--gnome-font-family, "Adwaita Sans", Cantarell, system-ui, sans-serif);
@@ -41,7 +42,8 @@ gnome-spin-button *,
 gnome-spinner *,
 gnome-switch *,
 gnome-text-field *,
-gnome-toast * {
+gnome-toast *,
+gnome-tooltip * {
   box-sizing: border-box;
 }
 
@@ -1257,6 +1259,115 @@ gnome-banner[variant="error"] {
 gnome-banner[variant="success"] {
   background-color: var(--gnome-success-bg-color, #2ec27e);
   color: var(--gnome-success-fg-color, #fff);
+}
+
+/* Tooltip */
+
+gnome-tooltip {
+  display: contents;
+}
+
+gnome-tooltip [data-slot="tooltip-content"] {
+  position: fixed;
+  z-index: 1100;
+  left: -9999px;
+  top: -9999px;
+  max-width: 240px;
+  padding: 4px var(--gnome-space-2, 12px);
+  background-color: var(--gnome-tooltip-bg-color, #3d3d3d);
+  color: var(--gnome-tooltip-fg-color, #fff);
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-align: center;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border-radius: var(--gnome-radius-sm, 6px);
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.2),
+    0 0 0 1px rgb(255 255 255 / 0.06);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-tooltip [data-slot="tooltip-content"][data-state="open"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+gnome-tooltip [data-slot="tooltip-content"]::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  pointer-events: none;
+}
+
+gnome-tooltip [data-slot="tooltip-content"][data-placement="top"]::after {
+  top: 100%;
+  left: calc(var(--gnome-tooltip-arrow-offset) - 5px);
+  border-top-color: var(--gnome-tooltip-bg-color, #3d3d3d);
+}
+
+gnome-tooltip [data-slot="tooltip-content"][data-placement="bottom"]::after {
+  bottom: 100%;
+  left: calc(var(--gnome-tooltip-arrow-offset) - 5px);
+  border-bottom-color: var(--gnome-tooltip-bg-color, #3d3d3d);
+}
+
+gnome-tooltip [data-slot="tooltip-content"][data-placement="left"]::after {
+  left: 100%;
+  top: calc(var(--gnome-tooltip-arrow-offset) - 5px);
+  border-left-color: var(--gnome-tooltip-bg-color, #3d3d3d);
+}
+
+gnome-tooltip [data-slot="tooltip-content"][data-placement="right"]::after {
+  right: 100%;
+  top: calc(var(--gnome-tooltip-arrow-offset) - 5px);
+  border-right-color: var(--gnome-tooltip-bg-color, #3d3d3d);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-tooltip [data-slot="tooltip-content"] {
+    background-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+    color: var(--gnome-tooltip-fg-color, rgb(0 0 0 / 0.8));
+    box-shadow:
+      0 2px 8px rgb(0 0 0 / 0.4),
+      0 0 0 1px rgb(0 0 0 / 0.12);
+  }
+
+  gnome-tooltip [data-slot="tooltip-content"][data-placement="top"]::after {
+    border-top-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+
+  gnome-tooltip [data-slot="tooltip-content"][data-placement="bottom"]::after {
+    border-bottom-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+
+  gnome-tooltip [data-slot="tooltip-content"][data-placement="left"]::after {
+    border-left-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+
+  gnome-tooltip [data-slot="tooltip-content"][data-placement="right"]::after {
+    border-right-color: var(--gnome-tooltip-bg-color, #c0bfbc);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-tooltip [data-slot="tooltip-content"] {
+    transition: opacity var(--gnome-duration-fast, 100ms) linear;
+    transform: none;
+  }
+
+  gnome-tooltip [data-slot="tooltip-content"][data-state="open"] {
+    transform: none;
+  }
 }
 
 /* Dialog */

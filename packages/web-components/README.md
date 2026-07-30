@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains eighteen framework-agnostic components:
+The package currently contains nineteen framework-agnostic components:
 
 - `<gnome-avatar>` — circular image or name-derived initials fallback,
   driven by the composed `<img>`'s own `error` event.
@@ -43,6 +43,8 @@ The package currently contains eighteen framework-agnostic components:
   pause-on-hover/focus.
 - `<gnome-popover>` — trigger relationships, adaptive positioning, outside
   dismissal, and focus restoration.
+- `<gnome-tooltip>` — hover/focus-triggered informational bubble, sharing
+  `gnome-popover`'s floating-position helper; no focus trap.
 
 The package does not depend on React, Angular, Lit, or htmx.
 
@@ -609,6 +611,34 @@ cancelable; `gnome-dismiss` reports the final dismissal reason.
 The trigger receives `aria-haspopup`, `aria-expanded`, and `aria-controls`.
 The popover flips and clamps itself to remain inside the viewport.
 
+## Tooltip
+
+```html
+<gnome-tooltip placement="top" delay="500">
+  <button type="button" data-slot="tooltip-trigger" aria-label="Save">💾</button>
+  <span data-slot="tooltip-content">Save file (Ctrl+S)</span>
+</gnome-tooltip>
+```
+
+`gnome-tooltip` reuses the same `computeFloatingPosition` helper (and its
+flip/clamp/arrow-offset logic) as `gnome-popover` — set via
+`internal/floating.ts`, shared between the two. Shows on the trigger's
+`mouseenter`/`focus` after `delay` milliseconds (default `500`; `delay="0"`
+for instant), hides on `mouseleave`/`blur`/Escape. `placement` accepts
+`"top" | "bottom" | "left" | "right"` (default `"top"`). The trigger's
+`aria-describedby` is wired to the content automatically (guarded — a
+consumer-authored `aria-describedby` is left alone).
+
+Unlike `gnome-popover`, the content is never `hidden` — it stays laid out
+at all times with `opacity: 0`, fading in via `[data-state="open"]`. A
+`display: none` element can't transition, so this is what makes the
+fade/scale animation possible; as a side effect it also keeps the
+description available to `aria-describedby` readers even while the visual
+bubble is hidden, which the `visibility: hidden` fallback in the React
+version does not (that removes it from the accessibility tree between
+hovers). There is no focus trap and no dismiss/action events — a tooltip
+is purely informational.
+
 ## htmx
 
 Because all content remains in light DOM, htmx can process and replace
@@ -628,6 +658,9 @@ fragments without `htmx.process()`:
 Dialog, Menu, and Popover observe light-DOM swaps while open. Replacing Menu or
 Popover trigger/content fragments refreshes `aria-controls`, `aria-expanded`,
 the accessible name relationship, positioning, and focus without reopening it.
+Tooltip observes swaps of its trigger/content at all times (not just while
+visible), so a replaced trigger keeps its hover/focus listeners and
+`aria-describedby` relationship.
 
 ## Events
 

@@ -95,3 +95,8 @@ export {
   type GnomeToastOpenChangeDetail,
   registerGnomeToast,
 } from './toast';
+export {
+  GnomeTooltipElement,
+  type GnomeTooltipPlacement,
+  registerGnomeTooltip,
+} from './tooltip';
