@@ -23,6 +23,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(packageRoot, 'src/index.ts'),
+        'action-row': resolve(packageRoot, 'src/action-row.ts'),
         avatar: resolve(packageRoot, 'src/avatar.ts'),
         badge: resolve(packageRoot, 'src/badge.ts'),
         banner: resolve(packageRoot, 'src/banner.ts'),

@@ -48,6 +48,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-banner>` | `Banner` |
 | ✅ | `<gnome-tooltip>` | `Tooltip` |
 | ✅ | `<gnome-card>` | `Card` |
+| ✅ | `<gnome-action-row>` | `ActionRow` |
 
 ---
 
@@ -100,7 +101,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
 | 15 | ✅ | `<gnome-card>` | `Card` | React renders `<button>` (or whatever `as` specifies) when `interactive`; since a custom element is one fixed tag, the host composes a real `<button data-slot="card-surface">` around its existing children instead — moving them, not cloning, so listeners survive. Adopts a consumer-authored surface (e.g. an `<a>`) instead of generating one; unwraps back onto the host when `interactive` is removed |
-| 16 | ⬜ | `<gnome-action-row>` | `ActionRow` | `data-slot="row-title/subtitle/prefix/suffix"`; activatable variant emits `gnome-activate` |
+| 16 | ✅ | `<gnome-action-row>` | `ActionRow` | `data-slot="row-title/row-subtitle/row-prefix/row-suffix"`, plus a generated/adopted `row-content` wrapper. Unlike React (which wraps *everything* including `trailing` in `<button>`), the generated `data-slot="row-surface"` button wraps only prefix+content — `row-suffix` stays outside it so a trailing `Switch`/`Button` never double-nests inside another interactive element. `gnome-activate` fires only from the surface, so suffix clicks are excluded without manual `stopPropagation()` |
 | 17 | ⬜ | `<gnome-boxed-list>` | `BoxedList` | Groups `gnome-action-row` children with merged borders; `variant="separate"` |
 | 18 | ⬜ | `<gnome-header-bar>` | `HeaderBar` | `data-slot="start/title/end"` regions |
 

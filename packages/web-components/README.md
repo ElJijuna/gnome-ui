@@ -3,8 +3,11 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty framework-agnostic components:
+The package currently contains twenty-one framework-agnostic components:
 
+- `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
+  slots; `interactive` composes a real `<button data-slot="row-surface">`
+  around everything except `row-suffix`, emitting `gnome-activate`.
 - `<gnome-avatar>` — circular image or name-derived initials fallback,
   driven by the composed `<img>`'s own `error` event.
 - `<gnome-badge>` — pure CSS counter/status indicator, optionally anchored
@@ -670,6 +673,61 @@ generated surface (not onto an adopted one you authored yourself).
 `padding` accepts `"none" | "sm" | "md" | "lg"` (default `"md"`) and is a
 plain attribute read directly by CSS — no JS state to keep in sync.
 
+## Action Row
+
+```html
+<gnome-action-row>
+  <span data-slot="row-prefix">🔔</span>
+  <span data-slot="row-title">Notifications</span>
+  <span data-slot="row-subtitle">Manage app alerts</span>
+  <span data-slot="row-suffix">
+    <input type="checkbox" role="switch" aria-label="Notifications" checked />
+  </span>
+</gnome-action-row>
+
+<!-- Interactive: composes a real <button data-slot="row-surface"> -->
+<gnome-action-row interactive aria-label="Open Wi-Fi settings">
+  <span data-slot="row-title">Wi-Fi</span>
+  <span data-slot="row-subtitle">Home Network</span>
+</gnome-action-row>
+
+<script type="module">
+  document.querySelector('gnome-action-row[interactive]').addEventListener('gnome-activate', () => {
+    // Navigate or open a dialog.
+  });
+</script>
+```
+
+`gnome-action-row` groups `data-slot="row-title"` and `data-slot="row-subtitle"`
+into a generated (or adopted) `data-slot="row-content"` wrapper so they
+stack correctly next to `row-prefix`/`row-suffix` — this happens
+regardless of `interactive`.
+
+Unlike the React version — which renders `<button>` around *everything*,
+including `trailing`, when `interactive` — `gnome-action-row` only composes
+a real `<button data-slot="row-surface">` around `row-prefix` and
+`row-content`; **`row-suffix` stays outside it.** The React docs warn that
+a trailing `Switch`/`Button` needs manual `stopPropagation()` to avoid
+double-nesting inside the row's own `<button>` (invalid, inaccessible
+HTML) — here that problem doesn't exist structurally, since suffix is
+never inside the surface. The hover/active tint still spans the full row
+(`:hover`/`:active` on the host itself, which CSS already matches while the
+pointer/press is on any descendant, `row-suffix` included) so it looks the
+same as the React version; only the keyboard focus ring stays scoped to
+`row-surface`, since it must point at the exact element that has focus —
+that's the one place a `row-suffix` control (e.g. a Switch) visibly
+diverges, with its own focus ring instead of the row's.
+
+Clicking (or keyboard-activating) the surface emits `gnome-activate` —
+already pre-filtered to real row activation, since clicks on a
+`row-suffix` control's own elements never reach the surface. Author your
+own `data-slot="row-surface"` (e.g. an `<a>` for a row that navigates) to
+use a different element; the host adopts it instead of generating one.
+`variant="property"` (default `"default"`) flips the visual hierarchy —
+`row-title` shrinks to a dim caption label and `row-subtitle` becomes the
+prominent value — and, like `padding` on `gnome-card`, is a plain attribute
+read directly by CSS.
+
 ## htmx
 
 Because all content remains in light DOM, htmx can process and replace
@@ -706,6 +764,7 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 | `gnome-action` | Banner | No — clicking an action never dismisses the banner | `{ action }` |
 | `gnome-before-dismiss` | Toast, Banner | Yes | `{ reason }` |
 | `gnome-dismiss` | Toast, Banner | No | `{ reason }` |
+| `gnome-activate` | Action Row | No | none |
 
 ## Accessibility
 

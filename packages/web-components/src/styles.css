@@ -1,5 +1,6 @@
 /* Import @gnome-ui/core/styles before this stylesheet to provide the tokens. */
 
+gnome-action-row,
 gnome-avatar,
 gnome-badge,
 gnome-banner,
@@ -26,6 +27,7 @@ gnome-tooltip {
   font-size: var(--gnome-font-size-body, 1rem);
 }
 
+gnome-action-row *,
 gnome-avatar *,
 gnome-badge *,
 gnome-banner *,
@@ -1471,6 +1473,125 @@ gnome-card[interactive] [data-slot="card-surface"]:disabled {
       white 25%
     );
   }
+}
+
+/* Action Row */
+
+gnome-action-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
+  min-height: 52px;
+  width: 100%;
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  text-align: start;
+}
+
+gnome-action-row [data-slot="row-prefix"] {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-action-row [data-slot="row-content"] {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+gnome-action-row [data-slot="row-title"] {
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+gnome-action-row [data-slot="row-subtitle"] {
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+gnome-action-row [data-slot="row-suffix"] {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--gnome-space-1, 6px);
+}
+
+gnome-action-row[variant="property"] [data-slot="row-title"] {
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-action-row[variant="property"] [data-slot="row-subtitle"] {
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  opacity: 1;
+}
+
+gnome-action-row[interactive] {
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-action-row[interactive] [data-slot="row-surface"] {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/*
+ * The hover/active tint lives on the whole host, not just row-surface: :hover
+ * and :active both match an ancestor while the pointer/press is on any
+ * descendant, so this covers row-suffix too (e.g. a trailing Switch) without
+ * pulling it inside the button — matching the React version's full-row
+ * highlight while keeping row-suffix structurally outside the surface.
+ * focus-visible stays on row-surface itself, since a keyboard focus ring
+ * must point at the exact element that has focus.
+ */
+gnome-action-row[interactive]:hover {
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+}
+
+gnome-action-row[interactive]:active {
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.12));
+}
+
+gnome-action-row[interactive] [data-slot="row-surface"]:focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-action-row[interactive] [data-slot="row-surface"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Dialog */

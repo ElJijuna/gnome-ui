@@ -1,6 +1,12 @@
 import './styles.css';
 
 export {
+  GnomeActionRowElement,
+  type GnomeActionRowEventMap,
+  type GnomeActionRowVariant,
+  registerGnomeActionRow,
+} from './action-row';
+export {
   type GnomeAvatarColor,
   GnomeAvatarElement,
   type GnomeAvatarSize,

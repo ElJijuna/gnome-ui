@@ -208,3 +208,12 @@ body {
   border: none;
   background: transparent;
 }
+
+.wc-story gnome-action-row [data-slot="row-surface"] {
+  min-height: 0;
+  border: none;
+}
+
+.wc-story gnome-action-row [data-slot="row-surface"]:hover {
+  background: transparent;
+}
