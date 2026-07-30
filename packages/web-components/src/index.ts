@@ -58,6 +58,11 @@ export {
   type GnomeRadioGroupEventMap,
   registerGnomeRadioGroup,
 } from './radio-group';
+export {
+  GnomeSkeletonElement,
+  type GnomeSkeletonVariant,
+  registerGnomeSkeleton,
+} from './skeleton';
 export { GnomeSliderElement, registerGnomeSlider } from './slider';
 export { GnomeSpinButtonElement, registerGnomeSpinButton } from './spin-button';
 export {

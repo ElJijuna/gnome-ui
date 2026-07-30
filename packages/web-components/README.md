@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains fifteen framework-agnostic components:
+The package currently contains sixteen framework-agnostic components:
 
 - `<gnome-avatar>` — circular image or name-derived initials fallback,
   driven by the composed `<img>`'s own `error` event.
@@ -19,6 +19,8 @@ The package currently contains fifteen framework-agnostic components:
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
   native radio inputs, with a normalized `value`/`gnome-change` API.
+- `<gnome-skeleton>` — presentational loading placeholder with rect,
+  circle, and text (row-count) variants.
 - `<gnome-slider>` — styled native `<input type="range">` with a
   CSS-driven accent fill.
 - `<gnome-spin-button>` — styled native `<input type="number">` with
@@ -401,6 +403,31 @@ values are clamped); omit it (or remove the attribute) for the
 indeterminate pulsing state. `variant` accepts
 `"accent" | "success" | "warning" | "error"` (default `"accent"`). The
 transition and pulse animation both respect `prefers-reduced-motion`.
+
+## Skeleton
+
+```html
+<gnome-skeleton width="240" height="20"></gnome-skeleton>
+<gnome-skeleton variant="circle" size="48"></gnome-skeleton>
+<gnome-skeleton variant="text" lines="3"></gnome-skeleton>
+```
+
+`gnome-skeleton` is a loading placeholder — purely presentational, always
+`aria-hidden`. Like `gnome-avatar`'s initials, the `text` variant's row
+elements (`[data-slot="skeleton-line"]`) are entirely host-derived from
+`lines`; there is nothing for a consumer to author, so — unlike
+`gnome-avatar` — no `MutationObserver` is needed, since nothing external
+ever swaps this content.
+
+`variant` accepts `"rect" | "circle" | "text"` (default `"rect"`). `width`
+(default `"100%"`) and `height` (default `16`) apply to the `rect` variant;
+`size` (default `40`) sets the diameter for `circle`; `lines` (default `3`,
+minimum `1`) sets the row count for `text`, whose last row renders at 60%
+width. Bare numeric values for `width`/`height`/`size` are treated as
+pixels; any other CSS length (`"12rem"`, `"2em"`) is used as-is. `animated`
+defaults to `true` — set `animated="false"` to disable the shimmer
+regardless of `prefers-reduced-motion` (which also disables it
+automatically).
 
 ## Dialog
 

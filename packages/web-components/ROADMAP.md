@@ -43,6 +43,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-progress-bar>` | `ProgressBar` |
 | ✅ | `<gnome-badge>` | `Badge` |
 | ✅ | `<gnome-avatar>` | `Avatar` |
+| ✅ | `<gnome-skeleton>` | `Skeleton` |
 
 ---
 
@@ -73,7 +74,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 8 | ✅ | `<gnome-progress-bar>` | `ProgressBar` | Native `<progress>` can't reliably paint a custom indeterminate pulse cross-browser, so — like `gnome-spinner` — host manages `role="progressbar"`/`aria-value*` itself and paints fill via a `--gnome-progress-value` custom property |
 | 9 | ✅ | `<gnome-badge>` | `Badge` | Pure CSS host — `variant`/`dot`/`anchored` are plain attributes read directly by CSS; `anchored` requires the consumer's own wrapper to be `position: relative` |
 | 10 | ✅ | `<gnome-avatar>` | `Avatar` | Composes a real `<img>`; its own `error`/`load` events drive the fallback. Initials are always derived, so — uniquely in this package — the host manages a `[data-slot="avatar-initials"]` element itself (adopting one already present, e.g. from SSR) |
-| 11 | ⬜ | `<gnome-skeleton>` | `Skeleton` | Pure CSS placeholder, `aria-hidden` |
+| 11 | ✅ | `<gnome-skeleton>` | `Skeleton` | The `text` variant's rows are entirely host-derived from `lines` — like `gnome-avatar`'s initials, there is nothing for a consumer to author — but unlike `gnome-avatar` no `MutationObserver` is needed, since nothing external ever swaps this host-owned content |
 | 12 | ⬜ | `<gnome-separator>` | `Separator` | `role="separator"`, horizontal/vertical |
 
 ---
