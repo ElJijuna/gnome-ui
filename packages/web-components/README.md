@@ -3,8 +3,10 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains fourteen framework-agnostic components:
+The package currently contains fifteen framework-agnostic components:
 
+- `<gnome-avatar>` — circular image or name-derived initials fallback,
+  driven by the composed `<img>`'s own `error` event.
 - `<gnome-badge>` — pure CSS counter/status indicator, optionally anchored
   over another element.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
@@ -54,6 +56,7 @@ import '@gnome-ui/web-components';
 Granular entry points register only one element:
 
 ```ts
+import '@gnome-ui/web-components/avatar';
 import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
@@ -72,6 +75,35 @@ import '@gnome-ui/web-components/toast';
 
 Every registration function is idempotent. Importing these modules during SSR
 is safe; registration occurs only when the Custom Elements registry exists.
+
+## Avatar
+
+```html
+<gnome-avatar name="Ada Lovelace" size="lg">
+  <img data-slot="avatar-image" src="/ada.jpg" />
+</gnome-avatar>
+
+<!-- No image (or a broken one): shows initials derived from name -->
+<gnome-avatar name="Grace Hopper"></gnome-avatar>
+```
+
+`gnome-avatar` composes a real light-DOM `<img data-slot="avatar-image">`
+when the consumer wants a photo — its own native `error`/`load` events drive
+the fallback, matching ordinary browser image-loading behavior. Unlike
+every other component in this package, initials are always *derived* from
+`name` (up to two characters, via the same algorithm as `@gnome-ui/react`),
+so there is nothing for a consumer to author: the host manages a
+`[data-slot="avatar-initials"]` element itself, adopting one already
+present in light DOM (e.g. from server-rendered markup) or creating one.
+
+The host defaults `alt` on the image from `name` (without overwriting an
+explicit `alt`), and always keeps its own `aria-label` in sync from the
+image's `alt` or `name`. `color` (`"blue" | "green" | "yellow" | "orange" |
+"red" | "purple" | "brown" | "teal" | "slate"`) overrides the
+deterministic name-derived color; `size` accepts
+`"sm" | "md" | "lg" | "xl"` (default `"md"`). `getInitials` and
+`hashNameToColor` are exported for consumers who need the same derivation
+outside the component.
 
 ## Badge
 
@@ -546,6 +578,8 @@ the accessible name relationship, positioning, and focus without reopening it.
 - Progress bars default to `role="progressbar"` and expose `aria-valuenow`/
   `aria-valuemin`/`aria-valuemax` in the determinate state; consumers still
   provide `aria-label` or `aria-labelledby`.
+- Avatars default to `role="img"` with an `aria-label` kept in sync from the
+  image's `alt` or `name`; the initials fallback is `aria-hidden`.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -588,8 +622,9 @@ group-level disabling, text field label/hint wiring and validation state,
 spin button stepping and bounds-based button disabling, slider keyboard
 interaction and fill computation, spinner ARIA state and reduced-motion
 animation duration, progress bar determinate/indeterminate ARIA state,
-badge variant/dot/anchored styling, and the toast's combined pointer/focus
-pause behavior. They also run in the repository CI workflow.
+badge variant/dot/anchored styling, avatar image/initials fallback
+behavior, and the toast's combined pointer/focus pause behavior. They also
+run in the repository CI workflow.
 
 ## Releases
 

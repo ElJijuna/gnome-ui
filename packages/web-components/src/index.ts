@@ -1,5 +1,13 @@
 import './styles.css';
 
+export {
+  type GnomeAvatarColor,
+  GnomeAvatarElement,
+  type GnomeAvatarSize,
+  getInitials,
+  hashNameToColor,
+  registerGnomeAvatar,
+} from './avatar';
 export { GnomeBadgeElement, type GnomeBadgeVariant, registerGnomeBadge } from './badge';
 export {
   GnomeButtonElement,

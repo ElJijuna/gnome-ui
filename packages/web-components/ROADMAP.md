@@ -42,6 +42,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-spinner>` | `Spinner` |
 | ✅ | `<gnome-progress-bar>` | `ProgressBar` |
 | ✅ | `<gnome-badge>` | `Badge` |
+| ✅ | `<gnome-avatar>` | `Avatar` |
 
 ---
 
@@ -71,7 +72,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 7 | ✅ | `<gnome-spinner>` | `Spinner` | `role="status"`, respects `prefers-reduced-motion`; no light-DOM children, no interaction |
 | 8 | ✅ | `<gnome-progress-bar>` | `ProgressBar` | Native `<progress>` can't reliably paint a custom indeterminate pulse cross-browser, so — like `gnome-spinner` — host manages `role="progressbar"`/`aria-value*` itself and paints fill via a `--gnome-progress-value` custom property |
 | 9 | ✅ | `<gnome-badge>` | `Badge` | Pure CSS host — `variant`/`dot`/`anchored` are plain attributes read directly by CSS; `anchored` requires the consumer's own wrapper to be `position: relative` |
-| 10 | ⬜ | `<gnome-avatar>` | `Avatar` | `<img>` with initials/icon fallback on load error |
+| 10 | ✅ | `<gnome-avatar>` | `Avatar` | Composes a real `<img>`; its own `error`/`load` events drive the fallback. Initials are always derived, so — uniquely in this package — the host manages a `[data-slot="avatar-initials"]` element itself (adopting one already present, e.g. from SSR) |
 | 11 | ⬜ | `<gnome-skeleton>` | `Skeleton` | Pure CSS placeholder, `aria-hidden` |
 | 12 | ⬜ | `<gnome-separator>` | `Separator` | `role="separator"`, horizontal/vertical |
 
