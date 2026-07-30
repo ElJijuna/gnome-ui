@@ -57,6 +57,11 @@
       "import": "./dist/radio-group.js",
       "require": "./dist/radio-group.cjs"
     },
+    "./separator": {
+      "types": "./dist/separator.d.ts",
+      "import": "./dist/separator.js",
+      "require": "./dist/separator.cjs"
+    },
     "./skeleton": {
       "types": "./dist/skeleton.d.ts",
       "import": "./dist/skeleton.js",

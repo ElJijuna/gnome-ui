@@ -44,6 +44,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-badge>` | `Badge` |
 | ✅ | `<gnome-avatar>` | `Avatar` |
 | ✅ | `<gnome-skeleton>` | `Skeleton` |
+| ✅ | `<gnome-separator>` | `Separator` |
 
 ---
 
@@ -75,7 +76,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 9 | ✅ | `<gnome-badge>` | `Badge` | Pure CSS host — `variant`/`dot`/`anchored` are plain attributes read directly by CSS; `anchored` requires the consumer's own wrapper to be `position: relative` |
 | 10 | ✅ | `<gnome-avatar>` | `Avatar` | Composes a real `<img>`; its own `error`/`load` events drive the fallback. Initials are always derived, so — uniquely in this package — the host manages a `[data-slot="avatar-initials"]` element itself (adopting one already present, e.g. from SSR) |
 | 11 | ✅ | `<gnome-skeleton>` | `Skeleton` | The `text` variant's rows are entirely host-derived from `lines` — like `gnome-avatar`'s initials, there is nothing for a consumer to author — but unlike `gnome-avatar` no `MutationObserver` is needed, since nothing external ever swaps this host-owned content |
-| 12 | ⬜ | `<gnome-separator>` | `Separator` | `role="separator"`, horizontal/vertical |
+| 12 | ✅ | `<gnome-separator>` | `Separator` | React renders `<hr>` (horizontal) or a `<div role="separator">` (vertical); since a custom element is one fixed tag, the host manages `role="separator"`/`aria-orientation` itself for both orientations |
 
 ---
 

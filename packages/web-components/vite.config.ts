@@ -32,6 +32,7 @@ export default defineConfig({
         popover: resolve(packageRoot, 'src/popover.ts'),
         'progress-bar': resolve(packageRoot, 'src/progress-bar.ts'),
         'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
+        separator: resolve(packageRoot, 'src/separator.ts'),
         skeleton: resolve(packageRoot, 'src/skeleton.ts'),
         slider: resolve(packageRoot, 'src/slider.ts'),
         'spin-button': resolve(packageRoot, 'src/spin-button.ts'),

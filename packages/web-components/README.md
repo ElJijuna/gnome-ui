@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains sixteen framework-agnostic components:
+The package currently contains seventeen framework-agnostic components:
 
 - `<gnome-avatar>` — circular image or name-derived initials fallback,
   driven by the composed `<img>`'s own `error` event.
@@ -19,6 +19,9 @@ The package currently contains sixteen framework-agnostic components:
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
   native radio inputs, with a normalized `value`/`gnome-change` API.
+- `<gnome-separator>` — dividing line; the host manages
+  `role="separator"`/`aria-orientation` since a custom element can't switch
+  between `<hr>` and a `<div>` per orientation like the React version.
 - `<gnome-skeleton>` — presentational loading placeholder with rect,
   circle, and text (row-count) variants.
 - `<gnome-slider>` — styled native `<input type="range">` with a
@@ -428,6 +431,28 @@ pixels; any other CSS length (`"12rem"`, `"2em"`) is used as-is. `animated`
 defaults to `true` — set `animated="false"` to disable the shimmer
 regardless of `prefers-reduced-motion` (which also disables it
 automatically).
+
+## Separator
+
+```html
+<gnome-separator></gnome-separator>
+
+<!-- Inside a flex row: stretches via align-self: stretch -->
+<div style="display: flex; align-items: center; gap: 12px; height: 32px;">
+  <span>Files</span>
+  <gnome-separator orientation="vertical"></gnome-separator>
+  <span>Music</span>
+</div>
+```
+
+Unlike the React `Separator` — which renders a semantic `<hr>` for the
+horizontal case and a `<div role="separator">` for the vertical one — a
+custom element is always a single fixed tag, so `gnome-separator` manages
+`role="separator"` and `aria-orientation` itself for both orientations
+(guarded so it never overwrites a consumer-authored `role`). `orientation`
+accepts `"horizontal" | "vertical"` (default `"horizontal"`; `aria-orientation`
+is only set for `"vertical"`, matching the ARIA default). Color comes
+entirely from design tokens and adapts to dark mode automatically.
 
 ## Dialog
 

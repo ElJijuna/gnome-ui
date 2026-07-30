@@ -59,6 +59,11 @@ export {
   registerGnomeRadioGroup,
 } from './radio-group';
 export {
+  GnomeSeparatorElement,
+  type GnomeSeparatorOrientation,
+  registerGnomeSeparator,
+} from './separator';
+export {
   GnomeSkeletonElement,
   type GnomeSkeletonVariant,
   registerGnomeSkeleton,

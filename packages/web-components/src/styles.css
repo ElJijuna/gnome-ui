@@ -9,6 +9,7 @@ gnome-menu,
 gnome-popover,
 gnome-progress-bar,
 gnome-radio-group,
+gnome-separator,
 gnome-skeleton,
 gnome-slider,
 gnome-spin-button,
@@ -31,6 +32,7 @@ gnome-menu *,
 gnome-popover *,
 gnome-progress-bar *,
 gnome-radio-group *,
+gnome-separator *,
 gnome-skeleton *,
 gnome-slider *,
 gnome-spin-button *,
@@ -1119,6 +1121,29 @@ gnome-skeleton [data-slot="skeleton-line"] {
   gnome-skeleton[data-animated] [data-slot="skeleton-line"]::after {
     animation: none;
   }
+}
+
+/* Separator */
+
+gnome-separator {
+  display: block;
+  border: none;
+  margin: 0;
+  background-color: var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
+  flex-shrink: 0;
+}
+
+gnome-separator[data-orientation="horizontal"] {
+  display: block;
+  width: 100%;
+  height: 1px;
+}
+
+gnome-separator[data-orientation="vertical"] {
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+  align-self: stretch;
 }
 
 /* Dialog */
