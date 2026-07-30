@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains seven framework-agnostic components:
+The package currently contains eight framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -13,6 +13,8 @@ The package currently contains seven framework-agnostic components:
   focus restoration.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
+- `<gnome-radio-group>` — shared naming and group-level disabling around
+  native radio inputs, with a normalized `value`/`gnome-change` API.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
@@ -45,6 +47,7 @@ import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
+import '@gnome-ui/web-components/radio-group';
 import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/toast';
 ```
@@ -156,6 +159,39 @@ control while preserving any disabled state the consumer set directly on it
 once the host's `disabled` attribute is removed. `gnomeSwitch.checked` proxies
 to the native control's `checked` property; `focus()` and `click()` delegate
 to it as well.
+
+## Radio Group
+
+```html
+<gnome-radio-group name="view-mode">
+  <label><input type="radio" data-slot="radio-control" value="list" checked /> List</label>
+  <label><input type="radio" data-slot="radio-control" value="grid" /> Grid</label>
+  <label><input type="radio" data-slot="radio-control" value="compact" /> Compact</label>
+</gnome-radio-group>
+
+<script type="module">
+  const group = document.querySelector('gnome-radio-group');
+
+  group.addEventListener('gnome-change', (event) => {
+    console.log('View mode:', event.detail.value);
+  });
+</script>
+```
+
+`gnome-radio-group` composes native light-DOM `<input type="radio">`
+controls marked `data-slot="radio-control"`. Same-name native radios already
+provide mutual exclusivity, arrow-key cycling, and Space/click selection in
+every browser, so the host does not reimplement that — it only:
+
+- Assigns a shared `name` to every control: the host's own `name` attribute
+  if set, otherwise an auto-generated one, so groups work correctly even
+  without an explicit `name`.
+- Mirrors a group-level `disabled` attribute onto every control, preserving
+  any disabled state a consumer set directly on one of them.
+- Normalizes selection into a `value` property (get the checked control's
+  value, or set it to check the matching control) and a `gnome-change`
+  event with `{ value }`, dispatched whenever any control's native `change`
+  fires.
 
 ## Dialog
 
@@ -300,6 +336,7 @@ the accessible name relationship, positioning, and focus without reopening it.
 | `gnome-cancel` | Dialog, Menu, Popover | Yes | `{ reason }` |
 | `gnome-close` | Dialog, Menu, Popover | No | `{ reason }` |
 | `gnome-select` | Menu | Yes | `{ item, value }` |
+| `gnome-change` | Radio Group | No | `{ value }` |
 | `gnome-action` | Toast | Yes | `{ action }` |
 | `gnome-before-dismiss` | Toast | Yes | `{ reason }` |
 | `gnome-dismiss` | Toast | No | `{ reason }` |
@@ -317,6 +354,9 @@ the accessible name relationship, positioning, and focus without reopening it.
   `aria-label`).
 - Checkboxes retain native checkbox semantics and form participation,
   including the `indeterminate` visual state.
+- Radio groups rely on native same-name radio semantics for mutual
+  exclusivity and arrow-key cycling; the host only adds shared naming and
+  group-level disabling.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -354,8 +394,9 @@ npm run test:browser --workspace @gnome-ui/web-components
 These Playwright checks cover native button form behavior and loading state,
 modal isolation and focus, menu keyboard navigation and fragment replacement,
 popover repositioning after resize, switch and checkbox keyboard toggling
-(including indeterminate resolution), and the toast's combined pointer/focus
-pause behavior. They also run in the repository CI workflow.
+(including indeterminate resolution), radio group keyboard cycling and
+group-level disabling, and the toast's combined pointer/focus pause
+behavior. They also run in the repository CI workflow.
 
 ## Releases
 

@@ -148,3 +148,14 @@ body {
 .wc-story gnome-checkbox [data-slot="checkbox-control"]:not(:checked, :indeterminate) {
   background: var(--gnome-card-bg-color, #fff);
 }
+
+.wc-story gnome-radio-group [data-slot="radio-control"] {
+  width: 18px;
+  min-height: 0;
+  padding: 0;
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+.wc-story gnome-radio-group [data-slot="radio-control"]:not(:checked) {
+  background: var(--gnome-card-bg-color, #fff);
+}

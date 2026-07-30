@@ -38,6 +38,12 @@ export {
   type GnomePopoverPosition,
   registerGnomePopover,
 } from './popover';
+export {
+  type GnomeRadioGroupChangeDetail,
+  GnomeRadioGroupElement,
+  type GnomeRadioGroupEventMap,
+  registerGnomeRadioGroup,
+} from './radio-group';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
 export {
   type GnomeToastActionDetail,

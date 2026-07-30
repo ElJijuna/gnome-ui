@@ -28,6 +28,7 @@ export default defineConfig({
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
+        'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
         switch: resolve(packageRoot, 'src/switch.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),
       },

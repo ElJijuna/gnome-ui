@@ -35,6 +35,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-popover>` | `Popover` |
 | ✅ | `<gnome-switch>` | `Switch` |
 | ✅ | `<gnome-checkbox>` | `Checkbox` |
+| ✅ | `<gnome-radio-group>` | `RadioButton` |
 
 ---
 
@@ -47,7 +48,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |----------|--------|---------|--------------|-------|
 | 1 | ✅ | `<gnome-switch>` | `Switch` | Wraps `<input type="checkbox" role="switch">`; native `change`/`input` events bubble through the light-DOM host, no custom event needed |
 | 2 | ✅ | `<gnome-checkbox>` | `Checkbox` | Wraps `<input type="checkbox">`; host applies `indeterminate` imperatively since it has no HTML attribute equivalent |
-| 3 | ⬜ | `<gnome-radio-group>` | `RadioButton` | Host groups native `<input type="radio">` children sharing a `name`; emits `gnome-change` with selected value |
+| 3 | ✅ | `<gnome-radio-group>` | `RadioButton` | Native same-name radios already provide exclusivity and arrow-key cycling; host adds shared/auto-generated `name`, group-level `disabled`, and a `value`/`gnome-change` API |
 | 4 | ⬜ | `<gnome-text-field>` | `TextField` | Wraps `<input>`/`<textarea>`; label/helper/error slots; delegates `focus()`/`validity` |
 | 5 | ⬜ | `<gnome-spin-button>` | `SpinButton` | Wraps `<input type="number">` with +/− step buttons |
 | 6 | ⬜ | `<gnome-slider>` | `Slider` | Wraps `<input type="range">`; custom track/fill styling only |
