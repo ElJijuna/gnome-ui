@@ -32,6 +32,11 @@
       "import": "./dist/button.js",
       "require": "./dist/button.cjs"
     },
+    "./card": {
+      "types": "./dist/card.d.ts",
+      "import": "./dist/card.js",
+      "require": "./dist/card.cjs"
+    },
     "./checkbox": {
       "types": "./dist/checkbox.d.ts",
       "import": "./dist/checkbox.js",

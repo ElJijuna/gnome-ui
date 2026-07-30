@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains nineteen framework-agnostic components:
+The package currently contains twenty framework-agnostic components:
 
 - `<gnome-avatar>` — circular image or name-derived initials fallback,
   driven by the composed `<img>`'s own `error` event.
@@ -14,6 +14,8 @@ The package currently contains nineteen framework-agnostic components:
   events.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
+- `<gnome-card>` — elevated content container; `interactive` composes a real
+  `<button data-slot="card-surface">` around its children.
 - `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
   `indeterminate` support.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
@@ -638,6 +640,35 @@ bubble is hidden, which the `visibility: hidden` fallback in the React
 version does not (that removes it from the accessibility tree between
 hovers). There is no focus trap and no dismiss/action events — a tooltip
 is purely informational.
+
+## Card
+
+```html
+<gnome-card padding="md">
+  <strong>Card title</strong>
+  <p>Static content grouped on an elevated surface.</p>
+</gnome-card>
+
+<!-- Interactive: composes a real <button data-slot="card-surface"> -->
+<gnome-card interactive aria-label="Open settings">
+  <strong>Settings</strong>
+  <p>Manage your account and preferences.</p>
+</gnome-card>
+```
+
+A custom element is always one fixed tag, so unlike the React version —
+which renders `<button>` (or whatever `as` specifies) when `interactive` —
+`gnome-card` composes a real `<button type="button" data-slot="card-surface">`
+around its existing children for native keyboard/click activation, moving
+them inside without cloning (so event listeners survive). Author your own
+`data-slot="card-surface"` (e.g. an `<a>` for a card that navigates) to use
+a different element; the host adopts it instead of generating one.
+Toggling `interactive` off unwraps the surface, moving children back onto
+the host directly. An `aria-label` set on the host is copied onto a
+generated surface (not onto an adopted one you authored yourself).
+
+`padding` accepts `"none" | "sm" | "md" | "lg"` (default `"md"`) and is a
+plain attribute read directly by CSS — no JS state to keep in sync.
 
 ## htmx
 

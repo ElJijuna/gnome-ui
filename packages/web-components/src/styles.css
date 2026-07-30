@@ -4,6 +4,7 @@ gnome-avatar,
 gnome-badge,
 gnome-banner,
 gnome-button,
+gnome-card,
 gnome-checkbox,
 gnome-dialog,
 gnome-menu,
@@ -29,6 +30,7 @@ gnome-avatar *,
 gnome-badge *,
 gnome-banner *,
 gnome-button *,
+gnome-card *,
 gnome-checkbox *,
 gnome-dialog *,
 gnome-menu *,
@@ -1367,6 +1369,107 @@ gnome-tooltip [data-slot="tooltip-content"][data-placement="right"]::after {
 
   gnome-tooltip [data-slot="tooltip-content"][data-state="open"] {
     transform: none;
+  }
+}
+
+/* Card */
+
+gnome-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
+  border-radius: var(--gnome-radius-lg, 12px);
+  padding: var(--gnome-space-4, 24px);
+}
+
+gnome-card[padding="none"] {
+  padding: 0;
+}
+
+gnome-card[padding="sm"] {
+  padding: var(--gnome-space-2, 12px);
+}
+
+gnome-card[padding="lg"] {
+  padding: var(--gnome-space-5, 32px);
+}
+
+gnome-card[interactive] {
+  display: contents;
+}
+
+gnome-card[interactive] [data-slot="card-surface"] {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
+  border-radius: var(--gnome-radius-lg, 12px);
+  padding: var(--gnome-space-4, 24px);
+  appearance: none;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-card[interactive][padding="none"] [data-slot="card-surface"] {
+  padding: 0;
+}
+
+gnome-card[interactive][padding="sm"] [data-slot="card-surface"] {
+  padding: var(--gnome-space-2, 12px);
+}
+
+gnome-card[interactive][padding="lg"] [data-slot="card-surface"] {
+  padding: var(--gnome-space-5, 32px);
+}
+
+gnome-card[interactive] [data-slot="card-surface"]:hover {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 94%, black 6%);
+}
+
+gnome-card[interactive] [data-slot="card-surface"]:active {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 88%, black 12%);
+}
+
+gnome-card[interactive] [data-slot="card-surface"]:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-card[interactive] [data-slot="card-surface"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-card[interactive] [data-slot="card-surface"]:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-card-bg-color, rgb(255 255 255 / 0.08)) 85%,
+      white 15%
+    );
+  }
+
+  gnome-card[interactive] [data-slot="card-surface"]:active {
+    background-color: color-mix(
+      in srgb,
+      var(--gnome-card-bg-color, rgb(255 255 255 / 0.08)) 75%,
+      white 25%
+    );
   }
 }
 

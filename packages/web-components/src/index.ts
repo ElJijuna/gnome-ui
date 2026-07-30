@@ -25,6 +25,7 @@ export {
   type GnomeButtonVariant,
   registerGnomeButton,
 } from './button';
+export { GnomeCardElement, type GnomeCardPadding, registerGnomeCard } from './card';
 export { GnomeCheckboxElement, registerGnomeCheckbox } from './checkbox';
 export {
   type GnomeDialogCloseDetail,
