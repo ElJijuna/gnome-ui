@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains eight framework-agnostic components:
+The package currently contains nine framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -17,6 +17,8 @@ The package currently contains eight framework-agnostic components:
   native radio inputs, with a normalized `value`/`gnome-change` API.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
+- `<gnome-text-field>` — styled native text input/textarea with label and
+  helper/error text slots wired via `for`/`id` and `aria-describedby`.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
   pause-on-hover/focus.
 - `<gnome-popover>` — trigger relationships, adaptive positioning, outside
@@ -49,6 +51,7 @@ import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/radio-group';
 import '@gnome-ui/web-components/switch';
+import '@gnome-ui/web-components/text-field';
 import '@gnome-ui/web-components/toast';
 ```
 
@@ -192,6 +195,37 @@ every browser, so the host does not reimplement that — it only:
   value, or set it to check the matching control) and a `gnome-change`
   event with `{ value }`, dispatched whenever any control's native `change`
   fires.
+
+## Text Field
+
+```html
+<gnome-text-field>
+  <label data-slot="text-field-label">Username</label>
+  <input type="text" data-slot="text-field-control" placeholder="octocat" />
+  <span data-slot="text-field-hint">Choose a unique handle.</span>
+</gnome-text-field>
+```
+
+`gnome-text-field` composes a native light-DOM `<input>` or `<textarea>`
+marked `data-slot="text-field-control"`, with optional `<label
+data-slot="text-field-label">` and `data-slot="text-field-hint"` slots.
+Consumers own all label and hint text content; the host only wires ARIA
+relationships and state:
+
+- Links the label to the control via `for`/`id` (auto-generated if the
+  control has none).
+- Links the hint to the control via `aria-describedby` (auto-generated),
+  removing it if the hint is removed.
+- Mirrors a group-level `disabled` attribute onto the control, dimming the
+  whole field, while preserving any disabled state set directly on the
+  control.
+- Mirrors an `invalid` boolean attribute onto the control's `aria-invalid`
+  and applies the error visual treatment to the control and hint —
+  consumers still choose what message the hint displays.
+
+`value` proxies to the native control's `value`; `focus()`,
+`checkValidity()`, `reportValidity()`, `setCustomValidity()`, and `validity`
+delegate to it as well, so standard HTML5 form validation keeps working.
 
 ## Dialog
 
@@ -357,6 +391,8 @@ the accessible name relationship, positioning, and focus without reopening it.
 - Radio groups rely on native same-name radio semantics for mutual
   exclusivity and arrow-key cycling; the host only adds shared naming and
   group-level disabling.
+- Text fields link label and hint to the control via `for`/`id` and
+  `aria-describedby`, and reflect `invalid` state as `aria-invalid`.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -395,8 +431,9 @@ These Playwright checks cover native button form behavior and loading state,
 modal isolation and focus, menu keyboard navigation and fragment replacement,
 popover repositioning after resize, switch and checkbox keyboard toggling
 (including indeterminate resolution), radio group keyboard cycling and
-group-level disabling, and the toast's combined pointer/focus pause
-behavior. They also run in the repository CI workflow.
+group-level disabling, text field label/hint wiring and validation state,
+and the toast's combined pointer/focus pause behavior. They also run in the
+repository CI workflow.
 
 ## Releases
 

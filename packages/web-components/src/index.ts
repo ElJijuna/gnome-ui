@@ -45,6 +45,7 @@ export {
   registerGnomeRadioGroup,
 } from './radio-group';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
+export { GnomeTextFieldElement, registerGnomeTextField } from './text-field';
 export {
   type GnomeToastActionDetail,
   type GnomeToastDismissDetail,

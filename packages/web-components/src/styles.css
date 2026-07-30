@@ -7,6 +7,7 @@ gnome-menu,
 gnome-popover,
 gnome-radio-group,
 gnome-switch,
+gnome-text-field,
 gnome-toast {
   box-sizing: border-box;
   color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
@@ -21,6 +22,7 @@ gnome-menu *,
 gnome-popover *,
 gnome-radio-group *,
 gnome-switch *,
+gnome-text-field *,
 gnome-toast * {
   box-sizing: border-box;
 }
@@ -372,6 +374,96 @@ gnome-radio-group [data-slot="radio-control"]:disabled {
   gnome-radio-group [data-slot="radio-control"]:not(:checked):hover {
     border-color: var(--gnome-light-4, #c0bfbc);
     background-color: color-mix(in srgb, var(--gnome-card-bg-color, #383838) 85%, white 15%);
+  }
+}
+
+/* Text Field */
+
+gnome-text-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 6px);
+}
+
+gnome-text-field[data-disabled] {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-text-field [data-slot="text-field-label"] {
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+gnome-text-field [data-slot="text-field-control"] {
+  appearance: none;
+  width: 100%;
+  padding: 8px var(--gnome-space-2, 12px);
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  background-color: var(--gnome-view-bg-color, #fff);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.06);
+  color: var(--gnome-view-fg-color, rgb(0 0 0 / 0.8));
+  font-family: inherit;
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-text-field [data-slot="text-field-control"]::placeholder {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-text-field [data-slot="text-field-control"]:focus {
+  outline: none;
+}
+
+gnome-text-field [data-slot="text-field-control"]:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-text-field [data-slot="text-field-control"]:disabled {
+  cursor: not-allowed;
+}
+
+gnome-text-field[invalid] [data-slot="text-field-control"] {
+  border-color: var(--gnome-error-color, #e01b24);
+}
+
+gnome-text-field[invalid] [data-slot="text-field-control"]:focus-visible {
+  border-color: var(--gnome-error-color, #e01b24);
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-error-color, #e01b24);
+}
+
+gnome-text-field [data-slot="text-field-hint"] {
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-text-field[invalid] [data-slot="text-field-hint"] {
+  color: var(--gnome-error-color, #e01b24);
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-text-field [data-slot="text-field-control"] {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: var(--gnome-border-subtle);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
   }
 }
 
@@ -819,5 +911,10 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
   gnome-radio-group [data-slot="radio-control"]:not(:checked):hover {
     border-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
     background-color: var(--gnome-hover-overlay);
+  }
+
+  gnome-text-field [data-slot="text-field-control"] {
+    border-width: 2px;
+    box-shadow: none;
   }
 }

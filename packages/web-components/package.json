@@ -47,6 +47,11 @@
       "import": "./dist/switch.js",
       "require": "./dist/switch.cjs"
     },
+    "./text-field": {
+      "types": "./dist/text-field.d.ts",
+      "import": "./dist/text-field.js",
+      "require": "./dist/text-field.cjs"
+    },
     "./toast": {
       "types": "./dist/toast.d.ts",
       "import": "./dist/toast.js",

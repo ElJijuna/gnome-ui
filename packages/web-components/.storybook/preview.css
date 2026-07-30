@@ -159,3 +159,10 @@ body {
 .wc-story gnome-radio-group [data-slot="radio-control"]:not(:checked) {
   background: var(--gnome-card-bg-color, #fff);
 }
+
+.wc-story gnome-text-field [data-slot="text-field-control"] {
+  min-height: 0;
+  padding: 8px var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-md, 8px);
+  background: var(--gnome-view-bg-color, #fff);
+}

@@ -30,6 +30,7 @@ export default defineConfig({
         popover: resolve(packageRoot, 'src/popover.ts'),
         'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
         switch: resolve(packageRoot, 'src/switch.ts'),
+        'text-field': resolve(packageRoot, 'src/text-field.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),
       },
       formats: ['es', 'cjs'],
