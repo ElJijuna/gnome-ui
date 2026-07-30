@@ -1,6 +1,13 @@
 import './styles.css';
 
 export {
+  GnomeButtonElement,
+  type GnomeButtonShape,
+  type GnomeButtonSize,
+  type GnomeButtonVariant,
+  registerGnomeButton,
+} from './button';
+export {
   type GnomeDialogCloseDetail,
   type GnomeDialogCloseReason,
   GnomeDialogElement,

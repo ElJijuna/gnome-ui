@@ -3,8 +3,10 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains four behavior-rich components:
+The package currently contains five framework-agnostic components:
 
+- `<gnome-button>` — styled native buttons with GNOME variants, sizing,
+  loading state, and preserved form behavior.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
@@ -34,6 +36,7 @@ import '@gnome-ui/web-components';
 Granular entry points register only one element:
 
 ```ts
+import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
@@ -42,6 +45,39 @@ import '@gnome-ui/web-components/toast';
 
 Every registration function is idempotent. Importing these modules during SSR
 is safe; registration occurs only when the Custom Elements registry exists.
+
+## Button
+
+```html
+<gnome-button variant="suggested" size="md">
+  <button
+    type="submit"
+    name="intent"
+    value="save"
+    data-slot="button-control"
+    hx-post="/settings"
+  >
+    Save changes
+  </button>
+</gnome-button>
+```
+
+`gnome-button` deliberately composes a native light-DOM `<button>` instead of
+reimplementing button semantics on the custom element. Native form submission,
+keyboard activation, accessible naming, `name`/`value`, and htmx attributes
+therefore continue to work normally.
+
+The host accepts:
+
+- `variant="default|suggested|destructive|flat|raised"`
+- `size="sm|md|lg"`
+- `shape="default|pill|circular"`
+- Boolean `disabled`, `loading`, and `osd` attributes
+
+`loading` sets `aria-busy="true"` and temporarily disables the native control.
+Consumer-owned `disabled` and `aria-busy` values are restored when the state
+ends or htmx replaces the control. The host's `focus()` and `click()` methods
+delegate to the native button.
 
 ## Dialog
 
@@ -194,6 +230,8 @@ the accessible name relationship, positioning, and focus without reopening it.
 
 - Dialogs trap focus while open, support Escape, lock background scrolling,
   label themselves from light-DOM title/description slots, and restore focus.
+- Buttons retain native button semantics and form participation; circular
+  icon-only controls still require an explicit accessible name.
 - Menus expose the WAI-ARIA menu pattern, support directional navigation and
   typeahead, skip disabled items, and restore focus after dismissal.
 - Toasts use a polite atomic live region and pause timers during hover or
@@ -230,10 +268,10 @@ Run the real-browser interaction tests against Storybook:
 npm run test:browser --workspace @gnome-ui/web-components
 ```
 
-These Playwright checks cover modal isolation and focus, menu keyboard
-navigation and fragment replacement, popover repositioning after resize, and
-the toast's combined pointer/focus pause behavior. They also run in the
-repository CI workflow.
+These Playwright checks cover native button form behavior and loading state,
+modal isolation and focus, menu keyboard navigation and fragment replacement,
+popover repositioning after resize, and the toast's combined pointer/focus
+pause behavior. They also run in the repository CI workflow.
 
 ## Releases
 

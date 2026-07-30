@@ -23,6 +23,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(packageRoot, 'src/index.ts'),
+        button: resolve(packageRoot, 'src/button.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),

@@ -49,6 +49,52 @@ body {
   background: var(--gnome-button-hover-bg-color, rgb(0 0 0 / 0.12));
 }
 
+.wc-story gnome-button [data-slot="button-control"] {
+  min-height: 34px;
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+  border-radius: var(--gnome-radius-md, 9px);
+}
+
+.wc-story gnome-button[data-shape="pill"] [data-slot="button-control"] {
+  padding-inline: var(--gnome-space-3, 18px);
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+.wc-story gnome-button[data-shape="circular"] [data-slot="button-control"] {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: var(--gnome-space-1, 6px);
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+.wc-story gnome-button[data-size="sm"] [data-slot="button-control"] {
+  min-height: 28px;
+  padding: 4px var(--gnome-space-1, 6px);
+}
+
+.wc-story gnome-button[data-size="sm"][data-shape="circular"] [data-slot="button-control"] {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  padding: 4px;
+}
+
+.wc-story gnome-button[data-size="lg"] [data-slot="button-control"] {
+  min-height: 42px;
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-3, 18px);
+}
+
+.wc-story gnome-button[data-size="lg"][data-shape="circular"] [data-slot="button-control"] {
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: var(--gnome-space-1, 6px);
+}
+
 .wc-story gnome-menu [data-menu-item] {
   border: 0;
   background: transparent;

@@ -1,5 +1,6 @@
 /* Import @gnome-ui/core/styles before this stylesheet to provide the tokens. */
 
+gnome-button,
 gnome-dialog,
 gnome-menu,
 gnome-popover,
@@ -10,11 +11,193 @@ gnome-toast {
   font-size: var(--gnome-font-size-body, 1rem);
 }
 
+gnome-button *,
 gnome-dialog *,
 gnome-menu *,
 gnome-popover *,
 gnome-toast * {
   box-sizing: border-box;
+}
+
+/* Button */
+
+gnome-button {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+gnome-button [data-slot="button-control"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 5.5rem;
+  min-height: 34px;
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+  border: 1px solid transparent;
+  border-radius: var(--gnome-radius-md, 9px);
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--gnome-font-family, "Adwaita Sans", Cantarell, system-ui, sans-serif);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1;
+  outline: none;
+  text-decoration: none;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+gnome-button [data-slot="button-control"]:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-button [data-slot="button-control"]:disabled {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  pointer-events: none;
+}
+
+gnome-button[data-variant="default"] [data-slot="button-control"],
+gnome-button[data-variant="raised"] [data-slot="button-control"] {
+  border-color: var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  background: var(--gnome-card-bg-color, #fff);
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.12));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-button[data-variant="default"] [data-slot="button-control"]:hover:not(:disabled),
+gnome-button[data-variant="raised"] [data-slot="button-control"]:hover:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--gnome-card-bg-color, #fff) 94%,
+    var(--gnome-window-fg-color, #000)
+  );
+}
+
+gnome-button[data-variant="default"] [data-slot="button-control"]:active:not(:disabled),
+gnome-button[data-variant="raised"] [data-slot="button-control"]:active:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--gnome-card-bg-color, #fff) 88%,
+    var(--gnome-window-fg-color, #000)
+  );
+  box-shadow: none;
+}
+
+gnome-button[data-variant="suggested"] [data-slot="button-control"] {
+  border-color: transparent;
+  background: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #fff);
+}
+
+gnome-button[data-variant="destructive"] [data-slot="button-control"] {
+  border-color: transparent;
+  background: var(--gnome-destructive-bg-color, #e01b24);
+  color: var(--gnome-destructive-fg-color, #fff);
+}
+
+gnome-button[data-variant="suggested"] [data-slot="button-control"]:hover:not(:disabled),
+gnome-button[data-variant="destructive"] [data-slot="button-control"]:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+gnome-button[data-variant="suggested"] [data-slot="button-control"]:active:not(:disabled),
+gnome-button[data-variant="destructive"] [data-slot="button-control"]:active:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+gnome-button[data-variant="flat"] [data-slot="button-control"] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-button[data-variant="flat"] [data-slot="button-control"]:hover:not(:disabled) {
+  background: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+}
+
+gnome-button[data-variant="flat"] [data-slot="button-control"]:active:not(:disabled) {
+  background: var(--gnome-active-overlay, rgb(0 0 0 / 0.12));
+}
+
+gnome-button[data-osd] [data-slot="button-control"] {
+  border-color: rgb(255 255 255 / 0.12);
+  background: rgb(0 0 0 / 0.65);
+  box-shadow: none;
+  color: rgb(255 255 255 / 0.95);
+  backdrop-filter: blur(4px);
+}
+
+gnome-button[data-osd] [data-slot="button-control"]:hover:not(:disabled) {
+  background: rgb(0 0 0 / 0.75);
+  filter: none;
+}
+
+gnome-button[data-osd] [data-slot="button-control"]:active:not(:disabled) {
+  background: rgb(0 0 0 / 0.85);
+  filter: none;
+}
+
+gnome-button[data-shape="pill"] [data-slot="button-control"] {
+  padding-inline: var(--gnome-space-3, 18px);
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+gnome-button[data-shape="circular"] [data-slot="button-control"] {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: var(--gnome-space-1, 6px);
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+gnome-button[data-size="sm"] [data-slot="button-control"] {
+  min-width: 4rem;
+  min-height: 28px;
+  padding: 4px var(--gnome-space-1, 6px);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+}
+
+gnome-button[data-size="sm"][data-shape="circular"] [data-slot="button-control"] {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  padding: 4px;
+}
+
+gnome-button[data-size="lg"] [data-slot="button-control"] {
+  min-height: 42px;
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-3, 18px);
+  font-size: var(--gnome-font-size-title-4, 1.125rem);
+}
+
+gnome-button[data-size="lg"][data-shape="circular"] [data-slot="button-control"] {
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: var(--gnome-space-1, 6px);
+}
+
+gnome-button[data-loading] [data-slot="button-control"]::before {
+  width: 0.9em;
+  height: 0.9em;
+  flex: 0 0 auto;
+  border: 2px solid currentcolor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  content: "";
 }
 
 /* Dialog */
@@ -316,12 +499,22 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  gnome-button[data-loading] [data-slot="button-control"]::before {
+    animation: gnome-button-spin 700ms linear infinite;
+  }
+
   gnome-dialog[data-state="open"] [data-slot="dialog-surface"],
   gnome-menu [data-slot="menu-content"][data-state="open"],
   gnome-toast[data-state="open"],
   gnome-popover [data-slot="popover-content"][data-state="open"] {
     animation: gnome-web-component-enter var(--gnome-duration-fast, 100ms)
       var(--gnome-easing-default, ease-out);
+  }
+}
+
+@keyframes gnome-button-spin {
+  to {
+    transform: rotate(1turn);
   }
 }
 
@@ -338,6 +531,11 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
 }
 
 @media (prefers-contrast: more) {
+  gnome-button[data-variant="default"] [data-slot="button-control"],
+  gnome-button[data-variant="raised"] [data-slot="button-control"] {
+    border-width: 2px;
+  }
+
   gnome-dialog [data-slot="dialog-surface"],
   gnome-menu [data-slot="menu-content"],
   gnome-toast,
