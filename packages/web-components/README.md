@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twelve framework-agnostic components:
+The package currently contains thirteen framework-agnostic components:
 
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
@@ -21,6 +21,8 @@ The package currently contains twelve framework-agnostic components:
   decrement/increment buttons wired to `stepDown()`/`stepUp()`.
 - `<gnome-spinner>` — presentational indeterminate loading indicator with
   `role="status"`.
+- `<gnome-progress-bar>` — presentational determinate/indeterminate progress
+  indicator with `role="progressbar"`.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
 - `<gnome-text-field>` — styled native text input/textarea with label and
@@ -55,6 +57,7 @@ import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
+import '@gnome-ui/web-components/progress-bar';
 import '@gnome-ui/web-components/radio-group';
 import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
@@ -317,6 +320,29 @@ ARIA: `role="status"` (unless the consumer already set a `role`) and
 already announces the loading state. `size` accepts `"sm" | "md" | "lg"`
 (default `"md"`). The animation respects `prefers-reduced-motion`.
 
+## Progress Bar
+
+```html
+<gnome-progress-bar aria-label="Download progress" value="0.6"></gnome-progress-bar>
+<gnome-progress-bar aria-label="Download progress" variant="success"></gnome-progress-bar>
+<!-- indeterminate: omit value -->
+<gnome-progress-bar aria-label="Download progress"></gnome-progress-bar>
+```
+
+`gnome-progress-bar` is purely presentational — no light-DOM children. Native
+`<progress>` has no reliably cross-browser-stylable way to paint a
+custom-colored indeterminate pulse (there's no value to hook a
+percentage-based pseudo-element onto), so — like `gnome-spinner` — the host
+manages `role="progressbar"` and `aria-valuenow`/`aria-valuemin`/
+`aria-valuemax` itself and paints the fill through CSS driven by a
+`--gnome-progress-value` custom property.
+
+Set `value` between `0` and `1` for the determinate state (out-of-range
+values are clamped); omit it (or remove the attribute) for the
+indeterminate pulsing state. `variant` accepts
+`"accent" | "success" | "warning" | "error"` (default `"accent"`). The
+transition and pulse animation both respect `prefers-reduced-motion`.
+
 ## Dialog
 
 ```html
@@ -490,6 +516,9 @@ the accessible name relationship, positioning, and focus without reopening it.
   interaction, pointer/touch dragging, and screen-reader semantics.
 - Spinners default to `role="status"` and an accessible label, and can be
   silenced with `label=""` when a sibling already announces loading state.
+- Progress bars default to `role="progressbar"` and expose `aria-valuenow`/
+  `aria-valuemin`/`aria-valuemax` in the determinate state; consumers still
+  provide `aria-label` or `aria-labelledby`.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -531,8 +560,9 @@ popover repositioning after resize, switch and checkbox keyboard toggling
 group-level disabling, text field label/hint wiring and validation state,
 spin button stepping and bounds-based button disabling, slider keyboard
 interaction and fill computation, spinner ARIA state and reduced-motion
-animation duration, and the toast's combined pointer/focus pause behavior.
-They also run in the repository CI workflow.
+animation duration, progress bar determinate/indeterminate ARIA state, and
+the toast's combined pointer/focus pause behavior. They also run in the
+repository CI workflow.
 
 ## Releases
 

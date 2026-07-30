@@ -28,6 +28,7 @@ export default defineConfig({
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
+        'progress-bar': resolve(packageRoot, 'src/progress-bar.ts'),
         'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
         slider: resolve(packageRoot, 'src/slider.ts'),
         'spin-button': resolve(packageRoot, 'src/spin-button.ts'),

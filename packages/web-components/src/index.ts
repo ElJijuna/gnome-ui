@@ -28,6 +28,11 @@ export {
   registerGnomeMenu,
 } from './menu';
 export {
+  GnomeProgressBarElement,
+  type GnomeProgressBarVariant,
+  registerGnomeProgressBar,
+} from './progress-bar';
+export {
   computePopoverPosition,
   type GnomePopoverCloseDetail,
   type GnomePopoverCloseReason,

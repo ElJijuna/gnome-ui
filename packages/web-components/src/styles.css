@@ -5,6 +5,7 @@ gnome-checkbox,
 gnome-dialog,
 gnome-menu,
 gnome-popover,
+gnome-progress-bar,
 gnome-radio-group,
 gnome-slider,
 gnome-spin-button,
@@ -23,6 +24,7 @@ gnome-checkbox *,
 gnome-dialog *,
 gnome-menu *,
 gnome-popover *,
+gnome-progress-bar *,
 gnome-radio-group *,
 gnome-slider *,
 gnome-spin-button *,
@@ -779,6 +781,75 @@ gnome-spinner[data-size="lg"] {
 @media (prefers-reduced-motion: reduce) {
   gnome-spinner {
     animation-duration: 2s;
+  }
+}
+
+/* Progress Bar */
+
+gnome-progress-bar {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-light-3, #deddda);
+}
+
+gnome-progress-bar::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--gnome-progress-value, 0%);
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  content: "";
+  transition: width var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-progress-bar[data-variant="success"]::after {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+}
+
+gnome-progress-bar[data-variant="warning"]::after {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+}
+
+gnome-progress-bar[data-variant="error"]::after {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+}
+
+gnome-progress-bar[data-indeterminate]::after {
+  width: 40%;
+  animation: gnome-progress-bar-pulse 1.4s var(--gnome-easing-default, ease-out) infinite;
+}
+
+@keyframes gnome-progress-bar-pulse {
+  0% {
+    inset-inline-start: -40%;
+  }
+
+  100% {
+    inset-inline-start: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-progress-bar {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-progress-bar::after {
+    transition: none;
+  }
+
+  gnome-progress-bar[data-indeterminate]::after {
+    inset-inline-start: 0;
+    width: 100%;
+    animation: none;
+    opacity: 0.5;
   }
 }
 

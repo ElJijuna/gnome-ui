@@ -37,6 +37,11 @@
       "import": "./dist/popover.js",
       "require": "./dist/popover.cjs"
     },
+    "./progress-bar": {
+      "types": "./dist/progress-bar.d.ts",
+      "import": "./dist/progress-bar.js",
+      "require": "./dist/progress-bar.cjs"
+    },
     "./radio-group": {
       "types": "./dist/radio-group.d.ts",
       "import": "./dist/radio-group.js",

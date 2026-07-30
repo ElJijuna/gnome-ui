@@ -40,6 +40,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | `<gnome-spin-button>` | `SpinButton` |
 | ✅ | `<gnome-slider>` | `Slider` |
 | ✅ | `<gnome-spinner>` | `Spinner` |
+| ✅ | `<gnome-progress-bar>` | `ProgressBar` |
 
 ---
 
@@ -67,7 +68,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
 | 7 | ✅ | `<gnome-spinner>` | `Spinner` | `role="status"`, respects `prefers-reduced-motion`; no light-DOM children, no interaction |
-| 8 | ⬜ | `<gnome-progress-bar>` | `ProgressBar` | Wraps `<progress>` for determinate; ARIA `role="progressbar"` for indeterminate |
+| 8 | ✅ | `<gnome-progress-bar>` | `ProgressBar` | Native `<progress>` can't reliably paint a custom indeterminate pulse cross-browser, so — like `gnome-spinner` — host manages `role="progressbar"`/`aria-value*` itself and paints fill via a `--gnome-progress-value` custom property |
 | 9 | ⬜ | `<gnome-badge>` | `Badge` | Pure CSS host, no JS behavior beyond variant/attribute reflection |
 | 10 | ⬜ | `<gnome-avatar>` | `Avatar` | `<img>` with initials/icon fallback on load error |
 | 11 | ⬜ | `<gnome-skeleton>` | `Skeleton` | Pure CSS placeholder, `aria-hidden` |
