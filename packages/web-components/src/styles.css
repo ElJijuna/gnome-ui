@@ -1,6 +1,7 @@
 /* Import @gnome-ui/core/styles before this stylesheet to provide the tokens. */
 
 gnome-dialog,
+gnome-menu,
 gnome-popover,
 gnome-toast {
   box-sizing: border-box;
@@ -10,6 +11,7 @@ gnome-toast {
 }
 
 gnome-dialog *,
+gnome-menu *,
 gnome-popover *,
 gnome-toast * {
   box-sizing: border-box;
@@ -89,6 +91,120 @@ gnome-dialog [data-slot="dialog-actions"] {
   justify-content: end;
   gap: var(--gnome-space-1, 6px);
   padding-block: var(--gnome-space-2, 12px) var(--gnome-space-3, 18px);
+}
+
+/* Menu */
+
+gnome-menu {
+  display: contents;
+}
+
+gnome-menu [data-slot="menu-content"] {
+  position: fixed;
+  z-index: 910;
+  display: grid;
+  width: max-content;
+  min-width: 12rem;
+  max-width: min(24rem, calc(100vw - 16px));
+  max-height: calc(100vh - 16px);
+  overflow: auto;
+  gap: 2px;
+  padding: var(--gnome-space-1, 6px);
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-lg, 12px);
+  background: var(--gnome-popover-bg-color, #fff);
+  box-shadow: var(--gnome-shadow-md, 0 2px 8px rgb(0 0 0 / 0.2));
+  color: var(--gnome-popover-fg-color, rgb(0 0 0 / 0.8));
+  outline: none;
+}
+
+gnome-menu [data-slot="menu-content"][hidden] {
+  display: none;
+}
+
+gnome-menu [data-slot="menu-content"]::before {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  background: var(--gnome-popover-bg-color, #fff);
+  content: "";
+  transform: rotate(45deg);
+}
+
+gnome-menu [data-slot="menu-content"][data-placement="bottom"]::before {
+  top: -7px;
+  left: calc(var(--gnome-menu-arrow-offset) - 6px);
+  border-width: 1px 0 0 1px;
+}
+
+gnome-menu [data-slot="menu-content"][data-placement="top"]::before {
+  bottom: -7px;
+  left: calc(var(--gnome-menu-arrow-offset) - 6px);
+  border-width: 0 1px 1px 0;
+}
+
+gnome-menu [data-slot="menu-content"][data-placement="left"]::before {
+  top: calc(var(--gnome-menu-arrow-offset) - 6px);
+  right: -7px;
+  border-width: 1px 1px 0 0;
+}
+
+gnome-menu [data-slot="menu-content"][data-placement="right"]::before {
+  top: calc(var(--gnome-menu-arrow-offset) - 6px);
+  left: -7px;
+  border-width: 0 0 1px 1px;
+}
+
+gnome-menu [data-menu-item] {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  width: 100%;
+  min-height: 36px;
+  justify-content: flex-start;
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+  border: 0;
+  border-radius: var(--gnome-radius-md, 9px);
+  background: transparent;
+  color: inherit;
+  cursor: default;
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+}
+
+gnome-menu [data-menu-item]:is(:hover, :focus-visible) {
+  background: var(--gnome-button-hover-bg-color, rgb(0 0 0 / 0.12));
+}
+
+gnome-menu [data-menu-item]:focus-visible {
+  outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: -1px;
+}
+
+gnome-menu [data-menu-item]:is([disabled], [data-disabled], [aria-disabled="true"]) {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-menu [data-slot="menu-label"] {
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-2, 12px);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-small, 0.875rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+gnome-menu [data-slot="menu-separator"] {
+  height: 1px;
+  margin: var(--gnome-space-1, 6px) 0;
+  border: 0;
+  background: var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+}
+
+gnome-menu [data-slot="menu-shortcut"] {
+  margin-inline-start: auto;
+  opacity: var(--gnome-opacity-dim, 0.55);
+  font-size: var(--gnome-font-size-small, 0.875rem);
 }
 
 /* Toast */
@@ -192,6 +308,7 @@ gnome-popover [data-slot="popover-content"][data-placement="right"]::before {
 }
 
 gnome-popover [data-slot="popover-content"]:focus-visible,
+gnome-menu [data-slot="menu-content"]:focus-visible,
 gnome-toast :is(button, a, input, select, textarea):focus-visible,
 gnome-dialog :is(button, a, input, select, textarea):focus-visible {
   outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
@@ -200,6 +317,7 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
 
 @media (prefers-reduced-motion: no-preference) {
   gnome-dialog[data-state="open"] [data-slot="dialog-surface"],
+  gnome-menu [data-slot="menu-content"][data-state="open"],
   gnome-toast[data-state="open"],
   gnome-popover [data-slot="popover-content"][data-state="open"] {
     animation: gnome-web-component-enter var(--gnome-duration-fast, 100ms)
@@ -221,6 +339,7 @@ gnome-dialog :is(button, a, input, select, textarea):focus-visible {
 
 @media (prefers-contrast: more) {
   gnome-dialog [data-slot="dialog-surface"],
+  gnome-menu [data-slot="menu-content"],
   gnome-toast,
   gnome-popover [data-slot="popover-content"] {
     border-width: 2px;

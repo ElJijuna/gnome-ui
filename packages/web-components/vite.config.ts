@@ -24,6 +24,7 @@ export default defineConfig({
       entry: {
         index: resolve(packageRoot, 'src/index.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
+        menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),
       },

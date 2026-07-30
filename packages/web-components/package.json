@@ -17,6 +17,11 @@
       "import": "./dist/dialog.js",
       "require": "./dist/dialog.cjs"
     },
+    "./menu": {
+      "types": "./dist/menu.d.ts",
+      "import": "./dist/menu.js",
+      "require": "./dist/menu.cjs"
+    },
     "./popover": {
       "types": "./dist/popover.d.ts",
       "import": "./dist/popover.js",

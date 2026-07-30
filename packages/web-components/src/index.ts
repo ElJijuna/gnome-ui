@@ -9,6 +9,17 @@ export {
   registerGnomeDialog,
 } from './dialog';
 export {
+  type GnomeMenuCloseDetail,
+  type GnomeMenuCloseReason,
+  GnomeMenuElement,
+  type GnomeMenuEventMap,
+  type GnomeMenuFocus,
+  type GnomeMenuOpenChangeDetail,
+  type GnomeMenuPlacement,
+  type GnomeMenuSelectDetail,
+  registerGnomeMenu,
+} from './menu';
+export {
   computePopoverPosition,
   type GnomePopoverCloseDetail,
   type GnomePopoverCloseReason,

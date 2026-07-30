@@ -1,6 +1,11 @@
 import { defineCustomElement, emit, ensureId, focusFirst, HTMLElementBase } from './internal/dom';
+import {
+  computeFloatingPosition,
+  type FloatingPlacement,
+  type FloatingPosition,
+} from './internal/floating';
 
-export type GnomePopoverPlacement = 'bottom' | 'left' | 'right' | 'top';
+export type GnomePopoverPlacement = FloatingPlacement;
 export type GnomePopoverCloseReason =
   | 'attribute'
   | 'escape'
@@ -22,56 +27,7 @@ export interface GnomePopoverEventMap extends HTMLElementEventMap {
   'gnome-open-change': CustomEvent<GnomePopoverOpenChangeDetail>;
 }
 
-export interface GnomePopoverPosition {
-  arrowOffset: number;
-  left: number;
-  placement: GnomePopoverPlacement;
-  top: number;
-}
-
-const GAP = 10;
-const VIEWPORT_MARGIN = 8;
-const ARROW_EDGE_MARGIN = 10;
-
-function opposite(placement: GnomePopoverPlacement): GnomePopoverPlacement {
-  if (placement === 'bottom') {
-    return 'top';
-  }
-
-  if (placement === 'top') {
-    return 'bottom';
-  }
-
-  return placement === 'left' ? 'right' : 'left';
-}
-
-function rawPosition(trigger: DOMRect, content: DOMRect, placement: GnomePopoverPlacement) {
-  if (placement === 'bottom') {
-    return {
-      left: trigger.left + trigger.width / 2 - content.width / 2,
-      top: trigger.bottom + GAP,
-    };
-  }
-
-  if (placement === 'top') {
-    return {
-      left: trigger.left + trigger.width / 2 - content.width / 2,
-      top: trigger.top - content.height - GAP,
-    };
-  }
-
-  if (placement === 'left') {
-    return {
-      left: trigger.left - content.width - GAP,
-      top: trigger.top + trigger.height / 2 - content.height / 2,
-    };
-  }
-
-  return {
-    left: trigger.right + GAP,
-    top: trigger.top + trigger.height / 2 - content.height / 2,
-  };
-}
+export type GnomePopoverPosition = FloatingPosition;
 
 export function computePopoverPosition(
   trigger: DOMRect,
@@ -79,75 +35,7 @@ export function computePopoverPosition(
   preferred: GnomePopoverPlacement,
   viewport = { height: window.innerHeight, width: window.innerWidth },
 ): GnomePopoverPosition {
-  const candidates = [
-    ...new Set<GnomePopoverPlacement>([
-      preferred,
-      opposite(preferred),
-      'bottom',
-      'top',
-      'right',
-      'left',
-    ]),
-  ];
-
-  let placement = preferred;
-  let position = rawPosition(trigger, content, placement);
-  let foundPerfectFit = false;
-
-  for (const candidate of candidates) {
-    const candidatePosition = rawPosition(trigger, content, candidate);
-    const fitsHorizontally =
-      candidatePosition.left >= VIEWPORT_MARGIN &&
-      candidatePosition.left + content.width <= viewport.width - VIEWPORT_MARGIN;
-    const fitsVertically =
-      candidatePosition.top >= VIEWPORT_MARGIN &&
-      candidatePosition.top + content.height <= viewport.height - VIEWPORT_MARGIN;
-
-    if (fitsHorizontally && fitsVertically) {
-      placement = candidate;
-      position = candidatePosition;
-      foundPerfectFit = true;
-      break;
-    }
-  }
-
-  if (!foundPerfectFit) {
-    for (const candidate of candidates) {
-      const candidatePosition = rawPosition(trigger, content, candidate);
-      const fitsPrimaryAxis =
-        candidate === 'top' || candidate === 'bottom'
-          ? candidatePosition.top >= VIEWPORT_MARGIN &&
-            candidatePosition.top + content.height <= viewport.height - VIEWPORT_MARGIN
-          : candidatePosition.left >= VIEWPORT_MARGIN &&
-            candidatePosition.left + content.width <= viewport.width - VIEWPORT_MARGIN;
-
-      if (fitsPrimaryAxis) {
-        placement = candidate;
-        position = candidatePosition;
-        break;
-      }
-    }
-  }
-
-  const left = Math.max(
-    VIEWPORT_MARGIN,
-    Math.min(position.left, viewport.width - content.width - VIEWPORT_MARGIN),
-  );
-  const top = Math.max(
-    VIEWPORT_MARGIN,
-    Math.min(position.top, viewport.height - content.height - VIEWPORT_MARGIN),
-  );
-  const vertical = placement === 'top' || placement === 'bottom';
-  const rawArrowOffset = vertical
-    ? trigger.left + trigger.width / 2 - left
-    : trigger.top + trigger.height / 2 - top;
-  const contentSize = vertical ? content.width : content.height;
-  const arrowOffset = Math.max(
-    ARROW_EDGE_MARGIN,
-    Math.min(rawArrowOffset, contentSize - ARROW_EDGE_MARGIN),
-  );
-
-  return { arrowOffset, left, placement, top };
+  return computeFloatingPosition(trigger, content, preferred, viewport);
 }
 
 /**
@@ -170,20 +58,12 @@ export class GnomePopoverElement extends HTMLElementBase {
     listener: EventListenerOrEventListenerObject | null,
     options?: boolean | AddEventListenerOptions,
   ): void;
-  addEventListener(
-    type: string,
-    listener: unknown,
-    options?: boolean | AddEventListenerOptions,
-  ) {
+  addEventListener(type: string, listener: unknown, options?: boolean | AddEventListenerOptions) {
     if (listener === null) {
       return;
     }
 
-    super.addEventListener(
-      type,
-      listener as EventListenerOrEventListenerObject,
-      options,
-    );
+    super.addEventListener(type, listener as EventListenerOrEventListenerObject, options);
   }
 
   removeEventListener<K extends keyof GnomePopoverEventMap>(
@@ -196,20 +76,12 @@ export class GnomePopoverElement extends HTMLElementBase {
     listener: EventListenerOrEventListenerObject | null,
     options?: boolean | EventListenerOptions,
   ): void;
-  removeEventListener(
-    type: string,
-    listener: unknown,
-    options?: boolean | EventListenerOptions,
-  ) {
+  removeEventListener(type: string, listener: unknown, options?: boolean | EventListenerOptions) {
     if (listener === null) {
       return;
     }
 
-    super.removeEventListener(
-      type,
-      listener as EventListenerOrEventListenerObject,
-      options,
-    );
+    super.removeEventListener(type, listener as EventListenerOrEventListenerObject, options);
   }
 
   #connected = false;
@@ -366,10 +238,7 @@ export class GnomePopoverElement extends HTMLElementBase {
   #clearGeneratedLabel(content: HTMLElement) {
     const generatedLabel = this.#generatedLabelledBy.get(content);
 
-    if (
-      generatedLabel &&
-      content.getAttribute('aria-labelledby') === generatedLabel
-    ) {
+    if (generatedLabel && content.getAttribute('aria-labelledby') === generatedLabel) {
       content.removeAttribute('aria-labelledby');
     }
 
@@ -427,10 +296,7 @@ export class GnomePopoverElement extends HTMLElementBase {
       return;
     }
 
-    if (
-      previousTrigger !== this.#trigger ||
-      previousContent !== this.#content
-    ) {
+    if (previousTrigger !== this.#trigger || previousContent !== this.#content) {
       this.#observeGeometry();
     }
 
@@ -539,11 +405,7 @@ export class GnomePopoverElement extends HTMLElementBase {
   #observeGeometry() {
     this.#stopObservingGeometry();
 
-    if (
-      typeof ResizeObserver === 'undefined' ||
-      !this.#trigger ||
-      !this.#content
-    ) {
+    if (typeof ResizeObserver === 'undefined' || !this.#trigger || !this.#content) {
       return;
     }
 

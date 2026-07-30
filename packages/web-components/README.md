@@ -3,10 +3,12 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-This initial proof set intentionally contains three behavior-rich components:
+The package currently contains four behavior-rich components:
 
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
+- `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
+  cancelable selection events.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
   pause-on-hover/focus.
 - `<gnome-popover>` — trigger relationships, adaptive positioning, outside
@@ -21,7 +23,7 @@ npm install @gnome-ui/core @gnome-ui/web-components
 ```
 
 Import tokens and component styles once, then import the package to register
-all three elements:
+all elements:
 
 ```ts
 import '@gnome-ui/core/styles';
@@ -33,6 +35,7 @@ Granular entry points register only one element:
 
 ```ts
 import '@gnome-ui/web-components/dialog';
+import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/toast';
 ```
@@ -76,6 +79,42 @@ is safe; registration occurs only when the Custom Elements registry exists.
 `gnome-cancel` event before closing. Dialogs can be stacked; only the most
 recently opened dialog remains interactive, and closing it restores the
 previous modal and its focus.
+
+## Menu
+
+```html
+<gnome-menu placement="bottom">
+  <button type="button" data-slot="menu-trigger">Project options</button>
+
+  <section data-slot="menu-content">
+    <span data-slot="menu-label">Project</span>
+    <button type="button" data-menu-item data-value="rename">Rename</button>
+    <button type="button" data-menu-item disabled>Duplicate</button>
+    <button type="button" data-menu-item data-value="archive">
+      Archive
+      <span data-slot="menu-shortcut" aria-hidden="true">⇧⌘A</span>
+    </button>
+    <hr data-slot="menu-separator" />
+    <a href="/settings" data-menu-item data-value="settings">
+      Project settings
+    </a>
+  </section>
+</gnome-menu>
+
+<script type="module">
+  document.querySelector('gnome-menu').addEventListener('gnome-select', (event) => {
+    if (event.detail.value === 'archive' && !window.confirm('Archive project?')) {
+      event.preventDefault();
+    }
+  });
+</script>
+```
+
+Use semantic buttons and links for items and mark each with `data-menu-item`.
+The component adds the menu roles and trigger relationships, skips disabled
+items, supports Arrow keys, Home, End, and typeahead, and restores trigger
+focus after Escape or selection. Add `data-keep-open` when an item should not
+close the menu.
 
 ## Toast
 
@@ -135,17 +174,18 @@ fragments without `htmx.process()`:
 </gnome-dialog>
 ```
 
-Dialog and Popover observe light-DOM swaps while open. Replacing Popover
-trigger or content fragments refreshes `aria-controls`, `aria-expanded`, the
-accessible name relationship, positioning, and focus without reopening it.
+Dialog, Menu, and Popover observe light-DOM swaps while open. Replacing Menu or
+Popover trigger/content fragments refreshes `aria-controls`, `aria-expanded`,
+the accessible name relationship, positioning, and focus without reopening it.
 
 ## Events
 
 | Event | Components | Cancelable | Detail |
 |-------|------------|------------|--------|
-| `gnome-open-change` | Dialog, Popover, Toast | No | `{ open }` |
-| `gnome-cancel` | Dialog, Popover | Yes | `{ reason }` |
-| `gnome-close` | Dialog, Popover | No | `{ reason }` |
+| `gnome-open-change` | Dialog, Menu, Popover, Toast | No | `{ open }` |
+| `gnome-cancel` | Dialog, Menu, Popover | Yes | `{ reason }` |
+| `gnome-close` | Dialog, Menu, Popover | No | `{ reason }` |
+| `gnome-select` | Menu | Yes | `{ item, value }` |
 | `gnome-action` | Toast | Yes | `{ action }` |
 | `gnome-before-dismiss` | Toast | Yes | `{ reason }` |
 | `gnome-dismiss` | Toast | No | `{ reason }` |
@@ -154,6 +194,8 @@ accessible name relationship, positioning, and focus without reopening it.
 
 - Dialogs trap focus while open, support Escape, lock background scrolling,
   label themselves from light-DOM title/description slots, and restore focus.
+- Menus expose the WAI-ARIA menu pattern, support directional navigation and
+  typeahead, skip disabled items, and restore focus after dismissal.
 - Toasts use a polite atomic live region and pause timers during hover or
   keyboard interaction.
 - Popovers expose trigger/content relationships, move focus into their
@@ -188,9 +230,10 @@ Run the real-browser interaction tests against Storybook:
 npm run test:browser --workspace @gnome-ui/web-components
 ```
 
-These Playwright checks cover modal isolation and focus, popover repositioning
-after resize, and the toast's combined pointer/focus pause behavior. They also
-run in the repository CI workflow.
+These Playwright checks cover modal isolation and focus, menu keyboard
+navigation and fragment replacement, popover repositioning after resize, and
+the toast's combined pointer/focus pause behavior. They also run in the
+repository CI workflow.
 
 ## Releases
 
