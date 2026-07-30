@@ -23,6 +23,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(packageRoot, 'src/index.ts'),
+        badge: resolve(packageRoot, 'src/badge.ts'),
         button: resolve(packageRoot, 'src/button.ts'),
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),

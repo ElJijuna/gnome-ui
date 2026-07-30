@@ -3,8 +3,10 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirteen framework-agnostic components:
+The package currently contains fourteen framework-agnostic components:
 
+- `<gnome-badge>` — pure CSS counter/status indicator, optionally anchored
+  over another element.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
 - `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
@@ -52,6 +54,7 @@ import '@gnome-ui/web-components';
 Granular entry points register only one element:
 
 ```ts
+import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
@@ -69,6 +72,30 @@ import '@gnome-ui/web-components/toast';
 
 Every registration function is idempotent. Importing these modules during SSR
 is safe; registration occurs only when the Custom Elements registry exists.
+
+## Badge
+
+```html
+<gnome-badge>3</gnome-badge>
+<gnome-badge variant="success">12</gnome-badge>
+<gnome-badge dot variant="error"></gnome-badge>
+
+<!-- Anchored over another element: the consumer's own wrapper must be
+     position: relative (or similar) — the badge only knows about itself. -->
+<span style="position: relative; display: inline-flex;">
+  <gnome-icon-button aria-label="Notifications">🔔</gnome-icon-button>
+  <gnome-badge anchored variant="error">3</gnome-badge>
+</span>
+```
+
+`gnome-badge` is a pure CSS host — no lifecycle logic, no light-DOM
+management. `variant` (`"accent" | "success" | "warning" | "error" |
+"neutral"`, default `"accent"`), `dot`, and `anchored` are plain attributes
+read directly by CSS. `dot` renders a small dot and visually collapses any
+light-DOM text content (`font-size: 0`) rather than removing it — keep dot
+badges empty. `anchored` only switches the badge to `position: absolute;
+top; right;`; positioning it correctly over a sibling still requires the
+consumer's own wrapper to establish the positioning context.
 
 ## Button
 
@@ -560,9 +587,9 @@ popover repositioning after resize, switch and checkbox keyboard toggling
 group-level disabling, text field label/hint wiring and validation state,
 spin button stepping and bounds-based button disabling, slider keyboard
 interaction and fill computation, spinner ARIA state and reduced-motion
-animation duration, progress bar determinate/indeterminate ARIA state, and
-the toast's combined pointer/focus pause behavior. They also run in the
-repository CI workflow.
+animation duration, progress bar determinate/indeterminate ARIA state,
+badge variant/dot/anchored styling, and the toast's combined pointer/focus
+pause behavior. They also run in the repository CI workflow.
 
 ## Releases
 

@@ -1,5 +1,6 @@
 /* Import @gnome-ui/core/styles before this stylesheet to provide the tokens. */
 
+gnome-badge,
 gnome-button,
 gnome-checkbox,
 gnome-dialog,
@@ -19,6 +20,7 @@ gnome-toast {
   font-size: var(--gnome-font-size-body, 1rem);
 }
 
+gnome-badge *,
 gnome-button *,
 gnome-checkbox *,
 gnome-dialog *,
@@ -850,6 +852,76 @@ gnome-progress-bar[data-indeterminate]::after {
     width: 100%;
     animation: none;
     opacity: 0.5;
+  }
+}
+
+/* Badge */
+
+gnome-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  box-shadow: 0 0 0 2px var(--gnome-window-bg-color, #fafafa);
+  color: var(--gnome-accent-fg-color, #fff);
+  font-size: 0.6875rem;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+gnome-badge[variant="success"] {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+  color: var(--gnome-success-fg-color, #fff);
+}
+
+gnome-badge[variant="warning"] {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+  color: var(--gnome-warning-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-badge[variant="error"] {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+  color: var(--gnome-error-fg-color, #fff);
+}
+
+gnome-badge[variant="neutral"] {
+  background-color: var(--gnome-light-4, #c0bfbc);
+  color: rgb(0 0 0 / 0.8);
+}
+
+gnome-badge[dot] {
+  min-width: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+gnome-badge[anchored] {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 1;
+}
+
+gnome-badge[dot][anchored] {
+  top: -2px;
+  right: -2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-badge {
+    box-shadow: 0 0 0 2px var(--gnome-window-bg-color, #242424);
+  }
+
+  gnome-badge[variant="neutral"] {
+    background-color: var(--gnome-dark-2, #5e5c64);
+    color: rgb(255 255 255 / 0.87);
   }
 }
 

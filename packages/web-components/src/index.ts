@@ -1,5 +1,6 @@
 import './styles.css';
 
+export { GnomeBadgeElement, type GnomeBadgeVariant, registerGnomeBadge } from './badge';
 export {
   GnomeButtonElement,
   type GnomeButtonShape,
