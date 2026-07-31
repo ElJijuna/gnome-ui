@@ -1,0 +1,103 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-3, 16px);
+  border-radius: var(--gnome-radius-md, 8px);
+  border-inline-start: 3px solid transparent;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.message {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Dismiss button ───────────────────────────────────────────────────────── */
+
+.dismissBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 4px;
+  margin-top: -2px;
+  border-radius: var(--gnome-radius-md, 8px);
+  opacity: 0.6;
+  transition:
+    opacity var(--gnome-duration-fast) var(--gnome-easing-default),
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.dismissBtn:hover {
+  opacity: 1;
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+}
+
+.dismissBtn:active {
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.1));
+}
+
+.dismissBtn:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 1px;
+}
+
+/* ─── Variant: info ────────────────────────────────────────────────────────── */
+
+.info {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 10%, transparent);
+  border-inline-start-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.info .icon {
+  color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+/* ─── Variant: warning ─────────────────────────────────────────────────────── */
+
+.warning {
+  background-color: color-mix(in srgb, var(--gnome-warning-bg-color, #f6d32d) 15%, transparent);
+  border-inline-start-color: var(--gnome-warning-bg-color, #f6d32d);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.warning .icon {
+  color: color-mix(in srgb, var(--gnome-warning-bg-color, #f6d32d) 70%, black);
+}
+
+/* ─── Variant: tip ─────────────────────────────────────────────────────────── */
+
+.tip {
+  background-color: color-mix(in srgb, var(--gnome-success-bg-color, #2ec27e) 10%, transparent);
+  border-inline-start-color: var(--gnome-success-bg-color, #2ec27e);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.tip .icon {
+  color: var(--gnome-success-bg-color, #2ec27e);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .info,
+  .warning,
+  .tip {
+    color: var(--gnome-window-fg-color, rgb(255 255 255 / 0.9));
+  }
+}

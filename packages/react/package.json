@@ -92,6 +92,11 @@
       "import": "./dist/components/ButtonRow.js",
       "require": "./dist/components/ButtonRow.cjs"
     },
+    "./components/Callout": {
+      "types": "./dist/components/Callout.d.ts",
+      "import": "./dist/components/Callout.js",
+      "require": "./dist/components/Callout.cjs"
+    },
     "./components/Card": {
       "types": "./dist/components/Card.d.ts",
       "import": "./dist/components/Card.js",
