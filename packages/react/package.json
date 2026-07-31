@@ -457,6 +457,11 @@
       "import": "./dist/components/TextField.js",
       "require": "./dist/components/TextField.cjs"
     },
+    "./components/TextTruncate": {
+      "types": "./dist/components/TextTruncate.d.ts",
+      "import": "./dist/components/TextTruncate.js",
+      "require": "./dist/components/TextTruncate.cjs"
+    },
     "./components/Timeline": {
       "types": "./dist/components/Timeline.d.ts",
       "import": "./dist/components/Timeline.js",

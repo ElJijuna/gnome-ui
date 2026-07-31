@@ -285,6 +285,8 @@ export type { TextColor, TextProps, TextVariant } from './components/Text';
 export { Text } from './components/Text';
 export type { TextFieldProps } from './components/TextField';
 export { TextField } from './components/TextField';
+export type { TextTruncateProps } from './components/TextTruncate';
+export { TextTruncate } from './components/TextTruncate';
 export type {
   TimelineItem,
   TimelineOrientation,

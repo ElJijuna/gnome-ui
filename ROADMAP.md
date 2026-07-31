@@ -470,7 +470,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`Callout`** | Inline, dismissible admonition box (`info`/`warning`/`tip` variants) for contextual help text within forms and cards — distinct from `Banner` (persistent, view-level) and `Toast` (temporary, notification-level) |
 | ⬜ | **`StepIndicator`** | Numbered "Step X of Y" progress indicator for onboarding/wizard flows — complements the existing `CarouselIndicatorDots`/`CarouselIndicatorLines` with a labelled, linear alternative |
 | ⬜ | **`RangeSlider`** | Dual-thumb slider for selecting a min/max range — `Slider` is single-thumb only; needed for range filters (price, date range, etc.) |
-| ⬜ | **`TextTruncate`** | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property |
+| ✅ | **`TextTruncate`** | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property |
 | ⬜ | **`Kbd`** | Standalone single key-cap (e.g. `Enter`, `Esc`) for inline instructional text ("press `Enter` to continue") — complements `ShortcutLabel`, which only renders full `+`-delimited combos and doesn't expose its key-cap rendering separately |
 | ⬜ | **`Highlight`** | Inline `<mark>`-based text highlighting for matched search terms — pairs with `SearchBar`'s suggestion list and any filterable list/table |
 | ⬜ | **`VisuallyHidden`** | Reusable "sr-only" utility — visually hides content while keeping it in the accessibility tree; extracts the recipe currently duplicated inline inside `CopyButton`'s live-region announcement |
