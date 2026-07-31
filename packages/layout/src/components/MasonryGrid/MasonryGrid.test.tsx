@@ -101,6 +101,74 @@ describe('MasonryGrid', () => {
         ),
       ).not.toThrow();
     });
+
+    describe('with a measured container', () => {
+      afterEach(() => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 0;
+          },
+        });
+      });
+
+      it('resolves the column count for the matching breakpoint bucket', () => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 1000;
+          },
+        });
+
+        // 1000px matches the "lg" bucket (>=992) before "md"/"sm"/"xs".
+        const { container } = render(
+          <MasonryGrid columns={{ xs: 1, sm: 2, lg: 4 }}>
+            <div style={{ height: 50 }}>A</div>
+            <div style={{ height: 50 }}>B</div>
+            <div style={{ height: 50 }}>C</div>
+            <div style={{ height: 50 }}>D</div>
+          </MasonryGrid>,
+        );
+
+        expect(container.firstChild).toHaveAttribute('data-settled');
+      });
+
+      it('falls back to the closest defined bucket when none match exactly', () => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 300;
+          },
+        });
+
+        // No bucket at or below 300px is defined, so it should fall back to
+        // the smallest defined bucket ("md") instead of the default of 3.
+        const { container } = render(
+          <MasonryGrid columns={{ md: 2, xl: 5 }}>
+            <div style={{ height: 50 }}>A</div>
+          </MasonryGrid>,
+        );
+
+        expect(container.firstChild).toHaveAttribute('data-settled');
+      });
+
+      it('coerces a non-positive fixed column count up to 1', () => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 900;
+          },
+        });
+
+        expect(() =>
+          render(
+            <MasonryGrid columns={0}>
+              <div style={{ height: 50 }}>A</div>
+            </MasonryGrid>,
+          ),
+        ).not.toThrow();
+      });
+    });
   });
 
   describe('gap prop', () => {
@@ -122,6 +190,52 @@ describe('MasonryGrid', () => {
           </MasonryGrid>,
         ),
       ).not.toThrow();
+    });
+
+    describe('with a measured container', () => {
+      afterEach(() => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 0;
+          },
+        });
+      });
+
+      it('resolves the gap for the matching breakpoint bucket', () => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 1000;
+          },
+        });
+
+        const { container } = render(
+          <MasonryGrid columns={2} gap={{ xs: 'sm', lg: 'lg' }}>
+            <div style={{ height: 50 }}>A</div>
+            <div style={{ height: 50 }}>B</div>
+          </MasonryGrid>,
+        );
+
+        expect(container.firstChild).toHaveAttribute('data-settled');
+      });
+
+      it('falls back to the closest defined gap bucket when none match exactly', () => {
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+          configurable: true,
+          get() {
+            return 300;
+          },
+        });
+
+        const { container } = render(
+          <MasonryGrid columns={2} gap={{ xl: 'lg' }}>
+            <div style={{ height: 50 }}>A</div>
+          </MasonryGrid>,
+        );
+
+        expect(container.firstChild).toHaveAttribute('data-settled');
+      });
     });
   });
 
