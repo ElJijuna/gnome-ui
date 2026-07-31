@@ -450,7 +450,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 ## Tier 20 — Atomic & Molecular Gaps
 
 > Widgets from the GTK4/libadwaita catalog (or well-established HIG-adjacent
-> patterns) not yet covered by the ~95 components already shipped in
+> patterns) not yet covered by the ~96 components already shipped in
 > `@gnome-ui/react`. Scoped to atoms and simple molecules only — no new
 > organism/page-level compositions. Verified against the current component
 > tree to avoid duplicating existing functionality (e.g. `ColorPicker`
@@ -470,6 +470,11 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`Callout`** | Inline, dismissible admonition box (`info`/`warning`/`tip` variants) for contextual help text within forms and cards — distinct from `Banner` (persistent, view-level) and `Toast` (temporary, notification-level) |
 | ⬜ | **`StepIndicator`** | Numbered "Step X of Y" progress indicator for onboarding/wizard flows — complements the existing `CarouselIndicatorDots`/`CarouselIndicatorLines` with a labelled, linear alternative |
 | ⬜ | **`RangeSlider`** | Dual-thumb slider for selecting a min/max range — `Slider` is single-thumb only; needed for range filters (price, date range, etc.) |
+| ⬜ | **`TextTruncate`** | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property |
+| ⬜ | **`Kbd`** | Standalone single key-cap (e.g. `Enter`, `Esc`) for inline instructional text ("press `Enter` to continue") — complements `ShortcutLabel`, which only renders full `+`-delimited combos and doesn't expose its key-cap rendering separately |
+| ⬜ | **`Highlight`** | Inline `<mark>`-based text highlighting for matched search terms — pairs with `SearchBar`'s suggestion list and any filterable list/table |
+| ⬜ | **`VisuallyHidden`** | Reusable "sr-only" utility — visually hides content while keeping it in the accessibility tree; extracts the recipe currently duplicated inline inside `CopyButton`'s live-region announcement |
+| ⬜ | **`Overlay`** | Standalone backdrop/scrim layer with fade transition and click-to-dismiss — extracts the near-identical backdrop implementation currently duplicated across `Modal`, `Dialog`, and `BottomSheet` |
 
 ### Molecules
 
@@ -486,6 +491,9 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`ChoiceCardGroup`** | Card-based single-choice selector (large selectable cards instead of radio buttons) — mirrors the pattern used in GNOME Initial Setup / welcome flows |
 | ⬜ | **`FileDropZone`** | Drag-and-drop file upload target with hover/active states, falling back to a `GtkFileDialog`-style click-to-browse trigger |
 | ⬜ | **`MultiSelectDropdown`** | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger — `Dropdown`/`ComboRow` are currently single-select only |
+| ⬜ | **`CodeBlock`** | Static monospace code/config snippet display with optional line numbers and a `CopyButton` trailing action — distinct from `TerminalView` (live scrolling terminal output) |
+| ⬜ | **`FieldGroup`** | Generic form-field grouping with a shared label, help text, and error message, for arbitrary fields outside a `BoxedList` — `PreferencesGroup` is scoped specifically to wrapping settings rows |
+| ⬜ | **`Portal`** | Reusable `createPortal` wrapper (mount target, SSR-safe no-op) — extracts the ad-hoc portal logic currently duplicated independently across 13 components (`Dialog`, `Modal`, `Popover`, `Tooltip`, `BottomSheet`, etc.) |
 
 ---
 
