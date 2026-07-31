@@ -332,6 +332,11 @@
       "import": "./dist/components/Popover.js",
       "require": "./dist/components/Popover.cjs"
     },
+    "./components/Portal": {
+      "types": "./dist/components/Portal.d.ts",
+      "import": "./dist/components/Portal.js",
+      "require": "./dist/components/Portal.cjs"
+    },
     "./components/PreferencesDialog": {
       "types": "./dist/components/PreferencesDialog.d.ts",
       "import": "./dist/components/PreferencesDialog.js",

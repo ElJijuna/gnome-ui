@@ -214,6 +214,8 @@ export type { PathBarProps, PathBarSegment } from './components/PathBar';
 export { PathBar } from './components/PathBar';
 export type { PopoverPlacement, PopoverProps } from './components/Popover';
 export { Popover } from './components/Popover';
+export type { PortalProps } from './components/Portal';
+export { Portal } from './components/Portal';
 export type { PreferencesDialogProps } from './components/PreferencesDialog';
 export { PreferencesDialog } from './components/PreferencesDialog';
 export type { PreferencesGroupProps } from './components/PreferencesGroup';
