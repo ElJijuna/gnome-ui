@@ -207,6 +207,11 @@
       "import": "./dist/components/ExpanderRow.js",
       "require": "./dist/components/ExpanderRow.cjs"
     },
+    "./components/FileTypeIcon": {
+      "types": "./dist/components/FileTypeIcon.d.ts",
+      "import": "./dist/components/FileTypeIcon.js",
+      "require": "./dist/components/FileTypeIcon.cjs"
+    },
     "./components/Footer": {
       "types": "./dist/components/Footer.d.ts",
       "import": "./dist/components/Footer.js",

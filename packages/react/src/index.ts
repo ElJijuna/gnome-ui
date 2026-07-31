@@ -144,6 +144,8 @@ export type { ExpanderProps } from './components/Expander';
 export { Expander } from './components/Expander';
 export type { ExpanderRowProps } from './components/ExpanderRow';
 export { ExpanderRow } from './components/ExpanderRow';
+export type { FileTypeCategory, FileTypeIconProps } from './components/FileTypeIcon';
+export { FileTypeIcon } from './components/FileTypeIcon';
 export type { FooterProps } from './components/Footer';
 export { Footer } from './components/Footer';
 export type { FrameProps } from './components/Frame';
