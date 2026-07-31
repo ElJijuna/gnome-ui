@@ -6,3 +6,4 @@ packages/web-components/test-results
 .turbo
 .DS_Store
 *.local
+coverage
