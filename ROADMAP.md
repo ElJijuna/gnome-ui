@@ -474,7 +474,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`Kbd`** | Standalone single key-cap (e.g. `Enter`, `Esc`) for inline instructional text ("press `Enter` to continue") — complements `ShortcutLabel`, which only renders full `+`-delimited combos and doesn't expose its key-cap rendering separately |
 | ⬜ | **`Highlight`** | Inline `<mark>`-based text highlighting for matched search terms — pairs with `SearchBar`'s suggestion list and any filterable list/table |
 | ⬜ | **`VisuallyHidden`** | Reusable "sr-only" utility — visually hides content while keeping it in the accessibility tree; extracts the recipe currently duplicated inline inside `CopyButton`'s live-region announcement |
-| ⬜ | **`Overlay`** | Standalone backdrop/scrim layer with fade transition and click-to-dismiss — extracts the near-identical backdrop implementation currently duplicated across `Modal`, `Dialog`, and `BottomSheet` |
+| ✅ | **`Overlay`** | Standalone backdrop/scrim layer with fade transition and click-to-dismiss — extracts the near-identical backdrop implementation currently duplicated across `Modal`, `Dialog`, and `BottomSheet` |
 
 ### Molecules
 

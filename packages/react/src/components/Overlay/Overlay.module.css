@@ -1,0 +1,46 @@
+/* ─── Backdrop ──────────────────────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gnome-dialog-backdrop-color, rgb(0 0 0 / 0.5));
+  backdrop-filter: blur(var(--gnome-dialog-backdrop-blur, 4px));
+  animation: backdrop-in var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+.backdrop.closing {
+  animation: backdrop-out var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes backdrop-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .backdrop.closing {
+    animation: none;
+  }
+}
