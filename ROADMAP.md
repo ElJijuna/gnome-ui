@@ -8,13 +8,14 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 ## Next Package Priorities
 
-> Framework expansion will proceed in this order. Both packages build on the
+> Framework expansion will proceed in this order. All three packages build on the
 > framework-agnostic tokens and themes provided by `@gnome-ui/core`.
 
 | Priority | Status | Package | Description |
 |----------|--------|---------|-------------|
 | 1 | 🚧 | **`@gnome-ui/web-components`** | Framework-agnostic Custom Elements for GNOME widgets. Foundation: `gnome-button`, `gnome-dialog`, `gnome-menu`, `gnome-toast`, and `gnome-popover`; uses semantic HTML and light DOM, exposes standard DOM events, preserves accessibility, and remains compatible with htmx and server-rendered fragments. |
-| 2 | ⬜ | **`@gnome-ui/angular`** | Angular package built after the Web Components foundation. Provide standalone components, Angular Forms integration where applicable, and reuse `@gnome-ui/core` tokens plus Web Components rather than duplicating styling and behavior. |
+| 2 | ⬜ | **`@gnome-ui/angular`** | Angular package built after the Web Components foundation. Provide standalone components, Angular Forms integration where applicable, and reuse `@gnome-ui/core` tokens plus Web Components rather than duplicating styling and behavior. Blocked on Priority 1. |
+| 3 | ⬜ | **`@gnome-ui/react-native`** | React Native package targeting iOS/Android/GNOME-mobile shells. No DOM to reuse from Web Components, so components are rebuilt with native primitives (`View`, `Text`, `Pressable`) and `StyleSheet`; consumes `@gnome-ui/core` tokens via a generated RN-compatible theme object (JS values, not CSS custom properties) and mirrors the `@gnome-ui/react` component API/props where the platforms overlap. Independent of Priority 1/2 — can start in parallel since it does not depend on the Web Components foundation. |
 
 ---
 
@@ -334,13 +335,13 @@ Pure TypeScript package. Communicates with GNOME via the WebKitGTK `window.webki
 
 | Status | Module | Description |
 |--------|--------|-------------|
-| ✅ | **`settings`** | Read/write application settings via `GSettings` |
-| ✅ | **`notifications`** | Send and withdraw desktop notifications (`Gio.Notification`) |
-| ✅ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
-| ✅ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
-| ✅ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
-| ✅ | **`clipboard`** | Read and write the GDK clipboard (text, files, images) |
-| ✅ | **`portals`** | Low-level XDG Desktop Portal access for sandboxed (Flatpak) apps |
+| ⬜ | **`settings`** | Read/write application settings via `GSettings` |
+| ⬜ | **`notifications`** | Send and withdraw desktop notifications (`Gio.Notification`) |
+| ⬜ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
+| ⬜ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
+| ⬜ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
+| ⬜ | **`clipboard`** | Read and write the GDK clipboard (text, files, images) |
+| ⬜ | **`portals`** | Low-level XDG Desktop Portal access for sandboxed (Flatpak) apps |
 
 ### `@gnome-ui/hooks` — React hooks
 
@@ -352,13 +353,13 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`usePlatform`** | Convenience booleans for the current shell context (`isGnomeWebView`, `isPWA`…) |
 | ✅ | **`useNativeEvent`** | Subscribe to an event dispatched by the GJS host via `gnome:` prefix |
 | ✅ | **`useBreakpoint`** | Reactive `isMobile`, `isTablet`, `isDesktop` flags based on GNOME HIG breakpoints |
-| ✅ | **`useSettings`** | Read and write a GSettings key; re-renders on external changes |
-| ✅ | **`useNotification`** | Returns a `send(title, body, icon?)` helper and dismissal control |
-| ✅ | **`useColorScheme`** | Returns `"light" \| "dark" \| "auto"` and a setter |
-| ✅ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path |
-| ✅ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state |
-| ✅ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters |
-| ⬜ | **`useHapticFeedback`** | Trigger haptic feedback via feedbackd (native) or Vibration API (browser) — issue [#81](https://github.com/ElJijuna/gnome-ui/issues/81) |
+| ⬜ | **`useSettings`** | Read and write a GSettings key; re-renders on external changes — blocked on `@gnome-ui/platform`'s `settings` module |
+| ⬜ | **`useNotification`** | Returns a `send(title, body, icon?)` helper and dismissal control — blocked on `@gnome-ui/platform`'s `notifications` module |
+| ⬜ | **`useColorScheme`** | Returns `"light" \| "dark" \| "auto"` and a setter — blocked on `@gnome-ui/platform`'s `colorScheme` module |
+| ⬜ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path — blocked on `@gnome-ui/platform`'s `fileChooser` module |
+| ⬜ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state — blocked on `@gnome-ui/platform`'s `clipboard` module |
+| ⬜ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters — blocked on `@gnome-ui/platform`'s `window` module |
+| ✅ | **`useHapticFeedback`** | Trigger haptic feedback via feedbackd (native) or Vibration API (browser) — issue [#81](https://github.com/ElJijuna/gnome-ui/issues/81) |
 
 ---
 
@@ -435,10 +436,9 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 |--------|-----------|-------------|
 | ✅ | **`DashboardGrid`** | Responsive CSS Grid container for arranging dashboard widgets; supports column count and per-item span — issue [#82](https://github.com/ElJijuna/gnome-ui/issues/82) |
 | ✅ | **`StatCard`** | Key metric display with optional trend indicator (direction, percentage, period) and loading skeleton — issue [#83](https://github.com/ElJijuna/gnome-ui/issues/83) |
-| ⬜ | **`ProgressCard`** | Resource usage card with labelled progress bar; color thresholds at 75 % (warning) and 90 % (critical) — issue [#84](https://github.com/ElJijuna/gnome-ui/issues/84) |
+| ✅ | **`ProgressCard`** | Resource usage card with labelled progress bar; color thresholds at 75 % (warning) and 90 % (critical) — issue [#84](https://github.com/ElJijuna/gnome-ui/issues/84) |
 | ✅ | **`ActivityFeed`** | Chronological event list with relative timestamps, icons, and truncation — issue [#85](https://github.com/ElJijuna/gnome-ui/issues/85) |
-| ⬜ | **`QuickActions`** | Grid of shortcut action buttons with keyboard navigation — issue [#86](https://github.com/ElJijuna/gnome-ui/issues/86) |
-| ⬜ | **`StatusIndicator`** | Service/connection status dot: `online`, `offline`, `warning`, `error`, `loading` — issue [#87](https://github.com/ElJijuna/gnome-ui/issues/87) |
+| ✅ | **`QuickActions`** | Grid of shortcut action buttons with keyboard navigation — issue [#86](https://github.com/ElJijuna/gnome-ui/issues/86) |
 | ✅ | **`SectionHeader`** | Section title row with optional subtitle and trailing action slot — issue [#88](https://github.com/ElJijuna/gnome-ui/issues/88) |
 | ✅ | **`EmptyState`** | Centered empty-state illustration: icon, title, description, optional CTA — issue [#89](https://github.com/ElJijuna/gnome-ui/issues/89) |
 | ✅ | **`StatusIndicator`** | Service/connection status dot: `online`, `offline`, `warning`, `error`, `loading` — issue [#87](https://github.com/ElJijuna/gnome-ui/issues/87) |
