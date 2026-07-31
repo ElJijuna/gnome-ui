@@ -19,13 +19,21 @@ describe('TagInput', () => {
     });
 
     it('renders helper text below the input', () => {
-      render(<TagInput value={[]} onChange={vi.fn()} label="Tags" helperText="Press Enter to add" />);
+      render(
+        <TagInput value={[]} onChange={vi.fn()} label="Tags" helperText="Press Enter to add" />,
+      );
       expect(screen.getByText('Press Enter to add')).toBeInTheDocument();
     });
 
     it('renders error message instead of helper text', () => {
       render(
-        <TagInput value={[]} onChange={vi.fn()} label="Tags" helperText="Helper" error="Required" />,
+        <TagInput
+          value={[]}
+          onChange={vi.fn()}
+          label="Tags"
+          helperText="Helper"
+          error="Required"
+        />,
       );
       expect(screen.getByText('Required')).toBeInTheDocument();
       expect(screen.queryByText('Helper')).not.toBeInTheDocument();

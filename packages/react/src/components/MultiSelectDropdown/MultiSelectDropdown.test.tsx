@@ -76,7 +76,12 @@ describe('MultiSelectDropdown', () => {
       const onChange = vi.fn();
 
       render(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={[]} onChange={onChange} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={[]}
+          onChange={onChange}
+        />,
       );
 
       fireEvent.click(screen.getByRole('combobox'));
@@ -105,7 +110,12 @@ describe('MultiSelectDropdown', () => {
 
     it('keeps the listbox open after toggling an option', () => {
       render(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={[]} onChange={vi.fn()} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={[]}
+          onChange={vi.fn()}
+        />,
       );
 
       fireEvent.click(screen.getByRole('combobox'));
@@ -118,7 +128,12 @@ describe('MultiSelectDropdown', () => {
       const onChange = vi.fn();
 
       render(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={[]} onChange={onChange} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={[]}
+          onChange={onChange}
+        />,
       );
 
       fireEvent.click(screen.getByRole('combobox'));
@@ -155,7 +170,12 @@ describe('MultiSelectDropdown', () => {
       const onChange = vi.fn();
 
       render(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={[]} onChange={onChange} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={[]}
+          onChange={onChange}
+        />,
       );
 
       const trigger = screen.getByRole('combobox');
@@ -172,7 +192,12 @@ describe('MultiSelectDropdown', () => {
       let value: string[] = [];
 
       const { rerender } = render(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={value} onChange={onChange} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={value}
+          onChange={onChange}
+        />,
       );
 
       fireEvent.click(screen.getByRole('combobox'));
@@ -181,7 +206,12 @@ describe('MultiSelectDropdown', () => {
 
       value = ['js'];
       rerender(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={value} onChange={onChange} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={value}
+          onChange={onChange}
+        />,
       );
 
       fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
@@ -192,7 +222,12 @@ describe('MultiSelectDropdown', () => {
 
     it('closes on Escape', () => {
       render(
-        <MultiSelectDropdown aria-label="Languages" options={options} value={[]} onChange={vi.fn()} />,
+        <MultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={[]}
+          onChange={vi.fn()}
+        />,
       );
 
       fireEvent.click(screen.getByRole('combobox'));

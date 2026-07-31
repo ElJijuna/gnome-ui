@@ -264,7 +264,9 @@ export const MultiSelectDropdown = <V extends string = string>({
             .filter(Boolean)
             .join(' ')}
         >
-          {selectedOptions.length === 0 ? placeholder : summarize(selectedOptions.length, selectedOptions)}
+          {selectedOptions.length === 0
+            ? placeholder
+            : summarize(selectedOptions.length, selectedOptions)}
         </span>
         <Icon
           icon={PanDown}
@@ -317,9 +319,7 @@ export const MultiSelectDropdown = <V extends string = string>({
                 />
                 <span className={styles.optionText}>
                   <span className={styles.optionLabel}>{opt.label}</span>
-                  {opt.description && (
-                    <span className={styles.optionDesc}>{opt.description}</span>
-                  )}
+                  {opt.description && <span className={styles.optionDesc}>{opt.description}</span>}
                 </span>
               </li>
             );

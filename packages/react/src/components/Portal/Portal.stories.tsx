@@ -81,8 +81,8 @@ export const CustomContainer: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <Text variant="body" color="dim">
-          The content below is portaled into the highlighted box on the right, not rendered where
-          it appears in JSX.
+          The content below is portaled into the highlighted box on the right, not rendered where it
+          appears in JSX.
         </Text>
         <div style={{ display: 'flex', gap: 16 }}>
           <div
