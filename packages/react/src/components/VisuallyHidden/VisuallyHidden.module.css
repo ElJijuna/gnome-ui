@@ -1,0 +1,32 @@
+/* ─── sr-only recipe ───────────────────────────────────────────────────────────
+   Visually hides content while keeping it readable by assistive technology.
+   `clip` is included alongside `clip-path` for older browser support. */
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  border: 0;
+}
+
+/* ─── sr-only-focusable ────────────────────────────────────────────────────────
+   Restores normal layout when the element (or a focusable descendant, e.g. a
+   skip-link's <a>) receives keyboard focus. */
+
+.focusable:focus,
+.focusable:focus-within {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  white-space: normal;
+  clip: auto;
+  clip-path: none;
+}

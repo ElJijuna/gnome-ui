@@ -532,6 +532,11 @@
       "import": "./dist/components/ViewSwitcherSidebar.js",
       "require": "./dist/components/ViewSwitcherSidebar.cjs"
     },
+    "./components/VisuallyHidden": {
+      "types": "./dist/components/VisuallyHidden.d.ts",
+      "import": "./dist/components/VisuallyHidden.js",
+      "require": "./dist/components/VisuallyHidden.cjs"
+    },
     "./components/VulnerabilityFinding": {
       "types": "./dist/components/VulnerabilityFinding.d.ts",
       "import": "./dist/components/VulnerabilityFinding.js",

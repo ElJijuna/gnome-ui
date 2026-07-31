@@ -323,6 +323,8 @@ export type {
   ViewSwitcherSidebarProps,
 } from './components/ViewSwitcherSidebar';
 export { ViewSwitcherSidebar, ViewSwitcherSidebarItem } from './components/ViewSwitcherSidebar';
+export type { VisuallyHiddenProps } from './components/VisuallyHidden';
+export { VisuallyHidden } from './components/VisuallyHidden';
 export type {
   VulnerabilityFindingProps,
   VulnerabilityFindingStatus,

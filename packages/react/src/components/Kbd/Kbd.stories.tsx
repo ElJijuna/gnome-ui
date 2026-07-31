@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import readme from './README.md?raw';
 import { Kbd } from './Kbd';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof Kbd> = {
   title: 'Components/Kbd',
@@ -51,7 +50,8 @@ export const CommonKeys: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'A range of common keys showing symbol normalisation. Unknown keys (e.g. "F5") render as-is.',
+        story:
+          'A range of common keys showing symbol normalisation. Unknown keys (e.g. "F5") render as-is.',
       },
     },
   },
