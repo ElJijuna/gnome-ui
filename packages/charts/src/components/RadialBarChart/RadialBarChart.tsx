@@ -33,20 +33,26 @@ export interface RadialBarChartProps {
 const ArcLabel = (props: {
   cx?: number;
   cy?: number;
-  midAngle?: number;
-  innerRadius?: number;
-  outerRadius?: number;
   name?: string;
+  viewBox?: {
+    startAngle?: number;
+    endAngle?: number;
+    innerRadius?: number;
+    outerRadius?: number;
+  };
 }) => {
-  const { cx, cy, midAngle, innerRadius, outerRadius, name } = props;
+  const { cx, cy, name, viewBox } = props;
+  const { startAngle, endAngle, innerRadius, outerRadius } = viewBox ?? {};
 
   if (
     cx === null ||
     cx === undefined ||
     cy === null ||
     cy === undefined ||
-    midAngle === null ||
-    midAngle === undefined ||
+    startAngle === null ||
+    startAngle === undefined ||
+    endAngle === null ||
+    endAngle === undefined ||
     innerRadius === null ||
     innerRadius === undefined ||
     outerRadius === null ||
@@ -56,6 +62,7 @@ const ArcLabel = (props: {
   }
 
   const RADIAN = Math.PI / 180;
+  const midAngle = (startAngle + endAngle) / 2;
   const r = innerRadius + (outerRadius - innerRadius) / 2;
   const x = cx + r * Math.cos(-midAngle * RADIAN);
   const y = cy + r * Math.sin(-midAngle * RADIAN);
