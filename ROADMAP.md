@@ -185,6 +185,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **`IconButton`** | Accessible icon-only action button composed from `Button`, `Icon`, and optional `Tooltip`; supports variants, sizes, disabled state, refs, and HTML button attributes — issue [#102](https://github.com/ElJijuna/gnome-ui/issues/102) |
 | ✅ | **`Button` `raised` variant** | Add `variant="raised"` to `Button`: explicit raised look for buttons inside flat/toolbar contexts — mirrors `.raised` style class |
 | ✅ | **`Button` `osd` modifier** | Add `osd` prop to `Button`: dark semi-transparent style for controls overlaid on media/images — mirrors `.osd` style class |
+| ✅ | **`CopyButton`** | Icon button that copies a value to the clipboard via `navigator.clipboard`, swapping to a checkmark and "Copied!" tooltip/live-region announcement as confirmation; composed from `IconButton` — no `@gnome-ui/platform` dependency required |
 
 ### View Switcher additions
 
