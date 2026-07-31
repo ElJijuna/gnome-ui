@@ -1,3 +1,23 @@
+## [1.53.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.52.0...@gnome-ui/react@1.53.0) (2026-07-31)
+
+### Features
+
+* **@gnome-ui/react:** add Callout component with styles, tests, and documentation ([3e6108c](https://github.com/ElJijuna/gnome-ui/commit/3e6108ca13698d0a48667d38521aeb4d7f8f9658))
+* **@gnome-ui/react:** add Divider component with optional label, styles, tests, and documentation ([6027fc1](https://github.com/ElJijuna/gnome-ui/commit/6027fc1cd6b04bd1caf86a8053f5203c19a72f09))
+* **@gnome-ui/react:** add Expander component with collapsible content and associated styles, tests, and documentation ([508a291](https://github.com/ElJijuna/gnome-ui/commit/508a2912e74d59cb7eabf99bebaa31e106f0033e))
+* **@gnome-ui/react:** add FileTypeIcon component with styles, tests, and documentation ([eb03a25](https://github.com/ElJijuna/gnome-ui/commit/eb03a25173d4a4e8cfee5f44cb942b740133e4ff))
+* **@gnome-ui/react:** add Highlight component with styles, tests, and documentation ([aaf2919](https://github.com/ElJijuna/gnome-ui/commit/aaf291933e1c024d2fcc7286f1e9e7156e79407f))
+* **@gnome-ui/react:** add Kbd component with styles, tests, and documentation ([6cbe485](https://github.com/ElJijuna/gnome-ui/commit/6cbe485889258baf878424f9ec444853b64ce3dc))
+* **@gnome-ui/react:** add LevelBar component with discrete mode and color variants ([0fbaee3](https://github.com/ElJijuna/gnome-ui/commit/0fbaee32fe7ff2ce71e20deeed3e09b7786f9e82))
+* **@gnome-ui/react:** add Overlay component with styles, tests, and documentation ([7541ec6](https://github.com/ElJijuna/gnome-ui/commit/7541ec611ac0b916fe09bc7f37dfbfc35b87426c))
+* **@gnome-ui/react:** add PasswordField component with styles, tests, and documentation ([b578db6](https://github.com/ElJijuna/gnome-ui/commit/b578db6fc052148a67bde2e96be03e98e2b93b61))
+* **@gnome-ui/react:** add RangeSlider component with styles, tests, and documentation ([fe7305a](https://github.com/ElJijuna/gnome-ui/commit/fe7305a66d3cc63215729423204611bfcfc749cf))
+* **@gnome-ui/react:** add StepIndicator component with styles, tests, and documentation ([13ede74](https://github.com/ElJijuna/gnome-ui/commit/13ede74d1bacf94dc68c8530afa7d41696cec4e6))
+* **@gnome-ui/react:** add TextTruncate component with styles, tests, and documentation ([dfa7c07](https://github.com/ElJijuna/gnome-ui/commit/dfa7c07772031f7518bdfd6f7e8770fb5f30a258))
+* **@gnome-ui/react:** add VisuallyHidden component with styles, tests, and documentation ([2c14423](https://github.com/ElJijuna/gnome-ui/commit/2c14423025ace200be097353675d62fafa5022bf))
+* **@gnome-ui/react:** implement RatingStars component with interactive and read-only modes ([ca1ed12](https://github.com/ElJijuna/gnome-ui/commit/ca1ed12c48d4bb441c676ae4fe043650dc36bb3a))
+* **@gnome-ui/react:** reorder and add new components in package.json exports ([3231c2b](https://github.com/ElJijuna/gnome-ui/commit/3231c2b5daf1b2a9867c9d45a1dd67caf24f2ee8))
+
 ## [1.52.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.51.0...@gnome-ui/react@1.52.0) (2026-07-31)
 
 ### Features
