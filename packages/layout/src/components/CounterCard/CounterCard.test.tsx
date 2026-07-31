@@ -215,7 +215,9 @@ describe('CounterCard', () => {
     });
 
     it('re-animates from the previous value when the target changes mid-flight', () => {
-      const { rerender } = render(<CounterCard label="Files" value={100} duration={200} animated />);
+      const { rerender } = render(
+        <CounterCard label="Files" value={100} duration={200} animated />,
+      );
 
       expect(screen.getByText('100')).toBeInTheDocument();
 

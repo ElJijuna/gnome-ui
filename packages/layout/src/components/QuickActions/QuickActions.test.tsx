@@ -137,11 +137,7 @@ describe('QuickActions', () => {
   });
 
   it('does nothing when every action is disabled and an arrow key is pressed', () => {
-    const actions = makeActions([
-      { disabled: true },
-      { disabled: true },
-      { disabled: true },
-    ]);
+    const actions = makeActions([{ disabled: true }, { disabled: true }, { disabled: true }]);
 
     const { container } = render(<QuickActions actions={actions} />);
     const buttons = container.querySelectorAll('button');
@@ -153,9 +149,7 @@ describe('QuickActions', () => {
   });
 
   it('ignores keydown dispatched on a disabled action', () => {
-    const { container } = render(
-      <QuickActions actions={makeActions([{}, { disabled: true }])} />,
-    );
+    const { container } = render(<QuickActions actions={makeActions([{}, { disabled: true }])} />);
     const disabledButton = screen.getByRole('button', { name: 'Share' });
     const firstButton = screen.getByRole('button', { name: 'New File' });
 
