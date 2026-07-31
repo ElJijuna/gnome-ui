@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useState } from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { Layout } from './Layout';
 
@@ -429,6 +429,58 @@ describe('Layout', () => {
       expect(body().className).not.toMatch(/sidebarCollapsed/);
     });
 
+    it('ignores keys other than Tab and Escape while the sidebar traps focus', () => {
+      render(
+        <Layout sidebar={<button type="button">Nav action</button>} sidebarOpen>
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+      const navAction = screen.getByRole('button', { name: 'Nav action' });
+
+      expect(navAction).toHaveFocus();
+      fireEvent.keyDown(document, { key: 'a' });
+      expect(navAction).toHaveFocus();
+    });
+
+    it('keeps focus on the sidebar wrapper when Tab is pressed and it has no focusable children', () => {
+      render(
+        <Layout sidebar={<span>No interactive content</span>} sidebarOpen>
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+
+      const aside = screen.getByText('No interactive content').closest('aside') as HTMLElement;
+
+      fireEvent.keyDown(document, { key: 'Tab' });
+      expect(aside).toHaveFocus();
+    });
+
+    it('wraps focus back into the sidebar when Tab is pressed while focus is outside it', () => {
+      render(
+        <Layout
+          sidebar={
+            <>
+              <button type="button">First</button>
+              <button type="button">Last</button>
+            </>
+          }
+          sidebarOpen
+        >
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+
+      const first = screen.getByRole('button', { name: 'First' });
+      const contentAction = screen.getByRole('button', { name: 'Content action' });
+
+      // Simulate focus having escaped the sidebar (e.g. programmatic focus).
+      contentAction.focus();
+      expect(contentAction).toHaveFocus();
+
+      fireEvent.keyDown(document, { key: 'Tab' });
+      expect(first).toHaveFocus();
+    });
+
     it('can close the mobile sidebar when a navigation item is selected', async () => {
       const ControlledLayout = () => {
         const [open, setOpen] = useState(true);
@@ -457,6 +509,58 @@ describe('Layout', () => {
       await waitFor(() => {
         expect(body().className).not.toMatch(/bodySidebarOpen/);
       });
+    });
+  });
+
+  describe('auto-overlay breakpoint detection', () => {
+    // jsdom does not implement window.matchMedia — stub it so the breakpoint
+    // detection effect (which is otherwise skipped via its `!window.matchMedia`
+    // fallback) actually runs its real matching branch. sidebarOverlayActive
+    // (driven by this detection) gates whether opening the sidebar traps focus.
+    const stubMatchMedia = (matches: boolean) => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        configurable: true,
+        value: (query: string): MediaQueryList =>
+          ({
+            matches,
+            media: query,
+            onchange: null,
+            addListener: () => {},
+            removeListener: () => {},
+            addEventListener: () => {},
+            removeEventListener: () => {},
+            dispatchEvent: () => false,
+          }) as MediaQueryList,
+      });
+    };
+
+    afterEach(() => {
+      Reflect.deleteProperty(window, 'matchMedia');
+    });
+
+    it('does not trap focus in the sidebar when the overlay breakpoint does not match', () => {
+      stubMatchMedia(false);
+
+      render(
+        <Layout sidebar={<button type="button">Nav action</button>} sidebarOpen>
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+
+      expect(screen.getByRole('button', { name: 'Nav action' })).not.toHaveFocus();
+    });
+
+    it('traps focus in the sidebar once the overlay breakpoint matches', () => {
+      stubMatchMedia(true);
+
+      render(
+        <Layout sidebar={<button type="button">Nav action</button>} sidebarOpen>
+          <button type="button">Content action</button>
+        </Layout>,
+      );
+
+      expect(screen.getByRole('button', { name: 'Nav action' })).toHaveFocus();
     });
   });
 });
