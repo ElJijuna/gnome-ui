@@ -10,23 +10,14 @@ const config: StorybookConfig = {
   staticDirs: ['../../../public'],
   managerHead: (head) => `${head}<link rel="icon" type="image/png" href="/assets/gnome-ui.png" />`,
   docs: {},
-  refs: {
-    react: {
-      title: '@gnome-ui/react',
-      url: 'https://gnome-ui.org/react',
-      expanded: false,
-    },
-    layout: {
-      title: '@gnome-ui/layout',
-      url: 'https://gnome-ui.org/layout',
-      expanded: false,
-    },
-    icons: {
-      title: '@gnome-ui/icons',
-      url: 'https://gnome-ui.org/icons',
-      expanded: false,
-    },
-  },
+  // `refs` composition (linking to the react/layout/icons sub-Storybooks on
+  // gnome-ui.org) is disabled: the manager crashes with "Cannot read
+  // properties of undefined (reading 'id')" whenever a composed ref doesn't
+  // serve a metadata.json — which none of our `storybook build` outputs do,
+  // since it isn't a standard build artifact in modern Storybook. Reproduced
+  // against the live gnome-ui.org deployment; not fixed by upgrading to
+  // Storybook 10.5.5. Separately, the `react` ref URL was also wrong — CI
+  // deploys @gnome-ui/react's Storybook to the site root, not `/react`.
 };
 
 export default config;
