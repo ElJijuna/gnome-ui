@@ -1,0 +1,13 @@
+.mark {
+  color: inherit;
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 30%, transparent);
+  border-radius: var(--gnome-radius-sm, 4px);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+@media (prefers-contrast: more) {
+  .mark {
+    background-color: var(--gnome-accent-bg-color, #3584e4);
+    color: #fff;
+  }
+}

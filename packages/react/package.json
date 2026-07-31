@@ -242,6 +242,11 @@
       "import": "./dist/components/HeaderBar.js",
       "require": "./dist/components/HeaderBar.cjs"
     },
+    "./components/Highlight": {
+      "types": "./dist/components/Highlight.d.ts",
+      "import": "./dist/components/Highlight.js",
+      "require": "./dist/components/Highlight.cjs"
+    },
     "./components/Icon": {
       "types": "./dist/components/Icon.d.ts",
       "import": "./dist/components/Icon.js",
