@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { CounterCard } from './CounterCard';
+
+let reducedMotion = false;
 
 // jsdom does not implement window.matchMedia — stub it so useCountUp works.
 beforeAll(() => {
@@ -9,7 +11,7 @@ beforeAll(() => {
     writable: true,
     value: (query: string): MediaQueryList =>
       ({
-        matches: false,
+        matches: query.includes('reduce') ? reducedMotion : false,
         media: query,
         onchange: null,
         addListener: () => {},
@@ -19,6 +21,10 @@ beforeAll(() => {
         dispatchEvent: () => false,
       }) as MediaQueryList,
   });
+});
+
+beforeEach(() => {
+  reducedMotion = false;
 });
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -167,6 +173,61 @@ describe('CounterCard', () => {
       render(<CounterCard label="Files" value={42} animated={false} loadingType="spinner" />);
       expect(screen.queryByRole('status')).toBeNull();
       expect(screen.getByText('Files')).toBeInTheDocument();
+    });
+  });
+
+  describe('animated counting', () => {
+    let currentTime: number;
+
+    beforeEach(() => {
+      currentTime = 0;
+      vi.spyOn(performance, 'now').mockImplementation(() => currentTime);
+      vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
+        currentTime += 60;
+        cb(currentTime);
+
+        return 1;
+      });
+      vi.stubGlobal('cancelAnimationFrame', () => {});
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+      vi.unstubAllGlobals();
+    });
+
+    it('animates up to the target value and settles there', () => {
+      render(<CounterCard label="Files" value={100} duration={200} animated />);
+
+      // The animation stub runs every scheduled frame synchronously to completion.
+      expect(screen.getByLabelText('Files: 100')).toBeInTheDocument();
+      expect(screen.getByText('100')).toBeInTheDocument();
+    });
+
+    it('does not animate and shows the target immediately when reduced motion is preferred', () => {
+      reducedMotion = true;
+
+      render(<CounterCard label="Files" value={50} duration={200} animated />);
+
+      expect(screen.getByText('50')).toBeInTheDocument();
+      // No frame should have been requested since the effect bails out immediately.
+      expect(currentTime).toBe(0);
+    });
+
+    it('re-animates from the previous value when the target changes mid-flight', () => {
+      const { rerender } = render(<CounterCard label="Files" value={100} duration={200} animated />);
+
+      expect(screen.getByText('100')).toBeInTheDocument();
+
+      rerender(<CounterCard label="Files" value={250} duration={200} animated />);
+
+      expect(screen.getByText('250')).toBeInTheDocument();
+    });
+
+    it('unmounts cleanly after an animation runs', () => {
+      const { unmount } = render(<CounterCard label="Files" value={100} duration={200} animated />);
+
+      expect(() => unmount()).not.toThrow();
     });
   });
 
