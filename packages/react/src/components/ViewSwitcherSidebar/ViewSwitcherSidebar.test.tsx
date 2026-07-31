@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { ViewSwitcherSidebar } from './ViewSwitcherSidebar';
 import { ViewSwitcherSidebarItem } from './ViewSwitcherSidebarItem';
 
-function ControlledSidebar() {
+const ControlledSidebar = () => {
   const [value, setValue] = useState('photos');
   const views = ['photos', 'albums', 'shared'];
 
@@ -17,7 +17,7 @@ function ControlledSidebar() {
       ))}
     </ViewSwitcherSidebar>
   );
-}
+};
 
 describe('ViewSwitcherSidebar', () => {
   describe('rendering', () => {

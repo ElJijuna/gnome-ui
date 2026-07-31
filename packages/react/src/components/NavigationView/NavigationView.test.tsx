@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import { NavigationPage, NavigationView, useNavigation } from './NavigationView';
 
-function HomeControls({ target }: { target: string }) {
+const HomeControls = ({ target }: { target: string }) => {
   const { navigate } = useNavigation();
 
   return (
@@ -12,9 +12,9 @@ function HomeControls({ target }: { target: string }) {
       Open {target}
     </button>
   );
-}
+};
 
-function BackButton() {
+const BackButton = () => {
   const { pop, canGoBack } = useNavigation();
 
   return (
@@ -22,7 +22,7 @@ function BackButton() {
       Back
     </button>
   );
-}
+};
 
 describe('NavigationView', () => {
   describe('rendering', () => {

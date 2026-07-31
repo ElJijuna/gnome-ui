@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { ViewSwitcher } from './ViewSwitcher';
 import { ViewSwitcherItem } from './ViewSwitcherItem';
 
-function ControlledSwitcher() {
+const ControlledSwitcher = () => {
   const [active, setActive] = useState('all');
   const views = ['all', 'photos', 'shared'];
 
@@ -22,7 +22,7 @@ function ControlledSwitcher() {
       ))}
     </ViewSwitcher>
   );
-}
+};
 
 describe('ViewSwitcher', () => {
   describe('rendering', () => {
