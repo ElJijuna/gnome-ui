@@ -46,6 +46,7 @@ export {
   type GnomeDialogOpenChangeDetail,
   registerGnomeDialog,
 } from './dialog';
+export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
 export {
   type GnomeMenuCloseDetail,
   type GnomeMenuCloseReason,

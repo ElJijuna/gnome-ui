@@ -9,6 +9,7 @@ gnome-button,
 gnome-card,
 gnome-checkbox,
 gnome-dialog,
+gnome-header-bar,
 gnome-menu,
 gnome-popover,
 gnome-progress-bar,
@@ -37,6 +38,7 @@ gnome-button *,
 gnome-card *,
 gnome-checkbox *,
 gnome-dialog *,
+gnome-header-bar *,
 gnome-menu *,
 gnome-popover *,
 gnome-progress-bar *,
@@ -1626,6 +1628,64 @@ gnome-boxed-list[variant="separate"] > * {
   border: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.07));
   border-radius: var(--gnome-radius-lg, 12px);
   overflow: hidden;
+}
+
+/* Header Bar */
+
+gnome-header-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  padding: 0 var(--gnome-space-2, 12px);
+  min-height: 47px;
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  color: var(--gnome-headerbar-fg-color, rgb(0 0 0 / 0.8));
+  border-bottom: 1px solid var(--gnome-headerbar-border-color, rgb(0 0 0 / 0.12));
+}
+
+gnome-header-bar[flat] {
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+gnome-header-bar [data-slot="header-start"] {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+gnome-header-bar [data-slot="header-title"] {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 var(--gnome-space-1, 6px);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-heading, 1.2);
+  color: var(--gnome-headerbar-fg-color, rgb(0 0 0 / 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+gnome-header-bar [data-slot="header-end"] {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-header-bar {
+    border-bottom-color: var(--gnome-headerbar-border-color, rgb(255 255 255 / 0.1));
+  }
 }
 
 /* Dialog */

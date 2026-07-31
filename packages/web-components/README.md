@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-two framework-agnostic components:
+The package currently contains twenty-three framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -25,6 +25,9 @@ The package currently contains twenty-two framework-agnostic components:
   `indeterminate` support.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
+- `<gnome-header-bar>` — title bar with start/title/end regions placed in
+  explicit CSS grid columns so the title stays centered without either
+  side slot.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
@@ -766,6 +769,39 @@ separator bookkeeping at all, JS or otherwise.
 `variant="separate"` (default `"default"`) renders each child as its own
 standalone rounded card instead of a single joined list; like `padding` on
 `gnome-card`, it's a plain attribute read directly by CSS.
+
+## Header Bar
+
+```html
+<gnome-header-bar>
+  <span data-slot="header-start">
+    <button type="button" aria-label="Back">←</button>
+  </span>
+  <span data-slot="header-title">Contacts</span>
+  <span data-slot="header-end">
+    <button type="button" aria-label="Add contact">+</button>
+  </span>
+</gnome-header-bar>
+```
+
+Title bar with a centered title and leading/trailing action slots.
+`data-slot="header-start"`/`"header-title"`/`"header-end"` are placed into
+explicit CSS grid columns (`grid-column: 1/2/3`) rather than relying on DOM
+order — so the title stays centered even when a consumer omits
+`header-start` or `header-end` entirely, with no placeholder elements
+generated to hold the grid's shape.
+
+The host gives `header-title` `aria-live="polite"` (guarded, and
+re-applied if the title element itself is swapped — e.g. an htmx view
+transition — via a lightweight `childList` `MutationObserver`) so
+assistive tech announces title changes. `header-title` also carries the
+default single-line typography (`font-weight`, ellipsis truncation); for a
+custom multi-line title, override `white-space`/`font-weight` inline on
+your own title element (see the *Custom title* story).
+
+`flat` removes the bottom border, for the topmost bar of a full-window
+layout — a plain attribute read directly by CSS, no JS state to keep in
+sync.
 
 ## htmx
 

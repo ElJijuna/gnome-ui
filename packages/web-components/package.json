@@ -57,6 +57,11 @@
       "import": "./dist/dialog.js",
       "require": "./dist/dialog.cjs"
     },
+    "./header-bar": {
+      "types": "./dist/header-bar.d.ts",
+      "import": "./dist/header-bar.js",
+      "require": "./dist/header-bar.cjs"
+    },
     "./menu": {
       "types": "./dist/menu.d.ts",
       "import": "./dist/menu.js",
