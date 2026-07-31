@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { fireEvent, render } from '@testing-library/react';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { PieChart } from './PieChart';
 
@@ -8,6 +8,51 @@ const DATA = [
   { label: 'Firefox', value: 18 },
   { label: 'Safari', value: 11 },
 ];
+
+// Recharts' ResponsiveContainer measures itself via getBoundingClientRect, which
+// jsdom always reports as 0x0 — so the chart never renders any real SVG geometry
+// (and custom label/tooltip renderers never run) unless we fake a real size.
+// requestAnimationFrame is also stubbed with advancing timestamps, since react-smooth's
+// enter animation otherwise never resolves in jsdom.
+const withRealLayout = () => {
+  let originalGetBoundingClientRect: typeof HTMLElement.prototype.getBoundingClientRect;
+
+  beforeAll(() => {
+    originalGetBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
+    Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
+      configurable: true,
+      value: () => ({
+        width: 800,
+        height: 400,
+        top: 0,
+        left: 0,
+        right: 800,
+        bottom: 400,
+        x: 0,
+        y: 0,
+        toJSON() {},
+      }),
+    });
+
+    let frame = 0;
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
+      frame += 20;
+      cb(frame);
+
+      return 1;
+    });
+    vi.stubGlobal('cancelAnimationFrame', () => {});
+  });
+
+  afterAll(() => {
+    Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
+      configurable: true,
+      writable: true,
+      value: originalGetBoundingClientRect,
+    });
+    vi.unstubAllGlobals();
+  });
+};
 
 describe('PieChart', () => {
   describe('rendering', () => {
@@ -75,6 +120,57 @@ describe('PieChart', () => {
       const { container } = render(<PieChart data={DATA} showLabels showLegend />);
 
       expect(container.firstChild).toBeInTheDocument();
+    });
+  });
+
+  describe('with real layout', () => {
+    withRealLayout();
+
+    it('renders a pie slice per data item', () => {
+      const { container } = render(<PieChart data={DATA} />);
+
+      expect(container.querySelectorAll('.recharts-pie-sector')).toHaveLength(DATA.length);
+    });
+
+    it('renders slice labels with each item name when showLabels is true', () => {
+      const { container } = render(<PieChart data={DATA} showLabels />);
+      const texts = Array.from(container.querySelectorAll('text')).map((t) => t.textContent);
+
+      expect(texts).toEqual(expect.arrayContaining(['Chrome', 'Firefox', 'Safari']));
+    });
+
+    it('omits the label for a slice smaller than the 4% threshold', () => {
+      const { container } = render(
+        <PieChart
+          data={[
+            { label: 'Big', value: 999 },
+            { label: 'Tiny', value: 1 },
+          ]}
+          showLabels
+        />,
+      );
+      const texts = Array.from(container.querySelectorAll('text')).map((t) => t.textContent);
+
+      expect(texts).toContain('Big');
+      expect(texts).not.toContain('Tiny');
+    });
+
+    it('does not render slice labels when showLabels is false', () => {
+      const { container } = render(<PieChart data={DATA} />);
+
+      expect(container.querySelectorAll('text')).toHaveLength(0);
+    });
+
+    it('formats the tooltip value on hover', () => {
+      const { container } = render(<PieChart data={DATA} />);
+      const sector = container.querySelector('.recharts-pie-sector path');
+
+      expect(sector).not.toBeNull();
+
+      fireEvent.mouseOver(sector as Element);
+      fireEvent.mouseMove(sector as Element);
+
+      expect(document.querySelector('.recharts-tooltip-wrapper')).toHaveTextContent('62');
     });
   });
 });
