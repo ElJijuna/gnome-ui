@@ -465,7 +465,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`Expander`** | Standalone disclosure triangle + collapsible content — mirrors `GtkExpander`; complements `ExpanderRow`, which only works nested inside a `BoxedList` row |
 | ⬜ | **`PasswordField`** | Standalone masked `TextField` with a built-in reveal/conceal toggle, for login forms and dialogs outside a settings-row context — reuses the reveal-icon pattern from `PasswordEntryRow` without requiring `ActionRow` |
 | ⬜ | **`Divider`** | Horizontal rule with an optional centred label (e.g. `"OR"`) — common auth/login-form pattern; distinct from the plain `Separator` line |
-| ⬜ | **`RatingStars`** | Star rating display and interactive input, keyboard-navigable — common HIG-adjacent pattern for review/quality widgets, pairs with `Icon`'s `Star`/`StarOutline` |
+| ✅ | **`RatingStars`** | Star rating display and interactive input, keyboard-navigable — common HIG-adjacent pattern for review/quality widgets, pairs with `Icon`'s `Star`/`StarOutline` |
 | ⬜ | **`FileTypeIcon`** | Small icon (optionally with a thumbnail) resolved from a file's MIME type or extension — useful for file-manager-style listings, complementing the existing `Layout/FileManager` story |
 | ⬜ | **`Callout`** | Inline, dismissible admonition box (`info`/`warning`/`tip` variants) for contextual help text within forms and cards — distinct from `Banner` (persistent, view-level) and `Toast` (temporary, notification-level) |
 | ⬜ | **`StepIndicator`** | Numbered "Step X of Y" progress indicator for onboarding/wizard flows — complements the existing `CarouselIndicatorDots`/`CarouselIndicatorLines` with a labelled, linear alternative |
