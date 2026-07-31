@@ -1,3 +1,16 @@
+## [1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.2.0...@gnome-ui/web-components@1.3.0) (2026-07-31)
+
+### Features
+
+* **@gnome-ui/web-components:** add gnome-action-row component with interactive features, accessibility support, and styles ([45baa2c](https://github.com/ElJijuna/gnome-ui/commit/45baa2ca6522d90c8ca8bfe240d32105279c36ff))
+* **@gnome-ui/web-components:** add gnome-banner component with dismiss and action features, including styles, tests, and documentation ([e940db9](https://github.com/ElJijuna/gnome-ui/commit/e940db9c5e90f1ae76bbcd60da96465d9ee0a863))
+* **@gnome-ui/web-components:** add gnome-boxed-list component with role management, styling, and documentation ([129b9a6](https://github.com/ElJijuna/gnome-ui/commit/129b9a6c4306bd1b0033d1d24d4296f6d13ca917))
+* **@gnome-ui/web-components:** add gnome-card component with interactive features, padding options, and styles ([acf6af7](https://github.com/ElJijuna/gnome-ui/commit/acf6af77fa94ee952692bfb9b13a84df7abf806d))
+* **@gnome-ui/web-components:** add gnome-header-bar component with slots, styling, and tests ([98803f2](https://github.com/ElJijuna/gnome-ui/commit/98803f2d39805d4fe31f773e99845a20d4d25ac7))
+* **@gnome-ui/web-components:** add gnome-separator component with orientation support and accessibility features ([c9f1447](https://github.com/ElJijuna/gnome-ui/commit/c9f1447f7d9daa8387f104e0a433b11d5a6e8ee5))
+* **@gnome-ui/web-components:** add gnome-skeleton component with multiple variants, loading animations, and accessibility features ([5af49e5](https://github.com/ElJijuna/gnome-ui/commit/5af49e540ad0c4f01a836f4add8283514f2fae51))
+* **@gnome-ui/web-components:** add gnome-tooltip component with hover/focus triggers, accessibility features, and styles ([afe4f8d](https://github.com/ElJijuna/gnome-ui/commit/afe4f8d0213f82b0700f02b9fdf505751b7dc989))
+
 ## [1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.1.0...@gnome-ui/web-components@1.2.0) (2026-07-30)
 
 ### Features
