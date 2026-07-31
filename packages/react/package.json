@@ -262,6 +262,11 @@
       "import": "./dist/components/InlineViewSwitcher.js",
       "require": "./dist/components/InlineViewSwitcher.cjs"
     },
+    "./components/Kbd": {
+      "types": "./dist/components/Kbd.d.ts",
+      "import": "./dist/components/Kbd.js",
+      "require": "./dist/components/Kbd.cjs"
+    },
     "./components/LevelBar": {
       "types": "./dist/components/LevelBar.d.ts",
       "import": "./dist/components/LevelBar.js",
