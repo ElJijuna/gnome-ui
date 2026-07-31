@@ -199,6 +199,8 @@ export type { OverlaySplitViewProps } from './components/OverlaySplitView';
 export { OverlaySplitView } from './components/OverlaySplitView';
 export type { PasswordEntryRowProps } from './components/PasswordEntryRow';
 export { PasswordEntryRow } from './components/PasswordEntryRow';
+export type { PasswordFieldProps } from './components/PasswordField';
+export { PasswordField } from './components/PasswordField';
 export type { PathBarProps, PathBarSegment } from './components/PathBar';
 export { PathBar } from './components/PathBar';
 export type { PopoverPlacement, PopoverProps } from './components/Popover';

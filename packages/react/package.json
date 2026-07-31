@@ -302,6 +302,11 @@
       "import": "./dist/components/PasswordEntryRow.js",
       "require": "./dist/components/PasswordEntryRow.cjs"
     },
+    "./components/PasswordField": {
+      "types": "./dist/components/PasswordField.d.ts",
+      "import": "./dist/components/PasswordField.js",
+      "require": "./dist/components/PasswordField.cjs"
+    },
     "./components/PathBar": {
       "types": "./dist/components/PathBar.d.ts",
       "import": "./dist/components/PathBar.js",
