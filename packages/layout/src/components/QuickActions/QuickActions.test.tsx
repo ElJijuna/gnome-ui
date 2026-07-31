@@ -89,6 +89,81 @@ describe('QuickActions', () => {
     expect(third).toHaveFocus();
   });
 
+  it('moves focus to the first enabled action on Home', () => {
+    render(<QuickActions actions={makeActions()} />);
+
+    const first = screen.getByRole('button', { name: 'New File' });
+    const third = screen.getByRole('button', { name: 'Settings' });
+
+    third.focus();
+    fireEvent.keyDown(third, { key: 'Home' });
+
+    expect(first).toHaveFocus();
+  });
+
+  it('moves focus to the last enabled action on End', () => {
+    render(<QuickActions actions={makeActions()} />);
+
+    const first = screen.getByRole('button', { name: 'New File' });
+    const third = screen.getByRole('button', { name: 'Settings' });
+
+    first.focus();
+    fireEvent.keyDown(first, { key: 'End' });
+
+    expect(third).toHaveFocus();
+  });
+
+  it('End skips a trailing disabled action and lands on the last enabled one', () => {
+    render(<QuickActions actions={makeActions([{}, {}, { disabled: true }])} />);
+
+    const first = screen.getByRole('button', { name: 'New File' });
+    const second = screen.getByRole('button', { name: 'Share' });
+
+    first.focus();
+    fireEvent.keyDown(first, { key: 'End' });
+
+    expect(second).toHaveFocus();
+  });
+
+  it('ignores keys that are not navigation keys', () => {
+    render(<QuickActions actions={makeActions()} />);
+
+    const first = screen.getByRole('button', { name: 'New File' });
+
+    first.focus();
+    fireEvent.keyDown(first, { key: 'a' });
+
+    expect(first).toHaveFocus();
+  });
+
+  it('does nothing when every action is disabled and an arrow key is pressed', () => {
+    const actions = makeActions([
+      { disabled: true },
+      { disabled: true },
+      { disabled: true },
+    ]);
+
+    const { container } = render(<QuickActions actions={actions} />);
+    const buttons = container.querySelectorAll('button');
+
+    fireEvent.keyDown(buttons[0], { key: 'ArrowRight' });
+
+    // No button is focusable, and no error is thrown navigating a fully-disabled group.
+    expect(document.activeElement).not.toBe(buttons[0]);
+  });
+
+  it('ignores keydown dispatched on a disabled action', () => {
+    const { container } = render(
+      <QuickActions actions={makeActions([{}, { disabled: true }])} />,
+    );
+    const disabledButton = screen.getByRole('button', { name: 'Share' });
+    const firstButton = screen.getByRole('button', { name: 'New File' });
+
+    expect(() => fireEvent.keyDown(disabledButton, { key: 'ArrowRight' })).not.toThrow();
+    expect(container.querySelectorAll('button')[0]).toBe(firstButton);
+    expect(firstButton).not.toHaveFocus();
+  });
+
   it('forwards className and data attributes to the root', () => {
     render(
       <QuickActions
