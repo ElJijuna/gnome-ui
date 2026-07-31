@@ -1,0 +1,103 @@
+/* ─── Wrapper ───────────────────────────────────────────────────────────────── */
+
+.expander {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ─── Header button ─────────────────────────────────────────────────────────── */
+
+.header {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 8px);
+  padding: var(--gnome-space-1, 4px);
+  margin: calc(var(--gnome-space-1, 4px) * -1);
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: var(--gnome-radius-xs, 4px);
+  font: inherit;
+  outline: none;
+  cursor: pointer;
+  text-align: start;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.header:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.header:active {
+  background-color: var(--gnome-active-overlay);
+}
+
+.header:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 1px;
+}
+
+.header:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Chevron ───────────────────────────────────────────────────────────────── */
+
+.chevronWrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  opacity: 0.55;
+  transition: transform var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+.chevron {
+  display: block;
+}
+
+/* ─── Label ─────────────────────────────────────────────────────────────────── */
+
+.label {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+/* ─── Reveal panel (CSS grid height animation) ──────────────────────────────── */
+
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--gnome-duration-normal, 200ms) var(--gnome-easing-default);
+}
+
+.expanded .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+  min-height: 0;
+  padding-top: var(--gnome-space-2, 8px);
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+
+  .chevronWrap {
+    transition: none;
+  }
+}

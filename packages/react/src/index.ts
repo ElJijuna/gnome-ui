@@ -138,6 +138,8 @@ export type { DropdownOption, DropdownProps } from './components/Dropdown';
 export { Dropdown } from './components/Dropdown';
 export type { EntryRowProps } from './components/EntryRow';
 export { EntryRow } from './components/EntryRow';
+export type { ExpanderProps } from './components/Expander';
+export { Expander } from './components/Expander';
 export type { ExpanderRowProps } from './components/ExpanderRow';
 export { ExpanderRow } from './components/ExpanderRow';
 export type { FooterProps } from './components/Footer';
