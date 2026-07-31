@@ -461,7 +461,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`LevelBar`** | Discrete level indicator with colour-coded low/high/full offset zones — mirrors `GtkLevelBar`; distinct from `ProgressBar` (determinate task progress) and `SegmentedBar` (proportional category breakdown) |
+| ✅ | **`LevelBar`** | Discrete level indicator with colour-coded low/high/full offset zones — mirrors `GtkLevelBar`; distinct from `ProgressBar` (determinate task progress) and `SegmentedBar` (proportional category breakdown) |
 | ⬜ | **`Expander`** | Standalone disclosure triangle + collapsible content — mirrors `GtkExpander`; complements `ExpanderRow`, which only works nested inside a `BoxedList` row |
 | ⬜ | **`PasswordField`** | Standalone masked `TextField` with a built-in reveal/conceal toggle, for login forms and dialogs outside a settings-row context — reuses the reveal-icon pattern from `PasswordEntryRow` without requiring `ActionRow` |
 | ⬜ | **`Divider`** | Horizontal rule with an optional centred label (e.g. `"OR"`) — common auth/login-form pattern; distinct from the plain `Separator` line |

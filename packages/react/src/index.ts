@@ -173,6 +173,8 @@ export type {
   InlineViewSwitcherVariant,
 } from './components/InlineViewSwitcher';
 export { InlineViewSwitcher, InlineViewSwitcherItem } from './components/InlineViewSwitcher';
+export type { LevelBarProps, LevelBarVariant } from './components/LevelBar';
+export { LevelBar } from './components/LevelBar';
 export type { LinkProps } from './components/Link';
 export { Link } from './components/Link';
 export type { LinkedGroupProps } from './components/LinkedGroup';

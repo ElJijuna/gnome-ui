@@ -1,0 +1,77 @@
+/* ─── Track ────────────────────────────────────────────────────────────────── */
+
+.track {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--gnome-radius-pill);
+  background-color: var(--gnome-light-3, #deddda);
+  overflow: hidden;
+}
+
+.track.discrete {
+  gap: 2px;
+  background-color: transparent;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* ─── Fill (continuous) ────────────────────────────────────────────────────── */
+
+.fill {
+  height: 100%;
+  border-radius: var(--gnome-radius-pill);
+  transition: width var(--gnome-duration-normal) var(--gnome-easing-default);
+  will-change: width;
+}
+
+/* ─── Blocks (discrete) ────────────────────────────────────────────────────── */
+
+.block {
+  flex: 1;
+  height: 100%;
+  min-width: 2px;
+  border-radius: 1px;
+  background-color: var(--gnome-light-3, #deddda);
+  transition: background-color var(--gnome-duration-normal) var(--gnome-easing-default);
+}
+
+/* ─── Variants ─────────────────────────────────────────────────────────────── */
+
+.accent {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.success {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+}
+
+.warning {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+}
+
+.error {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .track:not(.discrete) {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+
+  .block {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .fill,
+  .block {
+    transition: none;
+  }
+}
