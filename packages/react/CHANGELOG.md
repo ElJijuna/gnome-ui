@@ -1,3 +1,32 @@
+## [1.52.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.51.0...@gnome-ui/react@1.52.0) (2026-07-31)
+
+### Features
+
+* **@gnome-ui/react:** add CopyButton component with clipboard functionality and tests ([fe7a0a3](https://github.com/ElJijuna/gnome-ui/commit/fe7a0a32a28e221ad88a87121d79095135f40698))
+* **@gnome-ui/web-components:** add gnome-action-row component with interactive features, accessibility support, and styles ([45baa2c](https://github.com/ElJijuna/gnome-ui/commit/45baa2ca6522d90c8ca8bfe240d32105279c36ff))
+* **@gnome-ui/web-components:** add gnome-avatar component with image fallback, initials generation, and customizable attributes ([d45d815](https://github.com/ElJijuna/gnome-ui/commit/d45d8154e1720ac24270e0db22210b6678c785a7))
+* **@gnome-ui/web-components:** add gnome-badge component with variant, dot, and anchored attributes, including styles and tests ([8b8516c](https://github.com/ElJijuna/gnome-ui/commit/8b8516c594ab1b37f61bdc9f9aa9b9905db696f9))
+* **@gnome-ui/web-components:** add gnome-banner component with dismiss and action features, including styles, tests, and documentation ([e940db9](https://github.com/ElJijuna/gnome-ui/commit/e940db9c5e90f1ae76bbcd60da96465d9ee0a863))
+* **@gnome-ui/web-components:** add gnome-boxed-list component with role management, styling, and documentation ([129b9a6](https://github.com/ElJijuna/gnome-ui/commit/129b9a6c4306bd1b0033d1d24d4296f6d13ca917))
+* **@gnome-ui/web-components:** add gnome-button component with customizable variants, sizes, and loading states ([b43ad28](https://github.com/ElJijuna/gnome-ui/commit/b43ad28707f36b34063778e173f707eb0ab043b4))
+* **@gnome-ui/web-components:** add gnome-card component with interactive features, padding options, and styles ([acf6af7](https://github.com/ElJijuna/gnome-ui/commit/acf6af77fa94ee952692bfb9b13a84df7abf806d))
+* **@gnome-ui/web-components:** add gnome-checkbox component with support for indeterminate state and accessibility features ([4d496ef](https://github.com/ElJijuna/gnome-ui/commit/4d496ef803b6b7a58280be2b40ada2fdb9aea5bd))
+* **@gnome-ui/web-components:** add gnome-header-bar component with slots, styling, and tests ([98803f2](https://github.com/ElJijuna/gnome-ui/commit/98803f2d39805d4fe31f773e99845a20d4d25ac7))
+* **@gnome-ui/web-components:** add gnome-menu component with keyboard navigation and accessibility features ([ecccdf9](https://github.com/ElJijuna/gnome-ui/commit/ecccdf922c7d9ce5f4d23602afb26d806c83661f))
+* **@gnome-ui/web-components:** add gnome-progress-bar component with determinate and indeterminate states, ARIA support, and styling ([0cffa86](https://github.com/ElJijuna/gnome-ui/commit/0cffa86f2884e8874b8ed29ba189bf90fd630983))
+* **@gnome-ui/web-components:** add gnome-radio-group component with support for native radio inputs and accessibility features ([15ab87d](https://github.com/ElJijuna/gnome-ui/commit/15ab87df045353c7e5ebf1d77e34854bd797c517))
+* **@gnome-ui/web-components:** add gnome-separator component with orientation support and accessibility features ([c9f1447](https://github.com/ElJijuna/gnome-ui/commit/c9f1447f7d9daa8387f104e0a433b11d5a6e8ee5))
+* **@gnome-ui/web-components:** add gnome-skeleton component with multiple variants, loading animations, and accessibility features ([5af49e5](https://github.com/ElJijuna/gnome-ui/commit/5af49e540ad0c4f01a836f4add8283514f2fae51))
+* **@gnome-ui/web-components:** add gnome-slider component with native range input support and accessibility features ([143b663](https://github.com/ElJijuna/gnome-ui/commit/143b663a5d3805adc2980dfcb5237c344360e775))
+* **@gnome-ui/web-components:** add gnome-spin-button component with increment/decrement functionality and accessibility features ([d5ff227](https://github.com/ElJijuna/gnome-ui/commit/d5ff2277f89236629959420e8a24554548d16d69))
+* **@gnome-ui/web-components:** add gnome-spinner component with accessibility features and CSS animations ([714fb86](https://github.com/ElJijuna/gnome-ui/commit/714fb866e53b5996a14bb5d45f5600707e98eaf5))
+* **@gnome-ui/web-components:** add gnome-switch component with native toggle semantics and accessibility features ([a4ef936](https://github.com/ElJijuna/gnome-ui/commit/a4ef93608483f22388063069dc25ffd6d1a2b339))
+* **@gnome-ui/web-components:** add gnome-text-field component with label, hint, and validation support ([0a9e009](https://github.com/ElJijuna/gnome-ui/commit/0a9e009c5957b8cfe4e4f8aebe786b03acd548d4))
+* **@gnome-ui/web-components:** add gnome-tooltip component with hover/focus triggers, accessibility features, and styles ([afe4f8d](https://github.com/ElJijuna/gnome-ui/commit/afe4f8d0213f82b0700f02b9fdf505751b7dc989))
+* **@gnome-ui/web-components:** add GnomePopover and GnomeToast components with tests and styles ([b4a73dc](https://github.com/ElJijuna/gnome-ui/commit/b4a73dca68540d07a18415b92bcec5133487dc4e))
+* **@gnome-ui/web-components:** add Playwright browser tests and improve dialog accessibility ([c429da8](https://github.com/ElJijuna/gnome-ui/commit/c429da8975ab5168c4984534f429dd4bd72c273f))
+* **@gnome-ui/web-components:** implement dialog and popover enhancements with ARIA updates and accessibility improvements ([c36996e](https://github.com/ElJijuna/gnome-ui/commit/c36996e09271da3014078f6ee3640fa58013c79d))
+
 ## [1.51.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.50.1...@gnome-ui/react@1.51.0) (2026-07-13)
 
 ### Features
