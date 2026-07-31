@@ -68,10 +68,7 @@ describe('ColorPicker', () => {
 
     it('marks the swatch matching value as checked', () => {
       render(<ColorPicker value="#2ec27e" />);
-      expect(screen.getByRole('radio', { name: 'Green' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'Green' })).toHaveAttribute('aria-checked', 'true');
     });
   });
 

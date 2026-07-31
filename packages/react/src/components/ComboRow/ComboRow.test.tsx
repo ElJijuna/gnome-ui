@@ -24,7 +24,9 @@ describe('ComboRow', () => {
     });
 
     it('renders leading content', () => {
-      render(<ComboRow title="Theme" leading={<span data-testid="leading">T</span>} options={options} />);
+      render(
+        <ComboRow title="Theme" leading={<span data-testid="leading">T</span>} options={options} />,
+      );
       expect(screen.getByTestId('leading')).toBeInTheDocument();
     });
 
@@ -162,9 +164,7 @@ describe('ComboRow', () => {
 
   describe('HTML attribute forwarding', () => {
     it('forwards className', () => {
-      const { container } = render(
-        <ComboRow title="Theme" options={options} className="custom" />,
-      );
+      const { container } = render(<ComboRow title="Theme" options={options} className="custom" />);
       expect(container.firstElementChild).toHaveClass('custom');
     });
   });

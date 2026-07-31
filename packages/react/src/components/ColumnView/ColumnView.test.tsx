@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
-import { ColumnView, type ColumnDef } from './ColumnView';
+import { type ColumnDef, ColumnView } from './ColumnView';
 
 interface Row {
   id: number;

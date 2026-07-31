@@ -74,11 +74,7 @@ describe('OverlaySplitView', () => {
       setViewportWidth(400);
 
       render(
-        <OverlaySplitView
-          showSidebar
-          sidebar={<div>Sidebar</div>}
-          content={<div>Content</div>}
-        />,
+        <OverlaySplitView showSidebar sidebar={<div>Sidebar</div>} content={<div>Content</div>} />,
       );
 
       expect(screen.getByText('Sidebar').parentElement).toHaveAttribute('aria-hidden', 'false');

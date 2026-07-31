@@ -204,13 +204,7 @@ describe('SearchBar', () => {
       const onClose = vi.fn();
 
       render(
-        <SearchBar
-          open
-          value="a"
-          onChange={vi.fn()}
-          onClose={onClose}
-          suggestions={suggestions}
-        />,
+        <SearchBar open value="a" onChange={vi.fn()} onClose={onClose} suggestions={suggestions} />,
       );
 
       screen.getByRole('combobox').focus();

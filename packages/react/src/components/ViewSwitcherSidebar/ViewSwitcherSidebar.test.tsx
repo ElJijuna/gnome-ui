@@ -72,10 +72,7 @@ describe('ViewSwitcherSidebar', () => {
         'aria-checked',
         'false',
       );
-      expect(screen.getByRole('radio', { name: 'Albums' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'Albums' })).toHaveAttribute('aria-checked', 'true');
     });
 
     it('calls onValueChange with its name when clicked', async () => {
@@ -167,10 +164,7 @@ describe('ViewSwitcherSidebar', () => {
       screen.getByRole('radio', { name: 'photos' }).focus();
       await userEvent.keyboard('{ArrowDown}');
 
-      expect(screen.getByRole('radio', { name: 'albums' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'albums' })).toHaveAttribute('aria-checked', 'true');
       expect(screen.getByRole('radio', { name: 'albums' })).toHaveFocus();
     });
 
@@ -180,10 +174,7 @@ describe('ViewSwitcherSidebar', () => {
       screen.getByRole('radio', { name: 'photos' }).focus();
       await userEvent.keyboard('{ArrowUp}');
 
-      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute('aria-checked', 'true');
     });
 
     it('End/Home jump to the last/first item', async () => {
@@ -191,16 +182,10 @@ describe('ViewSwitcherSidebar', () => {
 
       screen.getByRole('radio', { name: 'photos' }).focus();
       await userEvent.keyboard('{End}');
-      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute('aria-checked', 'true');
 
       await userEvent.keyboard('{Home}');
-      expect(screen.getByRole('radio', { name: 'photos' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'photos' })).toHaveAttribute('aria-checked', 'true');
     });
   });
 

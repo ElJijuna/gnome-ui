@@ -79,7 +79,10 @@ describe('NavigationSplitView', () => {
         />,
       );
 
-      expect(screen.getByText('Sidebar pane').parentElement).toHaveAttribute('aria-hidden', 'false');
+      expect(screen.getByText('Sidebar pane').parentElement).toHaveAttribute(
+        'aria-hidden',
+        'false',
+      );
       expect(screen.getByText('Content pane').parentElement).toHaveAttribute('aria-hidden', 'true');
     });
 
@@ -95,7 +98,10 @@ describe('NavigationSplitView', () => {
       );
 
       expect(screen.getByText('Sidebar pane').parentElement).toHaveAttribute('aria-hidden', 'true');
-      expect(screen.getByText('Content pane').parentElement).toHaveAttribute('aria-hidden', 'false');
+      expect(screen.getByText('Content pane').parentElement).toHaveAttribute(
+        'aria-hidden',
+        'false',
+      );
     });
 
     it('omits the divider', () => {

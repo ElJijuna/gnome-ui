@@ -165,7 +165,13 @@ describe('Toast', () => {
       const onDismiss = vi.fn();
 
       render(
-        <Toast title="File saved" dismissible actionLabel="Undo" onAction={onAction} onDismiss={onDismiss} />,
+        <Toast
+          title="File saved"
+          dismissible
+          actionLabel="Undo"
+          onAction={onAction}
+          onDismiss={onDismiss}
+        />,
       );
       await userEvent.click(screen.getByRole('button', { name: 'Dismiss' }));
 
@@ -221,4 +227,3 @@ describe('Toaster', () => {
     });
   });
 });
-

@@ -110,7 +110,9 @@ describe('Slider', () => {
     it('snaps to the configured step', () => {
       const onChange = vi.fn();
 
-      render(<Slider value={0} min={0} max={100} step={10} onChange={onChange} aria-label="Volume" />);
+      render(
+        <Slider value={0} min={0} max={100} step={10} onChange={onChange} aria-label="Volume" />,
+      );
       const slider = screen.getByRole('slider');
       mockTrackRect(slider);
 

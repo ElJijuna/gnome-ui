@@ -103,10 +103,7 @@ describe('ViewSwitcher', () => {
       screen.getByRole('radio', { name: 'all' }).focus();
       await userEvent.keyboard('{ArrowRight}');
 
-      expect(screen.getByRole('radio', { name: 'photos' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'photos' })).toHaveAttribute('aria-checked', 'true');
       expect(screen.getByRole('radio', { name: 'photos' })).toHaveFocus();
     });
 
@@ -116,10 +113,7 @@ describe('ViewSwitcher', () => {
       screen.getByRole('radio', { name: 'all' }).focus();
       await userEvent.keyboard('{ArrowLeft}');
 
-      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute('aria-checked', 'true');
     });
 
     it('ArrowRight wraps from the last to the first item', async () => {
@@ -137,10 +131,7 @@ describe('ViewSwitcher', () => {
       screen.getByRole('radio', { name: 'all' }).focus();
       await userEvent.keyboard('{End}');
 
-      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute(
-        'aria-checked',
-        'true',
-      );
+      expect(screen.getByRole('radio', { name: 'shared' })).toHaveAttribute('aria-checked', 'true');
     });
 
     it('Home jumps to the first item', async () => {
