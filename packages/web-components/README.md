@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-one framework-agnostic components:
+The package currently contains twenty-two framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -15,6 +15,8 @@ The package currently contains twenty-one framework-agnostic components:
 - `<gnome-banner>` — persistent top-of-view message strip with
   `data-action`/`data-dismiss` descendants and `gnome-action`/`gnome-dismiss`
   events.
+- `<gnome-boxed-list>` — rounded bordered list; gives every direct child
+  `role="listitem"` and merges their borders with pure CSS dividers.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
 - `<gnome-card>` — elevated content container; `interactive` composes a real
@@ -727,6 +729,43 @@ use a different element; the host adopts it instead of generating one.
 `row-title` shrinks to a dim caption label and `row-subtitle` becomes the
 prominent value — and, like `padding` on `gnome-card`, is a plain attribute
 read directly by CSS.
+
+## Boxed List
+
+```html
+<gnome-boxed-list>
+  <gnome-action-row>
+    <span data-slot="row-title">Wi-Fi</span>
+    <span data-slot="row-subtitle">Home Network</span>
+    <span data-slot="row-suffix">
+      <input type="checkbox" role="switch" aria-label="Wi-Fi" checked />
+    </span>
+  </gnome-action-row>
+  <gnome-action-row>
+    <span data-slot="row-title">Bluetooth</span>
+    <span data-slot="row-subtitle">Off</span>
+    <span data-slot="row-suffix">
+      <input type="checkbox" role="switch" aria-label="Bluetooth" />
+    </span>
+  </gnome-action-row>
+</gnome-boxed-list>
+```
+
+Rounded bordered list grouping row-shaped children (e.g. `gnome-action-row`,
+or any element) with merged borders and a single rounded outline. The host
+sets `role="list"` (guarded) and gives every direct child `role="listitem"`
+(also guarded, and re-applied to children added later — e.g. an htmx
+append — via a lightweight `childList` `MutationObserver`, since ARIA
+roles can't be expressed in CSS).
+
+Unlike the React version — which inserts an actual `<Separator>` element
+between rows — dividers here are a plain CSS `border-top` on every child
+but the first, so rows can be added, removed, or reordered with no
+separator bookkeeping at all, JS or otherwise.
+
+`variant="separate"` (default `"default"`) renders each child as its own
+standalone rounded card instead of a single joined list; like `padding` on
+`gnome-card`, it's a plain attribute read directly by CSS.
 
 ## htmx
 

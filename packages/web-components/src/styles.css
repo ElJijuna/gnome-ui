@@ -4,6 +4,7 @@ gnome-action-row,
 gnome-avatar,
 gnome-badge,
 gnome-banner,
+gnome-boxed-list,
 gnome-button,
 gnome-card,
 gnome-checkbox,
@@ -31,6 +32,7 @@ gnome-action-row *,
 gnome-avatar *,
 gnome-badge *,
 gnome-banner *,
+gnome-boxed-list *,
 gnome-button *,
 gnome-card *,
 gnome-checkbox *,
@@ -1592,6 +1594,38 @@ gnome-action-row[interactive] [data-slot="row-surface"]:disabled {
   opacity: var(--gnome-opacity-disabled, 0.5);
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Boxed List */
+
+gnome-boxed-list {
+  display: block;
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  border: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.07));
+  border-radius: var(--gnome-radius-lg, 12px);
+  overflow: hidden;
+}
+
+gnome-boxed-list:not([variant="separate"]) > :not(:first-child) {
+  border-top: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.07));
+}
+
+gnome-boxed-list[variant="separate"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+  background: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+gnome-boxed-list[variant="separate"] > * {
+  background-color: var(--gnome-card-bg-color, #fff);
+  border: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.07));
+  border-radius: var(--gnome-radius-lg, 12px);
+  overflow: hidden;
 }
 
 /* Dialog */

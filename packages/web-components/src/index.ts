@@ -25,6 +25,11 @@ export {
   registerGnomeBanner,
 } from './banner';
 export {
+  GnomeBoxedListElement,
+  type GnomeBoxedListVariant,
+  registerGnomeBoxedList,
+} from './boxed-list';
+export {
   GnomeButtonElement,
   type GnomeButtonShape,
   type GnomeButtonSize,
