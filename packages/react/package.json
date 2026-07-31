@@ -467,6 +467,11 @@
       "import": "./dist/components/Tabs.js",
       "require": "./dist/components/Tabs.cjs"
     },
+    "./components/TagInput": {
+      "types": "./dist/components/TagInput.d.ts",
+      "import": "./dist/components/TagInput.js",
+      "require": "./dist/components/TagInput.cjs"
+    },
     "./components/TerminalView": {
       "types": "./dist/components/TerminalView.d.ts",
       "import": "./dist/components/TerminalView.js",

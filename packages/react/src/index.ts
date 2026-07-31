@@ -289,6 +289,8 @@ export type { SwitchRowProps } from './components/SwitchRow';
 export { SwitchRow } from './components/SwitchRow';
 export type { TabBarProps, TabItemProps, TabPanelProps } from './components/Tabs';
 export { TabBar, TabItem, TabPanel } from './components/Tabs';
+export type { TagInputProps } from './components/TagInput';
+export { TagInput } from './components/TagInput';
 export type { TerminalVariant, TerminalViewProps } from './components/TerminalView';
 export { TerminalView } from './components/TerminalView';
 export type { TextColor, TextProps, TextVariant } from './components/Text';
