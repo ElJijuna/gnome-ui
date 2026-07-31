@@ -287,6 +287,11 @@
       "import": "./dist/components/Modal.js",
       "require": "./dist/components/Modal.cjs"
     },
+    "./components/MultiSelectDropdown": {
+      "types": "./dist/components/MultiSelectDropdown.d.ts",
+      "import": "./dist/components/MultiSelectDropdown.js",
+      "require": "./dist/components/MultiSelectDropdown.cjs"
+    },
     "./components/NavigationSplitView": {
       "types": "./dist/components/NavigationSplitView.d.ts",
       "import": "./dist/components/NavigationSplitView.js",
