@@ -45,7 +45,7 @@
 }
 
 .stepItem:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   background-color: var(--gnome-border-subtle);

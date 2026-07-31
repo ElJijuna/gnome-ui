@@ -1,3 +1,4 @@
+import type { IconDefinition } from '@gnome-ui/icons';
 import {
   ApplicationXExecutable,
   AudioXGeneric,
@@ -12,7 +13,6 @@ import {
   XOfficePresentation,
   XOfficeSpreadsheet,
 } from '@gnome-ui/icons';
-import type { IconDefinition } from '@gnome-ui/icons';
 
 export type FileTypeCategory =
   | 'folder'

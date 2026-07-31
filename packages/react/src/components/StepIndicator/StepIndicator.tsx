@@ -74,11 +74,7 @@ export const StepIndicator = ({
           const isCurrent = i === clampedCurrent;
           const clickable = Boolean(onStepClick) && isCompleted;
           const stepLabel = stepLabels?.[i];
-          const circleContent = isCompleted ? (
-            <Icon icon={Check} size="sm" aria-hidden />
-          ) : (
-            i + 1
-          );
+          const circleContent = isCompleted ? <Icon icon={Check} size="sm" aria-hidden /> : i + 1;
 
           return (
             <li

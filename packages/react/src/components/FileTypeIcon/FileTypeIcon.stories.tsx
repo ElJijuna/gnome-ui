@@ -54,10 +54,7 @@ export const AllCategories: Story = {
     return (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
         {files.map((name) => (
-          <div
-            key={name}
-            style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}
-          >
+          <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
             <FileTypeIcon name={name} size="lg" />
             <Text variant="caption">{name}</Text>
           </div>

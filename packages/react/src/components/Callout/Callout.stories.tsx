@@ -78,9 +78,7 @@ export const InAForm: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <TextField label="New password" type="password" />
-      <Callout variant="warning">
-        Choosing a weak password puts your account at risk.
-      </Callout>
+      <Callout variant="warning">Choosing a weak password puts your account at risk.</Callout>
     </div>
   ),
   parameters: { controls: { disable: true } },

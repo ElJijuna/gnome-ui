@@ -85,7 +85,9 @@ describe('TextTruncate', () => {
       mockScrollWidth = 300;
       mockClientWidth = 120;
 
-      const { container } = render(<TextTruncate>A very long label that does not fit</TextTruncate>);
+      const { container } = render(
+        <TextTruncate>A very long label that does not fit</TextTruncate>,
+      );
 
       // The tooltip's own (hidden) content div also contains the text, so
       // target the trigger specifically via the attribute Tooltip sets on it.
@@ -98,7 +100,9 @@ describe('TextTruncate', () => {
       mockScrollWidth = 300;
       mockClientWidth = 120;
 
-      const { container } = render(<TextTruncate>A very long label that does not fit</TextTruncate>);
+      const { container } = render(
+        <TextTruncate>A very long label that does not fit</TextTruncate>,
+      );
       const el = container.querySelector('[aria-describedby]') as HTMLElement;
 
       expect(el.className).toMatch(/truncate/);
@@ -109,7 +113,9 @@ describe('TextTruncate', () => {
       mockScrollWidth = 300;
       mockClientWidth = 120;
 
-      const { container } = render(<TextTruncate>A very long label that does not fit</TextTruncate>);
+      const { container } = render(
+        <TextTruncate>A very long label that does not fit</TextTruncate>,
+      );
       const trigger = container.querySelector('[aria-describedby]') as HTMLElement;
 
       await userEvent.hover(trigger);

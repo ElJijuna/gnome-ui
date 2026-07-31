@@ -342,6 +342,11 @@
       "import": "./dist/components/RadioButton.js",
       "require": "./dist/components/RadioButton.cjs"
     },
+    "./components/RangeSlider": {
+      "types": "./dist/components/RangeSlider.d.ts",
+      "import": "./dist/components/RangeSlider.js",
+      "require": "./dist/components/RangeSlider.cjs"
+    },
     "./components/RatingStars": {
       "types": "./dist/components/RatingStars.d.ts",
       "import": "./dist/components/RatingStars.js",

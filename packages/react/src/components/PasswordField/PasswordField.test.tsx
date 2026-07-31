@@ -69,9 +69,7 @@ describe('PasswordField', () => {
     });
 
     it('accepts custom reveal/conceal labels', async () => {
-      render(
-        <PasswordField label="Password" revealLabel="Mostrar" concealLabel="Ocultar" />,
-      );
+      render(<PasswordField label="Password" revealLabel="Mostrar" concealLabel="Ocultar" />);
       const user = userEvent.setup();
 
       expect(screen.getByRole('button', { name: 'Mostrar' })).toBeInTheDocument();

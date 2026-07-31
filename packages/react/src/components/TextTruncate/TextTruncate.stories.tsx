@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { TextTruncate } from './TextTruncate';
 import readme from './README.md?raw';
+import { TextTruncate } from './TextTruncate';
 
 const meta: Meta<typeof TextTruncate> = {
   title: 'Components/TextTruncate',

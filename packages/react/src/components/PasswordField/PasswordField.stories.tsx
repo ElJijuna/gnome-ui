@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import readme from './README.md?raw';
 import { PasswordField } from './PasswordField';
+import readme from './README.md?raw';
 
 const meta: Meta<typeof PasswordField> = {
   title: 'Components/PasswordField',
@@ -80,7 +80,8 @@ export const NotRevealable: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Set `revealable={false}` for high-security fields where the value should never be displayable, e.g. a PIN pad.',
+        story:
+          'Set `revealable={false}` for high-security fields where the value should never be displayable, e.g. a PIN pad.',
       },
     },
   },

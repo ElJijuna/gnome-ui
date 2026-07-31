@@ -47,9 +47,7 @@ export const FileTypeIcon = ({
 }: FileTypeIconProps) => {
   const category = isFolder
     ? 'folder'
-    : (mimeType && categoryFromMimeType(mimeType)) ||
-      (name && categoryFromName(name)) ||
-      'unknown';
+    : (mimeType && categoryFromMimeType(mimeType)) || (name && categoryFromName(name)) || 'unknown';
 
   const resolvedLabel = label ?? getFileTypeLabel(category);
 

@@ -215,6 +215,8 @@ export type { ProgressBarProps, ProgressBarVariant } from './components/Progress
 export { ProgressBar } from './components/ProgressBar';
 export type { RadioButtonProps } from './components/RadioButton';
 export { RadioButton } from './components/RadioButton';
+export type { RangeSliderProps } from './components/RangeSlider';
+export { RangeSlider } from './components/RangeSlider';
 export type { RatingStarsProps } from './components/RatingStars';
 export { RatingStars } from './components/RatingStars';
 export type {
