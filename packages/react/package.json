@@ -27,15 +27,15 @@
       "import": "./dist/components/Avatar.js",
       "require": "./dist/components/Avatar.cjs"
     },
-    "./components/AvatarRotator": {
-      "types": "./dist/components/AvatarRotator.d.ts",
-      "import": "./dist/components/AvatarRotator.js",
-      "require": "./dist/components/AvatarRotator.cjs"
-    },
     "./components/AvatarGroup": {
       "types": "./dist/components/AvatarGroup.d.ts",
       "import": "./dist/components/AvatarGroup.js",
       "require": "./dist/components/AvatarGroup.cjs"
+    },
+    "./components/AvatarRotator": {
+      "types": "./dist/components/AvatarRotator.d.ts",
+      "import": "./dist/components/AvatarRotator.js",
+      "require": "./dist/components/AvatarRotator.cjs"
     },
     "./components/Badge": {
       "types": "./dist/components/Badge.d.ts",
@@ -142,10 +142,20 @@
       "import": "./dist/components/ContributionGraph.js",
       "require": "./dist/components/ContributionGraph.cjs"
     },
+    "./components/CopyButton": {
+      "types": "./dist/components/CopyButton.d.ts",
+      "import": "./dist/components/CopyButton.js",
+      "require": "./dist/components/CopyButton.cjs"
+    },
     "./components/CountDownTimer": {
       "types": "./dist/components/CountDownTimer.d.ts",
       "import": "./dist/components/CountDownTimer.js",
       "require": "./dist/components/CountDownTimer.cjs"
+    },
+    "./components/CveIdentifier": {
+      "types": "./dist/components/CveIdentifier.d.ts",
+      "import": "./dist/components/CveIdentifier.js",
+      "require": "./dist/components/CveIdentifier.cjs"
     },
     "./components/CvssScore": {
       "types": "./dist/components/CvssScore.d.ts",
@@ -157,11 +167,6 @@
       "import": "./dist/components/CvssVector.js",
       "require": "./dist/components/CvssVector.cjs"
     },
-    "./components/CveIdentifier": {
-      "types": "./dist/components/CveIdentifier.d.ts",
-      "import": "./dist/components/CveIdentifier.js",
-      "require": "./dist/components/CveIdentifier.cjs"
-    },
     "./components/CweIdentifier": {
       "types": "./dist/components/CweIdentifier.d.ts",
       "import": "./dist/components/CweIdentifier.js",
@@ -171,6 +176,11 @@
       "types": "./dist/components/Dialog.d.ts",
       "import": "./dist/components/Dialog.js",
       "require": "./dist/components/Dialog.cjs"
+    },
+    "./components/Divider": {
+      "types": "./dist/components/Divider.d.ts",
+      "import": "./dist/components/Divider.js",
+      "require": "./dist/components/Divider.cjs"
     },
     "./components/Drawer": {
       "types": "./dist/components/Drawer.d.ts",
@@ -186,6 +196,11 @@
       "types": "./dist/components/EntryRow.d.ts",
       "import": "./dist/components/EntryRow.js",
       "require": "./dist/components/EntryRow.cjs"
+    },
+    "./components/Expander": {
+      "types": "./dist/components/Expander.d.ts",
+      "import": "./dist/components/Expander.js",
+      "require": "./dist/components/Expander.cjs"
     },
     "./components/ExpanderRow": {
       "types": "./dist/components/ExpanderRow.d.ts",
@@ -232,6 +247,11 @@
       "import": "./dist/components/InlineViewSwitcher.js",
       "require": "./dist/components/InlineViewSwitcher.cjs"
     },
+    "./components/LevelBar": {
+      "types": "./dist/components/LevelBar.d.ts",
+      "import": "./dist/components/LevelBar.js",
+      "require": "./dist/components/LevelBar.cjs"
+    },
     "./components/Link": {
       "types": "./dist/components/Link.d.ts",
       "import": "./dist/components/Link.js",
@@ -256,6 +276,11 @@
       "types": "./dist/components/NavigationView.d.ts",
       "import": "./dist/components/NavigationView.js",
       "require": "./dist/components/NavigationView.cjs"
+    },
+    "./components/Overlay": {
+      "types": "./dist/components/Overlay.d.ts",
+      "import": "./dist/components/Overlay.js",
+      "require": "./dist/components/Overlay.cjs"
     },
     "./components/OverlaySplitView": {
       "types": "./dist/components/OverlaySplitView.d.ts",
@@ -297,15 +322,15 @@
       "import": "./dist/components/ProgressBar.js",
       "require": "./dist/components/ProgressBar.cjs"
     },
-    "./components/SegmentedBar": {
-      "types": "./dist/components/SegmentedBar.d.ts",
-      "import": "./dist/components/SegmentedBar.js",
-      "require": "./dist/components/SegmentedBar.cjs"
-    },
     "./components/RadioButton": {
       "types": "./dist/components/RadioButton.d.ts",
       "import": "./dist/components/RadioButton.js",
       "require": "./dist/components/RadioButton.cjs"
+    },
+    "./components/RatingStars": {
+      "types": "./dist/components/RatingStars.d.ts",
+      "import": "./dist/components/RatingStars.js",
+      "require": "./dist/components/RatingStars.cjs"
     },
     "./components/ScrollToTop": {
       "types": "./dist/components/ScrollToTop.d.ts",
@@ -322,10 +347,20 @@
       "import": "./dist/components/SecurityMetric.js",
       "require": "./dist/components/SecurityMetric.cjs"
     },
+    "./components/SegmentedBar": {
+      "types": "./dist/components/SegmentedBar.d.ts",
+      "import": "./dist/components/SegmentedBar.js",
+      "require": "./dist/components/SegmentedBar.cjs"
+    },
     "./components/Separator": {
       "types": "./dist/components/Separator.d.ts",
       "import": "./dist/components/Separator.js",
       "require": "./dist/components/Separator.cjs"
+    },
+    "./components/SeverityBadge": {
+      "types": "./dist/components/SeverityBadge.d.ts",
+      "import": "./dist/components/SeverityBadge.js",
+      "require": "./dist/components/SeverityBadge.cjs"
     },
     "./components/ShortcutLabel": {
       "types": "./dist/components/ShortcutLabel.d.ts",
@@ -371,11 +406,6 @@
       "types": "./dist/components/SplitButton.d.ts",
       "import": "./dist/components/SplitButton.js",
       "require": "./dist/components/SplitButton.cjs"
-    },
-    "./components/SeverityBadge": {
-      "types": "./dist/components/SeverityBadge.d.ts",
-      "import": "./dist/components/SeverityBadge.js",
-      "require": "./dist/components/SeverityBadge.cjs"
     },
     "./components/StatusBadge": {
       "types": "./dist/components/StatusBadge.d.ts",
