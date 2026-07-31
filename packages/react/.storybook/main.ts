@@ -10,28 +10,13 @@ const config: StorybookConfig = {
   staticDirs: ['../../../public'],
   managerHead: (head) => `${head}<link rel="icon" type="image/png" href="/assets/gnome-ui.png" />`,
   docs: {},
-  refs: {
-    layout: {
-      title: '@gnome-ui/layout',
-      url: 'https://gnome-ui.org/layout',
-      expanded: false,
-    },
-    charts: {
-      title: '@gnome-ui/charts',
-      url: 'https://gnome-ui.org/charts',
-      expanded: false,
-    },
-    icons: {
-      title: '@gnome-ui/icons',
-      url: 'https://gnome-ui.org/icons',
-      expanded: false,
-    },
-    webComponents: {
-      title: '@gnome-ui/web-components',
-      url: 'https://gnome-ui.org/web-components',
-      expanded: false,
-    },
-  },
+  // `refs` composition (linking to the layout/charts/icons/web-components
+  // sub-Storybooks on gnome-ui.org) is disabled: as of Storybook 10.5.5 the
+  // manager crashes with "Cannot read properties of undefined (reading 'id')"
+  // whenever a composed ref doesn't serve a metadata.json — which none of our
+  // `storybook build` outputs do, since it isn't a standard build artifact in
+  // modern Storybook. Reproduced both locally and against the live
+  // gnome-ui.org deployment; confirmed NOT fixed by the 10.5.5 upgrade.
 };
 
 export default config;
