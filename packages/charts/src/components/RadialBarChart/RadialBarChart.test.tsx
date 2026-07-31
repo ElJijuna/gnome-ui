@@ -144,9 +144,7 @@ describe('RadialBarChart', () => {
     it('renders a radial bar sector per data item', () => {
       const { container } = render(<RadialBarChart data={DATA} />);
 
-      expect(container.querySelectorAll('.recharts-radial-bar-sector')).toHaveLength(
-        DATA.length,
-      );
+      expect(container.querySelectorAll('.recharts-radial-bar-sector')).toHaveLength(DATA.length);
     });
 
     it('renders arc labels with each item name when showLabels is true', () => {

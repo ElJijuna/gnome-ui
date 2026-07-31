@@ -137,13 +137,9 @@ describe('TreeMap', () => {
 
     it('colors tiles from the same group identically', () => {
       const { container } = render(<TreeMap data={DATA} />);
-      const reactFill = container
-        .querySelector('rect[aria-label^="React"]')
-        ?.getAttribute('fill');
+      const reactFill = container.querySelector('rect[aria-label^="React"]')?.getAttribute('fill');
       const vueFill = container.querySelector('rect[aria-label^="Vue"]')?.getAttribute('fill');
-      const nodeFill = container
-        .querySelector('rect[aria-label^="Node.js"]')
-        ?.getAttribute('fill');
+      const nodeFill = container.querySelector('rect[aria-label^="Node.js"]')?.getAttribute('fill');
 
       expect(reactFill).toBe(vueFill);
       expect(reactFill).not.toBe(nodeFill);
