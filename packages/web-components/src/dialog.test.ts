@@ -166,14 +166,10 @@ describe('GnomeDialogElement', () => {
     expect(secondDialog.inert).toBe(false);
     expect(document.activeElement?.textContent).toBe('Second action');
 
-    firstDialog.dispatchEvent(
-      new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
-    );
+    firstDialog.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }));
     expect(firstDialog.open).toBe(true);
 
-    secondDialog.dispatchEvent(
-      new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
-    );
+    secondDialog.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }));
 
     expect(secondDialog.open).toBe(false);
     expect(firstDialog.inert).toBe(false);

@@ -67,20 +67,18 @@ describe('GnomeAvatarElement', () => {
   });
 
   it('shows the image and hides initials when a src is present', () => {
-    const { image, initials } = renderAvatar(
-      '<img data-slot="avatar-image" src="/ada.png" />',
-      { name: 'Ada Lovelace' },
-    );
+    const { image, initials } = renderAvatar('<img data-slot="avatar-image" src="/ada.png" />', {
+      name: 'Ada Lovelace',
+    });
 
     expect(image?.hidden).toBe(false);
     expect(initials?.hidden).toBe(true);
   });
 
   it('defaults the image alt from name without overwriting an explicit alt', () => {
-    const { image: withoutAlt } = renderAvatar(
-      '<img data-slot="avatar-image" src="/ada.png" />',
-      { name: 'Ada Lovelace' },
-    );
+    const { image: withoutAlt } = renderAvatar('<img data-slot="avatar-image" src="/ada.png" />', {
+      name: 'Ada Lovelace',
+    });
     expect(withoutAlt?.getAttribute('alt')).toBe('Ada Lovelace');
 
     const { image: withAlt } = renderAvatar(
@@ -100,10 +98,9 @@ describe('GnomeAvatarElement', () => {
   });
 
   it('falls back to initials when the image fires an error event', () => {
-    const { image, initials } = renderAvatar(
-      '<img data-slot="avatar-image" src="/broken.png" />',
-      { name: 'Ada Lovelace' },
-    );
+    const { image, initials } = renderAvatar('<img data-slot="avatar-image" src="/broken.png" />', {
+      name: 'Ada Lovelace',
+    });
 
     expect(image?.hidden).toBe(false);
     expect(initials?.hidden).toBe(true);
@@ -115,10 +112,9 @@ describe('GnomeAvatarElement', () => {
   });
 
   it('recovers when the image loads successfully after a previous error', () => {
-    const { image, initials } = renderAvatar(
-      '<img data-slot="avatar-image" src="/broken.png" />',
-      { name: 'Ada Lovelace' },
-    );
+    const { image, initials } = renderAvatar('<img data-slot="avatar-image" src="/broken.png" />', {
+      name: 'Ada Lovelace',
+    });
 
     image?.dispatchEvent(new Event('error'));
     expect(image?.hidden).toBe(true);
@@ -129,10 +125,9 @@ describe('GnomeAvatarElement', () => {
   });
 
   it('adopts a pre-existing initials element instead of creating a duplicate', () => {
-    const { avatar, initials } = renderAvatar(
-      '<span data-slot="avatar-initials">SSR</span>',
-      { name: 'Ada Lovelace' },
-    );
+    const { avatar, initials } = renderAvatar('<span data-slot="avatar-initials">SSR</span>', {
+      name: 'Ada Lovelace',
+    });
 
     expect(avatar.querySelectorAll('[data-slot="avatar-initials"]')).toHaveLength(1);
     expect(initials?.textContent).toBe('AL');
@@ -153,8 +148,6 @@ describe('GnomeAvatarElement', () => {
 
     replacement.dispatchEvent(new Event('error'));
     expect(replacement.hidden).toBe(true);
-    expect(avatar.querySelector<HTMLElement>('[data-slot="avatar-initials"]')?.hidden).toBe(
-      false,
-    );
+    expect(avatar.querySelector<HTMLElement>('[data-slot="avatar-initials"]')?.hidden).toBe(false);
   });
 });

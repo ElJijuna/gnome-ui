@@ -184,9 +184,7 @@ function refreshModalIsolation() {
   }
 
   const topModal = modalStack[modalStack.length - 1];
-  const outsideBranches = new Set(
-    topModal ? getOutsideBranches(topModal) : [],
-  );
+  const outsideBranches = new Set(topModal ? getOutsideBranches(topModal) : []);
 
   for (const element of managedInertElements) {
     if (!outsideBranches.has(element)) {

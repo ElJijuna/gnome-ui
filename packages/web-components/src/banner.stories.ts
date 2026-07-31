@@ -111,9 +111,7 @@ export const Variants: Story = {
     ];
 
     for (const [variant, message] of rows) {
-      demo.append(
-        renderBanner({ actionLabel: '', dismissible: false, message, variant }),
-      );
+      demo.append(renderBanner({ actionLabel: '', dismissible: false, message, variant }));
     }
 
     story.append(demo);
@@ -138,7 +136,8 @@ export const WithAction: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Add a <button data-action> inside [data-slot="banner-actions"] for a trailing action.',
+        story:
+          'Add a <button data-action> inside [data-slot="banner-actions"] for a trailing action.',
       },
     },
   },
@@ -153,7 +152,8 @@ export const Dismissible: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Add a <button data-dismiss> to let the user close the banner; it hides itself and fires gnome-dismiss.',
+        story:
+          'Add a <button data-dismiss> to let the user close the banner; it hides itself and fires gnome-dismiss.',
       },
     },
   },

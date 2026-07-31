@@ -1,8 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('badge renders its light-DOM content with the accent variant by default', async ({
-  page,
-}) => {
+test('badge renders its light-DOM content with the accent variant by default', async ({ page }) => {
   await page.goto('/iframe.html?id=web-components-badge--interactive');
 
   const badge = page.locator('gnome-badge');

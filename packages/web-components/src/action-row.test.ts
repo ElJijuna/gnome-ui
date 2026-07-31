@@ -37,9 +37,7 @@ describe('GnomeActionRowElement', () => {
     expect(content).not.toBeNull();
     expect(content?.parentElement).toBe(row);
     expect(content?.querySelector('[data-slot="row-title"]')?.textContent).toBe('Wi-Fi');
-    expect(content?.querySelector('[data-slot="row-subtitle"]')?.textContent).toBe(
-      'Home Network',
-    );
+    expect(content?.querySelector('[data-slot="row-subtitle"]')?.textContent).toBe('Home Network');
   });
 
   it('does not generate row-content when there is no title/subtitle at all', () => {
@@ -115,7 +113,8 @@ describe('GnomeActionRowElement', () => {
 
     it('does not emit gnome-activate when clicking a row-suffix control', () => {
       const { row } = renderRow(
-        BASIC_MARKUP + '<span data-slot="row-suffix"><button type="button">Configure</button></span>',
+        BASIC_MARKUP +
+          '<span data-slot="row-suffix"><button type="button">Configure</button></span>',
         { interactive: '' },
       );
       const onActivate = vi.fn();

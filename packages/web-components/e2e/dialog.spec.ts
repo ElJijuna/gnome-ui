@@ -2,9 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import type { GnomeDialogElement } from '../src/dialog';
 
-test('dialog isolates the page, manages focus, and refreshes swapped content', async ({
-  page,
-}) => {
+test('dialog isolates the page, manages focus, and refreshes swapped content', async ({ page }) => {
   await page.goto('/iframe.html?id=web-components-dialog--interactive');
 
   const trigger = page.getByRole('button', { name: 'Delete project' });
@@ -58,14 +56,10 @@ test('stacked dialogs keep only the topmost modal interactive', async ({ page })
 
   const secondDialog = page.locator('#stacked-dialog');
   await expect
-    .poll(() =>
-      firstDialog.evaluate((element) => Boolean(element.closest('[inert]'))),
-    )
+    .poll(() => firstDialog.evaluate((element) => Boolean(element.closest('[inert]'))))
     .toBe(true);
   await expect
-    .poll(() =>
-      secondDialog.evaluate((element) => Boolean(element.closest('[inert]'))),
-    )
+    .poll(() => secondDialog.evaluate((element) => Boolean(element.closest('[inert]'))))
     .toBe(false);
   await expect(secondDialog).toHaveAttribute('data-modal-top', '');
   await expect(page.getByRole('button', { name: 'Second action' })).toBeFocused();
@@ -74,9 +68,7 @@ test('stacked dialogs keep only the topmost modal interactive', async ({ page })
 
   await expect(secondDialog).not.toHaveAttribute('open', '');
   await expect
-    .poll(() =>
-      firstDialog.evaluate((element) => Boolean(element.closest('[inert]'))),
-    )
+    .poll(() => firstDialog.evaluate((element) => Boolean(element.closest('[inert]'))))
     .toBe(false);
   await expect(firstDialog).toHaveAttribute('data-modal-top', '');
   await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();

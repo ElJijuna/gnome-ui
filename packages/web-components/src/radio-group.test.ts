@@ -130,7 +130,7 @@ describe('GnomeRadioGroupElement', () => {
     const { group, controls } = renderRadioGroup();
     group.disabled = true;
 
-    const original = controls[0];
+    const [original] = controls;
     const replacement = document.createElement('input');
     replacement.type = 'radio';
     replacement.dataset.slot = 'radio-control';

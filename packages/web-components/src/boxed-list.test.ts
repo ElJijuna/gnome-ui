@@ -15,8 +15,7 @@ function renderList(markup: string, attrs: Record<string, string> = {}) {
   return list;
 }
 
-const ROWS =
-  '<div>First row</div><div>Second row</div><div>Third row</div>';
+const ROWS = '<div>First row</div><div>Second row</div><div>Third row</div>';
 
 describe('GnomeBoxedListElement', () => {
   it('registers the custom element and defaults role=list, variant=default', () => {

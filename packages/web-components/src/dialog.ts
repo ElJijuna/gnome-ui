@@ -46,20 +46,12 @@ export class GnomeDialogElement extends HTMLElementBase {
     listener: EventListenerOrEventListenerObject | null,
     options?: boolean | AddEventListenerOptions,
   ): void;
-  addEventListener(
-    type: string,
-    listener: unknown,
-    options?: boolean | AddEventListenerOptions,
-  ) {
+  addEventListener(type: string, listener: unknown, options?: boolean | AddEventListenerOptions) {
     if (listener === null) {
       return;
     }
 
-    super.addEventListener(
-      type,
-      listener as EventListenerOrEventListenerObject,
-      options,
-    );
+    super.addEventListener(type, listener as EventListenerOrEventListenerObject, options);
   }
 
   removeEventListener<K extends keyof GnomeDialogEventMap>(
@@ -72,20 +64,12 @@ export class GnomeDialogElement extends HTMLElementBase {
     listener: EventListenerOrEventListenerObject | null,
     options?: boolean | EventListenerOptions,
   ): void;
-  removeEventListener(
-    type: string,
-    listener: unknown,
-    options?: boolean | EventListenerOptions,
-  ) {
+  removeEventListener(type: string, listener: unknown, options?: boolean | EventListenerOptions) {
     if (listener === null) {
       return;
     }
 
-    super.removeEventListener(
-      type,
-      listener as EventListenerOrEventListenerObject,
-      options,
-    );
+    super.removeEventListener(type, listener as EventListenerOrEventListenerObject, options);
   }
 
   #connected = false;

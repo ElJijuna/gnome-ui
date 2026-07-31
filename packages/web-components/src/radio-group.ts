@@ -72,13 +72,9 @@ export class GnomeRadioGroupElement extends HTMLElementBase {
   #observer: MutationObserver | null = null;
 
   #handleChange = (event: Event) => {
-    const target = event.target;
+    const { target } = event;
 
-    if (
-      target instanceof HTMLInputElement &&
-      this.#controls.includes(target) &&
-      target.checked
-    ) {
+    if (target instanceof HTMLInputElement && this.#controls.includes(target) && target.checked) {
       emit<GnomeRadioGroupChangeDetail>(this, 'gnome-change', { value: target.value });
     }
   };

@@ -163,18 +163,13 @@ describe('GnomePopoverElement', () => {
 
     const replacementContent = document.createElement('section');
     replacementContent.dataset.slot = 'popover-content';
-    replacementContent.innerHTML =
-      '<button type="button">Updated action</button>';
+    replacementContent.innerHTML = '<button type="button">Updated action</button>';
     content?.replaceWith(replacementContent);
     await Promise.resolve();
 
-    expect(replacementTrigger.getAttribute('aria-controls')).toBe(
-      replacementContent.id,
-    );
+    expect(replacementTrigger.getAttribute('aria-controls')).toBe(replacementContent.id);
     expect(replacementContent.getAttribute('role')).toBe('dialog');
-    expect(replacementContent.getAttribute('aria-labelledby')).toBe(
-      replacementTrigger.id,
-    );
+    expect(replacementContent.getAttribute('aria-labelledby')).toBe(replacementTrigger.id);
     expect(replacementContent.hidden).toBe(false);
     expect(document.activeElement?.textContent).toBe('Updated action');
   });

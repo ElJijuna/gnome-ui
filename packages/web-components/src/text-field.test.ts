@@ -34,9 +34,7 @@ describe('GnomeTextFieldElement', () => {
   });
 
   it('removes aria-describedby when the hint is absent', () => {
-    const { control } = renderTextField(
-      '<input type="text" data-slot="text-field-control" />',
-    );
+    const { control } = renderTextField('<input type="text" data-slot="text-field-control" />');
 
     expect(control?.hasAttribute('aria-describedby')).toBe(false);
   });

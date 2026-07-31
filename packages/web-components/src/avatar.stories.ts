@@ -13,7 +13,17 @@ const PHOTO_DATA_URI =
   );
 
 interface AvatarArgs {
-  color: '' | 'blue' | 'brown' | 'green' | 'orange' | 'purple' | 'red' | 'slate' | 'teal' | 'yellow';
+  color:
+    | ''
+    | 'blue'
+    | 'brown'
+    | 'green'
+    | 'orange'
+    | 'purple'
+    | 'red'
+    | 'slate'
+    | 'teal'
+    | 'yellow';
   name: string;
   showImage: boolean;
   size: 'lg' | 'md' | 'sm' | 'xl';

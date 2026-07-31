@@ -15,9 +15,7 @@ test('popover follows resized content and restores trigger focus', async ({ page
     element.style.width = '320px';
   });
 
-  await expect
-    .poll(() => content.evaluate((element) => element.style.left))
-    .not.toBe(initialLeft);
+  await expect.poll(() => content.evaluate((element) => element.style.left)).not.toBe(initialLeft);
 
   await page.keyboard.press('Escape');
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
@@ -31,9 +29,7 @@ test('popover rewires ARIA after an htmx-style trigger swap', async ({ page }) =
   const content = page.locator('[data-slot="popover-content"]');
 
   await page.evaluate(() => {
-    const original = document.querySelector<HTMLElement>(
-      '[data-slot="popover-trigger"]',
-    );
+    const original = document.querySelector<HTMLElement>('[data-slot="popover-trigger"]');
     const replacement = document.createElement('button');
     replacement.type = 'button';
     replacement.dataset.slot = 'popover-trigger';

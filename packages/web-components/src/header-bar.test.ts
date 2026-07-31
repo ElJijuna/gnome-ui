@@ -69,9 +69,7 @@ describe('GnomeHeaderBarElement', () => {
   });
 
   it('does not throw and leaves flat false when there is no title at all', () => {
-    const { bar } = renderHeaderBar(
-      '<button data-slot="header-start" type="button">Back</button>',
-    );
+    const { bar } = renderHeaderBar('<button data-slot="header-start" type="button">Back</button>');
 
     expect(bar.querySelector('[data-slot="header-title"]')).toBeNull();
   });

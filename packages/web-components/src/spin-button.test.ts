@@ -2,10 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { GnomeSpinButtonElement } from './spin-button';
 
-function renderSpinButton(
-  controlAttrs = 'value="5" min="0" max="10" step="1"',
-  markup?: string,
-) {
+function renderSpinButton(controlAttrs = 'value="5" min="0" max="10" step="1"', markup?: string) {
   const spin = document.createElement('gnome-spin-button');
   spin.innerHTML =
     markup ??
@@ -49,7 +46,9 @@ describe('GnomeSpinButtonElement', () => {
   });
 
   it('disables the decrement button at min and the increment button at max', () => {
-    const { control, increment, decrement } = renderSpinButton('value="9" min="0" max="10" step="1"');
+    const { control, increment, decrement } = renderSpinButton(
+      'value="9" min="0" max="10" step="1"',
+    );
 
     expect(decrement?.disabled).toBe(false);
     expect(increment?.disabled).toBe(false);
@@ -103,9 +102,7 @@ describe('GnomeSpinButtonElement', () => {
   });
 
   it('preserves consumer-owned disabled state', async () => {
-    const { spin, control } = renderSpinButton(
-      'value="5" min="0" max="10" step="1" disabled',
-    );
+    const { spin, control } = renderSpinButton('value="5" min="0" max="10" step="1" disabled');
 
     expect(control?.disabled).toBe(true);
 

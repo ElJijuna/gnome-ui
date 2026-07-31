@@ -670,7 +670,8 @@ gnome-spin-button :is([data-slot="spin-button-decrement"], [data-slot="spin-butt
   font: inherit;
   font-size: 1.1rem;
   line-height: 1;
-  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+  transition: background-color var(--gnome-duration-fast, 100ms)
+    var(--gnome-easing-default, ease-out);
 }
 
 gnome-spin-button [data-slot="spin-button-decrement"] {

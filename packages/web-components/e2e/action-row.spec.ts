@@ -14,9 +14,9 @@ test('interactive row composes a real button and supports keyboard activation', 
 }) => {
   await page.goto('/iframe.html?id=web-components-action-row--interactive');
 
-  const surface = page.locator('gnome-action-row', { hasText: 'About' }).locator(
-    '[data-slot="row-surface"]',
-  );
+  const surface = page
+    .locator('gnome-action-row', { hasText: 'About' })
+    .locator('[data-slot="row-surface"]');
   await expect(surface).toHaveJSProperty('tagName', 'BUTTON');
 
   let dialogMessage = '';

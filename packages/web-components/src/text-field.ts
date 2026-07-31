@@ -182,10 +182,7 @@ export class GnomeTextFieldElement extends HTMLElementBase {
     this.toggleAttribute('data-disabled', effectivelyDisabled);
 
     if (this.#control && this.#hint) {
-      this.#control.setAttribute(
-        'aria-describedby',
-        ensureId(this.#hint, 'gnome-text-field-hint'),
-      );
+      this.#control.setAttribute('aria-describedby', ensureId(this.#hint, 'gnome-text-field-hint'));
     } else if (this.#control) {
       this.#control.removeAttribute('aria-describedby');
     }

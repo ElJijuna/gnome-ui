@@ -132,9 +132,9 @@ describe('GnomeBannerElement', () => {
     banner.addEventListener('gnome-action', onAction);
     banner.addEventListener('gnome-dismiss', onDismiss);
 
-    banner.querySelector('[data-slot="banner-message"]')?.dispatchEvent(
-      new MouseEvent('click', { bubbles: true }),
-    );
+    banner
+      .querySelector('[data-slot="banner-message"]')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 
     expect(onAction).not.toHaveBeenCalled();
     expect(onDismiss).not.toHaveBeenCalled();

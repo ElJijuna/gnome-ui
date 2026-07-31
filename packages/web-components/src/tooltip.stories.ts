@@ -116,7 +116,8 @@ export const Placements: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'All four placements. The tooltip flips automatically if there is not enough viewport space.',
+        story:
+          'All four placements. The tooltip flips automatically if there is not enough viewport space.',
       },
     },
   },
@@ -172,7 +173,10 @@ export const NoDelay: Story = {
     demo.style.padding = '32px';
 
     demo.append(
-      renderTooltip({ delay: 0, label: 'Appears instantly', placement: 'top' }, 'Hover me (delay=0)'),
+      renderTooltip(
+        { delay: 0, label: 'Appears instantly', placement: 'top' },
+        'Hover me (delay=0)',
+      ),
       renderTooltip(
         { delay: 500, label: 'Standard 500 ms delay', placement: 'top' },
         'Hover me (default)',

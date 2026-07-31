@@ -59,11 +59,6 @@ export {
   registerGnomeMenu,
 } from './menu';
 export {
-  GnomeProgressBarElement,
-  type GnomeProgressBarVariant,
-  registerGnomeProgressBar,
-} from './progress-bar';
-export {
   computePopoverPosition,
   type GnomePopoverCloseDetail,
   type GnomePopoverCloseReason,
@@ -74,6 +69,11 @@ export {
   type GnomePopoverPosition,
   registerGnomePopover,
 } from './popover';
+export {
+  GnomeProgressBarElement,
+  type GnomeProgressBarVariant,
+  registerGnomeProgressBar,
+} from './progress-bar';
 export {
   type GnomeRadioGroupChangeDetail,
   GnomeRadioGroupElement,

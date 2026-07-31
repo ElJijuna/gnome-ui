@@ -1,8 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('determinate progress bar exposes aria-value* and paints the fill width', async ({
-  page,
-}) => {
+test('determinate progress bar exposes aria-value* and paints the fill width', async ({ page }) => {
   await page.goto('/iframe.html?id=web-components-progress-bar--interactive');
 
   const bar = page.getByRole('progressbar', { name: 'Download progress' });
@@ -21,8 +19,6 @@ test('indeterminate progress bar omits aria-value* and pulses', async ({ page })
   await expect(bar).not.toHaveAttribute('aria-valuenow');
   await expect(bar).toHaveAttribute('data-indeterminate', '');
 
-  const animationName = await bar.evaluate(
-    (el) => getComputedStyle(el, '::after').animationName,
-  );
+  const animationName = await bar.evaluate((el) => getComputedStyle(el, '::after').animationName);
   expect(animationName).toBe('gnome-progress-bar-pulse');
 });
