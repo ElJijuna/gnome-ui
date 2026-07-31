@@ -275,6 +275,8 @@ export type { StatusBadgeProps, StatusBadgeVariant } from './components/StatusBa
 export { StatusBadge } from './components/StatusBadge';
 export type { StatusPageProps } from './components/StatusPage';
 export { StatusPage } from './components/StatusPage';
+export type { StepIndicatorOrientation, StepIndicatorProps } from './components/StepIndicator';
+export { StepIndicator } from './components/StepIndicator';
 export type { SwitchProps } from './components/Switch';
 export { Switch } from './components/Switch';
 export type { SwitchRowProps } from './components/SwitchRow';

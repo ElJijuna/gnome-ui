@@ -1,0 +1,175 @@
+/* ─── Nav ──────────────────────────────────────────────────────────────────── */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+}
+
+/* ─── Caption ──────────────────────────────────────────────────────────────── */
+
+.caption {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── List ─────────────────────────────────────────────────────────────────── */
+
+.list {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav.vertical .list {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ─── Step item + connector line ───────────────────────────────────────────── */
+
+.stepItem {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+.stepItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background-color: var(--gnome-border-subtle);
+}
+
+.stepItem:not(:last-child)::after {
+  inset-inline-start: 50%;
+  inset-block-start: 14px;
+  width: 100%;
+  height: 2px;
+}
+
+.stepItem.completed:not(:last-child)::after {
+  background-color: var(--gnome-accent-color, #3584e4);
+}
+
+.nav.vertical .stepItem {
+  flex-direction: row;
+  align-items: flex-start;
+  padding-block-end: var(--gnome-space-3, 20px);
+}
+
+.nav.vertical .stepItem:not(:last-child)::after {
+  inset-inline-start: 14px;
+  inset-block-start: 30px;
+  width: 2px;
+  height: 100%;
+}
+
+/* ─── Circle ───────────────────────────────────────────────────────────────── */
+
+.circle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 2px solid var(--gnome-border-subtle);
+  border-radius: 50%;
+  cursor: default;
+  transition:
+    background-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    border-color var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+button.circle {
+  cursor: pointer;
+}
+
+button.circle:hover {
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+button.circle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+.current .circle {
+  color: #fff;
+  background-color: var(--gnome-accent-color, #3584e4);
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+.completed .circle {
+  color: var(--gnome-accent-color, #3584e4);
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+/* ─── Step label ───────────────────────────────────────────────────────────── */
+
+.stepLabel {
+  max-width: 96px;
+  overflow: hidden;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav.vertical .stepLabel {
+  max-width: none;
+  padding-inline-start: var(--gnome-space-2, 12px);
+  text-align: start;
+  white-space: normal;
+}
+
+.current .stepLabel {
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .circle {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+  }
+}
+
+/* ─── High contrast ────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .circle {
+    border-width: 3px;
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .circle {
+    transition: none;
+  }
+}

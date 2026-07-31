@@ -432,6 +432,11 @@
       "import": "./dist/components/StatusPage.js",
       "require": "./dist/components/StatusPage.cjs"
     },
+    "./components/StepIndicator": {
+      "types": "./dist/components/StepIndicator.d.ts",
+      "import": "./dist/components/StepIndicator.js",
+      "require": "./dist/components/StepIndicator.cjs"
+    },
     "./components/Switch": {
       "types": "./dist/components/Switch.d.ts",
       "import": "./dist/components/Switch.js",

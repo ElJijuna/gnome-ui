@@ -468,7 +468,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`RatingStars`** | Star rating display and interactive input, keyboard-navigable — common HIG-adjacent pattern for review/quality widgets, pairs with `Icon`'s `Star`/`StarOutline` |
 | ✅ | **`FileTypeIcon`** | Small icon (optionally with a thumbnail) resolved from a file's MIME type or extension — useful for file-manager-style listings, complementing the existing `Layout/FileManager` story |
 | ✅ | **`Callout`** | Inline, dismissible admonition box (`info`/`warning`/`tip` variants) for contextual help text within forms and cards — distinct from `Banner` (persistent, view-level) and `Toast` (temporary, notification-level) |
-| ⬜ | **`StepIndicator`** | Numbered "Step X of Y" progress indicator for onboarding/wizard flows — complements the existing `CarouselIndicatorDots`/`CarouselIndicatorLines` with a labelled, linear alternative |
+| ✅ | **`StepIndicator`** | Numbered "Step X of Y" progress indicator for onboarding/wizard flows — complements the existing `CarouselIndicatorDots`/`CarouselIndicatorLines` with a labelled, linear alternative |
 | ⬜ | **`RangeSlider`** | Dual-thumb slider for selecting a min/max range — `Slider` is single-thumb only; needed for range filters (price, date range, etc.) |
 | ✅ | **`TextTruncate`** | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property |
 | ⬜ | **`Kbd`** | Standalone single key-cap (e.g. `Enter`, `Esc`) for inline instructional text ("press `Enter` to continue") — complements `ShortcutLabel`, which only renders full `+`-delimited combos and doesn't expose its key-cap rendering separately |
