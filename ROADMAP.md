@@ -447,6 +447,48 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 ---
 
+## Tier 20 — Atomic & Molecular Gaps
+
+> Widgets from the GTK4/libadwaita catalog (or well-established HIG-adjacent
+> patterns) not yet covered by the ~95 components already shipped in
+> `@gnome-ui/react`. Scoped to atoms and simple molecules only — no new
+> organism/page-level compositions. Verified against the current component
+> tree to avoid duplicating existing functionality (e.g. `ColorPicker`
+> already covers Adwaita accent-color swatches via `GNOME_PALETTE`, so it is
+> intentionally excluded here).
+
+### Atoms
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`LevelBar`** | Discrete level indicator with colour-coded low/high/full offset zones — mirrors `GtkLevelBar`; distinct from `ProgressBar` (determinate task progress) and `SegmentedBar` (proportional category breakdown) |
+| ⬜ | **`Expander`** | Standalone disclosure triangle + collapsible content — mirrors `GtkExpander`; complements `ExpanderRow`, which only works nested inside a `BoxedList` row |
+| ⬜ | **`PasswordField`** | Standalone masked `TextField` with a built-in reveal/conceal toggle, for login forms and dialogs outside a settings-row context — reuses the reveal-icon pattern from `PasswordEntryRow` without requiring `ActionRow` |
+| ⬜ | **`Divider`** | Horizontal rule with an optional centred label (e.g. `"OR"`) — common auth/login-form pattern; distinct from the plain `Separator` line |
+| ⬜ | **`RatingStars`** | Star rating display and interactive input, keyboard-navigable — common HIG-adjacent pattern for review/quality widgets, pairs with `Icon`'s `Star`/`StarOutline` |
+| ⬜ | **`FileTypeIcon`** | Small icon (optionally with a thumbnail) resolved from a file's MIME type or extension — useful for file-manager-style listings, complementing the existing `Layout/FileManager` story |
+| ⬜ | **`Callout`** | Inline, dismissible admonition box (`info`/`warning`/`tip` variants) for contextual help text within forms and cards — distinct from `Banner` (persistent, view-level) and `Toast` (temporary, notification-level) |
+| ⬜ | **`StepIndicator`** | Numbered "Step X of Y" progress indicator for onboarding/wizard flows — complements the existing `CarouselIndicatorDots`/`CarouselIndicatorLines` with a labelled, linear alternative |
+| ⬜ | **`RangeSlider`** | Dual-thumb slider for selecting a min/max range — `Slider` is single-thumb only; needed for range filters (price, date range, etc.) |
+
+### Molecules
+
+| Status | Component | Description |
+|--------|-----------|-------------|
+| ⬜ | **`Calendar`** | Month-grid date display with keyboard navigation — mirrors `GtkCalendar`; usable standalone or as the panel inside `DatePicker` |
+| ⬜ | **`DatePicker`** | `TextField` trigger + `Popover`-anchored `Calendar` — mirrors the `GtkCalendar` + `GtkPopover` composition pattern used for date entry across GNOME apps |
+| ⬜ | **`TimePicker`** | Hour/minute selection built from paired `SpinButton`s in a `Popover`, with 12/24-hour format support |
+| ⬜ | **`FontPicker`** | Button that opens a family/size/weight chooser — mirrors `GtkFontDialogButton` |
+| ⬜ | **`EmojiPicker`** | Searchable emoji grid in a `Popover` — mirrors `GtkEmojiChooser` |
+| ⬜ | **`TagInput`** | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox` — `WrapBox`/`Chip` currently only support static/pre-populated display, not interactive entry |
+| ⬜ | **`OtpInput`** | Segmented PIN/verification-code input (one cell per digit, auto-advance, paste support) — common auth pattern, pairs naturally with `PasswordEntryRow`/`PasswordField` |
+| ⬜ | **`CopyField`** | Read-only `TextField`/`EntryRow` with a built-in trailing `CopyButton` — for displaying copyable values (API keys, tokens, IDs) outside the `CveIdentifier`/`CweIdentifier`-style specialised components |
+| ⬜ | **`ChoiceCardGroup`** | Card-based single-choice selector (large selectable cards instead of radio buttons) — mirrors the pattern used in GNOME Initial Setup / welcome flows |
+| ⬜ | **`FileDropZone`** | Drag-and-drop file upload target with hover/active states, falling back to a `GtkFileDialog`-style click-to-browse trigger |
+| ⬜ | **`MultiSelectDropdown`** | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger — `Dropdown`/`ComboRow` are currently single-select only |
+
+---
+
 ## Infrastructure
 
 | Status | Item | Description |
