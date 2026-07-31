@@ -10,9 +10,8 @@ import {
   useState,
 } from 'react';
 
-import { createPortal } from 'react-dom';
-
 import { useBodyScrollLock } from '../Dialog/dialogUtils';
+import { Portal } from '../Portal';
 
 import styles from './BottomSheet.module.css';
 
@@ -306,9 +305,5 @@ export const BottomSheet = ({
     </div>
   );
 
-  if (typeof document === 'undefined') {
-    return node;
-  }
-
-  return createPortal(node, document.body);
+  return <Portal>{node}</Portal>;
 };

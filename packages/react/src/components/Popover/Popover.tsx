@@ -12,7 +12,7 @@ import {
   useState,
 } from 'react';
 
-import { createPortal } from 'react-dom';
+import { Portal } from '../Portal';
 
 import styles from './Popover.module.css';
 
@@ -378,7 +378,7 @@ export const Popover = ({
   return (
     <>
       {trigger}
-      {open && (typeof document !== 'undefined' ? createPortal(panel, document.body) : panel)}
+      {open && <Portal>{panel}</Portal>}
     </>
   );
 };

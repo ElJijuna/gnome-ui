@@ -8,7 +8,7 @@ import {
   useRef,
 } from 'react';
 
-import { createPortal } from 'react-dom';
+import { Portal } from '../Portal';
 
 import styles from './Dialog.module.css';
 import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from './dialogUtils';
@@ -237,9 +237,5 @@ export const Dialog = ({
     </div>
   );
 
-  if (typeof document === 'undefined') {
-    return node;
-  }
-
-  return createPortal(node, document.body);
+  return <Portal>{node}</Portal>;
 };

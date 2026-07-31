@@ -12,7 +12,7 @@ import {
   useState,
 } from 'react';
 
-import { createPortal } from 'react-dom';
+import { Portal } from '../Portal';
 
 import styles from './Tooltip.module.css';
 
@@ -306,7 +306,7 @@ export const Tooltip = ({
   return (
     <>
       {child}
-      {typeof document !== 'undefined' ? createPortal(tooltip, document.body) : tooltip}
+      <Portal>{tooltip}</Portal>
     </>
   );
 };

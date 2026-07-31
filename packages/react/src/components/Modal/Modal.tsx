@@ -9,9 +9,8 @@ import {
   useState,
 } from 'react';
 
-import { createPortal } from 'react-dom';
-
 import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from '../Dialog/dialogUtils';
+import { Portal } from '../Portal';
 
 import styles from './Modal.module.css';
 
@@ -227,9 +226,5 @@ export const Modal = ({
     </div>
   );
 
-  if (typeof document === 'undefined') {
-    return node;
-  }
-
-  return createPortal(node, document.body);
+  return <Portal>{node}</Portal>;
 };
