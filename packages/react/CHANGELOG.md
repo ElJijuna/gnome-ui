@@ -1,3 +1,15 @@
+## [1.55.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.54.0...@gnome-ui/react@1.55.0) (2026-08-01)
+
+### Features
+
+* **@gnome-ui/layout:** add ResizablePanel component with styles, tests, and documentation ([5a36aca](https://github.com/ElJijuna/gnome-ui/commit/5a36aca8a9a0555e8c4e48707f65027ab4d6b4d6))
+* **@gnome-ui/layout:** add StickyToc component with styles, tests, and documentation ([e502fa6](https://github.com/ElJijuna/gnome-ui/commit/e502fa65ddd7e4454eb08e35be1c737b9c68af8f))
+* **@gnome-ui/layout:** add TeamCard component with styles, tests, and documentation ([0a4bd10](https://github.com/ElJijuna/gnome-ui/commit/0a4bd10ac74f2bc43d7a0bef7d454760b99a631f))
+* **@gnome-ui/react:** add ChoiceCardGroup component with styles, tests, and documentation ([87fec54](https://github.com/ElJijuna/gnome-ui/commit/87fec54ed897e00f28c249f5ba57addf885f4c44))
+* **@gnome-ui/react:** add CodeBlock component with styles, tests, and documentation ([88100d9](https://github.com/ElJijuna/gnome-ui/commit/88100d99dfd72c889f3f5b0d878bd0561431adf2))
+* **@gnome-ui/react:** add FileDropZone component with styles, tests, and documentation ([b3d1e65](https://github.com/ElJijuna/gnome-ui/commit/b3d1e650766e8ee32364c0ccb9bd22219f2c0405))
+* **@gnome-ui/react:** add FontPicker component with styles, tests, and documentation ([152de0e](https://github.com/ElJijuna/gnome-ui/commit/152de0ee1179baaff945b6b07769b7cf7349698c))
+
 ## [1.54.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.53.0...@gnome-ui/react@1.54.0) (2026-08-01)
 
 ### Features
