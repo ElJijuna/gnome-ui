@@ -83,7 +83,11 @@ export const MultipleFields: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <CopyField label="Public key" value="pk_live_a1b2c3d4e5f6" />
-      <CopyField label="Secret key" value="sk_live_z9y8x7w6v5u4" helperText="Never share this key." />
+      <CopyField
+        label="Secret key"
+        value="sk_live_z9y8x7w6v5u4"
+        helperText="Never share this key."
+      />
       <CopyField label="Account ID" value="acct_1PABC2XYZ" monospace={false} />
     </div>
   ),

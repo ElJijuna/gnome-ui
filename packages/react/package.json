@@ -317,6 +317,11 @@
       "import": "./dist/components/NavigationView.js",
       "require": "./dist/components/NavigationView.cjs"
     },
+    "./components/OtpInput": {
+      "types": "./dist/components/OtpInput.d.ts",
+      "import": "./dist/components/OtpInput.js",
+      "require": "./dist/components/OtpInput.cjs"
+    },
     "./components/Overlay": {
       "types": "./dist/components/Overlay.d.ts",
       "import": "./dist/components/Overlay.js",

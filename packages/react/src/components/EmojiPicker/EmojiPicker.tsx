@@ -17,9 +17,8 @@ import { type HTMLAttributes, type ReactElement, useRef, useState } from 'react'
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
 import { Popover, type PopoverPlacement } from '../Popover';
-
-import { CATEGORY_LABELS, CATEGORY_ORDER, type EmojiCategory, EMOJI_DATA } from './emojiData';
 import styles from './EmojiPicker.module.css';
+import { CATEGORY_LABELS, CATEGORY_ORDER, EMOJI_DATA, type EmojiCategory } from './emojiData';
 
 const CATEGORY_ICONS: Record<EmojiCategory, IconDefinition> = {
   people: EmojiPeople,

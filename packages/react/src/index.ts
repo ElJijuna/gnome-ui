@@ -208,6 +208,8 @@ export type { NavigationSplitViewProps } from './components/NavigationSplitView'
 export { NavigationSplitView } from './components/NavigationSplitView';
 export type { NavigationPageProps, NavigationViewProps } from './components/NavigationView';
 export { NavigationPage, NavigationView, useNavigation } from './components/NavigationView';
+export type { OtpInputProps } from './components/OtpInput';
+export { OtpInput } from './components/OtpInput';
 export type { OverlayProps } from './components/Overlay';
 export { Overlay } from './components/Overlay';
 export type { OverlaySplitViewProps } from './components/OverlaySplitView';

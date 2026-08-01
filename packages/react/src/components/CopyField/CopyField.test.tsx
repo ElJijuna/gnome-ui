@@ -52,7 +52,12 @@ describe('CopyField', () => {
 
     it('accepts custom copy/copied labels', async () => {
       render(
-        <CopyField label="API key" value="sk-abc123" copyLabel="Copy key" copiedLabel="Key copied!" />,
+        <CopyField
+          label="API key"
+          value="sk-abc123"
+          copyLabel="Copy key"
+          copiedLabel="Key copied!"
+        />,
       );
 
       expect(screen.getByRole('button', { name: 'Copy key' })).toBeInTheDocument();
