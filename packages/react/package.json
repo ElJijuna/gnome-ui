@@ -152,6 +152,11 @@
       "import": "./dist/components/CopyButton.js",
       "require": "./dist/components/CopyButton.cjs"
     },
+    "./components/CopyField": {
+      "types": "./dist/components/CopyField.d.ts",
+      "import": "./dist/components/CopyField.js",
+      "require": "./dist/components/CopyField.cjs"
+    },
     "./components/CountDownTimer": {
       "types": "./dist/components/CountDownTimer.d.ts",
       "import": "./dist/components/CountDownTimer.js",

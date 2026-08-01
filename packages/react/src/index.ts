@@ -96,6 +96,8 @@ export type {
 export { ContributionGraph } from './components/ContributionGraph';
 export type { CopyButtonProps } from './components/CopyButton';
 export { CopyButton } from './components/CopyButton';
+export type { CopyFieldProps } from './components/CopyField';
+export { CopyField } from './components/CopyField';
 export type { CountDownTimerProps, CountDownVariant } from './components/CountDownTimer';
 export { CountDownTimer } from './components/CountDownTimer';
 export type { CveIdentifierProps, CveLinkSource } from './components/CveIdentifier';
