@@ -140,6 +140,8 @@ export type { DrawerProps, DrawerSide, DrawerSize } from './components/Drawer';
 export { Drawer } from './components/Drawer';
 export type { DropdownOption, DropdownProps } from './components/Dropdown';
 export { Dropdown } from './components/Dropdown';
+export type { EmojiCategory, EmojiEntry, EmojiPickerProps } from './components/EmojiPicker';
+export { EmojiPicker } from './components/EmojiPicker';
 export type { EntryRowProps } from './components/EntryRow';
 export { EntryRow } from './components/EntryRow';
 export type { ExpanderProps } from './components/Expander';

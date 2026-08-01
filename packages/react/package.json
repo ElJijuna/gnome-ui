@@ -197,6 +197,11 @@
       "import": "./dist/components/Dropdown.js",
       "require": "./dist/components/Dropdown.cjs"
     },
+    "./components/EmojiPicker": {
+      "types": "./dist/components/EmojiPicker.d.ts",
+      "import": "./dist/components/EmojiPicker.js",
+      "require": "./dist/components/EmojiPicker.cjs"
+    },
     "./components/EntryRow": {
       "types": "./dist/components/EntryRow.d.ts",
       "import": "./dist/components/EntryRow.js",
