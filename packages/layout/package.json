@@ -122,6 +122,11 @@
       "import": "./dist/components/StatusIndicator.js",
       "require": "./dist/components/StatusIndicator.cjs"
     },
+    "./components/TeamCard": {
+      "types": "./dist/components/TeamCard.d.ts",
+      "import": "./dist/components/TeamCard.js",
+      "require": "./dist/components/TeamCard.cjs"
+    },
     "./components/Toast": {
       "types": "./dist/components/Toast.d.ts",
       "import": "./dist/components/Toast.js",

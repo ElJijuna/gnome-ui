@@ -36,6 +36,7 @@
 | ✅ | **`ProfileCard`** | User profile dashboard card: avatar, name, handle, optional status dot, stats row, decorative background chart |
 | ✅ | **`ActivityFeed`** | Chronological event list with relative timestamps, optional icons, skeleton loading, and a "Show more" affordance |
 | ✅ | **`SectionHeader`** | Section title row with an optional subtitle and trailing action slot |
+| ✅ | **`TeamCard`** | Group card: avatar group, team name, member count — distinct from `UserCard`, which represents a single user's identity |
 
 ---
 
@@ -76,7 +77,6 @@
 | ⬜ | **`AnnouncementCard`** | Dismissible feature-announcement card with an image and a "Learn more" action — distinct from `Banner`, which communicates system status, not promotional content |
 | ⬜ | **`MapCard`** | Location preview card: static map, address, "Open in Maps" action |
 | ⬜ | **`MediaCard`** | Card optimized for an image/video thumbnail, title, and metadata (duration or size) — for media galleries/libraries |
-| ⬜ | **`TeamCard`** | Group card: avatar group, team name, member count — distinct from `UserCard`, which represents a single user's identity |
 | ⬜ | **`IntegrationCard`** | Third-party service connection card: logo, name, connected/disconnected status, connect/disconnect action — for Settings/Integrations pages |
 | ⬜ | **`BreadcrumbBar`** | Full-width bar hosting a `PathBar` (react) plus trailing actions — a shell/wrapper, does not duplicate `PathBar` itself |
 | ⬜ | **`SecondaryNavBar`** | Horizontal sub-navigation bar under the main header, full-width pill/underline tabs — GNOME Settings category pattern |

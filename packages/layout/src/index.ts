@@ -90,6 +90,8 @@ export type {
   StatusIndicatorStatus,
 } from './components/StatusIndicator';
 export { StatusIndicator } from './components/StatusIndicator';
+export type { TeamCardProps } from './components/TeamCard';
+export { TeamCard } from './components/TeamCard';
 export type {
   ToastContextValue,
   ToastOptions,

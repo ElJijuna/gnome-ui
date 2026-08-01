@@ -1,0 +1,65 @@
+/* ─── Card override ──────────────────────────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: 600;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Avatar group ───────────────────────────────────────────────────────────── */
+
+.avatarGroup {
+  align-self: flex-start;
+}
+
+.avatarRow {
+  display: flex;
+  gap: 4px;
+}
+
+/* ─── Footer meta ────────────────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action {
+  flex-shrink: 0;
+}
+
+/* ─── Spinner loading ─────────────────────────────────────────────────────── */
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+}
