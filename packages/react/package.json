@@ -122,6 +122,11 @@
       "import": "./dist/components/Chip.js",
       "require": "./dist/components/Chip.cjs"
     },
+    "./components/ChoiceCardGroup": {
+      "types": "./dist/components/ChoiceCardGroup.d.ts",
+      "import": "./dist/components/ChoiceCardGroup.js",
+      "require": "./dist/components/ChoiceCardGroup.cjs"
+    },
     "./components/Clamp": {
       "types": "./dist/components/Clamp.d.ts",
       "import": "./dist/components/Clamp.js",

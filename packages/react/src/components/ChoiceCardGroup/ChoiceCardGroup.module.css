@@ -1,0 +1,178 @@
+/* ─── Fieldset reset ───────────────────────────────────────────────────────── */
+
+.group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.group:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+/* ─── Legend (group label) ────────────────────────────────────────────────── */
+
+.legend {
+  padding: 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+/* ─── Hint / error text ────────────────────────────────────────────────────── */
+
+.hint {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.errorHint {
+  opacity: 1;
+  color: var(--gnome-error-color, #e01b24);
+}
+
+/* ─── Grid ─────────────────────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--gnome-space-2, 12px);
+}
+
+/* ─── Card ─────────────────────────────────────────────────────────────────── */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: var(--gnome-space-3, 16px);
+  text-align: left;
+  appearance: none;
+  background-color: var(--gnome-card-bg-color, #fff);
+  border: 2px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+  border-radius: var(--gnome-radius-lg, 12px);
+  cursor: pointer;
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.card:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 40%, transparent);
+}
+
+.card:focus {
+  outline: none;
+}
+
+.card:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+.card:disabled {
+  cursor: not-allowed;
+}
+
+.cardChecked {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 8%, transparent);
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+.cardDisabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+/* ─── Radio dot (visual only — selection state lives on aria-checked) ───────── */
+
+.radioDot {
+  position: absolute;
+  top: var(--gnome-space-2, 12px);
+  right: var(--gnome-space-2, 12px);
+  width: 16px;
+  height: 16px;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1.5px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.3));
+  border-radius: 50%;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.cardChecked .radioDot {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+  box-shadow: inset 0 0 0 3px var(--gnome-card-bg-color, #fff);
+}
+
+/* ─── Icon ─────────────────────────────────────────────────────────────────── */
+
+.icon {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+/* ─── Title / description ────────────────────────────────────────────────────── */
+
+.title {
+  padding-right: 20px;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.description {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgb(255 255 255 / 0.12);
+  }
+
+  .radioDot {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgb(255 255 255 / 0.3);
+  }
+
+  .cardChecked .radioDot {
+    box-shadow: inset 0 0 0 3px var(--gnome-card-bg-color, #383838);
+  }
+}
+
+/* ─── High contrast ────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .card {
+    border-width: 3px;
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .radioDot {
+    transition: none;
+  }
+}

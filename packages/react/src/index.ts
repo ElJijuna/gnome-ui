@@ -69,6 +69,8 @@ export type { CheckRowProps } from './components/CheckRow';
 export { CheckRow } from './components/CheckRow';
 export type { ChipProps } from './components/Chip';
 export { Chip } from './components/Chip';
+export type { ChoiceCardGroupProps, ChoiceCardOption } from './components/ChoiceCardGroup';
+export { ChoiceCardGroup } from './components/ChoiceCardGroup';
 export type { ClampProps } from './components/Clamp';
 // Adaptive Layout
 export { Clamp } from './components/Clamp';
