@@ -212,6 +212,11 @@
       "import": "./dist/components/ExpanderRow.js",
       "require": "./dist/components/ExpanderRow.cjs"
     },
+    "./components/FieldGroup": {
+      "types": "./dist/components/FieldGroup.d.ts",
+      "import": "./dist/components/FieldGroup.js",
+      "require": "./dist/components/FieldGroup.cjs"
+    },
     "./components/FileTypeIcon": {
       "types": "./dist/components/FileTypeIcon.d.ts",
       "import": "./dist/components/FileTypeIcon.js",
