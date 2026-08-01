@@ -160,6 +160,8 @@ export type { FileDropZoneProps } from './components/FileDropZone';
 export { FileDropZone } from './components/FileDropZone';
 export type { FileTypeCategory, FileTypeIconProps } from './components/FileTypeIcon';
 export { FileTypeIcon } from './components/FileTypeIcon';
+export type { FontPickerProps, FontValue, FontWeightOption } from './components/FontPicker';
+export { DEFAULT_FONT_FAMILIES, FONT_WEIGHTS, FontPicker } from './components/FontPicker';
 export type { FooterProps } from './components/Footer';
 export { Footer } from './components/Footer';
 export type { FrameProps } from './components/Frame';

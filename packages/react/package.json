@@ -247,6 +247,11 @@
       "import": "./dist/components/FileTypeIcon.js",
       "require": "./dist/components/FileTypeIcon.cjs"
     },
+    "./components/FontPicker": {
+      "types": "./dist/components/FontPicker.d.ts",
+      "import": "./dist/components/FontPicker.js",
+      "require": "./dist/components/FontPicker.cjs"
+    },
     "./components/Footer": {
       "types": "./dist/components/Footer.d.ts",
       "import": "./dist/components/Footer.js",

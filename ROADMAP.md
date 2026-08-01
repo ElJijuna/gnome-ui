@@ -483,7 +483,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ⬜ | **`Calendar`** | Month-grid date display with keyboard navigation — mirrors `GtkCalendar`; usable standalone or as the panel inside `DatePicker` |
 | ⬜ | **`DatePicker`** | `TextField` trigger + `Popover`-anchored `Calendar` — mirrors the `GtkCalendar` + `GtkPopover` composition pattern used for date entry across GNOME apps |
 | ⬜ | **`TimePicker`** | Hour/minute selection built from paired `SpinButton`s in a `Popover`, with 12/24-hour format support |
-| ⬜ | **`FontPicker`** | Button that opens a family/size/weight chooser — mirrors `GtkFontDialogButton` |
+| ✅ | **`FontPicker`** | Button that opens a family/size/weight chooser — mirrors `GtkFontDialogButton` |
 | ✅ | **`EmojiPicker`** | Searchable emoji grid in a `Popover` — mirrors `GtkEmojiChooser` |
 | ✅ | **`TagInput`** | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox` — `WrapBox`/`Chip` currently only support static/pre-populated display, not interactive entry |
 | ✅ | **`OtpInput`** | Segmented PIN/verification-code input (one cell per digit, auto-advance, paste support) — common auth pattern, pairs naturally with `PasswordEntryRow`/`PasswordField` |

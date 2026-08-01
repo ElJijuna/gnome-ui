@@ -94,9 +94,7 @@ describe('FileDropZone', () => {
 
     it('keeps all files when multiple is true', () => {
       const onFilesSelected = vi.fn();
-      const { container } = render(
-        <FileDropZone onFilesSelected={onFilesSelected} multiple />,
-      );
+      const { container } = render(<FileDropZone onFilesSelected={onFilesSelected} multiple />);
       const input = container.querySelector('input[type="file"]') as HTMLInputElement;
       const a = makeFile('a.txt', 10);
       const b = makeFile('b.txt', 10);
@@ -152,9 +150,7 @@ describe('FileDropZone', () => {
       const onError = vi.fn();
       const file = makeFile('video.mov', 10, 'video/quicktime');
 
-      render(
-        <FileDropZone onFilesSelected={onFilesSelected} onError={onError} accept="image/*" />,
-      );
+      render(<FileDropZone onFilesSelected={onFilesSelected} onError={onError} accept="image/*" />);
       const zone = screen.getByRole('button');
 
       fireEvent.drop(zone, { dataTransfer: { files: [file] } });
@@ -178,9 +174,7 @@ describe('FileDropZone', () => {
       const onError = vi.fn();
       const file = makeFile('large.png', 2000, 'image/png');
 
-      render(
-        <FileDropZone onFilesSelected={onFilesSelected} onError={onError} maxSize={1000} />,
-      );
+      render(<FileDropZone onFilesSelected={onFilesSelected} onError={onError} maxSize={1000} />);
       fireEvent.drop(screen.getByRole('button'), { dataTransfer: { files: [file] } });
 
       expect(onFilesSelected).not.toHaveBeenCalled();

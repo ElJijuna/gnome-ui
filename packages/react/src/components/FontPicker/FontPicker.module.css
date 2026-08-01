@@ -1,0 +1,34 @@
+/* ─── Trigger ──────────────────────────────────────────────────────────────── */
+
+.trigger {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Picker panel ───────────────────────────────────────────────────────────── */
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+  width: 260px;
+  padding: var(--gnome-space-2, 12px);
+}
+
+/* ─── Field row ────────────────────────────────────────────────────────────── */
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fieldLabel {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
