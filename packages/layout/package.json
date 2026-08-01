@@ -122,6 +122,11 @@
       "import": "./dist/components/StatusIndicator.js",
       "require": "./dist/components/StatusIndicator.cjs"
     },
+    "./components/StickyToc": {
+      "types": "./dist/components/StickyToc.d.ts",
+      "import": "./dist/components/StickyToc.js",
+      "require": "./dist/components/StickyToc.cjs"
+    },
     "./components/TeamCard": {
       "types": "./dist/components/TeamCard.d.ts",
       "import": "./dist/components/TeamCard.js",

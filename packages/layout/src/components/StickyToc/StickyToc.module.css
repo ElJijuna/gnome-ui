@@ -1,0 +1,75 @@
+/* ─── Rail ─────────────────────────────────────────────────────────────────── */
+
+.toc {
+  position: sticky;
+  top: var(--gnome-space-4, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: start;
+  max-height: calc(100vh - var(--gnome-space-4, 24px) * 2);
+  overflow-y: auto;
+}
+
+/* ─── Heading ──────────────────────────────────────────────────────────────── */
+
+.heading {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: 600;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: 0.55;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ─── List ─────────────────────────────────────────────────────────────────── */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-inline-start: 2px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
+}
+
+/* ─── Link ─────────────────────────────────────────────────────────────────── */
+
+.link {
+  display: block;
+  padding: 4px 12px;
+  margin-inline-start: -2px;
+  border-inline-start: 2px solid transparent;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 0.875rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: 0.7;
+  text-decoration: none;
+  transition:
+    color 100ms ease,
+    opacity 100ms ease,
+    border-color 100ms ease;
+}
+
+.link:hover {
+  opacity: 1;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--gnome-accent-color, #3584e4);
+  outline-offset: -2px;
+}
+
+.active {
+  border-inline-start-color: var(--gnome-accent-color, #3584e4);
+  color: var(--gnome-accent-color, #3584e4);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

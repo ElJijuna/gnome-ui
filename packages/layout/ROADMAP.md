@@ -37,6 +37,7 @@
 | ✅ | **`ActivityFeed`** | Chronological event list with relative timestamps, optional icons, skeleton loading, and a "Show more" affordance |
 | ✅ | **`SectionHeader`** | Section title row with an optional subtitle and trailing action slot |
 | ✅ | **`TeamCard`** | Group card: avatar group, team name, member count — distinct from `UserCard`, which represents a single user's identity |
+| ✅ | **`StickyToc`** | Sticky table-of-contents side rail with scroll-spy highlighting the active section — for long docs/settings pages |
 
 ---
 
@@ -82,7 +83,6 @@
 | ⬜ | **`SecondaryNavBar`** | Horizontal sub-navigation bar under the main header, full-width pill/underline tabs — GNOME Settings category pattern |
 | ⬜ | **`PageHeaderBar`** | Page-content header: title, description, trailing action buttons, optional tab strip below. Lives inside `PageContent`; distinct from `AppHeader`, the app/window-level header |
 | ⬜ | **`FloatingActionBar`** | Bottom-center floating bar that appears contextually (e.g. "3 items selected" + bulk actions) — distinct from `Toast` (not a notification, persists while the selection lasts) and `StatusBar` (not fixed, appears/disappears) |
-| ⬜ | **`StickyToc`** | Sticky table-of-contents side rail with scroll-spy highlighting the active section — for long docs/settings pages |
 | ⬜ | **`FilterSidebar`** | Left rail dedicated to faceted filters (checkbox groups, ranges) with a "Clear all"/"Apply" footer |
 | ⬜ | **`ResultsLayout`** | Search/listing page shell: `FilterSidebar` slot, sort/view toolbar, results grid/list area, pagination footer — composes `FilterSidebar` and the results toolbar |
 | ⬜ | **`MapLayout`** | Split shell for map-based apps: map canvas area plus a collapsible list/detail side panel |

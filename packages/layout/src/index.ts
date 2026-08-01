@@ -90,6 +90,8 @@ export type {
   StatusIndicatorStatus,
 } from './components/StatusIndicator';
 export { StatusIndicator } from './components/StatusIndicator';
+export type { StickyTocProps, StickyTocSection } from './components/StickyToc';
+export { StickyToc } from './components/StickyToc';
 export type { TeamCardProps } from './components/TeamCard';
 export { TeamCard } from './components/TeamCard';
 export type {
