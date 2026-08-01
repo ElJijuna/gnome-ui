@@ -38,6 +38,7 @@
 | ✅ | **`SectionHeader`** | Section title row with an optional subtitle and trailing action slot |
 | ✅ | **`TeamCard`** | Group card: avatar group, team name, member count — distinct from `UserCard`, which represents a single user's identity |
 | ✅ | **`StickyToc`** | Sticky table-of-contents side rail with scroll-spy highlighting the active section — for long docs/settings pages |
+| ✅ | **`ResizablePanel`** | Two or more panels separated by a draggable divider, based on the `GtkPaned` pattern — foundational for user-resizable master-detail layouts (code editors, file explorers, analytics dashboards) |
 
 ---
 
@@ -50,7 +51,6 @@
 | Status | Component | Description |
 |--------|-----------|-------------|
 | ⬜ | **`SplitLayout`** | Two-column shell: list/master on the left, detail on the right. Collapses to a single column on mobile, following the `AdwNavigationSplitView` pattern |
-| ⬜ | **`ResizablePanel`** | Two or more panels separated by a draggable divider, based on the `GtkPaned` pattern — foundational for user-resizable master-detail layouts (code editors, file explorers, analytics dashboards) |
 | ⬜ | **`DrawerPanel`** | Side panel that slides over content from any edge — web equivalent of `AdwBottomSheet` (mobile) and `AdwOverlaySplitView` in overlay mode (desktop). Ideal for filters, contextual settings, and detail views without leaving the page |
 | ⬜ | **`SkeletonCard`** | Animated shimmer loading placeholder for cards and lists — per GNOME HIG, perceived structure is preferred over an empty spinner. Supports `card`, `list-item`, `text` variants and free composition |
 | ⬜ | **`CommandPalette`** | Global action/navigation search, GNOME Shell Activities style. Triggered by a keyboard shortcut (`Ctrl+K`). Keyboard-first: arrow-key navigation, `Enter` to activate, `Escape` to close. Supports grouped results and preview |

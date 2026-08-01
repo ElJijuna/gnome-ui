@@ -69,6 +69,8 @@ export type { ProgressCardProps } from './components/ProgressCard';
 export { ProgressCard } from './components/ProgressCard';
 export type { QuickAction, QuickActionsProps } from './components/QuickActions';
 export { QuickActions } from './components/QuickActions';
+export type { ResizablePanelDirection, ResizablePanelProps } from './components/ResizablePanel';
+export { ResizablePanel } from './components/ResizablePanel';
 export type { SectionHeaderProps } from './components/SectionHeader';
 export { SectionHeader } from './components/SectionHeader';
 export type { SidebarShellProps } from './components/SidebarShell';

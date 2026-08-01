@@ -1,0 +1,76 @@
+/* ─── Container ────────────────────────────────────────────────────────────── */
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+/* ─── Panel ────────────────────────────────────────────────────────────────── */
+
+.panel {
+  flex-grow: 0;
+  flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* ─── Divider ──────────────────────────────────────────────────────────────── */
+
+.divider {
+  position: relative;
+  flex-shrink: 0;
+  background-color: var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
+  touch-action: none;
+  user-select: none;
+}
+
+.horizontal > .divider {
+  width: 1px;
+  cursor: col-resize;
+}
+
+.vertical > .divider {
+  height: 1px;
+  cursor: row-resize;
+}
+
+/* Wider invisible hit target so the 1px divider is still easy to grab. */
+.divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.horizontal > .divider::after {
+  inset-inline: -3px;
+}
+
+.vertical > .divider::after {
+  inset-block: -3px;
+}
+
+.divider:hover,
+.divider:focus-visible {
+  background-color: var(--gnome-accent-color, #3584e4);
+}
+
+.divider:focus-visible {
+  outline: none;
+}
+
+@media (prefers-contrast: more) {
+  .divider {
+    background-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  }
+}
