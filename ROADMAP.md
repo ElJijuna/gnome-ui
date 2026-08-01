@@ -489,7 +489,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`OtpInput`** | Segmented PIN/verification-code input (one cell per digit, auto-advance, paste support) — common auth pattern, pairs naturally with `PasswordEntryRow`/`PasswordField` |
 | ✅ | **`CopyField`** | Read-only `TextField`/`EntryRow` with a built-in trailing `CopyButton` — for displaying copyable values (API keys, tokens, IDs) outside the `CveIdentifier`/`CweIdentifier`-style specialised components |
 | ✅ | **`ChoiceCardGroup`** | Card-based single-choice selector (large selectable cards instead of radio buttons) — mirrors the pattern used in GNOME Initial Setup / welcome flows |
-| ⬜ | **`FileDropZone`** | Drag-and-drop file upload target with hover/active states, falling back to a `GtkFileDialog`-style click-to-browse trigger |
+| ✅ | **`FileDropZone`** | Drag-and-drop file upload target with hover/active states, falling back to a `GtkFileDialog`-style click-to-browse trigger |
 | ✅ | **`MultiSelectDropdown`** | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger — `Dropdown`/`ComboRow` are currently single-select only |
 | ✅ | **`CodeBlock`** | Static monospace code/config snippet display with optional line numbers and a `CopyButton` trailing action — distinct from `TerminalView` (live scrolling terminal output) |
 | ✅ | **`FieldGroup`** | Generic form-field grouping with a shared label, help text, and error message, for arbitrary fields outside a `BoxedList` — `PreferencesGroup` is scoped specifically to wrapping settings rows |

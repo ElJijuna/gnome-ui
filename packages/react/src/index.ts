@@ -156,6 +156,8 @@ export type { ExpanderRowProps } from './components/ExpanderRow';
 export { ExpanderRow } from './components/ExpanderRow';
 export type { FieldGroupProps } from './components/FieldGroup';
 export { FieldGroup } from './components/FieldGroup';
+export type { FileDropZoneProps } from './components/FileDropZone';
+export { FileDropZone } from './components/FileDropZone';
 export type { FileTypeCategory, FileTypeIconProps } from './components/FileTypeIcon';
 export { FileTypeIcon } from './components/FileTypeIcon';
 export type { FooterProps } from './components/Footer';
