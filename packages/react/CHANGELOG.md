@@ -1,3 +1,16 @@
+## [1.54.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.53.0...@gnome-ui/react@1.54.0) (2026-08-01)
+
+### Features
+
+* **@gnome-ui/react:** add CopyField component with styles, tests, and documentation ([0973d53](https://github.com/ElJijuna/gnome-ui/commit/0973d531cd0809c697fc84d3a49921516e812ff5))
+* **@gnome-ui/react:** add EmojiPicker component with styles, tests, and documentation ([9808ff9](https://github.com/ElJijuna/gnome-ui/commit/9808ff9a47b3bfe5c06c7ad6bb1f78ead7149203))
+* **@gnome-ui/react:** add FieldGroup component with styles, tests, and documentation ([a0f24b5](https://github.com/ElJijuna/gnome-ui/commit/a0f24b521d249d8b058cf28d5ad28a279d3f7aae))
+* **@gnome-ui/react:** add MultiSelectDropdown component with styles, tests, and documentation ([9900586](https://github.com/ElJijuna/gnome-ui/commit/9900586a1355cd88707229dfa7de3f93dad560f1))
+* **@gnome-ui/react:** add OtpInput component with styles, tests, and documentation ([7cf06dd](https://github.com/ElJijuna/gnome-ui/commit/7cf06ddc099b181a13f9f609cd638ddf08c90996))
+* **@gnome-ui/react:** add Portal component with SSR support, documentation, and tests ([eac7a7b](https://github.com/ElJijuna/gnome-ui/commit/eac7a7b506707187ea7db745fd271619201216d7))
+* **@gnome-ui/react:** add TagInput component with styles, tests, and documentation ([293bd03](https://github.com/ElJijuna/gnome-ui/commit/293bd03209291c285db804eb693b70f913b22dc3))
+* **@gnome-ui/react:** replace createPortal with Portal component in BottomSheet, Dialog, Modal, Popover, and Tooltip ([a81927e](https://github.com/ElJijuna/gnome-ui/commit/a81927e02198582bf1db3d84d82fa4ff01d863d6))
+
 ## [1.53.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.52.0...@gnome-ui/react@1.53.0) (2026-07-31)
 
 ### Features
