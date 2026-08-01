@@ -132,6 +132,11 @@
       "import": "./dist/components/Clamp.js",
       "require": "./dist/components/Clamp.cjs"
     },
+    "./components/CodeBlock": {
+      "types": "./dist/components/CodeBlock.d.ts",
+      "import": "./dist/components/CodeBlock.js",
+      "require": "./dist/components/CodeBlock.cjs"
+    },
     "./components/ColorPicker": {
       "types": "./dist/components/ColorPicker.d.ts",
       "import": "./dist/components/ColorPicker.js",

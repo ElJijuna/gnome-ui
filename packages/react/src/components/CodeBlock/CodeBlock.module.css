@@ -1,0 +1,122 @@
+/* ─── Block ────────────────────────────────────────────────────────────────── */
+
+.block {
+  overflow: hidden;
+  background-color: var(--gnome-card-bg-color, #f6f6f6);
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
+  border-radius: var(--gnome-radius-md, 8px);
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-2, 12px);
+  padding: 6px var(--gnome-space-2, 12px);
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
+}
+
+.headerText {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.filename {
+  overflow: hidden;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.language {
+  flex-shrink: 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+.copyBtn {
+  flex-shrink: 0;
+}
+
+/* ─── Code area ────────────────────────────────────────────────────────────── */
+
+.pre {
+  margin: 0;
+  padding: var(--gnome-space-2, 12px) 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.pre.wrap {
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code {
+  display: block;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  line-height: 1.6;
+  color: var(--gnome-view-fg-color, rgb(0 0 0 / 0.85));
+}
+
+.line {
+  display: flex;
+}
+
+.lineNumber {
+  flex-shrink: 0;
+  min-width: 32px;
+  padding-inline: var(--gnome-space-2, 12px);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  text-align: right;
+  opacity: var(--gnome-opacity-dim, 0.4);
+  user-select: none;
+}
+
+.lineText {
+  padding-inline-end: var(--gnome-space-2, 12px);
+}
+
+/* Line-number gutter only reserves space when a line actually has one —
+   lines without a preceding .lineNumber still align via this padding. */
+.lineNumber + .lineText {
+  padding-inline-start: 0;
+}
+
+.lineText:first-child {
+  padding-inline-start: var(--gnome-space-2, 12px);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .block {
+    background-color: var(--gnome-card-bg-color, #2a2a2a);
+    border-color: rgb(255 255 255 / 0.1);
+  }
+
+  .header {
+    border-color: rgb(255 255 255 / 0.1);
+  }
+}
+
+/* ─── High contrast ────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .block {
+    border-width: 2px;
+  }
+}

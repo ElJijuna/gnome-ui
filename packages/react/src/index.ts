@@ -74,6 +74,8 @@ export { ChoiceCardGroup } from './components/ChoiceCardGroup';
 export type { ClampProps } from './components/Clamp';
 // Adaptive Layout
 export { Clamp } from './components/Clamp';
+export type { CodeBlockProps } from './components/CodeBlock';
+export { CodeBlock } from './components/CodeBlock';
 export type {
   ColorPickerColor,
   ColorPickerProps,
