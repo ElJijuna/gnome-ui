@@ -14,6 +14,7 @@ gnome-dialog,
 gnome-divider,
 gnome-dropdown,
 gnome-expander-row,
+gnome-field-group,
 gnome-header-bar,
 gnome-highlight,
 gnome-icon-button,
@@ -56,6 +57,7 @@ gnome-dialog *,
 gnome-divider *,
 gnome-dropdown *,
 gnome-expander-row *,
+gnome-field-group *,
 gnome-header-bar *,
 gnome-highlight *,
 gnome-icon-button *,
@@ -3528,4 +3530,52 @@ gnome-kbd [data-slot="kbd-key"] {
     border-width: 2px;
     box-shadow: none;
   }
+}
+
+/* Field Group */
+
+gnome-field-group {
+  display: block;
+}
+
+gnome-field-group [data-slot="field-group-fieldset"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+gnome-field-group [data-slot="field-group-fieldset"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-field-group [data-slot="field-group-legend"] {
+  padding: 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-field-group [data-slot="field-group-hint"] {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-field-group [data-slot="field-group-hint"][data-error] {
+  opacity: 1;
+  color: var(--gnome-error-color, #e01b24);
+}
+
+gnome-field-group [data-slot="field-group-content"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
 }

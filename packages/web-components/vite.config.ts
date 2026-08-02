@@ -37,6 +37,7 @@ export default defineConfig({
         divider: resolve(packageRoot, 'src/divider.ts'),
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
         'expander-row': resolve(packageRoot, 'src/expander-row.ts'),
+        'field-group': resolve(packageRoot, 'src/field-group.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         highlight: resolve(packageRoot, 'src/highlight.ts'),
         'icon-button': resolve(packageRoot, 'src/icon-button.ts'),

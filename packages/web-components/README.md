@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-six framework-agnostic components:
+The package currently contains thirty-seven framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -41,6 +41,9 @@ The package currently contains thirty-six framework-agnostic components:
 - `<gnome-expander-row>` — collapsible `gnome-action-row`; remaining
   light-DOM children are moved into a generated, height-animated
   `role="region"` panel; dividers between them are pure CSS.
+- `<gnome-field-group>` — wraps a real `<fieldset>`/`<legend>`; original
+  light-DOM children (the fields) are moved into a generated content div
+  inside it, so `disabled` disables every descendant form control for free.
 - `<gnome-header-bar>` — title bar with start/title/end regions placed in
   explicit CSS grid columns so the title stays centered without either
   side slot.
@@ -125,6 +128,7 @@ import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/divider';
 import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/expander-row';
+import '@gnome-ui/web-components/field-group';
 import '@gnome-ui/web-components/highlight';
 import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/kbd';
@@ -1206,6 +1210,39 @@ shape `gnome-dialog`/`gnome-dropdown`/`gnome-menu`/`gnome-popover` use for
 their own open-state transitions. Author your own
 `data-slot="row-surface"` to use a different element, same adoption
 pattern as `gnome-action-row`/`gnome-switch-row`.
+
+## Field Group
+
+```html
+<gnome-field-group label="Notification method" helper-text="Choose how you want to be notified.">
+  <label><input type="radio" name="notif" value="email" checked /> Email</label>
+  <label><input type="radio" name="notif" value="sms" /> SMS</label>
+  <label><input type="radio" name="notif" value="push" /> Push</label>
+</gnome-field-group>
+
+<!-- Error state: replaces helper-text, announced via role="alert" -->
+<gnome-field-group label="Notification method" error="Select at least one notification method.">
+  ...
+</gnome-field-group>
+```
+
+`gnome-field-group` is a generic form-field grouping with a shared label,
+help text, and error message, for arbitrary fields outside a
+`gnome-boxed-list` — distinct from `gnome-boxed-list`/`gnome-action-row`,
+which are scoped to settings-page rows. It wraps a real
+`<fieldset data-slot="field-group-fieldset">`/`<legend
+data-slot="field-group-legend">` — same rationale as `gnome-highlight`
+wrapping real `<mark>` and `gnome-kbd` wrapping real `<kbd>` — so
+`disabled` disables every descendant form control for free via native
+fieldset behavior, no need to thread it through each field manually.
+
+All original light-DOM children (the fields themselves) are moved, once,
+into a generated `<div data-slot="field-group-content">` inside the
+fieldset — same adopt-existing-children technique as
+`gnome-expander-row`'s panel. `error` takes priority over `helper-text`
+when both are set, and the visible hint gets `role="alert"` only in the
+error case; the fieldset's `aria-describedby` points at whichever is
+shown.
 
 ## Boxed List
 

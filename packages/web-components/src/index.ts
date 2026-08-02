@@ -69,6 +69,7 @@ export {
   type GnomeExpanderRowOpenChangeDetail,
   registerGnomeExpanderRow,
 } from './expander-row';
+export { GnomeFieldGroupElement, registerGnomeFieldGroup } from './field-group';
 export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
 export { GnomeHighlightElement, registerGnomeHighlight } from './highlight';
 export {

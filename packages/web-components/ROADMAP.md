@@ -148,7 +148,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 31 | ✅ | `<gnome-kbd>` | `Kbd` | Wraps native `<kbd>` directly; static symbol-lookup table |
 | 32 | ⬜ | `<gnome-file-type-icon>` | `FileTypeIcon` | Wraps `<img>` (thumbnail) or an icon glyph; MIME/filename category resolution ported alongside |
 | 33 | ✅ | `<gnome-step-indicator>` | `StepIndicator` | `<nav>`/`<ol>` of step circles, fully derived from `currentStep`, no internal state |
-| 34 | ⬜ | `<gnome-field-group>` | `FieldGroup` | Wraps native `<fieldset>`/`<legend>` directly — free native `disabled`-cascade to all descendants |
+| 34 | ✅ | `<gnome-field-group>` | `FieldGroup` | Wraps native `<fieldset>`/`<legend>` directly — free native `disabled`-cascade to all descendants |
 
 ---
 

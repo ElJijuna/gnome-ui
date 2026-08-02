@@ -82,6 +82,11 @@
       "import": "./dist/expander-row.js",
       "require": "./dist/expander-row.cjs"
     },
+    "./field-group": {
+      "types": "./dist/field-group.d.ts",
+      "import": "./dist/field-group.js",
+      "require": "./dist/field-group.cjs"
+    },
     "./header-bar": {
       "types": "./dist/header-bar.d.ts",
       "import": "./dist/header-bar.js",
