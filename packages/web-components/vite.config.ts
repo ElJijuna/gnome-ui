@@ -33,6 +33,7 @@ export default defineConfig({
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
+        'icon-button': resolve(packageRoot, 'src/icon-button.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
         'progress-bar': resolve(packageRoot, 'src/progress-bar.ts'),

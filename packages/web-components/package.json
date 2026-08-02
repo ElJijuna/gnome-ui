@@ -62,6 +62,11 @@
       "import": "./dist/header-bar.js",
       "require": "./dist/header-bar.cjs"
     },
+    "./icon-button": {
+      "types": "./dist/icon-button.d.ts",
+      "import": "./dist/icon-button.js",
+      "require": "./dist/icon-button.cjs"
+    },
     "./menu": {
       "types": "./dist/menu.d.ts",
       "import": "./dist/menu.js",

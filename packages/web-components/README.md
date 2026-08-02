@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-three framework-agnostic components:
+The package currently contains twenty-four framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -28,6 +28,8 @@ The package currently contains twenty-three framework-agnostic components:
 - `<gnome-header-bar>` — title bar with start/title/end regions placed in
   explicit CSS grid columns so the title stays centered without either
   side slot.
+- `<gnome-icon-button>` — icon-only action button, always circular; the
+  host requires a `label` and syncs it onto the control's `aria-label`.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
@@ -81,6 +83,7 @@ import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
+import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/progress-bar';
@@ -181,6 +184,36 @@ The host accepts:
 Consumer-owned `disabled` and `aria-busy` values are restored when the state
 ends or htmx replaces the control. The host's `focus()` and `click()` methods
 delegate to the native button.
+
+## Icon Button
+
+```html
+<gnome-icon-button variant="flat" label="Close panel">
+  <button type="button" data-slot="icon-button-control">
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+      <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" fill="none" />
+    </svg>
+  </button>
+</gnome-icon-button>
+```
+
+`gnome-icon-button` composes a native light-DOM `<button>`, same as
+`gnome-button`, but is always circular — an icon-only control has no text
+that would make a rectangular shape meaningful, so `shape` isn't exposed.
+Any SVG or `<img>` child of the control is sized automatically from `size`.
+
+The host accepts:
+
+- `variant="default|suggested|destructive|flat|raised"`
+- `size="sm|md|lg"`
+- `label` — required accessible name, synced onto the control's
+  `aria-label` (restored to any consumer-authored value once `label` is
+  removed or the control is swapped, e.g. by htmx)
+- Boolean `disabled`, `loading`, and `osd` attributes
+
+`loading` sets `aria-busy="true"`, disables the native control, and hides
+the icon in favor of a centered spinner. The host's `focus()` and `click()`
+methods delegate to the native button.
 
 ## Checkbox
 
@@ -847,6 +880,8 @@ visible), so a replaced trigger keeps its hover/focus listeners and
   label themselves from light-DOM title/description slots, and restore focus.
 - Buttons retain native button semantics and form participation; circular
   icon-only controls still require an explicit accessible name.
+- Icon buttons require a `label`, which the host syncs onto the control's
+  `aria-label` since the control has no visible text of its own.
 - Menus expose the WAI-ARIA menu pattern, support directional navigation and
   typeahead, skip disabled items, and restore focus after dismissal.
 - Switches retain native checkbox semantics and form participation; the

@@ -48,6 +48,12 @@ export {
 } from './dialog';
 export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
 export {
+  GnomeIconButtonElement,
+  type GnomeIconButtonSize,
+  type GnomeIconButtonVariant,
+  registerGnomeIconButton,
+} from './icon-button';
+export {
   type GnomeMenuCloseDetail,
   type GnomeMenuCloseReason,
   GnomeMenuElement,
