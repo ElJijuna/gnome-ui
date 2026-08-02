@@ -44,6 +44,10 @@ export {
 } from './callout';
 export { GnomeCardElement, type GnomeCardPadding, registerGnomeCard } from './card';
 export { GnomeCheckboxElement, registerGnomeCheckbox } from './checkbox';
+export {
+  GnomeChoiceCardGroupElement,
+  registerGnomeChoiceCardGroup,
+} from './choice-card-group';
 export { GnomeComboRowElement, registerGnomeComboRow } from './combo-row';
 export {
   type GnomeDialogCloseDetail,

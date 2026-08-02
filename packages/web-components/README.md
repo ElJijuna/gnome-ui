@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-eight framework-agnostic components:
+The package currently contains thirty-nine framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -26,6 +26,9 @@ The package currently contains thirty-eight framework-agnostic components:
   `<button data-slot="card-surface">` around its children.
 - `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
   `indeterminate` support.
+- `<gnome-choice-card-group>` — `role="radiogroup"` of large selectable
+  cards; combines `gnome-field-group`'s fieldset/legend/hint wrapping with
+  `gnome-view-switcher`'s roving-tabindex keyboard navigation.
 - `<gnome-combo-row>` — settings row with a real, consumer-authored
   `<gnome-dropdown>` in `data-slot="row-suffix"`; genuinely composes
   `gnome-action-row`'s layout with `gnome-dropdown`'s behavior, no
@@ -126,6 +129,7 @@ import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/callout';
 import '@gnome-ui/web-components/checkbox';
+import '@gnome-ui/web-components/choice-card-group';
 import '@gnome-ui/web-components/combo-row';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/divider';
@@ -311,6 +315,59 @@ The host accepts a boolean `disabled` attribute, which disables the native
 control while preserving any disabled state the consumer set directly on it
 once the host's `disabled` attribute is removed. `focus()` and `click()`
 delegate to the native control.
+
+## Choice Card Group
+
+```html
+<gnome-choice-card-group label="Account type" helper-text="You can change this later.">
+  <button type="button" role="radio" aria-checked="true" data-value="personal">
+    <span data-slot="choice-card-title">Personal</span>
+    <span data-slot="choice-card-description">For individual use</span>
+  </button>
+  <button type="button" role="radio" aria-checked="false" data-value="team">
+    <span data-slot="choice-card-title">Team</span>
+    <span data-slot="choice-card-description">For small groups</span>
+  </button>
+</gnome-choice-card-group>
+
+<script type="module">
+  const group = document.querySelector('gnome-choice-card-group');
+
+  group.addEventListener('click', (event) => {
+    const card = event.target.closest('[role="radio"]');
+    if (!card || card.disabled) return;
+
+    for (const sibling of group.querySelectorAll('[role="radio"]')) {
+      sibling.setAttribute('aria-checked', String(sibling === card));
+    }
+  });
+</script>
+```
+
+`gnome-choice-card-group` is a card-based single-choice selector
+(`role="radiogroup"`) — large selectable cards instead of radio buttons,
+for account-type/template pickers in welcome/setup flows. It combines two
+behaviors this package already has separately: wraps a real
+`<fieldset>`/`<legend>` plus a label/helper-text/error hint, same
+technique as `gnome-field-group` (original light-DOM children — the card
+`<button>`s — are moved, once, into a generated
+`<div role="radiogroup" data-slot="choice-card-group-grid">` inside the
+fieldset); and roving-tabindex keyboard navigation with automatic
+activation, same algorithm as `gnome-view-switcher` (all four arrow keys
+cycle, Home/End jump to the ends, moving focus also clicks the target
+card).
+
+Same division of responsibility as `gnome-tab-bar`/`gnome-view-switcher`:
+requires descendants marked `role="radio"` (real `<button>`s
+recommended) — the host does not create cards or manage `aria-checked`
+itself, only the surrounding fieldset chrome and keyboard navigation.
+Style hooks on each card use `[role="radio"]` directly (not a redundant
+`data-slot`), matching `gnome-tab-bar`'s `[role="tab"]` convention. A
+decorative `[data-slot="choice-card-dot"]` is injected into each card
+automatically if missing, same pattern as `gnome-expander-row`'s
+auto-injected chevron. Nest a `[data-slot="choice-card-icon"]` element for
+an optional leading icon — the slot only sets `color`, so any inline SVG
+or `gnome-file-type-icon` works.
 
 ## Switch
 

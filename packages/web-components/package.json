@@ -57,6 +57,11 @@
       "import": "./dist/checkbox.js",
       "require": "./dist/checkbox.cjs"
     },
+    "./choice-card-group": {
+      "types": "./dist/choice-card-group.d.ts",
+      "import": "./dist/choice-card-group.js",
+      "require": "./dist/choice-card-group.cjs"
+    },
     "./combo-row": {
       "types": "./dist/combo-row.d.ts",
       "import": "./dist/combo-row.js",

@@ -9,6 +9,7 @@ gnome-button,
 gnome-callout,
 gnome-card,
 gnome-checkbox,
+gnome-choice-card-group,
 gnome-combo-row,
 gnome-dialog,
 gnome-divider,
@@ -53,6 +54,7 @@ gnome-button *,
 gnome-callout *,
 gnome-card *,
 gnome-checkbox *,
+gnome-choice-card-group *,
 gnome-combo-row *,
 gnome-dialog *,
 gnome-divider *,
@@ -3620,4 +3622,166 @@ gnome-file-type-icon [data-slot="file-type-icon-thumbnail"] {
   height: 100%;
   object-fit: cover;
   border-radius: var(--gnome-radius-xs, 4px);
+}
+
+/* Choice Card Group */
+
+gnome-choice-card-group {
+  display: block;
+}
+
+gnome-choice-card-group [data-slot="choice-card-group-fieldset"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+gnome-choice-card-group [data-slot="choice-card-group-fieldset"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-choice-card-group [data-slot="choice-card-group-legend"] {
+  padding: 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-choice-card-group [data-slot="choice-card-group-hint"] {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-choice-card-group [data-slot="choice-card-group-hint"][data-error] {
+  opacity: 1;
+  color: var(--gnome-error-color, #e01b24);
+}
+
+gnome-choice-card-group [data-slot="choice-card-group-grid"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--gnome-space-2, 12px);
+}
+
+gnome-choice-card-group [role="radio"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: var(--gnome-space-3, 16px);
+  border: 2px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+  border-radius: var(--gnome-radius-lg, 12px);
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  appearance: none;
+  cursor: pointer;
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-choice-card-group [role="radio"]:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 40%, transparent);
+}
+
+gnome-choice-card-group [role="radio"]:focus {
+  outline: none;
+}
+
+gnome-choice-card-group [role="radio"]:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-choice-card-group [role="radio"]:disabled {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-choice-card-group [role="radio"][aria-checked="true"] {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 8%, transparent);
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+gnome-choice-card-group [data-slot="choice-card-dot"] {
+  position: absolute;
+  top: var(--gnome-space-2, 12px);
+  right: var(--gnome-space-2, 12px);
+  width: 16px;
+  height: 16px;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1.5px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.3));
+  border-radius: 50%;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-choice-card-group [role="radio"][aria-checked="true"] [data-slot="choice-card-dot"] {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+  box-shadow: inset 0 0 0 3px var(--gnome-card-bg-color, #fff);
+}
+
+gnome-choice-card-group [data-slot="choice-card-icon"] {
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+gnome-choice-card-group [data-slot="choice-card-title"] {
+  padding-right: 20px;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-choice-card-group [data-slot="choice-card-description"] {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-choice-card-group [role="radio"] {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgb(255 255 255 / 0.12);
+  }
+
+  gnome-choice-card-group [data-slot="choice-card-dot"] {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgb(255 255 255 / 0.3);
+  }
+
+  gnome-choice-card-group [role="radio"][aria-checked="true"] [data-slot="choice-card-dot"] {
+    box-shadow: inset 0 0 0 3px var(--gnome-card-bg-color, #383838);
+  }
+}
+
+@media (prefers-contrast: more) {
+  gnome-choice-card-group [role="radio"] {
+    border-width: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-choice-card-group [role="radio"],
+  gnome-choice-card-group [data-slot="choice-card-dot"] {
+    transition: none;
+  }
 }

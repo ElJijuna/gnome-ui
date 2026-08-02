@@ -39,6 +39,7 @@ export default defineConfig({
         callout: resolve(packageRoot, 'src/callout.ts'),
         card: resolve(packageRoot, 'src/card.ts'),
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
+        'choice-card-group': resolve(packageRoot, 'src/choice-card-group.ts'),
         'combo-row': resolve(packageRoot, 'src/combo-row.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         divider: resolve(packageRoot, 'src/divider.ts'),
