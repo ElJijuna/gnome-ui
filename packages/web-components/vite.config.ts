@@ -34,6 +34,7 @@ export default defineConfig({
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         'icon-button': resolve(packageRoot, 'src/icon-button.ts'),
+        'level-bar': resolve(packageRoot, 'src/level-bar.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
         'progress-bar': resolve(packageRoot, 'src/progress-bar.ts'),

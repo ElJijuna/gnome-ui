@@ -11,6 +11,7 @@ gnome-checkbox,
 gnome-dialog,
 gnome-header-bar,
 gnome-icon-button,
+gnome-level-bar,
 gnome-menu,
 gnome-popover,
 gnome-progress-bar,
@@ -41,6 +42,7 @@ gnome-checkbox *,
 gnome-dialog *,
 gnome-header-bar *,
 gnome-icon-button *,
+gnome-level-bar *,
 gnome-menu *,
 gnome-popover *,
 gnome-progress-bar *,
@@ -1236,6 +1238,88 @@ gnome-avatar[data-color="slate"] {
 @media (prefers-color-scheme: dark) {
   gnome-avatar {
     box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+}
+
+/* Level Bar */
+
+gnome-level-bar {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-light-3, #deddda);
+}
+
+gnome-level-bar:not([data-discrete])::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--gnome-level-value, 0%);
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  content: "";
+  transition: width var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-level-bar[data-variant="success"]:not([data-discrete])::after {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+}
+
+gnome-level-bar[data-variant="warning"]:not([data-discrete])::after {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+}
+
+gnome-level-bar[data-variant="error"]:not([data-discrete])::after {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+}
+
+gnome-level-bar[data-discrete] {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  overflow: visible;
+  background-color: transparent;
+}
+
+gnome-level-bar [data-slot="level-block"] {
+  flex: 1 1 0;
+  border-radius: 2px;
+  background-color: var(--gnome-light-3, #deddda);
+}
+
+gnome-level-bar [data-slot="level-block"][data-filled] {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-level-bar[data-variant="success"] [data-slot="level-block"][data-filled] {
+  background-color: var(--gnome-success-bg-color, #2ec27e);
+}
+
+gnome-level-bar[data-variant="warning"] [data-slot="level-block"][data-filled] {
+  background-color: var(--gnome-warning-bg-color, #f6d32d);
+}
+
+gnome-level-bar[data-variant="error"] [data-slot="level-block"][data-filled] {
+  background-color: var(--gnome-error-bg-color, #e01b24);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-level-bar,
+  gnome-level-bar [data-slot="level-block"] {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+
+  gnome-level-bar[data-discrete] {
+    background-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-level-bar:not([data-discrete])::after {
+    transition: none;
   }
 }
 

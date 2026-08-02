@@ -54,6 +54,11 @@ export {
   registerGnomeIconButton,
 } from './icon-button';
 export {
+  GnomeLevelBarElement,
+  type GnomeLevelBarVariant,
+  registerGnomeLevelBar,
+} from './level-bar';
+export {
   type GnomeMenuCloseDetail,
   type GnomeMenuCloseReason,
   GnomeMenuElement,

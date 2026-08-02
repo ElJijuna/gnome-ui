@@ -67,6 +67,11 @@
       "import": "./dist/icon-button.js",
       "require": "./dist/icon-button.cjs"
     },
+    "./level-bar": {
+      "types": "./dist/level-bar.d.ts",
+      "import": "./dist/level-bar.js",
+      "require": "./dist/level-bar.cjs"
+    },
     "./menu": {
       "types": "./dist/menu.d.ts",
       "import": "./dist/menu.js",

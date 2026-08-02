@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-four framework-agnostic components:
+The package currently contains twenty-five framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -30,6 +30,9 @@ The package currently contains twenty-four framework-agnostic components:
   side slot.
 - `<gnome-icon-button>` — icon-only action button, always circular; the
   host requires a `label` and syncs it onto the control's `aria-label`.
+- `<gnome-level-bar>` — `role="meter"` gauge with colour-coded low/high
+  offset zones; continuous fill via a CSS custom property, or a row of
+  host-derived blocks in `discrete` mode.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
@@ -84,6 +87,7 @@ import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/icon-button';
+import '@gnome-ui/web-components/level-bar';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/progress-bar';
@@ -454,6 +458,48 @@ values are clamped); omit it (or remove the attribute) for the
 indeterminate pulsing state. `variant` accepts
 `"accent" | "success" | "warning" | "error"` (default `"accent"`). The
 transition and pulse animation both respect `prefers-reduced-motion`.
+
+## Level Bar
+
+```html
+<gnome-level-bar
+  aria-label="Disk usage"
+  value="0.85"
+  low="0.2"
+  high="0.8"
+></gnome-level-bar>
+
+<!-- discrete mode: signal-strength style blocks -->
+<gnome-level-bar
+  aria-label="Signal strength"
+  discrete
+  num-blocks="5"
+  value="0.6"
+></gnome-level-bar>
+```
+
+`gnome-level-bar` is `role="meter"` — the WAI-ARIA role for a scalar
+measurement within a known range, distinct from `gnome-progress-bar`'s
+`role="progressbar"`. Use it for a gauge (disk usage, battery, signal
+strength), not task progress.
+
+The host accepts:
+
+- `value`, `min` (default `0`), `max` (default `1`)
+- `low` / `low-variant` (default `"warning"`) — colour used at or below the
+  low threshold
+- `high` / `high-variant` (default `"error"`) — colour used at or above the
+  high threshold
+- `variant` (default `"accent"`) — colour between the two thresholds;
+  accepts `"accent" | "success" | "warning" | "error"`
+- Boolean `discrete` + `num-blocks` (default `10`)
+
+In continuous mode the fill is painted through CSS driven by a
+`--gnome-level-value` custom property, same technique as
+`gnome-progress-bar`. In `discrete` mode there is nothing for a consumer to
+author — like `gnome-skeleton`'s `text` variant rows, the host derives
+`num-blocks` `[data-slot="level-block"]` elements itself and toggles
+`data-filled` up to the current fraction.
 
 ## Skeleton
 
@@ -904,6 +950,9 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 - Progress bars default to `role="progressbar"` and expose `aria-valuenow`/
   `aria-valuemin`/`aria-valuemax` in the determinate state; consumers still
   provide `aria-label` or `aria-labelledby`.
+- Level bars default to `role="meter"` and expose `aria-valuenow`/
+  `aria-valuemin`/`aria-valuemax`; consumers still provide `aria-label` or
+  `aria-labelledby`. Discrete-mode blocks are `aria-hidden`.
 - Avatars default to `role="img"` with an `aria-label` kept in sync from the
   image's `alt` or `name`; the initials fallback is `aria-hidden`.
 - Toasts use a polite atomic live region and pause timers during hover or
