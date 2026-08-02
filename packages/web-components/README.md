@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-five framework-agnostic components:
+The package currently contains thirty-six framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -49,6 +49,9 @@ The package currently contains thirty-five framework-agnostic components:
   from `text`/`query`/`case-sensitive`.
 - `<gnome-icon-button>` — icon-only action button, always circular; the
   host requires a `label` and syncs it onto the control's `aria-label`.
+- `<gnome-kbd>` — single key-cap for inline instructional text; the key name
+  is authored as plain light-DOM text, common names normalise to a Unicode
+  symbol unless `raw` is set, and the original name moves to `aria-label`.
 - `<gnome-level-bar>` — `role="meter"` gauge with colour-coded low/high
   offset zones; continuous fill via a CSS custom property, or a row of
   host-derived blocks in `discrete` mode.
@@ -124,6 +127,7 @@ import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/expander-row';
 import '@gnome-ui/web-components/highlight';
 import '@gnome-ui/web-components/icon-button';
+import '@gnome-ui/web-components/kbd';
 import '@gnome-ui/web-components/level-bar';
 import '@gnome-ui/web-components/menu';
 import '@gnome-ui/web-components/popover';
@@ -733,6 +737,30 @@ is set (mirrors react's `onStepClick` being optional to make steps
 non-interactive) — clicking one emits `gnome-select` with `{ step }`; the
 current and upcoming steps are never clickable. `orientation` accepts
 `"horizontal" | "vertical"` (default `"horizontal"`).
+
+## Kbd
+
+```html
+Press <gnome-kbd>Enter</gnome-kbd> to confirm, or <gnome-kbd>Esc</gnome-kbd>
+to cancel.
+
+<!-- Unknown key names render as-is -->
+<gnome-kbd>F5</gnome-kbd>
+
+<!-- Raw text instead of the normalised symbol -->
+<gnome-kbd raw>Enter</gnome-kbd>
+```
+
+`gnome-kbd` is a standalone single key-cap for inline instructional text —
+the key name is authored as plain light-DOM text, same as the native
+`<kbd>` element, and captured once on first connect. Common key names
+(`Ctrl`, `Shift`, `Alt`, `Enter`, `Esc`, arrow keys, and more) normalise to
+their Unicode symbol unless the `raw` boolean attribute is set; when a
+symbol is substituted, the original name moves to `aria-label` so
+assistive tech still announces "Enter" rather than "↵". Set the `key`
+property (not `.textContent`) for programmatic updates after the initial
+render, since the component re-renders from the captured raw name rather
+than re-reading its own generated content.
 
 ## Banner
 

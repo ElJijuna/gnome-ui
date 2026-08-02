@@ -40,6 +40,7 @@ export default defineConfig({
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         highlight: resolve(packageRoot, 'src/highlight.ts'),
         'icon-button': resolve(packageRoot, 'src/icon-button.ts'),
+        kbd: resolve(packageRoot, 'src/kbd.ts'),
         'level-bar': resolve(packageRoot, 'src/level-bar.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),

@@ -77,6 +77,7 @@ export {
   type GnomeIconButtonVariant,
   registerGnomeIconButton,
 } from './icon-button';
+export { GnomeKbdElement, registerGnomeKbd } from './kbd';
 export {
   GnomeLevelBarElement,
   type GnomeLevelBarVariant,

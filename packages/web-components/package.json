@@ -97,6 +97,11 @@
       "import": "./dist/icon-button.js",
       "require": "./dist/icon-button.cjs"
     },
+    "./kbd": {
+      "types": "./dist/kbd.d.ts",
+      "import": "./dist/kbd.js",
+      "require": "./dist/kbd.cjs"
+    },
     "./level-bar": {
       "types": "./dist/level-bar.d.ts",
       "import": "./dist/level-bar.js",
