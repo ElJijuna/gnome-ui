@@ -133,6 +133,83 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 ---
 
+## Tier 7 — Presentational Primitives
+
+> Trivial complexity, no blocking dependencies — mostly derived-render or wraps a real
+> native element directly. `IconButton` ships first since Tier 9 depends on it.
+
+| Priority | Status | Element | Ported from | Notes |
+|----------|--------|---------|--------------|-------|
+| 26 | ⬜ | `<gnome-icon-button>` | `IconButton` | Wraps `<button>`; icon-only shape of `gnome-button`. Hard blocker for Tier 9 |
+| 27 | ⬜ | `<gnome-level-bar>` | `LevelBar` | `role="meter"`; continuous fill or discrete block array, purely attribute-reactive |
+| 28 | ⬜ | `<gnome-divider>` | `Divider` | Distinct from `gnome-separator` — adds an optional centered label; `gnome-separator` only has `orientation`, no label support |
+| 29 | ⬜ | `<gnome-callout>` | `Callout` | `role="note"`; icon + message + optional dismiss button, visibility owned by the consumer |
+| 30 | ⬜ | `<gnome-highlight>` | `Highlight` | Pure string-split-and-`<mark>` rendering, stateless |
+| 31 | ⬜ | `<gnome-kbd>` | `Kbd` | Wraps native `<kbd>` directly; static symbol-lookup table |
+| 32 | ⬜ | `<gnome-file-type-icon>` | `FileTypeIcon` | Wraps `<img>` (thumbnail) or an icon glyph; MIME/filename category resolution ported alongside |
+| 33 | ⬜ | `<gnome-step-indicator>` | `StepIndicator` | `<nav>`/`<ol>` of step circles, fully derived from `currentStep`, no internal state |
+| 34 | ⬜ | `<gnome-field-group>` | `FieldGroup` | Wraps native `<fieldset>`/`<legend>` directly — free native `disabled`-cascade to all descendants |
+
+---
+
+## Tier 8 — Disclosure & Self-Contained Interaction
+
+> Moderate complexity but no blocking dependencies — self-contained state machines that
+> reuse patterns already proven by shipped elements.
+
+| Priority | Status | Element | Ported from | Notes |
+|----------|--------|---------|--------------|-------|
+| 35 | ⬜ | `<gnome-expander>` | `Expander` | Disclosure trigger `<button>` + `role="region"` content, same shape as `gnome-dialog`'s toggle logic |
+| 36 | ⬜ | `<gnome-otp-input>` | `OtpInput` | N native `<input>` cells in a `<fieldset>`; auto-advance, backspace-to-previous, paste-distributes |
+| 37 | ⬜ | `<gnome-file-drop-zone>` | `FileDropZone` | Native `DragEvent`s + hidden `<input type="file">`; drag-enter/leave counter for nested-element correctness |
+| 38 | ⬜ | `<gnome-rating-stars>` | `RatingStars` | Roving-tabindex `role="radiogroup"`, same recipe as `gnome-radio-group`; read-only mode uses `role="img"` |
+| 39 | ⬜ | `<gnome-choice-card-group>` | `ChoiceCardGroup` | Roving-tabindex `radiogroup` of cards, same recipe as `gnome-radio-group` |
+| 40 | ⬜ | `<gnome-text-truncate>` | `TextTruncate` | `ResizeObserver`-driven overflow detection, wraps content in already-shipped `gnome-tooltip` when truncated |
+
+---
+
+## Tier 9 — IconButton-Dependent Composites
+
+> Blocked on Tier 7's `<gnome-icon-button>`.
+
+| Priority | Status | Element | Ported from | Notes |
+|----------|--------|---------|--------------|-------|
+| 41 | ⬜ | `<gnome-copy-button>` | `CopyButton` | `IconButton` + `navigator.clipboard`; timeout-reset "copied" state, `aria-live` confirmation |
+| 42 | ⬜ | `<gnome-password-field>` | `PasswordField` | Near-identical shape to shipped `gnome-text-field`, plus a reveal `IconButton` toggling `type` |
+| 43 | ⬜ | `<gnome-copy-field>` | `CopyField` | `<input readonly>` + trailing `gnome-copy-button`; no own state |
+| 44 | ⬜ | `<gnome-code-block>` | `CodeBlock` | `<pre><code>` + header (filename/language/`gnome-copy-button`); no syntax highlighting |
+| 45 | ⬜ | `<gnome-emoji-picker>` | `EmojiPicker` | Composes already-shipped `gnome-popover` + `gnome-icon-button`; search-filter, session-only "recently used", static `emojiData.ts` dataset |
+
+---
+
+## Tier 10 — Dropdown / Listbox Cluster
+
+> Shares flip-positioning and listbox-keyboard-nav logic — port as one cluster rather than
+> in isolation to avoid duplicating the same pattern three times.
+
+| Priority | Status | Element | Ported from | Notes |
+|----------|--------|---------|--------------|-------|
+| 46 | ⬜ | `<gnome-dropdown>` | `Dropdown` | Shared foundation for this cluster (see also old Tier 6 priority 22 — combines `gnome-menu` internals with a select-styled trigger) |
+| 47 | ⬜ | `<gnome-multi-select-dropdown>` | `MultiSelectDropdown` | `role="combobox"` trigger + `role="listbox"` of checkbox options; flip-up/down positioning via `getBoundingClientRect`, outside-click-to-close |
+| 48 | ⬜ | `<gnome-font-picker>` | `FontPicker` | Trivial glue code (one `open` boolean) over `gnome-popover` + two `gnome-dropdown`s + `gnome-spin-button`; blocked on `gnome-dropdown` |
+
+---
+
+## Tier 11 — Heavy Interaction / Needs Own Design Pass
+
+> Same complexity class as the hardest already-shipped elements, or blocked on untriaged
+> prerequisites — sequence last.
+
+| Priority | Status | Element | Ported from | Notes |
+|----------|--------|---------|--------------|-------|
+| 49 | ⬜ | `<gnome-range-slider>` | `RangeSlider` | Dual-thumb `PointerEvent` drag (no native dual-handle `<input type="range">`); same complexity class as shipped `gnome-slider`, which already proves pointer-capture works in light DOM |
+| 50 | ⬜ | `<gnome-overlay>` | `Overlay` | Backdrop/scrim + fade-timing state machine + scroll lock; reuse `gnome-dialog`/`gnome-popover`'s internals rather than reimplement |
+| 51 | ⬜ | `<gnome-chip>` | `Chip` | Untriaged — needs its own read before estimating. Prerequisite for `gnome-tag-input` |
+| 52 | ⬜ | `<gnome-wrap-box>` | `WrapBox` | Untriaged — likely a trivial flex-wrap container. Prerequisite for `gnome-tag-input` |
+| 53 | ⬜ | `<gnome-tag-input>` | `TagInput` | `<input>` + chip-list container; draft-text/Enter-to-commit/backspace-to-remove state. Blocked on `gnome-chip` + `gnome-wrap-box` |
+
+---
+
 ## Deferred / Not Planned
 
 > Components better served staying React-only for now: heavy composition
@@ -147,6 +224,8 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | `Carousel`, `BottomSheet` | Gesture-heavy; needs a pointer/swipe internal helper first |
 | `ColumnView` | Large surface area (sorting, virtualization); needs its own design pass |
 | `ContributionGraph`, chart components | SVG data-viz, framework-agnostic port has little value over embedding the React version |
+| `Portal` | React-specific plumbing; light-DOM custom elements already render in the real DOM tree, no portal abstraction needed — `gnome-dialog`/`gnome-popover` handle their own positioning internally |
+| `VisuallyHidden` | Cross-cutting CSS utility, not a component with behavior; ship as a `.gnome-sr-only` utility class in `styles.css` instead of a custom element |
 
 ---
 
