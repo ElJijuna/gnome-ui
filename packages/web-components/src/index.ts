@@ -119,6 +119,12 @@ export {
   registerGnomeSpinner,
 } from './spinner';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
+export {
+  type GnomeSwitchRowChangeDetail,
+  GnomeSwitchRowElement,
+  type GnomeSwitchRowEventMap,
+  registerGnomeSwitchRow,
+} from './switch-row';
 export { GnomeTabBarElement, registerGnomeTabBar } from './tab-bar';
 export { GnomeTextFieldElement, registerGnomeTextField } from './text-field';
 export {

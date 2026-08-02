@@ -24,6 +24,7 @@ gnome-slider,
 gnome-spin-button,
 gnome-spinner,
 gnome-switch,
+gnome-switch-row,
 gnome-tab-bar,
 gnome-text-field,
 gnome-toast,
@@ -59,6 +60,7 @@ gnome-slider *,
 gnome-spin-button *,
 gnome-spinner *,
 gnome-switch *,
+gnome-switch-row *,
 gnome-tab-bar *,
 gnome-text-field *,
 gnome-toast *,
@@ -1927,6 +1929,152 @@ gnome-combo-row [data-slot="row-subtitle"] {
 
 gnome-combo-row [data-slot="row-suffix"] {
   grid-area: suffix;
+}
+
+/* Switch Row */
+
+gnome-switch-row {
+  display: block;
+}
+
+gnome-switch-row [data-slot="row-surface"] {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  width: 100%;
+  min-height: 52px;
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  font: inherit;
+  text-align: start;
+  outline: none;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-switch-row [data-slot="row-surface"]:hover:not(:disabled) {
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+}
+
+gnome-switch-row [data-slot="row-surface"]:active:not(:disabled) {
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.12));
+}
+
+gnome-switch-row [data-slot="row-surface"]:focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-switch-row [data-slot="row-surface"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+gnome-switch-row [data-slot="row-prefix"] {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-switch-row [data-slot="row-content"] {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+gnome-switch-row [data-slot="row-title"] {
+  overflow: hidden;
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+gnome-switch-row [data-slot="row-subtitle"] {
+  overflow: hidden;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  opacity: var(--gnome-opacity-dim, 0.55);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+gnome-switch-row [data-slot="row-switch-track"] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 56px;
+  height: 28px;
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.12));
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: var(--gnome-light-4, #c0bfbc);
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-switch-row[checked] [data-slot="row-switch-track"] {
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-switch-row [data-slot="row-switch-thumb"] {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-switch-row[checked] [data-slot="row-switch-thumb"] {
+  transform: translateX(28px);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-switch-row [data-slot="row-switch-track"] {
+    background-color: var(--gnome-dark-2, #5e5c64);
+  }
+
+  gnome-switch-row [data-slot="row-switch-thumb"] {
+    background-color: var(--gnome-light-3, #deddda);
+  }
+
+  gnome-switch-row[checked] [data-slot="row-switch-thumb"] {
+    background-color: #fff;
+  }
+}
+
+@media (prefers-contrast: more) {
+  gnome-switch-row [data-slot="row-switch-track"] {
+    border-width: 2px;
+  }
+
+  gnome-switch-row [data-slot="row-switch-thumb"] {
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-switch-row [data-slot="row-switch-track"],
+  gnome-switch-row [data-slot="row-switch-thumb"] {
+    transition: none;
+  }
 }
 
 /* Boxed List */

@@ -132,6 +132,11 @@
       "import": "./dist/switch.js",
       "require": "./dist/switch.cjs"
     },
+    "./switch-row": {
+      "types": "./dist/switch-row.d.ts",
+      "import": "./dist/switch-row.js",
+      "require": "./dist/switch-row.cjs"
+    },
     "./tab-bar": {
       "types": "./dist/tab-bar.d.ts",
       "import": "./dist/tab-bar.js",

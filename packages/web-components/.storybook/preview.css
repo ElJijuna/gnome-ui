@@ -218,6 +218,12 @@ body {
   background: transparent;
 }
 
+.wc-story gnome-switch-row [data-slot="row-surface"] {
+  min-height: 0;
+  border: none;
+  background: transparent;
+}
+
 .wc-story gnome-icon-button [data-slot="icon-button-control"] {
   min-width: 0;
   min-height: 0;

@@ -18,8 +18,11 @@ function renderComboRow(args: ComboRowArgs) {
   demo.className = 'wc-story__demo';
   demo.style.width = '100%';
   demo.style.maxWidth = '32rem';
-  demo.style.border = '1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12))';
-  demo.style.borderRadius = 'var(--gnome-radius-md, 8px)';
+
+  const card = document.createElement('div');
+  card.style.border = '1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12))';
+  card.style.borderRadius = 'var(--gnome-radius-md, 8px)';
+  card.style.overflow = 'hidden';
 
   const eventOutput = document.createElement('p');
   eventOutput.className = 'wc-story__event';
@@ -66,7 +69,8 @@ function renderComboRow(args: ComboRowArgs) {
   });
 
   comboRow.append(title, subtitle, dropdown);
-  demo.append(comboRow, eventOutput);
+  card.append(comboRow);
+  demo.append(card, eventOutput);
   story.append(demo);
 
   return story;

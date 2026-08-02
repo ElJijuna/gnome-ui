@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-nine framework-agnostic components:
+The package currently contains thirty framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -59,6 +59,10 @@ The package currently contains twenty-nine framework-agnostic components:
   indicator with `role="progressbar"`.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
+- `<gnome-switch-row>` — the entire row is the switch (`role="switch"` on
+  a generated `<button data-slot="row-surface">`); clicking anywhere
+  toggles it, genuinely different from `gnome-action-row` + a nested
+  `gnome-switch`.
 - `<gnome-tab-bar>` — `role="tablist"` roving-tabindex keyboard navigation;
   the host does not create tabs or manage selection, only focus movement.
 - `<gnome-text-field>` — styled native text input/textarea with label and
@@ -110,6 +114,7 @@ import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
 import '@gnome-ui/web-components/spinner';
 import '@gnome-ui/web-components/switch';
+import '@gnome-ui/web-components/switch-row';
 import '@gnome-ui/web-components/tab-bar';
 import '@gnome-ui/web-components/text-field';
 import '@gnome-ui/web-components/toast';
@@ -972,6 +977,42 @@ whichever element is marked `data-slot="row-suffix"`, if it exposes a
 `disabled` property — works for `gnome-dropdown`, `gnome-button`, or a
 native control marked directly with that slot.
 
+## Switch Row
+
+```html
+<gnome-switch-row>
+  <span data-slot="row-prefix">🔔</span>
+  <span data-slot="row-title">Notifications</span>
+  <span data-slot="row-subtitle">Get notified about updates</span>
+</gnome-switch-row>
+
+<script type="module">
+  document.querySelector('gnome-switch-row').addEventListener('gnome-change', (event) => {
+    console.log('Checked:', event.detail.checked);
+  });
+</script>
+```
+
+`gnome-switch-row` is genuinely different from `gnome-action-row` composed
+with a nested `gnome-switch`: the entire row is the switch — clicking
+anywhere toggles it — matching `@gnome-ui/react`'s `SwitchRow`, whose own
+docs call out that this differs from `ActionRow` + trailing `Switch`
+because the row itself is the interactive element. Composing a real
+`<gnome-switch>` (which wraps its own native `<input>`) inside the row's
+own `<button>` would nest two interactive controls — invalid, inaccessible
+HTML — so the host's generated `<button data-slot="row-surface">` itself
+carries `role="switch"`/`aria-checked`, and the switch track/thumb is a
+small host-generated `aria-hidden` visual: nothing for the consumer to
+author, same rationale as `gnome-avatar`'s initials.
+
+Only `row-title`, `row-subtitle`, and `row-prefix` are consumer-authored
+(same slot names as `gnome-action-row`). Author your own
+`data-slot="row-surface"` (e.g. an `<a>` for a row that navigates) to use a
+different element — the host adopts it instead of generating one, and
+falls back to `aria-disabled`/`tabindex="-1"` for `disabled` when the
+adopted element has no native `disabled` property. Fires a non-cancelable
+`gnome-change` (`{ checked }`) on every toggle.
+
 ## Boxed List
 
 ```html
@@ -1074,6 +1115,7 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 | `gnome-close` | Dialog, Dropdown, Menu, Popover | No | `{ reason }` |
 | `gnome-select` | Menu | Yes | `{ item, value }` |
 | `gnome-change` | Dropdown, Radio Group | No | `{ value }` |
+| `gnome-change` | Switch Row | No | `{ checked }` |
 | `gnome-action` | Toast | Yes | `{ action }` |
 | `gnome-action` | Banner | No — clicking an action never dismisses the banner | `{ action }` |
 | `gnome-before-dismiss` | Toast, Banner | Yes | `{ reason }` |
@@ -1103,6 +1145,9 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 - Switches retain native checkbox semantics and form participation; the
   consumer must add `role="switch"` and an accessible name (a `<label>` or
   `aria-label`).
+- Switch rows are a real `role="switch"` `<button>`, labelled from
+  `row-title`/`row-subtitle` via `aria-labelledby` — native keyboard
+  activation (Space/Enter) works for free.
 - Checkboxes retain native checkbox semantics and form participation,
   including the `indeterminate` visual state.
 - Radio groups rely on native same-name radio semantics for mutual
