@@ -46,6 +46,15 @@ export {
   type GnomeDialogOpenChangeDetail,
   registerGnomeDialog,
 } from './dialog';
+export {
+  type GnomeDropdownChangeDetail,
+  type GnomeDropdownCloseDetail,
+  type GnomeDropdownCloseReason,
+  GnomeDropdownElement,
+  type GnomeDropdownEventMap,
+  type GnomeDropdownOpenChangeDetail,
+  registerGnomeDropdown,
+} from './dropdown';
 export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
 export {
   GnomeIconButtonElement,

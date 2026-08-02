@@ -57,6 +57,11 @@
       "import": "./dist/dialog.js",
       "require": "./dist/dialog.cjs"
     },
+    "./dropdown": {
+      "types": "./dist/dropdown.d.ts",
+      "import": "./dist/dropdown.js",
+      "require": "./dist/dropdown.cjs"
+    },
     "./header-bar": {
       "types": "./dist/header-bar.d.ts",
       "import": "./dist/header-bar.js",

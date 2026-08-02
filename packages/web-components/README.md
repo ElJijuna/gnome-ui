@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-six framework-agnostic components:
+The package currently contains twenty-seven framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -25,6 +25,9 @@ The package currently contains twenty-six framework-agnostic components:
   `indeterminate` support.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
+- `<gnome-dropdown>` — combo-box option list; `role="combobox"` trigger +
+  `role="listbox"` content, active option tracked via
+  `aria-activedescendant` instead of moving DOM focus.
 - `<gnome-header-bar>` — title bar with start/title/end regions placed in
   explicit CSS grid columns so the title stays centered without either
   side slot.
@@ -88,6 +91,7 @@ import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/dialog';
+import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/level-bar';
 import '@gnome-ui/web-components/menu';
@@ -664,6 +668,47 @@ if that's what you want.
 recently opened dialog remains interactive, and closing it restores the
 previous modal and its focus.
 
+## Dropdown
+
+```html
+<gnome-dropdown placeholder="Select a theme">
+  <button type="button" data-slot="dropdown-trigger"></button>
+  <ul data-slot="dropdown-content">
+    <li data-option data-value="light">Light</li>
+    <li data-option data-value="dark">Dark</li>
+    <li data-option data-value="hc" aria-disabled="true">High contrast</li>
+  </ul>
+</gnome-dropdown>
+
+<script type="module">
+  document.querySelector('gnome-dropdown').addEventListener('gnome-change', (event) => {
+    console.log('Selected:', event.detail.value);
+  });
+</script>
+```
+
+`gnome-dropdown` combines `gnome-menu`'s internals — light-DOM trigger/
+content, floating position with flip, outside-pointer/`Escape`/`Tab`
+dismissal, geometry tracking — with a trigger styled as a `<select>`. Two
+real differences from `gnome-menu`: focus never leaves the trigger (the
+standard `role="combobox"` pattern tracks the active `role="option"`
+through `aria-activedescendant` instead of moving DOM focus per item), and
+selection is single-value, tracked via the `value` attribute and mirrored
+onto each option's `aria-selected` the same way `gnome-radio-group` mirrors
+native `checked`.
+
+The host manages the trigger's visible text itself, via a
+`[data-slot="dropdown-value"]` span it adopts or creates — nothing for the
+consumer to author there, since it's fully derived from `value`/
+`placeholder`. Options only need `data-option` + `data-value`; wrap the
+label in `[data-slot="option-label"]` if you also want a secondary
+`[data-slot="option-description"]` line. `disabled`/`aria-disabled="true"`
+options are skipped during keyboard navigation and ignored on click.
+
+Fires a non-cancelable `gnome-change` (`{ value }`) on selection and
+`gnome-open-change`/`gnome-close` (`{ reason }`) on open-state transitions,
+same shape as `gnome-menu`'s events.
+
 ## Menu
 
 ```html
@@ -951,11 +996,11 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 
 | Event | Components | Cancelable | Detail |
 |-------|------------|------------|--------|
-| `gnome-open-change` | Dialog, Menu, Popover, Toast | No | `{ open }` |
+| `gnome-open-change` | Dialog, Dropdown, Menu, Popover, Toast | No | `{ open }` |
 | `gnome-cancel` | Dialog, Menu, Popover | Yes | `{ reason }` |
-| `gnome-close` | Dialog, Menu, Popover | No | `{ reason }` |
+| `gnome-close` | Dialog, Dropdown, Menu, Popover | No | `{ reason }` |
 | `gnome-select` | Menu | Yes | `{ item, value }` |
-| `gnome-change` | Radio Group | No | `{ value }` |
+| `gnome-change` | Dropdown, Radio Group | No | `{ value }` |
 | `gnome-action` | Toast | Yes | `{ action }` |
 | `gnome-action` | Banner | No — clicking an action never dismisses the banner | `{ action }` |
 | `gnome-before-dismiss` | Toast, Banner | Yes | `{ reason }` |
@@ -972,6 +1017,9 @@ visible), so a replaced trigger keeps its hover/focus listeners and
   `aria-label` since the control has no visible text of its own.
 - Menus expose the WAI-ARIA menu pattern, support directional navigation and
   typeahead, skip disabled items, and restore focus after dismissal.
+- Dropdowns expose the WAI-ARIA combobox/listbox pattern; focus stays on the
+  trigger the whole time and the active option is announced via
+  `aria-activedescendant`, skipping disabled options during navigation.
 - Tab bars default to `role="tablist"`; the consumer marks each descendant
   `role="tab"` and manages `aria-selected` — the host only handles
   roving-tabindex and Left/Right/Home/End focus movement, skipping disabled

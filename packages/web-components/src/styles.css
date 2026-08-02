@@ -9,6 +9,7 @@ gnome-button,
 gnome-card,
 gnome-checkbox,
 gnome-dialog,
+gnome-dropdown,
 gnome-header-bar,
 gnome-icon-button,
 gnome-level-bar,
@@ -41,6 +42,7 @@ gnome-button *,
 gnome-card *,
 gnome-checkbox *,
 gnome-dialog *,
+gnome-dropdown *,
 gnome-header-bar *,
 gnome-icon-button *,
 gnome-level-bar *,
@@ -2145,6 +2147,223 @@ gnome-menu [data-slot="menu-shortcut"] {
   margin-inline-start: auto;
   opacity: var(--gnome-opacity-dim, 0.55);
   font-size: var(--gnome-font-size-small, 0.875rem);
+}
+
+/* Dropdown */
+
+gnome-dropdown {
+  display: inline-block;
+  min-width: 160px;
+}
+
+gnome-dropdown [data-slot="dropdown-trigger"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-1, 6px);
+  width: 100%;
+  min-height: 36px;
+  padding: 7px var(--gnome-space-2, 12px);
+  appearance: none;
+  background-color: var(--gnome-card-bg-color, #fff);
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.08));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  font: inherit;
+  text-align: start;
+  user-select: none;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-dropdown [data-slot="dropdown-trigger"]::after {
+  flex-shrink: 0;
+  width: 10px;
+  height: 6px;
+  background-color: currentcolor;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: "";
+  opacity: var(--gnome-opacity-dim, 0.55);
+  transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-dropdown[data-state="open"] [data-slot="dropdown-trigger"]::after {
+  transform: rotate(180deg);
+}
+
+gnome-dropdown [data-slot="dropdown-trigger"]:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 90%, black 10%);
+}
+
+gnome-dropdown [data-slot="dropdown-trigger"]:focus {
+  outline: none;
+}
+
+gnome-dropdown [data-slot="dropdown-trigger"]:focus-visible,
+gnome-dropdown[data-state="open"] [data-slot="dropdown-trigger"] {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-dropdown [data-slot="dropdown-trigger"]:disabled {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-dropdown [data-slot="dropdown-value"] {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+gnome-dropdown [data-slot="dropdown-value"][data-placeholder] {
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-dropdown [data-slot="dropdown-content"] {
+  position: fixed;
+  z-index: 910;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  max-height: 280px;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #fff));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow:
+    0 4px 16px rgb(0 0 0 / 0.12),
+    0 1px 3px rgb(0 0 0 / 0.08);
+  animation: gnome-dropdown-in var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease)
+    both;
+}
+
+gnome-dropdown [data-slot="dropdown-content"][hidden] {
+  display: none;
+}
+
+gnome-dropdown [data-slot="dropdown-content"][data-placement="top"] {
+  animation-name: gnome-dropdown-in-up;
+}
+
+@keyframes gnome-dropdown-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: top center;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top center;
+  }
+}
+
+@keyframes gnome-dropdown-in-up {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: bottom center;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom center;
+  }
+}
+
+gnome-dropdown [data-option] {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  min-height: 40px;
+  padding: 8px var(--gnome-space-2, 12px);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  font-size: var(--gnome-font-size-body, 1rem);
+  user-select: none;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-dropdown [data-option][data-active] {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 12%, transparent);
+}
+
+gnome-dropdown [data-option][aria-selected="true"] {
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+gnome-dropdown [data-option][aria-selected="true"]::after {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  color: var(--gnome-accent-color, #3584e4);
+  content: "✓";
+}
+
+gnome-dropdown [data-option]:is([disabled], [aria-disabled="true"]) {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  pointer-events: none;
+}
+
+gnome-dropdown [data-slot="option-label"] {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+gnome-dropdown [data-slot="option-description"] {
+  display: block;
+  overflow: hidden;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-dropdown [data-slot="dropdown-trigger"] {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow: none;
+  }
+
+  gnome-dropdown [data-slot="dropdown-trigger"]:hover:not(:disabled) {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+
+  gnome-dropdown [data-slot="dropdown-content"] {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgb(255 255 255 / 0.1);
+    box-shadow:
+      0 4px 16px rgb(0 0 0 / 0.4),
+      0 1px 3px rgb(0 0 0 / 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-dropdown [data-slot="dropdown-trigger"],
+  gnome-dropdown [data-slot="dropdown-trigger"]::after {
+    transition: none;
+  }
+
+  gnome-dropdown [data-slot="dropdown-content"] {
+    animation: none;
+  }
 }
 
 /* Toast */

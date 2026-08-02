@@ -32,6 +32,7 @@ export default defineConfig({
         card: resolve(packageRoot, 'src/card.ts'),
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
+        dropdown: resolve(packageRoot, 'src/dropdown.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         'icon-button': resolve(packageRoot, 'src/icon-button.ts'),
         'level-bar': resolve(packageRoot, 'src/level-bar.ts'),
