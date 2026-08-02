@@ -70,6 +70,7 @@ export {
   registerGnomeExpanderRow,
 } from './expander-row';
 export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
+export { GnomeHighlightElement, registerGnomeHighlight } from './highlight';
 export {
   GnomeIconButtonElement,
   type GnomeIconButtonSize,

@@ -144,7 +144,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 27 | ✅ | `<gnome-level-bar>` | `LevelBar` | `role="meter"`; continuous fill or discrete block array, purely attribute-reactive |
 | 28 | ✅ | `<gnome-divider>` | `Divider` | Distinct from `gnome-separator` — adds an optional centered label; `gnome-separator` only has `orientation`, no label support |
 | 29 | ✅ | `<gnome-callout>` | `Callout` | `role="note"`; icon + message + optional dismiss button, visibility owned by the consumer |
-| 30 | ⬜ | `<gnome-highlight>` | `Highlight` | Pure string-split-and-`<mark>` rendering, stateless |
+| 30 | ✅ | `<gnome-highlight>` | `Highlight` | Pure string-split-and-`<mark>` rendering, stateless |
 | 31 | ⬜ | `<gnome-kbd>` | `Kbd` | Wraps native `<kbd>` directly; static symbol-lookup table |
 | 32 | ⬜ | `<gnome-file-type-icon>` | `FileTypeIcon` | Wraps `<img>` (thumbnail) or an icon glyph; MIME/filename category resolution ported alongside |
 | 33 | ⬜ | `<gnome-step-indicator>` | `StepIndicator` | `<nav>`/`<ol>` of step circles, fully derived from `currentStep`, no internal state |

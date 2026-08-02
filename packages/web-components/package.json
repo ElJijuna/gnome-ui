@@ -87,6 +87,11 @@
       "import": "./dist/header-bar.js",
       "require": "./dist/header-bar.cjs"
     },
+    "./highlight": {
+      "types": "./dist/highlight.d.ts",
+      "import": "./dist/highlight.js",
+      "require": "./dist/highlight.cjs"
+    },
     "./icon-button": {
       "types": "./dist/icon-button.d.ts",
       "import": "./dist/icon-button.js",

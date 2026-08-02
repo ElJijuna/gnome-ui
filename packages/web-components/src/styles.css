@@ -15,6 +15,7 @@ gnome-divider,
 gnome-dropdown,
 gnome-expander-row,
 gnome-header-bar,
+gnome-highlight,
 gnome-icon-button,
 gnome-level-bar,
 gnome-menu,
@@ -54,6 +55,7 @@ gnome-divider *,
 gnome-dropdown *,
 gnome-expander-row *,
 gnome-header-bar *,
+gnome-highlight *,
 gnome-icon-button *,
 gnome-level-bar *,
 gnome-menu *,
@@ -1360,6 +1362,22 @@ gnome-divider [data-slot="divider-label"] {
   font-size: var(--gnome-font-size-caption, 0.75rem);
   font-weight: var(--gnome-font-weight-normal, 400);
   opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* Highlight */
+
+gnome-highlight mark {
+  border-radius: var(--gnome-radius-sm, 4px);
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 30%, transparent);
+  color: inherit;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+@media (prefers-contrast: more) {
+  gnome-highlight mark {
+    background-color: var(--gnome-accent-bg-color, #3584e4);
+    color: #fff;
+  }
 }
 
 /* Skeleton */

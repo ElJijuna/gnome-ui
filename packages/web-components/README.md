@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-three framework-agnostic components:
+The package currently contains thirty-four framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -44,6 +44,9 @@ The package currently contains thirty-three framework-agnostic components:
 - `<gnome-header-bar>` — title bar with start/title/end regions placed in
   explicit CSS grid columns so the title stays centered without either
   side slot.
+- `<gnome-highlight>` — wraps every occurrence of `query` in `<mark>`;
+  `query` splits on whitespace into individual terms. Fully host-derived
+  from `text`/`query`/`case-sensitive`.
 - `<gnome-icon-button>` — icon-only action button, always circular; the
   host requires a `label` and syncs it onto the control's `aria-label`.
 - `<gnome-level-bar>` — `role="meter"` gauge with colour-coded low/high
@@ -116,6 +119,7 @@ import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/divider';
 import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/expander-row';
+import '@gnome-ui/web-components/highlight';
 import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/level-bar';
 import '@gnome-ui/web-components/menu';
@@ -669,6 +673,26 @@ rebuilt from `label` alone, same rationale as `gnome-level-bar`'s discrete
 blocks. Distinct from `gnome-separator`, which is a bare dividing line
 with no label but supports a vertical orientation — this component
 doesn't.
+
+## Highlight
+
+```html
+<gnome-highlight text="The quick brown fox jumps over the lazy dog." query="quick fox">
+</gnome-highlight>
+```
+
+`gnome-highlight` wraps every occurrence of `query` within `text` in a
+`<mark>` element — pairs with `gnome-dropdown`'s option list or any
+filterable list to show users which part of a result matched what they
+typed. Purely presentational — no light-DOM children for the consumer to
+author; the whole structure (plain text interleaved with `<mark>`
+matches) is fully rebuilt from `text`/`query`/`case-sensitive`, same
+rationale as `gnome-divider`.
+
+`query` splits on whitespace into individual terms, mirroring
+`@gnome-ui/react`'s `Highlight`, whose most common multi-term use case is
+highlighting each word of a multi-word search query. `case-sensitive`
+(boolean, default `false`) matches case-sensitively when set.
 
 ## Banner
 
