@@ -45,6 +45,7 @@ export default defineConfig({
         'spin-button': resolve(packageRoot, 'src/spin-button.ts'),
         spinner: resolve(packageRoot, 'src/spinner.ts'),
         switch: resolve(packageRoot, 'src/switch.ts'),
+        'tab-bar': resolve(packageRoot, 'src/tab-bar.ts'),
         'text-field': resolve(packageRoot, 'src/text-field.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),
         tooltip: resolve(packageRoot, 'src/tooltip.ts'),

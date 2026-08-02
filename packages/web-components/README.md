@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-five framework-agnostic components:
+The package currently contains twenty-six framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -52,6 +52,8 @@ The package currently contains twenty-five framework-agnostic components:
   indicator with `role="progressbar"`.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
+- `<gnome-tab-bar>` — `role="tablist"` roving-tabindex keyboard navigation;
+  the host does not create tabs or manage selection, only focus movement.
 - `<gnome-text-field>` — styled native text input/textarea with label and
   helper/error text slots wired via `for`/`id` and `aria-describedby`.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
@@ -96,6 +98,7 @@ import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
 import '@gnome-ui/web-components/spinner';
 import '@gnome-ui/web-components/switch';
+import '@gnome-ui/web-components/tab-bar';
 import '@gnome-ui/web-components/text-field';
 import '@gnome-ui/web-components/toast';
 ```
@@ -290,6 +293,45 @@ control while preserving any disabled state the consumer set directly on it
 once the host's `disabled` attribute is removed. `gnomeSwitch.checked` proxies
 to the native control's `checked` property; `focus()` and `click()` delegate
 to it as well.
+
+## Tab Bar
+
+```html
+<gnome-tab-bar aria-label="Settings sections">
+  <button role="tab" aria-selected="true">General</button>
+  <button role="tab" aria-selected="false">Notifications</button>
+  <button role="tab" aria-selected="false">Privacy</button>
+</gnome-tab-bar>
+
+<script type="module">
+  const tabBar = document.querySelector('gnome-tab-bar');
+
+  tabBar.addEventListener('click', (event) => {
+    const tab = event.target.closest('[role="tab"]');
+    if (!tab) return;
+
+    for (const other of tabBar.querySelectorAll('[role="tab"]')) {
+      other.setAttribute('aria-selected', String(other === tab));
+    }
+  });
+</script>
+```
+
+`gnome-tab-bar` defaults to `role="tablist"` and only manages roving-tabindex
+keyboard navigation — Left/Right/Home/End move focus between descendants
+marked `role="tab"` (real `<button>`s recommended, so `disabled` is free).
+Same division of responsibility as `@gnome-ui/react`'s `TabBar`: the host
+does not create tabs, change `aria-selected`, or show/hide panels — the
+consumer owns selection state and panel visibility, same as clicking any
+other button.
+
+The host mirrors `aria-selected` onto `tabIndex` the same way
+`gnome-radio-group` mirrors native `checked`: whichever tab has
+`aria-selected="true"` becomes the roving-tabindex stop (falling back to the
+first enabled tab if none is selected), kept in sync via a
+`MutationObserver` so it also works after an htmx/Turbo swap. The boolean
+`inline` attribute removes the header-bar background for use inside a card
+or content area.
 
 ## Radio Group
 
@@ -930,6 +972,10 @@ visible), so a replaced trigger keeps its hover/focus listeners and
   `aria-label` since the control has no visible text of its own.
 - Menus expose the WAI-ARIA menu pattern, support directional navigation and
   typeahead, skip disabled items, and restore focus after dismissal.
+- Tab bars default to `role="tablist"`; the consumer marks each descendant
+  `role="tab"` and manages `aria-selected` — the host only handles
+  roving-tabindex and Left/Right/Home/End focus movement, skipping disabled
+  tabs.
 - Switches retain native checkbox semantics and form participation; the
   consumer must add `role="switch"` and an accessible name (a `<label>` or
   `aria-label`).

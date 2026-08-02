@@ -109,6 +109,7 @@ export {
   registerGnomeSpinner,
 } from './spinner';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
+export { GnomeTabBarElement, registerGnomeTabBar } from './tab-bar';
 export { GnomeTextFieldElement, registerGnomeTextField } from './text-field';
 export {
   type GnomeToastActionDetail,

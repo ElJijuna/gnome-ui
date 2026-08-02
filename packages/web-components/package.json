@@ -122,6 +122,11 @@
       "import": "./dist/switch.js",
       "require": "./dist/switch.cjs"
     },
+    "./tab-bar": {
+      "types": "./dist/tab-bar.d.ts",
+      "import": "./dist/tab-bar.js",
+      "require": "./dist/tab-bar.cjs"
+    },
     "./text-field": {
       "types": "./dist/text-field.d.ts",
       "import": "./dist/text-field.js",
