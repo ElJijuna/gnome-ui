@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-seven framework-agnostic components:
+The package currently contains twenty-eight framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -65,6 +65,9 @@ The package currently contains twenty-seven framework-agnostic components:
   dismissal, and focus restoration.
 - `<gnome-tooltip>` — hover/focus-triggered informational bubble, sharing
   `gnome-popover`'s floating-position helper; no focus trap.
+- `<gnome-view-switcher>` — segmented control (`role="radiogroup"`); all
+  four arrow keys cycle and moving focus also activates the target item
+  (automatic activation).
 
 The package does not depend on React, Angular, Lit, or htmx.
 
@@ -105,6 +108,7 @@ import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/tab-bar';
 import '@gnome-ui/web-components/text-field';
 import '@gnome-ui/web-components/toast';
+import '@gnome-ui/web-components/view-switcher';
 ```
 
 Every registration function is idempotent. Importing these modules during SSR
@@ -336,6 +340,38 @@ first enabled tab if none is selected), kept in sync via a
 `MutationObserver` so it also works after an htmx/Turbo swap. The boolean
 `inline` attribute removes the header-bar background for use inside a card
 or content area.
+
+## View Switcher
+
+```html
+<gnome-view-switcher aria-label="View switcher">
+  <button role="radio" aria-checked="true">List</button>
+  <button role="radio" aria-checked="false">Grid</button>
+  <button role="radio" aria-checked="false">Timeline</button>
+</gnome-view-switcher>
+
+<script type="module">
+  const viewSwitcher = document.querySelector('gnome-view-switcher');
+
+  viewSwitcher.addEventListener('click', (event) => {
+    const item = event.target.closest('[role="radio"]');
+    if (!item) return;
+
+    for (const other of viewSwitcher.querySelectorAll('[role="radio"]')) {
+      other.setAttribute('aria-checked', String(other === item));
+    }
+  });
+</script>
+```
+
+`gnome-view-switcher` defaults to `role="radiogroup"` — same division of
+responsibility as `gnome-tab-bar` (the host doesn't create items or manage
+`aria-checked`, and mirrors it onto roving `tabIndex` the same way
+`gnome-radio-group` mirrors native `checked`), but with two real
+differences: all four arrow keys cycle (Left/Up move back, Right/Down move
+forward) instead of a tablist's horizontal-only nav, and — since a
+radiogroup uses "automatic activation" — moving focus with an arrow key
+also clicks the target item, mirroring `@gnome-ui/react`'s `ViewSwitcher`.
 
 ## Radio Group
 
@@ -1024,6 +1060,9 @@ visible), so a replaced trigger keeps its hover/focus listeners and
   `role="tab"` and manages `aria-selected` — the host only handles
   roving-tabindex and Left/Right/Home/End focus movement, skipping disabled
   tabs.
+- View switchers default to `role="radiogroup"`; all four arrow keys cycle
+  and, unlike tab bars, moving focus also clicks the target item
+  (automatic activation), skipping disabled items.
 - Switches retain native checkbox semantics and form participation; the
   consumer must add `role="switch"` and an accessible name (a `<label>` or
   `aria-label`).

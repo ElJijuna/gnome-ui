@@ -114,7 +114,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
 | 19 | ✅ | `<gnome-tab-bar>` | `Tabs` | `role="tablist"`; arrow-key navigation mirrors `gnome-menu`'s typeahead code path |
-| 20 | ⬜ | `<gnome-view-switcher>` | `ViewSwitcher` | Segmented control; pairs with `gnome-tab-bar` selection model |
+| 20 | ✅ | `<gnome-view-switcher>` | `ViewSwitcher` | Segmented control; pairs with `gnome-tab-bar` selection model |
 | 21 | ⬜ | `<gnome-search-bar>` | `SearchBar` | Collapsible; reuses `gnome-popover` positioning for autocomplete list |
 
 ---

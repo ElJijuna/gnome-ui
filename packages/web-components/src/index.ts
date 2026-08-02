@@ -134,3 +134,4 @@ export {
   type GnomeTooltipPlacement,
   registerGnomeTooltip,
 } from './tooltip';
+export { GnomeViewSwitcherElement, registerGnomeViewSwitcher } from './view-switcher';

@@ -217,3 +217,36 @@ body {
 .wc-story gnome-action-row [data-slot="row-surface"]:hover {
   background: transparent;
 }
+
+.wc-story gnome-icon-button [data-slot="icon-button-control"] {
+  min-width: 0;
+  min-height: 0;
+  padding: var(--gnome-space-1, 6px);
+  border-radius: var(--gnome-radius-pill, 9999px);
+}
+
+.wc-story gnome-tab-bar [role="tab"] {
+  min-height: 0;
+  border: none;
+  border-radius: var(--gnome-radius-md, 8px) var(--gnome-radius-md, 8px) 0 0;
+}
+
+.wc-story gnome-tab-bar [role="tab"]:not([aria-selected="true"]) {
+  background: transparent;
+}
+
+.wc-story gnome-dropdown [data-slot="dropdown-trigger"] {
+  min-height: 0;
+  border-radius: var(--gnome-radius-md, 8px);
+  background-color: var(--gnome-card-bg-color, #fff);
+}
+
+.wc-story gnome-view-switcher [role="radio"] {
+  min-height: 0;
+  border: none;
+  border-radius: calc(var(--gnome-radius-pill, 9999px) - 3px);
+}
+
+.wc-story gnome-view-switcher [role="radio"]:not([aria-checked="true"]) {
+  background: transparent;
+}

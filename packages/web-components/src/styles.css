@@ -26,7 +26,8 @@ gnome-switch,
 gnome-tab-bar,
 gnome-text-field,
 gnome-toast,
-gnome-tooltip {
+gnome-tooltip,
+gnome-view-switcher {
   box-sizing: border-box;
   color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   font-family: var(--gnome-font-family, "Adwaita Sans", Cantarell, system-ui, sans-serif);
@@ -59,7 +60,8 @@ gnome-switch *,
 gnome-tab-bar *,
 gnome-text-field *,
 gnome-toast *,
-gnome-tooltip * {
+gnome-tooltip *,
+gnome-view-switcher * {
   box-sizing: border-box;
 }
 
@@ -2658,6 +2660,91 @@ gnome-tab-bar[inline] [role="tab"]:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   gnome-tab-bar [role="tab"],
   gnome-tab-bar [role="tab"]::after {
+    transition: none;
+  }
+}
+
+/* View Switcher */
+
+gnome-view-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--gnome-radius-pill, 9999px);
+  background-color: color-mix(in srgb, var(--gnome-headerbar-bg-color, #ebebeb) 75%, black 25%);
+}
+
+gnome-view-switcher [role="radio"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-1, 6px);
+  padding: 5px var(--gnome-space-2, 12px);
+  border: none;
+  border-radius: calc(var(--gnome-radius-pill, 9999px) - 3px);
+  background: transparent;
+  color: var(--gnome-headerbar-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  white-space: nowrap;
+  outline: none;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out),
+    color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease-out);
+}
+
+gnome-view-switcher [role="radio"]:hover:not(:disabled, [aria-checked="true"]) {
+  background-color: rgb(0 0 0 / 0.06);
+}
+
+gnome-view-switcher [role="radio"]:active:not(:disabled, [aria-checked="true"]) {
+  background-color: rgb(0 0 0 / 0.12);
+}
+
+gnome-view-switcher [role="radio"]:disabled,
+gnome-view-switcher [role="radio"][aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-view-switcher [role="radio"][aria-checked="true"] {
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.12));
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+gnome-view-switcher [role="radio"]:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px)
+    color-mix(in srgb, var(--gnome-headerbar-bg-color, #ebebeb) 75%, black 25%),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-view-switcher {
+    background-color: color-mix(in srgb, var(--gnome-headerbar-bg-color, #303030) 70%, black 30%);
+  }
+
+  gnome-view-switcher [role="radio"]:hover:not(:disabled, [aria-checked="true"]) {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+
+  gnome-view-switcher [role="radio"]:active:not(:disabled, [aria-checked="true"]) {
+    background-color: rgb(255 255 255 / 0.14);
+  }
+
+  gnome-view-switcher [role="radio"][aria-checked="true"] {
+    background-color: var(--gnome-headerbar-bg-color, #303030);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-view-switcher [role="radio"] {
     transition: none;
   }
 }
