@@ -56,6 +56,12 @@ export {
   type GnomeDropdownOpenChangeDetail,
   registerGnomeDropdown,
 } from './dropdown';
+export {
+  GnomeExpanderRowElement,
+  type GnomeExpanderRowEventMap,
+  type GnomeExpanderRowOpenChangeDetail,
+  registerGnomeExpanderRow,
+} from './expander-row';
 export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
 export {
   GnomeIconButtonElement,

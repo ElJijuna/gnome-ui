@@ -67,6 +67,11 @@
       "import": "./dist/dropdown.js",
       "require": "./dist/dropdown.cjs"
     },
+    "./expander-row": {
+      "types": "./dist/expander-row.d.ts",
+      "import": "./dist/expander-row.js",
+      "require": "./dist/expander-row.cjs"
+    },
     "./header-bar": {
       "types": "./dist/header-bar.d.ts",
       "import": "./dist/header-bar.js",

@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty framework-agnostic components:
+The package currently contains thirty-one framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -32,6 +32,9 @@ The package currently contains thirty framework-agnostic components:
 - `<gnome-dropdown>` — combo-box option list; `role="combobox"` trigger +
   `role="listbox"` content, active option tracked via
   `aria-activedescendant` instead of moving DOM focus.
+- `<gnome-expander-row>` — collapsible `gnome-action-row`; remaining
+  light-DOM children are moved into a generated, height-animated
+  `role="region"` panel; dividers between them are pure CSS.
 - `<gnome-header-bar>` — title bar with start/title/end regions placed in
   explicit CSS grid columns so the title stays centered without either
   side slot.
@@ -104,6 +107,7 @@ import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/combo-row';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/dropdown';
+import '@gnome-ui/web-components/expander-row';
 import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/level-bar';
 import '@gnome-ui/web-components/menu';
@@ -1013,6 +1017,48 @@ falls back to `aria-disabled`/`tabindex="-1"` for `disabled` when the
 adopted element has no native `disabled` property. Fires a non-cancelable
 `gnome-change` (`{ checked }`) on every toggle.
 
+## Expander Row
+
+```html
+<gnome-expander-row>
+  <span data-slot="row-title">Advanced settings</span>
+  <span data-slot="row-subtitle">Configure additional options</span>
+  <span data-slot="row-suffix">Beta</span>
+
+  <gnome-action-row>
+    <span data-slot="row-title">Enable telemetry</span>
+  </gnome-action-row>
+  <gnome-action-row>
+    <span data-slot="row-title">Hardware acceleration</span>
+  </gnome-action-row>
+</gnome-expander-row>
+
+<script type="module">
+  document.querySelector('gnome-expander-row').addEventListener('gnome-open-change', (event) => {
+    console.log('Expanded:', event.detail.open);
+  });
+</script>
+```
+
+`gnome-expander-row` is a collapsible `gnome-action-row` — same header
+slots (`row-prefix`/`row-title`/`row-subtitle`/`row-suffix`, grouped into a
+generated `row-content`), wrapped in a generated
+`<button data-slot="row-surface">` plus a host-generated, `aria-hidden`
+`row-chevron` indicator. Any remaining light-DOM children (nested rows,
+e.g. `<gnome-action-row>`) are moved into a generated
+`<div data-slot="row-panel" role="region">`, height-animated with a CSS
+grid `0fr`/`1fr` transition; dividers between child rows are pure CSS
+(`border-top` on every child but the first), same technique as
+`gnome-boxed-list` — no JS bookkeeping as rows are added or removed. If
+there's nothing to reveal, no panel is generated at all.
+
+The `expanded` attribute uses `AdwExpanderRow`'s own terminology, but
+fires `gnome-open-change` (`{ open }`) — the same event name and detail
+shape `gnome-dialog`/`gnome-dropdown`/`gnome-menu`/`gnome-popover` use for
+their own open-state transitions. Author your own
+`data-slot="row-surface"` to use a different element, same adoption
+pattern as `gnome-action-row`/`gnome-switch-row`.
+
 ## Boxed List
 
 ```html
@@ -1110,7 +1156,7 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 
 | Event | Components | Cancelable | Detail |
 |-------|------------|------------|--------|
-| `gnome-open-change` | Dialog, Dropdown, Menu, Popover, Toast | No | `{ open }` |
+| `gnome-open-change` | Dialog, Dropdown, Expander Row, Menu, Popover, Toast | No | `{ open }` |
 | `gnome-cancel` | Dialog, Menu, Popover | Yes | `{ reason }` |
 | `gnome-close` | Dialog, Dropdown, Menu, Popover | No | `{ reason }` |
 | `gnome-select` | Menu | Yes | `{ item, value }` |
@@ -1148,6 +1194,9 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 - Switch rows are a real `role="switch"` `<button>`, labelled from
   `row-title`/`row-subtitle` via `aria-labelledby` — native keyboard
   activation (Space/Enter) works for free.
+- Expander rows are a real disclosure `<button>` (`aria-expanded`/
+  `aria-controls`) revealing a `role="region"` panel labelled by the
+  header — native keyboard activation works for free, same as switch rows.
 - Checkboxes retain native checkbox semantics and form participation,
   including the `indeterminate` visual state.
 - Radio groups rely on native same-name radio semantics for mutual

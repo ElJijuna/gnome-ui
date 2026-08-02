@@ -34,6 +34,7 @@ export default defineConfig({
         'combo-row': resolve(packageRoot, 'src/combo-row.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
+        'expander-row': resolve(packageRoot, 'src/expander-row.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         'icon-button': resolve(packageRoot, 'src/icon-button.ts'),
         'level-bar': resolve(packageRoot, 'src/level-bar.ts'),
