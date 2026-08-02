@@ -277,3 +277,9 @@ body {
   border-radius: 50%;
   background-color: var(--gnome-view-bg-color, #fff);
 }
+
+.wc-story gnome-expander [data-slot="expander-header"] {
+  min-height: 0;
+  border: none;
+  background: transparent;
+}

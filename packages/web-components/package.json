@@ -82,6 +82,11 @@
       "import": "./dist/dropdown.js",
       "require": "./dist/dropdown.cjs"
     },
+    "./expander": {
+      "types": "./dist/expander.d.ts",
+      "import": "./dist/expander.js",
+      "require": "./dist/expander.cjs"
+    },
     "./expander-row": {
       "types": "./dist/expander-row.d.ts",
       "import": "./dist/expander-row.js",

@@ -14,6 +14,7 @@ gnome-combo-row,
 gnome-dialog,
 gnome-divider,
 gnome-dropdown,
+gnome-expander,
 gnome-expander-row,
 gnome-field-group,
 gnome-file-type-icon,
@@ -59,6 +60,7 @@ gnome-combo-row *,
 gnome-dialog *,
 gnome-divider *,
 gnome-dropdown *,
+gnome-expander *,
 gnome-expander-row *,
 gnome-field-group *,
 gnome-file-type-icon *,
@@ -3782,6 +3784,103 @@ gnome-choice-card-group [data-slot="choice-card-description"] {
 @media (prefers-reduced-motion: reduce) {
   gnome-choice-card-group [role="radio"],
   gnome-choice-card-group [data-slot="choice-card-dot"] {
+    transition: none;
+  }
+}
+
+/* Expander */
+
+gnome-expander {
+  display: block;
+  width: 100%;
+}
+
+gnome-expander [data-slot="expander-header"] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 8px);
+  padding: var(--gnome-space-1, 4px);
+  margin: calc(var(--gnome-space-1, 4px) * -1);
+  border: none;
+  border-radius: var(--gnome-radius-xs, 4px);
+  background: transparent;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  appearance: none;
+}
+
+gnome-expander [data-slot="expander-header"]:hover:not(:disabled) {
+  background-color: var(--gnome-hover-overlay);
+}
+
+gnome-expander [data-slot="expander-header"]:active:not(:disabled) {
+  background-color: var(--gnome-active-overlay);
+}
+
+gnome-expander [data-slot="expander-header"]:focus {
+  outline: none;
+}
+
+gnome-expander [data-slot="expander-header"]:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 1px;
+}
+
+gnome-expander [data-slot="expander-header"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+gnome-expander [data-slot="expander-chevron"] {
+  flex-shrink: 0;
+  width: 6px;
+  height: 10px;
+  background-color: currentcolor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  opacity: var(--gnome-opacity-dim, 0.55);
+  transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-expander[expanded] [data-slot="expander-chevron"] {
+  transform: rotate(90deg);
+}
+
+gnome-expander [data-slot="expander-label"] {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+gnome-expander [data-slot="expander-panel"] {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--gnome-duration-normal, 200ms)
+    var(--gnome-easing-default, ease);
+}
+
+gnome-expander[expanded] [data-slot="expander-panel"] {
+  grid-template-rows: 1fr;
+}
+
+gnome-expander [data-slot="expander-panel-inner"] {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* margin, not padding, on the first child: padding directly on the grid
+   item resists collapsing to 0 when grid-template-rows is 0fr, since
+   box-sizing: border-box can't shrink the box below its own padding —
+   margin on a child collapses away cleanly instead. */
+gnome-expander [data-slot="expander-panel-inner"] > :first-child {
+  margin-top: var(--gnome-space-2, 8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-expander [data-slot="expander-panel"],
+  gnome-expander [data-slot="expander-chevron"] {
     transition: none;
   }
 }

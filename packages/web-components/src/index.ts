@@ -68,6 +68,12 @@ export {
   registerGnomeDropdown,
 } from './dropdown';
 export {
+  GnomeExpanderElement,
+  type GnomeExpanderEventMap,
+  type GnomeExpanderOpenChangeDetail,
+  registerGnomeExpander,
+} from './expander';
+export {
   GnomeExpanderRowElement,
   type GnomeExpanderRowEventMap,
   type GnomeExpanderRowOpenChangeDetail,

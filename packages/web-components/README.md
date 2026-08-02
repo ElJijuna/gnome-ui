@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-nine framework-agnostic components:
+The package currently contains forty framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -41,6 +41,9 @@ The package currently contains thirty-nine framework-agnostic components:
 - `<gnome-dropdown>` — combo-box option list; `role="combobox"` trigger +
   `role="listbox"` content, active option tracked via
   `aria-activedescendant` instead of moving DOM focus.
+- `<gnome-expander>` — standalone disclosure triangle + collapsible
+  content; a bare, unstyled counterpart to `gnome-expander-row` for use
+  outside a settings-row context.
 - `<gnome-expander-row>` — collapsible `gnome-action-row`; remaining
   light-DOM children are moved into a generated, height-animated
   `role="region"` panel; dividers between them are pure CSS.
@@ -134,6 +137,7 @@ import '@gnome-ui/web-components/combo-row';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/divider';
 import '@gnome-ui/web-components/dropdown';
+import '@gnome-ui/web-components/expander';
 import '@gnome-ui/web-components/expander-row';
 import '@gnome-ui/web-components/field-group';
 import '@gnome-ui/web-components/file-type-icon';
@@ -1229,6 +1233,37 @@ different element — the host adopts it instead of generating one, and
 falls back to `aria-disabled`/`tabindex="-1"` for `disabled` when the
 adopted element has no native `disabled` property. Fires a non-cancelable
 `gnome-change` (`{ checked }`) on every toggle.
+
+## Expander
+
+```html
+<gnome-expander label="Show advanced options">
+  <p>These settings are rarely needed — change them only if you know what you're doing.</p>
+</gnome-expander>
+
+<script type="module">
+  document.querySelector('gnome-expander').addEventListener('gnome-open-change', (event) => {
+    console.log('Expanded:', event.detail.open);
+  });
+</script>
+```
+
+`gnome-expander` is a standalone disclosure triangle + collapsible
+content — mirrors `GtkExpander`. A bare, unstyled counterpart to
+`gnome-expander-row`, which is scoped to `gnome-action-row`'s header-slot
+layout; use `gnome-expander` outside a settings-row context (e.g. "Show
+advanced options" in a form or dialog).
+
+The header (a real `<button data-slot="expander-header">` with a
+decorative chevron) is fully host-generated from the `label` attribute —
+nothing for the consumer to author there, same rationale as
+`gnome-divider`. All original light-DOM children are moved, once, into a
+generated `<div data-slot="expander-panel" role="region">`,
+height-animated with the same CSS grid `0fr`/`1fr` transition as
+`gnome-expander-row`'s panel. Fires `gnome-open-change` (`{ open }`) on
+toggle — same event name and detail shape as
+`gnome-dialog`/`gnome-dropdown`/`gnome-menu`/`gnome-popover`/
+`gnome-expander-row`.
 
 ## Expander Row
 

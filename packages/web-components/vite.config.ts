@@ -44,6 +44,7 @@ export default defineConfig({
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         divider: resolve(packageRoot, 'src/divider.ts'),
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
+        expander: resolve(packageRoot, 'src/expander.ts'),
         'expander-row': resolve(packageRoot, 'src/expander-row.ts'),
         'field-group': resolve(packageRoot, 'src/field-group.ts'),
         'file-type-icon': resolve(packageRoot, 'src/file-type-icon.ts'),
