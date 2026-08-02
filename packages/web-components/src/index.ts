@@ -36,6 +36,12 @@ export {
   type GnomeButtonVariant,
   registerGnomeButton,
 } from './button';
+export {
+  GnomeCalloutElement,
+  type GnomeCalloutEventMap,
+  type GnomeCalloutVariant,
+  registerGnomeCallout,
+} from './callout';
 export { GnomeCardElement, type GnomeCardPadding, registerGnomeCard } from './card';
 export { GnomeCheckboxElement, registerGnomeCheckbox } from './checkbox';
 export { GnomeComboRowElement, registerGnomeComboRow } from './combo-row';

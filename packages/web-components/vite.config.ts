@@ -29,6 +29,7 @@ export default defineConfig({
         banner: resolve(packageRoot, 'src/banner.ts'),
         'boxed-list': resolve(packageRoot, 'src/boxed-list.ts'),
         button: resolve(packageRoot, 'src/button.ts'),
+        callout: resolve(packageRoot, 'src/callout.ts'),
         card: resolve(packageRoot, 'src/card.ts'),
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         'combo-row': resolve(packageRoot, 'src/combo-row.ts'),

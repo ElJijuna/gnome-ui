@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-two framework-agnostic components:
+The package currently contains thirty-three framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -19,6 +19,9 @@ The package currently contains thirty-two framework-agnostic components:
   `role="listitem"` and merges their borders with pure CSS dividers.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
   loading state, and preserved form behavior.
+- `<gnome-callout>` — inline, dismissible admonition box; `data-dismiss`
+  emits `gnome-dismiss` but the host never hides itself, unlike
+  `gnome-banner`.
 - `<gnome-card>` — elevated content container; `interactive` composes a real
   `<button data-slot="card-surface">` around its children.
 - `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
@@ -106,6 +109,7 @@ Granular entry points register only one element:
 import '@gnome-ui/web-components/avatar';
 import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
+import '@gnome-ui/web-components/callout';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/combo-row';
 import '@gnome-ui/web-components/dialog';
@@ -703,6 +707,36 @@ followed by `gnome-dismiss` and hides the banner (`hidden`) rather than
 removing it from the DOM — remove it yourself in a `gnome-dismiss` listener
 if that's what you want.
 
+## Callout
+
+```html
+<gnome-callout variant="warning">
+  <svg data-slot="callout-icon" width="16" height="16" aria-hidden="true">…</svg>
+  <span>Double-check this value before continuing.</span>
+  <button type="button" data-dismiss aria-label="Dismiss">×</button>
+</gnome-callout>
+
+<script type="module">
+  document.querySelector('gnome-callout').addEventListener('gnome-dismiss', () => {
+    // You decide what happens next — hide it, remove it, etc.
+  });
+</script>
+```
+
+`gnome-callout` is an inline, dismissible admonition box for contextual
+help text within forms and cards — distinct from `gnome-banner` (a
+persistent, edge-to-edge strip at the top of a view) and `gnome-toast` (a
+temporary notification). `variant` (`"info" | "warning" | "tip"`, default
+`"info"`) is a plain attribute read directly by CSS, same as
+`gnome-banner`/`gnome-badge`.
+
+Mark a descendant `data-dismiss` to emit `gnome-dismiss` on click. Unlike
+`gnome-banner`, the host **never hides itself** — there's no internal
+open/closed state to manage, matching `@gnome-ui/react`'s `Callout`, whose
+`onDismiss` is a plain notification callback that leaves visibility
+entirely to the consumer. An optional icon goes in
+`data-slot="callout-icon"`; there is no default/built-in icon.
+
 ## Dialog
 
 ```html
@@ -1188,6 +1222,7 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 | `gnome-action` | Banner | No — clicking an action never dismisses the banner | `{ action }` |
 | `gnome-before-dismiss` | Toast, Banner | Yes | `{ reason }` |
 | `gnome-dismiss` | Toast, Banner | No | `{ reason }` |
+| `gnome-dismiss` | Callout | No | none — the host never hides itself |
 | `gnome-activate` | Action Row | No | none |
 
 ## Accessibility

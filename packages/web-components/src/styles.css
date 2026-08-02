@@ -6,6 +6,7 @@ gnome-badge,
 gnome-banner,
 gnome-boxed-list,
 gnome-button,
+gnome-callout,
 gnome-card,
 gnome-checkbox,
 gnome-combo-row,
@@ -44,6 +45,7 @@ gnome-badge *,
 gnome-banner *,
 gnome-boxed-list *,
 gnome-button *,
+gnome-callout *,
 gnome-card *,
 gnome-checkbox *,
 gnome-combo-row *,
@@ -1571,6 +1573,92 @@ gnome-banner[variant="error"] {
 gnome-banner[variant="success"] {
   background-color: var(--gnome-success-bg-color, #2ec27e);
   color: var(--gnome-success-fg-color, #fff);
+}
+
+/* Callout */
+
+gnome-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-3, 16px);
+  border-radius: var(--gnome-radius-md, 8px);
+  border-inline-start: 3px solid transparent;
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+}
+
+gnome-callout [data-slot="callout-icon"] {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+gnome-callout [data-dismiss] {
+  appearance: none;
+  flex-shrink: 0;
+  margin-top: -2px;
+  padding: 4px;
+  border: none;
+  border-radius: var(--gnome-radius-md, 8px);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.6;
+  transition:
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-callout [data-dismiss]:hover {
+  opacity: 1;
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+}
+
+gnome-callout [data-dismiss]:active {
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.1));
+}
+
+gnome-callout [data-dismiss]:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 1px;
+}
+
+gnome-callout[variant="info"] {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 10%, transparent);
+  border-inline-start-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-callout[variant="info"] [data-slot="callout-icon"] {
+  color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+gnome-callout[variant="warning"] {
+  background-color: color-mix(in srgb, var(--gnome-warning-bg-color, #f6d32d) 15%, transparent);
+  border-inline-start-color: var(--gnome-warning-bg-color, #f6d32d);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-callout[variant="warning"] [data-slot="callout-icon"] {
+  color: color-mix(in srgb, var(--gnome-warning-bg-color, #f6d32d) 70%, black);
+}
+
+gnome-callout[variant="tip"] {
+  background-color: color-mix(in srgb, var(--gnome-success-bg-color, #2ec27e) 10%, transparent);
+  border-inline-start-color: var(--gnome-success-bg-color, #2ec27e);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-callout[variant="tip"] [data-slot="callout-icon"] {
+  color: var(--gnome-success-bg-color, #2ec27e);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-callout[variant="info"],
+  gnome-callout[variant="warning"],
+  gnome-callout[variant="tip"] {
+    color: var(--gnome-window-fg-color, rgb(255 255 255 / 0.9));
+  }
 }
 
 /* Tooltip */

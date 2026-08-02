@@ -42,6 +42,11 @@
       "import": "./dist/button.js",
       "require": "./dist/button.cjs"
     },
+    "./callout": {
+      "types": "./dist/callout.d.ts",
+      "import": "./dist/callout.js",
+      "require": "./dist/callout.cjs"
+    },
     "./card": {
       "types": "./dist/card.d.ts",
       "import": "./dist/card.js",
