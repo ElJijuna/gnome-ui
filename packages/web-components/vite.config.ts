@@ -5,6 +5,13 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 const packageRoot = fileURLToPath(new URL('.', import.meta.url));
+const externalPackages = ['@gnome-ui/core', '@gnome-ui/icons'];
+
+function isExternalDependency(id: string) {
+  return externalPackages.some(
+    (packageName) => id === packageName || id.startsWith(`${packageName}/`),
+  );
+}
 
 export default defineConfig({
   plugins: [
@@ -38,6 +45,7 @@ export default defineConfig({
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
         'expander-row': resolve(packageRoot, 'src/expander-row.ts'),
         'field-group': resolve(packageRoot, 'src/field-group.ts'),
+        'file-type-icon': resolve(packageRoot, 'src/file-type-icon.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         highlight: resolve(packageRoot, 'src/highlight.ts'),
         'icon-button': resolve(packageRoot, 'src/icon-button.ts'),
@@ -67,6 +75,7 @@ export default defineConfig({
     cssCodeSplit: false,
     sourcemap: true,
     rollupOptions: {
+      external: isExternalDependency,
       output: {
         assetFileNames: 'style.css',
       },

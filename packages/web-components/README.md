@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-seven framework-agnostic components:
+The package currently contains thirty-eight framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -44,6 +44,9 @@ The package currently contains thirty-seven framework-agnostic components:
 - `<gnome-field-group>` — wraps a real `<fieldset>`/`<legend>`; original
   light-DOM children (the fields) are moved into a generated content div
   inside it, so `disabled` disables every descendant form control for free.
+- `<gnome-file-type-icon>` — `role="img"` icon (or thumbnail) resolved from
+  a file's MIME type or name extension; icon glyphs come from
+  `@gnome-ui/icons`, this package's only non-`@gnome-ui/core` dependency.
 - `<gnome-header-bar>` — title bar with start/title/end regions placed in
   explicit CSS grid columns so the title stays centered without either
   side slot.
@@ -129,6 +132,7 @@ import '@gnome-ui/web-components/divider';
 import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/expander-row';
 import '@gnome-ui/web-components/field-group';
+import '@gnome-ui/web-components/file-type-icon';
 import '@gnome-ui/web-components/highlight';
 import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/kbd';
@@ -1243,6 +1247,39 @@ fieldset — same adopt-existing-children technique as
 when both are set, and the visible hint gets `role="alert"` only in the
 error case; the fieldset's `aria-describedby` points at whichever is
 shown.
+
+## File Type Icon
+
+```html
+<!-- Resolved from the name extension -->
+<gnome-file-type-icon name="report.pdf"></gnome-file-type-icon>
+
+<!-- Resolved from a MIME type — takes precedence over name when both are set -->
+<gnome-file-type-icon mime-type="image/png"></gnome-file-type-icon>
+
+<!-- Folder, regardless of name/mime-type -->
+<gnome-file-type-icon is-folder></gnome-file-type-icon>
+
+<!-- Thumbnail instead of the resolved icon -->
+<gnome-file-type-icon name="sunset.jpg" thumbnail="/preview.jpg" size="lg"></gnome-file-type-icon>
+```
+
+`gnome-file-type-icon` is a small `role="img"` icon — optionally a
+thumbnail — resolved from a file's MIME type or name extension, useful for
+file-manager-style listings. Falls back to the generic file icon (mirrors
+freedesktop's `text-x-generic`) when the type can't be resolved. Purely
+presentational and fully host-derived, same rationale as
+`gnome-divider`/`gnome-highlight` — nothing for the consumer to author.
+
+Icon glyphs come from `@gnome-ui/icons` — framework-agnostic path data,
+this package's only runtime dependency besides `@gnome-ui/core` — and are
+built into an inline `<svg data-slot="file-type-icon-svg">` the same way
+`gnome-callout`'s story icons are: via `DOMParser`, not
+`document.createElement('svg')`, to avoid the HTML-namespace
+self-closing-tag parsing bug. `label` overrides the generated accessible
+name (e.g. `"PDF document"`); `size` accepts `"sm" | "md" | "lg"` (default
+`"md"`) and sizes the host itself so swapping between the resolved icon
+and a thumbnail never shifts layout.
 
 ## Boxed List
 

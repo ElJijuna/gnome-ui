@@ -70,6 +70,12 @@ export {
   registerGnomeExpanderRow,
 } from './expander-row';
 export { GnomeFieldGroupElement, registerGnomeFieldGroup } from './field-group';
+export {
+  type FileTypeCategory,
+  GnomeFileTypeIconElement,
+  type GnomeFileTypeIconSize,
+  registerGnomeFileTypeIcon,
+} from './file-type-icon';
 export { GnomeHeaderBarElement, registerGnomeHeaderBar } from './header-bar';
 export { GnomeHighlightElement, registerGnomeHighlight } from './highlight';
 export {

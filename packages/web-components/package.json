@@ -87,6 +87,11 @@
       "import": "./dist/field-group.js",
       "require": "./dist/field-group.cjs"
     },
+    "./file-type-icon": {
+      "types": "./dist/file-type-icon.d.ts",
+      "import": "./dist/file-type-icon.js",
+      "require": "./dist/file-type-icon.cjs"
+    },
     "./header-bar": {
       "types": "./dist/header-bar.d.ts",
       "import": "./dist/header-bar.js",
@@ -225,7 +230,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@gnome-ui/core": "*"
+    "@gnome-ui/core": "*",
+    "@gnome-ui/icons": "*"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.0",
