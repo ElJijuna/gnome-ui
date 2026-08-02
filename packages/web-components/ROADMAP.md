@@ -142,7 +142,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 |----------|--------|---------|--------------|-------|
 | 26 | ✅ | `<gnome-icon-button>` | `IconButton` | Wraps `<button>`; icon-only shape of `gnome-button`. Hard blocker for Tier 9 |
 | 27 | ✅ | `<gnome-level-bar>` | `LevelBar` | `role="meter"`; continuous fill or discrete block array, purely attribute-reactive |
-| 28 | ⬜ | `<gnome-divider>` | `Divider` | Distinct from `gnome-separator` — adds an optional centered label; `gnome-separator` only has `orientation`, no label support |
+| 28 | ✅ | `<gnome-divider>` | `Divider` | Distinct from `gnome-separator` — adds an optional centered label; `gnome-separator` only has `orientation`, no label support |
 | 29 | ⬜ | `<gnome-callout>` | `Callout` | `role="note"`; icon + message + optional dismiss button, visibility owned by the consumer |
 | 30 | ⬜ | `<gnome-highlight>` | `Highlight` | Pure string-split-and-`<mark>` rendering, stateless |
 | 31 | ⬜ | `<gnome-kbd>` | `Kbd` | Wraps native `<kbd>` directly; static symbol-lookup table |

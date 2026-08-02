@@ -33,6 +33,7 @@ export default defineConfig({
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         'combo-row': resolve(packageRoot, 'src/combo-row.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
+        divider: resolve(packageRoot, 'src/divider.ts'),
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
         'expander-row': resolve(packageRoot, 'src/expander-row.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),

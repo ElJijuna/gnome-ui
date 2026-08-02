@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-one framework-agnostic components:
+The package currently contains thirty-two framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -29,6 +29,9 @@ The package currently contains thirty-one framework-agnostic components:
   combobox logic duplicated.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
+- `<gnome-divider>` — horizontal rule with an optional centered label,
+  fully host-derived from the `label` attribute; distinct from
+  `gnome-separator`, which has no label but supports a vertical orientation.
 - `<gnome-dropdown>` — combo-box option list; `role="combobox"` trigger +
   `role="listbox"` content, active option tracked via
   `aria-activedescendant` instead of moving DOM focus.
@@ -106,6 +109,7 @@ import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/combo-row';
 import '@gnome-ui/web-components/dialog';
+import '@gnome-ui/web-components/divider';
 import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/expander-row';
 import '@gnome-ui/web-components/icon-button';
@@ -643,6 +647,24 @@ custom element is always a single fixed tag, so `gnome-separator` manages
 accepts `"horizontal" | "vertical"` (default `"horizontal"`; `aria-orientation`
 is only set for `"vertical"`, matching the ARIA default). Color comes
 entirely from design tokens and adapts to dark mode automatically.
+
+## Divider
+
+```html
+<gnome-divider label="OR"></gnome-divider>
+
+<!-- Bare, no label -->
+<gnome-divider></gnome-divider>
+```
+
+`gnome-divider` is purely presentational — no light-DOM children for the
+consumer to author. The `label` attribute drives an `aria-label` and a
+host-derived centered `[data-slot="divider-label"]` span between two
+`[data-slot="divider-line"]` segments; the whole structure is fully
+rebuilt from `label` alone, same rationale as `gnome-level-bar`'s discrete
+blocks. Distinct from `gnome-separator`, which is a bare dividing line
+with no label but supports a vertical orientation — this component
+doesn't.
 
 ## Banner
 

@@ -47,6 +47,7 @@ export {
   type GnomeDialogOpenChangeDetail,
   registerGnomeDialog,
 } from './dialog';
+export { GnomeDividerElement, registerGnomeDivider } from './divider';
 export {
   type GnomeDropdownChangeDetail,
   type GnomeDropdownCloseDetail,

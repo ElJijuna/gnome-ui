@@ -10,6 +10,7 @@ gnome-card,
 gnome-checkbox,
 gnome-combo-row,
 gnome-dialog,
+gnome-divider,
 gnome-dropdown,
 gnome-expander-row,
 gnome-header-bar,
@@ -47,6 +48,7 @@ gnome-card *,
 gnome-checkbox *,
 gnome-combo-row *,
 gnome-dialog *,
+gnome-divider *,
 gnome-dropdown *,
 gnome-expander-row *,
 gnome-header-bar *,
@@ -1333,6 +1335,29 @@ gnome-level-bar[data-variant="error"] [data-slot="level-block"][data-filled] {
   gnome-level-bar:not([data-discrete])::after {
     transition: none;
   }
+}
+
+/* Divider */
+
+gnome-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--gnome-space-2, 12px);
+}
+
+gnome-divider [data-slot="divider-line"] {
+  flex: 1;
+  height: 1px;
+  background-color: var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
+}
+
+gnome-divider [data-slot="divider-label"] {
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  opacity: var(--gnome-opacity-dim, 0.55);
 }
 
 /* Skeleton */
