@@ -31,6 +31,7 @@ export default defineConfig({
         button: resolve(packageRoot, 'src/button.ts'),
         card: resolve(packageRoot, 'src/card.ts'),
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
+        'combo-row': resolve(packageRoot, 'src/combo-row.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),

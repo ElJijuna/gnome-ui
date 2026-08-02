@@ -38,6 +38,7 @@ export {
 } from './button';
 export { GnomeCardElement, type GnomeCardPadding, registerGnomeCard } from './card';
 export { GnomeCheckboxElement, registerGnomeCheckbox } from './checkbox';
+export { GnomeComboRowElement, registerGnomeComboRow } from './combo-row';
 export {
   type GnomeDialogCloseDetail,
   type GnomeDialogCloseReason,

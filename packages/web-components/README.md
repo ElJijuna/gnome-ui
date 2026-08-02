@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains twenty-eight framework-agnostic components:
+The package currently contains twenty-nine framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -23,6 +23,10 @@ The package currently contains twenty-eight framework-agnostic components:
   `<button data-slot="card-surface">` around its children.
 - `<gnome-checkbox>` — styled native multi-selection checkbox with imperative
   `indeterminate` support.
+- `<gnome-combo-row>` — settings row with a real, consumer-authored
+  `<gnome-dropdown>` in `data-slot="row-suffix"`; genuinely composes
+  `gnome-action-row`'s layout with `gnome-dropdown`'s behavior, no
+  combobox logic duplicated.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
 - `<gnome-dropdown>` — combo-box option list; `role="combobox"` trigger +
@@ -93,6 +97,7 @@ import '@gnome-ui/web-components/avatar';
 import '@gnome-ui/web-components/badge';
 import '@gnome-ui/web-components/button';
 import '@gnome-ui/web-components/checkbox';
+import '@gnome-ui/web-components/combo-row';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/icon-button';
@@ -934,6 +939,38 @@ use a different element; the host adopts it instead of generating one.
 `row-title` shrinks to a dim caption label and `row-subtitle` becomes the
 prominent value — and, like `padding` on `gnome-card`, is a plain attribute
 read directly by CSS.
+
+## Combo Row
+
+```html
+<gnome-combo-row>
+  <span data-slot="row-title">Theme</span>
+  <span data-slot="row-subtitle">Choose your preferred color scheme</span>
+
+  <gnome-dropdown data-slot="row-suffix" value="dark">
+    <button type="button" data-slot="dropdown-trigger"></button>
+    <ul data-slot="dropdown-content">
+      <li data-option data-value="light">Light</li>
+      <li data-option data-value="dark">Dark</li>
+    </ul>
+  </gnome-dropdown>
+</gnome-combo-row>
+```
+
+`gnome-combo-row` genuinely composes `gnome-action-row`'s layout
+conventions (`row-prefix`/`row-title`/`row-subtitle`/`row-suffix`) with a
+real `<gnome-dropdown>` the consumer authors directly in
+`data-slot="row-suffix"` — no combobox logic is duplicated; the nested
+dropdown registers and behaves entirely on its own once connected. Unlike
+`gnome-action-row`, this row is never itself interactive (there's no
+row-level activation, only the nested dropdown trigger), so title/subtitle
+stacking is handled entirely by CSS grid areas — no JS-generated
+`row-content` wrapper is needed here.
+
+The host's `disabled` attribute dims the row and forwards `disabled` to
+whichever element is marked `data-slot="row-suffix"`, if it exposes a
+`disabled` property — works for `gnome-dropdown`, `gnome-button`, or a
+native control marked directly with that slot.
 
 ## Boxed List
 

@@ -127,7 +127,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
 | 22 | ✅ | `<gnome-dropdown>` | `Dropdown` | Combines `gnome-menu` internals with a trigger styled as a select |
-| 23 | ⬜ | `<gnome-combo-row>` | `ComboRow` | `gnome-action-row` + `gnome-dropdown` composition |
+| 23 | ✅ | `<gnome-combo-row>` | `ComboRow` | `gnome-action-row` + `gnome-dropdown` composition |
 | 24 | ⬜ | `<gnome-switch-row>` | `SwitchRow` | `gnome-action-row` + `gnome-switch` composition |
 | 25 | ⬜ | `<gnome-expander-row>` | `ExpanderRow` | Collapsible `gnome-action-row`; `prefers-reduced-motion` handling ported from React version |
 

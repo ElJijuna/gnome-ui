@@ -8,6 +8,7 @@ gnome-boxed-list,
 gnome-button,
 gnome-card,
 gnome-checkbox,
+gnome-combo-row,
 gnome-dialog,
 gnome-dropdown,
 gnome-header-bar,
@@ -42,6 +43,7 @@ gnome-boxed-list *,
 gnome-button *,
 gnome-card *,
 gnome-checkbox *,
+gnome-combo-row *,
 gnome-dialog *,
 gnome-dropdown *,
 gnome-header-bar *,
@@ -1869,6 +1871,62 @@ gnome-action-row[interactive] [data-slot="row-surface"]:disabled {
   opacity: var(--gnome-opacity-disabled, 0.5);
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Combo Row */
+
+gnome-combo-row {
+  display: grid;
+  grid-template-areas:
+    "prefix title suffix"
+    "prefix subtitle suffix";
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: var(--gnome-space-2, 12px);
+  row-gap: 2px;
+  padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
+  min-height: 52px;
+  width: 100%;
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  text-align: start;
+}
+
+gnome-combo-row[data-disabled] {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  pointer-events: none;
+}
+
+gnome-combo-row [data-slot="row-prefix"] {
+  grid-area: prefix;
+  display: flex;
+  align-items: center;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-combo-row [data-slot="row-title"] {
+  grid-area: title;
+  overflow: hidden;
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+gnome-combo-row [data-slot="row-subtitle"] {
+  grid-area: subtitle;
+  overflow: hidden;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  opacity: var(--gnome-opacity-dim, 0.55);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+gnome-combo-row [data-slot="row-suffix"] {
+  grid-area: suffix;
 }
 
 /* Boxed List */
