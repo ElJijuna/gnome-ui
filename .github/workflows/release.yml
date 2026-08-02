@@ -106,6 +106,9 @@ jobs:
           name: dist
           path: .
 
+      - name: Build @gnome-ui/icons
+        run: npm run build --workspace=packages/icons
+
       - name: Build @gnome-ui/web-components
         run: npm run build --workspace=packages/web-components
 
