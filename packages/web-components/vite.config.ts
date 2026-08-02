@@ -50,6 +50,7 @@ export default defineConfig({
         slider: resolve(packageRoot, 'src/slider.ts'),
         'spin-button': resolve(packageRoot, 'src/spin-button.ts'),
         spinner: resolve(packageRoot, 'src/spinner.ts'),
+        'step-indicator': resolve(packageRoot, 'src/step-indicator.ts'),
         switch: resolve(packageRoot, 'src/switch.ts'),
         'switch-row': resolve(packageRoot, 'src/switch-row.ts'),
         'tab-bar': resolve(packageRoot, 'src/tab-bar.ts'),

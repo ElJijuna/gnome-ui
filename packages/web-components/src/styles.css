@@ -27,6 +27,7 @@ gnome-skeleton,
 gnome-slider,
 gnome-spin-button,
 gnome-spinner,
+gnome-step-indicator,
 gnome-switch,
 gnome-switch-row,
 gnome-tab-bar,
@@ -67,6 +68,7 @@ gnome-skeleton *,
 gnome-slider *,
 gnome-spin-button *,
 gnome-spinner *,
+gnome-step-indicator *,
 gnome-switch *,
 gnome-switch-row *,
 gnome-tab-bar *,
@@ -1377,6 +1379,165 @@ gnome-highlight mark {
   gnome-highlight mark {
     background-color: var(--gnome-accent-bg-color, #3584e4);
     color: #fff;
+  }
+}
+
+/* Step Indicator */
+
+gnome-step-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+}
+
+gnome-step-indicator [data-slot="step-indicator-caption"] {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-step-indicator [data-slot="step-indicator-list"] {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+gnome-step-indicator[data-orientation="vertical"] [data-slot="step-indicator-list"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+gnome-step-indicator [data-slot="step-item"] {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+}
+
+gnome-step-indicator [data-slot="step-item"]:not(:last-child)::after {
+  position: absolute;
+  z-index: -1;
+  inset-inline-start: 50%;
+  inset-block-start: 14px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  content: "";
+}
+
+gnome-step-indicator [data-slot="step-item"][data-completed]:not(:last-child)::after {
+  background-color: var(--gnome-accent-color, #3584e4);
+}
+
+gnome-step-indicator[data-orientation="vertical"] [data-slot="step-item"] {
+  flex-direction: row;
+  align-items: flex-start;
+  padding-block-end: var(--gnome-space-3, 20px);
+}
+
+gnome-step-indicator[data-orientation="vertical"] [data-slot="step-item"]:not(:last-child)::after {
+  inset-inline-start: 14px;
+  inset-block-start: 30px;
+  width: 2px;
+  height: 100%;
+}
+
+gnome-step-indicator [data-slot="step-circle"] {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: 50%;
+  background-color: var(--gnome-view-bg-color, #fff);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  cursor: default;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+button[data-slot="step-circle"] {
+  appearance: none;
+  cursor: pointer;
+}
+
+button[data-slot="step-circle"]:hover {
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+button[data-slot="step-circle"]:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-step-indicator [data-slot="step-item"][data-current] [data-slot="step-circle"] {
+  border-color: var(--gnome-accent-color, #3584e4);
+  background-color: var(--gnome-accent-color, #3584e4);
+  color: #fff;
+}
+
+gnome-step-indicator [data-slot="step-item"][data-completed] [data-slot="step-circle"] {
+  border-color: var(--gnome-accent-color, #3584e4);
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+gnome-step-indicator [data-slot="step-item"][data-completed] [data-slot="step-circle"]::after {
+  content: "✓";
+}
+
+gnome-step-indicator [data-slot="step-label"] {
+  max-width: 96px;
+  overflow: hidden;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+gnome-step-indicator[data-orientation="vertical"] [data-slot="step-label"] {
+  max-width: none;
+  padding-inline-start: var(--gnome-space-2, 12px);
+  text-align: start;
+  white-space: normal;
+}
+
+gnome-step-indicator [data-slot="step-item"][data-current] [data-slot="step-label"] {
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-step-indicator [data-slot="step-circle"] {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+  }
+}
+
+@media (prefers-contrast: more) {
+  gnome-step-indicator [data-slot="step-circle"] {
+    border-width: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-step-indicator [data-slot="step-circle"] {
+    transition: none;
   }
 }
 

@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains thirty-four framework-agnostic components:
+The package currently contains thirty-five framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -69,6 +69,9 @@ The package currently contains thirty-four framework-agnostic components:
   `role="status"`.
 - `<gnome-progress-bar>` — presentational determinate/indeterminate progress
   indicator with `role="progressbar"`.
+- `<gnome-step-indicator>` — numbered "Step X of Y" progress indicator;
+  `steps` accepts a plain count (unlabelled) or a comma-separated label
+  list, fully host-derived.
 - `<gnome-switch>` — styled native on/off toggle with preserved form
   behavior and native `change`/`input` events.
 - `<gnome-switch-row>` — the entire row is the switch (`role="switch"` on
@@ -129,6 +132,7 @@ import '@gnome-ui/web-components/radio-group';
 import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
 import '@gnome-ui/web-components/spinner';
+import '@gnome-ui/web-components/step-indicator';
 import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/switch-row';
 import '@gnome-ui/web-components/tab-bar';
@@ -694,6 +698,42 @@ rationale as `gnome-divider`.
 highlighting each word of a multi-word search query. `case-sensitive`
 (boolean, default `false`) matches case-sensitively when set.
 
+## Step Indicator
+
+```html
+<!-- Unlabelled: shows a "Step X of Y" caption -->
+<gnome-step-indicator steps="4" current="1"></gnome-step-indicator>
+
+<!-- Labelled: shows each step's label instead of the caption -->
+<gnome-step-indicator steps="Account, Profile, Confirm" current="0" clickable>
+</gnome-step-indicator>
+
+<script type="module">
+  document.querySelector('gnome-step-indicator[clickable]').addEventListener(
+    'gnome-select',
+    (event) => {
+      // event.detail.step — jump back to a completed step.
+    },
+  );
+</script>
+```
+
+`gnome-step-indicator` is a numbered "Step X of Y" progress indicator for
+onboarding/wizard flows — steps are numbered circles connected by a
+progress line, with the completed portion tinted in the accent color.
+Purely attribute-driven and fully host-derived — nothing for the consumer
+to author, same rationale as `gnome-divider`/`gnome-highlight`.
+
+`steps` accepts either a plain count (`steps="4"`, unlabelled — only the
+caption is shown, mirroring `@gnome-ui/react`'s `StepIndicator` accepting
+a plain `number`) or a comma-separated label list (mirroring its
+`string[]` case). `current` is the zero-based active step index (clamped
+to the valid range). Completed steps are only clickable when `clickable`
+is set (mirrors react's `onStepClick` being optional to make steps
+non-interactive) — clicking one emits `gnome-select` with `{ step }`; the
+current and upcoming steps are never clickable. `orientation` accepts
+`"horizontal" | "vertical"` (default `"horizontal"`).
+
 ## Banner
 
 ```html
@@ -1240,6 +1280,7 @@ visible), so a replaced trigger keeps its hover/focus listeners and
 | `gnome-cancel` | Dialog, Menu, Popover | Yes | `{ reason }` |
 | `gnome-close` | Dialog, Dropdown, Menu, Popover | No | `{ reason }` |
 | `gnome-select` | Menu | Yes | `{ item, value }` |
+| `gnome-select` | Step Indicator | No | `{ step }` |
 | `gnome-change` | Dropdown, Radio Group | No | `{ value }` |
 | `gnome-change` | Switch Row | No | `{ checked }` |
 | `gnome-action` | Toast | Yes | `{ action }` |

@@ -268,3 +268,12 @@ body {
 .wc-story gnome-view-switcher [role="radio"]:not([aria-checked="true"]) {
   background: transparent;
 }
+
+.wc-story gnome-step-indicator [data-slot="step-circle"] {
+  min-height: 0;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: 50%;
+  background-color: var(--gnome-view-bg-color, #fff);
+}

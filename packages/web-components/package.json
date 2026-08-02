@@ -147,6 +147,11 @@
       "import": "./dist/spinner.js",
       "require": "./dist/spinner.cjs"
     },
+    "./step-indicator": {
+      "types": "./dist/step-indicator.d.ts",
+      "import": "./dist/step-indicator.js",
+      "require": "./dist/step-indicator.cjs"
+    },
     "./switch": {
       "types": "./dist/switch.d.ts",
       "import": "./dist/switch.js",

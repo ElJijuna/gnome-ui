@@ -132,6 +132,13 @@ export {
   type GnomeSpinnerSize,
   registerGnomeSpinner,
 } from './spinner';
+export {
+  GnomeStepIndicatorElement,
+  type GnomeStepIndicatorEventMap,
+  type GnomeStepIndicatorOrientation,
+  type GnomeStepIndicatorSelectDetail,
+  registerGnomeStepIndicator,
+} from './step-indicator';
 export { GnomeSwitchElement, registerGnomeSwitch } from './switch';
 export {
   type GnomeSwitchRowChangeDetail,
