@@ -174,7 +174,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
-| 41 | ⬜ | `<gnome-copy-button>` | `CopyButton` | `IconButton` + `navigator.clipboard`; timeout-reset "copied" state, `aria-live` confirmation |
+| 41 | ✅ | `<gnome-copy-button>` | `CopyButton` | `IconButton` + `navigator.clipboard`; timeout-reset "copied" state, `aria-live` confirmation |
 | 42 | ⬜ | `<gnome-password-field>` | `PasswordField` | Near-identical shape to shipped `gnome-text-field`, plus a reveal `IconButton` toggling `type` |
 | 43 | ⬜ | `<gnome-copy-field>` | `CopyField` | `<input readonly>` + trailing `gnome-copy-button`; no own state |
 | 44 | ⬜ | `<gnome-code-block>` | `CodeBlock` | `<pre><code>` + header (filename/language/`gnome-copy-button`); no syntax highlighting |

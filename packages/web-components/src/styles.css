@@ -11,6 +11,7 @@ gnome-card,
 gnome-checkbox,
 gnome-choice-card-group,
 gnome-combo-row,
+gnome-copy-button,
 gnome-dialog,
 gnome-divider,
 gnome-dropdown,
@@ -58,6 +59,7 @@ gnome-card *,
 gnome-checkbox *,
 gnome-choice-card-group *,
 gnome-combo-row *,
+gnome-copy-button *,
 gnome-dialog *,
 gnome-divider *,
 gnome-dropdown *,
@@ -4002,4 +4004,23 @@ gnome-otp-input [data-slot="otp-input-cell"][data-error]:focus-visible {
   gnome-otp-input [data-slot="otp-input-cell"] {
     transition: none;
   }
+}
+
+/* Copy Button */
+
+gnome-copy-button {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+gnome-copy-button [data-slot="copy-button-status"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

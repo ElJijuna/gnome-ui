@@ -50,6 +50,15 @@ export {
 } from './choice-card-group';
 export { GnomeComboRowElement, registerGnomeComboRow } from './combo-row';
 export {
+  type GnomeCopyButtonCopiedDetail,
+  type GnomeCopyButtonCopyErrorDetail,
+  GnomeCopyButtonElement,
+  type GnomeCopyButtonEventMap,
+  type GnomeCopyButtonSize,
+  type GnomeCopyButtonVariant,
+  registerGnomeCopyButton,
+} from './copy-button';
+export {
   type GnomeDialogCloseDetail,
   type GnomeDialogCloseReason,
   GnomeDialogElement,

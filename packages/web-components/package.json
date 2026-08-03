@@ -67,6 +67,11 @@
       "import": "./dist/combo-row.js",
       "require": "./dist/combo-row.cjs"
     },
+    "./copy-button": {
+      "types": "./dist/copy-button.d.ts",
+      "import": "./dist/copy-button.js",
+      "require": "./dist/copy-button.cjs"
+    },
     "./dialog": {
       "types": "./dist/dialog.d.ts",
       "import": "./dist/dialog.js",

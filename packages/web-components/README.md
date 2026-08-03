@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty-one framework-agnostic components:
+The package currently contains forty-two framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -33,6 +33,9 @@ The package currently contains forty-one framework-agnostic components:
   `<gnome-dropdown>` in `data-slot="row-suffix"`; genuinely composes
   `gnome-action-row`'s layout with `gnome-dropdown`'s behavior, no
   combobox logic duplicated.
+- `<gnome-copy-button>` — icon button that copies `value` to the clipboard,
+  swapping to a checkmark confirmation; fully host-generated, composing an
+  internal `gnome-icon-button`.
 - `<gnome-dialog>` — modal focus management, Escape/backdrop dismissal, and
   focus restoration.
 - `<gnome-divider>` — horizontal rule with an optional centered label,
@@ -136,6 +139,7 @@ import '@gnome-ui/web-components/callout';
 import '@gnome-ui/web-components/checkbox';
 import '@gnome-ui/web-components/choice-card-group';
 import '@gnome-ui/web-components/combo-row';
+import '@gnome-ui/web-components/copy-button';
 import '@gnome-ui/web-components/dialog';
 import '@gnome-ui/web-components/divider';
 import '@gnome-ui/web-components/dropdown';
@@ -1485,6 +1489,40 @@ your own title element (see the *Custom title* story).
 `flat` removes the bottom border, for the topmost bar of a full-window
 layout — a plain attribute read directly by CSS, no JS state to keep in
 sync.
+
+## Copy Button
+
+```html
+<gnome-copy-button value="CVE-2024-3094" label="Copy" copied-label="Copied!">
+</gnome-copy-button>
+
+<script type="module">
+  const copyButton = document.querySelector('gnome-copy-button');
+
+  copyButton.addEventListener('gnome-copied', (event) => {
+    console.log('Copied:', event.detail.value);
+  });
+
+  copyButton.addEventListener('gnome-copy-error', (event) => {
+    console.error('Copy failed:', event.detail.error);
+  });
+</script>
+```
+
+`gnome-copy-button` writes `value` to the clipboard on click, swapping its
+icon and accessible name to a checkmark and `copied-label` (default
+`"Copied!"`) for `reset-delay` ms (default `2000`) as confirmation — mirrors
+`@gnome-ui/react`'s `CopyButton`. Fully host-generated: it builds its own
+internal `gnome-icon-button`, reusing that component's `variant`/`size`/
+`osd`/`disabled` styling, plus a visually-hidden `role="status"` live region
+that announces the confirmation.
+
+Fires `gnome-copied` (`{ value }`) after a successful write and
+`gnome-copy-error` (`{ error }`) if the write rejects or the Clipboard API is
+unavailable in the current context — in either case the label stays
+unchanged. The host's `focus()` and `click()` methods delegate to the
+internal control; `copied` is a read-only property reflecting the current
+confirmation state.
 
 ## htmx
 

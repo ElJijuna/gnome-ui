@@ -41,6 +41,7 @@ export default defineConfig({
         checkbox: resolve(packageRoot, 'src/checkbox.ts'),
         'choice-card-group': resolve(packageRoot, 'src/choice-card-group.ts'),
         'combo-row': resolve(packageRoot, 'src/combo-row.ts'),
+        'copy-button': resolve(packageRoot, 'src/copy-button.ts'),
         dialog: resolve(packageRoot, 'src/dialog.ts'),
         divider: resolve(packageRoot, 'src/divider.ts'),
         dropdown: resolve(packageRoot, 'src/dropdown.ts'),
