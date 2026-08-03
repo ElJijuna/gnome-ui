@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.6.0...@gnome-ui/web-components@1.7.0) (2026-08-03)
+
+### Features
+
+* **@gnome-ui/web-components:** add gnome-copy-button component with styles, tests, and documentation ([c04014c](https://github.com/ElJijuna/gnome-ui/commit/c04014c2c01aedbe4ae035c988709e0034a20095))
+
 ## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.5.0...@gnome-ui/web-components@1.6.0) (2026-08-03)
 
 ### Features
