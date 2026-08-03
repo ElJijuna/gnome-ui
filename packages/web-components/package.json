@@ -132,6 +132,11 @@
       "import": "./dist/menu.js",
       "require": "./dist/menu.cjs"
     },
+    "./otp-input": {
+      "types": "./dist/otp-input.d.ts",
+      "import": "./dist/otp-input.js",
+      "require": "./dist/otp-input.cjs"
+    },
     "./popover": {
       "types": "./dist/popover.d.ts",
       "import": "./dist/popover.js",

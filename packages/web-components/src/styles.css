@@ -24,6 +24,7 @@ gnome-icon-button,
 gnome-kbd,
 gnome-level-bar,
 gnome-menu,
+gnome-otp-input,
 gnome-popover,
 gnome-progress-bar,
 gnome-radio-group,
@@ -70,6 +71,7 @@ gnome-icon-button *,
 gnome-kbd *,
 gnome-level-bar *,
 gnome-menu *,
+gnome-otp-input *,
 gnome-popover *,
 gnome-progress-bar *,
 gnome-radio-group *,
@@ -3881,6 +3883,123 @@ gnome-expander [data-slot="expander-panel-inner"] > :first-child {
 @media (prefers-reduced-motion: reduce) {
   gnome-expander [data-slot="expander-panel"],
   gnome-expander [data-slot="expander-chevron"] {
+    transition: none;
+  }
+}
+
+/* Otp Input */
+
+gnome-otp-input {
+  display: block;
+}
+
+gnome-otp-input [data-slot="otp-input-fieldset"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 6px);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+gnome-otp-input [data-slot="otp-input-fieldset"]:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-otp-input [data-slot="otp-input-legend"] {
+  padding: 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-otp-input [data-slot="otp-input-hint"] {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.75rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-otp-input [data-slot="otp-input-hint"][data-error] {
+  opacity: 1;
+  color: var(--gnome-error-color, #e01b24);
+}
+
+gnome-otp-input [data-slot="otp-input-row"] {
+  display: flex;
+  gap: var(--gnome-space-2, 12px);
+}
+
+gnome-otp-input [data-slot="otp-input-cell"] {
+  width: 40px;
+  height: 48px;
+  padding: 0;
+  appearance: none;
+  font-family: var(--gnome-font-family);
+  font-size: 1.25rem;
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-view-fg-color, rgb(0 0 0 / 0.8));
+  text-align: center;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1px solid var(--gnome-border-subtle, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.06);
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-otp-input [data-slot="otp-input-cell"]:focus {
+  outline: none;
+}
+
+gnome-otp-input [data-slot="otp-input-cell"]:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-accent-color, #3584e4);
+}
+
+gnome-otp-input [data-slot="otp-input-cell"]:disabled {
+  cursor: not-allowed;
+}
+
+gnome-otp-input [data-slot="otp-input-cell"][data-error] {
+  border-color: var(--gnome-error-color, #e01b24);
+}
+
+gnome-otp-input [data-slot="otp-input-cell"][data-error]:focus-visible {
+  border-color: var(--gnome-error-color, #e01b24);
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.06),
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-error-color, #e01b24);
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-otp-input [data-slot="otp-input-cell"] {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: var(--gnome-border-subtle, rgb(255 255 255 / 0.15));
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
+  }
+}
+
+@media (prefers-contrast: more) {
+  gnome-otp-input [data-slot="otp-input-cell"] {
+    border-width: 2px;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-otp-input [data-slot="otp-input-cell"] {
     transition: none;
   }
 }

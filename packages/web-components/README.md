@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty framework-agnostic components:
+The package currently contains forty-one framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -69,6 +69,8 @@ The package currently contains forty framework-agnostic components:
   host-derived blocks in `discrete` mode.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
+- `<gnome-otp-input>` — segmented PIN/verification-code input; fully
+  host-generated cells with auto-advance, backspace, and paste support.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
   native radio inputs, with a normalized `value`/`gnome-change` API.
 - `<gnome-separator>` — dividing line; the host manages
@@ -146,6 +148,7 @@ import '@gnome-ui/web-components/icon-button';
 import '@gnome-ui/web-components/kbd';
 import '@gnome-ui/web-components/level-bar';
 import '@gnome-ui/web-components/menu';
+import '@gnome-ui/web-components/otp-input';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/progress-bar';
 import '@gnome-ui/web-components/radio-group';
@@ -1011,6 +1014,46 @@ The component adds the menu roles and trigger relationships, skips disabled
 items, supports Arrow keys, Home, End, and typeahead, and restores trigger
 focus after Escape or selection. Add `data-keep-open` when an item should not
 close the menu.
+
+## Otp Input
+
+```html
+<gnome-otp-input label="Verification code" helper-text="We sent a 6-digit code to your email.">
+</gnome-otp-input>
+
+<script type="module">
+  const otp = document.querySelector('gnome-otp-input');
+
+  otp.addEventListener('gnome-change', (event) => {
+    console.log('Value:', event.detail.value);
+  });
+
+  otp.addEventListener('gnome-complete', (event) => {
+    console.log('Complete:', event.detail.value);
+  });
+
+  otp.length = 6; // default
+  otp.value = '123'; // pre-fill programmatically
+</script>
+```
+
+`gnome-otp-input` is a segmented PIN/verification-code input — one cell
+per digit, with auto-advance on typing, backspace-to-previous-cell, and
+paste support (pasting a full code distributes it across the remaining
+cells). Fully host-generated, same rationale as `gnome-field-group`:
+nothing for the consumer to author — the fieldset/legend/hint chrome and
+every `[data-slot="otp-input-cell"]` are built from attributes alone.
+
+`value` is a JS-only property, not an attribute — mirrors
+`gnome-radio-group`'s `value`, since it changes on every keystroke and
+reflecting it as an attribute would be wasted churn. Fires `gnome-change`
+(`{ value }`) on every user-driven edit and `gnome-complete` (`{ value }`)
+once the value reaches `length` digits (default `6`) — the complete check
+compares against the previous value, so it won't re-fire on an unchanged
+complete value but fires again if the value leaves and returns to a
+(possibly different) complete value, matching `@gnome-ui/react`'s
+`OtpInput` effect semantics exactly. `masked` renders `type="password"`
+cells; `disabled` disables every cell (and the wrapping `<fieldset>`).
 
 ## Toast
 

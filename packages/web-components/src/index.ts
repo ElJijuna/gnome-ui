@@ -112,6 +112,13 @@ export {
   registerGnomeMenu,
 } from './menu';
 export {
+  type GnomeOtpInputChangeDetail,
+  type GnomeOtpInputCompleteDetail,
+  GnomeOtpInputElement,
+  type GnomeOtpInputEventMap,
+  registerGnomeOtpInput,
+} from './otp-input';
+export {
   computePopoverPosition,
   type GnomePopoverCloseDetail,
   type GnomePopoverCloseReason,

@@ -54,6 +54,7 @@ export default defineConfig({
         kbd: resolve(packageRoot, 'src/kbd.ts'),
         'level-bar': resolve(packageRoot, 'src/level-bar.ts'),
         menu: resolve(packageRoot, 'src/menu.ts'),
+        'otp-input': resolve(packageRoot, 'src/otp-input.ts'),
         popover: resolve(packageRoot, 'src/popover.ts'),
         'progress-bar': resolve(packageRoot, 'src/progress-bar.ts'),
         'radio-group': resolve(packageRoot, 'src/radio-group.ts'),
