@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.5.0...@gnome-ui/web-components@1.6.0) (2026-08-03)
+
+### Features
+
+* **@gnome-ui/web-components:** add gnome-otp-input component with ([4de23e1](https://github.com/ElJijuna/gnome-ui/commit/4de23e1ab14dfc8dceaa29de94e20da6fab82f64))
+
 ## [1.5.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.4.0...@gnome-ui/web-components@1.5.0) (2026-08-02)
 
 ### Features
