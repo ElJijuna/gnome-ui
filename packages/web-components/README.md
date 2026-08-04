@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty-three framework-agnostic components:
+The package currently contains forty-four framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -76,6 +76,9 @@ The package currently contains forty-three framework-agnostic components:
   host-generated cells with auto-advance, backspace, and paste support.
 - `<gnome-radio-group>` — shared naming and group-level disabling around
   native radio inputs, with a normalized `value`/`gnome-change` API.
+- `<gnome-rating-stars>` — fully host-generated star rating; interactive
+  roving-tabindex `role="radiogroup"` by default, or a static `role="img"`
+  when `readonly`/`disabled`.
 - `<gnome-separator>` — dividing line; the host manages
   `role="separator"`/`aria-orientation` since a custom element can't switch
   between `<hr>` and a `<div>` per orientation like the React version.
@@ -159,6 +162,7 @@ import '@gnome-ui/web-components/otp-input';
 import '@gnome-ui/web-components/popover';
 import '@gnome-ui/web-components/progress-bar';
 import '@gnome-ui/web-components/radio-group';
+import '@gnome-ui/web-components/rating-stars';
 import '@gnome-ui/web-components/slider';
 import '@gnome-ui/web-components/spin-button';
 import '@gnome-ui/web-components/spinner';
@@ -1549,6 +1553,37 @@ reusing that component wholesale rather than reimplementing hover/focus
 positioning — which is also how `aria-describedby` gets wired to the full
 text. When the text fits, no tooltip exists at all. `truncated` is a
 read-only property reflecting the current state.
+
+## Rating Stars
+
+```html
+<gnome-rating-stars value="3" max="5"></gnome-rating-stars>
+
+<script type="module">
+  const ratingStars = document.querySelector('gnome-rating-stars');
+
+  ratingStars.addEventListener('gnome-change', (event) => {
+    console.log('New rating:', event.detail.value);
+  });
+</script>
+```
+
+`gnome-rating-stars` is fully host-generated from `max` — mirrors
+`@gnome-ui/react`'s `RatingStars`. It renders an interactive roving-tabindex
+`role="radiogroup"` of `role="radio"` stars by default; clicking a star, or
+moving focus to one with the arrow keys/Home/End (clamped at the ends, not
+wrapping), sets `value` and fires `gnome-change` (`{ value }`). Hovering or
+focusing a star previews its fill without changing `value` or firing an
+event.
+
+The React version switches to a static display based on whether an
+`onChange` callback was passed — there's no equivalent introspection for a
+custom element, so set the `readonly` boolean attribute instead (absent by
+default, same as native `<input readonly>`) to render a static `role="img"`
+display instead, for showing an average/read-only rating. `disabled` forces
+the same read-only display. `aria-label` defaults to `"Rating"`
+(interactive) or a generated `"N out of M stars"` (read-only) unless you set
+your own.
 
 ## htmx
 

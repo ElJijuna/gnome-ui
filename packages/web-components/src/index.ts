@@ -150,6 +150,13 @@ export {
   registerGnomeRadioGroup,
 } from './radio-group';
 export {
+  type GnomeRatingStarsChangeDetail,
+  GnomeRatingStarsElement,
+  type GnomeRatingStarsEventMap,
+  type GnomeRatingStarsSize,
+  registerGnomeRatingStars,
+} from './rating-stars';
+export {
   GnomeSeparatorElement,
   type GnomeSeparatorOrientation,
   registerGnomeSeparator,

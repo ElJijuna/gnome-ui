@@ -157,6 +157,11 @@
       "import": "./dist/radio-group.js",
       "require": "./dist/radio-group.cjs"
     },
+    "./rating-stars": {
+      "types": "./dist/rating-stars.d.ts",
+      "import": "./dist/rating-stars.js",
+      "require": "./dist/rating-stars.cjs"
+    },
     "./separator": {
       "types": "./dist/separator.d.ts",
       "import": "./dist/separator.js",

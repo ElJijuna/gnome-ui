@@ -29,6 +29,7 @@ gnome-otp-input,
 gnome-popover,
 gnome-progress-bar,
 gnome-radio-group,
+gnome-rating-stars,
 gnome-separator,
 gnome-skeleton,
 gnome-slider,
@@ -78,6 +79,7 @@ gnome-otp-input *,
 gnome-popover *,
 gnome-progress-bar *,
 gnome-radio-group *,
+gnome-rating-stars *,
 gnome-separator *,
 gnome-skeleton *,
 gnome-slider *,
@@ -4048,4 +4050,32 @@ gnome-text-truncate [data-clamp] {
   -webkit-box-orient: vertical;
   white-space: normal;
   overflow: hidden;
+}
+
+/* Rating Stars */
+
+gnome-rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+gnome-rating-stars [data-slot="rating-star-control"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--gnome-radius-xs, 4px);
+}
+
+gnome-rating-stars [data-slot="rating-star-control"]:focus-visible {
+  outline: 2px solid var(--gnome-accent-bg-color, #3584e4);
+  outline-offset: 2px;
+}
+
+gnome-rating-stars [data-slot="rating-star"] {
+  color: var(--gnome-warning-bg-color, #f6d32d);
 }

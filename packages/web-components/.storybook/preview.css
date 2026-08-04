@@ -104,6 +104,17 @@ body {
   background: var(--gnome-button-hover-bg-color, rgb(0 0 0 / 0.12));
 }
 
+.wc-story gnome-rating-stars [data-slot="rating-star-control"] {
+  min-height: 0;
+  padding: 2px;
+  border: none;
+  background: transparent;
+}
+
+.wc-story gnome-rating-stars [data-slot="rating-star-control"]:hover {
+  background: transparent;
+}
+
 .wc-story :is(button, input):focus-visible {
   outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
   outline-offset: var(--gnome-focus-ring-offset, 2px);

@@ -162,7 +162,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 35 | ✅ | `<gnome-expander>` | `Expander` | Disclosure trigger `<button>` + `role="region"` content, same shape as `gnome-dialog`'s toggle logic |
 | 36 | ✅ | `<gnome-otp-input>` | `OtpInput` | N native `<input>` cells in a `<fieldset>`; auto-advance, backspace-to-previous, paste-distributes |
 | 37 | ⬜ | `<gnome-file-drop-zone>` | `FileDropZone` | Native `DragEvent`s + hidden `<input type="file">`; drag-enter/leave counter for nested-element correctness |
-| 38 | ⬜ | `<gnome-rating-stars>` | `RatingStars` | Roving-tabindex `role="radiogroup"`, same recipe as `gnome-radio-group`; read-only mode uses `role="img"` |
+| 38 | ✅ | `<gnome-rating-stars>` | `RatingStars` | Roving-tabindex `role="radiogroup"`, same recipe as `gnome-radio-group`; read-only mode uses `role="img"` |
 | 39 | ✅ | `<gnome-choice-card-group>` | `ChoiceCardGroup` | Roving-tabindex `radiogroup` of cards, same recipe as `gnome-radio-group` |
 | 40 | ✅ | `<gnome-text-truncate>` | `TextTruncate` | `ResizeObserver`-driven overflow detection, wraps content in already-shipped `gnome-tooltip` when truncated |
 
