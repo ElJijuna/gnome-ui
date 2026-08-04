@@ -102,6 +102,11 @@
       "import": "./dist/field-group.js",
       "require": "./dist/field-group.cjs"
     },
+    "./file-drop-zone": {
+      "types": "./dist/file-drop-zone.d.ts",
+      "import": "./dist/file-drop-zone.js",
+      "require": "./dist/file-drop-zone.cjs"
+    },
     "./file-type-icon": {
       "types": "./dist/file-type-icon.d.ts",
       "import": "./dist/file-type-icon.js",

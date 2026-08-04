@@ -48,6 +48,7 @@ export default defineConfig({
         expander: resolve(packageRoot, 'src/expander.ts'),
         'expander-row': resolve(packageRoot, 'src/expander-row.ts'),
         'field-group': resolve(packageRoot, 'src/field-group.ts'),
+        'file-drop-zone': resolve(packageRoot, 'src/file-drop-zone.ts'),
         'file-type-icon': resolve(packageRoot, 'src/file-type-icon.ts'),
         'header-bar': resolve(packageRoot, 'src/header-bar.ts'),
         highlight: resolve(packageRoot, 'src/highlight.ts'),

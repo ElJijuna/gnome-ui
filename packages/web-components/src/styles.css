@@ -18,6 +18,7 @@ gnome-dropdown,
 gnome-expander,
 gnome-expander-row,
 gnome-field-group,
+gnome-file-drop-zone,
 gnome-file-type-icon,
 gnome-header-bar,
 gnome-highlight,
@@ -68,6 +69,7 @@ gnome-dropdown *,
 gnome-expander *,
 gnome-expander-row *,
 gnome-field-group *,
+gnome-file-drop-zone *,
 gnome-file-type-icon *,
 gnome-header-bar *,
 gnome-highlight *,
@@ -4078,4 +4080,102 @@ gnome-rating-stars [data-slot="rating-star-control"]:focus-visible {
 
 gnome-rating-stars [data-slot="rating-star"] {
   color: var(--gnome-warning-bg-color, #f6d32d);
+}
+
+/* File Drop Zone */
+
+gnome-file-drop-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--gnome-space-4, 24px);
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 2px dashed var(--gnome-card-shade-color, rgb(0 0 0 / 0.2));
+  border-radius: var(--gnome-radius-lg, 12px);
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+gnome-file-drop-zone:hover:not([data-disabled]) {
+  border-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 50%, transparent);
+}
+
+gnome-file-drop-zone:focus {
+  outline: none;
+}
+
+gnome-file-drop-zone:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-file-drop-zone[data-dragging] {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 8%, transparent);
+  border-color: var(--gnome-accent-color, #3584e4);
+}
+
+gnome-file-drop-zone[data-disabled] {
+  cursor: not-allowed;
+  opacity: var(--gnome-opacity-disabled, 0.5);
+}
+
+gnome-file-drop-zone [data-slot="file-drop-zone-icon"] {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-file-drop-zone[data-dragging] [data-slot="file-drop-zone-icon"] {
+  color: var(--gnome-accent-color, #3584e4);
+  opacity: 1;
+}
+
+gnome-file-drop-zone [data-slot="file-drop-zone-label"] {
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+gnome-file-drop-zone [data-slot="file-drop-zone-helper-text"] {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+gnome-file-drop-zone [data-slot="file-drop-zone-input"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  gnome-file-drop-zone {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgb(255 255 255 / 0.2);
+  }
+}
+
+@media (prefers-contrast: more) {
+  gnome-file-drop-zone {
+    border-width: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gnome-file-drop-zone {
+    transition: none;
+  }
 }

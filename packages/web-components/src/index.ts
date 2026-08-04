@@ -90,6 +90,13 @@ export {
 } from './expander-row';
 export { GnomeFieldGroupElement, registerGnomeFieldGroup } from './field-group';
 export {
+  GnomeFileDropZoneElement,
+  type GnomeFileDropZoneErrorDetail,
+  type GnomeFileDropZoneEventMap,
+  type GnomeFileDropZoneFilesSelectedDetail,
+  registerGnomeFileDropZone,
+} from './file-drop-zone';
+export {
   type FileTypeCategory,
   GnomeFileTypeIconElement,
   type GnomeFileTypeIconSize,

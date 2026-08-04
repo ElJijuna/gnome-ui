@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty-four framework-agnostic components:
+The package currently contains forty-five framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -53,6 +53,10 @@ The package currently contains forty-four framework-agnostic components:
 - `<gnome-field-group>` — wraps a real `<fieldset>`/`<legend>`; original
   light-DOM children (the fields) are moved into a generated content div
   inside it, so `disabled` disables every descendant form control for free.
+- `<gnome-file-drop-zone>` — drag-and-drop upload target with a
+  click-to-browse fallback; fully host-generated, entirely event-driven
+  (`gnome-files-selected`/`gnome-error`) since `File` objects can't
+  round-trip through attributes.
 - `<gnome-file-type-icon>` — `role="img"` icon (or thumbnail) resolved from
   a file's MIME type or name extension; icon glyphs come from
   `@gnome-ui/icons`, this package's only non-`@gnome-ui/core` dependency.
@@ -152,6 +156,7 @@ import '@gnome-ui/web-components/dropdown';
 import '@gnome-ui/web-components/expander';
 import '@gnome-ui/web-components/expander-row';
 import '@gnome-ui/web-components/field-group';
+import '@gnome-ui/web-components/file-drop-zone';
 import '@gnome-ui/web-components/file-type-icon';
 import '@gnome-ui/web-components/highlight';
 import '@gnome-ui/web-components/icon-button';
@@ -1584,6 +1589,41 @@ display instead, for showing an average/read-only rating. `disabled` forces
 the same read-only display. `aria-label` defaults to `"Rating"`
 (interactive) or a generated `"N out of M stars"` (read-only) unless you set
 your own.
+
+## File Drop Zone
+
+```html
+<gnome-file-drop-zone accept="image/png,image/jpeg" max-size="2097152">
+</gnome-file-drop-zone>
+
+<script type="module">
+  const zone = document.querySelector('gnome-file-drop-zone');
+
+  zone.addEventListener('gnome-files-selected', (event) => {
+    console.log('Accepted:', event.detail.files.map((f) => f.name));
+  });
+
+  zone.addEventListener('gnome-error', (event) => {
+    console.error(event.detail.message);
+  });
+</script>
+```
+
+`gnome-file-drop-zone` is fully host-generated — mirrors `@gnome-ui/react`'s
+`FileDropZone`. There's nothing for the consumer to author: the icon,
+label, helper text, and a hidden `<input type="file">` are all built once
+on connect. `File` objects can't round-trip through HTML attributes, so
+selection is entirely event-driven — `gnome-files-selected` (`{ files }`)
+fires with the accepted files, whether dropped or picked via the browse
+dialog it falls back to on click/Enter/Space, and `gnome-error`
+(`{ message }`) fires once per rejected file.
+
+Native `accept` only restricts the browse dialog, not drag-and-drop, so
+dropped files are re-validated against both `accept` and `max-size` before
+firing `gnome-files-selected`. `multiple` allows more than one file;
+without it, only the first file (dropped or picked) is kept. `dragging` is
+a read-only property reflecting whether a drag is currently over the zone
+(also exposed as `data-dragging` for styling).
 
 ## htmx
 

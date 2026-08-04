@@ -115,6 +115,12 @@ body {
   background: transparent;
 }
 
+.wc-story gnome-file-drop-zone [data-slot="file-drop-zone-input"] {
+  min-height: 0;
+  border: 0;
+  background: transparent;
+}
+
 .wc-story :is(button, input):focus-visible {
   outline: var(--gnome-focus-ring-width, 3px) solid var(--gnome-focus-ring-color, #3584e4);
   outline-offset: var(--gnome-focus-ring-offset, 2px);
