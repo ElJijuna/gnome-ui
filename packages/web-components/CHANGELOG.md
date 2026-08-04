@@ -1,3 +1,10 @@
+## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.8.0...@gnome-ui/web-components@1.9.0) (2026-08-04)
+
+### Features
+
+* **@gnome-ui/react:** add FilterableMultiSelectDropdown with styles, tests, and documentation ([b410ca1](https://github.com/ElJijuna/gnome-ui/commit/b410ca181d886048b8a11cf3ab0231432b5610ab))
+* **@gnome-ui/web-components:** add gnome-file-drop-zone with style ([50b2d98](https://github.com/ElJijuna/gnome-ui/commit/50b2d98008d7c25c405981ff8957033d5eb14077))
+
 ## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.7.0...@gnome-ui/web-components@1.8.0) (2026-08-04)
 
 ### Features
