@@ -1,3 +1,35 @@
+## [1.56.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.55.0...@gnome-ui/react@1.56.0) (2026-08-04)
+
+### Features
+
+* **@gnome-ui/react:** add FilterableMultiSelectDropdown with styles, tests, and documentation ([b410ca1](https://github.com/ElJijuna/gnome-ui/commit/b410ca181d886048b8a11cf3ab0231432b5610ab))
+* **@gnome-ui/web-components:** add gnome-callout component with styles, tests, and documentation ([0e11f3a](https://github.com/ElJijuna/gnome-ui/commit/0e11f3ad796d9f992aca92fc3f81d8bd0656e77a))
+* **@gnome-ui/web-components:** add gnome-choice-card-group component with styles, tests, and documentation ([8fba6a9](https://github.com/ElJijuna/gnome-ui/commit/8fba6a976e5c241983d42a8bef733c262f499ed6))
+* **@gnome-ui/web-components:** add gnome-combo-row component with styles, tests, and documentation ([7b6895c](https://github.com/ElJijuna/gnome-ui/commit/7b6895cea2008561616723f40ff60e8ff29a0745))
+* **@gnome-ui/web-components:** add gnome-copy-button component with styles, tests, and documentation ([c04014c](https://github.com/ElJijuna/gnome-ui/commit/c04014c2c01aedbe4ae035c988709e0034a20095))
+* **@gnome-ui/web-components:** add gnome-divider component with styles, tests, and documentation ([1155e99](https://github.com/ElJijuna/gnome-ui/commit/1155e990d0e10c41f28d65d9c95f4856c4e00b57))
+* **@gnome-ui/web-components:** add gnome-dropdown component with styles, tests, and documentation ([280c9a9](https://github.com/ElJijuna/gnome-ui/commit/280c9a9f17c88e66f9b4d2d63c06d6dde1808a45))
+* **@gnome-ui/web-components:** add gnome-expander component with styles, tests, and documentation ([86fa8da](https://github.com/ElJijuna/gnome-ui/commit/86fa8dafd58daff4d4dcd079b31eab70704be11a))
+* **@gnome-ui/web-components:** add gnome-expander-row component with styles, tests, and documentation ([46031d3](https://github.com/ElJijuna/gnome-ui/commit/46031d308ca5e671605c23bae6f6a98f7575aa25))
+* **@gnome-ui/web-components:** add gnome-field-group component with styles, tests, and documentation ([0bf4442](https://github.com/ElJijuna/gnome-ui/commit/0bf44429d361489105749c5a7fc090406e02b5c2))
+* **@gnome-ui/web-components:** add gnome-file-drop-zone with style ([50b2d98](https://github.com/ElJijuna/gnome-ui/commit/50b2d98008d7c25c405981ff8957033d5eb14077))
+* **@gnome-ui/web-components:** add gnome-file-type-icon component with styles, tests, and documentation ([fe86bb1](https://github.com/ElJijuna/gnome-ui/commit/fe86bb10329f51642e444d65b8840f3e406bb00e))
+* **@gnome-ui/web-components:** add gnome-highlight component with styles, tests, and documentation ([b489b91](https://github.com/ElJijuna/gnome-ui/commit/b489b91dc3b84cc51a9c6470b4e27ac4c445c978))
+* **@gnome-ui/web-components:** add gnome-icon-button component with styles, tests, and documentation ([0cac513](https://github.com/ElJijuna/gnome-ui/commit/0cac51314c920859b40014bbb320c9d76e5b9bb3))
+* **@gnome-ui/web-components:** add gnome-kbd component with styles, tests, and documentation ([3a701ed](https://github.com/ElJijuna/gnome-ui/commit/3a701ed3ff7f70e31530999220ae64b10484a66b))
+* **@gnome-ui/web-components:** add gnome-level-bar component with styles, tests, and documentation ([343f9af](https://github.com/ElJijuna/gnome-ui/commit/343f9af904ecb1b42e1841a8582106624250e448))
+* **@gnome-ui/web-components:** add gnome-otp-input component with ([4de23e1](https://github.com/ElJijuna/gnome-ui/commit/4de23e1ab14dfc8dceaa29de94e20da6fab82f64))
+* **@gnome-ui/web-components:** add gnome-rating-stars component with styles, tests, and documentation ([cdebfe7](https://github.com/ElJijuna/gnome-ui/commit/cdebfe7874fbade94bead7b15b4fad846a1dfb38))
+* **@gnome-ui/web-components:** add gnome-step-indicator component with styles, tests, and documentation ([dd983e4](https://github.com/ElJijuna/gnome-ui/commit/dd983e40f86772fa1eb61330d4bece7900373fd9))
+* **@gnome-ui/web-components:** add gnome-switch-row component with styles, tests, and documentation ([45ecf52](https://github.com/ElJijuna/gnome-ui/commit/45ecf52cfb293393bbf0174d1e6e847baecac219))
+* **@gnome-ui/web-components:** add gnome-tab-bar component with styles, tests, and documentation ([7bf71c3](https://github.com/ElJijuna/gnome-ui/commit/7bf71c3d0c751769f351a312ba1af77548825039))
+* **@gnome-ui/web-components:** add gnome-text-truncate component with styles, tests, and documentation ([c19d90c](https://github.com/ElJijuna/gnome-ui/commit/c19d90cb072f27bd1f8678d0fb54a55f6a06b4e0))
+* **@gnome-ui/web-components:** add gnome-view-switcher component with styles, tests, and documentation ([eb4b394](https://github.com/ElJijuna/gnome-ui/commit/eb4b394253dd142a7dfb80fcdd7d2277ebf3b135))
+
+### Bug Fixes
+
+* **ci:** build icons before web-components in release/storybook workflows to resolve module types ([9dff0a3](https://github.com/ElJijuna/gnome-ui/commit/9dff0a33356887a93bed0c50023698d887735e7f))
+
 ## [1.55.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.54.0...@gnome-ui/react@1.55.0) (2026-08-01)
 
 ### Features
