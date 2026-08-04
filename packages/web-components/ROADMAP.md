@@ -189,7 +189,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
-| 46 | ⬜ | `<gnome-dropdown>` | `Dropdown` | Shared foundation for this cluster (see also old Tier 6 priority 22 — combines `gnome-menu` internals with a select-styled trigger) |
+| 46 | ✅ | `<gnome-dropdown>` | `Dropdown` | Shared foundation for this cluster — already shipped under old Tier 6 priority 22, combines `gnome-menu` internals with a select-styled trigger |
 | 47 | ⬜ | `<gnome-multi-select-dropdown>` | `MultiSelectDropdown` | `role="combobox"` trigger + `role="listbox"` of checkbox options; flip-up/down positioning via `getBoundingClientRect`, outside-click-to-close |
 | 48 | ⬜ | `<gnome-font-picker>` | `FontPicker` | Trivial glue code (one `open` boolean) over `gnome-popover` + two `gnome-dropdown`s + `gnome-spin-button`; blocked on `gnome-dropdown` |
 
