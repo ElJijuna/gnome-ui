@@ -247,6 +247,11 @@
       "import": "./dist/components/FileTypeIcon.js",
       "require": "./dist/components/FileTypeIcon.cjs"
     },
+    "./components/FilterableMultiSelectDropdown": {
+      "types": "./dist/components/FilterableMultiSelectDropdown.d.ts",
+      "import": "./dist/components/FilterableMultiSelectDropdown.js",
+      "require": "./dist/components/FilterableMultiSelectDropdown.cjs"
+    },
     "./components/FontPicker": {
       "types": "./dist/components/FontPicker.d.ts",
       "import": "./dist/components/FontPicker.js",

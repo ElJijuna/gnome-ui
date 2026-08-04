@@ -1,0 +1,352 @@
+/* ─── Wrapper ────────────────────────────────────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 160px;
+}
+
+/* ─── Trigger button ─────────────────────────────────────────────────────────── */
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-1, 6px);
+  width: 100%;
+  padding: 7px var(--gnome-space-2, 12px);
+  min-height: 36px;
+  appearance: none;
+  background-color: var(--gnome-card-bg-color, #fff);
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow: var(--gnome-shadow-sm, 0 1px 2px rgb(0 0 0 / 0.08));
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-normal, 400);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    box-shadow var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.trigger:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--gnome-card-bg-color, #fff) 90%, black 10%);
+}
+
+.trigger:focus {
+  outline: none;
+}
+
+.trigger:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+.trigger:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
+.triggerOpen {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Trigger label ──────────────────────────────────────────────────────────── */
+
+.triggerLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeholder {
+  opacity: var(--gnome-opacity-dim, 0.55);
+}
+
+/* ─── Chevron icon ───────────────────────────────────────────────────────────── */
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  transition: transform var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ─── Popup (filter field + listbox) ─────────────────────────────────────────── */
+
+.popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  background-color: var(--gnome-popover-bg-color, var(--gnome-card-bg-color, #fff));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.12));
+  border-radius: var(--gnome-radius-md, 8px);
+  box-shadow:
+    0 4px 16px rgb(0 0 0 / 0.12),
+    0 1px 3px rgb(0 0 0 / 0.08);
+  overflow: hidden;
+  animation: popup-in var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease) both;
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: top center;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top center;
+  }
+}
+
+.popupDown {
+  top: calc(100% + 4px);
+}
+
+.popupUp {
+  bottom: calc(100% + 4px);
+  animation-name: popup-in-up;
+}
+
+@keyframes popup-in-up {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: bottom center;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom center;
+  }
+}
+
+/* ─── Filter field ───────────────────────────────────────────────────────────── */
+
+.filterRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 8px;
+  border-bottom: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.1));
+}
+
+.filterIcon {
+  position: absolute;
+  left: 16px;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  pointer-events: none;
+}
+
+.filterInput {
+  width: 100%;
+  padding: 6px 8px 6px 28px;
+  appearance: none;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-view-fg-color, rgb(0 0 0 / 0.8));
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.15));
+  border-radius: var(--gnome-radius-md, 8px);
+  outline: none;
+}
+
+.filterInput:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gnome-accent-color, #3584e4) 30%, transparent);
+}
+
+/* ─── Listbox ────────────────────────────────────────────────────────────────── */
+
+.list {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ─── Option ─────────────────────────────────────────────────────────────────── */
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: 8px var(--gnome-space-2, 12px);
+  min-height: 40px;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.optionActive {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 12%, transparent);
+}
+
+.optionSelected {
+  font-weight: var(--gnome-font-weight-semibold, 600);
+}
+
+.optionDisabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Checkbox glyph (visual only — selection state lives on aria-selected) ──── */
+
+.checkbox {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1.5px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.3));
+  border-radius: var(--gnome-radius-sm, 4px);
+  transition:
+    background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.checkboxChecked {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  border-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.checkboxChecked::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 4px;
+  height: 8px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+}
+
+/* ─── Option text block ──────────────────────────────────────────────────────── */
+
+.optionText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.optionLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.optionDesc {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  opacity: var(--gnome-opacity-dim, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Empty state ────────────────────────────────────────────────────────────── */
+
+.empty {
+  margin: 16px 0;
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  text-align: center;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .trigger {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow: none;
+  }
+
+  .trigger:hover:not(:disabled) {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+
+  .popup {
+    background-color: var(--gnome-card-bg-color, #383838);
+    border-color: rgb(255 255 255 / 0.1);
+    box-shadow:
+      0 4px 16px rgb(0 0 0 / 0.4),
+      0 1px 3px rgb(0 0 0 / 0.3);
+  }
+
+  .filterRow {
+    border-color: rgb(255 255 255 / 0.1);
+  }
+
+  .filterInput {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgb(255 255 255 / 0.15);
+  }
+
+  .checkbox {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+    border-color: rgb(255 255 255 / 0.3);
+  }
+}
+
+/* ─── High contrast ──────────────────────────────────────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .checkbox {
+    border-width: 2px;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .chevron,
+  .checkbox {
+    transition: none;
+  }
+
+  .popup {
+    animation: none;
+  }
+}
