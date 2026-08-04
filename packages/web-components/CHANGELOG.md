@@ -1,3 +1,10 @@
+## [1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.7.0...@gnome-ui/web-components@1.8.0) (2026-08-04)
+
+### Features
+
+* **@gnome-ui/web-components:** add gnome-rating-stars component with styles, tests, and documentation ([cdebfe7](https://github.com/ElJijuna/gnome-ui/commit/cdebfe7874fbade94bead7b15b4fad846a1dfb38))
+* **@gnome-ui/web-components:** add gnome-text-truncate component with styles, tests, and documentation ([c19d90c](https://github.com/ElJijuna/gnome-ui/commit/c19d90cb072f27bd1f8678d0fb54a55f6a06b4e0))
+
 ## [1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.6.0...@gnome-ui/web-components@1.7.0) (2026-08-03)
 
 ### Features
