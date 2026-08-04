@@ -207,6 +207,11 @@
       "import": "./dist/text-field.js",
       "require": "./dist/text-field.cjs"
     },
+    "./text-truncate": {
+      "types": "./dist/text-truncate.d.ts",
+      "import": "./dist/text-truncate.js",
+      "require": "./dist/text-truncate.cjs"
+    },
     "./toast": {
       "types": "./dist/toast.d.ts",
       "import": "./dist/toast.js",

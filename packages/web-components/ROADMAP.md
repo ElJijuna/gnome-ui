@@ -164,7 +164,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 37 | ⬜ | `<gnome-file-drop-zone>` | `FileDropZone` | Native `DragEvent`s + hidden `<input type="file">`; drag-enter/leave counter for nested-element correctness |
 | 38 | ⬜ | `<gnome-rating-stars>` | `RatingStars` | Roving-tabindex `role="radiogroup"`, same recipe as `gnome-radio-group`; read-only mode uses `role="img"` |
 | 39 | ✅ | `<gnome-choice-card-group>` | `ChoiceCardGroup` | Roving-tabindex `radiogroup` of cards, same recipe as `gnome-radio-group` |
-| 40 | ⬜ | `<gnome-text-truncate>` | `TextTruncate` | `ResizeObserver`-driven overflow detection, wraps content in already-shipped `gnome-tooltip` when truncated |
+| 40 | ✅ | `<gnome-text-truncate>` | `TextTruncate` | `ResizeObserver`-driven overflow detection, wraps content in already-shipped `gnome-tooltip` when truncated |
 
 ---
 

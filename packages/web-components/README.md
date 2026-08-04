@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty-two framework-agnostic components:
+The package currently contains forty-three framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -102,6 +102,9 @@ The package currently contains forty-two framework-agnostic components:
   the host does not create tabs or manage selection, only focus movement.
 - `<gnome-text-field>` — styled native text input/textarea with label and
   helper/error text slots wired via `for`/`id` and `aria-describedby`.
+- `<gnome-text-truncate>` — `ResizeObserver`-driven overflow detection; only
+  when actually clipped does it move its content into a real `gnome-tooltip`
+  revealing the full text.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
   pause-on-hover/focus.
 - `<gnome-popover>` — trigger relationships, adaptive positioning, outside
@@ -164,6 +167,7 @@ import '@gnome-ui/web-components/switch';
 import '@gnome-ui/web-components/switch-row';
 import '@gnome-ui/web-components/tab-bar';
 import '@gnome-ui/web-components/text-field';
+import '@gnome-ui/web-components/text-truncate';
 import '@gnome-ui/web-components/toast';
 import '@gnome-ui/web-components/view-switcher';
 ```
@@ -1523,6 +1527,28 @@ unavailable in the current context — in either case the label stays
 unchanged. The host's `focus()` and `click()` methods delegate to the
 internal control; `copied` is a read-only property reflecting the current
 confirmation state.
+
+## Text Truncate
+
+```html
+<div style="width: 220px">
+  <gnome-text-truncate>A very long file name that might not fit in the available space.txt</gnome-text-truncate>
+</div>
+```
+
+`gnome-text-truncate` clips its text with an ellipsis on overflow — mirrors
+`GtkLabel`'s `ellipsize` property. The text is authored as plain light-DOM
+content, captured once on connect; set the `text` property for programmatic
+updates afterward. `lines` (default `1`) truncates to a single line; values
+above `1` clamp to that many lines instead, measuring overflow via
+`ResizeObserver` so it stays accurate as the host is resized.
+
+Only when the text is actually clipped does the component move it into a
+real `gnome-tooltip` (placed via `tooltip-placement`, default `"top"`),
+reusing that component wholesale rather than reimplementing hover/focus
+positioning — which is also how `aria-describedby` gets wired to the full
+text. When the text fits, no tooltip exists at all. `truncated` is a
+read-only property reflecting the current state.
 
 ## htmx
 

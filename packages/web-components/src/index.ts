@@ -182,6 +182,7 @@ export {
 } from './switch-row';
 export { GnomeTabBarElement, registerGnomeTabBar } from './tab-bar';
 export { GnomeTextFieldElement, registerGnomeTextField } from './text-field';
+export { GnomeTextTruncateElement, registerGnomeTextTruncate } from './text-truncate';
 export {
   type GnomeToastActionDetail,
   type GnomeToastDismissDetail,

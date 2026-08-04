@@ -39,6 +39,7 @@ gnome-switch,
 gnome-switch-row,
 gnome-tab-bar,
 gnome-text-field,
+gnome-text-truncate,
 gnome-toast,
 gnome-tooltip,
 gnome-view-switcher {
@@ -87,6 +88,7 @@ gnome-switch *,
 gnome-switch-row *,
 gnome-tab-bar *,
 gnome-text-field *,
+gnome-text-truncate *,
 gnome-toast *,
 gnome-tooltip *,
 gnome-view-switcher * {
@@ -4023,4 +4025,27 @@ gnome-copy-button [data-slot="copy-button-status"] {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Text Truncate */
+
+gnome-text-truncate {
+  display: block;
+  min-width: 0;
+}
+
+gnome-text-truncate [data-slot="text-truncate-content"],
+gnome-text-truncate [data-slot="tooltip-trigger"] {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+gnome-text-truncate [data-clamp] {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
 }

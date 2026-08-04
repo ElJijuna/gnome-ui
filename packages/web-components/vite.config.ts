@@ -69,6 +69,7 @@ export default defineConfig({
         'switch-row': resolve(packageRoot, 'src/switch-row.ts'),
         'tab-bar': resolve(packageRoot, 'src/tab-bar.ts'),
         'text-field': resolve(packageRoot, 'src/text-field.ts'),
+        'text-truncate': resolve(packageRoot, 'src/text-truncate.ts'),
         toast: resolve(packageRoot, 'src/toast.ts'),
         tooltip: resolve(packageRoot, 'src/tooltip.ts'),
         'view-switcher': resolve(packageRoot, 'src/view-switcher.ts'),
