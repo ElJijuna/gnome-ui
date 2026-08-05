@@ -55,10 +55,15 @@ Minimal inline charts — no axes, no grid, no legend, no tooltip. Designed to b
 | `SparkAreaChart` | Compact area chart with optional gradient fill |
 | `SparkLineChart` | Compact line chart, no fill |
 | `SparkBarChart` | Compact bar chart with rounded bars |
+| `SparkGaugeChart` | Compact single-value progress ring |
 
-All spark components accept `data: number[]` directly or
-`Record<string, unknown>[]` with a `dataKey`. The default color is
+`SparkAreaChart`, `SparkLineChart`, and `SparkBarChart` accept `data: number[]`
+directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
 `var(--gnome-accent-color)` so it inherits the active accent automatically.
+
+`SparkGaugeChart` is the exception — it takes a single `value` (plus `min`,
+`max`, and optional `thresholds`) instead of a data array, mirroring
+`GaugeChart`'s API. See [`src/README.md`](src/README.md) for full spark chart docs.
 
 ```tsx
 import { SparkAreaChart, SparkLineChart, SparkBarChart } from "@gnome-ui/charts";

@@ -3,12 +3,15 @@
 Inline sparkline charts for embedding compact trend visualizations inside
 cards, tables, and dashboards — no axes, no labels, minimal chrome.
 
-Three variants are available: `SparkAreaChart`, `SparkLineChart`, and
-`SparkBarChart`. All accept either a plain number array or an object array
-with a `dataKey`.
+Four variants are available: `SparkAreaChart`, `SparkLineChart`,
+`SparkBarChart`, and `SparkGaugeChart`. The first three accept either a plain
+number array or an object array with a `dataKey`. `SparkGaugeChart` is
+different — it mirrors `GaugeChart`'s single-value API (`value`, `min`, `max`,
+`thresholds`) instead of plotting a trend; see
+[its own section below](#sparkgaugechart) for details.
 
 ```tsx
-import { SparkAreaChart, SparkBarChart, SparkLineChart } from '@gnome-ui/charts';
+import { SparkAreaChart, SparkBarChart, SparkGaugeChart, SparkLineChart } from '@gnome-ui/charts';
 
 // Plain numbers
 <SparkAreaChart data={[42, 58, 35, 72, 61]} height={48} aria-label="Weekly trend" />
@@ -25,7 +28,7 @@ import { SparkAreaChart, SparkBarChart, SparkLineChart } from '@gnome-ui/charts'
 <SparkBarChart data={[88, 72, 95, 60, 48]} color="var(--gnome-red-3, #e01b24)" height={48} aria-label="Error rate" />
 ```
 
-## Shared props
+## Shared props (SparkAreaChart, SparkLineChart, SparkBarChart)
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -58,6 +61,45 @@ import { SparkAreaChart, SparkBarChart, SparkLineChart } from '@gnome-ui/charts'
 |------|------|---------|-------------|
 | `barSize` | `number` | auto | Bar width in px |
 | `fillOpacity` | `number` | `0.85` | Bar fill opacity |
+
+---
+
+## SparkGaugeChart
+
+A compact progress ring for a single value — not a trend. Mirrors
+`GaugeChart`'s API instead of the shared `data`/`dataKey` props above.
+
+```tsx
+import { SparkGaugeChart } from '@gnome-ui/charts';
+
+<SparkGaugeChart value={72} size={40} aria-label="CPU usage 72%" />
+
+<SparkGaugeChart
+  value={93}
+  thresholds={[
+    { value: 0, color: 'var(--gnome-green-4, #2ec27e)' },
+    { value: 60, color: 'var(--gnome-yellow-5, #e5a50a)' },
+    { value: 85, color: 'var(--gnome-red-3, #e01b24)' },
+  ]}
+  aria-label="Disk usage 93%"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Current value; the ring is clamped to `min`/`max` |
+| `min` | `number` | `0` | Minimum of the gauge range |
+| `max` | `number` | `100` | Maximum of the gauge range |
+| `color` | `string` | accent color | Ring color; overrides `thresholds` |
+| `thresholds` | `{ value, color }[]` | — | Ascending value/color bands for status-style rings |
+| `size` | `number` | `40` | Ring diameter in px |
+| `strokeWidth` | `number` | `4` | Ring stroke width in px |
+| `aria-label` | `string` | — | Accessible label (recommended) |
+| `className` | `string` | — | Extra CSS class on the `<svg>` |
+
+Renders as plain SVG — no Recharts dependency, no built-in tooltip. Pair it
+with a numeric label in the surrounding layout (e.g. inside a `StatCard`)
+since the ring itself shows no text.
 
 ---
 

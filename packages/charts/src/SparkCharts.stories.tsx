@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { GNOME_CHART_PALETTE } from './colors';
 import { SparkAreaChart, type SparkAreaChartProps } from './components/SparkAreaChart';
 import { SparkBarChart, type SparkBarChartProps } from './components/SparkBarChart';
+import { SparkGaugeChart, type SparkGaugeChartProps } from './components/SparkGaugeChart';
 import { SparkLineChart, type SparkLineChartProps } from './components/SparkLineChart';
 import readme from './README.md?raw';
 
@@ -142,6 +143,61 @@ export const Bar: StoryObj<SparkBarChartProps> = {
       <SparkBarChart {...args} aria-label="Weekly trend" />
     </div>
   ),
+};
+
+// ─── SparkGaugeChart ──────────────────────────────────────────────────────────
+
+export const Gauge: StoryObj<SparkGaugeChartProps> = {
+  name: 'SparkGaugeChart',
+  args: {
+    value: 72,
+    min: 0,
+    max: 100,
+    size: 40,
+    strokeWidth: 4,
+    color: 'var(--gnome-accent-color, #3584e4)',
+  },
+  argTypes: {
+    value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+    min: { control: { type: 'number' } },
+    max: { control: { type: 'number' } },
+    size: { control: { type: 'range', min: 16, max: 96, step: 4 } },
+    strokeWidth: { control: { type: 'range', min: 1, max: 12, step: 1 } },
+    color: { control: 'color' },
+    thresholds: { table: { disable: true } },
+    className: { table: { disable: true } },
+    'aria-label': { table: { disable: true } },
+  },
+  render: (args) => <SparkGaugeChart {...args} aria-label="CPU usage" />,
+};
+
+export const GaugeThresholds: StoryObj<SparkGaugeChartProps> = {
+  name: 'SparkGaugeChart — thresholds',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      {[30, 72, 93].map((value) => (
+        <SparkGaugeChart
+          key={value}
+          value={value}
+          size={40}
+          thresholds={[
+            { value: 0, color: 'var(--gnome-green-4, #2ec27e)' },
+            { value: 60, color: 'var(--gnome-yellow-5, #e5a50a)' },
+            { value: 85, color: 'var(--gnome-red-3, #e01b24)' },
+          ]}
+          aria-label={`Usage ${value}%`}
+        />
+      ))}
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pass `thresholds` for status-style rings — same API as `GaugeChart`.',
+      },
+    },
+  },
 };
 
 // ─── Multi-series ─────────────────────────────────────────────────────────────
@@ -329,6 +385,18 @@ export const InCards: StoryObj = {
           height={48}
           color={GNOME_CHART_PALETTE[4]}
           aria-label="Errors trend"
+        />
+      </MetricCard>
+      <MetricCard label="Disk usage" value="72%" trend="↑ +5%">
+        <SparkGaugeChart
+          value={72}
+          size={48}
+          thresholds={[
+            { value: 0, color: 'var(--gnome-green-4, #2ec27e)' },
+            { value: 60, color: 'var(--gnome-yellow-5, #e5a50a)' },
+            { value: 85, color: 'var(--gnome-red-3, #e01b24)' },
+          ]}
+          aria-label="Disk usage 72%"
         />
       </MetricCard>
     </div>

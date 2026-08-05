@@ -101,6 +101,11 @@
       "import": "./dist/components/SparkBarChart.js",
       "require": "./dist/components/SparkBarChart.cjs"
     },
+    "./components/SparkGaugeChart": {
+      "types": "./dist/components/SparkGaugeChart.d.ts",
+      "import": "./dist/components/SparkGaugeChart.js",
+      "require": "./dist/components/SparkGaugeChart.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",

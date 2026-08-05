@@ -29,6 +29,8 @@ export type { SparkAreaChartProps, SparkSeries } from './components/SparkAreaCha
 export { SparkAreaChart } from './components/SparkAreaChart';
 export type { SparkBarChartProps } from './components/SparkBarChart';
 export { SparkBarChart } from './components/SparkBarChart';
+export type { SparkGaugeChartProps, SparkGaugeChartThreshold } from './components/SparkGaugeChart';
+export { SparkGaugeChart } from './components/SparkGaugeChart';
 export type { SparkLineChartProps } from './components/SparkLineChart';
 export { SparkLineChart } from './components/SparkLineChart';
 export type { TreeMapDataItem, TreeMapProps } from './components/TreeMap';

@@ -419,7 +419,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`GaugeChart`** | Single-value speedometer/gauge chart for KPI dashboards, complementing `StatCard` |
 | ✅ | **`Heatmap`** | Generic matrix heatmap for correlation and density data (distinct from `ContributionGraph`'s calendar layout) |
 | ✅ | **`SankeyChart`** | Flow diagram for multi-stage funnels and user journeys |
-| ⬜ | **`SparkGaugeChart`** | Compact inline gauge for embedding in cards and table cells |
+| ✅ | **`SparkGaugeChart`** | Compact inline gauge for embedding in cards and table cells |
 
 ---
 
