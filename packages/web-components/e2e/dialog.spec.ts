@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import type { GnomeDialogElement } from '../src/dialog';
+import type { GnomeDialogElement } from '@/dialog';
 
 test('dialog isolates the page, manages focus, and refreshes swapped content', async ({ page }) => {
   await page.goto('/iframe.html?id=web-components-dialog--interactive');
