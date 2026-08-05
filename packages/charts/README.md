@@ -44,6 +44,7 @@ import "@gnome-ui/charts/styles";
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 | `GaugeChart` | Single-value speedometer gauge with optional status color thresholds |
 | `Heatmap` | Row × column matrix heatmap for correlation and density data |
+| `SankeyChart` | Flow diagram for multi-stage funnels and user journeys |
 
 ### Spark charts
 
@@ -351,6 +352,20 @@ const data = [
 | `showValues` | `boolean` | `false` | Show the formatted value inside each cell |
 | `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for cell values and the legend |
 | `showLegend` | `boolean` | `false` | Show a min→max color scale below the grid |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+
+`SankeyChart` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `nodes` | `SankeyChartNode[]` | — | `{ name: string; color?: string }[]` |
+| `links` | `SankeyChartLink[]` | — | `{ source: string; target: string; value: number }[]`, referencing node names |
+| `height` | `number` | `400` | Chart height in px |
+| `nodeWidth` | `number` | `12` | Node rectangle thickness in px |
+| `nodePadding` | `number` | `24` | Vertical gap between stacked nodes in the same column |
+| `showValues` | `boolean` | `false` | Append the formatted value to each node label |
+| `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for labels and the tooltip |
 | `aria-label` | `string` | auto | Accessible label for the chart |
 | `className` | `string` | — | Extra CSS class on the wrapper |
 

@@ -21,6 +21,8 @@ export type { RadarChartProps, RadarChartSeries } from './components/RadarChart'
 export { RadarChart } from './components/RadarChart';
 export type { RadialBarChartDataItem, RadialBarChartProps } from './components/RadialBarChart';
 export { RadialBarChart } from './components/RadialBarChart';
+export type { SankeyChartLink, SankeyChartNode, SankeyChartProps } from './components/SankeyChart';
+export { SankeyChart } from './components/SankeyChart';
 export type { ScatterChartProps, ScatterChartSeries } from './components/ScatterChart';
 export { ScatterChart } from './components/ScatterChart';
 export type { SparkAreaChartProps, SparkSeries } from './components/SparkAreaChart';

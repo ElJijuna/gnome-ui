@@ -71,6 +71,11 @@
       "import": "./dist/components/RadialBarChart.js",
       "require": "./dist/components/RadialBarChart.cjs"
     },
+    "./components/SankeyChart": {
+      "types": "./dist/components/SankeyChart.d.ts",
+      "import": "./dist/components/SankeyChart.js",
+      "require": "./dist/components/SankeyChart.cjs"
+    },
     "./components/ScatterChart": {
       "types": "./dist/components/ScatterChart.d.ts",
       "import": "./dist/components/ScatterChart.js",
