@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '@/tooltipStyle';
 
 import styles from './GaugeChart.module.css';
 

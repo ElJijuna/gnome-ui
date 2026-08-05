@@ -7,8 +7,8 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { GNOME_CHART_PALETTE } from '../../colors';
-import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
+import { GNOME_CHART_PALETTE } from '@/colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '@/tooltipStyle';
 
 import styles from './FunnelChart.module.css';
 

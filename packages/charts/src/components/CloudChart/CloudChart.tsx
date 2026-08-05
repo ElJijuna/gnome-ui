@@ -1,4 +1,4 @@
-import { GNOME_CHART_PALETTE } from '../../colors';
+import { GNOME_CHART_PALETTE } from '@/colors';
 
 import styles from './CloudChart.module.css';
 

@@ -1,8 +1,8 @@
 import { useId, useState } from 'react';
 import { Area, AreaChart as RechartsAreaChart, ResponsiveContainer } from 'recharts';
 
-import { GNOME_CHART_PALETTE } from '../../colors';
-import type { SparkSeries } from '../../types/spark';
+import { GNOME_CHART_PALETTE } from '@/colors';
+import type { SparkSeries } from '@/types/spark';
 
 type SparkData = number[] | Record<string, unknown>[];
 

@@ -12,9 +12,9 @@ import {
   YAxis,
 } from 'recharts';
 
-import { GNOME_CHART_PALETTE } from '../../colors';
-import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
-import { type ChartLegendPosition, getLegendProps } from '../../types/legend';
+import { GNOME_CHART_PALETTE } from '@/colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '@/tooltipStyle';
+import { type ChartLegendPosition, getLegendProps } from '@/types/legend';
 
 import styles from './ComposedChart.module.css';
 

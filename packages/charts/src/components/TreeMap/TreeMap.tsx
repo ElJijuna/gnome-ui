@@ -2,8 +2,8 @@ import { useNumberFormatter } from '@gnome-ui/react';
 import type { ReactElement } from 'react';
 import { ResponsiveContainer, Tooltip, Treemap } from 'recharts';
 
-import { GNOME_CHART_PALETTE } from '../../colors';
-import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
+import { GNOME_CHART_PALETTE } from '@/colors';
+import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '@/tooltipStyle';
 
 import styles from './TreeMap.module.css';
 
