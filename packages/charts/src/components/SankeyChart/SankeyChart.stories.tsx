@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { SankeyChart } from './SankeyChart';
 import readme from './README.md?raw';
+import { SankeyChart } from './SankeyChart';
 
 const meta: Meta<typeof SankeyChart> = {
   title: 'Charts/SankeyChart',

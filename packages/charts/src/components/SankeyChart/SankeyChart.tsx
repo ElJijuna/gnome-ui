@@ -164,9 +164,7 @@ export const SankeyChart = ({
   return (
     <div
       role="img"
-      aria-label={
-        ariaLabel ?? `Sankey chart with ${nodes.length} nodes and ${links.length} flows`
-      }
+      aria-label={ariaLabel ?? `Sankey chart with ${nodes.length} nodes and ${links.length} flows`}
       className={[styles.container, className].filter(Boolean).join(' ')}
       style={{ height }}
     >

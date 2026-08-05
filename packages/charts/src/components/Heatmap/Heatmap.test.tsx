@@ -21,9 +21,7 @@ describe('Heatmap', () => {
     it('renders a cell for every row/column combination', () => {
       const { container } = render(<Heatmap data={DATA} />);
 
-      expect(container.querySelectorAll('[title]').length).toBeGreaterThanOrEqual(
-        DATA.length + 2,
-      );
+      expect(container.querySelectorAll('[title]').length).toBeGreaterThanOrEqual(DATA.length + 2);
     });
 
     it('renders row labels', () => {
@@ -84,7 +82,9 @@ describe('Heatmap', () => {
     });
 
     it('uses a custom valueFormatter', () => {
-      const { getByText } = render(<Heatmap data={DATA} showValues valueFormatter={(v) => `${v}%`} />);
+      const { getByText } = render(
+        <Heatmap data={DATA} showValues valueFormatter={(v) => `${v}%`} />,
+      );
 
       expect(getByText('10%')).toBeInTheDocument();
     });

@@ -131,9 +131,7 @@ describe('GaugeChart', () => {
     });
 
     it('uses a custom valueFormatter', () => {
-      const { getByText } = render(
-        <GaugeChart value={72} valueFormatter={(v) => `${v}%`} />,
-      );
+      const { getByText } = render(<GaugeChart value={72} valueFormatter={(v) => `${v}%`} />);
 
       expect(getByText('72%')).toBeInTheDocument();
     });

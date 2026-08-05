@@ -119,17 +119,13 @@ describe('SankeyChart', () => {
     it('renders a rect per node', () => {
       const { container } = render(<SankeyChart nodes={NODES} links={LINKS} />);
 
-      expect(container.querySelectorAll('.recharts-sankey-nodes rect')).toHaveLength(
-        NODES.length,
-      );
+      expect(container.querySelectorAll('.recharts-sankey-nodes rect')).toHaveLength(NODES.length);
     });
 
     it('renders a path per link', () => {
       const { container } = render(<SankeyChart nodes={NODES} links={LINKS} />);
 
-      expect(container.querySelectorAll('.recharts-sankey-links path')).toHaveLength(
-        LINKS.length,
-      );
+      expect(container.querySelectorAll('.recharts-sankey-links path')).toHaveLength(LINKS.length);
     });
 
     it('labels each node with its name', () => {
@@ -140,9 +136,7 @@ describe('SankeyChart', () => {
     });
 
     it('appends the formatted value to labels when showValues is true', () => {
-      const { container } = render(
-        <SankeyChart nodes={NODES} links={LINKS} showValues />,
-      );
+      const { container } = render(<SankeyChart nodes={NODES} links={LINKS} showValues />);
       const texts = Array.from(container.querySelectorAll('text')).map((t) => t.textContent);
 
       expect(texts.some((t) => t?.startsWith('Visitors ('))).toBe(true);

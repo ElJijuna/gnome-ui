@@ -34,8 +34,7 @@ const ACTIVITY_DATA = DAYS.flatMap((day, dayIndex) =>
     row: day,
     column: hour,
     value: Math.round(
-      Math.abs(Math.sin(dayIndex * 1.3 + hourIndex * 0.7)) * 90 +
-        (dayIndex >= 5 ? 0 : 10),
+      Math.abs(Math.sin(dayIndex * 1.3 + hourIndex * 0.7)) * 90 + (dayIndex >= 5 ? 0 : 10),
     ),
   })),
 );
