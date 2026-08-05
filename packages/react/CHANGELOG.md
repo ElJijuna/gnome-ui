@@ -1,3 +1,23 @@
+## [1.56.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.56.0...@gnome-ui/react@1.56.1) (2026-08-05)
+
+### Features
+
+* **@gnome-ui/charts:** add GaugeChart component with styles, documentation, and tests ([9ba6b1d](https://github.com/ElJijuna/gnome-ui/commit/9ba6b1d8afc2981c80a9cb0ae9d056438c2d1d84))
+* **@gnome-ui/charts:** add Heatmap component with styles, documentation, and tests ([fc4735d](https://github.com/ElJijuna/gnome-ui/commit/fc4735d22212ec8c396d68d8f49bf6b81a7f077b))
+* **@gnome-ui/charts:** add SankeyChart component with documentation, styles, and tests ([8a0cebe](https://github.com/ElJijuna/gnome-ui/commit/8a0cebeef452fd70af2d1f6c6675bef44c5cd56e))
+* **@gnome-ui/charts:** add SparkGaugeChart component with documentation, styles, and tests ([487bd70](https://github.com/ElJijuna/gnome-ui/commit/487bd709cb7fbc7580097462fe507f9738f43fa5))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** update default arc color in GaugeChart and remove unused palette import ([b2c169a](https://github.com/ElJijuna/gnome-ui/commit/b2c169a9bd12f5662cdca79853a74869e30690f0))
+* **@gnome-ui/charts:** update import paths to use alias for colors and styles ([41ce7f5](https://github.com/ElJijuna/gnome-ui/commit/41ce7f5bbaef577abc8c891b2353da72e397641a))
+
+### Refactoring
+
+* **@gnome-ui/charts:** simplify JSX formatting in GaugeChart, Heatmap, and SankeyChart tests and stories ([2823bf7](https://github.com/ElJijuna/gnome-ui/commit/2823bf74914abdadea6cb3868100dc6de9a56c3d))
+* **@gnome-ui/layout:** update import paths to use absolute paths for improved readability and maintainability. Enhanced vitest configuration for path aliasing. ([1f7917c](https://github.com/ElJijuna/gnome-ui/commit/1f7917c70b08c771c4816bd4f198d4d07f2625e0))
+* **@gnome-ui/react:** import paths to use absolute paths for better readability and maintainability across multiple components and stories. Updated vitest configuration to include path aliasing for cleaner imports. ([84e5266](https://github.com/ElJijuna/gnome-ui/commit/84e5266ccbda6d4760c4fb301ddcaea15247dd17))
+
 ## [1.56.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.55.0...@gnome-ui/react@1.56.0) (2026-08-04)
 
 ### Features
