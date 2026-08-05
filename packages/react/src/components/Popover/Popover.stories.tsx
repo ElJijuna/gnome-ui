@@ -2,12 +2,12 @@ import { Copy, Delete, Edit, Settings, Share, ViewMore } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { Separator } from '../Separator';
-import { Slider } from '../Slider';
-import { Switch } from '../Switch';
-import { Text } from '../Text';
+import { Button } from '@/components/Button';
+import { Icon } from '@/components/Icon';
+import { Separator } from '@/components/Separator';
+import { Slider } from '@/components/Slider';
+import { Switch } from '@/components/Switch';
+import { Text } from '@/components/Text';
 
 import { Popover } from './Popover';
 import readme from './README.md?raw';

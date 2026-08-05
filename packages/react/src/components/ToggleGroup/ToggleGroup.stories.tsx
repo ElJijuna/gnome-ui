@@ -2,7 +2,7 @@ import { Edit, GoHome, PanEnd, PanStart, ViewMore, ViewSidebar } from '@gnome-ui
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { ToggleGroup } from './ToggleGroup';
 import { ToggleGroupItem } from './ToggleGroupItem';

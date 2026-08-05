@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useId, useState } from 'react';
 
-import { Checkbox } from '../Checkbox';
-import { RadioButton } from '../RadioButton';
-import { Text } from '../Text';
+import { Checkbox } from '@/components/Checkbox';
+import { RadioButton } from '@/components/RadioButton';
+import { Text } from '@/components/Text';
 
 import { FieldGroup } from './FieldGroup';
 import readme from './README.md?raw';

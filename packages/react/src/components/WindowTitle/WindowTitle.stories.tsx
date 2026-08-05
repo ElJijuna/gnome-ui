@@ -1,9 +1,9 @@
 import { DocumentOpen } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../Button';
-import { HeaderBar } from '../HeaderBar';
-import { Icon } from '../Icon';
+import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Icon } from '@/components/Icon';
 import readme from './README.md?raw';
 import { WindowTitle } from './WindowTitle';
 

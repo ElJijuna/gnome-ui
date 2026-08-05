@@ -1,9 +1,9 @@
 import { Copy, Delete, Edit, Information, Save, Search, Settings } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Button } from '@/components/Button';
+import { Icon } from '@/components/Icon';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { Tooltip } from './Tooltip';
 

@@ -10,8 +10,8 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import { Button } from '../Button/Button';
-import { FOCUSABLE, trapFocus, useVisualViewport } from '../Dialog/dialogUtils';
+import { Button } from '@/components/Button/Button';
+import { FOCUSABLE, trapFocus, useVisualViewport } from '@/components/Dialog/dialogUtils';
 
 import styles from './Drawer.module.css';
 

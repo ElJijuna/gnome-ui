@@ -11,8 +11,8 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
-import { Icon } from '../Icon';
-import { Spinner } from '../Spinner';
+import { Icon } from '@/components/Icon';
+import { Spinner } from '@/components/Spinner';
 
 import styles from './SearchBar.module.css';
 

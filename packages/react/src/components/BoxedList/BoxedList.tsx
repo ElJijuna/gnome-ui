@@ -1,6 +1,6 @@
 import { Children, type HTMLAttributes, type ReactNode } from 'react';
 
-import { Separator } from '../Separator';
+import { Separator } from '@/components/Separator';
 
 import styles from './BoxedList.module.css';
 

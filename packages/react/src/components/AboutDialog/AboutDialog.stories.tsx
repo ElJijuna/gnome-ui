@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../Button';
+import { Button } from '@/components/Button';
 
 import { AboutDialog } from './AboutDialog';
 import readme from './README.md?raw';

@@ -1,8 +1,8 @@
 import { Delete, DocumentOpen, Error, Information, Search, StarOutline } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../Button';
-import { Popover } from '../Popover';
+import { Button } from '@/components/Button';
+import { Popover } from '@/components/Popover';
 import readme from './README.md?raw';
 import { StatusPage } from './StatusPage';
 

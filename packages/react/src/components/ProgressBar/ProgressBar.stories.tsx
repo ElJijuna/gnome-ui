@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 
 import { ProgressBar } from './ProgressBar';
 import readme from './README.md?raw';

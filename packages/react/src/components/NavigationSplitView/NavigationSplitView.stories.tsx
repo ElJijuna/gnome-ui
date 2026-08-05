@@ -1,14 +1,13 @@
 import { GoHome, GoPrevious, Search, Settings, Star } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-
-import { useBreakpoint } from '../../hooks/useBreakpoint';
-import { Button } from '../Button';
-import { HeaderBar } from '../HeaderBar';
-import { Icon } from '../Icon';
-import { Sidebar } from '../Sidebar';
-import { SidebarItem } from '../Sidebar/SidebarItem';
-import { Text } from '../Text';
+import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Icon } from '@/components/Icon';
+import { Sidebar } from '@/components/Sidebar';
+import { SidebarItem } from '@/components/Sidebar/SidebarItem';
+import { Text } from '@/components/Text';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { NavigationSplitView } from './NavigationSplitView';
 import readme from './README.md?raw';

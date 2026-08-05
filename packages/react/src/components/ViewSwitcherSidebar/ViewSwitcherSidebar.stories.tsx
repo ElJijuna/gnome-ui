@@ -2,9 +2,9 @@ import { Add, Delete, GoHome, MediaPlay, Search, Settings, Star } from '@gnome-u
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Badge } from '../Badge';
-import { HeaderBar } from '../HeaderBar';
-import { Text } from '../Text';
+import { Badge } from '@/components/Badge';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { ViewSwitcherSidebar } from './ViewSwitcherSidebar';
 import { ViewSwitcherSidebarItem } from './ViewSwitcherSidebarItem';

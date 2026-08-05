@@ -2,9 +2,9 @@ import { GoHome, MediaPlay, Search, Star } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../Button';
-import { HeaderBar } from '../HeaderBar';
-import { Text } from '../Text';
+import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { ViewSwitcher } from './ViewSwitcher';
 import { ViewSwitcherItem } from './ViewSwitcherItem';

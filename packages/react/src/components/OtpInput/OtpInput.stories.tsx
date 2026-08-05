@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 
 import { OtpInput } from './OtpInput';
 import readme from './README.md?raw';

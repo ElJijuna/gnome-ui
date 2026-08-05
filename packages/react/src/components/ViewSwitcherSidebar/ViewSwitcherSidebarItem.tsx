@@ -1,7 +1,7 @@
 import type { IconDefinition } from '@gnome-ui/icons';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import { useViewSwitcherSidebar } from './ViewSwitcherSidebar';
 import styles from './ViewSwitcherSidebar.module.css';

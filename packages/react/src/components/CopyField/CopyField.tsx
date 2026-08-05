@@ -1,6 +1,6 @@
 import { type InputHTMLAttributes, useId } from 'react';
 
-import { CopyButton } from '../CopyButton';
+import { CopyButton } from '@/components/CopyButton';
 
 import styles from './CopyField.module.css';
 

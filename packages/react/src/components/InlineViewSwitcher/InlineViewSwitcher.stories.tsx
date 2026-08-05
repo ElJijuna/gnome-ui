@@ -2,8 +2,8 @@ import { Share, Star, ViewAppGrid, ViewGrid, ViewList } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Card } from '../Card';
-import { HeaderBar } from '../HeaderBar';
+import { Card } from '@/components/Card';
+import { HeaderBar } from '@/components/HeaderBar';
 
 import { InlineViewSwitcher } from './InlineViewSwitcher';
 import { InlineViewSwitcherItem } from './InlineViewSwitcherItem';

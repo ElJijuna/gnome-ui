@@ -2,8 +2,8 @@ import type { IconDefinition } from '@gnome-ui/icons';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { memo } from 'react';
 
-import { Badge } from '../Badge';
-import { Icon } from '../Icon';
+import { Badge } from '@/components/Badge';
+import { Icon } from '@/components/Icon';
 
 import styles from './Tabs.module.css';
 

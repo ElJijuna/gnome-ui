@@ -10,8 +10,8 @@ import {
   useState,
 } from 'react';
 
-import { useBodyScrollLock } from '../Dialog/dialogUtils';
-import { Portal } from '../Portal';
+import { useBodyScrollLock } from '@/components/Dialog/dialogUtils';
+import { Portal } from '@/components/Portal';
 
 import styles from './BottomSheet.module.css';
 

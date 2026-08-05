@@ -1,6 +1,6 @@
 import { type CSSProperties, type HTMLAttributes, type ReactNode, useEffect, useRef } from 'react';
 
-import { useBreakpoint } from '../../hooks/useBreakpoint';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import styles from './OverlaySplitView.module.css';
 

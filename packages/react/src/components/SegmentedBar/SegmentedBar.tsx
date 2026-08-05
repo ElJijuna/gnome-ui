@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import { memo, useState } from 'react';
 
-import { Tooltip } from '../Tooltip';
+import { Tooltip } from '@/components/Tooltip';
 
 import styles from './SegmentedBar.module.css';
 

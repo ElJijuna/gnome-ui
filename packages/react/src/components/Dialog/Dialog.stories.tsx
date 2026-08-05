@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { AboutDialog } from '../AboutDialog';
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { AboutDialog } from '@/components/AboutDialog';
+import { Button } from '@/components/Button';
+import { Text } from '@/components/Text';
 
 import { Dialog } from './Dialog';
 import readme from './README.md?raw';

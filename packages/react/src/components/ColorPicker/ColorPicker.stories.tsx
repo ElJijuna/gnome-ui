@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Avatar } from '../Avatar';
-import { Text } from '../Text';
+import { Avatar } from '@/components/Avatar';
+import { Text } from '@/components/Text';
 
 import { ColorPicker, ColorSwatch, GNOME_PALETTE } from './ColorPicker';
 import readme from './README.md?raw';

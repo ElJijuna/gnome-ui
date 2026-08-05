@@ -1,8 +1,8 @@
 import { ViewConceal, ViewReveal } from '@gnome-ui/icons';
 import { type ReactNode, useState } from 'react';
 
-import { EntryRow, type EntryRowProps } from '../EntryRow';
-import { Icon } from '../Icon';
+import { EntryRow, type EntryRowProps } from '@/components/EntryRow';
+import { Icon } from '@/components/Icon';
 
 import styles from './PasswordEntryRow.module.css';
 

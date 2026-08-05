@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 
-import { Icon, type IconSize } from '../Icon';
+import { Icon, type IconSize } from '@/components/Icon';
 
 import styles from './FileTypeIcon.module.css';
 import {

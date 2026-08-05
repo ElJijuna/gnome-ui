@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Avatar } from '../Avatar';
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { Avatar } from '@/components/Avatar';
+import { Button } from '@/components/Button';
+import { Text } from '@/components/Text';
 
 import { Badge } from './Badge';
 import readme from './README.md?raw';

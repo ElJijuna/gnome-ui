@@ -1,4 +1,4 @@
-import type { VulnerabilitySeverity } from '../SeverityBadge';
+import type { VulnerabilitySeverity } from '@/components/SeverityBadge';
 
 export type CvssSeverity = Exclude<VulnerabilitySeverity, 'minimal'>;
 

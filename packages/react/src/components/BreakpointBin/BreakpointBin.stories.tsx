@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { GNOME_BREAKPOINTS } from '../../hooks/useBreakpoint';
-import { ActionRow } from '../ActionRow';
-import { BoxedList } from '../BoxedList';
-import { Button } from '../Button';
-import { Switch } from '../Switch';
-import { Text } from '../Text';
+import { ActionRow } from '@/components/ActionRow';
+import { BoxedList } from '@/components/BoxedList';
+import { Button } from '@/components/Button';
+import { Switch } from '@/components/Switch';
+import { Text } from '@/components/Text';
+import { GNOME_BREAKPOINTS } from '@/hooks/useBreakpoint';
 
 import { BreakpointBin } from './BreakpointBin';
 import readme from './README.md?raw';

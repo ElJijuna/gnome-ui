@@ -2,7 +2,7 @@ import { type HTMLAttributes, type MouseEvent, useEffect, useRef, useState } fro
 
 import { createPortal } from 'react-dom';
 
-import { useBodyScrollLock } from '../Dialog/dialogUtils';
+import { useBodyScrollLock } from '@/components/Dialog/dialogUtils';
 
 import styles from './Overlay.module.css';
 

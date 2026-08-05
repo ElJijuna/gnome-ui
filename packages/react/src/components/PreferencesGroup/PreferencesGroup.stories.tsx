@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ActionRow } from '../ActionRow';
-import { BoxedList } from '../BoxedList';
-import { Button } from '../Button';
-import { ComboRow } from '../ComboRow';
-import { SwitchRow } from '../SwitchRow';
+import { ActionRow } from '@/components/ActionRow';
+import { BoxedList } from '@/components/BoxedList';
+import { Button } from '@/components/Button';
+import { ComboRow } from '@/components/ComboRow';
+import { SwitchRow } from '@/components/SwitchRow';
 
 import { PreferencesGroup } from './PreferencesGroup';
 import readme from './README.md?raw';

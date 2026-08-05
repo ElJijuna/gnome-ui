@@ -8,7 +8,7 @@ import {
   useRef,
 } from 'react';
 
-import { Portal } from '../Portal';
+import { Portal } from '@/components/Portal';
 
 import styles from './Dialog.module.css';
 import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from './dialogUtils';

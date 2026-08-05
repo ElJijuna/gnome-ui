@@ -21,7 +21,7 @@ import {
   Switch,
   Text,
   Toolbar,
-} from '../../index';
+} from '@/index';
 import readme from './README.md?raw';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────

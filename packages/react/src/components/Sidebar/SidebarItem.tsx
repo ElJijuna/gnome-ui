@@ -13,8 +13,8 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
-import { Icon } from '../Icon';
-import { Tooltip } from '../Tooltip';
+import { Icon } from '@/components/Icon';
+import { Tooltip } from '@/components/Tooltip';
 
 import { SidebarFilterContext, useSidebarCollapsed } from './Sidebar';
 import styles from './Sidebar.module.css';

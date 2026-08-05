@@ -10,7 +10,12 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from '../Dialog/dialogUtils';
+import {
+  FOCUSABLE,
+  trapFocus,
+  useBodyScrollLock,
+  useVisualViewport,
+} from '@/components/Dialog/dialogUtils';
 
 import styles from './AboutDialog.module.css';
 

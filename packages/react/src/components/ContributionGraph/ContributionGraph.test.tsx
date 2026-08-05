@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { GnomeProvider } from '../GnomeProvider/GnomeProvider';
+import { GnomeProvider } from '@/components/GnomeProvider/GnomeProvider';
 
 import { ContributionGraph } from './ContributionGraph';
 

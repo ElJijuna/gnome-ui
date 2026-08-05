@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../Button';
+import { Button } from '@/components/Button';
 import readme from './README.md?raw';
 import type { ShortcutsSection } from './ShortcutsDialog';
 import { ShortcutsDialog } from './ShortcutsDialog';

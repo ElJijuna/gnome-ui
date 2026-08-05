@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { BoxedList } from '../BoxedList';
+import { BoxedList } from '@/components/BoxedList';
 
 import { ButtonRow } from './ButtonRow';
 import readme from './README.md?raw';

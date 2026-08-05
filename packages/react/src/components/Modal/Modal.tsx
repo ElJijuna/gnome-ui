@@ -9,8 +9,13 @@ import {
   useState,
 } from 'react';
 
-import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from '../Dialog/dialogUtils';
-import { Portal } from '../Portal';
+import {
+  FOCUSABLE,
+  trapFocus,
+  useBodyScrollLock,
+  useVisualViewport,
+} from '@/components/Dialog/dialogUtils';
+import { Portal } from '@/components/Portal';
 
 import styles from './Modal.module.css';
 

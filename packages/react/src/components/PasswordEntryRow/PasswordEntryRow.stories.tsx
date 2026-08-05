@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { BoxedList } from '../BoxedList';
-import { EntryRow } from '../EntryRow';
+import { BoxedList } from '@/components/BoxedList';
+import { EntryRow } from '@/components/EntryRow';
 
 import { PasswordEntryRow } from './PasswordEntryRow';
 import readme from './README.md?raw';

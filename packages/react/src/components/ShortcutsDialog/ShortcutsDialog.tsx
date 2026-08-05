@@ -2,7 +2,7 @@ import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from 're
 
 import { createPortal } from 'react-dom';
 
-import { useBodyScrollLock } from '../Dialog/dialogUtils';
+import { useBodyScrollLock } from '@/components/Dialog/dialogUtils';
 
 import styles from './ShortcutsDialog.module.css';
 

@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react';
 
-import { Chip } from '../Chip';
-import { WrapBox } from '../WrapBox';
+import { Chip } from '@/components/Chip';
+import { WrapBox } from '@/components/WrapBox';
 
 import styles from './TagInput.module.css';
 

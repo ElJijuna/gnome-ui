@@ -2,7 +2,7 @@ import type { IconDefinition } from '@gnome-ui/icons';
 import { Close } from '@gnome-ui/icons';
 import type { HTMLAttributes } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import styles from './Chip.module.css';
 

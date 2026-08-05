@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 
-import { Icon } from '../Icon';
-import { VisuallyHidden } from '../VisuallyHidden';
+import { Icon } from '@/components/Icon';
+import { VisuallyHidden } from '@/components/VisuallyHidden';
 
 import styles from './FileDropZone.module.css';
 

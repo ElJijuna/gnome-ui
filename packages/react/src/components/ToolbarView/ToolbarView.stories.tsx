@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ActionRow } from '../ActionRow';
-import { BoxedList } from '../BoxedList';
-import { Button } from '../Button';
-import { HeaderBar } from '../HeaderBar';
-import { Text } from '../Text';
-import { Toolbar } from '../Toolbar';
-import { WindowTitle } from '../WindowTitle';
+import { ActionRow } from '@/components/ActionRow';
+import { BoxedList } from '@/components/BoxedList';
+import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Text } from '@/components/Text';
+import { Toolbar } from '@/components/Toolbar';
+import { WindowTitle } from '@/components/WindowTitle';
 import readme from './README.md?raw';
 import { ToolbarView } from './ToolbarView';
 

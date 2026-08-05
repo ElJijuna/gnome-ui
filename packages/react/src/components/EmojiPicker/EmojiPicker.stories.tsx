@@ -2,8 +2,8 @@ import { EmojiObjects } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { IconButton } from '../IconButton';
-import { Text } from '../Text';
+import { IconButton } from '@/components/IconButton';
+import { Text } from '@/components/Text';
 
 import { EmojiPicker } from './EmojiPicker';
 import readme from './README.md?raw';

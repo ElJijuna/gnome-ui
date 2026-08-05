@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
-import { useBreakpoint } from '../../hooks/useBreakpoint';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import styles from './NavigationSplitView.module.css';
 

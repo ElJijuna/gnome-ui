@@ -1,7 +1,7 @@
 import { Star, StarOutline } from '@gnome-ui/icons';
 import { type HTMLAttributes, type KeyboardEvent, useState } from 'react';
 
-import { Icon, type IconSize } from '../Icon';
+import { Icon, type IconSize } from '@/components/Icon';
 
 import styles from './RatingStars.module.css';
 

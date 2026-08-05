@@ -2,10 +2,10 @@ import { Search } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { type ChangeEvent, useState } from 'react';
 
-import { Button } from '../Button';
-import { HeaderBar } from '../HeaderBar';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Icon } from '@/components/Icon';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { SearchBar, type Suggestion } from './SearchBar';
 

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { BoxedList } from '../BoxedList';
-import { Button } from '../Button';
+import { BoxedList } from '@/components/BoxedList';
+import { Button } from '@/components/Button';
 
 import { EntryRow } from './EntryRow';
 import readme from './README.md?raw';

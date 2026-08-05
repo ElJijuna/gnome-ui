@@ -1,7 +1,7 @@
 import { Check, Copy } from '@gnome-ui/icons';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
 
-import { IconButton, type IconButtonProps } from '../IconButton';
+import { IconButton, type IconButtonProps } from '@/components/IconButton';
 
 export interface CopyButtonProps
   extends Omit<IconButtonProps, 'icon' | 'label' | 'onClick' | 'tooltip'> {

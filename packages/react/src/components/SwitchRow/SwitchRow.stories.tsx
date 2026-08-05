@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { BoxedList } from '../BoxedList';
+import { BoxedList } from '@/components/BoxedList';
 import readme from './README.md?raw';
 import { SwitchRow } from './SwitchRow';
 

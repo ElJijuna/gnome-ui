@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { ActionRow } from '../ActionRow';
-import { BoxedList } from '../BoxedList';
-import { Button } from '../Button';
-import { Switch } from '../Switch';
+import { ActionRow } from '@/components/ActionRow';
+import { BoxedList } from '@/components/BoxedList';
+import { Button } from '@/components/Button';
+import { Switch } from '@/components/Switch';
 
 import { ExpanderRow } from './ExpanderRow';
 import readme from './README.md?raw';

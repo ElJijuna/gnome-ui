@@ -1,6 +1,6 @@
 import { type CSSProperties, type HTMLAttributes, useEffect, useMemo, useState } from 'react';
 
-import { Avatar, type AvatarColor, type AvatarSize } from '../Avatar';
+import { Avatar, type AvatarColor, type AvatarSize } from '@/components/Avatar';
 
 import styles from './AvatarRotator.module.css';
 

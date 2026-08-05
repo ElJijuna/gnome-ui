@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useRef, useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 
 import { Portal } from './Portal';
 import readme from './README.md?raw';

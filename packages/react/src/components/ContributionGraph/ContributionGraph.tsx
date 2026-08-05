@@ -7,7 +7,7 @@ import {
   GnomeContext,
   type GnomeNamedAccentColor,
   useDateTimeFormatter,
-} from '../GnomeProvider/GnomeContext';
+} from '@/components/GnomeProvider/GnomeContext';
 
 import styles from './ContributionGraph.module.css';
 

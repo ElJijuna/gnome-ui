@@ -14,11 +14,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react';
 import { useRef, useState } from 'react';
 
-import { Badge } from '../Badge';
-import { Button } from '../Button';
-import { HeaderBar } from '../HeaderBar';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Badge } from '@/components/Badge';
+import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Icon } from '@/components/Icon';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { Sidebar } from './Sidebar';
 import { SidebarItem } from './SidebarItem';

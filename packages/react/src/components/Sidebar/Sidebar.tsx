@@ -7,10 +7,9 @@ import {
   useContext,
   useState,
 } from 'react';
-
-import { useBreakpoint } from '../../hooks/useBreakpoint';
-import { SearchBar } from '../SearchBar';
-import { StatusPage } from '../StatusPage';
+import { SearchBar } from '@/components/SearchBar';
+import { StatusPage } from '@/components/StatusPage';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import styles from './Sidebar.module.css';
 

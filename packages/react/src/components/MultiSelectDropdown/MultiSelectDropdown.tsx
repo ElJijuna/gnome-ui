@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import styles from './MultiSelectDropdown.module.css';
 

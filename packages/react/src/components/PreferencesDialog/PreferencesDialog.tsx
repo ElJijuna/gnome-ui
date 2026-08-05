@@ -16,7 +16,7 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import type { PreferencesPageProps } from '../PreferencesPage/PreferencesPage';
+import type { PreferencesPageProps } from '@/components/PreferencesPage/PreferencesPage';
 
 import styles from './PreferencesDialog.module.css';
 

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { FileTypeIcon } from '../FileTypeIcon';
-import { Text } from '../Text';
+import { FileTypeIcon } from '@/components/FileTypeIcon';
+import { Text } from '@/components/Text';
 
 import { FileDropZone } from './FileDropZone';
 import readme from './README.md?raw';

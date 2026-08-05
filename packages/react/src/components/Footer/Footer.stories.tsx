@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { Button } from '@/components/Button';
+import { Text } from '@/components/Text';
 
 import { Footer } from './Footer';
 import readme from './README.md?raw';

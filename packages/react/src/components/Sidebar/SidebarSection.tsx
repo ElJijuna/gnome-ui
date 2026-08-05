@@ -12,7 +12,7 @@ import {
   useState,
 } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import { SidebarFilterContext, useSidebarCollapsed } from './Sidebar';
 import styles from './Sidebar.module.css';

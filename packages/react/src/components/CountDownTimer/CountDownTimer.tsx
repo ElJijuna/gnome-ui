@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import { useEffect, useState } from 'react';
 
-import { useDateTimeFormatter } from '../GnomeProvider/GnomeContext';
+import { useDateTimeFormatter } from '@/components/GnomeProvider/GnomeContext';
 
 import styles from './CountDownTimer.module.css';
 

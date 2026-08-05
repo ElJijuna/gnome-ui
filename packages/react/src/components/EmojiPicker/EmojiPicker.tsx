@@ -14,9 +14,9 @@ import {
 } from '@gnome-ui/icons';
 import { type HTMLAttributes, type ReactElement, useRef, useState } from 'react';
 
-import { Icon } from '../Icon';
-import { IconButton } from '../IconButton';
-import { Popover, type PopoverPlacement } from '../Popover';
+import { Icon } from '@/components/Icon';
+import { IconButton } from '@/components/IconButton';
+import { Popover, type PopoverPlacement } from '@/components/Popover';
 import styles from './EmojiPicker.module.css';
 import { CATEGORY_LABELS, CATEGORY_ORDER, EMOJI_DATA, type EmojiCategory } from './emojiData';
 

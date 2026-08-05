@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ActionRow } from '../ActionRow';
-import { BoxedList } from '../BoxedList';
-import { Switch } from '../Switch';
-import { Text } from '../Text';
+import { ActionRow } from '@/components/ActionRow';
+import { BoxedList } from '@/components/BoxedList';
+import { Switch } from '@/components/Switch';
+import { Text } from '@/components/Text';
 
 import { Clamp } from './Clamp';
 import readme from './README.md?raw';

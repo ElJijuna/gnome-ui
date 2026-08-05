@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { PreferencesGroup } from '../PreferencesGroup';
-import { PreferencesPage } from '../PreferencesPage';
+import { PreferencesGroup } from '@/components/PreferencesGroup';
+import { PreferencesPage } from '@/components/PreferencesPage';
 
 import { PreferencesDialog } from './PreferencesDialog';
 

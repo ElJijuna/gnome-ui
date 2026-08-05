@@ -1,7 +1,7 @@
 import type { IconDefinition } from '@gnome-ui/icons';
 import type { ButtonHTMLAttributes } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import { useToggleGroup } from './ToggleGroup';
 import styles from './ToggleGroup.module.css';

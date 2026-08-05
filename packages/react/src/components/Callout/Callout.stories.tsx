@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { TextField } from '../TextField';
+import { TextField } from '@/components/TextField';
 
 import { Callout } from './Callout';
 import readme from './README.md?raw';

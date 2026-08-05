@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { BoxedList } from '../BoxedList';
-import { ComboRow } from '../ComboRow';
-import { EntryRow } from '../EntryRow';
-import { PreferencesGroup } from '../PreferencesGroup';
-import { SpinRow } from '../SpinRow';
-import { SwitchRow } from '../SwitchRow';
+import { BoxedList } from '@/components/BoxedList';
+import { ComboRow } from '@/components/ComboRow';
+import { EntryRow } from '@/components/EntryRow';
+import { PreferencesGroup } from '@/components/PreferencesGroup';
+import { SpinRow } from '@/components/SpinRow';
+import { SwitchRow } from '@/components/SwitchRow';
 
 import { PreferencesPage } from './PreferencesPage';
 import readme from './README.md?raw';

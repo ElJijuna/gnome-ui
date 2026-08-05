@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { SpinButton } from '../SpinButton';
-import { Text } from '../Text';
+import { SpinButton } from '@/components/SpinButton';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { Slider } from './Slider';
 

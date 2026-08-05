@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 
-import { CopyButton } from '../CopyButton';
+import { CopyButton } from '@/components/CopyButton';
 
 import styles from './CodeBlock.module.css';
 

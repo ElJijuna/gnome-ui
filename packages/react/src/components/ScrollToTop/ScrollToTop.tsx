@@ -1,7 +1,7 @@
 import { GoUp } from '@gnome-ui/icons';
 import { type CSSProperties, forwardRef } from 'react';
 
-import { IconButton } from '../IconButton';
+import { IconButton } from '@/components/IconButton';
 import styles from './ScrollToTop.module.css';
 import { useScrollToTopVisibility } from './useScrollToTopVisibility';
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { Button } from '../Button';
-import { Dropdown } from '../Dropdown';
-import { Popover, type PopoverPlacement } from '../Popover';
-import { SpinButton } from '../SpinButton';
+import { Button } from '@/components/Button';
+import { Dropdown } from '@/components/Dropdown';
+import { Popover, type PopoverPlacement } from '@/components/Popover';
+import { SpinButton } from '@/components/SpinButton';
 import styles from './FontPicker.module.css';
 import { DEFAULT_FONT_FAMILIES, FONT_WEIGHTS, type FontValue, weightLabel } from './fontData';
 

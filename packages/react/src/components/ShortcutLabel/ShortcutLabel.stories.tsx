@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ActionRow } from '../ActionRow';
-import { BoxedList } from '../BoxedList';
+import { ActionRow } from '@/components/ActionRow';
+import { BoxedList } from '@/components/BoxedList';
 import readme from './README.md?raw';
 import { ShortcutLabel } from './ShortcutLabel';
 

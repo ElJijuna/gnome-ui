@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../Button';
-import { TextField } from '../TextField';
+import { Button } from '@/components/Button';
+import { TextField } from '@/components/TextField';
 
 import { LinkedGroup } from './LinkedGroup';
 import readme from './README.md?raw';

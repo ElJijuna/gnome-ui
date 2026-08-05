@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ActionRow } from '../ActionRow';
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Switch } from '../Switch';
-import { Text } from '../Text';
-import { WrapBox } from '../WrapBox';
+import { ActionRow } from '@/components/ActionRow';
+import { Box } from '@/components/Box';
+import { Button } from '@/components/Button';
+import { Switch } from '@/components/Switch';
+import { Text } from '@/components/Text';
+import { WrapBox } from '@/components/WrapBox';
 
 import { BoxedList } from './BoxedList';
 import readme from './README.md?raw';

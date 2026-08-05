@@ -2,7 +2,7 @@ import * as Icons from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 
 import { Icon, type IconColor } from './Icon';
 import readme from './README.md?raw';

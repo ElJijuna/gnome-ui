@@ -1,12 +1,11 @@
 import { GoHome, Search, Settings, Star } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-
-import { useBreakpoint } from '../../hooks/useBreakpoint';
-import { HeaderBar } from '../HeaderBar';
-import { Text } from '../Text';
-import { ViewSwitcher } from '../ViewSwitcher';
-import { ViewSwitcherItem } from '../ViewSwitcher/ViewSwitcherItem';
+import { HeaderBar } from '@/components/HeaderBar';
+import { Text } from '@/components/Text';
+import { ViewSwitcher } from '@/components/ViewSwitcher';
+import { ViewSwitcherItem } from '@/components/ViewSwitcher/ViewSwitcherItem';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 import readme from './README.md?raw';
 import { ViewSwitcherBar } from './ViewSwitcherBar';
 

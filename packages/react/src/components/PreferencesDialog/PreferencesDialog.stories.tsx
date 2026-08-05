@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { BoxedList } from '../BoxedList';
-import { Button } from '../Button';
-import { ComboRow } from '../ComboRow';
-import { EntryRow } from '../EntryRow';
-import { PreferencesGroup } from '../PreferencesGroup';
-import { PreferencesPage } from '../PreferencesPage';
-import { SpinRow } from '../SpinRow';
-import { SwitchRow } from '../SwitchRow';
+import { BoxedList } from '@/components/BoxedList';
+import { Button } from '@/components/Button';
+import { ComboRow } from '@/components/ComboRow';
+import { EntryRow } from '@/components/EntryRow';
+import { PreferencesGroup } from '@/components/PreferencesGroup';
+import { PreferencesPage } from '@/components/PreferencesPage';
+import { SpinRow } from '@/components/SpinRow';
+import { SwitchRow } from '@/components/SwitchRow';
 
 import { PreferencesDialog } from './PreferencesDialog';
 import readme from './README.md?raw';

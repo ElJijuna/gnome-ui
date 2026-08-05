@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../Button';
+import { Button } from '@/components/Button';
 import readme from './README.md?raw';
 import { Spacer } from './Spacer';
 import { Toolbar } from './Toolbar';

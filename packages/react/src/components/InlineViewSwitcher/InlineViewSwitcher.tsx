@@ -14,8 +14,8 @@ import {
   useState,
 } from 'react';
 
-import { BottomSheet } from '../BottomSheet';
-import { Icon } from '../Icon';
+import { BottomSheet } from '@/components/BottomSheet';
+import { Icon } from '@/components/Icon';
 
 import styles from './InlineViewSwitcher.module.css';
 import type { InlineViewSwitcherItemProps } from './InlineViewSwitcherItem';

@@ -12,7 +12,7 @@ import {
   useState,
 } from 'react';
 
-import { Portal } from '../Portal';
+import { Portal } from '@/components/Portal';
 
 import styles from './Tooltip.module.css';
 

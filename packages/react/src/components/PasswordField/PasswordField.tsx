@@ -1,7 +1,7 @@
 import { ViewConceal, ViewReveal } from '@gnome-ui/icons';
 import { type InputHTMLAttributes, useId, useState } from 'react';
 
-import { IconButton } from '../IconButton';
+import { IconButton } from '@/components/IconButton';
 
 import styles from './PasswordField.module.css';
 

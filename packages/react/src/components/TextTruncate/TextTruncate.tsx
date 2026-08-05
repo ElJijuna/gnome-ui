@@ -1,6 +1,6 @@
 import { type HTMLAttributes, useCallback, useRef, useState } from 'react';
 
-import { Tooltip, type TooltipPlacement } from '../Tooltip';
+import { Tooltip, type TooltipPlacement } from '@/components/Tooltip';
 
 import styles from './TextTruncate.module.css';
 

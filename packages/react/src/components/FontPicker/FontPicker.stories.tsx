@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 
 import { FontPicker } from './FontPicker';
 import type { FontValue } from './fontData';

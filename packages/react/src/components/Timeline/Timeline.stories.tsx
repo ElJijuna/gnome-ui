@@ -10,10 +10,10 @@ import {
 } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Badge } from '../Badge';
-import { Card } from '../Card';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Badge } from '@/components/Badge';
+import { Card } from '@/components/Card';
+import { Icon } from '@/components/Icon';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import type { TimelineItem } from './Timeline';
 import { Timeline } from './Timeline';

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 
 import { Link } from './Link';
 import readme from './README.md?raw';

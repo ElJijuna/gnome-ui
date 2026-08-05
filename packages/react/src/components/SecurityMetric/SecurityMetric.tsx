@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 
-import { SeverityBadge, type VulnerabilitySeverity } from '../SeverityBadge';
+import { SeverityBadge, type VulnerabilitySeverity } from '@/components/SeverityBadge';
 
 import styles from './SecurityMetric.module.css';
 

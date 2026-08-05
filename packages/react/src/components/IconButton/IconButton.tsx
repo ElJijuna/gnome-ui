@@ -1,9 +1,9 @@
 import type { IconDefinition } from '@gnome-ui/icons';
 import { forwardRef } from 'react';
 
-import { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from '../Button';
-import { Icon, type IconSize } from '../Icon';
-import { Tooltip, type TooltipPlacement } from '../Tooltip';
+import { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from '@/components/Button';
+import { Icon, type IconSize } from '@/components/Icon';
+import { Tooltip, type TooltipPlacement } from '@/components/Tooltip';
 
 export type IconButtonVariant = ButtonVariant | 'osd';
 export type IconButtonSize = ButtonSize;

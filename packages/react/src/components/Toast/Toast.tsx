@@ -1,7 +1,7 @@
 import { Close } from '@gnome-ui/icons';
 import { type HTMLAttributes, type ReactNode, useCallback, useEffect, useRef } from 'react';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import styles from './Toast.module.css';
 

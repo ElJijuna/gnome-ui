@@ -11,12 +11,12 @@ import {
   useState,
 } from 'react';
 
-import { Icon } from '../Icon';
-import type { MultiSelectDropdownOption } from '../MultiSelectDropdown';
+import { Icon } from '@/components/Icon';
+import type { MultiSelectDropdownOption } from '@/components/MultiSelectDropdown';
 
 import styles from './FilterableMultiSelectDropdown.module.css';
 
-export type { MultiSelectDropdownOption } from '../MultiSelectDropdown';
+export type { MultiSelectDropdownOption } from '@/components/MultiSelectDropdown';
 
 export interface FilterableMultiSelectDropdownProps<V extends string = string>
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {

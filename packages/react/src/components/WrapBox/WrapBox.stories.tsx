@@ -2,7 +2,7 @@ import { GoHome, Search, Settings, Star } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Chip } from '../Chip';
+import { Chip } from '@/components/Chip';
 import readme from './README.md?raw';
 import { WrapBox } from './WrapBox';
 

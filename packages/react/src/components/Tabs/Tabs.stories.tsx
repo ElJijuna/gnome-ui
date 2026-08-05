@@ -2,7 +2,7 @@ import { GoHome, MediaPlay, Search, Settings, Star } from '@gnome-ui/icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { TabBar } from './TabBar';
 import { TabItem } from './TabItem';

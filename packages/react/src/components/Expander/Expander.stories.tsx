@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Text } from '../Text';
-import { TextField } from '../TextField';
+import { Text } from '@/components/Text';
+import { TextField } from '@/components/TextField';
 
 import { Expander } from './Expander';
 import readme from './README.md?raw';

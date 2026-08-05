@@ -1,6 +1,6 @@
 import { Children, type HTMLAttributes, type ReactNode, useId, useState } from 'react';
 
-import { Separator } from '../Separator';
+import { Separator } from '@/components/Separator';
 
 import styles from './ExpanderRow.module.css';
 
