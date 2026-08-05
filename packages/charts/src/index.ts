@@ -11,6 +11,8 @@ export type { FunnelChartDataItem, FunnelChartProps } from './components/FunnelC
 export { FunnelChart } from './components/FunnelChart';
 export type { GaugeChartProps, GaugeChartThreshold } from './components/GaugeChart';
 export { GaugeChart } from './components/GaugeChart';
+export type { HeatmapDataItem, HeatmapProps } from './components/Heatmap';
+export { Heatmap } from './components/Heatmap';
 export type { LineChartProps, LineChartSeries } from './components/LineChart';
 export { LineChart } from './components/LineChart';
 export type { PieChartDataItem, PieChartProps } from './components/PieChart';

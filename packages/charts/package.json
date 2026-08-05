@@ -46,6 +46,11 @@
       "import": "./dist/components/GaugeChart.js",
       "require": "./dist/components/GaugeChart.cjs"
     },
+    "./components/Heatmap": {
+      "types": "./dist/components/Heatmap.d.ts",
+      "import": "./dist/components/Heatmap.js",
+      "require": "./dist/components/Heatmap.cjs"
+    },
     "./components/LineChart": {
       "types": "./dist/components/LineChart.d.ts",
       "import": "./dist/components/LineChart.js",

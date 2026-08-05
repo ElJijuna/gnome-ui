@@ -43,6 +43,7 @@ import "@gnome-ui/charts/styles";
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 | `GaugeChart` | Single-value speedometer gauge with optional status color thresholds |
+| `Heatmap` | Row × column matrix heatmap for correlation and density data |
 
 ### Spark charts
 
@@ -333,6 +334,23 @@ const data = [
 | `showValue` | `boolean` | `true` | Show the numeric value and `label` centered on the gauge |
 | `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for the displayed value |
 | `label` | `string` | — | Caption rendered under the value |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+
+`Heatmap` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `HeatmapDataItem[]` | — | `{ row: string; column: string; value: number }[]` |
+| `rows` | `string[]` | first-seen order | Explicit row order, top to bottom |
+| `columns` | `string[]` | first-seen order | Explicit column order, left to right |
+| `color` | `string` | accent blue | Base color for the intensity scale |
+| `min` | `number` | lowest value in `data` | Explicit domain minimum |
+| `max` | `number` | highest value in `data` | Explicit domain maximum |
+| `cellSize` | `number` | `40` | Cell side length in px |
+| `showValues` | `boolean` | `false` | Show the formatted value inside each cell |
+| `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for cell values and the legend |
+| `showLegend` | `boolean` | `false` | Show a min→max color scale below the grid |
 | `aria-label` | `string` | auto | Accessible label for the chart |
 | `className` | `string` | — | Extra CSS class on the wrapper |
 
