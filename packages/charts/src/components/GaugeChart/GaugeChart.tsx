@@ -7,7 +7,6 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { GNOME_CHART_PALETTE } from '../../colors';
 import { GNOME_TOOLTIP_ITEM_STYLE, GNOME_TOOLTIP_STYLE } from '../../tooltipStyle';
 
 import styles from './GaugeChart.module.css';
@@ -22,6 +21,7 @@ export interface GaugeChartProps {
   min?: number;
   max?: number;
   height?: number;
+  /** Explicit arc color, overrides `thresholds`. Defaults to `var(--gnome-accent-color)`. */
   color?: string;
   /** Ascending value/color bands (e.g. green/yellow/red status zones). Ignored when `color` is set. */
   thresholds?: GaugeChartThreshold[];
@@ -55,7 +55,7 @@ const resolveColor = (
     return resolved;
   }
 
-  return GNOME_CHART_PALETTE[0];
+  return 'var(--gnome-accent-color, #3584e4)';
 };
 
 export const GaugeChart = ({
