@@ -64,8 +64,8 @@ export const Default: Story = {
     trend: { direction: 'up', value: 12, period: 'vs last month' },
     actions: (
       <>
-        <IconButton icon={FolderDownload} aria-label="Export chart" tooltip="Export chart" />
-        <IconButton icon={ViewMore} aria-label="More options" tooltip="More options" />
+        <IconButton icon={FolderDownload} label="Export chart" tooltip="Export chart" />
+        <IconButton icon={ViewMore} label="More options" tooltip="More options" />
       </>
     ),
     children: <DemoChart />,

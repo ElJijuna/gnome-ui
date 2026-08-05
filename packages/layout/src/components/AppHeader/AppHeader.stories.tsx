@@ -1,9 +1,9 @@
 import { Button, SearchBar, Text, ViewSwitcher, ViewSwitcherItem } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Layout } from '../Layout';
-import { PageContent } from '../PageContent';
-import { StatusBar } from '../StatusBar';
+import { Layout } from '@/components/Layout';
+import { PageContent } from '@/components/PageContent';
+import { StatusBar } from '@/components/StatusBar';
 
 import { AppHeader } from './AppHeader';
 import readme from './README.md?raw';

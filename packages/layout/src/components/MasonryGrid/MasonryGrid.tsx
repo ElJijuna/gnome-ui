@@ -5,7 +5,7 @@ import type {
   DashboardGridBreakpoint,
   DashboardGridGap,
   DashboardGridGapValue,
-} from '../DashboardGrid';
+} from '@/components/DashboardGrid';
 
 import styles from './MasonryGrid.module.css';
 

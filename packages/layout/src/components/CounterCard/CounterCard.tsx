@@ -2,8 +2,8 @@ import type { IconDefinition } from '@gnome-ui/icons';
 import { Card, Icon, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
 import { type HTMLAttributes, useEffect, useRef, useState } from 'react';
 
-import { LoadingStatus } from '../LoadingStatus';
-import type { LoadingType } from '../StatCard';
+import { LoadingStatus } from '@/components/LoadingStatus';
+import type { LoadingType } from '@/components/StatCard';
 
 import styles from './CounterCard.module.css';
 

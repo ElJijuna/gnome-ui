@@ -43,8 +43,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Layout } from '../Layout/Layout';
-import { UserCard } from '../UserCard';
+import { Layout } from '@/components/Layout/Layout';
+import { UserCard } from '@/components/UserCard';
 import readme from './README.md?raw';
 
 // ─── Constants ─────────────────────────────────────────────────────────────────

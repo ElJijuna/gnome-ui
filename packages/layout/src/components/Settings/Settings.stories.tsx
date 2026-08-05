@@ -40,7 +40,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Layout } from '../Layout/Layout';
+import { Layout } from '@/components/Layout/Layout';
 import readme from './README.md?raw';
 
 // ─── Nav structure ─────────────────────────────────────────────────────────────

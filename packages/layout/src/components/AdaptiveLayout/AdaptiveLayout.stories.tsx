@@ -12,7 +12,7 @@ import { Avatar, Box, Button, HeaderBar, Icon, Text, WrapBox } from '@gnome-ui/r
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { UserCard } from '../UserCard';
+import { UserCard } from '@/components/UserCard';
 
 import type { AdaptiveNavItem, GnomeColor, GnomeColorShade } from './AdaptiveLayout';
 import { AdaptiveLayout } from './AdaptiveLayout';

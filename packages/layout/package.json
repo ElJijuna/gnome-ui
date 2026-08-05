@@ -179,7 +179,7 @@
   "scripts": {
     "build": "tsc6 && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc6 --noEmit",
+    "typecheck": "tsc6 --noEmit && tsc6 --noEmit -p .storybook/tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",

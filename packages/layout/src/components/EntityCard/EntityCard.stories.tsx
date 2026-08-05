@@ -1,7 +1,7 @@
 import { Avatar, StatusBadge } from '@gnome-ui/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { IconBadge } from '../IconBadge';
+import { IconBadge } from '@/components/IconBadge';
 
 import { EntityCard } from './EntityCard';
 import readme from './README.md?raw';

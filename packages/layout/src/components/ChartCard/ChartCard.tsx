@@ -1,8 +1,8 @@
 import { Card, Separator, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
-import { LoadingStatus } from '../LoadingStatus';
-import type { LoadingType, StatCardTrend } from '../StatCard';
+import { LoadingStatus } from '@/components/LoadingStatus';
+import type { LoadingType, StatCardTrend } from '@/components/StatCard';
 
 import styles from './ChartCard.module.css';
 

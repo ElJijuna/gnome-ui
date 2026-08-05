@@ -1,8 +1,8 @@
 import { Button, Skeleton, Spinner, Text, useLocale } from '@gnome-ui/react';
 import { type HTMLAttributes, type ReactNode, useMemo, useState } from 'react';
 
-import { LoadingStatus } from '../LoadingStatus';
-import type { LoadingType } from '../StatCard';
+import { LoadingStatus } from '@/components/LoadingStatus';
+import type { LoadingType } from '@/components/StatCard';
 
 import styles from './ActivityFeed.module.css';
 

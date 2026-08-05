@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 
-import { LoadingStatus } from '../LoadingStatus';
-import type { LoadingType } from '../StatCard';
+import { LoadingStatus } from '@/components/LoadingStatus';
+import type { LoadingType } from '@/components/StatCard';
 
 import styles from './PanelCard.module.css';
 

@@ -1,7 +1,7 @@
 import { Card, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
-import { LoadingStatus } from '../LoadingStatus';
+import { LoadingStatus } from '@/components/LoadingStatus';
 
 import styles from './StatCard.module.css';
 

@@ -1,7 +1,7 @@
 import { Button, type ButtonProps } from '@gnome-ui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 
-import type { LayoutSidebarBreakpoint, LayoutSidebarOpenChangeReason } from '../Layout';
+import type { LayoutSidebarBreakpoint, LayoutSidebarOpenChangeReason } from '@/components/Layout';
 
 const sidebarBreakpointQuery: Record<LayoutSidebarBreakpoint, string> = {
   narrow: '(max-width: 400px)',

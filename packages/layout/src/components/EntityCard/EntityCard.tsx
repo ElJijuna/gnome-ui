@@ -1,8 +1,8 @@
 import { Card, Skeleton, Spinner, Text } from '@gnome-ui/react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
-import { LoadingStatus } from '../LoadingStatus';
-import type { LoadingType } from '../StatCard';
+import { LoadingStatus } from '@/components/LoadingStatus';
+import type { LoadingType } from '@/components/StatCard';
 
 import styles from './EntityCard.module.css';
 

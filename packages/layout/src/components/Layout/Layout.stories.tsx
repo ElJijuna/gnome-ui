@@ -24,13 +24,13 @@ import {
 import type { Meta, StoryObj } from '@storybook/react';
 import { type ReactNode, useState } from 'react';
 
-import { AppHeader as ShellAppHeader } from '../AppHeader';
-import { CounterCard } from '../CounterCard';
-import { PageContent } from '../PageContent';
-import { SidebarShell } from '../SidebarShell';
-import { SidebarTrigger } from '../SidebarTrigger';
-import { StatusBar } from '../StatusBar';
-import { UserCard } from '../UserCard';
+import { AppHeader as ShellAppHeader } from '@/components/AppHeader';
+import { CounterCard } from '@/components/CounterCard';
+import { PageContent } from '@/components/PageContent';
+import { SidebarShell } from '@/components/SidebarShell';
+import { SidebarTrigger } from '@/components/SidebarTrigger';
+import { StatusBar } from '@/components/StatusBar';
+import { UserCard } from '@/components/UserCard';
 
 import { Layout } from './Layout';
 import readme from './README.md?raw';
