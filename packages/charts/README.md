@@ -42,6 +42,7 @@ import "@gnome-ui/charts/styles";
 | `PieChart` | Pie or donut chart with optional slice labels and legend |
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
+| `GaugeChart` | Single-value speedometer gauge with optional status color thresholds |
 
 ### Spark charts
 
@@ -316,6 +317,22 @@ const data = [
 | `innerRadius` | `number \| string` | `"20%"` | Inner radius of the donut gap |
 | `showLabels` | `boolean` | `false` | Show category name inside each arc |
 | `showLegend` | `boolean` | `false` | Show legend below chart |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+
+`GaugeChart` accepts:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Current value; shown as-is even outside `min`/`max`, the arc is clamped |
+| `min` | `number` | `0` | Minimum of the gauge range |
+| `max` | `number` | `100` | Maximum of the gauge range |
+| `height` | `number` | `220` | Chart height in px |
+| `color` | `string` | — | Explicit arc color; overrides `thresholds` |
+| `thresholds` | `{ value, color }[]` | — | Ascending value/color bands for status-style gauges |
+| `showValue` | `boolean` | `true` | Show the numeric value and `label` centered on the gauge |
+| `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for the displayed value |
+| `label` | `string` | — | Caption rendered under the value |
 | `aria-label` | `string` | auto | Accessible label for the chart |
 | `className` | `string` | — | Extra CSS class on the wrapper |
 

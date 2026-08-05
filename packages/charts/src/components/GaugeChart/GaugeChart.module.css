@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.valueLabel {
+  position: absolute;
+  left: 50%;
+  top: 76%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  font-family: var(--gnome-font-family, system-ui);
+}
+
+.caption {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--gnome-dim-label-color, rgba(0, 0, 0, 0.55));
+  font-family: var(--gnome-font-family, system-ui);
+}

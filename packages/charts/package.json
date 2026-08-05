@@ -41,6 +41,11 @@
       "import": "./dist/components/FunnelChart.js",
       "require": "./dist/components/FunnelChart.cjs"
     },
+    "./components/GaugeChart": {
+      "types": "./dist/components/GaugeChart.d.ts",
+      "import": "./dist/components/GaugeChart.js",
+      "require": "./dist/components/GaugeChart.cjs"
+    },
     "./components/LineChart": {
       "types": "./dist/components/LineChart.d.ts",
       "import": "./dist/components/LineChart.js",

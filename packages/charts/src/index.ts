@@ -9,6 +9,8 @@ export type { ComposedChartProps, ComposedChartSeries } from './components/Compo
 export { ComposedChart } from './components/ComposedChart';
 export type { FunnelChartDataItem, FunnelChartProps } from './components/FunnelChart';
 export { FunnelChart } from './components/FunnelChart';
+export type { GaugeChartProps, GaugeChartThreshold } from './components/GaugeChart';
+export { GaugeChart } from './components/GaugeChart';
 export type { LineChartProps, LineChartSeries } from './components/LineChart';
 export { LineChart } from './components/LineChart';
 export type { PieChartDataItem, PieChartProps } from './components/PieChart';
