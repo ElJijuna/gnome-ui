@@ -10,11 +10,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** theme tokens and `GnomeProvider` only — no components ship
-> yet. Package structure, build tooling, the `@gnome-ui/core` token
-> generator, and the theme/locale provider are in place; component ports
-> from `@gnome-ui/react` start next. See [ROADMAP.md](../../ROADMAP.md)
-> Priority 3.
+> **Status:** theme tokens, `GnomeProvider`, and the first component
+> (`Button`) ship. Component ports from `@gnome-ui/react` continue tier by
+> tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -118,11 +116,49 @@ never calls `I18nManager.forceRTL()` — RN's layout direction is a single
 global flag that needs an app reload and is set once at bootstrap, not per
 provider tree.
 
+## Components
+
+### Button
+
+```tsx
+import { Button } from '@gnome-ui/react-native';
+
+<Button variant="suggested" onPress={() => save()}>
+  Save
+</Button>;
+```
+
+Mirrors `@gnome-ui/react`'s `Button` props (`variant`, `size`, `shape`, `osd`,
+`leadingIcon`/`trailingIcon`), rebuilt on `Pressable` — hover/`:active` CSS
+states become the `pressed` render-prop, and `filter: brightness()` (not
+available in RN) becomes a `0.85` opacity dip on press for the solid
+`suggested`/`destructive` variants. `leadingIcon`/`trailingIcon` render
+as-is: RN has no `currentColor` equivalent, so size and color icons
+yourself, matching the resolved label color (`theme.accentFgColor`,
+`theme.destructiveFgColor`, `theme.windowFgColor`, …) if you want them to
+match.
+
 ## Installation
 
 ```bash
 npm install @gnome-ui/react-native react-native
 ```
+
+## Testing
+
+This package uses **Jest**, not the Vitest used elsewhere in the monorepo.
+`react-native`'s published entry ships untranspiled Flow syntax
+(`import typeof * as X from './index.js.flow'`) that only Jest's official
+`@react-native/jest-preset` + `@react-native/babel-preset` know how to
+strip before the module loads — Vitest has no hook that reaches a plain
+`require("react-native")` call inside an already-external dependency (confirmed
+against both `resolve.alias` and a custom `resolveId` plugin), so component
+tests run under `jest.config.cjs` / `babel.config.cjs` instead. Pure-logic
+tests (`resolveTheme`, `resolveContext`) run under the same Jest setup for
+consistency rather than splitting the package across two runners.
+
+Rendering uses `@testing-library/react-native` on top of `test-renderer`
+(the actively maintained successor to the deprecated `react-test-renderer`).
 
 ## License
 
