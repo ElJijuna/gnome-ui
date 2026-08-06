@@ -1,3 +1,10 @@
+export type {
+  GnomeResolvedColorScheme,
+  GnomeResolvedContrast,
+  ResolveGnomeThemeOptions,
+} from './resolveTheme';
+export { resolveGnomeTheme } from './resolveTheme';
+export type { GnomeThemeTokens } from './tokens.generated';
 export {
   darkRawTokens,
   darkTheme,
@@ -8,13 +15,3 @@ export {
   lightRawTokens,
   lightTheme,
 } from './tokens.generated';
-
-export type { GnomeThemeTokens } from './tokens.generated';
-
-export { resolveGnomeTheme } from './resolveTheme';
-
-export type {
-  GnomeColorScheme,
-  GnomeContrast,
-  ResolveGnomeThemeOptions,
-} from './resolveTheme';

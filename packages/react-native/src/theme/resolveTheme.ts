@@ -1,3 +1,4 @@
+import type { GnomeThemeTokens } from './tokens.generated';
 import {
   darkTheme,
   highContrastDarkTheme,
@@ -5,15 +6,13 @@ import {
   lightTheme,
 } from './tokens.generated';
 
-import type { GnomeThemeTokens } from './tokens.generated';
-
-export type GnomeColorScheme = 'light' | 'dark';
-export type GnomeContrast = 'normal' | 'more';
+export type GnomeResolvedColorScheme = 'light' | 'dark';
+export type GnomeResolvedContrast = 'normal' | 'more';
 
 export interface ResolveGnomeThemeOptions {
-  colorScheme: GnomeColorScheme;
+  colorScheme: GnomeResolvedColorScheme;
   /** @default 'normal' */
-  contrast?: GnomeContrast;
+  contrast?: GnomeResolvedContrast;
 }
 
 export function resolveGnomeTheme({

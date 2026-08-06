@@ -10,10 +10,11 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** theme tokens only — no components ship yet. Package structure,
-> build tooling, and the `@gnome-ui/core` token generator are in place;
-> component ports from `@gnome-ui/react` start next. See
-> [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> **Status:** theme tokens and `GnomeProvider` only — no components ship
+> yet. Package structure, build tooling, the `@gnome-ui/core` token
+> generator, and the theme/locale provider are in place; component ports
+> from `@gnome-ui/react` start next. See [ROADMAP.md](../../ROADMAP.md)
+> Priority 3.
 
 ## How it works
 
@@ -62,6 +63,60 @@ theme.space2; // 12
 The generated file is committed, but always regenerate it after changing
 `@gnome-ui/core`'s tokens — `npm run theme:generate`, or just run `build`
 / `typecheck` / `test`, which each regenerate it first.
+
+## GnomeProvider
+
+RN has no CSS cascade, so components can't read a custom-property-style
+theme the way `@gnome-ui/react`'s components do — they need the resolved
+theme object handed to them directly. `GnomeProvider` computes it once and
+exposes it (plus locale, direction, and formatting defaults) via context:
+
+```tsx
+import { GnomeProvider, useGnomeTheme } from '@gnome-ui/react-native';
+import { Text, View } from 'react-native';
+
+function App() {
+  return (
+    <GnomeProvider accentColor="green">
+      <Screen />
+    </GnomeProvider>
+  );
+}
+
+function Screen() {
+  const theme = useGnomeTheme();
+
+  return (
+    <View style={{ backgroundColor: theme.windowBgColor, padding: theme.space4 }}>
+      <Text style={{ color: theme.windowFgColor, fontSize: theme.fontSizeBody }}>Hello</Text>
+    </View>
+  );
+}
+```
+
+`colorScheme` and `contrast` both default to `"system"`: color scheme
+follows `useColorScheme()`/`Appearance`, and contrast follows the OS
+accessibility setting where one exists — Android's "High text contrast",
+iOS's "Increase Contrast" — falling back to `"normal"` elsewhere (e.g. web).
+Pass `"light"`/`"dark"` or `"normal"`/`"more"` to override either
+explicitly.
+
+`accentColor` accepts a named Adwaita palette color (`"green"`, `"red"`,
+…) — resolved to the matching shade for the active color scheme, same as
+`@gnome-ui/react` — or any RN color string. It's threaded through
+`theme.accentColor`/`theme.accentBgColor` (and `theme.focusRingColor`
+outside high contrast, which keeps its own fixed value there for maximum
+contrast, matching `tokens.css`).
+
+Other hooks: `useLocale`, `useDir`, `useNumberFormatter`,
+`useDateTimeFormatter`, `useColorScheme`/`useResolvedColorScheme`,
+`useContrast`/`useResolvedContrast`, `useAccentColor` — each reads one slice
+of the same context, mirroring `@gnome-ui/react`'s `GnomeProvider` hook set.
+
+Unlike the web provider, `dir` is exposed for consumers to branch on but
+never calls `I18nManager.forceRTL()` — RN's layout direction is a single
+global flag that needs an app reload and is set once at bootstrap, not per
+provider tree.
 
 ## Installation
 

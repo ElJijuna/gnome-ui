@@ -18,9 +18,7 @@ describe('resolveGnomeTheme', () => {
   });
 
   it('returns the high-contrast light theme', () => {
-    expect(resolveGnomeTheme({ colorScheme: 'light', contrast: 'more' })).toBe(
-      highContrastTheme,
-    );
+    expect(resolveGnomeTheme({ colorScheme: 'light', contrast: 'more' })).toBe(highContrastTheme);
   });
 
   it('returns the high-contrast dark theme', () => {
