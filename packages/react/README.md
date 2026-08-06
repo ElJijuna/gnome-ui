@@ -226,6 +226,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`ShortcutLabel`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-shortcutlabel--docs) | Renders keyboard shortcut tokens (e.g. `Ctrl+S`) as individual key cap pills |
 | [`WindowTitle`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-windowtitle--docs) | Two-line title + subtitle widget for use inside a `HeaderBar` |
 | [`Timeline`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-timeline--docs) | Ordered sequence of events connected by a visual connector line; vertical (activity feed) and horizontal (stepper) orientations; solid, dotted, and none variants |
+| [`ContributionGraph`](https://eljijuna.github.io/gnome-ui/?path=/docs/data-display-contributiongraph--docs) | Activity heatmap calendar (GitHub-style); pure SVG, keyboard-navigable grid, responsive week count, dark mode and accent-color aware |
 
 ### Layout & containers
 
