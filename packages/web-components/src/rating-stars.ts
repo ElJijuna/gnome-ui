@@ -34,7 +34,7 @@ function clamp(value: number, min: number, max: number) {
 // — same bug found in gnome-copy-button/gnome-file-type-icon. DOMParser
 // with the XML content type avoids it.
 function buildStarSvg(icon: IconDefinition, size: number): SVGElement {
-  const pathsMarkup = icon.paths
+  const pathsMarkup = (icon.paths ?? [])
     .map((path) => {
       const attrs = [`d="${path.d}"`];
 

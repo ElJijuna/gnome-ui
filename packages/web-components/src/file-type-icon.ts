@@ -14,7 +14,7 @@ export type { FileTypeCategory } from './internal/file-type';
 export type GnomeFileTypeIconSize = 'sm' | 'md' | 'lg';
 
 function buildIconSvg(icon: IconDefinition): SVGElement {
-  const pathsMarkup = icon.paths
+  const pathsMarkup = (icon.paths ?? [])
     .map((path) => {
       const attrs = [`d="${path.d}"`];
 

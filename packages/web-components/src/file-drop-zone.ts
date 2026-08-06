@@ -48,7 +48,7 @@ function matchesAccept(file: File, accept: string): boolean {
 // — same bug found in gnome-copy-button/gnome-rating-stars. DOMParser with
 // the XML content type avoids it.
 function buildFolderSvg(icon: IconDefinition): SVGElement {
-  const pathsMarkup = icon.paths
+  const pathsMarkup = (icon.paths ?? [])
     .map((path) => {
       const attrs = [`d="${path.d}"`];
 
