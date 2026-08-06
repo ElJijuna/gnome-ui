@@ -22,11 +22,20 @@ const Icon = ({ icon, size = 16, color = 'currentColor' }: IconProps) => {
       height={size}
       fill={color}
       aria-hidden
-    >
-      {icon.paths.map((p, i) => (
-        <path key={i} d={p.d} fillRule={p.fillRule} clipRule={p.clipRule} transform={p.transform} />
-      ))}
-    </svg>
+      {...(icon.svg
+        ? { dangerouslySetInnerHTML: { __html: icon.svg } }
+        : {
+            children: icon.paths?.map((p, i) => (
+              <path
+                key={i}
+                d={p.d}
+                fillRule={p.fillRule}
+                clipRule={p.clipRule}
+                transform={p.transform}
+              />
+            )),
+          })}
+    />
   );
 };
 

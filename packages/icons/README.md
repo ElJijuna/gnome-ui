@@ -93,18 +93,50 @@ function renderIcon(icon: IconDefinition, size = 16) {
 }
 ```
 
+### Animated icons
+
+A handful of icons carry a small CSS animation instead of (or in addition to)
+static path data — `animated: true`, with the SVG markup in `svg` instead of
+`paths`. This mirrors GTK 4.22's `GtkSvg`: trusted, package-authored SVG (not
+arbitrary user content) that can include `<style>`/`<animate>` structure a
+flat path list can't express.
+
+Rendered through plain `<Icon>`, animated icons are inert — they show a
+static frame, matching how every other icon behaves by default. Wrap them in
+`<AnimatedIcon>` (from `@gnome-ui/react`) to play the animation; it exposes a
+`playing` prop and always enforces `prefers-reduced-motion`, regardless of
+what `playing` is set to.
+
+```tsx
+import { Syncing } from "@gnome-ui/icons";
+import { AnimatedIcon } from "@gnome-ui/react";
+
+<AnimatedIcon icon={Syncing} playing={isSyncing} label="Syncing" />
+```
+
+| Export | Use case |
+|--------|----------|
+| `Syncing` | Sync in progress (animated `Refresh`) |
+| `Recording` | Active recording (animated `MediaRecord`) |
+| `Downloading` | Active download (animated arrow into a tray) |
+| `Connecting` | Acquiring a connection (animated `NetworkWirelessAcquiring`) |
+
 ## Types
 
 ```ts
-/** Icons from @gnome-ui/icons — multi-path, fixed viewBox. */
+/** Icons from @gnome-ui/icons — multi-path, fixed viewBox, or raw animated SVG. */
 interface IconDefinition {
   readonly viewBox: string;
-  readonly paths: ReadonlyArray<{
+  readonly paths?: ReadonlyArray<{
     readonly d: string;
     readonly fillRule?: "nonzero" | "evenodd" | "inherit";
     readonly clipRule?: "nonzero" | "evenodd" | "inherit";
     readonly transform?: string;
   }>;
+  /** Raw trusted SVG markup, used instead of `paths` for animated icons. */
+  readonly svg?: string;
+  /** Marks the icon as carrying a CSS animation in `svg`. */
+  readonly animated?: boolean;
 }
 
 /** Single-path icons from simple-icons or any { path } object. */
@@ -262,7 +294,7 @@ Available via `@gnome-ui/icons` or the `@gnome-ui/icons/third-party` sub-path.
 
 ### Complete icon list
 
-668 icon exports are available from `@gnome-ui/icons`.
+672 icon exports are available from `@gnome-ui/icons`.
 
 | Export | Source |
 |--------|--------|
@@ -934,6 +966,10 @@ Available via `@gnome-ui/icons` or the `@gnome-ui/icons/third-party` sub-path.
 | `Bitbucket` | Third-party brand icons |
 | `X` | Third-party brand icons |
 | `Npm` | Third-party brand icons |
+| `Syncing` | Animated |
+| `Recording` | Animated |
+| `Downloading` | Animated |
+| `Connecting` | Animated |
 
 ## License
 

@@ -29,6 +29,10 @@ import { Icon } from '@gnome-ui/react';
 <Icon icon={GitHub} size="md" color="#24292f" />
 ```
 
+### Animated icons
+
+`Syncing`, `Recording`, `Downloading`, and `Connecting` carry a CSS animation (`animated: true`, markup in `svg`) instead of static paths. They render as a static frame through plain `<Icon>` — wrap in `<AnimatedIcon>` from `@gnome-ui/react` to play them, which always enforces `prefers-reduced-motion`.
+
 ### Guidelines
 
 - Import only the icons you use — the package is tree-shakeable.
