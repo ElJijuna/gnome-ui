@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from '@jest/globals';
 import { darkTheme, highContrastTheme, lightTheme } from '../theme/tokens.generated';
 import { applyAccentColor, resolveColorScheme, resolveContrast } from './resolveContext';
 
