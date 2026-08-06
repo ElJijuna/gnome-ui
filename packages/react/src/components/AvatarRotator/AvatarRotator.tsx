@@ -1,6 +1,7 @@
 import { type CSSProperties, type HTMLAttributes, useEffect, useMemo, useState } from 'react';
 
 import { Avatar, type AvatarColor, type AvatarSize } from '@/components/Avatar';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 import styles from './AvatarRotator.module.css';
 
@@ -38,28 +39,6 @@ function clampIndex(index: number, length: number) {
   }
 
   return ((index % length) + length) % length;
-}
-
-function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) {
-      return;
-    }
-
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    setPrefersReducedMotion(query.matches);
-
-    const handleChange = () => setPrefersReducedMotion(query.matches);
-
-    query.addEventListener?.('change', handleChange);
-
-    return () => query.removeEventListener?.('change', handleChange);
-  }, []);
-
-  return prefersReducedMotion;
 }
 
 /**

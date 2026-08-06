@@ -7,3 +7,4 @@ export {
 } from '@/components/GnomeProvider/GnomeContext';
 export type { BreakpointState, GnomeBreakpointName } from './useBreakpoint';
 export { GNOME_BREAKPOINTS, useBreakpoint } from './useBreakpoint';
+export { usePrefersReducedMotion } from './usePrefersReducedMotion';

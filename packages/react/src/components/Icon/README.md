@@ -29,3 +29,10 @@ import { Search } from "@gnome-ui/icons";
 
 <Icon icon={Search} size="md" label="Search" />
 ```
+
+### Animated icons
+
+Icons marked `animated: true` (e.g. `Syncing`, `Recording`) render as a
+static frame through `Icon` — wrap them in
+[`AnimatedIcon`](?path=/docs/components-animatedicon--docs) to play the
+animation.

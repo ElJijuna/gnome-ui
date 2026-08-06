@@ -41,7 +41,16 @@ const SIZE_MAP: Record<IconSize, number> = { sm: 12, md: 16, lg: 20 };
 
 function isIconDefinition(icon: AnyIconDefinition): icon is IconDefinition {
   // When an object has both `path` and `paths`, `paths` wins.
-  return 'paths' in icon && Array.isArray((icon as IconDefinition).paths);
+  if ('paths' in icon && Array.isArray((icon as IconDefinition).paths)) {
+    return true;
+  }
+
+  // Animated icons carry `svg` instead of `paths`, and never a `path`
+  // (singular) field. That last check matters: a real `simple-icons`
+  // `SimpleIcon` object also has its own unrelated `svg` field (the icon's
+  // full rendered markup) alongside `path` — excluding anything with
+  // `path` keeps those correctly classified as `RawPathIconDefinition`.
+  return typeof (icon as IconDefinition).svg === 'string' && !('path' in icon);
 }
 
 /**
@@ -73,10 +82,19 @@ export const Icon = ({
 
   const resolvedViewBox = isIconDefinition(icon) ? icon.viewBox : (icon.viewBox ?? '0 0 24 24');
 
+  const rawSvg = isIconDefinition(icon) ? icon.svg : undefined;
   const paths = isIconDefinition(icon)
-    ? icon.paths.map((p, i) => (
-        <path key={i} d={p.d} fillRule={p.fillRule} clipRule={p.clipRule} transform={p.transform} />
-      ))
+    ? icon.svg
+      ? undefined
+      : icon.paths?.map((p, i) => (
+          <path
+            key={i}
+            d={p.d}
+            fillRule={p.fillRule}
+            clipRule={p.clipRule}
+            transform={p.transform}
+          />
+        ))
     : [<path key={0} d={icon.path} />];
 
   const colorClass = color && color !== 'default' ? styles[`color-${color}`] : undefined;
@@ -94,6 +112,10 @@ export const Icon = ({
       role={label ? 'img' : undefined}
       focusable="false"
       className={computedClassName}
+      // `svg` is authored in `@gnome-ui/icons` and reviewed like any other
+      // source file, never user-supplied — same trust boundary as the
+      // `paths` data rendered as JSX below.
+      {...(rawSvg ? { dangerouslySetInnerHTML: { __html: rawSvg } } : {})}
       {...props}
     >
       {paths}

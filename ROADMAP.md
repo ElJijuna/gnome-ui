@@ -73,6 +73,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | ✅ | **Dialog** | Blocking modal with title, body, and buttons |
 | ✅ | **Tooltip** | Informational text on hover |
 | ✅ | **Status Page** | Empty state with icon, title, and description |
+| ✅ | **AnimatedIcon** | Plays the CSS animation embedded in an `animated` icon from `@gnome-ui/icons` (`Syncing`, `Recording`, `Downloading`, `Connecting`); always honors `prefers-reduced-motion`. Pragmatic web analog to GTK 4.22's `GtkSvg` native animated-SVG renderer — see `@gnome-ui/icons` — Icon Library below |
 
 ---
 

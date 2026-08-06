@@ -1,4 +1,4 @@
-import { Add } from '@gnome-ui/icons';
+import { Add, Syncing } from '@gnome-ui/icons';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
@@ -64,6 +64,35 @@ describe('Icon', () => {
     const { container } = render(<Icon icon={Add} />);
 
     expect(container.querySelectorAll('path').length).toBeGreaterThan(0);
+  });
+});
+
+describe('Icon — animated icon definitions (svg field)', () => {
+  it('renders raw svg markup instead of path elements', () => {
+    const { container } = render(<Icon icon={Syncing} />);
+
+    expect(container.querySelector('svg g')).toBeInTheDocument();
+    expect(container.querySelector('svg style')).toBeInTheDocument();
+  });
+
+  it('does not animate by default (no play-state variable set)', () => {
+    const { container } = render(<Icon icon={Syncing} />);
+
+    expect(container.querySelector('svg')).not.toHaveStyle({
+      '--gnome-icon-play-state': 'running',
+    });
+  });
+
+  it('gives svg precedence over paths when both are present', () => {
+    const mixed = {
+      paths: [{ d: 'M2 2' }],
+      svg: '<circle cx="1" cy="1" r="1"/>',
+      viewBox: '0 0 16 16',
+    };
+    const { container } = render(<Icon icon={mixed} />);
+
+    expect(container.querySelector('path')).not.toBeInTheDocument();
+    expect(container.querySelector('circle')).toBeInTheDocument();
   });
 });
 

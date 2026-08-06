@@ -152,8 +152,8 @@ function isIconDefinition(value: unknown): value is Icons.IconDefinition {
     typeof value === 'object' &&
     value !== null &&
     'viewBox' in value &&
-    'paths' in value &&
-    Array.isArray((value as { paths: unknown }).paths)
+    (('paths' in value && Array.isArray((value as { paths: unknown }).paths)) ||
+      typeof (value as { svg?: unknown }).svg === 'string')
   );
 }
 

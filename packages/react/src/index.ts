@@ -14,6 +14,8 @@ export {
   formatPackageCoordinate,
   getPackageUrl,
 } from './components/AffectedPackage';
+export type { AnimatedIconProps } from './components/AnimatedIcon';
+export { AnimatedIcon } from './components/AnimatedIcon';
 export type { AvatarColor, AvatarProps, AvatarSize } from './components/Avatar';
 export { Avatar } from './components/Avatar';
 export type { AvatarGroupItem, AvatarGroupProps } from './components/AvatarGroup';
@@ -377,3 +379,4 @@ export { WrapBox } from './components/WrapBox';
 export type { BreakpointState, GnomeBreakpointName } from './hooks/useBreakpoint';
 // Hooks
 export { GNOME_BREAKPOINTS, useBreakpoint } from './hooks/useBreakpoint';
+export { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
