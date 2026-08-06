@@ -18,14 +18,18 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc6 && vite build",
-    "typecheck": "tsc6 --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "theme:generate": "node scripts/generate-theme.mjs && biome check --write src/theme/tokens.generated.ts",
+    "build": "npm run theme:generate && tsc6 && vite build",
+    "typecheck": "npm run theme:generate && tsc6 --noEmit",
+    "test": "npm run theme:generate && vitest run",
+    "test:watch": "npm run theme:generate && vitest",
+    "test:coverage": "npm run theme:generate && vitest run --coverage"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@gnome-ui/core": "*"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -33,6 +37,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
+    "postcss": "^8.5.25",
     "react": "^19.0.0",
     "react-native": "^0.86.2",
     "vite": "^8.0.16",
