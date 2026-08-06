@@ -18,6 +18,7 @@ A React component library that faithfully implements the [GNOME Human Interface 
 | [`@gnome-ui/platform`](packages/platform) | TypeScript bridge to GNOME host APIs (GSettings, portals, notifications…) | [![npm](https://img.shields.io/npm/v/@gnome-ui/platform)](https://www.npmjs.com/package/@gnome-ui/platform) |
 | [`@gnome-ui/hooks`](packages/hooks) | React hooks that surface `@gnome-ui/platform` APIs as idiomatic React state | [![npm](https://img.shields.io/npm/v/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks) |
 | [`@gnome-ui/charts`](packages/charts) | Data visualisation components (Line, Bar, Area) styled with Adwaita tokens | [![npm](https://img.shields.io/npm/v/@gnome-ui/charts)](https://www.npmjs.com/package/@gnome-ui/charts) |
+| [`@gnome-ui/react-native`](packages/react-native) | React Native components for iOS/Android/GNOME-mobile — scaffold only, no components yet | [![npm](https://img.shields.io/npm/v/@gnome-ui/react-native)](https://www.npmjs.com/package/@gnome-ui/react-native) |
 
 ## Quick start
 
