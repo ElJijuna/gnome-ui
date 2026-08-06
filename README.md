@@ -140,6 +140,7 @@ for a compact documentation index or
 | `ErrorState` | Error state with presets: `generic`, `network`, `permission`, `not-found` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-errorstate--docs) |
 | `DashboardGrid` | Responsive dashboard container with fixed, auto, breakpoint-mapped columns, column layout, and per-item `span` | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-dashboardgrid--docs) |
 | `QuickActions` | Grid of keyboard-navigable shortcut action buttons for dashboards and control panels | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/layout-quickactions--docs) |
+| `ContributionGraph` | Activity heatmap calendar (GitHub-style) rendered in pure SVG, with keyboard navigation and dark mode | [Docs](https://eljijuna.github.io/gnome-ui/?path=/docs/data-display-contributiongraph--docs) |
 
 See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
 

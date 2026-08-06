@@ -429,7 +429,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| 🚧 | **`ContributionGraph`** | Activity heatmap calendar: a 52-week grid of rounded SVG cells where colour intensity (Adwaita green palette) represents activity count; supports dark mode, keyboard navigation (`role="grid"`), and screen-reader labels — issue [#21](https://github.com/ElJijuna/gnome-ui/issues/21) |
+| ✅ | **`ContributionGraph`** | Activity heatmap calendar: a 52-week grid of rounded SVG cells where colour intensity (Adwaita green palette) represents activity count; supports dark mode, keyboard navigation (`role="grid"`), and screen-reader labels — issue [#21](https://github.com/ElJijuna/gnome-ui/issues/21) |
 
 ---
 
