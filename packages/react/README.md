@@ -292,6 +292,19 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`ViewSwitcherBar`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-viewswitcherbar--docs) | Bottom bar for `ViewSwitcher` items on narrow screens (≤ 550 px) |
 | [`BreakpointBin`](https://eljijuna.github.io/gnome-ui/?path=/docs/adaptive-breakpointbin--docs) | Applies layout changes when the **component** crosses a size threshold — CSS container queries equivalent |
 
+## Testing
+
+Unit tests (Vitest + Testing Library, jsdom) cover component logic and
+rendering. For behavior a simulated DOM can't verify faithfully — the real
+OS clipboard, the real `prefers-reduced-motion` media query — real-browser
+tests run against Storybook via Playwright:
+
+```bash
+npm run test:browser --workspace @gnome-ui/react
+```
+
+These also run in the repository CI workflow.
+
 ## License
 
 [MIT](../../LICENSE)

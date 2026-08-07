@@ -648,10 +648,11 @@
     "dev": "vite",
     "build": "tsc6 && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc6 --noEmit && tsc6 --noEmit -p .storybook/tsconfig.json",
+    "typecheck": "tsc6 --noEmit && tsc6 --noEmit -p .storybook/tsconfig.json && tsc6 --noEmit -p e2e/tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:browser": "playwright test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -667,6 +668,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "@storybook/addon-a11y": "^10.5.5",
     "@storybook/addon-docs": "^10.5.5",
     "@storybook/react": "^10.5.5",

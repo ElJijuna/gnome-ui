@@ -3,6 +3,8 @@ dist
 storybook-static
 packages/web-components/playwright-report
 packages/web-components/test-results
+packages/react/playwright-report
+packages/react/test-results
 .turbo
 .DS_Store
 *.local
