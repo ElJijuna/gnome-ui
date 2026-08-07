@@ -67,6 +67,7 @@ export const MultiSelectDropdown = <V extends string = string>({
   placeholder = 'Select options',
   disabled,
   className,
+  'aria-label': ariaLabel,
   ...props
 }: MultiSelectDropdownProps<V>) => {
   const [open, setOpen] = useState(false);
@@ -251,6 +252,7 @@ export const MultiSelectDropdown = <V extends string = string>({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
+        aria-label={ariaLabel}
         aria-activedescendant={
           open && activeIndex >= 0 ? `${listboxId}-opt-${activeIndex}` : undefined
         }
