@@ -83,6 +83,7 @@ export const FilterableMultiSelectDropdown = <V extends string = string>({
   filterPlaceholder = 'Filter options…',
   disabled,
   className,
+  'aria-label': ariaLabel,
   ...props
 }: FilterableMultiSelectDropdownProps<V>) => {
   const [open, setOpen] = useState(false);
@@ -283,6 +284,7 @@ export const FilterableMultiSelectDropdown = <V extends string = string>({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
+        aria-label={ariaLabel}
         disabled={disabled}
         className={[styles.trigger, open ? styles.triggerOpen : null].filter(Boolean).join(' ')}
         onClick={() => (open ? closeList() : openList())}

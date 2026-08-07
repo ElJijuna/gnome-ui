@@ -22,6 +22,19 @@ function openDropdown() {
 
 describe('FilterableMultiSelectDropdown', () => {
   describe('rendering', () => {
+    it('applies aria-label to the combobox trigger itself, not a wrapper element', () => {
+      render(
+        <FilterableMultiSelectDropdown
+          aria-label="Languages"
+          options={options}
+          value={[]}
+          onChange={vi.fn()}
+        />,
+      );
+
+      expect(screen.getByRole('combobox', { name: 'Languages' })).toBeInTheDocument();
+    });
+
     it('renders the placeholder when nothing is selected', () => {
       render(
         <FilterableMultiSelectDropdown
