@@ -21,6 +21,13 @@ const suggestions = [
 
 describe('SearchBar', () => {
   describe('rendering', () => {
+    it('exposes the suggestions panel as a real listbox of options', () => {
+      render(<SearchBar open value="a" onChange={vi.fn()} suggestions={suggestions} />);
+
+      expect(screen.getByRole('listbox', { name: 'Suggestions' })).toBeInTheDocument();
+      expect(screen.getAllByRole('option')).toHaveLength(suggestions.length);
+    });
+
     it('renders a combobox input with a default placeholder', () => {
       render(<SearchBar open value="" onChange={vi.fn()} />);
       expect(screen.getByRole('combobox')).toHaveAttribute('placeholder', 'Search…');
@@ -140,7 +147,7 @@ describe('SearchBar', () => {
         />,
       );
 
-      expect(screen.getByRole('list', { name: 'Matching contacts' })).toBeInTheDocument();
+      expect(screen.getByRole('listbox', { name: 'Matching contacts' })).toBeInTheDocument();
     });
 
     it('renders custom suggestion content via renderSuggestion', () => {

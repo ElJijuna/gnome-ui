@@ -201,6 +201,7 @@ export const SearchBar = ({
       ? createPortal(
           <ul
             ref={listboxRef}
+            role="listbox"
             aria-label={suggestionsLabel}
             id={listboxId}
             className={styles.suggestionsPanel}
@@ -217,6 +218,7 @@ export const SearchBar = ({
                 <li
                   key={item.id}
                   id={`${optionIdPrefix}-${item.id}`}
+                  role="option"
                   aria-selected={index === activeIndex}
                   className={[
                     styles.suggestionItem,
