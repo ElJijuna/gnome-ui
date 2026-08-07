@@ -127,15 +127,35 @@ export const Modal = ({
     return () => window.clearTimeout(id);
   }, [isClosing]);
 
-  // Save / restore focus around open/close
+  // Move focus into the dialog once it's actually mounted. Keyed off
+  // `isVisible` (not `open`) on purpose: this effect and the "track open ↔
+  // closed transitions" effect above both fire from the same `open` change,
+  // in declaration order — `setIsVisible(true)` from that effect hasn't
+  // committed a re-render yet when a sibling effect on the same dependency
+  // runs, so `modalRef.current` would still be null. `isVisible` only
+  // becomes true once that re-render has actually happened and mounted the
+  // dialog into the DOM.
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+
+    previouslyFocused.current = document.activeElement;
+    const el = modalRef.current?.querySelector<HTMLElement>(FOCUSABLE);
+
+    (el ?? modalRef.current)?.focus();
+  }, [isVisible]);
+
+  // Restore focus to whatever was focused before, as soon as a close is
+  // requested — deliberately on `open` (not `isVisible`, which for an
+  // animated close only flips after the exit animation finishes) so this
+  // happens immediately.
   useEffect(() => {
     if (open) {
-      previouslyFocused.current = document.activeElement;
-      const el = modalRef.current?.querySelector<HTMLElement>(FOCUSABLE);
-      el?.focus();
-    } else {
-      (previouslyFocused.current as HTMLElement | null)?.focus();
+      return;
     }
+
+    (previouslyFocused.current as HTMLElement | null)?.focus();
   }, [open]);
 
   const handleKeyDown = useCallback(
@@ -167,6 +187,7 @@ export const Modal = ({
         ref={modalRef}
         role="dialog"
         aria-modal="true"
+        tabIndex={-1}
         aria-labelledby={title ? titleId : undefined}
         className={[
           styles.modal,

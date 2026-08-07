@@ -40,6 +40,12 @@ describe('Modal', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
+  it('moves focus to the close button when it opens', () => {
+    render(<Modal open title="Settings" />);
+
+    expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus();
+  });
+
   it('has accessible name from title', () => {
     render(<Modal open title="Preferences" />);
 
