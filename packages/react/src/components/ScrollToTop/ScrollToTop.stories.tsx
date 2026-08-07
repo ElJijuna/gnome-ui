@@ -81,6 +81,28 @@ export const AllPositions: Story = {
   },
 };
 
+// ─── Window Scroll ────────────────────────────────────────────────────────────
+
+/** Observes the real page scroll (default `window` target) — scroll down past 300px to reveal the button. */
+export const WindowScroll: Story = {
+  args: { visible: 'auto', threshold: 300 },
+  render: (args) => (
+    <div style={{ height: '2000px', paddingTop: 16 }}>
+      <p>Scroll the page down to reveal the button.</p>
+      <ScrollToTop {...args} />
+    </div>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story:
+          'Unlike `AutoVisibility` (which observes a scoped scrollable container), this observes the real `window` scroll position — the default when `scrollTarget` is omitted.',
+      },
+    },
+  },
+};
+
 // ─── Auto Visibility ──────────────────────────────────────────────────────────
 
 /** Scroll the box below to see the button appear after 150 px. */
