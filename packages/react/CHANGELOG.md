@@ -1,3 +1,26 @@
+## [1.57.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.56.1...@gnome-ui/react@1.57.0) (2026-08-07)
+
+### Features
+
+* **@gnome-ui/icons:** add animated icons support with new variants and update documentation ([243df4e](https://github.com/ElJijuna/gnome-ui/commit/243df4efacfc1e1222a6aa02947946387e61efd3))
+* **@gnome-ui/react-native:** implement Button component with variants and testing ([48d6e63](https://github.com/ElJijuna/gnome-ui/commit/48d6e637748d273684f9d8b34fb44cd7fe6b18d3))
+* **@gnome-ui/react-native:** implement GnomeProvider and GnomeContext for theming support ([ba97e44](https://github.com/ElJijuna/gnome-ui/commit/ba97e44de9274a6674cc1789cb0d0d757486a39a))
+* **@gnome-ui/react-native:** initialize react-native package with basic structure and configuration ([a63fe03](https://github.com/ElJijuna/gnome-ui/commit/a63fe03801f89248dcb47aeb4c01724539a5e46d))
+* **@gnome-ui/react:** add AnimatedIcon component with support for CSS animations and reduced motion handling ([157c1d2](https://github.com/ElJijuna/gnome-ui/commit/157c1d242eb1a9ee2763114c223405d6e17cabbf))
+
+### Bug Fixes
+
+* **@gnome-ui/web-components:** handle undefined icon paths in SVG building functions across multiple components ([71e8d9d](https://github.com/ElJijuna/gnome-ui/commit/71e8d9d90db60013660d0fb84dbf42ac09e2c465))
+
+### Refactoring
+
+* **@gnome-ui/react-native:** update code structure for improved readability and maintainability ([5af833d](https://github.com/ElJijuna/gnome-ui/commit/5af833d41953fa96b127a6f95fb6fb8f5d97d424))
+
+### Documentation
+
+* **@gnome-ui/react:** add ContributionGraph component documentation to README ([1907448](https://github.com/ElJijuna/gnome-ui/commit/1907448e074645d338b4e2a7458e3f384fe371c5))
+* add ContributionGraph component to README and update its status in ROADMAP ([5794def](https://github.com/ElJijuna/gnome-ui/commit/5794defa6f8777c36dce8a60b2fdba09fd616c7a))
+
 ## [1.56.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.56.0...@gnome-ui/react@1.56.1) (2026-08-05)
 
 ### Features
