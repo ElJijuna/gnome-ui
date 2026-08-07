@@ -1,3 +1,35 @@
+## [1.9.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.9.0...@gnome-ui/web-components@1.9.1) (2026-08-07)
+
+### Features
+
+* **@gnome-ui/charts:** add GaugeChart component with styles, documentation, and tests ([9ba6b1d](https://github.com/ElJijuna/gnome-ui/commit/9ba6b1d8afc2981c80a9cb0ae9d056438c2d1d84))
+* **@gnome-ui/charts:** add Heatmap component with styles, documentation, and tests ([fc4735d](https://github.com/ElJijuna/gnome-ui/commit/fc4735d22212ec8c396d68d8f49bf6b81a7f077b))
+* **@gnome-ui/charts:** add SankeyChart component with documentation, styles, and tests ([8a0cebe](https://github.com/ElJijuna/gnome-ui/commit/8a0cebeef452fd70af2d1f6c6675bef44c5cd56e))
+* **@gnome-ui/charts:** add SparkGaugeChart component with documentation, styles, and tests ([487bd70](https://github.com/ElJijuna/gnome-ui/commit/487bd709cb7fbc7580097462fe507f9738f43fa5))
+* **@gnome-ui/icons:** add animated icons support with new variants and update documentation ([243df4e](https://github.com/ElJijuna/gnome-ui/commit/243df4efacfc1e1222a6aa02947946387e61efd3))
+* **@gnome-ui/react-native:** implement Button component with variants and testing ([48d6e63](https://github.com/ElJijuna/gnome-ui/commit/48d6e637748d273684f9d8b34fb44cd7fe6b18d3))
+* **@gnome-ui/react-native:** implement GnomeProvider and GnomeContext for theming support ([ba97e44](https://github.com/ElJijuna/gnome-ui/commit/ba97e44de9274a6674cc1789cb0d0d757486a39a))
+* **@gnome-ui/react-native:** initialize react-native package with basic structure and configuration ([a63fe03](https://github.com/ElJijuna/gnome-ui/commit/a63fe03801f89248dcb47aeb4c01724539a5e46d))
+* **@gnome-ui/react:** add AnimatedIcon component with support for CSS animations and reduced motion handling ([157c1d2](https://github.com/ElJijuna/gnome-ui/commit/157c1d242eb1a9ee2763114c223405d6e17cabbf))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** update default arc color in GaugeChart and remove unused palette import ([b2c169a](https://github.com/ElJijuna/gnome-ui/commit/b2c169a9bd12f5662cdca79853a74869e30690f0))
+* **@gnome-ui/charts:** update import paths to use alias for colors and styles ([41ce7f5](https://github.com/ElJijuna/gnome-ui/commit/41ce7f5bbaef577abc8c891b2353da72e397641a))
+* **@gnome-ui/web-components:** handle undefined icon paths in SVG building functions across multiple components ([71e8d9d](https://github.com/ElJijuna/gnome-ui/commit/71e8d9d90db60013660d0fb84dbf42ac09e2c465))
+
+### Refactoring
+
+* **@gnome-ui/charts:** simplify JSX formatting in GaugeChart, Heatmap, and SankeyChart tests and stories ([2823bf7](https://github.com/ElJijuna/gnome-ui/commit/2823bf74914abdadea6cb3868100dc6de9a56c3d))
+* **@gnome-ui/layout:** update import paths to use absolute paths for improved readability and maintainability. Enhanced vitest configuration for path aliasing. ([1f7917c](https://github.com/ElJijuna/gnome-ui/commit/1f7917c70b08c771c4816bd4f198d4d07f2625e0))
+* **@gnome-ui/react-native:** update code structure for improved readability and maintainability ([5af833d](https://github.com/ElJijuna/gnome-ui/commit/5af833d41953fa96b127a6f95fb6fb8f5d97d424))
+* **@gnome-ui/react:** import paths to use absolute paths for better readability and maintainability across multiple components and stories. Updated vitest configuration to include path aliasing for cleaner imports. ([84e5266](https://github.com/ElJijuna/gnome-ui/commit/84e5266ccbda6d4760c4fb301ddcaea15247dd17))
+
+### Documentation
+
+* **@gnome-ui/react:** add ContributionGraph component documentation to README ([1907448](https://github.com/ElJijuna/gnome-ui/commit/1907448e074645d338b4e2a7458e3f384fe371c5))
+* add ContributionGraph component to README and update its status in ROADMAP ([5794def](https://github.com/ElJijuna/gnome-ui/commit/5794defa6f8777c36dce8a60b2fdba09fd616c7a))
+
 ## [1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.8.0...@gnome-ui/web-components@1.9.0) (2026-08-04)
 
 ### Features
