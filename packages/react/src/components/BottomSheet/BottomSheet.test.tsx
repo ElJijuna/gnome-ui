@@ -49,6 +49,12 @@ describe('BottomSheet', () => {
     expect(screen.getByRole('dialog')).toHaveAccessibleName('Share file');
   });
 
+  it('moves focus into the sheet itself when it has no focusable content', () => {
+    render(<BottomSheet open title="Options" />);
+
+    expect(screen.getByRole('dialog')).toHaveFocus();
+  });
+
   it('closes on Escape', () => {
     const onClose = vi.fn();
 

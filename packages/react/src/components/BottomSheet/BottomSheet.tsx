@@ -104,16 +104,38 @@ export const BottomSheet = ({
     }
   }, [open]);
 
-  // Save / restore focus
+  // Move focus into the sheet once it's actually mounted. Keyed off
+  // `isVisible` (not `open`) on purpose: this effect and the "track open →
+  // closed transitions" effect above both fire from the same `open` change,
+  // in declaration order — `setIsVisible(true)` from that effect hasn't
+  // committed a re-render yet when a sibling effect on the same dependency
+  // runs, so `sheetRef.current` would still be null. `isVisible` only
+  // becomes true once that re-render has actually happened and mounted the
+  // sheet into the DOM.
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+
+    previouslyFocused.current = document.activeElement;
+    const el = sheetRef.current?.querySelector<HTMLElement>(FOCUSABLE);
+
+    // Fall back to the sheet itself when there's no focusable content —
+    // otherwise focus (and Escape/Tab, which key off it) never actually
+    // enters the sheet at all.
+    (el ?? sheetRef.current)?.focus();
+  }, [isVisible]);
+
+  // Restore focus to whatever was focused before, as soon as a close is
+  // requested — deliberately on `open` (not `isVisible`, which for an
+  // animated close only flips after the exit animation finishes) so this
+  // happens immediately.
   useEffect(() => {
     if (open) {
-      previouslyFocused.current = document.activeElement;
-      const el = sheetRef.current?.querySelector<HTMLElement>(FOCUSABLE);
-
-      el?.focus();
-    } else {
-      (previouslyFocused.current as HTMLElement | null)?.focus();
+      return;
     }
+
+    (previouslyFocused.current as HTMLElement | null)?.focus();
   }, [open]);
 
   // Focus trap + Escape
@@ -262,6 +284,7 @@ export const BottomSheet = ({
         ref={sheetRef}
         role="dialog"
         aria-modal="true"
+        tabIndex={-1}
         aria-labelledby={title ? titleId : undefined}
         className={[
           styles.sheet,
