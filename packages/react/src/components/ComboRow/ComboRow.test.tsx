@@ -16,6 +16,14 @@ beforeAll(() => {
 
 describe('ComboRow', () => {
   describe('rendering', () => {
+    it('exposes the open list as a real listbox of options', () => {
+      render(<ComboRow title="Theme" options={options} />);
+      fireEvent.click(screen.getByRole('combobox'));
+
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+      expect(screen.getAllByRole('option')).toHaveLength(options.length);
+    });
+
     it('renders title and subtitle', () => {
       render(<ComboRow title="Theme" subtitle="Appearance" options={options} />);
 
