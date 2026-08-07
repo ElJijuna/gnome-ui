@@ -15,6 +15,12 @@ beforeAll(() => {
 });
 
 describe('Dropdown', () => {
+  it('applies aria-label to the combobox trigger itself, not a wrapper element', () => {
+    render(<Dropdown aria-label="Colour scheme" options={options} />);
+
+    expect(screen.getByRole('combobox', { name: 'Colour scheme' })).toBeInTheDocument();
+  });
+
   it('renders placeholder when no value is selected', () => {
     render(<Dropdown aria-label="Colour scheme" placeholder="Choose scheme" options={options} />);
 

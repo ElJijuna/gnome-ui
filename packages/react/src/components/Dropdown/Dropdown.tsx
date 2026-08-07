@@ -58,6 +58,7 @@ export const Dropdown = <V extends string = string>({
   placeholder = 'Select an option',
   disabled,
   className,
+  'aria-label': ariaLabel,
   ...props
 }: DropdownProps<V>) => {
   const [open, setOpen] = useState(false);
@@ -241,6 +242,7 @@ export const Dropdown = <V extends string = string>({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
+        aria-label={ariaLabel}
         aria-activedescendant={
           open && activeIndex >= 0 ? `${listboxId}-opt-${activeIndex}` : undefined
         }
