@@ -14,6 +14,7 @@ export {
   useNotification,
 } from './useNotification';
 export { type PlatformInfo, usePlatform } from './usePlatform';
+export { usePortalSignal } from './usePortalSignal';
 export { useRuntime } from './useRuntime';
 export { type UseSettingsResult, useSettings } from './useSettings';
 export { type UseWindowStateResult, useWindowState } from './useWindowState';

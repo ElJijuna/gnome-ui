@@ -45,6 +45,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | `usePlatform()` | `PlatformInfo` | Convenience booleans for the current shell context |
 | `useRuntime()` | `RuntimeInfo` | Full runtime snapshot: shell, engine, browser, OS |
 | `useNativeEvent(type, handler)` | `void` | Subscribe to an event dispatched by the GJS host |
+| `usePortalSignal(interface, signal, handler)` | `void` | Subscribe to an XDG Desktop Portal D-Bus signal (e.g. `Settings`'s `SettingChanged`) |
 
 ### GNOME integrations
 
@@ -121,6 +122,28 @@ webView.evaluate_javascript(
   -1, null, null, null, null
 );
 ```
+
+### Subscribe to an XDG Desktop Portal signal
+
+```tsx
+import { usePortalSignal } from "@gnome-ui/hooks";
+
+export function SystemSettingsWatcher() {
+  usePortalSignal(
+    "org.freedesktop.portal.Settings",
+    "SettingChanged",
+    (payload: { namespace: string; key: string; value: unknown }) => {
+      console.log(`${payload.namespace}.${payload.key} changed to`, payload.value);
+    },
+  );
+
+  return null;
+}
+```
+
+For one-off calls to a portal interface (not a subscription), use
+`callPortal` from `@gnome-ui/platform` directly — it's request/response, so
+it doesn't need a hook.
 
 ### Read and write a GSettings key
 

@@ -32,6 +32,11 @@
       "import": "./dist/useFileChooser.js",
       "require": "./dist/useFileChooser.cjs"
     },
+    "./useHapticFeedback": {
+      "types": "./dist/useHapticFeedback.d.ts",
+      "import": "./dist/useHapticFeedback.js",
+      "require": "./dist/useHapticFeedback.cjs"
+    },
     "./useNativeEvent": {
       "types": "./dist/useNativeEvent.d.ts",
       "import": "./dist/useNativeEvent.js",
@@ -46,6 +51,11 @@
       "types": "./dist/usePlatform.d.ts",
       "import": "./dist/usePlatform.js",
       "require": "./dist/usePlatform.cjs"
+    },
+    "./usePortalSignal": {
+      "types": "./dist/usePortalSignal.d.ts",
+      "import": "./dist/usePortalSignal.js",
+      "require": "./dist/usePortalSignal.cjs"
     },
     "./useRuntime": {
       "types": "./dist/useRuntime.d.ts",

@@ -43,6 +43,14 @@ describe('useColorScheme', () => {
       expect(result.current.scheme).toBe('light');
       expect(result.current.error).toEqual(new Error('not supported'));
     });
+
+    it('wraps a non-Error rejection in an Error', async () => {
+      vi.mocked(getColorScheme).mockRejectedValue('denied');
+      const { result } = renderHook(() => useColorScheme());
+
+      await waitFor(() => expect(result.current.loading).toBe(false));
+      expect(result.current.error).toEqual(new Error('denied'));
+    });
   });
 
   describe('external changes', () => {

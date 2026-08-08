@@ -58,6 +58,17 @@ describe('useClipboard', () => {
       expect(result.current.error).toEqual(new Error('not supported'));
       expect(result.current.value).toBeNull();
     });
+
+    it('wraps a non-Error rejection in an Error', async () => {
+      vi.mocked(writeText).mockRejectedValue('denied');
+      const { result } = renderHook(() => useClipboard());
+
+      await act(async () => {
+        await expect(result.current.copy('hello')).rejects.toBe('denied');
+      });
+
+      expect(result.current.error).toEqual(new Error('denied'));
+    });
   });
 
   describe('paste', () => {

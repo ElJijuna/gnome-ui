@@ -61,6 +61,14 @@ describe('useWindowState', () => {
       expect(result.current.maximized).toBe(false);
       expect(result.current.error).toEqual(new Error('not supported'));
     });
+
+    it('wraps a non-Error rejection in an Error', async () => {
+      vi.mocked(getWindowState).mockRejectedValue('denied');
+      const { result } = renderHook(() => useWindowState());
+
+      await waitFor(() => expect(result.current.loading).toBe(false));
+      expect(result.current.error).toEqual(new Error('denied'));
+    });
   });
 
   describe('external changes', () => {

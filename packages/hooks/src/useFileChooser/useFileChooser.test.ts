@@ -80,6 +80,17 @@ describe('useFileChooser', () => {
       expect(result.current.path).toBeNull();
     });
 
+    it('wraps a non-Error rejection in an Error', async () => {
+      vi.mocked(openFile).mockRejectedValue('denied');
+      const { result } = renderHook(() => useFileChooser());
+
+      await act(async () => {
+        await expect(result.current.open()).rejects.toBe('denied');
+      });
+
+      expect(result.current.error).toEqual(new Error('denied'));
+    });
+
     it('loading is true while the call is pending and false once it settles', async () => {
       let resolveOpen: (value: { canceled: boolean; paths: string[] }) => void = () => {};
 

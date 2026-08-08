@@ -50,6 +50,14 @@ describe('useSettings', () => {
       expect(result.current.value).toBe(false);
       expect(result.current.error).toEqual(new Error('not supported'));
     });
+
+    it('wraps a non-Error rejection in an Error', async () => {
+      vi.mocked(getSetting).mockRejectedValue('denied');
+      const { result } = renderHook(() => useSettings('prefer-dark', false));
+
+      await waitFor(() => expect(result.current.loading).toBe(false));
+      expect(result.current.error).toEqual(new Error('denied'));
+    });
   });
 
   describe('external changes', () => {
