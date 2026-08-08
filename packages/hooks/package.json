@@ -27,6 +27,11 @@
       "import": "./dist/useColorScheme.js",
       "require": "./dist/useColorScheme.cjs"
     },
+    "./useElementSize": {
+      "types": "./dist/useElementSize.d.ts",
+      "import": "./dist/useElementSize.js",
+      "require": "./dist/useElementSize.cjs"
+    },
     "./useFileChooser": {
       "types": "./dist/useFileChooser.d.ts",
       "import": "./dist/useFileChooser.js",
@@ -56,6 +61,11 @@
       "types": "./dist/usePortalSignal.d.ts",
       "import": "./dist/usePortalSignal.js",
       "require": "./dist/usePortalSignal.cjs"
+    },
+    "./usePrefersReducedMotion": {
+      "types": "./dist/usePrefersReducedMotion.d.ts",
+      "import": "./dist/usePrefersReducedMotion.js",
+      "require": "./dist/usePrefersReducedMotion.cjs"
     },
     "./useRuntime": {
       "types": "./dist/useRuntime.d.ts",

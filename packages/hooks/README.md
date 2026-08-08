@@ -37,6 +37,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | Hook | Returns | Description |
 | --- | --- | --- |
 | `useBreakpoint()` | `BreakpointInfo` | Reactive `isMobile`, `isTablet`, `isDesktop` flags based on GNOME HIG breakpoints |
+| `useElementSize(ref)` | `ElementSize` | Reactive `{ width, height }` of an element via `ResizeObserver` — the container-level sibling of `useBreakpoint` |
 
 ### Platform & runtime
 
@@ -82,6 +83,26 @@ Breakpoints follow the GNOME HIG adaptive layout recommendations:
 | `isDesktop` | `width ≥ 1024 px` |
 
 SSR-safe: defaults to `isDesktop: true` when `window` is not available.
+
+### Adapt layout to a container's own size
+
+```tsx
+import { useElementSize } from "@gnome-ui/hooks";
+import { useRef } from "react";
+
+export function AdaptiveCard() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { width } = useElementSize(ref);
+
+  return <div ref={ref}>{width < 400 ? <CompactLayout /> : <WideLayout />}</div>;
+}
+```
+
+Unlike `useBreakpoint` (which watches the viewport), `useElementSize` uses
+`ResizeObserver` to watch the element itself — the same widget can behave
+differently depending on how much space its parent gives it, regardless of
+the window size. Returns `{ width: 0, height: 0 }` until the ref is attached
+and the first measurement lands.
 
 ### Detect GNOME WebView context
 
