@@ -39,6 +39,7 @@
 | ✅ | **`TeamCard`** | Group card: avatar group, team name, member count — distinct from `UserCard`, which represents a single user's identity |
 | ✅ | **`StickyToc`** | Sticky table-of-contents side rail with scroll-spy highlighting the active section — for long docs/settings pages |
 | ✅ | **`ResizablePanel`** | Two or more panels separated by a draggable divider, based on the `GtkPaned` pattern — foundational for user-resizable master-detail layouts (code editors, file explorers, analytics dashboards) |
+| ✅ | **`LoadingStatus`** | Visually hidden `role="status"` live region announcing a skeleton loading state to screen readers — `aria-busy` alone isn't announced by most screen readers, and `Skeleton` itself is `aria-hidden`. Used internally by `StatCard`, `EntityCard`, `ProfileCard`, `ChartCard`, `ActivityFeed`, and other cards' loading states |
 
 ---
 
