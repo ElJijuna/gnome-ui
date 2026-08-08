@@ -1,4 +1,5 @@
 export { type BreakpointInfo, useBreakpoint } from './useBreakpoint';
+export { type UseClipboardResult, useClipboard } from './useClipboard';
 export { type UseColorSchemeResult, useColorScheme } from './useColorScheme';
 export { type UseFileChooserResult, useFileChooser } from './useFileChooser';
 export {

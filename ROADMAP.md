@@ -359,7 +359,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`useNotification`** | Returns `send`/`dismiss`, scoped to the component's lifetime — notifications sent through it are auto-withdrawn and `onAction` listeners auto-unsubscribed on unmount |
 | ✅ | **`useColorScheme`** | Returns the resolved `"light"`/`"dark"` scheme and a `"light"`/`"dark"`/`"system"` setter, reactive to external changes — talks to `Adw.StyleManager` via the bridge, distinct from `@gnome-ui/react`'s `GnomeProvider`-based hook of the same name |
 | ✅ | **`useFileChooser`** | Returns `open()`/`save()`/`selectFolder()` triggers and the resolved `path`/`paths` as reactive state, plus `loading`/`error` |
-| ⬜ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state — blocked on `@gnome-ui/platform`'s `clipboard` module |
+| ✅ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state, plus `loading`/`error` — text only; use `@gnome-ui/platform`'s `clipboard` module directly for images/files |
 | ⬜ | **`useWindowState`** | Returns `{ maximized, fullscreen, focused }` and matching setters — blocked on `@gnome-ui/platform`'s `window` module |
 | ✅ | **`useHapticFeedback`** | Trigger haptic feedback via feedbackd (native) or Vibration API (browser) — issue [#81](https://github.com/ElJijuna/gnome-ui/issues/81) |
 

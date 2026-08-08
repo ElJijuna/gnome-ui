@@ -260,6 +260,46 @@ every trigger rejects outside that environment (see `error`).
 | `loading` | `boolean` | `true` while a dialog is open and awaiting the user |
 | `error` | `Error \| null` | Set when the last dialog call failed |
 
+### Copy and paste clipboard text
+
+```tsx
+import { useState } from "react";
+import { useClipboard } from "@gnome-ui/hooks";
+
+export function ShareLink({ url }: { url: string }) {
+  const { value, copy, paste } = useClipboard();
+  const [text, setText] = useState("");
+
+  return (
+    <>
+      <button onClick={() => copy(url)}>{value === url ? "Copied!" : "Copy link"}</button>
+
+      <TextField value={text} onChange={setText} />
+      <button onClick={async () => setText(await paste())}>Paste</button>
+    </>
+  );
+}
+```
+
+Text only — `@gnome-ui/platform`'s `clipboard` module also has
+`readImage`/`writeImage`/`readFiles`/`writeFiles` for images and file
+references, but those return a different enough shape (a `data:` URL, a
+list of paths) that folding them into this hook's single `value` would
+just make the common case harder to use. Reach for the platform functions
+directly for those.
+
+There is no "clipboard changed" signal to subscribe to — `value` only
+updates when you call `copy`/`paste` through this hook, not when the
+clipboard changes externally (another app, another window).
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `value` | `string \| null` | Last text copied or pasted through this hook |
+| `copy(text)` | `(text: string) => Promise<void>` | Writes text to the clipboard and updates `value` |
+| `paste()` | `() => Promise<string>` | Reads text from the clipboard and updates `value` |
+| `loading` | `boolean` | `true` while a copy/paste call is pending |
+| `error` | `Error \| null` | Set when the last copy/paste call failed |
+
 ### Trigger haptic feedback
 
 ```tsx
