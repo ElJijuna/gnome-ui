@@ -55,7 +55,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | `useColorScheme()` | `UseColorSchemeResult` | Reactive resolved `"light"`/`"dark"` scheme, with a `"light"`/`"dark"`/`"system"` setter |
 | `useFileChooser()` | `UseFileChooserResult` | Trigger file open/save/folder dialogs; tracks the resolved path as reactive state |
 | `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard with copy/paste helpers |
-| `useWindowState()` | `{ maximized, fullscreen, ... }` | Reactive window state with matching setters |
+| `useWindowState()` | `UseWindowStateResult` | Reactive window state (`maximized`, `fullscreen`, `focused`) with matching actions |
 | `useHapticFeedback()` | `{ trigger, isSupported, ... }` | Haptic feedback via feedbackd (native) or Vibration API (browser/PWA) |
 
 ## Examples
@@ -299,6 +299,40 @@ clipboard changes externally (another app, another window).
 | `paste()` | `() => Promise<string>` | Reads text from the clipboard and updates `value` |
 | `loading` | `boolean` | `true` while a copy/paste call is pending |
 | `error` | `Error \| null` | Set when the last copy/paste call failed |
+
+### React to window state and trigger window actions
+
+```tsx
+import { useWindowState } from "@gnome-ui/hooks";
+
+export function FullscreenToggle() {
+  const { fullscreen, setFullscreen } = useWindowState();
+
+  return (
+    <button onClick={() => setFullscreen(!fullscreen)}>
+      {fullscreen ? "Exit" : "Enter"} fullscreen
+    </button>
+  );
+}
+```
+
+`setMaximized`/`minimize` are WebKitGTK-only — there is no browser
+equivalent for either (see `error`). `setFullscreen`/`close` fall back to
+the real Fullscreen API / `window.close()` in a browser. `maximized` is
+always `false` outside WebKitGTK — no browser API exposes whether the OS
+window chrome is maximized.
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `maximized` | `boolean` | Always `false` outside WebKitGTK |
+| `fullscreen` | `boolean` | Real Fullscreen API state in a browser |
+| `focused` | `boolean` | Real `document.hasFocus()` state in a browser |
+| `setMaximized(value)` | `(value: boolean) => void` | Maximizes or restores the window |
+| `setFullscreen(value)` | `(value: boolean) => void` | Enters or exits fullscreen |
+| `minimize()` | `() => void` | Minimizes the window |
+| `close()` | `() => void` | Requests that the window close |
+| `loading` | `boolean` | `true` until the first read completes |
+| `error` | `Error \| null` | Set when the last read or action failed |
 
 ### Trigger haptic feedback
 

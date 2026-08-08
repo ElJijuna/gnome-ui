@@ -16,3 +16,4 @@ export {
 export { type PlatformInfo, usePlatform } from './usePlatform';
 export { useRuntime } from './useRuntime';
 export { type UseSettingsResult, useSettings } from './useSettings';
+export { type UseWindowStateResult, useWindowState } from './useWindowState';
