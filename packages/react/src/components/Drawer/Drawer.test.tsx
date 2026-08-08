@@ -1,3 +1,4 @@
+import { Settings } from '@gnome-ui/icons';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -63,5 +64,53 @@ describe('Drawer', () => {
     );
 
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('narrows a drawer nested inside a parent drawer', () => {
+    render(
+      <Drawer open aria-label="Parent">
+        <Drawer open aria-label="Child">
+          <span>Nested content</span>
+        </Drawer>
+      </Drawer>,
+    );
+
+    const parentWidth = getComputedStyle(
+      screen.getByRole('dialog', { name: 'Parent' }),
+    ).getPropertyValue('--gnome-drawer-preset-width');
+    const childWidth = getComputedStyle(
+      screen.getByRole('dialog', { name: 'Child' }),
+    ).getPropertyValue('--gnome-drawer-preset-width');
+
+    expect(parentWidth).toBe('420px');
+    expect(childWidth).toBe('357px');
+  });
+
+  it('renders a rail with pressed state and fires onClick per entry', () => {
+    const onClickA = vi.fn();
+    const onClickB = vi.fn();
+
+    render(
+      <Drawer
+        open
+        aria-label="With rail"
+        rail={[
+          { id: 'a', icon: Settings, label: 'Section A', active: true, onClick: onClickA },
+          { id: 'b', icon: Settings, label: 'Section B', onClick: onClickB },
+        ]}
+      >
+        <span>Body</span>
+      </Drawer>,
+    );
+
+    const sectionA = screen.getByRole('button', { name: 'Section A' });
+    const sectionB = screen.getByRole('button', { name: 'Section B' });
+
+    expect(sectionA).toHaveAttribute('aria-pressed', 'true');
+    expect(sectionB).toHaveAttribute('aria-pressed', 'false');
+
+    fireEvent.click(sectionB);
+    expect(onClickB).toHaveBeenCalledTimes(1);
+    expect(onClickA).not.toHaveBeenCalled();
   });
 });

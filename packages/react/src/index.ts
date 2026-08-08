@@ -144,7 +144,7 @@ export type {
 export { Dialog } from './components/Dialog';
 export type { DividerProps } from './components/Divider';
 export { Divider } from './components/Divider';
-export type { DrawerProps, DrawerSide, DrawerSize } from './components/Drawer';
+export type { DrawerProps, DrawerRailItem, DrawerSide, DrawerSize } from './components/Drawer';
 export { Drawer } from './components/Drawer';
 export type { DropdownOption, DropdownProps } from './components/Dropdown';
 export { Dropdown } from './components/Dropdown';
