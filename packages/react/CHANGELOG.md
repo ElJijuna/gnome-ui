@@ -1,3 +1,20 @@
+## [1.58.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.57.0...@gnome-ui/react@1.58.0) (2026-08-08)
+
+### Features
+
+* **@gnome-ui/hooks:** implement useClipboard hook for reactive clipboard management with copy/paste functionality ([1d30f36](https://github.com/ElJijuna/gnome-ui/commit/1d30f3695d620106fea98beec23553232b98e4d6))
+* **@gnome-ui/hooks:** implement useColorScheme hook for reactive color scheme management ([3e210de](https://github.com/ElJijuna/gnome-ui/commit/3e210deaf4cffb35abc3fa79035226641479ba1e))
+* **@gnome-ui/hooks:** implement useFileChooser hook for file and folder selection with reactive state management ([ebd91c0](https://github.com/ElJijuna/gnome-ui/commit/ebd91c02ebb610b0fd954a474cea4d8cc7794498))
+* **@gnome-ui/hooks:** implement useNotification hook for scoped desktop notifications ([11d5d66](https://github.com/ElJijuna/gnome-ui/commit/11d5d66db9cf4e84084cef8c2ba84d6dcd1390c8))
+* **@gnome-ui/hooks:** implement useSettings hook for reactive GSettings management ([b8233be](https://github.com/ElJijuna/gnome-ui/commit/b8233be12b61a437d3f80b437a4ed6ce14afb99c))
+* **@gnome-ui/hooks:** implement useWindowState hook for reactive window state management with actions ([f2fb67e](https://github.com/ElJijuna/gnome-ui/commit/f2fb67e09b451e000100cb7a409d438ffdef9200))
+* **@gnome-ui/platform:** add tests for file chooser functionality (open, save, select folder) ([1329d66](https://github.com/ElJijuna/gnome-ui/commit/1329d66aaaa1901802ddc9332c0103e07a9935aa))
+* **@gnome-ui/platform:** enhance clipboard functionality with image and file read/write support ([5a1f506](https://github.com/ElJijuna/gnome-ui/commit/5a1f506b7ae0eca8c42c5b187d3401adc55ae20b))
+* **@gnome-ui/platform:** implement color scheme detection and setter via bridge ([ccbb102](https://github.com/ElJijuna/gnome-ui/commit/ccbb102b786b1e72d88189af1f1afc0597700783))
+* **@gnome-ui/platform:** implement window state queries and setters via bridge ([3f574b7](https://github.com/ElJijuna/gnome-ui/commit/3f574b7dc46cc28fcb41c2fbdc17188b043d7cbf))
+* **@gnome-ui/platform:** implement XDG Desktop Portal access with callPortal and onPortalSignal functions ([6db26cc](https://github.com/ElJijuna/gnome-ui/commit/6db26cc6745ae13585856d1eeedaf0f2c98e2e60))
+* **@gnome-ui/react:** implement WidgetManager component for managing a collection of widgets with customizable picker surfaces ([ee17b4c](https://github.com/ElJijuna/gnome-ui/commit/ee17b4ca40edc1e9deeec717a234a385dd35151b))
+
 ## [1.57.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.56.1...@gnome-ui/react@1.57.0) (2026-08-07)
 
 ### Features
