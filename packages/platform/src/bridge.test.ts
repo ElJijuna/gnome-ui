@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { isWebKitBridge, onNativeEvent, postMessage } from './bridge.ts';
+import { isWebKitBridge, onNativeEvent, postMessage, postMessageAndWait } from './bridge.ts';
 
 type WebKitWindow = Window & {
   webkit?: {
@@ -101,5 +101,89 @@ describe('onNativeEvent', () => {
     window.dispatchEvent(new CustomEvent('bare-event', { detail: {} }));
     expect(handler).not.toHaveBeenCalled();
     off();
+  });
+});
+
+describe('postMessageAndWait', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    clearWebKit();
+  });
+
+  it('tags the outgoing message with a requestId and resolves with the matching response', async () => {
+    let requestId = '';
+
+    setWebKit({
+      settings: {
+        postMessage: vi.fn((payload: { requestId: string; key: string }) => {
+          ({ requestId } = payload);
+          window.dispatchEvent(
+            new CustomEvent('gnome:settings-get-result', {
+              detail: { requestId, value: 'dark' },
+            }),
+          );
+        }),
+      },
+    });
+
+    const detail = await postMessageAndWait<{ requestId: string; value: string }>(
+      'settings',
+      { action: 'get', key: 'color-scheme' },
+      'settings-get-result',
+    );
+
+    expect(requestId).not.toBe('');
+    expect(detail).toEqual({ requestId, value: 'dark' });
+  });
+
+  it('ignores a response event carrying an unrelated requestId', async () => {
+    let requestId = '';
+
+    setWebKit({
+      settings: {
+        postMessage: vi.fn((payload: { requestId: string }) => {
+          ({ requestId } = payload);
+        }),
+      },
+    });
+
+    const pending = postMessageAndWait('settings', {}, 'settings-get-result');
+
+    window.dispatchEvent(
+      new CustomEvent('gnome:settings-get-result', {
+        detail: { requestId: 'some-other-request', value: 'wrong' },
+      }),
+    );
+    window.dispatchEvent(
+      new CustomEvent('gnome:settings-get-result', {
+        detail: { requestId, value: 'right' },
+      }),
+    );
+
+    await expect(pending).resolves.toMatchObject({ value: 'right' });
+  });
+
+  it('rejects after the default timeout when the host never responds', async () => {
+    vi.useFakeTimers();
+    setWebKit({ settings: { postMessage: vi.fn() } });
+
+    const pending = postMessageAndWait('settings', {}, 'settings-get-result');
+    const assertion = expect(pending).rejects.toThrow(
+      'Timed out waiting for a "settings-get-result" response to a "settings" request.',
+    );
+
+    await vi.advanceTimersByTimeAsync(5000);
+    await assertion;
+  });
+
+  it('respects a custom timeoutMs', async () => {
+    vi.useFakeTimers();
+    setWebKit({ settings: { postMessage: vi.fn() } });
+
+    const pending = postMessageAndWait('settings', {}, 'settings-get-result', 100);
+    const assertion = expect(pending).rejects.toThrow(/Timed out/);
+
+    await vi.advanceTimersByTimeAsync(100);
+    await assertion;
   });
 });

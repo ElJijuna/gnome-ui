@@ -155,7 +155,7 @@ describe('readText', () => {
 
     const pending = readText();
     const assertion = expect(pending).rejects.toThrow(
-      'Timed out waiting for the clipboard read response from the host.',
+      'Timed out waiting for a "clipboard-read-text-result" response to a "clipboard" request.',
     );
 
     await vi.advanceTimersByTimeAsync(5000);
