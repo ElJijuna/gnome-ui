@@ -11,13 +11,13 @@
 
 import { execFileSync } from 'node:child_process';
 import {
-  mkdtempSync,
-  mkdirSync,
-  writeFileSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
   existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -30,7 +30,9 @@ function findRepoRoot(startDir) {
   let dir = startDir;
   while (!existsSync(join(dir, 'turbo.json'))) {
     const parent = dirname(dir);
-    if (parent === dir) throw new Error('Could not locate repo root (turbo.json not found)');
+    if (parent === dir) {
+      throw new Error('Could not locate repo root (turbo.json not found)');
+    }
     dir = parent;
   }
   return dir;
@@ -196,14 +198,20 @@ step('Validate every exports target resolves to a real file', () => {
   for (const [subpath, target] of Object.entries(exportsMap)) {
     if (typeof target === 'string') {
       const filePath = join(installedPkgDir, target);
-      if (!existsSync(filePath)) missing.push(`${subpath} -> ${target}`);
+      if (!existsSync(filePath)) {
+        missing.push(`${subpath} -> ${target}`);
+      }
       continue;
     }
     for (const condition of ['types', 'import', 'require']) {
       const rel = target[condition];
-      if (!rel) continue;
+      if (!rel) {
+        continue;
+      }
       const filePath = join(installedPkgDir, rel);
-      if (!existsSync(filePath)) missing.push(`${subpath} [${condition}] -> ${rel}`);
+      if (!existsSync(filePath)) {
+        missing.push(`${subpath} [${condition}] -> ${rel}`);
+      }
     }
   }
   if (missing.length > 0) {
