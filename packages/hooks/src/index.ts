@@ -1,6 +1,7 @@
 export { type BreakpointInfo, useBreakpoint } from './useBreakpoint';
 export { type UseClipboardResult, useClipboard } from './useClipboard';
 export { type UseColorSchemeResult, useColorScheme } from './useColorScheme';
+export { type ElementSize, useElementSize } from './useElementSize';
 export { type UseFileChooserResult, useFileChooser } from './useFileChooser';
 export {
   type GnomeHapticEvent,
@@ -15,6 +16,7 @@ export {
 } from './useNotification';
 export { type PlatformInfo, usePlatform } from './usePlatform';
 export { usePortalSignal } from './usePortalSignal';
+export { usePrefersReducedMotion } from './usePrefersReducedMotion';
 export { useRuntime } from './useRuntime';
 export { type UseSettingsResult, useSettings } from './useSettings';
 export { type UseWindowStateResult, useWindowState } from './useWindowState';
