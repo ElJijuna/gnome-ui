@@ -53,7 +53,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | `useSettings(key, defaultValue)` | `UseSettingsResult<T>` | Read/write a GSettings key; re-renders on external changes |
 | `useNotification()` | `{ send, dismiss }` | Send and dismiss desktop notifications, scoped to the component's lifetime |
 | `useColorScheme()` | `UseColorSchemeResult` | Reactive resolved `"light"`/`"dark"` scheme, with a `"light"`/`"dark"`/`"system"` setter |
-| `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs |
+| `useFileChooser()` | `UseFileChooserResult` | Trigger file open/save/folder dialogs; tracks the resolved path as reactive state |
 | `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard with copy/paste helpers |
 | `useWindowState()` | `{ maximized, fullscreen, ... }` | Reactive window state with matching setters |
 | `useHapticFeedback()` | `{ trigger, isSupported, ... }` | Haptic feedback via feedbackd (native) or Vibration API (browser/PWA) |
@@ -224,6 +224,41 @@ export function ThemeToggle() {
 | `setScheme(preference)` | `(preference: "light" \| "dark" \| "system") => void` | Sets this app's color scheme preference |
 | `loading` | `boolean` | `true` until the first read completes |
 | `error` | `Error \| null` | Set when reading or writing failed |
+
+### Choose a file, save destination, or folder
+
+```tsx
+import { useFileChooser } from "@gnome-ui/hooks";
+
+export function AttachmentPicker() {
+  const { path, open, loading } = useFileChooser();
+
+  return (
+    <Button
+      onClick={() => open({ filters: [{ name: "Images", extensions: ["png", "jpg"] }] })}
+      disabled={loading}
+    >
+      {path ?? "Choose a file…"}
+    </Button>
+  );
+}
+```
+
+`path`/`paths` hold the most recently chosen result and are left unchanged
+if the user cancels the dialog — canceling doesn't blank out a prior
+selection. WebKitGTK only, same as `@gnome-ui/platform`'s `fileChooser`
+module: browsers never expose real filesystem paths to page scripts, so
+every trigger rejects outside that environment (see `error`).
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `path` | `string \| null` | Most recently chosen file, save destination, or folder |
+| `paths` | `string[]` | All paths from the most recent `open({ multiple: true })` call |
+| `open(options)` | `(options?) => Promise<OpenFileResult>` | Opens a file picker |
+| `save(options)` | `(options?) => Promise<SaveFileResult>` | Opens a save dialog |
+| `selectFolder(options)` | `(options?) => Promise<SelectFolderResult>` | Opens a folder picker |
+| `loading` | `boolean` | `true` while a dialog is open and awaiting the user |
+| `error` | `Error \| null` | Set when the last dialog call failed |
 
 ### Trigger haptic feedback
 
