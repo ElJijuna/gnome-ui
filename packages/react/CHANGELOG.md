@@ -1,3 +1,10 @@
+## [1.59.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.58.0...@gnome-ui/react@1.59.0) (2026-08-08)
+
+### Features
+
+* **@gnome-ui/react:** enhance button styles for active state with aria-pressed support ([dce0138](https://github.com/ElJijuna/gnome-ui/commit/dce0138baa58ab6fe4d3b129f7d5be3bbecd726a))
+* **@gnome-ui/react:** enhance Drawer component with nested functionality and rail support ([0f2b1d4](https://github.com/ElJijuna/gnome-ui/commit/0f2b1d4f4f7cfc9fd82b48f85f5ec8000c85dcb5))
+
 ## [1.58.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.57.0...@gnome-ui/react@1.58.0) (2026-08-08)
 
 ### Features
