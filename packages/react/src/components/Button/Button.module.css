@@ -80,7 +80,8 @@
   background-color: var(--gnome-light-2, #f6f5f4);
 }
 
-.default:active:not(:disabled) {
+.default:active:not(:disabled),
+.default[aria-pressed="true"]:not(:disabled) {
   background-color: var(--gnome-light-3, #deddda);
   box-shadow: none;
 }
@@ -96,7 +97,8 @@
     background-color: rgb(255 255 255 / 0.08);
   }
 
-  .default:active:not(:disabled) {
+  .default:active:not(:disabled),
+  .default[aria-pressed="true"]:not(:disabled) {
     background-color: rgb(255 255 255 / 0.14);
     box-shadow: none;
   }
@@ -113,7 +115,8 @@
   filter: brightness(1.08);
 }
 
-.suggested:active:not(:disabled) {
+.suggested:active:not(:disabled),
+.suggested[aria-pressed="true"]:not(:disabled) {
   filter: brightness(0.92);
 }
 
@@ -128,7 +131,8 @@
   filter: brightness(1.08);
 }
 
-.destructive:active:not(:disabled) {
+.destructive:active:not(:disabled),
+.destructive[aria-pressed="true"]:not(:disabled) {
   filter: brightness(0.92);
 }
 
@@ -143,7 +147,8 @@
   background-color: var(--gnome-hover-overlay);
 }
 
-.flat:active:not(:disabled) {
+.flat:active:not(:disabled),
+.flat[aria-pressed="true"]:not(:disabled) {
   background-color: var(--gnome-active-overlay);
 }
 
@@ -159,7 +164,8 @@
   background-color: var(--gnome-light-2, #f6f5f4);
 }
 
-.raised:active:not(:disabled) {
+.raised:active:not(:disabled),
+.raised[aria-pressed="true"]:not(:disabled) {
   background-color: var(--gnome-light-3, #deddda);
   box-shadow: none;
 }
@@ -175,7 +181,8 @@
     background-color: rgb(255 255 255 / 0.08);
   }
 
-  .raised:active:not(:disabled) {
+  .raised:active:not(:disabled),
+  .raised[aria-pressed="true"]:not(:disabled) {
     background-color: rgb(255 255 255 / 0.14);
     box-shadow: none;
   }
