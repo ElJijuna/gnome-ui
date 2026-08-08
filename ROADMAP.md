@@ -342,7 +342,7 @@ Pure TypeScript package. Communicates with GNOME via the WebKitGTK `window.webki
 | ⬜ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
 | ⬜ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
 | ⬜ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
-| ⬜ | **`clipboard`** | Read and write the GDK clipboard (text, files, images) |
+| 🚧 | **`clipboard`** | `readText`/`writeText` shipped — WebKitGTK via the bridge (request/response correlation for the async `Gdk.Clipboard.read_text_async()` round-trip) with a real `navigator.clipboard` fallback in browsers/PWAs. Files and images still pending. |
 | ⬜ | **`portals`** | Low-level XDG Desktop Portal access for sandboxed (Flatpak) apps |
 
 ### `@gnome-ui/hooks` — React hooks

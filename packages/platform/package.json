@@ -21,7 +21,8 @@
     "typecheck": "tsc6 --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:pack": "node scripts/verify-package.mjs"
   },
   "publishConfig": {
     "access": "public"
