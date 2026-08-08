@@ -19,13 +19,13 @@
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1;
-  color: var(--gnome-window-fg-color, rgba(0, 0, 0, 0.8));
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
   font-family: var(--gnome-font-family, system-ui);
 }
 
 .caption {
   margin-top: 4px;
   font-size: 0.75rem;
-  color: var(--gnome-dim-label-color, rgba(0, 0, 0, 0.55));
+  color: var(--gnome-dim-label-color, rgb(0 0 0 / 0.55));
   font-family: var(--gnome-font-family, system-ui);
 }
