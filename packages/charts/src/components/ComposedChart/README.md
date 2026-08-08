@@ -34,6 +34,7 @@ const data = [
 | `showGrid` | `boolean` | `true` | Show background grid |
 | `showLegend` | `boolean` | `false` | Show series legend |
 | `className` | `string` | — | Extra CSS class |
+| `aria-label` | `string` | auto | Accessible label for the chart |
 
 ### `ComposedChartSeries`
 

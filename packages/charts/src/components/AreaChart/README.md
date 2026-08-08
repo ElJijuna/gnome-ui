@@ -32,6 +32,7 @@ import { AreaChart } from '@gnome-ui/charts';
 | `showLegend` | `boolean` | `false` | Show series legend |
 | `stacked` | `boolean` | `false` | Stack areas on top of each other |
 | `gradient` | `boolean` | `false` | Apply top-to-bottom gradient fill |
+| `aria-label` | `string` | auto | Accessible label for the chart |
 
 ### Guidelines
 

@@ -55,4 +55,49 @@ describe('LineChart', () => {
       expect(container.firstChild).toBeInTheDocument();
     });
   });
+
+  describe('accessibility', () => {
+    it('has role=img on the wrapper', () => {
+      const { container } = render(<LineChart data={DATA} series={SERIES} />);
+
+      expect(container.querySelector("[role='img']")).toBeInTheDocument();
+    });
+
+    it('generates an aria-label that includes each series name', () => {
+      const { container } = render(
+        <LineChart
+          data={DATA}
+          series={[
+            { dataKey: 'cpu', name: 'CPU' },
+            { dataKey: 'memory', name: 'Memory' },
+          ]}
+        />,
+      );
+
+      const el = container.querySelector("[role='img']");
+
+      expect(el).toHaveAttribute('aria-label', expect.stringContaining('CPU'));
+      expect(el).toHaveAttribute('aria-label', expect.stringContaining('Memory'));
+    });
+
+    it('falls back to dataKey in aria-label when name is omitted', () => {
+      const { container } = render(<LineChart data={DATA} series={[{ dataKey: 'cpu' }]} />);
+
+      expect(container.querySelector("[role='img']")).toHaveAttribute(
+        'aria-label',
+        expect.stringContaining('cpu'),
+      );
+    });
+
+    it('uses the custom aria-label when provided', () => {
+      const { container } = render(
+        <LineChart data={DATA} series={SERIES} aria-label="CPU over time" />,
+      );
+
+      expect(container.querySelector("[role='img']")).toHaveAttribute(
+        'aria-label',
+        'CPU over time',
+      );
+    });
+  });
 });

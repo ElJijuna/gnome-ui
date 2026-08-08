@@ -32,6 +32,7 @@ export interface LineChartProps {
   /** Position of the legend when `showLegend` is true. Defaults to `"bottom"`. */
   legendPosition?: ChartLegendPosition;
   className?: string;
+  'aria-label'?: string;
 }
 
 const AXIS_STYLE = {
@@ -49,11 +50,19 @@ export const LineChart = ({
   showLegend = false,
   legendPosition = 'bottom',
   className,
+  'aria-label': ariaLabel,
 }: LineChartProps) => {
   const formatNumber = useNumberFormatter().format;
 
   return (
-    <div className={[styles.container, className].filter(Boolean).join(' ')} style={{ height }}>
+    <div
+      role="img"
+      aria-label={
+        ariaLabel ?? `Line chart with ${series.map((s) => s.name ?? s.dataKey).join(', ')}`
+      }
+      className={[styles.container, className].filter(Boolean).join(' ')}
+      style={{ height }}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <RechartsLineChart
           accessibilityLayer

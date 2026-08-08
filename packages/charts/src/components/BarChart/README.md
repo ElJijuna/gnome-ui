@@ -29,6 +29,7 @@ import { BarChart } from '@gnome-ui/charts';
 | `height` | `number` | `300` | Chart height in px |
 | `showGrid` | `boolean` | `true` | Show horizontal grid lines |
 | `showLegend` | `boolean` | `false` | Show series legend |
+| `aria-label` | `string` | auto | Accessible label for the chart |
 
 ### Guidelines
 

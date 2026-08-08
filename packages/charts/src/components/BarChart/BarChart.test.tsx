@@ -57,4 +57,49 @@ describe('BarChart', () => {
       expect(container.firstChild).toBeInTheDocument();
     });
   });
+
+  describe('accessibility', () => {
+    it('has role=img on the wrapper', () => {
+      const { container } = render(<BarChart data={DATA} series={SERIES} />);
+
+      expect(container.querySelector("[role='img']")).toBeInTheDocument();
+    });
+
+    it('generates an aria-label that includes each series name', () => {
+      const { container } = render(
+        <BarChart
+          data={DATA}
+          series={[
+            { dataKey: 'sales', name: 'Sales' },
+            { dataKey: 'returns', name: 'Returns' },
+          ]}
+        />,
+      );
+
+      const el = container.querySelector("[role='img']");
+
+      expect(el).toHaveAttribute('aria-label', expect.stringContaining('Sales'));
+      expect(el).toHaveAttribute('aria-label', expect.stringContaining('Returns'));
+    });
+
+    it('falls back to dataKey in aria-label when name is omitted', () => {
+      const { container } = render(<BarChart data={DATA} series={[{ dataKey: 'sales' }]} />);
+
+      expect(container.querySelector("[role='img']")).toHaveAttribute(
+        'aria-label',
+        expect.stringContaining('sales'),
+      );
+    });
+
+    it('uses the custom aria-label when provided', () => {
+      const { container } = render(
+        <BarChart data={DATA} series={SERIES} aria-label="Monthly sales" />,
+      );
+
+      expect(container.querySelector("[role='img']")).toHaveAttribute(
+        'aria-label',
+        'Monthly sales',
+      );
+    });
+  });
 });

@@ -34,6 +34,7 @@ export interface AreaChartProps {
   stacked?: boolean;
   gradient?: boolean;
   className?: string;
+  'aria-label'?: string;
 }
 
 const AXIS_STYLE = {
@@ -53,6 +54,7 @@ export const AreaChart = ({
   stacked = false,
   gradient = false,
   className,
+  'aria-label': ariaLabel,
 }: AreaChartProps) => {
   const formatNumber = useNumberFormatter().format;
 
@@ -62,7 +64,14 @@ export const AreaChart = ({
   }));
 
   return (
-    <div className={[styles.container, className].filter(Boolean).join(' ')} style={{ height }}>
+    <div
+      role="img"
+      aria-label={
+        ariaLabel ?? `Area chart with ${series.map((s) => s.name ?? s.dataKey).join(', ')}`
+      }
+      className={[styles.container, className].filter(Boolean).join(' ')}
+      style={{ height }}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <RechartsAreaChart
           accessibilityLayer

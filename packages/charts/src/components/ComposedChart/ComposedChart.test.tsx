@@ -65,4 +65,42 @@ describe('ComposedChart', () => {
       expect(container.firstChild).not.toBeNull();
     });
   });
+
+  describe('accessibility', () => {
+    it('has role=img on the wrapper', () => {
+      const { container } = render(<ComposedChart data={DATA} series={SERIES} />);
+
+      expect(container.querySelector("[role='img']")).toBeInTheDocument();
+    });
+
+    it('generates an aria-label that includes each series name', () => {
+      const { container } = render(<ComposedChart data={DATA} series={SERIES} />);
+      const el = container.querySelector("[role='img']");
+
+      expect(el).toHaveAttribute('aria-label', expect.stringContaining('Revenue'));
+      expect(el).toHaveAttribute('aria-label', expect.stringContaining('Expenses'));
+    });
+
+    it('falls back to dataKey in aria-label when name is omitted', () => {
+      const { container } = render(
+        <ComposedChart data={DATA} series={[{ dataKey: 'revenue', type: 'bar' }]} />,
+      );
+
+      expect(container.querySelector("[role='img']")).toHaveAttribute(
+        'aria-label',
+        expect.stringContaining('revenue'),
+      );
+    });
+
+    it('uses the custom aria-label when provided', () => {
+      const { container } = render(
+        <ComposedChart data={DATA} series={SERIES} aria-label="Revenue vs expenses" />,
+      );
+
+      expect(container.querySelector("[role='img']")).toHaveAttribute(
+        'aria-label',
+        'Revenue vs expenses',
+      );
+    });
+  });
 });
