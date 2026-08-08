@@ -338,7 +338,7 @@ Pure TypeScript package. Communicates with GNOME via the WebKitGTK `window.webki
 | Status | Module | Description |
 |--------|--------|-------------|
 | ✅ | **`settings`** | `getSetting`/`setSetting`/`onSettingChanged` — WebKitGTK via the bridge (request/response correlation for the async `Gio.Settings.get_value()` round-trip, plus a `changed`-signal subscription filtered by key). No browser fallback — there is no web equivalent of an app-schema-scoped `GSettings` store. |
-| ⬜ | **`notifications`** | Send and withdraw desktop notifications (`Gio.Notification`) |
+| ✅ | **`notifications`** | `sendNotification`/`withdrawNotification`/`onNotificationAction` — WebKitGTK via the bridge (`Gio.Notification`, action buttons), with a real browser `Notification` fallback (permission flow, single click routed through the same action-event shape as a synthetic `'default'` action). |
 | ⬜ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
 | ⬜ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
 | ⬜ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
