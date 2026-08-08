@@ -50,7 +50,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 
 | Hook | Returns | Description |
 | --- | --- | --- |
-| `useSettings(schema, key)` | `[value, setValue]` | Read/write a GSettings key; re-renders on changes |
+| `useSettings(key, defaultValue)` | `UseSettingsResult<T>` | Read/write a GSettings key; re-renders on external changes |
 | `useNotification()` | `{ send, dismiss }` | Send and dismiss desktop notifications |
 | `useColorScheme()` | `[scheme, setScheme]` | Reactive `"light"`, `"dark"`, or `"auto"` color scheme |
 | `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs |
@@ -121,6 +121,37 @@ webView.evaluate_javascript(
   -1, null, null, null, null
 );
 ```
+
+### Read and write a GSettings key
+
+```tsx
+import { useSettings } from "@gnome-ui/hooks";
+
+export function DarkModeToggle() {
+  const { value: darkMode, setValue: setDarkMode, loading } = useSettings("prefer-dark", false);
+
+  return <Switch checked={darkMode} onChange={setDarkMode} disabled={loading} label="Dark mode" />;
+}
+```
+
+`value` starts at the given default and updates once the initial read
+completes, then stays in sync with external changes too — another app,
+`dconf-editor`, or `gsettings set` from a terminal. `setValue` updates
+`value` immediately (optimistic) and persists the write in the background;
+if the write fails, `error` is set (and cleared again on the next
+successful write).
+
+Outside a WebKitGTK environment (a browser, Storybook, tests) there is no
+GSettings equivalent — `value` stays at the default forever and `error` is
+set. See [`@gnome-ui/platform`'s `settings` module](../platform/README.md#settings)
+for details.
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `value` | `T` | Current value — the default until the first successful read |
+| `setValue(value)` | `(value: T) => void` | Writes a new value (optimistic) |
+| `loading` | `boolean` | `true` until the first read completes |
+| `error` | `Error \| null` | Set when reading or writing failed |
 
 ### Toggle color scheme
 
