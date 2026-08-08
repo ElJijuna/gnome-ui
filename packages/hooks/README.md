@@ -52,7 +52,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | --- | --- | --- |
 | `useSettings(key, defaultValue)` | `UseSettingsResult<T>` | Read/write a GSettings key; re-renders on external changes |
 | `useNotification()` | `{ send, dismiss }` | Send and dismiss desktop notifications, scoped to the component's lifetime |
-| `useColorScheme()` | `[scheme, setScheme]` | Reactive `"light"`, `"dark"`, or `"auto"` color scheme |
+| `useColorScheme()` | `UseColorSchemeResult` | Reactive resolved `"light"`/`"dark"` scheme, with a `"light"`/`"dark"`/`"system"` setter |
 | `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs |
 | `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard with copy/paste helpers |
 | `useWindowState()` | `{ maximized, fullscreen, ... }` | Reactive window state with matching setters |
@@ -199,7 +199,7 @@ does (`title`, `body`, `icon`, `priority`, `actions`), plus an optional
 import { useColorScheme } from "@gnome-ui/hooks";
 
 export function ThemeToggle() {
-  const [scheme, setScheme] = useColorScheme();
+  const { scheme, setScheme } = useColorScheme();
 
   return (
     <button onClick={() => setScheme(scheme === "dark" ? "light" : "dark")}>
@@ -208,6 +208,22 @@ export function ThemeToggle() {
   );
 }
 ```
+
+> **Not the same hook as `@gnome-ui/react`'s `useColorScheme`.** That one
+> reads the `colorScheme`/`resolvedColorScheme` set by the nearest
+> `GnomeProvider` — a plain `matchMedia` read that drives your CSS theme and
+> works everywhere. *This* hook talks to `Adw.StyleManager` through
+> `@gnome-ui/platform`'s bridge, so `setScheme` forces this app's own
+> Adwaita rendering independently of your CSS. Reach for it only if you
+> specifically need that — outside a WebKitGTK environment `setScheme` has
+> no effect (see `error` below).
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `scheme` | `"light" \| "dark"` | Current resolved scheme — defaults to `"light"` until the first read completes |
+| `setScheme(preference)` | `(preference: "light" \| "dark" \| "system") => void` | Sets this app's color scheme preference |
+| `loading` | `boolean` | `true` until the first read completes |
+| `error` | `Error \| null` | Set when reading or writing failed |
 
 ### Trigger haptic feedback
 

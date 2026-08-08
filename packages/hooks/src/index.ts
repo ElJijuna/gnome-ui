@@ -1,4 +1,5 @@
 export { type BreakpointInfo, useBreakpoint } from './useBreakpoint';
+export { type UseColorSchemeResult, useColorScheme } from './useColorScheme';
 export {
   type GnomeHapticEvent,
   type UseHapticFeedbackResult,
