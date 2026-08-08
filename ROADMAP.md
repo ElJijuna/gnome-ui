@@ -356,7 +356,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`useNativeEvent`** | Subscribe to an event dispatched by the GJS host via `gnome:` prefix |
 | ✅ | **`useBreakpoint`** | Reactive `isMobile`, `isTablet`, `isDesktop` flags based on GNOME HIG breakpoints |
 | ✅ | **`useSettings`** | Read and write a GSettings key; re-renders on external changes, optimistic writes, exposes `loading`/`error` |
-| ⬜ | **`useNotification`** | Returns a `send(title, body, icon?)` helper and dismissal control — blocked on `@gnome-ui/platform`'s `notifications` module |
+| ✅ | **`useNotification`** | Returns `send`/`dismiss`, scoped to the component's lifetime — notifications sent through it are auto-withdrawn and `onAction` listeners auto-unsubscribed on unmount |
 | ⬜ | **`useColorScheme`** | Returns `"light" \| "dark" \| "auto"` and a setter — blocked on `@gnome-ui/platform`'s `colorScheme` module |
 | ⬜ | **`useFileChooser`** | Returns an `open()` / `save()` trigger and the resolved file path — blocked on `@gnome-ui/platform`'s `fileChooser` module |
 | ⬜ | **`useClipboard`** | Returns `{ value, copy, paste }` with reactive clipboard state — blocked on `@gnome-ui/platform`'s `clipboard` module |

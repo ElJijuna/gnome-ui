@@ -51,7 +51,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | Hook | Returns | Description |
 | --- | --- | --- |
 | `useSettings(key, defaultValue)` | `UseSettingsResult<T>` | Read/write a GSettings key; re-renders on external changes |
-| `useNotification()` | `{ send, dismiss }` | Send and dismiss desktop notifications |
+| `useNotification()` | `{ send, dismiss }` | Send and dismiss desktop notifications, scoped to the component's lifetime |
 | `useColorScheme()` | `[scheme, setScheme]` | Reactive `"light"`, `"dark"`, or `"auto"` color scheme |
 | `useFileChooser()` | `{ open, save, path }` | Trigger file open/save dialogs |
 | `useClipboard()` | `{ value, copy, paste }` | Reactive clipboard with copy/paste helpers |
@@ -152,6 +152,46 @@ for details.
 | `setValue(value)` | `(value: T) => void` | Writes a new value (optimistic) |
 | `loading` | `boolean` | `true` until the first read completes |
 | `error` | `Error \| null` | Set when reading or writing failed |
+
+### Send and dismiss desktop notifications
+
+```tsx
+import { useNotification } from "@gnome-ui/hooks";
+
+export function DownloadButton() {
+  const { send, dismiss } = useNotification();
+
+  async function onDownloadComplete() {
+    const id = await send({
+      title: "Download complete",
+      body: "report.pdf",
+      actions: [{ id: "open", label: "Open" }],
+      onAction: (actionId) => {
+        if (actionId === "open") openFile("report.pdf");
+      },
+    });
+
+    setTimeout(() => dismiss(id), 5000);
+  }
+
+  return <button onClick={onDownloadComplete}>Download</button>;
+}
+```
+
+Every notification sent through `send` — and every `onAction` listener
+attached to it — is automatically withdrawn/unsubscribed when the component
+unmounts. `@gnome-ui/platform`'s `sendNotification`/`onNotificationAction`
+don't do that for you on their own, since they have no concept of a React
+component's lifetime.
+
+| Return value | Type | Description |
+| --- | --- | --- |
+| `send(options)` | `(options: UseNotificationSendOptions) => Promise<string>` | Sends a notification, resolves with its id |
+| `dismiss(id)` | `(id: string) => Promise<void>` | Withdraws a previously sent notification |
+
+`options` accepts everything `@gnome-ui/platform`'s `SendNotificationOptions`
+does (`title`, `body`, `icon`, `priority`, `actions`), plus an optional
+`onAction(actionId)` callback.
 
 ### Toggle color scheme
 
