@@ -497,6 +497,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`FileDropZone`** | Drag-and-drop file upload target with hover/active states, falling back to a `GtkFileDialog`-style click-to-browse trigger |
 | ✅ | **`MultiSelectDropdown`** | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger — `Dropdown`/`ComboRow` are currently single-select only |
 | ✅ | **`CodeBlock`** | Static monospace code/config snippet display with optional line numbers and a `CopyButton` trailing action — distinct from `TerminalView` (live scrolling terminal output) |
+| ✅ | **`WidgetManager`** | Card that manages a controlled collection of widgets picked from a `catalog`, each rendering its own content via `render()`; edit-mode trigger opens a staged add/remove picker (`Modal`/`BottomSheet`/`Drawer`, configurable) applied only on confirm |
 | ✅ | **`FieldGroup`** | Generic form-field grouping with a shared label, help text, and error message, for arbitrary fields outside a `BoxedList` — `PreferencesGroup` is scoped specifically to wrapping settings rows |
 | ✅ | **`Portal`** | Reusable `createPortal` wrapper (mount target, SSR-safe no-op) — extracts the ad-hoc portal logic currently duplicated independently across 13 components (`Dialog`, `Modal`, `Popover`, `Tooltip`, `BottomSheet`, etc.) |
 

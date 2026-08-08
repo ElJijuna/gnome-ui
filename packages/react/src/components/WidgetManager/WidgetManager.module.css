@@ -1,0 +1,180 @@
+/* ─── Manager ──────────────────────────────────────────────────────────────── */
+
+.manager {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-3, 18px);
+  padding: var(--gnome-space-4, 24px);
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-card-fg-color, rgb(0 0 0 / 0.8));
+  border: 1px solid var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
+  border-radius: var(--gnome-radius-lg, 12px);
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.headerText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.title {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+/* ─── Icon badge ───────────────────────────────────────────────────────────── */
+
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  background-color: var(--gnome-view-bg-color, #fafafa);
+  border-radius: 50%;
+}
+
+/* ─── Body ─────────────────────────────────────────────────────────────────── */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-3, 18px);
+}
+
+.widgetList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-3, 18px);
+}
+
+.widget {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-2, 12px);
+  padding: var(--gnome-space-3, 18px);
+  background-color: var(--gnome-view-bg-color, #fafafa);
+  border-radius: var(--gnome-radius-md, 8px);
+}
+
+.widgetHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+}
+
+.widgetTitle {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+}
+
+.widgetContent {
+  min-width: 0;
+}
+
+/* ─── Add trigger ──────────────────────────────────────────────────────────── */
+
+.addTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--gnome-space-4, 24px);
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+  font-weight: var(--gnome-font-weight-semibold, 600);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  opacity: var(--gnome-opacity-dim, 0.55);
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px dashed var(--gnome-card-shade-color, rgb(0 0 0 / 0.2));
+  border-radius: var(--gnome-radius-lg, 12px);
+  transition:
+    border-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease),
+    opacity var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.addTrigger:hover {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--gnome-accent-color, #3584e4) 50%, transparent);
+}
+
+.addTrigger:focus {
+  outline: none;
+}
+
+.addTrigger:focus-visible {
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-window-bg-color, #fafafa),
+    0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+/* ─── Picker footer (BottomSheet / Drawer only — Modal uses its own actions) ─ */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gnome-space-2, 12px);
+  padding-top: var(--gnome-space-2, 12px);
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .manager {
+    background-color: var(--gnome-card-bg-color, #242424);
+    border-color: rgb(255 255 255 / 0.07);
+  }
+
+  .badge,
+  .widget {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+  }
+
+  .addTrigger {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+}
+
+[data-theme="dark"] {
+  .manager {
+    background-color: var(--gnome-card-bg-color, #242424);
+    border-color: rgb(255 255 255 / 0.07);
+  }
+
+  .badge,
+  .widget {
+    background-color: var(--gnome-view-bg-color, #1e1e1e);
+  }
+
+  .addTrigger {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .addTrigger {
+    transition: none;
+  }
+}

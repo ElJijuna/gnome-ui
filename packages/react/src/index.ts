@@ -372,6 +372,12 @@ export {
   getVulnerabilitySummaryTotal,
   VulnerabilitySummary,
 } from './components/VulnerabilitySummary';
+export type {
+  WidgetDefinition,
+  WidgetManagerPickerSurface,
+  WidgetManagerProps,
+} from './components/WidgetManager';
+export { WidgetManager } from './components/WidgetManager';
 export type { WindowTitleProps } from './components/WindowTitle';
 export { WindowTitle } from './components/WindowTitle';
 export type { WrapBoxAlign, WrapBoxJustify, WrapBoxProps } from './components/WrapBox';

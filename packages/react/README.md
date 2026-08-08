@@ -258,6 +258,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`ViewSwitcherSidebar`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-viewswitchersidebar--docs) / `ViewSwitcherSidebarItem` | Sidebar-based view switcher — replaces `GtkStackSidebar` |
 | [`Carousel`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-carousel--docs) / `CarouselIndicatorDots` / `CarouselIndicatorLines` | Swipeable page carousel with dot or line indicators — mirrors `AdwCarousel` |
 | [`ShortcutsDialog`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-shortcutsdialog--docs) | Modal listing keyboard shortcuts with integrated search |
+| [`WidgetManager`](https://eljijuna.github.io/gnome-ui/?path=/docs/components-widgetmanager--docs) | Card that manages a controlled collection of widgets picked from a catalog; edit-mode trigger opens a `Modal`/`BottomSheet`/`Drawer` picker with staged add/remove and confirm/cancel |
 
 ### Overlays
 

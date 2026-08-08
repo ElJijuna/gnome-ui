@@ -612,6 +612,11 @@
       "import": "./dist/components/VulnerabilitySummary.js",
       "require": "./dist/components/VulnerabilitySummary.cjs"
     },
+    "./components/WidgetManager": {
+      "types": "./dist/components/WidgetManager.d.ts",
+      "import": "./dist/components/WidgetManager.js",
+      "require": "./dist/components/WidgetManager.cjs"
+    },
     "./components/WindowTitle": {
       "types": "./dist/components/WindowTitle.d.ts",
       "import": "./dist/components/WindowTitle.js",
