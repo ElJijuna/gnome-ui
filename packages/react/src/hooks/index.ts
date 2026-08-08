@@ -1,3 +1,4 @@
+export { usePrefersReducedMotion } from '@gnome-ui/hooks';
 export type { GnomeDir } from '@/components/GnomeProvider/GnomeContext';
 export {
   useDateTimeFormatter,
@@ -7,4 +8,3 @@ export {
 } from '@/components/GnomeProvider/GnomeContext';
 export type { BreakpointState, GnomeBreakpointName } from './useBreakpoint';
 export { GNOME_BREAKPOINTS, useBreakpoint } from './useBreakpoint';
-export { usePrefersReducedMotion } from './usePrefersReducedMotion';

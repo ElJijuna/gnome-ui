@@ -1,7 +1,7 @@
+import { usePrefersReducedMotion } from '@gnome-ui/hooks';
 import { type CSSProperties, type HTMLAttributes, useEffect, useMemo, useState } from 'react';
 
 import { Avatar, type AvatarColor, type AvatarSize } from '@/components/Avatar';
-import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 import styles from './AvatarRotator.module.css';
 

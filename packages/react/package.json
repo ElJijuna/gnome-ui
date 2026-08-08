@@ -666,6 +666,7 @@
   },
   "dependencies": {
     "@gnome-ui/core": "*",
+    "@gnome-ui/hooks": "*",
     "@gnome-ui/icons": "*"
   },
   "peerDependencies": {

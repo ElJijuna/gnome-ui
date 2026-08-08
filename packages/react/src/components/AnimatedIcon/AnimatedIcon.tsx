@@ -1,8 +1,8 @@
+import { usePrefersReducedMotion } from '@gnome-ui/hooks';
 import type { IconDefinition } from '@gnome-ui/icons';
 import type { CSSProperties } from 'react';
 
 import { Icon, type IconProps } from '@/components/Icon';
-import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 export interface AnimatedIconProps extends Omit<IconProps, 'icon'> {
   /** Animated icon from `@gnome-ui/icons` (`animated: true`, e.g. `Syncing`, `Recording`). */

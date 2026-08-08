@@ -1,5 +1,6 @@
 // Components
 
+export { usePrefersReducedMotion } from '@gnome-ui/hooks';
 export type { AboutDialogLink, AboutDialogProps } from './components/AboutDialog';
 export { AboutDialog } from './components/AboutDialog';
 export type { ActionRowProps } from './components/ActionRow';
@@ -385,4 +386,3 @@ export { WrapBox } from './components/WrapBox';
 export type { BreakpointState, GnomeBreakpointName } from './hooks/useBreakpoint';
 // Hooks
 export { GNOME_BREAKPOINTS, useBreakpoint } from './hooks/useBreakpoint';
-export { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
