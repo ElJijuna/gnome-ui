@@ -339,7 +339,7 @@ Pure TypeScript package. Communicates with GNOME via the WebKitGTK `window.webki
 |--------|--------|-------------|
 | ✅ | **`settings`** | `getSetting`/`setSetting`/`onSettingChanged` — WebKitGTK via the bridge (request/response correlation for the async `Gio.Settings.get_value()` round-trip, plus a `changed`-signal subscription filtered by key). No browser fallback — there is no web equivalent of an app-schema-scoped `GSettings` store. |
 | ✅ | **`notifications`** | `sendNotification`/`withdrawNotification`/`onNotificationAction` — WebKitGTK via the bridge (`Gio.Notification`, action buttons), with a real browser `Notification` fallback (permission flow, single click routed through the same action-event shape as a synthetic `'default'` action). |
-| ⬜ | **`fileChooser`** | Open/save file dialogs (`GtkFileChooserDialog` / XDG portal) |
+| ✅ | **`fileChooser`** | `openFile`/`saveFile`/`selectFolder` — WebKitGTK via the bridge (`GtkFileChooserDialog` / XDG portal), request/response correlated. No browser fallback — the File System Access API only hands back opaque handles, never real filesystem paths. |
 | ⬜ | **`colorScheme`** | Detect and change the Adwaita color scheme (light/dark/auto) |
 | ⬜ | **`window`** | Query and change window state (maximize, minimize, fullscreen, close) |
 | 🚧 | **`clipboard`** | `readText`/`writeText` shipped — WebKitGTK via the bridge (request/response correlation for the async `Gdk.Clipboard.read_text_async()` round-trip) with a real `navigator.clipboard` fallback in browsers/PWAs. Files and images still pending. |
