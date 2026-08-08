@@ -1,5 +1,5 @@
-export type { NativeEventHandler } from './bridge';
-export { isWebKitBridge, onNativeEvent, postMessage } from './bridge';
+export type { BridgeChannel, NativeEventHandler } from './bridge';
+export { isWebKitBridge, onNativeEvent, postMessage, postMessageAndWait } from './bridge';
 export * from './clipboard';
 export * from './colorScheme';
 export * from './fileChooser';
