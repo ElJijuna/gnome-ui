@@ -1,0 +1,69 @@
+{
+  "nav": {
+    "home": "Home",
+    "components": "Components",
+    "hooks": "Hooks",
+    "icons": "Icons",
+    "packages": "Packages"
+  },
+  "home": {
+    "title": "GNOME UI",
+    "subtitle": "A component library for building GNOME-style desktop and web apps, following the Human Interface Guidelines.",
+    "browseComponents": "Browse components",
+    "browseIcons": "Browse icons",
+    "statsComponents": "components",
+    "statsHooks": "hooks",
+    "statsIcons": "icons",
+    "statsPackages": "packages"
+  },
+  "search": {
+    "placeholder": "Search components…",
+    "noResults": "No components match \"{query}\"."
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Toggle color scheme"
+  },
+  "locale": {
+    "toggle": "Language"
+  },
+  "component": {
+    "viewStorybook": "View in Storybook",
+    "install": "Install",
+    "props": "Props",
+    "example": "Example",
+    "noExample": "No live example yet — see the full set of examples in Storybook.",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "livePreview": "Live preview",
+    "previewError": "This example couldn't be rendered live. Here's the code, and the full set of interactive examples is in Storybook.",
+    "propColumn": "Prop",
+    "typeColumn": "Type",
+    "defaultColumn": "Default",
+    "descriptionColumn": "Description"
+  },
+  "packages": {
+    "title": "Packages",
+    "subtitle": "Every published @gnome-ui package, with install commands and links to its own Storybook.",
+    "componentCount": "{count} components",
+    "viewStorybook": "Storybook"
+  },
+  "hooks": {
+    "title": "Hooks",
+    "subtitle": "React hooks that expose @gnome-ui/platform APIs as idiomatic React state.",
+    "install": "Install"
+  },
+  "icons": {
+    "title": "Icons",
+    "subtitle": "672 GNOME symbolic and third-party icons, tree-shakeable and ready to drop into <Icon>.",
+    "searchPlaceholder": "Search icons…",
+    "count": "{count} icons",
+    "install": "Install"
+  },
+  "footer": {
+    "sourceCode": "Source code",
+    "license": "MIT Licensed"
+  }
+}

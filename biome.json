@@ -10,7 +10,8 @@
       "!**/.turbo",
       "!node_modules",
       "!package-lock.json",
-      "!CHANGELOG.md"
+      "!CHANGELOG.md",
+      "!packages/website/src/generated"
     ]
   },
   "linter": {

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GNOME UI</title>
+    <meta name="description" content="Component showcase for the GNOME UI design system." />
+    <!--
+      GitHub Pages SPA fallback: 404.html redirects any unknown path here,
+      stashing the original path in sessionStorage. This restores it via
+      history.replaceState before the router mounts, so deep links and
+      refreshes on client-side routes work on static hosting.
+      https://github.com/rafgraph/spa-github-pages
+    -->
+    <script>
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
