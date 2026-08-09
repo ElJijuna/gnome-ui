@@ -40,18 +40,18 @@
 | ✅ | **`StickyToc`** | Sticky table-of-contents side rail with scroll-spy highlighting the active section — for long docs/settings pages |
 | ✅ | **`ResizablePanel`** | Two or more panels separated by a draggable divider, based on the `GtkPaned` pattern — foundational for user-resizable master-detail layouts (code editors, file explorers, analytics dashboards) |
 | ✅ | **`LoadingStatus`** | Visually hidden `role="status"` live region announcing a skeleton loading state to screen readers — `aria-busy` alone isn't announced by most screen readers, and `Skeleton` itself is `aria-hidden`. Used internally by `StatCard`, `EntityCard`, `ProfileCard`, `ChartCard`, `ActivityFeed`, and other cards' loading states |
+| ✅ | **`SplitLayout`** | List/master + detail shell composing `NavigationSplitView` (react) with a `HeaderBar` per pane and an automatic mobile Back button — the way real Adwaita apps (Settings, Files, Contacts) actually look, vs. the bare pane-toggle mechanics of `NavigationSplitView` alone |
 
 ---
 
 ## Backlog
 
-> Proposed but unbuilt components, cross-checked against the 27 implemented
+> Proposed but unbuilt components, cross-checked against the 32 implemented
 > components above to avoid duplication. Each row that could be confused with
 > an existing component includes an explicit differentiation clause.
 
 | Status | Component | Description |
 |--------|-----------|-------------|
-| ⬜ | **`SplitLayout`** | Two-column shell: list/master on the left, detail on the right. Collapses to a single column on mobile, following the `AdwNavigationSplitView` pattern |
 | ⬜ | **`DrawerPanel`** | Side panel that slides over content from any edge — web equivalent of `AdwBottomSheet` (mobile) and `AdwOverlaySplitView` in overlay mode (desktop). Ideal for filters, contextual settings, and detail views without leaving the page |
 | ⬜ | **`SkeletonCard`** | Animated shimmer loading placeholder for cards and lists — per GNOME HIG, perceived structure is preferred over an empty spinner. Supports `card`, `list-item`, `text` variants and free composition |
 | ⬜ | **`CommandPalette`** | Global action/navigation search, GNOME Shell Activities style. Triggered by a keyboard shortcut (`Ctrl+K`). Keyboard-first: arrow-key navigation, `Enter` to activate, `Escape` to close. Supports grouped results and preview |

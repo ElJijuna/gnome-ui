@@ -77,6 +77,8 @@ export type { SidebarShellProps } from './components/SidebarShell';
 export { SidebarShell } from './components/SidebarShell';
 export type { SidebarTriggerProps } from './components/SidebarTrigger';
 export { SidebarTrigger } from './components/SidebarTrigger';
+export type { SplitLayoutProps } from './components/SplitLayout';
+export { SplitLayout } from './components/SplitLayout';
 export type {
   LoadingType,
   StatCardProps,

@@ -117,6 +117,11 @@
       "import": "./dist/components/SidebarTrigger.js",
       "require": "./dist/components/SidebarTrigger.cjs"
     },
+    "./components/SplitLayout": {
+      "types": "./dist/components/SplitLayout.d.ts",
+      "import": "./dist/components/SplitLayout.js",
+      "require": "./dist/components/SplitLayout.cjs"
+    },
     "./components/StatusBar": {
       "types": "./dist/components/StatusBar.d.ts",
       "import": "./dist/components/StatusBar.js",
