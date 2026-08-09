@@ -9,3 +9,4 @@ packages/react/test-results
 .DS_Store
 *.local
 coverage
+packages/website/src/generated
