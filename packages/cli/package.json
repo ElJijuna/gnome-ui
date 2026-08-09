@@ -12,9 +12,14 @@
   ],
   "scripts": {
     "build": "tsc6 -p tsconfig.json",
-    "typecheck": "tsc6 -p tsconfig.json --noEmit"
+    "typecheck": "tsc6 -p tsconfig.json --noEmit && tsc6 -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "blessed": "^0.1.81",
+    "blessed-components": "^1.17.0",
     "commander": "^14.0.2",
     "npmjs-api-client": "^1.8.0"
   },
@@ -22,7 +27,10 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0"
+    "@types/blessed": "^0.1.27",
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.4",
+    "vitest": "^4.1.4"
   },
   "author": "pilmee <pilmee@gmail.com> (https://github.com/ElJijuna)",
   "license": "MIT"
