@@ -38,6 +38,7 @@ import { useBreakpoint } from "@gnome-ui/hooks/useBreakpoint";
 | --- | --- | --- |
 | `useBreakpoint()` | `BreakpointInfo` | Reactive `isMobile`, `isTablet`, `isDesktop` flags based on GNOME HIG breakpoints |
 | `useElementSize(ref)` | `ElementSize` | Reactive `{ width, height }` of an element via `ResizeObserver` — the container-level sibling of `useBreakpoint` |
+| `usePrefersReducedMotion()` | `boolean` | Tracks the OS-level `prefers-reduced-motion` accessibility setting |
 
 ### Platform & runtime
 
