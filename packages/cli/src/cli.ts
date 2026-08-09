@@ -12,7 +12,7 @@ import { confirmYesNo } from './ui/confirm.js';
 import { createAppScreen } from './ui/screen.js';
 import { selectDependenciesToUpdate } from './ui/select-dependencies.js';
 import { withSpinner } from './ui/spinner.js';
-import { applyUpdates } from './update.js';
+import { applyUpdates, detectPackageManager } from './update.js';
 
 export interface RunOptions {
   /** Skip the Yes/No confirmation before selecting packages to update. */
@@ -147,9 +147,21 @@ async function runInteractiveFlow(
 
     const selected = await selectDependenciesToUpdate(screen, outdated, { top: tableBottom + 1 });
 
+    if (selected.length === 0) {
+      screen.destroy();
+
+      return { kind: 'declined', dependencies };
+    }
+
+    const packageManager = detectPackageManager(context.projectRoot);
+    const shouldInstall = await confirmYesNo(screen, {
+      title: 'Install updates',
+      message: `Update ${selected.length} package(s) and run \`${packageManager} install\`?`,
+    });
+
     screen.destroy();
 
-    if (selected.length === 0) {
+    if (!shouldInstall) {
       return { kind: 'declined', dependencies };
     }
 

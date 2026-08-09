@@ -77,10 +77,14 @@ All three commands open a terminal UI, built with
    - `update` skips that question.
 6. If proceeding, a checklist lets you pick which outdated packages to
    update — **all of them are selected by default**.
-7. The terminal UI closes, `package.json` is rewritten with the updated
-   ranges (preserving `^`/`~` prefixes), and your package manager's install
-   command runs with normal terminal output so you can watch it.
-8. A plain-text summary is printed.
+7. A final **Yes/No** confirmation names the exact install command about to
+   run (e.g. `Update 2 package(s) and run npm install?`) — this is the last
+   point before anything on disk changes.
+8. Once confirmed, the terminal UI closes, `package.json` is rewritten with
+   the updated ranges (preserving `^`/`~` prefixes), and your package
+   manager's install command runs with normal terminal output so you can
+   watch it.
+9. A plain-text summary is printed.
 
 ### Checklist keys
 
@@ -90,7 +94,7 @@ All three commands open a terminal UI, built with
 | `Space` / `Enter` | Toggle the highlighted package |
 | `a` | Select all |
 | `n` | Select none |
-| `y` | Confirm the selection and continue |
+| `y` | Continue to the final install confirmation |
 | `q` / `Escape` / `Ctrl+C` | Cancel — no changes are made |
 
 ### Non-interactive environments

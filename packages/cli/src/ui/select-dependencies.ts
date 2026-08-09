@@ -4,7 +4,7 @@ import { type MultiSelectData, type MultiSelectItem, multiSelect } from 'blessed
 import type { GnomeDependency } from '../dependencies.js';
 
 const HELP_TEXT =
-  ' ↑/↓ move · space/enter toggle · a select all · n select none · y confirm · q cancel ';
+  ' ↑/↓ move · space/enter toggle · a select all · n select none · y continue · q cancel ';
 
 /**
  * Lets the user narrow down which outdated `@gnome-ui/*` packages to
