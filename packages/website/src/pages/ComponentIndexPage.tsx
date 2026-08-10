@@ -1,7 +1,8 @@
 import { PageContent, SectionHeader } from '@gnome-ui/layout';
-import { ActionRow, BoxedList, SearchBar, Text } from '@gnome-ui/react';
+import { ActionRow, BoxedList, Text } from '@gnome-ui/react';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { SearchField } from '@/components/SearchField';
 import { components } from '@/generated/registry';
 import { useTranslation } from '@/i18n/I18nContext';
 import type { ComponentEntry } from '@/types/registry';
@@ -48,14 +49,14 @@ export const ComponentIndexPage = () => {
   return (
     <PageContent maxWidth="lg">
       <SectionHeader title={t('nav.components')} />
-      <SearchBar
+      <SearchField
         open
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         onClear={() => setQuery('')}
         placeholder={t('search.placeholder')}
         aria-label={t('search.placeholder')}
-        style={{ marginBottom: 24 }}
+        wrapperStyle={{ marginBottom: 'var(--gnome-space-4)' }}
       />
 
       {filtered.length === 0 && (
@@ -65,8 +66,12 @@ export const ComponentIndexPage = () => {
       )}
 
       {grouped.map(([pkg, entries]) => (
-        <div key={pkg} style={{ marginBottom: 32 }}>
-          <Text variant="title-4" as="h2" style={{ marginBottom: 8, display: 'block' }}>
+        <div key={pkg} style={{ marginBottom: 'var(--gnome-space-5)' }}>
+          <Text
+            variant="title-4"
+            as="h2"
+            style={{ marginBottom: 'var(--gnome-space-2)', display: 'block' }}
+          >
             {PACKAGE_LABELS[pkg] ?? pkg}
           </Text>
           <BoxedList>

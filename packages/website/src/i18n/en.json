@@ -60,7 +60,9 @@
     "subtitle": "672 GNOME symbolic and third-party icons, tree-shakeable and ready to drop into <Icon>.",
     "searchPlaceholder": "Search icons…",
     "count": "{count} icons",
-    "install": "Install"
+    "install": "Install",
+    "animatedTitle": "Animated icons",
+    "animatedSubtitle": "Play the built-in CSS animation with <AnimatedIcon> instead of a static frame."
   },
   "footer": {
     "sourceCode": "Source code",

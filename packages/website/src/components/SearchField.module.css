@@ -1,0 +1,15 @@
+.wrap {
+  background-color: var(--gnome-card-bg-color);
+  border: 1px solid var(--gnome-card-shade-color);
+  border-radius: var(--gnome-radius-lg);
+  overflow: hidden;
+  transition: box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.wrap:focus-within {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 var(--gnome-focus-ring-offset) var(--gnome-window-bg-color),
+    0 0 0 calc(var(--gnome-focus-ring-offset) + var(--gnome-focus-ring-width))
+    var(--gnome-focus-ring-color);
+}

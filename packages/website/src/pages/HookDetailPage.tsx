@@ -26,15 +26,23 @@ export const HookDetailPage = () => {
       <Text variant="caption" color="dim">
         @gnome-ui/hooks
       </Text>
-      <Text variant="title-1" as="h1" style={{ display: 'block', marginBottom: 16 }}>
+      <Text
+        variant="title-1"
+        as="h1"
+        style={{ display: 'block', marginBottom: 'var(--gnome-space-2)' }}
+      >
         {entry.name}
       </Text>
 
       <InlineMarkdown text={entry.description} />
 
       {entry.example && (
-        <div style={{ marginTop: 24 }}>
-          <Text variant="title-4" as="h2" style={{ display: 'block', marginBottom: 8 }}>
+        <div style={{ marginTop: 'var(--gnome-space-4)' }}>
+          <Text
+            variant="title-4"
+            as="h2"
+            style={{ display: 'block', marginBottom: 'var(--gnome-space-2)' }}
+          >
             {t('component.example')}
           </Text>
           <CodeBlock code={entry.example} language="tsx" />
@@ -42,7 +50,7 @@ export const HookDetailPage = () => {
       )}
 
       {installCommand && (
-        <div style={{ marginTop: 32 }}>
+        <div style={{ marginTop: 'var(--gnome-space-5)' }}>
           <CopyField
             value={installCommand}
             label={t('hooks.install')}

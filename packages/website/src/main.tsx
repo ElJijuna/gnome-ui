@@ -2,6 +2,7 @@ import '@gnome-ui/core/styles';
 import '@gnome-ui/react/styles';
 import '@gnome-ui/layout/styles';
 import '@gnome-ui/charts/styles';
+import '@/styles/global.css';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

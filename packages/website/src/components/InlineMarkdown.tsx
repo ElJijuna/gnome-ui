@@ -1,4 +1,7 @@
+import { Link } from '@gnome-ui/react';
 import type { ReactNode } from 'react';
+
+import styles from './InlineMarkdown.module.css';
 
 // Matches the small subset of inline markdown actually used across the
 // monorepo's READMEs: `code`, **bold**, and [text](url) links.
@@ -9,7 +12,11 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
     const key = `${keyPrefix}-${i}`;
 
     if (part.startsWith('`') && part.endsWith('`')) {
-      return <code key={key}>{part.slice(1, -1)}</code>;
+      return (
+        <code key={key} className={styles.code}>
+          {part.slice(1, -1)}
+        </code>
+      );
     }
 
     if (part.startsWith('**') && part.endsWith('**')) {
@@ -20,9 +27,9 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
 
     if (linkMatch) {
       return (
-        <a key={key} href={linkMatch[2]} target="_blank" rel="noreferrer">
+        <Link key={key} href={linkMatch[2]} external>
           {linkMatch[1]}
-        </a>
+        </Link>
       );
     }
 
@@ -42,7 +49,9 @@ export const InlineMarkdown = ({ text }: InlineMarkdownProps) => {
   return (
     <>
       {paragraphs.map((paragraph, i) => (
-        <p key={i}>{renderInline(paragraph, `p${i}`)}</p>
+        <p key={i} className={styles.paragraph}>
+          {renderInline(paragraph, `p${i}`)}
+        </p>
       ))}
     </>
   );

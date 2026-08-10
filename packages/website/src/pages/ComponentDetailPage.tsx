@@ -30,20 +30,28 @@ export const ComponentDetailPage = () => {
       <Text variant="caption" color="dim">
         {packageEntry?.packageName}
       </Text>
-      <Text variant="title-1" as="h1" style={{ display: 'block', marginBottom: 16 }}>
+      <Text
+        variant="title-1"
+        as="h1"
+        style={{ display: 'block', marginBottom: 'var(--gnome-space-2)' }}
+      >
         {entry.name}
       </Text>
 
       <InlineMarkdown text={entry.description} />
 
-      <div style={{ marginTop: 24 }}>
-        <Text variant="title-4" as="h2" style={{ display: 'block', marginBottom: 8 }}>
+      <div style={{ marginTop: 'var(--gnome-space-4)' }}>
+        <Text
+          variant="title-4"
+          as="h2"
+          style={{ display: 'block', marginBottom: 'var(--gnome-space-2)' }}
+        >
           {t('component.example')}
         </Text>
 
         {entry.example ? (
           <>
-            <Card style={{ padding: 24, marginBottom: 16 }}>
+            <Card padding="lg" style={{ marginBottom: 'var(--gnome-space-3)' }}>
               <LiveExample code={entry.example} />
             </Card>
             <CodeBlock code={entry.example} language="tsx" />
@@ -56,8 +64,12 @@ export const ComponentDetailPage = () => {
       </div>
 
       {entry.props && entry.props.length > 0 && (
-        <div style={{ marginTop: 32 }}>
-          <Text variant="title-4" as="h2" style={{ display: 'block', marginBottom: 8 }}>
+        <div style={{ marginTop: 'var(--gnome-space-5)' }}>
+          <Text
+            variant="title-4"
+            as="h2"
+            style={{ display: 'block', marginBottom: 'var(--gnome-space-2)' }}
+          >
             {t('component.props')}
           </Text>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -68,8 +80,8 @@ export const ComponentDetailPage = () => {
                     key={column}
                     style={{
                       textAlign: 'left',
-                      padding: 8,
-                      borderBottom: '1px solid var(--gnome-light-3, #deddda)',
+                      padding: 'var(--gnome-space-2)',
+                      borderBottom: '1px solid var(--gnome-card-shade-color)',
                     }}
                   >
                     {column}
@@ -84,8 +96,8 @@ export const ComponentDetailPage = () => {
                     <td
                       key={j}
                       style={{
-                        padding: 8,
-                        borderBottom: '1px solid var(--gnome-light-3, #deddda)',
+                        padding: 'var(--gnome-space-2)',
+                        borderBottom: '1px solid var(--gnome-card-shade-color)',
                       }}
                     >
                       {cell}
@@ -98,7 +110,14 @@ export const ComponentDetailPage = () => {
         </div>
       )}
 
-      <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div
+        style={{
+          marginTop: 'var(--gnome-space-5)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--gnome-space-2)',
+        }}
+      >
         {installCommand && (
           <CopyField
             value={installCommand}
