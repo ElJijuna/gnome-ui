@@ -1,14 +1,20 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildStorybookEmbedUrl,
   buildStorybookUrl,
   extractDescription,
   extractExample,
   extractInstallCommand,
   extractPackageDescription,
+  extractPrimaryStoryExport,
   extractPropsTable,
+  extractReactNativeDescription,
   extractStorybookMeta,
+  extractWebComponentDescription,
+  kebabToPascal,
   slugify,
+  toSlug,
 } from './generate-registry.mjs';
 
 describe('slugify', () => {
@@ -62,6 +68,22 @@ describe('extractPackageDescription', () => {
     expect(extractPackageDescription(markdown)).toBe(
       'Component library for GNOME-style desktop apps.',
     );
+  });
+
+  it('skips a leading blockquote (e.g. a status callout) to find the real paragraph', () => {
+    const markdown = [
+      '# @gnome-ui/react-native',
+      '',
+      '> **Status:** early days.',
+      '',
+      '## How it works',
+      '',
+      'Bare React Native component library.',
+      '',
+      '## Theme tokens',
+    ].join('\n');
+
+    expect(extractPackageDescription(markdown)).toBe('Bare React Native component library.');
   });
 });
 
@@ -186,6 +208,137 @@ describe('buildStorybookUrl', () => {
   it('falls back to the package root when there is no story file at all', () => {
     expect(buildStorybookUrl('react', undefined)).toBe(
       'https://eljijuna.github.io/gnome-ui/react/',
+    );
+  });
+});
+
+describe('toSlug', () => {
+  it('converts camelCase/PascalCase to kebab-case at each word boundary', () => {
+    expect(toSlug('CommonKeys')).toBe('common-keys');
+    expect(toSlug('InlineInProse')).toBe('inline-in-prose');
+    expect(toSlug('Default')).toBe('default');
+  });
+});
+
+describe('kebabToPascal', () => {
+  it('converts kebab-case to PascalCase', () => {
+    expect(kebabToPascal('action-row')).toBe('ActionRow');
+    expect(kebabToPascal('button')).toBe('Button');
+  });
+});
+
+describe('extractPrimaryStoryExport', () => {
+  it('finds the first exported Story object, not just any export', () => {
+    const source = [
+      'export const AlertDialog: Story = {',
+      '  args: {},',
+      '};',
+      '',
+      'export const WithBody: Story = {};',
+    ].join('\n');
+
+    expect(extractPrimaryStoryExport(source)).toBe('AlertDialog');
+  });
+
+  it('returns undefined when there are no story exports', () => {
+    expect(extractPrimaryStoryExport('export default {};')).toBeUndefined();
+  });
+
+  it('returns undefined when there is no stories source at all', () => {
+    expect(extractPrimaryStoryExport(undefined)).toBeUndefined();
+  });
+});
+
+describe('buildStorybookEmbedUrl', () => {
+  it('builds a bare-canvas iframe URL from the title and first story export', () => {
+    const source =
+      "title: 'Components/Kbd',\ntags: ['autodocs'],\n\nexport const Default: Story = {};";
+
+    expect(buildStorybookEmbedUrl('react', source)).toBe(
+      'https://eljijuna.github.io/gnome-ui/react/iframe.html?id=components-kbd--default&viewMode=story',
+    );
+  });
+
+  it('slugifies a multi-word story export at its camelCase boundary', () => {
+    const source = "title: 'Components/Kbd',\n\nexport const CommonKeys: Story = {};";
+
+    expect(buildStorybookEmbedUrl('react', source)).toBe(
+      'https://eljijuna.github.io/gnome-ui/react/iframe.html?id=components-kbd--common-keys&viewMode=story',
+    );
+  });
+
+  it('returns undefined when there is no title', () => {
+    expect(buildStorybookEmbedUrl('react', 'export const Default: Story = {};')).toBeUndefined();
+  });
+
+  it('returns undefined when there is no story export', () => {
+    expect(buildStorybookEmbedUrl('react', "title: 'Components/Kbd',")).toBeUndefined();
+  });
+
+  it('returns undefined when there is no stories source at all', () => {
+    expect(buildStorybookEmbedUrl('react', undefined)).toBeUndefined();
+  });
+});
+
+describe('extractWebComponentDescription', () => {
+  it('takes the JSDoc block immediately before the custom element class', () => {
+    const source = [
+      "import { defineCustomElement } from './internal/dom';",
+      '',
+      '/**',
+      ' * Styled light-DOM wrapper for a native button.',
+      ' *',
+      ' * The native control must be a descendant marked with',
+      ' * `data-slot="button-control"`.',
+      ' */',
+      'export class GnomeButtonElement extends HTMLElementBase {',
+      '  connectedCallback() {}',
+      '}',
+    ].join('\n');
+
+    expect(extractWebComponentDescription(source)).toBe(
+      'Styled light-DOM wrapper for a native button.',
+    );
+  });
+
+  it('returns undefined when the class has no leading JSDoc', () => {
+    const source = 'export class GnomeButtonElement extends HTMLElementBase {}';
+
+    expect(extractWebComponentDescription(source)).toBeUndefined();
+  });
+
+  it('ignores unrelated JSDoc blocks elsewhere in the file', () => {
+    const source = [
+      '/**',
+      ' * Internal helper, not the component description.',
+      ' */',
+      'function helper() {}',
+      '',
+      'export class GnomeButtonElement extends HTMLElementBase {}',
+    ].join('\n');
+
+    expect(extractWebComponentDescription(source)).toBeUndefined();
+  });
+});
+
+describe('extractReactNativeDescription', () => {
+  it('takes the JSDoc block immediately before the component export', () => {
+    const source = [
+      'export interface ButtonProps {',
+      '  /** Visual style of the button. */',
+      '  variant?: string;',
+      '}',
+      '',
+      '/**',
+      ' * Button component following GNOME Human Interface Guidelines.',
+      ' *',
+      ' * @see https://developer.gnome.org/hig/patterns/controls/buttons.html',
+      ' */',
+      'export const Button = forwardRef(function Button() {});',
+    ].join('\n');
+
+    expect(extractReactNativeDescription(source)).toBe(
+      'Button component following GNOME Human Interface Guidelines.',
     );
   });
 });

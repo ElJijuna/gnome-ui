@@ -1,0 +1,36 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gnome-space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gnome-space-1);
+  padding: var(--gnome-space-1) var(--gnome-space-2);
+  border-radius: var(--gnome-radius-pill);
+  border: 1px solid var(--gnome-card-shade-color);
+  font-family: var(--gnome-font-family);
+  font-size: 0.8125rem;
+  color: var(--gnome-window-fg-color);
+  white-space: nowrap;
+}
+
+.unavailable {
+  opacity: var(--gnome-opacity-dim);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: var(--gnome-success-color);
+}
+
+.dotUnavailable {
+  background-color: var(--gnome-window-fg-color);
+  opacity: var(--gnome-opacity-disabled);
+}

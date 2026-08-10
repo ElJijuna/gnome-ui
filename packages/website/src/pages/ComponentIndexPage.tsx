@@ -11,6 +11,8 @@ const PACKAGE_LABELS: Record<string, string> = {
   react: '@gnome-ui/react',
   layout: '@gnome-ui/layout',
   charts: '@gnome-ui/charts',
+  'web-components': '@gnome-ui/web-components',
+  'react-native': '@gnome-ui/react-native',
 };
 
 function groupByPackage(entries: ComponentEntry[]): [string, ComponentEntry[]][] {

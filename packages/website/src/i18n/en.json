@@ -35,6 +35,7 @@
     "props": "Props",
     "example": "Example",
     "noExample": "No live example yet — see the full set of examples in Storybook.",
+    "noPreview": "No live preview available for this component — it doesn't render in a browser.",
     "copy": "Copy",
     "copied": "Copied!",
     "livePreview": "Live preview",
@@ -42,7 +43,15 @@
     "propColumn": "Prop",
     "typeColumn": "Type",
     "defaultColumn": "Default",
-    "descriptionColumn": "Description"
+    "descriptionColumn": "Description",
+    "availableIn": "Available in:",
+    "comingSoon": "coming soon"
+  },
+  "frameworks": {
+    "react": "React",
+    "webComponents": "Web Components",
+    "reactNative": "React Native",
+    "angular": "Angular"
   },
   "packages": {
     "title": "Packages",

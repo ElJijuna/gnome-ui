@@ -2,10 +2,12 @@ import { PageContent } from '@gnome-ui/layout';
 import { Card, CodeBlock, CopyField, Link, StatusPage, Text } from '@gnome-ui/react';
 import { useParams } from 'react-router';
 
+import { FrameworkAvailability } from '@/components/FrameworkAvailability';
 import { InlineMarkdown } from '@/components/InlineMarkdown';
 import { components, packages } from '@/generated/registry';
 import { useTranslation } from '@/i18n/I18nContext';
 import { LiveExample } from '@/live/LiveExample';
+import { StorybookEmbed } from '@/live/StorybookEmbed';
 
 export const ComponentDetailPage = () => {
   const { t } = useTranslation();
@@ -38,7 +40,11 @@ export const ComponentDetailPage = () => {
         {entry.name}
       </Text>
 
-      <InlineMarkdown text={entry.description} />
+      <FrameworkAvailability name={entry.name} />
+
+      <div style={{ marginTop: 'var(--gnome-space-3)' }}>
+        <InlineMarkdown text={entry.description} />
+      </div>
 
       <div style={{ marginTop: 'var(--gnome-space-4)' }}>
         <Text
@@ -56,9 +62,13 @@ export const ComponentDetailPage = () => {
             </Card>
             <CodeBlock code={entry.example} language="tsx" />
           </>
+        ) : entry.storybookEmbedUrl ? (
+          <Card padding="none" style={{ overflow: 'hidden' }}>
+            <StorybookEmbed url={entry.storybookEmbedUrl} title={entry.name} />
+          </Card>
         ) : (
           <Text variant="body" color="dim">
-            {t('component.noExample')}
+            {entry.storybookUrl ? t('component.noExample') : t('component.noPreview')}
           </Text>
         )}
       </div>
@@ -127,9 +137,11 @@ export const ComponentDetailPage = () => {
           />
         )}
 
-        <Link href={entry.storybookUrl} external>
-          {t('component.viewStorybook')}
-        </Link>
+        {entry.storybookUrl && (
+          <Link href={entry.storybookUrl} external>
+            {t('component.viewStorybook')}
+          </Link>
+        )}
       </div>
     </PageContent>
   );
