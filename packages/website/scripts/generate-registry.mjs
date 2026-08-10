@@ -66,7 +66,8 @@ export function extractPackageDescription(markdown) {
         trimmed === '' ||
         trimmed.startsWith('#') ||
         trimmed.startsWith('<') ||
-        trimmed.startsWith('[![')
+        trimmed.startsWith('[![') ||
+        trimmed.startsWith('>')
       ) {
         continue;
       }
@@ -223,6 +224,69 @@ export function extractHookExample(markdown, hookName) {
   return undefined;
 }
 
+/**
+ * `@gnome-ui/web-components` and `@gnome-ui/react-native` have no per-component
+ * README — their description lives in the `/** ... *\/` JSDoc block immediately
+ * preceding the component's own export (a custom element class, or a
+ * `forwardRef`/plain `const` component). Takes the first paragraph, stopping
+ * at a blank comment line or a `@tag`.
+ */
+function extractLeadingJsDoc(source, anchorPattern) {
+  const anchorMatch = source.match(anchorPattern);
+
+  if (!anchorMatch) {
+    return undefined;
+  }
+
+  const beforeAnchor = source.slice(0, anchorMatch.index);
+  const blocks = [...beforeAnchor.matchAll(/\/\*\*[\s\S]*?\*\//g)];
+  const lastBlock = blocks.at(-1);
+
+  if (!lastBlock) {
+    return undefined;
+  }
+
+  const gapAfterBlock = beforeAnchor.slice(lastBlock.index + lastBlock[0].length);
+
+  if (gapAfterBlock.trim() !== '') {
+    // Not immediately before the anchor — some other code sits between them.
+    return undefined;
+  }
+
+  const commentBody = lastBlock[0].slice('/**'.length, -'*/'.length);
+  const paragraph = [];
+
+  for (const rawLine of commentBody.split('\n')) {
+    const line = rawLine.replace(/^\s*\*\s?/, '').trim();
+
+    if (line.startsWith('@')) {
+      break;
+    }
+
+    if (line === '') {
+      if (paragraph.length > 0) {
+        break;
+      }
+
+      continue;
+    }
+
+    paragraph.push(line);
+  }
+
+  return paragraph.join(' ').trim() || undefined;
+}
+
+/** Description for a `@gnome-ui/web-components` custom element source file. */
+export function extractWebComponentDescription(source) {
+  return extractLeadingJsDoc(source, /export class \w+Element/);
+}
+
+/** Description for a `@gnome-ui/react-native` component source file. */
+export function extractReactNativeDescription(source) {
+  return extractLeadingJsDoc(source, /export const \w+/);
+}
+
 /** Extracts a story file's `title` and whether it's tagged `autodocs`. */
 export function extractStorybookMeta(storiesSource) {
   const titleMatch = storiesSource.match(/title:\s*['"]([^'"]+)['"]/);
@@ -253,6 +317,35 @@ export function buildStorybookUrl(packageId, storiesSource) {
   return `${base}?path=/docs/${slugify(meta.title)}--docs`;
 }
 
+/** Name of the first exported `Story` object in a `.stories.(ts|tsx)` file, if any. */
+export function extractPrimaryStoryExport(storiesSource) {
+  const match = storiesSource?.match(/export const (\w+)\s*:\s*Story/);
+
+  return match ? match[1] : undefined;
+}
+
+/**
+ * Bare-canvas Storybook embed URL (`iframe.html`, no app chrome) for the
+ * first story in a `.stories.(ts|tsx)` file — Storybook's own documented
+ * embed pattern (https://storybook.js.org/docs/sharing/embed). The story id
+ * is `<slugified title>--<slugified export name>`; the export-name half
+ * uses the same camelCase-boundary slug as component directory names
+ * (`CommonKeys` -> `common-keys`), verified against a real build's
+ * `index.json`.
+ */
+export function buildStorybookEmbedUrl(packageId, storiesSource) {
+  const meta = storiesSource ? extractStorybookMeta(storiesSource) : undefined;
+  const storyExport = extractPrimaryStoryExport(storiesSource);
+
+  if (!meta || !storyExport) {
+    return undefined;
+  }
+
+  const storyId = `${slugify(meta.title)}--${toSlug(storyExport)}`;
+
+  return `${STORYBOOK_BASE}/${packageId}/iframe.html?id=${storyId}&viewMode=story`;
+}
+
 // ─── Filesystem walking ─────────────────────────────────────────────────────
 
 function listComponentDirs(componentsRoot) {
@@ -269,8 +362,17 @@ function readIfExists(path) {
   return existsSync(path) ? readFileSync(path, 'utf8') : undefined;
 }
 
-function toSlug(name) {
+/** PascalCase/camelCase -> kebab-case, e.g. `CommonKeys` -> `common-keys`. */
+export function toSlug(name) {
   return name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+/** kebab-case -> PascalCase, e.g. `action-row` -> `ActionRow`. */
+export function kebabToPascal(kebab) {
+  return kebab
+    .split('-')
+    .map((segment) => segment[0].toUpperCase() + segment.slice(1))
+    .join('');
 }
 
 function buildComponentEntries(packageId) {
@@ -296,6 +398,81 @@ function buildComponentEntries(packageId) {
         example: extractExample(readme),
         props: extractPropsTable(readme),
         storybookUrl: buildStorybookUrl(packageId, storiesSource),
+        storybookEmbedUrl: buildStorybookEmbedUrl(packageId, storiesSource),
+      };
+    })
+    .filter((entry) => entry !== undefined)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * `@gnome-ui/web-components` has no per-component subdirectories — every
+ * custom element is a flat `<kebab-name>.ts` file (+ a sibling
+ * `<kebab-name>.stories.ts`), with no README, so there's no `example`/`props`
+ * to extract — only a description (from its leading JSDoc) and a Storybook
+ * link/embed.
+ */
+function buildWebComponentEntries() {
+  const root = join(REPO_ROOT, 'packages', 'web-components', 'src');
+
+  if (!existsSync(root)) {
+    return [];
+  }
+
+  const files = readdirSync(root).filter(
+    (file) =>
+      file.endsWith('.ts') &&
+      !file.endsWith('.test.ts') &&
+      !file.endsWith('.stories.ts') &&
+      file !== 'style.d.ts' &&
+      file !== 'index.ts',
+  );
+
+  return files
+    .map((file) => {
+      const base = file.replace(/\.ts$/, '');
+      const source = readFileSync(join(root, file), 'utf8');
+      const storiesSource = readIfExists(join(root, `${base}.stories.ts`));
+
+      return {
+        slug: base,
+        package: 'web-components',
+        name: kebabToPascal(base),
+        description: extractWebComponentDescription(source) ?? '',
+        storybookUrl: buildStorybookUrl('web-components', storiesSource),
+        storybookEmbedUrl: buildStorybookEmbedUrl('web-components', storiesSource),
+      };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * `@gnome-ui/react-native` mirrors `react`/`layout`/`charts`'s per-component
+ * directory layout but has no README, and no Storybook is built or deployed
+ * for it (RN components don't render in a browser) — `storybookUrl` is
+ * omitted rather than pointing somewhere broken.
+ */
+function buildReactNativeEntries() {
+  const componentsRoot = join(REPO_ROOT, 'packages', 'react-native', 'src', 'components');
+
+  return listComponentDirs(componentsRoot)
+    .map((name) => {
+      const dir = join(componentsRoot, name);
+      const componentFile = readdirSync(dir).find(
+        (file) => file.endsWith('.tsx') && !file.endsWith('.test.tsx'),
+      );
+
+      if (!componentFile) {
+        return undefined;
+      }
+
+      const source = readFileSync(join(dir, componentFile), 'utf8');
+
+      return {
+        slug: toSlug(name),
+        package: 'react-native',
+        name,
+        description: extractReactNativeDescription(source) ?? '',
       };
     })
     .filter((entry) => entry !== undefined)
@@ -354,6 +531,8 @@ export function generateRegistry() {
     ...buildComponentEntries('react'),
     ...buildComponentEntries('layout'),
     ...buildComponentEntries('charts'),
+    ...buildWebComponentEntries(),
+    ...buildReactNativeEntries(),
   ];
   const hooks = buildHookEntries();
 
@@ -374,7 +553,13 @@ export function generateRegistry() {
       componentCount: componentCountByPackage.charts,
     }),
     buildPackageEntry('icons', { storybook: true }),
-    buildPackageEntry('web-components', { storybook: true }),
+    buildPackageEntry('web-components', {
+      storybook: true,
+      componentCount: componentCountByPackage['web-components'],
+    }),
+    buildPackageEntry('react-native', {
+      componentCount: componentCountByPackage['react-native'],
+    }),
     buildPackageEntry('hooks', { componentCount: hooks.length }),
     buildPackageEntry('platform'),
     buildPackageEntry('core'),

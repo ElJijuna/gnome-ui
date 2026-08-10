@@ -35,6 +35,7 @@
     "props": "Props",
     "example": "Ejemplo",
     "noExample": "Todavía no hay un ejemplo en vivo — mirá el conjunto completo de ejemplos en Storybook.",
+    "noPreview": "No hay vista previa en vivo disponible para este componente — no se renderiza en un navegador.",
     "copy": "Copiar",
     "copied": "¡Copiado!",
     "livePreview": "Vista previa en vivo",
@@ -42,7 +43,15 @@
     "propColumn": "Prop",
     "typeColumn": "Tipo",
     "defaultColumn": "Por defecto",
-    "descriptionColumn": "Descripción"
+    "descriptionColumn": "Descripción",
+    "availableIn": "Disponible en:",
+    "comingSoon": "próximamente"
+  },
+  "frameworks": {
+    "react": "React",
+    "webComponents": "Web Components",
+    "reactNative": "React Native",
+    "angular": "Angular"
   },
   "packages": {
     "title": "Paquetes",

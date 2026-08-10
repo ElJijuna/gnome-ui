@@ -8,18 +8,25 @@ built and deployed, never installed.
 
 ## What it does
 
-- Lists every component in `@gnome-ui/react`, `@gnome-ui/layout`, and
-  `@gnome-ui/charts` (~169 at last count), each with a description, a live
-  interactive example, its source code, a props table, a copy-paste install
-  command, and a link to its Storybook doc page — all **generated from the
-  existing `README.md` + `.stories.tsx` files already in those packages**,
-  not hand-written.
+- Lists every component in `@gnome-ui/react`, `@gnome-ui/layout`,
+  `@gnome-ui/charts`, `@gnome-ui/web-components`, and `@gnome-ui/react-native`
+  (~215 at last count), each with a description, a live preview, its source
+  code (where one exists), a props table, a copy-paste install command, and
+  a link to its Storybook doc page — all **generated from the existing
+  `README.md` + `.stories.(ts|tsx)` files (or, for `web-components`/
+  `react-native` which have no per-component README, the leading JSDoc
+  comment on the component itself)**, not hand-written.
+- Each component page shows an **availability matrix** — react /
+  web-components / react-native / angular — so it's clear at a glance which
+  frameworks ship a component of that name (`angular` is always "coming
+  soon": no package implements it yet). See `src/lib/frameworks.ts`.
 - Lists every hook in `@gnome-ui/hooks` (description + code, no live demo —
   hooks aren't visual).
 - A searchable gallery of all ~672 icons in `@gnome-ui/icons`, rendered with
-  the real `<Icon>` component.
+  the real `<Icon>` component, plus a dedicated section that actually plays
+  the 4 `animated` icons via `<AnimatedIcon>`.
 - A package overview page for every published package, including the ones
-  without per-component pages (`web-components`, `platform`, `core`, `cli`).
+  without per-component pages (`platform`, `core`, `cli`).
 - Light/dark/system theme toggle and English/Spanish locale toggle (site
   chrome only — extracted README content stays English this iteration).
 
@@ -39,24 +46,29 @@ src/pages/                      One page per route, data-driven from the generat
 ### Content generation
 
 `scripts/generate-registry.mjs` walks `packages/{react,layout,charts}/src/components/*/README.md`
-and `.stories.tsx`, `packages/hooks/README.md`'s shared hooks table, and
-every package's top-level `README.md`, and writes `src/generated/registry.ts`.
-The `dev`, `build`, and `typecheck` npm scripts all run it first
-(`npm run generate &&` — plain `pre<script>` hooks only apply to npm's
-built-in lifecycle script names, not custom ones like `build`, so this is
-chained explicitly rather than relying on that).
+and `.stories.tsx`, the flat `packages/web-components/src/*.ts` (+ matching
+`.stories.ts`) files, `packages/react-native/src/components/*/*.tsx`,
+`packages/hooks/README.md`'s shared hooks table, and every package's
+top-level `README.md`, and writes `src/generated/registry.ts`. The `dev`,
+`build`, and `typecheck` npm scripts all run it first (`npm run generate &&`
+— plain `pre<script>` hooks only apply to npm's built-in lifecycle script
+names, not custom ones like `build`, so this is chained explicitly rather
+than relying on that).
 
-README content isn't fully uniform across the monorepo — only ~1/3 of
-component READMEs have a ` ```tsx ` example, only ~30% have a `### Props`
-table — so every extracted field is optional and pages render gracefully
-without it (no live example → a "see Storybook" link instead; no props
-table → the section is simply omitted).
+README content isn't fully uniform across the monorepo — only about half of
+`react`/`layout`/`charts` component READMEs have a ` ```tsx ` example, only
+~30% have a `### Props` table, and `web-components`/`react-native` have no
+per-component README at all (description comes from the leading JSDoc
+comment on the component's own class/export instead) — so every extracted
+field is optional and pages render gracefully without it.
 
 The Storybook deep link for each component is computed from its
-`.stories.tsx` `title` using Storybook's own `toId()` slug algorithm,
+`.stories.(ts|tsx)` `title` using Storybook's own `toId()` slug algorithm,
 verified against a real `storybook build` output rather than guessed from
 memory. Falls back to the package's Storybook root (never a broken link)
-when a story isn't tagged `autodocs`.
+when a story isn't tagged `autodocs`. The same file's first exported
+`Story` name feeds a second, bare-canvas embed URL (see Live previews below)
+— also verified against a real build's `index.json`.
 
 Run it standalone to regenerate without a full build:
 
@@ -68,18 +80,44 @@ Its pure parsing functions have unit tests in `generate-registry.test.mjs`.
 
 ### Live previews
 
-Live component previews use [`react-live`](https://www.npmjs.com/package/react-live):
-each example's code (import lines stripped) is evaluated client-side with
-every export of `@gnome-ui/react`, `@gnome-ui/layout`, `@gnome-ui/charts`,
-and `@gnome-ui/icons` in scope (`src/live/scope.ts`). `@gnome-ui/hooks` is
-deliberately excluded from that scope — it isn't live-rendered, and two of
-its hooks (`useColorScheme`, `useBreakpoint`) share a name with an unrelated
-hook of the same name in `@gnome-ui/react`.
+A component page shows a live preview one of two ways, in order:
 
-A snippet that doesn't evaluate cleanly (some READMEs weren't written with
-"must be a self-contained expression" in mind) falls back to a friendly
-message plus the code and a Storybook link, rather than crashing the page —
-see `LiveExample.tsx`'s `PreviewBoundary`.
+1. **`react-live`**, when the component has an extracted code example: the
+   snippet (import lines stripped) is evaluated client-side with every
+   export of `@gnome-ui/react`, `@gnome-ui/layout`, `@gnome-ui/charts`, and
+   `@gnome-ui/icons` in scope (`src/live/scope.ts`). `@gnome-ui/hooks` is
+   deliberately excluded — two of its hooks (`useColorScheme`,
+   `useBreakpoint`) share a name with an unrelated hook of the same name in
+   `@gnome-ui/react`. A snippet that doesn't evaluate cleanly (some READMEs
+   weren't written with "must be a self-contained expression" in mind)
+   falls back to a friendly message plus the code and a Storybook link,
+   rather than crashing the page — see `LiveExample.tsx`'s
+   `PreviewBoundary`.
+2. **A Storybook embed** (`src/live/StorybookEmbed.tsx`), otherwise — used
+   for every `web-components` entry (no README, so no code to run through
+   react-live) and for any `react`/`layout`/`charts` component whose README
+   has no ` ```tsx ` block. This is a bare-canvas `iframe.html?id=...&viewMode=story`
+   embed of the component's own first story — [Storybook's documented embed
+   pattern](https://storybook.js.org/docs/sharing/embed) — so it's the real
+   component, live, from the package's own deployed Storybook, not a
+   synthesized re-implementation.
+
+`react-native` has neither: no README/JSDoc example to run and no
+Storybook is built for it (RN components don't render in a browser), so its
+pages show description, install command, and the availability matrix only.
+
+### Framework availability matrix
+
+`src/lib/frameworks.ts` groups every `ComponentEntry` by its exact `name`
+(e.g. `"Button"`) and records which framework each package belongs to —
+`react`, `layout`, and `charts` all count as `react` (different
+sub-libraries of the same ecosystem); `web-components` and `react-native`
+are their own. `angular` is never a member of any group — no package
+implements it — and is always rendered as "coming soon" by
+`FrameworkAvailability.tsx`. The matching is by exact name only; a
+same-concept component named slightly differently in one framework (rare —
+spot-checked at ~93% exact-name overlap between `react` and
+`web-components`) won't be linked automatically.
 
 ### Styling
 
