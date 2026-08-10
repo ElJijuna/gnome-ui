@@ -90,6 +90,17 @@ importing a component. All four are imported once in `src/main.tsx`; if a
 future page pulls in a package that isn't imported there yet, its
 components will render completely unstyled.
 
+None of those packages ship an app-level reset (they're meant to be dropped
+into a host app that already has one) — `src/styles/global.css` is the
+site's own reset (`box-sizing`, zeroed `body` margin, a `#root` that fills
+the viewport) and is imported last in `main.tsx`.
+
+`SearchBar` is built to sit flush under a `HeaderBar`; used standalone in
+page content it has no visible boundary. `src/components/SearchField.tsx`
+wraps it (`inline` + a bordered, rounded container with a focus ring) for
+the two pages that search inline content (`ComponentIndexPage`,
+`IconsGalleryPage`) rather than the header search bar itself.
+
 ## Local development
 
 ```bash

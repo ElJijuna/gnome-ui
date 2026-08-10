@@ -1,9 +1,11 @@
 import type { IconDefinition } from '@gnome-ui/icons';
 import * as Icons from '@gnome-ui/icons';
-import { PageContent, SectionHeader } from '@gnome-ui/layout';
-import { CopyField, Icon, SearchBar, Text } from '@gnome-ui/react';
+import { Connecting, Downloading, Recording, Syncing } from '@gnome-ui/icons';
+import { DashboardGrid, PageContent, SectionHeader } from '@gnome-ui/layout';
+import { AnimatedIcon, Card, CopyField, Icon, Text } from '@gnome-ui/react';
 import { useMemo, useState } from 'react';
 
+import { SearchField } from '@/components/SearchField';
 import { packages } from '@/generated/registry';
 import { useTranslation } from '@/i18n/I18nContext';
 
@@ -14,6 +16,13 @@ function isIconDefinition(value: unknown): value is IconDefinition {
 const ALL_ICONS: [string, IconDefinition][] = Object.entries(Icons).filter(
   (entry): entry is [string, IconDefinition] => isIconDefinition(entry[1]),
 );
+
+const ANIMATED_ICONS: [string, IconDefinition][] = [
+  ['Syncing', Syncing],
+  ['Recording', Recording],
+  ['Downloading', Downloading],
+  ['Connecting', Connecting],
+];
 
 export const IconsGalleryPage = () => {
   const { t } = useTranslation();
@@ -37,20 +46,44 @@ export const IconsGalleryPage = () => {
           label={t('icons.install')}
           copyLabel={t('component.copy')}
           copiedLabel={t('component.copied')}
-          style={{ maxWidth: 360, marginBottom: 16 }}
+          style={{ maxWidth: 360, marginBottom: 'var(--gnome-space-4)' }}
         />
       )}
 
-      <SearchBar
+      <SectionHeader
+        title={t('icons.animatedTitle')}
+        subtitle={t('icons.animatedSubtitle')}
+        style={{ marginBottom: 'var(--gnome-space-2)' }}
+      />
+      <DashboardGrid columns={4} gap="sm" style={{ marginBottom: 'var(--gnome-space-5)' }}>
+        {ANIMATED_ICONS.map(([name, icon]) => (
+          <Card key={name} padding="md" style={{ textAlign: 'center' }}>
+            <AnimatedIcon icon={icon} label={name} size="lg" />
+            <Text
+              variant="caption"
+              color="dim"
+              style={{ display: 'block', marginTop: 'var(--gnome-space-2)' }}
+            >
+              {name}
+            </Text>
+          </Card>
+        ))}
+      </DashboardGrid>
+
+      <SearchField
         open
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         onClear={() => setQuery('')}
         placeholder={t('icons.searchPlaceholder')}
         aria-label={t('icons.searchPlaceholder')}
-        style={{ marginBottom: 8 }}
+        wrapperStyle={{ marginBottom: 'var(--gnome-space-2)' }}
       />
-      <Text variant="caption" color="dim" style={{ display: 'block', marginBottom: 16 }}>
+      <Text
+        variant="caption"
+        color="dim"
+        style={{ display: 'block', marginBottom: 'var(--gnome-space-4)' }}
+      >
         {t('icons.count', { count: filtered.length })}
       </Text>
 
@@ -58,7 +91,7 @@ export const IconsGalleryPage = () => {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))',
-          gap: 4,
+          gap: 'var(--gnome-space-1)',
         }}
       >
         {filtered.map(([name, icon]) => (
@@ -69,9 +102,9 @@ export const IconsGalleryPage = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: 4,
-              padding: 12,
-              borderRadius: 8,
+              gap: 'var(--gnome-space-1)',
+              padding: 'var(--gnome-space-2)',
+              borderRadius: 'var(--gnome-radius-md)',
             }}
           >
             <Icon icon={icon} size="lg" label={name} />

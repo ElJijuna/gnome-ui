@@ -1,0 +1,15 @@
+.paragraph {
+  margin: 0 0 var(--gnome-space-2) 0;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.code {
+  font-family: var(--gnome-font-family-mono, "Adwaita Mono", monospace);
+  font-size: 0.9em;
+  background-color: var(--gnome-card-shade-color);
+  border-radius: var(--gnome-radius-sm);
+  padding: 0.1em 0.4em;
+}

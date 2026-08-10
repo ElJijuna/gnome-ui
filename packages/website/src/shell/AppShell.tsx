@@ -54,7 +54,7 @@ export const AppShell = ({ children }: { children: ReactNode }) => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
+            gap: 'var(--gnome-space-1)',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
@@ -66,7 +66,7 @@ export const AppShell = ({ children }: { children: ReactNode }) => {
         </button>
       }
       actions={
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 'var(--gnome-space-2)', alignItems: 'center' }}>
           <LocaleToggle />
           <ThemeToggle />
         </div>

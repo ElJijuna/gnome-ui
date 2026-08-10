@@ -16,7 +16,8 @@ export const PackagesOverviewPage = () => {
         {packages.map((pkg) => (
           <Card
             key={pkg.id}
-            style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}
+            padding="md"
+            style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gnome-space-2)' }}
           >
             <div>
               <Text variant="title-4">{pkg.packageName}</Text>
