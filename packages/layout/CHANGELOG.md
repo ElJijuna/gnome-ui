@@ -1,3 +1,60 @@
+## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.32.1...@gnome-ui/layout@1.33.0) (2026-08-17)
+
+### Features
+
+* **@gnome-ui/charts:** add accessibility features with aria-label support for AreaChart, BarChart, ComposedChart, and LineChart ([bc25430](https://github.com/ElJijuna/gnome-ui/commit/bc2543066b5b7570153f8a98acdb3cd381534f74))
+* **@gnome-ui/cli:** enhance update flow with final confirmation and package manager detection ([126c94e](https://github.com/ElJijuna/gnome-ui/commit/126c94ec962df9434c410bf9c66981230d4ea114))
+* **@gnome-ui/cli:** implement project management features with tests ([836409e](https://github.com/ElJijuna/gnome-ui/commit/836409e2f56ead4c026e30a260aaaf8f7a16fcdc))
+* **@gnome-ui/hooks:** add useElementSize hook for reactive element size tracking and implement tests ([b7297f0](https://github.com/ElJijuna/gnome-ui/commit/b7297f0482afaa1dc642183e0a0f6f8181062f85))
+* **@gnome-ui/hooks:** add usePortalSignal hook for subscribing to XDG Desktop Portal D-Bus signals and enhance tests for error handling in various hooks ([8d98124](https://github.com/ElJijuna/gnome-ui/commit/8d98124001418549b5837bcfdba19afdb2d2957f))
+* **@gnome-ui/hooks:** add usePrefersReducedMotion hook for tracking OS-level accessibility setting and implement tests ([71590d7](https://github.com/ElJijuna/gnome-ui/commit/71590d79ec93c2c33f914a235355d36f8ac2e16c))
+* **@gnome-ui/hooks:** implement useClipboard hook for reactive clipboard management with copy/paste functionality ([1d30f36](https://github.com/ElJijuna/gnome-ui/commit/1d30f3695d620106fea98beec23553232b98e4d6))
+* **@gnome-ui/hooks:** implement useColorScheme hook for reactive color scheme management ([3e210de](https://github.com/ElJijuna/gnome-ui/commit/3e210deaf4cffb35abc3fa79035226641479ba1e))
+* **@gnome-ui/hooks:** implement useFileChooser hook for file and folder selection with reactive state management ([ebd91c0](https://github.com/ElJijuna/gnome-ui/commit/ebd91c02ebb610b0fd954a474cea4d8cc7794498))
+* **@gnome-ui/hooks:** implement useNotification hook for scoped desktop notifications ([11d5d66](https://github.com/ElJijuna/gnome-ui/commit/11d5d66db9cf4e84084cef8c2ba84d6dcd1390c8))
+* **@gnome-ui/hooks:** implement useSettings hook for reactive GSettings management ([b8233be](https://github.com/ElJijuna/gnome-ui/commit/b8233be12b61a437d3f80b437a4ed6ce14afb99c))
+* **@gnome-ui/hooks:** implement useWindowState hook for reactive window state management with actions ([f2fb67e](https://github.com/ElJijuna/gnome-ui/commit/f2fb67e09b451e000100cb7a409d438ffdef9200))
+* **@gnome-ui/icons:** add animated icons support with new variants and update documentation ([243df4e](https://github.com/ElJijuna/gnome-ui/commit/243df4efacfc1e1222a6aa02947946387e61efd3))
+* **@gnome-ui/layout:** add LoadingStatus component for announcing loading states to screen readers ([0973c35](https://github.com/ElJijuna/gnome-ui/commit/0973c35549c63c8a8b8a425cab2789e10082a085))
+* **@gnome-ui/layout:** add SplitLayout component for enhanced list/master detail views ([2ee5a12](https://github.com/ElJijuna/gnome-ui/commit/2ee5a1268888ca41db1ff14ef944c60a49e0207d))
+* **@gnome-ui/platform:** add tests for file chooser functionality (open, save, select folder) ([1329d66](https://github.com/ElJijuna/gnome-ui/commit/1329d66aaaa1901802ddc9332c0103e07a9935aa))
+* **@gnome-ui/platform:** enhance clipboard functionality with image and file read/write support ([5a1f506](https://github.com/ElJijuna/gnome-ui/commit/5a1f506b7ae0eca8c42c5b187d3401adc55ae20b))
+* **@gnome-ui/platform:** implement color scheme detection and setter via bridge ([ccbb102](https://github.com/ElJijuna/gnome-ui/commit/ccbb102b786b1e72d88189af1f1afc0597700783))
+* **@gnome-ui/platform:** implement window state queries and setters via bridge ([3f574b7](https://github.com/ElJijuna/gnome-ui/commit/3f574b7dc46cc28fcb41c2fbdc17188b043d7cbf))
+* **@gnome-ui/platform:** implement XDG Desktop Portal access with callPortal and onPortalSignal functions ([6db26cc](https://github.com/ElJijuna/gnome-ui/commit/6db26cc6745ae13585856d1eeedaf0f2c98e2e60))
+* **@gnome-ui/react-native:** implement Button component with variants and testing ([48d6e63](https://github.com/ElJijuna/gnome-ui/commit/48d6e637748d273684f9d8b34fb44cd7fe6b18d3))
+* **@gnome-ui/react-native:** implement GnomeProvider and GnomeContext for theming support ([ba97e44](https://github.com/ElJijuna/gnome-ui/commit/ba97e44de9274a6674cc1789cb0d0d757486a39a))
+* **@gnome-ui/react-native:** initialize react-native package with basic structure and configuration ([a63fe03](https://github.com/ElJijuna/gnome-ui/commit/a63fe03801f89248dcb47aeb4c01724539a5e46d))
+* **@gnome-ui/react:** add AnimatedIcon component with support for CSS animations and reduced motion handling ([157c1d2](https://github.com/ElJijuna/gnome-ui/commit/157c1d242eb1a9ee2763114c223405d6e17cabbf))
+* **@gnome-ui/react:** enhance button styles for active state with aria-pressed support ([dce0138](https://github.com/ElJijuna/gnome-ui/commit/dce0138baa58ab6fe4d3b129f7d5be3bbecd726a))
+* **@gnome-ui/react:** enhance Drawer component with nested functionality and rail support ([0f2b1d4](https://github.com/ElJijuna/gnome-ui/commit/0f2b1d4f4f7cfc9fd82b48f85f5ec8000c85dcb5))
+* **@gnome-ui/react:** implement WidgetManager component for managing a collection of widgets with customizable picker surfaces ([ee17b4c](https://github.com/ElJijuna/gnome-ui/commit/ee17b4ca40edc1e9deeec717a234a385dd35151b))
+* **@gnome-ui/website:** add TypeScript configuration and Vite setup for website package ([f3e44df](https://github.com/ElJijuna/gnome-ui/commit/f3e44df0aba5a3fb1920e6e71e8553abd63d2716))
+* **@gnome-ui/website:** enhance component showcase with framework availability and live previews for web-components and react-native ([5ae2f03](https://github.com/ElJijuna/gnome-ui/commit/5ae2f033ccf97693b38cc6dbf38db7683b48023f))
+* **@gnome-ui/website:** implement global styles, new SearchField component, and enhance pages with consistent spacing ([0de321c](https://github.com/ElJijuna/gnome-ui/commit/0de321c2d8d59995eb04fefc8a7f7310588ed973))
+* add scripts for generating and checking component tables in README.md ([fb93adc](https://github.com/ElJijuna/gnome-ui/commit/fb93adc7318d55f6389a7498f440a90c434bb008))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** update color definitions in CSS to use rgb() format for consistency ([0d3c601](https://github.com/ElJijuna/gnome-ui/commit/0d3c601d1580ea1415579d55c1636714484667a2))
+* **@gnome-ui/web-components:** handle undefined icon paths in SVG building functions across multiple components ([71e8d9d](https://github.com/ElJijuna/gnome-ui/commit/71e8d9d90db60013660d0fb84dbf42ac09e2c465))
+* add build steps for @gnome-ui/platform and @gnome-ui/hooks in release workflow ([92cb72e](https://github.com/ElJijuna/gnome-ui/commit/92cb72ebfec19c42c06ba91fd94f3f59f884d074))
+* update license links in README and llms-full documentation to point to the correct URL ([b33d5ed](https://github.com/ElJijuna/gnome-ui/commit/b33d5edbcf36ab22e20d158daaa34a97901cdc98))
+* update pymdownx.superfences configuration to support custom mermaid fences ([866a1ba](https://github.com/ElJijuna/gnome-ui/commit/866a1bae712dee3ef31f6eb52bc3a651f6dfda03))
+* update setup-uv action to version 10.0.1 for improved functionality ([79fc733](https://github.com/ElJijuna/gnome-ui/commit/79fc733eabfe0cd5bc8e715710b3284c58916783))
+
+### Refactoring
+
+* **@gnome-ui/react-native:** update code structure for improved readability and maintainability ([5af833d](https://github.com/ElJijuna/gnome-ui/commit/5af833d41953fa96b127a6f95fb6fb8f5d97d424))
+* **@gnome-ui/react:** integrate usePrefersReducedMotion hook and remove redundant implementation ([02a8b6b](https://github.com/ElJijuna/gnome-ui/commit/02a8b6b8e0c7336a1583347fe0088eee06babad6))
+* refactor code structure for improved readability and maintainability ([dbfb5ea](https://github.com/ElJijuna/gnome-ui/commit/dbfb5eab781503781a25b8febde638d2e872b70c))
+
+### Documentation
+
+* **@gnome-ui/hooks:** add description for usePrefersReducedMotion hook in README ([14717be](https://github.com/ElJijuna/gnome-ui/commit/14717bee3c52f07f25c4d07f2ad8d8ac6a9caf3e))
+* **@gnome-ui/react:** add ContributionGraph component documentation to README ([1907448](https://github.com/ElJijuna/gnome-ui/commit/1907448e074645d338b4e2a7458e3f384fe371c5))
+* add ContributionGraph component to README and update its status in ROADMAP ([5794def](https://github.com/ElJijuna/gnome-ui/commit/5794defa6f8777c36dce8a60b2fdba09fd616c7a))
+
 ## [1.32.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.32.0...@gnome-ui/layout@1.32.1) (2026-08-05)
 
 ### Features
