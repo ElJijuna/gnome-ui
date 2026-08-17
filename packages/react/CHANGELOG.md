@@ -1,3 +1,37 @@
+## [1.59.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.59.0...@gnome-ui/react@1.59.1) (2026-08-17)
+
+### Features
+
+* **@gnome-ui/charts:** add accessibility features with aria-label support for AreaChart, BarChart, ComposedChart, and LineChart ([bc25430](https://github.com/ElJijuna/gnome-ui/commit/bc2543066b5b7570153f8a98acdb3cd381534f74))
+* **@gnome-ui/cli:** enhance update flow with final confirmation and package manager detection ([126c94e](https://github.com/ElJijuna/gnome-ui/commit/126c94ec962df9434c410bf9c66981230d4ea114))
+* **@gnome-ui/cli:** implement project management features with tests ([836409e](https://github.com/ElJijuna/gnome-ui/commit/836409e2f56ead4c026e30a260aaaf8f7a16fcdc))
+* **@gnome-ui/hooks:** add useElementSize hook for reactive element size tracking and implement tests ([b7297f0](https://github.com/ElJijuna/gnome-ui/commit/b7297f0482afaa1dc642183e0a0f6f8181062f85))
+* **@gnome-ui/hooks:** add usePortalSignal hook for subscribing to XDG Desktop Portal D-Bus signals and enhance tests for error handling in various hooks ([8d98124](https://github.com/ElJijuna/gnome-ui/commit/8d98124001418549b5837bcfdba19afdb2d2957f))
+* **@gnome-ui/hooks:** add usePrefersReducedMotion hook for tracking OS-level accessibility setting and implement tests ([71590d7](https://github.com/ElJijuna/gnome-ui/commit/71590d79ec93c2c33f914a235355d36f8ac2e16c))
+* **@gnome-ui/layout:** add LoadingStatus component for announcing loading states to screen readers ([0973c35](https://github.com/ElJijuna/gnome-ui/commit/0973c35549c63c8a8b8a425cab2789e10082a085))
+* **@gnome-ui/layout:** add SplitLayout component for enhanced list/master detail views ([2ee5a12](https://github.com/ElJijuna/gnome-ui/commit/2ee5a1268888ca41db1ff14ef944c60a49e0207d))
+* **@gnome-ui/website:** add TypeScript configuration and Vite setup for website package ([f3e44df](https://github.com/ElJijuna/gnome-ui/commit/f3e44df0aba5a3fb1920e6e71e8553abd63d2716))
+* **@gnome-ui/website:** enhance component showcase with framework availability and live previews for web-components and react-native ([5ae2f03](https://github.com/ElJijuna/gnome-ui/commit/5ae2f033ccf97693b38cc6dbf38db7683b48023f))
+* **@gnome-ui/website:** implement global styles, new SearchField component, and enhance pages with consistent spacing ([0de321c](https://github.com/ElJijuna/gnome-ui/commit/0de321c2d8d59995eb04fefc8a7f7310588ed973))
+* add scripts for generating and checking component tables in README.md ([fb93adc](https://github.com/ElJijuna/gnome-ui/commit/fb93adc7318d55f6389a7498f440a90c434bb008))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** update color definitions in CSS to use rgb() format for consistency ([0d3c601](https://github.com/ElJijuna/gnome-ui/commit/0d3c601d1580ea1415579d55c1636714484667a2))
+* add build steps for @gnome-ui/platform and @gnome-ui/hooks in release workflow ([92cb72e](https://github.com/ElJijuna/gnome-ui/commit/92cb72ebfec19c42c06ba91fd94f3f59f884d074))
+* update license links in README and llms-full documentation to point to the correct URL ([b33d5ed](https://github.com/ElJijuna/gnome-ui/commit/b33d5edbcf36ab22e20d158daaa34a97901cdc98))
+* update pymdownx.superfences configuration to support custom mermaid fences ([866a1ba](https://github.com/ElJijuna/gnome-ui/commit/866a1bae712dee3ef31f6eb52bc3a651f6dfda03))
+* update setup-uv action to version 10.0.1 for improved functionality ([79fc733](https://github.com/ElJijuna/gnome-ui/commit/79fc733eabfe0cd5bc8e715710b3284c58916783))
+
+### Refactoring
+
+* **@gnome-ui/react:** integrate usePrefersReducedMotion hook and remove redundant implementation ([02a8b6b](https://github.com/ElJijuna/gnome-ui/commit/02a8b6b8e0c7336a1583347fe0088eee06babad6))
+* refactor code structure for improved readability and maintainability ([dbfb5ea](https://github.com/ElJijuna/gnome-ui/commit/dbfb5eab781503781a25b8febde638d2e872b70c))
+
+### Documentation
+
+* **@gnome-ui/hooks:** add description for usePrefersReducedMotion hook in README ([14717be](https://github.com/ElJijuna/gnome-ui/commit/14717bee3c52f07f25c4d07f2ad8d8ac6a9caf3e))
+
 ## [1.59.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.58.0...@gnome-ui/react@1.59.0) (2026-08-08)
 
 ### Features
