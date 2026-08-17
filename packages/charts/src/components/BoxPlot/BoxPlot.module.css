@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: var(--gnome-space-2, 8px);
+  font-family: var(--gnome-font-family, system-ui);
+}
+
+.axis {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  padding-bottom: 24px;
+}
+
+.tickLabel {
+  position: absolute;
+  right: 8px;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--gnome-dim-label-color, rgb(0 0 0 / 0.55));
+  white-space: nowrap;
+}
+
+.columns {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  gap: var(--gnome-space-2, 8px);
+  min-width: 0;
+}
+
+.column {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.track {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.whisker {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-1px);
+}
+
+.whiskerCap {
+  position: absolute;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  transform: translateY(-1px);
+}
+
+.box {
+  position: absolute;
+  left: 15%;
+  width: 70%;
+  border: 1.5px solid;
+  border-radius: var(--gnome-radius-sm, 3px);
+  box-sizing: border-box;
+}
+
+.median {
+  position: absolute;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  transform: translateY(-1px);
+  background-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.85));
+}
+
+.outlier {
+  position: absolute;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.label {
+  flex: 0 0 auto;
+  margin-top: 8px;
+  font-size: 11px;
+  text-align: center;
+  color: var(--gnome-dim-label-color, rgb(0 0 0 / 0.55));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

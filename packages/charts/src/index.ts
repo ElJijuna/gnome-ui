@@ -3,6 +3,8 @@ export type { AreaChartProps, AreaChartSeries } from './components/AreaChart';
 export { AreaChart } from './components/AreaChart';
 export type { BarChartProps, BarChartSeries } from './components/BarChart';
 export { BarChart } from './components/BarChart';
+export type { BoxPlotDataItem, BoxPlotProps, BoxPlotStats } from './components/BoxPlot';
+export { BoxPlot } from './components/BoxPlot';
 export type { BulletChartProps, BulletChartRange } from './components/BulletChart';
 export { BulletChart } from './components/BulletChart';
 export type { CloudChartDataItem, CloudChartProps } from './components/CloudChart';

@@ -26,6 +26,11 @@
       "import": "./dist/components/BarChart.js",
       "require": "./dist/components/BarChart.cjs"
     },
+    "./components/BoxPlot": {
+      "types": "./dist/components/BoxPlot.d.ts",
+      "import": "./dist/components/BoxPlot.js",
+      "require": "./dist/components/BoxPlot.cjs"
+    },
     "./components/BulletChart": {
       "types": "./dist/components/BulletChart.d.ts",
       "import": "./dist/components/BulletChart.js",

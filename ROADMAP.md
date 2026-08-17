@@ -422,6 +422,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`SankeyChart`** | Flow diagram for multi-stage funnels and user journeys |
 | ✅ | **`BulletChart`** | Bullet graph: performance value vs. target with qualitative range bands, complements `GaugeChart` in dense KPI rows |
 | ✅ | **`WaterfallChart`** | Floating-bar chart for the cumulative effect of sequential increases/decreases — revenue bridges, budget breakdowns |
+| ✅ | **`BoxPlot`** | Box-and-whisker plot for distribution, quartiles, and outliers across one or more groups; accepts raw values or precomputed statistics |
 | ✅ | **`SparkGaugeChart`** | Compact inline gauge for embedding in cards and table cells |
 | ✅ | **`SparkPieChart`** | Compact inline pie/donut for part-to-whole composition, embeddable in cards and table cells |
 | ✅ | **`SparkBulletChart`** | Compact inline bullet graph for embedding in cards and table cells |

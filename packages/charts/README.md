@@ -47,6 +47,7 @@ import "@gnome-ui/charts/styles";
 | `Heatmap` | Row × column matrix heatmap for correlation and density data |
 | `SankeyChart` | Flow diagram for multi-stage funnels and user journeys |
 | `WaterfallChart` | Floating-bar chart for cumulative increases/decreases — revenue bridges, budget breakdowns |
+| `BoxPlot` | Box-and-whisker plot for distribution, quartiles, and outliers across one or more groups |
 
 ### Spark charts
 
