@@ -24,6 +24,9 @@ jobs:
 
       - run: npm run lint
 
+      - name: Check component tables
+        run: npm run tables:check
+
       - name: Check LLM documentation
         run: npm run llms:check
 
