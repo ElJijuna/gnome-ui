@@ -46,6 +46,7 @@ import "@gnome-ui/charts/styles";
 | `BulletChart` | Compact bullet graph: performance value vs. target with qualitative range bands |
 | `Heatmap` | Row × column matrix heatmap for correlation and density data |
 | `SankeyChart` | Flow diagram for multi-stage funnels and user journeys |
+| `WaterfallChart` | Floating-bar chart for cumulative increases/decreases — revenue bridges, budget breakdowns |
 
 ### Spark charts
 

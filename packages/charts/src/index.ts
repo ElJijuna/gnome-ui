@@ -41,4 +41,6 @@ export type { SparkPieChartDataItem, SparkPieChartProps } from './components/Spa
 export { SparkPieChart } from './components/SparkPieChart';
 export type { TreeMapDataItem, TreeMapProps } from './components/TreeMap';
 export { TreeMap } from './components/TreeMap';
+export type { WaterfallChartDataItem, WaterfallChartProps } from './components/WaterfallChart';
+export { WaterfallChart } from './components/WaterfallChart';
 export type { ChartLegendPosition } from './types/legend';

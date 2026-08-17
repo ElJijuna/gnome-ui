@@ -121,6 +121,11 @@
       "import": "./dist/components/TreeMap.js",
       "require": "./dist/components/TreeMap.cjs"
     },
+    "./components/WaterfallChart": {
+      "types": "./dist/components/WaterfallChart.d.ts",
+      "import": "./dist/components/WaterfallChart.js",
+      "require": "./dist/components/WaterfallChart.cjs"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",

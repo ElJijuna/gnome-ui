@@ -421,6 +421,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`Heatmap`** | Generic matrix heatmap for correlation and density data (distinct from `ContributionGraph`'s calendar layout) |
 | ✅ | **`SankeyChart`** | Flow diagram for multi-stage funnels and user journeys |
 | ✅ | **`BulletChart`** | Bullet graph: performance value vs. target with qualitative range bands, complements `GaugeChart` in dense KPI rows |
+| ✅ | **`WaterfallChart`** | Floating-bar chart for the cumulative effect of sequential increases/decreases — revenue bridges, budget breakdowns |
 | ✅ | **`SparkGaugeChart`** | Compact inline gauge for embedding in cards and table cells |
 | ✅ | **`SparkPieChart`** | Compact inline pie/donut for part-to-whole composition, embeddable in cards and table cells |
 | ✅ | **`SparkBulletChart`** | Compact inline bullet graph for embedding in cards and table cells |
