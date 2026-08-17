@@ -102,6 +102,9 @@ jobs:
           name: hooks-dist
           path: packages/hooks/dist
 
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
+
       - run: npm run build --workspace=packages/react
 
       - uses: actions/upload-artifact@v4
@@ -111,7 +114,7 @@ jobs:
 
   build-charts:
     name: Build @gnome-ui/charts
-    needs: [build-core, build-icons, build-react]
+    needs: [build-core, build-icons, build-react, build-hooks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -132,6 +135,14 @@ jobs:
         with:
           name: react-dist
           path: packages/react/dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: hooks-dist
+          path: packages/hooks/dist
+
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
 
       - run: npm run build --workspace=packages/charts
 
@@ -168,6 +179,9 @@ jobs:
         with:
           name: hooks-dist
           path: packages/hooks/dist
+
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
 
       - run: npm run build --workspace=packages/layout
 
@@ -302,7 +316,7 @@ jobs:
 
   build-storybook-charts:
     name: Build Storybook (@gnome-ui/charts)
-    needs: [build-icons, build-charts, build-react]
+    needs: [build-icons, build-charts, build-react, build-hooks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -328,6 +342,14 @@ jobs:
         with:
           name: react-dist
           path: packages/react/dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: hooks-dist
+          path: packages/hooks/dist
+
+      - name: Build @gnome-ui/platform
+        run: npm run build --workspace=packages/platform
 
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/charts
