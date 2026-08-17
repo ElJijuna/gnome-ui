@@ -26,6 +26,11 @@
       "import": "./dist/components/BarChart.js",
       "require": "./dist/components/BarChart.cjs"
     },
+    "./components/BulletChart": {
+      "types": "./dist/components/BulletChart.d.ts",
+      "import": "./dist/components/BulletChart.js",
+      "require": "./dist/components/BulletChart.cjs"
+    },
     "./components/CloudChart": {
       "types": "./dist/components/CloudChart.d.ts",
       "import": "./dist/components/CloudChart.js",
@@ -90,6 +95,11 @@
       "types": "./dist/components/SparkBarChart.d.ts",
       "import": "./dist/components/SparkBarChart.js",
       "require": "./dist/components/SparkBarChart.cjs"
+    },
+    "./components/SparkBulletChart": {
+      "types": "./dist/components/SparkBulletChart.d.ts",
+      "import": "./dist/components/SparkBulletChart.js",
+      "require": "./dist/components/SparkBulletChart.cjs"
     },
     "./components/SparkGaugeChart": {
       "types": "./dist/components/SparkGaugeChart.d.ts",

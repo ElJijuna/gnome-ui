@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-3, 16px);
+  font-family: var(--gnome-font-family, system-ui);
+}
+
+.label {
+  flex: 0 0 auto;
+  min-width: 80px;
+  font-size: 0.8125rem;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track {
+  position: relative;
+  flex: 1 1 auto;
+  border-radius: var(--gnome-radius-sm, 4px);
+  overflow: hidden;
+}
+
+.band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.bar {
+  position: absolute;
+  top: 30%;
+  bottom: 30%;
+  left: 0;
+  border-radius: var(--gnome-radius-sm, 3px);
+  transition: width 0.2s ease;
+}
+
+.target {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  width: 2px;
+  background-color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  transform: translateX(-1px);
+}
+
+.value {
+  flex: 0 0 auto;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.targetValue {
+  font-weight: 400;
+  color: var(--gnome-dim-label-color, rgb(0 0 0 / 0.55));
+}

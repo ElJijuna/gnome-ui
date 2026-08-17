@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { GNOME_CHART_PALETTE } from './colors';
 import { SparkAreaChart, type SparkAreaChartProps } from './components/SparkAreaChart';
 import { SparkBarChart, type SparkBarChartProps } from './components/SparkBarChart';
+import { SparkBulletChart, type SparkBulletChartProps } from './components/SparkBulletChart';
 import { SparkGaugeChart, type SparkGaugeChartProps } from './components/SparkGaugeChart';
 import { SparkLineChart, type SparkLineChartProps } from './components/SparkLineChart';
 import { SparkPieChart, type SparkPieChartProps } from './components/SparkPieChart';
@@ -236,6 +237,55 @@ export const PieDonut: StoryObj<SparkPieChartProps> = {
   render: () => <SparkPieChart data={PIE_DATA} donut aria-label="Browser share" />,
 };
 
+// ─── SparkBulletChart ─────────────────────────────────────────────────────────
+
+export const Bullet: StoryObj<SparkBulletChartProps> = {
+  name: 'SparkBulletChart',
+  args: {
+    value: 72,
+    target: 90,
+    height: 16,
+  },
+  argTypes: {
+    ranges: { table: { disable: true } },
+    value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+    target: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+    min: { control: { type: 'number' } },
+    max: { control: { type: 'number' } },
+    height: { control: { type: 'range', min: 8, max: 40, step: 2 } },
+    color: { control: 'color' },
+    className: { table: { disable: true } },
+    'aria-label': { table: { disable: true } },
+  },
+  render: (args) => (
+    <div style={{ width: 200 }}>
+      <SparkBulletChart {...args} aria-label="Revenue vs target" />
+    </div>
+  ),
+};
+
+export const BulletRanges: StoryObj<SparkBulletChartProps> = {
+  name: 'SparkBulletChart — ranges',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div style={{ width: 200 }}>
+      <SparkBulletChart
+        value={72}
+        target={90}
+        ranges={[{ value: 50 }, { value: 80 }, { value: 100 }]}
+        aria-label="Revenue vs target"
+      />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pass `ranges` for status-style bands — same API as `BulletChart`.',
+      },
+    },
+  },
+};
+
 // ─── Multi-series ─────────────────────────────────────────────────────────────
 
 const MULTI_DATA = [
@@ -437,6 +487,9 @@ export const InCards: StoryObj = {
       </MetricCard>
       <MetricCard label="Storage" value="1.2 TB" trend="4 categories">
         <SparkPieChart data={PIE_DATA} size={48} donut aria-label="Storage by category" />
+      </MetricCard>
+      <MetricCard label="Revenue" value="$72K" trend="Target $90K">
+        <SparkBulletChart value={72} target={90} height={16} aria-label="Revenue vs target" />
       </MetricCard>
     </div>
   ),

@@ -3,6 +3,8 @@ export type { AreaChartProps, AreaChartSeries } from './components/AreaChart';
 export { AreaChart } from './components/AreaChart';
 export type { BarChartProps, BarChartSeries } from './components/BarChart';
 export { BarChart } from './components/BarChart';
+export type { BulletChartProps, BulletChartRange } from './components/BulletChart';
+export { BulletChart } from './components/BulletChart';
 export type { CloudChartDataItem, CloudChartProps } from './components/CloudChart';
 export { CloudChart } from './components/CloudChart';
 export type { ComposedChartProps, ComposedChartSeries } from './components/ComposedChart';
@@ -29,6 +31,8 @@ export type { SparkAreaChartProps, SparkSeries } from './components/SparkAreaCha
 export { SparkAreaChart } from './components/SparkAreaChart';
 export type { SparkBarChartProps } from './components/SparkBarChart';
 export { SparkBarChart } from './components/SparkBarChart';
+export type { SparkBulletChartProps, SparkBulletChartRange } from './components/SparkBulletChart';
+export { SparkBulletChart } from './components/SparkBulletChart';
 export type { SparkGaugeChartProps, SparkGaugeChartThreshold } from './components/SparkGaugeChart';
 export { SparkGaugeChart } from './components/SparkGaugeChart';
 export type { SparkLineChartProps } from './components/SparkLineChart';

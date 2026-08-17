@@ -3,13 +3,13 @@
 Inline sparkline charts for embedding compact trend visualizations inside
 cards, tables, and dashboards — no axes, no labels, minimal chrome.
 
-Five variants are available: `SparkAreaChart`, `SparkLineChart`,
-`SparkBarChart`, `SparkGaugeChart`, and `SparkPieChart`. The first three
-accept either a plain number array or an object array with a `dataKey`.
-`SparkGaugeChart` and `SparkPieChart` are different — they mirror
-`GaugeChart`'s and `PieChart`'s APIs instead of plotting a trend; see
-[SparkGaugeChart](#sparkgaugechart) and [SparkPieChart](#sparkpiechart)
-below for details.
+Six variants are available: `SparkAreaChart`, `SparkLineChart`,
+`SparkBarChart`, `SparkGaugeChart`, `SparkPieChart`, and `SparkBulletChart`.
+The first three accept either a plain number array or an object array with
+a `dataKey`. The last three are different — they mirror `GaugeChart`'s,
+`PieChart`'s, and `BulletChart`'s APIs instead of plotting a trend; see
+[SparkGaugeChart](#sparkgaugechart), [SparkPieChart](#sparkpiechart), and
+[SparkBulletChart](#sparkbulletchart) below for details.
 
 ```tsx
 import { SparkAreaChart, SparkBarChart, SparkGaugeChart, SparkLineChart } from '@gnome-ui/charts';
@@ -141,6 +141,42 @@ import { SparkPieChart } from '@gnome-ui/charts';
 Colors fall back to `GNOME_CHART_PALETTE` by index when not set per item.
 Unlike the other spark charts it has no `highlighted` prop — hover emphasis
 doesn't map cleanly onto a multi-slice composition chart at this scale.
+
+---
+
+## SparkBulletChart
+
+A compact bullet graph — value vs. target in a single row. Mirrors
+`BulletChart`'s API instead of the shared `data`/`dataKey` props above,
+minus the `label`/`showValue` text (pair it with a label in the
+surrounding layout, e.g. a table row or list item).
+
+```tsx
+import { SparkBulletChart } from '@gnome-ui/charts';
+
+<SparkBulletChart value={72} target={90} aria-label="Revenue vs target" />
+
+<SparkBulletChart
+  value={72}
+  target={90}
+  ranges={[{ value: 50 }, { value: 80 }, { value: 100 }]}
+  aria-label="CPU vs target"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Performance measure — the current value |
+| `target` | `number` | — | Comparative measure, rendered as a perpendicular tick |
+| `min` | `number` | `0` | Minimum of the track range |
+| `max` | `number` | `100` | Maximum of the track range |
+| `ranges` | `{ value, color? }[]` | — | Ascending upper bounds for qualitative bands; falls back to a neutral grayscale ramp |
+| `color` | `string` | accent color | Performance bar color |
+| `height` | `number` | `16` | Track height in px |
+| `aria-label` | `string` | — | Accessible label (recommended) |
+| `className` | `string` | — | Extra CSS class on the wrapper `<div>` |
+
+Renders as plain HTML/CSS — no Recharts dependency, no built-in tooltip.
 
 ---
 

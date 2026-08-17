@@ -43,6 +43,7 @@ import "@gnome-ui/charts/styles";
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 | `GaugeChart` | Single-value speedometer gauge with optional status color thresholds |
+| `BulletChart` | Compact bullet graph: performance value vs. target with qualitative range bands |
 | `Heatmap` | Row × column matrix heatmap for correlation and density data |
 | `SankeyChart` | Flow diagram for multi-stage funnels and user journeys |
 
@@ -57,6 +58,7 @@ Minimal inline charts — no axes, no grid, no legend, no tooltip. Designed to b
 | `SparkBarChart` | Compact bar chart with rounded bars |
 | `SparkGaugeChart` | Compact single-value progress ring |
 | `SparkPieChart` | Compact pie or donut for part-to-whole composition |
+| `SparkBulletChart` | Compact bullet graph: value vs. target in a single row |
 
 `SparkAreaChart`, `SparkLineChart`, and `SparkBarChart` accept `data: number[]`
 directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
@@ -70,6 +72,10 @@ directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
 per slice — plus `size` (diameter, default 40) and `donut` (hollow center,
 default `false`), mirroring `PieChart`'s API. Colors fall back to
 `GNOME_CHART_PALETTE` by index.
+
+`SparkBulletChart` takes `value` (plus optional `target`, `min`, `max`, and
+`ranges`) instead of a data array, mirroring `BulletChart`'s API at a compact
+scale (`height`, default 16, instead of `BulletChart`'s `label`/`showValue`).
 
 See [`src/README.md`](src/README.md) for full spark chart docs.
 
