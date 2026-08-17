@@ -174,7 +174,14 @@ export const Gauge: StoryObj<SparkGaugeChartProps> = {
 
 export const GaugeThresholds: StoryObj<SparkGaugeChartProps> = {
   name: 'SparkGaugeChart — thresholds',
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Pass `thresholds` for status-style rings — same API as `GaugeChart`.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
       {[30, 72, 93].map((value) => (
@@ -192,13 +199,6 @@ export const GaugeThresholds: StoryObj<SparkGaugeChartProps> = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Pass `thresholds` for status-style rings — same API as `GaugeChart`.',
-      },
-    },
-  },
 };
 
 // ─── SparkPieChart ────────────────────────────────────────────────────────────
