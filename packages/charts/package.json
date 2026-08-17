@@ -81,20 +81,10 @@
       "import": "./dist/components/ScatterChart.js",
       "require": "./dist/components/ScatterChart.cjs"
     },
-    "./components/TreeMap": {
-      "types": "./dist/components/TreeMap.d.ts",
-      "import": "./dist/components/TreeMap.js",
-      "require": "./dist/components/TreeMap.cjs"
-    },
     "./components/SparkAreaChart": {
       "types": "./dist/components/SparkAreaChart.d.ts",
       "import": "./dist/components/SparkAreaChart.js",
       "require": "./dist/components/SparkAreaChart.cjs"
-    },
-    "./components/SparkLineChart": {
-      "types": "./dist/components/SparkLineChart.d.ts",
-      "import": "./dist/components/SparkLineChart.js",
-      "require": "./dist/components/SparkLineChart.cjs"
     },
     "./components/SparkBarChart": {
       "types": "./dist/components/SparkBarChart.d.ts",
@@ -106,17 +96,42 @@
       "import": "./dist/components/SparkGaugeChart.js",
       "require": "./dist/components/SparkGaugeChart.cjs"
     },
+    "./components/SparkLineChart": {
+      "types": "./dist/components/SparkLineChart.d.ts",
+      "import": "./dist/components/SparkLineChart.js",
+      "require": "./dist/components/SparkLineChart.cjs"
+    },
     "./components/SparkPieChart": {
       "types": "./dist/components/SparkPieChart.d.ts",
       "import": "./dist/components/SparkPieChart.js",
       "require": "./dist/components/SparkPieChart.cjs"
+    },
+    "./components/TreeMap": {
+      "types": "./dist/components/TreeMap.d.ts",
+      "import": "./dist/components/TreeMap.js",
+      "require": "./dist/components/TreeMap.cjs"
     },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles": "./dist/style.css"
+    "./styles": "./dist/style.css",
+    "./tooltipStyle": {
+      "types": "./dist/tooltipStyle.d.ts",
+      "import": "./dist/tooltipStyle.js",
+      "require": "./dist/tooltipStyle.cjs"
+    },
+    "./types/legend": {
+      "types": "./dist/types/legend.d.ts",
+      "import": "./dist/types/legend.js",
+      "require": "./dist/types/legend.cjs"
+    },
+    "./types/spark": {
+      "types": "./dist/types/spark.d.ts",
+      "import": "./dist/types/spark.js",
+      "require": "./dist/types/spark.cjs"
+    }
   },
   "files": [
     "dist"
