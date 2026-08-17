@@ -33,6 +33,8 @@ export type { SparkGaugeChartProps, SparkGaugeChartThreshold } from './component
 export { SparkGaugeChart } from './components/SparkGaugeChart';
 export type { SparkLineChartProps } from './components/SparkLineChart';
 export { SparkLineChart } from './components/SparkLineChart';
+export type { SparkPieChartDataItem, SparkPieChartProps } from './components/SparkPieChart';
+export { SparkPieChart } from './components/SparkPieChart';
 export type { TreeMapDataItem, TreeMapProps } from './components/TreeMap';
 export { TreeMap } from './components/TreeMap';
 export type { ChartLegendPosition } from './types/legend';

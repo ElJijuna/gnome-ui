@@ -7,6 +7,7 @@ import { SparkAreaChart, type SparkAreaChartProps } from './components/SparkArea
 import { SparkBarChart, type SparkBarChartProps } from './components/SparkBarChart';
 import { SparkGaugeChart, type SparkGaugeChartProps } from './components/SparkGaugeChart';
 import { SparkLineChart, type SparkLineChartProps } from './components/SparkLineChart';
+import { SparkPieChart, type SparkPieChartProps } from './components/SparkPieChart';
 import readme from './README.md?raw';
 
 // ─── Sample data ─────────────────────────────────────────────────────────────
@@ -198,6 +199,41 @@ export const GaugeThresholds: StoryObj<SparkGaugeChartProps> = {
       },
     },
   },
+};
+
+// ─── SparkPieChart ────────────────────────────────────────────────────────────
+
+const PIE_DATA = [{ value: 62 }, { value: 18 }, { value: 11 }, { value: 9 }];
+
+export const Pie: StoryObj<SparkPieChartProps> = {
+  name: 'SparkPieChart',
+  args: {
+    data: PIE_DATA,
+    size: 40,
+    donut: false,
+    paddingAngle: 2,
+  },
+  argTypes: {
+    donut: { control: 'boolean', description: 'Render as a donut (hollow center).' },
+    paddingAngle: {
+      control: { type: 'range', min: 0, max: 10, step: 1 },
+      description: 'Gap in degrees between adjacent slices.',
+    },
+    size: {
+      control: { type: 'range', min: 20, max: 120, step: 4 },
+      description: 'Chart diameter in px.',
+    },
+    data: { table: { disable: true } },
+    className: { table: { disable: true } },
+    'aria-label': { table: { disable: true } },
+  },
+  render: (args) => <SparkPieChart {...args} aria-label="Browser share" />,
+};
+
+export const PieDonut: StoryObj<SparkPieChartProps> = {
+  name: 'SparkPieChart — donut',
+  parameters: { controls: { disable: true } },
+  render: () => <SparkPieChart data={PIE_DATA} donut aria-label="Browser share" />,
 };
 
 // ─── Multi-series ─────────────────────────────────────────────────────────────
@@ -398,6 +434,9 @@ export const InCards: StoryObj = {
           ]}
           aria-label="Disk usage 72%"
         />
+      </MetricCard>
+      <MetricCard label="Storage" value="1.2 TB" trend="4 categories">
+        <SparkPieChart data={PIE_DATA} size={48} donut aria-label="Storage by category" />
       </MetricCard>
     </div>
   ),

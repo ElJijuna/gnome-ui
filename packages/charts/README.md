@@ -56,6 +56,7 @@ Minimal inline charts — no axes, no grid, no legend, no tooltip. Designed to b
 | `SparkLineChart` | Compact line chart, no fill |
 | `SparkBarChart` | Compact bar chart with rounded bars |
 | `SparkGaugeChart` | Compact single-value progress ring |
+| `SparkPieChart` | Compact pie or donut for part-to-whole composition |
 
 `SparkAreaChart`, `SparkLineChart`, and `SparkBarChart` accept `data: number[]`
 directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
@@ -63,7 +64,14 @@ directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
 
 `SparkGaugeChart` is the exception — it takes a single `value` (plus `min`,
 `max`, and optional `thresholds`) instead of a data array, mirroring
-`GaugeChart`'s API. See [`src/README.md`](src/README.md) for full spark chart docs.
+`GaugeChart`'s API.
+
+`SparkPieChart` takes `data: { value: number; color?: string }[]` — one entry
+per slice — plus `size` (diameter, default 40) and `donut` (hollow center,
+default `false`), mirroring `PieChart`'s API. Colors fall back to
+`GNOME_CHART_PALETTE` by index.
+
+See [`src/README.md`](src/README.md) for full spark chart docs.
 
 ```tsx
 import { SparkAreaChart, SparkLineChart, SparkBarChart } from "@gnome-ui/charts";

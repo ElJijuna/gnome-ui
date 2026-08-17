@@ -3,12 +3,13 @@
 Inline sparkline charts for embedding compact trend visualizations inside
 cards, tables, and dashboards — no axes, no labels, minimal chrome.
 
-Four variants are available: `SparkAreaChart`, `SparkLineChart`,
-`SparkBarChart`, and `SparkGaugeChart`. The first three accept either a plain
-number array or an object array with a `dataKey`. `SparkGaugeChart` is
-different — it mirrors `GaugeChart`'s single-value API (`value`, `min`, `max`,
-`thresholds`) instead of plotting a trend; see
-[its own section below](#sparkgaugechart) for details.
+Five variants are available: `SparkAreaChart`, `SparkLineChart`,
+`SparkBarChart`, `SparkGaugeChart`, and `SparkPieChart`. The first three
+accept either a plain number array or an object array with a `dataKey`.
+`SparkGaugeChart` and `SparkPieChart` are different — they mirror
+`GaugeChart`'s and `PieChart`'s APIs instead of plotting a trend; see
+[SparkGaugeChart](#sparkgaugechart) and [SparkPieChart](#sparkpiechart)
+below for details.
 
 ```tsx
 import { SparkAreaChart, SparkBarChart, SparkGaugeChart, SparkLineChart } from '@gnome-ui/charts';
@@ -100,6 +101,46 @@ import { SparkGaugeChart } from '@gnome-ui/charts';
 Renders as plain SVG — no Recharts dependency, no built-in tooltip. Pair it
 with a numeric label in the surrounding layout (e.g. inside a `StatCard`)
 since the ring itself shows no text.
+
+---
+
+## SparkPieChart
+
+A compact pie or donut for part-to-whole composition — not a trend. Mirrors
+`PieChart`'s API instead of the shared `data`/`dataKey` props above.
+
+```tsx
+import { SparkPieChart } from '@gnome-ui/charts';
+
+<SparkPieChart
+  data={[{ value: 62 }, { value: 18 }, { value: 11 }, { value: 9 }]}
+  size={40}
+  aria-label="Browser share"
+/>
+
+<SparkPieChart
+  data={[
+    { value: 45, color: 'var(--gnome-blue-3, #3584e4)' },
+    { value: 30, color: 'var(--gnome-green-4, #2ec27e)' },
+    { value: 25, color: 'var(--gnome-orange-3, #ff7800)' },
+  ]}
+  donut
+  aria-label="Storage by category"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `{ value: number; color?: string }[]` | — | One entry per slice |
+| `size` | `number` | `40` | Chart diameter in px |
+| `donut` | `boolean` | `false` | Render as a donut (hollow center) |
+| `paddingAngle` | `number` | `2` | Gap in degrees between adjacent slices |
+| `aria-label` | `string` | — | Accessible label (recommended) |
+| `className` | `string` | — | Extra CSS class on the wrapper `<div>` |
+
+Colors fall back to `GNOME_CHART_PALETTE` by index when not set per item.
+Unlike the other spark charts it has no `highlighted` prop — hover emphasis
+doesn't map cleanly onto a multi-slice composition chart at this scale.
 
 ---
 
