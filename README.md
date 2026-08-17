@@ -6,7 +6,7 @@ A React component library that faithfully implements the [GNOME Human Interface 
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/badge/gnome--ui-docs-3584e4)](https://gnome-ui.org/)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://gnome-ui.org/react/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ElJijuna/gnome-ui/blob/main/LICENSE)
 
 Read the guides, architecture, design guidelines, roadmap, and changelog at
 **[gnome-ui.org](https://gnome-ui.org/)** — and
@@ -18,14 +18,14 @@ below).
 
 | Package | Description | Version |
 |---------|-------------|---------|
-| [`@gnome-ui/core`](packages/core) | Framework-agnostic design tokens (CSS custom properties) | [![npm](https://img.shields.io/npm/v/@gnome-ui/core)](https://www.npmjs.com/package/@gnome-ui/core) |
-| [`@gnome-ui/icons`](packages/icons) | Framework-agnostic Adwaita symbolic icon definitions (SVG path data) | [![npm](https://img.shields.io/npm/v/@gnome-ui/icons)](https://www.npmjs.com/package/@gnome-ui/icons) |
-| [`@gnome-ui/react`](packages/react) | React component library | [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react) |
-| [`@gnome-ui/layout`](packages/layout) | Full-page application shell and dashboard components | [![npm](https://img.shields.io/npm/v/@gnome-ui/layout)](https://www.npmjs.com/package/@gnome-ui/layout) |
-| [`@gnome-ui/platform`](packages/platform) | TypeScript bridge to GNOME host APIs (GSettings, portals, notifications…) | [![npm](https://img.shields.io/npm/v/@gnome-ui/platform)](https://www.npmjs.com/package/@gnome-ui/platform) |
-| [`@gnome-ui/hooks`](packages/hooks) | React hooks that surface `@gnome-ui/platform` APIs as idiomatic React state | [![npm](https://img.shields.io/npm/v/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks) |
-| [`@gnome-ui/charts`](packages/charts) | Data visualisation components (Line, Bar, Area) styled with Adwaita tokens | [![npm](https://img.shields.io/npm/v/@gnome-ui/charts)](https://www.npmjs.com/package/@gnome-ui/charts) |
-| [`@gnome-ui/react-native`](packages/react-native) | React Native components for iOS/Android/GNOME-mobile | [![npm](https://img.shields.io/npm/v/@gnome-ui/react-native)](https://www.npmjs.com/package/@gnome-ui/react-native) |
+| [`@gnome-ui/core`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/core) | Framework-agnostic design tokens (CSS custom properties) | [![npm](https://img.shields.io/npm/v/@gnome-ui/core)](https://www.npmjs.com/package/@gnome-ui/core) |
+| [`@gnome-ui/icons`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/icons) | Framework-agnostic Adwaita symbolic icon definitions (SVG path data) | [![npm](https://img.shields.io/npm/v/@gnome-ui/icons)](https://www.npmjs.com/package/@gnome-ui/icons) |
+| [`@gnome-ui/react`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/react) | React component library | [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react) |
+| [`@gnome-ui/layout`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/layout) | Full-page application shell and dashboard components | [![npm](https://img.shields.io/npm/v/@gnome-ui/layout)](https://www.npmjs.com/package/@gnome-ui/layout) |
+| [`@gnome-ui/platform`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/platform) | TypeScript bridge to GNOME host APIs (GSettings, portals, notifications…) | [![npm](https://img.shields.io/npm/v/@gnome-ui/platform)](https://www.npmjs.com/package/@gnome-ui/platform) |
+| [`@gnome-ui/hooks`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/hooks) | React hooks that surface `@gnome-ui/platform` APIs as idiomatic React state | [![npm](https://img.shields.io/npm/v/@gnome-ui/hooks)](https://www.npmjs.com/package/@gnome-ui/hooks) |
+| [`@gnome-ui/charts`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/charts) | Data visualisation components (Line, Bar, Area) styled with Adwaita tokens | [![npm](https://img.shields.io/npm/v/@gnome-ui/charts)](https://www.npmjs.com/package/@gnome-ui/charts) |
+| [`@gnome-ui/react-native`](https://github.com/ElJijuna/gnome-ui/tree/main/packages/react-native) | React Native components for iOS/Android/GNOME-mobile | [![npm](https://img.shields.io/npm/v/@gnome-ui/react-native)](https://www.npmjs.com/package/@gnome-ui/react-native) |
 
 ## Quick start
 
@@ -209,4 +209,4 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/). 
 
 ## License
 
-[MIT](LICENSE) © el_jijuna
+[MIT](https://github.com/ElJijuna/gnome-ui/blob/main/LICENSE) © el_jijuna
