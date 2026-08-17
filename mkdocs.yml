@@ -1,6 +1,6 @@
 site_name: GNOME UI
 site_description: Documentation for the gnome-ui design system
-site_url: https://eljijuna.github.io/gnome-ui/
+site_url: https://gnome-ui.org/
 repo_url: https://github.com/ElJijuna/gnome-ui
 repo_name: ElJijuna/gnome-ui
 edit_uri: edit/main/docs/

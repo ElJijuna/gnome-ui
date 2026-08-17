@@ -48,7 +48,7 @@ like `1,000`.
     ```
 
 Every component, live and interactive, lives in its package's own
-Storybook — start at [`@gnome-ui/react`](https://eljijuna.github.io/gnome-ui/react/).
+Storybook — start at [`@gnome-ui/react`](https://gnome-ui.org/react/).
 
 ## Working on the monorepo itself
 
