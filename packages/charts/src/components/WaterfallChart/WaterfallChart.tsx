@@ -82,7 +82,10 @@ const buildChartData = (data: WaterfallChartDataItem[], format: (value: number) 
       value: barValue,
       kind,
       rawValue: item.value,
-      displayValue: kind === 'total' ? format(item.value) : `${item.value >= 0 ? '+' : ''}${format(item.value)}`,
+      displayValue:
+        kind === 'total'
+          ? format(item.value)
+          : `${item.value >= 0 ? '+' : ''}${format(item.value)}`,
     };
   });
 };
@@ -130,7 +133,8 @@ export const WaterfallChart = ({
     <div
       role="img"
       aria-label={
-        ariaLabel ?? `Waterfall chart: ${data.map((d) => `${d.label} ${format(d.value)}`).join(', ')}`
+        ariaLabel ??
+        `Waterfall chart: ${data.map((d) => `${d.label} ${format(d.value)}`).join(', ')}`
       }
       className={[styles.container, className].filter(Boolean).join(' ')}
       style={{ height }}
@@ -170,9 +174,7 @@ export const WaterfallChart = ({
             {chartData.map((entry, i) => (
               <Cell key={i} fill={colorFor(entry.kind)} />
             ))}
-            {showValues && (
-              <LabelList dataKey="displayValue" position="top" style={LABEL_STYLE} />
-            )}
+            {showValues && <LabelList dataKey="displayValue" position="top" style={LABEL_STYLE} />}
           </Bar>
         </RechartsBarChart>
       </ResponsiveContainer>

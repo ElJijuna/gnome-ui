@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { WaterfallChart } from './WaterfallChart';
 import readme from './README.md?raw';
+import { WaterfallChart } from './WaterfallChart';
 
 const meta: Meta<typeof WaterfallChart> = {
   title: 'Charts/WaterfallChart',

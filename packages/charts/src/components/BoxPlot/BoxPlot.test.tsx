@@ -89,13 +89,13 @@ describe('BoxPlot', () => {
       const { container } = render(<BoxPlot data={STATS_DATA} />);
       const boxes = container.querySelectorAll(`.${styles.box}`);
 
-      expect(boxes[0]).not.toHaveStyle({ borderColor: (boxes[1] as HTMLElement).style.borderColor });
+      expect(boxes[0]).not.toHaveStyle({
+        borderColor: (boxes[1] as HTMLElement).style.borderColor,
+      });
     });
 
     it('uses an explicit per-item color', () => {
-      const { container } = render(
-        <BoxPlot data={[{ ...STATS_DATA[0], color: '#e01b24' }]} />,
-      );
+      const { container } = render(<BoxPlot data={[{ ...STATS_DATA[0], color: '#e01b24' }]} />);
       const box = container.querySelector(`.${styles.box}`);
 
       expect(box).toHaveStyle({ borderColor: '#e01b24' });

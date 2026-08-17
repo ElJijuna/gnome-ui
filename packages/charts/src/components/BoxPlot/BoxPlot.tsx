@@ -91,7 +91,11 @@ export const BoxPlot = ({
     stats: resolveStats(item),
   }));
 
-  const allValues = resolved.flatMap((r) => [r.stats.min, r.stats.max, ...(r.stats.outliers ?? [])]);
+  const allValues = resolved.flatMap((r) => [
+    r.stats.min,
+    r.stats.max,
+    ...(r.stats.outliers ?? []),
+  ]);
   const rawMin = allValues.length ? Math.min(...allValues) : 0;
   const rawMax = allValues.length ? Math.max(...allValues) : 1;
   const padding = (rawMax - rawMin || 1) * 0.08;
@@ -108,9 +112,7 @@ export const BoxPlot = ({
       role="img"
       aria-label={
         ariaLabel ??
-        `Box plot: ${resolved
-          .map((r) => `${r.label} median ${format(r.stats.median)}`)
-          .join(', ')}`
+        `Box plot: ${resolved.map((r) => `${r.label} median ${format(r.stats.median)}`).join(', ')}`
       }
       className={[styles.container, className].filter(Boolean).join(' ')}
       style={{ height }}
@@ -141,8 +143,14 @@ export const BoxPlot = ({
                   className={styles.whisker}
                   style={{ top: `${maxY}%`, height: `${minY - maxY}%`, backgroundColor: color }}
                 />
-                <div className={styles.whiskerCap} style={{ top: `${maxY}%`, backgroundColor: color }} />
-                <div className={styles.whiskerCap} style={{ top: `${minY}%`, backgroundColor: color }} />
+                <div
+                  className={styles.whiskerCap}
+                  style={{ top: `${maxY}%`, backgroundColor: color }}
+                />
+                <div
+                  className={styles.whiskerCap}
+                  style={{ top: `${minY}%`, backgroundColor: color }}
+                />
                 <div
                   className={styles.box}
                   style={{

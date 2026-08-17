@@ -123,7 +123,10 @@ describe('WaterfallChart', () => {
 
     it('colors total bars with totalColor', () => {
       const { container } = render(
-        <WaterfallChart data={[{ label: 'Start', value: 100, isTotal: true }]} totalColor="#111111" />,
+        <WaterfallChart
+          data={[{ label: 'Start', value: 100, isTotal: true }]}
+          totalColor="#111111"
+        />,
       );
       const cell = container.querySelector('.recharts-bar-rectangle path[fill="#111111"]');
 
