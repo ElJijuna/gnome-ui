@@ -4,13 +4,15 @@ A React component library that faithfully implements the [GNOME Human Interface 
 
 [![npm](https://img.shields.io/npm/v/@gnome-ui/react)](https://www.npmjs.com/package/@gnome-ui/react)
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
-[![Website](https://img.shields.io/badge/gnome--ui-showcase-3584e4)](https://eljijuna.github.io/gnome-ui/)
+[![Docs](https://img.shields.io/badge/gnome--ui-docs-3584e4)](https://eljijuna.github.io/gnome-ui/)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://eljijuna.github.io/gnome-ui/react/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Browse every component, hook, and icon across every package — with live
-examples, copy-paste install commands, and links to each package's own
-Storybook — at **[eljijuna.github.io/gnome-ui](https://eljijuna.github.io/gnome-ui/)**.
+Read the guides, architecture, design guidelines, roadmap, and changelog at
+**[eljijuna.github.io/gnome-ui](https://eljijuna.github.io/gnome-ui/)** — and
+browse every component live, with real interactive previews, in each
+package's own Storybook (linked throughout, and per-row in the tables
+below).
 
 ## Packages
 
@@ -148,7 +150,7 @@ for a compact documentation index or
 | `QuickActions` | Grid of keyboard-navigable shortcut action buttons for dashboards and control panels | [Docs](https://eljijuna.github.io/gnome-ui/react/?path=/docs/layout-quickactions--docs) |
 | `ContributionGraph` | Activity heatmap calendar (GitHub-style) rendered in pure SVG, with keyboard navigation and dark mode | [Docs](https://eljijuna.github.io/gnome-ui/react/?path=/docs/data-display-contributiongraph--docs) |
 
-See [ROADMAP.md](ROADMAP.md) for the full list of planned components.
+See [ROADMAP.md](https://github.com/ElJijuna/gnome-ui/blob/main/ROADMAP.md) for the full list of planned components.
 
 ## Development
 
@@ -194,7 +196,7 @@ gnome-ui/
 
 ## Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Read [CONTRIBUTING.md](https://github.com/ElJijuna/gnome-ui/blob/main/CONTRIBUTING.md) before opening a pull request.
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/). Your commit messages determine the next version automatically via semantic-release:
 

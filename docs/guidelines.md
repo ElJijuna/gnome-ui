@@ -1,0 +1,1 @@
+--8<-- "GNOME_GUIDELINES.md"

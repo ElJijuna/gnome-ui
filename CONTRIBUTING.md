@@ -93,9 +93,9 @@ Breaking changes trigger a **major** version bump.
 
 2. Export it from `packages/react/src/index.ts`.
 
-3. Follow the patterns in [GNOME_GUIDELINES.md](GNOME_GUIDELINES.md).
+3. Follow the patterns in [GNOME_GUIDELINES.md](https://github.com/ElJijuna/gnome-ui/blob/main/GNOME_GUIDELINES.md).
 
-4. Mark it as `✅` in [ROADMAP.md](ROADMAP.md).
+4. Mark it as `✅` in [ROADMAP.md](https://github.com/ElJijuna/gnome-ui/blob/main/ROADMAP.md).
 
 5. Every component needs:
    - All styles using CSS custom properties from `@gnome-ui/core`

@@ -329,7 +329,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 ## Tier 16 — Platform Integration
 
 > New workspaces that bridge the React layer with the GNOME host process.
-> See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full dependency graph and communication model.
+> See [ARCHITECTURE.md](https://github.com/ElJijuna/gnome-ui/blob/main/ARCHITECTURE.md) for the full dependency graph and communication model.
 
 ### `@gnome-ui/platform` — TypeScript API layer
 

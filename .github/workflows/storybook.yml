@@ -1,4 +1,4 @@
-name: Deploy Storybook
+name: Deploy Docs & Storybook
 
 on:
   push:
@@ -171,12 +171,13 @@ jobs:
           name: layout-dist
           path: packages/layout/dist/
 
-  build-website:
-    name: Build website
-    needs: [build-icons, build-react, build-hooks, build-charts, build-layout]
+  build-docs:
+    name: Build docs (MkDocs)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # git-revision-date-localized needs full history
 
       - uses: actions/setup-node@v4
         with:
@@ -185,37 +186,18 @@ jobs:
 
       - run: npm ci
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: icons-dist
-          path: packages/icons/dist
+      - run: npm run llms:generate
 
-      - uses: actions/download-artifact@v4
+      - uses: astral-sh/setup-uv@v3
         with:
-          name: react-dist
-          path: packages/react/dist
+          enable-cache: true
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: hooks-dist
-          path: packages/hooks/dist
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: charts-dist
-          path: packages/charts/dist
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: layout-dist
-          path: packages/layout/dist
-
-      - run: npm run build --workspace=packages/website
+      - run: uv run mkdocs build --strict
 
       - uses: actions/upload-artifact@v4
         with:
-          name: website-dist
-          path: packages/website/dist/
+          name: docs-dist
+          path: dist/
 
   build-storybook-icons:
     name: Build Storybook (@gnome-ui/icons)
@@ -372,7 +354,7 @@ jobs:
   combine-and-deploy:
     name: Combine & Deploy to GitHub Pages
     needs:
-      - build-website
+      - build-docs
       - build-storybook-react
       - build-storybook-layout
       - build-storybook-charts
@@ -385,7 +367,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: website-dist
+          name: docs-dist
           path: site/
 
       - uses: actions/download-artifact@v4
