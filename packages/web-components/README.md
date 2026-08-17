@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty-five framework-agnostic components:
+The package currently contains forty-seven framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -74,6 +74,9 @@ The package currently contains forty-five framework-agnostic components:
 - `<gnome-level-bar>` — `role="meter"` gauge with colour-coded low/high
   offset zones; continuous fill via a CSS custom property, or a row of
   host-derived blocks in `discrete` mode.
+- `<gnome-linked-group>` — merges children into a single connected unit with
+  no gap and merged borders; `vertical` is a plain attribute read directly
+  by CSS, same rationale as `gnome-badge`.
 - `<gnome-menu>` — action menus with arrow-key navigation, typeahead, and
   cancelable selection events.
 - `<gnome-otp-input>` — segmented PIN/verification-code input; fully
@@ -114,6 +117,9 @@ The package currently contains forty-five framework-agnostic components:
   revealing the full text.
 - `<gnome-toast>` — live-region announcements, timed dismissal, and
   pause-on-hover/focus.
+- `<gnome-toolbar>` — horizontal `.toolbar`-style action bar; pure CSS host
+  with no attributes, providing the standard 6px padding/gap for rows of
+  buttons, `gnome-linked-group` clusters, dropdowns, and dividers.
 - `<gnome-popover>` — trigger relationships, adaptive positioning, outside
   dismissal, and focus restoration.
 - `<gnome-tooltip>` — hover/focus-triggered informational bubble, sharing
@@ -706,6 +712,39 @@ author — like `gnome-skeleton`'s `text` variant rows, the host derives
 `num-blocks` `[data-slot="level-block"]` elements itself and toggles
 `data-filled` up to the current fraction.
 
+## Linked Group
+
+```html
+<gnome-linked-group>
+  <gnome-button>
+    <button type="button" data-slot="button-control">Cut</button>
+  </gnome-button>
+  <gnome-button>
+    <button type="button" data-slot="button-control">Copy</button>
+  </gnome-button>
+  <gnome-button>
+    <button type="button" data-slot="button-control">Paste</button>
+  </gnome-button>
+</gnome-linked-group>
+
+<!-- Stack vertically -->
+<gnome-linked-group vertical>…</gnome-linked-group>
+```
+
+Renders children as a single visually-connected unit with no gap and merged
+borders — the canonical GNOME pattern for button groups and segmented
+inputs, mirroring the libadwaita `.linked` style class. Pure CSS host:
+`vertical` is a plain attribute read directly by CSS, same rationale as
+`gnome-badge`.
+
+Unlike the React version, whose children ARE the real bordered DOM elements,
+`gnome-button` is a two-level host (its border/radius lives on the inner
+`[data-slot="button-control"]`, not the host itself) — the border-merge CSS
+matches that control slot explicitly, alongside any bare native `<button>`,
+`<input>`, `<select>`, `<textarea>`, or `<a>` passed directly as a child.
+Works with any `gnome-button` variant, and mixes cleanly with other widget
+types (e.g. a native `<input>` beside a `gnome-button`).
+
 ## Skeleton
 
 ```html
@@ -1097,6 +1136,40 @@ cells; `disabled` disables every cell (and the wrapping `<fieldset>`).
 
 Set `duration="0"` for a persistent toast. `gnome-before-dismiss` is
 cancelable; `gnome-dismiss` reports the final dismissal reason.
+
+## Toolbar
+
+```html
+<gnome-toolbar>
+  <gnome-button variant="flat">
+    <button type="button" data-slot="button-control">←</button>
+  </gnome-button>
+  <gnome-linked-group>
+    <gnome-button variant="flat">
+      <button type="button" data-slot="button-control">Bold</button>
+    </gnome-button>
+    <gnome-button variant="flat">
+      <button type="button" data-slot="button-control">Italic</button>
+    </gnome-button>
+  </gnome-linked-group>
+  <gnome-separator orientation="vertical" style="height: 24px"></gnome-separator>
+  <gnome-dropdown>…</gnome-dropdown>
+  <div style="flex: 1"></div>
+  <gnome-button variant="suggested">
+    <button type="button" data-slot="button-control">Save</button>
+  </gnome-button>
+</gnome-toolbar>
+```
+
+Horizontal action bar following the libadwaita `.toolbar` style class — pure
+CSS host with no attributes, no lifecycle logic. Provides the standard 6px
+padding/gap for rows of flat or raised buttons, `gnome-linked-group`
+clusters, dropdowns, and dividers; consumer-authored children render
+directly, in DOM order, same as the React version, which never sets a
+`role`. Use a plain `flex: 1` filler `<div>` between leading and trailing
+groups to push trailing items to the end (mirrors the React version's
+`<Spacer />`, which this package does not port as a separate element since
+a bare `<div>` already does the job with no JS behind it).
 
 ## Popover
 

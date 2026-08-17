@@ -137,6 +137,11 @@
       "import": "./dist/level-bar.js",
       "require": "./dist/level-bar.cjs"
     },
+    "./linked-group": {
+      "types": "./dist/linked-group.d.ts",
+      "import": "./dist/linked-group.js",
+      "require": "./dist/linked-group.cjs"
+    },
     "./menu": {
       "types": "./dist/menu.d.ts",
       "import": "./dist/menu.js",
@@ -226,6 +231,11 @@
       "types": "./dist/toast.d.ts",
       "import": "./dist/toast.js",
       "require": "./dist/toast.cjs"
+    },
+    "./toolbar": {
+      "types": "./dist/toolbar.d.ts",
+      "import": "./dist/toolbar.js",
+      "require": "./dist/toolbar.cjs"
     },
     "./tooltip": {
       "types": "./dist/tooltip.d.ts",

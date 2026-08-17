@@ -25,6 +25,7 @@ gnome-highlight,
 gnome-icon-button,
 gnome-kbd,
 gnome-level-bar,
+gnome-linked-group,
 gnome-menu,
 gnome-otp-input,
 gnome-popover,
@@ -43,6 +44,7 @@ gnome-tab-bar,
 gnome-text-field,
 gnome-text-truncate,
 gnome-toast,
+gnome-toolbar,
 gnome-tooltip,
 gnome-view-switcher {
   box-sizing: border-box;
@@ -76,6 +78,7 @@ gnome-highlight *,
 gnome-icon-button *,
 gnome-kbd *,
 gnome-level-bar *,
+gnome-linked-group *,
 gnome-menu *,
 gnome-otp-input *,
 gnome-popover *,
@@ -94,6 +97,7 @@ gnome-tab-bar *,
 gnome-text-field *,
 gnome-text-truncate *,
 gnome-toast *,
+gnome-toolbar *,
 gnome-tooltip *,
 gnome-view-switcher * {
   box-sizing: border-box;
@@ -4178,4 +4182,80 @@ gnome-file-drop-zone [data-slot="file-drop-zone-input"] {
   gnome-file-drop-zone {
     transition: none;
   }
+}
+
+/* Linked Group */
+
+gnome-linked-group {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+gnome-linked-group[vertical] {
+  flex-direction: column;
+}
+
+gnome-linked-group > * {
+  flex-shrink: 0;
+}
+
+/* Zero the visual box's own radius before restoring it on the group's
+   first/last edge below. gnome-button's border/radius lives on the inner
+   [data-slot="button-control"], not the host, so it's matched explicitly
+   alongside any bare native control passed directly as a child. */
+gnome-linked-group > :is(button, input, select, textarea, a),
+gnome-linked-group > gnome-button [data-slot="button-control"] {
+  border-radius: 0;
+}
+
+gnome-linked-group:not([vertical]) > :is(button, input, select, textarea, a):not(:first-child),
+gnome-linked-group:not([vertical]) > gnome-button:not(:first-child) [data-slot="button-control"] {
+  margin-left: -1px;
+}
+
+gnome-linked-group[vertical] > :is(button, input, select, textarea, a):not(:first-child),
+gnome-linked-group[vertical] > gnome-button:not(:first-child) [data-slot="button-control"] {
+  margin-top: -1px;
+}
+
+gnome-linked-group:not([vertical]) > :is(button, input, select, textarea, a):first-child,
+gnome-linked-group:not([vertical]) > gnome-button:first-child [data-slot="button-control"] {
+  border-top-left-radius: var(--gnome-radius-md, 9px);
+  border-bottom-left-radius: var(--gnome-radius-md, 9px);
+}
+
+gnome-linked-group[vertical] > :is(button, input, select, textarea, a):first-child,
+gnome-linked-group[vertical] > gnome-button:first-child [data-slot="button-control"] {
+  border-top-left-radius: var(--gnome-radius-md, 9px);
+  border-top-right-radius: var(--gnome-radius-md, 9px);
+}
+
+gnome-linked-group:not([vertical]) > :is(button, input, select, textarea, a):last-child,
+gnome-linked-group:not([vertical]) > gnome-button:last-child [data-slot="button-control"] {
+  border-top-right-radius: var(--gnome-radius-md, 9px);
+  border-bottom-right-radius: var(--gnome-radius-md, 9px);
+}
+
+gnome-linked-group[vertical] > :is(button, input, select, textarea, a):last-child,
+gnome-linked-group[vertical] > gnome-button:last-child [data-slot="button-control"] {
+  border-bottom-left-radius: var(--gnome-radius-md, 9px);
+  border-bottom-right-radius: var(--gnome-radius-md, 9px);
+}
+
+gnome-linked-group > *:hover,
+gnome-linked-group > *:focus-within {
+  position: relative;
+  z-index: 1;
+}
+
+/* Toolbar */
+
+gnome-toolbar {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  padding: var(--gnome-space-1, 6px);
+  min-height: 46px;
 }

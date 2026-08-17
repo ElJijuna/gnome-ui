@@ -116,6 +116,7 @@ export {
   type GnomeLevelBarVariant,
   registerGnomeLevelBar,
 } from './level-bar';
+export { GnomeLinkedGroupElement, registerGnomeLinkedGroup } from './linked-group';
 export {
   type GnomeMenuCloseDetail,
   type GnomeMenuCloseReason,
@@ -206,6 +207,7 @@ export {
   type GnomeToastOpenChangeDetail,
   registerGnomeToast,
 } from './toast';
+export { GnomeToolbarElement, registerGnomeToolbar } from './toolbar';
 export {
   GnomeTooltipElement,
   type GnomeTooltipPlacement,

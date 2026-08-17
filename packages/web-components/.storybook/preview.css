@@ -55,6 +55,13 @@ body {
   border-radius: var(--gnome-radius-md, 9px);
 }
 
+/* gnome-linked-group's own border-merge rules (styles.css) need to beat this
+   block's border-radius — specificity ties on .wc-story + attribute, so the
+   extra gnome-linked-group type selector here is load-bearing, not decorative. */
+.wc-story gnome-linked-group gnome-button [data-slot="button-control"] {
+  border-radius: 0;
+}
+
 .wc-story gnome-button[data-shape="pill"] [data-slot="button-control"] {
   padding-inline: var(--gnome-space-3, 18px);
   border-radius: var(--gnome-radius-pill, 9999px);
