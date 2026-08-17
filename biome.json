@@ -8,10 +8,10 @@
       "!**/coverage",
       "!**/storybook-static",
       "!**/.turbo",
+      "!.venv",
       "!node_modules",
       "!package-lock.json",
-      "!CHANGELOG.md",
-      "!packages/website/src/generated"
+      "!CHANGELOG.md"
     ]
   },
   "linter": {

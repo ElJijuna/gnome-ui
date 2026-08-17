@@ -5,6 +5,7 @@ export default [
   {
     ignores: [
       'dist/**',
+      '.venv/**',
       'coverage/**',
       'storybook-static/**',
       'node_modules/**',

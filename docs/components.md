@@ -1,0 +1,1 @@
+--8<-- "COMPONENT_INDEX.md"
