@@ -104,26 +104,32 @@ test('drilling in and going back swaps which pane is on screen', async ({ page }
   expect((await collapsedPanes(page)).filter((p) => p.onScreen)).toHaveLength(1);
 });
 
-// KNOWN BUG — the slid-out pane is only translated away and given
-// `pointer-events: none`; it keeps its `display`, so its buttons stay in the
-// tab order. After drilling into the detail view a keyboard user tabs straight
-// into the sidebar list they can no longer see. `aria-hidden` is set, which
-// hides it from screen readers but does nothing for focus — `inert` is what
-// covers both.
-test.fail('the slid-out sidebar is out of the tab order', async ({ page }) => {
+// The slid-out pane keeps its `display`, so `inert` is what takes it out of
+// the tab order — `aria-hidden` alone would hide it from screen readers while
+// leaving a keyboard user free to tab into a pane they cannot see.
+test('the slid-out sidebar is out of the tab order', async ({ page }) => {
   await page.setViewportSize({ width: 380, height: 720 });
   await page.goto('/iframe.html?id=adaptive-navigationsplitview--narrow-viewport');
 
   await page.getByRole('button', { name: 'Starred' }).click();
   await expect(page.getByRole('button', { name: 'Back' })).toBeVisible();
 
-  const reachable = await page.evaluate(() => {
+  // `inert` leaves tabIndex untouched, so the only way to observe it is to try
+  // to take focus and watch the browser refuse.
+  const focusable = await page.evaluate(() => {
     const hiddenPane = document.querySelector('[aria-hidden="true"]');
-    return Array.from(hiddenPane?.querySelectorAll('button') ?? []).some(
-      (b) => b.tabIndex >= 0 && !b.disabled,
-    );
+    const button = hiddenPane?.querySelector('button');
+
+    if (!button) {
+      return null;
+    }
+
+    button.focus();
+
+    return document.activeElement === button;
   });
-  expect(reachable).toBe(false);
+
+  expect(focusable).toBe(false);
 });
 
 test('the hidden pane is hidden from assistive technology too', async ({ page }) => {

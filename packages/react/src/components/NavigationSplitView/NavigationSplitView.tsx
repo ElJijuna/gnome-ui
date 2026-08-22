@@ -91,6 +91,9 @@ export const NavigationSplitView = ({
           .filter(Boolean)
           .join(' ')}
         aria-hidden={isNarrow && showContent}
+        // Panes are slid out of view, never unmounted — `inert` is what takes
+        // the hidden one out of the tab order as well as the a11y tree.
+        inert={isNarrow && showContent}
       >
         {sidebar}
       </div>
@@ -107,6 +110,7 @@ export const NavigationSplitView = ({
           .filter(Boolean)
           .join(' ')}
         aria-hidden={isNarrow && !showContent}
+        inert={isNarrow && !showContent}
       >
         {content}
       </div>
