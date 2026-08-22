@@ -11,7 +11,13 @@ import {
 import { Portal } from '@/components/Portal';
 
 import styles from './Dialog.module.css';
-import { FOCUSABLE, trapFocus, useBodyScrollLock, useVisualViewport } from './dialogUtils';
+import {
+  FOCUSABLE,
+  trapFocus,
+  useBodyScrollLock,
+  useEscapeToDismiss,
+  useVisualViewport,
+} from './dialogUtils';
 
 // ─── AlertDialog types ────────────────────────────────────────────────────────
 
@@ -147,23 +153,19 @@ export const Dialog = ({
   const handleBackdrop = isAlert ? dismissAlert : closeOnBackdrop ? onClose : undefined;
 
   // ── Keyboard ───────────────────────────────────────────────────────────────
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        if (isAlert) {
-          dismissAlert();
-        } else {
-          onClose?.();
-        }
+  const handleEscape = useCallback(() => {
+    if (isAlert) {
+      dismissAlert();
+    } else {
+      onClose?.();
+    }
+  }, [isAlert, dismissAlert, onClose]);
 
-        return;
-      }
+  useEscapeToDismiss(open, dialogRef, handleEscape);
 
-      trapFocus(e, dialogRef);
-    },
-    [isAlert, dismissAlert, onClose],
-  );
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    trapFocus(e, dialogRef);
+  }, []);
 
   if (!open) {
     return null;

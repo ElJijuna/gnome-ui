@@ -65,6 +65,52 @@ export function useBodyScrollLock(locked: boolean): void {
   }, [locked]);
 }
 
+/**
+ * Closes a dialog on Escape from a `document`-level listener while `open`.
+ *
+ * Binding this to the dialog element instead would only work while focus is
+ * still inside it, so a click on the backdrop — which moves focus to `<body>` —
+ * would leave a dialog with no keyboard way out.
+ *
+ * Only the topmost modal dialog reacts, so a stacked dialog closes one layer at
+ * a time rather than dismissing everything underneath it too.
+ */
+export function useEscapeToDismiss(
+  open: boolean,
+  ref: RefObject<HTMLElement | null>,
+  onEscape: () => void,
+): void {
+  useEffect(() => {
+    if (!open || typeof document === 'undefined') {
+      return;
+    }
+
+    // `KeyboardEvent` is React's synthetic type in this module — this listener
+    // is bound to the real document, so it needs the DOM one.
+    const handler = (e: globalThis.KeyboardEvent): void => {
+      if (e.key !== 'Escape') {
+        return;
+      }
+
+      const modals = document.querySelectorAll<HTMLElement>(
+        '[role="dialog"][aria-modal="true"], [role="alertdialog"][aria-modal="true"]',
+      );
+      const topmost = modals[modals.length - 1];
+
+      if (topmost && topmost !== ref.current) {
+        return;
+      }
+
+      e.preventDefault();
+      onEscape();
+    };
+
+    document.addEventListener('keydown', handler);
+
+    return () => document.removeEventListener('keydown', handler);
+  }, [open, ref, onEscape]);
+}
+
 export function trapFocus(e: KeyboardEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement | null>) {
   if (e.key !== 'Tab') {
     return;

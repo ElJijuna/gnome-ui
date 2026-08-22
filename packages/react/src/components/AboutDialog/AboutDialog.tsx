@@ -14,6 +14,7 @@ import {
   FOCUSABLE,
   trapFocus,
   useBodyScrollLock,
+  useEscapeToDismiss,
   useVisualViewport,
 } from '@/components/Dialog/dialogUtils';
 
@@ -110,19 +111,13 @@ export const AboutDialog = ({
     }
   }, [open]);
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        onClose?.();
+  const handleEscape = useCallback(() => onClose?.(), [onClose]);
 
-        return;
-      }
+  useEscapeToDismiss(open, dialogRef, handleEscape);
 
-      trapFocus(e, dialogRef);
-    },
-    [onClose],
-  );
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    trapFocus(e, dialogRef);
+  }, []);
 
   if (!open) {
     return null;

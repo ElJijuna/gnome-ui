@@ -41,14 +41,11 @@ test('closeOnBackdrop={false} survives an outside click', async ({ page }) => {
   await expect(dialog).toBeVisible();
 });
 
-// KNOWN BUG — Dialog's Escape handling is a React `onKeyDown` on the dialog
-// box itself, so it only fires while focus is inside that subtree. Clicking
-// the backdrop moves focus to <body>, after which Escape reaches nothing and
-// a `closeOnBackdrop={false}` dialog can no longer be dismissed by keyboard
-// at all. Dialog.test.tsx cannot see this: it fires keyDown straight at the
-// dialog node, so focus location never matters there. The fix is a
-// document-level keydown listener while open (AboutDialog shares the flaw).
-test.fail('Escape still closes the dialog after the backdrop has taken focus', async ({ page }) => {
+// Escape is handled by a `document`-level listener rather than by the dialog
+// element, so it keeps working after focus has left the dialog — which is what
+// a backdrop click does. Unit tests fire keyDown straight at the dialog node,
+// where focus location never matters, so only a real browser separates the two.
+test('Escape still closes the dialog after the backdrop has taken focus', async ({ page }) => {
   await page.goto('/iframe.html?id=components-dialog--no-backdrop-close');
 
   await page.getByRole('button', { name: 'Open strict dialog' }).click();
