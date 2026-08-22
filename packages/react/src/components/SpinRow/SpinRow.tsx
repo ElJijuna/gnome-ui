@@ -76,7 +76,7 @@ export const SpinRow = ({
   const value = isControlled ? controlledValue : uncontrolledValue;
 
   const dp = decimals ?? countDecimals(step);
-  const spinId = useId();
+  const titleId = useId();
 
   const set = useCallback(
     (next: number) => {
@@ -133,7 +133,9 @@ export const SpinRow = ({
       {leading && <span className={styles.leading}>{leading}</span>}
 
       <span className={styles.content}>
-        <span className={styles.title}>{title}</span>
+        <span id={titleId} className={styles.title}>
+          {title}
+        </span>
         {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
       </span>
 
@@ -143,7 +145,7 @@ export const SpinRow = ({
         aria-valuenow={value}
         aria-valuemin={min}
         aria-valuemax={max}
-        aria-labelledby={spinId}
+        aria-labelledby={titleId}
         aria-disabled={disabled || undefined}
         tabIndex={disabled ? -1 : 0}
         onKeyDown={disabled ? undefined : handleKeyDown}
@@ -163,7 +165,7 @@ export const SpinRow = ({
           −
         </button>
 
-        <span id={spinId} className={styles.spinValue} aria-hidden="true">
+        <span className={styles.spinValue} aria-hidden="true">
           {value.toFixed(dp)}
         </span>
 

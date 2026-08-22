@@ -68,13 +68,10 @@ test('clicking a stepper adjusts the row it belongs to and leaves the others alo
   await expect(volume).toHaveAttribute('aria-valuenow', '75');
 });
 
-// KNOWN BUG — SpinRow points `aria-labelledby` at the span holding the current
-// value, not at the row title, and that span is `aria-hidden="true"` on top of
-// it. The control therefore announces as "75, spinbutton" with no hint that it
-// is Volume, and the label target is one ARIA says to ignore. Standalone
-// SpinButton gets this right via `aria-label`. Unit tests query by role only,
-// so nothing there ever reads the computed name.
-test.fail('the spinbutton is named after its row title', async ({ page }) => {
+// The spinbutton takes its accessible name from the row title via
+// `aria-labelledby`. Unit tests query by role alone and never read the computed
+// name, so a label pointing somewhere useless would go unnoticed there.
+test('the spinbutton is named after its row title', async ({ page }) => {
   await page.goto('/iframe.html?id=components-spinrow--in-boxed-list');
 
   await expect(page.getByRole('spinbutton', { name: 'Volume' })).toBeVisible();
