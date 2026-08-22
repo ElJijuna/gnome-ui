@@ -7,15 +7,12 @@ import { expect, test } from '@playwright/test';
 // SearchBar, lays nothing out, and has no contextmenu gesture, so
 // Sidebar.test.tsx can reach none of the three the way a user does.
 
-// KNOWN BUG — a filtered-out item is hidden with the `hidden` attribute on its
-// <li>, but `.item { display: block }` in Sidebar.module.css overrides the UA
-// `[hidden] { display: none }` rule, so the item stays on screen. Typing in the
-// built-in search therefore appears to do nothing until *no* item matches, at
-// which point the Sidebar-level "No Results" branch takes over. jsdom cannot
-// see this: Testing Library honours the `hidden` attribute directly, with no
-// cascade involved, so Sidebar.test.tsx passes. The fix is a
-// `.item[hidden] { display: none }` rule (or dropping the `display: block`).
-test.fail('the built-in search filters the items as they are typed', async ({ page }) => {
+// The filtered-out item is hidden with the `hidden` attribute on its <li>,
+// which only takes effect because `.item[hidden] { display: none }` outranks
+// the `display: block` on `.item`. Testing Library honours the attribute
+// directly with no cascade involved, so only a browser can prove the item has
+// really left the page.
+test('the built-in search filters the items as they are typed', async ({ page }) => {
   await page.goto('/iframe.html?id=components-sidebar--searchable');
 
   const nav = page.locator('nav');

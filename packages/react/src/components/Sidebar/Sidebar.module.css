@@ -131,6 +131,12 @@ button.sectionHeader:focus-visible {
   display: block;
 }
 
+/* `display: block` above outranks the user-agent `[hidden] { display: none }`
+   rule, so a filtered-out item needs this to actually disappear. */
+.item[hidden] {
+  display: none;
+}
+
 /* ─── Item button ──────────────────────────────────────────────────────────── */
 
 .itemBtn {
