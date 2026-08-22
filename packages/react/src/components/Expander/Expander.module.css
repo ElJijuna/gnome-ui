@@ -84,16 +84,25 @@
   grid-template-rows: 1fr;
 }
 
+/* Padding is not part of the clipped content box, so keeping it here while the
+   row is 0fr would leave a closed expander reserving vertical space. It rides
+   the same transition as the row instead. */
 .panelInner {
   overflow: hidden;
   min-height: 0;
+  padding-top: 0;
+  transition: padding-top var(--gnome-duration-normal, 200ms) var(--gnome-easing-default);
+}
+
+.expanded .panelInner {
   padding-top: var(--gnome-space-2, 8px);
 }
 
 /* ─── Reduced motion ────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .panel {
+  .panel,
+  .panelInner {
     transition: none;
   }
 

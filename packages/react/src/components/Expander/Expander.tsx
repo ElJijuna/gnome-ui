@@ -96,7 +96,15 @@ export const Expander = ({
         <span className={styles.label}>{label}</span>
       </button>
 
-      <div id={panelId} role="region" aria-labelledby={headerId} className={styles.panel}>
+      {/* The panel is clipped rather than unmounted, so `inert` is what keeps
+          its controls out of the tab order while it is closed. */}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={headerId}
+        className={styles.panel}
+        inert={!expanded}
+      >
         <div className={styles.panelInner}>{children}</div>
       </div>
     </div>

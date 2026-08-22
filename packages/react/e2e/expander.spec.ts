@@ -35,24 +35,19 @@ test('collapsing again clips the panel back down', async ({ page }) => {
   await expect.poll(async () => (await panel.boundingBox())!.height).toBeLessThan(16);
 });
 
-// KNOWN BUG — `.panelInner` keeps its `padding-top: 8px` when the grid row is
-// `0fr`, because padding is not part of the clipped content box. A closed
-// expander therefore still reserves ~12px of vertical space, which shows up as
-// an unexplained gap between stacked expanders. Only real layout reveals it.
-test.fail('a closed panel reserves no vertical space', async ({ page }) => {
+// The panel's padding rides the same transition as the grid row rather than
+// sitting on the clipped item, so a closed expander gives its space back.
+test('a closed panel reserves no vertical space', async ({ page }) => {
   await page.goto('/iframe.html?id=components-expander--in-a-form');
 
   const panel = page.getByRole('region', { name: 'Show advanced options' });
   expect((await panel.boundingBox())!.height).toBe(0);
 });
 
-// KNOWN BUG — the collapsed panel is clipped with `overflow: hidden`, not
-// removed with `hidden`/`display: none`, so every control inside it stays in
-// the tab order. A keyboard user tabbing past a closed expander silently lands
-// on invisible, zero-height fields. Only sequential focus navigation in a real
-// browser exposes this; the fix is `hidden` (or `inert`) on the panel while
-// collapsed.
-test.fail('controls inside a collapsed panel are out of the tab order', async ({ page }) => {
+// The collapsed panel carries `inert`, which is the only thing keeping its
+// controls out of the tab order — it is still painted and still in the layout.
+// Sequential focus navigation exists nowhere but a real browser.
+test('controls inside a collapsed panel are out of the tab order', async ({ page }) => {
   await page.goto('/iframe.html?id=components-expander--in-a-form');
 
   const header = page.getByRole('button', { name: 'Show advanced options' });
