@@ -41,9 +41,7 @@ test('hovering a segment dims the others and shows its tooltip', async ({ page }
   const track = page.getByRole('img').first();
   const segments = track.locator('> *');
   const opacities = () =>
-    track.evaluate((el) =>
-      Array.from(el.children).map((child) => getComputedStyle(child).opacity),
-    );
+    track.evaluate((el) => Array.from(el.children).map((child) => getComputedStyle(child).opacity));
 
   const resting = await opacities();
   expect(new Set(resting).size).toBe(1);

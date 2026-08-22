@@ -65,8 +65,6 @@ test('the separators are decorative and never read as path segments', async ({ p
 
   // Three chevrons for four segments — one fewer than the segment count.
   await expect(svgs).toHaveCount(3);
-  const hidden = await nav
-    .locator('span[aria-hidden="true"]')
-    .evaluateAll((els) => els.length);
+  const hidden = await nav.locator('span[aria-hidden="true"]').evaluateAll((els) => els.length);
   expect(hidden).toBeGreaterThanOrEqual(3);
 });

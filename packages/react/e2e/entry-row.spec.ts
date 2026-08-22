@@ -43,9 +43,7 @@ test('the label physically floats up when the field takes focus and drops back w
   expect(resting).not.toBeNull();
 
   await email.focus();
-  await expect
-    .poll(async () => (await label.boundingBox())!.y)
-    .toBeLessThan(resting!.y);
+  await expect.poll(async () => (await label.boundingBox())!.y).toBeLessThan(resting!.y);
 
   const floatedFontSize = await label.evaluate((el) => getComputedStyle(el).fontSize);
   expect(parseFloat(floatedFontSize)).toBeLessThan(16);
@@ -57,9 +55,7 @@ test('the label physically floats up when the field takes focus and drops back w
 
   await email.fill('jane@example.com');
   await email.blur();
-  await expect
-    .poll(async () => (await label.boundingBox())!.y)
-    .toBeLessThan(resting!.y);
+  await expect.poll(async () => (await label.boundingBox())!.y).toBeLessThan(resting!.y);
 });
 
 test('a pre-filled row starts with its label already floated', async ({ page }) => {

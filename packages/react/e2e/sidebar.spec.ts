@@ -41,9 +41,7 @@ test('the filter is at least marked on the non-matching items', async ({ page })
 
   // The `hidden` attribute is applied correctly even though the cascade
   // currently stops it from taking effect.
-  await expect
-    .poll(() => nav.locator('li[hidden]').count())
-    .toBeGreaterThan(0);
+  await expect.poll(() => nav.locator('li[hidden]').count()).toBeGreaterThan(0);
 });
 
 test('a search that matches nothing falls back to the empty state', async ({ page }) => {
