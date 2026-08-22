@@ -45,10 +45,9 @@ test('two expander rows open and close independently', async ({ page }) => {
     .toBeGreaterThan(20);
 });
 
-// KNOWN BUG — same clipping flaw as Expander: the closed panel is only
-// `overflow: hidden`, never `hidden`/`inert`, so the rows inside it keep their
-// place in the tab order at zero height.
-test.fail('rows inside a closed expander are out of the tab order', async ({ page }) => {
+// Same contract as Expander: the closed panel is clipped, not unmounted, so
+// `inert` is what keeps the rows inside it off the tab order.
+test('rows inside a closed expander are out of the tab order', async ({ page }) => {
   await page.goto('/iframe.html?id=components-expanderrow--default');
 
   const header = page.getByRole('button').first();

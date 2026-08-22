@@ -119,7 +119,15 @@ export const ExpanderRow = ({
       </button>
 
       {/* ─── Reveal panel ───────────────────────────────────────────────── */}
-      <div id={panelId} role="region" aria-labelledby={headerId} className={styles.panel}>
+      {/* The panel is clipped rather than unmounted, so `inert` is what keeps
+          its rows out of the tab order while it is closed. */}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={headerId}
+        className={styles.panel}
+        inert={!expanded}
+      >
         <div className={styles.panelInner}>
           {childItems.map((child, i) => (
             <div key={i} className={styles.childItem}>
