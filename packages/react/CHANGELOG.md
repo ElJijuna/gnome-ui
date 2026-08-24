@@ -1,3 +1,29 @@
+## [1.59.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.59.1...@gnome-ui/react@1.59.2) (2026-08-24)
+
+### Features
+
+* **@gnome-ui/charts:** add BoxPlot component with styles, documentation, stories, and tests ([c526197](https://github.com/ElJijuna/gnome-ui/commit/c52619797e36c6efbd9b6492c7de0b63d1406038))
+* **@gnome-ui/charts:** add BulletChart and SparkBulletChart components with documentation, stories, and tests ([40b2003](https://github.com/ElJijuna/gnome-ui/commit/40b200392c5f0f6ffe52b27c344fa42c5b8d7283))
+* **@gnome-ui/charts:** add SparkPieChart component with documentation, stories, and tests ([50b70ce](https://github.com/ElJijuna/gnome-ui/commit/50b70ce156a0b0238b31f29cac0ff19a5dc7c764))
+* **@gnome-ui/charts:** add WaterfallChart component with documentation, stories, and tests ([28280a7](https://github.com/ElJijuna/gnome-ui/commit/28280a780b4ffa5cc2d54a53b36dbf6bd85bfc15))
+* **@gnome-ui/web-components:** add gnome-linked-group and gnome-toolbar components with styles and tests ([95a889e](https://github.com/ElJijuna/gnome-ui/commit/95a889e733d7b69b83fd0ba49df9623c59fd1b85))
+
+### Bug Fixes
+
+* **@gnome-ui/charts:** merge duplicate parameters key in GaugeThresholds story ([349ca91](https://github.com/ElJijuna/gnome-ui/commit/349ca91ccf84aaa109b475983c4b65985a15a952))
+* **@gnome-ui/charts:** reorganize exports in package.json to include SparkLineChart and TreeMap components ([73ee831](https://github.com/ElJijuna/gnome-ui/commit/73ee8312e99d7c9d0db176c76748bd12c96d8dc1))
+* **@gnome-ui/react:** add CSS rule to ensure filtered-out items are hidden correctly ([6f7b4f9](https://github.com/ElJijuna/gnome-ui/commit/6f7b4f9ffc23ba33f7f14dca66c00f51f5f37b48))
+* **@gnome-ui/react:** add Escape key handling for dialogs to improve accessibility ([2586b44](https://github.com/ElJijuna/gnome-ui/commit/2586b440560dfd7f53ee049312f03b65212d2386))
+* **@gnome-ui/react:** ensure ExpanderRow rows inside closed expander are out of tab order ([f51270c](https://github.com/ElJijuna/gnome-ui/commit/f51270c33d9f8877acc9494fadd68df847042c0e))
+* **@gnome-ui/react:** implement inert attribute for hidden panes to improve tab order accessibility ([c6b335d](https://github.com/ElJijuna/gnome-ui/commit/c6b335dae17842cb7094a77cb4be50f32ea58ea9))
+* **@gnome-ui/react:** resolve vertical space issue in closed expander and improve tab order accessibility ([cad8147](https://github.com/ElJijuna/gnome-ui/commit/cad81471bb968993fd20ea2c5c2d4dc53a59a8b8))
+* **@gnome-ui/react:** streamline expect.poll syntax in multiple test files for improved readability ([22b2504](https://github.com/ElJijuna/gnome-ui/commit/22b25047fe439eb7cd26d78d9e00155f72de3361))
+* **@gnome-ui/react:** update aria-labelledby to reference row title for improved accessibility ([bc55b73](https://github.com/ElJijuna/gnome-ui/commit/bc55b73d889b81d4e59d521ceccf23b314c3810f))
+
+### Refactoring
+
+* **@gnome-ui/charts:** improve code formatting and readability in BoxPlot and WaterfallChart components ([b13b5bc](https://github.com/ElJijuna/gnome-ui/commit/b13b5bc580b1bbbbaaa9bc6ac423ee2095456fb6))
+
 ## [1.59.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.59.0...@gnome-ui/react@1.59.1) (2026-08-17)
 
 ### Features
