@@ -1,0 +1,93 @@
+/* ─── Wrapper ───────────────────────────────────────────────────────────────── */
+
+.timePicker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 4px);
+  font-family: var(--gnome-font-family);
+}
+
+.label {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.7));
+}
+
+/* ─── Entry-styled trigger (mirrors GtkEntry) ───────────────────────────────── */
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-2, 8px);
+  min-width: 9rem;
+  padding: 8px var(--gnome-space-2, 12px);
+  appearance: none;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1px solid var(--gnome-border-subtle);
+  border-radius: var(--gnome-radius-md, 8px);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font: inherit;
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.trigger:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.trigger:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow: 0 0 0 1px var(--gnome-accent-color, #3584e4);
+}
+
+.trigger:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.trigger[data-placeholder] .value {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.45));
+  opacity: 0.55;
+  font-variant-numeric: normal;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  opacity: 0.7;
+}
+
+/* ─── Popover panel — spinner columns ───────────────────────────────────────── */
+
+.panel {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 4px);
+  padding: var(--gnome-space-1, 4px);
+}
+
+.colon {
+  font-size: var(--gnome-font-size-title-4, 1.25rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  padding-inline: 2px;
+}
+
+.column {
+  min-width: 3.75rem;
+}

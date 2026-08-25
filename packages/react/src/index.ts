@@ -338,6 +338,8 @@ export type {
   TimelineVariant,
 } from './components/Timeline';
 export { Timeline } from './components/Timeline';
+export type { TimePickerProps, TimeValue } from './components/TimePicker';
+export { TimePicker } from './components/TimePicker';
 export type { ToasterProps, ToastProps } from './components/Toast';
 export { Toast, Toaster } from './components/Toast';
 export type { ToggleGroupItemProps, ToggleGroupProps } from './components/ToggleGroup';

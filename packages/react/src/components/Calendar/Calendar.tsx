@@ -170,9 +170,14 @@ export const Calendar = ({
     let raf = 0;
     let tries = 0;
     const tryFocus = () => {
-      const cell = gridRef.current?.querySelector<HTMLButtonElement>('button[tabindex="0"]');
-      cell?.focus();
-      if (document.activeElement !== cell && tries++ < 10) {
+      const grid = gridRef.current;
+      // Stop once focus is on any day in the grid — otherwise the retry would
+      // fight a user who immediately arrows to another day.
+      if (grid?.contains(document.activeElement)) {
+        return;
+      }
+      grid?.querySelector<HTMLButtonElement>('button[tabindex="0"]')?.focus();
+      if (!grid?.contains(document.activeElement) && tries++ < 10) {
         raf = requestAnimationFrame(tryFocus);
       }
     };

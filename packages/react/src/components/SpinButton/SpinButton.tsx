@@ -15,6 +15,18 @@ export interface SpinButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'o
   step?: number;
   /** Number of decimal places shown. Derived from `step` when omitted. */
   decimals?: number;
+  /**
+   * Wrap around instead of clamping at the edges — stepping past `max` returns
+   * to `min` and vice versa, and the −/+ buttons never disable. Mirrors
+   * `GtkSpinButton:wrap`; used for cyclic values like hours and minutes.
+   */
+  wrap?: boolean;
+  /**
+   * Custom display formatter for the current value (e.g. zero-padding, or
+   * mapping a numeric value to `AM`/`PM`). Defaults to fixed-decimal text. When
+   * provided, its result is also exposed as `aria-valuetext`.
+   */
+  format?: (value: number) => string;
   /** Disables the control. */
   disabled?: boolean;
   /** Accessible label. Required when no visible `<label>` is associated. */
@@ -34,6 +46,11 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
+function wrapValue(value: number, min: number, max: number, step: number): number {
+  const range = max - min + step;
+  return ((((value - min) % range) + range) % range) + min;
+}
+
 /**
  * Numeric input with − and + buttons following the Adwaita `GtkSpinButton` style.
  *
@@ -49,6 +66,8 @@ export const SpinButton = ({
   max = 100,
   step = 1,
   decimals,
+  wrap = false,
+  format,
   disabled = false,
   className,
   'aria-label': ariaLabel,
@@ -58,9 +77,14 @@ export const SpinButton = ({
   const dp = decimals ?? countDecimals(step);
 
   const set = useCallback(
-    (next: number) => onChange(parseFloat(clamp(next, min, max).toFixed(dp))),
-    [onChange, min, max, dp],
+    (next: number) => {
+      const bounded = wrap ? wrapValue(next, min, max, step) : clamp(next, min, max);
+      onChange(parseFloat(bounded.toFixed(dp)));
+    },
+    [onChange, min, max, step, dp, wrap],
   );
+
+  const displayText = format ? format(value) : value.toFixed(dp);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
@@ -100,6 +124,7 @@ export const SpinButton = ({
       aria-valuenow={value}
       aria-valuemin={min}
       aria-valuemax={max}
+      aria-valuetext={format ? displayText : undefined}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       aria-disabled={disabled || undefined}
@@ -114,7 +139,7 @@ export const SpinButton = ({
         type="button"
         tabIndex={-1}
         aria-hidden="true"
-        disabled={disabled || value <= min}
+        disabled={disabled || (!wrap && value <= min)}
         className={styles.btn}
         onClick={() => set(value - step)}
       >
@@ -122,14 +147,14 @@ export const SpinButton = ({
       </button>
 
       <span className={styles.value} aria-hidden="true">
-        {value.toFixed(dp)}
+        {displayText}
       </span>
 
       <button
         type="button"
         tabIndex={-1}
         aria-hidden="true"
-        disabled={disabled || value >= max}
+        disabled={disabled || (!wrap && value >= max)}
         className={styles.btn}
         onClick={() => set(value + step)}
       >
