@@ -97,6 +97,11 @@
       "import": "./dist/components/ButtonRow.js",
       "require": "./dist/components/ButtonRow.cjs"
     },
+    "./components/Calendar": {
+      "types": "./dist/components/Calendar.d.ts",
+      "import": "./dist/components/Calendar.js",
+      "require": "./dist/components/Calendar.cjs"
+    },
     "./components/Callout": {
       "types": "./dist/components/Callout.d.ts",
       "import": "./dist/components/Callout.js",

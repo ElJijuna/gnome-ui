@@ -56,6 +56,8 @@ export type { ButtonContentProps } from './components/ButtonContent';
 export { ButtonContent } from './components/ButtonContent';
 export type { ButtonRowProps, ButtonRowVariant } from './components/ButtonRow';
 export { ButtonRow } from './components/ButtonRow';
+export type { CalendarProps } from './components/Calendar';
+export { Calendar } from './components/Calendar';
 export type { CalloutProps, CalloutVariant } from './components/Callout';
 export { Callout } from './components/Callout';
 export type { CardPadding, CardProps } from './components/Card';
