@@ -1,3 +1,12 @@
+## [1.60.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.59.2...@gnome-ui/react@1.60.0) (2026-08-25)
+
+### Features
+
+* **@gnome-ui/react:** add CoachMark and CoachMarkTour components for onboarding experience ([3fa3a12](https://github.com/ElJijuna/gnome-ui/commit/3fa3a12fb0e54b961003d79ac7c804aee139d2a0))
+* **@gnome-ui/react:** implement Calendar component with full keyboard navigation and month-grid display ([b2e4708](https://github.com/ElJijuna/gnome-ui/commit/b2e470872f9f07befc2516bccb5b2d01644ae92c))
+* **@gnome-ui/react:** implement DatePicker component with keyboard navigation and popover integration ([ff664d7](https://github.com/ElJijuna/gnome-ui/commit/ff664d79969374cb96a16f470750bb92e81847ed))
+* **@gnome-ui/react:** implement TimePicker component with keyboard navigation and popover integration ([c670630](https://github.com/ElJijuna/gnome-ui/commit/c670630ec77718d306db30ab19a55bcbb5592e93))
+
 ## [1.59.2](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.59.1...@gnome-ui/react@1.59.2) (2026-08-24)
 
 ### Features
