@@ -505,6 +505,7 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 | ✅ | **`WidgetManager`** | Card that manages a controlled collection of widgets picked from a `catalog`, each rendering its own content via `render()`; edit-mode trigger opens a staged add/remove picker (`Modal`/`BottomSheet`/`Drawer`, configurable) applied only on confirm |
 | ✅ | **`FieldGroup`** | Generic form-field grouping with a shared label, help text, and error message, for arbitrary fields outside a `BoxedList` — `PreferencesGroup` is scoped specifically to wrapping settings rows |
 | ✅ | **`Portal`** | Reusable `createPortal` wrapper (mount target, SSR-safe no-op) — extracts the ad-hoc portal logic currently duplicated independently across 13 components (`Dialog`, `Modal`, `Popover`, `Tooltip`, `BottomSheet`, etc.) |
+| ✅ | **`CoachMark`** | Onboarding feature-discovery pattern: spotlights a target element and anchors a callout bubble (title, description, actions) beside it, with a `CoachMarkTour` orchestrator for sequential steps (Next/Back/Skip/Done + "X of N"). Pragmatic web-app pattern beyond GNOME HIG, built on `Button`/`Portal` and a viewport-aware flip positioner |
 
 ---
 

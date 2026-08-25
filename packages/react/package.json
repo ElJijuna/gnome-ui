@@ -142,6 +142,11 @@
       "import": "./dist/components/Clamp.js",
       "require": "./dist/components/Clamp.cjs"
     },
+    "./components/CoachMark": {
+      "types": "./dist/components/CoachMark.d.ts",
+      "import": "./dist/components/CoachMark.js",
+      "require": "./dist/components/CoachMark.cjs"
+    },
     "./components/CodeBlock": {
       "types": "./dist/components/CodeBlock.d.ts",
       "import": "./dist/components/CodeBlock.js",

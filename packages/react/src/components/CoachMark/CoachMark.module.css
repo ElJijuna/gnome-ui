@@ -1,0 +1,126 @@
+/* ─── Backdrop + spotlight ──────────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--gnome-z-modal, 1000);
+  /* Darkening is produced by the spotlight's spread shadow, so the backdrop
+     itself stays transparent while still capturing clicks. */
+  background: transparent;
+}
+
+.spotlight {
+  position: fixed;
+  border-radius: var(--gnome-radius-md, 12px);
+  box-shadow:
+    0 0 0 100vmax var(--gnome-coachmark-scrim, rgb(0 0 0 / 0.55)),
+    inset 0 0 0 2px var(--gnome-accent-color, #3584e4);
+  pointer-events: none;
+}
+
+.animated.backdrop {
+  opacity: 0;
+  transition: opacity var(--gnome-duration-normal, 200ms) var(--gnome-easing-default);
+}
+
+.animated.backdrop.visible {
+  opacity: 1;
+}
+
+/* ─── Bubble ────────────────────────────────────────────────────────────────── */
+
+.bubble {
+  position: fixed;
+  z-index: calc(var(--gnome-z-modal, 1000) + 1);
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(20rem, calc(100vw - 24px));
+  padding: var(--gnome-space-3, 16px);
+  background-color: var(--gnome-card-bg-color, #fff);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  border-radius: var(--gnome-radius-lg, 12px);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.1),
+    0 8px 24px rgb(0 0 0 / 0.25);
+  font-family: var(--gnome-font-family);
+  outline: none;
+}
+
+.animated.bubble {
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity var(--gnome-duration-fast, 150ms) var(--gnome-easing-default),
+    transform var(--gnome-duration-fast, 150ms) var(--gnome-easing-default);
+}
+
+.animated.bubble.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Arrow ─────────────────────────────────────────────────────────────────── */
+
+.arrow {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background-color: var(--gnome-card-bg-color, #fff);
+  transform: rotate(45deg);
+}
+
+.bottom .arrow {
+  top: -7px;
+  margin-left: -7px;
+  box-shadow: -1px -1px 2px rgb(0 0 0 / 0.06);
+}
+
+.top .arrow {
+  bottom: -7px;
+  margin-left: -7px;
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 0.06);
+}
+
+.right .arrow {
+  left: -7px;
+  margin-top: -7px;
+  box-shadow: -1px 1px 2px rgb(0 0 0 / 0.06);
+}
+
+.left .arrow {
+  right: -7px;
+  margin-top: -7px;
+  box-shadow: 1px -1px 2px rgb(0 0 0 / 0.06);
+}
+
+/* ─── Content ───────────────────────────────────────────────────────────────── */
+
+.counter {
+  display: block;
+  margin-bottom: var(--gnome-space-1, 4px);
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  color: var(--gnome-accent-color, #3584e4);
+  letter-spacing: 0.02em;
+}
+
+.title {
+  margin: 0 0 var(--gnome-space-1, 4px);
+  font-size: var(--gnome-font-size-title-4, 1.125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  line-height: var(--gnome-line-height-heading, 1.3);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.7));
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--gnome-space-2, 8px);
+  margin-top: var(--gnome-space-3, 16px);
+}
