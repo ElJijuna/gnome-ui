@@ -138,6 +138,8 @@ export {
   isCweId,
   normalizeCweId,
 } from './components/CweIdentifier';
+export type { DatePickerProps } from './components/DatePicker';
+export { DatePicker } from './components/DatePicker';
 export type {
   AlertDialogResponse,
   AlertDialogResponseVariant,

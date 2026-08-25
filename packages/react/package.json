@@ -202,6 +202,11 @@
       "import": "./dist/components/CweIdentifier.js",
       "require": "./dist/components/CweIdentifier.cjs"
     },
+    "./components/DatePicker": {
+      "types": "./dist/components/DatePicker.d.ts",
+      "import": "./dist/components/DatePicker.js",
+      "require": "./dist/components/DatePicker.cjs"
+    },
     "./components/Dialog": {
       "types": "./dist/components/Dialog.d.ts",
       "import": "./dist/components/Dialog.js",

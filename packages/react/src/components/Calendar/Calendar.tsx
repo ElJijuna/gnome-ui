@@ -60,6 +60,12 @@ export interface CalendarProps
   showDayNames?: boolean;
   /** Show an ISO week-number column. Mirrors `GtkCalendar:show-week-numbers`. */
   showWeekNumbers?: boolean;
+  /**
+   * Move DOM focus onto the roving day cell as soon as the grid mounts. Used by
+   * pickers that reveal the calendar in a popover and want the keyboard to land
+   * on a day rather than the month-navigation button.
+   */
+  autoFocus?: boolean;
 }
 
 // A known Sunday, used to derive weekday names in the configured order without
@@ -94,6 +100,7 @@ export const Calendar = ({
   showHeading = true,
   showDayNames = true,
   showWeekNumbers = false,
+  autoFocus = false,
   className,
   ...props
 }: CalendarProps) => {
@@ -150,6 +157,30 @@ export const Calendar = ({
     );
     cell?.focus();
   }, [focusDate]);
+
+  // On mount, optionally pull focus onto the roving day. A wrapping `Popover`
+  // keeps the panel `visibility:hidden` until it has measured a position, and a
+  // hidden element cannot take focus — so retry across frames until the day
+  // actually receives focus (also overriding the popover's own first-focusable
+  // grab, which lands on the month-nav button). Capped so it can never spin.
+  useEffect(() => {
+    if (!autoFocus) {
+      return;
+    }
+    let raf = 0;
+    let tries = 0;
+    const tryFocus = () => {
+      const cell = gridRef.current?.querySelector<HTMLButtonElement>('button[tabindex="0"]');
+      cell?.focus();
+      if (document.activeElement !== cell && tries++ < 10) {
+        raf = requestAnimationFrame(tryFocus);
+      }
+    };
+    raf = requestAnimationFrame(tryFocus);
+    return () => cancelAnimationFrame(raf);
+    // Mount-only: `autoFocus` is read once when the grid appears.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const weeks = useMemo(
     () => getCalendarWeeks(displayMonth, weekStartsOn),
