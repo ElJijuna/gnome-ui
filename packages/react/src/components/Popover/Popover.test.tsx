@@ -80,6 +80,18 @@ describe('Popover', () => {
     });
   });
 
+  it('applies panelClassName to the panel', async () => {
+    render(
+      <Popover content={<div>Panel</div>} panelClassName="wide">
+        <button type="button">Open</button>
+      </Popover>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open' }));
+
+    expect(await screen.findByRole('dialog')).toHaveClass('wide');
+  });
+
   it('preserves trigger click handler', () => {
     const onClick = vi.fn();
 

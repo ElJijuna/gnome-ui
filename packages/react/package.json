@@ -217,6 +217,11 @@
       "import": "./dist/components/DatePicker.js",
       "require": "./dist/components/DatePicker.cjs"
     },
+    "./components/DateRangePicker": {
+      "types": "./dist/components/DateRangePicker.d.ts",
+      "import": "./dist/components/DateRangePicker.js",
+      "require": "./dist/components/DateRangePicker.cjs"
+    },
     "./components/Dialog": {
       "types": "./dist/components/Dialog.d.ts",
       "import": "./dist/components/Dialog.js",

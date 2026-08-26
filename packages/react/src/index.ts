@@ -155,6 +155,11 @@ export {
 export type { DatePickerProps } from './components/DatePicker';
 export { DatePicker } from './components/DatePicker';
 export type {
+  DateRangePickerProps,
+  DateRangePreset,
+} from './components/DateRangePicker';
+export { DateRangePicker } from './components/DateRangePicker';
+export type {
   AlertDialogResponse,
   AlertDialogResponseVariant,
   DialogButton,

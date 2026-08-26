@@ -133,6 +133,7 @@ for a compact documentation index or
 | `CvssVector` |  | [Docs](https://gnome-ui.org/react/) |
 | `CweIdentifier` |  | [Docs](https://gnome-ui.org/react/) |
 | `DatePicker` | A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | [Docs](https://gnome-ui.org/react/?path=/docs/components-datepicker--docs) |
+| `DateRangePicker` | A [`Popover`](../Popover)-anchored [`CalendarRange`](../CalendarRange) behind an entry-styled trigger — the range counterpart of `DatePicker`, and the same `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | [Docs](https://gnome-ui.org/react/?path=/docs/components-daterangepicker--docs) |
 | `Dialog` | Blocking modal dialog — two modes in one component. | [Docs](https://gnome-ui.org/react/?path=/docs/components-dialog--docs) |
 | `Divider` | Horizontal rule with an optional centred label — common auth/login-form pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-divider--docs) |
 | `Drawer` | Slide-over panel for supplementary React content. Use `side` to open from the left or right, `size` for classic or wide widths, and pass the body through `children` or the `content` prop. | [Docs](https://gnome-ui.org/react/?path=/docs/components-drawer--docs) |
@@ -5469,6 +5470,65 @@ Restrict the range and change the displayed format:
 
 ---
 
+Source: packages/react/src/components/DateRangePicker/README.md
+
+A [`Popover`](../Popover)-anchored [`CalendarRange`](../CalendarRange) behind an
+entry-styled trigger — the range counterpart of `DatePicker`, and the same
+`GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry.
+
+The trigger reads out both ends (`Aug 10, 2026 – Aug 19, 2026`) or a
+placeholder, and opens on click, <kbd>Enter</kbd>/<kbd>Space</kbd> or
+<kbd>↓</kbd>. Because `CalendarRange` only emits a finished range, the popover
+stays open through the first click and closes on the second — returning focus to
+the trigger.
+
+## Usage
+
+```tsx
+import { DateRangePicker } from '@gnome-ui/react/components/DateRangePicker';
+
+function Example() {
+  const [range, setRange] = useState<DateRange | null>(null);
+  return <DateRangePicker label="Stay" value={range} onChange={setRange} />;
+}
+```
+
+`onChange` receives `{ start, end }` with both ends filled in — there is no
+half-emitted range to guard against.
+
+## Two months, or however many
+
+The popover shows `visibleMonths={2}` panels by default, paged together, so a
+range spanning months needs no navigation. Pass `1` for a compact picker, or
+more for a wide one.
+
+## Presets
+
+`presets` adds one-click shortcuts beside the calendar. A preset's `range` may
+be a literal or a function, so relative shortcuts are computed at click time:
+
+```tsx
+<DateRangePicker
+  label="Report period"
+  presets={[
+    { label: 'Last 7 days', range: () => ({ start: addDays(new Date(), -6), end: new Date() }) },
+    { label: 'This month', range: () => ({ start: startOfMonth(new Date()), end: new Date() }) },
+  ]}
+/>
+```
+
+Choosing a preset commits the range and closes the popover, exactly like a
+second day click.
+
+## Props
+
+`value` / `defaultValue` (a `DateRange`), `onChange`, `min`, `max`, `minRange`,
+`maxRange`, `visibleMonths`, `presets`, `weekStartsOn`, `locale`,
+`formatOptions`, `placeholder`, `separator`, `label`, `aria-label`,
+`showWeekNumbers`, `disabled`, `placement`, `id`, `className`.
+
+---
+
 Source: packages/react/src/components/Dialog/README.md
 
 Blocking modal dialog — two modes in one component.
@@ -6400,6 +6460,7 @@ Unlike **Tooltip**, a Popover can contain rich interactive content — menus, fo
 - Prefer **Dialog** for actions that require confirmation or have significant consequences.
 - Provide a clear way to close: Escape key, outside click, and a close/done button for longer panels.
 - Supports both **uncontrolled** (toggle on trigger click) and **controlled** (`open` + `onClose`) modes.
+- Content wider than the default 320px cap (a two-month calendar, a table) needs `panelClassName` with `max-width: none` — see `DateRangePicker`.
 
 ---
 

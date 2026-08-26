@@ -1,0 +1,126 @@
+/* ─── Wrapper ───────────────────────────────────────────────────────────────── */
+
+.dateRangePicker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 4px);
+  font-family: var(--gnome-font-family);
+}
+
+.label {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.7));
+}
+
+/* ─── Entry-styled trigger (mirrors GtkEntry) ───────────────────────────────── */
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gnome-space-2, 8px);
+  min-width: 12rem;
+  padding: 8px var(--gnome-space-2, 12px);
+  appearance: none;
+  background-color: var(--gnome-view-bg-color, #fff);
+  border: 1px solid var(--gnome-border-subtle);
+  border-radius: var(--gnome-radius-md, 8px);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.8));
+  font: inherit;
+  font-size: var(--gnome-font-size-body, 1rem);
+  line-height: var(--gnome-line-height-body, 1.5);
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--gnome-duration-fast) var(--gnome-easing-default),
+    box-shadow var(--gnome-duration-fast) var(--gnome-easing-default);
+}
+
+.trigger:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.trigger:focus-visible {
+  border-color: var(--gnome-accent-color, #3584e4);
+  box-shadow: 0 0 0 1px var(--gnome-accent-color, #3584e4);
+}
+
+.trigger:disabled {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Placeholder styling when no date is selected. */
+.trigger[data-placeholder] .value {
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.45));
+  opacity: 0.55;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.55));
+  opacity: 0.7;
+}
+
+/* ─── Popover panel ─────────────────────────────────────────────────────────── */
+
+/*
+ * `Popover` caps its panel at 320px, which fits one month; a two-month calendar
+ * (plus an optional preset column) needs the cap lifted.
+ */
+.popover {
+  max-width: none;
+}
+
+.panel {
+  display: flex;
+  align-items: stretch;
+  gap: var(--gnome-space-2, 8px);
+}
+
+/* ─── Preset shortcuts ──────────────────────────────────────────────────────── */
+
+.presets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 4px);
+  padding: var(--gnome-space-2, 8px);
+  border-inline-end: 1px solid var(--gnome-border-subtle);
+}
+
+.preset {
+  padding: var(--gnome-space-1, 4px) var(--gnome-space-2, 8px);
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: var(--gnome-radius-md, 8px);
+  color: inherit;
+  font: inherit;
+  font-size: var(--gnome-font-size-body, 1rem);
+  text-align: start;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+}
+
+.preset:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.preset:active {
+  background-color: var(--gnome-active-overlay);
+}
+
+.preset:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: -1px;
+}

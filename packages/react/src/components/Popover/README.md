@@ -8,3 +8,4 @@ Unlike **Tooltip**, a Popover can contain rich interactive content — menus, fo
 - Prefer **Dialog** for actions that require confirmation or have significant consequences.
 - Provide a clear way to close: Escape key, outside click, and a close/done button for longer panels.
 - Supports both **uncontrolled** (toggle on trigger click) and **controlled** (`open` + `onClose`) modes.
+- Content wider than the default 320px cap (a two-month calendar, a table) needs `panelClassName` with `max-width: none` — see `DateRangePicker`.

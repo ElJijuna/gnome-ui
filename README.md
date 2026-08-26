@@ -123,6 +123,7 @@ for a compact documentation index or
 | `CvssVector` |  | [Docs](https://gnome-ui.org/react/) |
 | `CweIdentifier` |  | [Docs](https://gnome-ui.org/react/) |
 | `DatePicker` | A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | [Docs](https://gnome-ui.org/react/?path=/docs/components-datepicker--docs) |
+| `DateRangePicker` | A [`Popover`](../Popover)-anchored [`CalendarRange`](../CalendarRange) behind an entry-styled trigger — the range counterpart of `DatePicker`, and the same `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | [Docs](https://gnome-ui.org/react/?path=/docs/components-daterangepicker--docs) |
 | `Dialog` | Blocking modal dialog — two modes in one component. | [Docs](https://gnome-ui.org/react/?path=/docs/components-dialog--docs) |
 | `Divider` | Horizontal rule with an optional centred label — common auth/login-form pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-divider--docs) |
 | `Drawer` | Slide-over panel for supplementary React content. Use `side` to open from the left or right, `size` for classic or wide widths, and pass the body through `children` or the `content` prop. | [Docs](https://gnome-ui.org/react/?path=/docs/components-drawer--docs) |

@@ -45,6 +45,11 @@ export interface PopoverProps {
    */
   onOpenChange?: (open: boolean) => void;
   /**
+   * Extra class on the popover panel itself. Mainly for content wider than the
+   * default `max-width` — e.g. `DateRangePicker`'s two-month calendar.
+   */
+  panelClassName?: string;
+  /**
    * The trigger element. Must be a single React element that can
    * receive `ref` and click/keyboard event props.
    */
@@ -205,6 +210,7 @@ export const Popover = ({
   open: controlledOpen,
   onClose,
   onOpenChange,
+  panelClassName,
   children,
 }: PopoverProps) => {
   const isControlled = controlledOpen !== undefined;
@@ -349,6 +355,7 @@ export const Popover = ({
         styles.panel,
         pos ? styles[pos.placement] : null,
         open && pos ? styles.visible : null,
+        panelClassName,
       ]
         .filter(Boolean)
         .join(' ')}
