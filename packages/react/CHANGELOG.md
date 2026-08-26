@@ -1,3 +1,11 @@
+## [1.62.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.61.0...@gnome-ui/react@1.62.0) (2026-08-26)
+
+### Features
+
+* **@gnome-ui/react:** add CalendarRange component for date range selection ([bd581f7](https://github.com/ElJijuna/gnome-ui/commit/bd581f745bbcd3c371cfab0d903107eb17cd3d75))
+* **@gnome-ui/react:** add DateRangePicker component with presets and keyboard navigation ([294c72d](https://github.com/ElJijuna/gnome-ui/commit/294c72d678c245c5d771d43ff337f2e871b54dee))
+* **@gnome-ui/react:** add time selection functionality with showTime prop ([9bcc11e](https://github.com/ElJijuna/gnome-ui/commit/9bcc11e29310e40befb46cf02db8b8667d3dfe8b))
+
 ## [1.61.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.60.0...@gnome-ui/react@1.61.0) (2026-08-26)
 
 ### Features
