@@ -1,2 +1,2 @@
-export type { CalendarProps } from './Calendar';
+export type { CalendarProps, CalendarView } from './Calendar';
 export { Calendar } from './Calendar';

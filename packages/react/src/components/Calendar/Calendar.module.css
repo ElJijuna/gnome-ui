@@ -1,6 +1,9 @@
 /* ─── Wrapper ───────────────────────────────────────────────────────────────── */
 
 .calendar {
+  --calendar-cell-size: 2.25rem;
+  --calendar-cell-gap: var(--gnome-space-1, 4px);
+
   display: inline-flex;
   flex-direction: column;
   gap: var(--gnome-space-2, 8px);
@@ -28,6 +31,44 @@
   flex: 1;
   text-align: center;
   font-weight: var(--gnome-font-weight-bold, 700);
+}
+
+/* Heading label as the drill-down trigger: day grid → month grid → year grid. */
+.monthLabelButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnome-space-1, 4px);
+  min-height: 2rem;
+  padding-inline: var(--gnome-space-2, 8px);
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: var(--gnome-radius-full, 9999px);
+  color: inherit;
+  font: inherit;
+  font-weight: var(--gnome-font-weight-bold, 700);
+  text-transform: capitalize;
+  cursor: pointer;
+  outline: none;
+}
+
+.monthLabelButton:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.monthLabelButton:active {
+  background-color: var(--gnome-active-overlay);
+}
+
+.monthLabelButton:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: 1px;
+}
+
+/* The chevron points at the grid below; flip it once the drill-down is open. */
+.monthLabelButton[data-view="years"] .chevron {
+  transform: rotate(180deg);
 }
 
 .navButton {
@@ -68,21 +109,93 @@
 .grid {
   display: flex;
   flex-direction: column;
-  gap: var(--gnome-space-1, 4px);
+  gap: var(--calendar-cell-gap);
+
+  /* Pin the width to the day grid so switching views never resizes the panel. */
+  min-inline-size: calc(7 * var(--calendar-cell-size) + 6 * var(--calendar-cell-gap));
 }
 
 .weekRow {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 2.25rem;
-  gap: var(--gnome-space-1, 4px);
+  grid-auto-columns: var(--calendar-cell-size);
+  gap: var(--calendar-cell-gap);
 }
 
 .cell {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.25rem;
+  height: var(--calendar-cell-size);
+}
+
+/* ─── Month / year drill-down grids ─────────────────────────────────────────── */
+
+.drilldownRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--calendar-cell-gap);
+}
+
+.drilldownCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Three rows spread over the six week rows they replace. */
+  height: calc(2 * var(--calendar-cell-size) + var(--calendar-cell-gap));
+}
+
+.drilldownItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.5rem;
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: var(--gnome-radius-full, 9999px);
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-transform: capitalize;
+  cursor: pointer;
+  outline: none;
+}
+
+.drilldownItem:hover {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.drilldownItem:active {
+  background-color: var(--gnome-active-overlay);
+}
+
+.drilldownItem:focus-visible {
+  outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
+  outline-offset: -1px;
+}
+
+/* Current month / year: a ring, matching the day grid's "today". */
+.drilldownItem[data-today]:not([data-selected]) {
+  box-shadow: inset 0 0 0 1.5px var(--gnome-accent-color, #3584e4);
+  color: var(--gnome-accent-color, #3584e4);
+}
+
+.drilldownItem[data-selected] {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+  color: var(--gnome-accent-fg-color, #fff);
+}
+
+.drilldownItem[data-selected]:hover {
+  background-color: var(--gnome-accent-bg-color, #3584e4);
+}
+
+.drilldownItem[aria-disabled="true"] {
+  opacity: var(--gnome-opacity-disabled, 0.5);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* ─── Column headers / week numbers ─────────────────────────────────────────── */
@@ -112,8 +225,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: var(--calendar-cell-size);
+  height: var(--calendar-cell-size);
   appearance: none;
   background: transparent;
   border: none;

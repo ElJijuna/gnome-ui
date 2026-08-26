@@ -31,15 +31,36 @@ export const addDays = (date: Date, amount: number): Date =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 
 /**
+ * The date `year-month-day`, with the day clamped to the last valid day of that
+ * month. Used whenever a month or year jump must keep the day-of-month intact.
+ */
+export const clampDayToMonth = (year: number, month: number, day: number): Date => {
+  const lastDay = new Date(year, month + 1, 0).getDate();
+  return new Date(year, month, Math.min(day, lastDay));
+};
+
+/**
  * `date` shifted by `amount` months, keeping the day-of-month where possible
  * and clamping to the last valid day otherwise (e.g. Jan 31 + 1 month → Feb 28).
  */
 export const addMonths = (date: Date, amount: number): Date => {
   const target = new Date(date.getFullYear(), date.getMonth() + amount, 1);
-  const lastDay = new Date(target.getFullYear(), target.getMonth() + 1, 0).getDate();
-  target.setDate(Math.min(date.getDate(), lastDay));
-  return target;
+  return clampDayToMonth(target.getFullYear(), target.getMonth(), date.getDate());
 };
+
+/**
+ * `date` shifted by `amount` years, clamping the day-of-month where the target
+ * year is shorter (e.g. 29 Feb 2028 - 1 year → 28 Feb 2027).
+ */
+export const addYears = (date: Date, amount: number): Date =>
+  clampDayToMonth(date.getFullYear() + amount, date.getMonth(), date.getDate());
+
+/** How many years one page of the year view shows. */
+export const YEARS_PER_PAGE = 12;
+
+/** First year of the fixed-size page of years containing `year`. */
+export const startOfYearPage = (year: number): number =>
+  Math.floor(year / YEARS_PER_PAGE) * YEARS_PER_PAGE;
 
 /** Distance in days from the week's start to `date`, given the first weekday. */
 export const weekdayOffset = (date: Date, weekStartsOn: WeekStart): number =>
@@ -89,6 +110,20 @@ export const isOutOfRange = (date: Date, min?: Date, max?: Date): boolean => {
     return true;
   }
   return false;
+};
+
+/** `true` when every day of `date`'s month falls outside the inclusive `[min, max]` range. */
+export const isMonthOutOfRange = (date: Date, min?: Date, max?: Date): boolean => {
+  const first = startOfMonth(date);
+  const last = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  return isOutOfRange(last, min, undefined) || isOutOfRange(first, undefined, max);
+};
+
+/** `true` when every day of `date`'s year falls outside the inclusive `[min, max]` range. */
+export const isYearOutOfRange = (date: Date, min?: Date, max?: Date): boolean => {
+  const first = new Date(date.getFullYear(), 0, 1);
+  const last = new Date(date.getFullYear(), 11, 31);
+  return isOutOfRange(last, min, undefined) || isOutOfRange(first, undefined, max);
 };
 
 /** A stable `YYYY-MM-DD` key for a date, used for DOM `data-date` lookups. */

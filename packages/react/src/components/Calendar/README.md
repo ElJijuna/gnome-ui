@@ -16,6 +16,30 @@ day. Then:
 Leading and trailing days from adjacent months are shown dimmed and remain
 selectable — choosing one navigates to that month, matching `GtkCalendar`.
 
+## Changing the year
+
+The heading label is a button that drills down the way modern date pickers do,
+so a distant year is two clicks away instead of twelve pages:
+
+```
+August 2026  →  month grid (2026)  →  year grid (2016 – 2027)  →  back to days
+```
+
+Picking a year drops to that year's month grid; picking a month drops to its day
+grid. The step arrows follow the active view — a month at a time on the day grid,
+a year on the month grid, twelve years on the year grid — and each grid keeps the
+same roving-tabindex keyboard model (<kbd>←</kbd> <kbd>→</kbd> one cell,
+<kbd>↑</kbd> <kbd>↓</kbd> one row of four, <kbd>Home</kbd> / <kbd>End</kbd> the
+ends of the page, <kbd>Enter</kbd> to drill down, <kbd>Esc</kbd> back to days).
+Months and years with no selectable day inside `[min, max]` are disabled.
+
+Pass `showViewSwitcher={false}` for the plain `GtkCalendar` heading, or
+`defaultView="years"` to open on the year grid — handy for date-of-birth entry:
+
+```tsx
+<Calendar defaultView="years" max={new Date()} onViewChange={(view) => console.log(view)} />
+```
+
 ## Usage
 
 ```tsx

@@ -70,3 +70,27 @@ test('clicking outside closes the popover', async ({ page }) => {
   await page.mouse.click(5, 5);
   await expect(page.getByRole('dialog')).toBeHidden();
 });
+
+test('the year drill-down works inside the popover and Escape only backs out one level', async ({
+  page,
+}) => {
+  await page.goto(PRESELECTED);
+
+  await page.locator(trigger).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+
+  // Drill down to the year grid without the popover stealing focus back.
+  await page.getByRole('button', { name: /august 2026, choose a month/i }).click();
+  await page.getByRole('button', { name: /2026, choose a year/i }).click();
+  await expect(page.getByRole('grid', { name: /select a year/i })).toBeVisible();
+
+  // Escape backs out to the day grid rather than closing the whole picker.
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByRole('grid', { name: /august 2026/i })).toBeVisible();
+
+  // A second Escape closes it, as before.
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await expect(page.locator(trigger)).toBeFocused();
+});

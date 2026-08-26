@@ -22,6 +22,10 @@ const meta: Meta<typeof Calendar> = {
       control: { type: 'inline-radio' },
       options: [0, 1],
     },
+    defaultView: {
+      control: { type: 'inline-radio' },
+      options: ['days', 'months', 'years'],
+    },
   },
 };
 
@@ -95,5 +99,37 @@ export const Localized: Story = {
     defaultMonth: new Date(2026, 7, 1),
     locale: 'es-ES',
     weekStartsOn: 1,
+  },
+};
+
+// ─── Year drill-down ──────────────────────────────────────────────────────────
+
+/**
+ * Click the heading label to step day grid → month grid → year grid, the way
+ * modern date pickers reach a distant year without paging month by month.
+ */
+export const MonthAndYearPicker: Story = {
+  args: {
+    defaultMonth: new Date(2026, 7, 1),
+    defaultValue: new Date(2026, 7, 15),
+  },
+};
+
+// ─── Opens on the year grid (date of birth) ───────────────────────────────────
+
+export const YearFirst: Story = {
+  args: {
+    defaultMonth: new Date(1990, 5, 1),
+    defaultView: 'years',
+    max: new Date(2026, 7, 25),
+  },
+};
+
+// ─── Plain GtkCalendar heading (no drill-down) ────────────────────────────────
+
+export const WithoutViewSwitcher: Story = {
+  args: {
+    defaultMonth: new Date(2026, 7, 1),
+    showViewSwitcher: false,
   },
 };

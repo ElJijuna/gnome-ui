@@ -3,7 +3,16 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Calendar } from './Calendar';
-import { addMonths, getCalendarWeeks, isoWeekNumber, toISODateKey } from './calendarUtils';
+import {
+  addMonths,
+  addYears,
+  getCalendarWeeks,
+  isMonthOutOfRange,
+  isoWeekNumber,
+  isYearOutOfRange,
+  startOfYearPage,
+  toISODateKey,
+} from './calendarUtils';
 
 // A fixed "today" keeps the today-ring and default-focus assertions stable.
 const TODAY = new Date(2026, 7, 12); // Wed 12 Aug 2026
@@ -174,6 +183,236 @@ describe('Calendar', () => {
     });
   });
 
+  // Modern date pickers reach a distant year by drilling down through a month
+  // grid and a year grid rather than paging month by month; the heading label
+  // is the drill-down trigger.
+  describe('view drill-down', () => {
+    const heading = (name: RegExp) => screen.getByRole('button', { name });
+
+    it('opens the month grid from the heading label', async () => {
+      const user = userEvent.setup();
+      render(<Calendar defaultMonth={august2026} />);
+
+      await user.click(heading(/^august 2026, choose a month$/i));
+
+      expect(screen.getByRole('grid', { name: /select a month in 2026/i })).toBeInTheDocument();
+      // Twelve months, one row of four per quarter.
+      expect(screen.getAllByRole('gridcell')).toHaveLength(12);
+      expect(screen.getByRole('button', { name: 'March 2026' })).toBeInTheDocument();
+    });
+
+    it("picking a month returns to that month's day grid", async () => {
+      const user = userEvent.setup();
+      const onMonthChange = vi.fn();
+      render(<Calendar defaultMonth={august2026} onMonthChange={onMonthChange} />);
+
+      await user.click(heading(/choose a month/i));
+      await user.click(screen.getByRole('button', { name: 'March 2026' }));
+
+      expect(onMonthChange).toHaveBeenCalledOnce();
+      expect(toISODateKey(onMonthChange.mock.calls[0][0])).toBe('2026-03-01');
+      expect(screen.getByRole('grid', { name: /march 2026/i })).toBeInTheDocument();
+    });
+
+    it('opens the year grid on the second step and pages by twelve years', async () => {
+      const user = userEvent.setup();
+      render(<Calendar defaultMonth={august2026} />);
+
+      await user.click(heading(/choose a month/i));
+      await user.click(heading(/^2026, choose a year$/i));
+
+      // 2026 sits in the 2016–2027 page.
+      expect(screen.getByRole('grid', { name: /select a year, 2016 – 2027/i })).toBeInTheDocument();
+      expect(screen.getAllByRole('gridcell')).toHaveLength(12);
+
+      await user.click(screen.getByRole('button', { name: 'Previous years' }));
+      expect(screen.getByRole('grid', { name: /2004 – 2015/i })).toBeInTheDocument();
+    });
+
+    it("picking a year drops back to that year's month grid", async () => {
+      const user = userEvent.setup();
+      render(<Calendar defaultMonth={august2026} />);
+
+      await user.click(heading(/choose a month/i));
+      await user.click(heading(/choose a year/i));
+      await user.click(screen.getByRole('button', { name: '2019' }));
+
+      expect(screen.getByRole('grid', { name: /select a month in 2019/i })).toBeInTheDocument();
+
+      // …and picking a month from there lands on the day grid of that year.
+      await user.click(screen.getByRole('button', { name: 'August 2019' }));
+      expect(screen.getByRole('grid', { name: /august 2019/i })).toBeInTheDocument();
+    });
+
+    it('relabels the step buttons for the active view', async () => {
+      const user = userEvent.setup();
+      render(<Calendar defaultMonth={august2026} />);
+
+      expect(screen.getByRole('button', { name: 'Next month' })).toBeInTheDocument();
+
+      await user.click(heading(/choose a month/i));
+      await user.click(screen.getByRole('button', { name: 'Next year' }));
+      expect(screen.getByRole('grid', { name: /select a month in 2027/i })).toBeInTheDocument();
+    });
+
+    it('reports view changes through onViewChange', async () => {
+      const user = userEvent.setup();
+      const onViewChange = vi.fn();
+      render(<Calendar defaultMonth={august2026} onViewChange={onViewChange} />);
+
+      await user.click(heading(/choose a month/i));
+      await user.click(heading(/choose a year/i));
+
+      expect(onViewChange.mock.calls.map(([v]) => v)).toEqual(['months', 'years']);
+    });
+
+    it('cycles back to the day grid from the year grid', async () => {
+      const user = userEvent.setup();
+      render(<Calendar defaultMonth={august2026} />);
+
+      await user.click(heading(/choose a month/i));
+      await user.click(heading(/choose a year/i));
+      await user.click(heading(/back to days/i));
+
+      expect(screen.getByRole('grid', { name: /august 2026/i })).toBeInTheDocument();
+    });
+
+    it('Escape backs out of a drill-down without bubbling to an enclosing popover', async () => {
+      const user = userEvent.setup();
+      const onEscape = vi.fn();
+      render(
+        <div onKeyDown={onEscape}>
+          <Calendar defaultMonth={august2026} />
+        </div>,
+      );
+
+      await user.click(heading(/choose a month/i));
+      fireEvent.keyDown(screen.getByRole('grid'), { key: 'Escape' });
+
+      expect(screen.getByRole('grid', { name: /august 2026/i })).toBeInTheDocument();
+      expect(onEscape).not.toHaveBeenCalled();
+    });
+
+    it('opens directly on a requested view', () => {
+      render(<Calendar defaultMonth={august2026} defaultView="years" />);
+      expect(screen.getByRole('grid', { name: /select a year/i })).toBeInTheDocument();
+    });
+
+    it('keeps a plain label — and the day grid — when the switcher is off', () => {
+      render(<Calendar defaultMonth={august2026} showViewSwitcher={false} defaultView="years" />);
+
+      expect(screen.queryByRole('button', { name: /choose a month/i })).not.toBeInTheDocument();
+      expect(screen.getByRole('grid', { name: /august 2026/i })).toBeInTheDocument();
+    });
+
+    describe('keyboard', () => {
+      const rovingCell = () =>
+        screen.getByRole('grid').querySelector<HTMLButtonElement>('button[tabindex="0"]');
+
+      it('moves the roving cell across the month grid and selects with Enter', async () => {
+        const user = userEvent.setup();
+        render(<Calendar defaultMonth={august2026} />);
+        await user.click(heading(/choose a month/i));
+
+        const grid = screen.getByRole('grid');
+        // Seeded on August; one column right is September, one row down is +4.
+        expect(rovingCell()).toHaveAttribute('aria-label', 'August 2026');
+        fireEvent.keyDown(grid, { key: 'ArrowRight' });
+        expect(rovingCell()).toHaveAttribute('aria-label', 'September 2026');
+        fireEvent.keyDown(grid, { key: 'ArrowUp' });
+        expect(rovingCell()).toHaveAttribute('aria-label', 'May 2026');
+
+        fireEvent.keyDown(grid, { key: 'Enter' });
+        expect(screen.getByRole('grid', { name: /may 2026/i })).toBeInTheDocument();
+      });
+
+      it('pages the month grid a year at a time when focus leaves it', async () => {
+        const user = userEvent.setup();
+        render(<Calendar defaultMonth={new Date(2026, 0, 1)} />);
+        await user.click(heading(/choose a month/i));
+
+        // January - one column left wraps into December of the previous year.
+        fireEvent.keyDown(screen.getByRole('grid'), { key: 'ArrowLeft' });
+        expect(screen.getByRole('grid', { name: /select a month in 2025/i })).toBeInTheDocument();
+        expect(rovingCell()).toHaveAttribute('aria-label', 'December 2025');
+      });
+
+      it('moves across the year grid and selects with Enter', async () => {
+        const user = userEvent.setup();
+        render(<Calendar defaultMonth={august2026} />);
+        await user.click(heading(/choose a month/i));
+        await user.click(heading(/choose a year/i));
+
+        const grid = screen.getByRole('grid');
+        expect(rovingCell()).toHaveAttribute('aria-label', '2026');
+        fireEvent.keyDown(grid, { key: 'ArrowUp' });
+        expect(rovingCell()).toHaveAttribute('aria-label', '2022');
+
+        fireEvent.keyDown(grid, { key: 'Enter' });
+        expect(screen.getByRole('grid', { name: /select a month in 2022/i })).toBeInTheDocument();
+      });
+
+      it('re-pages the year grid when focus leaves the twelve-year page', async () => {
+        const user = userEvent.setup();
+        render(<Calendar defaultMonth={new Date(2016, 7, 1)} />);
+        await user.click(heading(/choose a month/i));
+        await user.click(heading(/choose a year/i));
+
+        // 2016 opens the 2016-2027 page; one step left falls into the previous.
+        fireEvent.keyDown(screen.getByRole('grid'), { key: 'ArrowLeft' });
+        expect(screen.getByRole('grid', { name: /2004 – 2015/i })).toBeInTheDocument();
+        expect(rovingCell()).toHaveAttribute('aria-label', '2015');
+      });
+    });
+
+    describe('range limits', () => {
+      it('disables months entirely outside [min, max]', async () => {
+        const user = userEvent.setup();
+        const onMonthChange = vi.fn();
+        render(
+          <Calendar
+            defaultMonth={august2026}
+            min={new Date(2026, 5, 15)}
+            max={new Date(2026, 8, 5)}
+            onMonthChange={onMonthChange}
+          />,
+        );
+        await user.click(heading(/choose a month/i));
+
+        expect(screen.getByRole('button', { name: 'May 2026' })).toHaveAttribute(
+          'aria-disabled',
+          'true',
+        );
+        // June is only partly out of range, so it stays selectable.
+        expect(screen.getByRole('button', { name: 'June 2026' })).not.toHaveAttribute(
+          'aria-disabled',
+        );
+
+        fireEvent.click(screen.getByRole('button', { name: 'May 2026' }));
+        expect(onMonthChange).not.toHaveBeenCalled();
+      });
+
+      it('disables years entirely outside [min, max]', async () => {
+        const user = userEvent.setup();
+        render(
+          <Calendar
+            defaultMonth={august2026}
+            min={new Date(2025, 0, 1)}
+            max={new Date(2027, 0, 1)}
+          />,
+        );
+        await user.click(heading(/choose a month/i));
+        await user.click(heading(/choose a year/i));
+
+        expect(screen.getByRole('button', { name: '2024' })).toHaveAttribute(
+          'aria-disabled',
+          'true',
+        );
+        expect(screen.getByRole('button', { name: '2027' })).not.toHaveAttribute('aria-disabled');
+      });
+    });
+  });
+
   describe('HTML attribute forwarding', () => {
     it('forwards className to the root', () => {
       const { container } = render(<Calendar defaultMonth={august2026} className="custom" />);
@@ -203,6 +442,29 @@ describe('calendarUtils', () => {
   it('addMonths clamps the day to the shorter target month', () => {
     // 31 Jan + 1 month → 28 Feb (2026 is not a leap year).
     expect(toISODateKey(addMonths(new Date(2026, 0, 31), 1))).toBe('2026-02-28');
+  });
+
+  it('addYears clamps a leap day onto the shorter target year', () => {
+    expect(toISODateKey(addYears(new Date(2028, 1, 29), -1))).toBe('2027-02-28');
+  });
+
+  it('startOfYearPage aligns years onto fixed twelve-year pages', () => {
+    expect(startOfYearPage(2026)).toBe(2016);
+    expect(startOfYearPage(2016)).toBe(2016);
+    expect(startOfYearPage(2015)).toBe(2004);
+  });
+
+  it('isMonthOutOfRange only rejects months with no selectable day', () => {
+    const min = new Date(2026, 5, 15);
+    // June still has 15-30 available; May has nothing.
+    expect(isMonthOutOfRange(new Date(2026, 5, 1), min)).toBe(false);
+    expect(isMonthOutOfRange(new Date(2026, 4, 31), min)).toBe(true);
+  });
+
+  it('isYearOutOfRange only rejects years with no selectable day', () => {
+    const max = new Date(2026, 0, 1);
+    expect(isYearOutOfRange(new Date(2026, 11, 31), undefined, max)).toBe(false);
+    expect(isYearOutOfRange(new Date(2027, 0, 1), undefined, max)).toBe(true);
   });
 
   it('isoWeekNumber matches known ISO-8601 boundaries', () => {

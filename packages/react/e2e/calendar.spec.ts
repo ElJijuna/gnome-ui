@@ -79,3 +79,63 @@ test('the grid exposes exactly one tabbable day (roving tabindex)', async ({ pag
   // The preselected story seeds focus on the selected day.
   await expect(tabbable).toHaveText('15');
 });
+
+// ─── Year drill-down ──────────────────────────────────────────────────────────
+//
+// The drill-down swaps the whole grid under the user, so focus has to be moved
+// onto the roving cell of the grid that just appeared. That is a real-focus
+// behaviour jsdom cannot assert, same as the day-grid month flip above.
+
+const DRILLDOWN = '/iframe.html?id=components-calendar--month-and-year-picker';
+
+test('the heading label steps day grid → month grid → year grid', async ({ page }) => {
+  await page.goto(DRILLDOWN);
+
+  await page.getByRole('button', { name: /august 2026, choose a month/i }).click();
+  await expect(page.getByRole('grid', { name: /select a month in 2026/i })).toBeVisible();
+  // Focus follows into the revealed grid, landing on the displayed month.
+  await expect(page.getByRole('button', { name: 'August 2026' })).toBeFocused();
+
+  await page.getByRole('button', { name: /2026, choose a year/i }).click();
+  await expect(page.getByRole('grid', { name: /select a year, 2016 – 2027/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: '2026', exact: true })).toBeFocused();
+});
+
+test('picking a year then a month walks back down to that day grid', async ({ page }) => {
+  await page.goto(DRILLDOWN);
+
+  await page.getByRole('button', { name: /choose a month/i }).click();
+  await page.getByRole('button', { name: /choose a year/i }).click();
+  await page.getByRole('button', { name: '2019', exact: true }).click();
+
+  await expect(page.getByRole('grid', { name: /select a month in 2019/i })).toBeVisible();
+  await page.getByRole('button', { name: 'March 2019' }).click();
+
+  await expect(page.getByRole('grid', { name: /march 2019/i })).toBeVisible();
+  // The day grid keeps the day-of-month the roving cell held (15 Aug → 15 Mar).
+  await expect(page.getByRole('button', { name: 'Friday, March 15, 2019' })).toBeFocused();
+});
+
+test('arrow keys rove the month grid and Enter drills down', async ({ page }) => {
+  await page.goto(DRILLDOWN);
+
+  await page.getByRole('button', { name: /choose a month/i }).click();
+  await expect(page.getByRole('button', { name: 'August 2026' })).toBeFocused();
+
+  await page.keyboard.press('ArrowDown'); // +4 months
+  await expect(page.getByRole('button', { name: 'December 2026' })).toBeFocused();
+
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('grid', { name: /december 2026/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Tuesday, December 15, 2026' })).toBeFocused();
+});
+
+test('Escape leaves the drill-down and returns to the day grid', async ({ page }) => {
+  await page.goto(DRILLDOWN);
+
+  await page.getByRole('button', { name: /choose a month/i }).click();
+  await page.keyboard.press('Escape');
+
+  await expect(page.getByRole('grid', { name: /august 2026/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Saturday, August 15, 2026' })).toBeFocused();
+});
