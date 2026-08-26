@@ -1,5 +1,3 @@
-# Calendar
-
 Month-grid date display with full keyboard navigation — mirrors
 [`GtkCalendar`](https://gnome.pages.gitlab.gnome.org/gtk/gtk4/class.Calendar.html).
 Usable standalone (settings, forms) or as the panel inside a `DatePicker`.
@@ -39,6 +37,12 @@ Pass `showViewSwitcher={false}` for the plain `GtkCalendar` heading, or
 ```tsx
 <Calendar defaultView="years" max={new Date()} onViewChange={(view) => console.log(view)} />
 ```
+
+## Related
+
+For start/end selection use [`CalendarRange`](../CalendarRange/README.md), which
+drives the same grid engine (and takes the same `visibleMonths` prop to show
+several month panels side by side).
 
 ## Usage
 

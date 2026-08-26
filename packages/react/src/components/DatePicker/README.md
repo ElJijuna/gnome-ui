@@ -1,5 +1,3 @@
-# DatePicker
-
 A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an
 entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition
 GNOME apps use for date entry.

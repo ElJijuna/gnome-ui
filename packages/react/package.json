@@ -102,6 +102,11 @@
       "import": "./dist/components/Calendar.js",
       "require": "./dist/components/Calendar.cjs"
     },
+    "./components/CalendarRange": {
+      "types": "./dist/components/CalendarRange.d.ts",
+      "import": "./dist/components/CalendarRange.js",
+      "require": "./dist/components/CalendarRange.cjs"
+    },
     "./components/Callout": {
       "types": "./dist/components/Callout.d.ts",
       "import": "./dist/components/Callout.js",

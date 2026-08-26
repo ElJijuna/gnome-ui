@@ -99,6 +99,8 @@ for a compact documentation index or
 | `Button` | Button component following the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/patterns/controls/buttons.html). | [Docs](https://gnome-ui.org/react/?path=/docs/components-button--docs) |
 | `ButtonContent` | Icon + label layout helper for buttons that contain both an icon and text. | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttoncontent--docs) |
 | `ButtonRow` | Full-width activatable row styled as a button inside a `BoxedList`. | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttonrow--docs) |
+| `Calendar` | Month-grid date display with full keyboard navigation — mirrors [`GtkCalendar`](https://gnome.pages.gitlab.gnome.org/gtk/gtk4/class.Calendar.html). Usable standalone (settings, forms) or as the panel inside a `DatePicker`. | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendar--docs) |
+| `CalendarRange` | Start/end date-range selection driving the same grid engine as `Calendar` — roving `tabindex`, month/year drill-down, `min`/`max`, week numbers, localisation. | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendarrange--docs) |
 | `Callout` | Inline, dismissible admonition box for contextual help text within forms and cards. | [Docs](https://gnome-ui.org/react/?path=/docs/components-callout--docs) |
 | `Card` | Card component following the [GNOME HIG containers](https://developer.gnome.org/hig/patterns/containers.html) and the Adwaita `.card` style class. | [Docs](https://gnome-ui.org/react/?path=/docs/components-card--docs) |
 | `Carousel` | Swipeable content carousel. | [Docs](https://gnome-ui.org/react/?path=/docs/components-carousel--docs) |
@@ -107,6 +109,7 @@ for a compact documentation index or
 | `Chip` | Compact pill-shaped label for tags, filters, and selection states. | [Docs](https://gnome-ui.org/react/?path=/docs/components-chip--docs) |
 | `ChoiceCardGroup` | Card-based single-choice selector — large selectable cards instead of radio buttons. | [Docs](https://gnome-ui.org/react/?path=/docs/components-choicecardgroup--docs) |
 | `Clamp` | Constrains its child to a maximum width while allowing it to shrink freely on narrow screens — mirroring the Adwaita `AdwClamp` widget. | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-clamp--docs) |
+| `CoachMark` | Onboarding **feature-discovery** pattern: spotlight a UI element and anchor a callout bubble (title, description, actions) beside it to teach a user one feature. Compose several with `CoachMarkTour`, or drive a single mark with `open`. | [Docs](https://gnome-ui.org/react/) |
 | `CodeBlock` | Static monospace code/config snippet display with optional line numbers and a trailing `CopyButton`. | [Docs](https://gnome-ui.org/react/?path=/docs/components-codeblock--docs) |
 | `ColorPicker` | Color palette picker following the Adwaita `GtkColorButton` + swatch pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-colorpicker--docs) |
 | `ColumnView` | Multi-column sortable data table styled with Adwaita design tokens. | [Docs](https://gnome-ui.org/react/?path=/docs/data-display-columnview--docs) |
@@ -119,6 +122,7 @@ for a compact documentation index or
 | `CvssScore` | Compact CVSS score display for vulnerability tables, finding summaries, and CVE detail surfaces. | [Docs](https://gnome-ui.org/react/?path=/docs/components-cvssscore--docs) |
 | `CvssVector` |  | [Docs](https://gnome-ui.org/react/) |
 | `CweIdentifier` |  | [Docs](https://gnome-ui.org/react/) |
+| `DatePicker` | A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | [Docs](https://gnome-ui.org/react/?path=/docs/components-datepicker--docs) |
 | `Dialog` | Blocking modal dialog — two modes in one component. | [Docs](https://gnome-ui.org/react/?path=/docs/components-dialog--docs) |
 | `Divider` | Horizontal rule with an optional centred label — common auth/login-form pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-divider--docs) |
 | `Drawer` | Slide-over panel for supplementary React content. Use `side` to open from the left or right, `size` for classic or wide widths, and pass the body through `children` or the `content` prop. | [Docs](https://gnome-ui.org/react/?path=/docs/components-drawer--docs) |
@@ -189,6 +193,7 @@ for a compact documentation index or
 | `TextField` | Single-line text input with label, helper text, and error state. | [Docs](https://gnome-ui.org/react/?path=/docs/components-textfield--docs) |
 | `TextTruncate` | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property. | [Docs](https://gnome-ui.org/react/?path=/docs/components-texttruncate--docs) |
 | `Timeline` | Ordered sequence of events connected by a visual timeline. | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
+| `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
 | `Toast` | Non-blocking temporary notification following the Adwaita `AdwToast` pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-toast--docs) |
 | `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |
 | `Toolbar` | Horizontal action bar following the libadwaita `.toolbar` pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-spacer--docs) |
@@ -257,6 +262,8 @@ Live examples and documentation: **[Storybook →](https://gnome-ui.org/charts/)
 |-----------|-------------|-------|
 | `AreaChart` | Area chart built on Recharts with GNOME design tokens, supporting stacked areas and gradient fills. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-areachart--docs) |
 | `BarChart` | Bar chart built on Recharts with GNOME design tokens for grouped comparisons across categories. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-barchart--docs) |
+| `BoxPlot` | Box-and-whisker plot built with plain HTML/CSS — no Recharts (it has no native box-plot primitive). Shows the distribution of one or more groups: median, interquartile range (Q1–Q3), whiskers extending to the most extreme non-outlier value, and outliers beyond 1.5×IQR. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-boxplot--docs) |
+| `BulletChart` | Bullet graph (Stephen Few) built with plain SVG-free HTML — no Recharts. Shows a performance measure against a target and qualitative ranges in a single compact horizontal track, for KPI rows in tables and dashboards where `GaugeChart` takes too much vertical space. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-bulletchart--docs) |
 | `CloudChart` | Word/tag cloud that scales each term's font size proportionally to its numeric value. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-cloudchart--docs) |
 | `ComposedChart` | Mixed chart combining bars, lines, and areas on shared axes. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-composedchart--docs) |
 | `FunnelChart` | Funnel visualization for conversion rates and sales pipelines. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-funnelchart--docs) |
@@ -269,6 +276,7 @@ Live examples and documentation: **[Storybook →](https://gnome-ui.org/charts/)
 | `SankeyChart` | Flow diagram built on Recharts. Renders named nodes as columns of rectangles connected by curved, proportionally-sized links — for multi-stage funnels, user journeys, or any flow between categories. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-sankeychart--docs) |
 | `ScatterChart` | Scatter and bubble chart for visualizing correlation between two numeric variables. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-scatterchart--docs) |
 | `TreeMap` | Tree map built on Recharts. Displays hierarchical data as nested rectangles; area is proportional to each item's value. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-treemap--docs) |
+| `WaterfallChart` | Floating-bar chart built on Recharts for the cumulative effect of a sequence of increases and decreases — revenue bridges, budget breakdowns, cohort attrition. Each bar starts where the previous one ended; mark `isTotal` on start/end/subtotal bars to anchor them to zero instead. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-waterfallchart--docs) |
 <!-- /component-table:charts -->
 
 See [ROADMAP.md](https://github.com/ElJijuna/gnome-ui/blob/main/ROADMAP.md) for the full list of planned components.

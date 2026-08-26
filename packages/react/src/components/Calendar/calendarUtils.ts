@@ -100,6 +100,12 @@ export const isoWeekNumber = (date: Date): number => {
   return 1 + Math.round(diff / (7 * 24 * 60 * 60 * 1000));
 };
 
+/** Parse a `YYYY-MM-DD` key back into a local-midnight `Date`. */
+export const fromISODateKey = (key: string): Date => {
+  const [year, month, day] = key.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
+
 /** `true` when `date` is outside the inclusive `[min, max]` range. */
 export const isOutOfRange = (date: Date, min?: Date, max?: Date): boolean => {
   const day = startOfDay(date).getTime();

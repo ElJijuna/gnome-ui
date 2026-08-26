@@ -48,9 +48,21 @@
   color: inherit;
   font: inherit;
   font-weight: var(--gnome-font-weight-bold, 700);
-  text-transform: capitalize;
   cursor: pointer;
   outline: none;
+}
+
+/*
+ * Only the first letter is capitalised: `text-transform: capitalize` would turn
+ * the Spanish "agosto de 2026" into "Agosto De 2026". `::first-letter` needs a
+ * block container, hence the inline-block wrapper.
+ */
+.headingText {
+  display: inline-block;
+}
+
+.headingText::first-letter {
+  text-transform: uppercase;
 }
 
 .monthLabelButton:hover {
@@ -104,6 +116,26 @@
   display: block;
 }
 
+/* ─── Panels ────────────────────────────────────────────────────────────────── */
+
+/* One panel per visible month, paged together by the shared heading. */
+.panels {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gnome-space-4, 16px);
+}
+
+.panelLabel {
+  padding-block-end: var(--calendar-cell-gap);
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  text-align: center;
+}
+
+.panelLabel::first-letter {
+  text-transform: uppercase;
+}
+
 /* ─── Grid ──────────────────────────────────────────────────────────────────── */
 
 .grid {
@@ -123,10 +155,56 @@
 }
 
 .cell {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: var(--calendar-cell-size);
+}
+
+/* ─── Range band ────────────────────────────────────────────────────────────── */
+
+/*
+ * The band lives on the cell, not the day button: only the cell can bleed into
+ * the 4px grid gap (half of it on each side) so consecutive days read as one
+ * continuous stripe under the round day buttons.
+ */
+.cell[data-in-range]::before,
+.cell[data-range-start]::before,
+.cell[data-range-end]::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline: calc(var(--calendar-cell-gap) / -2);
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 14%, transparent);
+  pointer-events: none;
+}
+
+/* Ends cap the stripe inside their own cell instead of bleeding into the gap. */
+.cell[data-range-start]::before {
+  inset-inline-start: 0;
+  border-start-start-radius: var(--gnome-radius-full, 9999px);
+  border-end-start-radius: var(--gnome-radius-full, 9999px);
+}
+
+.cell[data-range-end]::before {
+  inset-inline-end: 0;
+  border-start-end-radius: var(--gnome-radius-full, 9999px);
+  border-end-end-radius: var(--gnome-radius-full, 9999px);
+}
+
+/* A range still being drawn reads lighter than a committed one. */
+.cell[data-preview]::before {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 8%, transparent);
+}
+
+/*
+ * The tentative end of a preview is tinted, not filled: a solid pill means
+ * "committed end" and a ring already means "today", so a third look is needed.
+ */
+.cell[data-preview][data-range-start] .day:not([data-selected]),
+.cell[data-preview][data-range-end] .day:not([data-selected]) {
+  background-color: color-mix(in srgb, var(--gnome-accent-bg-color, #3584e4) 35%, transparent);
 }
 
 /* ─── Month / year drill-down grids ─────────────────────────────────────────── */
@@ -222,6 +300,7 @@
 /* ─── Day cell ──────────────────────────────────────────────────────────────── */
 
 .day {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;

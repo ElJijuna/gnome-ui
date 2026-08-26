@@ -109,6 +109,8 @@ for a compact documentation index or
 | `Button` | Button component following the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/patterns/controls/buttons.html). | [Docs](https://gnome-ui.org/react/?path=/docs/components-button--docs) |
 | `ButtonContent` | Icon + label layout helper for buttons that contain both an icon and text. | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttoncontent--docs) |
 | `ButtonRow` | Full-width activatable row styled as a button inside a `BoxedList`. | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttonrow--docs) |
+| `Calendar` | Month-grid date display with full keyboard navigation — mirrors [`GtkCalendar`](https://gnome.pages.gitlab.gnome.org/gtk/gtk4/class.Calendar.html). Usable standalone (settings, forms) or as the panel inside a `DatePicker`. | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendar--docs) |
+| `CalendarRange` | Start/end date-range selection driving the same grid engine as `Calendar` — roving `tabindex`, month/year drill-down, `min`/`max`, week numbers, localisation. | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendarrange--docs) |
 | `Callout` | Inline, dismissible admonition box for contextual help text within forms and cards. | [Docs](https://gnome-ui.org/react/?path=/docs/components-callout--docs) |
 | `Card` | Card component following the [GNOME HIG containers](https://developer.gnome.org/hig/patterns/containers.html) and the Adwaita `.card` style class. | [Docs](https://gnome-ui.org/react/?path=/docs/components-card--docs) |
 | `Carousel` | Swipeable content carousel. | [Docs](https://gnome-ui.org/react/?path=/docs/components-carousel--docs) |
@@ -117,6 +119,7 @@ for a compact documentation index or
 | `Chip` | Compact pill-shaped label for tags, filters, and selection states. | [Docs](https://gnome-ui.org/react/?path=/docs/components-chip--docs) |
 | `ChoiceCardGroup` | Card-based single-choice selector — large selectable cards instead of radio buttons. | [Docs](https://gnome-ui.org/react/?path=/docs/components-choicecardgroup--docs) |
 | `Clamp` | Constrains its child to a maximum width while allowing it to shrink freely on narrow screens — mirroring the Adwaita `AdwClamp` widget. | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-clamp--docs) |
+| `CoachMark` | Onboarding **feature-discovery** pattern: spotlight a UI element and anchor a callout bubble (title, description, actions) beside it to teach a user one feature. Compose several with `CoachMarkTour`, or drive a single mark with `open`. | [Docs](https://gnome-ui.org/react/) |
 | `CodeBlock` | Static monospace code/config snippet display with optional line numbers and a trailing `CopyButton`. | [Docs](https://gnome-ui.org/react/?path=/docs/components-codeblock--docs) |
 | `ColorPicker` | Color palette picker following the Adwaita `GtkColorButton` + swatch pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-colorpicker--docs) |
 | `ColumnView` | Multi-column sortable data table styled with Adwaita design tokens. | [Docs](https://gnome-ui.org/react/?path=/docs/data-display-columnview--docs) |
@@ -129,6 +132,7 @@ for a compact documentation index or
 | `CvssScore` | Compact CVSS score display for vulnerability tables, finding summaries, and CVE detail surfaces. | [Docs](https://gnome-ui.org/react/?path=/docs/components-cvssscore--docs) |
 | `CvssVector` |  | [Docs](https://gnome-ui.org/react/) |
 | `CweIdentifier` |  | [Docs](https://gnome-ui.org/react/) |
+| `DatePicker` | A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | [Docs](https://gnome-ui.org/react/?path=/docs/components-datepicker--docs) |
 | `Dialog` | Blocking modal dialog — two modes in one component. | [Docs](https://gnome-ui.org/react/?path=/docs/components-dialog--docs) |
 | `Divider` | Horizontal rule with an optional centred label — common auth/login-form pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-divider--docs) |
 | `Drawer` | Slide-over panel for supplementary React content. Use `side` to open from the left or right, `size` for classic or wide widths, and pass the body through `children` or the `content` prop. | [Docs](https://gnome-ui.org/react/?path=/docs/components-drawer--docs) |
@@ -199,6 +203,7 @@ for a compact documentation index or
 | `TextField` | Single-line text input with label, helper text, and error state. | [Docs](https://gnome-ui.org/react/?path=/docs/components-textfield--docs) |
 | `TextTruncate` | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property. | [Docs](https://gnome-ui.org/react/?path=/docs/components-texttruncate--docs) |
 | `Timeline` | Ordered sequence of events connected by a visual timeline. | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
+| `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
 | `Toast` | Non-blocking temporary notification following the Adwaita `AdwToast` pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-toast--docs) |
 | `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |
 | `Toolbar` | Horizontal action bar following the libadwaita `.toolbar` pattern. | [Docs](https://gnome-ui.org/react/?path=/docs/components-spacer--docs) |
@@ -267,6 +272,8 @@ Live examples and documentation: **[Storybook →](https://gnome-ui.org/charts/)
 |-----------|-------------|-------|
 | `AreaChart` | Area chart built on Recharts with GNOME design tokens, supporting stacked areas and gradient fills. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-areachart--docs) |
 | `BarChart` | Bar chart built on Recharts with GNOME design tokens for grouped comparisons across categories. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-barchart--docs) |
+| `BoxPlot` | Box-and-whisker plot built with plain HTML/CSS — no Recharts (it has no native box-plot primitive). Shows the distribution of one or more groups: median, interquartile range (Q1–Q3), whiskers extending to the most extreme non-outlier value, and outliers beyond 1.5×IQR. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-boxplot--docs) |
+| `BulletChart` | Bullet graph (Stephen Few) built with plain SVG-free HTML — no Recharts. Shows a performance measure against a target and qualitative ranges in a single compact horizontal track, for KPI rows in tables and dashboards where `GaugeChart` takes too much vertical space. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-bulletchart--docs) |
 | `CloudChart` | Word/tag cloud that scales each term's font size proportionally to its numeric value. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-cloudchart--docs) |
 | `ComposedChart` | Mixed chart combining bars, lines, and areas on shared axes. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-composedchart--docs) |
 | `FunnelChart` | Funnel visualization for conversion rates and sales pipelines. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-funnelchart--docs) |
@@ -279,6 +286,7 @@ Live examples and documentation: **[Storybook →](https://gnome-ui.org/charts/)
 | `SankeyChart` | Flow diagram built on Recharts. Renders named nodes as columns of rectangles connected by curved, proportionally-sized links — for multi-stage funnels, user journeys, or any flow between categories. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-sankeychart--docs) |
 | `ScatterChart` | Scatter and bubble chart for visualizing correlation between two numeric variables. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-scatterchart--docs) |
 | `TreeMap` | Tree map built on Recharts. Displays hierarchical data as nested rectangles; area is proportional to each item's value. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-treemap--docs) |
+| `WaterfallChart` | Floating-bar chart built on Recharts for the cumulative effect of a sequence of increases and decreases — revenue bridges, budget breakdowns, cohort attrition. Each bar starts where the previous one ended; mark `isTotal` on start/end/subtotal bars to anchor them to zero instead. | [Docs](https://gnome-ui.org/charts/?path=/docs/charts-waterfallchart--docs) |
 <!-- /component-table:charts -->
 
 See [ROADMAP.md](https://github.com/ElJijuna/gnome-ui/blob/main/ROADMAP.md) for the full list of planned components.
@@ -3210,8 +3218,11 @@ import "@gnome-ui/charts/styles";
 | `RadarChart` | Spider/radar chart with single or multiple series and optional fill |
 | `TreeMap` | Proportional tile chart with optional group coloring and labels |
 | `GaugeChart` | Single-value speedometer gauge with optional status color thresholds |
+| `BulletChart` | Compact bullet graph: performance value vs. target with qualitative range bands |
 | `Heatmap` | Row × column matrix heatmap for correlation and density data |
 | `SankeyChart` | Flow diagram for multi-stage funnels and user journeys |
+| `WaterfallChart` | Floating-bar chart for cumulative increases/decreases — revenue bridges, budget breakdowns |
+| `BoxPlot` | Box-and-whisker plot for distribution, quartiles, and outliers across one or more groups |
 
 ### Spark charts
 
@@ -3223,6 +3234,8 @@ Minimal inline charts — no axes, no grid, no legend, no tooltip. Designed to b
 | `SparkLineChart` | Compact line chart, no fill |
 | `SparkBarChart` | Compact bar chart with rounded bars |
 | `SparkGaugeChart` | Compact single-value progress ring |
+| `SparkPieChart` | Compact pie or donut for part-to-whole composition |
+| `SparkBulletChart` | Compact bullet graph: value vs. target in a single row |
 
 `SparkAreaChart`, `SparkLineChart`, and `SparkBarChart` accept `data: number[]`
 directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
@@ -3230,7 +3243,18 @@ directly or `Record<string, unknown>[]` with a `dataKey`. The default color is
 
 `SparkGaugeChart` is the exception — it takes a single `value` (plus `min`,
 `max`, and optional `thresholds`) instead of a data array, mirroring
-`GaugeChart`'s API. See [`src/README.md`](src/README.md) for full spark chart docs.
+`GaugeChart`'s API.
+
+`SparkPieChart` takes `data: { value: number; color?: string }[]` — one entry
+per slice — plus `size` (diameter, default 40) and `donut` (hollow center,
+default `false`), mirroring `PieChart`'s API. Colors fall back to
+`GNOME_CHART_PALETTE` by index.
+
+`SparkBulletChart` takes `value` (plus optional `target`, `min`, `max`, and
+`ranges`) instead of a data array, mirroring `BulletChart`'s API at a compact
+scale (`height`, default 16, instead of `BulletChart`'s `label`/`showValue`).
+
+See [`src/README.md`](src/README.md) for full spark chart docs.
 
 ```tsx
 import { SparkAreaChart, SparkLineChart, SparkBarChart } from "@gnome-ui/charts";
@@ -4760,6 +4784,152 @@ that colour the title text accordingly.
 
 ---
 
+Source: packages/react/src/components/Calendar/README.md
+
+Month-grid date display with full keyboard navigation — mirrors
+[`GtkCalendar`](https://gnome.pages.gitlab.gnome.org/gtk/gtk4/class.Calendar.html).
+Usable standalone (settings, forms) or as the panel inside a `DatePicker`.
+
+Implements the [WAI-ARIA grid pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/):
+the grid holds a roving `tabindex`, so a single <kbd>Tab</kbd> reaches the current
+day. Then:
+
+- <kbd>←</kbd> / <kbd>→</kbd> move one day; <kbd>↑</kbd> / <kbd>↓</kbd> move one week.
+- <kbd>Home</kbd> / <kbd>End</kbd> jump to the start / end of the week.
+- <kbd>PageUp</kbd> / <kbd>PageDown</kbd> page by month (hold <kbd>Shift</kbd> for a year).
+- <kbd>Enter</kbd> / <kbd>Space</kbd> select the focused day.
+
+Leading and trailing days from adjacent months are shown dimmed and remain
+selectable — choosing one navigates to that month, matching `GtkCalendar`.
+
+## Changing the year
+
+The heading label is a button that drills down the way modern date pickers do,
+so a distant year is two clicks away instead of twelve pages:
+
+```
+August 2026  →  month grid (2026)  →  year grid (2016 – 2027)  →  back to days
+```
+
+Picking a year drops to that year's month grid; picking a month drops to its day
+grid. The step arrows follow the active view — a month at a time on the day grid,
+a year on the month grid, twelve years on the year grid — and each grid keeps the
+same roving-tabindex keyboard model (<kbd>←</kbd> <kbd>→</kbd> one cell,
+<kbd>↑</kbd> <kbd>↓</kbd> one row of four, <kbd>Home</kbd> / <kbd>End</kbd> the
+ends of the page, <kbd>Enter</kbd> to drill down, <kbd>Esc</kbd> back to days).
+Months and years with no selectable day inside `[min, max]` are disabled.
+
+Pass `showViewSwitcher={false}` for the plain `GtkCalendar` heading, or
+`defaultView="years"` to open on the year grid — handy for date-of-birth entry:
+
+```tsx
+<Calendar defaultView="years" max={new Date()} onViewChange={(view) => console.log(view)} />
+```
+
+## Related
+
+For start/end selection use [`CalendarRange`](../CalendarRange/README.md), which
+drives the same grid engine (and takes the same `visibleMonths` prop to show
+several month panels side by side).
+
+## Usage
+
+```tsx
+import { Calendar } from '@gnome-ui/react/components/Calendar';
+
+function Example() {
+  const [date, setDate] = useState<Date | null>(null);
+  return <Calendar value={date} onChange={setDate} />;
+}
+```
+
+Restrict the selectable range and start weeks on Sunday:
+
+```tsx
+<Calendar
+  min={new Date()}
+  max={new Date(2027, 11, 31)}
+  weekStartsOn={0}
+  showWeekNumbers
+/>
+```
+
+---
+
+Source: packages/react/src/components/CalendarRange/README.md
+
+Start/end date-range selection driving the same grid engine as `Calendar` —
+roving `tabindex`, month/year drill-down, `min`/`max`, week numbers,
+localisation.
+
+The first click **anchors** the range and paints a live band up to the day under
+the pointer (or under the roving keyboard focus); the second click commits it.
+`onChange` therefore only ever fires with **both** ends filled in — there is no
+half-emitted range to defend against downstream:
+
+```tsx
+import { CalendarRange } from '@gnome-ui/react/components/CalendarRange';
+
+function Example() {
+  const [range, setRange] = useState<DateRange>({ start: null, end: null });
+  return <CalendarRange value={range} onChange={setRange} />;
+}
+```
+
+Picking backwards is fine — the pair is ordered before it is emitted — and
+<kbd>Esc</kbd> cancels a half-made range. Inside a popover Escape is layered:
+it closes the month/year drill-down first, then cancels the pending range, and
+only then reaches the popover.
+
+## More than one month
+
+`visibleMonths` renders N month panels side by side, paged together by the
+shared heading, so a range spanning months needs no navigation:
+
+```tsx
+<CalendarRange visibleMonths={2} />
+```
+
+The heading names the span (`August – September 2026`), each panel keeps its own
+`role="grid"` and month caption, and the roving `tabindex` stays global: exactly
+one day is tabbable across every panel, and walking off the last panel pages the
+whole window by one month.
+
+## Limiting the length
+
+`minRange` / `maxRange` cap the range in days, counting both ends. While the
+range is being drawn, days that could only produce an invalid range are disabled
+rather than silently rejected on click:
+
+```tsx
+<CalendarRange minRange={2} maxRange={14} min={new Date()} />
+```
+
+## Keyboard
+
+Identical to `Calendar` — <kbd>←</kbd>/<kbd>→</kbd>/<kbd>↑</kbd>/<kbd>↓</kbd>,
+<kbd>Home</kbd>/<kbd>End</kbd>, <kbd>PageUp</kbd>/<kbd>PageDown</kbd> (hold
+<kbd>Shift</kbd> for a year) — plus:
+
+- <kbd>Enter</kbd> / <kbd>Space</kbd> anchor the range, then commit it.
+- <kbd>Esc</kbd> cancels the range being drawn.
+
+Moving the focus while anchoring updates the preview band, so the range is fully
+selectable without a pointer. Every in-range cell carries `aria-selected`, the
+ends and the days between them are named (`", start of range"`, `", in selected
+range"`, `", end of range"`), and a polite live region announces both the
+half-made state and the finished range.
+
+## Props
+
+Everything `Calendar` takes (`month`, `defaultMonth`, `onMonthChange`, `min`,
+`max`, `weekStartsOn`, `locale`, `showHeading`, `showDayNames`,
+`showWeekNumbers`, `showViewSwitcher`, `defaultView`, `onViewChange`,
+`autoFocus`) plus `value` / `defaultValue` as a `DateRange`, `onChange`,
+`onRangeStart`, `minRange`, `maxRange` and `visibleMonths`.
+
+---
+
 Source: packages/react/src/components/Callout/README.md
 
 Inline, dismissible admonition box for contextual help text within forms and cards.
@@ -4924,6 +5094,66 @@ Constrains its child to a maximum width while allowing it to shrink freely on na
 - The default `maximumSize` is **600 px** — the Adwaita recommended narrow-content width.
 - The element is always centred horizontally.
 - Does not add any padding — wrap content in its own padded container as needed.
+
+---
+
+Source: packages/react/src/components/CoachMark/README.md
+
+Onboarding **feature-discovery** pattern: spotlight a UI element and anchor a
+callout bubble (title, description, actions) beside it to teach a user one
+feature. Compose several with `CoachMarkTour`, or drive a single mark with
+`open`.
+
+Not a GNOME HIG widget — a pragmatic web-app pattern built on the same design
+tokens and primitives (`Button`, `Portal`) as the rest of the library. Renders
+into a portal, positions with a viewport-aware flip, traps focus in the bubble,
+closes on <kbd>Escape</kbd>, and honours `prefers-reduced-motion`.
+
+## Single mark
+
+```tsx
+import { useRef, useState } from 'react';
+import { CoachMark } from '@gnome-ui/react/components/CoachMark';
+
+function Example() {
+  const target = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(true);
+
+  return (
+    <>
+      <button ref={target}>Sync</button>
+      <CoachMark
+        open={open}
+        targetRef={target}
+        title="Sync your files"
+        description="Press this to keep every device up to date."
+        primaryAction={{ label: 'Got it', onClick: () => setOpen(false) }}
+        onDismiss={() => setOpen(false)}
+      />
+    </>
+  );
+}
+```
+
+## Guided tour
+
+```tsx
+import { CoachMarkTour } from '@gnome-ui/react/components/CoachMark';
+
+<CoachMarkTour
+  open={running}
+  steps={[
+    { targetRef: searchRef, title: 'Search', description: 'Find anything fast.' },
+    { targetRef: addRef, title: 'Add', description: 'Create a new item here.', placement: 'left' },
+    { targetRef: menuRef, title: 'Menu', description: 'Everything else lives here.' },
+  ]}
+  onFinish={() => setRunning(false)}
+  onSkip={() => setRunning(false)}
+/>
+```
+
+Each step shows **Next**/**Done** (primary) and **Skip**/**Back** (secondary),
+plus an "X of N" counter. Labels are overridable via `labels` for i18n.
 
 ---
 
@@ -5200,6 +5430,42 @@ specific vulnerability and its underlying weakness category.
 
 Invalid values remain visible and are marked with `data-valid="false"` so
 scanner output is not silently dropped.
+
+---
+
+Source: packages/react/src/components/DatePicker/README.md
+
+A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an
+entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition
+GNOME apps use for date entry.
+
+The trigger reads out the formatted selection (or a placeholder), opens the
+calendar on click, <kbd>Enter</kbd>/<kbd>Space</kbd>, or <kbd>↓</kbd>, and
+closes it once a day is chosen — returning focus to the trigger. All keyboard
+navigation inside the panel is provided by `Calendar` (arrow keys, Home/End,
+PageUp/PageDown, Enter to select).
+
+## Usage
+
+```tsx
+import { DatePicker } from '@gnome-ui/react/components/DatePicker';
+
+function Example() {
+  const [date, setDate] = useState<Date | null>(null);
+  return <DatePicker label="Start date" value={date} onChange={setDate} />;
+}
+```
+
+Restrict the range and change the displayed format:
+
+```tsx
+<DatePicker
+  min={new Date()}
+  max={new Date(2027, 11, 31)}
+  formatOptions={{ dateStyle: 'full' }}
+  weekStartsOn={0}
+/>
+```
 
 ---
 
@@ -6820,6 +7086,37 @@ import { Timeline } from "@gnome-ui/react";
 
 ---
 
+Source: packages/react/src/components/TimePicker/README.md
+
+Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a
+[`Popover`](../Popover), behind an entry-styled trigger — mirrors the
+`GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with
+12- and 24-hour support.
+
+Each column cycles: stepping a minute past `59` rolls back to `00`, and hours
+wrap `23 → 00` (or `12 → 01` with the AM/PM column). Columns are independently
+keyboard-operable — <kbd>↑</kbd>/<kbd>↓</kbd> step, <kbd>PageUp</kbd>/<kbd>PageDown</kbd>
+step by ten. Values update live as the spinners move.
+
+## Usage
+
+```tsx
+import { TimePicker, type TimeValue } from '@gnome-ui/react/components/TimePicker';
+
+function Example() {
+  const [time, setTime] = useState<TimeValue | null>(null);
+  return <TimePicker label="Start time" value={time} onChange={setTime} />;
+}
+```
+
+12-hour presentation with a five-minute step:
+
+```tsx
+<TimePicker hourCycle={12} minuteStep={5} defaultValue={{ hours: 14, minutes: 30 }} />
+```
+
+---
+
 Source: packages/react/src/components/Toast/README.md
 
 Non-blocking temporary notification following the Adwaita `AdwToast` pattern.
@@ -8119,6 +8416,116 @@ import { BarChart } from '@gnome-ui/charts';
 
 ---
 
+Source: packages/charts/src/components/BoxPlot/README.md
+
+Box-and-whisker plot built with plain HTML/CSS — no Recharts (it has no native box-plot primitive). Shows the distribution of one or more groups: median, interquartile range (Q1–Q3), whiskers extending to the most extreme non-outlier value, and outliers beyond 1.5×IQR.
+
+Each item accepts either a raw `values` array (the component computes quartiles and outliers for you) or precomputed statistics — pick whichever fits how your data already arrives.
+
+```tsx
+import { BoxPlot } from '@gnome-ui/charts';
+
+// Raw values — quartiles and outliers computed automatically (1.5×IQR rule)
+<BoxPlot
+  data={[
+    { label: 'Team A', values: [12, 15, 14, 18, 22, 9, 31, 16] },
+    { label: 'Team B', values: [8, 11, 10, 9, 14, 7, 12] },
+  ]}
+/>
+
+// Precomputed statistics — e.g. aggregated server-side, or a non-IQR outlier rule
+<BoxPlot
+  data={[
+    { label: 'Team A', min: 9, q1: 13, median: 15.5, q3: 19, max: 22, outliers: [31] },
+    { label: 'Team B', min: 7, q1: 8.5, median: 10, q3: 11.5, max: 14 },
+  ]}
+/>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `BoxPlotDataItem[]` | — | `{ label, color? }` plus either `values: number[]` or `{ min, q1, median, q3, max, outliers? }` |
+| `height` | `number` | `320` | Chart height in px |
+| `showOutliers` | `boolean` | `true` | Render individual points beyond the whiskers |
+| `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for axis ticks and the tooltip title |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+
+### Quartile computation
+
+When an item provides `values`, quartiles use linear interpolation (the common "R-7" method). Outliers are values outside `[Q1 − 1.5×IQR, Q3 + 1.5×IQR]`; the whiskers then extend only to the most extreme *non-outlier* value, not the raw min/max — the standard Tukey box plot convention.
+
+### Guidelines
+
+- Prefer the `values` form unless your data is already aggregated — it keeps the outlier rule consistent across every chart in the app.
+- Each box shows a title tooltip with the full five-number summary on hover; individual outlier points are separately titled with their value.
+- There is no spark/compact variant: a box-and-whisker glyph needs room for the whiskers, box, and outlier dots to read as a distribution at all — compressing it into a card-sized sparkline loses that entirely. For a compact distribution hint at that scale, `SparkAreaChart`/`SparkBarChart` over a sorted or binned series is a closer fit.
+
+---
+
+Source: packages/charts/src/components/BulletChart/README.md
+
+Bullet graph (Stephen Few) built with plain SVG-free HTML — no Recharts. Shows a performance measure against a target and qualitative ranges in a single compact horizontal track, for KPI rows in tables and dashboards where `GaugeChart` takes too much vertical space.
+
+```tsx
+import { BulletChart } from '@gnome-ui/charts';
+
+<BulletChart value={72} target={90} label="Revenue" />
+```
+
+### Qualitative ranges
+
+Pass ascending `{ value, color? }` upper bounds to render background bands (e.g. poor/satisfactory/good). Colors default to a neutral grayscale ramp when omitted.
+
+```tsx
+<BulletChart
+  value={72}
+  target={90}
+  label="CPU"
+  ranges={[{ value: 50 }, { value: 80 }, { value: 100 }]}
+/>
+```
+
+### Custom range and formatting
+
+```tsx
+<BulletChart
+  value={4200}
+  target={5000}
+  min={0}
+  max={6000}
+  label="Revenue"
+  valueFormatter={(v) => `$${v.toLocaleString()}`}
+/>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Performance measure — the current value |
+| `target` | `number` | — | Comparative measure, rendered as a perpendicular tick |
+| `min` | `number` | `0` | Minimum of the track range |
+| `max` | `number` | `100` | Maximum of the track range |
+| `ranges` | `{ value, color? }[]` | — | Ascending upper bounds for qualitative bands; falls back to a neutral grayscale ramp |
+| `color` | `string` | accent color | Performance bar color |
+| `height` | `number` | `32` | Track height in px |
+| `label` | `string` | — | Caption rendered to the left of the track |
+| `showValue` | `boolean` | `true` | Show the formatted value (and target, if set) to the right |
+| `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for the displayed value/target |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+
+### Guidelines
+
+- Use `ranges` for status-style rows (capacity, SLA compliance) instead of a single flat track, so the bar communicates severity at a glance without needing a legend.
+- Prefer `BulletChart` over `GaugeChart` when a target value matters and vertical space is tight — a table row, a list of KPIs stacked in a sidebar.
+- Values are not required to be percentages — set `min`/`max` to match the metric's real range.
+
+---
+
 Source: packages/charts/src/components/CloudChart/README.md
 
 Word/tag cloud that scales each term's font size proportionally to its numeric value.
@@ -8734,3 +9141,58 @@ import { TreeMap } from '@gnome-ui/charts';
 - Labels are suppressed automatically on tiles narrower than 40 px or shorter than 24 px.
 - Use grouping to cluster related items under a shared color.
 - Best for showing relative proportions in a space-efficient way (file sizes, budget breakdowns).
+
+---
+
+Source: packages/charts/src/components/WaterfallChart/README.md
+
+Floating-bar chart built on Recharts for the cumulative effect of a sequence of increases and decreases — revenue bridges, budget breakdowns, cohort attrition. Each bar starts where the previous one ended; mark `isTotal` on start/end/subtotal bars to anchor them to zero instead.
+
+```tsx
+import { WaterfallChart } from '@gnome-ui/charts';
+
+<WaterfallChart
+  data={[
+    { label: 'Starting revenue', value: 42000, isTotal: true },
+    { label: 'New sales', value: 12000 },
+    { label: 'Upsells', value: 4000 },
+    { label: 'Churn', value: -6000 },
+    { label: 'Refunds', value: -1500 },
+    { label: 'Ending revenue', value: 50500, isTotal: true },
+  ]}
+/>
+```
+
+### Colors and value labels
+
+```tsx
+<WaterfallChart
+  data={data}
+  increaseColor="var(--gnome-green-4, #2ec27e)"
+  decreaseColor="var(--gnome-red-3, #e01b24)"
+  totalColor="var(--gnome-purple-3, #9141ac)"
+  showValues
+  valueFormatter={(v) => `$${v.toLocaleString()}`}
+/>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `WaterfallChartDataItem[]` | — | `{ label: string; value: number; isTotal?: boolean }[]`. Non-total bars float from the running cumulative total; `isTotal` bars are anchored to zero |
+| `height` | `number` | `300` | Chart height in px |
+| `increaseColor` | `string` | green | Color for positive delta bars |
+| `decreaseColor` | `string` | red | Color for negative delta bars |
+| `totalColor` | `string` | accent color | Color for `isTotal` bars |
+| `showGrid` | `boolean` | `true` | Show the horizontal grid |
+| `showValues` | `boolean` | `false` | Show the signed delta (or absolute value for totals) above each bar |
+| `valueFormatter` | `(value: number) => string` | locale-aware | Custom formatter for values and axis ticks |
+| `aria-label` | `string` | auto | Accessible label for the chart |
+| `className` | `string` | — | Extra CSS class on the wrapper |
+
+### Guidelines
+
+- Put `isTotal: true` on the first and last bars (and any subtotal checkpoints) so they read as absolute values instead of floating deltas.
+- The running total resets to a bar's own value whenever `isTotal` is set — the next non-total bar floats from that new baseline.
+- There is no spark/compact variant: condensing multiple labeled steps into a card-sized sparkline loses the per-step readability that makes a waterfall useful in the first place. For a single value-vs-target summary at that scale, use `SparkBulletChart` or `SparkGaugeChart` instead.

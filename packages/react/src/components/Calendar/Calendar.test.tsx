@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -148,6 +148,18 @@ describe('Calendar', () => {
       render(<Calendar defaultMonth={august2026} />);
       expect(day('Wednesday, August 12, 2026')).toHaveAttribute('tabindex', '0');
       expect(day('Saturday, August 15, 2026')).toHaveAttribute('tabindex', '-1');
+    });
+
+    it('follows real DOM focus so arrow keys continue from there', () => {
+      render(<Calendar defaultMonth={august2026} />);
+
+      // A screen reader can park focus on any cell, not just the tabbable one.
+      act(() => day('Monday, August 24, 2026').focus());
+      expect(day('Monday, August 24, 2026')).toHaveAttribute('tabindex', '0');
+      expect(day('Wednesday, August 12, 2026')).toHaveAttribute('tabindex', '-1');
+
+      fireEvent.keyDown(screen.getByRole('grid'), { key: 'ArrowRight' });
+      expect(day('Tuesday, August 25, 2026')).toHaveAttribute('tabindex', '0');
     });
 
     it('makes the selected day the tabbable one', () => {

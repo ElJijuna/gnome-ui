@@ -1,5 +1,3 @@
-# TimePicker
-
 Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a
 [`Popover`](../Popover), behind an entry-styled trigger — mirrors the
 `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with

@@ -58,6 +58,12 @@ export type { ButtonRowProps, ButtonRowVariant } from './components/ButtonRow';
 export { ButtonRow } from './components/ButtonRow';
 export type { CalendarProps, CalendarView } from './components/Calendar';
 export { Calendar } from './components/Calendar';
+export type {
+  CalendarRangeProps,
+  DateRange,
+  SelectedDateRange,
+} from './components/CalendarRange';
+export { CalendarRange } from './components/CalendarRange';
 export type { CalloutProps, CalloutVariant } from './components/Callout';
 export { Callout } from './components/Callout';
 export type { CardPadding, CardProps } from './components/Card';

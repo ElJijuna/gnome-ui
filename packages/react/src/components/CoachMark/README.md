@@ -1,5 +1,3 @@
-# CoachMark
-
 Onboarding **feature-discovery** pattern: spotlight a UI element and anchor a
 callout bubble (title, description, actions) beside it to teach a user one
 feature. Compose several with `CoachMarkTour`, or drive a single mark with
