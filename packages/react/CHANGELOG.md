@@ -1,3 +1,9 @@
+## [1.61.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.60.0...@gnome-ui/react@1.61.0) (2026-08-26)
+
+### Features
+
+* **@gnome-ui/react:** implement year and month drill-down navigation ([acb7f9b](https://github.com/ElJijuna/gnome-ui/commit/acb7f9ba68acdd5328d40a020828d6d973cfeb12))
+
 ## [1.60.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.59.2...@gnome-ui/react@1.60.0) (2026-08-25)
 
 ### Features
