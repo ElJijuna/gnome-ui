@@ -121,3 +121,35 @@ export const Controlled: Story = {
 export const Disabled: Story = {
   args: { label: 'Stay', defaultValue: AUGUST, disabled: true },
 };
+
+// ─── With time ────────────────────────────────────────────────────────────────
+
+/** Each end gets its own clock — the usual shape for bookings. */
+export const WithTime: Story = {
+  args: {
+    label: 'Stay',
+    showTime: true,
+    defaultValue: {
+      start: new Date(2026, 7, 10, 15, 0),
+      end: new Date(2026, 7, 19, 11, 0),
+    },
+  },
+};
+
+// ─── With time (12-hour, quarter hours) ───────────────────────────────────────
+
+export const WithTwelveHourClock: Story = {
+  args: {
+    label: 'Shift',
+    showTime: true,
+    hourCycle: 12,
+    minuteStep: 15,
+    visibleMonths: 1,
+    startTimeLabel: 'From',
+    endTimeLabel: 'To',
+    defaultValue: {
+      start: new Date(2026, 7, 10, 9, 0),
+      end: new Date(2026, 7, 10, 17, 30),
+    },
+  },
+};

@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { TimePicker } from './TimePicker';
+import { mergeDateAndTime, pad2, timeOf, to12, to24 } from './timeUtils';
 
 beforeEach(() => {
   // Popover schedules positioning/focus with rAF; run it inline.
@@ -173,5 +174,37 @@ describe('TimePicker', () => {
       // Trigger still reflects the controlled value.
       expect(trigger()).toHaveTextContent('14:30');
     });
+  });
+});
+
+// The pure clock maths moved out of the component when `TimeFields` was split
+// off for the date pickers, so it is asserted directly.
+describe('timeUtils', () => {
+  it('to12 / to24 round-trip every hour of the day', () => {
+    for (let hour = 0; hour < 24; hour++) {
+      const { hour: hour12, period } = to12(hour);
+      expect(to24(hour12, period)).toBe(hour);
+    }
+    expect(to12(0)).toEqual({ hour: 12, period: 0 });
+    expect(to12(12)).toEqual({ hour: 12, period: 1 });
+    expect(to12(23)).toEqual({ hour: 11, period: 1 });
+  });
+
+  it('timeOf reads the wall clock off a Date', () => {
+    expect(timeOf(new Date(2026, 7, 15, 9, 45))).toEqual({ hours: 9, minutes: 45 });
+  });
+
+  it('mergeDateAndTime keeps the day and replaces the clock', () => {
+    const merged = mergeDateAndTime(new Date(2026, 7, 15, 23, 59), { hours: 8, minutes: 5 });
+    expect(merged.getFullYear()).toBe(2026);
+    expect(merged.getMonth()).toBe(7);
+    expect(merged.getDate()).toBe(15);
+    expect(merged.getHours()).toBe(8);
+    expect(merged.getMinutes()).toBe(5);
+  });
+
+  it('pad2 pads a single digit', () => {
+    expect(pad2(7)).toBe('07');
+    expect(pad2(17)).toBe('17');
   });
 });

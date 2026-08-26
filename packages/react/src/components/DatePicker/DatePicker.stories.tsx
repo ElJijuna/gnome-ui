@@ -99,3 +99,29 @@ export const Localized: Story = {
 export const Disabled: Story = {
   args: { defaultValue: new Date(2026, 7, 15), disabled: true },
 };
+
+// ─── With time ────────────────────────────────────────────────────────────────
+
+/**
+ * `showTime` adds hour/minute columns under the calendar. Picking a day then
+ * keeps the popover open — the selection is finished by Done.
+ */
+export const WithTime: Story = {
+  args: {
+    label: 'Appointment',
+    showTime: true,
+    defaultValue: new Date(2026, 7, 15, 9, 30),
+  },
+};
+
+// ─── With time (12-hour) ──────────────────────────────────────────────────────
+
+export const WithTwelveHourClock: Story = {
+  args: {
+    label: 'Appointment',
+    showTime: true,
+    hourCycle: 12,
+    minuteStep: 15,
+    defaultValue: new Date(2026, 7, 15, 14, 45),
+  },
+};

@@ -94,3 +94,25 @@ test('the year drill-down works inside the popover and Escape only backs out one
   await expect(page.getByRole('dialog')).toBeHidden();
   await expect(page.locator(trigger)).toBeFocused();
 });
+
+test('showTime keeps the popover open until Done and carries the clock over', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-datepicker--with-time');
+  const trigger = 'button[aria-haspopup="dialog"]';
+
+  await page.locator(trigger).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  // Focus still lands on the day, not on the time columns behind it.
+  await expect(page.getByRole('button', { name: /^Saturday, August 15, 2026/ })).toBeFocused();
+
+  await page.getByRole('button', { name: /^Thursday, August 20, 2026/ }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.locator(trigger)).toContainText('Aug 20, 2026, 09:30');
+
+  // The columns are reachable from the grid by Tab, and stepping re-emits.
+  await page.getByRole('spinbutton', { name: 'Hours' }).focus();
+  await page.keyboard.press('ArrowUp');
+  await expect(page.locator(trigger)).toContainText('Aug 20, 2026, 10:30');
+
+  await page.getByRole('button', { name: 'Done' }).click();
+  await expect(page.getByRole('dialog')).toBeHidden();
+});

@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DatePicker } from './DatePicker';
@@ -128,6 +129,140 @@ describe('DatePicker', () => {
         'aria-disabled',
         'true',
       );
+    });
+  });
+
+  // `showTime` turns the civil date into a point in time: the calendar keeps
+  // handing back local midnight, so the clock reading has to be carried across
+  // every day click, and the popover must wait for Done.
+  describe('showTime', () => {
+    it('shows the date and the time in the trigger', () => {
+      render(
+        <DatePicker
+          aria-label="Date"
+          showTime
+          locale="en-US"
+          defaultValue={new Date(2026, 7, 15, 9, 30)}
+        />,
+      );
+      expect(screen.getByRole('button', { name: 'Date' })).toHaveTextContent('Aug 15, 2026, 09:30');
+    });
+
+    it('reads the trigger on the same clock as the columns', () => {
+      render(
+        <DatePicker
+          aria-label="Date"
+          showTime
+          hourCycle={12}
+          locale="en-US"
+          defaultValue={new Date(2026, 7, 15, 15, 30)}
+        />,
+      );
+      expect(screen.getByRole('button', { name: 'Date' })).toHaveTextContent(
+        'Aug 15, 2026, 3:30 PM',
+      );
+    });
+
+    it('renders the time columns and a Done button', async () => {
+      const user = userEvent.setup();
+      render(<DatePicker aria-label="Date" showTime defaultValue={new Date(2026, 7, 15, 9, 30)} />);
+
+      await user.click(screen.getByRole('button', { name: 'Date' }));
+      const panel = await screen.findByRole('dialog');
+
+      expect(within(panel).getByRole('spinbutton', { name: 'Hours' })).toHaveAttribute(
+        'aria-valuenow',
+        '9',
+      );
+      expect(within(panel).getByRole('spinbutton', { name: 'Minutes' })).toHaveAttribute(
+        'aria-valuenow',
+        '30',
+      );
+      expect(within(panel).getByRole('button', { name: 'Done' })).toBeInTheDocument();
+    });
+
+    it('keeps the popover open on a day click and carries the time over', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(
+        <DatePicker
+          aria-label="Date"
+          showTime
+          defaultValue={new Date(2026, 7, 15, 9, 30)}
+          onChange={onChange}
+        />,
+      );
+
+      await user.click(screen.getByRole('button', { name: 'Date' }));
+      await screen.findByRole('dialog');
+      await user.click(screen.getByRole('button', { name: /^Thursday, August 20, 2026/ }));
+
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      const [[picked]] = onChange.mock.calls;
+      expect(picked.getDate()).toBe(20);
+      expect(picked.getHours()).toBe(9);
+      expect(picked.getMinutes()).toBe(30);
+    });
+
+    it('emits the same day at the new hour when a column steps', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(
+        <DatePicker
+          aria-label="Date"
+          showTime
+          defaultValue={new Date(2026, 7, 15, 9, 30)}
+          onChange={onChange}
+        />,
+      );
+
+      await user.click(screen.getByRole('button', { name: 'Date' }));
+      await screen.findByRole('dialog');
+      fireEvent.keyDown(screen.getByRole('spinbutton', { name: 'Hours' }), { key: 'ArrowUp' });
+
+      const [[picked]] = onChange.mock.calls;
+      expect(picked.getDate()).toBe(15);
+      expect(picked.getHours()).toBe(10);
+      expect(picked.getMinutes()).toBe(30);
+    });
+
+    it('attaches a time edited before any day to today', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(<DatePicker aria-label="Date" showTime onChange={onChange} />);
+
+      await user.click(screen.getByRole('button', { name: 'Date' }));
+      await screen.findByRole('dialog');
+      // Nothing selected yet: the columns start from the neutral noon fallback.
+      fireEvent.keyDown(screen.getByRole('spinbutton', { name: 'Minutes' }), { key: 'ArrowUp' });
+
+      const today = new Date();
+      const [[picked]] = onChange.mock.calls;
+      expect(picked.getDate()).toBe(today.getDate());
+      expect(picked.getHours()).toBe(12);
+      expect(picked.getMinutes()).toBe(1);
+    });
+
+    it('closes on Done', async () => {
+      const user = userEvent.setup();
+      render(<DatePicker aria-label="Date" showTime defaultValue={new Date(2026, 7, 15, 9, 30)} />);
+
+      await user.click(screen.getByRole('button', { name: 'Date' }));
+      await screen.findByRole('dialog');
+      await user.click(screen.getByRole('button', { name: 'Done' }));
+
+      await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    });
+
+    it('still closes on a day click when showTime is off', async () => {
+      const user = userEvent.setup();
+      render(<DatePicker aria-label="Date" defaultValue={new Date(2026, 7, 15)} />);
+
+      await user.click(screen.getByRole('button', { name: 'Date' }));
+      await screen.findByRole('dialog');
+      await user.click(screen.getByRole('button', { name: /^Thursday, August 20, 2026/ }));
+
+      await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
     });
   });
 });

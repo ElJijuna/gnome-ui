@@ -1,10 +1,13 @@
 import { XOfficeCalendar } from '@gnome-ui/icons';
 import { type KeyboardEvent, useId, useMemo, useState } from 'react';
 
+import { Button } from '@/components/Button';
 import { Calendar } from '@/components/Calendar';
 import type { WeekStart } from '@/components/Calendar/calendarUtils';
 import { Icon } from '@/components/Icon';
 import { Popover, type PopoverPlacement } from '@/components/Popover';
+import { TimeFields } from '@/components/TimePicker/TimeFields';
+import { mergeDateAndTime, type TimeValue, timeOf } from '@/components/TimePicker/timeUtils';
 
 import styles from './DatePicker.module.css';
 
@@ -24,10 +27,23 @@ export interface DatePickerProps {
   /** BCP-47 locale for the calendar and the displayed date. Defaults to the runtime locale. */
   locale?: string;
   /**
-   * `Intl.DateTimeFormatOptions` for the text shown in the trigger.
-   * Defaults to `{ dateStyle: 'medium' }`.
+   * `Intl.DateTimeFormatOptions` for the text shown in the trigger. Defaults to
+   * `{ dateStyle: 'medium' }`, or `{ dateStyle: 'medium', timeStyle: 'short' }`
+   * once `showTime` is on.
    */
   formatOptions?: Intl.DateTimeFormatOptions;
+  /**
+   * Add hour/minute columns under the calendar, making the emitted `Date` a
+   * point in time rather than a civil date. Picking a day then keeps the
+   * popover open — the selection is only finished by the Done button.
+   */
+  showTime?: boolean;
+  /** 12- or 24-hour columns when `showTime` is on. Defaults to `24`. */
+  hourCycle?: 12 | 24;
+  /** Minute increment for the time spinner. Defaults to `1`. */
+  minuteStep?: number;
+  /** Label on the button that closes a `showTime` popover. Defaults to `'Done'`. */
+  doneLabel?: string;
   /** Text shown in the trigger while no date is selected. */
   placeholder?: string;
   /** Visible label rendered above the trigger. */
@@ -64,7 +80,11 @@ export const DatePicker = ({
   max,
   weekStartsOn = 1,
   locale,
-  formatOptions = { dateStyle: 'medium' },
+  formatOptions,
+  showTime = false,
+  hourCycle = 24,
+  minuteStep = 1,
+  doneLabel = 'Done',
   placeholder = 'Select a date',
   label,
   'aria-label': ariaLabel,
@@ -84,18 +104,47 @@ export const DatePicker = ({
   const id = idProp ?? autoId;
   const labelId = `${id}-label`;
 
+  const resolvedFormat: Intl.DateTimeFormatOptions =
+    formatOptions ??
+    (showTime
+      ? {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+          // Follow the columns: 24-hour spinners must not read "3:00 PM".
+          hourCycle: hourCycle === 12 ? 'h12' : 'h23',
+        }
+      : { dateStyle: 'medium' });
   const formatter = useMemo(
-    () => new Intl.DateTimeFormat(locale, formatOptions),
-    [locale, formatOptions],
+    () => new Intl.DateTimeFormat(locale, resolvedFormat),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [locale, JSON.stringify(resolvedFormat)],
   );
   const displayValue = selected ? formatter.format(selected) : placeholder;
 
-  const handleSelect = (date: Date) => {
+  // The columns always need a concrete time; noon is the same neutral fallback
+  // `TimePicker` uses, and it is not treated as a selection until a day lands.
+  const draftTime: TimeValue = selected ? timeOf(selected) : { hours: 12, minutes: 0 };
+
+  const commit = (date: Date) => {
     if (!isControlled) {
       setUncontrolledValue(date);
     }
     onChange?.(date);
-    setOpen(false);
+  };
+
+  const handleSelect = (date: Date) => {
+    // `Calendar` hands back a civil date at local midnight, so the time in play
+    // has to be carried over rather than reset on every day click.
+    commit(showTime ? mergeDateAndTime(date, draftTime) : date);
+    if (!showTime) {
+      setOpen(false);
+    }
+  };
+
+  const handleTimeChange = (time: TimeValue) => {
+    // Editing the time before any day picks today — otherwise there is nothing
+    // to attach the clock reading to.
+    commit(mergeDateAndTime(selected ?? new Date(), time));
   };
 
   const handleTriggerKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -105,18 +154,35 @@ export const DatePicker = ({
     }
   };
 
-  const calendar = (
-    <Calendar
-      autoFocus
-      value={selected}
-      defaultMonth={selected ?? undefined}
-      onChange={handleSelect}
-      min={min}
-      max={max}
-      weekStartsOn={weekStartsOn}
-      locale={locale}
-      showWeekNumbers={showWeekNumbers}
-    />
+  const panel = (
+    <div className={styles.panel}>
+      <Calendar
+        autoFocus
+        value={selected}
+        defaultMonth={selected ?? undefined}
+        onChange={handleSelect}
+        min={min}
+        max={max}
+        weekStartsOn={weekStartsOn}
+        locale={locale}
+        showWeekNumbers={showWeekNumbers}
+      />
+
+      {showTime && (
+        <div className={styles.footer}>
+          <TimeFields
+            value={draftTime}
+            onChange={handleTimeChange}
+            hourCycle={hourCycle}
+            minuteStep={minuteStep}
+            className={styles.timeFields}
+          />
+          <Button variant="suggested" size="sm" onClick={() => setOpen(false)}>
+            {doneLabel}
+          </Button>
+        </div>
+      )}
+    </div>
   );
 
   return (
@@ -127,7 +193,14 @@ export const DatePicker = ({
         </span>
       )}
 
-      <Popover placement={placement} open={open} onOpenChange={setOpen} content={calendar}>
+      <Popover
+        placement={placement}
+        open={open}
+        onOpenChange={setOpen}
+        // A 12-hour footer is wider than `Popover`'s default 320px cap.
+        panelClassName={showTime ? styles.popover : undefined}
+        content={panel}
+      >
         <button
           type="button"
           id={id}

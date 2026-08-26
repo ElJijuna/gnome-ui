@@ -77,8 +77,11 @@
  * `Popover` caps its panel at 320px, which fits one month; a two-month calendar
  * (plus an optional preset column) needs the cap lifted.
  */
+
+/* Wide content needs more than Popover's 320px, but never more than the
+   viewport — `Popover` positions inside a 10px margin. */
 .popover {
-  max-width: none;
+  max-width: calc(100vw - 20px);
 }
 
 .panel {
@@ -123,4 +126,46 @@
 .preset:focus-visible {
   outline: var(--gnome-focus-ring-width, 2px) solid var(--gnome-focus-ring-color, #3584e4);
   outline-offset: -1px;
+}
+
+/* ─── Time footer (`showTime`) ──────────────────────────────────────────────── */
+
+.withFooter {
+  display: flex;
+  flex-direction: column;
+
+  /* Two 12-hour groups can be wider than one month; keep the grid centred. */
+  align-items: center;
+}
+
+/*
+ * Two groups of columns plus Done. It wraps: with a 12-hour clock (three
+ * columns each) the pair is wider than a one-month calendar, and an unwrapped
+ * row would drag the whole popover past the viewport.
+ */
+.footer {
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: var(--gnome-space-2, 8px) var(--gnome-space-4, 16px);
+  padding: var(--gnome-space-2, 8px);
+  border-block-start: 1px solid var(--gnome-border-subtle);
+}
+
+.timeGroup {
+  flex: 1 0 auto;
+}
+
+.timeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnome-space-1, 4px);
+}
+
+.timeLabel {
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  font-weight: var(--gnome-font-weight-bold, 700);
+  color: var(--gnome-window-fg-color, rgb(0 0 0 / 0.7));
 }

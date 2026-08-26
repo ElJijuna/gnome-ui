@@ -3,17 +3,12 @@ import { type KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 
 
 import { Icon } from '@/components/Icon';
 import { Popover, type PopoverPlacement } from '@/components/Popover';
-import { SpinButton } from '@/components/SpinButton';
 
+import { TimeFields } from './TimeFields';
 import styles from './TimePicker.module.css';
+import type { TimeValue } from './timeUtils';
 
-/** A wall-clock time, in 24-hour terms. */
-export interface TimeValue {
-  /** Hours, `0`–`23`. */
-  hours: number;
-  /** Minutes, `0`–`59`. */
-  minutes: number;
-}
+export type { TimeValue } from './timeUtils';
 
 export interface TimePickerProps {
   /** Controlled selected time. Pass `null` for "no selection". */
@@ -42,17 +37,6 @@ export interface TimePickerProps {
   id?: string;
   className?: string;
 }
-
-const pad2 = (n: number) => String(n).padStart(2, '0');
-
-/** Split a 0–23 hour into its 12-hour parts. */
-const to12 = (hours24: number) => ({
-  hour: hours24 % 12 === 0 ? 12 : hours24 % 12,
-  period: hours24 < 12 ? 0 : 1, // 0 = AM, 1 = PM
-});
-
-/** Recombine a 12-hour clock reading into a 0–23 hour. */
-const to24 = (hour12: number, period: number) => (period === 1 ? (hour12 % 12) + 12 : hour12 % 12);
 
 /**
  * Hour/minute selection built from paired `SpinButton`s inside a `Popover`,
@@ -114,9 +98,6 @@ export const TimePicker = ({
     onChange?.(next);
   };
 
-  const setHours24 = (hours: number) => commit({ hours, minutes: draft.minutes });
-  const setMinutes = (minutes: number) => commit({ hours: draft.hours, minutes });
-
   const handleTriggerKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (!open && event.key === 'ArrowDown') {
       event.preventDefault();
@@ -150,62 +131,9 @@ export const TimePicker = ({
     return () => cancelAnimationFrame(raf);
   }, [open]);
 
-  const twelve = to12(draft.hours);
-
   const panel = (
-    <div ref={panelRef} className={styles.panel}>
-      {hourCycle === 12 ? (
-        <SpinButton
-          value={twelve.hour}
-          min={1}
-          max={12}
-          wrap
-          format={pad2}
-          onChange={(h) => setHours24(to24(h, twelve.period))}
-          aria-label="Hours"
-          className={styles.column}
-        />
-      ) : (
-        <SpinButton
-          value={draft.hours}
-          min={0}
-          max={23}
-          wrap
-          format={pad2}
-          onChange={setHours24}
-          aria-label="Hours"
-          className={styles.column}
-        />
-      )}
-
-      <span className={styles.colon} aria-hidden="true">
-        :
-      </span>
-
-      <SpinButton
-        value={draft.minutes}
-        min={0}
-        max={59}
-        step={minuteStep}
-        wrap
-        format={pad2}
-        onChange={setMinutes}
-        aria-label="Minutes"
-        className={styles.column}
-      />
-
-      {hourCycle === 12 && (
-        <SpinButton
-          value={twelve.period}
-          min={0}
-          max={1}
-          wrap
-          format={(p) => (p === 1 ? 'PM' : 'AM')}
-          onChange={(p) => setHours24(to24(twelve.hour, p))}
-          aria-label="AM/PM"
-          className={styles.column}
-        />
-      )}
+    <div ref={panelRef}>
+      <TimeFields value={draft} onChange={commit} hourCycle={hourCycle} minuteStep={minuteStep} />
     </div>
   );
 

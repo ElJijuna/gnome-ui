@@ -52,3 +52,24 @@ second day click.
 `maxRange`, `visibleMonths`, `presets`, `weekStartsOn`, `locale`,
 `formatOptions`, `placeholder`, `separator`, `label`, `aria-label`,
 `showWeekNumbers`, `disabled`, `placement`, `id`, `className`.
+
+## Date and time
+
+`showTime` gives **each end its own** hour/minute columns — the shape bookings
+need — plus a Done button, since the second day click no longer finishes the
+selection:
+
+```tsx
+<DateRangePicker label="Stay" showTime hourCycle={12} minuteStep={15} />
+```
+
+The calendar keeps handing back civil dates, so both clock readings are merged
+into the pair on every change. On a **single-day** range the two times can
+invert; the end you just edited wins and the other follows it, so `start` is
+never after `end`. Committing a fresh pair of day clicks with inverted times
+collapses the end onto the start.
+
+`startTimeLabel` / `endTimeLabel` name the two column groups (visibly and for
+screen readers, as `"Start hours"`, `"End minutes"`…), and `doneLabel` renames
+the closing button. Note that `minRange` / `maxRange` still count **calendar
+days**, not elapsed hours.

@@ -251,4 +251,131 @@ describe('DateRangePicker', () => {
       expect(day('Friday, August 7, 2026')).not.toHaveAttribute('aria-disabled');
     });
   });
+
+  // `showTime` gives each end its own clock. The calendar still hands back civil
+  // dates, so both readings are merged in, kept in order, and the popover waits
+  // for Done rather than closing on the second day click.
+  describe('showTime', () => {
+    const AUG_WITH_TIME = {
+      start: new Date(2026, 7, 10, 9, 0),
+      end: new Date(2026, 7, 19, 17, 30),
+    };
+
+    it('shows both ends with their time in the trigger', () => {
+      render(
+        <DateRangePicker aria-label="Stay" showTime locale="en-US" defaultValue={AUG_WITH_TIME} />,
+      );
+      expect(trigger()).toHaveTextContent('Aug 10, 2026, 09:00 – Aug 19, 2026, 17:30');
+    });
+
+    it('renders one labelled set of columns per end', async () => {
+      const user = userEvent.setup();
+      render(<DateRangePicker aria-label="Stay" showTime defaultValue={AUG_WITH_TIME} />);
+
+      await user.click(trigger());
+      const panel = await screen.findByRole('dialog');
+
+      expect(within(panel).getByRole('spinbutton', { name: 'Start Hours' })).toHaveAttribute(
+        'aria-valuenow',
+        '9',
+      );
+      expect(within(panel).getByRole('spinbutton', { name: 'End Hours' })).toHaveAttribute(
+        'aria-valuenow',
+        '17',
+      );
+      expect(within(panel).getByRole('button', { name: 'Done' })).toBeInTheDocument();
+    });
+
+    it('keeps the popover open on the second day click and merges both times', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(
+        <DateRangePicker
+          aria-label="Stay"
+          showTime
+          defaultValue={AUG_WITH_TIME}
+          onChange={onChange}
+        />,
+      );
+
+      await user.click(trigger());
+      await screen.findByRole('dialog');
+      await user.click(day('Tuesday, August 4, 2026'));
+      await user.click(day('Friday, August 7, 2026'));
+
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      const [[range]] = onChange.mock.calls;
+      expect(toISODateKey(range.start)).toBe('2026-08-04');
+      expect(range.start.getHours()).toBe(9);
+      expect(toISODateKey(range.end)).toBe('2026-08-07');
+      expect(range.end.getHours()).toBe(17);
+      expect(range.end.getMinutes()).toBe(30);
+    });
+
+    it('re-emits the range when a time column steps', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(
+        <DateRangePicker
+          aria-label="Stay"
+          showTime
+          defaultValue={AUG_WITH_TIME}
+          onChange={onChange}
+        />,
+      );
+
+      await user.click(trigger());
+      await screen.findByRole('dialog');
+      fireEvent.keyDown(screen.getByRole('spinbutton', { name: 'End Hours' }), { key: 'ArrowUp' });
+
+      const [[range]] = onChange.mock.calls;
+      expect(range.end.getHours()).toBe(18);
+      expect(range.start.getHours()).toBe(9);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('keeps start before end on a single-day range, last edit winning', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(
+        <DateRangePicker
+          aria-label="Stay"
+          showTime
+          defaultValue={{ start: new Date(2026, 7, 10, 14, 0), end: new Date(2026, 7, 10, 16, 0) }}
+          onChange={onChange}
+        />,
+      );
+
+      await user.click(trigger());
+      await screen.findByRole('dialog');
+      // Drag the end back below the start: the start follows it down.
+      fireEvent.keyDown(screen.getByRole('spinbutton', { name: 'End Hours' }), { key: 'PageDown' });
+
+      const [[range]] = onChange.mock.calls;
+      expect(range.end.getHours()).toBe(6);
+      expect(range.start.getHours()).toBe(6);
+    });
+
+    it('closes on Done', async () => {
+      const user = userEvent.setup();
+      render(<DateRangePicker aria-label="Stay" showTime defaultValue={AUG_WITH_TIME} />);
+
+      await user.click(trigger());
+      await screen.findByRole('dialog');
+      await user.click(screen.getByRole('button', { name: 'Done' }));
+
+      await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    });
+
+    it('shows no time columns while showTime is off', async () => {
+      const user = userEvent.setup();
+      render(<DateRangePicker aria-label="Stay" defaultValue={AUGUST} />);
+
+      await user.click(trigger());
+      const panel = await screen.findByRole('dialog');
+
+      expect(within(panel).queryByRole('spinbutton')).not.toBeInTheDocument();
+      expect(within(panel).queryByRole('button', { name: 'Done' })).not.toBeInTheDocument();
+    });
+  });
 });

@@ -52,6 +52,9 @@ test('keyboard: ArrowDown opens, arrows move, two Enters commit', async ({ page 
   await page.locator(trigger).focus();
   await page.keyboard.press('ArrowDown');
   await expect(page.getByRole('dialog')).toBeVisible();
+  // The panel turning visible does not mean autoFocus has landed yet — pressing
+  // Enter too early activates the trigger again and closes the popover.
+  await expect(page.getByRole('button', { name: /^Monday, August 10, 2026/ })).toBeFocused();
 
   await page.keyboard.press('Enter'); // anchor on 10 Aug
   await page.keyboard.press('ArrowRight');
@@ -120,4 +123,27 @@ test('clicking outside closes without committing', async ({ page }) => {
   await expect(page.getByRole('dialog')).toBeHidden();
   // The half-made range never reached the trigger.
   await expect(page.locator(trigger)).toContainText('Aug 10, 2026 – Aug 19, 2026');
+});
+
+test('showTime gives each end its own clock and waits for Done', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-daterangepicker--with-time');
+
+  await page.locator(trigger).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.locator(trigger)).toContainText('Aug 10, 2026, 15:00 – Aug 19, 2026, 11:00');
+
+  // A whole new range: neither click closes the popover.
+  await page.getByRole('button', { name: /^Tuesday, August 4, 2026/ }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: /^Friday, August 7, 2026/ }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.locator(trigger)).toContainText('Aug 4, 2026, 15:00 – Aug 7, 2026, 11:00');
+
+  await page.getByRole('spinbutton', { name: 'End Hours' }).focus();
+  await page.keyboard.press('ArrowUp');
+  await expect(page.locator(trigger)).toContainText('Aug 7, 2026, 12:00');
+
+  await page.getByRole('button', { name: 'Done' }).click();
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await expect(page.locator(trigger)).toBeFocused();
 });
