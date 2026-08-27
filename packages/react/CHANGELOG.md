@@ -1,3 +1,12 @@
+## [1.63.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.62.0...@gnome-ui/react@1.63.0) (2026-08-27)
+
+### Features
+
+* **@gnome-ui/react:** add arrow navigation to Carousel component with customizable labels ([94f5eaf](https://github.com/ElJijuna/gnome-ui/commit/94f5eafd0f07dd2ebb55b3f25a2c4254870989ea))
+* **@gnome-ui/react:** add focusActiveSlides prop to Carousel for enhanced visual focus on active slides ([da2a137](https://github.com/ElJijuna/gnome-ui/commit/da2a137e99c6a107fae55af4a3152b03aebd47aa))
+* **@gnome-ui/react:** enhance Carousel component with infinite scrolling and peek functionality ([4bd6edf](https://github.com/ElJijuna/gnome-ui/commit/4bd6edfd7480210488b24557c00f534f72fee1d4))
+* **@gnome-ui/react:** improve Carousel component's scroll alignment and handling during rapid navigation ([e40ca76](https://github.com/ElJijuna/gnome-ui/commit/e40ca76ed97ed1c4e801af5f06b88adfab0203b7))
+
 ## [1.62.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.61.0...@gnome-ui/react@1.62.0) (2026-08-26)
 
 ### Features
