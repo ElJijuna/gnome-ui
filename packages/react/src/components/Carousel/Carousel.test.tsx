@@ -522,4 +522,160 @@ describe('Carousel', () => {
       expect(viewport).toContainElement(screen.getByRole('region'));
     });
   });
+
+  // ── infinite (seamless loop) ──────────────────────────────────────────────
+
+  describe('infinite', () => {
+    const renderInfinite = (props: ComponentProps<typeof Carousel> = {}) =>
+      render(
+        <Carousel infinite {...props}>
+          <div>Slide A</div>
+          <div>Slide B</div>
+          <div>Slide C</div>
+        </Carousel>,
+      );
+
+    it('renders a leading and a trailing clone around the real slides', () => {
+      renderInfinite();
+      // 1 lead + 3 real + 1 trailing
+      expect(screen.getByRole('region').children).toHaveLength(5);
+    });
+
+    it('keeps clones out of the accessibility tree', () => {
+      renderInfinite();
+      const slides = screen.getAllByRole('group');
+      expect(slides).toHaveLength(3);
+      expect(slides[0]).toHaveAttribute('aria-label', '1 of 3');
+      expect(slides[2]).toHaveAttribute('aria-label', '3 of 3');
+    });
+
+    it('marks clones as aria-hidden and inert', () => {
+      renderInfinite();
+      const clones = screen.getByRole('region').querySelectorAll('[aria-hidden="true"]');
+      expect(clones).toHaveLength(2);
+      for (const clone of clones) {
+        expect(clone).toHaveAttribute('inert');
+      }
+    });
+
+    it('clones the last page in front and the first page behind', () => {
+      renderInfinite();
+      const physical = [...screen.getByRole('region').children].map((el) => el.textContent);
+      expect(physical).toEqual(['Slide C', 'Slide A', 'Slide B', 'Slide C', 'Slide A']);
+    });
+
+    it('clones a whole group when visibleSlides > 1', () => {
+      render(
+        <Carousel infinite visibleSlides={2}>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+        </Carousel>,
+      );
+      const physical = [...screen.getByRole('region').children].map((el) => el.textContent);
+      // Lead clone = last page [3, 4]; trailing clone = first page [1, 2]
+      expect(physical).toEqual(['3', '4', '1', '2', '3', '4', '1', '2']);
+    });
+
+    it('pads the trailing clones so a ragged last page stays full', () => {
+      render(
+        <Carousel infinite visibleSlides={2}>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+        </Carousel>,
+      );
+      // 5 slides in groups of 2 → 3 pages; the last page needs 1 filler plus a
+      // full group to wrap onto.
+      expect(screen.getByRole('region').children).toHaveLength(2 + 5 + 3);
+    });
+
+    it('renders no clones when everything fits on one page', () => {
+      render(
+        <Carousel infinite>
+          <div>Only slide</div>
+        </Carousel>,
+      );
+      expect(screen.getByRole('region').children).toHaveLength(1);
+      expect(screen.getByRole('region').querySelector('[aria-hidden="true"]')).toBeNull();
+    });
+
+    it('wraps forward past the last page without loop being set', () => {
+      const onPageChanged = vi.fn();
+      renderInfinite({ page: 2, onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(0);
+    });
+
+    it('wraps backward past the first page', () => {
+      const onPageChanged = vi.fn();
+      renderInfinite({ page: 0, onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowLeft' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    it('never disables the arrows', () => {
+      renderInfinite({ arrows: true, page: 2 });
+      expect(screen.getByRole('button', { name: 'Previous slide' })).toBeEnabled();
+      expect(screen.getByRole('button', { name: 'Next slide' })).toBeEnabled();
+    });
+
+    it('keeps auto-play running past the last page', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      renderInfinite({ autoPlay: true, interval: 1000, onPageChanged });
+
+      act(() => {
+        vi.advanceTimersByTime(4000);
+      });
+
+      expect(onPageChanged.mock.calls.map(([p]) => p)).toEqual([1, 2, 0, 1]);
+    });
+  });
+
+  // ── peek ──────────────────────────────────────────────────────────────────
+
+  describe('peek', () => {
+    it('adds no padding by default', () => {
+      renderCarousel();
+      expect(screen.getByRole('region').style.paddingInline).toBe('');
+    });
+
+    it('insets the track by a px peek', () => {
+      renderCarousel({ peek: 40 });
+      const track = screen.getByRole('region');
+      expect(track.style.paddingInline).toBe('40px');
+      expect(track.style.scrollPaddingInline).toBe('40px');
+    });
+
+    it('adds spacing on top so the peek is what actually shows', () => {
+      renderCarousel({ peek: 40, spacing: 12 });
+      expect(screen.getByRole('region').style.paddingInline).toBe('52px');
+    });
+
+    it('accepts a CSS length and folds spacing into a calc()', () => {
+      renderCarousel({ peek: '10%', spacing: 12 });
+      expect(screen.getByRole('region').style.paddingInline).toBe('calc(10% + 12px)');
+    });
+
+    it('accepts a CSS length as-is without spacing', () => {
+      renderCarousel({ peek: '10%' });
+      expect(screen.getByRole('region').style.paddingInline).toBe('10%');
+    });
+
+    it('insets the block axis when vertical', () => {
+      renderCarousel({ peek: 24, orientation: 'vertical' });
+      const track = screen.getByRole('region');
+      expect(track.style.paddingBlock).toBe('24px');
+      expect(track.style.scrollPaddingBlock).toBe('24px');
+      expect(track.style.paddingInline).toBe('');
+    });
+  });
 });

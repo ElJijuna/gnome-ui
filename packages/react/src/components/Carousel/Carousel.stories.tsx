@@ -18,6 +18,15 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
   argTypes: {
     orientation: { control: 'select', options: ['horizontal', 'vertical'] },
     loop: { control: 'boolean' },
+    infinite: {
+      control: 'boolean',
+      description: 'Seamless circular motion — clones a page at each end instead of rewinding.',
+    },
+    peek: {
+      control: 'text',
+      description:
+        'How much of the neighbouring slides shows at each edge (px number or CSS length).',
+    },
     spacing: { control: { type: 'number', min: 0, max: 48, step: 4 } },
     visibleSlides: { control: { type: 'number', min: 1, max: 5, step: 1 } },
     autoPlay: { control: 'boolean' },
@@ -45,6 +54,8 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
   args: {
     orientation: 'horizontal',
     loop: false,
+    infinite: false,
+    peek: 0,
     spacing: 0,
     visibleSlides: 1,
     autoPlay: false,
@@ -267,6 +278,65 @@ export const CardSlides: Story = {
       description: {
         story:
           'Split cards as slides: text on the left half, image on the right half. Each slide is a plain `<article>` with `grid-template-columns: 1fr 1fr` — the carousel imposes no markup of its own on the children.',
+      },
+    },
+  },
+};
+
+// ─── Infinite ─────────────────────────────────────────────────────────────────
+
+export const Infinite: Story = {
+  render: renderCarousel,
+  args: { infinite: true, arrows: true, indicator: 'dots', spacing: 12 },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'With **infinite**, a copy of the last page is rendered before the first one (and vice versa), so paging past either end keeps moving in the same direction instead of rewinding across the whole deck. The carousel repositions onto the real page once the animation settles — try clicking next from *Purple* or previous from *Blue*. Clones are `aria-hidden` and `inert`, so screen readers and the tab order still see exactly five slides.',
+      },
+    },
+  },
+};
+
+// ─── WithPeek ─────────────────────────────────────────────────────────────────
+
+export const WithPeek: Story = {
+  render: renderCarousel,
+  args: { peek: '10%', infinite: true, spacing: 12, indicator: 'dots' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Set **peek** to reveal the neighbouring slides at both edges — `"10%"` of the viewport here, but any CSS length or a px number works. The active group shrinks to make room, so paging still advances exactly one group. Pair it with **infinite** so the leading edge is never empty on the first page.',
+      },
+    },
+  },
+};
+
+// ─── PeekWithMultipleSlides ───────────────────────────────────────────────────
+
+export const PeekWithMultipleSlides: Story = {
+  render: (args) => (
+    <Carousel {...args}>
+      {[...COLORS, ...COLORS].map((c, i) => (
+        <SlidePlaceholder key={i} label={`${LABELS[i % LABELS.length]} ${i + 1}`} color={c} />
+      ))}
+    </Carousel>
+  ),
+  args: {
+    visibleSlides: 2,
+    peek: 40,
+    spacing: 12,
+    infinite: true,
+    arrows: true,
+    indicator: 'dots',
+  },
+  parameters: {
+    containerWidth: 640,
+    docs: {
+      description: {
+        story:
+          '**peek** and **visibleSlides** compose: two full slides plus 40px of the previous and next ones. Ten slides in groups of two give five pages, and the group count divides evenly so the infinite wrap is perfectly seamless.',
       },
     },
   },
