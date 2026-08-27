@@ -413,4 +413,113 @@ describe('Carousel', () => {
       expect(calls).toEqual([1, 2]); // stops at 2 (last group), never reaches 3
     });
   });
+
+  // ── Arrows ────────────────────────────────────────────────────────────────
+
+  describe('arrows', () => {
+    const arrowButtons = () => ({
+      prev: screen.getByRole('button', { name: 'Previous slide' }),
+      next: screen.getByRole('button', { name: 'Next slide' }),
+    });
+
+    it('renders no arrows by default', () => {
+      renderCarousel({ indicator: 'none' });
+      expect(screen.queryByRole('button', { name: 'Next slide' })).not.toBeInTheDocument();
+    });
+
+    it('renders previous/next arrows when arrows is set', () => {
+      renderCarousel({ arrows: true });
+      const { prev, next } = arrowButtons();
+      expect(prev).toBeInTheDocument();
+      expect(next).toBeInTheDocument();
+    });
+
+    it('does not render arrows when there is only one page', () => {
+      render(
+        <Carousel arrows>
+          <div>Only slide</div>
+        </Carousel>,
+      );
+      expect(screen.queryByRole('button', { name: 'Next slide' })).not.toBeInTheDocument();
+    });
+
+    it('advances to the next page on next click', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ arrows: true, onPageChanged });
+
+      fireEvent.click(arrowButtons().next);
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('goes back one page on previous click', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ arrows: true, page: 2, onPageChanged });
+
+      fireEvent.click(arrowButtons().prev);
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('disables the previous arrow on the first page without loop', () => {
+      renderCarousel({ arrows: true });
+      const { prev, next } = arrowButtons();
+      expect(prev).toBeDisabled();
+      expect(next).toBeEnabled();
+    });
+
+    it('disables the next arrow on the last page without loop', () => {
+      renderCarousel({ arrows: true, page: 2 });
+      const { prev, next } = arrowButtons();
+      expect(prev).toBeEnabled();
+      expect(next).toBeDisabled();
+    });
+
+    it('keeps both arrows enabled and wraps when loop is set', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ arrows: true, loop: true, page: 0, onPageChanged });
+      const { prev, next } = arrowButtons();
+      expect(prev).toBeEnabled();
+      expect(next).toBeEnabled();
+
+      fireEvent.click(prev);
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    it('advances a full group when visibleSlides > 1', () => {
+      const onPageChanged = vi.fn();
+      render(
+        <Carousel arrows visibleSlides={2} onPageChanged={onPageChanged}>
+          <div>Slide 1</div>
+          <div>Slide 2</div>
+          <div>Slide 3</div>
+          <div>Slide 4</div>
+          <div>Slide 5</div>
+        </Carousel>,
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: 'Next slide' }));
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('uses custom arrow labels', () => {
+      renderCarousel({ arrows: true, previousLabel: 'Anterior', nextLabel: 'Siguiente' });
+      expect(screen.getByRole('button', { name: 'Anterior' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Siguiente' })).toBeInTheDocument();
+    });
+
+    it('applies className and rest props to the arrow viewport when no indicator is shown', () => {
+      renderCarousel({
+        arrows: true,
+        indicator: 'none',
+        className: 'custom',
+        'data-testid': 'car',
+      });
+      const viewport = screen.getByTestId('car');
+      expect(viewport).toHaveClass('custom');
+      expect(viewport).toContainElement(screen.getByRole('region'));
+    });
+  });
 });

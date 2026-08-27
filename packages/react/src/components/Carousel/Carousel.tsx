@@ -115,6 +115,28 @@ export const CarouselIndicatorLines = ({
   );
 };
 
+// ─── CarouselArrow ────────────────────────────────────────────────────────────
+
+const CHEVRON_PATHS = {
+  left: 'M10 4L6 8l4 4',
+  right: 'M6 4l4 4-4 4',
+  up: 'M4 10l4-4 4 4',
+  down: 'M4 6l4 4 4-4',
+} as const;
+
+const ArrowChevron = ({ direction }: { direction: keyof typeof CHEVRON_PATHS }) => (
+  <svg width="16" height="16" viewBox="0 0 16 16" focusable="false" aria-hidden="true">
+    <path
+      d={CHEVRON_PATHS[direction]}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 // ─── Carousel ─────────────────────────────────────────────────────────────────
 
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
@@ -171,6 +193,22 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * @default 'bottom'
    */
   indicatorPosition?: IndicatorPosition;
+  /**
+   * Show previous/next arrow buttons overlaid on the carousel edges.
+   * Hidden automatically when there is only a single page.
+   * @default false
+   */
+  arrows?: boolean;
+  /**
+   * Accessible label for the previous-page arrow.
+   * @default 'Previous slide'
+   */
+  previousLabel?: string;
+  /**
+   * Accessible label for the next-page arrow.
+   * @default 'Next slide'
+   */
+  nextLabel?: string;
 }
 
 /**
@@ -196,6 +234,9 @@ export const Carousel = ({
   interval = 3000,
   indicator,
   indicatorPosition = 'bottom',
+  arrows = false,
+  previousLabel = 'Previous slide',
+  nextLabel = 'Next slide',
   className,
   style,
   ...props
@@ -264,6 +305,18 @@ export const Carousel = ({
     [orientation, getPageSize],
   );
 
+  /** Scroll to `index` and sync internal/controlled page state. */
+  const goToPage = useCallback(
+    (index: number) => {
+      scrollToPage(index);
+      if (!isControlled) {
+        setInternalPage(index);
+      }
+      onPageChanged?.(index);
+    },
+    [scrollToPage, isControlled, onPageChanged],
+  );
+
   // Scroll to the controlled page when it changes externally
   useEffect(() => {
     if (!isControlled) {
@@ -318,13 +371,9 @@ export const Carousel = ({
           ? (currentPage - 1 + pageCount) % pageCount
           : Math.max(currentPage - 1, 0);
 
-      scrollToPage(next);
-      if (!isControlled) {
-        setInternalPage(next);
-      }
-      onPageChanged?.(next);
+      goToPage(next);
     },
-    [currentPage, pageCount, loop, orientation, scrollToPage, isControlled, onPageChanged],
+    [currentPage, pageCount, loop, orientation, goToPage],
   );
 
   // ── Drag (mouse + touch + pen) ───────────────────────────────────────────
@@ -520,6 +569,18 @@ export const Carousel = ({
   const isHorizontal = orientation === 'horizontal';
   const showIndicator = indicator === 'dots' || indicator === 'lines';
   const isSide = indicatorPosition === 'left' || indicatorPosition === 'right';
+  // A single page has nowhere to go — don't render dead arrows.
+  const showArrows = arrows && pageCount > 1;
+  // Anything but a bare scroll container needs a host for `className`/`style`/rest props.
+  const isWrapped = showIndicator || showArrows;
+
+  // When an indicator sits alongside, the outer flex child must absorb the
+  // leftover space — that's the arrow viewport when present, else the track.
+  const flexFill: CSSProperties | undefined = showIndicator
+    ? isSide
+      ? { flex: '1 1 0', width: 'auto' }
+      : { flex: '1 1 auto' }
+    : undefined;
 
   // Slide width when showing more than one at a time
   const slideFlexBasis =
@@ -535,13 +596,14 @@ export const Carousel = ({
         styles.carousel,
         isHorizontal ? styles.horizontal : styles.vertical,
         isDragging ? styles.dragging : null,
-        showIndicator ? null : className,
+        isWrapped ? null : className,
       ]
         .filter(Boolean)
         .join(' ')}
       style={{
+        ...(isWrapped ? undefined : style),
         ...(isHorizontal ? { columnGap: spacing || undefined } : { rowGap: spacing || undefined }),
-        ...(showIndicator && (isSide ? { flex: '1 1 0', width: 'auto' } : { flex: '1 1 auto' })),
+        ...(showArrows ? undefined : flexFill),
       }}
       onMouseEnter={() => {
         isHoveringRef.current = true;
@@ -551,7 +613,7 @@ export const Carousel = ({
       }}
       onKeyDown={handleKeyDown}
       onClick={handleClick}
-      {...(showIndicator ? {} : props)}
+      {...(isWrapped ? {} : props)}
     >
       {Children.map(children, (child, i) => (
         <div
@@ -577,17 +639,54 @@ export const Carousel = ({
     </div>
   );
 
-  if (!showIndicator) {
-    return scrollContainer;
-  }
+  const renderArrow = (dir: 'prev' | 'next') => {
+    const isPrev = dir === 'prev';
+    const step = isPrev ? -1 : 1;
+    const disabled = !loop && (isPrev ? currentPage <= 0 : currentPage >= pageCount - 1);
+    const target = loop
+      ? (((currentPage + step) % pageCount) + pageCount) % pageCount
+      : currentPage + step;
 
-  const onPageSelected = (i: number) => {
-    scrollToPage(i);
-    if (!isControlled) {
-      setInternalPage(i);
-    }
-    onPageChanged?.(i);
+    return (
+      <button
+        type="button"
+        className={[styles.arrow, isPrev ? styles.arrowPrev : styles.arrowNext].join(' ')}
+        aria-label={isPrev ? previousLabel : nextLabel}
+        disabled={disabled}
+        onClick={() => goToPage(target)}
+      >
+        <ArrowChevron
+          direction={isHorizontal ? (isPrev ? 'left' : 'right') : isPrev ? 'up' : 'down'}
+        />
+      </button>
+    );
   };
+
+  // Arrows are absolutely positioned against this viewport, so they stay pinned
+  // to the visible edges instead of scrolling away with the track.
+  const content = showArrows ? (
+    <div
+      className={[
+        styles.viewport,
+        isHorizontal ? styles.viewportHorizontal : styles.viewportVertical,
+        showIndicator ? null : className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      style={{ ...(showIndicator ? undefined : style), ...flexFill }}
+      {...(showIndicator ? {} : props)}
+    >
+      {scrollContainer}
+      {renderArrow('prev')}
+      {renderArrow('next')}
+    </div>
+  ) : (
+    scrollContainer
+  );
+
+  if (!showIndicator) {
+    return content;
+  }
 
   const indicatorStyle: CSSProperties | undefined = isSide
     ? { flexDirection: 'column', padding: '0 12px' }
@@ -603,12 +702,12 @@ export const Carousel = ({
       }}
       {...props}
     >
-      {scrollContainer}
+      {content}
       {indicator === 'dots' && (
         <CarouselIndicatorDots
           pages={pageCount}
           currentPage={currentPage}
-          onPageSelected={onPageSelected}
+          onPageSelected={goToPage}
           style={indicatorStyle}
         />
       )}
@@ -616,7 +715,7 @@ export const Carousel = ({
         <CarouselIndicatorLines
           pages={pageCount}
           currentPage={currentPage}
-          onPageSelected={onPageSelected}
+          onPageSelected={goToPage}
           style={indicatorStyle}
         />
       )}
