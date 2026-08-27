@@ -256,7 +256,7 @@ import { Button } from "@gnome-ui/react/components/Button";
 | [`TabBar`](https://gnome-ui.org/react/?path=/docs/components-tabs--docs) / `TabItem` / `TabPanel` | Tab-based navigation with keyboard support, optional close buttons, `count` badge for unread indicators, and `inline` variant |
 | [`ViewSwitcher`](https://gnome-ui.org/react/?path=/docs/components-viewswitcher--docs) / `ViewSwitcherItem` | Segmented pill control for switching between 2–4 top-level views |
 | [`ViewSwitcherSidebar`](https://gnome-ui.org/react/?path=/docs/components-viewswitchersidebar--docs) / `ViewSwitcherSidebarItem` | Sidebar-based view switcher — replaces `GtkStackSidebar` |
-| [`Carousel`](https://gnome-ui.org/react/?path=/docs/components-carousel--docs) / `CarouselIndicatorDots` / `CarouselIndicatorLines` | Swipeable page carousel with multi-slide viewports, peeking neighbours, seamless infinite looping, optional edge arrows and dot or line indicators — mirrors `AdwCarousel` |
+| [`Carousel`](https://gnome-ui.org/react/?path=/docs/components-carousel--docs) / `CarouselIndicatorDots` / `CarouselIndicatorLines` | Swipeable page carousel with multi-slide viewports, peeking and de-emphasised neighbours, seamless infinite looping, optional edge arrows and dot or line indicators — mirrors `AdwCarousel` |
 | [`ShortcutsDialog`](https://gnome-ui.org/react/?path=/docs/components-shortcutsdialog--docs) | Modal listing keyboard shortcuts with integrated search |
 | [`WidgetManager`](https://gnome-ui.org/react/?path=/docs/components-widgetmanager--docs) | Card that manages a controlled collection of widgets picked from a catalog; edit-mode trigger opens a `Modal`/`BottomSheet`/`Drawer` picker with staged add/remove and confirm/cancel |
 

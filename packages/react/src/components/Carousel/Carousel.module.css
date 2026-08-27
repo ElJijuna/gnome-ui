@@ -58,6 +58,14 @@
   overflow: hidden;
 }
 
+/* Only present when `focusActiveSlides` is on — the scale itself is inline. It
+   sits inside the slide so the slide's scroll snap area keeps its full size. */
+.slideScale {
+  width: 100%;
+  height: 100%;
+  transition: transform var(--gnome-duration-normal, 200ms) var(--gnome-easing-default, ease);
+}
+
 /* ─── Arrow viewport ────────────────────────────────────────────────────────── */
 
 /* Positioning context for the overlaid arrows. */
@@ -220,7 +228,8 @@
 
   .arrow,
   .dot,
-  .line {
+  .line,
+  .slideScale {
     transition: none;
   }
 }

@@ -678,4 +678,74 @@ describe('Carousel', () => {
       expect(track.style.paddingInline).toBe('');
     });
   });
+
+  // ── focusActiveSlides ─────────────────────────────────────────────────────
+
+  describe('focusActiveSlides', () => {
+    /** Transform of each slide's scaling wrapper, or 'none' when unscaled. */
+    const scales = () =>
+      [...screen.getByRole('region').children].map((slide) => {
+        const inner = slide.firstElementChild as HTMLElement;
+        return inner.style.transform || 'none';
+      });
+
+    it('renders the children directly when off', () => {
+      renderCarousel();
+      const inner = screen.getByRole('region').children[0].firstElementChild as HTMLElement;
+      expect(inner.className).not.toMatch(/slideScale/);
+      expect(inner).toHaveTextContent('Slide A');
+    });
+
+    it('wraps each slide in a scaling element when on', () => {
+      renderCarousel({ focusActiveSlides: true });
+      for (const slide of screen.getByRole('region').children) {
+        expect((slide.firstElementChild as HTMLElement).className).toMatch(/slideScale/);
+      }
+    });
+
+    it('shrinks every slide outside the current page to 80%', () => {
+      renderCarousel({ focusActiveSlides: true });
+      expect(scales()).toEqual(['none', 'scale(0.8)', 'scale(0.8)']);
+    });
+
+    it('follows the current page', () => {
+      renderCarousel({ focusActiveSlides: true, page: 1 });
+      expect(scales()).toEqual(['scale(0.8)', 'none', 'scale(0.8)']);
+    });
+
+    it('accepts an explicit scale', () => {
+      renderCarousel({ focusActiveSlides: 0.5 });
+      expect(scales()).toEqual(['none', 'scale(0.5)', 'scale(0.5)']);
+    });
+
+    it('treats a scale of 1 as off', () => {
+      renderCarousel({ focusActiveSlides: 1 });
+      const inner = screen.getByRole('region').children[0].firstElementChild as HTMLElement;
+      expect(inner.className).not.toMatch(/slideScale/);
+    });
+
+    it('keeps the whole active group at full size', () => {
+      render(
+        <Carousel focusActiveSlides visibleSlides={2} page={1}>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+        </Carousel>,
+      );
+      expect(scales()).toEqual(['scale(0.8)', 'scale(0.8)', 'none', 'none']);
+    });
+
+    it('scales the clone of an active slide with it, so it cannot pop mid-wrap', () => {
+      render(
+        <Carousel focusActiveSlides infinite page={0}>
+          <div>A</div>
+          <div>B</div>
+          <div>C</div>
+        </Carousel>,
+      );
+      // [clone C] [A] [B] [C] [clone A] — page 0 is A, and so is the trailing clone.
+      expect(scales()).toEqual(['scale(0.8)', 'none', 'scale(0.8)', 'scale(0.8)', 'none']);
+    });
+  });
 });

@@ -243,3 +243,43 @@ test('rapid arrow clicks across the wrap never rewind the carousel', async ({ pa
   expect(Math.abs(total - pageSize * 2)).toBeLessThanOrEqual(2);
   await expect(page.getByRole('tab', { name: 'Page 2' })).toHaveAttribute('aria-selected', 'true');
 });
+
+test('focusActiveSlides shrinks the neighbours without shifting the snap points', async ({
+  page,
+}) => {
+  await page.goto('/iframe.html?id=components-carousel--focus-active-slides');
+
+  const track = page.getByRole('region');
+  const next = page.getByRole('button', { name: 'Next slide' });
+  const pageSize = await track.evaluate((el) => el.scrollLeft);
+
+  const measure = () =>
+    track.evaluate((el) => {
+      const box = el.getBoundingClientRect();
+      const onScreen = [...el.children]
+        .map((slide) => {
+          const rect = (slide.firstElementChild as HTMLElement).getBoundingClientRect();
+          return { left: rect.left - box.left, width: rect.width };
+        })
+        .filter((slide) => slide.left + slide.width > 0.5 && slide.left < box.width - 0.5);
+      return { scroll: el.scrollLeft, onScreen };
+    });
+
+  const first = await measure();
+  // Previous, active, next — the active one at full size, both neighbours at 80%.
+  expect(first.onScreen).toHaveLength(3);
+  const [previous, active, upcoming] = first.onScreen;
+  expect(previous.width / active.width).toBeCloseTo(0.8, 2);
+  expect(upcoming.width / active.width).toBeCloseTo(0.8, 2);
+
+  // A scroll snap area is the *transformed* border box, so scaling the slide
+  // itself would leave every page resting half its lost width off target.
+  for (let i = 1; i <= 3; i++) {
+    await next.click();
+    await page.waitForTimeout(600);
+    const step = await measure();
+    expect(Math.abs(step.scroll - pageSize * (i + 1))).toBeLessThanOrEqual(1);
+    expect(Math.abs(step.onScreen[1].left - first.onScreen[1].left)).toBeLessThanOrEqual(1);
+    expect(step.onScreen[1].width).toBeCloseTo(active.width, 1);
+  }
+});

@@ -178,6 +178,16 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    */
   infinite?: boolean;
   /**
+   * Shrink the slides that are not on the current page, so the active ones read
+   * as the focus of the carousel. `true` scales them to 80% — 20% smaller —
+   * and a number sets that scale explicitly (`0.9` for a subtler effect).
+   *
+   * Purely visual: the slides keep their layout size, so paging is unaffected.
+   * Best paired with `peek`, which is what puts the shrunken neighbours on screen.
+   * @default false
+   */
+  focusActiveSlides?: boolean | number;
+  /**
    * How much of the neighbouring slides peeks in at each edge — a number in px
    * or any CSS length (`'10%'`, `'2rem'`). The active group shrinks to make
    * room, so paging still moves exactly one group. `spacing` is added on top,
@@ -258,6 +268,7 @@ export const Carousel = ({
   loop = false,
   infinite = false,
   peek = 0,
+  focusActiveSlides = false,
   visibleSlides = 1,
   onPageChanged,
   page: controlledPage,
@@ -283,6 +294,7 @@ export const Carousel = ({
   // Scroll positions are counted in *units* of one page. With clones, unit 0 is
   // the leading copy of the last page, so real page `p` lives at unit `p + 1`.
   const leadUnits = cloned ? 1 : 0;
+  const axis = orientation === 'horizontal' ? 'width' : 'height';
   const [internalPage, setInternalPage] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const isControlled = controlledPage !== undefined;
@@ -313,17 +325,17 @@ export const Carousel = ({
       return 1;
     }
     const first = el.firstElementChild;
-    const rect = first?.getBoundingClientRect();
-    const slideSize = rect
-      ? orientation === 'horizontal'
-        ? rect.width
-        : rect.height
+    // Computed style, not getBoundingClientRect: `focusActiveSlides` scales the
+    // slides, and a transform would shrink the measured box along with them.
+    const computed = first ? parseFloat(getComputedStyle(first)[axis]) : Number.NaN;
+    const slideSize = Number.isFinite(computed)
+      ? computed
       : orientation === 'horizontal'
         ? el.clientWidth
         : el.clientHeight;
     const size = vSlides * (slideSize + spacing);
     return size > 0 ? size : 1;
-  }, [orientation, spacing, vSlides]);
+  }, [orientation, spacing, vSlides, axis]);
 
   /** Mute the scroll listener while a scroll we started is still running. */
   const suppressScrollFeedback = useCallback((ms: number) => {
@@ -756,20 +768,54 @@ export const Carousel = ({
   // Clone one page in front and enough behind to both complete a ragged last
   // page and provide a full page to travel onto when wrapping forward.
   const trailingClones = cloned ? pageCount * vSlides - slideCount + vSlides : 0;
-  const physicalSlides: { node: ReactNode; key: string; index: number | null }[] = cloned
+  // `index` is the slide's own position (null for clones, which stay out of the
+  // a11y tree); `source` is the real slide it renders, clone or not.
+  const physicalSlides: {
+    node: ReactNode;
+    key: string;
+    index: number | null;
+    source: number;
+  }[] = cloned
     ? [
         ...Array.from({ length: vSlides }, (_, k) => {
-          const index = ((pageCount - 1) * vSlides + k) % slideCount;
-          return { node: childArray[index], key: `lead-${k}`, index: null };
+          const source = ((pageCount - 1) * vSlides + k) % slideCount;
+          return { node: childArray[source], key: `lead-${k}`, index: null, source };
         }),
-        ...childArray.map((node, index) => ({ node, key: keyOf(node, index), index })),
+        ...childArray.map((node, index) => ({
+          node,
+          key: keyOf(node, index),
+          index,
+          source: index,
+        })),
         ...Array.from({ length: trailingClones }, (_, k) => ({
           node: childArray[k % slideCount],
           key: `trail-${k}`,
           index: null,
+          source: k % slideCount,
         })),
       ]
-    : childArray.map((node, index) => ({ node, key: keyOf(node, index), index }));
+    : childArray.map((node, index) => ({
+        node,
+        key: keyOf(node, index),
+        index,
+        source: index,
+      }));
+
+  // `focusActiveSlides`: shrink everything outside the current group.
+  const inactiveScale =
+    focusActiveSlides === true
+      ? 0.8
+      : typeof focusActiveSlides === 'number'
+        ? focusActiveSlides
+        : 1;
+  const scalesSlides = inactiveScale !== 1;
+  const activeFrom = currentPage * vSlides;
+  const activePhysicalFrom = (currentPage + leadUnits) * vSlides;
+  // A slide counts as active either as itself or as the clone standing in for it
+  // — the clone is what you are looking at mid-wrap, and it must not pop.
+  const isActiveSlide = (physical: number, source: number) =>
+    (source >= activeFrom && source < activeFrom + vSlides) ||
+    (physical >= activePhysicalFrom && physical < activePhysicalFrom + vSlides);
 
   const scrollContainer = (
     <div
@@ -814,7 +860,7 @@ export const Carousel = ({
       onPointerCancel={handlePointerUp}
       {...(isWrapped ? {} : props)}
     >
-      {physicalSlides.map(({ node, key, index }, i) => (
+      {physicalSlides.map(({ node, key, index, source }, i) => (
         <div
           key={key}
           className={styles.slide}
@@ -835,7 +881,21 @@ export const Carousel = ({
             ...(vSlides > 1 && i % vSlides !== 0 ? { scrollSnapAlign: 'none' } : undefined),
           }}
         >
-          {node}
+          {/* The scale lives on an inner element on purpose: a scroll snap area
+              is the *transformed* border box, so scaling the slide itself would
+              shift where the carousel comes to rest by half the size it lost. */}
+          {scalesSlides ? (
+            <div
+              className={styles.slideScale}
+              style={
+                isActiveSlide(i, source) ? undefined : { transform: `scale(${inactiveScale})` }
+              }
+            >
+              {node}
+            </div>
+          ) : (
+            node
+          )}
         </div>
       ))}
     </div>

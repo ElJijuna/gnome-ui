@@ -13,6 +13,11 @@ or let `indicator` render one for you.
   CSS length (`peek="10%"`, `peek={40}`). The active group shrinks to make room, so
   paging still advances exactly one group. `spacing` is added on top of it, so `peek` is
   the amount of the neighbour you actually see.
+- `focusActiveSlides` — shrink everything outside the current page so the active slides
+  read as the focus. `true` scales them to 80%; pass a number for a different ratio
+  (`focusActiveSlides={0.92}`). It only shows when the neighbours are on screen, so pair
+  it with `peek`. The scale is a transform on an element inside each slide, so layout,
+  snap points and paging are all untouched.
 
 ### Navigation chrome
 - `indicator` — `'dots'`, `'lines'`, or `'none'` to hide the pagination entirely.
@@ -39,7 +44,7 @@ a remainder the last group overlaps the first one (5 slides in groups of 2 give 
 `[1,2] [3,4] [5,1]`), so the wrap shifts by the leftover slides.
 
 ```tsx
-<Carousel visibleSlides={2} spacing={16} peek={40} arrows indicator="dots" infinite>
+<Carousel visibleSlides={2} spacing={16} peek={40} focusActiveSlides arrows infinite>
   {items.map((item) => (
     <Card key={item.id}>{item.title}</Card>
   ))}
@@ -53,5 +58,7 @@ a remainder the last group overlaps the first one (5 slides in groups of 2 give 
 - Use `orientation="vertical"` for feed-style layouts — arrows move to the top and
   bottom edges automatically, and `peek` insets the block axis instead.
 - Pair `peek` with `infinite` so the leading edge is never blank on the first page.
+- Remember that `focusActiveSlides` eats into the peek: a slide scaled to 80% gives back
+  a tenth of its width at each side, so raise `peek` to keep the same visible sliver.
 - Use `infinite` for image galleries where wrap-around is expected, and `loop` when the
   slides must not be duplicated.

@@ -27,6 +27,10 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
       description:
         'How much of the neighbouring slides shows at each edge (px number or CSS length).',
     },
+    focusActiveSlides: {
+      control: 'boolean',
+      description: 'Shrink the slides outside the current page to 80%, focusing the active ones.',
+    },
     spacing: { control: { type: 'number', min: 0, max: 48, step: 4 } },
     visibleSlides: { control: { type: 'number', min: 1, max: 5, step: 1 } },
     autoPlay: { control: 'boolean' },
@@ -56,6 +60,7 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
     loop: false,
     infinite: false,
     peek: 0,
+    focusActiveSlides: false,
     spacing: 0,
     visibleSlides: 1,
     autoPlay: false,
@@ -237,8 +242,7 @@ const SlideCard = ({ eyebrow, title, body, image }: (typeof CARDS)[number]) => (
         flexDirection: 'column',
         justifyContent: 'center',
         gap: 8,
-        // Extra inline-start gutter keeps the overlaid arrow off the copy.
-        padding: '20px 20px 20px 52px',
+        padding: 20,
       }}
     >
       <span
@@ -271,13 +275,42 @@ export const CardSlides: Story = {
       ))}
     </Carousel>
   ),
-  args: { arrows: true, indicator: 'dots', loop: true, spacing: 16 },
+  args: { arrows: true, indicator: 'dots', infinite: true, peek: 32, spacing: 16 },
   parameters: {
-    containerWidth: 600,
+    containerWidth: 680,
     docs: {
       description: {
         story:
-          'Split cards as slides: text on the left half, image on the right half. Each slide is a plain `<article>` with `grid-template-columns: 1fr 1fr` — the carousel imposes no markup of its own on the children.',
+          'Split cards as slides: text on the left half, image on the right half. Each slide is a plain `<article>` with `grid-template-columns: 1fr 1fr` — the carousel imposes no markup of its own on the children. **peek** shows the edge of the next card so the deck reads as a deck, and it doubles as a gutter that keeps the overlaid arrows off the copy.',
+      },
+    },
+  },
+};
+
+// ─── FocusActiveSlides ────────────────────────────────────────────────────────
+
+export const FocusActiveSlides: Story = {
+  render: (args) => (
+    <Carousel {...args}>
+      {[...COLORS, ...COLORS].map((c, i) => (
+        <SlidePlaceholder key={i} label={`${LABELS[i % LABELS.length]} ${i + 1}`} color={c} />
+      ))}
+    </Carousel>
+  ),
+  args: {
+    focusActiveSlides: true,
+    peek: 96,
+    spacing: 16,
+    infinite: true,
+    arrows: true,
+    indicator: 'dots',
+  },
+  parameters: {
+    containerWidth: 720,
+    docs: {
+      description: {
+        story:
+          'With **focusActiveSlides**, everything outside the current page shrinks to 80% and animates back up as it becomes active. It only shows when the neighbours are on screen, so pair it with **peek**. Pass a number instead of `true` for a subtler ratio, e.g. `focusActiveSlides={0.92}`. The scale is a transform, so layout and paging are untouched.',
       },
     },
   },
