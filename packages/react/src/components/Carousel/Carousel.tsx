@@ -335,24 +335,41 @@ export const Carousel = ({
   }, []);
 
   /**
-   * Rewind from a clone onto the real page it copies. Runs once the scroll has
-   * settled and jumps instantly, so the swap is invisible.
+   * Put the scroll position back in the same cycle as the page we are logically
+   * on. Shifting by a whole cycle is pixel-identical — that is what the clones
+   * are for — so this is invisible, and it works on a scroll that is still
+   * animating, not just on a settled one.
+   *
+   * A shift only stays within the scrollable range while we sit on a clone,
+   * which is exactly when it is wanted: mid-deck positions are left alone.
    */
-  const normalizeLoop = useCallback(() => {
+  const alignToLogicalPage = useCallback(() => {
     const el = scrollRef.current;
-    if (!cloned || !el) {
+    if (!cloned || !el || draggingRef.current) {
       return;
     }
+    const horizontal = orientation === 'horizontal';
     const pageSize = getPageSize();
-    const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
-    const page = Math.round(scroll / pageSize) - leadUnits;
-    if (page >= 0 && page < pageCount) {
+    const cycle = pageCount * pageSize;
+    const scroll = horizontal ? el.scrollLeft : el.scrollTop;
+    const maxScroll = horizontal
+      ? el.scrollWidth - el.clientWidth
+      : el.scrollHeight - el.clientHeight;
+    const drift = scroll - (currentPageRef.current + leadUnits) * pageSize;
+
+    let aligned: number | null = null;
+    if (drift > cycle / 2 && scroll - cycle >= -1) {
+      aligned = scroll - cycle;
+    } else if (drift < -cycle / 2 && scroll + cycle <= maxScroll + 1) {
+      aligned = scroll + cycle;
+    }
+    if (aligned === null) {
       return;
     }
-    const wrapped = ((page % pageCount) + pageCount) % pageCount;
-    const offset = (wrapped + leadUnits) * pageSize;
+
+    const offset = Math.max(0, Math.min(aligned, maxScroll));
     suppressScrollFeedback(80);
-    if (orientation === 'horizontal') {
+    if (horizontal) {
       el.scrollTo({ left: offset, behavior: 'auto' });
     } else {
       el.scrollTo({ top: offset, behavior: 'auto' });
@@ -366,8 +383,10 @@ export const Carousel = ({
       if (!el) {
         return;
       }
-      const settle = behavior === 'smooth' ? 400 : 50;
-      suppressScrollFeedback(settle);
+      // Start from the cycle that makes this scroll travel the intended way:
+      // interrupting a wrap mid-flight would otherwise rewind across the deck.
+      alignToLogicalPage();
+      suppressScrollFeedback(behavior === 'smooth' ? 400 : 50);
 
       const offset = getPageSize() * unit;
       if (orientation === 'horizontal') {
@@ -375,13 +394,8 @@ export const Carousel = ({
       } else {
         el.scrollTo({ top: offset, behavior });
       }
-
-      if (cloned) {
-        window.clearTimeout(loopFixTimerRef.current);
-        loopFixTimerRef.current = window.setTimeout(normalizeLoop, settle + 20);
-      }
     },
-    [orientation, getPageSize, cloned, normalizeLoop, suppressScrollFeedback],
+    [orientation, getPageSize, alignToLogicalPage, suppressScrollFeedback],
   );
 
   const scrollToPage = useCallback(
@@ -421,7 +435,7 @@ export const Carousel = ({
       const wrapped = ((raw % pageCount) + pageCount) % pageCount;
       const next = wraps ? wrapped : Math.max(0, Math.min(raw, pageCount - 1));
       // With clones, keep travelling in the same direction onto the cloned page;
-      // normalizeLoop rewinds onto the real one after the animation settles.
+      // alignToLogicalPage rewinds onto the real one once scrolling stops.
       scrollToUnit((cloned && raw !== wrapped ? raw : next) + leadUnits);
       commitPage(next);
     },
@@ -444,6 +458,13 @@ export const Carousel = ({
     }
 
     const handleScroll = () => {
+      if (cloned) {
+        // Realign once scrolling has actually stopped. A fixed delay would
+        // sometimes fire mid-animation and cut the smooth scroll short, which
+        // reads as the carousel snapping back.
+        window.clearTimeout(loopFixTimerRef.current);
+        loopFixTimerRef.current = window.setTimeout(alignToLogicalPage, 120);
+      }
       if (draggingRef.current || isProgrammaticScrollRef.current) {
         return;
       }
@@ -454,17 +475,11 @@ export const Carousel = ({
         ? ((idx % pageCount) + pageCount) % pageCount
         : Math.max(0, Math.min(idx, pageCount - 1));
       commitPage(settled);
-
-      if (cloned) {
-        // Scrolls we did not start (wheel, trackpad) can also land on a clone.
-        window.clearTimeout(loopFixTimerRef.current);
-        loopFixTimerRef.current = window.setTimeout(normalizeLoop, 150);
-      }
     };
 
     el.addEventListener('scroll', handleScroll, { passive: true });
     return () => el.removeEventListener('scroll', handleScroll);
-  }, [orientation, pageCount, cloned, leadUnits, commitPage, normalizeLoop, getPageSize]);
+  }, [orientation, pageCount, cloned, leadUnits, commitPage, alignToLogicalPage, getPageSize]);
 
   // ── Keyboard navigation ───────────────────────────────────────────────────
 
@@ -621,7 +636,7 @@ export const Carousel = ({
 
       // Scroll to target while snap is still disabled, then re-enable once settled.
       // With clones we land where the finger left off — even on a clone — and
-      // normalizeLoop rewinds behind the scenes.
+      // alignToLogicalPage rewinds behind the scenes.
       scrollToUnit(
         cloned ? Math.max(0, Math.min(unit, pageCount + leadUnits)) : target + leadUnits,
       );

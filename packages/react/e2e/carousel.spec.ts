@@ -1,5 +1,12 @@
 import { expect, test } from '@playwright/test';
 
+declare global {
+  interface Window {
+    __samples?: number[];
+    __raf?: number;
+  }
+}
+
 // Carousel drives navigation through a real `el.scrollTo()` on its track and
 // reads the page back from real `el.scrollLeft` on scroll. Carousel.test.tsx
 // stubs `Element.prototype.scrollTo = vi.fn()` entirely — its own comment
@@ -175,4 +182,64 @@ test('dragging backward off the first page lands on the last one in infinite mod
 
   await expect(page.getByRole('tab', { name: 'Page 5' })).toHaveAttribute('aria-selected', 'true');
   await expect.poll(async () => Math.abs((await scroll()) - firstOffset * 5) <= 1).toBe(true);
+});
+
+test('rapid arrow clicks across the wrap never rewind the carousel', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--infinite');
+
+  const track = page.getByRole('region');
+  const next = page.getByRole('button', { name: 'Next slide' });
+
+  // Page 1 sits exactly one page in, so its offset is the page size.
+  const pageSize = await track.evaluate((el) => el.scrollLeft);
+  const cycle = pageSize * 5; // five pages in this story
+
+  for (let i = 0; i < 4; i++) {
+    await next.click();
+    await page.waitForTimeout(500);
+  }
+  await page.waitForTimeout(400);
+
+  // Sample the real scroll position on every animation frame.
+  await track.evaluate((el) => {
+    window.__samples = [];
+    const tick = () => {
+      window.__samples?.push(el.scrollLeft);
+      window.__raf = requestAnimationFrame(tick);
+    };
+    tick();
+  });
+
+  // Wrap past the last page, then interrupt the animation with another click —
+  // the case that used to smooth-scroll all the way back across the deck.
+  await next.click();
+  await page.waitForTimeout(150);
+  await next.click();
+  await page.waitForTimeout(1200);
+
+  const samples = await page.evaluate(() => {
+    if (window.__raf) {
+      cancelAnimationFrame(window.__raf);
+    }
+    return window.__samples ?? [];
+  });
+  expect(samples.length).toBeGreaterThan(20);
+
+  // Repositioning onto a clone shifts the offset by a whole cycle and is
+  // pixel-identical, so undo those shifts before judging the motion.
+  let shift = 0;
+  const travelled = samples.map((value, i) => {
+    if (i > 0 && value - samples[i - 1] < -cycle / 2) {
+      shift += cycle;
+    }
+    return value + shift;
+  });
+
+  const worstBackwardStep = Math.min(...travelled.slice(1).map((value, i) => value - travelled[i]));
+  expect(worstBackwardStep).toBeGreaterThanOrEqual(-1);
+
+  // Two clicks forward means exactly two pages of travel, never a rewind.
+  const total = travelled[travelled.length - 1] - travelled[0];
+  expect(Math.abs(total - pageSize * 2)).toBeLessThanOrEqual(2);
+  await expect(page.getByRole('tab', { name: 'Page 2' })).toHaveAttribute('aria-selected', 'true');
 });
