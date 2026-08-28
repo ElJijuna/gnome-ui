@@ -129,6 +129,16 @@ const CHEVRON_PATHS = {
 const keyOf = (node: ReactNode, index: number) =>
   isValidElement(node) && node.key !== null ? `slide-${node.key}` : `slide-${index}`;
 
+/**
+ * A `behavior: 'smooth'` passed to `scrollTo` wins over the stylesheet's
+ * `scroll-behavior`, so honouring reduced motion has to happen here rather than
+ * in CSS alone.
+ */
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const ArrowChevron = ({ direction }: { direction: keyof typeof CHEVRON_PATHS }) => (
   <svg width="16" height="16" viewBox="0 0 16 16" focusable="false" aria-hidden="true">
     <path
@@ -201,7 +211,7 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * @default 1
    */
   visibleSlides?: number;
-  /** Called whenever the visible page changes. */
+  /** Called whenever the visible page changes — once per actual change. */
   onPageChanged?: (index: number) => void;
   /**
    * Controlled current page index.
@@ -286,7 +296,9 @@ export const Carousel = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const vSlides = Math.max(1, Math.floor(visibleSlides)); // enforce integer
   const slideCount = Children.count(children);
-  const pageCount = Math.ceil(slideCount / vSlides);
+  // Floored at 1: an empty carousel still has to divide cleanly, or the modulo
+  // arithmetic in `navigate` turns every page index into NaN.
+  const pageCount = Math.max(1, Math.ceil(slideCount / vSlides));
   // `infinite` is a stronger `loop`: both wrap, only `infinite` clones.
   const wraps = loop || infinite;
   // Nothing to clone when everything already fits in one page.
@@ -311,9 +323,14 @@ export const Carousel = ({
   const loopFixTimerRef = useRef(0);
   // Auto-play: always-fresh snapshot of currentPage to avoid stale closure in setInterval
   const currentPageRef = useRef(currentPage);
+  // Held in a ref so `commitPage` stays stable across renders — it is a
+  // dependency of the scroll listener, which an inline callback would otherwise
+  // detach and reattach on every single render.
+  const onPageChangedRef = useRef(onPageChanged);
   const isHoveringRef = useRef(false);
   useEffect(() => {
     currentPageRef.current = currentPage;
+    onPageChangedRef.current = onPageChanged;
   });
 
   // Scroll distance per page = one full group = vSlides * (slide + spacing).
@@ -398,13 +415,14 @@ export const Carousel = ({
       // Start from the cycle that makes this scroll travel the intended way:
       // interrupting a wrap mid-flight would otherwise rewind across the deck.
       alignToLogicalPage();
-      suppressScrollFeedback(behavior === 'smooth' ? 400 : 50);
+      const motion = behavior === 'smooth' && prefersReducedMotion() ? 'auto' : behavior;
+      suppressScrollFeedback(motion === 'smooth' ? 400 : 50);
 
       const offset = getPageSize() * unit;
       if (orientation === 'horizontal') {
-        el.scrollTo({ left: offset, behavior });
+        el.scrollTo({ left: offset, behavior: motion });
       } else {
-        el.scrollTo({ top: offset, behavior });
+        el.scrollTo({ top: offset, behavior: motion });
       }
     },
     [orientation, getPageSize, alignToLogicalPage, suppressScrollFeedback],
@@ -416,16 +434,24 @@ export const Carousel = ({
     [scrollToUnit, leadUnits],
   );
 
-  /** Commit a page as the current one without moving the scroll position. */
+  /**
+   * Commit a page as the current one without moving the scroll position.
+   * A no-op when we are already there: the scroll listener runs on every frame
+   * of a swipe, and each of those frames would otherwise be an `onPageChanged`
+   * call carrying the page the consumer already knows about.
+   */
   const commitPage = useCallback(
     (index: number) => {
+      if (index === currentPageRef.current) {
+        return;
+      }
       currentPageRef.current = index;
       if (!isControlled) {
         setInternalPage(index);
       }
-      onPageChanged?.(index);
+      onPageChangedRef.current?.(index);
     },
-    [isControlled, onPageChanged],
+    [isControlled],
   );
 
   /** Jump straight to `index` (indicator clicks). */
@@ -731,7 +757,9 @@ export const Carousel = ({
   }, []);
 
   const isHorizontal = orientation === 'horizontal';
-  const showIndicator = indicator === 'dots' || indicator === 'lines';
+  // `pageCount` is floored at 1, so an empty carousel would otherwise get a
+  // lone dot standing for a page that holds nothing.
+  const showIndicator = (indicator === 'dots' || indicator === 'lines') && slideCount > 0;
   const isSide = indicatorPosition === 'left' || indicatorPosition === 'right';
   // A single page has nowhere to go — don't render dead arrows.
   const showArrows = arrows && pageCount > 1;

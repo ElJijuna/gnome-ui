@@ -283,3 +283,34 @@ test('focusActiveSlides shrinks the neighbours without shifting the snap points'
     expect(step.onScreen[1].width).toBeCloseTo(active.width, 1);
   }
 });
+
+// `behavior: 'smooth'` passed to scrollTo beats the stylesheet's
+// `scroll-behavior: auto`, so the reduced-motion media query alone never
+// stopped the animation — only the component dropping the option does.
+test('arrow navigation jumps straight to the page under reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/iframe.html?id=components-carousel--with-arrows');
+
+  const track = page.getByRole('region');
+  const width = await track.evaluate((el) => el.clientWidth);
+
+  await page.getByRole('button', { name: 'Next slide' }).click();
+
+  // Read straight after the click, with no polling: an animated scroll would
+  // still be near the start here.
+  expect(await track.evaluate((el) => el.scrollLeft)).toBeCloseTo(width, -1);
+});
+
+test('arrow navigation animates when reduced motion is not requested', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--with-arrows');
+
+  const track = page.getByRole('region');
+  const width = await track.evaluate((el) => el.clientWidth);
+
+  await page.getByRole('button', { name: 'Next slide' }).click();
+
+  // Still under way, so nowhere near the destination yet...
+  expect(await track.evaluate((el) => el.scrollLeft)).toBeLessThan(width / 2);
+  // ...and it gets there once the animation finishes.
+  await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(width, -1);
+});

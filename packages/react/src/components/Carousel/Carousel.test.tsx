@@ -118,7 +118,8 @@ describe('Carousel', () => {
 
       fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
 
-      expect(onPageChanged).toHaveBeenCalledWith(2);
+      // Clamped back onto the page we were already on, so nothing changed.
+      expect(onPageChanged).not.toHaveBeenCalled();
     });
 
     it('wraps to the first page on ArrowRight when loop is enabled', () => {
@@ -215,13 +216,108 @@ describe('Carousel', () => {
   // ── Uncontrolled mode ─────────────────────────────────────────────────────
 
   describe('uncontrolled mode', () => {
-    it('calls onPageChanged when a scroll event fires', () => {
+    // jsdom never really scrolls, so the track has to be told where a swipe
+    // would have left it.
+    const scrollTrackTo = (region: HTMLElement, scrollLeft: number) =>
+      Object.defineProperty(region, 'scrollLeft', { value: scrollLeft, configurable: true });
+
+    it('calls onPageChanged when a scroll event lands on another page', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ onPageChanged });
+      const region = screen.getByRole('region');
+      scrollTrackTo(region, 1);
+
+      fireEvent.scroll(region);
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    // A single swipe emits a scroll event per frame; each one used to be an
+    // onPageChanged call carrying the page the consumer already knew about.
+    it('does not repeat onPageChanged while scroll events keep landing on the same page', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ onPageChanged });
+      const region = screen.getByRole('region');
+      scrollTrackTo(region, 1);
+
+      fireEvent.scroll(region);
+      fireEvent.scroll(region);
+      fireEvent.scroll(region);
+
+      expect(onPageChanged).toHaveBeenCalledOnce();
+    });
+
+    it('does not call onPageChanged when a scroll settles on the page we are on', () => {
       const onPageChanged = vi.fn();
       renderCarousel({ onPageChanged });
 
       fireEvent.scroll(screen.getByRole('region'));
 
-      expect(onPageChanged).toHaveBeenCalledWith(0);
+      expect(onPageChanged).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── Empty carousel ────────────────────────────────────────────────────────
+
+  describe('without children', () => {
+    it('renders and navigates without producing NaN scroll offsets', () => {
+      render(<Carousel indicator="dots" />);
+      const region = screen.getByRole('region');
+
+      fireEvent.keyDown(region, { key: 'ArrowRight' });
+
+      const [[options]] = vi.mocked(Element.prototype.scrollTo).mock.calls as unknown as [
+        [ScrollToOptions],
+      ];
+      expect(options.left).not.toBeNaN();
+      // One floored page, but no slide behind it — so no dot either.
+      expect(screen.queryAllByRole('tab')).toHaveLength(0);
+    });
+  });
+
+  // ── Reduced motion ────────────────────────────────────────────────────────
+
+  describe('prefers-reduced-motion', () => {
+    const realMatchMedia = window.matchMedia;
+
+    afterEach(() => {
+      // The mock lives on `window`, so it would otherwise outlive this block.
+      Object.defineProperty(window, 'matchMedia', { writable: true, value: realMatchMedia });
+    });
+
+    // `behavior: 'smooth'` on scrollTo overrides the stylesheet, so the
+    // component has to drop it itself.
+    const mockReducedMotion = (matches: boolean) =>
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: vi.fn().mockImplementation((query: string) => ({
+          matches,
+          media: query,
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+        })),
+      });
+
+    it('scrolls instantly instead of smoothly when reduced motion is requested', () => {
+      mockReducedMotion(true);
+      renderCarousel();
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
+
+      expect(Element.prototype.scrollTo).toHaveBeenCalledWith(
+        expect.objectContaining({ behavior: 'auto' }),
+      );
+    });
+
+    it('keeps smooth scrolling when reduced motion is not requested', () => {
+      mockReducedMotion(false);
+      renderCarousel();
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
+
+      expect(Element.prototype.scrollTo).toHaveBeenCalledWith(
+        expect.objectContaining({ behavior: 'smooth' }),
+      );
     });
   });
 
@@ -392,7 +488,8 @@ describe('Carousel', () => {
       // 5 slides, visibleSlides=2 → 3 pages (0, 1, 2)
       renderWith5Slides({ page: 2, visibleSlides: 2, onPageChanged });
       fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
-      expect(onPageChanged).toHaveBeenCalledWith(2);
+      // Clamped onto the group we were already on, so nothing changed.
+      expect(onPageChanged).not.toHaveBeenCalled();
     });
 
     it('wraps from last group to first with loop', () => {

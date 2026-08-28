@@ -51,6 +51,14 @@ a remainder the last group overlaps the first one (5 slides in groups of 2 give 
 </Carousel>
 ```
 
+### Behaviour notes
+- `onPageChanged` fires once per actual page change. A swipe emits a scroll event per
+  frame, and navigating past the end without `loop` clamps back onto the current page —
+  neither re-notifies you of a page you are already on.
+- Programmatic scrolls honour `prefers-reduced-motion: reduce` by jumping straight to the
+  page. A `behavior: 'smooth'` scroll overrides the stylesheet, so this cannot be undone
+  from CSS.
+
 ### Guidelines
 - Keep page count low (3–6). More pages need a compact indicator like lines.
 - Reserve inline padding inside slides when `arrows` is on so the buttons don't sit on
