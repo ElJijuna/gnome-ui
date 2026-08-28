@@ -168,6 +168,25 @@ export const WithArrows: Story = {
   },
 };
 
+// ─── RightToLeft ──────────────────────────────────────────────────────────────
+
+export const RightToLeft: Story = {
+  render: (args) => (
+    <div dir="rtl">
+      {renderCarousel({ ...args, label: 'معرض الصور', indicatorLabel: 'Carousel pages' })}
+    </div>
+  ),
+  args: { arrows: true, indicator: 'dots' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Direction is read off the DOM, so a `dir="rtl"` anywhere up the tree is enough. Paging runs right to left, the arrows swap sides and flip their chevrons, dragging is mirrored, and ←/→ follow what the eye sees — the **left** arrow key moves forward.',
+      },
+    },
+  },
+};
+
 // ─── AutoPlay ─────────────────────────────────────────────────────────────────
 
 export const AutoPlay: Story = {

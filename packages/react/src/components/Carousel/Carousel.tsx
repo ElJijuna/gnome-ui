@@ -378,8 +378,12 @@ export const Carousel = ({
   // Scroll positions are counted in *units* of one page. With clones, unit 0 is
   // the leading copy of the last page, so real page `p` lives at unit `p + 1`.
   const leadUnits = cloned ? 1 : 0;
-  const axis = orientation === 'horizontal' ? 'width' : 'height';
+  const isHorizontal = orientation === 'horizontal';
+  const axis = isHorizontal ? 'width' : 'height';
   const [internalPage, setInternalPage] = useState(0);
+  // `direction` is inherited from anywhere up the tree, so it is read back off
+  // the DOM rather than taken as a prop.
+  const [isRtl, setIsRtl] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const isControlled = controlledPage !== undefined;
@@ -408,6 +412,76 @@ export const Carousel = ({
     onPageChangedRef.current = onPageChanged;
   });
 
+  // `direction` is inherited and fires no event of its own, so it is read off
+  // the DOM on mount and re-read whenever a `dir` attribute changes anywhere up
+  // the tree. The attribute filter keeps this quiet: nothing else wakes it, and
+  // the callback only ever reads.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) {
+      return;
+    }
+    const read = () => {
+      const rtl = getComputedStyle(el).direction === 'rtl';
+      setIsRtl((was) => (was === rtl ? was : rtl));
+    };
+    read();
+
+    if (typeof MutationObserver === 'undefined') {
+      return;
+    }
+    const observer = new MutationObserver(read);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['dir'],
+      subtree: true,
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  /**
+   * A right-to-left horizontal scroller starts at its right edge: `scrollLeft`
+   * is 0 on page 0 and counts *down* into negatives as you page forward.
+   * Everything below works in logical coordinates instead — 0 at page 0, growing
+   * forward, in both directions — and these four helpers are the only places
+   * that touch the DOM's own numbers. Vertical carousels are unaffected.
+   */
+  const dirSign = isHorizontal && isRtl ? -1 : 1;
+
+  const readScroll = useCallback(
+    (el: HTMLElement) => (isHorizontal ? el.scrollLeft * dirSign : el.scrollTop),
+    [isHorizontal, dirSign],
+  );
+
+  const readMaxScroll = useCallback(
+    (el: HTMLElement) =>
+      isHorizontal ? el.scrollWidth - el.clientWidth : el.scrollHeight - el.clientHeight,
+    [isHorizontal],
+  );
+
+  /** Instant, assignment-based — the drag loop runs this on every pointer move. */
+  const setScroll = useCallback(
+    (el: HTMLElement, offset: number) => {
+      if (isHorizontal) {
+        el.scrollLeft = offset * dirSign;
+      } else {
+        el.scrollTop = offset;
+      }
+    },
+    [isHorizontal, dirSign],
+  );
+
+  const animateScroll = useCallback(
+    (el: HTMLElement, offset: number, behavior: ScrollBehavior) => {
+      if (isHorizontal) {
+        el.scrollTo({ left: offset * dirSign, behavior });
+      } else {
+        el.scrollTo({ top: offset, behavior });
+      }
+    },
+    [isHorizontal, dirSign],
+  );
+
   // Scroll distance per page = one full group = vSlides * (slide + spacing).
   // Measured off a real slide rather than derived from the container, so `peek`
   // padding (which may be a percentage or any CSS length) is accounted for.
@@ -422,12 +496,12 @@ export const Carousel = ({
     const computed = first ? parseFloat(getComputedStyle(first)[axis]) : Number.NaN;
     const slideSize = Number.isFinite(computed)
       ? computed
-      : orientation === 'horizontal'
+      : isHorizontal
         ? el.clientWidth
         : el.clientHeight;
     const size = vSlides * (slideSize + spacing);
     return size > 0 ? size : 1;
-  }, [orientation, spacing, vSlides, axis]);
+  }, [isHorizontal, spacing, vSlides, axis]);
 
   /** Mute the scroll listener while a scroll we started is still running. */
   const suppressScrollFeedback = useCallback((ms: number) => {
@@ -452,13 +526,10 @@ export const Carousel = ({
     if (!cloned || !el || draggingRef.current) {
       return;
     }
-    const horizontal = orientation === 'horizontal';
     const pageSize = getPageSize();
     const cycle = pageCount * pageSize;
-    const scroll = horizontal ? el.scrollLeft : el.scrollTop;
-    const maxScroll = horizontal
-      ? el.scrollWidth - el.clientWidth
-      : el.scrollHeight - el.clientHeight;
+    const scroll = readScroll(el);
+    const maxScroll = readMaxScroll(el);
     const drift = scroll - (currentPageRef.current + leadUnits) * pageSize;
 
     let aligned: number | null = null;
@@ -473,12 +544,17 @@ export const Carousel = ({
 
     const offset = Math.max(0, Math.min(aligned, maxScroll));
     suppressScrollFeedback(80);
-    if (horizontal) {
-      el.scrollTo({ left: offset, behavior: 'auto' });
-    } else {
-      el.scrollTo({ top: offset, behavior: 'auto' });
-    }
-  }, [cloned, orientation, leadUnits, pageCount, getPageSize, suppressScrollFeedback]);
+    animateScroll(el, offset, 'auto');
+  }, [
+    cloned,
+    leadUnits,
+    pageCount,
+    getPageSize,
+    readScroll,
+    readMaxScroll,
+    animateScroll,
+    suppressScrollFeedback,
+  ]);
 
   /** Scroll to an absolute unit — may point at a clone when `infinite` is on. */
   const scrollToUnit = useCallback(
@@ -493,14 +569,9 @@ export const Carousel = ({
       const motion = behavior === 'smooth' && prefersReducedMotion() ? 'auto' : behavior;
       suppressScrollFeedback(motion === 'smooth' ? 400 : 50);
 
-      const offset = getPageSize() * unit;
-      if (orientation === 'horizontal') {
-        el.scrollTo({ left: offset, behavior: motion });
-      } else {
-        el.scrollTo({ top: offset, behavior: motion });
-      }
+      animateScroll(el, getPageSize() * unit, motion);
     },
-    [orientation, getPageSize, alignToLogicalPage, suppressScrollFeedback],
+    [getPageSize, animateScroll, alignToLogicalPage, suppressScrollFeedback],
   );
 
   const scrollToPage = useCallback(
@@ -582,8 +653,7 @@ export const Carousel = ({
         return;
       }
       const pageSize = getPageSize();
-      const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
-      const idx = Math.round(scroll / pageSize) - leadUnits;
+      const idx = Math.round(readScroll(el) / pageSize) - leadUnits;
       const settled = cloned
         ? ((idx % pageCount) + pageCount) % pageCount
         : Math.max(0, Math.min(idx, pageCount - 1));
@@ -592,7 +662,7 @@ export const Carousel = ({
 
     el.addEventListener('scroll', handleScroll, { passive: true });
     return () => el.removeEventListener('scroll', handleScroll);
-  }, [orientation, pageCount, cloned, leadUnits, commitPage, alignToLogicalPage, getPageSize]);
+  }, [pageCount, cloned, leadUnits, commitPage, alignToLogicalPage, getPageSize, readScroll]);
 
   // ── Keyboard navigation ───────────────────────────────────────────────────
 
@@ -604,9 +674,12 @@ export const Carousel = ({
         return;
       }
 
-      const isForward =
-        orientation === 'horizontal' ? e.key === 'ArrowRight' : e.key === 'ArrowDown';
-      const isBack = orientation === 'horizontal' ? e.key === 'ArrowLeft' : e.key === 'ArrowUp';
+      // Arrow keys follow what the eye sees, so in RTL the *left* arrow is the
+      // one that moves forward through the deck.
+      const forwardKey = isHorizontal ? (isRtl ? 'ArrowLeft' : 'ArrowRight') : 'ArrowDown';
+      const backKey = isHorizontal ? (isRtl ? 'ArrowRight' : 'ArrowLeft') : 'ArrowUp';
+      const isForward = e.key === forwardKey;
+      const isBack = e.key === backKey;
 
       if (!isForward && !isBack) {
         return;
@@ -614,7 +687,7 @@ export const Carousel = ({
       e.preventDefault();
       navigate(isForward ? 1 : -1);
     },
-    [orientation, navigate, goToPage, pageCount],
+    [isHorizontal, isRtl, navigate, goToPage, pageCount],
   );
 
   // ── Drag (mouse + touch + pen) ───────────────────────────────────────────
@@ -641,12 +714,12 @@ export const Carousel = ({
       hasDraggedRef.current = false;
       setIsDragging(true);
       dragStartRef.current = {
-        pos: orientation === 'horizontal' ? e.clientX : e.clientY,
-        scroll: orientation === 'horizontal' ? el.scrollLeft : el.scrollTop,
+        pos: isHorizontal ? e.clientX : e.clientY,
+        scroll: readScroll(el),
         time: Date.now(),
       };
     },
-    [orientation],
+    [isHorizontal, readScroll],
   );
 
   const handlePointerMove = useCallback(
@@ -659,18 +732,17 @@ export const Carousel = ({
         return;
       }
 
-      const pos = orientation === 'horizontal' ? e.clientX : e.clientY;
-      const delta = dragStartRef.current.pos - pos;
+      const pos = isHorizontal ? e.clientX : e.clientY;
+      // Signed into logical space: in RTL the finger travels right to move
+      // forward through the deck.
+      const delta = (dragStartRef.current.pos - pos) * dirSign;
 
       if (Math.abs(delta) > 4) {
         hasDraggedRef.current = true;
       }
 
       // Apply boundary resistance: dampen movement past first/last slide
-      const maxScroll =
-        orientation === 'horizontal'
-          ? el.scrollWidth - el.clientWidth
-          : el.scrollHeight - el.clientHeight;
+      const maxScroll = readMaxScroll(el);
       let newScroll = dragStartRef.current.scroll + delta;
 
       if (newScroll < 0) {
@@ -679,13 +751,9 @@ export const Carousel = ({
         newScroll = maxScroll + (newScroll - maxScroll) * 0.3;
       }
 
-      if (orientation === 'horizontal') {
-        el.scrollLeft = newScroll;
-      } else {
-        el.scrollTop = newScroll;
-      }
+      setScroll(el, newScroll);
     },
-    [orientation],
+    [isHorizontal, dirSign, readMaxScroll, setScroll],
   );
 
   const handlePointerUp = useCallback(
@@ -706,22 +774,14 @@ export const Carousel = ({
       }
 
       const isCancel = e.type === 'pointercancel';
-      const pos = isCancel
-        ? dragStartRef.current.pos
-        : orientation === 'horizontal'
-          ? e.clientX
-          : e.clientY;
+      const pos = isCancel ? dragStartRef.current.pos : isHorizontal ? e.clientX : e.clientY;
 
-      const delta = dragStartRef.current.pos - pos;
+      const delta = (dragStartRef.current.pos - pos) * dirSign;
       const elapsed = Math.max(Date.now() - dragStartRef.current.time, 1);
       const velocity = isCancel ? 0 : delta / elapsed; // px/ms, positive = forward
       const pageSize = getPageSize();
-      const scroll = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
-
-      const maxScroll =
-        orientation === 'horizontal'
-          ? el.scrollWidth - el.clientWidth
-          : el.scrollHeight - el.clientHeight;
+      const scroll = readScroll(el);
+      const maxScroll = readMaxScroll(el);
 
       let unit: number;
       if (Math.abs(velocity) > 0.3) {
@@ -766,7 +826,19 @@ export const Carousel = ({
         el.style.removeProperty('scroll-snap-type');
       }, 350);
     },
-    [orientation, getPageSize, wraps, cloned, leadUnits, pageCount, scrollToUnit, commitPage],
+    [
+      isHorizontal,
+      dirSign,
+      getPageSize,
+      readScroll,
+      readMaxScroll,
+      wraps,
+      cloned,
+      leadUnits,
+      pageCount,
+      scrollToUnit,
+      commitPage,
+    ],
   );
 
   // Auto-play: advance one slide every `interval` ms, pausing on hover, keyboard
@@ -807,8 +879,7 @@ export const Carousel = ({
       // Skip when already in place, so the common case never mutes the scroll
       // listener or fights a scroll in progress.
       const target = (currentPageRef.current + leadUnits) * getPageSize();
-      const current = orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
-      if (Math.abs(current - target) < 1) {
+      if (Math.abs(readScroll(el) - target) < 1) {
         return;
       }
       scrollToPage(currentPageRef.current, 'auto');
@@ -823,7 +894,7 @@ export const Carousel = ({
     const observer = new ResizeObserver(reposition);
     observer.observe(el);
     return () => observer.disconnect();
-  }, [scrollToPage, getPageSize, orientation, leadUnits]);
+  }, [scrollToPage, getPageSize, readScroll, leadUnits]);
 
   // Clean up timers on unmount
   useEffect(() => {
@@ -843,7 +914,6 @@ export const Carousel = ({
     }
   }, []);
 
-  const isHorizontal = orientation === 'horizontal';
   // `pageCount` is floored at 1, so an empty carousel would otherwise get a
   // lone dot standing for a page that holds nothing.
   const showIndicator = (indicator === 'dots' || indicator === 'lines') && slideCount > 0;
@@ -1057,7 +1127,7 @@ export const Carousel = ({
         onClick={() => navigate(isPrev ? -1 : 1)}
       >
         <ArrowChevron
-          direction={isHorizontal ? (isPrev ? 'left' : 'right') : isPrev ? 'up' : 'down'}
+          direction={isHorizontal ? (isPrev === !isRtl ? 'left' : 'right') : isPrev ? 'up' : 'down'}
         />
       </button>
     );

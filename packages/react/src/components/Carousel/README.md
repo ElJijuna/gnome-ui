@@ -27,6 +27,16 @@ or let `indicator` render one for you.
 - `autoPlay` — overlays a play/pause button in the corner. Turn `autoPlayControl` off only
   when you render your own; automatically moving content must be stoppable.
 
+### Right to left
+Direction is read off the DOM, so a `dir="rtl"` anywhere up the tree is all it takes — there
+is no prop. Everything mirrors: paging runs right to left, `peek` and the arrows follow the
+inline axis, the chevrons flip, dragging is reversed, and the **left** arrow key is the one
+that moves forward, because arrow keys follow what the eye sees rather than the index.
+
+Internally the scroll position is kept in logical coordinates — 0 on page 0, growing as you
+page forward — because a right-to-left scroller reports `scrollLeft` as 0 at its right edge
+and counts *down* into negatives from there.
+
 ### Accessibility
 - `label` names the carousel region (`'Carousel'` by default). `role="region"` is dropped
   from the landmark tree without a name, so give it something specific when the page holds

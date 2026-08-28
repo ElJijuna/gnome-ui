@@ -387,3 +387,88 @@ test('auto-play pauses while the keyboard is inside the carousel', async ({ page
     'true',
   );
 });
+
+// A right-to-left horizontal scroller starts at its right edge: scrollLeft is 0
+// on page 0 and counts *down* into negatives as you page forward. None of the
+// drag or paging maths held under that sign flip before.
+test.describe('right to left', () => {
+  const url = '/iframe.html?id=components-carousel--right-to-left';
+
+  test('arrows page forward into negative scroll offsets', async ({ page }) => {
+    await page.goto(url);
+
+    const track = page.getByRole('region');
+    const width = await track.evaluate((el) => el.clientWidth);
+    const prev = page.getByRole('button', { name: 'Previous slide' });
+
+    await expect(prev).toBeDisabled();
+    expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
+
+    await page.getByRole('button', { name: 'Next slide' }).click();
+
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(-width, -1);
+    await expect(prev).toBeEnabled();
+  });
+
+  test('the arrows sit on the mirrored edges', async ({ page }) => {
+    await page.goto(url);
+
+    const trackBox = (await page.getByRole('region').boundingBox())!;
+    const prevBox = (await page.getByRole('button', { name: 'Previous slide' }).boundingBox())!;
+    const nextBox = (await page.getByRole('button', { name: 'Next slide' }).boundingBox())!;
+
+    // Previous is the inline start, which in RTL is the right-hand edge.
+    expect(prevBox.x).toBeGreaterThan(trackBox.x + trackBox.width / 2);
+    expect(nextBox.x).toBeLessThan(trackBox.x + trackBox.width / 2);
+  });
+
+  test('the left arrow key moves forward', async ({ page }) => {
+    await page.goto(url);
+
+    await page.getByRole('region').focus();
+    await page.keyboard.press('ArrowLeft');
+
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+
+    await page.keyboard.press('ArrowRight');
+
+    await expect(pageButtons(page).nth(0)).toHaveAttribute('aria-current', 'true');
+  });
+
+  // Clones plus a wrap plus a flipped sign — the corner where the paging maths
+  // is most likely to come apart.
+  test('infinite wraps backward from the first page', async ({ page }) => {
+    await page.goto(`${url}&args=infinite:!true`);
+
+    const track = page.getByRole('region');
+    const width = await track.evaluate((el) => el.clientWidth);
+
+    // Page 0 sits one page in, behind it the cloned last page.
+    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(-width, -1);
+
+    await page.getByRole('button', { name: 'Previous slide' }).click();
+
+    await expect(pageButtons(page).nth(4)).toHaveAttribute('aria-current', 'true');
+    // Landed on the leading clone, then silently realigned onto the real page.
+    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(-width * 5, -1);
+  });
+
+  test('dragging rightwards advances the page', async ({ page }) => {
+    await page.goto(url);
+
+    const track = page.getByRole('region');
+    const box = (await track.boundingBox())!;
+    // Near the top edge, clear of the arrows — they are centred on the track and
+    // would swallow the pointerdown.
+    const y = box.y + 24;
+
+    // Mirror of the LTR drag: the finger travels the other way.
+    await page.mouse.move(box.x + 20, y);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width - 20, y, { steps: 10 });
+    await page.mouse.up();
+
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+  });
+});
