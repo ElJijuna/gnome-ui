@@ -562,3 +562,115 @@ test.describe('imperative handle', () => {
     await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
   });
 });
+
+// `orientation="vertical"` is a first-class prop whose scroll maths went through
+// the same rewrite as the horizontal axis, with almost nothing exercising it.
+test.describe('vertical', () => {
+  const url = '/iframe.html?id=components-carousel--vertical';
+
+  test('arrows page down the block axis and disable at the ends', async ({ page }) => {
+    await page.goto(url);
+
+    const track = page.getByRole('region');
+    const height = await track.evaluate((el) => el.clientHeight);
+    const prev = page.getByRole('button', { name: 'Previous slide' });
+    const next = page.getByRole('button', { name: 'Next slide' });
+
+    await expect(prev).toBeDisabled();
+    expect(await track.evaluate((el) => el.scrollTop)).toBe(0);
+    // The block axis moves; the inline one never does.
+    expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
+
+    await next.click();
+
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+    await expect.poll(() => track.evaluate((el) => el.scrollTop)).toBeCloseTo(height, -1);
+    expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
+    await expect(prev).toBeEnabled();
+
+    await prev.click();
+
+    await expect(pageButtons(page).nth(0)).toHaveAttribute('aria-current', 'true');
+    await expect.poll(() => track.evaluate((el) => el.scrollTop)).toBe(0);
+    await expect(prev).toBeDisabled();
+  });
+
+  test('the arrows sit on the block edges', async ({ page }) => {
+    await page.goto(url);
+
+    const trackBox = (await page.getByRole('region').boundingBox())!;
+    const prevBox = (await page.getByRole('button', { name: 'Previous slide' }).boundingBox())!;
+    const nextBox = (await page.getByRole('button', { name: 'Next slide' }).boundingBox())!;
+
+    expect(prevBox.y).toBeLessThan(trackBox.y + trackBox.height / 2);
+    expect(nextBox.y).toBeGreaterThan(trackBox.y + trackBox.height / 2);
+  });
+
+  test('up and down arrow keys page, left and right do nothing', async ({ page }) => {
+    await page.goto(url);
+
+    await page.getByRole('region').focus();
+
+    await page.keyboard.press('ArrowRight');
+    await expect(pageButtons(page).nth(0)).toHaveAttribute('aria-current', 'true');
+
+    await page.keyboard.press('ArrowDown');
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+
+    await page.keyboard.press('ArrowUp');
+    await expect(pageButtons(page).nth(0)).toHaveAttribute('aria-current', 'true');
+  });
+
+  test('dragging upwards advances the page', async ({ page }) => {
+    await page.goto(url);
+
+    const track = page.getByRole('region');
+    const box = (await track.boundingBox())!;
+    // Clear of the arrows, which are centred on the inline axis here.
+    const x = box.x + 24;
+
+    await page.mouse.move(x, box.y + box.height - 20);
+    await page.mouse.down();
+    await page.mouse.move(x, box.y + 20, { steps: 10 });
+    await page.mouse.up();
+
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+  });
+
+  test('infinite wraps backward from the first page', async ({ page }) => {
+    await page.goto(`${url}&args=infinite:!true`);
+
+    const track = page.getByRole('region');
+    const height = await track.evaluate((el) => el.clientHeight);
+    const scroll = () => track.evaluate((el) => el.scrollTop);
+
+    // Page 0 sits one page in, behind it the cloned last page.
+    await expect.poll(scroll).toBeCloseTo(height, -1);
+    await expect(track.getByRole('group')).toHaveCount(5);
+
+    await page.getByRole('button', { name: 'Previous slide' }).click();
+
+    await expect(pageButtons(page).nth(4)).toHaveAttribute('aria-current', 'true');
+    await expect.poll(scroll).toBeCloseTo(height * 5, -1);
+  });
+
+  test('peek insets the block axis', async ({ page }) => {
+    await page.goto('/iframe.html?id=components-carousel--vertical-peek');
+
+    const track = page.getByRole('region');
+    const padding = await track.evaluate((el) => {
+      const style = getComputedStyle(el);
+      return {
+        block: style.paddingBlockStart,
+        inline: style.paddingInlineStart,
+      };
+    });
+
+    // peek 24 + spacing 12: the gap falls inside the inset, so it is added back
+    // to keep `peek` the amount of the neighbour you actually see.
+    expect(padding.block).toBe('36px');
+    expect(padding.inline).toBe('0px');
+    // Neighbours show through the inset at both ends.
+    await expect(page.getByRole('group', { name: '2 of 5' })).toBeInViewport();
+  });
+});

@@ -169,6 +169,41 @@ export const WithArrows: Story = {
   },
 };
 
+// ─── Vertical ─────────────────────────────────────────────────────────────────
+
+export const Vertical: Story = {
+  render: renderCarousel,
+  args: { orientation: 'vertical', arrows: true, indicator: 'dots', indicatorPosition: 'right' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Paging runs down the block axis. The arrows move to the top and bottom edges on their own, ↑/↓ replace ←/→, `peek` insets the block axis, and the indicator is usually better off to one side. The track needs a height — the slides fill it.',
+      },
+    },
+  },
+};
+
+export const VerticalPeek: Story = {
+  render: renderCarousel,
+  args: {
+    orientation: 'vertical',
+    peek: 24,
+    spacing: 12,
+    infinite: true,
+    indicator: 'dots',
+    indicatorPosition: 'right',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`peek` follows the orientation: on a vertical carousel it insets the block axis, so the slides above and below show through the top and bottom edges instead of the sides.',
+      },
+    },
+  },
+};
+
 // ─── ImperativeControl ────────────────────────────────────────────────────────
 
 const ImperativeDemo = (args: ComponentProps<typeof Carousel>) => {

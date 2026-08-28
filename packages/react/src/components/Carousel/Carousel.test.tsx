@@ -265,6 +265,98 @@ describe('Carousel', () => {
     });
   });
 
+  // ── Vertical orientation ──────────────────────────────────────────────────
+
+  describe('vertical orientation', () => {
+    const renderVertical = (props: ComponentProps<typeof Carousel> = {}) =>
+      renderCarousel({ orientation: 'vertical', ...props });
+
+    it('scrolls the block axis, never the inline one', () => {
+      renderVertical();
+      vi.mocked(Element.prototype.scrollTo).mockClear();
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowDown' });
+
+      const [[options]] = vi.mocked(Element.prototype.scrollTo).mock.calls as unknown as [
+        [ScrollToOptions],
+      ];
+      expect(options).toHaveProperty('top');
+      expect(options).not.toHaveProperty('left');
+    });
+
+    // One press per render: with a controlled `page` the prop owns the position,
+    // so two presses in a row do not start from where the first one left off.
+    it('pages forward on ArrowDown', () => {
+      const onPageChanged = vi.fn();
+      renderVertical({ page: 1, onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowDown' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    it('pages back on ArrowUp', () => {
+      const onPageChanged = vi.fn();
+      renderVertical({ page: 1, onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowUp' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(0);
+    });
+
+    it('ignores the inline arrow keys', () => {
+      const onPageChanged = vi.fn();
+      renderVertical({ onPageChanged });
+      const region = screen.getByRole('region');
+
+      fireEvent.keyDown(region, { key: 'ArrowRight' });
+      fireEvent.keyDown(region, { key: 'ArrowLeft' });
+
+      expect(onPageChanged).not.toHaveBeenCalled();
+    });
+
+    it('still honours Home and End', () => {
+      const onPageChanged = vi.fn();
+      renderVertical({ onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'End' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    it('lays the track out as a column', () => {
+      renderVertical({ spacing: 16 });
+      const region = screen.getByRole('region');
+
+      expect(region.style.rowGap).toBe('16px');
+      expect(region.style.columnGap).toBe('');
+    });
+
+    it('drives the same imperative handle', () => {
+      const ref = createRef<CarouselHandle>();
+      render(
+        <Carousel orientation="vertical" ref={ref}>
+          <div>Slide A</div>
+          <div>Slide B</div>
+          <div>Slide C</div>
+        </Carousel>,
+      );
+
+      act(() => ref.current?.next());
+
+      expect(ref.current?.page).toBe(1);
+    });
+
+    it('scales the inactive slides for focusActiveSlides', () => {
+      renderVertical({ focusActiveSlides: true, page: 0 });
+      const slides = screen.getAllByRole('group');
+
+      // Every slide gets the scale wrapper; only the inactive ones are shrunk.
+      expect((slides[0].firstElementChild as HTMLElement).style.transform).toBe('');
+      expect((slides[1].firstElementChild as HTMLElement).style.transform).toBe('scale(0.8)');
+    });
+  });
+
   // ── Imperative handle ─────────────────────────────────────────────────────
 
   describe('ref handle', () => {
