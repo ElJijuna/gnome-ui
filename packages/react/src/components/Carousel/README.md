@@ -95,6 +95,38 @@ const [page, setPage] = useState(0);
 <Carousel page={page} onPageChanged={setPage} indicator="dots" />;
 ```
 
+### Imperative control
+Pass a `ref` to drive the carousel from outside — a toolbar, a keyboard shortcut, a step in
+a wizard.
+
+```tsx
+const carousel = useRef<CarouselHandle>(null);
+
+<Carousel ref={carousel} indicator="dots" loop>…</Carousel>;
+
+carousel.current?.next();
+carousel.current?.goToSlide(4);
+carousel.current?.page; // 4
+```
+
+| | |
+| --- | --- |
+| `next()` / `previous()` | Page by one. Wraps when `loop` or `infinite` is on. |
+| `goTo(page, { animate })` | Absolute jump. Clamped into range — it never wraps. |
+| `goToSlide(slide, { animate })` | Jump to the page holding a slide. Not the page index once `visibleSlides` is above 1. |
+| `focus()` | Move keyboard focus to the track. |
+| `play()` / `pause()` | Start and stop the `autoPlay` rotation, exactly as the button does. |
+| `page`, `pageCount`, `isPlaying` | Live getters. |
+| `element` | The scrollable track, for measuring or positioning. `null` before mount. |
+
+Every method takes the same path as the arrows and the indicator, so wrapping, travel across
+cloned pages, reduced motion and the `onPageChanged`-once rule behave the same however the
+move started. In particular the handle **reports** rather than seizes: with a controlled
+`page`, `next()` calls `onPageChanged` and leaves the prop to you, just like the arrow does.
+
+The readable members are getters, not a frozen snapshot, so `handle.page` is already right on
+the line after `next()` instead of a render later.
+
 ### Behaviour notes
 - `defaultPage` is clamped into range and ignored entirely once `page` is passed.
 - `onPageChanged` fires once per actual page change. A swipe emits a scroll event per

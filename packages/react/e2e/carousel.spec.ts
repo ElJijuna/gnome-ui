@@ -514,3 +514,51 @@ test.describe('right to left', () => {
     await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
   });
 });
+
+// The handle is only worth anything if it drives the real scroller, not just
+// internal state — so this goes through the DOM like a consumer would.
+test.describe('imperative handle', () => {
+  const url = '/iframe.html?id=components-carousel--imperative-control';
+
+  test('next, previous and goTo really move the track', async ({ page }) => {
+    await page.goto(url);
+
+    const track = page.getByRole('region');
+    const width = await track.evaluate((el) => el.clientWidth);
+    const readout = page.getByText(/^page \d+ of \d+$/);
+
+    await page.getByRole('button', { name: 'next()' }).click();
+
+    await expect(readout).toHaveText('page 2 of 5');
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(width, -1);
+
+    await page.getByRole('button', { name: 'previous()' }).click();
+
+    await expect(readout).toHaveText('page 1 of 5');
+    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBe(0);
+
+    await page.getByRole('button', { name: 'goToSlide(4)' }).click();
+
+    await expect(readout).toHaveText('page 5 of 5');
+    await expect(page.getByRole('group', { name: '5 of 5' })).toBeInViewport();
+  });
+
+  test('previous() wraps from the first page when loop is on', async ({ page }) => {
+    await page.goto(url);
+
+    await page.getByRole('button', { name: 'previous()' }).click();
+
+    await expect(page.getByText(/^page \d+ of \d+$/)).toHaveText('page 5 of 5');
+    await expect(pageButtons(page).nth(4)).toHaveAttribute('aria-current', 'true');
+  });
+
+  test('focus() puts the keyboard on the track', async ({ page }) => {
+    await page.goto(url);
+
+    await page.getByRole('button', { name: 'focus()' }).click();
+    await page.keyboard.press('ArrowRight');
+
+    await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+  });
+});

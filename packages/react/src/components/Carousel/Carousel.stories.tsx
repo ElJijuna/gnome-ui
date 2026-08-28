@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { type ComponentProps } from 'react';
+import { type ComponentProps, useRef, useState } from 'react';
 
-import { Carousel } from './Carousel';
+import { Carousel, type CarouselHandle } from './Carousel';
 import readme from './README.md?raw';
 
 type Story = StoryObj<ComponentProps<typeof Carousel>>;
@@ -164,6 +164,59 @@ export const WithArrows: Story = {
       description: {
         story:
           'Set **arrows** to overlay previous/next buttons on the carousel edges. They are disabled at the first and last page unless **loop** is on, and hidden entirely when there is only one page. Combine with `indicator: "none"` for arrows-only navigation.',
+      },
+    },
+  },
+};
+
+// ─── ImperativeControl ────────────────────────────────────────────────────────
+
+const ImperativeDemo = (args: ComponentProps<typeof Carousel>) => {
+  const ref = useRef<CarouselHandle>(null);
+  const [readout, setReadout] = useState('page 1 of 5');
+
+  const report = () =>
+    setReadout(`page ${(ref.current?.page ?? 0) + 1} of ${ref.current?.pageCount ?? 0}`);
+
+  const act = (fn: () => void) => () => {
+    fn();
+    // The getters are live, so the readout is right before the next render.
+    report();
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {renderCarousel({ ...args, ref })}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+        <button type="button" onClick={act(() => ref.current?.previous())}>
+          previous()
+        </button>
+        <button type="button" onClick={act(() => ref.current?.next())}>
+          next()
+        </button>
+        <button type="button" onClick={act(() => ref.current?.goTo(0))}>
+          goTo(0)
+        </button>
+        <button type="button" onClick={act(() => ref.current?.goToSlide(4))}>
+          goToSlide(4)
+        </button>
+        <button type="button" onClick={act(() => ref.current?.focus())}>
+          focus()
+        </button>
+        <output style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>{readout}</output>
+      </div>
+    </div>
+  );
+};
+
+export const ImperativeControl: Story = {
+  render: (args) => <ImperativeDemo {...args} />,
+  args: { indicator: 'dots', loop: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Drive the carousel from outside with a `ref`. Every method takes the same path as the arrows and the dots, so wrapping, cloned-page travel and reduced motion behave the same however the move started — and `page`, `pageCount` and `isPlaying` are live getters, correct on the line after the call rather than after the next render.',
       },
     },
   },

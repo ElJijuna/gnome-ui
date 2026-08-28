@@ -7,8 +7,10 @@ import {
   type MouseEvent,
   type PointerEvent,
   type ReactNode,
+  type Ref,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useRef,
   useState,
 } from 'react';
@@ -187,8 +189,47 @@ const PlayPauseGlyph = ({ playing }: { playing: boolean }) => (
 
 // ─── Carousel ─────────────────────────────────────────────────────────────────
 
+/**
+ * Imperative handle for `Carousel`, reached through `ref`.
+ *
+ * Every method routes through the same internals as the arrows and the
+ * indicator, so wrapping, cloned-page travel, reduced motion and the
+ * controlled-mode contract all behave identically however the move was started.
+ * The readable members are live getters, correct on the line after the call
+ * that changed them rather than after the next render.
+ */
+export interface CarouselHandle {
+  /** Advance one page. Wraps when `loop` or `infinite` is on. */
+  next: () => void;
+  /** Go back one page. Wraps when `loop` or `infinite` is on. */
+  previous: () => void;
+  /** Jump to a page index. Clamped into range — it never wraps. */
+  goTo: (page: number, options?: { animate?: boolean }) => void;
+  /**
+   * Jump to the page holding a given slide, counting slides the way
+   * `slideLabel` does. With `visibleSlides` above 1 this is not the page index.
+   */
+  goToSlide: (slide: number, options?: { animate?: boolean }) => void;
+  /** Move keyboard focus to the track. */
+  focus: () => void;
+  /** Start the `autoPlay` rotation, exactly as the play button does. */
+  play: () => void;
+  /** Stop the `autoPlay` rotation, exactly as the pause button does. */
+  pause: () => void;
+  /** Current page index. */
+  readonly page: number;
+  /** Total pages: `ceil(slides / visibleSlides)`, floored at 1. */
+  readonly pageCount: number;
+  /** Whether the rotation is running — always `false` without `autoPlay`. */
+  readonly isPlaying: boolean;
+  /** The scrollable track, for measuring or positioning. `null` before mount. */
+  readonly element: HTMLDivElement | null;
+}
+
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
+  /** Imperative handle — see `CarouselHandle`. */
+  ref?: Ref<CarouselHandle>;
   /**
    * Scroll orientation.
    * @default "horizontal"
@@ -348,6 +389,7 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const Carousel = ({
   children,
+  ref,
   orientation = 'horizontal',
   spacing = 0,
   loop = false,
@@ -422,9 +464,15 @@ export const Carousel = ({
   const isHoveringRef = useRef(false);
   // Keyboard users cannot hover, so focus has to pause the rotation for them.
   const isFocusedRef = useRef(false);
+  // Live snapshots for the imperative handle's getters, so a read taken on the
+  // line after `next()` is already right instead of waiting for a render.
+  const pageCountRef = useRef(pageCount);
+  const playingRef = useRef(autoPlay);
   useEffect(() => {
     currentPageRef.current = currentPage;
     onPageChangedRef.current = onPageChanged;
+    pageCountRef.current = pageCount;
+    playingRef.current = autoPlay && isPlaying;
   });
 
   // `direction` is inherited and fires no event of its own, so it is read off
@@ -617,8 +665,8 @@ export const Carousel = ({
 
   /** Jump straight to `index` (indicator clicks). */
   const goToPage = useCallback(
-    (index: number) => {
-      scrollToPage(index);
+    (index: number, behavior: ScrollBehavior = 'smooth') => {
+      scrollToPage(index, behavior);
       commitPage(index);
     },
     [scrollToPage, commitPage],
@@ -856,6 +904,24 @@ export const Carousel = ({
     ],
   );
 
+  /**
+   * An explicit play or pause outranks the hover and focus pauses: the pointer
+   * and the keyboard are sitting on the button precisely because you just asked
+   * the carousel to move, so leaving those flags set would make the resume
+   * button look dead.
+   */
+  const setPlaying = useCallback(
+    (playing: boolean) => {
+      isHoveringRef.current = false;
+      isFocusedRef.current = false;
+      // Written here as well as in the sync effect, so `handle.isPlaying` does
+      // not lag a render behind `handle.pause()`.
+      playingRef.current = autoPlay && playing;
+      setIsPlaying(playing);
+    },
+    [autoPlay],
+  );
+
   // Auto-play: advance one slide every `interval` ms, pausing on hover, keyboard
   // focus, drag, a backgrounded tab, or the pause button.
   useEffect(() => {
@@ -910,6 +976,39 @@ export const Carousel = ({
     observer.observe(el);
     return () => observer.disconnect();
   }, [scrollToPage, getPageSize, readScroll, leadUnits]);
+
+  useImperativeHandle(ref, (): CarouselHandle => {
+    const clampPage = (index: number) =>
+      Math.max(0, Math.min(Math.floor(index), pageCountRef.current - 1));
+
+    return {
+      // Straight through `navigate`, which is what the arrows call — the
+      // wrapping and the travel onto cloned pages come along with it.
+      next: () => navigate(1),
+      previous: () => navigate(-1),
+      goTo: (index, options) =>
+        goToPage(clampPage(index), options?.animate === false ? 'auto' : 'smooth'),
+      goToSlide: (slide, options) => {
+        const bounded = Math.max(0, Math.min(Math.floor(slide), slideCount - 1));
+        goToPage(clampPage(bounded / vSlides), options?.animate === false ? 'auto' : 'smooth');
+      },
+      focus: () => scrollRef.current?.focus(),
+      play: () => setPlaying(true),
+      pause: () => setPlaying(false),
+      get page() {
+        return currentPageRef.current;
+      },
+      get pageCount() {
+        return pageCountRef.current;
+      },
+      get isPlaying() {
+        return playingRef.current;
+      },
+      get element() {
+        return scrollRef.current;
+      },
+    };
+  }, [navigate, goToPage, setPlaying, slideCount, vSlides]);
 
   // Clean up timers on unmount
   useEffect(() => {
@@ -1153,15 +1252,7 @@ export const Carousel = ({
       type="button"
       className={styles.playPause}
       aria-label={isPlaying ? pauseLabel : playLabel}
-      onClick={() => {
-        // An explicit press outranks the hover and focus pauses: the pointer and
-        // the keyboard are sitting on this button precisely because you just
-        // asked the carousel to move, so leaving those flags set would make the
-        // resume button look dead.
-        isHoveringRef.current = false;
-        isFocusedRef.current = false;
-        setIsPlaying((playing) => !playing);
-      }}
+      onClick={() => setPlaying(!isPlaying)}
     >
       <PlayPauseGlyph playing={isPlaying} />
     </button>

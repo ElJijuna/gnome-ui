@@ -69,6 +69,7 @@ export { Callout } from './components/Callout';
 export type { CardPadding, CardProps } from './components/Card';
 export { Card } from './components/Card';
 export type {
+  CarouselHandle,
   CarouselIndicatorDotsProps,
   CarouselIndicatorLinesProps,
   CarouselProps,

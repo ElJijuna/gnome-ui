@@ -1,7 +1,12 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
-import { type ComponentProps } from 'react';
+import { type ComponentProps, createRef } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from './Carousel';
+import {
+  Carousel,
+  type CarouselHandle,
+  CarouselIndicatorDots,
+  CarouselIndicatorLines,
+} from './Carousel';
 
 beforeEach(() => {
   Element.prototype.scrollTo = vi.fn();
@@ -257,6 +262,179 @@ describe('Carousel', () => {
       fireEvent.scroll(screen.getByRole('region'));
 
       expect(onPageChanged).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── Imperative handle ─────────────────────────────────────────────────────
+
+  describe('ref handle', () => {
+    const renderWithHandle = (props: ComponentProps<typeof Carousel> = {}) => {
+      const ref = createRef<CarouselHandle>();
+      const result = render(
+        <Carousel {...props} ref={ref}>
+          <div>Slide A</div>
+          <div>Slide B</div>
+          <div>Slide C</div>
+        </Carousel>,
+      );
+      return { ref, ...result };
+    };
+
+    it('pages forward and back', () => {
+      const onPageChanged = vi.fn();
+      const { ref } = renderWithHandle({ onPageChanged });
+
+      act(() => ref.current?.next());
+      expect(onPageChanged).toHaveBeenLastCalledWith(1);
+
+      act(() => ref.current?.previous());
+      expect(onPageChanged).toHaveBeenLastCalledWith(0);
+    });
+
+    it('reads the page back without waiting for a render', () => {
+      const { ref } = renderWithHandle();
+
+      act(() => ref.current?.next());
+
+      expect(ref.current?.page).toBe(1);
+      expect(ref.current?.pageCount).toBe(3);
+    });
+
+    it('clamps at the ends like the arrows do', () => {
+      const onPageChanged = vi.fn();
+      const { ref } = renderWithHandle({ onPageChanged });
+
+      act(() => ref.current?.previous());
+
+      expect(onPageChanged).not.toHaveBeenCalled();
+      expect(ref.current?.page).toBe(0);
+    });
+
+    it('wraps when loop is on, like the arrows do', () => {
+      const onPageChanged = vi.fn();
+      const { ref } = renderWithHandle({ loop: true, onPageChanged });
+
+      act(() => ref.current?.previous());
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    describe('goTo', () => {
+      it('jumps to a page', () => {
+        const onPageChanged = vi.fn();
+        const { ref } = renderWithHandle({ onPageChanged });
+
+        act(() => ref.current?.goTo(2));
+
+        expect(onPageChanged).toHaveBeenCalledWith(2);
+      });
+
+      it('clamps out-of-range indices instead of wrapping', () => {
+        const { ref } = renderWithHandle({ loop: true });
+
+        act(() => ref.current?.goTo(99));
+        expect(ref.current?.page).toBe(2);
+
+        act(() => ref.current?.goTo(-5));
+        expect(ref.current?.page).toBe(0);
+      });
+
+      it('skips the animation when asked', () => {
+        const { ref } = renderWithHandle();
+        vi.mocked(Element.prototype.scrollTo).mockClear();
+
+        act(() => ref.current?.goTo(2, { animate: false }));
+
+        expect(Element.prototype.scrollTo).toHaveBeenCalledWith(
+          expect.objectContaining({ behavior: 'auto' }),
+        );
+      });
+    });
+
+    describe('goToSlide', () => {
+      it('is the page index when one slide shows at a time', () => {
+        const { ref } = renderWithHandle();
+
+        act(() => ref.current?.goToSlide(2));
+
+        expect(ref.current?.page).toBe(2);
+      });
+
+      it('resolves a slide to the group that holds it', () => {
+        const ref = createRef<CarouselHandle>();
+        render(
+          <Carousel visibleSlides={2} ref={ref}>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+          </Carousel>,
+        );
+
+        // Groups are [1,2] [3,4] [5]: slide 5 is index 4, on page 2.
+        act(() => ref.current?.goToSlide(4));
+        expect(ref.current?.page).toBe(2);
+
+        act(() => ref.current?.goToSlide(2));
+        expect(ref.current?.page).toBe(1);
+      });
+    });
+
+    describe('auto-play', () => {
+      it('pauses and resumes the rotation', () => {
+        vi.useFakeTimers();
+        const onPageChanged = vi.fn();
+        const { ref } = renderWithHandle({ autoPlay: true, interval: 1000, onPageChanged });
+
+        act(() => ref.current?.pause());
+        act(() => {
+          vi.advanceTimersByTime(5000);
+        });
+        expect(onPageChanged).not.toHaveBeenCalled();
+
+        act(() => ref.current?.play());
+        act(() => {
+          vi.advanceTimersByTime(1000);
+        });
+        expect(onPageChanged).toHaveBeenCalledWith(1);
+      });
+
+      it('reports isPlaying without waiting for a render', () => {
+        const { ref } = renderWithHandle({ autoPlay: true });
+
+        expect(ref.current?.isPlaying).toBe(true);
+        act(() => ref.current?.pause());
+        expect(ref.current?.isPlaying).toBe(false);
+      });
+
+      it('is never playing without autoPlay', () => {
+        const { ref } = renderWithHandle();
+
+        expect(ref.current?.isPlaying).toBe(false);
+        act(() => ref.current?.play());
+        expect(ref.current?.isPlaying).toBe(false);
+      });
+    });
+
+    it('exposes the track and focuses it', () => {
+      const { ref } = renderWithHandle();
+
+      expect(ref.current?.element).toBe(screen.getByRole('region'));
+
+      act(() => ref.current?.focus());
+      expect(screen.getByRole('region')).toHaveFocus();
+    });
+
+    it('reports through onPageChanged without seizing a controlled page', () => {
+      const onPageChanged = vi.fn();
+      const { ref } = renderWithHandle({ page: 1, onPageChanged });
+
+      act(() => ref.current?.next());
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+      // The prop still owns what is rendered.
+      expect(screen.getByRole('region')).toBeInTheDocument();
     });
   });
 

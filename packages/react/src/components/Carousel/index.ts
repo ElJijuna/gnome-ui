@@ -1,4 +1,5 @@
 export type {
+  CarouselHandle,
   CarouselIndicatorDotsProps,
   CarouselIndicatorLinesProps,
   CarouselProps,
