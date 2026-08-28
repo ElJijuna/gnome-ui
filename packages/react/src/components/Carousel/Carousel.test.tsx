@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { type ComponentProps, createRef } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { GnomeProvider } from '../GnomeProvider/GnomeProvider';
 import {
   Carousel,
   type CarouselHandle,
@@ -265,6 +266,79 @@ describe('Carousel', () => {
     });
   });
 
+  // ── Responsive values ─────────────────────────────────────────────────────
+
+  describe('responsive visibleSlides', () => {
+    // The bucket comes from the track's own measured width. jsdom reports 0,
+    // which reads as "not measured yet" and resolves to `base` — the same thing
+    // the first server-rendered paint sees.
+    it('uses the base entry while the track is unmeasured', () => {
+      renderCarousel({ visibleSlides: { base: 3, narrow: 1 }, indicator: 'dots' });
+
+      // 3 slides in groups of 3 → one page.
+      expect(within(pageIndicator()).getAllByRole('button')).toHaveLength(1);
+    });
+
+    it('falls back to one slide when the map has no matching entry', () => {
+      renderCarousel({ visibleSlides: { narrow: 3 }, indicator: 'dots' });
+
+      expect(within(pageIndicator()).getAllByRole('button')).toHaveLength(3);
+    });
+
+    it('still accepts a plain number', () => {
+      renderCarousel({ visibleSlides: 3, indicator: 'dots' });
+
+      expect(within(pageIndicator()).getAllByRole('button')).toHaveLength(1);
+    });
+
+    it('resolves peek through the same buckets', () => {
+      renderCarousel({ peek: { base: 24, narrow: 8 } });
+
+      expect(screen.getByRole('region').style.paddingInline).toBe('24px');
+    });
+
+    // Regrouping moves the page index under the reader, so the carousel follows
+    // the slide that was leading the view instead of the number.
+    it('keeps the leading slide on screen when the group size changes', () => {
+      const onPageChanged = vi.fn();
+      const slides = Array.from({ length: 6 }, (_, i) => <div key={i}>Slide {i + 1}</div>);
+      const { rerender } = render(
+        <Carousel visibleSlides={2} defaultPage={2} onPageChanged={onPageChanged}>
+          {slides}
+        </Carousel>,
+      );
+
+      // Groups of 2, page 2 → slides 5 and 6, leading slide index 4.
+      rerender(
+        <Carousel visibleSlides={3} defaultPage={2} onPageChanged={onPageChanged}>
+          {slides}
+        </Carousel>,
+      );
+
+      // Groups of 3 → slide 4 lives on page 1, not page 2.
+      expect(onPageChanged).toHaveBeenLastCalledWith(1);
+    });
+
+    it('clamps when the deck loses pages entirely', () => {
+      const onPageChanged = vi.fn();
+      const slides = Array.from({ length: 6 }, (_, i) => <div key={i}>Slide {i + 1}</div>);
+      const { rerender } = render(
+        <Carousel visibleSlides={1} defaultPage={5} onPageChanged={onPageChanged}>
+          {slides}
+        </Carousel>,
+      );
+
+      rerender(
+        <Carousel visibleSlides={6} defaultPage={5} onPageChanged={onPageChanged}>
+          {slides}
+        </Carousel>,
+      );
+
+      // Six slides in one group leaves a single page to be on.
+      expect(onPageChanged).toHaveBeenLastCalledWith(0);
+    });
+  });
+
   // ── Vertical orientation ──────────────────────────────────────────────────
 
   describe('vertical orientation', () => {
@@ -354,6 +428,59 @@ describe('Carousel', () => {
       // Every slide gets the scale wrapper; only the inactive ones are shrunk.
       expect((slides[0].firstElementChild as HTMLElement).style.transform).toBe('');
       expect((slides[1].firstElementChild as HTMLElement).style.transform).toBe('scale(0.8)');
+    });
+  });
+
+  // ── Text direction ────────────────────────────────────────────────────────
+
+  describe('direction', () => {
+    const realMatchMedia = window.matchMedia;
+
+    beforeEach(() => {
+      // GnomeProvider resolves the colour scheme on mount; jsdom has no
+      // matchMedia for it to ask.
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: vi.fn().mockImplementation((query: string) => ({
+          matches: false,
+          media: query,
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+        })),
+      });
+    });
+
+    afterEach(() => {
+      Object.defineProperty(window, 'matchMedia', { writable: true, value: realMatchMedia });
+    });
+
+    // GnomeProvider keeps `dir` in context and never writes the attribute, so
+    // reading the DOM alone would miss it entirely.
+    it('follows a GnomeProvider dir even though no attribute is rendered', () => {
+      const onPageChanged = vi.fn();
+      render(
+        <GnomeProvider dir="rtl">
+          <Carousel onPageChanged={onPageChanged}>
+            <div>Slide A</div>
+            <div>Slide B</div>
+            <div>Slide C</div>
+          </Carousel>
+        </GnomeProvider>,
+      );
+
+      // In RTL the left arrow is the one that moves forward.
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowLeft' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('stays left-to-right by default', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowLeft' });
+
+      expect(onPageChanged).not.toHaveBeenCalled();
     });
   });
 

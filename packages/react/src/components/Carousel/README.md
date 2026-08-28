@@ -8,7 +8,8 @@ or let `indicator` render one for you.
 
 ### Layout
 - `visibleSlides` — how many children fit inside the viewport at once. Paging moves a
-  whole group, so 5 slides with `visibleSlides={2}` give 3 pages.
+  whole group, so 5 slides with `visibleSlides={2}` give 3 pages. Takes a breakpoint map too
+  — see [Responsive](#responsive).
 - `peek` — how much of the neighbouring slides shows at each edge, as a px number or any
   CSS length (`peek="10%"`, `peek={40}`). The active group shrinks to make room, so
   paging still advances exactly one group. `spacing` is added on top of it, so `peek` is
@@ -18,6 +19,26 @@ or let `indicator` render one for you.
   (`focusActiveSlides={0.92}`). It only shows when the neighbours are on screen, so pair
   it with `peek`. The scale is a transform on an element inside each slide, so layout,
   snap points and paging are all untouched.
+
+### Responsive
+`visibleSlides` and `peek` accept a breakpoint map as well as a plain value:
+
+```tsx
+<Carousel visibleSlides={{ base: 3, wide: 2, narrow: 1 }} peek={{ base: 32, narrow: 0 }} />
+```
+
+The buckets are the GNOME max-widths (`narrow` ≤ 400, `medium` ≤ 550, `wide` ≤ 860), so a map
+reads like stacked media queries and the **narrowest matching entry wins**. Leave one out and
+it falls outwards: with no `medium`, a 550 px width keeps the `wide` value.
+
+They resolve against the **carousel's own width**, not the viewport — the `AdwBreakpointBin`
+pattern, so a carousel in a sidebar adapts to the space it was given rather than to the
+window. The width measured is the border box, so `peek` (which is padding on that element)
+cannot feed back into the bucket that chose it.
+
+Regrouping keeps the slide that was leading the view on screen, so the page index follows the
+content: at 3-per-page, page 2 leads with slide 4; drop to 1-per-page and you land on page 4,
+still looking at slide 4.
 
 ### Navigation chrome
 - `indicator` — `'dots'`, `'lines'`, or `'none'` to hide the pagination entirely.

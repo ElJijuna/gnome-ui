@@ -1,3 +1,4 @@
+import { usePrefersReducedMotion } from '@gnome-ui/hooks';
 import {
   Children,
   type CSSProperties,
@@ -14,6 +15,9 @@ import {
   useRef,
   useState,
 } from 'react';
+
+import { useDir } from '@/components/GnomeProvider/GnomeContext';
+import { bucketForWidth, type ResponsiveValue, resolveResponsive } from '@/hooks/useBreakpoint';
 
 import styles from './Carousel.module.css';
 
@@ -154,16 +158,6 @@ const CHEVRON_PATHS = {
 const keyOf = (node: ReactNode, index: number) =>
   isValidElement(node) && node.key !== null ? `slide-${node.key}` : `slide-${index}`;
 
-/**
- * A `behavior: 'smooth'` passed to `scrollTo` wins over the stylesheet's
- * `scroll-behavior`, so honouring reduced motion has to happen here rather than
- * in CSS alone.
- */
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  typeof window.matchMedia === 'function' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 const ArrowChevron = ({ direction }: { direction: keyof typeof CHEVRON_PATHS }) => (
   <svg width="16" height="16" viewBox="0 0 16 16" focusable="false" aria-hidden="true">
     <path
@@ -276,15 +270,28 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    * or any CSS length (`'10%'`, `'2rem'`). The active group shrinks to make
    * room, so paging still moves exactly one group. `spacing` is added on top,
    * so this is the amount of the neighbour you actually see.
+   *
+   * Accepts a breakpoint map, resolved like `visibleSlides`.
    * @default 0
    */
-  peek?: number | string;
+  peek?: ResponsiveValue<number | string>;
   /**
    * Number of slides visible at once (integer ≥ 1). Navigation advances one
    * full group at a time, and the indicator shows one dot/line per group.
+   *
+   * Accepts a breakpoint map keyed by the GNOME breakpoints, which are
+   * max-widths — so it reads like stacked media queries and the narrowest
+   * matching entry wins:
+   *
+   * ```tsx
+   * <Carousel visibleSlides={{ base: 3, wide: 2, narrow: 1 }} />
+   * ```
+   *
+   * The carousel keeps the leading slide on screen across a change, so the page
+   * index shifts to wherever that slide now lives.
    * @default 1
    */
-  visibleSlides?: number;
+  visibleSlides?: ResponsiveValue<number>;
   /** Called whenever the visible page changes — once per actual change. */
   onPageChanged?: (index: number) => void;
   /**
@@ -419,7 +426,19 @@ export const Carousel = ({
   ...props
 }: CarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const vSlides = Math.max(1, Math.floor(visibleSlides)); // enforce integer
+  // Breakpoints resolve against the carousel's own width, not the window's: a
+  // carousel in a sidebar has to adapt to the space it was given. That is the
+  // `AdwBreakpointBin` pattern.
+  //
+  // Measured border box, not content box — which is why `useElementSize` is not
+  // the hook for this. `peek` is inset as padding on this very element, so a
+  // content-box reading would shrink with it, and a width sitting near a
+  // threshold could flip the bucket, change the peek, and flip back forever.
+  const [trackWidth, setTrackWidth] = useState(0);
+  const bucket = bucketForWidth(trackWidth);
+  const visible = resolveResponsive(visibleSlides, bucket, 1);
+  const peekAt = resolveResponsive(peek, bucket, 0);
+  const vSlides = Math.max(1, Math.floor(visible)); // enforce integer
   const slideCount = Children.count(children);
   // Floored at 1: an empty carousel still has to divide cleanly, or the modulo
   // arithmetic in `navigate` turns every page index into NaN.
@@ -438,9 +457,13 @@ export const Carousel = ({
   const [internalPage, setInternalPage] = useState(() =>
     Math.max(0, Math.min(Math.floor(defaultPage), pageCount - 1)),
   );
-  // `direction` is inherited from anywhere up the tree, so it is read back off
-  // the DOM rather than taken as a prop.
-  const [isRtl, setIsRtl] = useState(false);
+  // Direction has two possible sources and the component honours both: a
+  // `GnomeProvider dir` (context only — the provider does not write the
+  // attribute) and a plain `dir="rtl"` anywhere up the DOM tree.
+  const contextDir = useDir();
+  const [domRtl, setDomRtl] = useState(false);
+  const isRtl = contextDir === 'rtl' || domRtl;
+  const reducedMotion = usePrefersReducedMotion();
   const [isDragging, setIsDragging] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const isControlled = controlledPage !== undefined;
@@ -475,10 +498,10 @@ export const Carousel = ({
     playingRef.current = autoPlay && isPlaying;
   });
 
-  // `direction` is inherited and fires no event of its own, so it is read off
-  // the DOM on mount and re-read whenever a `dir` attribute changes anywhere up
-  // the tree. The attribute filter keeps this quiet: nothing else wakes it, and
-  // the callback only ever reads.
+  // CSS `direction` fires no event of its own, so it is read off the DOM on
+  // mount and re-read whenever a `dir` attribute changes anywhere up the tree.
+  // The attribute filter keeps this quiet: nothing else wakes it, and the
+  // callback only ever reads.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) {
@@ -486,7 +509,7 @@ export const Carousel = ({
     }
     const read = () => {
       const rtl = getComputedStyle(el).direction === 'rtl';
-      setIsRtl((was) => (was === rtl ? was : rtl));
+      setDomRtl((was) => (was === rtl ? was : rtl));
     };
     read();
 
@@ -629,12 +652,14 @@ export const Carousel = ({
       // Start from the cycle that makes this scroll travel the intended way:
       // interrupting a wrap mid-flight would otherwise rewind across the deck.
       alignToLogicalPage();
-      const motion = behavior === 'smooth' && prefersReducedMotion() ? 'auto' : behavior;
+      // A `behavior: 'smooth'` passed to `scrollTo` wins over the stylesheet's
+      // `scroll-behavior`, so reduced motion has to be honoured here, not in CSS.
+      const motion = behavior === 'smooth' && reducedMotion ? 'auto' : behavior;
       suppressScrollFeedback(motion === 'smooth' ? 400 : 50);
 
       animateScroll(el, getPageSize() * unit, motion);
     },
-    [getPageSize, animateScroll, alignToLogicalPage, suppressScrollFeedback],
+    [reducedMotion, getPageSize, animateScroll, alignToLogicalPage, suppressScrollFeedback],
   );
 
   const scrollToPage = useCallback(
@@ -949,6 +974,25 @@ export const Carousel = ({
     return () => window.clearInterval(timer);
   }, [autoPlay, isPlaying, interval, wraps, pageCount, navigate]);
 
+  // A breakpoint change regroups the deck under us: the page index that meant
+  // "slides 3 and 4" now means something else, and at 3-per-page there may not
+  // even be a page 4 any more. Follow the slide that was leading the view rather
+  // than the index, so what the reader was looking at stays on screen.
+  const prevVSlidesRef = useRef(vSlides);
+  useEffect(() => {
+    if (prevVSlidesRef.current === vSlides) {
+      return;
+    }
+    const leadingSlide = currentPageRef.current * prevVSlidesRef.current;
+    prevVSlidesRef.current = vSlides;
+
+    const target = Math.max(0, Math.min(Math.floor(leadingSlide / vSlides), pageCount - 1));
+    commitPage(target);
+    // Unconditional: the group size changed, so the offset of that page did too,
+    // even when its index happens to be the one we were already on.
+    scrollToPage(target, 'auto');
+  }, [vSlides, pageCount, commitPage, scrollToPage]);
+
   // Page offsets are pixel measurements, and with clones page 0 does not sit at
   // scroll 0 — so put the current page back in place on mount and on resize.
   useEffect(() => {
@@ -956,7 +1000,13 @@ export const Carousel = ({
     if (!el) {
       return;
     }
+    const measure = () => {
+      const border = isHorizontal ? el.offsetWidth : el.offsetHeight;
+      setTrackWidth((was) => (was === border ? was : border));
+    };
+
     const reposition = () => {
+      measure();
       // Skip when already in place, so the common case never mutes the scroll
       // listener or fights a scroll in progress.
       const target = (currentPageRef.current + leadUnits) * getPageSize();
@@ -975,7 +1025,7 @@ export const Carousel = ({
     const observer = new ResizeObserver(reposition);
     observer.observe(el);
     return () => observer.disconnect();
-  }, [scrollToPage, getPageSize, readScroll, leadUnits]);
+  }, [scrollToPage, getPageSize, readScroll, leadUnits, isHorizontal]);
 
   useImperativeHandle(ref, (): CarouselHandle => {
     const clampPage = (index: number) =>
@@ -1085,13 +1135,13 @@ export const Carousel = ({
   // The inter-group gap falls inside that inset, so add it back — `peek` should
   // be what you actually see of the neighbour, not what the gap leaves over.
   const peekValue =
-    peek === 0 || peek === ''
+    peekAt === 0 || peekAt === ''
       ? undefined
-      : typeof peek === 'number'
-        ? `${peek + spacing}px`
+      : typeof peekAt === 'number'
+        ? `${peekAt + spacing}px`
         : spacing
-          ? `calc(${peek} + ${spacing}px)`
-          : peek;
+          ? `calc(${peekAt} + ${spacing}px)`
+          : peekAt;
 
   const childArray = Children.toArray(children);
   // Clone one page in front and enough behind to both complete a ragged last

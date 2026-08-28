@@ -674,3 +674,59 @@ test.describe('vertical', () => {
     await expect(page.getByRole('group', { name: '2 of 5' })).toBeInViewport();
   });
 });
+
+// Breakpoints resolve against the carousel's own width, so this is only
+// observable with a real container and real layout.
+test.describe('responsive', () => {
+  const url = '/iframe.html?id=components-carousel--responsive';
+
+  const setWidth = async (page: Page, width: number) => {
+    const slider = page.getByRole('slider');
+    await slider.fill(String(width));
+    await slider.dispatchEvent('change');
+  };
+
+  test('regroups on the container width, not the viewport', async ({ page }) => {
+    await page.goto(url);
+
+    // 900 px container → base → 3 per page → ceil(5/3) = 2 pages.
+    await expect(pageButtons(page)).toHaveCount(2);
+
+    // 700 px → wide → 2 per page → 3 pages. The viewport never changed.
+    await setWidth(page, 700);
+    await expect(pageButtons(page)).toHaveCount(3);
+
+    // 380 px → narrow → 1 per page → 5 pages.
+    await setWidth(page, 380);
+    await expect(pageButtons(page)).toHaveCount(5);
+  });
+
+  test('keeps the leading slide on screen across a regroup', async ({ page }) => {
+    await page.goto(url);
+
+    // Groups of 3, page 2 leads with slide 4.
+    await page.getByRole('button', { name: 'Next slide' }).click();
+    await expect(page.getByRole('group', { name: '4 of 5' })).toBeInViewport();
+
+    await setWidth(page, 380);
+
+    // One per page now, so slide 4 is page 4 — the reader keeps looking at it.
+    await expect(pageButtons(page)).toHaveCount(5);
+    await expect(pageButtons(page).nth(3)).toHaveAttribute('aria-current', 'true');
+    await expect(page.getByRole('group', { name: '4 of 5' })).toBeInViewport();
+  });
+
+  test('resolves peek through the same buckets', async ({ page }) => {
+    await page.goto(url);
+
+    const padding = () =>
+      page.getByRole('region').evaluate((el) => getComputedStyle(el).paddingInlineStart);
+
+    // peek 32 + spacing 12 at base.
+    await expect.poll(padding).toBe('44px');
+
+    // narrow drops the peek to 0, leaving no inset at all.
+    await setWidth(page, 380);
+    await expect.poll(padding).toBe('0px');
+  });
+});

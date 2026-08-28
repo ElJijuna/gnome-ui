@@ -6,5 +6,16 @@ export {
   useLocale,
   useNumberFormatter,
 } from '@/components/GnomeProvider/GnomeContext';
-export type { BreakpointState, GnomeBreakpointName } from './useBreakpoint';
-export { GNOME_BREAKPOINTS, useBreakpoint } from './useBreakpoint';
+export type {
+  BreakpointState,
+  GnomeBreakpointBucket,
+  GnomeBreakpointName,
+  ResponsiveValue,
+} from './useBreakpoint';
+export {
+  bucketForWidth,
+  GNOME_BREAKPOINTS,
+  isResponsiveMap,
+  resolveResponsive,
+  useBreakpoint,
+} from './useBreakpoint';

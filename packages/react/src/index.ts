@@ -409,6 +409,17 @@ export type { WindowTitleProps } from './components/WindowTitle';
 export { WindowTitle } from './components/WindowTitle';
 export type { WrapBoxAlign, WrapBoxJustify, WrapBoxProps } from './components/WrapBox';
 export { WrapBox } from './components/WrapBox';
-export type { BreakpointState, GnomeBreakpointName } from './hooks/useBreakpoint';
+export type {
+  BreakpointState,
+  GnomeBreakpointBucket,
+  GnomeBreakpointName,
+  ResponsiveValue,
+} from './hooks/useBreakpoint';
 // Hooks
-export { GNOME_BREAKPOINTS, useBreakpoint } from './hooks/useBreakpoint';
+export {
+  bucketForWidth,
+  GNOME_BREAKPOINTS,
+  isResponsiveMap,
+  resolveResponsive,
+  useBreakpoint,
+} from './hooks/useBreakpoint';

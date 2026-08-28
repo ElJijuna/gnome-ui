@@ -32,7 +32,11 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
       description: 'Shrink the slides outside the current page to 80%, focusing the active ones.',
     },
     spacing: { control: { type: 'number', min: 0, max: 48, step: 4 } },
-    visibleSlides: { control: { type: 'number', min: 1, max: 5, step: 1 } },
+    visibleSlides: {
+      control: { type: 'number', min: 1, max: 5, step: 1 },
+      description:
+        "Slides per page. Accepts a breakpoint map (`{ base: 3, wide: 2, narrow: 1 }`) resolved against the carousel's own width.",
+    },
     autoPlay: { control: 'boolean' },
     interval: { control: { type: 'number', min: 500, max: 10000, step: 500 } },
     indicator: {
@@ -164,6 +168,50 @@ export const WithArrows: Story = {
       description: {
         story:
           'Set **arrows** to overlay previous/next buttons on the carousel edges. They are disabled at the first and last page unless **loop** is on, and hidden entirely when there is only one page. Combine with `indicator: "none"` for arrows-only navigation.',
+      },
+    },
+  },
+};
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+const ResponsiveDemo = (args: ComponentProps<typeof Carousel>) => {
+  const [width, setWidth] = useState(900);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem' }}>
+        Container width
+        <input
+          type="range"
+          min={280}
+          max={900}
+          step={10}
+          value={width}
+          onChange={(e) => setWidth(Number(e.target.value))}
+        />
+        <output style={{ fontFamily: 'monospace' }}>{width}px</output>
+      </label>
+      <div style={{ width, maxWidth: '100%' }}>{renderCarousel(args)}</div>
+    </div>
+  );
+};
+
+export const Responsive: Story = {
+  render: (args) => <ResponsiveDemo {...args} />,
+  args: {
+    visibleSlides: { base: 3, wide: 2, narrow: 1 },
+    peek: { base: 32, narrow: 0 },
+    spacing: 12,
+    indicator: 'dots',
+    arrows: true,
+  },
+  parameters: {
+    containerWidth: 940,
+    docs: {
+      description: {
+        story:
+          "Breakpoints resolve against the **carousel's own width**, not the window — drag the slider and watch the groups change without touching the viewport. That is the `AdwBreakpointBin` pattern: a carousel in a sidebar adapts to the space it was given. The buckets are max-widths, so `{ base: 3, wide: 2, narrow: 1 }` reads like stacked media queries and the narrowest match wins. Regrouping keeps the slide that was leading the view on screen, so the page index follows the content rather than the other way round.",
       },
     },
   },
