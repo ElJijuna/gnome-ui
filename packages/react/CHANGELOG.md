@@ -1,3 +1,14 @@
+## [1.64.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.63.0...@gnome-ui/react@1.64.0) (2026-08-28)
+
+### Features
+
+* **@gnome-ui/react:** add auto-play control with play/pause functionality and enhance accessibility features ([91915ff](https://github.com/ElJijuna/gnome-ui/commit/91915ff23391d26efbec878a3dc5f035cd70171a))
+* **@gnome-ui/react:** add defaultPage prop to Carousel for initial page control and update documentation ([6ad70bf](https://github.com/ElJijuna/gnome-ui/commit/6ad70bfa3946dd62eb961beed2a75721391d6033))
+* **@gnome-ui/react:** add imperative control to Carousel with ref support and update documentation ([08f2338](https://github.com/ElJijuna/gnome-ui/commit/08f233803d683cef4098eaa40a3e670055995855))
+* **@gnome-ui/react:** add right-to-left support for Carousel component with updated keyboard navigation and documentation ([fb96c23](https://github.com/ElJijuna/gnome-ui/commit/fb96c23d8d399d2c298bcc57e3c77a1c2d32c62e))
+* **@gnome-ui/react:** enhance Carousel component with reduced motion support and improved onPageChanged behavior ([c247d1d](https://github.com/ElJijuna/gnome-ui/commit/c247d1dd5f34f21a3c157d576ae3365bf78eb5e3))
+* **@gnome-ui/react:** implement responsive behavior for Carousel with breakpoint support for visibleSlides and peek properties ([8a3fab6](https://github.com/ElJijuna/gnome-ui/commit/8a3fab622d3553538f4fcaef4e907c106a586f18))
+
 ## [1.63.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.62.0...@gnome-ui/react@1.63.0) (2026-08-27)
 
 ### Features
