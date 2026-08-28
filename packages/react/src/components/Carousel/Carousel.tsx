@@ -24,6 +24,9 @@ const INDICATOR_FLEX_DIR: Record<IndicatorPosition, CSSProperties['flexDirection
   right: 'row',
 };
 
+const defaultPageLabel = (index: number) => `Page ${index + 1}`;
+const defaultSlideLabel = (index: number, total: number) => `${index + 1} of ${total}`;
+
 // ─── CarouselIndicatorDots ────────────────────────────────────────────────────
 
 export interface CarouselIndicatorDotsProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,6 +36,13 @@ export interface CarouselIndicatorDotsProps extends HTMLAttributes<HTMLDivElemen
   currentPage: number;
   /** Called when the user clicks a dot. */
   onPageSelected?: (index: number) => void;
+  /** Accessible name for each page button. @default `Page ${index + 1}` */
+  pageLabel?: (index: number, total: number) => string;
+  /**
+   * Accessible name for the indicator as a whole.
+   * @default 'Carousel pages'
+   */
+  label?: string;
 }
 
 /**
@@ -43,23 +53,26 @@ export const CarouselIndicatorDots = ({
   pages,
   currentPage,
   onPageSelected,
+  pageLabel = defaultPageLabel,
+  label = 'Carousel pages',
   className,
   ...props
 }: CarouselIndicatorDotsProps) => {
   return (
+    // Not a `tablist`: there are no tabpanels to control, and the role would
+    // promise roving-tabindex arrow navigation that a page picker does not have.
     <div
       className={[styles.indicatorDots, className].filter(Boolean).join(' ')}
-      role="tablist"
-      aria-label="Carousel pages"
+      role="group"
+      aria-label={label}
       {...props}
     >
       {Array.from({ length: pages }, (_, i) => (
         <button
           key={i}
           type="button"
-          role="tab"
-          aria-selected={i === currentPage}
-          aria-label={`Page ${i + 1}`}
+          aria-current={i === currentPage ? 'true' : undefined}
+          aria-label={pageLabel(i, pages)}
           className={[styles.dot, i === currentPage ? styles.dotActive : null]
             .filter(Boolean)
             .join(' ')}
@@ -79,6 +92,13 @@ export interface CarouselIndicatorLinesProps extends HTMLAttributes<HTMLDivEleme
   currentPage: number;
   /** Called when the user clicks a line. */
   onPageSelected?: (index: number) => void;
+  /** Accessible name for each page button. @default `Page ${index + 1}` */
+  pageLabel?: (index: number, total: number) => string;
+  /**
+   * Accessible name for the indicator as a whole.
+   * @default 'Carousel pages'
+   */
+  label?: string;
 }
 
 /**
@@ -89,23 +109,26 @@ export const CarouselIndicatorLines = ({
   pages,
   currentPage,
   onPageSelected,
+  pageLabel = defaultPageLabel,
+  label = 'Carousel pages',
   className,
   ...props
 }: CarouselIndicatorLinesProps) => {
   return (
+    // Not a `tablist`: there are no tabpanels to control, and the role would
+    // promise roving-tabindex arrow navigation that a page picker does not have.
     <div
       className={[styles.indicatorLines, className].filter(Boolean).join(' ')}
-      role="tablist"
-      aria-label="Carousel pages"
+      role="group"
+      aria-label={label}
       {...props}
     >
       {Array.from({ length: pages }, (_, i) => (
         <button
           key={i}
           type="button"
-          role="tab"
-          aria-selected={i === currentPage}
-          aria-label={`Page ${i + 1}`}
+          aria-current={i === currentPage ? 'true' : undefined}
+          aria-label={pageLabel(i, pages)}
           className={[styles.line, i === currentPage ? styles.lineActive : null]
             .filter(Boolean)
             .join(' ')}
@@ -149,6 +172,16 @@ const ArrowChevron = ({ direction }: { direction: keyof typeof CHEVRON_PATHS }) 
       strokeLinecap="round"
       strokeLinejoin="round"
     />
+  </svg>
+);
+
+const PlayPauseGlyph = ({ playing }: { playing: boolean }) => (
+  <svg width="16" height="16" viewBox="0 0 16 16" focusable="false" aria-hidden="true">
+    {playing ? (
+      <path d="M5 3h2.5v10H5zm3.5 0H11v10H8.5z" fill="currentColor" />
+    ) : (
+      <path d="M5 3l7 5-7 5z" fill="currentColor" />
+    )}
   </svg>
 );
 
@@ -249,6 +282,38 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
    */
   arrows?: boolean;
   /**
+   * Render a play/pause button while `autoPlay` is on. Automatically moving
+   * content needs a way to stop it (WCAG 2.2.2), so turn this off only when you
+   * provide your own control.
+   * @default true
+   */
+  autoPlayControl?: boolean;
+  /**
+   * Accessible name for the carousel as a whole. `role="region"` is dropped from
+   * the landmark tree without one.
+   * @default 'Carousel'
+   */
+  label?: string;
+  /**
+   * Accessible name for the indicator as a whole.
+   * @default 'Carousel pages'
+   */
+  indicatorLabel?: string;
+  /** Accessible name for each indicator button. @default `Page ${index + 1}` */
+  pageLabel?: (index: number, total: number) => string;
+  /** Accessible name for each slide. @default `${index + 1} of ${total}` */
+  slideLabel?: (index: number, total: number) => string;
+  /**
+   * Accessible label for the auto-play pause button.
+   * @default 'Pause automatic slide rotation'
+   */
+  pauseLabel?: string;
+  /**
+   * Accessible label for the auto-play resume button.
+   * @default 'Resume automatic slide rotation'
+   */
+  playLabel?: string;
+  /**
    * Accessible label for the previous-page arrow.
    * @default 'Previous slide'
    */
@@ -287,6 +352,13 @@ export const Carousel = ({
   indicator,
   indicatorPosition = 'bottom',
   arrows = false,
+  autoPlayControl = true,
+  label = 'Carousel',
+  indicatorLabel = 'Carousel pages',
+  pageLabel = defaultPageLabel,
+  slideLabel = defaultSlideLabel,
+  pauseLabel = 'Pause automatic slide rotation',
+  playLabel = 'Resume automatic slide rotation',
   previousLabel = 'Previous slide',
   nextLabel = 'Next slide',
   className,
@@ -309,6 +381,7 @@ export const Carousel = ({
   const axis = orientation === 'horizontal' ? 'width' : 'height';
   const [internalPage, setInternalPage] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const isControlled = controlledPage !== undefined;
   const currentPage = isControlled ? controlledPage : internalPage;
 
@@ -328,6 +401,8 @@ export const Carousel = ({
   // detach and reattach on every single render.
   const onPageChangedRef = useRef(onPageChanged);
   const isHoveringRef = useRef(false);
+  // Keyboard users cannot hover, so focus has to pause the rotation for them.
+  const isFocusedRef = useRef(false);
   useEffect(() => {
     currentPageRef.current = currentPage;
     onPageChangedRef.current = onPageChanged;
@@ -523,6 +598,12 @@ export const Carousel = ({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Home' || e.key === 'End') {
+        e.preventDefault();
+        goToPage(e.key === 'Home' ? 0 : pageCount - 1);
+        return;
+      }
+
       const isForward =
         orientation === 'horizontal' ? e.key === 'ArrowRight' : e.key === 'ArrowDown';
       const isBack = orientation === 'horizontal' ? e.key === 'ArrowLeft' : e.key === 'ArrowUp';
@@ -533,7 +614,7 @@ export const Carousel = ({
       e.preventDefault();
       navigate(isForward ? 1 : -1);
     },
-    [orientation, navigate],
+    [orientation, navigate, goToPage, pageCount],
   );
 
   // ── Drag (mouse + touch + pen) ───────────────────────────────────────────
@@ -688,14 +769,20 @@ export const Carousel = ({
     [orientation, getPageSize, wraps, cloned, leadUnits, pageCount, scrollToUnit, commitPage],
   );
 
-  // Auto-play: advance one slide every `interval` ms, pausing on hover/drag
+  // Auto-play: advance one slide every `interval` ms, pausing on hover, keyboard
+  // focus, drag, a backgrounded tab, or the pause button.
   useEffect(() => {
-    if (!autoPlay || interval <= 0) {
+    if (!autoPlay || !isPlaying || interval <= 0) {
       return;
     }
 
     const timer = window.setInterval(() => {
-      if (draggingRef.current || isHoveringRef.current) {
+      if (draggingRef.current || isHoveringRef.current || isFocusedRef.current) {
+        return;
+      }
+      // A backgrounded tab throttles the interval rather than stopping it, so
+      // the carousel would otherwise race through the deck unseen.
+      if (typeof document !== 'undefined' && document.hidden) {
         return;
       }
       if (!wraps && currentPageRef.current >= pageCount - 1) {
@@ -707,7 +794,7 @@ export const Carousel = ({
     }, interval);
 
     return () => window.clearInterval(timer);
-  }, [autoPlay, interval, wraps, pageCount, navigate]);
+  }, [autoPlay, isPlaying, interval, wraps, pageCount, navigate]);
 
   // Page offsets are pixel measurements, and with clones page 0 does not sit at
   // scroll 0 — so put the current page back in place on mount and on resize.
@@ -763,8 +850,38 @@ export const Carousel = ({
   const isSide = indicatorPosition === 'left' || indicatorPosition === 'right';
   // A single page has nowhere to go — don't render dead arrows.
   const showArrows = arrows && pageCount > 1;
+  // WCAG 2.2.2: content that moves on its own needs a control to stop it. A
+  // single page never moves, so it needs no button either.
+  const showPlayPause = autoPlay && autoPlayControl && pageCount > 1;
+  // Both the arrows and the play/pause button are overlaid on the track, so
+  // either one calls for the viewport that positions them.
+  const hasOverlay = showArrows || showPlayPause;
   // Anything but a bare scroll container needs a host for `className`/`style`/rest props.
-  const isWrapped = showIndicator || showArrows;
+  const isWrapped = showIndicator || hasOverlay;
+
+  /**
+   * Auto-play pauses while the pointer is over the carousel or the keyboard is
+   * inside it. Both live on the outermost element so that the arrows, the
+   * indicator and the pause button count as "over the carousel" too — hovering
+   * an arrow used to resume the rotation you were reaching for.
+   */
+  const rootPauseProps = autoPlay
+    ? {
+        onMouseEnter: () => {
+          isHoveringRef.current = true;
+        },
+        onMouseLeave: () => {
+          isHoveringRef.current = false;
+        },
+        // React's onFocus/onBlur are focusin/focusout, so they see descendants.
+        onFocus: () => {
+          isFocusedRef.current = true;
+        },
+        onBlur: () => {
+          isFocusedRef.current = false;
+        },
+      }
+    : undefined;
 
   // When an indicator sits alongside, the outer flex child must absorb the
   // leftover space — that's the arrow viewport when present, else the track.
@@ -849,6 +966,9 @@ export const Carousel = ({
     <div
       ref={scrollRef}
       role="region"
+      // `aria-roledescription` is only honoured on a named element, and an
+      // unnamed region is dropped from the landmark tree outright.
+      aria-label={label}
       aria-roledescription="carousel"
       tabIndex={0}
       className={[
@@ -872,14 +992,9 @@ export const Carousel = ({
               paddingBlock: peekValue,
               scrollPaddingBlock: peekValue,
             }),
-        ...(showArrows ? undefined : flexFill),
+        ...(hasOverlay ? undefined : flexFill),
       }}
-      onMouseEnter={() => {
-        isHoveringRef.current = true;
-      }}
-      onMouseLeave={() => {
-        isHoveringRef.current = false;
-      }}
+      {...(isWrapped ? undefined : rootPauseProps)}
       onKeyDown={handleKeyDown}
       onClick={handleClick}
       onPointerDown={handlePointerDown}
@@ -900,7 +1015,7 @@ export const Carousel = ({
             : {
                 role: 'group',
                 'aria-roledescription': 'slide',
-                'aria-label': `${index + 1} of ${slideCount}`,
+                'aria-label': slideLabel(index, slideCount),
               })}
           style={{
             ...(slideFlexBasis ? { flex: `0 0 ${slideFlexBasis}` } : undefined),
@@ -948,9 +1063,28 @@ export const Carousel = ({
     );
   };
 
-  // Arrows are absolutely positioned against this viewport, so they stay pinned
-  // to the visible edges instead of scrolling away with the track.
-  const content = showArrows ? (
+  const playPauseButton = (
+    <button
+      type="button"
+      className={styles.playPause}
+      aria-label={isPlaying ? pauseLabel : playLabel}
+      onClick={() => {
+        // An explicit press outranks the hover and focus pauses: the pointer and
+        // the keyboard are sitting on this button precisely because you just
+        // asked the carousel to move, so leaving those flags set would make the
+        // resume button look dead.
+        isHoveringRef.current = false;
+        isFocusedRef.current = false;
+        setIsPlaying((playing) => !playing);
+      }}
+    >
+      <PlayPauseGlyph playing={isPlaying} />
+    </button>
+  );
+
+  // The overlays are absolutely positioned against this viewport, so they stay
+  // pinned to the visible edges instead of scrolling away with the track.
+  const content = hasOverlay ? (
     <div
       className={[
         styles.viewport,
@@ -960,11 +1094,13 @@ export const Carousel = ({
         .filter(Boolean)
         .join(' ')}
       style={{ ...(showIndicator ? undefined : style), ...flexFill }}
+      {...(showIndicator ? undefined : rootPauseProps)}
       {...(showIndicator ? {} : props)}
     >
       {scrollContainer}
-      {renderArrow('prev')}
-      {renderArrow('next')}
+      {showArrows && renderArrow('prev')}
+      {showArrows && renderArrow('next')}
+      {showPlayPause && playPauseButton}
     </div>
   ) : (
     scrollContainer
@@ -978,6 +1114,15 @@ export const Carousel = ({
     ? { flexDirection: 'column', padding: '0 12px' }
     : undefined;
 
+  const indicatorProps = {
+    pages: pageCount,
+    currentPage,
+    onPageSelected: goToPage,
+    label: indicatorLabel,
+    pageLabel,
+    style: indicatorStyle,
+  };
+
   return (
     <div
       className={className}
@@ -986,25 +1131,12 @@ export const Carousel = ({
         display: 'flex',
         flexDirection: INDICATOR_FLEX_DIR[indicatorPosition],
       }}
+      {...rootPauseProps}
       {...props}
     >
       {content}
-      {indicator === 'dots' && (
-        <CarouselIndicatorDots
-          pages={pageCount}
-          currentPage={currentPage}
-          onPageSelected={goToPage}
-          style={indicatorStyle}
-        />
-      )}
-      {indicator === 'lines' && (
-        <CarouselIndicatorLines
-          pages={pageCount}
-          currentPage={currentPage}
-          onPageSelected={goToPage}
-          style={indicatorStyle}
-        />
-      )}
+      {indicator === 'dots' && <CarouselIndicatorDots {...indicatorProps} />}
+      {indicator === 'lines' && <CarouselIndicatorLines {...indicatorProps} />}
     </div>
   );
 };

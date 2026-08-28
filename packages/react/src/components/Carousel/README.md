@@ -24,6 +24,25 @@ or let `indicator` render one for you.
 - `arrows` — overlays previous/next buttons on the carousel edges. They disable at the
   first/last page unless the carousel wraps, and disappear when there is only one page.
   Label them with `previousLabel` / `nextLabel`.
+- `autoPlay` — overlays a play/pause button in the corner. Turn `autoPlayControl` off only
+  when you render your own; automatically moving content must be stoppable.
+
+### Accessibility
+- `label` names the carousel region (`'Carousel'` by default). `role="region"` is dropped
+  from the landmark tree without a name, so give it something specific when the page holds
+  more than one carousel.
+- Every visible string is a prop: `label`, `indicatorLabel`, `pageLabel`, `slideLabel`,
+  `previousLabel`, `nextLabel`, `pauseLabel`, `playLabel`. `pageLabel` and `slideLabel` are
+  formatters — `(index, total) => string`, both zero-based on `index`.
+- Keyboard: ←/→ (or ↑/↓ when vertical) page by one, `Home` and `End` jump to the first and
+  last page.
+- `autoPlay` pauses while the pointer is over the carousel, while the keyboard is inside
+  it, during a drag, while the tab is in the background, and whenever the pause button says
+  so. Pressing play overrides the hover and focus pauses, so the button never reads as dead.
+- The page indicators are a `role="group"` of ordinary buttons, and the current one carries
+  `aria-current="true"`. They are deliberately **not** a `tablist`: there are no tabpanels
+  behind them, and the role would promise roving-tabindex arrow navigation that a page
+  picker does not have.
 
 ### Wrapping: `loop` vs `infinite`
 Both wrap around past the ends; they differ in how they get there.

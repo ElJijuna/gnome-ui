@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { type ComponentProps } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Carousel, CarouselIndicatorDots, CarouselIndicatorLines } from './Carousel';
@@ -17,22 +17,22 @@ afterEach(() => {
 describe('CarouselIndicatorDots', () => {
   it('renders one dot per page', () => {
     render(<CarouselIndicatorDots pages={4} currentPage={0} />);
-    expect(screen.getAllByRole('tab')).toHaveLength(4);
+    expect(screen.getAllByRole('button')).toHaveLength(4);
   });
 
   it('marks only the current page dot as selected', () => {
     render(<CarouselIndicatorDots pages={3} currentPage={1} />);
-    const tabs = screen.getAllByRole('tab');
-    expect(tabs[0]).toHaveAttribute('aria-selected', 'false');
-    expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
-    expect(tabs[2]).toHaveAttribute('aria-selected', 'false');
+    const dots = screen.getAllByRole('button');
+    expect(dots[0]).not.toHaveAttribute('aria-current');
+    expect(dots[1]).toHaveAttribute('aria-current', 'true');
+    expect(dots[2]).not.toHaveAttribute('aria-current');
   });
 
   it('calls onPageSelected with the dot index when clicked', () => {
     const onPageSelected = vi.fn();
     render(<CarouselIndicatorDots pages={3} currentPage={0} onPageSelected={onPageSelected} />);
 
-    fireEvent.click(screen.getAllByRole('tab')[2]);
+    fireEvent.click(screen.getAllByRole('button')[2]);
 
     expect(onPageSelected).toHaveBeenCalledOnce();
     expect(onPageSelected).toHaveBeenCalledWith(2);
@@ -44,21 +44,21 @@ describe('CarouselIndicatorDots', () => {
 describe('CarouselIndicatorLines', () => {
   it('renders one line per page', () => {
     render(<CarouselIndicatorLines pages={5} currentPage={0} />);
-    expect(screen.getAllByRole('tab')).toHaveLength(5);
+    expect(screen.getAllByRole('button')).toHaveLength(5);
   });
 
   it('marks only the current page line as selected', () => {
     render(<CarouselIndicatorLines pages={3} currentPage={2} />);
-    const tabs = screen.getAllByRole('tab');
-    expect(tabs[0]).toHaveAttribute('aria-selected', 'false');
-    expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
+    const dots = screen.getAllByRole('button');
+    expect(dots[0]).not.toHaveAttribute('aria-current');
+    expect(dots[2]).toHaveAttribute('aria-current', 'true');
   });
 
   it('calls onPageSelected with the line index when clicked', () => {
     const onPageSelected = vi.fn();
     render(<CarouselIndicatorLines pages={3} currentPage={0} onPageSelected={onPageSelected} />);
 
-    fireEvent.click(screen.getAllByRole('tab')[1]);
+    fireEvent.click(screen.getAllByRole('button')[1]);
 
     expect(onPageSelected).toHaveBeenCalledWith(1);
   });
@@ -67,6 +67,9 @@ describe('CarouselIndicatorLines', () => {
 // ── Carousel ──────────────────────────────────────────────────────────────────
 
 describe('Carousel', () => {
+  /** The page picker — scoped, because arrows and pause are buttons too. */
+  const pageIndicator = () => screen.getByRole('group', { name: 'Carousel pages' });
+
   const renderCarousel = (props: ComponentProps<typeof Carousel> = {}) =>
     render(
       <Carousel {...props}>
@@ -271,7 +274,7 @@ describe('Carousel', () => {
       ];
       expect(options.left).not.toBeNaN();
       // One floored page, but no slide behind it — so no dot either.
-      expect(screen.queryAllByRole('tab')).toHaveLength(0);
+      expect(screen.queryAllByRole('button')).toHaveLength(0);
     });
   });
 
@@ -323,7 +326,128 @@ describe('Carousel', () => {
 
   // ── autoPlay ──────────────────────────────────────────────────────────────
 
+  describe('accessibility', () => {
+    it('gives the region an accessible name so it stays a landmark', () => {
+      renderCarousel();
+      expect(screen.getByRole('region')).toHaveAccessibleName('Carousel');
+    });
+
+    it('accepts a custom region name', () => {
+      renderCarousel({ label: 'Featured products' });
+      expect(screen.getByRole('region')).toHaveAccessibleName('Featured products');
+    });
+
+    it('lets the slide and page labels be translated', () => {
+      renderCarousel({
+        indicator: 'dots',
+        indicatorLabel: 'Páginas',
+        pageLabel: (i, total) => `Página ${i + 1} de ${total}`,
+        slideLabel: (i, total) => `Diapositiva ${i + 1} de ${total}`,
+      });
+
+      const indicator = screen.getByRole('group', { name: 'Páginas' });
+      expect(within(indicator).getByRole('button', { name: 'Página 1 de 3' })).toBeInTheDocument();
+      expect(screen.getByRole('group', { name: 'Diapositiva 2 de 3' })).toBeInTheDocument();
+    });
+
+    describe('Home and End', () => {
+      it('jumps to the first page on Home', () => {
+        const onPageChanged = vi.fn();
+        renderCarousel({ page: 2, onPageChanged });
+
+        fireEvent.keyDown(screen.getByRole('region'), { key: 'Home' });
+
+        expect(onPageChanged).toHaveBeenCalledWith(0);
+      });
+
+      it('jumps to the last page on End', () => {
+        const onPageChanged = vi.fn();
+        renderCarousel({ page: 0, onPageChanged });
+
+        fireEvent.keyDown(screen.getByRole('region'), { key: 'End' });
+
+        expect(onPageChanged).toHaveBeenCalledWith(2);
+      });
+    });
+  });
+
   describe('autoPlay', () => {
+    // WCAG 2.2.2 — moving content needs a control that stops it.
+    const pauseButton = () =>
+      screen.getByRole('button', { name: 'Pause automatic slide rotation' });
+
+    it('renders a pause control', () => {
+      renderCarousel({ autoPlay: true });
+      expect(pauseButton()).toBeInTheDocument();
+    });
+
+    it('stops advancing once the rotation is paused', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      act(() => {
+        fireEvent.click(pauseButton());
+      });
+      act(() => {
+        vi.advanceTimersByTime(5000);
+      });
+
+      expect(onPageChanged).not.toHaveBeenCalled();
+      expect(
+        screen.getByRole('button', { name: 'Resume automatic slide rotation' }),
+      ).toBeInTheDocument();
+    });
+
+    it('resumes advancing when the control is pressed again', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      act(() => {
+        fireEvent.click(pauseButton());
+      });
+      act(() => {
+        fireEvent.click(screen.getByRole('button', { name: 'Resume automatic slide rotation' }));
+      });
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
+    it('omits the control when autoPlayControl is off', () => {
+      renderCarousel({ autoPlay: true, autoPlayControl: false });
+      expect(
+        screen.queryByRole('button', { name: 'Pause automatic slide rotation' }),
+      ).not.toBeInTheDocument();
+    });
+
+    // Keyboard users cannot hover, so focus is their equivalent of the
+    // hover pause that pointer users already had.
+    it('pauses while the keyboard is inside the carousel', () => {
+      vi.useFakeTimers();
+      const onPageChanged = vi.fn();
+      renderCarousel({ autoPlay: true, interval: 1000, onPageChanged });
+
+      act(() => {
+        fireEvent.focus(screen.getByRole('region'));
+      });
+      act(() => {
+        vi.advanceTimersByTime(3000);
+      });
+      expect(onPageChanged).not.toHaveBeenCalled();
+
+      act(() => {
+        fireEvent.blur(screen.getByRole('region'));
+      });
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+      expect(onPageChanged).toHaveBeenCalledWith(1);
+    });
+
     it('advances to the next slide after the interval', () => {
       vi.useFakeTimers();
       const onPageChanged = vi.fn();
@@ -475,12 +599,12 @@ describe('Carousel', () => {
 
     it('shows ceil(slides/visibleSlides) indicator dots', () => {
       renderWith5Slides({ visibleSlides: 2, indicator: 'dots' });
-      expect(screen.getAllByRole('tab')).toHaveLength(3); // ceil(5/2) = 3
+      expect(within(pageIndicator()).getAllByRole('button')).toHaveLength(3); // ceil(5/2) = 3
     });
 
     it('shows 2 indicator dots for 5 slides with visibleSlides=3', () => {
       renderWith5Slides({ visibleSlides: 3, indicator: 'dots' });
-      expect(screen.getAllByRole('tab')).toHaveLength(2); // ceil(5/3) = 2
+      expect(within(pageIndicator()).getAllByRole('button')).toHaveLength(2); // ceil(5/3) = 2
     });
 
     it('clamps at last group on ArrowRight without loop', () => {

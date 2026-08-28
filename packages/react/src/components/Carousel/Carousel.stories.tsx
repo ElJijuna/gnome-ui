@@ -49,8 +49,18 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
       control: 'boolean',
       description: 'Show previous/next arrow buttons overlaid on the carousel edges.',
     },
+    autoPlayControl: {
+      control: 'boolean',
+      description: 'Render the play/pause button while `autoPlay` is on (WCAG 2.2.2).',
+    },
+    label: { control: 'text', description: 'Accessible name for the carousel region.' },
+    indicatorLabel: { control: 'text' },
     previousLabel: { control: 'text' },
     nextLabel: { control: 'text' },
+    pauseLabel: { control: 'text' },
+    playLabel: { control: 'text' },
+    pageLabel: { table: { disable: true } },
+    slideLabel: { table: { disable: true } },
     page: { table: { disable: true } },
     onPageChanged: { table: { disable: true } },
     children: { table: { disable: true } },
@@ -153,6 +163,21 @@ export const WithArrows: Story = {
       description: {
         story:
           'Set **arrows** to overlay previous/next buttons on the carousel edges. They are disabled at the first and last page unless **loop** is on, and hidden entirely when there is only one page. Combine with `indicator: "none"` for arrows-only navigation.',
+      },
+    },
+  },
+};
+
+// ─── AutoPlay ─────────────────────────────────────────────────────────────────
+
+export const AutoPlay: Story = {
+  render: renderCarousel,
+  args: { autoPlay: true, interval: 2000, indicator: 'dots', loop: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Set **autoPlay** to rotate the deck on its own. A pause button is overlaid in the corner — automatically moving content has to be stoppable (WCAG 2.2.2). Rotation also pauses while the pointer is over the carousel, while the keyboard is inside it, during a drag, and while the tab is in the background. Turn **autoPlayControl** off only when you render your own control.',
       },
     },
   },

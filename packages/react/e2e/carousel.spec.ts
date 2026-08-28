@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 
 declare global {
   interface Window {
@@ -14,21 +14,25 @@ declare global {
 // (click → real scroll → real scroll event → page state syncs back) has
 // never run.
 
+/** The page picker's buttons — scoped, since arrows and pause are buttons too. */
+const pageButtons = (page: Page) =>
+  page.getByRole('group', { name: 'Carousel pages' }).getByRole('button');
+
 test('clicking a page tab really scrolls the track and updates the selected tab', async ({
   page,
 }) => {
   await page.goto('/iframe.html?id=components-carousel--with-dots');
 
   const track = page.getByRole('region');
-  const page1Tab = page.getByRole('tab', { name: 'Page 1' });
-  const page2Tab = page.getByRole('tab', { name: 'Page 2' });
+  const page1Dot = page.getByRole('button', { name: 'Page 1' });
+  const page2Dot = page.getByRole('button', { name: 'Page 2' });
 
-  await expect(page1Tab).toHaveAttribute('aria-selected', 'true');
+  await expect(page1Dot).toHaveAttribute('aria-current', 'true');
 
-  await page2Tab.click();
+  await page2Dot.click();
 
-  await expect(page2Tab).toHaveAttribute('aria-selected', 'true');
-  await expect(page1Tab).toHaveAttribute('aria-selected', 'false');
+  await expect(page2Dot).toHaveAttribute('aria-current', 'true');
+  await expect(page1Dot).not.toHaveAttribute('aria-current');
 
   await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
 });
@@ -47,7 +51,10 @@ test('dragging the track with the pointer changes the page', async ({ page }) =>
   await page.mouse.move(box!.x + 20, y, { steps: 10 });
   await page.mouse.up();
 
-  await expect(page.getByRole('tab', { name: 'Page 2' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 2' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
 });
 
 test('arrow buttons page the track and disable at the ends', async ({ page }) => {
@@ -62,13 +69,19 @@ test('arrow buttons page the track and disable at the ends', async ({ page }) =>
 
   await next.click();
 
-  await expect(page.getByRole('tab', { name: 'Page 2' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 2' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
   await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
   await expect(prev).toBeEnabled();
 
   await prev.click();
 
-  await expect(page.getByRole('tab', { name: 'Page 1' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 1' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
   await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBe(0);
   await expect(prev).toBeDisabled();
 });
@@ -77,11 +90,14 @@ test('arrows advance a whole group when several slides are visible', async ({ pa
   await page.goto('/iframe.html?id=components-carousel--multiple-visible-slides');
 
   // 5 slides in groups of 2 → 3 pages.
-  await expect(page.getByRole('tab')).toHaveCount(3);
+  await expect(pageButtons(page)).toHaveCount(3);
 
   await page.getByRole('button', { name: 'Next slide' }).click();
 
-  await expect(page.getByRole('tab', { name: 'Page 2' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 2' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
   // Third slide is now the leading one in the viewport.
   await expect(page.getByRole('group', { name: '3 of 5' })).toBeInViewport();
 });
@@ -94,8 +110,9 @@ test('infinite wraps forward without rewinding across the deck', async ({ page }
   const scroll = () => track.evaluate((el) => el.scrollLeft);
 
   // Clones stay out of the a11y tree: five real slides, five dots.
-  await expect(page.getByRole('group')).toHaveCount(5);
-  await expect(page.getByRole('tab')).toHaveCount(5);
+  // Scoped to the track — the page indicator is a group of its own.
+  await expect(page.getByRole('region').getByRole('group')).toHaveCount(5);
+  await expect(pageButtons(page)).toHaveCount(5);
 
   // Page 1 sits one page in, behind it the cloned last page.
   const firstOffset = await scroll();
@@ -107,7 +124,10 @@ test('infinite wraps forward without rewinding across the deck', async ({ page }
   }
   const lastOffset = await scroll();
   expect(lastOffset).toBeGreaterThan(firstOffset);
-  await expect(page.getByRole('tab', { name: 'Page 5' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 5' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
 
   await next.click();
   // Mid-flight it is still travelling forward, onto the cloned first page…
@@ -115,7 +135,10 @@ test('infinite wraps forward without rewinding across the deck', async ({ page }
   expect(await scroll()).toBeGreaterThan(lastOffset);
 
   // …and once settled it has silently rewound onto the real first page.
-  await expect(page.getByRole('tab', { name: 'Page 1' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 1' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
   await expect.poll(async () => Math.abs((await scroll()) - firstOffset) <= 1).toBe(true);
 });
 
@@ -130,7 +153,10 @@ test('infinite wraps backward from the first page', async ({ page }) => {
   await page.waitForTimeout(120);
   expect(await scroll()).toBeLessThan(firstOffset);
 
-  await expect(page.getByRole('tab', { name: 'Page 5' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 5' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
   // The silent rewind lands on the last real page, within a pixel of its snap point.
   await expect.poll(async () => Math.abs((await scroll()) - firstOffset * 5) <= 1).toBe(true);
 });
@@ -180,7 +206,10 @@ test('dragging backward off the first page lands on the last one in infinite mod
   await page.mouse.move(box!.x + box!.width - 10, y, { steps: 10 });
   await page.mouse.up();
 
-  await expect(page.getByRole('tab', { name: 'Page 5' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 5' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
   await expect.poll(async () => Math.abs((await scroll()) - firstOffset * 5) <= 1).toBe(true);
 });
 
@@ -241,7 +270,10 @@ test('rapid arrow clicks across the wrap never rewind the carousel', async ({ pa
   // Two clicks forward means exactly two pages of travel, never a rewind.
   const total = travelled[travelled.length - 1] - travelled[0];
   expect(Math.abs(total - pageSize * 2)).toBeLessThanOrEqual(2);
-  await expect(page.getByRole('tab', { name: 'Page 2' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('button', { name: 'Page 2' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
 });
 
 test('focusActiveSlides shrinks the neighbours without shifting the snap points', async ({
@@ -313,4 +345,45 @@ test('arrow navigation animates when reduced motion is not requested', async ({ 
   expect(await track.evaluate((el) => el.scrollLeft)).toBeLessThan(width / 2);
   // ...and it gets there once the animation finishes.
   await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(width, -1);
+});
+
+// WCAG 2.2.2: the rotation has to be stoppable, and stay stopped.
+test('the auto-play control pauses and resumes the rotation', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--auto-play');
+
+  const pause = page.getByRole('button', { name: 'Pause automatic slide rotation' });
+  await expect(page.getByRole('button', { name: 'Page 1' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
+
+  await pause.click();
+  const resume = page.getByRole('button', { name: 'Resume automatic slide rotation' });
+  await expect(resume).toBeVisible();
+
+  // Two full intervals with no movement.
+  await page.waitForTimeout(4500);
+  await expect(page.getByRole('button', { name: 'Page 1' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
+
+  await resume.click();
+  await expect(page.getByRole('button', { name: 'Page 2' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
+});
+
+// Keyboard users get no hover pause, so focus has to do the same job.
+test('auto-play pauses while the keyboard is inside the carousel', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--auto-play');
+
+  await page.getByRole('region').focus();
+  await page.waitForTimeout(4500);
+
+  await expect(page.getByRole('button', { name: 'Page 1' })).toHaveAttribute(
+    'aria-current',
+    'true',
+  );
 });
