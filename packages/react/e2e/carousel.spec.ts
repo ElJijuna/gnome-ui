@@ -142,6 +142,48 @@ test('infinite wraps forward without rewinding across the deck', async ({ page }
   await expect.poll(async () => Math.abs((await scroll()) - firstOffset) <= 1).toBe(true);
 });
 
+// 5 slides in groups of 2 give a ragged last page: [1,2] [3,4] [5,1]. The
+// README promises the wrap shifts by that leftover slide rather than breaking,
+// which is the one `infinite` case that is not pixel-seamless.
+test('infinite handles a last page that does not divide evenly', async ({ page }) => {
+  await page.goto(
+    '/iframe.html?id=components-carousel--multiple-visible-slides&args=infinite:!true',
+  );
+
+  const track = page.getByRole('region');
+  const next = page.getByRole('button', { name: 'Next slide' });
+  const scroll = () => track.evaluate((el) => el.scrollLeft);
+
+  // ceil(5 / 2) = 3 pages, and still only the five real slides in the a11y tree.
+  await expect(pageButtons(page)).toHaveCount(3);
+  await expect(track.getByRole('group')).toHaveCount(5);
+
+  const firstOffset = await scroll();
+
+  await next.click();
+  await next.click();
+  await expect(pageButtons(page).nth(2)).toHaveAttribute('aria-current', 'true');
+
+  // Last page leads with slide 5; the gap beside it is filled by a clone of
+  // slide 1, so the real one is still off screen.
+  await expect(page.getByRole('group', { name: '5 of 5' })).toBeInViewport();
+  await expect(page.getByRole('group', { name: '1 of 5' })).not.toBeInViewport();
+
+  const lastOffset = await scroll();
+  expect(lastOffset).toBeGreaterThan(firstOffset);
+
+  await next.click();
+  // Still travelling forward through the wrap, not rewinding across the deck.
+  await page.waitForTimeout(120);
+  expect(await scroll()).toBeGreaterThan(lastOffset);
+
+  // Settles on the real first page, where slide 1 has shifted over by the
+  // leftover slide — the documented cost of the ragged group.
+  await expect(pageButtons(page).nth(0)).toHaveAttribute('aria-current', 'true');
+  await expect(page.getByRole('group', { name: '1 of 5' })).toBeInViewport();
+  await expect.poll(async () => Math.abs((await scroll()) - firstOffset) <= 1).toBe(true);
+});
+
 test('infinite wraps backward from the first page', async ({ page }) => {
   await page.goto('/iframe.html?id=components-carousel--infinite');
 

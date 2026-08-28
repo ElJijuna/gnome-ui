@@ -61,6 +61,7 @@ const meta: Meta<ComponentProps<typeof Carousel>> = {
     playLabel: { control: 'text' },
     pageLabel: { table: { disable: true } },
     slideLabel: { table: { disable: true } },
+    defaultPage: { control: { type: 'number', min: 0, max: 4, step: 1 } },
     page: { table: { disable: true } },
     onPageChanged: { table: { disable: true } },
     children: { table: { disable: true } },

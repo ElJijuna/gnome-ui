@@ -247,10 +247,20 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   /** Called whenever the visible page changes — once per actual change. */
   onPageChanged?: (index: number) => void;
   /**
-   * Controlled current page index.
-   * When omitted the carousel manages page state internally.
+   * Controlled current page index. The carousel reports where the user moved it
+   * through `onPageChanged`, but only ever renders the page you pass — set this
+   * from `onPageChanged` or the indicator will disagree with the track.
+   *
+   * When omitted the carousel manages page state internally; use `defaultPage`
+   * to pick the page it starts on.
    */
   page?: number;
+  /**
+   * Page the carousel starts on when uncontrolled. Clamped into range, and
+   * ignored once `page` is passed.
+   * @default 0
+   */
+  defaultPage?: number;
   /**
    * Automatically advance to the next slide. Pauses while the pointer
    * hovers over the carousel or during drag.
@@ -347,6 +357,7 @@ export const Carousel = ({
   visibleSlides = 1,
   onPageChanged,
   page: controlledPage,
+  defaultPage = 0,
   autoPlay = false,
   interval = 3000,
   indicator,
@@ -380,7 +391,11 @@ export const Carousel = ({
   const leadUnits = cloned ? 1 : 0;
   const isHorizontal = orientation === 'horizontal';
   const axis = isHorizontal ? 'width' : 'height';
-  const [internalPage, setInternalPage] = useState(0);
+  // Clamped, so an out-of-range `defaultPage` cannot strand the carousel on a
+  // page that has nothing behind it.
+  const [internalPage, setInternalPage] = useState(() =>
+    Math.max(0, Math.min(Math.floor(defaultPage), pageCount - 1)),
+  );
   // `direction` is inherited from anywhere up the tree, so it is read back off
   // the DOM rather than taken as a prop.
   const [isRtl, setIsRtl] = useState(false);

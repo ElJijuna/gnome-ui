@@ -260,6 +260,54 @@ describe('Carousel', () => {
     });
   });
 
+  // ── defaultPage ───────────────────────────────────────────────────────────
+
+  describe('defaultPage', () => {
+    it('starts on the given page', () => {
+      renderCarousel({ defaultPage: 2, indicator: 'dots' });
+
+      expect(within(pageIndicator()).getByRole('button', { name: 'Page 3' })).toHaveAttribute(
+        'aria-current',
+        'true',
+      );
+    });
+
+    it('scrolls the track to that page on mount', () => {
+      renderCarousel({ defaultPage: 2 });
+
+      expect(Element.prototype.scrollTo).toHaveBeenCalledWith(
+        expect.objectContaining({ behavior: 'auto' }),
+      );
+    });
+
+    it('clamps a page that is out of range', () => {
+      renderCarousel({ defaultPage: 99, indicator: 'dots' });
+
+      expect(within(pageIndicator()).getByRole('button', { name: 'Page 3' })).toHaveAttribute(
+        'aria-current',
+        'true',
+      );
+    });
+
+    it('navigates on from the starting page', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ defaultPage: 1, onPageChanged });
+
+      fireEvent.keyDown(screen.getByRole('region'), { key: 'ArrowRight' });
+
+      expect(onPageChanged).toHaveBeenCalledWith(2);
+    });
+
+    it('is ignored once the page prop takes over', () => {
+      renderCarousel({ defaultPage: 2, page: 0, indicator: 'dots' });
+
+      expect(within(pageIndicator()).getByRole('button', { name: 'Page 1' })).toHaveAttribute(
+        'aria-current',
+        'true',
+      );
+    });
+  });
+
   // ── Empty carousel ────────────────────────────────────────────────────────
 
   describe('without children', () => {

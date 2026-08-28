@@ -80,7 +80,23 @@ a remainder the last group overlaps the first one (5 slides in groups of 2 give 
 </Carousel>
 ```
 
+### Page state
+Uncontrolled by default — pass `defaultPage` to start somewhere other than the first page.
+
+Pass `page` to control it, and then you own the position: the carousel renders the page you
+give it and reports every user-driven move through `onPageChanged`, but it does not force
+the prop back. If you drop that callback on the floor, the track ends up on one page while
+the indicator and the arrows still describe another. Feed `onPageChanged` straight back into
+`page` — the same contract as a controlled `<input>`.
+
+```tsx
+const [page, setPage] = useState(0);
+
+<Carousel page={page} onPageChanged={setPage} indicator="dots" />;
+```
+
 ### Behaviour notes
+- `defaultPage` is clamped into range and ignored entirely once `page` is passed.
 - `onPageChanged` fires once per actual page change. A swipe emits a scroll event per
   frame, and navigating past the end without `loop` clamps back onto the current page —
   neither re-notifies you of a page you are already on.
