@@ -17,6 +17,7 @@ import {
 } from 'react';
 
 import { useDir } from '@/components/GnomeProvider/GnomeContext';
+import { VisuallyHidden } from '@/components/VisuallyHidden';
 import { bucketForWidth, type ResponsiveValue, resolveResponsive } from '@/hooks/useBreakpoint';
 
 import styles from './Carousel.module.css';
@@ -32,6 +33,7 @@ const INDICATOR_FLEX_DIR: Record<IndicatorPosition, CSSProperties['flexDirection
 
 const defaultPageLabel = (index: number) => `Page ${index + 1}`;
 const defaultSlideLabel = (index: number, total: number) => `${index + 1} of ${total}`;
+const defaultStatusLabel = (index: number, total: number) => `Page ${index + 1} of ${total}`;
 
 // ─── CarouselIndicatorDots ────────────────────────────────────────────────────
 
@@ -49,6 +51,13 @@ export interface CarouselIndicatorDotsProps extends HTMLAttributes<HTMLDivElemen
    * @default 'Carousel pages'
    */
   label?: string;
+  /**
+   * Axis the pages are laid out along. `'vertical'` stacks them, for an
+   * indicator that sits beside the carousel rather than under it — which is
+   * what `Carousel` passes when `indicatorPosition` is `'left'` or `'right'`.
+   * @default 'horizontal'
+   */
+  orientation?: 'horizontal' | 'vertical';
 }
 
 /**
@@ -61,6 +70,7 @@ export const CarouselIndicatorDots = ({
   onPageSelected,
   pageLabel = defaultPageLabel,
   label = 'Carousel pages',
+  orientation = 'horizontal',
   className,
   ...props
 }: CarouselIndicatorDotsProps) => {
@@ -68,7 +78,13 @@ export const CarouselIndicatorDots = ({
     // Not a `tablist`: there are no tabpanels to control, and the role would
     // promise roving-tabindex arrow navigation that a page picker does not have.
     <div
-      className={[styles.indicatorDots, className].filter(Boolean).join(' ')}
+      className={[
+        styles.indicatorDots,
+        orientation === 'vertical' ? styles.indicatorVertical : null,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       role="group"
       aria-label={label}
       {...props}
@@ -105,6 +121,13 @@ export interface CarouselIndicatorLinesProps extends HTMLAttributes<HTMLDivEleme
    * @default 'Carousel pages'
    */
   label?: string;
+  /**
+   * Axis the pages are laid out along. `'vertical'` stacks them, for an
+   * indicator that sits beside the carousel rather than under it — which is
+   * what `Carousel` passes when `indicatorPosition` is `'left'` or `'right'`.
+   * @default 'horizontal'
+   */
+  orientation?: 'horizontal' | 'vertical';
 }
 
 /**
@@ -117,6 +140,7 @@ export const CarouselIndicatorLines = ({
   onPageSelected,
   pageLabel = defaultPageLabel,
   label = 'Carousel pages',
+  orientation = 'horizontal',
   className,
   ...props
 }: CarouselIndicatorLinesProps) => {
@@ -124,7 +148,13 @@ export const CarouselIndicatorLines = ({
     // Not a `tablist`: there are no tabpanels to control, and the role would
     // promise roving-tabindex arrow navigation that a page picker does not have.
     <div
-      className={[styles.indicatorLines, className].filter(Boolean).join(' ')}
+      className={[
+        styles.indicatorLines,
+        orientation === 'vertical' ? styles.indicatorVertical : null,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       role="group"
       aria-label={label}
       {...props}
@@ -362,6 +392,12 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   /** Accessible name for each slide. @default `${index + 1} of ${total}` */
   slideLabel?: (index: number, total: number) => string;
   /**
+   * The live-region announcement made whenever the page changes. Silenced
+   * while an `autoPlay` rotation is actually running.
+   * @default `Page ${index + 1} of ${total}`
+   */
+  statusLabel?: (index: number, total: number) => string;
+  /**
    * Accessible label for the auto-play pause button.
    * @default 'Pause automatic slide rotation'
    */
@@ -417,6 +453,7 @@ export const Carousel = ({
   indicatorLabel = 'Carousel pages',
   pageLabel = defaultPageLabel,
   slideLabel = defaultSlideLabel,
+  statusLabel = defaultStatusLabel,
   pauseLabel = 'Pause automatic slide rotation',
   playLabel = 'Resume automatic slide rotation',
   previousLabel = 'Previous slide',
@@ -466,6 +503,11 @@ export const Carousel = ({
   const reducedMotion = usePrefersReducedMotion();
   const [isDragging, setIsDragging] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  // The focus pause itself runs off a ref; this mirrors it into state purely so
+  // the live region can un-mute. A carousel that is rotating stays silent, but
+  // a keyboard user inside it has stopped the rotation and wants to be told
+  // where their arrow keys landed.
+  const [keyboardInside, setKeyboardInside] = useState(false);
   const isControlled = controlledPage !== undefined;
   const currentPage = isControlled ? controlledPage : internalPage;
 
@@ -1084,6 +1126,12 @@ export const Carousel = ({
   const isSide = indicatorPosition === 'left' || indicatorPosition === 'right';
   // A single page has nowhere to go — don't render dead arrows.
   const showArrows = arrows && pageCount > 1;
+  // Nothing to announce on a deck that cannot move — and no live region on an
+  // empty one, whose only child would otherwise be measured as a slide.
+  const showStatus = pageCount > 1;
+  // Announcing every automatic transition would make the page unusable, so the
+  // region stays quiet while the rotation actually runs.
+  const isRotating = autoPlay && isPlaying && !keyboardInside;
   // WCAG 2.2.2: content that moves on its own needs a control to stop it. A
   // single page never moves, so it needs no button either.
   const showPlayPause = autoPlay && autoPlayControl && pageCount > 1;
@@ -1110,9 +1158,11 @@ export const Carousel = ({
         // React's onFocus/onBlur are focusin/focusout, so they see descendants.
         onFocus: () => {
           isFocusedRef.current = true;
+          setKeyboardInside(true);
         },
         onBlur: () => {
           isFocusedRef.current = false;
+          setKeyboardInside(false);
         },
       }
     : undefined;
@@ -1278,6 +1328,22 @@ export const Carousel = ({
     </div>
   );
 
+  /**
+   * Both cues for a page change — the dot moving, the track scrolling — are
+   * invisible to a screen reader, since every slide sits in the DOM either way.
+   *
+   * It is a sibling of the track rather than a child: the track's children are
+   * its slides, and both `getPageSize` and the slide arithmetic read them that
+   * way. Being `position: absolute` it is out of flow, so it never becomes a
+   * flex item of whatever holds the carousel and adds nothing to any scroll
+   * extent.
+   */
+  const status = showStatus ? (
+    <VisuallyHidden role="status" aria-live={isRotating ? 'off' : 'polite'}>
+      {statusLabel(currentPage, pageCount)}
+    </VisuallyHidden>
+  ) : null;
+
   const renderArrow = (dir: 'prev' | 'next') => {
     const isPrev = dir === 'prev';
     const disabled = !wraps && (isPrev ? currentPage <= 0 : currentPage >= pageCount - 1);
@@ -1287,8 +1353,16 @@ export const Carousel = ({
         type="button"
         className={[styles.arrow, isPrev ? styles.arrowPrev : styles.arrowNext].join(' ')}
         aria-label={isPrev ? previousLabel : nextLabel}
-        disabled={disabled}
-        onClick={() => navigate(isPrev ? -1 : 1)}
+        // `aria-disabled`, not `disabled`: a real `disabled` drops the button
+        // out of the tab order the instant you page onto the last slide, so the
+        // keyboard focus you were clicking with falls to the body. The button
+        // stays focusable and the press is ignored instead.
+        aria-disabled={disabled || undefined}
+        onClick={() => {
+          if (!disabled) {
+            navigate(isPrev ? -1 : 1);
+          }
+        }}
       >
         <ArrowChevron
           direction={isHorizontal ? (isPrev === !isRtl ? 'left' : 'right') : isPrev ? 'up' : 'down'}
@@ -1333,12 +1407,13 @@ export const Carousel = ({
   );
 
   if (!showIndicator) {
-    return content;
+    return (
+      <>
+        {content}
+        {status}
+      </>
+    );
   }
-
-  const indicatorStyle: CSSProperties | undefined = isSide
-    ? { flexDirection: 'column', padding: '0 12px' }
-    : undefined;
 
   const indicatorProps = {
     pages: pageCount,
@@ -1346,7 +1421,7 @@ export const Carousel = ({
     onPageSelected: goToPage,
     label: indicatorLabel,
     pageLabel,
-    style: indicatorStyle,
+    orientation: isSide ? ('vertical' as const) : ('horizontal' as const),
   };
 
   return (
@@ -1363,6 +1438,7 @@ export const Carousel = ({
       {content}
       {indicator === 'dots' && <CarouselIndicatorDots {...indicatorProps} />}
       {indicator === 'lines' && <CarouselIndicatorLines {...indicatorProps} />}
+      {status}
     </div>
   );
 };

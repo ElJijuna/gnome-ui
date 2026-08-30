@@ -34,6 +34,15 @@ describe('CarouselIndicatorDots', () => {
     expect(dots[2]).not.toHaveAttribute('aria-current');
   });
 
+  it('stacks the dots when the orientation is vertical', () => {
+    const { rerender } = render(<CarouselIndicatorDots pages={3} currentPage={0} />);
+    expect(screen.getByRole('group').className).not.toMatch(/indicatorVertical/);
+
+    rerender(<CarouselIndicatorDots pages={3} currentPage={0} orientation="vertical" />);
+
+    expect(screen.getByRole('group').className).toMatch(/indicatorVertical/);
+  });
+
   it('calls onPageSelected with the dot index when clicked', () => {
     const onPageSelected = vi.fn();
     render(<CarouselIndicatorDots pages={3} currentPage={0} onPageSelected={onPageSelected} />);
@@ -58,6 +67,15 @@ describe('CarouselIndicatorLines', () => {
     const dots = screen.getAllByRole('button');
     expect(dots[0]).not.toHaveAttribute('aria-current');
     expect(dots[2]).toHaveAttribute('aria-current', 'true');
+  });
+
+  it('stacks the lines when the orientation is vertical', () => {
+    const { rerender } = render(<CarouselIndicatorLines pages={3} currentPage={0} />);
+    expect(screen.getByRole('group').className).not.toMatch(/indicatorVertical/);
+
+    rerender(<CarouselIndicatorLines pages={3} currentPage={0} orientation="vertical" />);
+
+    expect(screen.getByRole('group').className).toMatch(/indicatorVertical/);
   });
 
   it('calls onPageSelected with the line index when clicked', () => {
@@ -795,6 +813,95 @@ describe('Carousel', () => {
       expect(screen.getByRole('group', { name: 'Diapositiva 2 de 3' })).toBeInTheDocument();
     });
 
+    // The dot moving and the track scrolling are both invisible to a screen
+    // reader — every slide is in the DOM whichever page you are on.
+    describe('page announcements', () => {
+      it('announces the current page in a polite live region', () => {
+        renderCarousel();
+        const status = screen.getByRole('status');
+        expect(status).toHaveTextContent('Page 1 of 3');
+        expect(status).toHaveAttribute('aria-live', 'polite');
+      });
+
+      it('follows the page', () => {
+        const { rerender } = render(
+          <Carousel page={0}>
+            <div>Slide A</div>
+            <div>Slide B</div>
+          </Carousel>,
+        );
+        expect(screen.getByRole('status')).toHaveTextContent('Page 1 of 2');
+
+        rerender(
+          <Carousel page={1}>
+            <div>Slide A</div>
+            <div>Slide B</div>
+          </Carousel>,
+        );
+
+        expect(screen.getByRole('status')).toHaveTextContent('Page 2 of 2');
+      });
+
+      it('counts pages, not slides, when several are visible at once', () => {
+        renderCarousel({ visibleSlides: 2 });
+        expect(screen.getByRole('status')).toHaveTextContent('Page 1 of 2');
+      });
+
+      it('lets the announcement be translated', () => {
+        renderCarousel({ statusLabel: (i, total) => `Página ${i + 1} de ${total}` });
+        expect(screen.getByRole('status')).toHaveTextContent('Página 1 de 3');
+      });
+
+      it('says nothing on a deck that cannot move', () => {
+        render(
+          <Carousel>
+            <div>Only slide</div>
+          </Carousel>,
+        );
+        expect(screen.queryByRole('status')).not.toBeInTheDocument();
+      });
+
+      // Announcing every automatic transition would make the page unusable.
+      it('goes quiet while an autoPlay rotation is running', () => {
+        renderCarousel({ autoPlay: true });
+        expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'off');
+      });
+
+      it('speaks again once the rotation is paused', () => {
+        renderCarousel({ autoPlay: true });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Pause automatic slide rotation' }));
+
+        expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
+      });
+
+      // The rotation is paused while the keyboard is inside, so the user paging
+      // with the arrow keys has to be told where they landed.
+      it('speaks while the keyboard is inside an autoPlay carousel', () => {
+        renderCarousel({ autoPlay: true });
+
+        fireEvent.focus(screen.getByRole('region'));
+
+        expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
+
+        fireEvent.blur(screen.getByRole('region'));
+
+        expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'off');
+      });
+    });
+
+    describe('stacked indicator', () => {
+      it('stacks the indicator when it sits beside the track', () => {
+        renderCarousel({ indicator: 'dots', indicatorPosition: 'right' });
+        expect(pageIndicator().className).toMatch(/indicatorVertical/);
+      });
+
+      it('leaves it in a row when it sits under the track', () => {
+        renderCarousel({ indicator: 'dots', indicatorPosition: 'bottom' });
+        expect(pageIndicator().className).not.toMatch(/indicatorVertical/);
+      });
+    });
+
     describe('Home and End', () => {
       it('jumps to the first page on Home', () => {
         const onPageChanged = vi.fn();
@@ -1130,23 +1237,44 @@ describe('Carousel', () => {
     it('disables the previous arrow on the first page without loop', () => {
       renderCarousel({ arrows: true });
       const { prev, next } = arrowButtons();
-      expect(prev).toBeDisabled();
-      expect(next).toBeEnabled();
+      expect(prev).toHaveAttribute('aria-disabled', 'true');
+      expect(next).not.toHaveAttribute('aria-disabled');
     });
 
     it('disables the next arrow on the last page without loop', () => {
       renderCarousel({ arrows: true, page: 2 });
       const { prev, next } = arrowButtons();
-      expect(prev).toBeEnabled();
-      expect(next).toBeDisabled();
+      expect(prev).not.toHaveAttribute('aria-disabled');
+      expect(next).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    // A native `disabled` would take the button out of the tab order the moment
+    // the last page arrives, dropping the focus the user was paging with.
+    it('keeps a disabled arrow focusable', () => {
+      renderCarousel({ arrows: true, page: 2 });
+      const { next } = arrowButtons();
+
+      expect(next).toBeEnabled();
+      next.focus();
+
+      expect(next).toHaveFocus();
+    });
+
+    it('ignores a click on a disabled arrow', () => {
+      const onPageChanged = vi.fn();
+      renderCarousel({ arrows: true, page: 2, onPageChanged });
+
+      fireEvent.click(arrowButtons().next);
+
+      expect(onPageChanged).not.toHaveBeenCalled();
     });
 
     it('keeps both arrows enabled and wraps when loop is set', () => {
       const onPageChanged = vi.fn();
       renderCarousel({ arrows: true, loop: true, page: 0, onPageChanged });
       const { prev, next } = arrowButtons();
-      expect(prev).toBeEnabled();
-      expect(next).toBeEnabled();
+      expect(prev).not.toHaveAttribute('aria-disabled');
+      expect(next).not.toHaveAttribute('aria-disabled');
 
       fireEvent.click(prev);
 

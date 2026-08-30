@@ -173,6 +173,61 @@ export const WithArrows: Story = {
   },
 };
 
+// ─── InteractiveSlides ────────────────────────────────────────────────────────
+
+const SlideWithAction = ({ label, color }: { label: string; color: string }) => (
+  <div
+    style={{
+      height: 200,
+      background: color,
+      borderRadius: 12,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 12,
+      color: '#fff',
+      fontSize: '1.25rem',
+      fontWeight: 700,
+    }}
+  >
+    {label}
+    <button
+      type="button"
+      style={{
+        appearance: 'none',
+        border: 'none',
+        borderRadius: 8,
+        padding: '6px 14px',
+        font: 'inherit',
+        fontSize: '0.875rem',
+        cursor: 'pointer',
+      }}
+    >
+      {label} action
+    </button>
+  </div>
+);
+
+export const InteractiveSlides: Story = {
+  render: (args) => (
+    <Carousel {...args}>
+      {COLORS.map((c, i) => (
+        <SlideWithAction key={i} label={LABELS[i]} color={c} />
+      ))}
+    </Carousel>
+  ),
+  args: { arrows: true, indicator: 'dots' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Slides own their focusable content, and every slide stays in the tab order whether it is on screen or not — a control you cannot reach is worse than one you have to page to. Tab through this carousel: reaching a button on an off-screen slide scrolls its page into view, and the indicator follows. The arrows use `aria-disabled` rather than `disabled` for the same reason — paging onto the last slide would otherwise drop the focus you were clicking with.',
+      },
+    },
+  },
+};
+
 // ─── Responsive ───────────────────────────────────────────────────────────────
 
 const ResponsiveDemo = (args: ComponentProps<typeof Carousel>) => {

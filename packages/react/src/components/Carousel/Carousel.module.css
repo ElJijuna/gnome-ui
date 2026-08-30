@@ -104,11 +104,12 @@
   transition: opacity var(--gnome-duration-fast) var(--gnome-easing-default);
 }
 
-.arrow:hover:not(:disabled) {
+.arrow:not([aria-disabled="true"]):hover {
   opacity: 1;
 }
 
-.arrow:disabled {
+/* `aria-disabled`, not `:disabled` — see the comment on the arrow button. */
+.arrow[aria-disabled="true"] {
   opacity: 0.35;
   cursor: default;
 }
@@ -253,6 +254,23 @@
 .line:focus-visible {
   outline: 2px solid var(--gnome-focus-ring-color, #3584e4);
   outline-offset: 2px;
+}
+
+/* ─── Stacked indicators ────────────────────────────────────────────────────── */
+
+/* Set by `orientation="vertical"`, which `Carousel` passes when the indicator
+   sits to the left or right of the track. Declared after both indicators so the
+   padding turns with the axis. */
+.indicatorVertical {
+  flex-direction: column;
+  padding: 0 var(--gnome-space-2, 12px);
+}
+
+/* Stacked, a row of wide flat lines reads as a ladder of unrelated dashes
+   rather than one track, so the segments turn with the indicator. */
+.indicatorVertical .line {
+  width: 3px;
+  height: 24px;
 }
 
 /* ─── Reduced motion ────────────────────────────────────────────────────────── */

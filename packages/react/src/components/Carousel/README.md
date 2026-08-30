@@ -41,10 +41,15 @@ content: at 3-per-page, page 2 leads with slide 4; drop to 1-per-page and you la
 still looking at slide 4.
 
 ### Navigation chrome
-- `indicator` — `'dots'`, `'lines'`, or `'none'` to hide the pagination entirely.
-- `arrows` — overlays previous/next buttons on the carousel edges. They disable at the
-  first/last page unless the carousel wraps, and disappear when there is only one page.
-  Label them with `previousLabel` / `nextLabel`.
+- `indicator` — `'dots'`, `'lines'`, or `'none'` to hide the pagination entirely, and
+  `indicatorPosition` puts it on any edge. At `'left'` or `'right'` the carousel stacks it
+  for you, by handing the indicator its own `orientation="vertical"` — pass that yourself
+  when you render `CarouselIndicatorDots` / `CarouselIndicatorLines` standalone beside a
+  track. Stacked, the line segments turn with the indicator so the deck still reads as one
+  track rather than a ladder of unrelated dashes.
+- `arrows` — overlays previous/next buttons on the carousel edges. They go `aria-disabled`
+  at the first/last page unless the carousel wraps, and disappear when there is only one
+  page. Label them with `previousLabel` / `nextLabel`.
 - `autoPlay` — overlays a play/pause button in the corner. Turn `autoPlayControl` off only
   when you render your own; automatically moving content must be stoppable.
 
@@ -63,8 +68,24 @@ and counts *down* into negatives from there.
   from the landmark tree without a name, so give it something specific when the page holds
   more than one carousel.
 - Every visible string is a prop: `label`, `indicatorLabel`, `pageLabel`, `slideLabel`,
-  `previousLabel`, `nextLabel`, `pauseLabel`, `playLabel`. `pageLabel` and `slideLabel` are
-  formatters — `(index, total) => string`, both zero-based on `index`.
+  `statusLabel`, `previousLabel`, `nextLabel`, `pauseLabel`, `playLabel`. `pageLabel`,
+  `slideLabel` and `statusLabel` are formatters — `(index, total) => string`, all
+  zero-based on `index`.
+- A visually hidden `role="status"` region announces the page on every move — *"Page 3 of
+  5"*, or whatever `statusLabel` returns. Both cues for the change are invisible to a
+  screen reader otherwise: the dot moving, and the track scrolling under slides that are
+  all in the DOM whichever page you are on. It falls silent (`aria-live="off"`) while an
+  `autoPlay` rotation is running — a carousel that talks every few seconds is unusable —
+  and speaks again the moment the rotation stops, the automatic pause while the keyboard
+  is inside the carousel included. A single-page deck gets no live region at all.
+- The arrows carry `aria-disabled` and ignore the press, rather than being truly
+  `disabled`. A real `disabled` leaves the tab order the instant you page onto the last
+  slide, so the focus you were pressing Enter on falls to the body and the deck you were
+  navigating is gone.
+- Every slide stays reachable by Tab, on screen or not — a control you cannot reach is
+  worse than one you have to page to. Tabbing to something in an off-screen slide scrolls
+  it in, and the carousel reads the new page back off that scroll, so the indicator and
+  the arrows follow the focus.
 - Keyboard: ←/→ (or ↑/↓ when vertical) page by one, `Home` and `End` jump to the first and
   last page.
 - `autoPlay` pauses while the pointer is over the carousel, while the keyboard is inside

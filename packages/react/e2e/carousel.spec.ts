@@ -64,8 +64,8 @@ test('arrow buttons page the track and disable at the ends', async ({ page }) =>
   const prev = page.getByRole('button', { name: 'Previous slide' });
   const next = page.getByRole('button', { name: 'Next slide' });
 
-  await expect(prev).toBeDisabled();
-  await expect(next).toBeEnabled();
+  await expect(prev).toHaveAttribute('aria-disabled', 'true');
+  await expect(next).not.toHaveAttribute('aria-disabled');
 
   await next.click();
 
@@ -74,7 +74,7 @@ test('arrow buttons page the track and disable at the ends', async ({ page }) =>
     'true',
   );
   await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
-  await expect(prev).toBeEnabled();
+  await expect(prev).not.toHaveAttribute('aria-disabled');
 
   await prev.click();
 
@@ -83,7 +83,60 @@ test('arrow buttons page the track and disable at the ends', async ({ page }) =>
     'true',
   );
   await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBe(0);
-  await expect(prev).toBeDisabled();
+  await expect(prev).toHaveAttribute('aria-disabled', 'true');
+});
+
+// The whole point of `aria-disabled` over `disabled`: a native disabled button
+// leaves the tab order the instant the last page arrives, so the focus the user
+// was pressing Enter on falls to the body and the deck is unreachable.
+test('the arrow keeps the keyboard focus once it reaches the end of the deck', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--with-arrows');
+
+  const next = page.getByRole('button', { name: 'Next slide' });
+  await next.focus();
+
+  // Five slides, one page at a time — four presses land on the last page.
+  for (let i = 1; i < 5; i++) {
+    await page.keyboard.press('Enter');
+    await expect(pageButtons(page).nth(i)).toHaveAttribute('aria-current', 'true');
+  }
+
+  await expect(next).toHaveAttribute('aria-disabled', 'true');
+  await expect(next).toBeFocused();
+
+  // And it is genuinely inert, not just labelled that way.
+  await page.keyboard.press('Enter');
+  await expect(pageButtons(page).nth(4)).toHaveAttribute('aria-current', 'true');
+});
+
+test('tabbing to a control in an off-screen slide pages the carousel onto it', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--interactive-slides');
+
+  const track = page.getByRole('region');
+  await track.focus();
+
+  // The track itself, then the first slide's button — both already on screen.
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('button', { name: 'Blue action' })).toBeFocused();
+
+  // The second slide's button is off screen: the browser scrolls it in, and the
+  // carousel reads the page back off that scroll.
+  await page.keyboard.press('Tab');
+
+  await expect(page.getByRole('button', { name: 'Red action' })).toBeFocused();
+  await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
+  await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
+});
+
+test('the live region announces the page the carousel moved to', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-carousel--with-dots');
+
+  const status = page.getByRole('status');
+  await expect(status).toHaveText('Page 1 of 5');
+
+  await page.getByRole('button', { name: 'Page 3' }).click();
+
+  await expect(status).toHaveText('Page 3 of 5');
 });
 
 test('arrows advance a whole group when several slides are visible', async ({ page }) => {
@@ -443,14 +496,14 @@ test.describe('right to left', () => {
     const width = await track.evaluate((el) => el.clientWidth);
     const prev = page.getByRole('button', { name: 'Previous slide' });
 
-    await expect(prev).toBeDisabled();
+    await expect(prev).toHaveAttribute('aria-disabled', 'true');
     expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
 
     await page.getByRole('button', { name: 'Next slide' }).click();
 
     await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
     await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeCloseTo(-width, -1);
-    await expect(prev).toBeEnabled();
+    await expect(prev).not.toHaveAttribute('aria-disabled');
   });
 
   test('the arrows sit on the mirrored edges', async ({ page }) => {
@@ -576,7 +629,7 @@ test.describe('vertical', () => {
     const prev = page.getByRole('button', { name: 'Previous slide' });
     const next = page.getByRole('button', { name: 'Next slide' });
 
-    await expect(prev).toBeDisabled();
+    await expect(prev).toHaveAttribute('aria-disabled', 'true');
     expect(await track.evaluate((el) => el.scrollTop)).toBe(0);
     // The block axis moves; the inline one never does.
     expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
@@ -586,13 +639,13 @@ test.describe('vertical', () => {
     await expect(pageButtons(page).nth(1)).toHaveAttribute('aria-current', 'true');
     await expect.poll(() => track.evaluate((el) => el.scrollTop)).toBeCloseTo(height, -1);
     expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
-    await expect(prev).toBeEnabled();
+    await expect(prev).not.toHaveAttribute('aria-disabled');
 
     await prev.click();
 
     await expect(pageButtons(page).nth(0)).toHaveAttribute('aria-current', 'true');
     await expect.poll(() => track.evaluate((el) => el.scrollTop)).toBe(0);
-    await expect(prev).toBeDisabled();
+    await expect(prev).toHaveAttribute('aria-disabled', 'true');
   });
 
   test('the arrows sit on the block edges', async ({ page }) => {
