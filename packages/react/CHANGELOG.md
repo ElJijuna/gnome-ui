@@ -1,3 +1,9 @@
+## [1.65.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.64.0...@gnome-ui/react@1.65.0) (2026-08-30)
+
+### Features
+
+* **@gnome-ui/react:** enhance Carousel accessibility with aria attributes and live region announcements ([8247232](https://github.com/ElJijuna/gnome-ui/commit/82472324f5d919f776eb1fd294b13f76aa43dc3c))
+
 ## [1.64.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.63.0...@gnome-ui/react@1.64.0) (2026-08-28)
 
 ### Features
