@@ -12,6 +12,7 @@ export const COMPONENT_NAMES = [
   'ActionRow',
   'HeaderBar',
   'Tabs',
+  'ViewSwitcher',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -15,6 +15,7 @@ import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
+import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
 import type { ComponentName } from './types';
 
 const SCREENS: Record<ComponentName, ComponentType> = {
@@ -31,6 +32,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ActionRow: ActionRowScreen,
   HeaderBar: HeaderBarScreen,
   Tabs: TabsScreen,
+  ViewSwitcher: ViewSwitcherScreen,
 };
 
 export interface ComponentScreenProps {
