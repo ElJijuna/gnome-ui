@@ -12,6 +12,7 @@ import { LinkScreen } from './screens/LinkScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
+import { TabsScreen } from './screens/TabsScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
 import type { ComponentName } from './types';
@@ -29,6 +30,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   BoxedList: BoxedListScreen,
   ActionRow: ActionRowScreen,
   HeaderBar: HeaderBarScreen,
+  Tabs: TabsScreen,
 };
 
 export interface ComponentScreenProps {

@@ -8,6 +8,7 @@ export * from './components/Link';
 export * from './components/RadioButton';
 export * from './components/Separator';
 export * from './components/Switch';
+export * from './components/Tabs';
 export * from './components/Text';
 export * from './components/TextField';
 export * from './GnomeProvider';

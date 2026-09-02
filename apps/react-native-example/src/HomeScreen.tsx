@@ -17,6 +17,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   BoxedList: 'Rounded bordered list, default and separate variants',
   ActionRow: 'Title, subtitle, leading/trailing slots, property variant',
   HeaderBar: 'Centered title, leading/trailing slots, flat variant',
+  Tabs: 'TabBar, TabItem, TabPanel — icons, badges, closeable',
 };
 
 export interface HomeScreenProps {
