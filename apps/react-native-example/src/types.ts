@@ -8,6 +8,7 @@ export const COMPONENT_NAMES = [
   'RadioButton',
   'Separator',
   'Card',
+  'BoxedList',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

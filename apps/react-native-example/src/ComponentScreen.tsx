@@ -2,6 +2,7 @@ import { Button, Separator, Text } from '@gnome-ui/react-native';
 import type { ComponentType } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
@@ -23,6 +24,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   RadioButton: RadioButtonScreen,
   Separator: SeparatorScreen,
   Card: CardScreen,
+  BoxedList: BoxedListScreen,
 };
 
 export interface ComponentScreenProps {
