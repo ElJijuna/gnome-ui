@@ -10,8 +10,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** theme tokens, `GnomeProvider`, and the first components
-> (`Button`, `Text`, `Link`, `TextField`, `Switch`, `Checkbox`) ship.
+> **Status:** theme tokens, `GnomeProvider`, and Tier 1 Base fully ported —
+> `Button`, `Text`, `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`.
 > Component ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -315,6 +315,45 @@ hardcodes a palette swatch per color scheme rather than a token that
 already resolves per theme, so it branches on `useResolvedColorScheme()` —
 and on `useResolvedContrast()` for the high-contrast border color/width —
 to match.
+
+### RadioButton
+
+```tsx
+import { useState } from 'react';
+import { RadioButton } from '@gnome-ui/react-native';
+
+function SizeOptions() {
+  const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
+
+  return (
+    <>
+      {(['sm', 'md', 'lg'] as const).map((option) => (
+        <RadioButton
+          key={option}
+          value={size === option}
+          onSelect={() => setSize(option)}
+          accessibilityLabel={option}
+        />
+      ))}
+    </>
+  );
+}
+```
+
+Reuses `Checkbox`'s exact border/background transition technique — same
+`Animated.Value`, same mount-skip guard so it never animates before the
+user touches it, same `useResolvedColorScheme()`/`useResolvedContrast()`
+branching for the idle border color — just circular, with a filled dot
+instead of a checkmark, and no indeterminate state.
+
+The web version's `<input type="radio" name="...">` groups mutually
+exclusive options natively via the shared `name` attribute; RN has no
+equivalent, so grouping is fully manual — render one `RadioButton` per
+option and drive `value` from shared selection state in the parent, same
+as any other controlled list of options. `onSelect` (not `onValueChange`)
+only fires when pressed while unselected, matching native radio semantics:
+pressing an already-selected radio is a no-op, so there's no boolean to
+report back.
 
 ## Installation
 
