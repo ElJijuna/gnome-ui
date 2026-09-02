@@ -11,9 +11,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** theme tokens, `GnomeProvider`, and the first components
-> (`Button`, `Text`, `Link`, `TextField`) ship. Component ports from
-> `@gnome-ui/react` continue tier by tier. See [ROADMAP.md](../../ROADMAP.md)
-> Priority 3.
+> (`Button`, `Text`, `Link`, `TextField`, `Switch`) ship. Component ports
+> from `@gnome-ui/react` continue tier by tier. See
+> [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -243,6 +243,41 @@ hint together), matching `@gnome-ui/react`'s `.disabled` wrapper class.
 itself. Everything else (`value`, `onChangeText`, `placeholder`,
 `keyboardType`, `secureTextEntry`, …) is plain RN `TextInputProps`, and
 `ref` reaches the underlying `TextInput`.
+
+### Switch
+
+```tsx
+import { useState } from 'react';
+import { Switch } from '@gnome-ui/react-native';
+
+function WifiRow() {
+  const [enabled, setEnabled] = useState(true);
+
+  return <Switch value={enabled} onValueChange={setEnabled} accessibilityLabel="Wi-Fi" />;
+}
+```
+
+Rebuilt on `Pressable`/`Animated.View` rather than ported from
+`@gnome-ui/react`'s `<input type="checkbox" role="switch">`: RN has no
+checkbox primitive to skin, and the platform-supplied `Switch` can't be
+made to match Adwaita, so the track and thumb are drawn by hand.
+`value`/`onValueChange` (not `checked`/`onChange`) mirror RN's own `Switch`
+API instead — the ecosystem convention this component overlaps with. It's
+fully controlled: there's no `defaultValue` escape hatch, matching the
+platform's own `Switch`.
+
+Track background and border color animate on every `value` change after
+the initial mount — matching the CSS `transition` on `.switch` — using
+`theme.durationFast`/`theme.easingDefault`; the thumb's fill color does not
+animate, since the source CSS only transitions the thumb's `transform`, not
+its `background-color`.
+
+Two of `Switch.module.css`'s colors are hardcoded per color scheme inside a
+component-level `@media (prefers-color-scheme: dark)` block rather than
+driven by a semantic token. Unlike `Button`/`Link`/`TextField`, which each
+read a single token that already resolves correctly per theme, the
+unchecked track/thumb colors here branch explicitly on
+`useResolvedColorScheme()` to match.
 
 ## Installation
 
