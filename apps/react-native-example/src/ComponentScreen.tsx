@@ -44,7 +44,10 @@ export const ComponentScreen = ({ name, onBack }: ComponentScreenProps) => {
         </Text>
       </View>
       <Separator />
-      <ScrollView contentContainerStyle={{ padding: 16, gap: 28 }}>
+      <ScrollView
+        contentInsetAdjustmentBehavior="never"
+        contentContainerStyle={{ padding: 16, gap: 28 }}
+      >
         <Demo />
       </ScrollView>
     </View>

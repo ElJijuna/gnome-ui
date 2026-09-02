@@ -44,6 +44,8 @@ export const ControlsBar = (props: ControlsBarProps) => {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
+      contentInsetAdjustmentBehavior="never"
+      style={{ flexGrow: 0 }}
       contentContainerStyle={{ gap: 8, padding: 12 }}
     >
       <View style={{ flexDirection: 'row', gap: 8 }}>

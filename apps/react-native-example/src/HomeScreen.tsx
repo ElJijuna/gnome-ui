@@ -24,7 +24,10 @@ export const HomeScreen = ({ onSelect }: HomeScreenProps) => {
   const theme = useGnomeTheme();
 
   return (
-    <ScrollView contentContainerStyle={{ paddingVertical: 8 }}>
+    <ScrollView
+      contentInsetAdjustmentBehavior="never"
+      contentContainerStyle={{ paddingVertical: 8 }}
+    >
       {COMPONENT_NAMES.map((name, index) => (
         <Fragment key={name}>
           {index > 0 && <Separator style={{ marginHorizontal: 16 }} />}
