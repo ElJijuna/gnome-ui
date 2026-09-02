@@ -16,6 +16,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Card: 'Elevated surface, static or interactive, 4 padding sizes',
   BoxedList: 'Rounded bordered list, default and separate variants',
   ActionRow: 'Title, subtitle, leading/trailing slots, property variant',
+  HeaderBar: 'Centered title, leading/trailing slots, flat variant',
 };
 
 export interface HomeScreenProps {

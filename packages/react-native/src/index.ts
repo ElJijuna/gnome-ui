@@ -3,6 +3,7 @@ export * from './components/BoxedList';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Checkbox';
+export * from './components/HeaderBar';
 export * from './components/Link';
 export * from './components/RadioButton';
 export * from './components/Separator';

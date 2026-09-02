@@ -7,6 +7,7 @@ import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
+import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
@@ -27,6 +28,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Card: CardScreen,
   BoxedList: BoxedListScreen,
   ActionRow: ActionRowScreen,
+  HeaderBar: HeaderBarScreen,
 };
 
 export interface ComponentScreenProps {

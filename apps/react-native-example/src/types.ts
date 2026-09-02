@@ -10,6 +10,7 @@ export const COMPONENT_NAMES = [
   'Card',
   'BoxedList',
   'ActionRow',
+  'HeaderBar',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
