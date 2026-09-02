@@ -11,8 +11,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** theme tokens, `GnomeProvider`, and the first components
-> (`Button`, `Text`) ship. Component ports from `@gnome-ui/react` continue
-> tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> (`Button`, `Text`, `Link`) ship. Component ports from `@gnome-ui/react`
+> continue tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -182,6 +182,32 @@ Everything else is plain RN `Text`: `numberOfLines`, `selectable`,
 `onPress`, `adjustsFontSizeToFit` and the rest of `TextProps` pass straight
 through, `style` merges over the variant style, and `ref` reaches the
 underlying host `Text`.
+
+### Link
+
+```tsx
+import { Link } from '@gnome-ui/react-native';
+
+<Link href="https://gnome.org" external>
+  GNOME
+</Link>;
+```
+
+`href` is opened via `Linking.openURL` when pressed. Pass a custom `onPress`
+to hand it to a router instead (e.g. `navigation.navigate` for an internal
+link) — that fully replaces the default `Linking.openURL` call rather than
+running alongside it.
+
+RN's `Pressable` has no `:hover`, so the underline the web `Link` reveals on
+hover instead reveals on press — the closest native equivalent — alongside
+the same `0.7` press-opacity dip as `@gnome-ui/react`'s `:active` state.
+
+`external` appends a trailing ↗ indicator and sets an `"Opens in browser"`
+accessibility hint on the pressable; the indicator itself is hidden from
+accessibility (`accessibilityElementsHidden`) since the hint already
+announces the same thing, mirroring the web version's `aria-label` on its
+icon span. Unlike the web `Link`, RN has no tab concept, so `external` is
+purely presentational — `href` always opens the same way regardless.
 
 ## Installation
 
