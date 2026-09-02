@@ -1,5 +1,5 @@
-import type { GnomeResolvedColorScheme, GnomeResolvedContrast } from '../theme/resolveTheme';
-import type { GnomeThemeTokens } from '../theme/tokens.generated';
+import type { GnomeResolvedColorScheme, GnomeResolvedContrast } from '@/theme/resolveTheme';
+import type { GnomeThemeTokens } from '@/theme/tokens.generated';
 
 export type GnomeColorScheme = GnomeResolvedColorScheme | 'system';
 export type GnomeContrast = GnomeResolvedContrast | 'system';

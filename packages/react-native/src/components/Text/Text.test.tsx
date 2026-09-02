@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react-native';
 import { createRef, type ReactElement } from 'react';
 import type { Text as RNText } from 'react-native';
 
-import { GnomeProvider } from '../../GnomeProvider';
+import { GnomeProvider } from '@/GnomeProvider';
 import { Text, type TextVariant } from './Text';
 
 function renderWithProvider(ui: ReactElement) {

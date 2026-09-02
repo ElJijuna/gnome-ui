@@ -2,8 +2,8 @@ import { forwardRef } from 'react';
 import type { AccessibilityRole, TextProps as RNTextProps, TextStyle } from 'react-native';
 import { Text as RNText } from 'react-native';
 
-import { useGnomeTheme } from '../../GnomeProvider';
-import type { GnomeThemeTokens } from '../../theme';
+import { useGnomeTheme } from '@/GnomeProvider';
+import type { GnomeThemeTokens } from '@/theme';
 
 export type TextVariant =
   | 'large-title'

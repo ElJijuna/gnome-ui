@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { darkTheme, highContrastTheme, lightTheme } from '../theme/tokens.generated';
+import { darkTheme, highContrastTheme, lightTheme } from '@/theme/tokens.generated';
 import { applyAccentColor, resolveColorScheme, resolveContrast } from './resolveContext';
 
 describe('resolveColorScheme', () => {

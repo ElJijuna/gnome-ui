@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo } from 'react';
-import type { GnomeResolvedColorScheme, GnomeResolvedContrast } from '../theme/resolveTheme';
-import type { GnomeThemeTokens } from '../theme/tokens.generated';
-import { lightTheme } from '../theme/tokens.generated';
+import type { GnomeResolvedColorScheme, GnomeResolvedContrast } from '@/theme/resolveTheme';
+import type { GnomeThemeTokens } from '@/theme/tokens.generated';
+import { lightTheme } from '@/theme/tokens.generated';
 import type { GnomeAccentColor, GnomeColorScheme, GnomeContrast, GnomeDir } from './resolveContext';
 
 export interface GnomeContextValue {

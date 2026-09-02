@@ -2,8 +2,8 @@ import { forwardRef, type ReactNode } from 'react';
 import type { PressableProps, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import { Pressable, Text } from 'react-native';
 
-import { useGnomeTheme, useResolvedContrast } from '../../GnomeProvider';
-import type { GnomeThemeTokens } from '../../theme';
+import { useGnomeTheme, useResolvedContrast } from '@/GnomeProvider';
+import type { GnomeThemeTokens } from '@/theme';
 
 export type ButtonVariant = 'default' | 'suggested' | 'destructive' | 'flat' | 'raised';
 export type ButtonSize = 'sm' | 'md' | 'lg';

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import { createRef, type ReactElement } from 'react';
 import { View } from 'react-native';
 
-import { GnomeProvider } from '../../GnomeProvider';
+import { GnomeProvider } from '@/GnomeProvider';
 import { Button } from './Button';
 
 function renderWithProvider(ui: ReactElement) {

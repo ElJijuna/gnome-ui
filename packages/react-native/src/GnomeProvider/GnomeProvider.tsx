@@ -6,7 +6,7 @@ import {
   Platform,
   useColorScheme as useSystemColorScheme,
 } from 'react-native';
-import { resolveGnomeTheme } from '../theme/resolveTheme';
+import { resolveGnomeTheme } from '@/theme/resolveTheme';
 import { GnomeContext } from './GnomeContext';
 import type { GnomeAccentColor, GnomeColorScheme, GnomeContrast, GnomeDir } from './resolveContext';
 import { applyAccentColor, resolveColorScheme, resolveContrast } from './resolveContext';
