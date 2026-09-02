@@ -10,9 +10,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** theme tokens, `GnomeProvider`, and the first component
-> (`Button`) ship. Component ports from `@gnome-ui/react` continue tier by
-> tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> **Status:** theme tokens, `GnomeProvider`, and the first components
+> (`Button`, `Text`) ship. Component ports from `@gnome-ui/react` continue
+> tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -137,6 +137,51 @@ as-is: RN has no `currentColor` equivalent, so size and color icons
 yourself, matching the resolved label color (`theme.accentFgColor`,
 `theme.destructiveFgColor`, `theme.windowFgColor`, …) if you want them to
 match.
+
+### Text
+
+```tsx
+import { Text } from '@gnome-ui/react-native';
+
+<Text variant="title-1">Settings</Text>
+<Text variant="caption" color="dim">Last synced 5 minutes ago</Text>;
+```
+
+All 12 Adwaita text styles — `large-title`, `title-1`–`title-4`, `heading`,
+`body`, `document`, `caption`, `caption-heading`, `monospace`, `numeric` —
+and the same 7 semantic colors as `@gnome-ui/react` (`default`, `dim`,
+`accent`, `destructive`, `success`, `warning`, `error`).
+
+| Variant | Role | Use case |
+|---------|------|----------|
+| `large-title` | `header` | Display heading with lots of whitespace |
+| `title-1` | `header` | Primary screen title |
+| `title-2` | `header` | Section title |
+| `title-3` | `header` | Sub-section title |
+| `title-4` | `header` | Minor heading |
+| `heading` | `header` | UI labels, boxed list headers |
+| `body` | — | Default UI text, descriptions |
+| `document` | — | Reading content (chat, articles) |
+| `caption` | — | Sub-text, metadata |
+| `caption-heading` | — | Small group labels (uppercase) |
+| `monospace` | — | Code, logs, shell commands |
+| `numeric` | — | Aligned numbers, counters |
+
+RN has no element to choose, so `@gnome-ui/react`'s `as` prop is replaced by
+`accessibilityRole`: the six heading variants default to `"header"` — the
+native equivalent of `<h1>`–`<h4>`, and what the VoiceOver/TalkBack heading
+rotor reads — and passing `accessibilityRole` explicitly overrides that.
+
+Three CSS-only typography features are resolved at render time instead:
+relative `line-height` ratios and `em` letter-spacing become absolute dp
+against each variant's own font size (RN accepts nothing else), and
+`color="dim"` stays an *opacity* rather than a flat gray, so it keeps
+working over any background — exactly what `.color-dim` does on the web.
+
+Everything else is plain RN `Text`: `numberOfLines`, `selectable`,
+`onPress`, `adjustsFontSizeToFit` and the rest of `TextProps` pass straight
+through, `style` merges over the variant style, and `ref` reaches the
+underlying host `Text`.
 
 ## Installation
 
