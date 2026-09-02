@@ -11,8 +11,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** theme tokens, `GnomeProvider`, and the first components
-> (`Button`, `Text`, `Link`, `TextField`, `Switch`) ship. Component ports
-> from `@gnome-ui/react` continue tier by tier. See
+> (`Button`, `Text`, `Link`, `TextField`, `Switch`, `Checkbox`) ship.
+> Component ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
@@ -278,6 +278,43 @@ driven by a semantic token. Unlike `Button`/`Link`/`TextField`, which each
 read a single token that already resolves correctly per theme, the
 unchecked track/thumb colors here branch explicitly on
 `useResolvedColorScheme()` to match.
+
+### Checkbox
+
+```tsx
+import { useState } from 'react';
+import { Checkbox } from '@gnome-ui/react-native';
+
+function TermsRow() {
+  const [accepted, setAccepted] = useState(false);
+
+  return (
+    <Checkbox value={accepted} onValueChange={setAccepted} accessibilityLabel="Accept terms" />
+  );
+}
+
+// "Select all" with a mixed group:
+<Checkbox value={allSelected} indeterminate={someSelected && !allSelected} onValueChange={selectAll} />;
+```
+
+Three states — unchecked, checked, and `indeterminate` (mixed) — same as
+`@gnome-ui/react`'s. `value`/`onValueChange` mirror `Switch`'s convention
+rather than the web version's `checked`/`onChange`.
+
+RN has no `indeterminate` DOM property to set imperatively — the entire
+reason the web version needs a ref and an effect — so here it's just a
+render branch: `indeterminate` draws a short bar, otherwise a checkmark,
+both fading in on the same `Animated.Value` that drives the border/
+background transition. The checkmark itself is a `✓` glyph rather than the
+web version's `clip-path` polygon, since this package has no SVG dependency
+to draw one exactly — the same Unicode-glyph fallback `Link`'s external-link
+indicator already established for a small decorative mark.
+
+The idle border color is another case (like `Switch`) where the source CSS
+hardcodes a palette swatch per color scheme rather than a token that
+already resolves per theme, so it branches on `useResolvedColorScheme()` —
+and on `useResolvedContrast()` for the high-contrast border color/width —
+to match.
 
 ## Installation
 
