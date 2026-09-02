@@ -15,6 +15,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Separator: 'Horizontal and vertical dividing line',
   Card: 'Elevated surface, static or interactive, 4 padding sizes',
   BoxedList: 'Rounded bordered list, default and separate variants',
+  ActionRow: 'Title, subtitle, leading/trailing slots, property variant',
 };
 
 export interface HomeScreenProps {
