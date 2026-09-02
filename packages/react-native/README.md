@@ -11,8 +11,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** theme tokens, `GnomeProvider`, and the first components
-> (`Button`, `Text`, `Link`) ship. Component ports from `@gnome-ui/react`
-> continue tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> (`Button`, `Text`, `Link`, `TextField`) ship. Component ports from
+> `@gnome-ui/react` continue tier by tier. See [ROADMAP.md](../../ROADMAP.md)
+> Priority 3.
 
 ## How it works
 
@@ -208,6 +209,40 @@ accessibility (`accessibilityElementsHidden`) since the hint already
 announces the same thing, mirroring the web version's `aria-label` on its
 icon span. Unlike the web `Link`, RN has no tab concept, so `external` is
 purely presentational — `href` always opens the same way regardless.
+
+### TextField
+
+```tsx
+import { TextField } from '@gnome-ui/react-native';
+
+<TextField
+  label="Username"
+  helperText="Enter your username"
+  value={username}
+  onChangeText={setUsername}
+/>;
+
+<TextField label="Email" error="This field is required" />;
+```
+
+RN has no `<label htmlFor>`/`aria-describedby` pairing, so `label` doubles
+as `accessibilityLabel` and `error`/`helperText` doubles as
+`accessibilityHint` on the underlying `TextInput` — announced together the
+same way `aria-describedby` reads them on the web. `error`, when set,
+replaces `helperText` in both the rendered hint row and the accessibility
+hint, and colors the border and hint text with `theme.errorColor`.
+
+There's no `:focus-visible` distinction on RN, so the accent border on
+focus is plain `onFocus`/`onBlur` state rather than a keyboard-only ring;
+there's also no outer `box-shadow`, so focus is a border-color change only,
+not a grown ring like the web version's. The web `disabled` prop is RN's
+own `editable={false}` — mirrored as a dimmed wrapper (label, input, and
+hint together), matching `@gnome-ui/react`'s `.disabled` wrapper class.
+
+`style` targets the wrapping `View`; `inputStyle` targets the `TextInput`
+itself. Everything else (`value`, `onChangeText`, `placeholder`,
+`keyboardType`, `secureTextEntry`, …) is plain RN `TextInputProps`, and
+`ref` reaches the underlying `TextInput`.
 
 ## Installation
 
