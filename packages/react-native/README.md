@@ -11,9 +11,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** theme tokens, `GnomeProvider`, and Tier 1 Base fully ported —
-> `Button`, `Text`, `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`.
-> Component ports from `@gnome-ui/react` continue tier by tier. See
-> [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> `Button`, `Text`, `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`
+> — plus `Separator` from Tier 2. Component ports from `@gnome-ui/react`
+> continue tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -354,6 +354,28 @@ as any other controlled list of options. `onSelect` (not `onValueChange`)
 only fires when pressed while unselected, matching native radio semantics:
 pressing an already-selected radio is a no-op, so there's no boolean to
 report back.
+
+### Separator
+
+```tsx
+import { Separator } from '@gnome-ui/react-native';
+
+<Separator />;
+<Separator orientation="vertical" style={{ height: 24 }} />;
+```
+
+Thin dividing line — the first component from Tier 2 (Layout &
+Containers). Color comes entirely from `theme.cardShadeColor`, which
+already resolves correctly per color scheme, so — unlike `Switch`/
+`Checkbox`/`RadioButton` — there's no `useResolvedColorScheme()` branching
+needed here.
+
+Rebuilt as a plain `View` rather than ported from `@gnome-ui/react`'s
+`<hr>`/`<div role="separator">`: RN's `AccessibilityRole` union has no
+`"separator"` value, so — since a divider carries no information a screen
+reader user needs — it's excluded from the accessibility tree entirely
+with `accessible={false}`, the RN-idiomatic way to mark a purely
+decorative element.
 
 ## Installation
 
