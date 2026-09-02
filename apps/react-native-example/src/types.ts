@@ -7,6 +7,7 @@ export const COMPONENT_NAMES = [
   'Checkbox',
   'RadioButton',
   'Separator',
+  'Card',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

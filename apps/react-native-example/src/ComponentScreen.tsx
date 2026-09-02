@@ -3,6 +3,7 @@ import type { ComponentType } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { ButtonScreen } from './screens/ButtonScreen';
+import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
@@ -21,6 +22,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Checkbox: CheckboxScreen,
   RadioButton: RadioButtonScreen,
   Separator: SeparatorScreen,
+  Card: CardScreen,
 };
 
 export interface ComponentScreenProps {

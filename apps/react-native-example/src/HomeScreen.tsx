@@ -13,6 +13,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Checkbox: 'Unchecked, checked, indeterminate',
   RadioButton: 'Single selection within a manually-managed group',
   Separator: 'Horizontal and vertical dividing line',
+  Card: 'Elevated surface, static or interactive, 4 padding sizes',
 };
 
 export interface HomeScreenProps {
