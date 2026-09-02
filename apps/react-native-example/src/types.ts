@@ -1,0 +1,14 @@
+export const COMPONENT_NAMES = [
+  'Button',
+  'Text',
+  'Link',
+  'TextField',
+  'Switch',
+  'Checkbox',
+  'RadioButton',
+  'Separator',
+] as const;
+
+export type ComponentName = (typeof COMPONENT_NAMES)[number];
+
+export type Screen = 'home' | ComponentName;

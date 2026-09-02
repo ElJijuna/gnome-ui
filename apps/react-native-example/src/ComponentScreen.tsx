@@ -1,0 +1,50 @@
+import { Button, Separator, Text } from '@gnome-ui/react-native';
+import type { ComponentType } from 'react';
+import { ScrollView, View } from 'react-native';
+
+import { ButtonScreen } from './screens/ButtonScreen';
+import { CheckboxScreen } from './screens/CheckboxScreen';
+import { LinkScreen } from './screens/LinkScreen';
+import { RadioButtonScreen } from './screens/RadioButtonScreen';
+import { SeparatorScreen } from './screens/SeparatorScreen';
+import { SwitchScreen } from './screens/SwitchScreen';
+import { TextFieldScreen } from './screens/TextFieldScreen';
+import { TextScreen } from './screens/TextScreen';
+import type { ComponentName } from './types';
+
+const SCREENS: Record<ComponentName, ComponentType> = {
+  Button: ButtonScreen,
+  Text: TextScreen,
+  Link: LinkScreen,
+  TextField: TextFieldScreen,
+  Switch: SwitchScreen,
+  Checkbox: CheckboxScreen,
+  RadioButton: RadioButtonScreen,
+  Separator: SeparatorScreen,
+};
+
+export interface ComponentScreenProps {
+  name: ComponentName;
+  onBack: () => void;
+}
+
+export const ComponentScreen = ({ name, onBack }: ComponentScreenProps) => {
+  const Demo = SCREENS[name];
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8 }}>
+        <Button variant="flat" onPress={onBack}>
+          {'‹ Home'}
+        </Button>
+        <Text variant="title-3" style={{ marginStart: 4 }}>
+          {name}
+        </Text>
+      </View>
+      <Separator />
+      <ScrollView contentContainerStyle={{ padding: 16, gap: 28 }}>
+        <Demo />
+      </ScrollView>
+    </View>
+  );
+};

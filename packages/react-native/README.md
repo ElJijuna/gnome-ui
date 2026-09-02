@@ -383,6 +383,13 @@ decorative element.
 npm install @gnome-ui/react-native react-native
 ```
 
+## Example app
+
+[`apps/react-native-example`](../../apps/react-native-example) is a
+Storybook-style gallery for every component in this package, runnable in
+[Expo Go](https://expo.dev/go) — no native build needed. From the repo
+root: `npm start --workspace=@gnome-ui/react-native-example`.
+
 ## Testing
 
 This package uses **Jest**, not the Vitest used elsewhere in the monorepo.
