@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/react-native",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "React Native components following the GNOME Human Interface Guidelines, targeting iOS/Android/GNOME-mobile shells",
   "type": "module",
   "main": "./dist/index.cjs",
