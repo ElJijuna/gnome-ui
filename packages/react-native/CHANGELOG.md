@@ -1,3 +1,14 @@
+## [@gnome-ui/react-native-v1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.0.0...@gnome-ui/react-native@1.1.0) (2026-09-03)
+
+### Features
+
+* **@gnome-ui/react-native:** add Banner component for persistent notifications ([e05243d](https://github.com/ElJijuna/gnome-ui/commit/e05243ded4ae18d6d85babdca8f5ead1a80d9ee1))
+* **@gnome-ui/react-native:** add Dialog component for modal interactions ([eca3b4b](https://github.com/ElJijuna/gnome-ui/commit/eca3b4b4ce4fabc0c1da96e1510bd7ddb97cc7b6))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
 ## 1.0.0 (2026-09-03)
 
 ### Features
