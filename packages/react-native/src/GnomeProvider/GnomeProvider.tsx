@@ -108,6 +108,46 @@ function useSystemHighContrast(): boolean {
   return enabled;
 }
 
+/**
+ * Returns `true` when the OS "Reduce Motion" accessibility setting is on
+ * (iOS Settings > Accessibility > Motion, Android Settings >
+ * Accessibility > Remove animations), for components with a continuously
+ * looping `Animated` value (e.g. `Spinner`) to slow down or skip that
+ * animation. Unlike `contrast`/`colorScheme`, the web `GnomeProvider` has
+ * no corresponding override prop — `prefers-reduced-motion` is a pure CSS
+ * media query there, always OS-driven — so this hook mirrors that: it
+ * reads `AccessibilityInfo` directly and isn't scoped to `GnomeProvider`'s
+ * context, unlike every other hook in this package. `isReduceMotionEnabled`
+ * / `reduceMotionChanged` are supported on both iOS and Android (unlike
+ * the high-contrast APIs above, which are platform-specific), so no
+ * `Platform.OS` branch is needed.
+ */
+// eslint-disable-next-line react-refresh/only-export-components
+export function useReducedMotion(): boolean {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      const value = await AccessibilityInfo.isReduceMotionEnabled();
+
+      if (mounted) {
+        setEnabled(value);
+      }
+    })();
+
+    const subscription = AccessibilityInfo.addEventListener('reduceMotionChanged', setEnabled);
+
+    return () => {
+      mounted = false;
+      subscription.remove();
+    };
+  }, []);
+
+  return enabled;
+}
+
 /** Provides locale, text direction, color scheme, contrast, accent color, and resolved theme tokens to all descendant gnome-ui components. */
 export const GnomeProvider = ({
   locale,

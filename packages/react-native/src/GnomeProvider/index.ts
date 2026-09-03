@@ -13,7 +13,7 @@ export {
   useResolvedContrast,
 } from './GnomeContext';
 export type { GnomeProviderProps } from './GnomeProvider';
-export { GnomeProvider } from './GnomeProvider';
+export { GnomeProvider, useReducedMotion } from './GnomeProvider';
 export type {
   GnomeAccentColor,
   GnomeColorScheme,

@@ -14,8 +14,11 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), Tier 2 Layout &
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
-> `PathBar`) fully ported. Component ports from `@gnome-ui/react` continue
-> tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner` shipped —
+> `Progress Bar`, `Skeleton`, `Toast`, `Banner`, `Dialog`, `Tooltip`,
+> `Status Page`, and `AnimatedIcon` remain. Component ports from
+> `@gnome-ui/react` continue tier by tier. See
+> [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -118,6 +121,16 @@ Unlike the web provider, `dir` is exposed for consumers to branch on but
 never calls `I18nManager.forceRTL()` — RN's layout direction is a single
 global flag that needs an app reload and is set once at bootstrap, not per
 provider tree.
+
+`useReducedMotion()` is the one hook in this set **not** scoped to
+`GnomeProvider`'s context — it reads the OS "Reduce Motion" accessibility
+setting (`AccessibilityInfo.isReduceMotionEnabled`/`reduceMotionChanged`,
+supported on both iOS and Android) directly and works without a provider
+at all. Unlike `contrast`/`colorScheme`, the web `GnomeProvider` has no
+corresponding override prop for this — `prefers-reduced-motion` is a pure
+CSS media query there, always OS-driven — so there's nothing to mirror on
+the context side. Any component with a continuously looping `Animated`
+value (e.g. `Spinner`) reads it to slow down or skip that animation.
 
 ## Components
 
@@ -498,6 +511,40 @@ faked — each interactive segment still gets its own
 `accessibilityRole="button"` and `accessibilityLabel`. The separator is a
 Unicode `›` glyph instead of the web version's inline SVG chevron, matching
 this package's established no-SVG-dependency convention.
+
+### Spinner
+
+```tsx
+import { Spinner } from '@gnome-ui/react-native';
+
+<Spinner />;
+<Spinner size="lg" label="Syncing your library…" />;
+
+// Rendered alongside your own label instead of announcing its own:
+<Spinner label="" />;
+```
+
+Indeterminate loading ring — the first component from Tier 4 (Feedback).
+`size` is `"sm"` | `"md"` | `"lg"` (16/24/36px). `label` defaults to
+`"Loading…"`; pass `""` to silence it when a sibling label already
+describes the loading state (mirrors the web version's same convention).
+
+Rebuilt on `Animated.View` rather than ported from `@gnome-ui/react`'s
+pure-CSS `@keyframes spin`: the ring itself reuses the same per-side-border
+trick the CSS does (`borderColor` for the track, `borderTopColor` for the
+accent-colored "head", on a fully-rounded circle) — RN's `View` supports
+independent per-side border colors too, so that part translates directly.
+The rotation is an `Animated.loop`d `Animated.timing` driving a `rotate`
+transform with `useNativeDriver: true`. `useReducedMotion()` (see
+`GnomeProvider` above) mirrors the source CSS's own
+`@media (prefers-reduced-motion: reduce) { animation-duration: 2s }` —
+slowed to 2s, not stopped outright, matching the web behavior exactly
+rather than dropping the animation entirely.
+
+RN's `AccessibilityRole` union has no "status" value (the web version's
+`role="status"`); `"progressbar"` is the closest match for an
+indeterminate loading indicator, with no `accessibilityValue` set — RN's
+equivalent of omitting `aria-valuenow` for an indeterminate progress bar.
 
 ## Installation
 
