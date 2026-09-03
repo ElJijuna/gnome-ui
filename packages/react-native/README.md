@@ -15,7 +15,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
 > `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
-> `ProgressBar`, `Skeleton`, and `Toast`/`Toaster` shipped — `Banner`,
+> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, and `Banner` shipped —
 > `Dialog`, `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component
 > ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
@@ -679,6 +679,40 @@ skips straight to the settled state. RN's `AccessibilityRole` union has no
 "status" value (the web version's `role="status"`); `"alert"` is the
 closest available role, paired with `accessibilityLiveRegion="polite"`
 (Android's live-region API) as the nearest match to `aria-live="polite"`.
+
+### Banner
+
+```tsx
+import { Banner } from '@gnome-ui/react-native';
+
+<Banner variant="info">A new version is available.</Banner>;
+<Banner variant="error" actionLabel="Retry" onAction={() => {}}>
+  Sync failed
+</Banner>;
+<Banner variant="success" dismissible onDismiss={() => {}}>
+  Changes saved successfully.
+</Banner>;
+```
+
+Persistent message strip for the top of a view. `variant` is `"info"`
+(default) | `"warning"` | `"error"` | `"success"`, each mapping to the
+matching `theme.<variant>BgColor`/`<variant>FgColor` token pair. Unlike
+`Toast`, it never auto-dismisses — it stays until the user acts or presses
+the optional dismiss button, so there's no `duration` prop at all.
+
+Same accessibility substitution as `Toast`: RN's `AccessibilityRole` union
+has no "status" value (the web version's `role="status"`), so `"alert"` +
+`accessibilityLiveRegion="polite"` stands in for it. The banner itself is a
+plain `View`, not `Pressable` (only its action/dismiss buttons are
+interactive), so — per the `BoxedList` lesson that a bare `View` isn't an
+accessibility element by default — `accessible` is set explicitly alongside
+`accessibilityRole`.
+
+The web version's per-variant `:hover`/`:active` background tint on the
+action/dismiss buttons (a light overlay on the darker info/error/success
+backgrounds, a dark one on the light warning background) collapses to a
+single `Pressable`-pressed-state overlay, the same simplification `Toast`
+and `Card` already made for their own press states.
 
 ## Installation
 

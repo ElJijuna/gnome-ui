@@ -1,4 +1,5 @@
 export * from './components/ActionRow';
+export * from './components/Banner';
 export * from './components/BoxedList';
 export * from './components/Button';
 export * from './components/Card';

@@ -3,6 +3,7 @@ import type { ComponentType } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { ActionRowScreen } from './screens/ActionRowScreen';
+import { BannerScreen } from './screens/BannerScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
@@ -47,6 +48,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ProgressBar: ProgressBarScreen,
   Skeleton: SkeletonScreen,
   Toast: ToastScreen,
+  Banner: BannerScreen,
 };
 
 export interface ComponentScreenProps {

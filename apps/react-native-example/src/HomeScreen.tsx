@@ -26,6 +26,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ProgressBar: 'Determinate and indeterminate progress — 4 color variants',
   Skeleton: 'Content-shaped loading placeholder — rect, circle, text',
   Toast: 'Non-blocking notification — auto-dismiss, action, top/bottom',
+  Banner: 'Persistent message strip — 4 variants, action, dismissible',
 };
 
 export interface HomeScreenProps {
