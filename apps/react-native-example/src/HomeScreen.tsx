@@ -25,6 +25,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Spinner: 'Indeterminate loading ring — 3 sizes, reduced-motion aware',
   ProgressBar: 'Determinate and indeterminate progress — 4 color variants',
   Skeleton: 'Content-shaped loading placeholder — rect, circle, text',
+  Toast: 'Non-blocking notification — auto-dismiss, action, top/bottom',
 };
 
 export interface HomeScreenProps {

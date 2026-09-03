@@ -17,6 +17,7 @@ export * from './components/Switch';
 export * from './components/Tabs';
 export * from './components/Text';
 export * from './components/TextField';
+export * from './components/Toast';
 export * from './components/ViewSwitcher';
 export * from './GnomeProvider';
 export * from './theme';

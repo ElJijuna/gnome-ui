@@ -15,9 +15,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
 > `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
-> `ProgressBar`, and `Skeleton` shipped — `Toast`, `Banner`, `Dialog`,
-> `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component ports
-> from `@gnome-ui/react` continue tier by tier. See
+> `ProgressBar`, `Skeleton`, and `Toast`/`Toaster` shipped — `Banner`,
+> `Dialog`, `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component
+> ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
@@ -621,6 +621,64 @@ than one policy applied uniformly across the package.
 loading placeholder carries no information a screen reader user needs,
 the same reasoning `Separator` already established for a purely
 decorative element.
+
+### Toast / Toaster
+
+```tsx
+import { Toast, Toaster } from '@gnome-ui/react-native';
+
+function App() {
+  const [toasts, setToasts] = useState<{ id: number; message: string }[]>([]);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <YourAppContent />
+
+      <Toaster>
+        {toasts.map((t) => (
+          <Toast
+            key={t.id}
+            title={t.message}
+            dismissible
+            onDismiss={() => setToasts((prev) => prev.filter((x) => x.id !== t.id))}
+          />
+        ))}
+      </Toaster>
+    </View>
+  );
+}
+```
+
+Non-blocking temporary notification. `Toast` auto-dismisses after
+`duration` ms (default 3000, `0` disables it) and stays fully prop-driven
+— you own the list of active toasts and remove one from it in `onDismiss`,
+exactly like the web version. `Toaster` stacks them, positioned
+`"bottom"` (default) or `"top"`.
+
+RN has no `document.body`/portal target to render into the way the web
+version's `createPortal` does, so there's no `container` prop — mount
+`Toaster` yourself as the **last** child of your app's root-level `View`
+so it paints on top of everything else (see the example above).
+`pointerEvents="box-none"` on `Toaster` is the RN equivalent of the web
+version's `pointer-events: none` on the container: empty space around the
+stack doesn't intercept touches, but each `Toast` (a `Pressable`) still
+handles its own.
+
+The timer-pause behavior is ported verbatim (`setTimeout`/`Date.now()`
+bookkeeping, no DOM API involved) — only the *trigger* changes: RN has no
+hover, so `onPressIn`/`onPressOut` (touch-down/touch-up) stand in for the
+web version's `onMouseEnter`/`onMouseLeave`, pausing the auto-dismiss
+timer while the user is actively touching the toast. There's no
+`onFocus`/`onBlur`-triggered pause either — the card itself isn't
+focusable in RN's touch-first model, only its action/dismiss buttons are,
+and RN has no "focus-within" primitive to detect that.
+
+The entrance is an `Animated.timing` fading + sliding + scaling in,
+matching the web version's `@keyframes toast-in`; `useReducedMotion()`
+skips straight to the settled state. RN's `AccessibilityRole` union has no
+"status" value (the web version's `role="status"`); `"alert"` is the
+closest available role, paired with `accessibilityLiveRegion="polite"`
+(Android's live-region API) as the nearest match to `aria-live="polite"`.
 
 ## Installation
 
