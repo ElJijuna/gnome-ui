@@ -23,6 +23,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SearchBar: 'Collapsible search input — clear button, close button, filter row',
   PathBar: 'Breadcrumb location bar — interactive ancestors, static current folder',
   Spinner: 'Indeterminate loading ring — 3 sizes, reduced-motion aware',
+  ProgressBar: 'Determinate and indeterminate progress — 4 color variants',
 };
 
 export interface HomeScreenProps {

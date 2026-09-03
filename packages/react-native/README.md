@@ -14,10 +14,10 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), Tier 2 Layout &
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
-> `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner` shipped —
-> `Progress Bar`, `Skeleton`, `Toast`, `Banner`, `Dialog`, `Tooltip`,
-> `Status Page`, and `AnimatedIcon` remain. Component ports from
-> `@gnome-ui/react` continue tier by tier. See
+> `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner` and
+> `ProgressBar` shipped — `Skeleton`, `Toast`, `Banner`, `Dialog`,
+> `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component ports
+> from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
@@ -545,6 +545,42 @@ RN's `AccessibilityRole` union has no "status" value (the web version's
 `role="status"`); `"progressbar"` is the closest match for an
 indeterminate loading indicator, with no `accessibilityValue` set — RN's
 equivalent of omitting `aria-valuenow` for an indeterminate progress bar.
+
+### ProgressBar
+
+```tsx
+import { ProgressBar } from '@gnome-ui/react-native';
+
+<ProgressBar value={0.6} accessibilityLabel="Download progress" />;
+<ProgressBar variant="success" value={1} />;
+
+// Indeterminate — unknown duration:
+<ProgressBar accessibilityLabel="Loading" />;
+```
+
+Determinate and indeterminate progress bar. `value` (0–1) shows exact
+progress with an animated width transition on every change; omit it for
+an indeterminate 40%-wide bar that slides left to right on a loop.
+`variant` is `"accent"` (default) | `"success"` | `"warning"` | `"error"`.
+
+`useReducedMotion()` (see `GnomeProvider` above) is honored per the
+*source CSS's own* per-state behavior rather than one uniform rule:
+determinate width changes simply skip the transition, while the
+indeterminate pulse stops entirely and freezes as a static, full-width,
+50%-opacity bar — exactly what the source
+`@media (prefers-reduced-motion: reduce)` block does. This differs from
+`Spinner`, whose reduced-motion behavior *slows* its animation instead of
+stopping it outright — each component mirrors its own source CSS rather
+than a single reduced-motion policy applied uniformly across the package.
+
+`role="progressbar"` maps directly to RN's own `accessibilityRole` (no
+substitution needed, unlike `Spinner`'s web `role="status"`).
+`accessibilityValue` carries `min`/`max`/`now` for the determinate case;
+the indeterminate case omits all three — RN's equivalent of the web
+version omitting `aria-valuenow`/`aria-valuemin`/`aria-valuemax`. The web
+version's `aria-labelledby` (an id-relationship prop) has no RN
+equivalent — RN has no DOM ids — so only `aria-label`
+(`accessibilityLabel`) is ported.
 
 ## Installation
 
