@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import type { LayoutChangeEvent, StyleProp, ViewProps, ViewStyle } from 'react-native';
 import { Animated, Easing } from 'react-native';
 
 import { useGnomeTheme, useReducedMotion, useResolvedColorScheme } from '@/GnomeProvider';
@@ -46,6 +46,25 @@ export interface ProgressBarProps extends Omit<ViewProps, 'style'> {
  * of stopping it — each component mirrors its own source CSS rather than
  * applying a single reduced-motion policy across the package.
  *
+ * Both animated states are driven entirely by `transform` rather than by
+ * layout properties (`width`/`left`), so both can run
+ * `useNativeDriver: true`: RN's native animation driver can only animate
+ * transforms, and a JS-driven (`useNativeDriver: false`) `Animated.timing`
+ * or `Animated.loop` schedules its next frame via a plain `setTimeout` —
+ * one that routinely fires a tick after a test's `render()` returns but
+ * before unmount, outside any `act()` boundary, producing a real (if
+ * harmless) "update not wrapped in act()" warning under
+ * `@testing-library/react-native` on every render of this component. The
+ * determinate fill stays a constant `width: '100%'` and instead animates
+ * `transform: [{ scaleX }]` with `transformOrigin: 'left'` (so it grows
+ * from the left edge, not from center); the indeterminate pulse similarly
+ * animates `transform: [{ translateX }]` from `-0.4 * trackWidth` to
+ * `trackWidth` (measured via `onLayout`, since a transform's `translateX`
+ * needs a pixel offset, not a percentage) rather than animating `left`.
+ * Both reproduce the exact same visual motion as the source CSS's
+ * `width`/`left` transitions while running fully off the JS thread, which
+ * eliminates the warning at its root rather than suppressing it.
+ *
  * `role="progressbar"` maps directly to RN's own `accessibilityRole`
  * (unlike `Spinner`, which had to substitute for the web's `role="status"`
  * — `ProgressBar`'s web role already has a 1:1 RN equivalent).
@@ -62,6 +81,7 @@ export const ProgressBar = ({
   variant = 'accent',
   accessibilityLabel,
   style,
+  onLayout,
   ...viewProps
 }: ProgressBarProps) => {
   const theme = useGnomeTheme();
@@ -74,6 +94,12 @@ export const ProgressBar = ({
 
   const width = useRef(new Animated.Value(clamped ?? 0)).current;
   const pulse = useRef(new Animated.Value(0)).current;
+  const [trackWidth, setTrackWidth] = useState(0);
+
+  const handleTrackLayout = (event: LayoutChangeEvent) => {
+    setTrackWidth(event.nativeEvent.layout.width);
+    onLayout?.(event);
+  };
 
   useEffect(() => {
     if (isIndeterminate) {
@@ -86,7 +112,7 @@ export const ProgressBar = ({
       toValue: clamped ?? 0,
       duration: reducedMotion ? 0 : theme.durationNormal,
       easing: Easing.bezier(x1, y1, x2, y2),
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   }, [clamped, isIndeterminate, reducedMotion, width, theme.durationNormal, theme.easingDefault]);
 
@@ -104,7 +130,7 @@ export const ProgressBar = ({
         toValue: 1,
         duration: 1400,
         easing: Easing.bezier(x1, y1, x2, y2),
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
     );
 
@@ -123,13 +149,23 @@ export const ProgressBar = ({
 
   const fillStyle = isIndeterminate
     ? reducedMotion
-      ? { left: '0%', width: '100%', opacity: 0.5 }
+      ? { left: 0, width: '100%', opacity: 0.5 }
       : {
-          left: pulse.interpolate({ inputRange: [0, 1], outputRange: ['-40%', '100%'] }),
+          left: 0,
           width: '40%',
+          transform: [
+            {
+              translateX: pulse.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-0.4 * trackWidth, trackWidth],
+              }),
+            },
+          ],
         }
     : {
-        width: width.interpolate({ inputRange: [0, 1], outputRange: ['0%', '100%'] }),
+        width: '100%',
+        transformOrigin: 'left',
+        transform: [{ scaleX: width }],
       };
 
   return (
@@ -140,6 +176,7 @@ export const ProgressBar = ({
       accessibilityValue={
         clamped !== undefined ? { min: 0, max: 100, now: Math.round(percent as number) } : undefined
       }
+      onLayout={handleTrackLayout}
       style={[
         {
           width: '100%',
