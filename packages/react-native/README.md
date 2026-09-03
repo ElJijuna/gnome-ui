@@ -14,7 +14,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), and Tier 2
 > Layout & Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`,
 > `HeaderBar`) fully ported. Tier 3 Navigation in progress: `Tabs`,
-> `ViewSwitcher`, and `Sidebar` shipped — `Search Bar`/`PathBar` remain.
+> `ViewSwitcher`, `Sidebar`, and `SearchBar` shipped — `PathBar` remains.
 > Component ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -428,6 +428,48 @@ touch-first device), `menuItems` (context menu — no portal/positioning
 primitive exists in this package yet), and `onDrop`/`acceptTypes` (HTML5
 drag-and-drop has no RN equivalent without a gesture-handler dependency this
 package doesn't have).
+
+### SearchBar
+
+```tsx
+import { SearchBar } from '@gnome-ui/react-native';
+
+<SearchBar
+  open
+  value={query}
+  onChangeText={setQuery}
+  onClear={() => setQuery('')}
+  onClose={() => setOpen(false)}
+/>;
+
+// Filter chips below the bar:
+<SearchBar open value={query} onChangeText={setQuery}>
+  <Chip label="Apps" />
+  <Chip label="Documents" />
+</SearchBar>;
+```
+
+Collapsible search input. `open={false}` renders nothing at all rather than
+porting the web version's CSS height/opacity transition — no established
+animated-height pattern exists yet in this package (the same trade-off
+`SidebarSection` made for its collapsible body) — and mounting on
+`open={true}` auto-focuses the input, standing in for the web version's
+`requestAnimationFrame`-on-open focus effect.
+
+`onClose` renders a trailing "Cancel" button rather than being wired to an
+Escape keypress: touch keyboards have no reliable Escape key, so a visible
+button is the RN-idiomatic stand-in. The clear (×) button appears whenever
+`value` is non-empty, mirroring the web version, and both icons are Unicode
+glyphs (`🔍`/`×`) rather than `@gnome-ui/icons`, matching every other
+no-SVG-dependency component in this package.
+
+Dropped relative to `@gnome-ui/react`'s `SearchBar`: the `suggestions` /
+`onSuggestionSelect` / `loadingSuggestions` / `renderSuggestion` /
+`suggestionsLabel` autocomplete popover — it depends on a portal +
+viewport-anchored positioning primitive (`createPortal` +
+`getBoundingClientRect`) this package doesn't have yet, the same gap that
+dropped `SidebarItem`'s `menuItems` context menu — and a `Spinner`
+component, not yet ported.
 
 ## Installation
 

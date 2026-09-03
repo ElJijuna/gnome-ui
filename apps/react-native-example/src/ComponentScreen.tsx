@@ -10,6 +10,7 @@ import { CheckboxScreen } from './screens/CheckboxScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
+import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
 import { SidebarScreen } from './screens/SidebarScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
@@ -35,6 +36,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Tabs: TabsScreen,
   ViewSwitcher: ViewSwitcherScreen,
   Sidebar: SidebarScreen,
+  SearchBar: SearchBarScreen,
 };
 
 export interface ComponentScreenProps {

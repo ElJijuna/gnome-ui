@@ -20,6 +20,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Tabs: 'TabBar, TabItem, TabPanel — icons, badges, closeable',
   ViewSwitcher: 'Pill-shaped segmented control for switching major views',
   Sidebar: 'Lateral navigation panel — sections, icons, collapsed rail, filtering',
+  SearchBar: 'Collapsible search input — clear button, close button, filter row',
 };
 
 export interface HomeScreenProps {
