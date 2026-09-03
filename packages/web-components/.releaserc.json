@@ -1,4 +1,5 @@
 {
+  "extends": "semantic-release-monorepo",
   "tagFormat": "@gnome-ui/web-components@${version}",
   "branches": ["main"],
   "plugins": [

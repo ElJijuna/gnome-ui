@@ -1,4 +1,5 @@
 {
+  "extends": "semantic-release-monorepo",
   "tagFormat": "@gnome-ui/charts@${version}",
   "branches": ["main"],
   "plugins": [
