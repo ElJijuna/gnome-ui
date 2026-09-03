@@ -11,12 +11,11 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** theme tokens, `GnomeProvider`, Tier 1 Base (`Button`, `Text`,
-> `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), and Tier 2
-> Layout & Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`,
-> `HeaderBar`) fully ported. Tier 3 Navigation in progress: `Tabs`,
-> `ViewSwitcher`, `Sidebar`, and `SearchBar` shipped — `PathBar` remains.
-> Component ports from `@gnome-ui/react` continue tier by tier. See
-> [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), Tier 2 Layout &
+> Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
+> and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
+> `PathBar`) fully ported. Component ports from `@gnome-ui/react` continue
+> tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -470,6 +469,35 @@ viewport-anchored positioning primitive (`createPortal` +
 `getBoundingClientRect`) this package doesn't have yet, the same gap that
 dropped `SidebarItem`'s `menuItems` context menu — and a `Spinner`
 component, not yet ported.
+
+### PathBar
+
+```tsx
+import { PathBar } from '@gnome-ui/react-native';
+
+<PathBar
+  segments={[
+    { label: 'Home', path: '/home' },
+    { label: 'Documents', path: '/home/documents' },
+    { label: 'Projects', path: '/home/documents/projects' },
+  ]}
+  onNavigate={(path, index) => go(path)}
+/>;
+```
+
+Breadcrumb location bar. Segments are separated by a `›` chevron; every
+segment except the last is a pressable button that calls `onNavigate` with
+its `path` and index, and the last segment renders as a static bold label —
+the current location.
+
+Rebuilt with `Pressable`/`View`/`Text` rather than ported from
+`@gnome-ui/react`'s `<nav><ol><li>`: RN's `AccessibilityRole` union has
+neither a "navigation" landmark nor a breadcrumb-list role (the same gap
+that dropped `Sidebar`'s `<nav>` role), so those are dropped rather than
+faked — each interactive segment still gets its own
+`accessibilityRole="button"` and `accessibilityLabel`. The separator is a
+Unicode `›` glyph instead of the web version's inline SVG chevron, matching
+this package's established no-SVG-dependency convention.
 
 ## Installation
 

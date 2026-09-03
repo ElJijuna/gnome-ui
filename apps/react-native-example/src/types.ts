@@ -15,6 +15,7 @@ export const COMPONENT_NAMES = [
   'ViewSwitcher',
   'Sidebar',
   'SearchBar',
+  'PathBar',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

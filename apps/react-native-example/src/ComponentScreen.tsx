@@ -9,6 +9,7 @@ import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
+import { PathBarScreen } from './screens/PathBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
@@ -37,6 +38,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ViewSwitcher: ViewSwitcherScreen,
   Sidebar: SidebarScreen,
   SearchBar: SearchBarScreen,
+  PathBar: PathBarScreen,
 };
 
 export interface ComponentScreenProps {

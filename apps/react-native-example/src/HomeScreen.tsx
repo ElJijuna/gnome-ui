@@ -21,6 +21,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ViewSwitcher: 'Pill-shaped segmented control for switching major views',
   Sidebar: 'Lateral navigation panel — sections, icons, collapsed rail, filtering',
   SearchBar: 'Collapsible search input — clear button, close button, filter row',
+  PathBar: 'Breadcrumb location bar — interactive ancestors, static current folder',
 };
 
 export interface HomeScreenProps {

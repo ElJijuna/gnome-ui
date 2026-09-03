@@ -5,6 +5,7 @@ export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/HeaderBar';
 export * from './components/Link';
+export * from './components/PathBar';
 export * from './components/RadioButton';
 export * from './components/SearchBar';
 export * from './components/Separator';
