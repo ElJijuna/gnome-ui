@@ -15,8 +15,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
 > `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
-> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, and `Banner` shipped —
-> `Dialog`, `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component
+> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, `Banner`, and `Dialog`
+> shipped — `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component
 > ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -713,6 +713,82 @@ action/dismiss buttons (a light overlay on the darker info/error/success
 backgrounds, a dark one on the light warning background) collapses to a
 single `Pressable`-pressed-state overlay, the same simplification `Toast`
 and `Card` already made for their own press states.
+
+### Dialog
+
+```tsx
+import { Dialog } from '@gnome-ui/react-native';
+
+// Standard
+<Dialog open={open} title="About Sync" onClose={() => setOpen(false)}>
+  Files are synced automatically every 15 minutes.
+</Dialog>;
+
+// With buttons
+<Dialog
+  open={open}
+  title="Discard changes?"
+  onClose={() => setOpen(false)}
+  buttons={[
+    { label: 'Keep editing', onPress: () => setOpen(false) },
+    { label: 'Discard', variant: 'destructive', onPress: () => setOpen(false) },
+  ]}
+>
+  Your changes have not been saved.
+</Dialog>;
+
+// Alert — role="alertdialog" + responses/onResponse
+<Dialog
+  open={open}
+  role="alertdialog"
+  title="Delete file?"
+  responses={[
+    { id: 'cancel', label: 'Cancel' },
+    { id: 'delete', label: 'Delete', variant: 'destructive' },
+  ]}
+  onResponse={(id) => setOpen(false)}
+>
+  This action cannot be undone.
+</Dialog>;
+```
+
+Blocking modal dialog. **Standard** takes `title` + `children` + `buttons[]`
+with per-button `onPress`; **Alert** (`role="alertdialog"`) takes
+`responses[]` + a single `onResponse(id)` instead — the same two-API shape
+as `@gnome-ui/react`'s `Dialog`, since `AlertDialog` there is a mode of the
+same component rather than a separate one. `AboutDialog` (a distinct
+`@gnome-ui/react` component, not a `Dialog` variant) has no RN port yet.
+
+Built on RN's own `Modal` (`transparent`, `animationType="none"` — the
+entrance is a custom `Animated.timing`) rather than the web version's DOM
+`Portal` + manual focus trap: `Modal` already floats above everything with
+no portal target needed, and already blocks interaction with the screen
+behind it, so there's no `useBodyScrollLock` port. Its `onRequestClose`
+fires on the **Android hardware back button** — the direct analog of the
+web version's document-level Escape listener (iOS has no back button, so
+this is Android-only, matching the platform's own convention). Focus
+trapping (`Tab`/`Shift+Tab` cycling between focusable elements) has no
+port at all — there's no keyboard `Tab` concept in RN's touch-first model,
+the same reasoning that already dropped `TabBar`'s roving-tabindex arrow
+keys.
+
+`role` is set via RN's newer, web-aligned `role` prop (not
+`accessibilityRole`) — its `Role` union has real `"dialog"`/`"alertdialog"`
+values, unlike the older `AccessibilityRole` enum `Toast`/`Banner` had to
+substitute `"alert"` into for the web's `role="status"`.
+`accessibilityViewIsModal` (iOS-only) is the closest match to
+`aria-modal="true"`, restricting VoiceOver to the dialog's subtree. The
+dialog card sets `accessible` explicitly (a bare `View` with `role` isn't
+an accessibility element by default — the same `BoxedList` lesson) —
+**this shares the same open, unverified-on-a-real-device accessibility
+question already flagged for `BoxedList`/`TabBar`/`ViewSwitcher`'s
+container-role pattern**: `accessible={true}` on a container may collapse
+its subtree into one opaque VoiceOver stop, which for `Dialog` specifically
+would mean its footer buttons become unreachable via VoiceOver even though
+they're independently `Pressable`. Kept for `getByRole` testability and
+consistency with the established pattern, but this is the component where
+that tradeoff matters most — worth prioritizing for real-device screen
+reader verification before it's treated as settled.
 
 ## Installation
 

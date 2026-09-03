@@ -8,6 +8,7 @@ import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
+import { DialogScreen } from './screens/DialogScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
@@ -49,6 +50,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Skeleton: SkeletonScreen,
   Toast: ToastScreen,
   Banner: BannerScreen,
+  Dialog: DialogScreen,
 };
 
 export interface ComponentScreenProps {

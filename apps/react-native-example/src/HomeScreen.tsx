@@ -27,6 +27,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Skeleton: 'Content-shaped loading placeholder — rect, circle, text',
   Toast: 'Non-blocking notification — auto-dismiss, action, top/bottom',
   Banner: 'Persistent message strip — 4 variants, action, dismissible',
+  Dialog: 'Blocking modal — title, body, buttons, and the alertdialog API',
 };
 
 export interface HomeScreenProps {
