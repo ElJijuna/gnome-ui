@@ -11,6 +11,7 @@ import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
+import { SidebarScreen } from './screens/SidebarScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
@@ -33,6 +34,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   HeaderBar: HeaderBarScreen,
   Tabs: TabsScreen,
   ViewSwitcher: ViewSwitcherScreen,
+  Sidebar: SidebarScreen,
 };
 
 export interface ComponentScreenProps {

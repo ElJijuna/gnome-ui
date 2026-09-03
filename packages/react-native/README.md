@@ -10,10 +10,13 @@ React Native component library following the [GNOME Human Interface Guidelines](
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** theme tokens, `GnomeProvider`, and Tier 1 Base fully ported —
-> `Button`, `Text`, `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`
-> — plus `Separator` from Tier 2. Component ports from `@gnome-ui/react`
-> continue tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> **Status:** theme tokens, `GnomeProvider`, Tier 1 Base (`Button`, `Text`,
+> `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), and Tier 2
+> Layout & Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`,
+> `HeaderBar`) fully ported. Tier 3 Navigation in progress: `Tabs`,
+> `ViewSwitcher`, and `Sidebar` shipped — `Search Bar`/`PathBar` remain.
+> Component ports from `@gnome-ui/react` continue tier by tier. See
+> [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -376,6 +379,55 @@ Rebuilt as a plain `View` rather than ported from `@gnome-ui/react`'s
 reader user needs — it's excluded from the accessibility tree entirely
 with `accessible={false}`, the RN-idiomatic way to mark a purely
 decorative element.
+
+### Sidebar
+
+```tsx
+import { Sidebar, SidebarItem, SidebarSection } from '@gnome-ui/react-native';
+
+<Sidebar>
+  <SidebarSection title="Mailboxes">
+    <SidebarItem label="Inbox" icon={<InboxIcon />} active onPress={() => go('inbox')} />
+    <SidebarItem label="Starred" icon={<StarIcon />} suffix={<Text variant="caption">3</Text>} />
+  </SidebarSection>
+  <SidebarSection title="Labels" collapsible>
+    <SidebarItem label="Work" />
+    <SidebarItem label="Archived" disabled />
+  </SidebarSection>
+</Sidebar>;
+
+// Rail (icon-only) mode:
+<Sidebar collapsed>…</Sidebar>;
+
+// Controlled filtering — pair with your own search input:
+<Sidebar filter={query}>…</Sidebar>;
+```
+
+Lateral navigation panel. Consecutive top-level children (typically
+`SidebarSection`s) get a `Separator` inserted between them — the same
+divider-on-index-boundary technique `BoxedList` uses for its rows — standing
+in for the web version's `.section + .section` adjacent-sibling CSS rule,
+which RN has no equivalent of. A child that `filter` hides is excluded from
+that index count too, so a lone visible row never ends up sandwiched between
+two stray dividers.
+
+`SidebarSection` is `collapsible` via its header `Pressable` or imperatively
+through a `ref` (`expand`/`collapse`/`toggle`) — the body stays mounted and
+toggles `display: 'none'` rather than unmounting, the same "stays mounted
+but hidden" approach `TabPanel` uses, instead of porting the web version's
+animated CSS-grid collapse. In rail (`collapsed`) mode every section header
+is hidden and every body is always shown.
+
+Dropped relative to `@gnome-ui/react`'s `Sidebar`/`SidebarItem`: `searchable`
+(would pull in a `SearchBar`, not yet ported to this package — use `filter`
+with your own input instead), `mode`/auto page-layout switch (depends on the
+web-only `useBreakpoint` hook), `variant` (tinted/blurred backgrounds — the
+blurred variant needs a native blur view this package doesn't depend on),
+`tooltip` (no `Tooltip` port yet, and nothing to trigger one from on a
+touch-first device), `menuItems` (context menu — no portal/positioning
+primitive exists in this package yet), and `onDrop`/`acceptTypes` (HTML5
+drag-and-drop has no RN equivalent without a gesture-handler dependency this
+package doesn't have).
 
 ## Installation
 

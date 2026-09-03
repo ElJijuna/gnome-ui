@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { createRef } from 'react';
-import { Text, View } from 'react-native';
+import type { View } from 'react-native';
+import { Text } from 'react-native';
 
 import { GnomeProvider } from '@/GnomeProvider';
 import { ActionRow } from './ActionRow';

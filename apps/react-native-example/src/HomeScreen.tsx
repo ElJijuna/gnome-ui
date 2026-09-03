@@ -19,6 +19,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   HeaderBar: 'Centered title, leading/trailing slots, flat variant',
   Tabs: 'TabBar, TabItem, TabPanel — icons, badges, closeable',
   ViewSwitcher: 'Pill-shaped segmented control for switching major views',
+  Sidebar: 'Lateral navigation panel — sections, icons, collapsed rail, filtering',
 };
 
 export interface HomeScreenProps {

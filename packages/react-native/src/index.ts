@@ -7,6 +7,7 @@ export * from './components/HeaderBar';
 export * from './components/Link';
 export * from './components/RadioButton';
 export * from './components/Separator';
+export * from './components/Sidebar';
 export * from './components/Switch';
 export * from './components/Tabs';
 export * from './components/Text';
