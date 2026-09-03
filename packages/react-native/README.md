@@ -14,8 +14,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), Tier 2 Layout &
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
-> `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner` and
-> `ProgressBar` shipped — `Skeleton`, `Toast`, `Banner`, `Dialog`,
+> `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
+> `ProgressBar`, and `Skeleton` shipped — `Toast`, `Banner`, `Dialog`,
 > `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component ports
 > from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
@@ -581,6 +581,46 @@ version omitting `aria-valuenow`/`aria-valuemin`/`aria-valuemax`. The web
 version's `aria-labelledby` (an id-relationship prop) has no RN
 equivalent — RN has no DOM ids — so only `aria-label`
 (`accessibilityLabel`) is ported.
+
+### Skeleton
+
+```tsx
+import { Skeleton } from '@gnome-ui/react-native';
+
+<Skeleton />;
+<Skeleton width={220} height={16} />;
+<Skeleton variant="circle" size={48} />;
+<Skeleton variant="text" lines={3} />;
+<Skeleton animated={false} />;
+```
+
+Content-shaped loading placeholder — a pragmatic web-style extension for
+layouts that benefit from placeholder shape (GNOME HIG itself recommends
+`Spinner`/`ProgressBar` for loading states, but this is ported as-is from
+`@gnome-ui/react` for parity). `variant` is `"rect"` (default, `width`/
+`height`) | `"circle"` (`size` diameter) | `"text"` (`lines` rows, the
+last one narrower).
+
+The web version's shimmer is a `linear-gradient` swept across the shape
+via `transform: translateX()`; this package has no gradient dependency
+(no `expo-linear-gradient`/`react-native-linear-gradient` in its
+dependency tree, and adding one for a single component would be scope
+creep), so `animated` drives a plain opacity pulse instead — the same
+1.4s round-trip cycle length as the web shimmer. This is a common
+RN-idiomatic substitute for a CSS shimmer effect (compare Tailwind's own
+`animate-pulse` utility, which uses the identical technique).
+
+Unlike `Spinner` (slows) and `ProgressBar` (stops one state, slows the
+other), `useReducedMotion()` here fully disables the pulse and shows a
+static base color — mirroring the source CSS's own `animation: none`,
+which has no partial-motion in-between state to preserve. Each Tier 4
+component's reduced-motion behavior follows its own source CSS rather
+than one policy applied uniformly across the package.
+
+`accessible={false}` mirrors the web version's `aria-hidden="true"` — a
+loading placeholder carries no information a screen reader user needs,
+the same reasoning `Separator` already established for a purely
+decorative element.
 
 ## Installation
 

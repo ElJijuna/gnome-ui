@@ -24,6 +24,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   PathBar: 'Breadcrumb location bar — interactive ancestors, static current folder',
   Spinner: 'Indeterminate loading ring — 3 sizes, reduced-motion aware',
   ProgressBar: 'Determinate and indeterminate progress — 4 color variants',
+  Skeleton: 'Content-shaped loading placeholder — rect, circle, text',
 };
 
 export interface HomeScreenProps {

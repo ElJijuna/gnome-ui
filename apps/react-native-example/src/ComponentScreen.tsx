@@ -15,6 +15,7 @@ import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
 import { SidebarScreen } from './screens/SidebarScreen';
+import { SkeletonScreen } from './screens/SkeletonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
@@ -43,6 +44,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   PathBar: PathBarScreen,
   Spinner: SpinnerScreen,
   ProgressBar: ProgressBarScreen,
+  Skeleton: SkeletonScreen,
 };
 
 export interface ComponentScreenProps {
