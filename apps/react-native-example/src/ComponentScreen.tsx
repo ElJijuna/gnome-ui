@@ -24,6 +24,7 @@ import { TabsScreen } from './screens/TabsScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
 import { ToastScreen } from './screens/ToastScreen';
+import { TooltipScreen } from './screens/TooltipScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
 import type { ComponentName } from './types';
 
@@ -51,6 +52,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Toast: ToastScreen,
   Banner: BannerScreen,
   Dialog: DialogScreen,
+  Tooltip: TooltipScreen,
 };
 
 export interface ComponentScreenProps {

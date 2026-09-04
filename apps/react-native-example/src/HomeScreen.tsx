@@ -28,6 +28,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Toast: 'Non-blocking notification — auto-dismiss, action, top/bottom',
   Banner: 'Persistent message strip — 4 variants, action, dismissible',
   Dialog: 'Blocking modal — title, body, buttons, and the alertdialog API',
+  Tooltip: 'Floating label — long-press, hover, or focus to trigger; auto-flips',
 };
 
 export interface HomeScreenProps {

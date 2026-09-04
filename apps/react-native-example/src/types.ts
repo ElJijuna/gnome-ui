@@ -22,6 +22,7 @@ export const COMPONENT_NAMES = [
   'Toast',
   'Banner',
   'Dialog',
+  'Tooltip',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

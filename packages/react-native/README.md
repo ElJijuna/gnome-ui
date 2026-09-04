@@ -15,8 +15,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
 > `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
-> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, `Banner`, and `Dialog`
-> shipped — `Tooltip`, `Status Page`, and `AnimatedIcon` remain. Component
+> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, and
+> `Tooltip` shipped — `Status Page` and `AnimatedIcon` remain. Component
 > ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -789,6 +789,46 @@ they're independently `Pressable`. Kept for `getByRole` testability and
 consistency with the established pattern, but this is the component where
 that tradeoff matters most — worth prioritizing for real-device screen
 reader verification before it's treated as settled.
+
+### Tooltip
+
+```tsx
+import { Button, Tooltip } from '@gnome-ui/react-native';
+
+<Tooltip label="Save file" placement="top">
+  <Button accessibilityLabel="Save">Save</Button>
+</Tooltip>;
+```
+
+Floating informational label. Positioned automatically and flips to the
+opposite side (then to whichever side actually fits) when the preferred
+placement has no room — the same algorithm as `@gnome-ui/react`'s
+`Tooltip`, measured with `measureInWindow()` instead of
+`getBoundingClientRect()`.
+
+**Trigger differs from the web version by necessity**: the web `Tooltip`
+only shows on mouse hover / keyboard focus — touch has no hover state, so
+it explicitly never shows on touch. RN is touch-first, so the primary
+trigger here is **long-press** (`delayLongPress={delay}`, released via
+`onPressOut`) — the standard mobile "peek" idiom. `onHoverIn`/`onHoverOut`
+are also wired for hover-capable input (trackpad/mouse on iPad, or a
+pointer-driven RN target) and `onFocus`/`onBlur` for external-keyboard
+accessibility, both delayed the same way the web version delays hover.
+
+Built on RN's own `Modal` (transparent, `pointerEvents="box-none"`), the
+same portal-substitute `Dialog` uses. `role="tooltip"` ports 1:1 — RN's
+`Role` union already has a `"tooltip"` value. `aria-describedby` has no RN
+equivalent, so the label is set as the trigger's `accessibilityHint`
+instead (unless the trigger already provides its own). The bubble's arrow
+reuses the same zero-size / transparent-border-on-three-sides triangle
+trick as the web CSS — RN `View`s support per-side `border*Color` too, the
+same technique `Spinner`'s ring already relies on.
+
+Not ported: repositioning on scroll/resize while visible (RN has no global
+scroll event, and a long-press is naturally cancelled by a scroll gesture
+starting). `tooltipBgColor`/`tooltipFgColor` aren't real `@gnome-ui/core`
+tokens (only CSS var fallbacks), so the RN port hardcodes the same literal
+light/dark values, the same workaround `Spinner`'s track color established.
 
 ## Installation
 
