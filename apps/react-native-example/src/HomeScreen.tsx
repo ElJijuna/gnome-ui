@@ -34,6 +34,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Dropdown: 'Expandable option list — descriptions, disabled options, flips to fit',
   Slider: 'Draggable range control — marks, custom step, adjustable accessibility action',
   SpinButton: 'Numeric −/+ stepper — wrap, custom format, decimals from step',
+  Avatar: 'Circular image or initials fallback — deterministic color from name, 4 sizes',
 };
 
 export interface HomeScreenProps {

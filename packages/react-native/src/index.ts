@@ -1,5 +1,6 @@
 export * from './components/ActionRow';
 export * from './components/AnimatedIcon';
+export * from './components/Avatar';
 export * from './components/Banner';
 export * from './components/BoxedList';
 export * from './components/Button';

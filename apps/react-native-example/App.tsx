@@ -56,7 +56,7 @@ interface AppShellProps {
 const AppShell = (props: AppShellProps) => {
   const theme = useGnomeTheme();
   const resolvedColorScheme = useResolvedColorScheme();
-  const [screen, setScreen] = useState<Screen>('SpinButton');
+  const [screen, setScreen] = useState<Screen>('Avatar');
 
   return (
     <SafeAreaView

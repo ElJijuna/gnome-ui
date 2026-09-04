@@ -28,6 +28,7 @@ export const COMPONENT_NAMES = [
   'Dropdown',
   'Slider',
   'SpinButton',
+  'Avatar',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
