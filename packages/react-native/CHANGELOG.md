@@ -1,3 +1,12 @@
+## [@gnome-ui/react-native-v1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.1.0...@gnome-ui/react-native@1.2.0) (2026-09-04)
+
+### Features
+
+* **@gnome-ui/react-native:** add AnimatedIcon component for dynamic icon animations ([57157c4](https://github.com/ElJijuna/gnome-ui/commit/57157c46ede5cb6953f665cfc6e2b276b1cc65e7))
+* **@gnome-ui/react-native:** add Dropdown component for expandable option lists ([2d25984](https://github.com/ElJijuna/gnome-ui/commit/2d25984d72a3dfc582da65ba6f34cc19782d5333))
+* **@gnome-ui/react-native:** add Tooltip component for contextual information ([c0ac9f9](https://github.com/ElJijuna/gnome-ui/commit/c0ac9f9f1d236f1c85ccd2c2012b69eb55fb8076))
+* **@gnome-ui/react-native:** implement Icon component with accessibility support and size/color customization ([2440e07](https://github.com/ElJijuna/gnome-ui/commit/2440e079ecf72d4d032f42af2d3b8d8e0b5fc1f7))
+
 ## [@gnome-ui/react-native-v1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.0.0...@gnome-ui/react-native@1.1.0) (2026-09-03)
 
 ### Features
