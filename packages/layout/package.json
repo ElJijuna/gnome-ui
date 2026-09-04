@@ -190,9 +190,9 @@
     "test:coverage": "vitest run --coverage",
     "storybook": "npm run test:storybook-report:dev && storybook dev -p 6009",
     "build-storybook": "storybook build",
-    "test:storybook-report": "vitest run --reporter=json --coverage --outputFile=storybook-static/vitest-report.json",
+    "test:storybook-report": "vitest run --reporter=json --coverage --outputFile=storybook-reports/vitest-report.json",
     "test:storybook-report:dev": "vitest run --reporter=json --coverage --outputFile=storybook-reports/vitest-report.json",
-    "storybook:ci": "npm run build-storybook && npm run test:storybook-report"
+    "storybook:ci": "npm run test:storybook-report && npm run build-storybook"
   },
   "publishConfig": {
     "access": "public"
