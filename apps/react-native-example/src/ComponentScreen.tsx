@@ -21,6 +21,7 @@ import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
 import { SidebarScreen } from './screens/SidebarScreen';
 import { SkeletonScreen } from './screens/SkeletonScreen';
+import { SliderScreen } from './screens/SliderScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
@@ -59,6 +60,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Icon: IconScreen,
   AnimatedIcon: AnimatedIconScreen,
   Dropdown: DropdownScreen,
+  Slider: SliderScreen,
 };
 
 export interface ComponentScreenProps {

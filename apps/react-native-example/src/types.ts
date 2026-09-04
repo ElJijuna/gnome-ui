@@ -26,6 +26,7 @@ export const COMPONENT_NAMES = [
   'Icon',
   'AnimatedIcon',
   'Dropdown',
+  'Slider',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

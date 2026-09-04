@@ -17,6 +17,7 @@ export * from './components/SearchBar';
 export * from './components/Separator';
 export * from './components/Sidebar';
 export * from './components/Skeleton';
+export * from './components/Slider';
 export * from './components/Spinner';
 export * from './components/Switch';
 export * from './components/Tabs';

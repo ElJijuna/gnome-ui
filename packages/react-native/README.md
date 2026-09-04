@@ -18,7 +18,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, `Tooltip`, and
 > `AnimatedIcon` (which brought a new `Icon` component along with it, as its
 > own public component) shipped — `Status Page` skipped for now. Tier 5
-> Advanced Controls in progress: `Dropdown` shipped — `Slider`,
+> Advanced Controls in progress: `Dropdown` and `Slider` shipped —
 > `Spin Button`, `Avatar`, `Badge`, and `Popover` remain. Component
 > ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
@@ -922,6 +922,54 @@ Selection is by direct tap only. `role="combobox"` on the trigger ports
 1:1; RN's `Role` union has no `"listbox"` value, so the panel uses
 `role="list"` instead — the same closest-available substitution `BoxedList`
 already established for a plain list container.
+
+### Slider
+
+```tsx
+import { Slider } from '@gnome-ui/react-native';
+
+<Slider
+  value={volume}
+  onChange={setVolume}
+  accessibilityLabel="Volume"
+  marks={[
+    { value: 0, label: 'Min' },
+    { value: 100, label: 'Max' },
+  ]}
+/>;
+```
+
+Draggable range control following the Adwaita `GtkScale` pattern, mirroring
+`@gnome-ui/react`'s `Slider`.
+
+Touch drag is handled with RN's own `PanResponder` (this package's first use
+of it) reading each touch event's `locationX` — the position relative to the
+track view itself, recalculated by RN on every touch/move — so no
+`measureInWindow` round-trip is needed at all, unlike `Tooltip`/`Dropdown`'s
+trigger-rect measurement. `min`/`max`/`step` clamping and snapping is ported
+verbatim from the web version's pure-JS math.
+
+The web version's keyboard interaction (← / → one step, Page Up/Down ten
+steps, Home/End to the bounds) has no RN equivalent — a touch-first device
+has no keyboard driving those keys. Rather than dropping value-adjustment
+accessibility entirely (the reasoning that dropped `Dropdown`'s/`TabBar`'s
+keyboard nav), `accessibilityRole="adjustable"` +
+`onAccessibilityAction`/`accessibilityActions` wires up the "increment"/
+"decrement" actions VoiceOver's swipe-up/down and TalkBack's local-context
+menu generate for an adjustable element — the real native analog of
+keyboard stepping, one step per action. The bigger Page Up/Down and
+Home/End jumps have no equivalent screen-reader gesture on either platform,
+so only single-step adjustment is ported.
+
+RN's `transform` only accepts pixel offsets, unlike the CSS `%` units the
+web version's `left: X%; transform: translate(-50%, -50%)` thumb/tick
+centering trick needs — so those are positioned with a plain pixel `left`
+computed from the track's `onLayout`-measured width instead. Mark labels
+use a different trick, since (unlike the thumb/ticks) their own rendered
+width isn't a known constant: a zero-width `View` with
+`alignItems: 'center'` at the mark's percentage `left` lets Yoga center the
+`Text` child around that point regardless of how wide the label renders,
+with no measurement needed.
 
 ## Installation
 
