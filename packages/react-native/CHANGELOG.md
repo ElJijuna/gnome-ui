@@ -1,3 +1,9 @@
+## [@gnome-ui/react-native-v1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.2.0...@gnome-ui/react-native@1.3.0) (2026-09-04)
+
+### Features
+
+* **@gnome-ui/react-native:** add Slider component with accessibility support and update README ([a2dcef4](https://github.com/ElJijuna/gnome-ui/commit/a2dcef4d6219a07393dd1dca8a942132fbd4604f))
+
 ## [@gnome-ui/react-native-v1.2.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.1.0...@gnome-ui/react-native@1.2.0) (2026-09-04)
 
 ### Features
