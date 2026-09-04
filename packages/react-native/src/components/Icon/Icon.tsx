@@ -1,4 +1,5 @@
 import type { AnyIconDefinition, IconDefinition } from '@gnome-ui/icons';
+import type { StyleProp, ViewStyle } from 'react-native';
 import { Path, Svg, SvgXml } from 'react-native-svg';
 
 import { useGnomeTheme } from '@/GnomeProvider';
@@ -40,6 +41,8 @@ export interface IconProps {
    * equivalent to inherit from a parent, unlike the web version.
    */
   color?: IconColor;
+  /** Forwarded to the underlying `Svg` — useful for a `transform` (e.g. a rotated disclosure chevron) or `margin`. */
+  style?: StyleProp<ViewStyle>;
 }
 
 /**
@@ -91,7 +94,7 @@ function fillRule(rule: 'nonzero' | 'evenodd' | 'inherit' | undefined) {
  * import { siGithub } from "simple-icons";
  * <Icon icon={siGithub} label="GitHub" />
  */
-export const Icon = ({ icon, size = 'md', width, height, label, color }: IconProps) => {
+export const Icon = ({ icon, size = 'md', width, height, label, color, style }: IconProps) => {
   const theme = useGnomeTheme();
   const px = ICON_SIZE_MAP[size];
   const fill = resolveIconColor(theme, color);
@@ -121,6 +124,7 @@ export const Icon = ({ icon, size = 'md', width, height, label, color }: IconPro
         width={width ?? px}
         height={height ?? px}
         fill={fill}
+        style={style}
         {...accessibilityProps}
       />
     );
@@ -132,6 +136,7 @@ export const Icon = ({ icon, size = 'md', width, height, label, color }: IconPro
       width={width ?? px}
       height={height ?? px}
       fill={fill}
+      style={style}
       {...accessibilityProps}
     >
       {paths}

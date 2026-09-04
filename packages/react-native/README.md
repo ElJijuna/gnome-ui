@@ -14,11 +14,12 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Link`, `TextField`, `Switch`, `Checkbox`, `RadioButton`), Tier 2 Layout &
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
-> `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
-> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`,
-> `Tooltip`, and `AnimatedIcon` (which brought a new `Icon` component along
-> with it, as its own public component) shipped — `Status Page` remains.
-> Component
+> `PathBar`) fully ported. Tier 4 Feedback: `Spinner`, `ProgressBar`,
+> `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, `Tooltip`, and
+> `AnimatedIcon` (which brought a new `Icon` component along with it, as its
+> own public component) shipped — `Status Page` skipped for now. Tier 5
+> Advanced Controls in progress: `Dropdown` shipped — `Slider`,
+> `Spin Button`, `Avatar`, `Badge`, and `Popover` remain. Component
 > ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -883,6 +884,44 @@ pulsing in a staggered sweep) — an icon `AnimatedIcon` doesn't recognize
 (a future 5th animated icon, or a consumer-authored one) falls back to the
 static `<Icon>` frame rather than throwing. Regardless of `playing`, the
 animation is always paused when the OS reduced-motion setting is on.
+
+### Dropdown
+
+```tsx
+import { Dropdown } from '@gnome-ui/react-native';
+
+<Dropdown
+  options={[
+    { value: 'blue', label: 'Blue' },
+    { value: 'green', label: 'Green', description: 'A calm accent' },
+  ]}
+  value={accentColor}
+  onChange={setAccentColor}
+  placeholder="Accent color"
+/>;
+```
+
+Expandable option list following the Adwaita combo-row pattern, mirroring
+`@gnome-ui/react`'s `Dropdown`.
+
+Built on RN's own `Modal` (transparent) — the same portal-substitute
+`Dialog`/`Tooltip` already use — with a full-screen backdrop `Pressable`
+that closes the list on an outside tap (the RN analog of the web version's
+document-level "click outside" listener; unlike `Tooltip`'s backdrop, this
+one isn't `pointerEvents="box-none"`, since it's meant to catch that tap
+rather than pass it through). `open` flips synchronously on trigger press;
+the trigger's on-screen rect and the panel's own rendered height each
+resolve independently into state, combined by a separate effect into the
+final position and flip-up/flip-down direction — the same two-independent-
+async-measurements pattern `Tooltip` established.
+
+Keyboard navigation (↑/↓ roving highlight, Home/End, type-ahead) has no
+port — RN's touch-first model has no keyboard focus to drive it, the same
+reasoning that already dropped `TabBar`'s roving-tabindex arrow keys.
+Selection is by direct tap only. `role="combobox"` on the trigger ports
+1:1; RN's `Role` union has no `"listbox"` value, so the panel uses
+`role="list"` instead — the same closest-available substitution `BoxedList`
+already established for a plain list container.
 
 ## Installation
 

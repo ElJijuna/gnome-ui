@@ -10,6 +10,7 @@ import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { DialogScreen } from './screens/DialogScreen';
+import { DropdownScreen } from './screens/DropdownScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { IconScreen } from './screens/IconScreen';
 import { LinkScreen } from './screens/LinkScreen';
@@ -57,6 +58,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Tooltip: TooltipScreen,
   Icon: IconScreen,
   AnimatedIcon: AnimatedIconScreen,
+  Dropdown: DropdownScreen,
 };
 
 export interface ComponentScreenProps {

@@ -31,6 +31,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Tooltip: 'Floating label — long-press, hover, or focus to trigger; auto-flips',
   Icon: 'Inline SVG icon from @gnome-ui/icons, simple-icons, or a raw path',
   AnimatedIcon: 'Plays Syncing/Recording/Downloading/Connecting — static via Icon otherwise',
+  Dropdown: 'Expandable option list — descriptions, disabled options, flips to fit',
 };
 
 export interface HomeScreenProps {
