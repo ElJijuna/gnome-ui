@@ -18,8 +18,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, `Tooltip`, and
 > `AnimatedIcon` (which brought a new `Icon` component along with it, as its
 > own public component) shipped — `Status Page` skipped for now. Tier 5
-> Advanced Controls in progress: `Dropdown`, `Slider`, and `SpinButton`
-> shipped — `Avatar`, `Badge`, and `Popover` remain. Component ports from
+> Advanced Controls in progress: `Dropdown`, `Slider`, `SpinButton`,
+> `Avatar`, and `Badge` shipped — `Popover` remains. Component ports from
 > `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -998,6 +998,55 @@ value text are hidden from the accessibility tree
 (`accessibilityElementsHidden`/`importantForAccessibility="no"`, mirroring
 the web version's `aria-hidden`/`tabIndex={-1}` on both `<button>`s and the
 value `<span>`) so a screen reader user gets one adjustable stop, not three.
+
+### Avatar
+
+```tsx
+import { Avatar } from '@gnome-ui/react-native';
+
+<Avatar name="Grace Hopper" size="lg" />
+<Avatar src="https://example.com/alice.jpg" alt="Alice's profile photo" />;
+```
+
+Circular avatar with image or initials fallback, mirroring `@gnome-ui/react`'s
+`Avatar`. The color-hash and initials-extraction math ports verbatim (pure
+JS, no DOM involved).
+
+The outer container carries `role="img"` + `accessibilityLabel` — RN's newer
+web-aligned `Role` union has an `"img"` value, a direct 1:1 port of the web
+version's `role="img"`, no substitution needed (same as `ProgressBar`'s
+`role="progressbar"`). The image/initials underneath are hidden from the
+accessibility tree, mirroring the web version's `aria-hidden` on both, so a
+screen reader gets one stop, not two — same reasoning as `SpinButton`'s
+hidden −/+ buttons.
+
+The web CSS's `box-shadow: inset 0 0 0 1px …` ring becomes a real 1px
+`borderWidth`/`borderColor` here (RN has no inset shadow) — the same
+substitution `Slider`'s thumb border already used for a ring effect.
+
+### Badge
+
+```tsx
+import { Badge, Avatar } from '@gnome-ui/react-native';
+
+<Badge variant="error" anchor={<Avatar name="Alice Bob" />}>3</Badge>
+<Badge dot variant="success" />;
+```
+
+Counter or status indicator, optionally overlaid on another element,
+mirroring `@gnome-ui/react`'s `Badge`. `children` renders as a themed `Text`
+label when it's a string or number (the common case — counts and short
+text); any other node renders as-is, the same convention `Button`'s
+`children` already established.
+
+The web CSS's `box-shadow: 0 0 0 2px var(--gnome-window-bg-color)` ring
+(always present, separating the badge from whatever's behind it) has no RN
+equivalent that avoids affecting layout — RN's `border*` shrinks the content
+box instead of drawing outside it. Reproduced instead with an outer wrapping
+`View` (2px padding, `theme.windowBgColor` background, pill radius) around
+the actual colored badge, so the ring appears to spread outward exactly like
+the web version's non-blurred shadow, without eating into the badge's own
+text padding.
 
 ## Installation
 

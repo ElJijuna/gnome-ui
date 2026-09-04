@@ -35,6 +35,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Slider: 'Draggable range control — marks, custom step, adjustable accessibility action',
   SpinButton: 'Numeric −/+ stepper — wrap, custom format, decimals from step',
   Avatar: 'Circular image or initials fallback — deterministic color from name, 4 sizes',
+  Badge: 'Counter or status dot — 5 variants, optionally anchored on another element',
 };
 
 export interface HomeScreenProps {
