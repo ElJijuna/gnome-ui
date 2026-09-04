@@ -17,6 +17,7 @@ import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { IconScreen } from './screens/IconScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
+import { PopoverScreen } from './screens/PopoverScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
@@ -67,6 +68,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SpinButton: SpinButtonScreen,
   Avatar: AvatarScreen,
   Badge: BadgeScreen,
+  Popover: PopoverScreen,
 };
 
 export interface ComponentScreenProps {

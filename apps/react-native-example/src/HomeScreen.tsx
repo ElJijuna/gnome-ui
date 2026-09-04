@@ -36,6 +36,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SpinButton: 'Numeric −/+ stepper — wrap, custom format, decimals from step',
   Avatar: 'Circular image or initials fallback — deterministic color from name, 4 sizes',
   Badge: 'Counter or status dot — 5 variants, optionally anchored on another element',
+  Popover: 'Floating panel with rich content — auto-flips, closes on outside tap',
 };
 
 export interface HomeScreenProps {

@@ -30,6 +30,7 @@ export const COMPONENT_NAMES = [
   'SpinButton',
   'Avatar',
   'Badge',
+  'Popover',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -18,10 +18,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, `Tooltip`, and
 > `AnimatedIcon` (which brought a new `Icon` component along with it, as its
 > own public component) shipped — `Status Page` skipped for now. Tier 5
-> Advanced Controls in progress: `Dropdown`, `Slider`, `SpinButton`,
-> `Avatar`, and `Badge` shipped — `Popover` remains. Component ports from
-> `@gnome-ui/react` continue tier by tier. See
-> [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
+> `Avatar`, `Badge`, and `Popover`. Component ports from `@gnome-ui/react`
+> continue tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
 
@@ -1027,7 +1026,7 @@ substitution `Slider`'s thumb border already used for a ring effect.
 ### Badge
 
 ```tsx
-import { Badge, Avatar } from '@gnome-ui/react-native';
+import { Avatar, Badge } from '@gnome-ui/react-native';
 
 <Badge variant="error" anchor={<Avatar name="Alice Bob" />}>3</Badge>
 <Badge dot variant="success" />;
@@ -1047,6 +1046,50 @@ box instead of drawing outside it. Reproduced instead with an outer wrapping
 the actual colored badge, so the ring appears to spread outward exactly like
 the web version's non-blurred shadow, without eating into the badge's own
 text padding.
+
+### Popover
+
+```tsx
+import { Button, Popover, Text } from '@gnome-ui/react-native';
+
+<Popover content={<Text>Rich content here</Text>}>
+  <Button>Open</Button>
+</Popover>;
+```
+
+Floating panel anchored to a trigger element, following the Adwaita
+`GtkPopover` pattern, mirroring `@gnome-ui/react`'s `Popover`. Unlike
+`Tooltip`, it can hold rich interactive content (buttons, links, forms).
+
+Reuses this package's own established pieces rather than re-deriving them:
+`Tooltip`'s `cloneElement`-onto-an-arbitrary-trigger architecture and
+4-placement fallback-cascade positioning (no arrow-offset-shift-when-clamped
+— same simplification `Tooltip` already accepted), and `Dropdown`'s
+toggle-on-press + full-screen backdrop `Pressable` that closes on an outside
+tap plus reduced-motion fade-in.
+
+**Deliberate divergence from `Dropdown`'s backdrop structure**: `Dropdown`
+nests its panel directly inside the backdrop `Pressable` and gets away with
+it because almost every pixel of its panel is itself a `Pressable` option
+row, which claims the touch responder before it can bubble to the backdrop.
+A popover's `content` is arbitrary — likely to have inert padding/whitespace
+with no `Pressable` of its own — so nesting the same way would let a tap on
+inert panel space fall through to the backdrop and close the popover, unlike
+the web version's `.contains()` check (which never closes on *any* tap
+inside the panel). Fixed with `onStartShouldSetResponder={() => true}` on
+the panel itself: it claims the touch responder for any touch RN's
+negotiation hasn't already given to a deeper `Pressable` inside `content`,
+without making the panel itself behave like a button.
+
+`BackHandler`'s `hardwareBackPress` (wired the same way `Dialog` already
+does) is the Android analog of the web version's document-level Escape
+listener. Focus-trapping and focus-restore-on-close have no port — no DOM
+`document.activeElement`/`querySelector` equivalent exists in RN, the same
+gap already present in `Dialog`/`Tooltip`/`Dropdown`.
+
+The web version's rotated-square-with-matching-background arrow is replaced
+with `Tooltip`'s simpler transparent-border-triangle technique — the same
+visual affordance, a much simpler RN-native primitive.
 
 ## Installation
 

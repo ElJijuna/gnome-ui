@@ -13,6 +13,7 @@ export * from './components/HeaderBar';
 export * from './components/Icon';
 export * from './components/Link';
 export * from './components/PathBar';
+export * from './components/Popover';
 export * from './components/ProgressBar';
 export * from './components/RadioButton';
 export * from './components/SearchBar';
