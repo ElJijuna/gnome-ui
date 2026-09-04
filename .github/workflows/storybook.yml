@@ -232,7 +232,7 @@ jobs:
       - run: npm ci
 
       - name: Build Storybook
-        run: npm run build-storybook --workspace packages/icons
+        run: npm run storybook:ci --workspace packages/icons
 
       - uses: actions/upload-artifact@v4
         with:
@@ -267,7 +267,7 @@ jobs:
         run: npm run build --workspace=packages/platform
 
       - name: Build Storybook
-        run: npm run build-storybook --workspace packages/react
+        run: npm run storybook:ci --workspace packages/react
 
       - uses: actions/upload-artifact@v4
         with:
@@ -307,7 +307,7 @@ jobs:
         run: npm run build --workspace=packages/platform
 
       - name: Build Storybook
-        run: npm run build-storybook --workspace packages/layout
+        run: npm run storybook:ci --workspace packages/layout
 
       - uses: actions/upload-artifact@v4
         with:
@@ -352,7 +352,7 @@ jobs:
         run: npm run build --workspace=packages/platform
 
       - name: Build Storybook
-        run: npm run build-storybook --workspace packages/charts
+        run: npm run storybook:ci --workspace packages/charts
 
       - uses: actions/upload-artifact@v4
         with:
@@ -379,7 +379,7 @@ jobs:
           path: packages/icons/dist
 
       - name: Build Storybook
-        run: npm run build-storybook --workspace packages/web-components
+        run: npm run storybook:ci --workspace packages/web-components
 
       - uses: actions/upload-artifact@v4
         with:

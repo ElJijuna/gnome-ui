@@ -1,6 +1,7 @@
 node_modules
 dist
 storybook-static
+storybook-reports
 packages/web-components/playwright-report
 packages/web-components/test-results
 packages/react/playwright-report
