@@ -2,12 +2,21 @@ import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    {
+      name: '@pilmee/storybook-addon-vitest',
+      options: {
+        reportPath: './vitest-report.json',
+      },
+    },
+  ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  staticDirs: ['../../../public'],
+  staticDirs: ['../../../public', { from: '../storybook-reports', to: '/' }],
   managerHead: (head) => `${head}<link rel="icon" type="image/png" href="/assets/gnome-ui.png" />`,
   docs: {},
   viteFinal: async (config) => {
