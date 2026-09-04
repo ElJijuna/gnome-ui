@@ -1,3 +1,13 @@
+## [@gnome-ui/react-v1.66.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.65.0...@gnome-ui/react@1.66.0) (2026-09-04)
+
+### Features
+
+* **@gnome-ui/react:** enhance Storybook configuration with Vitest integration and update static directory settings ([67b58f6](https://github.com/ElJijuna/gnome-ui/commit/67b58f69fae4facbf6193b0d0a4a71a693c533f0))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
 ## [1.65.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.64.0...@gnome-ui/react@1.65.0) (2026-08-30)
 
 ### Features
