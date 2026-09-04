@@ -33,6 +33,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   AnimatedIcon: 'Plays Syncing/Recording/Downloading/Connecting — static via Icon otherwise',
   Dropdown: 'Expandable option list — descriptions, disabled options, flips to fit',
   Slider: 'Draggable range control — marks, custom step, adjustable accessibility action',
+  SpinButton: 'Numeric −/+ stepper — wrap, custom format, decimals from step',
 };
 
 export interface HomeScreenProps {

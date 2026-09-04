@@ -18,9 +18,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, `Tooltip`, and
 > `AnimatedIcon` (which brought a new `Icon` component along with it, as its
 > own public component) shipped — `Status Page` skipped for now. Tier 5
-> Advanced Controls in progress: `Dropdown` and `Slider` shipped —
-> `Spin Button`, `Avatar`, `Badge`, and `Popover` remain. Component
-> ports from `@gnome-ui/react` continue tier by tier. See
+> Advanced Controls in progress: `Dropdown`, `Slider`, and `SpinButton`
+> shipped — `Avatar`, `Badge`, and `Popover` remain. Component ports from
+> `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
 ## How it works
@@ -970,6 +970,34 @@ width isn't a known constant: a zero-width `View` with
 `alignItems: 'center'` at the mark's percentage `left` lets Yoga center the
 `Text` child around that point regardless of how wide the label renders,
 with no measurement needed.
+
+### SpinButton
+
+```tsx
+import { SpinButton } from '@gnome-ui/react-native';
+
+<SpinButton value={quantity} onChange={setQuantity} min={0} max={10} accessibilityLabel="Quantity" />;
+```
+
+Numeric −/+ stepper following the Adwaita `GtkSpinButton` pattern, mirroring
+`@gnome-ui/react`'s `SpinButton`. The `min`/`max`/`step`/`decimals`/`wrap`/
+`format` clamp-and-format math ports verbatim (pure JS, no DOM involved).
+
+The primary interaction is tapping the visible −/+ buttons, same as a
+sighted mouse user on the web version. The web version's keyboard
+interaction (↑/↓ one step, Page Up/Down ten steps, Home/End to bounds) has
+no RN equivalent — a touch-first device has no keyboard to drive it, the
+same reasoning `Slider` already applied. Rather than dropping value
+adjustment accessibility entirely, single-step increment/decrement reuses
+`Slider`'s exact `accessibilityRole="adjustable"` +
+`onAccessibilityAction`/`accessibilityActions` recipe (VoiceOver's
+swipe-up/down, TalkBack's local-context menu) — the bigger Page Up/Down and
+Home/End jumps have no equivalent screen-reader gesture on either platform,
+so those alone are dropped, same as `Slider`. The visible −/+ buttons and
+value text are hidden from the accessibility tree
+(`accessibilityElementsHidden`/`importantForAccessibility="no"`, mirroring
+the web version's `aria-hidden`/`tabIndex={-1}` on both `<button>`s and the
+value `<span>`) so a screen reader user gets one adjustable stop, not three.
 
 ## Installation
 
