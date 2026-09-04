@@ -426,6 +426,9 @@ jobs:
           name: dist
           path: .
 
+      - name: Build @gnome-ui/icons
+        run: npm run build --workspace=packages/icons
+
       - name: Build @gnome-ui/react-native
         run: npm run build --workspace=packages/react-native
 
