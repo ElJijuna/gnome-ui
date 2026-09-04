@@ -1,3 +1,13 @@
+## [@gnome-ui/icons-v1.44.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.43.0...@gnome-ui/icons@1.44.0) (2026-09-04)
+
+### Features
+
+* **@gnome-ui/icons:** enhance Storybook configuration with Vitest integration and update static directory settings ([d4c440b](https://github.com/ElJijuna/gnome-ui/commit/d4c440bac98151af73a950690f61d4ec97bf05fc))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
 ## [1.43.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.42.1...@gnome-ui/icons@1.43.0) (2026-08-07)
 
 ### Features
