@@ -1,3 +1,13 @@
+## [@gnome-ui/layout-v1.34.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.33.0...@gnome-ui/layout@1.34.0) (2026-09-04)
+
+### Features
+
+* **@gnome-ui/layout:** enhance Storybook configuration with Vitest integration and update static directory settings ([1508220](https://github.com/ElJijuna/gnome-ui/commit/1508220e23a815227108c6470e2c92ceaaa6a273))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
 ## [1.33.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.32.1...@gnome-ui/layout@1.33.0) (2026-08-17)
 
 ### Features
