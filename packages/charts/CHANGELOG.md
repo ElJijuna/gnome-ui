@@ -1,3 +1,13 @@
+## [@gnome-ui/charts-v1.38.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.37.0...@gnome-ui/charts@1.38.0) (2026-09-04)
+
+### Features
+
+* **@gnome-ui/charts:** enhance Storybook configuration with Vitest integration and update static directory settings ([1cc50ac](https://github.com/ElJijuna/gnome-ui/commit/1cc50acd5ed4e0511ac60e0525eb31a78f80f04d))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
 ## [1.37.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.36.0...@gnome-ui/charts@1.37.0) (2026-08-17)
 
 ### Features
