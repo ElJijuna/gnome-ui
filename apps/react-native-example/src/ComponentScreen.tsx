@@ -3,6 +3,7 @@ import type { ComponentType } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { ActionRowScreen } from './screens/ActionRowScreen';
+import { AnimatedIconScreen } from './screens/AnimatedIconScreen';
 import { BannerScreen } from './screens/BannerScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
@@ -10,6 +11,7 @@ import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
+import { IconScreen } from './screens/IconScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
@@ -53,6 +55,8 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Banner: BannerScreen,
   Dialog: DialogScreen,
   Tooltip: TooltipScreen,
+  Icon: IconScreen,
+  AnimatedIcon: AnimatedIconScreen,
 };
 
 export interface ComponentScreenProps {

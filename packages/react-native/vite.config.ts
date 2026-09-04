@@ -26,7 +26,13 @@ export default defineConfig({
       fileName: (format) => (format === 'cjs' ? 'index.cjs' : 'index.js'),
     },
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime', 'react-native'],
+      external: [
+        'react',
+        'react/jsx-runtime',
+        'react-native',
+        'react-native-svg',
+        '@gnome-ui/icons',
+      ],
     },
     sourcemap: true,
   },

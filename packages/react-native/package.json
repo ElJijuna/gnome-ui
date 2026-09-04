@@ -29,11 +29,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@gnome-ui/core": "*"
+    "@gnome-ui/core": "*",
+    "@gnome-ui/icons": "*"
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-native": ">=0.76.0"
+    "react-native": ">=0.76.0",
+    "react-native-svg": ">=15.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
@@ -47,6 +49,7 @@
     "postcss": "^8.5.25",
     "react": "^19.0.0",
     "react-native": "^0.86.2",
+    "react-native-svg": "15.15.4",
     "test-renderer": "^1.2.0",
     "vite": "^8.0.16",
     "vite-plugin-dts": "^4.5.4"

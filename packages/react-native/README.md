@@ -15,8 +15,10 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Containers (`Separator`, `Card`, `BoxedList`, `ActionRow`, `HeaderBar`),
 > and Tier 3 Navigation (`Tabs`, `ViewSwitcher`, `Sidebar`, `SearchBar`,
 > `PathBar`) fully ported. Tier 4 Feedback in progress: `Spinner`,
-> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, and
-> `Tooltip` shipped — `Status Page` and `AnimatedIcon` remain. Component
+> `ProgressBar`, `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`,
+> `Tooltip`, and `AnimatedIcon` (which brought a new `Icon` component along
+> with it, as its own public component) shipped — `Status Page` remains.
+> Component
 > ports from `@gnome-ui/react` continue tier by tier. See
 > [ROADMAP.md](../../ROADMAP.md) Priority 3.
 
@@ -830,11 +832,68 @@ starting). `tooltipBgColor`/`tooltipFgColor` aren't real `@gnome-ui/core`
 tokens (only CSS var fallbacks), so the RN port hardcodes the same literal
 light/dark values, the same workaround `Spinner`'s track color established.
 
+### Icon
+
+```tsx
+import { Search } from '@gnome-ui/icons';
+import { Icon } from '@gnome-ui/react-native';
+
+<Icon icon={Search} label="Search" size="lg" color="blue" />;
+```
+
+Renders an icon as an inline SVG via `react-native-svg` (a new peer
+dependency — this package's first). Accepts the same `AnyIconDefinition`
+union as `@gnome-ui/react`'s `Icon`: a structured `paths`-based
+`IconDefinition` from `@gnome-ui/icons`, a `simple-icons` `SimpleIcon`, or a
+plain `{ path }` object. `color` picks a named GNOME palette hue
+(`theme.blue3`, `theme.red3`, …) — RN has no `currentColor` to inherit from
+a parent the way the web version does, so omitting `color` resolves to the
+theme's default foreground color explicitly instead.
+
+`animated` icons (`Syncing`, `Recording`, `Downloading`, `Connecting`) carry
+raw `svg` markup instead of `paths` — rendered here through `react-native-
+svg`'s `SvgXml`. It parses the structural elements (`<g>`/`<path>`/
+`<circle>`) but has no CSS engine, so the markup's embedded `<style>`/
+`@keyframes` block is silently dropped and the shapes render at their
+authored rest position — which happens to be exactly the desired inert,
+static-frame behavior for a plain `<Icon>`, no special-casing needed. Wrap
+in `<AnimatedIcon>` to actually play the motion.
+
+### AnimatedIcon
+
+```tsx
+import { Syncing } from '@gnome-ui/icons';
+import { AnimatedIcon } from '@gnome-ui/react-native';
+
+<AnimatedIcon icon={Syncing} playing={isSyncing} label="Syncing" />;
+```
+
+Plays the motion for a known `animated` icon (`Syncing`, `Recording`,
+`Downloading`, `Connecting`) — rendered through plain `<Icon>`, these show a
+static frame instead, same as `@gnome-ui/react`'s `AnimatedIcon`.
+
+Unlike the web version (which plays a CSS animation embedded in the icon's
+raw `svg` markup via a `--gnome-icon-play-state` custom property), RN has
+no CSS engine to interpret `@keyframes` at all. Each of the 4 known icons'
+motion is instead hand-built with `Animated`, matched by referential
+identity against `@gnome-ui/icons`' own exports (`Syncing` → full-turn
+rotation, `Recording` → opacity pulse, `Downloading` → a translate+opacity
+"drop" on the arrow over a static tray, `Connecting` → three signal dots
+pulsing in a staggered sweep) — an icon `AnimatedIcon` doesn't recognize
+(a future 5th animated icon, or a consumer-authored one) falls back to the
+static `<Icon>` frame rather than throwing. Regardless of `playing`, the
+animation is always paused when the OS reduced-motion setting is on.
+
 ## Installation
 
 ```bash
-npm install @gnome-ui/react-native react-native
+npm install @gnome-ui/react-native react-native react-native-svg
 ```
+
+`react-native-svg` is a peer dependency, only needed for `Icon`/
+`AnimatedIcon` — it ships as one of Expo Go's included native modules, so
+Expo projects on `npx expo install react-native-svg` need no extra native
+build step; bare RN projects need it linked as usual for a native module.
 
 ## Example app
 

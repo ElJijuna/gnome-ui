@@ -1,4 +1,5 @@
 export * from './components/ActionRow';
+export * from './components/AnimatedIcon';
 export * from './components/Banner';
 export * from './components/BoxedList';
 export * from './components/Button';
@@ -6,6 +7,7 @@ export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/Dialog';
 export * from './components/HeaderBar';
+export * from './components/Icon';
 export * from './components/Link';
 export * from './components/PathBar';
 export * from './components/ProgressBar';
