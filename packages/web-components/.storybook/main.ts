@@ -2,7 +2,16 @@ import type { StorybookConfig } from '@storybook/web-components-vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.ts'],
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    {
+      name: '@pilmee/storybook-addon-vitest',
+      options: {
+        reportPath: './vitest-report.json',
+      },
+    },
+  ],
   framework: {
     name: '@storybook/web-components-vite',
     options: {
@@ -12,7 +21,7 @@ const config: StorybookConfig = {
       },
     },
   },
-  staticDirs: ['../../../public'],
+  staticDirs: ['../../../public', { from: '../storybook-reports', to: '/' }],
   managerHead: (head) => `${head}<link rel="icon" type="image/png" href="/assets/gnome-ui.png" />`,
   docs: {},
   // `refs` composition (linking to the react/layout/charts/icons

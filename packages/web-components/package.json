@@ -268,8 +268,11 @@
     "test:browser": "playwright test",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "storybook": "storybook dev -p 6010",
-    "build-storybook": "storybook build"
+    "storybook": "npm run test:storybook-report:dev && storybook dev -p 6010",
+    "build-storybook": "storybook build",
+    "test:storybook-report": "vitest run --reporter=json --coverage --outputFile=storybook-static/vitest-report.json",
+    "test:storybook-report:dev": "vitest run --reporter=json --coverage --outputFile=storybook-reports/vitest-report.json",
+    "storybook:ci": "npm run build-storybook && npm run test:storybook-report"
   },
   "publishConfig": {
     "access": "public"
@@ -279,6 +282,7 @@
     "@gnome-ui/icons": "*"
   },
   "devDependencies": {
+    "@pilmee/storybook-addon-vitest": "^0.1.0",
     "@playwright/test": "^1.62.0",
     "@storybook/addon-a11y": "^10.5.5",
     "@storybook/addon-docs": "^10.5.5",
