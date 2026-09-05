@@ -20,7 +20,10 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Component ports from `@gnome-ui/react`
-> continue tier by tier. See [ROADMAP.md](../../ROADMAP.md) Priority 3.
+> continue tier by tier — see this package's own [ROADMAP.md](./ROADMAP.md)
+> for full per-tier status against all 130 `@gnome-ui/react` components, and
+> the main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
+> expansion this package belongs to.
 
 ## How it works
 
