@@ -1,3 +1,26 @@
+## [@gnome-ui/react-native-v1.4.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.3.0...@gnome-ui/react-native@1.4.0) (2026-09-05)
+
+### Features
+
+* **@gnome-ui/react-native:** add Avatar component with initial fallback and accessibility support ([36294f1](https://github.com/ElJijuna/gnome-ui/commit/36294f131466505d6a2612b0f8586d444ee11389))
+* **@gnome-ui/react-native:** add Badge component with variants and anchor support ([bf4f1e7](https://github.com/ElJijuna/gnome-ui/commit/bf4f1e73ebd357fd8095700cbcc156024bb59ba8))
+* **@gnome-ui/react-native:** add BottomSheet component with drag-to-dismiss functionality and update related screens ([98c50b1](https://github.com/ElJijuna/gnome-ui/commit/98c50b1d7b345492a7e1372821136a728c926249))
+* **@gnome-ui/react-native:** add Divider component with optional label and update documentation ([7fa3b86](https://github.com/ElJijuna/gnome-ui/commit/7fa3b864d368560f39dd8d0c56d593e7fe5cba4f))
+* **@gnome-ui/react-native:** add Expander component with collapsible content and update documentation ([1688743](https://github.com/ElJijuna/gnome-ui/commit/1688743ca50fc9fb86c7d4646ea62c595270d44f))
+* **@gnome-ui/react-native:** add Highlight component for text highlighting and update documentation ([ab85e25](https://github.com/ElJijuna/gnome-ui/commit/ab85e2512e42d2920391140e9ef78d40485fbcf0))
+* **@gnome-ui/react-native:** add LevelBar component with continuous and discrete modes, update documentation and roadmap ([b58adc0](https://github.com/ElJijuna/gnome-ui/commit/b58adc0c5ed81f47af503e5a50dfa9bcf371f2af))
+* **@gnome-ui/react-native:** add Overlay component with backdrop and fade transition, update documentation and roadmap ([59ac93e](https://github.com/ElJijuna/gnome-ui/commit/59ac93e97303e983edff31327094e1cd07ac780b))
+* **@gnome-ui/react-native:** add Popover component with rich content support and update documentation ([3b16d81](https://github.com/ElJijuna/gnome-ui/commit/3b16d8167a016207a75e43c246510bcfade39cac))
+* **@gnome-ui/react-native:** add SpinButton component with accessibility support and update documentation ([701a7df](https://github.com/ElJijuna/gnome-ui/commit/701a7df52431c696b913a6195bc0604ef583a92e))
+
+### Bug Fixes
+
+* **@gnome-ui/react-native:** improve text formatting and update accessibility state test ([88426e4](https://github.com/ElJijuna/gnome-ui/commit/88426e457fea99f6dc65c88844eb322dcc3011c5))
+
+### Documentation
+
+* update README and add ROADMAP for component porting plan ([a8ae5ff](https://github.com/ElJijuna/gnome-ui/commit/a8ae5ff8dc9c96342a7a5de3e7275666c4d1743d))
+
 ## [@gnome-ui/react-native-v1.3.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.2.0...@gnome-ui/react-native@1.3.0) (2026-09-04)
 
 ### Features
