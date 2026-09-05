@@ -20,7 +20,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> and `Overlay`/`LevelBar` (Tier 20) also shipped. Component ports from
+> and `Overlay`/`LevelBar`/`Expander` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1197,6 +1197,39 @@ Discrete mode's per-block color transition has no port — a value change is
 a plain, unanimated color swap per block, a decorative nicety rather than a
 behavior gap. `role="meter"` ports 1:1 from RN's newer web-aligned `Role`
 union (unlike `AccessibilityRole`, which has no `"meter"` value at all).
+
+### Expander
+
+```tsx
+import { Expander } from '@gnome-ui/react-native';
+
+<Expander label="Show advanced options">
+  <TextField label="Custom endpoint" />
+</Expander>
+```
+
+Standalone disclosure triangle + collapsible content, mirroring `GtkExpander`
+and `@gnome-ui/react`'s `Expander`. A bare, unstyled counterpart to
+`ExpanderRow`; use it outside a settings-row context (e.g. "Show advanced
+options" in a form, or "Show details" under an error message).
+
+The web version clips the panel with a CSS grid-height animation and rides
+the content's `padding-top` on a second, separate transition, so a collapsed
+expander doesn't reserve blank space for hidden padding. RN has no CSS grid
+to lean on, so the panel is a single `Animated.View` whose numeric `height`
+is driven directly (`useNativeDriver: false`, the same accepted trade-off
+`Checkbox`/`RadioButton`/`Switch`/`AnimatedIcon` already make for
+non-transform properties) — since the content's own `onLayout` measurement
+already includes its `paddingTop`, one animated height reproduces the web
+version's two-transition result. Content stays mounted while collapsed
+(`accessibilityElementsHidden`/`importantForAccessibility="no"`, the same
+substitution for the web's `inert` used elsewhere in this package), and on
+first mount with `defaultExpanded` the panel briefly renders at its natural,
+unmeasured height so the initial reveal doesn't pop once layout resolves.
+
+The chevron is `PanEnd` (GNOME's own `pan-end-symbolic` disclosure triangle)
+rotating 0deg → 90deg on an `Animated.Value`, the same `interpolate`-to-
+`rotate` recipe `Spinner` uses for its own spin.
 
 ## Installation
 

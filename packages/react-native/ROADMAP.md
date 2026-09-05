@@ -137,7 +137,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | ✅ | **BoxedList `variant="separate"`** | Already shipped (Tier 2) |
 | ⬜ | **ButtonRow** | Directly portable — full-width `Pressable` styled like `Button`, inside `BoxedList` |
 | ✅ | **ActionRow `variant="property"`** | Already shipped (Tier 2) |
-| ⬜ | **ExpanderRow** | Blocked on nothing — `ActionRow` + the same "stays mounted, toggle `display: 'none'`" pattern `TabPanel`/`SidebarSection` already use instead of an animated-height CSS grid |
+| ⬜ | **ExpanderRow** | Blocked on nothing — `ActionRow` + the standalone `Expander`'s (Tier 20, shipped) directly-driven `Animated.View` height recipe for the reveal, in place of the web version's animated-height CSS grid |
 
 ### Button additions
 
@@ -297,7 +297,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ✅ | **LevelBar** | Shipped reusing `ProgressBar`'s exact `scaleX`-transform animation technique for the continuous fill; discrete mode's per-block color change is left unanimated (decorative nicety, not a gap) |
-| ⬜ | **Expander** | Directly portable — standalone version of the disclosure pattern `ExpanderRow` (Tier 8) will also need |
+| ✅ | **Expander** | Shipped — single `Animated.View` with a directly-driven numeric `height` (`useNativeDriver: false`) replaces the web version's two-transition CSS grid trick, since the content `onLayout` measurement already folds in its own `paddingTop`; chevron is `PanEnd` rotating via the same `interpolate`-to-`rotate` recipe `Spinner` uses |
 | ⬜ | **PasswordField** | Directly portable — `TextField` + reveal-icon toggle, same recipe `PasswordEntryRow` (Tier 12) needs |
 | ⬜ | **Divider** | Trivial — `Separator` + a centered `Text` label |
 | ⬜ | **RatingStars** | Directly portable — tap-to-select row of `Icon`s (`Star`/`StarOutline`), roving-tabindex keyboard nav drops per this package's standing convention |
@@ -361,11 +361,13 @@ package.
 
 - **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme),
   plus `BottomSheet` (Tier 14) — real `PanResponder` drag-to-dismiss, no new
-  gesture dependency needed — and `Overlay`/`LevelBar` (Tier 20). `Overlay`
-  was extracted as a new standalone primitive rather than retrofitted into
-  the four components that still each keep their own inline copy of the
-  same pattern; `LevelBar` reuses `ProgressBar`'s `scaleX`-transform
-  animation technique verbatim.
+  gesture dependency needed — and `Overlay`/`LevelBar`/`Expander` (Tier 20).
+  `Overlay` was extracted as a new standalone primitive rather than
+  retrofitted into the four components that still each keep their own
+  inline copy of the same pattern; `LevelBar` reuses `ProgressBar`'s
+  `scaleX`-transform animation technique verbatim; `Expander` replaces the
+  web version's two-transition CSS grid reveal with a single directly-driven
+  `Animated.View` height.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,

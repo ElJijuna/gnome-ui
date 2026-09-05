@@ -10,6 +10,7 @@ export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/Dialog';
 export * from './components/Dropdown';
+export * from './components/Expander';
 export * from './components/HeaderBar';
 export * from './components/Icon';
 export * from './components/LevelBar';

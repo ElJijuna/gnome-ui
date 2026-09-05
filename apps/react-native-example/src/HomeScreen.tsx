@@ -40,6 +40,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   BottomSheet: 'Slide-up panel from the bottom edge — drag the handle down to dismiss',
   Overlay: 'Standalone backdrop with fade transition and press-to-dismiss',
   LevelBar: 'Gauge/measurement indicator — continuous fill or discrete blocks, low/high zones',
+  Expander: 'Disclosure triangle + collapsible content — animated height reveal',
 };
 
 export interface HomeScreenProps {

@@ -14,6 +14,7 @@ import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
+import { ExpanderScreen } from './screens/ExpanderScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { IconScreen } from './screens/IconScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
@@ -75,6 +76,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   BottomSheet: BottomSheetScreen,
   Overlay: OverlayScreen,
   LevelBar: LevelBarScreen,
+  Expander: ExpanderScreen,
 };
 
 export interface ComponentScreenProps {
