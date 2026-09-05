@@ -39,6 +39,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Popover: 'Floating panel with rich content — auto-flips, closes on outside tap',
   BottomSheet: 'Slide-up panel from the bottom edge — drag the handle down to dismiss',
   Overlay: 'Standalone backdrop with fade transition and press-to-dismiss',
+  LevelBar: 'Gauge/measurement indicator — continuous fill or discrete blocks, low/high zones',
 };
 
 export interface HomeScreenProps {

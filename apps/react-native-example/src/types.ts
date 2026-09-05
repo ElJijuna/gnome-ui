@@ -33,6 +33,7 @@ export const COMPONENT_NAMES = [
   'Popover',
   'BottomSheet',
   'Overlay',
+  'LevelBar',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -16,6 +16,7 @@ import { DialogScreen } from './screens/DialogScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { IconScreen } from './screens/IconScreen';
+import { LevelBarScreen } from './screens/LevelBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
@@ -73,6 +74,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Popover: PopoverScreen,
   BottomSheet: BottomSheetScreen,
   Overlay: OverlayScreen,
+  LevelBar: LevelBarScreen,
 };
 
 export interface ComponentScreenProps {

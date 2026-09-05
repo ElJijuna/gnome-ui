@@ -20,7 +20,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> and `Overlay` (Tier 20) also shipped. Component ports from
+> and `Overlay`/`LevelBar` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1167,6 +1167,36 @@ the touch responder differently than the no-op-`Pressable` wrapper the
 others use). Extracting `Overlay` as a new standalone primitive was the
 scoped ask; retrofitting four already-shipped components to share it is a
 separate, riskier refactor this turn didn't take on.
+
+### LevelBar
+
+```tsx
+import { LevelBar } from '@gnome-ui/react-native';
+
+<LevelBar value={0.15} low={0.25} high={0.75} accessibilityLabel="Battery" />
+<LevelBar value={0.6} discrete numBlocks={5} accessibilityLabel="Signal strength" />;
+```
+
+Discrete level indicator with color-coded low/high offset zones, mirroring
+`GtkLevelBar` and `@gnome-ui/react`'s `LevelBar`. Use for a gauge/
+measurement display (disk usage, battery, signal strength) — not for task
+progress (`ProgressBar`) or a proportional category breakdown
+(`SegmentedBar`).
+
+The continuous fill reuses `ProgressBar`'s exact animation technique rather
+than animating `width` directly: a fixed `width: '100%'` fill with
+`transformOrigin: 'left'` and an animated `transform: [{ scaleX }]`, so the
+whole thing runs on `useNativeDriver: true` — a JS-driven `width` animation
+schedules its next frame via a plain `setTimeout` that routinely fires
+after a test's `render()` returns but before unmount, producing a spurious
+"update not wrapped in act()" warning, the same reasoning `ProgressBar`'s
+own docstring documents. `useReducedMotion()` mirrors `ProgressBar`'s
+determinate behavior (duration drops to `0`, an immediate jump).
+
+Discrete mode's per-block color transition has no port — a value change is
+a plain, unanimated color swap per block, a decorative nicety rather than a
+behavior gap. `role="meter"` ports 1:1 from RN's newer web-aligned `Role`
+union (unlike `AccessibilityRole`, which has no `"meter"` value at all).
 
 ## Installation
 

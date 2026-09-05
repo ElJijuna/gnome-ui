@@ -296,7 +296,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **LevelBar** | Directly portable — discrete-zone variant of `ProgressBar`'s existing fill math |
+| ✅ | **LevelBar** | Shipped reusing `ProgressBar`'s exact `scaleX`-transform animation technique for the continuous fill; discrete mode's per-block color change is left unanimated (decorative nicety, not a gap) |
 | ⬜ | **Expander** | Directly portable — standalone version of the disclosure pattern `ExpanderRow` (Tier 8) will also need |
 | ⬜ | **PasswordField** | Directly portable — `TextField` + reveal-icon toggle, same recipe `PasswordEntryRow` (Tier 12) needs |
 | ⬜ | **Divider** | Trivial — `Separator` + a centered `Text` label |
@@ -361,9 +361,11 @@ package.
 
 - **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme),
   plus `BottomSheet` (Tier 14) — real `PanResponder` drag-to-dismiss, no new
-  gesture dependency needed — and `Overlay` (Tier 20), extracted as a new
-  standalone primitive rather than retrofitted into the four components
-  that still each keep their own inline copy of the same pattern.
+  gesture dependency needed — and `Overlay`/`LevelBar` (Tier 20). `Overlay`
+  was extracted as a new standalone primitive rather than retrofitted into
+  the four components that still each keep their own inline copy of the
+  same pattern; `LevelBar` reuses `ProgressBar`'s `scaleX`-transform
+  animation technique verbatim.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
