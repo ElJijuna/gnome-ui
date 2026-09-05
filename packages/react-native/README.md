@@ -20,7 +20,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> and `Overlay`/`LevelBar`/`Expander` (Tier 20) also shipped. Component ports from
+> and `Overlay`/`LevelBar`/`Expander`/`Divider` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1230,6 +1230,30 @@ unmeasured height so the initial reveal doesn't pop once layout resolves.
 The chevron is `PanEnd` (GNOME's own `pan-end-symbolic` disclosure triangle)
 rotating 0deg → 90deg on an `Animated.Value`, the same `interpolate`-to-
 `rotate` recipe `Spinner` uses for its own spin.
+
+### Divider
+
+```tsx
+import { Divider } from '@gnome-ui/react-native';
+
+<Divider>OR</Divider>
+<Divider>Continue with</Divider>
+<Divider />
+```
+
+Horizontal rule with an optional centered label — the common auth/login-form
+pattern ("Sign in" / **OR** / "Continue with Google"). Mirrors
+`@gnome-ui/react`'s `Divider`. For a bare dividing line with no label, use
+`Separator` instead — it also supports a vertical orientation, which
+`Divider` does not.
+
+`role="separator"` ports 1:1 from RN's newer web-aligned `Role` union (the
+same one `Avatar`/`Badge`/`LevelBar` already reach for) — unlike
+`Separator`'s own `accessible={false}`, since a labelled `Divider` ("OR") is
+exactly the kind of content a screen reader user needs read aloud, rather
+than a purely decorative line. The label reuses `Text`'s
+`variant="caption" color="dim"` verbatim, which already resolves to the same
+font-size/weight/dim-opacity the web version's `.label` class hard-codes.
 
 ## Installation
 

@@ -41,6 +41,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Overlay: 'Standalone backdrop with fade transition and press-to-dismiss',
   LevelBar: 'Gauge/measurement indicator — continuous fill or discrete blocks, low/high zones',
   Expander: 'Disclosure triangle + collapsible content — animated height reveal',
+  Divider: 'Horizontal rule with an optional centered label — "OR" between sign-in methods',
 };
 
 export interface HomeScreenProps {

@@ -13,6 +13,7 @@ import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { DialogScreen } from './screens/DialogScreen';
+import { DividerScreen } from './screens/DividerScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
@@ -77,6 +78,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Overlay: OverlayScreen,
   LevelBar: LevelBarScreen,
   Expander: ExpanderScreen,
+  Divider: DividerScreen,
 };
 
 export interface ComponentScreenProps {

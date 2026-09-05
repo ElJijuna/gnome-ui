@@ -35,6 +35,7 @@ export const COMPONENT_NAMES = [
   'Overlay',
   'LevelBar',
   'Expander',
+  'Divider',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
