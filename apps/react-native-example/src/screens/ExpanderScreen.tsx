@@ -18,8 +18,8 @@ export const ExpanderScreen = () => {
       <Section title="Default expanded">
         <Expander label="Show details" defaultExpanded>
           <Text>
-            Everything nested here stays mounted while collapsed — only the animated height
-            hides it.
+            Everything nested here stays mounted while collapsed — only the animated height hides
+            it.
           </Text>
         </Expander>
       </Section>

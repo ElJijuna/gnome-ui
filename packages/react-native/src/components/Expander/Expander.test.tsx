@@ -134,9 +134,7 @@ describe('Expander', () => {
       expect(button.props.accessibilityState).toEqual(expect.objectContaining({ expanded: true }));
 
       await fireEvent.press(button);
-      expect(button.props.accessibilityState).toEqual(
-        expect.objectContaining({ expanded: false }),
-      );
+      expect(button.props.accessibilityState).toEqual(expect.objectContaining({ expanded: false }));
     });
 
     it('calls onExpandedChange with the next value', async () => {
