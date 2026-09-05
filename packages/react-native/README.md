@@ -19,10 +19,11 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `AnimatedIcon` (which brought a new `Icon` component along with it, as its
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
-> `Avatar`, `Badge`, and `Popover`. Component ports from `@gnome-ui/react`
-> continue tier by tier — see this package's own [ROADMAP.md](./ROADMAP.md)
-> for full per-tier status against all 130 `@gnome-ui/react` components, and
-> the main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
+> `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
+> also shipped. Component ports from `@gnome-ui/react` continue tier by
+> tier — see this package's own [ROADMAP.md](./ROADMAP.md) for full
+> per-tier status against all 130 `@gnome-ui/react` components, and the
+> main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
 > expansion this package belongs to.
 
 ## How it works
@@ -1093,6 +1094,45 @@ gap already present in `Dialog`/`Tooltip`/`Dropdown`.
 The web version's rotated-square-with-matching-background arrow is replaced
 with `Tooltip`'s simpler transparent-border-triangle technique — the same
 visual affordance, a much simpler RN-native primitive.
+
+### BottomSheet
+
+```tsx
+import { BottomSheet, Button } from '@gnome-ui/react-native';
+
+<Button onPress={() => setOpen(true)}>Open</Button>
+<BottomSheet open={open} title="Options" onClose={() => setOpen(false)}>
+  <Text>Rich content here</Text>
+</BottomSheet>;
+```
+
+Slide-up panel that overlays content from the bottom edge, mirroring
+`AdwBottomSheet` (libadwaita 1.6+) and `@gnome-ui/react`'s `BottomSheet`.
+Reuses `Dialog`'s backdrop-opacity-on-an-`AnimatedPressable` +
+no-op-`Pressable`-around-the-card recipe, and `BackHandler`'s
+`hardwareBackPress` as the Android analog of the web version's Escape
+listener.
+
+**Real drag-to-dismiss**, not a fixed-panel simplification: `PanResponder`
+(the same core API `Slider` already proved handles a threshold gesture)
+drives a single `Animated.Value` shared with the entrance/exit animation —
+dragging the handle bar past 150 px (same constant as the web version)
+requests a close; releasing short of that springs back to `0`. A real
+slide-up needs the sheet's own height first (RN's `transform` has no
+percentage-of-self units, the same `Slider`/`Avatar` pitfall) — the sheet
+renders once off-screen, measured via `onLayout`, before animating in.
+
+**A real, timed exit animation, unlike `Dialog`**: `Dialog`'s web source has
+no exit keyframes at all, but `BottomSheet`'s does — ported with a local
+`visible` state that lags one animation behind the `open` prop, flipping to
+`false` only in the exit `Animated.timing`'s own completion callback.
+
+The web version's `backdrop-filter: blur(4px)` has no port (no native blur
+view dependency, same reasoning that dropped `Sidebar`'s blurred variant),
+and `useBodyScrollLock` needs no RN equivalent (`Modal` already blocks all
+background interaction). `children`, when a plain string, is wrapped in
+`Text` before rendering — RN throws if a raw string is a `View`'s child,
+unlike the web version's plain `<div>{children}</div>`.
 
 ## Installation
 

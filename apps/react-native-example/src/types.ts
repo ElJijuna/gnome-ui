@@ -31,6 +31,7 @@ export const COMPONENT_NAMES = [
   'Avatar',
   'Badge',
   'Popover',
+  'BottomSheet',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

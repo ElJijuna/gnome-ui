@@ -7,6 +7,7 @@ import { AnimatedIconScreen } from './screens/AnimatedIconScreen';
 import { AvatarScreen } from './screens/AvatarScreen';
 import { BadgeScreen } from './screens/BadgeScreen';
 import { BannerScreen } from './screens/BannerScreen';
+import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
@@ -69,6 +70,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Avatar: AvatarScreen,
   Badge: BadgeScreen,
   Popover: PopoverScreen,
+  BottomSheet: BottomSheetScreen,
 };
 
 export interface ComponentScreenProps {

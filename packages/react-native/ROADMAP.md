@@ -211,7 +211,7 @@ make one worth building.
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ⬜ | **NavigationView** | High mobile value (push/pop stack is the native navigation idiom) — but most RN apps already bring their own navigation library (React Navigation, Expo Router); scope this as a *styled primitive* for consumers without one, not a router replacement |
-| ⬜ | **BottomSheet** | High mobile value — a fixed-position sliding panel (`Toast`'s enter/exit `Animated` recipe) covers a first version without a new gesture dependency; real drag-to-dismiss would want `react-native-gesture-handler`/`reanimated` |
+| ✅ | **BottomSheet** | Shipped with real drag-to-dismiss on core `PanResponder` (no new gesture dependency needed after all — `Slider`'s own drag technique generalizes) |
 | ⬜ | **Carousel** | More portable than it looks — RN's built-in `ScrollView`/`FlatList` with `pagingEnabled` covers swipeable paging with no new dependency; `CarouselIndicatorDots`/`Lines` are simple derived dot rows |
 | ✅ | **AlertDialog** | Already shipped as `Dialog`'s `role="alertdialog"` + `responses`/`onResponse` (Tier 4) |
 | 🚫 | **AboutDialog** | Niche composite (app info/credits/legal tabs) — low priority, revisit if a consuming app actually needs an in-app "About" screen |
@@ -309,7 +309,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | 🚫 | **Kbd** | No physical keyboard on mobile to reference — not planned, same reasoning as `ShortcutLabel`/`ShortcutsDialog` |
 | ⬜ | **Highlight** | Directly portable — pure string-split-and-styled-`Text` rendering, stateless |
 | ⬜ | **VisuallyHidden** | This package already has the underlying recipe inline on every component that needs it (`accessibilityElementsHidden` + `importantForAccessibility="no"`, first established by `PathBar`) — extracting a reusable wrapper is a quick win, not new design |
-| ⬜ | **Overlay** | Directly portable — extract the backdrop `Pressable` + fade `Animated.Value` pattern already duplicated across `Dialog`/`Dropdown`/`Popover` into its own component |
+| ⬜ | **Overlay** | Directly portable — extract the backdrop `Pressable` + fade `Animated.Value` pattern already duplicated across `Dialog`/`Dropdown`/`Popover`/`BottomSheet` into its own component |
 
 ### Molecules
 
@@ -359,7 +359,9 @@ package.
 
 ## Summary
 
-- **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme).
+- **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme),
+  plus `BottomSheet` (Tier 14) — real `PanResponder` drag-to-dismiss, no new
+  gesture dependency needed.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
@@ -367,8 +369,8 @@ package.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
   Tier 7's `ToggleGroup`/`WrapBox`/`Chip`; Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
-  Tier 14's `NavigationView`/`BottomSheet`/`Carousel`; most of Tier 20's
-  atoms, plus the `Popover`-unblocked molecule cluster
+  Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's atoms,
+  plus the `Popover`-unblocked molecule cluster
   (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, once
   `Calendar` exists for the first two).
 - **Whole-package deferrals**: `@gnome-ui/charts`, `@gnome-ui/platform`,
