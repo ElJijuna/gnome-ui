@@ -32,6 +32,7 @@ export const COMPONENT_NAMES = [
   'Badge',
   'Popover',
   'BottomSheet',
+  'Overlay',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -38,6 +38,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Badge: 'Counter or status dot — 5 variants, optionally anchored on another element',
   Popover: 'Floating panel with rich content — auto-flips, closes on outside tap',
   BottomSheet: 'Slide-up panel from the bottom edge — drag the handle down to dismiss',
+  Overlay: 'Standalone backdrop with fade transition and press-to-dismiss',
 };
 
 export interface HomeScreenProps {

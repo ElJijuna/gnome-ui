@@ -17,6 +17,7 @@ import { DropdownScreen } from './screens/DropdownScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { IconScreen } from './screens/IconScreen';
 import { LinkScreen } from './screens/LinkScreen';
+import { OverlayScreen } from './screens/OverlayScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
 import { PopoverScreen } from './screens/PopoverScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
@@ -71,6 +72,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Badge: BadgeScreen,
   Popover: PopoverScreen,
   BottomSheet: BottomSheetScreen,
+  Overlay: OverlayScreen,
 };
 
 export interface ComponentScreenProps {

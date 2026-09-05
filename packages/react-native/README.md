@@ -20,8 +20,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> also shipped. Component ports from `@gnome-ui/react` continue tier by
-> tier — see this package's own [ROADMAP.md](./ROADMAP.md) for full
+> and `Overlay` (Tier 20) also shipped. Component ports from
+> `@gnome-ui/react` continue tier by tier — see this package's own
+> [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
 > main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
 > expansion this package belongs to.
@@ -1133,6 +1134,39 @@ and `useBodyScrollLock` needs no RN equivalent (`Modal` already blocks all
 background interaction). `children`, when a plain string, is wrapped in
 `Text` before rendering — RN throws if a raw string is a `View`'s child,
 unlike the web version's plain `<div>{children}</div>`.
+
+### Overlay
+
+```tsx
+import { Overlay, Button } from '@gnome-ui/react-native';
+
+<Button onPress={() => setOpen(true)}>Open</Button>
+<Overlay open={open} onDismiss={() => setOpen(false)}>
+  <YourOwnCard />
+</Overlay>;
+```
+
+Standalone backdrop/scrim layer with a fade transition and
+press-to-dismiss — the shared building block behind `Dialog`, `Dropdown`,
+`Popover`, and `BottomSheet`'s own backdrops, extracted here for building
+custom overlay UI, mirroring `@gnome-ui/react`'s `Overlay`.
+
+Deliberately minimal, same as the web version: no focus trap, no
+`BackHandler`/Escape handling, no `role` — use `Dialog`/`Popover`/
+`BottomSheet` directly when you need those. Reuses `Dialog`'s exact
+backdrop recipe (`AnimatedPressable` + a no-op `Pressable` wrapping
+`children`, so a tap on your own content never bubbles to the backdrop and
+dismisses it) and `BottomSheet`'s real, timed exit animation technique — a
+local `visible` state that lags the `open` prop by one `Animated.timing`,
+flipping to `false` only in that animation's own completion callback.
+
+**Not retrofitted into `Dialog`/`Dropdown`/`Popover`/`BottomSheet`** — each
+already ships and is fully tested with its own inline copy of this same
+backdrop pattern (with small per-component differences: `Popover` claims
+the touch responder differently than the no-op-`Pressable` wrapper the
+others use). Extracting `Overlay` as a new standalone primitive was the
+scoped ask; retrofitting four already-shipped components to share it is a
+separate, riskier refactor this turn didn't take on.
 
 ## Installation
 

@@ -309,7 +309,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | 🚫 | **Kbd** | No physical keyboard on mobile to reference — not planned, same reasoning as `ShortcutLabel`/`ShortcutsDialog` |
 | ⬜ | **Highlight** | Directly portable — pure string-split-and-styled-`Text` rendering, stateless |
 | ⬜ | **VisuallyHidden** | This package already has the underlying recipe inline on every component that needs it (`accessibilityElementsHidden` + `importantForAccessibility="no"`, first established by `PathBar`) — extracting a reusable wrapper is a quick win, not new design |
-| ⬜ | **Overlay** | Directly portable — extract the backdrop `Pressable` + fade `Animated.Value` pattern already duplicated across `Dialog`/`Dropdown`/`Popover`/`BottomSheet` into its own component |
+| ✅ | **Overlay** | Extracted as a new standalone primitive (`Dialog`'s backdrop recipe + `BottomSheet`'s timed-exit-animation technique); not retrofitted into `Dialog`/`Dropdown`/`Popover`/`BottomSheet` themselves — each keeps its own already-shipped, already-tested inline copy |
 
 ### Molecules
 
@@ -361,7 +361,9 @@ package.
 
 - **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme),
   plus `BottomSheet` (Tier 14) — real `PanResponder` drag-to-dismiss, no new
-  gesture dependency needed.
+  gesture dependency needed — and `Overlay` (Tier 20), extracted as a new
+  standalone primitive rather than retrofitted into the four components
+  that still each keep their own inline copy of the same pattern.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
@@ -369,8 +371,8 @@ package.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
   Tier 7's `ToggleGroup`/`WrapBox`/`Chip`; Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
-  Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's atoms,
-  plus the `Popover`-unblocked molecule cluster
+  Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
+  remaining atoms, plus the `Popover`-unblocked molecule cluster
   (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, once
   `Calendar` exists for the first two).
 - **Whole-package deferrals**: `@gnome-ui/charts`, `@gnome-ui/platform`,
