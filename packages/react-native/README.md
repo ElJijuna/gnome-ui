@@ -20,7 +20,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> and `Overlay`/`LevelBar`/`Expander`/`Divider` (Tier 20) also shipped. Component ports from
+> and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight` (Tier 20) also
+> shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1254,6 +1255,41 @@ exactly the kind of content a screen reader user needs read aloud, rather
 than a purely decorative line. The label reuses `Text`'s
 `variant="caption" color="dim"` verbatim, which already resolves to the same
 font-size/weight/dim-opacity the web version's `.label` class hard-codes.
+
+### Highlight
+
+```tsx
+import { Highlight } from '@gnome-ui/react-native';
+
+<Highlight text="Preferences for accessibility" query="access" />
+<Highlight text="The quick brown fox" query={['quick', 'fox']} />
+```
+
+Wraps every occurrence of `query` within `text` in a highlighted inline run
+— mirrors `@gnome-ui/react`'s `Highlight`, which wraps matches in a `<mark>`.
+Pairs with `SearchBar`'s suggestion list and any filterable list to show
+users which part of a result matched what they typed.
+
+The outer span is the themed `Text` component (so callers get the same
+`variant`/`color` API as everywhere else), but each matched run is a plain,
+unthemed RN `Text` carrying only the highlight's own overrides — RN's `Text`
+is the one primitive that inherits ambient `fontSize`/`color`/`fontFamily`
+from a parent `Text` when nested, the same way the web version's `<mark>`
+inherits from its surrounding text and only overrides
+`background-color`/`font-weight`. Reaching for the themed `Text` for the
+marked runs too would reset them to its own default `variant="body"` sizing
+instead of inheriting whatever variant the caller chose for the whole
+string.
+
+The web version's translucent `color-mix(in srgb, accent 30%, transparent)`
+background has no RN equivalent (`color-mix` is CSS-only) — resolved to a
+literal 8-digit `#RRGGBBAA` hex instead, since `accentBgColor` is always a
+plain 6-digit hex across all four theme variants. `border-radius` on the
+`<mark>` has no reliable port either: RN only paints `backgroundColor` on an
+inline (nested) `Text` run, not `borderRadius` — a decorative nicety
+dropped, not a behavior gap. `prefers-contrast: more`'s solid-background/
+white-text swap ports via `useResolvedContrast()`, the same hook `Button`
+already uses for its own high-contrast branching.
 
 ## Installation
 

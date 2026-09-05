@@ -42,6 +42,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   LevelBar: 'Gauge/measurement indicator — continuous fill or discrete blocks, low/high zones',
   Expander: 'Disclosure triangle + collapsible content — animated height reveal',
   Divider: 'Horizontal rule with an optional centered label — "OR" between sign-in methods',
+  Highlight: 'Highlights every occurrence of a search term within a string',
 };
 
 export interface HomeScreenProps {

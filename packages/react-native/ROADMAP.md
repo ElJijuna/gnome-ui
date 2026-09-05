@@ -307,7 +307,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | ⬜ | **RangeSlider** | Dual-thumb version of the already-shipped `Slider` — same `PanResponder`/`locationX` technique, tracking two values instead of one |
 | ⬜ | **TextTruncate** | The one atom needing real design work — RN has `numberOfLines` but no "did this actually truncate" overflow signal the way `ResizeObserver` gives the web version; likely needs an `onTextLayout` line-count comparison trick, wrapped in the already-shipped `Tooltip` when truncation is detected |
 | 🚫 | **Kbd** | No physical keyboard on mobile to reference — not planned, same reasoning as `ShortcutLabel`/`ShortcutsDialog` |
-| ⬜ | **Highlight** | Directly portable — pure string-split-and-styled-`Text` rendering, stateless |
+| ✅ | **Highlight** | Shipped — outer themed `Text` wraps matched runs in plain (unthemed) nested RN `Text`, relying on RN's ambient style inheritance for nested `Text` so a run only overrides `backgroundColor`/`fontWeight` instead of resetting to `variant="body"`; the web's `color-mix()` translucent background resolves to a literal 8-digit `#RRGGBBAA` hex |
 | ⬜ | **VisuallyHidden** | This package already has the underlying recipe inline on every component that needs it (`accessibilityElementsHidden` + `importantForAccessibility="no"`, first established by `PathBar`) — extracting a reusable wrapper is a quick win, not new design |
 | ✅ | **Overlay** | Extracted as a new standalone primitive (`Dialog`'s backdrop recipe + `BottomSheet`'s timed-exit-animation technique); not retrofitted into `Dialog`/`Dropdown`/`Popover`/`BottomSheet` themselves — each keeps its own already-shipped, already-tested inline copy |
 
@@ -361,16 +361,19 @@ package.
 
 - **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme),
   plus `BottomSheet` (Tier 14) — real `PanResponder` drag-to-dismiss, no new
-  gesture dependency needed — and `Overlay`/`LevelBar`/`Expander`/`Divider`
-  (Tier 20). `Overlay` was extracted as a new standalone primitive rather
-  than retrofitted into the four components that still each keep their own
-  inline copy of the same pattern; `LevelBar` reuses `ProgressBar`'s
-  `scaleX`-transform animation technique verbatim; `Expander` replaces the
-  web version's two-transition CSS grid reveal with a single directly-driven
-  `Animated.View` height; `Divider` is the first `role="separator"`
-  component in the package that actually stays in the accessibility tree
-  (unlike `Separator`'s `accessible={false}`), since its label is real
-  content.
+  gesture dependency needed — and `Overlay`/`LevelBar`/`Expander`/`Divider`/
+  `Highlight` (Tier 20). `Overlay` was extracted as a new standalone
+  primitive rather than retrofitted into the four components that still
+  each keep their own inline copy of the same pattern; `LevelBar` reuses
+  `ProgressBar`'s `scaleX`-transform animation technique verbatim;
+  `Expander` replaces the web version's two-transition CSS grid reveal with
+  a single directly-driven `Animated.View` height; `Divider` is the first
+  `role="separator"` component in the package that actually stays in the
+  accessibility tree (unlike `Separator`'s `accessible={false}`), since its
+  label is real content; `Highlight` leans on RN `Text`'s (uniquely, among
+  RN primitives) ambient style inheritance when nested, so a matched run
+  only overrides `backgroundColor`/`fontWeight` instead of resetting to a
+  default variant.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
