@@ -27,18 +27,22 @@ describe('IconButton', () => {
     expect(screen.getByRole('button')).toHaveStyle({ borderRadius: 9999 });
   });
 
-  it.each(['default', 'suggested', 'destructive', 'flat', 'raised', 'osd'] as const)(
-    'applies %s variant without crashing',
-    async (variant) => {
-      await render(
-        <GnomeProvider colorScheme="light">
-          <IconButton icon={Settings} label="Settings" variant={variant} />
-        </GnomeProvider>,
-      );
+  it.each([
+    'default',
+    'suggested',
+    'destructive',
+    'flat',
+    'raised',
+    'osd',
+  ] as const)('applies %s variant without crashing', async (variant) => {
+    await render(
+      <GnomeProvider colorScheme="light">
+        <IconButton icon={Settings} label="Settings" variant={variant} />
+      </GnomeProvider>,
+    );
 
-      expect(screen.getByRole('button', { name: 'Settings' })).toBeOnTheScreen();
-    },
-  );
+    expect(screen.getByRole('button', { name: 'Settings' })).toBeOnTheScreen();
+  });
 
   it.each(['sm', 'lg'] as const)('applies %s size', async (size) => {
     await render(

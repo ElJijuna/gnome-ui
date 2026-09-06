@@ -49,7 +49,12 @@ const RailDemo = () => {
   return (
     <>
       <Button onPress={() => setOpen(true)}>Open Settings</Button>
-      <Drawer open={open} title={sections[section].title} onClose={() => setOpen(false)} rail={rail}>
+      <Drawer
+        open={open}
+        title={sections[section].title}
+        onClose={() => setOpen(false)}
+        rail={rail}
+      >
         <Text variant="body" color="dim">
           {sections[section].body}
         </Text>

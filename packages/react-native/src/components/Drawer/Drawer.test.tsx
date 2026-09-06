@@ -113,12 +113,8 @@ describe('Drawer', () => {
     const sectionA = screen.getByRole('button', { name: 'Section A' });
     const sectionB = screen.getByRole('button', { name: 'Section B' });
 
-    expect(sectionA.props.accessibilityState).toEqual(
-      expect.objectContaining({ selected: true }),
-    );
-    expect(sectionB.props.accessibilityState).toEqual(
-      expect.objectContaining({ selected: false }),
-    );
+    expect(sectionA.props.accessibilityState).toEqual(expect.objectContaining({ selected: true }));
+    expect(sectionB.props.accessibilityState).toEqual(expect.objectContaining({ selected: false }));
 
     await fireEvent.press(sectionB);
 
