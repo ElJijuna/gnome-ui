@@ -21,8 +21,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
-> `SegmentedBar`/`AvatarGroup`/`AvatarRotator` (Tier 20), `Chip` (Tier 7), and
-> `IconButton`/`Drawer` (Tier 8/Tier 20) also shipped. Component ports from
+> `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
+> (Tier 20), `Chip` (Tier 7), and `IconButton`/`Drawer` (Tier 8/Tier 20)
+> also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1479,6 +1480,65 @@ motion alike. `pauseOnHover` becomes `pauseOnPress`
 (`onPressIn`/`onPressOut`) — the same touch substitution `Toast`'s own
 press-and-hold pause already established, kept as a real toggleable prop
 here (defaults `true`).
+
+### CoachMark / CoachMarkTour
+
+```tsx
+import { CoachMark, CoachMarkTour } from '@gnome-ui/react-native';
+
+<CoachMark
+  open={open}
+  targetRef={target}
+  title="Sync your files"
+  description="Press this to keep every device up to date."
+  primaryAction={{ label: 'Got it', onPress: () => setOpen(false) }}
+  onDismiss={() => setOpen(false)}
+/>
+
+<CoachMarkTour
+  open={running}
+  steps={[
+    { targetRef: searchRef, title: 'Search', description: 'Find anything fast.' },
+    { targetRef: addRef, title: 'Add', description: 'Create a new item here.', placement: 'left' },
+  ]}
+  onFinish={() => setRunning(false)}
+  onSkip={() => setRunning(false)}
+/>
+```
+
+Spotlights a target element and anchors a callout bubble (title,
+description, step counter, actions) beside it, guiding a user to one
+feature. Compose several with `CoachMarkTour`, or drive one directly with
+`open`. Mirrors `@gnome-ui/react`'s `CoachMark`/`CoachMarkTour` — not a
+GNOME HIG widget, a pragmatic feature-discovery pattern.
+
+Positions with the same two-pass viewport-aware flip as the web version
+(`coachMarkUtils.ts`, duplicated verbatim — pure math, no DOM), resolved
+from `targetRef.current?.measureInWindow(...)` and the bubble's own
+`onLayout` size. **The measurement is deliberately delayed (a real
+`setTimeout`, not just one `requestAnimationFrame`)** — confirmed
+on-device that measuring too early catches a stale rect when the target
+sits below sibling content whose own size isn't final on the first commit
+(e.g. a multi-line description `Text` above it); a single rAF still
+landed before the follow-up layout pass accounted for it.
+
+The spotlight cutout has no CSS `box-shadow: 0 0 0 100vmax` port — that
+trick paints an opaque scrim everywhere except inside a rounded rect via a
+huge spread shadow, which RN's real OS shadows can't reproduce. Rebuilt as
+four plain `View` bands around the padded target rect, plus a separate
+rounded `accentColor`-bordered ring on top — the whole overlay sits inside
+one full-screen `Pressable`, so a tap anywhere within it (including
+visually "in the hole") triggers `dismissOnBackdrop`, matching the web
+version exactly. `dismissOnBackdrop` has no effect when `spotlight` is
+`false` — ported faithfully, not fixed: the web source only renders a
+backdrop element at all when `spotlight` is true. The arrow reuses
+`Popover`/`Tooltip`'s transparent-border-triangle trick rather than the
+web CSS's rotated-45°-square, offset along the bubble's edge by
+`arrowOffset` from the position math (unlike `Tooltip`/`Popover`'s simpler
+always-centered arrow). No focus trap and no scroll/resize
+re-positioning, the same established gaps for a transient RN floating
+element. `CoachMarkTour` is pure state orchestration on top of
+`CoachMark`, ported verbatim.
 
 ## Installation
 

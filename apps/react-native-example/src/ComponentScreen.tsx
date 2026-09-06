@@ -15,6 +15,7 @@ import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { ChipScreen } from './screens/ChipScreen';
+import { CoachMarkScreen } from './screens/CoachMarkScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
 import { DrawerScreen } from './screens/DrawerScreen';
@@ -95,6 +96,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Drawer: DrawerScreen,
   AvatarGroup: AvatarGroupScreen,
   AvatarRotator: AvatarRotatorScreen,
+  CoachMark: CoachMarkScreen,
 };
 
 export interface ComponentScreenProps {
