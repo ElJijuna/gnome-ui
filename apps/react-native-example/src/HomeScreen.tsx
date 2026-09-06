@@ -46,6 +46,8 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   FileTypeIcon: 'Icon resolved from a MIME type or file name extension, or a thumbnail',
   Chip: 'Pill-shaped label — static, removable, or a selectable toggle',
   SegmentedBar: 'Proportional category breakdown — repository language distribution',
+  IconButton: 'Icon-only action button — Button + Icon + optional Tooltip',
+  Drawer: 'Slide-in panel from the left or right edge — title, rail, nested width scaling',
 };
 
 export interface HomeScreenProps {

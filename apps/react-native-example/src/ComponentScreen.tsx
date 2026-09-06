@@ -15,11 +15,13 @@ import { CheckboxScreen } from './screens/CheckboxScreen';
 import { ChipScreen } from './screens/ChipScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
+import { DrawerScreen } from './screens/DrawerScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
+import { IconButtonScreen } from './screens/IconButtonScreen';
 import { IconScreen } from './screens/IconScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
@@ -87,6 +89,8 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   FileTypeIcon: FileTypeIconScreen,
   Chip: ChipScreen,
   SegmentedBar: SegmentedBarScreen,
+  IconButton: IconButtonScreen,
+  Drawer: DrawerScreen,
 };
 
 export interface ComponentScreenProps {

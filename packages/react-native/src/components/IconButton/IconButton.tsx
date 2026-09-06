@@ -1,0 +1,88 @@
+import type { IconDefinition } from '@gnome-ui/icons';
+import { forwardRef } from 'react';
+import type { View } from 'react-native';
+
+import { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from '@/components/Button';
+import { Icon, type IconSize } from '@/components/Icon';
+import { Tooltip, type TooltipPlacement } from '@/components/Tooltip';
+
+export type IconButtonVariant = ButtonVariant | 'osd';
+export type IconButtonSize = ButtonSize;
+
+export interface IconButtonProps
+  extends Omit<
+    ButtonProps,
+    'accessibilityLabel' | 'children' | 'leadingIcon' | 'osd' | 'shape' | 'trailingIcon' | 'variant'
+  > {
+  /** Icon definition imported from `@gnome-ui/icons`. */
+  icon: IconDefinition;
+  /** Accessible name for the icon-only button. */
+  label: string;
+  /** Visual style of the button. Use `"osd"` for media overlay controls. */
+  variant?: IconButtonVariant;
+  /** Size of the button. */
+  size?: IconButtonSize;
+  /** Override the rendered icon size. Defaults to a size matched to `size`. */
+  iconSize?: IconSize;
+  /** Optional tooltip label shown on long-press/hover/focus. */
+  tooltip?: string;
+  /** Preferred tooltip placement. */
+  tooltipPlacement?: TooltipPlacement;
+  /** Tooltip delay in milliseconds. */
+  tooltipDelay?: number;
+}
+
+const ICON_SIZE_BY_BUTTON_SIZE: Record<IconButtonSize, IconSize> = {
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+};
+
+/**
+ * Icon-only action button composed from `Button`, `Icon`, and optionally
+ * `Tooltip` — mirrors `@gnome-ui/react`'s `IconButton`, itself already just
+ * a thin composition of those same three pieces (its own JSDoc example
+ * shows the identical `<Tooltip><Button><Icon /></Button></Tooltip>`
+ * nesting `IconButton` here just formalizes into a named, reusable export).
+ * `label` is required since the button has no visible text.
+ */
+export const IconButton = forwardRef<View, IconButtonProps>(function IconButton(
+  {
+    icon,
+    label,
+    variant = 'default',
+    size = 'md',
+    iconSize,
+    tooltip,
+    tooltipPlacement,
+    tooltipDelay,
+    ...props
+  },
+  ref,
+) {
+  const buttonVariant = variant === 'osd' ? 'flat' : variant;
+
+  const button = (
+    <Button
+      ref={ref}
+      accessibilityLabel={label}
+      shape="circular"
+      size={size}
+      variant={buttonVariant}
+      osd={variant === 'osd'}
+      {...props}
+    >
+      <Icon icon={icon} size={iconSize ?? ICON_SIZE_BY_BUTTON_SIZE[size]} />
+    </Button>
+  );
+
+  if (!tooltip) {
+    return button;
+  }
+
+  return (
+    <Tooltip label={tooltip} placement={tooltipPlacement} delay={tooltipDelay}>
+      {button}
+    </Tooltip>
+  );
+});

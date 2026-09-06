@@ -40,6 +40,8 @@ export const COMPONENT_NAMES = [
   'FileTypeIcon',
   'Chip',
   'SegmentedBar',
+  'IconButton',
+  'Drawer',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

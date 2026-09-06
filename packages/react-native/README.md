@@ -21,8 +21,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
-> `SegmentedBar` (Tier 20), and `Chip` (Tier 7) also shipped. Component
-> ports from
+> `SegmentedBar` (Tier 20), `Chip` (Tier 7), and `IconButton`/`Drawer`
+> (Tier 8/Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1383,6 +1383,52 @@ compose cleanly on the same `Pressable`. `filter: brightness(1.15)` on the
 actively-touched segment has no RN equivalent — dropped as a decorative
 nicety, since the touched segment already reads as highlighted by
 contrast once every other segment dims to 35% opacity.
+
+### IconButton
+
+```tsx
+import { IconButton } from '@gnome-ui/react-native';
+import { Search } from '@gnome-ui/icons';
+
+<IconButton icon={Search} label="Search" />
+<IconButton icon={Search} label="Search" tooltip="Search files" />
+```
+
+Icon-only action button composed from `Button`, `Icon`, and optionally
+`Tooltip` — mirrors `@gnome-ui/react`'s `IconButton`, itself already just a
+thin composition of those same three pieces. `label` is required since the
+button has no visible text. Built as a genuine prerequisite for `Drawer`'s
+`rail`, not scope creep — every piece it composes already existed.
+
+### Drawer
+
+```tsx
+import { Drawer } from '@gnome-ui/react-native';
+
+<Drawer open={open} title="Details" onClose={() => setOpen(false)}>
+  <Text>Drawer content can be any React node passed as children.</Text>
+</Drawer>
+```
+
+Slide-in panel for supplementary content, anchored to the left or right
+edge. Mirrors `@gnome-ui/react`'s `Drawer`. Supports a `rail` (an
+`IconButton` strip on the drawer's inner edge for switching panels without
+closing it) and nested-drawer width auto-scaling via context — a `Drawer`
+opened from within another drawer's content automatically renders
+narrower (`0.85^depth`, floored at 240px), so stacked drawers read as a
+drill-in hierarchy.
+
+Floats with a margin on every side and all four corners rounded, matching
+`@gnome-ui/react`'s own recent CSS update to the same look — positioned
+within the padded backdrop via `justifyContent` rather than the web CSS's
+`margin: auto` on the drawer itself, since RN auto-margin support was
+unverified for this Yoga version (confirmed correct with an on-device
+debug-color check before trusting it; `BottomSheet` already proves the
+same `justifyContent: 'flex-end'` mechanism on its own vertical axis).
+Unlike `BottomSheet`, there's no drag-to-dismiss — the web source defines
+no exit keyframes at all, so this follows `Dialog`'s simpler animation
+shape instead. `backdrop-filter: blur(4px)` has no port (no native blur
+dependency in this package).
 
 ## Installation
 

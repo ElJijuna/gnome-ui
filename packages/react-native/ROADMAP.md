@@ -144,7 +144,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ⬜ | **SplitButton** | Directly portable — `Button` + a second narrow chevron `Pressable`, connected-border trick from `LinkedGroup` |
-| ⬜ | **IconButton** | `Button`'s `shape="circular"` already covers the visual shape; still needs its own named export bundling `Icon` sizing + optional `Tooltip` composition |
+| ✅ | **IconButton** | Shipped — `Button`'s `shape="circular"` + `Icon` + optional `Tooltip`, the exact same composition `@gnome-ui/react`'s own `IconButton` already is (its JSDoc example already showed this nesting directly). Built as a genuine prerequisite for `Drawer`'s `rail`, not scope creep |
 | ✅ | **Button `raised` variant** | Already shipped (Tier 1) |
 | ✅ | **Button `osd` modifier** | Already shipped (Tier 1) |
 | ⬜ | **CopyButton** | Needs a new peer dependency — RN has no `navigator.clipboard`; `expo-clipboard` (Expo) or `@react-native-clipboard/clipboard` (bare RN) required first |
@@ -333,6 +333,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | ⬜ | **MultiSelectDropdown** | Unblocked now that `Dropdown` exists (Tier 5) — checkbox-list variant of the same `Modal` + backdrop pattern |
 | ⬜ | **CodeBlock** | Directly portable — monospace `Text` block + optional line numbers, `theme.fontFamilyMono` already exists |
 | ⬜ | **WidgetManager** | Low priority — complex composite (catalog picker, staged add/remove); revisit only if a concrete dashboard/widget use case appears |
+| ✅ | **Drawer** | Missing from this file's original pass, added retroactively (found the same way `SegmentedBar` was). Slide-in panel anchored left/right, floats with a margin on every side (all four corners rounded, mirroring the `@gnome-ui/react` source's own recent CSS update) via `justifyContent` on the backdrop rather than the web CSS's `margin: auto` — confirmed on-device with saturated debug colors, since RN auto-margin support was unverified for this Yoga version. No drag-to-dismiss (the web source has no exit keyframes either), so it follows `Dialog`'s simpler animation shape rather than `BottomSheet`'s. `DrawerDepthContext` (nested-drawer width auto-scaling) ports 1:1, pure React state. `rail` unblocked the new `IconButton` (see Tier 8) |
 | ⬜ | **FieldGroup** | Directly portable — generic labeled-group wrapper, simpler than `PreferencesGroup` (Tier 13) |
 | 🚫 | **Portal** | No RN counterpart to extract — every floating component already owns its `Modal` internally (see the standing constraints at the top of this file) |
 | ⬜ | **CoachMark** | Directly portable now that `Popover`'s positioning math exists — spotlight + anchored callout bubble, `CoachMarkTour` orchestrator is plain state on top |
@@ -386,7 +387,16 @@ package.
   8-digit-hex trick, hover/active collapsed into `ActionRow`/`Card`'s
   pressed-overlay recipe, and a first (documented) instance of an icon
   deliberately NOT tracking a dynamic accent color since `Icon` has no
-  `currentColor` equivalent.
+  `currentColor` equivalent. Also shipped: `IconButton` (Tier 8) —
+  `Button`+`Icon`+optional `Tooltip`, the exact composition
+  `@gnome-ui/react`'s own `IconButton` already is — built as a genuine
+  prerequisite for `Drawer` (also shipped, missing from this file's
+  original pass like `SegmentedBar`), whose `rail` needed it. `Drawer`
+  floats with a margin on every side via `justifyContent` on the backdrop
+  (not the web CSS's `margin: auto`, unverified for this RN/Yoga version —
+  confirmed correct on-device with saturated debug colors before trusting
+  it) and has no drag-to-dismiss, following `Dialog`'s simpler animation
+  shape since the web source defines no exit keyframes.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
