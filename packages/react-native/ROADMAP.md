@@ -279,6 +279,7 @@ is a concrete consuming app that needs charts on mobile.
 
 | Status | Component | Notes |
 |--------|-----------|-------|
+| ✅ | **SegmentedBar** | Shipped — missing from this file's first pass, added retroactively. Touch rebuild of the web's hover-to-dim/highlight interaction: each segment is a `Pressable` dimming its siblings on `onPressIn`/`onPressOut` (not gated behind `Tooltip`'s long-press delay), wrapped in `Tooltip` (ported 1:1) for the label/percentage readout. `filter: brightness()` on the touched segment has no RN port — dropped, since dimming the rest already reads as highlighting the one being touched |
 | 🚫 | **ContributionGraph** | SVG-heavy 52-week calendar grid — low mobile value, same `react-native-svg`-from-scratch cost as the chart package above; bundle with that initiative rather than doing it alone |
 
 ## Tier 19 — Dashboard Components (`@gnome-ui/layout`)
@@ -362,7 +363,12 @@ package.
 - **Shipped**: Tiers 1–5 complete (31 components + `GnomeProvider`/theme),
   plus `BottomSheet` (Tier 14) — real `PanResponder` drag-to-dismiss, no new
   gesture dependency needed — and `Overlay`/`LevelBar`/`Expander`/`Divider`/
-  `Highlight`/`FileTypeIcon` (Tier 20). `Overlay` was extracted as a new
+  `Highlight`/`FileTypeIcon` (Tier 20), plus `SegmentedBar` (Tier 18,
+  missing from this file's original pass — added retroactively; touch
+  rebuild of the web's hover-to-dim/highlight via each segment's own
+  `Pressable` `onPressIn`/`onPressOut`, composed with a ported-1:1
+  `Tooltip` per segment for the label/percentage readout). `Overlay` was
+  extracted as a new
   standalone primitive rather than retrofitted into the four components
   that still each keep their own inline copy of the same pattern;
   `LevelBar` reuses `ProgressBar`'s `scaleX`-transform animation technique

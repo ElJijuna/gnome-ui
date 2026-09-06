@@ -45,6 +45,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Highlight: 'Highlights every occurrence of a search term within a string',
   FileTypeIcon: 'Icon resolved from a MIME type or file name extension, or a thumbnail',
   Chip: 'Pill-shaped label — static, removable, or a selectable toggle',
+  SegmentedBar: 'Proportional category breakdown — repository language distribution',
 };
 
 export interface HomeScreenProps {

@@ -29,6 +29,7 @@ import { PopoverScreen } from './screens/PopoverScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
+import { SegmentedBarScreen } from './screens/SegmentedBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
 import { SidebarScreen } from './screens/SidebarScreen';
 import { SkeletonScreen } from './screens/SkeletonScreen';
@@ -85,6 +86,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Highlight: HighlightScreen,
   FileTypeIcon: FileTypeIconScreen,
   Chip: ChipScreen,
+  SegmentedBar: SegmentedBarScreen,
 };
 
 export interface ComponentScreenProps {

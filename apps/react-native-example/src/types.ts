@@ -39,6 +39,7 @@ export const COMPONENT_NAMES = [
   'Highlight',
   'FileTypeIcon',
   'Chip',
+  'SegmentedBar',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

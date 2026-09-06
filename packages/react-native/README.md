@@ -20,8 +20,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`
-> (Tier 20), and `Chip` (Tier 7) also shipped. Component ports from
+> and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
+> `SegmentedBar` (Tier 20), and `Chip` (Tier 7) also shipped. Component
+> ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1348,6 +1349,40 @@ palette, none of which tracks the app's configurable accent color, so
 this is a decorative nicety dropped, not a behavior gap.
 `accessibilityRole="checkbox"` on the selectable form ports 1:1, the same
 `Checkbox` precedent.
+
+### SegmentedBar
+
+```tsx
+import { SegmentedBar } from '@gnome-ui/react-native';
+
+<SegmentedBar
+  values={[
+    { label: 'TypeScript', value: 60, color: '#3178c6' },
+    { label: 'JavaScript', value: 30, color: '#f7df1e' },
+    { label: 'CSS',        value: 10, color: '#563d7c' },
+  ]}
+/>
+```
+
+Horizontal bar split into proportional segments, one per category. Mirrors
+`@gnome-ui/react`'s `SegmentedBar`. Typical use case: repository language
+distribution. Values are normalized proportionally when they don't sum to
+100.
+
+The web version's hover interaction (dim every segment but the one under
+the pointer, brighten that one via `filter: brightness()`) is rebuilt for
+touch rather than dropped: each segment is a `Pressable`, and touching one
+dims the rest immediately via `onPressIn`/`onPressOut` — deliberately not
+gated behind `Tooltip`'s own long-press delay, since this feedback is the
+RN analog of a `Pressable`'s own instant `pressed` state, not the "peek"
+affordance a tooltip reveal is. Each segment is also wrapped in `Tooltip`
+(`placement="top"`, `delay={200}`, ported 1:1) for the label/percentage
+readout — `Tooltip` clones its own handlers onto the child while still
+calling the child's original ones, so the dim/highlight and the tooltip
+compose cleanly on the same `Pressable`. `filter: brightness(1.15)` on the
+actively-touched segment has no RN equivalent — dropped as a decorative
+nicety, since the touched segment already reads as highlighted by
+contrast once every other segment dims to 35% opacity.
 
 ## Installation
 

@@ -25,6 +25,7 @@ export * from './components/Popover';
 export * from './components/ProgressBar';
 export * from './components/RadioButton';
 export * from './components/SearchBar';
+export * from './components/SegmentedBar';
 export * from './components/Separator';
 export * from './components/Sidebar';
 export * from './components/Skeleton';
