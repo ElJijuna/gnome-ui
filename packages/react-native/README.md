@@ -21,7 +21,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`
-> (Tier 20) also shipped. Component ports from
+> (Tier 20), and `Chip` (Tier 7) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1316,6 +1316,38 @@ worth of code. `role="img"` + `accessibilityLabel` ports 1:1, and the
 thumbnail reuses `Avatar`'s own `Image`/`resizeMode="cover"` recipe, sized
 from `Icon`'s own size map so swapping between the resolved icon and a
 thumbnail never shifts layout.
+
+### Chip
+
+```tsx
+import { Chip } from '@gnome-ui/react-native';
+
+<Chip label="React" />
+<Chip label="React" onRemove={() => {}} />
+<Chip label="React" selectable selected={selected} onToggle={() => setSelected((s) => !s)} />
+```
+
+Compact pill-shaped label for tags, filters, and selection states. Mirrors
+`@gnome-ui/react`'s `Chip`. Three usage modes: **static** (just a visual
+label), **removable** (add `onRemove` for a × button), and **selectable**
+(add `selectable` + `selected` + `onToggle` for toggle behavior — same
+`isInteractive = selectable && !onRemove` precedence as the web version,
+so passing both renders the remove button, not a toggle). Pair with
+`WrapBox` for multi-chip layouts.
+
+The selected background/border tint
+(`color-mix(in srgb, accent 15%/50%, transparent)`) resolves to a literal
+8-digit `#RRGGBBAA` hex, the same `Highlight` precedent. The web version's
+`:hover`/`:active` background transitions collapse into a single
+pressed-state overlay tinted by `theme.activeOverlay` (the same
+`ActionRow`/`Card` recipe), since touch has no hover. The leading icon and
+remove (×) icon stay in the default foreground color rather than tracking
+the selected accent text (`color: inherit` on the web) — RN's `Icon` has
+no `currentColor` equivalent and only accepts a fixed named-swatch
+palette, none of which tracks the app's configurable accent color, so
+this is a decorative nicety dropped, not a behavior gap.
+`accessibilityRole="checkbox"` on the selectable form ports 1:1, the same
+`Checkbox` precedent.
 
 ## Installation
 

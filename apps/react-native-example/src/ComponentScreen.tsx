@@ -12,6 +12,7 @@ import { BoxedListScreen } from './screens/BoxedListScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
+import { ChipScreen } from './screens/ChipScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
@@ -83,6 +84,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Divider: DividerScreen,
   Highlight: HighlightScreen,
   FileTypeIcon: FileTypeIconScreen,
+  Chip: ChipScreen,
 };
 
 export interface ComponentScreenProps {

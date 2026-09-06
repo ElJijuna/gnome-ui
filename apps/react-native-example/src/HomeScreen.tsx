@@ -44,6 +44,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Divider: 'Horizontal rule with an optional centered label — "OR" between sign-in methods',
   Highlight: 'Highlights every occurrence of a search term within a string',
   FileTypeIcon: 'Icon resolved from a MIME type or file name extension, or a thumbnail',
+  Chip: 'Pill-shaped label — static, removable, or a selectable toggle',
 };
 
 export interface HomeScreenProps {

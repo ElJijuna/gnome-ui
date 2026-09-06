@@ -107,7 +107,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 |--------|-----------|-------|
 | ⬜ | **ToggleGroup** | Directly portable — `Pressable` row, same selection-state shape as `RadioButton`/`ViewSwitcher` |
 | ⬜ | **WrapBox** | Directly portable — plain `flexWrap: 'wrap'` container. Prerequisite for `TagInput` (Tier 20) |
-| ⬜ | **Chip** | Directly portable, no blockers. Prerequisite for `TagInput` (Tier 20) |
+| ✅ | **Chip** | Shipped — selected background/border tint resolves to a literal 8-digit `#RRGGBBAA` hex (the `Highlight` precedent); `:hover`/`:active` collapse into one pressed-overlay tint (the `ActionRow`/`Card` recipe); leading/remove icons stay in the default foreground color rather than tracking the selected accent text, since `Icon` has no `currentColor` equivalent. Prerequisite for `TagInput` (Tier 20) |
 | 🚫 | **ShortcutsDialog** | No keyboard shortcuts exist to list on a touch-first device — low value, not planned unless a specific need arises |
 | ⬜ | **Sidebar (v2)** | Rewrite blocked on `useBreakpoint` (Tier 6) — named sections/context menus/tooltip are otherwise straightforward compositions of already-shipped pieces |
 | ⬜ | **ViewSwitcherSidebar** | Blocked on `useBreakpoint` (Tier 6), same as `Sidebar` v2 |
@@ -375,13 +375,18 @@ package.
   a matched run only overrides `backgroundColor`/`fontWeight` instead of
   resetting to a default variant; `FileTypeIcon` duplicates
   `@gnome-ui/react`'s pure MIME/extension resolver verbatim and reuses
-  `Avatar`'s own `Image` thumbnail recipe.
+  `Avatar`'s own `Image` thumbnail recipe. Also shipped, from Tier 7:
+  `Chip` — selected-state tint via the same `Highlight`-precedent
+  8-digit-hex trick, hover/active collapsed into `ActionRow`/`Card`'s
+  pressed-overlay recipe, and a first (documented) instance of an icon
+  deliberately NOT tracking a dynamic accent color since `Icon` has no
+  `currentColor` equivalent.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
   `ViewSwitcherBar`).
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
-  Tier 7's `ToggleGroup`/`WrapBox`/`Chip`; Tier 8's `Toolbar`/`Spacer`/
+  Tier 7's remaining `ToggleGroup`/`WrapBox`; Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster
