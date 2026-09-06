@@ -48,6 +48,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SegmentedBar: 'Proportional category breakdown — repository language distribution',
   IconButton: 'Icon-only action button — Button + Icon + optional Tooltip',
   Drawer: 'Slide-in panel from the left or right edge — title, rail, nested width scaling',
+  AvatarGroup: 'Overlapping stack of avatars with a "+N" overflow indicator',
 };
 
 export interface HomeScreenProps {

@@ -21,8 +21,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
-> `SegmentedBar` (Tier 20), `Chip` (Tier 7), and `IconButton`/`Drawer`
-> (Tier 8/Tier 20) also shipped. Component ports from
+> `SegmentedBar`/`AvatarGroup` (Tier 20), `Chip` (Tier 7), and
+> `IconButton`/`Drawer` (Tier 8/Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1429,6 +1429,30 @@ Unlike `BottomSheet`, there's no drag-to-dismiss — the web source defines
 no exit keyframes at all, so this follows `Dialog`'s simpler animation
 shape instead. `backdrop-filter: blur(4px)` has no port (no native blur
 dependency in this package).
+
+### AvatarGroup
+
+```tsx
+import { AvatarGroup } from '@gnome-ui/react-native';
+
+<AvatarGroup
+  avatars={[{ name: 'Alice Martin' }, { name: 'Bob Smith' }, { name: 'Carol White' }]}
+  max={5}
+/>
+```
+
+Overlapping stack of `Avatar`s with a "+N" overflow indicator. Mirrors
+`@gnome-ui/react`'s `AvatarGroup`. The web version's separating ring
+around each overlapping avatar is two layered `box-shadow`s (an inset 1px
+dark/light border plus an outset 2px window-colored ring) — RN can only
+give a `View` one border, so this keeps just the outer window-colored
+ring (overriding `Avatar`'s own subtle 1px ring via its `style` prop),
+since that's the ring doing the actual "stay visually distinct from the
+avatar behind you" work. The overflow chip reuses `Avatar`'s own per-size
+box dimensions so it lines up exactly with the avatars beside it.
+`role="group"` + an auto-generated `accessibilityLabel` (joined names,
+plus "and N more" when overflowing) port 1:1 from RN's newer web-aligned
+`Role` union.
 
 ## Installation
 

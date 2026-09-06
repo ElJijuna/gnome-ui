@@ -342,7 +342,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | ⬜ | **FieldGroup** | Directly portable — generic labeled-group wrapper, simpler than `PreferencesGroup` (Tier 13) |
 | 🚫 | **Portal** | No RN counterpart to extract — every floating component already owns its `Modal` internally (see the standing constraints at the top of this file) |
 | ⬜ | **CoachMark** | Directly portable now that `Popover`'s positioning math exists — spotlight + anchored callout bubble, `CoachMarkTour` orchestrator is plain state on top |
-| ⬜ | **AvatarGroup** | Missing from original pass, added retroactively. Directly portable — overlapping stack of the already-shipped `Avatar`, plus a "+N" overflow pill |
+| ✅ | **AvatarGroup** | Shipped — overlapping stack of the already-shipped `Avatar`, plus a "+N" overflow chip reusing `Avatar`'s own per-size box dimensions. The web's two-layered `box-shadow` ring (inset hairline + outset window-colored ring) collapses to a single `borderWidth: 2` override, since RN gives a `View` only one border — kept the outer separating ring, since that's the one doing the actual distinguish-overlapping-avatars work |
 | ⬜ | **AvatarRotator** | Missing from original pass, added retroactively. Directly portable — timed rotation through a list of avatar images/initials, reusing `Avatar` and this package's own `useReducedMotion()` (the web version's `usePrefersReducedMotion` import is `@gnome-ui/hooks`-specific, not relevant here) |
 | ⬜ | **ColorPicker** | Missing from original pass, added retroactively. Molecule-level effort — swatch grid (`Pressable` circles, `selected` ring) + a custom-color entry field; no native color-picker API to lean on either platform |
 | ⬜ | **CountDownTimer** | Missing from original pass, added retroactively. Directly portable — plain interval-driven countdown state, already has `useDateTimeFormatter` available via `GnomeProvider` for formatting |
@@ -422,7 +422,10 @@ package.
   (not the web CSS's `margin: auto`, unverified for this RN/Yoga version —
   confirmed correct on-device with saturated debug colors before trusting
   it) and has no drag-to-dismiss, following `Dialog`'s simpler animation
-  shape since the web source defines no exit keyframes.
+  shape since the web source defines no exit keyframes. Also shipped:
+  `AvatarGroup` (Tier 20) — the web's two-layered ring (inset hairline +
+  outset window-colored ring) collapses to one `borderWidth: 2` override
+  on each `Avatar`, since RN gives a `View` only one border.
 - **Full inventory pass (2026-09-06)**: ran `ls packages/react/src/components`
   (130 folders) against a word-boundary grep of this file end to end,
   following up on the partial check that first caught `SegmentedBar`/

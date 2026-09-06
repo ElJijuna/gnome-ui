@@ -42,6 +42,7 @@ export const COMPONENT_NAMES = [
   'SegmentedBar',
   'IconButton',
   'Drawer',
+  'AvatarGroup',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

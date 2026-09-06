@@ -1,6 +1,7 @@
 export * from './components/ActionRow';
 export * from './components/AnimatedIcon';
 export * from './components/Avatar';
+export * from './components/AvatarGroup';
 export * from './components/Badge';
 export * from './components/Banner';
 export * from './components/BottomSheet';
