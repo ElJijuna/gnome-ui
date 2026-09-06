@@ -1,3 +1,16 @@
+## [@gnome-ui/react-native-v1.5.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.4.0...@gnome-ui/react-native@1.5.0) (2026-09-06)
+
+### Features
+
+* **@gnome-ui/react-native:** add Chip component with various modes and update documentation ([a103007](https://github.com/ElJijuna/gnome-ui/commit/a103007ef275f735fc50fd71a631c0ace0936e6b))
+* **@gnome-ui/react-native:** add Drawer and IconButton component with proportional segments and update documentation ([9839da9](https://github.com/ElJijuna/gnome-ui/commit/9839da9d7c8175658b9e4137b6efb234df7b573b))
+* **@gnome-ui/react-native:** add FileTypeIcon component with MIME type and extension resolution, update documentation and roadmap ([3e1a7bb](https://github.com/ElJijuna/gnome-ui/commit/3e1a7bbaeb7d6727e904c462f8342e3c2164c1a8))
+* **@gnome-ui/react-native:** add SegmentedBar component with proportional segments and update documentation ([88723d4](https://github.com/ElJijuna/gnome-ui/commit/88723d4d536d0efd4efd1cbe3791988b3648c590))
+
+### Bug Fixes
+
+* **@gnome-ui/react-native:** improve formatting in Drawer and IconButton test files for better readability ([b5ff268](https://github.com/ElJijuna/gnome-ui/commit/b5ff268b39f5aed7dfa1cb97a67ebf805611b5bf))
+
 ## [@gnome-ui/react-native-v1.4.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.3.0...@gnome-ui/react-native@1.4.0) (2026-09-05)
 
 ### Features
