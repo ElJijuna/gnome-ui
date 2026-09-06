@@ -193,6 +193,7 @@ make one worth building.
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ⬜ | **SwitchRow** | `ActionRow` + `Switch` as the end widget |
+| ⬜ | **CheckRow** | Missing from this file's original pass, added retroactively. `ActionRow` + `Checkbox` as the end widget — same recipe as `SwitchRow`, both building blocks already shipped (Tier 1/Tier 2) |
 | ⬜ | **ComboRow** | `ActionRow` + `Dropdown` |
 | ⬜ | **EntryRow** | `ActionRow` with the subtitle area replaced by a `TextField` |
 | ⬜ | **PasswordEntryRow** | `EntryRow` + a reveal-icon toggle, same recipe `PasswordField` (Tier 20) will need |
@@ -311,6 +312,10 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | ✅ | **Highlight** | Shipped — outer themed `Text` wraps matched runs in plain (unthemed) nested RN `Text`, relying on RN's ambient style inheritance for nested `Text` so a run only overrides `backgroundColor`/`fontWeight` instead of resetting to `variant="body"`; the web's `color-mix()` translucent background resolves to a literal 8-digit `#RRGGBBAA` hex |
 | ⬜ | **VisuallyHidden** | This package already has the underlying recipe inline on every component that needs it (`accessibilityElementsHidden` + `importantForAccessibility="no"`, first established by `PathBar`) — extracting a reusable wrapper is a quick win, not new design |
 | ✅ | **Overlay** | Extracted as a new standalone primitive (`Dialog`'s backdrop recipe + `BottomSheet`'s timed-exit-animation technique); not retrofitted into `Dialog`/`Dropdown`/`Popover`/`BottomSheet` themselves — each keeps its own already-shipped, already-tested inline copy |
+| ⬜ | **Box** | Missing from this file's original pass, added retroactively (found via a full word-boundary cross-check of every `packages/react/src/components` folder against this file, 2026-09-06 — see the Summary). Trivial — `View` + `flexDirection`/`gap` from the same `BoxSpacing` scale already used elsewhere |
+| ⬜ | **Blockquote** | Missing from original pass, added retroactively. Trivial — `View` with a colored left border (per-side `borderColor` already established by `Spinner`'s ring/`Tooltip`'s arrow) + `Text`, no state |
+| ⬜ | **StatusBadge** | Missing from original pass, added retroactively. General-purpose status pill (success/warning/error/new/accent/neutral) — simpler sibling of the already-shipped `Badge` (no anchor/dot mode, no counter), same color-token mapping |
+| ⬜ | **Footer** | Missing from original pass, added retroactively. Bottom bar with leading/trailing/center slots — directly reuses `HeaderBar`'s already-shipped `flex: 1` on both side slots trick so the center content stays centered regardless of slot width |
 
 ### Molecules
 
@@ -337,17 +342,38 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | ⬜ | **FieldGroup** | Directly portable — generic labeled-group wrapper, simpler than `PreferencesGroup` (Tier 13) |
 | 🚫 | **Portal** | No RN counterpart to extract — every floating component already owns its `Modal` internally (see the standing constraints at the top of this file) |
 | ⬜ | **CoachMark** | Directly portable now that `Popover`'s positioning math exists — spotlight + anchored callout bubble, `CoachMarkTour` orchestrator is plain state on top |
+| ⬜ | **AvatarGroup** | Missing from original pass, added retroactively. Directly portable — overlapping stack of the already-shipped `Avatar`, plus a "+N" overflow pill |
+| ⬜ | **AvatarRotator** | Missing from original pass, added retroactively. Directly portable — timed rotation through a list of avatar images/initials, reusing `Avatar` and this package's own `useReducedMotion()` (the web version's `usePrefersReducedMotion` import is `@gnome-ui/hooks`-specific, not relevant here) |
+| ⬜ | **ColorPicker** | Missing from original pass, added retroactively. Molecule-level effort — swatch grid (`Pressable` circles, `selected` ring) + a custom-color entry field; no native color-picker API to lean on either platform |
+| ⬜ | **CountDownTimer** | Missing from original pass, added retroactively. Directly portable — plain interval-driven countdown state, already has `useDateTimeFormatter` available via `GnomeProvider` for formatting |
+| ⬜ | **ScrollToTop** | Missing from original pass, added retroactively. Needs reimagining, not a straight port — RN has no page-level scroll event; the mobile shape is a prop taking the consumer's own `ScrollView` scroll-offset (via `onScroll`), not an internally-observed `window.scroll` listener |
+| ⬜ | **TerminalView** | Missing from original pass, added retroactively. Directly portable — monospace `Text` lines in a `ScrollView`, `scrollToEnd()` on the ref for `autoScroll`. Distinct from `CodeBlock` above (static snippet) the same way the web version documents it |
+| ⬜ | **Timeline** | Missing from original pass, added retroactively. Directly portable — `View`-based vertical/horizontal list of connector-line + icon nodes, no web-only APIs involved |
 
 ---
 
 ## Domain-specific components (not in any tier)
 
 `AffectedPackage`, `CveIdentifier`, `CvssScore`, `CvssVector`,
-`CweIdentifier`, `SecurityMetric`, `VulnerabilityFinding`,
+`CweIdentifier`, `SecurityMetric`, `SeverityBadge`, `VulnerabilityFinding`,
 `VulnerabilitySummary` exist in `@gnome-ui/react` but were never part of
 the main ROADMAP.md's tier system — bespoke widgets for a specific
 security/vulnerability-reporting product surface, not GNOME HIG patterns.
-🚫 Out of scope here unless a concrete consuming app needs them on mobile.
+(`SeverityBadge` added 2026-09-06 — same reasoning as the rest of this
+list, its own docstring says "for vulnerability and security report
+surfaces" explicitly; not to be confused with the general-purpose
+`StatusBadge`, tracked in Tier 20 above.) 🚫 Out of scope here unless a
+concrete consuming app needs them on mobile.
+
+## React-only originals (not GNOME HIG ports)
+
+`FilterableMultiSelectDropdown` exists in `@gnome-ui/react` but isn't a
+port target for this file at all — it's an original component invented
+for that package specifically (a `MultiSelectDropdown` variant with a
+built-in search field), not a mirror of any GNOME/libadwaita widget.
+Excluded from the tier system by design, not an oversight — if this
+package ever wants the same shape, it'd extend `MultiSelectDropdown`
+(Tier 20) once that ships, not port this one directly.
 
 ---
 
@@ -397,6 +423,21 @@ package.
   confirmed correct on-device with saturated debug colors before trusting
   it) and has no drag-to-dismiss, following `Dialog`'s simpler animation
   shape since the web source defines no exit keyframes.
+- **Full inventory pass (2026-09-06)**: ran `ls packages/react/src/components`
+  (130 folders) against a word-boundary grep of this file end to end,
+  following up on the partial check that first caught `SegmentedBar`/
+  `Drawer` missing. Found 14 more real gaps and added all of them above:
+  `CheckRow` (Tier 12), `Box`/`Blockquote`/`StatusBadge`/`Footer` (Tier 20
+  atoms), `AvatarGroup`/`AvatarRotator`/`ColorPicker`/`CountDownTimer`/
+  `ScrollToTop`/`TerminalView`/`Timeline` (Tier 20 molecules),
+  `SeverityBadge` (Domain-specific — confused with the now-tracked
+  general-purpose `StatusBadge` at first glance, they're unrelated
+  components), and `FilterableMultiSelectDropdown` (a deliberate exclusion,
+  not a gap — an original `@gnome-ui/react`-only component, no GNOME HIG
+  counterpart to port). This word-boundary-grep-every-folder-name method is
+  now confirmed to reliably surface real gaps twice in a row — worth
+  re-running after any batch of upstream `@gnome-ui/react` additions, not
+  just once.
 - **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
   downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
   `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
