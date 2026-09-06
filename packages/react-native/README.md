@@ -20,8 +20,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > own public component) shipped — `Status Page` skipped for now. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
-> and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight` (Tier 20) also
-> shipped. Component ports from
+> and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`
+> (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1290,6 +1290,32 @@ inline (nested) `Text` run, not `borderRadius` — a decorative nicety
 dropped, not a behavior gap. `prefers-contrast: more`'s solid-background/
 white-text swap ports via `useResolvedContrast()`, the same hook `Button`
 already uses for its own high-contrast branching.
+
+### FileTypeIcon
+
+```tsx
+import { FileTypeIcon } from '@gnome-ui/react-native';
+
+<FileTypeIcon name="report.pdf" />
+<FileTypeIcon mimeType="image/png" />
+<FileTypeIcon name="cover.jpg" thumbnail={thumbnailUrl} />
+<FileTypeIcon isFolder />
+```
+
+Small icon — optionally a thumbnail — resolved from a file's MIME type or
+name extension. Useful for file-manager-style listings. Mirrors
+`@gnome-ui/react`'s `FileTypeIcon`, falling back to the generic file icon
+(freedesktop's `text-x-generic`) when the type can't be resolved.
+
+`fileType.ts`'s category-resolution logic (MIME type / extension → one of
+13 categories, plus the freedesktop icon and generated label per category)
+is pure, DOM-free TS — duplicated verbatim from `@gnome-ui/react` rather
+than imported cross-package, the same `Icon.tsx` precedent already
+established for logic that isn't worth a shared package for one file's
+worth of code. `role="img"` + `accessibilityLabel` ports 1:1, and the
+thumbnail reuses `Avatar`'s own `Image`/`resizeMode="cover"` recipe, sized
+from `Icon`'s own size map so swapping between the resolved icon and a
+thumbnail never shifts layout.
 
 ## Installation
 

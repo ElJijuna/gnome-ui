@@ -16,6 +16,7 @@ import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
+import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
 import { IconScreen } from './screens/IconScreen';
@@ -81,6 +82,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Expander: ExpanderScreen,
   Divider: DividerScreen,
   Highlight: HighlightScreen,
+  FileTypeIcon: FileTypeIconScreen,
 };
 
 export interface ComponentScreenProps {

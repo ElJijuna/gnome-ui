@@ -12,6 +12,7 @@ export * from './components/Dialog';
 export * from './components/Divider';
 export * from './components/Dropdown';
 export * from './components/Expander';
+export * from './components/FileTypeIcon';
 export * from './components/HeaderBar';
 export * from './components/Highlight';
 export * from './components/Icon';
