@@ -1,3 +1,9 @@
+## [@gnome-ui/react-v1.66.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.66.0...@gnome-ui/react@1.66.1) (2026-09-06)
+
+### Bug Fixes
+
+* **@gnome-ui/react:** adjust Drawer component styles for improved layout and consistency ([0def021](https://github.com/ElJijuna/gnome-ui/commit/0def0215aa246410757fe7e4dda57204148f5d3c))
+
 ## [@gnome-ui/react-v1.66.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.65.0...@gnome-ui/react@1.66.0) (2026-09-04)
 
 ### Features
