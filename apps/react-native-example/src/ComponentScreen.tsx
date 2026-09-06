@@ -5,6 +5,7 @@ import { ScrollView, View } from 'react-native';
 import { ActionRowScreen } from './screens/ActionRowScreen';
 import { AnimatedIconScreen } from './screens/AnimatedIconScreen';
 import { AvatarGroupScreen } from './screens/AvatarGroupScreen';
+import { AvatarRotatorScreen } from './screens/AvatarRotatorScreen';
 import { AvatarScreen } from './screens/AvatarScreen';
 import { BadgeScreen } from './screens/BadgeScreen';
 import { BannerScreen } from './screens/BannerScreen';
@@ -93,6 +94,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   IconButton: IconButtonScreen,
   Drawer: DrawerScreen,
   AvatarGroup: AvatarGroupScreen,
+  AvatarRotator: AvatarRotatorScreen,
 };
 
 export interface ComponentScreenProps {

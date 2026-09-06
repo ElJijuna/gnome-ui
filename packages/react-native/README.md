@@ -21,7 +21,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
-> `SegmentedBar`/`AvatarGroup` (Tier 20), `Chip` (Tier 7), and
+> `SegmentedBar`/`AvatarGroup`/`AvatarRotator` (Tier 20), `Chip` (Tier 7), and
 > `IconButton`/`Drawer` (Tier 8/Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
@@ -1453,6 +1453,32 @@ box dimensions so it lines up exactly with the avatars beside it.
 `role="group"` + an auto-generated `accessibilityLabel` (joined names,
 plus "and N more" when overflowing) port 1:1 from RN's newer web-aligned
 `Role` union.
+
+### AvatarRotator
+
+```tsx
+import { AvatarRotator } from '@gnome-ui/react-native';
+
+<AvatarRotator name="Alice Martin" avatars={[url1, url2, url3]} />
+```
+
+Single avatar surface that crossfades through multiple image sources.
+Mirrors `@gnome-ui/react`'s `AvatarRotator`. Keeps `Avatar` focused on
+rendering one identity, while this component owns timing, crossfade
+animation, and pause behavior.
+
+Each source renders as its own absolutely-positioned `Avatar`, crossfaded
+with `Animated.timing` (`useNativeDriver: true`) — a `RotatorLayer`
+sub-component owns each layer's own `Animated.Value` rather than the
+parent tracking an array of them, the same "each item animates itself"
+shape `Toast`/`Toaster` already established for independently
+transitioning list items. `prefers-reduced-motion` stops the rotation
+outright, not just the fade — ported exactly from the web version's own
+auto-advance effect, which bails out early on both `isPaused` and reduced
+motion alike. `pauseOnHover` becomes `pauseOnPress`
+(`onPressIn`/`onPressOut`) — the same touch substitution `Toast`'s own
+press-and-hold pause already established, kept as a real toggleable prop
+here (defaults `true`).
 
 ## Installation
 

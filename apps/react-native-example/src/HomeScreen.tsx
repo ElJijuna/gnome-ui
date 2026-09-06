@@ -49,6 +49,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   IconButton: 'Icon-only action button — Button + Icon + optional Tooltip',
   Drawer: 'Slide-in panel from the left or right edge — title, rail, nested width scaling',
   AvatarGroup: 'Overlapping stack of avatars with a "+N" overflow indicator',
+  AvatarRotator: 'Single avatar surface that crossfades through multiple image sources',
 };
 
 export interface HomeScreenProps {

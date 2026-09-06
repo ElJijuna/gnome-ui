@@ -343,7 +343,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | 🚫 | **Portal** | No RN counterpart to extract — every floating component already owns its `Modal` internally (see the standing constraints at the top of this file) |
 | ⬜ | **CoachMark** | Directly portable now that `Popover`'s positioning math exists — spotlight + anchored callout bubble, `CoachMarkTour` orchestrator is plain state on top |
 | ✅ | **AvatarGroup** | Shipped — overlapping stack of the already-shipped `Avatar`, plus a "+N" overflow chip reusing `Avatar`'s own per-size box dimensions. The web's two-layered `box-shadow` ring (inset hairline + outset window-colored ring) collapses to a single `borderWidth: 2` override, since RN gives a `View` only one border — kept the outer separating ring, since that's the one doing the actual distinguish-overlapping-avatars work |
-| ⬜ | **AvatarRotator** | Missing from original pass, added retroactively. Directly portable — timed rotation through a list of avatar images/initials, reusing `Avatar` and this package's own `useReducedMotion()` (the web version's `usePrefersReducedMotion` import is `@gnome-ui/hooks`-specific, not relevant here) |
+| ✅ | **AvatarRotator** | Shipped — each image source is its own absolutely-positioned `Avatar` layer, crossfaded via a `RotatorLayer` sub-component that owns its own `Animated.Value` (the `Toast`/`Toaster` "each item animates itself" shape). Reduced motion stops the auto-advance timer outright, not just the fade, ported exactly from the web effect's own bail-out condition. `pauseOnHover` → `pauseOnPress` (`onPressIn`/`onPressOut`), the same touch substitution `Toast`'s press-and-hold pause established |
 | ⬜ | **ColorPicker** | Missing from original pass, added retroactively. Molecule-level effort — swatch grid (`Pressable` circles, `selected` ring) + a custom-color entry field; no native color-picker API to lean on either platform |
 | ⬜ | **CountDownTimer** | Missing from original pass, added retroactively. Directly portable — plain interval-driven countdown state, already has `useDateTimeFormatter` available via `GnomeProvider` for formatting |
 | ⬜ | **ScrollToTop** | Missing from original pass, added retroactively. Needs reimagining, not a straight port — RN has no page-level scroll event; the mobile shape is a prop taking the consumer's own `ScrollView` scroll-offset (via `onScroll`), not an internally-observed `window.scroll` listener |
@@ -425,7 +425,12 @@ package.
   shape since the web source defines no exit keyframes. Also shipped:
   `AvatarGroup` (Tier 20) — the web's two-layered ring (inset hairline +
   outset window-colored ring) collapses to one `borderWidth: 2` override
-  on each `Avatar`, since RN gives a `View` only one border.
+  on each `Avatar`, since RN gives a `View` only one border — and
+  `AvatarRotator` (Tier 20), whose `RotatorLayer` sub-component gives each
+  crossfading image its own `Animated.Value` (the `Toast`/`Toaster`
+  "each item animates itself" shape) and whose reduced-motion handling
+  stops the auto-advance timer outright, not just the fade, matching the
+  web effect's own bail-out condition exactly.
 - **Full inventory pass (2026-09-06)**: ran `ls packages/react/src/components`
   (130 folders) against a word-boundary grep of this file end to end,
   following up on the partial check that first caught `SegmentedBar`/
