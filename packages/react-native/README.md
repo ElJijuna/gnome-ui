@@ -25,7 +25,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
-> `EntryRow`/`PasswordEntryRow` (Tier 12) also shipped. Component ports from
+> `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1962,6 +1962,45 @@ device a permanently dimmed control is just harder to see.
 The web needs `e.stopPropagation()` so pressing the button doesn't also
 trigger the row's focus-the-input click. RN's responder system routes a touch
 to the innermost pressable, so there's nothing to stop.
+
+### ComboRow
+
+```tsx
+import { ComboRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <ComboRow
+    title="Language"
+    subtitle="Used across the whole app"
+    value={language}
+    onValueChange={setLanguage}
+    options={[
+      { value: 'en', label: 'English' },
+      { value: 'es', label: 'Español' },
+    ]}
+  />
+</BoxedList>
+```
+
+Settings row with an inline combo selector at the trailing edge — mirrors
+`AdwComboRow` and `@gnome-ui/react`'s own `ComboRow`. Use it inside a
+`BoxedList` for a setting that picks one of a set of options. Controlled
+(`value`) and uncontrolled (`defaultValue`) modes both work; the trigger
+falls back to `"—"` when nothing is selected.
+
+**This is a composition of `ActionRow` + `Dropdown`, where the web version
+hand-rolls its own listbox inline** — around 200 lines re-implementing the
+trigger, the flip-up placement, outside-click dismissal, roving
+`aria-activedescendant` and the whole keyboard layer, none of which is
+meaningfully different from that package's own `Dropdown`. Nothing forced the
+duplication visually either: `.row` is `ActionRow`'s exact metrics and
+`.trigger` is `Dropdown`'s exact trigger. Composing the two already-shipped
+components means the flip-to-fit placement, the tap-outside dismissal and the
+`Modal`-based list all come along for free rather than being rebuilt.
+
+`Dropdown` is controlled-only, so the uncontrolled state lives in `ComboRow`
+— same behaviour as the web version, one level up. The keyboard layer drops
+as it does everywhere else here.
 
 ## Installation
 

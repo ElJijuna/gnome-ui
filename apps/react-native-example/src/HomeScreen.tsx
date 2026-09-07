@@ -60,6 +60,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   PreferencesGroup: 'Titled settings section — heading, description, header suffix',
   EntryRow: 'Boxed-list row with an inline text field and a floating label',
   PasswordEntryRow: 'EntryRow that masks its input, with a reveal/conceal toggle',
+  ComboRow: 'Settings row with an inline option selector at the trailing edge',
 };
 
 export interface HomeScreenProps {
