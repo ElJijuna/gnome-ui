@@ -52,6 +52,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   AvatarRotator: 'Single avatar surface that crossfades through multiple image sources',
   CoachMark: 'Spotlight a UI element and anchor a callout bubble beside it',
   Clamp: 'Caps content at a readable maximum width and centers it',
+  Box: 'Flex layout primitive — orientation, HIG spacing scale, align, justify',
 };
 
 export interface HomeScreenProps {

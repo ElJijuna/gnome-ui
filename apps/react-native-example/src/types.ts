@@ -46,6 +46,7 @@ export const COMPONENT_NAMES = [
   'AvatarRotator',
   'CoachMark',
   'Clamp',
+  'Box',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

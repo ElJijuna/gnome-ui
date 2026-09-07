@@ -23,7 +23,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
-> `Clamp` (Tier 6) also shipped. Component ports from
+> `Clamp` (Tier 6), and `Box` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1576,6 +1576,45 @@ it in a plain `View` there.
 reaches the DOM — implementing it exactly as that package documents it (a
 fraction of the available width, still capped by `maximumSize`) costs
 nothing on RN and avoids shipping a dead prop.
+
+### Box
+
+```tsx
+import { Box } from '@gnome-ui/react-native';
+
+// Vertical section (heading + content)
+<Box spacing={12}>
+  <Text variant="caption-heading" color="dim">Devices</Text>
+  <BoxedList>{/* … */}</BoxedList>
+</Box>
+
+// Horizontal icon + label
+<Box orientation="horizontal" spacing={6} align="center">
+  <Icon icon={Folder} size="sm" />
+  <Text>Documents</Text>
+</Box>
+```
+
+Fundamental flex layout primitive — the RN equivalent of `GtkBox`, and a 1:1
+mirror of `@gnome-ui/react`'s own `Box`. Arranges children in a row or
+column with consistent spacing from the GNOME HIG scale: **3** (tight) ·
+**6** (standard, the default) · **12** (medium) · **18** (large) · **24**
+(section) · **32** (loose) · **48** (jumbo), all in dp. `align` defaults to
+`"stretch"` when vertical and `"center"` when horizontal, `justify` to
+`"start"`.
+
+`BoxSpacing` keeps the web package's exact seven values rather than being
+remapped onto this package's own `theme.space1`–`space6` scale — the two
+overlap at 6/12/18/24/48 but not at 3 or 32/36, and `BoxSpacing` is a
+published type consumers may already be importing, so it ports verbatim.
+
+Two things the web version accepts don't survive the platform. `spacing`
+and `padding` are numbers only — RN's `gap`/`padding` take dp, not CSS
+strings like `"1rem"`. And `align`/`justify`, which the web hands straight
+to CSS, are mapped internally from their bare `start`/`end` keywords onto
+Yoga's `flex-start`/`flex-end`; the prop values stay the web ones, so the
+API reads identically across both packages. `display: 'flex'` needs no port
+at all — every RN `View` is already a flex container.
 
 ## Installation
 

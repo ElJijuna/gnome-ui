@@ -11,6 +11,7 @@ import { BadgeScreen } from './screens/BadgeScreen';
 import { BannerScreen } from './screens/BannerScreen';
 import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
+import { BoxScreen } from './screens/BoxScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
@@ -99,6 +100,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   AvatarRotator: AvatarRotatorScreen,
   CoachMark: CoachMarkScreen,
   Clamp: ClampScreen,
+  Box: BoxScreen,
 };
 
 export interface ComponentScreenProps {
