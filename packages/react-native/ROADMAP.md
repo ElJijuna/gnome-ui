@@ -204,8 +204,8 @@ make one worth building.
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **PreferencesGroup** | Titled `BoxedList` wrapper — blocked on nothing, but most useful once Tier 12's rows exist |
-| ⬜ | **PreferencesPage** | Scrollable stack of `PreferencesGroup` — trivial once it exists |
+| ✅ | **PreferencesGroup** | Shipped — pure layout/labelling wrapper, no `BoxedList` of its own. The web's empty `.content` div looks like dead markup but is load-bearing and is kept: the group is a 12 dp-gap flex column, so without that wrapper every child becomes a flex item of the group and picks up a 12 dp gap *between the rows*, instead of one gap between the header and the content as a whole. The title is `Text variant="body"` with an explicit semibold weight rather than `variant="heading"`, which is body-sized but bold and on the tighter heading line-height — `.title` is specifically semibold at the body line-height; it keeps the `header` role anyway (passed explicitly), the same call `StatusPage` makes. `min-width: 0` needs no port: it's the CSS flexbox min-content override that Yoga doesn't apply in the first place. Unblocks `PreferencesPage` |
+| ⬜ | **PreferencesPage** | Unblocked — `PreferencesGroup` has now shipped; this is a `ScrollView` stacking them |
 | ⬜ | **PreferencesDialog** | Multi-page settings `Dialog` — blocked on `PreferencesPage`; on mobile this more idiomatically wants `NavigationView`'s push/pop (Tier 14) than web tabs |
 
 ## Tier 14 — Missing Navigation & Overlays

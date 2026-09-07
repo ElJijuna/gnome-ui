@@ -24,7 +24,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
-> `InlineViewSwitcher` (Tier 8) also shipped. Component ports from
+> `InlineViewSwitcher` (Tier 8), and `PreferencesGroup` (Tier 13) also
+> shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1829,6 +1830,43 @@ One divergence is a fix, not a port: the web applies its `.active` class to
 the menu trigger even though menu mode hides the indicator, which paints
 `round`'s trigger label in `accent-fg` (#fff) on a plain card — white on
 white. The RN trigger uses the idle color.
+
+### PreferencesGroup
+
+```tsx
+import { PreferencesGroup } from '@gnome-ui/react-native';
+
+<PreferencesGroup
+  title="Appearance"
+  description="How the app looks on this device."
+  headerSuffix={<Button variant="flat" onPress={reset}>Reset</Button>}
+>
+  <BoxedList>{rows}</BoxedList>
+</PreferencesGroup>
+```
+
+Titled section that wraps a `BoxedList` with an optional description —
+mirrors `AdwPreferencesGroup` and `@gnome-ui/react`'s own
+`PreferencesGroup`. Use it to group related settings under a named heading.
+It's purely a layout and labelling wrapper: it doesn't render the
+`BoxedList` itself, you pass one as `children`. All three header parts are
+optional; with none of them the header row is omitted entirely.
+
+The web's empty `.content` wrapper looks like dead markup but is
+load-bearing, so it's kept. The group is a 12 dp-gap flex column — without
+that wrapper every child would become a flex item of the group and pick up a
+12 dp gap between the rows themselves, instead of one gap between the header
+and the content as a whole.
+
+The title renders as `Text variant="body"` with an explicit semibold weight
+rather than `variant="heading"`, which is body-sized but **bold** and on the
+tighter heading line-height; the CSS `.title` is specifically semibold at the
+body line-height. It keeps the `header` accessibility role anyway (passed
+explicitly), since a settings-group heading is exactly the kind of landmark a
+screen reader rotor should list — the same call `StatusPage` makes for its
+own title. `min-width: 0` on the header text has no port and needs none: it's
+the classic CSS flexbox override for a min-content floor Yoga doesn't apply
+in the first place.
 
 ## Installation
 

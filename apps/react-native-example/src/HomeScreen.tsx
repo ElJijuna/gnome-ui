@@ -57,6 +57,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   StatusPage: 'Empty state — big icon, title, description, and a way forward',
   ToggleGroup: 'Mutually-exclusive toggle buttons — icon, label, or both',
   InlineViewSwitcher: 'Inline switcher — 4 variants, sliding indicator, 4 overflow modes',
+  PreferencesGroup: 'Titled settings section — heading, description, header suffix',
 };
 
 export interface HomeScreenProps {

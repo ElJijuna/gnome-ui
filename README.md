@@ -171,7 +171,7 @@ from those two files — edit them, not this table, then run
 | `Popover` | Floating panel anchored to a trigger element, following the Adwaita `GtkPopover` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-popover--docs) |
 | `Portal` | Reusable `createPortal` wrapper — SSR-safe (renders `children` inline when `document` is unavailable) with optional mount-target support. | 🚫 | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-portal--docs) |
 | `PreferencesDialog` | Multi-page settings dialog using `PreferencesPage` tabs. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-preferencesdialog--docs) |
-| `PreferencesGroup` | Titled section that wraps a `BoxedList` with an optional description. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-preferencesgroup--docs) |
+| `PreferencesGroup` | Titled section that wraps a `BoxedList` with an optional description. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-preferencesgroup--docs) |
 | `PreferencesPage` | Scrollable page composed of `PreferencesGroup` sections. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-preferencespage--docs) |
 | `ProgressBar` | Determinate and indeterminate progress bar following the Adwaita style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-progressbar--docs) |
 | `RadioButton` | Single-selection radio button following the GNOME HIG and Adwaita style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-radiobutton--docs) |

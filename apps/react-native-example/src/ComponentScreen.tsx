@@ -34,6 +34,7 @@ import { LinkScreen } from './screens/LinkScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
 import { PopoverScreen } from './screens/PopoverScreen';
+import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
@@ -109,6 +110,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   StatusPage: StatusPageScreen,
   ToggleGroup: ToggleGroupScreen,
   InlineViewSwitcher: InlineViewSwitcherScreen,
+  PreferencesGroup: PreferencesGroupScreen,
 };
 
 export interface ComponentScreenProps {

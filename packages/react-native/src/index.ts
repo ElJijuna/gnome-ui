@@ -30,6 +30,7 @@ export * from './components/Link';
 export * from './components/Overlay';
 export * from './components/PathBar';
 export * from './components/Popover';
+export * from './components/PreferencesGroup';
 export * from './components/ProgressBar';
 export * from './components/RadioButton';
 export * from './components/SearchBar';

@@ -51,6 +51,7 @@ export const COMPONENT_NAMES = [
   'StatusPage',
   'ToggleGroup',
   'InlineViewSwitcher',
+  'PreferencesGroup',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
