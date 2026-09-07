@@ -54,6 +54,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Clamp: 'Caps content at a readable maximum width and centers it',
   Box: 'Flex layout primitive — orientation, HIG spacing scale, align, justify',
   WrapBox: 'Wrapping row — items reflow onto new lines, separate child/line gaps',
+  StatusPage: 'Empty state — big icon, title, description, and a way forward',
 };
 
 export interface HomeScreenProps {

@@ -17,7 +17,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `PathBar`) fully ported. Tier 4 Feedback: `Spinner`, `ProgressBar`,
 > `Skeleton`, `Toast`/`Toaster`, `Banner`, `Dialog`, `Tooltip`, and
 > `AnimatedIcon` (which brought a new `Icon` component along with it, as its
-> own public component) shipped — `Status Page` skipped for now. Tier 5
+> own public component) and `StatusPage` shipped — Tier 4 complete. Tier 5
 > Advanced Controls fully ported: `Dropdown`, `Slider`, `SpinButton`,
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
@@ -1662,6 +1662,56 @@ whenever the children have no cross-size of their own — the line collapses to
 zero height before `alignItems` gets to stretch anything into it. Caught
 on-device; it's a no-op in the ordinary case where the container hugs its
 content rather than having a fixed height.
+
+### StatusPage
+
+```tsx
+import { StatusPage } from '@gnome-ui/react-native';
+
+<StatusPage
+  icon={StarOutline}
+  title="No favorites yet"
+  description="Packages you star will show up here."
+>
+  <Button variant="suggested" onPress={onAdd}>Add a package</Button>
+</StatusPage>
+
+// For sidebars, popovers, and small panels
+<StatusPage compact icon={Search} title="No results" />
+```
+
+Empty-state / status page following the Adwaita `AdwStatusPage` pattern —
+mirrors `@gnome-ui/react`'s `StatusPage`. Use it to fill a view with no
+content yet, an error state, or a completion confirmation. Always explain
+*why* the view is empty and *what the user can do* about it; don't use it
+for loading states, where `Spinner` or `ProgressBar` belong instead.
+`compact` scales padding, icon size, title variant, description
+variant/measure and both action-area gaps down together.
+
+It centres its content on both axes, but — exactly as in the web version —
+the vertical centring only does anything once a parent gives it height: put
+it in a `flex: 1` container to fill the view.
+
+The title renders through this package's `Text` at `variant="title-1"`
+(`"title-4"` when `compact`), so it also picks up `Text`'s automatic
+`header` accessibility role — a deliberate divergence from the web
+version's `<p class="title">`. That `<p>` exists because HTML forces you to
+pick a concrete `h1`–`h6` level for a component that can't know where it
+sits in the document outline; RN's `header` role carries no level, so the
+dilemma disappears. On a touch device the rotor is the only structural
+navigation a screen reader user has, which makes the role worth having.
+
+`max-width: 36ch` on the description has no RN unit to port to. `ch` is the
+advance width of "0", ≈ 0.5em in the sans faces Adwaita uses, so the cap is
+resolved against the description's own font size — 288 dp at body size, 216
+dp at caption size — keeping the measure font-relative the way the CSS is,
+rather than freezing one pixel value that `compact` would get wrong. The
+icon is dimmed by its wrapper's opacity (0.55 light / 0.45 dark, the two
+values the web's own `prefers-color-scheme` block hardcodes) and hidden
+from assistive tech with the `accessibilityElementsHidden` +
+`importantForAccessibility="no"` pair used in place of `aria-hidden`. The
+action area is a `WrapBox` rather than a hand-rolled row — `.actions` is a
+centred wrapping flex row with a gap and nothing else.
 
 ## Installation
 

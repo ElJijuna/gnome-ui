@@ -48,6 +48,7 @@ export const COMPONENT_NAMES = [
   'Clamp',
   'Box',
   'WrapBox',
+  'StatusPage',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

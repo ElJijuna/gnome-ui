@@ -43,6 +43,7 @@ import { SkeletonScreen } from './screens/SkeletonScreen';
 import { SliderScreen } from './screens/SliderScreen';
 import { SpinButtonScreen } from './screens/SpinButtonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
+import { StatusPageScreen } from './screens/StatusPageScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
@@ -103,6 +104,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Clamp: ClampScreen,
   Box: BoxScreen,
   WrapBox: WrapBoxScreen,
+  StatusPage: StatusPageScreen,
 };
 
 export interface ComponentScreenProps {

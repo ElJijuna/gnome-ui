@@ -39,6 +39,7 @@ export * from './components/Skeleton';
 export * from './components/Slider';
 export * from './components/SpinButton';
 export * from './components/Spinner';
+export * from './components/StatusPage';
 export * from './components/Switch';
 export * from './components/Tabs';
 export * from './components/Text';

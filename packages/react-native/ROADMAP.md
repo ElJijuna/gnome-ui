@@ -61,7 +61,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | ✅ | SearchBar | |
 | ✅ | PathBar | |
 
-## Tier 4 — Feedback ✅ (9/10, 1 skipped)
+## Tier 4 — Feedback ✅ (10/10)
 
 | Status | Component | Notes |
 |--------|-----------|-------|
@@ -74,7 +74,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | ✅ | Tooltip | |
 | ✅ | AnimatedIcon | Brought `Icon` along as its own public component |
 | ✅ | Icon | Shipped alongside `AnimatedIcon` as its own independently-usable public component — given its own row here since it never had one, not because it shipped separately |
-| 🚫 | StatusPage | Skipped by explicit user request (2026-09-03) |
+| ✅ | StatusPage | Un-skipped and shipped 2026-09-06 — the original skip (2026-09-03) was reversed once [`MyNpmLens`](https://github.com/ElJijuna/MyNpmLens) turned out to depend on it in four places. The title renders as `Text variant="title-1"`, which also gives it the `header` accessibility role, diverging from the web version's `<p class="title">` — that `<p>` exists because HTML forces a concrete `h1`–`h6` level on a component that can't know where it sits in the outline, while RN's `header` role carries no level, so the dilemma disappears. `max-width: 36ch` on the description resolves as 0.5em per `ch` against that variant's own font size (288 dp body / 216 dp caption), keeping the measure font-relative the way the CSS is instead of freezing one pixel value that `compact` would get wrong. The action area is a `WrapBox` (Tier 7) rather than a hand-rolled row — `.actions` is a centred wrapping flex row with a gap and nothing else, which is precisely what that component already is |
 
 ## Tier 5 — Advanced Controls ✅ (6/6)
 
@@ -158,7 +158,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | ⬜ | **TabBar `inline` prop** | Trivial — drop the header-bar background color |
 | ⬜ | **SearchBar `inline` prop** | Trivial, same as above |
 | ⬜ | **SearchBar autocomplete** | Blocked on nothing now that `Popover` shipped (Tier 5) — reuses its positioning instead of the web version's own `Popover` |
-| 🚫 | **StatusPage `compact` prop** | N/A — `StatusPage` itself is skipped in this package |
+| ✅ | **StatusPage `compact` prop** | Shipped with `StatusPage` itself (Tier 4) — padding, icon size, title variant, description variant/measure, and both action-area gaps all scale together, matching the web's `.compact` block value for value |
 
 ---
 
@@ -290,8 +290,9 @@ is a concrete consuming app that needs charts on mobile.
 components (`DashboardGrid`, `StatCard`, `ProgressCard`, `ActivityFeed`,
 `QuickActions`, `SectionHeader`, `EmptyState`, `StatusIndicator`,
 `ErrorState`), out of this package's scope. `EmptyState`/`ErrorState`
-specifically would be near-trivial `StatusPage`-shaped compositions if
-`StatusPage` itself weren't already skipped in this package.
+specifically are now near-trivial compositions of the shipped `StatusPage`
+(Tier 4) — worth revisiting if a consuming app wants them as named
+components rather than as two-line `StatusPage` usages.
 
 ## Tier 20 — Atomic & Molecular Gaps
 
