@@ -23,7 +23,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
-> `Clamp` (Tier 6), `Box` (Tier 20), and `WrapBox` (Tier 7) also shipped. Component ports from
+> `Clamp` (Tier 6), `Box` (Tier 20), and `WrapBox`/`ToggleGroup` (Tier 7)
+> also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1712,6 +1713,63 @@ from assistive tech with the `accessibilityElementsHidden` +
 `importantForAccessibility="no"` pair used in place of `aria-hidden`. The
 action area is a `WrapBox` rather than a hand-rolled row — `.actions` is a
 centred wrapping flex row with a gap and nothing else.
+
+### ToggleGroup / ToggleGroupItem
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from '@gnome-ui/react-native';
+
+const [align, setAlign] = useState('left');
+
+<ToggleGroup value={align} onValueChange={setAlign} accessibilityLabel="Alignment">
+  <ToggleGroupItem name="left" icon={FormatJustifyLeft} accessibilityLabel="Left" />
+  <ToggleGroupItem name="center" icon={FormatJustifyCenter} accessibilityLabel="Center" />
+  <ToggleGroupItem name="right" icon={FormatJustifyRight} accessibilityLabel="Right" />
+</ToggleGroup>
+
+// Items can be icon-only, label-only, or icon + label
+<ToggleGroupItem name="grid" icon={Applications} label="Grid" />
+```
+
+Mutually-exclusive group of toggle buttons for in-place option selection —
+mirrors `AdwToggleGroup` (libadwaita 1.7 / GNOME 48) and
+`@gnome-ui/react`'s own `ToggleGroup`. Use it for formatting controls,
+view-mode selectors and toolbar options, wherever a `ViewSwitcher` would be
+too heavy or doesn't belong in a `HeaderBar`. For icon-only items always
+pass an `accessibilityLabel`.
+
+The context and its `value`/`onValueChange` shape port 1:1 — pure React. The
+keyboard layer doesn't: the web version owns an `onKeyDown` implementing
+← / → cycling and Home / End jumps over a roving `tabIndex`, none of which
+has a touch counterpart, so it drops per this package's standing convention
+(set by `ViewSwitcher` and `TabBar`). The `radiogroup`/`radio` + `checked`
+pairing that VoiceOver and TalkBack actually announce carries the semantics
+instead.
+
+The group sets `accessibilityRole="radiogroup"` but deliberately **not**
+`accessible` — on iOS, `accessible` on a container collapses the whole
+subtree into a single accessibility element, which would make the individual
+toggles unreachable for VoiceOver. Without it the role still groups on
+Android while every item stays focusable on its own.
+
+Three `color-mix(in srgb, accent N%, transparent)` values resolve to 8-digit
+`#RRGGBBAA` hexes off `theme.accentBgColor` (the `Chip` precedent for the
+same selected-tint problem), so the tint follows the app's configurable
+accent color. The CSS paints its active ring as an `inset` box-shadow, which
+RN has no equivalent for — it becomes a real `borderWidth: 1` that every
+item carries at all times (transparent when inactive) so selecting one never
+shifts the row's layout, the substitution `AvatarGroup` already made for its
+own ring. `box-shadow: var(--gnome-shadow-sm)` on the group is dropped
+rather than approximated: the theme generator keeps shadow tokens in `raw`
+only, and `Card` already established that a border carries the same
+separation here. `:hover` collapses away and `:active` maps to `Pressable`'s
+`pressed` using `theme.activeOverlay`, whose light/dark values match the
+CSS's own `:active` colors exactly.
+
+The icon keeps the default foreground color instead of tracking the active
+accent text — `Icon` has no `currentColor` equivalent and its `color` prop
+is a fixed GNOME palette with no `accent` member, which couldn't follow a
+configurable accent anyway. Same call, same reason, as `Chip`.
 
 ## Installation
 

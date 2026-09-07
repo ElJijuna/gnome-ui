@@ -55,6 +55,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Box: 'Flex layout primitive — orientation, HIG spacing scale, align, justify',
   WrapBox: 'Wrapping row — items reflow onto new lines, separate child/line gaps',
   StatusPage: 'Empty state — big icon, title, description, and a way forward',
+  ToggleGroup: 'Mutually-exclusive toggle buttons — icon, label, or both',
 };
 
 export interface HomeScreenProps {

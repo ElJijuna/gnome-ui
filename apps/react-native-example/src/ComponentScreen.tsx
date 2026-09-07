@@ -49,6 +49,7 @@ import { TabsScreen } from './screens/TabsScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
 import { ToastScreen } from './screens/ToastScreen';
+import { ToggleGroupScreen } from './screens/ToggleGroupScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
 import { WrapBoxScreen } from './screens/WrapBoxScreen';
@@ -105,6 +106,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Box: BoxScreen,
   WrapBox: WrapBoxScreen,
   StatusPage: StatusPageScreen,
+  ToggleGroup: ToggleGroupScreen,
 };
 
 export interface ComponentScreenProps {

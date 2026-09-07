@@ -106,7 +106,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **ToggleGroup** | Directly portable — `Pressable` row, same selection-state shape as `RadioButton`/`ViewSwitcher` |
+| ✅ | **ToggleGroup** | Shipped with `ToggleGroupItem` — context + `value`/`onValueChange` port 1:1 (pure React), while the web's `onKeyDown` ←/→/Home/End roving-`tabIndex` layer drops per this package's standing touch-first convention. The three `color-mix(accent N%, transparent)` values resolve to 8-digit `#RRGGBBAA` hexes off `theme.accentBgColor` (`Chip`'s precedent, and the same selected-tint problem), the `inset` box-shadow ring becomes a real `borderWidth: 1` every item carries at all times so selection never shifts layout (`AvatarGroup`'s precedent), and `box-shadow: shadow-sm` drops entirely — the theme generator keeps shadows in `raw` only and `Card` already settled that a border does this job on RN. **The group sets `accessibilityRole="radiogroup"` but deliberately not `accessible`**: on iOS `accessible` on a container collapses the subtree into one element and would make the toggles unreachable for VoiceOver. Unblocks `InlineViewSwitcher` (Tier 8) |
 | ✅ | **WrapBox** | Shipped — `flexDirection: 'row'` + `flexWrap`, with the CSS shorthand `gap: <row> <column>` split into RN's separate `rowGap`/`columnGap` (the single `gap` property sets both, which is exactly what `childSpacing`-vs-`lineSpacing` has to be able to avoid). The web version's `--wrapbox-*` CSS custom properties have nothing to port to — that indirection only exists because a CSS module can't take runtime values; here the values go straight onto the style object. Reuses `Box`'s `start`/`end` → `flex-start`/`flex-end` mapping, duplicated rather than shared: two small pure lookups, and `WrapBoxAlign` is deliberately narrower than `BoxAlign` (no `baseline`), mirroring the web package's own two separate types. Unblocks `TagInput` (Tier 20) now that `Chip` has also shipped. **Real bug found by the on-device screenshot check**: `align="stretch"` rendered nothing at all, because CSS defaults `align-content` to `stretch` while Yoga defaults it to `flex-start` — with `flexWrap` on and children carrying no cross-size of their own, the line collapsed to zero height before `alignItems` could stretch anything into it. Fixed by setting `alignContent: 'stretch'` explicitly (a no-op whenever the container hugs its content, which is the ordinary case); neither package exposes an `alignContent` prop, so this is restoring the web default rather than adding API |
 | ✅ | **Chip** | Shipped — selected background/border tint resolves to a literal 8-digit `#RRGGBBAA` hex (the `Highlight` precedent); `:hover`/`:active` collapse into one pressed-overlay tint (the `ActionRow`/`Card` recipe); leading/remove icons stay in the default foreground color rather than tracking the selected accent text, since `Icon` has no `currentColor` equivalent. Prerequisite for `TagInput` (Tier 20) |
 | 🚫 | **ShortcutsDialog** | No keyboard shortcuts exist to list on a touch-first device — low value, not planned unless a specific need arises |
@@ -154,7 +154,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **InlineViewSwitcher** | Directly portable once `ToggleGroup` ships — built on its internals in the web version too |
+| ⬜ | **InlineViewSwitcher** | Unblocked — `ToggleGroup` (Tier 7) has now shipped, and the web version builds this directly on its internals |
 | ⬜ | **TabBar `inline` prop** | Trivial — drop the header-bar background color |
 | ⬜ | **SearchBar `inline` prop** | Trivial, same as above |
 | ⬜ | **SearchBar autocomplete** | Blocked on nothing now that `Popover` shipped (Tier 5) — reuses its positioning instead of the web version's own `Popover` |
@@ -455,12 +455,19 @@ package.
   own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
   `ViewSwitcherBar`.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
-  Tier 7's remaining `ToggleGroup`; Tier 8's `Toolbar`/`Spacer`/
+  Tier 8's `InlineViewSwitcher`/`Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster
   (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, once
   `Calendar` exists for the first two).
+- **Open follow-up (`ViewSwitcher`, found 2026-09-06 while building
+  `ToggleGroup`)**: `ViewSwitcher`'s container sets `accessible` alongside
+  `accessibilityRole="radiogroup"`. On iOS that collapses the whole subtree
+  into a single accessibility element, which would leave its individual
+  `ViewSwitcherItem`s unreachable to VoiceOver. `ToggleGroup` deliberately
+  omits `accessible` for that reason. Not changed in `ViewSwitcher` as part
+  of that turn — needs its own on-device VoiceOver check first.
 - **Whole-package deferrals**: `@gnome-ui/charts`, `@gnome-ui/platform`,
   `@gnome-ui/hooks`, `@gnome-ui/layout`'s components, `ContributionGraph`,
   `ColumnView` — each is its own initiative, not a single-component turn.

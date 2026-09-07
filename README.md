@@ -206,7 +206,7 @@ from those two files — edit them, not this table, then run
 | `Timeline` | Ordered sequence of events connected by a visual timeline. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
 | `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
 | `Toast` | Non-blocking temporary notification following the Adwaita `AdwToast` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-toast--docs) |
-| `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |
+| `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |
 | `Toolbar` | Horizontal action bar following the libadwaita `.toolbar` pattern. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spacer--docs) |
 | `ToolbarView` | Layout container that attaches bars at the top and/or bottom while scrolling only the middle content. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-toolbarview--docs) |
 | `Tooltip` | Informational floating label following the GNOME HIG tooltip pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-tooltip--docs) |

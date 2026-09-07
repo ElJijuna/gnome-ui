@@ -45,6 +45,7 @@ export * from './components/Tabs';
 export * from './components/Text';
 export * from './components/TextField';
 export * from './components/Toast';
+export * from './components/ToggleGroup';
 export * from './components/Tooltip';
 export * from './components/ViewSwitcher';
 export * from './components/WrapBox';

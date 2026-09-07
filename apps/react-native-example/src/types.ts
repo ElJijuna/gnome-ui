@@ -49,6 +49,7 @@ export const COMPONENT_NAMES = [
   'Box',
   'WrapBox',
   'StatusPage',
+  'ToggleGroup',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
