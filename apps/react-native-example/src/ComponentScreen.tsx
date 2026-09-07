@@ -50,6 +50,7 @@ import { TextScreen } from './screens/TextScreen';
 import { ToastScreen } from './screens/ToastScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
+import { WrapBoxScreen } from './screens/WrapBoxScreen';
 import type { ComponentName } from './types';
 
 const SCREENS: Record<ComponentName, ComponentType> = {
@@ -101,6 +102,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   CoachMark: CoachMarkScreen,
   Clamp: ClampScreen,
   Box: BoxScreen,
+  WrapBox: WrapBoxScreen,
 };
 
 export interface ComponentScreenProps {

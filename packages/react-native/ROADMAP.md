@@ -107,7 +107,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ⬜ | **ToggleGroup** | Directly portable — `Pressable` row, same selection-state shape as `RadioButton`/`ViewSwitcher` |
-| ⬜ | **WrapBox** | Directly portable — plain `flexWrap: 'wrap'` container. Prerequisite for `TagInput` (Tier 20) |
+| ✅ | **WrapBox** | Shipped — `flexDirection: 'row'` + `flexWrap`, with the CSS shorthand `gap: <row> <column>` split into RN's separate `rowGap`/`columnGap` (the single `gap` property sets both, which is exactly what `childSpacing`-vs-`lineSpacing` has to be able to avoid). The web version's `--wrapbox-*` CSS custom properties have nothing to port to — that indirection only exists because a CSS module can't take runtime values; here the values go straight onto the style object. Reuses `Box`'s `start`/`end` → `flex-start`/`flex-end` mapping, duplicated rather than shared: two small pure lookups, and `WrapBoxAlign` is deliberately narrower than `BoxAlign` (no `baseline`), mirroring the web package's own two separate types. Unblocks `TagInput` (Tier 20) now that `Chip` has also shipped. **Real bug found by the on-device screenshot check**: `align="stretch"` rendered nothing at all, because CSS defaults `align-content` to `stretch` while Yoga defaults it to `flex-start` — with `flexWrap` on and children carrying no cross-size of their own, the line collapsed to zero height before `alignItems` could stretch anything into it. Fixed by setting `alignContent: 'stretch'` explicitly (a no-op whenever the container hugs its content, which is the ordinary case); neither package exposes an `alignContent` prop, so this is restoring the web default rather than adding API |
 | ✅ | **Chip** | Shipped — selected background/border tint resolves to a literal 8-digit `#RRGGBBAA` hex (the `Highlight` precedent); `:hover`/`:active` collapse into one pressed-overlay tint (the `ActionRow`/`Card` recipe); leading/remove icons stay in the default foreground color rather than tracking the selected accent text, since `Icon` has no `currentColor` equivalent. Prerequisite for `TagInput` (Tier 20) |
 | 🚫 | **ShortcutsDialog** | No keyboard shortcuts exist to list on a touch-first device — low value, not planned unless a specific need arises |
 | ⬜ | **Sidebar (v2)** | Rewrite blocked on `useBreakpoint` (Tier 6) — named sections/context menus/tooltip are otherwise straightforward compositions of already-shipped pieces |
@@ -331,7 +331,7 @@ specifically would be near-trivial `StatusPage`-shaped compositions if
 | ⬜ | **DateRangePicker** | `Popover` + `CalendarRange` composition — blocked on `CalendarRange` |
 | ⬜ | **FontPicker** | Unblocked now that `Popover`+`Dropdown`+`SpinButton` all exist — thin glue composition |
 | ⬜ | **EmojiPicker** | Unblocked now that `Popover` exists — needs the same static emoji dataset the web version ships, `ScrollView`+search-filter |
-| ⬜ | **TagInput** | Blocked on `WrapBox` + `Chip` (Tier 7) |
+| ⬜ | **TagInput** | Unblocked — both prerequisites (`WrapBox` + `Chip`, Tier 7) have now shipped |
 | ⬜ | **OtpInput** | Directly portable — N `TextInput` cells, auto-advance via `onChangeText` + `ref.focus()`, no web-only APIs involved |
 | ⬜ | **CopyField** | Blocked on `CopyButton`'s clipboard dependency (Tier 8) |
 | ⬜ | **ChoiceCardGroup** | Directly portable — roving-selection group of `Card`s, same recipe `RadioButton` already established |
@@ -454,7 +454,7 @@ package.
   own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
   `ViewSwitcherBar`.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
-  Tier 7's remaining `ToggleGroup`/`WrapBox`; Tier 8's `Toolbar`/`Spacer`/
+  Tier 7's remaining `ToggleGroup`; Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster

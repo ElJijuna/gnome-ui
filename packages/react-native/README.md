@@ -23,7 +23,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
-> `Clamp` (Tier 6), and `Box` (Tier 20) also shipped. Component ports from
+> `Clamp` (Tier 6), `Box` (Tier 20), and `WrapBox` (Tier 7) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1615,6 +1615,53 @@ to CSS, are mapped internally from their bare `start`/`end` keywords onto
 Yoga's `flex-start`/`flex-end`; the prop values stay the web ones, so the
 API reads identically across both packages. `display: 'flex'` needs no port
 at all — every RN `View` is already a flex container.
+
+### WrapBox
+
+```tsx
+import { WrapBox } from '@gnome-ui/react-native';
+
+// Tag list
+<WrapBox>
+  {tags.map((tag) => <Chip key={tag} label={tag} />)}
+</WrapBox>
+
+// Tight between items, loose between lines
+<WrapBox childSpacing={6} lineSpacing={18} justify="center">
+  {filters.map((filter) => <Chip key={filter} label={filter} />)}
+</WrapBox>
+```
+
+Flexible wrapping layout container — children flow horizontally and wrap to
+new lines when they don't fit, like words in a paragraph, without locking
+them into a grid. Mirrors `AdwWrapBox` (libadwaita 1.7 / GNOME 48) and
+`@gnome-ui/react`'s own `WrapBox`. Pair with `Chip` for tag lists and filter
+rows.
+
+`childSpacing` (default **6**) is the gap between items on a line;
+`lineSpacing` is the gap between lines and falls back to `childSpacing` when
+omitted — passing `0` really means zero, not "fall back". `justify` defaults
+to `"start"` and `align` to `"center"`; `wrapReverse` stacks lines bottom to
+top.
+
+The web version ships its values as CSS custom properties consumed by a
+stylesheet (`--wrapbox-gap`, `--wrapbox-justify`, …) because a CSS module
+can't take runtime values any other way — RN has no such indirection, so
+they're written straight onto the style object. `flex-flow: row wrap`
+becomes `flexDirection: 'row'` + `flexWrap`, and the CSS shorthand
+`gap: <row> <column>` splits into RN's separate `rowGap`/`columnGap`; the
+single `gap` property would set both, which is precisely what this component
+has to be able to avoid. As in `Box`, the spacing props are numbers only
+(dp, not CSS strings) and `align`/`justify` keep the web's bare `start`/`end`
+keywords while mapping internally onto Yoga's `flex-start`/`flex-end`.
+
+`alignContent: 'stretch'` is set explicitly even though neither package
+exposes an `alignContent` prop: **CSS defaults it to `stretch`, Yoga defaults
+it to `flex-start`**, so without it `align="stretch"` silently does nothing
+whenever the children have no cross-size of their own — the line collapses to
+zero height before `alignItems` gets to stretch anything into it. Caught
+on-device; it's a no-op in the ordinary case where the container hugs its
+content rather than having a fixed height.
 
 ## Installation
 
