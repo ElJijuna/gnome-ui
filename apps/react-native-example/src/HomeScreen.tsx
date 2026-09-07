@@ -59,6 +59,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   InlineViewSwitcher: 'Inline switcher — 4 variants, sliding indicator, 4 overflow modes',
   PreferencesGroup: 'Titled settings section — heading, description, header suffix',
   EntryRow: 'Boxed-list row with an inline text field and a floating label',
+  PasswordEntryRow: 'EntryRow that masks its input, with a reveal/conceal toggle',
 };
 
 export interface HomeScreenProps {

@@ -33,6 +33,7 @@ import { InlineViewSwitcherScreen } from './screens/InlineViewSwitcherScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
+import { PasswordEntryRowScreen } from './screens/PasswordEntryRowScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
 import { PopoverScreen } from './screens/PopoverScreen';
 import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
@@ -113,6 +114,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   InlineViewSwitcher: InlineViewSwitcherScreen,
   PreferencesGroup: PreferencesGroupScreen,
   EntryRow: EntryRowScreen,
+  PasswordEntryRow: PasswordEntryRowScreen,
 };
 
 export interface ComponentScreenProps {

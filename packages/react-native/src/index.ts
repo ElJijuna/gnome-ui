@@ -29,6 +29,7 @@ export * from './components/InlineViewSwitcher';
 export * from './components/LevelBar';
 export * from './components/Link';
 export * from './components/Overlay';
+export * from './components/PasswordEntryRow';
 export * from './components/PathBar';
 export * from './components/Popover';
 export * from './components/PreferencesGroup';

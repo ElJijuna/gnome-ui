@@ -25,7 +25,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
-> `EntryRow` (Tier 12) also shipped. Component ports from
+> `EntryRow`/`PasswordEntryRow` (Tier 12) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1921,6 +1921,47 @@ from assistive tech and the `title` becomes the input's `accessibilityLabel`
 loose text next to an unnamed field (pass `accessibilityLabel` to override).
 And `testID` lands on the row rather than the input, matching every other
 component in this package; reach the field itself by its accessible name.
+
+### PasswordEntryRow
+
+```tsx
+import { PasswordEntryRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <PasswordEntryRow title="Password" value={password} onValueChange={setPassword} />
+
+  {/* Registration and change-password forms */}
+  <PasswordEntryRow
+    title="New password"
+    value={next}
+    onValueChange={setNext}
+    autoComplete="new-password"
+  />
+</BoxedList>
+```
+
+Password entry row with a built-in reveal/conceal toggle — mirrors
+`AdwPasswordEntryRow` and `@gnome-ui/react`'s own `PasswordEntryRow`. It's an
+`EntryRow` that masks its input and always carries a trailing button to show
+or hide what's been typed, so don't add your own through `trailing` — that
+slot is for anything that should sit *before* the reveal button.
+
+`type={revealed ? 'text' : 'password'}` becomes RN's `secureTextEntry`, and
+`autoComplete` defaults to `"current-password"`, which is what lets password
+managers and the platform keyboard offer a saved credential.
+
+The reveal control is the already-shipped `IconButton` rather than a
+hand-rolled pressable, which costs one visual detail: `IconButton` is
+circular (it's `Button` at `shape="circular"`) where the web's
+`.revealButton` is a 32 dp square with a 6 dp radius. A circular flat icon
+button is the idiomatic touch control and keeps the row consistent with every
+other icon action here. The CSS's resting `opacity: 0.55` is dropped too — it
+exists so the button can brighten on hover, and with no hover on a touch
+device a permanently dimmed control is just harder to see.
+
+The web needs `e.stopPropagation()` so pressing the button doesn't also
+trigger the row's focus-the-input click. RN's responder system routes a touch
+to the innermost pressable, so there's nothing to stop.
 
 ## Installation
 
