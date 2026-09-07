@@ -24,6 +24,7 @@ export * from './components/HeaderBar';
 export * from './components/Highlight';
 export * from './components/Icon';
 export * from './components/IconButton';
+export * from './components/InlineViewSwitcher';
 export * from './components/LevelBar';
 export * from './components/Link';
 export * from './components/Overlay';

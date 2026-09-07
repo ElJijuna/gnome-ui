@@ -28,6 +28,7 @@ import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
 import { IconButtonScreen } from './screens/IconButtonScreen';
 import { IconScreen } from './screens/IconScreen';
+import { InlineViewSwitcherScreen } from './screens/InlineViewSwitcherScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
@@ -107,6 +108,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   WrapBox: WrapBoxScreen,
   StatusPage: StatusPageScreen,
   ToggleGroup: ToggleGroupScreen,
+  InlineViewSwitcher: InlineViewSwitcherScreen,
 };
 
 export interface ComponentScreenProps {

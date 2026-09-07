@@ -154,7 +154,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **InlineViewSwitcher** | Unblocked — `ToggleGroup` (Tier 7) has now shipped, and the web version builds this directly on its internals |
+| ✅ | **InlineViewSwitcher** | Shipped with `InlineViewSwitcherItem` — all four variants (`default`/`flat`/`round`/`pill`) and all four overflow strategies. **Far more than the "directly portable once `ToggleGroup` ships" this row used to claim**: almost none of the mechanism ports. The sliding indicator can't read `offsetLeft`/`offsetWidth`, so each item reports its own `onLayout` up through the context and the indicator animates `translateX` + `width` on **one JS-driven animation** (`useNativeDriver: false` — `width` can't be native-driven and mixing drivers on one component throws; `scaleX` would have been native but distorts the corner radii the variants are defined by). `ResizeObserver` + `scrollWidth` vs `clientWidth` becomes the summed item measurements (RN leaves `flexShrink` at 0, so an overflowing row still reports natural widths) against the row's own `onLayout`, with the web's `naturalWidthRef` capture and 30 px hysteresis ported verbatim. `scroll-snap-align: start` has no RN style but the measured offsets feed `snapToOffsets` exactly. `overflow="menu"` reuses the shipped `BottomSheet`. **Bug found by the on-device screenshot check and fixed rather than ported**: the web applies its `.active` class to the menu trigger even though menu mode hides the indicator, painting `round`'s label in `accent-fg` (#fff) on a plain card — white on white; the RN trigger uses the idle color instead |
 | ⬜ | **TabBar `inline` prop** | Trivial — drop the header-bar background color |
 | ⬜ | **SearchBar `inline` prop** | Trivial, same as above |
 | ⬜ | **SearchBar autocomplete** | Blocked on nothing now that `Popover` shipped (Tier 5) — reuses its positioning instead of the web version's own `Popover` |
@@ -455,7 +455,7 @@ package.
   own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
   `ViewSwitcherBar`.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
-  Tier 8's `InlineViewSwitcher`/`Toolbar`/`Spacer`/
+  Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster

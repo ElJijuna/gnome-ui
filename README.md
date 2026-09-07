@@ -153,7 +153,7 @@ from those two files — edit them, not this table, then run
 | `Highlight` | Wraps every occurrence of `query` within `text` in a `<mark>` element. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-highlight--docs) |
 | `Icon` | Renders an [`@gnome-ui/icons`](https://www.npmjs.com/package/@gnome-ui/icons) definition as an inline SVG. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-icon--docs) |
 | `IconButton` | Icon-only action button composed from `Button`, `Icon`, and optionally `Tooltip`. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-iconbutton--docs) |
-| `InlineViewSwitcher` | Compact inline view switcher for placing inside content areas, cards, or toolbars. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-inlineviewswitcher--docs) |
+| `InlineViewSwitcher` | Compact inline view switcher for placing inside content areas, cards, or toolbars. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-inlineviewswitcher--docs) |
 | `Kbd` | Standalone single key-cap for inline instructional text. | 🚫 | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-kbd--docs) |
 | `LevelBar` | Discrete level indicator with colour-coded low/high offset zones — mirrors `GtkLevelBar`. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-levelbar--docs) |
 | `Link` | Inline hyperlink following GNOME HIG. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-link--docs) |

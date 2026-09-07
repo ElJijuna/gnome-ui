@@ -23,8 +23,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
-> `Clamp` (Tier 6), `Box` (Tier 20), and `WrapBox`/`ToggleGroup` (Tier 7)
-> also shipped. Component ports from
+> `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
+> `InlineViewSwitcher` (Tier 8) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1770,6 +1770,65 @@ The icon keeps the default foreground color instead of tracking the active
 accent text — `Icon` has no `currentColor` equivalent and its `color` prop
 is a fixed GNOME palette with no `accent` member, which couldn't follow a
 configurable accent anyway. Same call, same reason, as `Chip`.
+
+### InlineViewSwitcher / InlineViewSwitcherItem
+
+```tsx
+import { InlineViewSwitcher, InlineViewSwitcherItem } from '@gnome-ui/react-native';
+
+const [view, setView] = useState('grid');
+
+<InlineViewSwitcher value={view} onValueChange={setView} variant="pill">
+  <InlineViewSwitcherItem name="grid" label="Grid" icon={Applications} />
+  <InlineViewSwitcherItem name="list" label="List" icon={ViewSidebar} />
+</InlineViewSwitcher>
+
+// Collapse to a BottomSheet picker when the items stop fitting
+<InlineViewSwitcher value={view} onValueChange={setView} overflow="menu">
+  {/* … */}
+</InlineViewSwitcher>
+```
+
+Compact inline view switcher for content areas, cards and toolbars —
+wherever `ViewSwitcher` (header-bar sized) would be too heavy. Mirrors
+`AdwInlineViewSwitcher` (libadwaita 1.7 / GNOME 48) and `@gnome-ui/react`'s
+own `InlineViewSwitcher`. Four variants — `default` (card surface + border),
+`flat` (indicator only), `round` (pill container, solid accent indicator),
+`pill` (segmented-control look, no accent) — and four overflow strategies:
+`wrap`, `scroll`, `compact`, `menu`.
+
+Almost none of the *mechanism* ports, so this is a rebuild rather than a
+transliteration:
+
+- **The sliding indicator** is measured, not laid out. The web reads the
+  active button's `offsetLeft`/`offsetWidth`; here each item reports its own
+  `onLayout` up through the context and the indicator animates `translateX` +
+  `width` on **one JS-driven animation** (`useNativeDriver: false`). `width`
+  can't be native-driven and mixing a native with a JS value on one component
+  throws — the trade-off `Expander` already accepted for its animated height.
+  `scaleX` would have been native-driveable but distorts the corner radii the
+  variants are defined by. `useReducedMotion()` snaps it into place instead.
+- **Overflow detection** replaces `ResizeObserver` + `scrollWidth` vs
+  `clientWidth` with the item measurements already being collected: their
+  summed natural widths (RN leaves `flexShrink` at 0, so an overflowing row
+  still reports each item at full width) against the row's own `onLayout`.
+  The web's `naturalWidthRef` capture and 30 px hysteresis port verbatim —
+  without them, collapsing the labels shrinks the content and immediately
+  re-expands it.
+- **`overflow="scroll"`** becomes a horizontal `ScrollView` with the
+  scrollbar hidden; `scroll-snap-align: start` has no RN style, but the
+  measured item offsets feed `snapToOffsets`, which reproduces it exactly.
+- **`overflow="menu"`** reuses the already-shipped `BottomSheet`.
+
+The ←/→/Home/End keyboard layer drops as everywhere else here, and — as in
+`ToggleGroup` — the group takes `accessibilityRole="radiogroup"` but
+deliberately not `accessible`, which on iOS would collapse the items into one
+unreachable element.
+
+One divergence is a fix, not a port: the web applies its `.active` class to
+the menu trigger even though menu mode hides the indicator, which paints
+`round`'s trigger label in `accent-fg` (#fff) on a plain card — white on
+white. The RN trigger uses the idle color.
 
 ## Installation
 

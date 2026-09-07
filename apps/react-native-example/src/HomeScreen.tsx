@@ -56,6 +56,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   WrapBox: 'Wrapping row — items reflow onto new lines, separate child/line gaps',
   StatusPage: 'Empty state — big icon, title, description, and a way forward',
   ToggleGroup: 'Mutually-exclusive toggle buttons — icon, label, or both',
+  InlineViewSwitcher: 'Inline switcher — 4 variants, sliding indicator, 4 overflow modes',
 };
 
 export interface HomeScreenProps {
