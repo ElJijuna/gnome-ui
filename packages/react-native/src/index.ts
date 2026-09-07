@@ -14,6 +14,7 @@ export * from './components/Checkbox';
 export * from './components/Chip';
 export * from './components/Clamp';
 export * from './components/CoachMark';
+export * from './components/ColorPicker';
 export * from './components/ComboRow';
 export * from './components/Dialog';
 export * from './components/Divider';

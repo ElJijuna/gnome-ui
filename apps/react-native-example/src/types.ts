@@ -55,6 +55,7 @@ export const COMPONENT_NAMES = [
   'EntryRow',
   'PasswordEntryRow',
   'ComboRow',
+  'ColorPicker',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -18,6 +18,7 @@ import { CheckboxScreen } from './screens/CheckboxScreen';
 import { ChipScreen } from './screens/ChipScreen';
 import { ClampScreen } from './screens/ClampScreen';
 import { CoachMarkScreen } from './screens/CoachMarkScreen';
+import { ColorPickerScreen } from './screens/ColorPickerScreen';
 import { ComboRowScreen } from './screens/ComboRowScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
@@ -117,6 +118,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   EntryRow: EntryRowScreen,
   PasswordEntryRow: PasswordEntryRowScreen,
   ComboRow: ComboRowScreen,
+  ColorPicker: ColorPickerScreen,
 };
 
 export interface ComponentScreenProps {

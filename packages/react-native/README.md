@@ -25,7 +25,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
-> `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12) also shipped. Component ports from
+> `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), and `ColorPicker`
+> (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2001,6 +2002,58 @@ components means the flip-to-fit placement, the tap-outside dismissal and the
 `Dropdown` is controlled-only, so the uncontrolled state lives in `ComboRow`
 — same behaviour as the web version, one level up. The keyboard layer drops
 as it does everywhere else here.
+
+### ColorPicker / ColorSwatch
+
+```tsx
+import { ColorPicker, ColorSwatch, GNOME_PALETTE } from '@gnome-ui/react-native';
+
+const [color, setColor] = useState('#3584e4');
+
+<ColorPicker value={color} onChange={setColor} />
+
+// Custom colors, with your own picker behind the "+"
+<ColorPicker
+  value={color}
+  onChange={setColor}
+  allowCustom
+  onRequestCustom={() => setPickerOpen(true)}
+/>
+```
+
+Color palette picker following the Adwaita `GtkColorButton` + swatch pattern
+— mirrors `@gnome-ui/react`'s own `ColorPicker`. Renders a wrapping row of
+circular `ColorSwatch` items backed by a radio group, defaulting to
+`GNOME_PALETTE` (the 9 Adwaita named colors, the same set `Avatar` uses).
+`ColorSwatch` is exported for standalone use; sizes are **22 / 30 / 38 dp**.
+
+**`allowCustom` is the one prop that changes meaning.** On the web it wires a
+hidden `<input type="color">` and the browser supplies the whole picker UI;
+RN has no such control, and an HSV picker is a component in its own right
+rather than a detail of this one. So the prop keeps its *visible* behaviour —
+the "+" button, and a `value` outside the palette shown as its own selected
+swatch — while the press is handed to a new **`onRequestCustom`** callback
+for your app to answer with whatever picker it has. The result round-trips
+through `value`/`onChange` exactly as before.
+
+The web's three `box-shadow` rings collapse into real box-model pieces, since
+RN gives a `View` one border: the resting `inset 0 0 0 1px` hairline becomes
+`borderWidth: 1`, the selected `inset 0 0 0 2px rgb(255 255 255 / .9)`
+becomes a 2 dp white border, and the outer `0 0 0 2px var(--swatch-color)`
+becomes a wrapper painted in the swatch color. That wrapper is **always**
+rendered with the same 2 dp padding and only changes color: a box-shadow ring
+costs no layout space on the web while a real padded wrapper does, so
+reserving it unconditionally is what keeps the row from reflowing as the
+selection moves.
+
+`filter: drop-shadow(...)` on the checkmark has no RN counterpart, so the
+path is drawn twice — a translucent black copy offset 1 dp down, then the
+white one on top. That's what the filter renders, and it's why it exists:
+without it the check disappears on the yellow swatch. The checkmark is
+hand-drawn with `react-native-svg` rather than taken from `@gnome-ui/icons`,
+mirroring the web version, which hand-draws it too — it's a stroked path, and
+`Icon`'s palette has no white to give it. The container is a `WrapBox`, and
+the "+" button's `border: 1.5px dashed` ports directly.
 
 ## Installation
 
