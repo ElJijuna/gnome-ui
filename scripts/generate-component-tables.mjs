@@ -253,7 +253,10 @@ const crossPackageStatus = {
 
 for (const packageId of PACKAGES) {
   const crossPackageColumns = packageId === 'react';
-  const entries = buildComponentEntries(packageId, crossPackageColumns ? crossPackageStatus : undefined);
+  const entries = buildComponentEntries(
+    packageId,
+    crossPackageColumns ? crossPackageStatus : undefined,
+  );
 
   generated = updateSection(generated, packageId, renderTable(entries, { crossPackageColumns }));
 }

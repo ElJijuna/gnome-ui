@@ -118,7 +118,7 @@ from those two files — edit them, not this table, then run
 | `CheckRow` | Activatable row with an integrated checkbox. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-checkrow--docs) |
 | `Chip` | Compact pill-shaped label for tags, filters, and selection states. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-chip--docs) |
 | `ChoiceCardGroup` | Card-based single-choice selector — large selectable cards instead of radio buttons. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-choicecardgroup--docs) |
-| `Clamp` | Constrains its child to a maximum width while allowing it to shrink freely on narrow screens — mirroring the Adwaita `AdwClamp` widget. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-clamp--docs) |
+| `Clamp` | Constrains its child to a maximum width while allowing it to shrink freely on narrow screens — mirroring the Adwaita `AdwClamp` widget. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-clamp--docs) |
 | `CoachMark` | Onboarding **feature-discovery** pattern: spotlight a UI element and anchor a callout bubble (title, description, actions) beside it to teach a user one feature. Compose several with `CoachMarkTour`, or drive a single mark with `open`. | ✅ | — | [Docs](https://gnome-ui.org/react/) |
 | `CodeBlock` | Static monospace code/config snippet display with optional line numbers and a trailing `CopyButton`. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-codeblock--docs) |
 | `ColorPicker` | Color palette picker following the Adwaita `GtkColorButton` + swatch pattern. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-colorpicker--docs) |

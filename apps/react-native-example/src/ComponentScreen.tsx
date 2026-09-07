@@ -15,6 +15,7 @@ import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
 import { ChipScreen } from './screens/ChipScreen';
+import { ClampScreen } from './screens/ClampScreen';
 import { CoachMarkScreen } from './screens/CoachMarkScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
@@ -97,6 +98,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   AvatarGroup: AvatarGroupScreen,
   AvatarRotator: AvatarRotatorScreen,
   CoachMark: CoachMarkScreen,
+  Clamp: ClampScreen,
 };
 
 export interface ComponentScreenProps {

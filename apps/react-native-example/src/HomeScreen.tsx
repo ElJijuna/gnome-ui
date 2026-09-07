@@ -51,6 +51,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   AvatarGroup: 'Overlapping stack of avatars with a "+N" overflow indicator',
   AvatarRotator: 'Single avatar surface that crossfades through multiple image sources',
   CoachMark: 'Spotlight a UI element and anchor a callout bubble beside it',
+  Clamp: 'Caps content at a readable maximum width and centers it',
 };
 
 export interface HomeScreenProps {

@@ -89,7 +89,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 ---
 
-## Tier 6 — Adaptive Layout ⬜ (0/5) — next up
+## Tier 6 — Adaptive Layout ⬜ (1/5) — next up
 
 > The real gap: nothing here exists yet, and `Sidebar`'s own adaptive
 > `mode` prop (Tier 11) and `Sidebar` v2 (Tier 7) are both blocked on it.
@@ -97,7 +97,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ⬜ | **`useBreakpoint`** | Needs a from-scratch RN build on `useWindowDimensions` + the same 400/550/860 sp thresholds — no CSS media query to lean on. Highest-priority item in this file: unblocks `Sidebar`'s `mode` prop, `Sidebar` v2, `ViewSwitcherSidebar`, and `BreakpointBin` |
-| ⬜ | **Clamp** | Trivial once started — `maxWidth` + `alignSelf: 'center'`, no breakpoint dependency |
+| ✅ | **Clamp** | Shipped — `maxWidth` + `alignSelf: 'center'` (not `marginHorizontal: 'auto'`, following `Drawer`'s own resolution when RN auto-margin support was left unverified for this Yoga version); the trade-off is that `Clamp` needs a column-direction parent, since `alignSelf` acts on the cross axis. `tighteningThreshold` is implemented as a real percentage width rather than ported as-is: `@gnome-ui/react` declares and documents the prop but never passes it to the DOM, so mirroring it 1:1 would have shipped a dead prop |
 | ⬜ | **NavigationSplitView** | Two-pane sidebar+content that collapses to one pane at ≤ 400 sp — blocked on `useBreakpoint` |
 | ⬜ | **OverlaySplitView** | Sidebar becomes a slide-over `Modal` at ≤ 400 sp — blocked on `useBreakpoint`; the slide-over itself reuses `Popover`/`Dropdown`'s `Modal` + reduced-motion fade recipe |
 | ⬜ | **ViewSwitcherBar** | Bottom bar replacing header-bar `ViewSwitcher` at ≤ 550 sp — blocked on `useBreakpoint` |
@@ -447,10 +447,12 @@ package.
   now confirmed to reliably surface real gaps twice in a row — worth
   re-running after any batch of upstream `@gnome-ui/react` additions, not
   just once.
-- **Next real gap**: Tier 6 (`useBreakpoint` first — it unblocks the most
-  downstream items: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`,
-  `Sidebar`'s own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
-  `ViewSwitcherBar`).
+- **Next real gap**: the rest of Tier 6 — `Clamp` shipped (2026-09-06), the
+  one member with no breakpoint dependency, so `useBreakpoint` is now the
+  only thing standing between this package and every remaining adaptive
+  item: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`, `Sidebar`'s
+  own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
+  `ViewSwitcherBar`.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
   Tier 7's remaining `ToggleGroup`/`WrapBox`; Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;

@@ -22,8 +22,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Avatar`, `Badge`, and `Popover`. Beyond Tier 5, `BottomSheet` (Tier 14)
 > and `Overlay`/`LevelBar`/`Expander`/`Divider`/`Highlight`/`FileTypeIcon`/
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
-> (Tier 20), `Chip` (Tier 7), and `IconButton`/`Drawer` (Tier 8/Tier 20)
-> also shipped. Component ports from
+> (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
+> `Clamp` (Tier 6) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1539,6 +1539,43 @@ always-centered arrow). No focus trap and no scroll/resize
 re-positioning, the same established gaps for a transient RN floating
 element. `CoachMarkTour` is pure state orchestration on top of
 `CoachMark`, ported verbatim.
+
+### Clamp
+
+```tsx
+import { Clamp } from '@gnome-ui/react-native';
+
+<Clamp>
+  <BoxedList>{/* … */}</BoxedList>
+</Clamp>
+
+<Clamp maximumSize={480} tighteningThreshold={0.9}>
+  <Text>Never wider than 480 dp, and never edge-to-edge below it</Text>
+</Clamp>
+```
+
+Constrains its children to a maximum width while letting them shrink freely
+— mirrors `@gnome-ui/react`'s `Clamp` and the Adwaita `AdwClamp` widget. Use
+it on settings pages and forms so content never becomes too wide to read
+comfortably on a tablet or a landscape phone, while still filling the width
+on a narrow one. `maximumSize` defaults to **600** (the Adwaita recommended
+narrow-content width) and is in density-independent pixels, not CSS px.
+Adds no padding of its own.
+
+The web version's `margin-inline: auto` centering becomes
+`alignSelf: 'center'` rather than `marginHorizontal: 'auto'` — RN
+auto-margin support was left unverified for this Yoga version back when
+`Drawer` needed the same trick, so this follows `Drawer`'s resolution of
+using flex alignment instead. The one consequence is that `Clamp` expects a
+column-direction parent (RN's default): `alignSelf` acts on the cross axis,
+so inside a `flexDirection: 'row'` parent it would centre vertically. Wrap
+it in a plain `View` there.
+
+`tighteningThreshold` is a real percentage width here, unlike in
+`@gnome-ui/react`, where the prop is declared and documented but never
+reaches the DOM — implementing it exactly as that package documents it (a
+fraction of the available width, still capped by `maximumSize`) costs
+nothing on RN and avoids shipping a dead prop.
 
 ## Installation
 
