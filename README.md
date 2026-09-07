@@ -139,7 +139,7 @@ from those two files — edit them, not this table, then run
 | `Drawer` | Slide-over panel for supplementary React content. Use `side` to open from the left or right, `size` for classic or wide widths, and pass the body through `children` or the `content` prop. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-drawer--docs) |
 | `Dropdown` | Expandable option list following the Adwaita combo-row / drop-down style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-dropdown--docs) |
 | `EmojiPicker` | Searchable emoji grid in a `Popover`. Mirrors `GtkEmojiChooser`. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-emojipicker--docs) |
-| `EntryRow` | Row with an inline text entry field. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-entryrow--docs) |
+| `EntryRow` | Row with an inline text entry field. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-entryrow--docs) |
 | `Expander` | Standalone disclosure triangle + collapsible content — mirrors `GtkExpander`. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-expander--docs) |
 | `ExpanderRow` | Collapsible `ActionRow` that reveals nested rows on activation. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-expanderrow--docs) |
 | `FieldGroup` | Generic form-field grouping with a shared label, help text, and error message, for arbitrary fields outside a `BoxedList`. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-fieldgroup--docs) |

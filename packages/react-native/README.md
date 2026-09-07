@@ -24,8 +24,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `SegmentedBar`/`AvatarGroup`/`AvatarRotator`/`CoachMark`/`CoachMarkTour`
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
-> `InlineViewSwitcher` (Tier 8), and `PreferencesGroup` (Tier 13) also
-> shipped. Component ports from
+> `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
+> `EntryRow` (Tier 12) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -1867,6 +1867,60 @@ screen reader rotor should list — the same call `StatusPage` makes for its
 own title. `min-width: 0` on the header text has no port and needs none: it's
 the classic CSS flexbox override for a min-content floor Yoga doesn't apply
 in the first place.
+
+### EntryRow
+
+```tsx
+import { EntryRow } from '@gnome-ui/react-native';
+
+const [name, setName] = useState('');
+
+<BoxedList>
+  <EntryRow title="Display name" value={name} onValueChange={setName} />
+  <EntryRow
+    title="Email"
+    value={email}
+    onValueChange={setEmail}
+    keyboardType="email-address"
+    leading={<Icon icon={MailRead} />}
+    trailing={<IconButton icon={Delete} label="Clear" onPress={() => setEmail('')} />}
+  />
+</BoxedList>
+```
+
+Row with an inline text entry field — mirrors `AdwEntryRow` and
+`@gnome-ui/react`'s own `EntryRow`. The `title` rises above the input as a
+small label once the field is focused or has content, and stands in for the
+placeholder until then. Use it inside a `BoxedList` for settings that take
+free-form text. Controlled (`value`) and uncontrolled (`defaultValue`) modes
+both work, and every remaining `TextInput` prop passes through.
+
+The float is one JS-driven `Animated.Value` (`useNativeDriver: false`):
+`fontSize` is part of the transition and can't be native-driven, and mixing a
+native with a JS value on one component throws — the same trade-off
+`Expander` and `InlineViewSwitcher` already accepted. `useReducedMotion()`
+snaps between the two states instead.
+
+**The label's travel is measured, not hardcoded.** The web expresses the
+resting position as `top: 50%; transform: translateY(-50%)` and the floated
+one as `top: 6px`, but RN can't interpolate between a percentage and a fixed
+offset — so the field reports its own height through `onLayout` and the
+distance is derived from it, which also keeps the label centred if you make
+the row taller than the 56 dp minimum.
+
+The `:focus` inset ring is dropped rather than approximated. `TextField`'s
+own precedent — recolor the border on focus — doesn't transfer, because an
+`EntryRow` has no border of its own: it's a row inside a `BoxedList`, and
+adding one would shift the list's geometry. On a touch device the state is
+already unmistakable: the label floats up, the text fades in, and the
+keyboard opens.
+
+Two deliberate divergences from the web version. The visible label is hidden
+from assistive tech and the `title` becomes the input's `accessibilityLabel`
+— RN has no `<label htmlFor>`, so otherwise the label would be announced as
+loose text next to an unnamed field (pass `accessibilityLabel` to override).
+And `testID` lands on the row rather than the input, matching every other
+component in this package; reach the field itself by its accessible name.
 
 ## Installation
 

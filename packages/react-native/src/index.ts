@@ -18,6 +18,7 @@ export * from './components/Dialog';
 export * from './components/Divider';
 export * from './components/Drawer';
 export * from './components/Dropdown';
+export * from './components/EntryRow';
 export * from './components/Expander';
 export * from './components/FileTypeIcon';
 export * from './components/HeaderBar';

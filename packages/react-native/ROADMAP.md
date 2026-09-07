@@ -196,8 +196,8 @@ make one worth building.
 | ⬜ | **SwitchRow** | `ActionRow` + `Switch` as the end widget |
 | ⬜ | **CheckRow** | Missing from this file's original pass, added retroactively. `ActionRow` + `Checkbox` as the end widget — same recipe as `SwitchRow`, both building blocks already shipped (Tier 1/Tier 2) |
 | ⬜ | **ComboRow** | `ActionRow` + `Dropdown` |
-| ⬜ | **EntryRow** | `ActionRow` with the subtitle area replaced by a `TextField` |
-| ⬜ | **PasswordEntryRow** | `EntryRow` + a reveal-icon toggle, same recipe `PasswordField` (Tier 20) will need |
+| ✅ | **EntryRow** | Shipped — built directly on `TextInput`, not on `ActionRow`+`TextField` as this row predicted: the floating label *is* the row's title, so there's no subtitle slot to replace and no second bordered field to nest. The float is one JS-driven `Animated.Value` (`fontSize` is part of the transition and can't be native-driven), and **the label's travel is measured rather than hardcoded** — RN can't interpolate between the web's `top: 50%` resting position and its `top: 6px` floated one, so the field reports its own height through `onLayout` and the distance is derived, which also keeps the label centred if a consumer makes the row taller than 56 dp. The `:focus` inset ring is dropped: `TextField`'s recolor-the-border precedent doesn't transfer, since an `EntryRow` has no border of its own and adding one would shift the `BoxedList`'s geometry — on touch the state is unmistakable anyway (label floats, text fades in, keyboard opens). Two deliberate divergences: the visible label is hidden from assistive tech and `title` becomes the input's `accessibilityLabel` (RN has no `<label htmlFor>`, so otherwise the label reads as loose text beside an unnamed field), and `testID` lands on the row rather than the input, matching every other component here. Unblocks `PasswordEntryRow` |
+| ⬜ | **PasswordEntryRow** | Unblocked — `EntryRow` has now shipped; this is it plus a reveal-icon toggle in the `trailing` slot, the same recipe `PasswordField` (Tier 20) will need |
 | ⬜ | **SpinRow** | `ActionRow` + `SpinButton` |
 
 ## Tier 13 — Preferences UI

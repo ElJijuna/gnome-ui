@@ -58,6 +58,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ToggleGroup: 'Mutually-exclusive toggle buttons — icon, label, or both',
   InlineViewSwitcher: 'Inline switcher — 4 variants, sliding indicator, 4 overflow modes',
   PreferencesGroup: 'Titled settings section — heading, description, header suffix',
+  EntryRow: 'Boxed-list row with an inline text field and a floating label',
 };
 
 export interface HomeScreenProps {

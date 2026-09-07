@@ -22,6 +22,7 @@ import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
 import { DrawerScreen } from './screens/DrawerScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
+import { EntryRowScreen } from './screens/EntryRowScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
@@ -111,6 +112,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ToggleGroup: ToggleGroupScreen,
   InlineViewSwitcher: InlineViewSwitcherScreen,
   PreferencesGroup: PreferencesGroupScreen,
+  EntryRow: EntryRowScreen,
 };
 
 export interface ComponentScreenProps {
