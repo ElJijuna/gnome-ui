@@ -1,3 +1,23 @@
+## [@gnome-ui/react-native-v1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.5.0...@gnome-ui/react-native@1.6.0) (2026-09-07)
+
+### Features
+
+* **@gnome-ui/react-native:** add AvatarGroup component with overflow indicator and update documentation ([c37d614](https://github.com/ElJijuna/gnome-ui/commit/c37d6147870d1e1365a806908020911c5fc63775))
+* **@gnome-ui/react-native:** add AvatarRotator component with crossfade functionality and update documentation ([5c75352](https://github.com/ElJijuna/gnome-ui/commit/5c7535253f1c274b58b48eb45e63d66adcaff75a))
+* **@gnome-ui/react-native:** add Box component for flexible layout with spacing and alignment options ([2566c8b](https://github.com/ElJijuna/gnome-ui/commit/2566c8b478e2dc3c77efae06817608c55150cdd8))
+* **@gnome-ui/react-native:** add Clamp component for adaptive layout with maximum width control ([6ff6b34](https://github.com/ElJijuna/gnome-ui/commit/6ff6b34b50bd31a237b1572ae7d99f01119839fc))
+* **@gnome-ui/react-native:** add CoachMark and CoachMarkTour components for onboarding experience ([5a42463](https://github.com/ElJijuna/gnome-ui/commit/5a4246356d77dd70912671d3aef1c20787ce5864))
+* **@gnome-ui/react-native:** add InlineViewSwitcher and InlineViewSwitcherItem components with variants and overflow strategies, update documentation and tests ([7cafb60](https://github.com/ElJijuna/gnome-ui/commit/7cafb60a3267bb87bb8be36699a1813341cfb18c))
+* **@gnome-ui/react-native:** add PreferencesGroup component with layout and documentation, update tests and roadmap ([f939516](https://github.com/ElJijuna/gnome-ui/commit/f9395160813fcf546a88689f0d4fe0f40e573d8a))
+* **@gnome-ui/react-native:** add StatusPage component for empty-state handling and update documentation ([fe4e3ce](https://github.com/ElJijuna/gnome-ui/commit/fe4e3ce77d5c8c9d7fabc83e48b2d7092afcd4b4))
+* **@gnome-ui/react-native:** add ToggleGroup and ToggleGroupItem components with documentation and tests ([561fe06](https://github.com/ElJijuna/gnome-ui/commit/561fe0630fd26e2022a41fd530a865e15a4dded5))
+* **@gnome-ui/react-native:** add WrapBox component for flexible wrapping layout and update documentation ([9ed4b6a](https://github.com/ElJijuna/gnome-ui/commit/9ed4b6a36622193d2316db596b3e02aba75b38ea))
+
+### Documentation
+
+* **@gnome-ui/react-native:** retroactively add missing components to ROADMAP.md ([3ea3c29](https://github.com/ElJijuna/gnome-ui/commit/3ea3c2965022156fa2be067ca5143b95b97bef48))
+* update ROADMAP.md and enhance component table generation ([bc44949](https://github.com/ElJijuna/gnome-ui/commit/bc44949acf717524e5ebc5bd09c7b39a8129c8bb))
+
 ## [@gnome-ui/react-native-v1.5.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.4.0...@gnome-ui/react-native@1.5.0) (2026-09-06)
 
 ### Features
