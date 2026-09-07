@@ -61,7 +61,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | ✅ | SearchBar | |
 | ✅ | PathBar | |
 
-## Tier 4 — Feedback ✅ (8/9, 1 skipped)
+## Tier 4 — Feedback ✅ (9/10, 1 skipped)
 
 | Status | Component | Notes |
 |--------|-----------|-------|
@@ -73,7 +73,8 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | ✅ | Dialog | + `role="alertdialog"` / `responses` / `onResponse` (AlertDialog API) — shipped ahead of Tier 14 |
 | ✅ | Tooltip | |
 | ✅ | AnimatedIcon | Brought `Icon` along as its own public component |
-| 🚫 | Status Page | Skipped by explicit user request (2026-09-03) |
+| ✅ | Icon | Shipped alongside `AnimatedIcon` as its own independently-usable public component — given its own row here since it never had one, not because it shipped separately |
+| 🚫 | StatusPage | Skipped by explicit user request (2026-09-03) |
 
 ## Tier 5 — Advanced Controls ✅ (6/6)
 
