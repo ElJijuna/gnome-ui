@@ -1,3 +1,13 @@
+## [@gnome-ui/react-native-v1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.6.0...@gnome-ui/react-native@1.7.0) (2026-09-10)
+
+### Features
+
+* **@gnome-ui/react-native:** add Bin component with documentation and tests ([dcbedef](https://github.com/ElJijuna/gnome-ui/commit/dcbedef58ca7bb356ab06d58fcb91d296eefd8c7))
+* **@gnome-ui/react-native:** add ColorPicker component with ColorSwatch, documentation, and tests ([77ee5b4](https://github.com/ElJijuna/gnome-ui/commit/77ee5b48a0aa118d080b0fe6506dea4d87d0fa54))
+* **@gnome-ui/react-native:** add ComboRow component with documentation and tests ([436ae3b](https://github.com/ElJijuna/gnome-ui/commit/436ae3b40eaa537ed193cc5b5233d9d4b719360e))
+* **@gnome-ui/react-native:** add EntryRow component with floating label, documentation, and tests ([b73e933](https://github.com/ElJijuna/gnome-ui/commit/b73e93364af0adb14a6033c35c36f9d09a9f5a51))
+* **@gnome-ui/react-native:** add PasswordEntryRow component with reveal/conceal toggle, documentation, and tests ([1f47928](https://github.com/ElJijuna/gnome-ui/commit/1f47928e6147564041ef4d62d6ec6f3ae5a79578))
+
 ## [@gnome-ui/react-native-v1.6.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.5.0...@gnome-ui/react-native@1.6.0) (2026-09-07)
 
 ### Features
