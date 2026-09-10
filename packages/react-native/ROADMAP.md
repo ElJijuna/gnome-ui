@@ -222,7 +222,7 @@ make one worth building.
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **Bin** | Trivial — single-child passthrough `View`, mostly useful as internal plumbing |
+| ✅ | **Bin** | Shipped as a pure passthrough — a plain `View` already has no default visual styling, so unlike the web port there's no CSS reset to strip |
 | ⬜ | **ToolbarView** | `HeaderBar`/`ActionBar` pinned top or bottom around a scrolling middle — straightforward composition |
 | ⬜ | **WindowTitle** | Trivial — two-line `Text` pairing for `HeaderBar`'s `start`/center slot |
 | 🚫 | **ShortcutLabel** | No physical keyboard shortcuts to display on mobile — not planned |

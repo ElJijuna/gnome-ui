@@ -62,6 +62,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   PasswordEntryRow: 'EntryRow that masks its input, with a reveal/conceal toggle',
   ComboRow: 'Settings row with an inline option selector at the trailing edge',
   ColorPicker: 'Circular color swatches — Adwaita palette, sizes, custom hook',
+  Bin: 'Single-child container with no visual styling of its own',
 };
 
 export interface HomeScreenProps {

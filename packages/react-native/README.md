@@ -25,8 +25,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
-> `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), and `ColorPicker`
-> (Tier 20) also shipped. Component ports from
+> `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
+> (Tier 20), and `Bin` (Tier 15) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2054,6 +2054,25 @@ hand-drawn with `react-native-svg` rather than taken from `@gnome-ui/icons`,
 mirroring the web version, which hand-draws it too — it's a stroked path, and
 `Icon`'s palette has no white to give it. The container is a `WrapBox`, and
 the "+" button's `border: 1.5px dashed` ports directly.
+
+### Bin
+
+```tsx
+import { Bin } from '@gnome-ui/react-native';
+
+<Bin style={{ maxWidth: 480 }}>
+  <ExpensiveChart data={series} />
+</Bin>
+```
+
+Single-child container with no visual styling — mirrors `AdwBin` and
+`@gnome-ui/react`'s own `Bin`. A transparent passthrough `View` forwarding
+every prop (and a ref to the underlying `View`) straight through, useful as
+a neutral base for custom components that need to apply layout or size
+constraints without introducing any chrome of their own. A plain RN `View`
+already has no default visual styling — no background, no border — so
+unlike the web port there's no CSS reset to strip; this is a pure
+passthrough.
 
 ## Installation
 

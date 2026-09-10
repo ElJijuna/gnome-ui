@@ -5,6 +5,7 @@ export * from './components/AvatarGroup';
 export * from './components/AvatarRotator';
 export * from './components/Badge';
 export * from './components/Banner';
+export * from './components/Bin';
 export * from './components/BottomSheet';
 export * from './components/Box';
 export * from './components/BoxedList';
