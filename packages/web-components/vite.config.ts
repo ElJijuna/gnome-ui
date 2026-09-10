@@ -34,6 +34,7 @@ export default defineConfig({
         avatar: resolve(packageRoot, 'src/avatar.ts'),
         badge: resolve(packageRoot, 'src/badge.ts'),
         banner: resolve(packageRoot, 'src/banner.ts'),
+        bin: resolve(packageRoot, 'src/bin.ts'),
         'boxed-list': resolve(packageRoot, 'src/boxed-list.ts'),
         button: resolve(packageRoot, 'src/button.ts'),
         callout: resolve(packageRoot, 'src/callout.ts'),

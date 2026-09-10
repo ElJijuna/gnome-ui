@@ -101,7 +101,7 @@ from those two files — edit them, not this table, then run
 | `AvatarRotator` | Single avatar surface that crossfades through multiple image sources. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-avatarrotator--docs) |
 | `Badge` | Counter or status indicator, optionally overlaid on another element. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-badge--docs) |
 | `Banner` | Persistent message strip displayed at the top of a view. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-banner--docs) |
-| `Bin` | Single-child container with no visual styling. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-bin--docs) |
+| `Bin` | Single-child container with no visual styling. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-bin--docs) |
 | `Blockquote` | Styled pull-quote with semantic `<blockquote>` markup. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-blockquote--docs) |
 | `BottomSheet` | Slide-up panel that overlays content from the bottom edge. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-bottomsheet--docs) |
 | `BoxedList` | Rounded bordered list — the most common container pattern in GNOME settings and detail views. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-boxedlist--docs) |

@@ -24,6 +24,7 @@ export {
   type GnomeBannerVariant,
   registerGnomeBanner,
 } from './banner';
+export { GnomeBinElement, registerGnomeBin } from './bin';
 export {
   GnomeBoxedListElement,
   type GnomeBoxedListVariant,

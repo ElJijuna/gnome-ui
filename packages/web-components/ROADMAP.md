@@ -108,6 +108,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 | 18 | ✅ | `<gnome-header-bar>` | `HeaderBar` | `data-slot="header-start/header-title/header-end"` placed in explicit CSS grid columns (not DOM-order) so the title stays centered without either side slot — no placeholder elements needed. Host gives `header-title` `aria-live="polite"`, re-applied via a `childList` `MutationObserver` if the title element is swapped |
 | 54 | ✅ | `<gnome-linked-group>` | `LinkedGroup` | Added out of tier order, at the user's request. Pure CSS host — `vertical` is a plain attribute read directly by CSS. `gnome-button`'s border/radius lives on its inner `[data-slot="button-control"]`, not the host, so the border-merge CSS matches that slot explicitly alongside any bare native control passed directly |
 | 55 | ✅ | `<gnome-toolbar>` | `Toolbar` | Added out of tier order, at the user's request, to compose `gnome-button`/`gnome-linked-group`/`gnome-dropdown`/`gnome-divider`/`gnome-separator` in one row. Pure CSS host, zero attributes — consumer children render directly, no `role` set (matches the React version) |
+| 56 | ✅ | `<gnome-bin>` | `Bin` | Added out of tier order, at the user's request; was missing from this file entirely (a real gap, not a deliberate exclusion). Even more minimal than `gnome-toolbar` — no attributes, no CSS beyond `display: block` (a custom element defaults to `display: inline`, so that one rule is needed to match a plain `<div>`'s default layout behavior) |
 
 ---
 

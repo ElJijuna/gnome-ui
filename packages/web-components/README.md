@@ -3,7 +3,7 @@
 Framework-agnostic GNOME UI widgets implemented with native Custom Elements,
 light DOM, and the design tokens from `@gnome-ui/core`.
 
-The package currently contains forty-seven framework-agnostic components:
+The package currently contains forty-eight framework-agnostic components:
 
 - `<gnome-action-row>` — settings row with title/subtitle/prefix/suffix
   slots; `interactive` composes a real `<button data-slot="row-surface">`
@@ -15,6 +15,8 @@ The package currently contains forty-seven framework-agnostic components:
 - `<gnome-banner>` — persistent top-of-view message strip with
   `data-action`/`data-dismiss` descendants and `gnome-action`/`gnome-dismiss`
   events.
+- `<gnome-bin>` — single-child container with no visual styling of its own;
+  the only CSS rule it ships is `display: block`, matching a plain `<div>`.
 - `<gnome-boxed-list>` — rounded bordered list; gives every direct child
   `role="listitem"` and merges their borders with pure CSS dividers.
 - `<gnome-button>` — styled native buttons with GNOME variants, sizing,
@@ -1170,6 +1172,22 @@ directly, in DOM order, same as the React version, which never sets a
 groups to push trailing items to the end (mirrors the React version's
 `<Spacer />`, which this package does not port as a separate element since
 a bare `<div>` already does the job with no JS behind it).
+
+## Bin
+
+```html
+<gnome-bin style="max-width: 480px; padding: 12px">
+  <p>Some content constrained to a neutral wrapper</p>
+</gnome-bin>
+```
+
+Single-child container with no visual styling of its own — mirrors
+`AdwBin`. Pure CSS host, no attributes, no lifecycle logic; the only rule
+it ships is `display: block`, since a custom element defaults to
+`display: inline` and this needs to match a plain `<div>`'s default layout
+behavior. Useful as a neutral base for applying layout or size constraints
+without introducing any chrome — every visual detail in the example above
+comes entirely from the `style` attribute, not from `gnome-bin` itself.
 
 ## Popover
 

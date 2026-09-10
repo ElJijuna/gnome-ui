@@ -32,6 +32,11 @@
       "import": "./dist/banner.js",
       "require": "./dist/banner.cjs"
     },
+    "./bin": {
+      "types": "./dist/bin.d.ts",
+      "import": "./dist/bin.js",
+      "require": "./dist/bin.cjs"
+    },
     "./boxed-list": {
       "types": "./dist/boxed-list.d.ts",
       "import": "./dist/boxed-list.js",

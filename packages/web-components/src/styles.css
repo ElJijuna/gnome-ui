@@ -4,6 +4,7 @@ gnome-action-row,
 gnome-avatar,
 gnome-badge,
 gnome-banner,
+gnome-bin,
 gnome-boxed-list,
 gnome-button,
 gnome-callout,
@@ -57,6 +58,7 @@ gnome-action-row *,
 gnome-avatar *,
 gnome-badge *,
 gnome-banner *,
+gnome-bin *,
 gnome-boxed-list *,
 gnome-button *,
 gnome-callout *,
@@ -4258,4 +4260,10 @@ gnome-toolbar {
   gap: var(--gnome-space-1, 6px);
   padding: var(--gnome-space-1, 6px);
   min-height: 46px;
+}
+
+/* Bin */
+
+gnome-bin {
+  display: block;
 }
