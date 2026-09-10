@@ -1,3 +1,17 @@
+## [@gnome-ui/web-components-v1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.10.0...@gnome-ui/web-components@1.11.0) (2026-09-10)
+
+### Features
+
+* **@gnome-ui/web-components:** add Bin component with documentation, tests, and styling ([a684085](https://github.com/ElJijuna/gnome-ui/commit/a6840852e3cf0918b82508be5e532c0463c9e8b1))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
+### Documentation
+
+* **@gnome-ui/web-components:** enhance Storybook configuration with Vitest integration and update static directory settings ([fe95d53](https://github.com/ElJijuna/gnome-ui/commit/fe95d53c7f29839deb8a2273010b3ce59e40be79))
+
 ## [1.10.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.9.1...@gnome-ui/web-components@1.10.0) (2026-08-17)
 
 ### Features
