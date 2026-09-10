@@ -1,3 +1,10 @@
+## [@gnome-ui/icons-v1.45.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.44.0...@gnome-ui/icons@1.45.0) (2026-09-10)
+
+### Features
+
+* **@gnome-ui/icons:** update ViewConceal icon definition for improved rendering ([fad3c3f](https://github.com/ElJijuna/gnome-ui/commit/fad3c3f8255288244223e6f551d61215dca26819))
+* **@gnome-ui/icons:** update ViewReveal icon definition for improved design and clarity ([5b22d53](https://github.com/ElJijuna/gnome-ui/commit/5b22d53423c1797ff06235092f612c4b3c0da12f))
+
 ## [@gnome-ui/icons-v1.44.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/icons@1.43.0...@gnome-ui/icons@1.44.0) (2026-09-04)
 
 ### Features
