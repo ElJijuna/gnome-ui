@@ -60,6 +60,7 @@ import { SkeletonScreen } from './screens/SkeletonScreen';
 import { SliderScreen } from './screens/SliderScreen';
 import { SpinButtonScreen } from './screens/SpinButtonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
+import { StatusBadgeScreen } from './screens/StatusBadgeScreen';
 import { StatusPageScreen } from './screens/StatusPageScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
@@ -141,6 +142,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   FilterableMultiSelectDropdown: FilterableMultiSelectDropdownScreen,
   PasswordField: PasswordFieldScreen,
   RangeSlider: RangeSliderScreen,
+  StatusBadge: StatusBadgeScreen,
 };
 
 export interface ComponentScreenProps {

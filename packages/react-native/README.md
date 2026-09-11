@@ -32,7 +32,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > also shipped, along with `FilterableMultiSelectDropdown` — an original
 > `@gnome-ui/react`-only component (not a GNOME HIG port) built once its
 > prerequisite `MultiSelectDropdown` landed — and `PasswordField`/
-> `RangeSlider` (both Tier 20). Component ports from
+> `RangeSlider`/`StatusBadge` (all Tier 20). Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2333,6 +2333,24 @@ overlapping. The web's keyboard navigation has no RN port — replaced by
 two independent `accessibilityRole="adjustable"` elements (one per thumb),
 the same VoiceOver/TalkBack increment/decrement analog `Slider` already
 established.
+
+### StatusBadge
+
+```tsx
+import { StatusBadge } from '@gnome-ui/react-native';
+
+<StatusBadge variant="success">published</StatusBadge>
+<StatusBadge variant="warning">beta</StatusBadge>
+<StatusBadge variant="new">new</StatusBadge>
+```
+
+Pill-shaped text label for entity status — published, beta, new, etc. —
+mirrors `@gnome-ui/react`'s `StatusBadge`. Unlike `Badge` (numeric counts,
+optional anchor/dot mode), this is a simpler sibling designed purely for
+short human-readable state labels: no anchor positioning, no dot mode, no
+counter. Six variants (`success`/`warning`/`error`/`new`/`accent`/
+`neutral`) reuse `Badge`'s exact color-mapping shape, plus a `new` (purple)
+variant `Badge` doesn't have.
 
 ## Installation
 
