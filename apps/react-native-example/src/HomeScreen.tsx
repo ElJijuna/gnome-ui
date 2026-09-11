@@ -68,6 +68,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Callout: 'Inline dismissible admonition box — info/warning/tip variants',
   CheckRow: 'Activatable row with an integrated checkbox — press anywhere to toggle',
   ExpanderRow: 'Collapsible ActionRow that reveals nested rows on activation',
+  FieldGroup: 'Labeled grouping with helper/error text for arbitrary form fields',
 };
 
 export interface HomeScreenProps {

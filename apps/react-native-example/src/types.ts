@@ -62,6 +62,7 @@ export const COMPONENT_NAMES = [
   'Callout',
   'CheckRow',
   'ExpanderRow',
+  'FieldGroup',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

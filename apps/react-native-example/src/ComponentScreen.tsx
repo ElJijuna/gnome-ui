@@ -32,6 +32,7 @@ import { DropdownScreen } from './screens/DropdownScreen';
 import { EntryRowScreen } from './screens/EntryRowScreen';
 import { ExpanderRowScreen } from './screens/ExpanderRowScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
+import { FieldGroupScreen } from './screens/FieldGroupScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
@@ -131,6 +132,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Callout: CalloutScreen,
   CheckRow: CheckRowScreen,
   ExpanderRow: ExpanderRowScreen,
+  FieldGroup: FieldGroupScreen,
 };
 
 export interface ComponentScreenProps {

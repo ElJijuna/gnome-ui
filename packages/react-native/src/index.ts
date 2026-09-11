@@ -28,6 +28,7 @@ export * from './components/Dropdown';
 export * from './components/EntryRow';
 export * from './components/Expander';
 export * from './components/ExpanderRow';
+export * from './components/FieldGroup';
 export * from './components/FileTypeIcon';
 export * from './components/HeaderBar';
 export * from './components/Highlight';

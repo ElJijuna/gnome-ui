@@ -27,8 +27,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
 > (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
-> (Tier 8), `Callout` (Tier 20), `CheckRow` (Tier 12), and `ExpanderRow`
-> (Tier 8) also shipped. Component ports from
+> (Tier 8), `Callout` (Tier 20), `CheckRow` (Tier 12), `ExpanderRow`
+> (Tier 8), and `FieldGroup` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2199,6 +2199,31 @@ inserted before each one automatically. Use `trailing` for a value label
 or a `Switch`; stop event propagation inside interactive trailing widgets
 so the row's own toggle isn't triggered. Unlike `CheckRow`/`ButtonRow`,
 there is no `disabled` prop — the source component doesn't expose one.
+
+### FieldGroup
+
+```tsx
+import { FieldGroup, RadioButton } from '@gnome-ui/react-native';
+
+<FieldGroup label="Notification method" helperText="Choose how you want to be notified.">
+  <LabeledRadio label="Email" selected={method === 'email'} onSelect={() => setMethod('email')} />
+  <LabeledRadio label="SMS" selected={method === 'sms'} onSelect={() => setMethod('sms')} />
+</FieldGroup>
+```
+
+Generic form-field grouping with a shared label, help text, and error
+message, for arbitrary fields outside a `BoxedList` — mirrors
+`@gnome-ui/react`'s `FieldGroup`. `PreferencesGroup` is scoped specifically
+to wrapping settings rows inside a `BoxedList`; use `FieldGroup` for a
+plain labeled grouping around any set of related form controls (e.g. a
+`RadioButton` group or several `Checkbox`es sharing one label and error),
+independent of the settings-page layout. `<fieldset>`/`<legend>` have no
+RN element equivalent — this renders as a `View` with `role="group"` and a
+themed `Text` label. The hint/error text reuses `TextField`'s exact
+`error ?? helperText` recipe. Unlike the web version's native
+`<fieldset disabled>`, `disabled` here only dims the group visually — RN
+has no equivalent of a fieldset automatically disabling every descendant
+control, so each child still needs disabling individually.
 
 ## Installation
 
