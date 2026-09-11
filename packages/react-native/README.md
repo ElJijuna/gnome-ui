@@ -26,7 +26,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
-> (Tier 20), `Bin` (Tier 15), and `Blockquote` (Tier 20) also shipped. Component ports from
+> (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), and `ButtonRow`
+> (Tier 8) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2094,6 +2095,33 @@ tinted backgrounds have no RN equivalent — resolved as an 8-digit
 substitution `Chip`'s selected-state tint already established. `<blockquote>`/
 `<footer>`/`<cite>` have no RN element equivalent, so this renders as a
 plain `View` with no semantic role.
+
+### ButtonRow
+
+```tsx
+import { BoxedList, ButtonRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <ButtonRow title="Save changes" variant="suggested" onPress={handleSave} />
+  <ButtonRow title="Delete account" variant="destructive" onPress={handleDelete} />
+</BoxedList>
+```
+
+Full-width activatable row styled as a button, for use inside a `BoxedList`
+— mirrors `AdwButtonRow` and `@gnome-ui/react`'s own `ButtonRow`. Use when
+an entire list row should trigger a single action with a centered label;
+prefer `ActionRow` with `interactive` when the row also needs a
+title/subtitle layout. Rebuilt with `Pressable` rather than ported from the
+web `<button>` — the same pressed-state-overlay recipe `ActionRow`/`Card`
+already established (`theme.activeOverlay` stands in for the web's
+`:hover`/`:active` background transition). The title's color reuses `Text`'s
+own `TextColor` union (`"accent"`/`"destructive"` resolve to the exact same
+tokens the source CSS's `suggested`/`destructive` variants reference), and
+gets `flex: 1` + `textAlign: 'center'` — ported straight from the source
+CSS's `.title` — so the label stays centered even when only one of
+`leading`/`trailing` is present. The variant color does not propagate to
+`leading`/`trailing` icons (no `currentColor` equivalent in RN), the same
+dropped nicety `Chip` already accepted for its own icons.
 
 ## Installation
 

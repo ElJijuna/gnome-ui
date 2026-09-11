@@ -14,6 +14,7 @@ import { BlockquoteScreen } from './screens/BlockquoteScreen';
 import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
+import { ButtonRowScreen } from './screens/ButtonRowScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
@@ -123,6 +124,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ColorPicker: ColorPickerScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,
+  ButtonRow: ButtonRowScreen,
 };
 
 export interface ComponentScreenProps {

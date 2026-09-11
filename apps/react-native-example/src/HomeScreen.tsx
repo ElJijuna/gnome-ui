@@ -64,6 +64,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ColorPicker: 'Circular color swatches — Adwaita palette, sizes, custom hook',
   Bin: 'Single-child container with no visual styling of its own',
   Blockquote: 'Pull-quote with a colored left border — 5 severity variants, optional icon/cite',
+  ButtonRow: 'Full-width activatable row styled as a button, for use inside a BoxedList',
 };
 
 export interface HomeScreenProps {

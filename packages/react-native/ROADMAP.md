@@ -136,7 +136,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ✅ | **BoxedList `variant="separate"`** | Already shipped (Tier 2) |
-| ⬜ | **ButtonRow** | Directly portable — full-width `Pressable` styled like `Button`, inside `BoxedList` |
+| ✅ | **ButtonRow** | Shipped — full-width `Pressable`, same pressed-overlay recipe `ActionRow`/`Card` already established. Title reuses `Text`'s own `TextColor` union (`"accent"`/`"destructive"` already resolve to the exact tokens the source CSS's `suggested`/`destructive` variants reference) instead of a separate color table. Title gets `flex: 1` + `textAlign: 'center'` (ported straight from the source CSS's `.title`) rather than centering the row via `justifyContent`, so the label stays centered even with only one of `leading`/`trailing` present — same `HeaderBar` symmetric-slot trick. Variant color doesn't propagate to `leading`/`trailing` icons (no `currentColor` equivalent), same dropped nicety as `Chip` |
 | ✅ | **ActionRow `variant="property"`** | Already shipped (Tier 2) |
 | ⬜ | **ExpanderRow** | Blocked on nothing — `ActionRow` + the standalone `Expander`'s (Tier 20, shipped) directly-driven `Animated.View` height recipe for the reveal, in place of the web version's animated-height CSS grid |
 
