@@ -15,10 +15,11 @@ import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
-import { CalloutScreen } from './screens/CalloutScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
+import { CalloutScreen } from './screens/CalloutScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
+import { CheckRowScreen } from './screens/CheckRowScreen';
 import { ChipScreen } from './screens/ChipScreen';
 import { ClampScreen } from './screens/ClampScreen';
 import { CoachMarkScreen } from './screens/CoachMarkScreen';
@@ -127,6 +128,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Blockquote: BlockquoteScreen,
   ButtonRow: ButtonRowScreen,
   Callout: CalloutScreen,
+  CheckRow: CheckRowScreen,
 };
 
 export interface ComponentScreenProps {

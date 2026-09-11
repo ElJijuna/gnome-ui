@@ -17,9 +17,7 @@ export const CalloutScreen = () => {
           <Callout variant="warning">
             This field is optional, but recommended for account recovery.
           </Callout>
-          <Callout variant="tip">
-            Tip: press and hold a row to reveal more actions.
-          </Callout>
+          <Callout variant="tip">Tip: press and hold a row to reveal more actions.</Callout>
         </View>
       </Section>
 

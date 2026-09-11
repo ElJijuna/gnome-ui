@@ -66,6 +66,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Blockquote: 'Pull-quote with a colored left border — 5 severity variants, optional icon/cite',
   ButtonRow: 'Full-width activatable row styled as a button, for use inside a BoxedList',
   Callout: 'Inline dismissible admonition box — info/warning/tip variants',
+  CheckRow: 'Activatable row with an integrated checkbox — press anywhere to toggle',
 };
 
 export interface HomeScreenProps {

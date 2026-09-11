@@ -27,7 +27,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
 > (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
-> (Tier 8), and `Callout` (Tier 20) also shipped. Component ports from
+> (Tier 8), `Callout` (Tier 20), and `CheckRow` (Tier 12) also shipped.
+> Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2144,6 +2145,34 @@ web's arbitrary `color-mix()` icon tint — `blue3`/`green4` happen to match
 `accentBgColor`/`successBgColor` exactly in every theme this package
 ships, so it's not an approximation for `info`/`tip`. `role="note"` ports
 1:1 from RN's web-aligned `Role` union (same as `Dialog`/`Tooltip`).
+
+### CheckRow
+
+```tsx
+import { BoxedList, CheckRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <CheckRow
+    title="Wi-Fi"
+    subtitle="Home Network"
+    checked={wifi}
+    onCheckedChange={setWifi}
+  />
+</BoxedList>
+```
+
+Activatable row with an integrated checkbox, for use inside a `BoxedList`
+— mirrors `@gnome-ui/react`'s `CheckRow`. The entire row is a single
+pressable; pressing anywhere toggles the checked state. Use for multi-select
+scenarios; prefer a single `Switch` row for a standalone on/off setting.
+Supports both controlled (`checked`) and uncontrolled (`defaultChecked`)
+modes, the same `isControlled`/internal-state-fallback shape already used
+by `Expander`/`ComboRow`/`Popover`. The checkbox visual reuses `Checkbox`'s
+exact border/background animation and checkmark-fade-in recipe, but as a
+plain non-interactive `View` rather than the real `Checkbox` component —
+nesting one `Pressable` inside another would create two overlapping tap
+targets. `aria-labelledby` has no RN equivalent, so `accessibilityLabel`
+combines the title and subtitle instead.
 
 ## Installation
 

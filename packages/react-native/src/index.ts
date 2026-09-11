@@ -15,6 +15,7 @@ export * from './components/ButtonRow';
 export * from './components/Callout';
 export * from './components/Card';
 export * from './components/Checkbox';
+export * from './components/CheckRow';
 export * from './components/Chip';
 export * from './components/Clamp';
 export * from './components/CoachMark';
