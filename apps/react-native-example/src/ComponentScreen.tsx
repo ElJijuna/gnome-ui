@@ -10,6 +10,7 @@ import { AvatarScreen } from './screens/AvatarScreen';
 import { BadgeScreen } from './screens/BadgeScreen';
 import { BannerScreen } from './screens/BannerScreen';
 import { BinScreen } from './screens/BinScreen';
+import { BlockquoteScreen } from './screens/BlockquoteScreen';
 import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
@@ -121,6 +122,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ComboRow: ComboRowScreen,
   ColorPicker: ColorPickerScreen,
   Bin: BinScreen,
+  Blockquote: BlockquoteScreen,
 };
 
 export interface ComponentScreenProps {

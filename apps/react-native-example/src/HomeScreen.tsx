@@ -63,6 +63,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ComboRow: 'Settings row with an inline option selector at the trailing edge',
   ColorPicker: 'Circular color swatches — Adwaita palette, sizes, custom hook',
   Bin: 'Single-child container with no visual styling of its own',
+  Blockquote: 'Pull-quote with a colored left border — 5 severity variants, optional icon/cite',
 };
 
 export interface HomeScreenProps {

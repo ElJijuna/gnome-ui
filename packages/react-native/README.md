@@ -26,7 +26,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
-> (Tier 20), and `Bin` (Tier 15) also shipped. Component ports from
+> (Tier 20), `Bin` (Tier 15), and `Blockquote` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2073,6 +2073,27 @@ constraints without introducing any chrome of their own. A plain RN `View`
 already has no default visual styling — no background, no border — so
 unlike the web port there's no CSS reset to strip; this is a pure
 passthrough.
+
+### Blockquote
+
+```tsx
+import { Blockquote } from '@gnome-ui/react-native';
+
+<Blockquote variant="info" cite="Ada Lovelace, 1842">
+  The Analytical Engine has no pretensions to originate anything.
+</Blockquote>
+```
+
+Pull-quote with a colored left border, mirroring `@gnome-ui/react`'s
+`Blockquote`. Five visual variants (`default`/`info`/`warning`/`error`/
+`success`) share the same severity scale as `Banner`/`Chip`, with an
+optional leading `icon` and a `cite` attribution line rendered below the
+quote. The web version's `color-mix(in srgb, <color> 8%/14%, transparent)`
+tinted backgrounds have no RN equivalent — resolved as an 8-digit
+`#RRGGBBAA` alpha suffix on the variant's own hex token instead, the same
+substitution `Chip`'s selected-state tint already established. `<blockquote>`/
+`<footer>`/`<cite>` have no RN element equivalent, so this renders as a
+plain `View` with no semantic role.
 
 ## Installation
 
