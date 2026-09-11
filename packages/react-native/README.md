@@ -28,7 +28,10 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
 > (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
 > (Tier 8), `Callout` (Tier 20), `CheckRow` (Tier 12), `ExpanderRow`
-> (Tier 8), and `FieldGroup` (Tier 20) also shipped. Component ports from
+> (Tier 8), `FieldGroup` (Tier 20), and `MultiSelectDropdown` (Tier 20)
+> also shipped, along with `FilterableMultiSelectDropdown` — an original
+> `@gnome-ui/react`-only component (not a GNOME HIG port) built once its
+> prerequisite `MultiSelectDropdown` landed. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2224,6 +2227,59 @@ themed `Text` label. The hint/error text reuses `TextField`'s exact
 `<fieldset disabled>`, `disabled` here only dims the group visually — RN
 has no equivalent of a fieldset automatically disabling every descendant
 control, so each child still needs disabling individually.
+
+### MultiSelectDropdown
+
+```tsx
+import { MultiSelectDropdown } from '@gnome-ui/react-native';
+
+<MultiSelectDropdown
+  options={[
+    { value: 'wifi', label: 'Wi-Fi' },
+    { value: 'bluetooth', label: 'Bluetooth' },
+  ]}
+  value={permissions}
+  onChange={setPermissions}
+  placeholder="Select permissions"
+/>
+```
+
+Checkbox-list variant of `Dropdown` for selecting multiple values from a
+single trigger — mirrors `@gnome-ui/react`'s `MultiSelectDropdown`. Use it
+over `Dropdown`/`ComboRow` (single-select only) whenever more than one
+value can be chosen at once. Toggling an option keeps the panel open, so
+the user can pick several in a row; close it via a backdrop tap. Reuses
+`Dropdown`'s `Modal` + backdrop + independently-measured trigger-rect/
+panel-height positioning almost verbatim, and gives each option row a
+leading checkbox-square visual instead of `Dropdown`'s single trailing
+checkmark.
+
+### FilterableMultiSelectDropdown
+
+```tsx
+import { FilterableMultiSelectDropdown } from '@gnome-ui/react-native';
+
+<FilterableMultiSelectDropdown
+  options={languages}
+  value={selected}
+  onChange={setSelected}
+  filterPlaceholder="Search languages…"
+/>
+```
+
+`MultiSelectDropdown` plus a filter field for narrowing long option lists
+— mirrors `@gnome-ui/react`'s `FilterableMultiSelectDropdown`, an original
+component specific to that package (not a GNOME HIG port). Opening the
+panel auto-focuses a filter `TextInput` pinned above the list; typing
+narrows the options to those whose label or description contains the
+query (case-insensitive) — filtering only affects what's shown, values
+selected before a query hides their option stay selected. An empty
+filtered result shows a centered "No results" message. The web version's
+filter-field keyboard navigation (↑/↓ roving highlight, Home/End,
+Enter-to-toggle) has no RN port, the same "no keyboard focus to drive it"
+reasoning `Dropdown` already established — the `TextInput` and its
+software keyboard still work natively, only the roving-highlight layer on
+top is dropped.
 
 ## Installation
 

@@ -69,6 +69,8 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   CheckRow: 'Activatable row with an integrated checkbox — press anywhere to toggle',
   ExpanderRow: 'Collapsible ActionRow that reveals nested rows on activation',
   FieldGroup: 'Labeled grouping with helper/error text for arbitrary form fields',
+  MultiSelectDropdown: 'Checkbox-list dropdown for selecting multiple values from one trigger',
+  FilterableMultiSelectDropdown: 'MultiSelectDropdown plus a filter field for long option lists',
 };
 
 export interface HomeScreenProps {

@@ -337,7 +337,7 @@ components rather than as two-line `StatusPage` usages.
 | ⬜ | **CopyField** | Blocked on `CopyButton`'s clipboard dependency (Tier 8) |
 | ⬜ | **ChoiceCardGroup** | Directly portable — roving-selection group of `Card`s, same recipe `RadioButton` already established |
 | ⬜ | **FileDropZone** | Needs reimagining, not a port — "drag and drop" has no touch equivalent; the mobile-idiomatic shape is a tap target opening `expo-document-picker`/`expo-image-picker`, a new peer dependency |
-| ⬜ | **MultiSelectDropdown** | Unblocked now that `Dropdown` exists (Tier 5) — checkbox-list variant of the same `Modal` + backdrop pattern |
+| ✅ | **MultiSelectDropdown** | Shipped — checkbox-list variant of `Dropdown`, reusing its `Modal` + backdrop + independently-measured-then-combined trigger-rect/panel-height positioning (`Rect`/`Position`/`computePosition`) verbatim rather than extracting a shared hook, the same duplication judgment call already applied to `Tooltip`/`Dropdown`'s own position code — though this is now the third near-identical copy of the up/down-flip-clamp-to-width shape specifically, worth extracting if a fourth caller needs it. Toggling an option keeps the panel open (unlike `Dropdown`'s `selectOption`, which closes it); each row gets a leading checkbox-square visual instead of `Dropdown`'s single trailing checkmark. Built as the documented prerequisite for `FilterableMultiSelectDropdown` (see "React-only originals" below), at the user's explicit choice when asked build-order (ship this first vs. build the filterable one standalone) |
 | ⬜ | **CodeBlock** | Directly portable — monospace `Text` block + optional line numbers, `theme.fontFamilyMono` already exists |
 | ⬜ | **WidgetManager** | Low priority — complex composite (catalog picker, staged add/remove); revisit only if a concrete dashboard/widget use case appears |
 | ✅ | **Drawer** | Missing from this file's original pass, added retroactively (found the same way `SegmentedBar` was). Slide-in panel anchored left/right, floats with a margin on every side (all four corners rounded, mirroring the `@gnome-ui/react` source's own recent CSS update) via `justifyContent` on the backdrop rather than the web CSS's `margin: auto` — confirmed on-device with saturated debug colors, since RN auto-margin support was unverified for this Yoga version. No drag-to-dismiss (the web source has no exit keyframes either), so it follows `Dialog`'s simpler animation shape rather than `BottomSheet`'s. `DrawerDepthContext` (nested-drawer width auto-scaling) ports 1:1, pure React state. `rail` unblocked the new `IconButton` (see Tier 8) |
@@ -369,13 +369,22 @@ concrete consuming app needs them on mobile.
 
 ## React-only originals (not GNOME HIG ports)
 
-`FilterableMultiSelectDropdown` exists in `@gnome-ui/react` but isn't a
-port target for this file at all — it's an original component invented
-for that package specifically (a `MultiSelectDropdown` variant with a
-built-in search field), not a mirror of any GNOME/libadwaita widget.
-Excluded from the tier system by design, not an oversight — if this
-package ever wants the same shape, it'd extend `MultiSelectDropdown`
-(Tier 20) once that ships, not port this one directly.
+`FilterableMultiSelectDropdown` exists in `@gnome-ui/react` — it's an
+original component invented for that package specifically (a
+`MultiSelectDropdown` variant with a built-in search field), not a mirror
+of any GNOME/libadwaita widget, so it stays outside the tier system by
+design. **Shipped in this package (2026-09-11)**, once `MultiSelectDropdown`
+(Tier 20, above) landed as its prerequisite — a parallel implementation
+duplicating `MultiSelectDropdown`'s shape and positioning recipe rather
+than wrapping it (matching how the web source itself relates to
+`MultiSelectDropdown`: sharing only the `MultiSelectDropdownOption` type,
+not composed from it), plus a filter `TextInput` pinned above the list,
+auto-focused via `autoFocus` on open. The web version's filter-field
+keyboard handler (↑/↓ roving highlight, Home/End, Enter-to-toggle) has no
+RN port — same "no keyboard focus to drive it" reasoning `Dropdown`
+already established — but the `TextInput` itself, and its software
+keyboard, still works natively; only the roving-highlight navigation on
+top of it is dropped.
 
 ---
 

@@ -34,6 +34,7 @@ import { ExpanderRowScreen } from './screens/ExpanderRowScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
 import { FieldGroupScreen } from './screens/FieldGroupScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
+import { FilterableMultiSelectDropdownScreen } from './screens/FilterableMultiSelectDropdownScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
 import { IconButtonScreen } from './screens/IconButtonScreen';
@@ -41,6 +42,7 @@ import { IconScreen } from './screens/IconScreen';
 import { InlineViewSwitcherScreen } from './screens/InlineViewSwitcherScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
 import { LinkScreen } from './screens/LinkScreen';
+import { MultiSelectDropdownScreen } from './screens/MultiSelectDropdownScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
 import { PasswordEntryRowScreen } from './screens/PasswordEntryRowScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
@@ -133,6 +135,8 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   CheckRow: CheckRowScreen,
   ExpanderRow: ExpanderRowScreen,
   FieldGroup: FieldGroupScreen,
+  MultiSelectDropdown: MultiSelectDropdownScreen,
+  FilterableMultiSelectDropdown: FilterableMultiSelectDropdownScreen,
 };
 
 export interface ComponentScreenProps {

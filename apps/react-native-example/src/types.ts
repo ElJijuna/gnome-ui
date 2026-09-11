@@ -63,6 +63,8 @@ export const COMPONENT_NAMES = [
   'CheckRow',
   'ExpanderRow',
   'FieldGroup',
+  'MultiSelectDropdown',
+  'FilterableMultiSelectDropdown',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
