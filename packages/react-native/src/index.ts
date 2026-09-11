@@ -8,6 +8,7 @@ export * from './components/Banner';
 export * from './components/Bin';
 export * from './components/Blockquote';
 export * from './components/BottomSheet';
+export * from './components/BottomTabBar';
 export * from './components/Box';
 export * from './components/BoxedList';
 export * from './components/Button';

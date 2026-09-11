@@ -32,6 +32,7 @@ export const COMPONENT_NAMES = [
   'Badge',
   'Popover',
   'BottomSheet',
+  'BottomTabBar',
   'Overlay',
   'LevelBar',
   'Expander',

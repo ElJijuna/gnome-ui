@@ -32,9 +32,12 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > also shipped, along with `FilterableMultiSelectDropdown` — an original
 > `@gnome-ui/react`-only component (not a GNOME HIG port) built once its
 > prerequisite `MultiSelectDropdown` landed — and `PasswordField`/
-> `RangeSlider`/`StatusBadge` (all Tier 20). Component ports from
-> `@gnome-ui/react` continue tier by tier — see this package's own
-> [ROADMAP.md](./ROADMAP.md) for full
+> `RangeSlider`/`StatusBadge` (all Tier 20). `BottomTabBar` also shipped —
+> a React Native-only original with no `@gnome-ui/react` source at all
+> (desktop apps don't have a bottom tab bar pattern to mirror), built on
+> explicit request for the iOS/Android fixed bottom-navigation shape.
+> Component ports from `@gnome-ui/react` continue tier by tier — see this
+> package's own [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
 > main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
 > expansion this package belongs to.
@@ -2351,6 +2354,48 @@ short human-readable state labels: no anchor positioning, no dot mode, no
 counter. Six variants (`success`/`warning`/`error`/`new`/`accent`/
 `neutral`) reuse `Badge`'s exact color-mapping shape, plus a `new` (purple)
 variant `Badge` doesn't have.
+
+### BottomTabBar
+
+```tsx
+import { BottomTabBar } from '@gnome-ui/react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<BottomTabBar
+  items={[
+    { value: 'home', label: 'Home', icon: HomeOutline, activeIcon: HomeFilled },
+    { value: 'search', label: 'Search', icon: Search },
+    { value: 'profile', label: 'Profile', icon: Person, badge: true },
+  ]}
+  value={tab}
+  onChange={setTab}
+  bottomInset={insets.bottom}
+/>
+```
+
+Fixed bottom navigation bar — the iOS/Android "tab bar" pattern (Music,
+Instagram, most system apps): a small, fixed set of top-level
+destinations, each an icon + label, always visible at the foot of the
+screen. No GNOME/libadwaita widget mirrors this, so it's an original
+component for this package, not a port.
+
+Distinct from the existing `TabBar`/`TabItem` (an in-page, horizontally
+scrollable content switcher) — that one signals "active" purely via a
+background pill + bold weight + accent underline, never by tinting the
+icon/label themselves. A bottom tab bar's whole visual signature is the
+opposite: the active icon+label *are* the app's accent color, so this is
+the first consumer of `Icon`'s new `tintColor` prop (an arbitrary-fill
+override, since `color="blue"` always means a fixed swatch, never
+whatever accent the app actually configured via `GnomeProvider
+accentColor`). Pass `activeIcon` for the filled-vs-outline convention iOS/
+Android system tab bars both use; omit it to reuse `icon` for both states,
+tinted differently. `badge` reuses the real `Badge` component's `anchor`
+mode — `true` for a dot, a number for a count (capped at `"99+"`).
+`bottomInset` lets you thread in your own `useSafeAreaInsets().bottom` —
+this package takes no dependency on `react-native-safe-area-context`
+itself.
 
 ## Installation
 

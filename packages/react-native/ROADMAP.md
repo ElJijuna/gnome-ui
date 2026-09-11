@@ -386,6 +386,41 @@ already established — but the `TextInput` itself, and its software
 keyboard, still works natively; only the roving-highlight navigation on
 top of it is dropped.
 
+## React Native-only originals (no `@gnome-ui/react` source at all)
+
+Distinct from the section above: these have no source anywhere in the
+monorepo to port from, not even a React-only original — they exist purely
+because a concrete mobile need (or explicit request) called for them, the
+same "flag it, get a decision, build it" precedent `AnimatedIcon`'s
+`react-native-svg` dependency already established.
+
+✅ **`BottomTabBar`** (2026-09-11) — the iOS/Android fixed bottom
+navigation pattern (Music, Instagram, most system apps): a small set of
+top-level destinations, each an icon + label, always visible at the foot
+of the screen. No GNOME/libadwaita widget mirrors this — desktop apps
+don't use bottom navigation — requested directly as "a modern bottom tab
+bar" once the ambiguity with the *existing* `TabBar` (part of `Tabs`, an
+in-page content switcher) was resolved by asking. That existing `TabBar`
+signals "active" purely via a background pill + bold weight + accent
+underline, never by tinting the icon/label themselves — a bottom tab bar's
+whole visual signature is the opposite, the active icon+label *are* the
+app's accent color. `Icon`'s `color` prop can't express that (`color="blue"`
+always means the fixed `theme.blue3`, never whatever accent the app
+actually configured via `GnomeProvider accentColor`), so this is the first
+consumer of a new `Icon` `tintColor` prop (an arbitrary-fill escape hatch,
+added the same way `style` was added specifically for `Dropdown`'s chevron
+need) — confirmed on-device against a non-default (`purple`) accent before
+calling it done, not just assumed from the default blue matching by
+coincidence. Reuses the real `Badge` component's `anchor` mode for the
+optional notification indicator rather than a hand-rolled pill, and the
+same `pressed ? theme.activeOverlay : 'transparent'` press recipe every
+other `Pressable` in this package already uses. Takes no dependency on
+`react-native-safe-area-context` for bottom-inset handling — a
+`bottomInset` numeric prop lets the consumer thread in their own
+`useSafeAreaInsets().bottom` instead, the same "don't add a peer
+dependency without a deliberate decision" standard already applied
+elsewhere.
+
 ---
 
 ## Infrastructure

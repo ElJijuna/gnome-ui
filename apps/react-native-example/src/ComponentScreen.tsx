@@ -12,6 +12,7 @@ import { BannerScreen } from './screens/BannerScreen';
 import { BinScreen } from './screens/BinScreen';
 import { BlockquoteScreen } from './screens/BlockquoteScreen';
 import { BottomSheetScreen } from './screens/BottomSheetScreen';
+import { BottomTabBarScreen } from './screens/BottomTabBarScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
@@ -107,6 +108,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Badge: BadgeScreen,
   Popover: PopoverScreen,
   BottomSheet: BottomSheetScreen,
+  BottomTabBar: BottomTabBarScreen,
   Overlay: OverlayScreen,
   LevelBar: LevelBarScreen,
   Expander: ExpanderScreen,
