@@ -15,6 +15,7 @@ import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
+import { CalloutScreen } from './screens/CalloutScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
@@ -125,6 +126,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,
   ButtonRow: ButtonRowScreen,
+  Callout: CalloutScreen,
 };
 
 export interface ComponentScreenProps {

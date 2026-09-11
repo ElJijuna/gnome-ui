@@ -12,6 +12,7 @@ export * from './components/Box';
 export * from './components/BoxedList';
 export * from './components/Button';
 export * from './components/ButtonRow';
+export * from './components/Callout';
 export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/Chip';

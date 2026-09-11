@@ -26,8 +26,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
-> (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), and `ButtonRow`
-> (Tier 8) also shipped. Component ports from
+> (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
+> (Tier 8), and `Callout` (Tier 20) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2122,6 +2122,28 @@ CSS's `.title` — so the label stays centered even when only one of
 `leading`/`trailing` is present. The variant color does not propagate to
 `leading`/`trailing` icons (no `currentColor` equivalent in RN), the same
 dropped nicety `Chip` already accepted for its own icons.
+
+### Callout
+
+```tsx
+import { Callout } from '@gnome-ui/react-native';
+
+<Callout variant="tip" dismissible onDismiss={() => setVisible(false)}>
+  Press and hold a row to reveal more actions.
+</Callout>
+```
+
+Inline, dismissible admonition box for contextual help text within forms
+and cards — mirrors `@gnome-ui/react`'s `Callout`. Unlike `Banner` (a
+persistent, edge-to-edge strip at the top of a view) and `Toast` (a
+temporary notification), `Callout` is a contained, tinted box meant to sit
+inline alongside the content it annotates. Three variants (`info`/
+`warning`/`tip`) each pair a tinted background/border with a leading icon;
+`Icon`'s fixed named palette (`blue`/`yellow`/`green`) stands in for the
+web's arbitrary `color-mix()` icon tint — `blue3`/`green4` happen to match
+`accentBgColor`/`successBgColor` exactly in every theme this package
+ships, so it's not an approximation for `info`/`tip`. `role="note"` ports
+1:1 from RN's web-aligned `Role` union (same as `Dialog`/`Tooltip`).
 
 ## Installation
 

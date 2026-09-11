@@ -59,6 +59,7 @@ export const COMPONENT_NAMES = [
   'Bin',
   'Blockquote',
   'ButtonRow',
+  'Callout',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
