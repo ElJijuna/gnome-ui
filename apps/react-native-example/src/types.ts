@@ -65,6 +65,7 @@ export const COMPONENT_NAMES = [
   'FieldGroup',
   'MultiSelectDropdown',
   'FilterableMultiSelectDropdown',
+  'PasswordField',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

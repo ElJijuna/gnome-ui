@@ -45,6 +45,7 @@ import { LinkScreen } from './screens/LinkScreen';
 import { MultiSelectDropdownScreen } from './screens/MultiSelectDropdownScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
 import { PasswordEntryRowScreen } from './screens/PasswordEntryRowScreen';
+import { PasswordFieldScreen } from './screens/PasswordFieldScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
 import { PopoverScreen } from './screens/PopoverScreen';
 import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
@@ -137,6 +138,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   FieldGroup: FieldGroupScreen,
   MultiSelectDropdown: MultiSelectDropdownScreen,
   FilterableMultiSelectDropdown: FilterableMultiSelectDropdownScreen,
+  PasswordField: PasswordFieldScreen,
 };
 
 export interface ComponentScreenProps {

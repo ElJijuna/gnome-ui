@@ -166,7 +166,7 @@ from those two files — edit them, not this table, then run
 | `Overlay` | Standalone backdrop/scrim layer with a fade transition and click-to-dismiss — the shared building block behind `Modal`, `Dialog`, and `BottomSheet`'s backdrops, extracted for building custom overlay UI. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-overlay--docs) |
 | `OverlaySplitView` | Sidebar + content layout where the sidebar becomes a slide-over **overlay** on narrow screens (≤ 400 px), mirroring `AdwOverlaySplitView`. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-overlaysplitview--docs) |
 | `PasswordEntryRow` | Password entry row with a built-in reveal/conceal toggle. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-passwordentryrow--docs) |
-| `PasswordField` | Single-line password input with a peek toggle that reveals the value as plain text. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-passwordfield--docs) |
+| `PasswordField` | Single-line password input with a peek toggle that reveals the value as plain text. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-passwordfield--docs) |
 | `PathBar` | Breadcrumb path bar for navigating a hierarchical location. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-pathbar--docs) |
 | `Popover` | Floating panel anchored to a trigger element, following the Adwaita `GtkPopover` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-popover--docs) |
 | `Portal` | Reusable `createPortal` wrapper — SSR-safe (renders `children` inline when `document` is unavailable) with optional mount-target support. | 🚫 | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-portal--docs) |

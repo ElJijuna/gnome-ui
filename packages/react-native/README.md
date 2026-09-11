@@ -31,7 +31,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 8), `FieldGroup` (Tier 20), and `MultiSelectDropdown` (Tier 20)
 > also shipped, along with `FilterableMultiSelectDropdown` — an original
 > `@gnome-ui/react`-only component (not a GNOME HIG port) built once its
-> prerequisite `MultiSelectDropdown` landed. Component ports from
+> prerequisite `MultiSelectDropdown` landed — and `PasswordField`
+> (Tier 20). Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2280,6 +2281,30 @@ Enter-to-toggle) has no RN port, the same "no keyboard focus to drive it"
 reasoning `Dropdown` already established — the `TextInput` and its
 software keyboard still work natively, only the roving-highlight layer on
 top is dropped.
+
+### PasswordField
+
+```tsx
+import { PasswordField } from '@gnome-ui/react-native';
+
+<PasswordField
+  label="Password"
+  value={password}
+  onChangeText={setPassword}
+  helperText="At least 8 characters"
+  autoComplete="new-password"
+/>
+```
+
+Single-line password input with a peek toggle to reveal the value as plain
+text — mirrors `@gnome-ui/react`'s `PasswordField`. `TextField` plus the
+exact `secureTextEntry`/`IconButton` reveal recipe `PasswordEntryRow`
+already established, at `size="sm"` (28 dp circular), positioned
+absolutely at the input's trailing edge and vertically centered — the
+input gets extra trailing padding so typed text never runs under the
+button. Use this over `TextField` with a manually-set `secureTextEntry`
+(which has no reveal affordance). Pass `revealable={false}` to hide the
+toggle entirely (e.g. for a PIN field).
 
 ## Installation
 

@@ -71,6 +71,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   FieldGroup: 'Labeled grouping with helper/error text for arbitrary form fields',
   MultiSelectDropdown: 'Checkbox-list dropdown for selecting multiple values from one trigger',
   FilterableMultiSelectDropdown: 'MultiSelectDropdown plus a filter field for long option lists',
+  PasswordField: 'TextField with a peek toggle to reveal the value as plain text',
 };
 
 export interface HomeScreenProps {
