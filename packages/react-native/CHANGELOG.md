@@ -1,3 +1,21 @@
+## [@gnome-ui/react-native-v1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.7.0...@gnome-ui/react-native@1.8.0) (2026-09-11)
+
+### Features
+
+* **@gnome-ui/react-native:** add Blockquote component with variants, documentation, and tests ([20c7fe3](https://github.com/ElJijuna/gnome-ui/commit/20c7fe3ece4d3135a9da59c5a83ddd5310ef87c4))
+* **@gnome-ui/react-native:** add BottomTabBar component with documentation, tests, and integration into example screens ([e104e15](https://github.com/ElJijuna/gnome-ui/commit/e104e15659883f8c6231755a21537bf02ef34663))
+* **@gnome-ui/react-native:** add ButtonRow component with documentation and tests ([211b045](https://github.com/ElJijuna/gnome-ui/commit/211b045bc267e69c064817546e0c5bb954e218c3))
+* **@gnome-ui/react-native:** add Callout component with variants, documentation, and tests ([1289704](https://github.com/ElJijuna/gnome-ui/commit/1289704618d77d097a7736ec1f3623808f9b9514))
+* **@gnome-ui/react-native:** add CheckRow component with documentation and tests ([5058a8b](https://github.com/ElJijuna/gnome-ui/commit/5058a8b46bbad1bb8e125192bcaa3701c4bbf22c))
+* **@gnome-ui/react-native:** add ExpanderRow component with documentation and tests ([9c41ece](https://github.com/ElJijuna/gnome-ui/commit/9c41ecebc5e3da1a23fc60ad735d5ad186d52ea7))
+* **@gnome-ui/react-native:** add FieldGroup component with documentation and tests ([b7d3647](https://github.com/ElJijuna/gnome-ui/commit/b7d36474aa1f1c8edfc25cdb97109491f938acb3))
+* **@gnome-ui/react-native:** add MultiSelectDropdown and FilterableMultiSelectDropdown components with documentation and tests ([7adaee4](https://github.com/ElJijuna/gnome-ui/commit/7adaee41b03ff1564949c7c4ab990213e60797d3))
+* **@gnome-ui/react-native:** add MultiSelectDropdown component with tests and documentation ([59419e3](https://github.com/ElJijuna/gnome-ui/commit/59419e31264aa50484a4feccb67d862aa3390578))
+* **@gnome-ui/react-native:** add PasswordField component with documentation and tests ([44e0aab](https://github.com/ElJijuna/gnome-ui/commit/44e0aabaec78508430197a67452ed255e079415c))
+* **@gnome-ui/react-native:** add RangeSlider component with documentation and tests ([8ec358f](https://github.com/ElJijuna/gnome-ui/commit/8ec358fe977348d60e8a8e0215f5a74d303a4d6d))
+* **@gnome-ui/react-native:** add StatusBadge component with documentation, tests, and integration into example screens ([293ed0d](https://github.com/ElJijuna/gnome-ui/commit/293ed0df5e22e2fa0b9b47e1fcd2347421a403c6))
+* **@gnome-ui/react-native:** add tintColor prop to Icon component for customizable fill color ([d75f2cd](https://github.com/ElJijuna/gnome-ui/commit/d75f2cdb5d85407458db2759a028f52cefb6493d))
+
 ## [@gnome-ui/react-native-v1.7.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.6.0...@gnome-ui/react-native@1.7.0) (2026-09-10)
 
 ### Features
