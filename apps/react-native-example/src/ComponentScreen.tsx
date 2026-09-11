@@ -30,6 +30,7 @@ import { DividerScreen } from './screens/DividerScreen';
 import { DrawerScreen } from './screens/DrawerScreen';
 import { DropdownScreen } from './screens/DropdownScreen';
 import { EntryRowScreen } from './screens/EntryRowScreen';
+import { ExpanderRowScreen } from './screens/ExpanderRowScreen';
 import { ExpanderScreen } from './screens/ExpanderScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
@@ -129,6 +130,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ButtonRow: ButtonRowScreen,
   Callout: CalloutScreen,
   CheckRow: CheckRowScreen,
+  ExpanderRow: ExpanderRowScreen,
 };
 
 export interface ComponentScreenProps {

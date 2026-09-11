@@ -27,6 +27,7 @@ export * from './components/Drawer';
 export * from './components/Dropdown';
 export * from './components/EntryRow';
 export * from './components/Expander';
+export * from './components/ExpanderRow';
 export * from './components/FileTypeIcon';
 export * from './components/HeaderBar';
 export * from './components/Highlight';

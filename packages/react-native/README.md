@@ -27,8 +27,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
 > `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
 > (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
-> (Tier 8), `Callout` (Tier 20), and `CheckRow` (Tier 12) also shipped.
-> Component ports from
+> (Tier 8), `Callout` (Tier 20), `CheckRow` (Tier 12), and `ExpanderRow`
+> (Tier 8) also shipped. Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2173,6 +2173,32 @@ plain non-interactive `View` rather than the real `Checkbox` component —
 nesting one `Pressable` inside another would create two overlapping tap
 targets. `aria-labelledby` has no RN equivalent, so `accessibilityLabel`
 combines the title and subtitle instead.
+
+### ExpanderRow
+
+```tsx
+import { ActionRow, BoxedList, ExpanderRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <ExpanderRow title="Advanced" subtitle="Proxy, DNS, and MTU settings">
+    <ActionRow title="Proxy" subtitle="Automatic" />
+    <ActionRow title="DNS" subtitle="Automatic" />
+  </ExpanderRow>
+</BoxedList>
+```
+
+Collapsible `ActionRow` that reveals nested rows on activation — mirrors
+`@gnome-ui/react`'s `ExpanderRow`. The header row toggles a smooth reveal
+animation exposing child rows; supports both controlled (`expanded`) and
+uncontrolled (`defaultExpanded`) modes. The reveal panel reuses the
+standalone `Expander`'s exact `Animated.View` height-driven recipe almost
+verbatim — only the chevron differs, using `PanDown` (rotating 0deg →
+180deg, matching the source CSS's straight down-arrow) instead of
+`Expander`'s own `PanEnd` triangle. Nested children get a real `Separator`
+inserted before each one automatically. Use `trailing` for a value label
+or a `Switch`; stop event propagation inside interactive trailing widgets
+so the row's own toggle isn't triggered. Unlike `CheckRow`/`ButtonRow`,
+there is no `disabled` prop — the source component doesn't expose one.
 
 ## Installation
 

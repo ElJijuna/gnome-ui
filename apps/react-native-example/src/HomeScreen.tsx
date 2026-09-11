@@ -67,6 +67,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ButtonRow: 'Full-width activatable row styled as a button, for use inside a BoxedList',
   Callout: 'Inline dismissible admonition box — info/warning/tip variants',
   CheckRow: 'Activatable row with an integrated checkbox — press anywhere to toggle',
+  ExpanderRow: 'Collapsible ActionRow that reveals nested rows on activation',
 };
 
 export interface HomeScreenProps {
