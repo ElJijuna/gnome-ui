@@ -72,6 +72,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   MultiSelectDropdown: 'Checkbox-list dropdown for selecting multiple values from one trigger',
   FilterableMultiSelectDropdown: 'MultiSelectDropdown plus a filter field for long option lists',
   PasswordField: 'TextField with a peek toggle to reveal the value as plain text',
+  RangeSlider: 'Dual-thumb slider for selecting a min/max range',
 };
 
 export interface HomeScreenProps {

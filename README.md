@@ -175,7 +175,7 @@ from those two files — edit them, not this table, then run
 | `PreferencesPage` | Scrollable page composed of `PreferencesGroup` sections. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-preferencespage--docs) |
 | `ProgressBar` | Determinate and indeterminate progress bar following the Adwaita style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-progressbar--docs) |
 | `RadioButton` | Single-selection radio button following the GNOME HIG and Adwaita style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-radiobutton--docs) |
-| `RangeSlider` | Dual-thumb slider for selecting a min/max range, following the Adwaita `GtkScale` pattern used by `Slider`. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-rangeslider--docs) |
+| `RangeSlider` | Dual-thumb slider for selecting a min/max range, following the Adwaita `GtkScale` pattern used by `Slider`. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-rangeslider--docs) |
 | `RatingStars` | Star rating display and input. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-ratingstars--docs) |
 | `ScrollToTop` | Fixed-position button that scrolls the page to the top on click, following the GNOME Human Interface Guidelines. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-scrolltotop--docs) |
 | `SearchBar` | Collapsible search bar following the Adwaita `AdwSearchBar` pattern. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-searchbar--docs) |

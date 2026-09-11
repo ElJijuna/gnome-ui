@@ -47,6 +47,7 @@ export * from './components/Popover';
 export * from './components/PreferencesGroup';
 export * from './components/ProgressBar';
 export * from './components/RadioButton';
+export * from './components/RangeSlider';
 export * from './components/SearchBar';
 export * from './components/SegmentedBar';
 export * from './components/Separator';

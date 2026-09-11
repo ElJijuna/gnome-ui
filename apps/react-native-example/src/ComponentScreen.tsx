@@ -51,6 +51,7 @@ import { PopoverScreen } from './screens/PopoverScreen';
 import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
+import { RangeSliderScreen } from './screens/RangeSliderScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SegmentedBarScreen } from './screens/SegmentedBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
@@ -139,6 +140,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   MultiSelectDropdown: MultiSelectDropdownScreen,
   FilterableMultiSelectDropdown: FilterableMultiSelectDropdownScreen,
   PasswordField: PasswordFieldScreen,
+  RangeSlider: RangeSliderScreen,
 };
 
 export interface ComponentScreenProps {

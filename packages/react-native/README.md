@@ -31,8 +31,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 8), `FieldGroup` (Tier 20), and `MultiSelectDropdown` (Tier 20)
 > also shipped, along with `FilterableMultiSelectDropdown` — an original
 > `@gnome-ui/react`-only component (not a GNOME HIG port) built once its
-> prerequisite `MultiSelectDropdown` landed — and `PasswordField`
-> (Tier 20). Component ports from
+> prerequisite `MultiSelectDropdown` landed — and `PasswordField`/
+> `RangeSlider` (both Tier 20). Component ports from
 > `@gnome-ui/react` continue tier by tier — see this package's own
 > [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
@@ -2305,6 +2305,34 @@ input gets extra trailing padding so typed text never runs under the
 button. Use this over `TextField` with a manually-set `secureTextEntry`
 (which has no reveal affordance). Pass `revealable={false}` to hide the
 toggle entirely (e.g. for a PIN field).
+
+### RangeSlider
+
+```tsx
+import { RangeSlider } from '@gnome-ui/react-native';
+
+<RangeSlider
+  value={priceRange}
+  onChange={setPriceRange}
+  minLabel="Minimum price"
+  maxLabel="Maximum price"
+/>
+```
+
+Dual-thumb slider for selecting a min/max range — mirrors
+`@gnome-ui/react`'s `RangeSlider`. Distinct from `Slider` (a single value)
+— use this for range filters (price, date range, age, etc.) where both
+bounds are adjustable. Reuses `Slider`'s exact `PanResponder`/`locationX`
+pixel-positioning technique: a single responder spans the whole track and,
+on touch-down, picks whichever thumb is nearer — that thumb then stays
+locked to the gesture for the rest of the drag, even if the touch drifts
+closer to the other thumb. Touching anywhere on the track immediately
+jumps the nearest thumb there, so there's no separate "drag the track"
+affordance to port. `minDistance` keeps the two thumbs from crossing or
+overlapping. The web's keyboard navigation has no RN port — replaced by
+two independent `accessibilityRole="adjustable"` elements (one per thumb),
+the same VoiceOver/TalkBack increment/decrement analog `Slider` already
+established.
 
 ## Installation
 

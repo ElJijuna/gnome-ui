@@ -66,6 +66,7 @@ export const COMPONENT_NAMES = [
   'MultiSelectDropdown',
   'FilterableMultiSelectDropdown',
   'PasswordField',
+  'RangeSlider',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
