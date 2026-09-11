@@ -41,6 +41,16 @@ export interface IconProps {
    * equivalent to inherit from a parent, unlike the web version.
    */
   color?: IconColor;
+  /**
+   * Arbitrary fill color, overriding `color`. Escape hatch for the rare
+   * case where a fixed named-palette swatch (e.g. `color="blue"` →
+   * `theme.blue3`) isn't good enough — most concretely, tinting an icon
+   * with the app's actual *configurable* accent (`theme.accentColor`),
+   * which `blue3` never tracks. Added for `BottomTabBar`'s active-tab
+   * icon, the same precedent as `style` being added specifically for
+   * `Dropdown`'s chevron rotation need.
+   */
+  tintColor?: string;
   /** Forwarded to the underlying `Svg` — useful for a `transform` (e.g. a rotated disclosure chevron) or `margin`. */
   style?: StyleProp<ViewStyle>;
 }
@@ -94,10 +104,19 @@ function fillRule(rule: 'nonzero' | 'evenodd' | 'inherit' | undefined) {
  * import { siGithub } from "simple-icons";
  * <Icon icon={siGithub} label="GitHub" />
  */
-export const Icon = ({ icon, size = 'md', width, height, label, color, style }: IconProps) => {
+export const Icon = ({
+  icon,
+  size = 'md',
+  width,
+  height,
+  label,
+  color,
+  tintColor,
+  style,
+}: IconProps) => {
   const theme = useGnomeTheme();
   const px = ICON_SIZE_MAP[size];
-  const fill = resolveIconColor(theme, color);
+  const fill = tintColor ?? resolveIconColor(theme, color);
 
   const resolvedViewBox = isIconDefinition(icon) ? icon.viewBox : (icon.viewBox ?? '0 0 24 24');
   const rawSvg = isIconDefinition(icon) ? icon.svg : undefined;

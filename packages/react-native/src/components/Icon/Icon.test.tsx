@@ -65,6 +65,16 @@ describe('Icon', () => {
     expect(screen.getByLabelText('Search').props.fill).toBe('#3584e4');
   });
 
+  it('lets tintColor override an arbitrary fill, taking precedence over color', async () => {
+    await render(
+      <GnomeProvider colorScheme="light">
+        <Icon icon={Search} label="Search" color="blue" tintColor="#ff00ff" />
+      </GnomeProvider>,
+    );
+
+    expect(screen.getByLabelText('Search').props.fill).toBe('#ff00ff');
+  });
+
   it('defaults to the md size (16px)', async () => {
     await render(
       <GnomeProvider colorScheme="light">
