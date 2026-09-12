@@ -1,3 +1,9 @@
+## [@gnome-ui/web-components-v1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.11.0...@gnome-ui/web-components@1.12.0) (2026-09-12)
+
+### Features
+
+* **@gnome-ui/web-components:** implement scroll buttons for overflowing tabs in TabBar component ([8d61c3d](https://github.com/ElJijuna/gnome-ui/commit/8d61c3d6d705ad9e0e04a2ad560b7b8e1c52cb35))
+
 ## [@gnome-ui/web-components-v1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.10.0...@gnome-ui/web-components@1.11.0) (2026-09-10)
 
 ### Features
