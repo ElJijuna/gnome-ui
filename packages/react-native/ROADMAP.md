@@ -546,6 +546,31 @@ package.
   already marked done in the code but not in this file, don't assume the
   row is simply wrong — check for a real gap first (tests, docs) before
   concluding it's pure staleness.**
+- **Parity check against `@gnome-ui/react`'s `Tabs` fix (2026-09-11), found
+  nothing to change here.** The web sibling had a real bug — `.tab` had
+  `min-width`/`max-width` but no `flex-shrink`, so CSS's default
+  `flex-shrink: 1` actively squeezed tabs (and their labels toward zero
+  width) on a narrow viewport instead of letting the bar's own
+  `overflow-x: auto` scroll them. This package's `TabItem` was already
+  immune, for two compounding reasons documented in its own source
+  already: Yoga's *default* `flexShrink` is `0` (unlike CSS's `1`), and the
+  label `Text` deliberately never got `flex: 1` in the first place — a
+  *different* Yoga bug found while first building `Tabs` (giving `flex: 1`
+  to text inside a content-sized, not stretched, `Pressable` collapsed it
+  to 3-4 characters) led to `numberOfLines`/`ellipsizeMode` instead, which
+  sidesteps the whole shrink-competition question. Also confirmed: this
+  package's own touch-first design philosophy (see the standing
+  constraints list at the top of this file) is why the sibling's new
+  scroll-arrow buttons weren't ported here either — horizontal swipe is
+  the native, expected mobile affordance for an overflowing tab strip, and
+  no RN component in this package fakes a mouse-oriented control for
+  something touch already does natively (see `TabBar`'s own doc comment on
+  dropping keyboard roving-tabindex for the same reason). **General
+  lesson: a "let's bring the packages to parity" request doesn't always
+  mean identical code changes — verify whether the same root cause even
+  applies before porting a fix, and check whether the fix's *complement*
+  (an affordance, not a bug) actually fits the target platform's own
+  conventions.**
 
 Per-component process for anything picked up from this file: read the
 `@gnome-ui/react` source first, design the RN API deliberately rather than

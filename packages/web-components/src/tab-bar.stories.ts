@@ -93,3 +93,67 @@ export const Inline: Story = {
     },
   },
 };
+
+const OVERFLOW_TAB_LABELS = [
+  'Home',
+  'Music',
+  'Search',
+  'Starred',
+  'Settings',
+  'Downloads',
+  'Documents',
+  'Pictures',
+];
+
+function renderScrollableTabBar() {
+  const story = document.createElement('main');
+  story.className = 'wc-story';
+
+  const demo = document.createElement('div');
+  demo.className = 'wc-story__demo';
+  demo.style.maxWidth = '360px';
+
+  const tabBar = document.createElement('gnome-tab-bar');
+  // `.wc-story__demo` is `display: grid; justify-items: start`, so a grid
+  // item is sized to its own content by default (shrink-to-fit) rather than
+  // stretched to the column — without an explicit width here, `gnome-tab-bar`
+  // would just grow to fit its unshrinkable tabs instead of actually
+  // overflowing the 360px demo box the way a real consumer's layout would
+  // constrain it.
+  tabBar.style.width = '100%';
+  tabBar.setAttribute('aria-label', 'Overflowing sections');
+
+  for (const [index, label] of OVERFLOW_TAB_LABELS.entries()) {
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.role = 'tab';
+    tab.textContent = label;
+    tab.setAttribute('aria-selected', String(index === 0));
+
+    tab.addEventListener('click', () => {
+      for (const other of tabBar.querySelectorAll('[role="tab"]')) {
+        other.setAttribute('aria-selected', String(other === tab));
+      }
+    });
+
+    tabBar.append(tab);
+  }
+
+  demo.append(tabBar);
+  story.append(demo);
+
+  return story;
+}
+
+export const Scrollable: Story = {
+  render: renderScrollableTabBar,
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Enough tabs to overflow a narrow (360px) container. `[role="tab"]` now sets `flex-shrink: 0` so tabs keep their natural width instead of squeezing their labels away, and two host-generated, `position: sticky` buttons (`[data-slot="tab-bar-scroll-start"]`/`-end`) fade in at whichever edge still has more to reveal — for anyone who hasn\'t discovered the native horizontal swipe/scroll, or is using a mouse with no scrollbar to grab.',
+      },
+    },
+  },
+};

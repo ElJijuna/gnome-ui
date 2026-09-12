@@ -116,7 +116,7 @@ Legend: ✅ Done · 🚧 In progress · ⬜ Pending
 
 | Priority | Status | Element | Ported from | Notes |
 |----------|--------|---------|--------------|-------|
-| 19 | ✅ | `<gnome-tab-bar>` | `Tabs` | `role="tablist"`; arrow-key navigation mirrors `gnome-menu`'s typeahead code path |
+| 19 | ✅ | `<gnome-tab-bar>` | `Tabs` | `role="tablist"`; arrow-key navigation mirrors `gnome-menu`'s typeahead code path. Also: `[role="tab"]` now sets `flex-shrink: 0` (2026-09-11, ported from `@gnome-ui/react`'s identical fix — labels were shrinking to near-zero width on narrow overflowing bars), plus two host-generated `position: sticky` `[data-slot="tab-bar-scroll-start"/"-end"]` buttons that appear only while there's more to reveal in that direction |
 | 20 | ✅ | `<gnome-view-switcher>` | `ViewSwitcher` | Segmented control; pairs with `gnome-tab-bar` selection model |
 | 21 | ⬜ | `<gnome-search-bar>` | `SearchBar` | Collapsible; reuses `gnome-popover` positioning for autocomplete list |
 

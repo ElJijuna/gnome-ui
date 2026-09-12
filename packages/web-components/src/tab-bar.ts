@@ -1,12 +1,34 @@
 import { defineCustomElement, HTMLElementBase } from './internal/dom';
 
 const TAB_SELECTOR = '[role="tab"]';
+const SCROLL_START_SELECTOR = '[data-slot="tab-bar-scroll-start"]';
+const SCROLL_END_SELECTOR = '[data-slot="tab-bar-scroll-end"]';
 
 function isDisabled(tab: HTMLElement) {
   return (
     (tab instanceof HTMLButtonElement && tab.disabled) ||
     tab.getAttribute('aria-disabled') === 'true'
   );
+}
+
+function createScrollButton(
+  slot: 'tab-bar-scroll-start' | 'tab-bar-scroll-end',
+  label: string,
+): HTMLButtonElement {
+  const button = document.createElement('button');
+
+  button.type = 'button';
+  button.dataset.slot = slot;
+  button.setAttribute('aria-label', label);
+  button.hidden = true;
+
+  const icon = document.createElement('span');
+
+  icon.dataset.slot = 'tab-bar-scroll-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  button.append(icon);
+
+  return button;
 }
 
 /**
@@ -24,9 +46,27 @@ function isDisabled(tab: HTMLElement) {
  * `gnome-radio-group` mirrors native `checked`: whichever tab has
  * `aria-selected="true"` becomes the roving-tabindex stop; if none does,
  * the first enabled tab is.
+ *
+ * The host itself is the scrollable element (`overflow-x: auto`, its
+ * scrollbar hidden via CSS), so touch users can already swipe to reach
+ * overflowing tabs — but nothing told a mouse/trackpad user, or anyone who
+ * hasn't tried swiping, that there was more to see. Two host-generated
+ * buttons (`[data-slot="tab-bar-scroll-start"]`/`-end`, `position: sticky`
+ * to the host's own edges so they never scroll away with the content they
+ * control) fade in only while there's genuinely more in that direction —
+ * mirrors `@gnome-ui/react`'s `TabBar`, same `scrollLeft`/`scrollWidth`
+ * math and the same RTL handling (`scrollLeft` ranges `[-max, 0]` in RTL
+ * per the modern cross-browser convention, `[0, max]` in LTR — "forward"
+ * flips sign, not meaning). Unlike `expander`'s host-generated header,
+ * these don't move or wrap the consumer's own `[role="tab"]` children at
+ * all — sticky positioning alone keeps them pinned without needing a
+ * generated scroll wrapper around content the consumer still owns.
  */
 export class GnomeTabBarElement extends HTMLElementBase {
   #observer: MutationObserver | null = null;
+  #resizeObserver: ResizeObserver | null = null;
+  #scrollStart: HTMLButtonElement | null = null;
+  #scrollEnd: HTMLButtonElement | null = null;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -34,14 +74,27 @@ export class GnomeTabBarElement extends HTMLElementBase {
     }
 
     this.addEventListener('keydown', this.#handleKeyDown);
+    this.#wrapScrollButtons();
     this.#syncTabIndexes();
     this.#observeTabs();
+
+    this.addEventListener('scroll', this.#updateScrollButtons, { passive: true });
+
+    if (typeof ResizeObserver !== 'undefined') {
+      this.#resizeObserver = new ResizeObserver(this.#updateScrollButtons);
+      this.#resizeObserver.observe(this);
+    }
+
+    this.#updateScrollButtons();
   }
 
   disconnectedCallback() {
     this.removeEventListener('keydown', this.#handleKeyDown);
+    this.removeEventListener('scroll', this.#updateScrollButtons);
     this.#observer?.disconnect();
     this.#observer = null;
+    this.#resizeObserver?.disconnect();
+    this.#resizeObserver = null;
   }
 
   get inline() {
@@ -60,9 +113,68 @@ export class GnomeTabBarElement extends HTMLElementBase {
     return this.#tabs().filter((tab) => !isDisabled(tab));
   }
 
+  #wrapScrollButtons() {
+    let start = this.querySelector<HTMLButtonElement>(SCROLL_START_SELECTOR);
+
+    if (!start || start.parentElement !== this) {
+      start = createScrollButton('tab-bar-scroll-start', 'Scroll to previous tabs');
+      this.prepend(start);
+    }
+
+    start.addEventListener('click', this.#handleScrollStartClick);
+    this.#scrollStart = start;
+
+    let end = this.querySelector<HTMLButtonElement>(SCROLL_END_SELECTOR);
+
+    if (!end || end.parentElement !== this) {
+      end = createScrollButton('tab-bar-scroll-end', 'Scroll to next tabs');
+      this.append(end);
+    }
+
+    end.addEventListener('click', this.#handleScrollEndClick);
+    this.#scrollEnd = end;
+  }
+
+  #handleScrollStartClick = () => this.#scrollByPage(false);
+  #handleScrollEndClick = () => this.#scrollByPage(true);
+
+  /** `forward` moves toward later tabs, `backward` toward earlier ones — independent of LTR/RTL sign conventions. */
+  #scrollByPage(forward: boolean) {
+    const rtl = getComputedStyle(this).direction === 'rtl';
+    const step = this.clientWidth * 0.8;
+    const towardPositive = forward !== rtl;
+    const reducedMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    this.scrollBy({
+      left: towardPositive ? step : -step,
+      behavior: reducedMotion ? 'instant' : 'smooth',
+    });
+  }
+
+  #updateScrollButtons = () => {
+    // Modern engines agree `scrollLeft` ranges `[0, max]` in LTR and
+    // `[-max, 0]` in RTL — its absolute distance from zero is the actual
+    // scroll offset regardless of which one applies.
+    const maxScroll = Math.max(0, this.scrollWidth - this.clientWidth);
+    const scrolled = Math.min(maxScroll, Math.abs(this.scrollLeft));
+
+    if (this.#scrollStart) {
+      this.#scrollStart.hidden = scrolled <= 1;
+    }
+
+    if (this.#scrollEnd) {
+      this.#scrollEnd.hidden = maxScroll - scrolled <= 1;
+    }
+  };
+
   #observeTabs() {
     this.#observer?.disconnect();
-    this.#observer = new MutationObserver(() => this.#syncTabIndexes());
+    this.#observer = new MutationObserver(() => {
+      this.#syncTabIndexes();
+      this.#updateScrollButtons();
+    });
     this.#observer.observe(this, {
       attributes: true,
       attributeFilter: ['aria-disabled', 'aria-selected', 'disabled', 'role'],

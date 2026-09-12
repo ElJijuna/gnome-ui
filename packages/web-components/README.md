@@ -472,6 +472,17 @@ first enabled tab if none is selected), kept in sync via a
 `inline` attribute removes the header-bar background for use inside a card
 or content area.
 
+When there are more tabs than fit, the host generates two
+`position: sticky` scroll buttons of its own (prepended/appended once on
+connect, alongside the consumer's own `[role="tab"]` children, which are
+never moved or wrapped) — each fades in only while there's genuinely more
+to reveal in that direction, so a mouse/trackpad user (or anyone who
+hasn't discovered the native horizontal swipe/scroll — the bar's own
+scrollbar is hidden via CSS) still has an explicit way to reach the rest.
+RTL-aware: which physical edge each button sticks to, which way a click
+scrolls, and which way its chevron points all follow the bar's resolved
+`direction`, not a hardcoded left/right.
+
 ## View Switcher
 
 ```html

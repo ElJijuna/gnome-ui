@@ -3212,6 +3212,7 @@ gnome-tab-bar {
   align-items: stretch;
   overflow-x: auto;
   scrollbar-width: none;
+  min-width: 0;
   min-height: 40px;
   padding: 0 var(--gnome-space-1, 6px);
   gap: 2px;
@@ -3232,6 +3233,7 @@ gnome-tab-bar [role="tab"] {
   position: relative;
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   gap: var(--gnome-space-1, 6px);
   min-width: 80px;
   max-width: 200px;
@@ -3299,12 +3301,100 @@ gnome-tab-bar[inline] [role="tab"]:focus-visible {
     var(--gnome-focus-ring-color, #3584e4);
 }
 
+/* Tab Bar — scroll buttons */
+
+/* `:not([hidden])` on the `display` declaration specifically: an
+   unconditional `display: flex` here would be an author-origin rule and
+   so would always beat the UA stylesheet's `[hidden] { display: none }`
+   regardless of specificity (author normal always beats UA normal) —
+   without this, toggling the `hidden` property from JS would do nothing
+   visually. */
+gnome-tab-bar [data-slot="tab-bar-scroll-start"],
+gnome-tab-bar [data-slot="tab-bar-scroll-end"] {
+  position: sticky;
+  z-index: 1;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--gnome-headerbar-bg-color, #ebebeb);
+  color: var(--gnome-headerbar-fg-color, rgb(0 0 0 / 0.8));
+  cursor: pointer;
+  outline: none;
+}
+
+gnome-tab-bar [data-slot="tab-bar-scroll-start"]:not([hidden]),
+gnome-tab-bar [data-slot="tab-bar-scroll-end"]:not([hidden]) {
+  display: flex;
+}
+
+/* Logical, not physical, offsets — so a `direction: rtl` ancestor (which
+   also reverses the flex row itself) sticks each button to the edge it
+   naturally ends up on, rather than a hardcoded left/right. */
+gnome-tab-bar [data-slot="tab-bar-scroll-start"] {
+  inset-inline-start: 0;
+}
+
+gnome-tab-bar [data-slot="tab-bar-scroll-end"] {
+  inset-inline-end: 0;
+}
+
+gnome-tab-bar[inline] [data-slot="tab-bar-scroll-start"],
+gnome-tab-bar[inline] [data-slot="tab-bar-scroll-end"] {
+  background-color: transparent;
+}
+
+gnome-tab-bar [data-slot="tab-bar-scroll-start"]:hover,
+gnome-tab-bar [data-slot="tab-bar-scroll-end"]:hover {
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.06));
+}
+
+gnome-tab-bar [data-slot="tab-bar-scroll-start"]:focus-visible,
+gnome-tab-bar [data-slot="tab-bar-scroll-end"]:focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--gnome-focus-ring-offset, 2px) var(--gnome-headerbar-bg-color, #ebebeb),
+    inset 0 0 0 calc(var(--gnome-focus-ring-offset, 2px) + var(--gnome-focus-ring-width, 3px))
+    var(--gnome-focus-ring-color, #3584e4);
+}
+
+gnome-tab-bar [data-slot="tab-bar-scroll-icon"] {
+  width: 6px;
+  height: 10px;
+  background-color: currentcolor;
+}
+
+/* Default (LTR): "start" points back (‹), "end" points forward (›) — the
+   same two triangles `gnome-expander`'s chevron already draws with
+   `clip-path`, one of them mirrored. */
+gnome-tab-bar [data-slot="tab-bar-scroll-start"] [data-slot="tab-bar-scroll-icon"] {
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+gnome-tab-bar [data-slot="tab-bar-scroll-end"] [data-slot="tab-bar-scroll-icon"] {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* RTL flips which physical direction is "forward" — flip both glyphs
+   rather than re-deriving their `clip-path`s. */
+gnome-tab-bar:dir(rtl) [data-slot="tab-bar-scroll-start"] [data-slot="tab-bar-scroll-icon"],
+gnome-tab-bar:dir(rtl) [data-slot="tab-bar-scroll-end"] [data-slot="tab-bar-scroll-icon"] {
+  transform: scaleX(-1);
+}
+
 @media (prefers-color-scheme: dark) {
   gnome-tab-bar {
     background-color: var(--gnome-headerbar-bg-color, #303030);
   }
 
   gnome-tab-bar [role="tab"] {
+    color: var(--gnome-headerbar-fg-color, rgb(255 255 255 / 0.85));
+  }
+
+  gnome-tab-bar [data-slot="tab-bar-scroll-start"],
+  gnome-tab-bar [data-slot="tab-bar-scroll-end"] {
+    background-color: var(--gnome-headerbar-bg-color, #303030);
     color: var(--gnome-headerbar-fg-color, rgb(255 255 255 / 0.85));
   }
 }
