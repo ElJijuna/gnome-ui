@@ -82,6 +82,19 @@ describe('SearchBar', () => {
     expect(screen.queryByRole('button', { name: 'Cancel' })).not.toBeOnTheScreen();
   });
 
+  it('removes the header-bar background when inline', async () => {
+    await render(
+      <GnomeProvider colorScheme="light">
+        <SearchBar open inline value="" placeholder="Search…" />
+      </GnomeProvider>,
+    );
+
+    expect(screen.getByPlaceholderText('Search…').parent).toHaveStyle({
+      backgroundColor: 'transparent',
+      borderBottomColor: 'transparent',
+    });
+  });
+
   it('renders children (e.g. filter chips) only while open', async () => {
     await render(
       <GnomeProvider colorScheme="light">

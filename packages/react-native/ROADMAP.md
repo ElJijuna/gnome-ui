@@ -158,8 +158,8 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ✅ | **InlineViewSwitcher** | Shipped with `InlineViewSwitcherItem` — all four variants (`default`/`flat`/`round`/`pill`) and all four overflow strategies. **Far more than the "directly portable once `ToggleGroup` ships" this row used to claim**: almost none of the mechanism ports. The sliding indicator can't read `offsetLeft`/`offsetWidth`, so each item reports its own `onLayout` up through the context and the indicator animates `translateX` + `width` on **one JS-driven animation** (`useNativeDriver: false` — `width` can't be native-driven and mixing drivers on one component throws; `scaleX` would have been native but distorts the corner radii the variants are defined by). `ResizeObserver` + `scrollWidth` vs `clientWidth` becomes the summed item measurements (RN leaves `flexShrink` at 0, so an overflowing row still reports natural widths) against the row's own `onLayout`, with the web's `naturalWidthRef` capture and 30 px hysteresis ported verbatim. `scroll-snap-align: start` has no RN style but the measured offsets feed `snapToOffsets` exactly. `overflow="menu"` reuses the shipped `BottomSheet`. **Bug found by the on-device screenshot check and fixed rather than ported**: the web applies its `.active` class to the menu trigger even though menu mode hides the indicator, painting `round`'s label in `accent-fg` (#fff) on a plain card — white on white; the RN trigger uses the idle color instead |
-| ⬜ | **TabBar `inline` prop** | Trivial — drop the header-bar background color |
-| ⬜ | **SearchBar `inline` prop** | Trivial, same as above |
+| ✅ | **TabBar `inline` prop** | Already shipped when this row was written — stale duplicate, not a new build. Found while looking up "Tabs" for a named-component request (2026-09-11): the prop was fully implemented (`backgroundColor`/`borderBottomWidth` toggle) but had no test coverage at all, so a regression test was added rather than any new code |
+| ✅ | **SearchBar `inline` prop** | Same stale-row situation as `TabBar` above, found in the same pass — already implemented, now covered by a regression test too |
 | ⬜ | **SearchBar autocomplete** | Blocked on nothing now that `Popover` shipped (Tier 5) — reuses its positioning instead of the web version's own `Popover` |
 | ✅ | **StatusPage `compact` prop** | Shipped with `StatusPage` itself (Tier 4) — padding, icon size, title variant, description variant/measure, and both action-area gaps all scale together, matching the web's `.compact` block value for value |
 
@@ -531,6 +531,21 @@ package.
 - **Whole-package deferrals**: `@gnome-ui/charts`, `@gnome-ui/platform`,
   `@gnome-ui/hooks`, `@gnome-ui/layout`'s components, `ContributionGraph`,
   `ColumnView` — each is its own initiative, not a single-component turn.
+- **Two stale ROADMAP rows found and fixed (2026-09-11)**: a request for
+  "Tabs" hit this file's exception case for an already-shipped component —
+  `TabBar`'s `inline` prop was marked `⬜ pending, trivial` here but was
+  actually already fully implemented in `TabBar.tsx`, and the exact same
+  was true of `SearchBar`'s own `inline` row right below it. Neither prop
+  needed writing; what was genuinely missing was test coverage — `grep
+  inline` across both components' `.test.tsx` files came back empty despite
+  the feature working. Added one regression test to each
+  (`TabBar`: `backgroundColor`/`borderBottomWidth` go transparent/`0`;
+  `SearchBar`: same via the `TextInput`'s parent style, since the bar's
+  colored surface has no `testID` of its own) rather than re-implementing
+  anything. **General lesson: when a named-component request lands on a row
+  already marked done in the code but not in this file, don't assume the
+  row is simply wrong — check for a real gap first (tests, docs) before
+  concluding it's pure staleness.**
 
 Per-component process for anything picked up from this file: read the
 `@gnome-ui/react` source first, design the RN API deliberately rather than

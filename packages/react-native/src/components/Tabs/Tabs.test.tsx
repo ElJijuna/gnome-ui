@@ -74,6 +74,21 @@ describe('Tabs', () => {
       expect(onPress).not.toHaveBeenCalled();
     });
 
+    it('removes the header-bar background when inline', async () => {
+      await render(
+        <GnomeProvider colorScheme="light">
+          <TabBar inline testID="bar">
+            <TabItem label="General" active />
+          </TabBar>
+        </GnomeProvider>,
+      );
+
+      expect(screen.getByTestId('bar')).toHaveStyle({
+        backgroundColor: 'transparent',
+        borderBottomWidth: 0,
+      });
+    });
+
     it('renders a count badge, capped at "99+"', async () => {
       await render(
         <GnomeProvider colorScheme="light">

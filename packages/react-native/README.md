@@ -503,6 +503,10 @@ button is the RN-idiomatic stand-in. The clear (×) button appears whenever
 glyphs (`🔍`/`×`) rather than `@gnome-ui/icons`, matching every other
 no-SVG-dependency component in this package.
 
+`inline` drops the header-bar background/border so the bar blends into any
+surface — a card, a plain content area, a custom container — instead of
+looking like it belongs to a `HeaderBar`.
+
 Dropped relative to `@gnome-ui/react`'s `SearchBar`: the `suggestions` /
 `onSuggestionSelect` / `loadingSuggestions` / `renderSuggestion` /
 `suggestionsLabel` autocomplete popover — it depends on a portal +
