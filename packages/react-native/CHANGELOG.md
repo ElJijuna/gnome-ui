@@ -1,3 +1,11 @@
+## [@gnome-ui/react-native-v1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.8.0...@gnome-ui/react-native@1.9.0) (2026-09-12)
+
+### Features
+
+* **@gnome-ui/react-native:** add BreakpointBin component with documentation, tests, and integration into example screens ([7364ac6](https://github.com/ElJijuna/gnome-ui/commit/7364ac6d07771140db02e4e934e948a7d7c0fb25))
+* **@gnome-ui/react-native:** add ButtonContent component with documentation, tests, and integration into example screens ([163299c](https://github.com/ElJijuna/gnome-ui/commit/163299c38ec7fd8fba0c55b030a23317cd97556f))
+* **@gnome-ui/web-components:** implement scroll buttons for overflowing tabs in TabBar component ([8d61c3d](https://github.com/ElJijuna/gnome-ui/commit/8d61c3d6d705ad9e0e04a2ad560b7b8e1c52cb35))
+
 ## [@gnome-ui/react-native-v1.8.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.7.0...@gnome-ui/react-native@1.8.0) (2026-09-11)
 
 ### Features
