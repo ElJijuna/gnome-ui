@@ -63,6 +63,7 @@ import { SkeletonScreen } from './screens/SkeletonScreen';
 import { SliderScreen } from './screens/SliderScreen';
 import { SpinButtonScreen } from './screens/SpinButtonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
+import { SpinRowScreen } from './screens/SpinRowScreen';
 import { StatusBadgeScreen } from './screens/StatusBadgeScreen';
 import { StatusPageScreen } from './screens/StatusPageScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
@@ -135,6 +136,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   EntryRow: EntryRowScreen,
   PasswordEntryRow: PasswordEntryRowScreen,
   ComboRow: ComboRowScreen,
+  SpinRow: SpinRowScreen,
   ColorPicker: ColorPickerScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,

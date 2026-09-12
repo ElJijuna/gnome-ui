@@ -59,6 +59,7 @@ export * from './components/Skeleton';
 export * from './components/Slider';
 export * from './components/SpinButton';
 export * from './components/Spinner';
+export * from './components/SpinRow';
 export * from './components/StatusBadge';
 export * from './components/StatusPage';
 export * from './components/Switch';

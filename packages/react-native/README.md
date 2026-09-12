@@ -25,7 +25,7 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
-> `EntryRow`/`PasswordEntryRow`/`ComboRow` (Tier 12), `ColorPicker`
+> `EntryRow`/`PasswordEntryRow`/`ComboRow`/`SpinRow` (Tier 12), `ColorPicker`
 > (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
 > (Tier 8), `Callout` (Tier 20), `CheckRow` (Tier 12), `ExpanderRow`
 > (Tier 8), `FieldGroup` (Tier 20), and `MultiSelectDropdown` (Tier 20)
@@ -2021,6 +2021,38 @@ components means the flip-to-fit placement, the tap-outside dismissal and the
 `Dropdown` is controlled-only, so the uncontrolled state lives in `ComboRow`
 — same behaviour as the web version, one level up. The keyboard layer drops
 as it does everywhere else here.
+
+### SpinRow
+
+```tsx
+import { SpinRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <SpinRow
+    title="Volume"
+    subtitle="Output level"
+    value={volume}
+    onValueChange={setVolume}
+    min={0}
+    max={100}
+  />
+</BoxedList>
+```
+
+Settings row with an integrated spin button for numeric values — mirrors
+`AdwSpinRow` and `@gnome-ui/react`'s own `SpinRow`. Use it inside a
+`BoxedList` for settings with numeric ranges (volume, timeout duration,
+count limits, etc.). Controlled (`value`) and uncontrolled (`defaultValue`)
+modes both work.
+
+**This is a composition of `ActionRow` + `SpinButton`, the same shape as
+`ComboRow`'s `ActionRow` + `Dropdown` composition above.** `SpinButton` is
+controlled-only, so the uncontrolled `defaultValue` state lives in `SpinRow`,
+one level up. The web version's keyboard interaction (↑/↓ one step, Page
+Up/Down ten steps, Home/End to bounds) drops as it does everywhere else in
+this package — `SpinButton` already provides the touch/screen-reader
+equivalents it was built with (tap the visible −/+ buttons, or the
+`accessibilityRole="adjustable"` increment/decrement actions).
 
 ### ColorPicker / ColorSwatch
 

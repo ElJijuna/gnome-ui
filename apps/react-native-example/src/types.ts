@@ -57,6 +57,7 @@ export const COMPONENT_NAMES = [
   'EntryRow',
   'PasswordEntryRow',
   'ComboRow',
+  'SpinRow',
   'ColorPicker',
   'Bin',
   'Blockquote',
