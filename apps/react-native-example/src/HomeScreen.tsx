@@ -54,6 +54,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   CoachMark: 'Spotlight a UI element and anchor a callout bubble beside it',
   Clamp: 'Caps content at a readable maximum width and centers it',
   Box: 'Flex layout primitive — orientation, HIG spacing scale, align, justify',
+  BreakpointBin: 'Container-query breakpoints — reacts to its own width, not the window',
   WrapBox: 'Wrapping row — items reflow onto new lines, separate child/line gaps',
   StatusPage: 'Empty state — big icon, title, description, and a way forward',
   ToggleGroup: 'Mutually-exclusive toggle buttons — icon, label, or both',

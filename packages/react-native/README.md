@@ -36,8 +36,11 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > a React Native-only original with no `@gnome-ui/react` source at all
 > (desktop apps don't have a bottom tab bar pattern to mirror), built on
 > explicit request for the iOS/Android fixed bottom-navigation shape.
-> Component ports from `@gnome-ui/react` continue tier by tier — see this
-> package's own [ROADMAP.md](./ROADMAP.md) for full
+> `useBreakpoint` and `BreakpointBin` (both Tier 6) also shipped — the
+> package's first adaptive-layout primitives, built on `useWindowDimensions`
+> and `onLayout` respectively since there's no CSS media query/container
+> query to lean on. Component ports from `@gnome-ui/react` continue tier by
+> tier — see this package's own [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
 > main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
 > expansion this package belongs to.
@@ -2396,6 +2399,62 @@ mode — `true` for a dot, a number for a count (capped at `"99+"`).
 `bottomInset` lets you thread in your own `useSafeAreaInsets().bottom` —
 this package takes no dependency on `react-native-safe-area-context`
 itself.
+
+### useBreakpoint
+
+```tsx
+import { useBreakpoint } from '@gnome-ui/react-native';
+
+const { isNarrow, isMedium, width } = useBreakpoint();
+
+return isNarrow ? <CompactLayout /> : <RegularLayout />;
+```
+
+Tracks the window width against the same GNOME/libadwaita canonical
+breakpoints as `@gnome-ui/react`'s hook of the same name — `narrow` (≤ 400
+dp, split views collapse), `medium` (≤ 550 dp, `ViewSwitcher` moves to a
+bottom bar), `wide` (≤ 860 dp, outer pane of a nested split view
+collapses). Built on `useWindowDimensions` rather than `Dimensions.get` +
+a manual listener, since it already re-renders subscribers on every
+rotation/resize — there's no CSS media query to lean on here, unlike the
+web version's `window.innerWidth` + `resize` listener.
+
+Also exports `bucketForWidth`/`resolveResponsive`/`ResponsiveValue` — the
+same small pure-function toolkit the web hook exports, for picking a
+value that varies by breakpoint (`{ base: 3, wide: 2, narrow: 1 }`-shaped
+maps). These aren't wired into any component's props yet; they're
+exported now so a future adaptive component (`Sidebar`'s `mode` prop,
+`NavigationSplitView`, …) doesn't have to redefine the bucket-fallback
+logic from scratch.
+
+### BreakpointBin
+
+```tsx
+import { BreakpointBin } from '@gnome-ui/react-native';
+
+<BreakpointBin breakpoints={[{ name: 'compact', maxWidth: 400 }]}>
+  {({ activeBreakpoint }) =>
+    activeBreakpoint === 'compact' ? <CompactCard /> : <WideCard />
+  }
+</BreakpointBin>;
+```
+
+The per-*component* (container-query) sibling of `useBreakpoint` — reacts
+to **its own width**, not the window, so the same component can render
+differently depending on how much space its parent gives it, regardless
+of device size. Two `BreakpointBin`s with identical `breakpoints` can be
+in different states side by side.
+
+`@gnome-ui/react`'s version watches itself with `ResizeObserver`; RN has
+no such API, so this measures via `onLayout` instead — fired on mount and
+again on every subsequent resize of the wrapping `View` (a parent's flex
+layout reflowing, a device rotation, an ancestor `BreakpointBin` flipping
+column↔row). The active breakpoint is the smallest `maxWidth` ≥ the
+current width, declaration order doesn't matter (sorted internally), and
+`activeBreakpoint` is `null` when the container is wider than every
+threshold. Unlike the web version there's no `data-breakpoint` attribute
+to expose for CSS targeting (RN has no attribute selectors) — branch on
+`activeBreakpoint` directly inside the render prop instead.
 
 ## Installation
 

@@ -89,14 +89,17 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 ---
 
-## Tier 6 — Adaptive Layout ⬜ (1/5) — next up
+## Tier 6 — Adaptive Layout ⬜ (2/5)
 
-> The real gap: nothing here exists yet, and `Sidebar`'s own adaptive
-> `mode` prop (Tier 11) and `Sidebar` v2 (Tier 7) are both blocked on it.
+> `useBreakpoint` shipped (2026-09-11), unblocking `Sidebar`'s own adaptive
+> `mode` prop (Tier 11), `Sidebar` v2 (Tier 7), `ViewSwitcherSidebar`
+> (Tier 7), `NavigationSplitView`, `OverlaySplitView`, and
+> `ViewSwitcherBar` below — none of those are built yet, this only clears
+> the prerequisite.
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **`useBreakpoint`** | Needs a from-scratch RN build on `useWindowDimensions` + the same 400/550/860 sp thresholds — no CSS media query to lean on. Highest-priority item in this file: unblocks `Sidebar`'s `mode` prop, `Sidebar` v2, `ViewSwitcherSidebar`, and `BreakpointBin` |
+| ✅ | **`useBreakpoint`** | Built on `useWindowDimensions` (reactive, so no manual resize listener needed like the web version's `window.innerWidth`/`resize`) + the same 400/550/860 dp thresholds. Also ports the web hook's `bucketForWidth`/`resolveResponsive`/`ResponsiveValue` pure-function toolkit verbatim (no RN-specific change needed there) — exported now, not yet consumed by any component's props |
 | ✅ | **Clamp** | Shipped — `maxWidth` + `alignSelf: 'center'` (not `marginHorizontal: 'auto'`, following `Drawer`'s own resolution when RN auto-margin support was left unverified for this Yoga version); the trade-off is that `Clamp` needs a column-direction parent, since `alignSelf` acts on the cross axis. `tighteningThreshold` is implemented as a real percentage width rather than ported as-is: `@gnome-ui/react` declares and documents the prop but never passes it to the DOM, so mirroring it 1:1 would have shipped a dead prop |
 | ⬜ | **NavigationSplitView** | Two-pane sidebar+content that collapses to one pane at ≤ 400 sp — blocked on `useBreakpoint` |
 | ⬜ | **OverlaySplitView** | Sidebar becomes a slide-over `Modal` at ≤ 400 sp — blocked on `useBreakpoint`; the slide-over itself reuses `Popover`/`Dropdown`'s `Modal` + reduced-motion fade recipe |
@@ -112,7 +115,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 | 🚫 | **ShortcutsDialog** | No keyboard shortcuts exist to list on a touch-first device — low value, not planned unless a specific need arises |
 | ⬜ | **Sidebar (v2)** | Rewrite blocked on `useBreakpoint` (Tier 6) — named sections/context menus/tooltip are otherwise straightforward compositions of already-shipped pieces |
 | ⬜ | **ViewSwitcherSidebar** | Blocked on `useBreakpoint` (Tier 6), same as `Sidebar` v2 |
-| ⬜ | **BreakpointBin** | The per-*component* (container-query) sibling of `useBreakpoint` — same `useWindowDimensions`-adjacent build, but measures its own `onLayout` width instead of the window |
+| ✅ | **BreakpointBin** | The per-*component* (container-query) sibling of `useBreakpoint` — measures its own width via `onLayout` (fires on mount and on every subsequent resize of the wrapping `View`) rather than `ResizeObserver`, which RN has no equivalent of. No `data-breakpoint`-attribute equivalent to expose (RN has no attribute selectors) — branch on the render prop's `activeBreakpoint` directly instead |
 | ✅ | **Cross-cutting — high-contrast** | Already done: `useContrast`/`useResolvedContrast` + `highContrastTheme`/`highContrastDarkTheme` shipped with the theme system itself |
 | ✅ | **Cross-cutting — Intl formatting** | Already done: `GnomeProvider` exposes `useLocale`/`useDir`/`useNumberFormatter`/`useDateTimeFormatter` |
 
@@ -492,12 +495,25 @@ package.
   now confirmed to reliably surface real gaps twice in a row — worth
   re-running after any batch of upstream `@gnome-ui/react` additions, not
   just once.
-- **Next real gap**: the rest of Tier 6 — `Clamp` shipped (2026-09-06), the
-  one member with no breakpoint dependency, so `useBreakpoint` is now the
-  only thing standing between this package and every remaining adaptive
-  item: `Sidebar` v2, `ViewSwitcherSidebar`, `BreakpointBin`, `Sidebar`'s
-  own adaptive `mode`, `NavigationSplitView`, `OverlaySplitView`,
-  `ViewSwitcherBar`.
+- **`useBreakpoint` + `BreakpointBin` (2026-09-11)**: shipped together —
+  `BreakpointBin` was requested on its own, but this file already flagged
+  it as blocked on `useBreakpoint` (Tier 6), so `useBreakpoint` was built
+  first as a genuine prerequisite rather than asked about, the same
+  judgment call `IconButton` (before `Drawer`) and `Icon` (before
+  `AnimatedIcon`) already established for this package. In the end
+  `BreakpointBin` doesn't actually *import* `useBreakpoint` at runtime —
+  its `breakpoints` prop is caller-supplied and it measures its own width
+  via `onLayout`, exactly like the web version doesn't import its own
+  `useBreakpoint` sibling either — the two are independent, parallel APIs
+  (window vs. container) sharing only the same threshold *values* and
+  design intent, not code. Still built in this order because that's the
+  dependency this file itself recorded, and because `useBreakpoint`'s
+  `bucketForWidth`/`resolveResponsive` toolkit is worth having landed
+  before the next adaptive component needs it. Tier 6's remaining items —
+  `Sidebar` v2, `ViewSwitcherSidebar`, `Sidebar`'s own adaptive `mode`,
+  `NavigationSplitView`, `OverlaySplitView`, `ViewSwitcherBar` — are now
+  unblocked (the prerequisite exists) but still unbuilt; picking any of
+  them up is its own turn, not a continuation of this one.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
   Tier 8's `Toolbar`/`Spacer`/
   `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;

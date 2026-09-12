@@ -48,6 +48,7 @@ export const COMPONENT_NAMES = [
   'CoachMark',
   'Clamp',
   'Box',
+  'BreakpointBin',
   'WrapBox',
   'StatusPage',
   'ToggleGroup',

@@ -105,7 +105,7 @@ from those two files — edit them, not this table, then run
 | `Blockquote` | Styled pull-quote with semantic `<blockquote>` markup. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-blockquote--docs) |
 | `BottomSheet` | Slide-up panel that overlays content from the bottom edge. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-bottomsheet--docs) |
 | `BoxedList` | Rounded bordered list — the most common container pattern in GNOME settings and detail views. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-boxedlist--docs) |
-| `BreakpointBin` | Container that fires layout changes when **its own width** crosses defined thresholds — the CSS container-query equivalent of `AdwBreakpointBin` (libadwaita 1.9 / GNOME 50). | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-breakpointbin--docs) |
+| `BreakpointBin` | Container that fires layout changes when **its own width** crosses defined thresholds — the CSS container-query equivalent of `AdwBreakpointBin` (libadwaita 1.9 / GNOME 50). | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-breakpointbin--docs) |
 | `Button` | Button component following the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/patterns/controls/buttons.html). | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-button--docs) |
 | `ButtonContent` | Icon + label layout helper for buttons that contain both an icon and text. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttoncontent--docs) |
 | `ButtonRow` | Full-width activatable row styled as a button inside a `BoxedList`. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttonrow--docs) |

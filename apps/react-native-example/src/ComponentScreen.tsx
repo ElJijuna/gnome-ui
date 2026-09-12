@@ -15,6 +15,7 @@ import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BottomTabBarScreen } from './screens/BottomTabBarScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
+import { BreakpointBinScreen } from './screens/BreakpointBinScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CalloutScreen } from './screens/CalloutScreen';
@@ -124,6 +125,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   CoachMark: CoachMarkScreen,
   Clamp: ClampScreen,
   Box: BoxScreen,
+  BreakpointBin: BreakpointBinScreen,
   WrapBox: WrapBoxScreen,
   StatusPage: StatusPageScreen,
   ToggleGroup: ToggleGroupScreen,
