@@ -76,6 +76,7 @@ import { ToastScreen } from './screens/ToastScreen';
 import { ToggleGroupScreen } from './screens/ToggleGroupScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
+import { WidgetManagerScreen } from './screens/WidgetManagerScreen';
 import { WrapBoxScreen } from './screens/WrapBoxScreen';
 import type { ComponentName } from './types';
 
@@ -155,6 +156,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   PasswordField: PasswordFieldScreen,
   RangeSlider: RangeSliderScreen,
   StatusBadge: StatusBadgeScreen,
+  WidgetManager: WidgetManagerScreen,
 };
 
 export interface ComponentScreenProps {

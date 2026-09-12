@@ -33,7 +33,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > also shipped, along with `FilterableMultiSelectDropdown` — an original
 > `@gnome-ui/react`-only component (not a GNOME HIG port) built once its
 > prerequisite `MultiSelectDropdown` landed — and `PasswordField`/
-> `RangeSlider`/`StatusBadge` (all Tier 20). `BottomTabBar` also shipped —
+> `RangeSlider`/`StatusBadge`/`WidgetManager` (all Tier 20) — `WidgetManager`
+> was previously deferred as low-priority, built once named directly since
+> every piece it composes had already shipped. `BottomTabBar` also shipped —
 > a React Native-only original with no `@gnome-ui/react` source at all
 > (desktop apps don't have a bottom tab bar pattern to mirror), built on
 > explicit request for the iOS/Android fixed bottom-navigation shape.
@@ -2501,6 +2503,51 @@ short human-readable state labels: no anchor positioning, no dot mode, no
 counter. Six variants (`success`/`warning`/`error`/`new`/`accent`/
 `neutral`) reuse `Badge`'s exact color-mapping shape, plus a `new` (purple)
 variant `Badge` doesn't have.
+
+### WidgetManager
+
+```tsx
+import { WidgetManager, type WidgetDefinition } from '@gnome-ui/react-native';
+
+const catalog: WidgetDefinition[] = [
+  { id: 'clock', label: 'Clock', description: 'Shows the current time', render: () => <ClockWidget /> },
+  { id: 'weather', label: 'Weather', render: () => <WeatherWidget /> },
+];
+
+<WidgetManager title="My Dashboard" catalog={catalog} value={widgetIds} onChange={setWidgetIds} />;
+```
+
+Card that manages a controlled collection of "widgets" — pick which ones
+are visible from a `catalog`, each rendering its own arbitrary content via
+`render()` — mirrors `@gnome-ui/react`'s own `WidgetManager`. The header's
+edit button toggles a local `editing` state: in view mode only the added
+widgets (or an empty-state message) show; in edit mode a dashed "add
+widget" trigger also appears, opening a catalog picker (`pickerSurface`:
+`"dialog"`, `"bottomSheet"`, or `"drawer"`). Adding/removing is staged
+inside the picker and only applied — via `onChange` — when the user
+confirms; canceling or dismissing discards the staging. Widgets can only be
+removed through the picker, never inline in the card.
+
+Every piece this composes already existed: `ActionRow`+`BoxedList` for the
+catalog rows, `Button`/`IconButton`/`Icon`/`StatusPage` for the rest of the
+chrome, and `Dialog`/`BottomSheet`/`Drawer` for the three `pickerSurface`
+options. The web version's option is called `"modal"`, after its own
+`Modal` component — this package's `Modal` counterpart is `Dialog` (RN's
+own `Modal` primitive is a different, lower-level thing), so the option is
+named after what it actually renders here instead of ported verbatim. None
+of those three overlay components scroll their `children` for you, unlike
+the web version's `overflow-y: auto` body, so the catalog list gets its own
+capped `ScrollView` before being handed to whichever surface renders it.
+`Dialog` already renders its own confirm/cancel row from a `buttons` array;
+only `bottomSheet`/`drawer` need the hand-rolled footer row the web source
+itself calls out ("Modal uses its own actions").
+
+Not ported: `aria-pressed` on the edit toggle — `Button`/`IconButton` set
+their own internal `accessibilityState` on the underlying `Pressable`, and
+a second `accessibilityState` prop passed in here would silently replace
+rather than merge with it (the same `Popover`-trigger clobber `SplitButton`
+already worked around) — dropped rather than routed around for one
+decorative toggle-state announcement.
 
 ### BottomTabBar
 

@@ -107,6 +107,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   PasswordField: 'TextField with a peek toggle to reveal the value as plain text',
   RangeSlider: 'Dual-thumb slider for selecting a min/max range',
   StatusBadge: 'Pill-shaped text label for entity status — published, beta, new, etc.',
+  WidgetManager: 'Card managing a controlled collection of widgets picked from a catalog',
 };
 
 type CategoryKey =
@@ -200,6 +201,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   Tooltip: 'feedback',
   StatusPage: 'feedback',
   StatusBadge: 'feedback',
+  WidgetManager: 'layout',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

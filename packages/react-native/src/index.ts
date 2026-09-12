@@ -72,6 +72,7 @@ export * from './components/Toast';
 export * from './components/ToggleGroup';
 export * from './components/Tooltip';
 export * from './components/ViewSwitcher';
+export * from './components/WidgetManager';
 export * from './components/WrapBox';
 export * from './GnomeProvider';
 export * from './hooks';

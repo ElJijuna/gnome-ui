@@ -74,6 +74,7 @@ export const COMPONENT_NAMES = [
   'PasswordField',
   'RangeSlider',
   'StatusBadge',
+  'WidgetManager',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
