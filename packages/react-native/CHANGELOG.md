@@ -1,3 +1,12 @@
+## [@gnome-ui/react-native-v1.10.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.9.0...@gnome-ui/react-native@1.10.0) (2026-09-12)
+
+### Features
+
+* **@gnome-ui/react-native:** add SpinRow component with integrated spin button and update documentation ([a436b52](https://github.com/ElJijuna/gnome-ui/commit/a436b529e89e0c063558371cf9775e9b27b4a183))
+* **@gnome-ui/react-native:** add SplitButton component with dropdown functionality and update documentation ([0fcc0f1](https://github.com/ElJijuna/gnome-ui/commit/0fcc0f14f35ea36ecf416eb3b898e6ec5c8a81ca))
+* **@gnome-ui/react-native:** add TagInput component with multi-value input and update documentation ([45213bb](https://github.com/ElJijuna/gnome-ui/commit/45213bbf1159f5112da7b13122c20acfd2e1ac27))
+* **@gnome-ui/react-native:** add WidgetManager component for managing a collection of widgets and update documentation ([09ee219](https://github.com/ElJijuna/gnome-ui/commit/09ee2195805f49d835049dd6d47a073ac520fb7c))
+
 ## [@gnome-ui/react-native-v1.9.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.8.0...@gnome-ui/react-native@1.9.0) (2026-09-12)
 
 ### Features
