@@ -59,6 +59,7 @@ export const COMPONENT_NAMES = [
   'ComboRow',
   'SpinRow',
   'SplitButton',
+  'TagInput',
   'ColorPicker',
   'Bin',
   'Blockquote',

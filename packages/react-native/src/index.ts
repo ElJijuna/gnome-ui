@@ -65,6 +65,7 @@ export * from './components/StatusBadge';
 export * from './components/StatusPage';
 export * from './components/Switch';
 export * from './components/Tabs';
+export * from './components/TagInput';
 export * from './components/Text';
 export * from './components/TextField';
 export * from './components/Toast';

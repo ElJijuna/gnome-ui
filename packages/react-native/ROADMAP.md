@@ -335,7 +335,7 @@ components rather than as two-line `StatusPage` usages.
 | ⬜ | **DateRangePicker** | `Popover` + `CalendarRange` composition — blocked on `CalendarRange` |
 | ⬜ | **FontPicker** | Unblocked now that `Popover`+`Dropdown`+`SpinButton` all exist — thin glue composition |
 | ⬜ | **EmojiPicker** | Unblocked now that `Popover` exists — needs the same static emoji dataset the web version ships, `ScrollView`+search-filter |
-| ⬜ | **TagInput** | Unblocked — both prerequisites (`WrapBox` + `Chip`, Tier 7) have now shipped |
+| ✅ | **TagInput** | Shipped as the predicted `WrapBox` + `Chip` composition. The web version's separate `onKeyDown`'s `,` case and `onPaste` handler collapse into one `handleChangeText`, since a paste also flows through `onChangeText` with the full resulting text — both a typed `,` and a pasted list are split-and-commit on the same code path. Return is `onSubmitEditing` (no `Enter` keystroke to catch on RN), Backspace-on-empty uses `onKeyPress` (the one `TextInput` event that still fires from an empty field). The tag box is a `Pressable` (click-anywhere-focuses-input, mirroring the web's `onClick`) with `accessible={false}` explicitly — `Pressable` defaults `accessible` to `true`, which would otherwise collapse every `Chip`'s remove button and the draft input into a single VoiceOver stop |
 | ⬜ | **OtpInput** | Directly portable — N `TextInput` cells, auto-advance via `onChangeText` + `ref.focus()`, no web-only APIs involved |
 | ⬜ | **CopyField** | Blocked on `CopyButton`'s clipboard dependency (Tier 8) |
 | ⬜ | **ChoiceCardGroup** | Directly portable — roving-selection group of `Card`s, same recipe `RadioButton` already established |

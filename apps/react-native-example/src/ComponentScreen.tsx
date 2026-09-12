@@ -69,6 +69,7 @@ import { StatusBadgeScreen } from './screens/StatusBadgeScreen';
 import { StatusPageScreen } from './screens/StatusPageScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
+import { TagInputScreen } from './screens/TagInputScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
 import { ToastScreen } from './screens/ToastScreen';
@@ -139,6 +140,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ComboRow: ComboRowScreen,
   SpinRow: SpinRowScreen,
   SplitButton: SplitButtonScreen,
+  TagInput: TagInputScreen,
   ColorPicker: ColorPickerScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,

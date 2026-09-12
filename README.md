@@ -198,7 +198,7 @@ from those two files — edit them, not this table, then run
 | `Switch` | On/off toggle following the Adwaita switch style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switch--docs) |
 | `SwitchRow` | Activatable row with an integrated switch. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switchrow--docs) |
 | `Tabs` | Tab-based navigation following the Adwaita `AdwTabBar` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-tabs--docs) |
-| `TagInput` | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox`. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-taginput--docs) |
+| `TagInput` | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox`. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-taginput--docs) |
 | `TerminalView` | Scrollable terminal-style output area styled after GNOME Terminal. Intended for displaying logs, command output, or read-only text content. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-terminalview--docs) |
 | `Text` | Typography component mirroring all [Adwaita text style classes](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html). | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-text--docs) |
 | `TextField` | Single-line text input with label, helper text, and error state. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-textfield--docs) |

@@ -43,7 +43,9 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > query to lean on. `ButtonContent` (Tier 15) also shipped — an icon+label
 > layout helper mostly redundant with `Button`'s own `leadingIcon`/
 > `trailingIcon`, kept for composing the same spacing outside `Button`
-> itself. Component ports from `@gnome-ui/react` continue tier by
+> itself. `TagInput` (Tier 20) also shipped — a `WrapBox` + `Chip`
+> composition, unblocked once both had shipped. Component ports from
+> `@gnome-ui/react` continue tier by
 > tier — see this package's own [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
 > main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
@@ -1721,6 +1723,41 @@ whenever the children have no cross-size of their own — the line collapses to
 zero height before `alignItems` gets to stretch anything into it. Caught
 on-device; it's a no-op in the ordinary case where the container hugs its
 content rather than having a fixed height.
+
+### TagInput
+
+```tsx
+import { TagInput } from '@gnome-ui/react-native';
+
+const [tags, setTags] = useState(['react', 'gnome']);
+
+<TagInput label="Tags" value={tags} onChange={setTags} placeholder="Add a tag…" />;
+```
+
+Type-to-add multi-value input rendering entries as removable `Chip`s in a
+`WrapBox`, mirroring `@gnome-ui/react`'s own `TagInput`. Type and press
+Return, or type a `,`, to commit the draft as a tag; paste a comma or
+newline-separated list to add several at once; Backspace with an empty
+draft removes the last tag; tap a chip's `×` to remove that one.
+
+The web version wires typed-`,` and pasted-list handling as two separate
+handlers (`onKeyDown`'s `,` case, `onPaste`). RN's `TextInput` has no
+`paste` event to mirror — but a paste still flows through `onChangeText`
+with the full resulting text, exactly like a typed `,` does, so both
+collapse into one handler here: whenever the text contains a `,` or
+newline, split on it and commit every non-empty part. Return is handled via
+`onSubmitEditing` (no `Enter` keystroke to catch on a touch keyboard), and
+Backspace-on-empty uses `onKeyPress` — the one `TextInput` event that still
+fires with the field already empty (`onChangeText` doesn't fire deleting
+from nothing).
+
+The tag box is a `Pressable` (mirrors the web version's
+`onClick={() => inputRef.current?.focus()}` on the container) with
+`accessible={false}` set explicitly: `Pressable` defaults `accessible` to
+`true`, which would otherwise collapse every `Chip`'s remove button and the
+draft input into a single VoiceOver stop — the same container-swallows-
+subtree trap documented for a bare `View` plus `accessibilityRole`, hit
+here via `Pressable`'s own default instead.
 
 ### StatusPage
 
