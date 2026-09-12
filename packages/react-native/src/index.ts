@@ -13,6 +13,7 @@ export * from './components/Box';
 export * from './components/BoxedList';
 export * from './components/BreakpointBin';
 export * from './components/Button';
+export * from './components/ButtonContent';
 export * from './components/ButtonRow';
 export * from './components/Callout';
 export * from './components/Card';

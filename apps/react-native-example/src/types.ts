@@ -60,6 +60,7 @@ export const COMPONENT_NAMES = [
   'ColorPicker',
   'Bin',
   'Blockquote',
+  'ButtonContent',
   'ButtonRow',
   'Callout',
   'CheckRow',

@@ -16,6 +16,7 @@ import { BottomTabBarScreen } from './screens/BottomTabBarScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
 import { BreakpointBinScreen } from './screens/BreakpointBinScreen';
+import { ButtonContentScreen } from './screens/ButtonContentScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
 import { CalloutScreen } from './screens/CalloutScreen';
@@ -137,6 +138,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ColorPicker: ColorPickerScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,
+  ButtonContent: ButtonContentScreen,
   ButtonRow: ButtonRowScreen,
   Callout: CalloutScreen,
   CheckRow: CheckRowScreen,

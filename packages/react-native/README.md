@@ -39,7 +39,10 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > `useBreakpoint` and `BreakpointBin` (both Tier 6) also shipped — the
 > package's first adaptive-layout primitives, built on `useWindowDimensions`
 > and `onLayout` respectively since there's no CSS media query/container
-> query to lean on. Component ports from `@gnome-ui/react` continue tier by
+> query to lean on. `ButtonContent` (Tier 15) also shipped — an icon+label
+> layout helper mostly redundant with `Button`'s own `leadingIcon`/
+> `trailingIcon`, kept for composing the same spacing outside `Button`
+> itself. Component ports from `@gnome-ui/react` continue tier by
 > tier — see this package's own [ROADMAP.md](./ROADMAP.md) for full
 > per-tier status against all 130 `@gnome-ui/react` components, and the
 > main [ROADMAP.md](../../ROADMAP.md) Priority 3 for the framework
@@ -2106,6 +2109,37 @@ tinted backgrounds have no RN equivalent — resolved as an 8-digit
 substitution `Chip`'s selected-state tint already established. `<blockquote>`/
 `<footer>`/`<cite>` have no RN element equivalent, so this renders as a
 plain `View` with no semantic role.
+
+### ButtonContent
+
+```tsx
+import { ButtonContent, Icon } from '@gnome-ui/react-native';
+import { Save } from '@gnome-ui/icons';
+
+<Pressable onPress={save}>
+  <ButtonContent icon={<Icon icon={Save} size="sm" />} label="Save" color="accent" />
+</Pressable>;
+```
+
+Icon + label layout helper mirroring `AdwButtonContent` — the same 6 dp
+gap, vertically-centered row every button in this package already
+produces internally via `leadingIcon`/`trailingIcon`. **Mostly redundant
+with `Button`'s own `leadingIcon`/`trailingIcon` props** for anything that
+actually is a `Button` — those already lay the icon and a themed,
+variant-colored label out identically, with no separate color prop
+needed. Reach for `ButtonContent` when composing icon+label content for
+something that *isn't* this package's `Button` instead: a bespoke
+`Pressable`, a custom card action, anywhere the same Adwaita spacing
+convention is wanted outside `Button` itself.
+
+Unlike the web version, there's no `currentColor` to inherit the
+surrounding button's text color from, so a `color` prop (the same
+`TextColor` union `Text`/`ButtonRow` already use) needs to be passed
+explicitly to match — e.g. `color="accent"` beside a `suggested`-style
+action, `color="destructive"` beside a destructive one. The icon slot is
+marked `accessibilityElementsHidden`/`importantForAccessibility="no-hide-
+descendants"`, the RN equivalent of the web version's `aria-hidden="true"`
+on its icon `<span>`.
 
 ### ButtonRow
 

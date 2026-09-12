@@ -229,7 +229,7 @@ make one worth building.
 | ⬜ | **ToolbarView** | `HeaderBar`/`ActionBar` pinned top or bottom around a scrolling middle — straightforward composition |
 | ⬜ | **WindowTitle** | Trivial — two-line `Text` pairing for `HeaderBar`'s `start`/center slot |
 | 🚫 | **ShortcutLabel** | No physical keyboard shortcuts to display on mobile — not planned |
-| ⬜ | **ButtonContent** | Mostly redundant — `Button`'s existing `leadingIcon`/`trailingIcon` already covers icon+label layout; low priority unless a real gap surfaces |
+| ✅ | **ButtonContent** | Built as a standalone icon+label row (own `View`+`Text`, `theme.space1` gap) rather than reusing `Button` internally — still genuinely redundant with `Button`'s `leadingIcon`/`trailingIcon` for anything that *is* a `Button`, so positioned as the composition helper for icon+label content outside `Button` (a bespoke `Pressable`, a card action). No `currentColor` to inherit from a surrounding button here, so it takes an explicit `color` prop (the same `TextColor` union `Text`/`ButtonRow` use) instead |
 
 ---
 

@@ -66,6 +66,8 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ColorPicker: 'Circular color swatches — Adwaita palette, sizes, custom hook',
   Bin: 'Single-child container with no visual styling of its own',
   Blockquote: 'Pull-quote with a colored left border — 5 severity variants, optional icon/cite',
+  ButtonContent:
+    'Icon + label layout helper — for composing button-style content outside Button itself',
   ButtonRow: 'Full-width activatable row styled as a button, for use inside a BoxedList',
   Callout: 'Inline dismissible admonition box — info/warning/tip variants',
   CheckRow: 'Activatable row with an integrated checkbox — press anywhere to toggle',
