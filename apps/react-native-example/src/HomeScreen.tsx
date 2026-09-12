@@ -90,6 +90,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   PasswordEntryRow: 'EntryRow that masks its input, with a reveal/conceal toggle',
   ComboRow: 'Settings row with an inline option selector at the trailing edge',
   SpinRow: 'Settings row with an integrated spin button at the trailing edge',
+  SplitButton: 'Primary action button with an attached dropdown arrow',
   ColorPicker: 'Circular color swatches — Adwaita palette, sizes, custom hook',
   Bin: 'Single-child container with no visual styling of its own',
   Blockquote: 'Pull-quote with a colored left border — 5 severity variants, optional icon/cite',
@@ -138,6 +139,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   FileTypeIcon: 'foundations',
 
   Button: 'actions',
+  SplitButton: 'actions',
   ButtonContent: 'actions',
   ButtonRow: 'actions',
   IconButton: 'actions',

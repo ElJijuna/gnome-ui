@@ -25,7 +25,8 @@ React Native component library following the [GNOME Human Interface Guidelines](
 > (Tier 20), `Chip` (Tier 7), `IconButton`/`Drawer` (Tier 8/Tier 20), and
 > `Clamp` (Tier 6), `Box` (Tier 20), `WrapBox`/`ToggleGroup` (Tier 7), and
 > `InlineViewSwitcher` (Tier 8), `PreferencesGroup` (Tier 13), and
-> `EntryRow`/`PasswordEntryRow`/`ComboRow`/`SpinRow` (Tier 12), `ColorPicker`
+> `EntryRow`/`PasswordEntryRow`/`ComboRow`/`SpinRow` (Tier 12), `SplitButton`
+> (Tier 8), `ColorPicker`
 > (Tier 20), `Bin` (Tier 15), `Blockquote` (Tier 20), `ButtonRow`
 > (Tier 8), `Callout` (Tier 20), `CheckRow` (Tier 12), `ExpanderRow`
 > (Tier 8), `FieldGroup` (Tier 20), and `MultiSelectDropdown` (Tier 20)
@@ -181,6 +182,42 @@ as-is: RN has no `currentColor` equivalent, so size and color icons
 yourself, matching the resolved label color (`theme.accentFgColor`,
 `theme.destructiveFgColor`, `theme.windowFgColor`, …) if you want them to
 match.
+
+### SplitButton
+
+```tsx
+import { SplitButton, Button } from '@gnome-ui/react-native';
+
+<SplitButton
+  label="Save"
+  onPress={() => save()}
+  dropdownContent={
+    <Button variant="flat" size="sm" onPress={() => saveAs()}>
+      Save as Template
+    </Button>
+  }
+/>;
+```
+
+Primary action button with an attached dropdown arrow, mirroring
+`AdwSplitButton` and `@gnome-ui/react`'s own `SplitButton`. Pressing the
+label half fires `onPress`; pressing the arrow half opens a floating panel
+with `dropdownContent` (menus, options, etc.). Supports the same
+`default`/`suggested`/`destructive` variants as `Button`.
+
+The label half is a real `Button` — its resting/pressed/disabled colors
+come for free. The arrow half is a hand-rolled `Pressable`, not a second
+`Button`: `Popover` (which supplies the floating panel) clones a prop-level
+`accessibilityState` onto its trigger, and RN merges a spread prop object
+outright rather than key-by-key — nesting a full `Button` there would
+silently clobber `Button`'s own internal `accessibilityState={{ disabled
+}}`. The hand-rolled `Pressable` owns `accessibilityState={{ disabled }}`
+itself instead, letting `Popover`'s clone merge in `expanded` alongside it.
+Its resting colors are derived from a small local color formula mirroring
+`Button`'s own (unexported) one, so the two halves render pixel-identical
+colors; they read as one connected control via zeroed shared inner corner
+radii plus a 1px separator, the RN equivalent of the web CSS's split
+`border-radius` and `.separator` span.
 
 ### Text
 

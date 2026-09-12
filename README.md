@@ -191,7 +191,7 @@ from those two files — edit them, not this table, then run
 | `SpinButton` | Numeric input with − and + buttons following the Adwaita `GtkSpinButton` style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinbutton--docs) |
 | `Spinner` | Indeterminate loading indicator following the Adwaita spinner style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinner--docs) |
 | `SpinRow` | Settings row with an integrated spin button for numeric values. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinrow--docs) |
-| `SplitButton` | Primary action button with an attached dropdown arrow. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-splitbutton--docs) |
+| `SplitButton` | Primary action button with an attached dropdown arrow. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-splitbutton--docs) |
 | `StatusBadge` | Pill-shaped text label for entity status. Use for human-readable state labels like `published`, `beta`, or `new` — not for numeric counts (use `Badge` for those). | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-statusbadge--docs) |
 | `StatusPage` | Empty-state and status page following the Adwaita `AdwStatusPage` pattern. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-statuspage--docs) |
 | `StepIndicator` | Numbered "Step X of Y" progress indicator for onboarding/wizard flows. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-stepindicator--docs) |

@@ -147,7 +147,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **SplitButton** | Directly portable — `Button` + a second narrow chevron `Pressable`, connected-border trick from `LinkedGroup` |
+| ✅ | **SplitButton** | Shipped as predicted — `Button` for the primary half, a hand-rolled narrow chevron `Pressable` (not a second `Button`) for the toggle half, opening a `Popover` for `dropdownContent`. The toggle isn't a `Button` because `Popover` clones a prop-level `accessibilityState` onto its trigger, which would silently clobber `Button`'s own internal `accessibilityState={{ disabled }}` (RN merges a spread prop object outright, not key-by-key) — the hand-rolled `Pressable` owns its own `accessibilityState={{ disabled }}` instead, letting `Popover`'s clone merge in `expanded`. Its colors are derived from a small local `getVariantColors` duplicating `Button`'s own (unexported) formula, so the two halves render pixel-identical resting colors; connected visually by zeroing the shared inner corner radii plus a 1px separator, no dependency on the still-unshipped `LinkedGroup` |
 | ✅ | **IconButton** | Shipped — `Button`'s `shape="circular"` + `Icon` + optional `Tooltip`, the exact same composition `@gnome-ui/react`'s own `IconButton` already is (its JSDoc example already showed this nesting directly). Built as a genuine prerequisite for `Drawer`'s `rail`, not scope creep |
 | ✅ | **Button `raised` variant** | Already shipped (Tier 1) |
 | ✅ | **Button `osd` modifier** | Already shipped (Tier 1) |
