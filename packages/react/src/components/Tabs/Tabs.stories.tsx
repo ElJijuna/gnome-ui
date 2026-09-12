@@ -202,6 +202,46 @@ export const Scrollable: Story = {
   },
 };
 
+// ─── Mobile portrait, many heavy tabs ──────────────────────────────────────────
+
+export const MobilePortraitOverflow: Story = {
+  render: function MobilePortraitOverflowStory() {
+    const tabs = [
+      { id: 'home', label: 'Home', icon: GoHome, count: 3 },
+      { id: 'music', label: 'Music', icon: MediaPlay, count: 12 },
+      { id: 'search', label: 'Search', icon: Search },
+      { id: 'starred', label: 'Starred', icon: Star, count: 150 },
+      { id: 'settings', label: 'Settings', icon: Settings },
+    ];
+    const [active, setActive] = useState('home');
+
+    return (
+      <TabBar>
+        {tabs.map(({ id, label, icon, count }) => (
+          <TabItem
+            key={id}
+            label={label}
+            icon={icon}
+            count={count}
+            active={active === id}
+            onClick={() => setActive(id)}
+          />
+        ))}
+      </TabBar>
+    );
+  },
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Icon + count-badge tabs are heavy enough that several of them, on a narrow mobile-portrait viewport, used to shrink past the point where their label had any room left — the label collapsed to nothing while the icon and badge stayed put. `.tab` now sets `flex-shrink: 0` so a tab never shrinks below its natural content width; `.list`'s `overflow-x: auto` scrolls the rest into view instead.",
+      },
+    },
+  },
+};
+
 // ─── In a full layout ─────────────────────────────────────────────────────────
 
 export const InLayout: Story = {
