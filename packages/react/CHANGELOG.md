@@ -1,3 +1,9 @@
+## [@gnome-ui/react-v1.67.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.66.1...@gnome-ui/react@1.67.0) (2026-09-12)
+
+### Features
+
+* **@gnome-ui/react:** enhance TabBar with scroll buttons for overflowing tabs and improve layout handling ([2e80a4d](https://github.com/ElJijuna/gnome-ui/commit/2e80a4db99e1fe0d1796534f85116db21c260144))
+
 ## [@gnome-ui/react-v1.66.1](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.66.0...@gnome-ui/react@1.66.1) (2026-09-06)
 
 ### Bug Fixes
