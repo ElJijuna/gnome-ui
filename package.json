@@ -23,6 +23,7 @@
     "llms:check": "node scripts/generate-llms.mjs --check",
     "tables:generate": "node scripts/generate-component-tables.mjs",
     "tables:check": "node scripts/generate-component-tables.mjs --check",
+    "gallery:generate": "node scripts/generate-component-gallery.mjs",
     "docs:dev": "uv run mkdocs serve",
     "docs:build": "uv run mkdocs build",
     "check": "npm run lint && npm run lint:css && npm run format:check && npm run typecheck",
