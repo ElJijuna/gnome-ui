@@ -129,8 +129,8 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **Toolbar** | Directly portable — flat-button row, `space1` gap |
-| ⬜ | **Spacer** | Trivial — `flex: 1` `View` |
+| ✅ | **Toolbar** | Shipped exactly as predicted — flat-button row, `theme.space1` gap/padding. Web CSS's `color`/`font-family` on `.toolbar` dropped, no RN style inheritance from parent `View` to child `Text` for them to reach |
+| ✅ | **Spacer** | Shipped exactly as predicted — trivial `flex: 1` `View`, shipped alongside `Toolbar` since it's the documented pattern for pushing trailing items to the end. `accessible={false}` mirrors the web's `aria-hidden="true"`, the same call `Separator` already made for a purely decorative element |
 | ⬜ | **LinkedGroup** | Directly portable — connected-border trick already proven by `Dropdown`'s trigger border |
 | ⬜ | **Frame** | Trivial — border + radius, no background |
 

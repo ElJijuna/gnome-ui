@@ -63,6 +63,7 @@ import { SeparatorScreen } from './screens/SeparatorScreen';
 import { SidebarScreen } from './screens/SidebarScreen';
 import { SkeletonScreen } from './screens/SkeletonScreen';
 import { SliderScreen } from './screens/SliderScreen';
+import { SpacerScreen } from './screens/SpacerScreen';
 import { SpinButtonScreen } from './screens/SpinButtonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
 import { SpinRowScreen } from './screens/SpinRowScreen';
@@ -79,6 +80,7 @@ import { TextScreen } from './screens/TextScreen';
 import { TimelineScreen } from './screens/TimelineScreen';
 import { ToastScreen } from './screens/ToastScreen';
 import { ToggleGroupScreen } from './screens/ToggleGroupScreen';
+import { ToolbarScreen } from './screens/ToolbarScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
 import { WidgetManagerScreen } from './screens/WidgetManagerScreen';
@@ -167,6 +169,8 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   StepIndicator: StepIndicatorScreen,
   Timeline: TimelineScreen,
   CopyButton: CopyButtonScreen,
+  Toolbar: ToolbarScreen,
+  Spacer: SpacerScreen,
 };
 
 export interface ComponentScreenProps {

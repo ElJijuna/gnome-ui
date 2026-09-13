@@ -80,6 +80,8 @@ export const COMPONENT_NAMES = [
   'StepIndicator',
   'Timeline',
   'CopyButton',
+  'Toolbar',
+  'Spacer',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

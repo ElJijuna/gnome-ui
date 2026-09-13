@@ -1529,6 +1529,44 @@ no exit keyframes at all, so this follows `Dialog`'s simpler animation
 shape instead. `backdrop-filter: blur(4px)` has no port (no native blur
 dependency in this package).
 
+### Toolbar
+
+```tsx
+import { Button, Spacer, Toolbar } from '@gnome-ui/react-native';
+
+<Toolbar>
+  <Button variant="flat">Cancel</Button>
+  <Spacer />
+  <Button variant="flat">Done</Button>
+</Toolbar>
+```
+
+Horizontal action bar following the libadwaita `.toolbar` pattern —
+mirrors `@gnome-ui/react`'s `Toolbar`. Directly portable, no web-only APIs
+— a flex row with `theme.space1` (6 dp) padding and gap, the standard
+spacing for rows of flat buttons in header bars, action bars, and tool
+rows. Use `Button variant="flat"` for buttons that blend into the bar, or
+`variant="raised"` for one that needs explicit elevation within a flat
+context. The web CSS's `color`/`font-family` on `.toolbar` are dropped —
+RN has no style inheritance from a parent `View` down to child `Text`
+the way CSS `color` cascades, so a value there would reach nothing (every
+child, e.g. `Button`, already sets its own explicit colors).
+
+### Spacer
+
+```tsx
+import { Spacer } from '@gnome-ui/react-native';
+```
+
+Invisible `flex: 1` filler for `Toolbar` and `HeaderBar` — mirrors
+`@gnome-ui/react`'s `Spacer`. Place between leading and trailing groups to
+push trailing items to the end. `accessible={false}` mirrors the web
+version's `aria-hidden="true"` — the same "purely decorative, exclude
+from the accessibility tree entirely" call `Separator` already made,
+rather than reaching for `role`'s newer `"separator"` value (which
+exists, but implies a divider a screen reader user might care about — a
+plain flex filler has no such meaning).
+
 ### AvatarGroup
 
 ```tsx

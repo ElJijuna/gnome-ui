@@ -113,6 +113,8 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   StepIndicator: 'Numbered "Step X of Y" progress indicator for onboarding/wizard flows',
   Timeline: 'Ordered sequence of events connected by a visual timeline',
   CopyButton: 'Icon button that copies a value to the clipboard, with a checkmark confirmation',
+  Toolbar: 'Horizontal action bar with standard flat-button padding and spacing',
+  Spacer: 'Invisible flex: 1 filler that pushes trailing items to the end of a row',
 };
 
 type CategoryKey =
@@ -212,6 +214,8 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   StepIndicator: 'feedback',
   Timeline: 'feedback',
   CopyButton: 'actions',
+  Toolbar: 'layout',
+  Spacer: 'layout',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',
