@@ -89,7 +89,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 
 ---
 
-## Tier 6 — Adaptive Layout ⬜ (2/5)
+## Tier 6 — Adaptive Layout ⬜ (3/5)
 
 > `useBreakpoint` shipped (2026-09-11), unblocking `Sidebar`'s own adaptive
 > `mode` prop (Tier 11), `Sidebar` v2 (Tier 7), `ViewSwitcherSidebar`
@@ -101,7 +101,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 |--------|-----------|-------|
 | ✅ | **`useBreakpoint`** | Built on `useWindowDimensions` (reactive, so no manual resize listener needed like the web version's `window.innerWidth`/`resize`) + the same 400/550/860 dp thresholds. Also ports the web hook's `bucketForWidth`/`resolveResponsive`/`ResponsiveValue` pure-function toolkit verbatim (no RN-specific change needed there) — exported now, not yet consumed by any component's props |
 | ✅ | **Clamp** | Shipped — `maxWidth` + `alignSelf: 'center'` (not `marginHorizontal: 'auto'`, following `Drawer`'s own resolution when RN auto-margin support was left unverified for this Yoga version); the trade-off is that `Clamp` needs a column-direction parent, since `alignSelf` acts on the cross axis. `tighteningThreshold` is implemented as a real percentage width rather than ported as-is: `@gnome-ui/react` declares and documents the prop but never passes it to the DOM, so mirroring it 1:1 would have shipped a dead prop |
-| ⬜ | **NavigationSplitView** | Two-pane sidebar+content that collapses to one pane at ≤ 400 sp — blocked on `useBreakpoint` |
+| ✅ | **NavigationSplitView** | Shipped — unblocked once `useBreakpoint` shipped (2026-09-11), a stale ⬜ this row's own note hadn't caught up to. The web's `clamp(min, fraction*100%, max)` sidebar width has no RN equivalent, so the container measures its own width via `onLayout` and the clamp is computed in JS. Narrow-mode pane switching is animated (`translateX`, one shared `Animated.Value`, the same "skip on initial mount" guard `Switch`/`StepIndicator` established) rather than `TabPanel`'s instant `display:'none'` swap, since both panes need to stay laid out to slide — RN `transform` has no percentage-of-self units, so the slide distance comes from the same measured width. The web's `inert` (hides a mounted-but-off-screen pane from both a11y tree and tab order) has no single RN prop — reproduced with `accessibilityElementsHidden` + `importantForAccessibility="no-hide-descendants"` + `pointerEvents="none"` together. Reuses the shipped `Separator` (vertical) for the wide-mode divider — its `theme.cardShadeColor` already matches the web's `--gnome-card-shade-color` divider color exactly, no new color needed |
 | ⬜ | **OverlaySplitView** | Sidebar becomes a slide-over `Modal` at ≤ 400 sp — blocked on `useBreakpoint`; the slide-over itself reuses `Popover`/`Dropdown`'s `Modal` + reduced-motion fade recipe |
 | ⬜ | **ViewSwitcherBar** | Bottom bar replacing header-bar `ViewSwitcher` at ≤ 550 sp — blocked on `useBreakpoint` |
 
@@ -509,14 +509,15 @@ package.
   design intent, not code. Still built in this order because that's the
   dependency this file itself recorded, and because `useBreakpoint`'s
   `bucketForWidth`/`resolveResponsive` toolkit is worth having landed
-  before the next adaptive component needs it. Tier 6's remaining items —
-  `Sidebar` v2, `ViewSwitcherSidebar`, `Sidebar`'s own adaptive `mode`,
-  `NavigationSplitView`, `OverlaySplitView`, `ViewSwitcherBar` — are now
-  unblocked (the prerequisite exists) but still unbuilt; picking any of
-  them up is its own turn, not a continuation of this one.
+  before the next adaptive component needs it. `NavigationSplitView`
+  shipped 2026-09-13. Tier 6's remaining items — `Sidebar` v2,
+  `ViewSwitcherSidebar`, `Sidebar`'s own adaptive `mode`,
+  `OverlaySplitView`, `ViewSwitcherBar` — are now unblocked (the
+  prerequisite exists) but still unbuilt; picking any of them up is its
+  own turn, not a continuation of this one.
 - **Cheap, unblocked wins available right now** (no missing prerequisite):
-  Tier 8's `Toolbar`/`Spacer`/
-  `LinkedGroup`/`Frame`/`ExpanderRow`; all of Tier 12's row composites;
+  Tier 8's `Frame`/`ExpanderRow` (`Toolbar`/`Spacer`/`LinkedGroup` already
+  shipped); all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster
   (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, once

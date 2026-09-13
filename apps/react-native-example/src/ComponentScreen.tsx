@@ -48,6 +48,7 @@ import { LevelBarScreen } from './screens/LevelBarScreen';
 import { LinkedGroupScreen } from './screens/LinkedGroupScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { MultiSelectDropdownScreen } from './screens/MultiSelectDropdownScreen';
+import { NavigationSplitViewScreen } from './screens/NavigationSplitViewScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
 import { PasswordEntryRowScreen } from './screens/PasswordEntryRowScreen';
 import { PasswordFieldScreen } from './screens/PasswordFieldScreen';
@@ -173,6 +174,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Toolbar: ToolbarScreen,
   Spacer: SpacerScreen,
   LinkedGroup: LinkedGroupScreen,
+  NavigationSplitView: NavigationSplitViewScreen,
 };
 
 export interface ComponentScreenProps {

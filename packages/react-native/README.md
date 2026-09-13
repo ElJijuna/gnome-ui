@@ -2547,6 +2547,40 @@ panel-height positioning almost verbatim, and gives each option row a
 leading checkbox-square visual instead of `Dropdown`'s single trailing
 checkmark.
 
+### NavigationSplitView
+
+```tsx
+import { NavigationSplitView } from '@gnome-ui/react-native';
+
+const [showContent, setShowContent] = useState(false);
+
+<NavigationSplitView
+  showContent={showContent}
+  sidebar={<MailList onSelect={() => setShowContent(true)} />}
+  content={<MailDetail onBack={() => setShowContent(false)} />}
+/>;
+```
+
+Two-pane sidebar + content layout following the Adwaita
+`AdwNavigationSplitView` pattern — mirrors `@gnome-ui/react`'s
+`NavigationSplitView`. On wide screens (`useBreakpoint().isNarrow ===
+false`, > 400 dp) both panes render side by side, separated by a
+`Separator`. On narrow screens only one pane shows at a time; `showContent`
+switches between the sidebar list and the detail view.
+
+The web version's `clamp(min, fraction * 100%, max)` sidebar width has no
+RN equivalent, so the container measures its own width via `onLayout` and
+the same clamp is computed in JS. Narrow-mode pane switching is animated
+(`translateX`) rather than an instant `display: 'none'` swap like
+`TabPanel` — both panes stay laid out and absolutely positioned, sliding
+via one shared `Animated.Value`, since RN `transform` has no
+percentage-of-self units to use a bare `-100%`/`100%` the way the web CSS
+does. The web's `inert` attribute (removes the hidden pane from the a11y
+tree and tab order while it stays mounted off-screen) has no single RN
+equivalent — reproduced with `accessibilityElementsHidden` +
+`importantForAccessibility="no-hide-descendants"` plus `pointerEvents="none"`
+so the off-screen pane can't intercept touches meant for the visible one.
+
 ### FilterableMultiSelectDropdown
 
 ```tsx

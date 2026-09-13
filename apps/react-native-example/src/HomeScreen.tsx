@@ -116,6 +116,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Toolbar: 'Horizontal action bar with standard flat-button padding and spacing',
   Spacer: 'Invisible flex: 1 filler that pushes trailing items to the end of a row',
   LinkedGroup: 'Visually-connected row of buttons/inputs with merged borders, no gap',
+  NavigationSplitView: 'Two-pane sidebar + content layout that collapses to one pane on phones',
 };
 
 type CategoryKey =
@@ -218,6 +219,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   Toolbar: 'layout',
   Spacer: 'layout',
   LinkedGroup: 'layout',
+  NavigationSplitView: 'navigation',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

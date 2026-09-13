@@ -83,6 +83,7 @@ export const COMPONENT_NAMES = [
   'Toolbar',
   'Spacer',
   'LinkedGroup',
+  'NavigationSplitView',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

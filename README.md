@@ -160,7 +160,7 @@ from those two files — edit them, not this table, then run
 | `LinkedGroup` | Renders children as a single visually-connected unit with no gap and merged borders. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-linkedgroup--docs) |
 | `Modal` |  | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-modal--docs) |
 | `MultiSelectDropdown` | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-multiselectdropdown--docs) |
-| `NavigationSplitView` | Two-pane sidebar + content layout that collapses to a single navigable pane on narrow screens (≤ 400 px), mirroring `AdwNavigationSplitView`. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-navigationsplitview--docs) |
+| `NavigationSplitView` | Two-pane sidebar + content layout that collapses to a single navigable pane on narrow screens (≤ 400 px), mirroring `AdwNavigationSplitView`. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-navigationsplitview--docs) |
 | `NavigationView` | Single-pane push/pop navigation stack. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-navigationview--docs) |
 | `OtpInput` | Segmented PIN/verification-code input — one cell per digit, with auto-advance on typing, backspace-to-previous-cell, and paste support. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-otpinput--docs) |
 | `Overlay` | Standalone backdrop/scrim layer with a fade transition and click-to-dismiss — the shared building block behind `Modal`, `Dialog`, and `BottomSheet`'s backdrops, extracted for building custom overlay UI. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-overlay--docs) |

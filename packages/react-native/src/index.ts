@@ -44,6 +44,7 @@ export * from './components/LevelBar';
 export * from './components/Link';
 export * from './components/LinkedGroup';
 export * from './components/MultiSelectDropdown';
+export * from './components/NavigationSplitView';
 export * from './components/Overlay';
 export * from './components/PasswordEntryRow';
 export * from './components/PasswordField';
