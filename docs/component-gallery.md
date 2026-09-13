@@ -213,3 +213,79 @@ README](https://github.com/ElJijuna/gnome-ui/tree/main/packages/react-native#ste
 [Full docs & controls →](https://gnome-ui.org/web-components/?path=/docs/web-components-step-indicator--docs)
 
 </div>
+
+## RatingStars
+
+<div class="gnome-platform-tabs">
+  <button type="button" class="gnome-platform-tab gnome-platform-badge gnome-platform-badge--react is-active" data-group="ratingstars" data-target="react">React</button>
+  <button type="button" class="gnome-platform-tab gnome-platform-badge gnome-platform-badge--react-native" data-group="ratingstars" data-target="react-native">React Native</button>
+  <button type="button" class="gnome-platform-tab gnome-platform-badge gnome-platform-badge--web-components" data-group="ratingstars" data-target="web-components">Web Components</button>
+</div>
+
+<div markdown="1" class="gnome-platform-panel" data-group="ratingstars" data-platform="react">
+
+<div class="gnome-live-demo">
+  <div class="gnome-live-demo__bar">
+    <div class="gnome-live-demo__dots"><span></span><span></span><span></span></div>
+    <div class="gnome-live-demo__url">gnome-ui.org/react — RatingStars</div>
+  </div>
+  <iframe src="https://gnome-ui.org/react/iframe.html?id=components-ratingstars--interactive&viewMode=story" title="RatingStars live demo (React)"></iframe>
+</div>
+
+```tsx
+import { RatingStars } from '@gnome-ui/react';
+
+// Read-only — omit onChange
+<RatingStars value={4.2} aria-label="Average rating: 4.2 out of 5" />
+
+// Interactive — pass onChange
+<RatingStars value={rating} onChange={setRating} />
+```
+
+[Full docs & controls →](https://gnome-ui.org/react/?path=/docs/components-ratingstars--docs)
+
+</div>
+
+<div markdown="1" class="gnome-platform-panel" data-group="ratingstars" data-platform="react-native" hidden>
+
+```tsx
+import { RatingStars } from '@gnome-ui/react-native';
+
+// Read-only — omit onChange
+<RatingStars value={4.2} accessibilityLabel="Average rating: 4.2 out of 5" />
+
+// Interactive — pass onChange
+<RatingStars value={rating} onChange={setRating} />
+```
+
+No web-viewable Storybook for this platform — verified on a real iOS
+Simulator instead. See [the React Native package's own
+README](https://github.com/ElJijuna/gnome-ui/tree/main/packages/react-native#ratingstars).
+
+</div>
+
+<div markdown="1" class="gnome-platform-panel" data-group="ratingstars" data-platform="web-components" hidden>
+
+<div class="gnome-live-demo">
+  <div class="gnome-live-demo__bar">
+    <div class="gnome-live-demo__dots"><span></span><span></span><span></span></div>
+    <div class="gnome-live-demo__url">gnome-ui.org/web-components — RatingStars</div>
+  </div>
+  <iframe src="https://gnome-ui.org/web-components/iframe.html?id=web-components-rating-stars--interactive&viewMode=story" title="RatingStars live demo (Web Components)"></iframe>
+</div>
+
+```html
+<gnome-rating-stars value="3" max="5"></gnome-rating-stars>
+
+<script type="module">
+  const ratingStars = document.querySelector('gnome-rating-stars');
+
+  ratingStars.addEventListener('gnome-change', (event) => {
+    console.log('New rating:', event.detail.value);
+  });
+</script>
+```
+
+[Full docs & controls →](https://gnome-ui.org/web-components/?path=/docs/web-components-rating-stars--docs)
+
+</div>
