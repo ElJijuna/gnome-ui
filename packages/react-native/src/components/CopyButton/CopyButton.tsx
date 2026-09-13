@@ -1,5 +1,5 @@
 import { Check, Copy } from '@gnome-ui/icons';
-import Clipboard from '@react-native-clipboard/clipboard';
+import type ClipboardModule from '@react-native-clipboard/clipboard';
 import { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
 
@@ -82,6 +82,19 @@ export const CopyButton = ({
 
   const handlePress = () => {
     try {
+      // Required lazily, not imported at module scope: the native binding's
+      // own top-level code calls `TurboModuleRegistry.getEnforcing(...)`
+      // eagerly, which throws the instant the module is evaluated if the
+      // native side isn't registered — as in Expo Go, which doesn't bundle
+      // this community module. A static `import` would throw as soon as
+      // this file is loaded, crashing every screen (not just this one),
+      // since example apps import every component screen up front. Deferring
+      // the require to press-time means Expo Go only fails if this specific
+      // button is actually pressed, caught below like any other native error.
+      // eslint-disable-next-line @typescript-eslint/no-require-imports -- see comment above
+      const Clipboard: typeof ClipboardModule =
+        require('@react-native-clipboard/clipboard').default;
+
       Clipboard.setString(value);
     } catch (error) {
       onCopyError?.(error);

@@ -90,8 +90,9 @@ describe('NavigationSplitView', () => {
       );
 
       const sidebarPane = screen.getByTestId('sidebar-inner').parent;
-      const contentPane = screen.getByTestId('content-inner', { includeHiddenElements: true })
-        .parent;
+      const contentPane = screen.getByTestId('content-inner', {
+        includeHiddenElements: true,
+      }).parent;
 
       expect(sidebarPane?.props.accessibilityElementsHidden).toBeFalsy();
       expect(contentPane?.props.accessibilityElementsHidden).toBe(true);
@@ -108,8 +109,9 @@ describe('NavigationSplitView', () => {
         />,
       );
 
-      const sidebarPane = screen.getByTestId('sidebar-inner', { includeHiddenElements: true })
-        .parent;
+      const sidebarPane = screen.getByTestId('sidebar-inner', {
+        includeHiddenElements: true,
+      }).parent;
       const contentPane = screen.getByTestId('content-inner').parent;
 
       expect(sidebarPane?.props.accessibilityElementsHidden).toBe(true);

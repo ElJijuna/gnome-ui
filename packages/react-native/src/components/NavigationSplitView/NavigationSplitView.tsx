@@ -169,9 +169,7 @@ export const NavigationSplitView = ({
         {sidebar}
       </Animated.View>
 
-      {!isNarrow && (
-        <Separator orientation="vertical" testID={testID && `${testID}-divider`} />
-      )}
+      {!isNarrow && <Separator orientation="vertical" testID={testID && `${testID}-divider`} />}
 
       <Animated.View
         accessibilityElementsHidden={contentHidden}
