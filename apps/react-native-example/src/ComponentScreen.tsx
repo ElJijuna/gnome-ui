@@ -67,6 +67,7 @@ import { SpinRowScreen } from './screens/SpinRowScreen';
 import { SplitButtonScreen } from './screens/SplitButtonScreen';
 import { StatusBadgeScreen } from './screens/StatusBadgeScreen';
 import { StatusPageScreen } from './screens/StatusPageScreen';
+import { SwitchRowScreen } from './screens/SwitchRowScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
 import { TagInputScreen } from './screens/TagInputScreen';
@@ -149,6 +150,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ButtonRow: ButtonRowScreen,
   Callout: CalloutScreen,
   CheckRow: CheckRowScreen,
+  SwitchRow: SwitchRowScreen,
   ExpanderRow: ExpanderRowScreen,
   FieldGroup: FieldGroupScreen,
   MultiSelectDropdown: MultiSelectDropdownScreen,

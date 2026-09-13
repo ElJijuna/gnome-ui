@@ -67,6 +67,7 @@ export const COMPONENT_NAMES = [
   'ButtonRow',
   'Callout',
   'CheckRow',
+  'SwitchRow',
   'ExpanderRow',
   'FieldGroup',
   'MultiSelectDropdown',

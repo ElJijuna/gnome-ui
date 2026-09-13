@@ -2330,6 +2330,36 @@ nesting one `Pressable` inside another would create two overlapping tap
 targets. `aria-labelledby` has no RN equivalent, so `accessibilityLabel`
 combines the title and subtitle instead.
 
+### SwitchRow
+
+```tsx
+import { BoxedList, SwitchRow } from '@gnome-ui/react-native';
+
+<BoxedList>
+  <SwitchRow
+    title="Wi-Fi"
+    subtitle="Home Network"
+    checked={wifi}
+    onCheckedChange={setWifi}
+  />
+</BoxedList>
+```
+
+Activatable row with an integrated switch, for use inside a `BoxedList`
+— mirrors `@gnome-ui/react`'s `SwitchRow`. The entire row is a single
+pressable; pressing anywhere toggles the switch, which is why this isn't
+`ActionRow` + a trailing `Switch` — `AdwSwitchRow` makes the whole row the
+interactive element, the same shape `CheckRow` already established for its
+checkbox. Use for a single on/off setting; prefer `CheckRow` for
+multi-select scenarios. Supports both controlled (`checked`) and
+uncontrolled (`defaultChecked`) modes, the same `isControlled`/internal-
+state-fallback shape already used by `Expander`/`ComboRow`/`Popover`/
+`CheckRow`. The switch visual reuses `Switch`'s exact track/thumb animation
+recipe, but as plain non-interactive `Animated.View`s rather than the real
+`Switch` component — nesting one `Pressable` inside another would create
+two overlapping tap targets. `aria-labelledby` has no RN equivalent, so
+`accessibilityLabel` combines the title and subtitle instead.
+
 ### ExpanderRow
 
 ```tsx

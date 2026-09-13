@@ -196,7 +196,7 @@ from those two files — edit them, not this table, then run
 | `StatusPage` | Empty-state and status page following the Adwaita `AdwStatusPage` pattern. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-statuspage--docs) |
 | `StepIndicator` | Numbered "Step X of Y" progress indicator for onboarding/wizard flows. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-stepindicator--docs) |
 | `Switch` | On/off toggle following the Adwaita switch style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switch--docs) |
-| `SwitchRow` | Activatable row with an integrated switch. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switchrow--docs) |
+| `SwitchRow` | Activatable row with an integrated switch. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switchrow--docs) |
 | `Tabs` | Tab-based navigation following the Adwaita `AdwTabBar` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-tabs--docs) |
 | `TagInput` | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox`. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-taginput--docs) |
 | `TerminalView` | Scrollable terminal-style output area styled after GNOME Terminal. Intended for displaying logs, command output, or read-only text content. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-terminalview--docs) |
