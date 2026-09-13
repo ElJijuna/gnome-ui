@@ -117,6 +117,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Spacer: 'Invisible flex: 1 filler that pushes trailing items to the end of a row',
   LinkedGroup: 'Visually-connected row of buttons/inputs with merged borders, no gap',
   NavigationSplitView: 'Two-pane sidebar + content layout that collapses to one pane on phones',
+  RatingStars: 'Star rating display and input — read-only summary or tap-to-select',
 };
 
 type CategoryKey =
@@ -220,6 +221,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   Spacer: 'layout',
   LinkedGroup: 'layout',
   NavigationSplitView: 'navigation',
+  RatingStars: 'forms',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

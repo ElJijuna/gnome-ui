@@ -91,8 +91,8 @@ export const CopyButton = ({
       // since example apps import every component screen up front. Deferring
       // the require to press-time means Expo Go only fails if this specific
       // button is actually pressed, caught below like any other native error.
-      // eslint-disable-next-line @typescript-eslint/no-require-imports -- see comment above
       const Clipboard: typeof ClipboardModule =
+        // eslint-disable-next-line @typescript-eslint/no-require-imports -- see comment above
         require('@react-native-clipboard/clipboard').default;
 
       Clipboard.setString(value);

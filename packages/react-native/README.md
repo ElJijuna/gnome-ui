@@ -2660,6 +2660,35 @@ two independent `accessibilityRole="adjustable"` elements (one per thumb),
 the same VoiceOver/TalkBack increment/decrement analog `Slider` already
 established.
 
+### RatingStars
+
+```tsx
+import { RatingStars } from '@gnome-ui/react-native';
+
+// Read-only — omit onChange
+<RatingStars value={4.2} accessibilityLabel="Average rating: 4.2 out of 5" />
+
+// Interactive — pass onChange
+<RatingStars value={rating} onChange={setRating} />
+```
+
+Star rating display and input — mirrors `@gnome-ui/react`'s `RatingStars`.
+Renders `role="radiogroup"` of `role="radio"` stars when `onChange` is
+provided, or a static `role="img"` when it isn't (e.g. showing an
+average/read-only rating); passing `disabled` always falls back to the
+read-only display even with `onChange` provided. The web version's
+`radiogroup` layer also owns an `onKeyDown` handler for arrow-key
+roving-tabindex navigation and a mouse-hover preview that doesn't commit
+until clicked — neither has a touch counterpart, so both drop, the same
+standing convention `ToggleGroup` already established for this package.
+What's left, tapping a star to commit that rating, is a strict subset of
+the web interaction rather than an approximation of it. Each star's fill
+uses `tintColor={theme.warningBgColor}` rather than `Icon`'s fixed
+`color="yellow"` — the source CSS reads `var(--gnome-warning-bg-color)`
+directly with no `color-mix()` darkening step, so the semantic warning
+token (already tracking dark mode and every contrast level) is the exact
+match, not an approximation through the fixed palette.
+
 ### StatusBadge
 
 ```tsx

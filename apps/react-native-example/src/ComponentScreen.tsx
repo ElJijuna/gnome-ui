@@ -58,6 +58,7 @@ import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { RangeSliderScreen } from './screens/RangeSliderScreen';
+import { RatingStarsScreen } from './screens/RatingStarsScreen';
 import { ScrollToTopScreen } from './screens/ScrollToTopScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SegmentedBarScreen } from './screens/SegmentedBarScreen';
@@ -175,6 +176,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   Spacer: SpacerScreen,
   LinkedGroup: LinkedGroupScreen,
   NavigationSplitView: NavigationSplitViewScreen,
+  RatingStars: RatingStarsScreen,
 };
 
 export interface ComponentScreenProps {
