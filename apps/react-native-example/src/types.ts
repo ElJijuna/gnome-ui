@@ -79,6 +79,7 @@ export const COMPONENT_NAMES = [
   'ScrollToTop',
   'StepIndicator',
   'Timeline',
+  'CopyButton',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

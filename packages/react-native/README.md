@@ -1464,6 +1464,41 @@ thin composition of those same three pieces. `label` is required since the
 button has no visible text. Built as a genuine prerequisite for `Drawer`'s
 `rail`, not scope creep — every piece it composes already existed.
 
+### CopyButton
+
+```tsx
+import { CopyButton } from '@gnome-ui/react-native';
+
+<CopyButton value="CVE-2024-3094" />
+<CopyButton value={installCommand} label="Copy install command" copiedLabel="Added to clipboard" />
+```
+
+Icon button that copies `value` to the clipboard, swapping to a checkmark
+and a "Copied!" tooltip for `resetDelay` ms (default 2000) as confirmation
+— mirrors `@gnome-ui/react`'s `CopyButton`. RN has no `navigator.clipboard`,
+so this is built on `@react-native-clipboard/clipboard` (a new peer
+dependency, deliberately chosen over `expo-clipboard` so this package
+works the same in bare RN and Expo, not just this repo's own Expo example
+app — the same "no new peer dependency without a deliberate decision"
+standard `AnimatedIcon`'s `react-native-svg` addition was held to).
+
+**Real environment finding**: `@react-native-clipboard/clipboard`'s native
+module isn't part of Expo Go's preinstalled module set, so any app using
+this component needs a custom dev client (`npx expo prebuild` +
+`expo run:ios`/`run:android`) rather than plain Expo Go — confirmed by
+hitting `TurboModuleRegistry.getEnforcing(...): 'RNCClipboard' could not
+be found` in Expo Go before building this repo's own example app a dev
+client to verify the component on-device.
+
+Its `setString` is synchronous and void — unlike the web version's
+`navigator.clipboard.writeText`, which returns a `Promise` that can
+reject, there's no error channel to observe under normal operation.
+`onCopyError` is kept for API parity (and wraps the native call in a
+`try`/`catch` defensively) but in practice won't fire the way it can on
+web. The live-region announcement uses `role="status"` directly — RN's
+newer `Role` union does include `"status"`, unlike the older
+`AccessibilityRole` enum `Toast` had to substitute `"alert"` for.
+
 ### Drawer
 
 ```tsx

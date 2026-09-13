@@ -32,6 +32,7 @@ export default defineConfig({
         'react-native',
         'react-native-svg',
         '@gnome-ui/icons',
+        '@react-native-clipboard/clipboard',
       ],
     },
     sourcemap: true,

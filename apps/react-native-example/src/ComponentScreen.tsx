@@ -28,6 +28,7 @@ import { ClampScreen } from './screens/ClampScreen';
 import { CoachMarkScreen } from './screens/CoachMarkScreen';
 import { ColorPickerScreen } from './screens/ColorPickerScreen';
 import { ComboRowScreen } from './screens/ComboRowScreen';
+import { CopyButtonScreen } from './screens/CopyButtonScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
 import { DrawerScreen } from './screens/DrawerScreen';
@@ -165,6 +166,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ScrollToTop: ScrollToTopScreen,
   StepIndicator: StepIndicatorScreen,
   Timeline: TimelineScreen,
+  CopyButton: CopyButtonScreen,
 };
 
 export interface ComponentScreenProps {

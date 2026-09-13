@@ -125,7 +125,7 @@ from those two files — edit them, not this table, then run
 | `ColumnView` | Multi-column sortable data table styled with Adwaita design tokens. | 🚫 | — | [Docs](https://gnome-ui.org/react/?path=/docs/data-display-columnview--docs) |
 | `ComboRow` | Settings row with an inline combo selector at the trailing edge. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-comborow--docs) |
 | `ContributionGraph` | A responsive activity heatmap calendar styled with Adwaita design tokens. Colour intensity represents activity count per day. | 🚫 | — | [Docs](https://gnome-ui.org/react/?path=/docs/data-display-contributiongraph--docs) |
-| `CopyButton` | Icon button that copies a value to the clipboard, swapping to a checkmark and a "Copied!" tooltip as confirmation. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-copybutton--docs) |
+| `CopyButton` | Icon button that copies a value to the clipboard, swapping to a checkmark and a "Copied!" tooltip as confirmation. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-copybutton--docs) |
 | `CopyField` | Read-only `TextField` with a built-in trailing `CopyButton`, for displaying copyable values (API keys, tokens, IDs) outside the `CveIdentifier`/`CweIdentifier`-style specialised components. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-copyfield--docs) |
 | `CountDownTimer` | Displays a countdown timer showing the remaining time until a specified end date. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-countdowntimer--docs) |
 | `CveIdentifier` | Monospace CVE identifier for vulnerability tables, findings, and report references. | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-cveidentifier--docs) |
