@@ -109,6 +109,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   RangeSlider: 'Dual-thumb slider for selecting a min/max range',
   StatusBadge: 'Pill-shaped text label for entity status — published, beta, new, etc.',
   WidgetManager: 'Card managing a controlled collection of widgets picked from a catalog',
+  ScrollToTop: 'Floating OSD button that scrolls a ScrollView/FlatList back to the top',
 };
 
 type CategoryKey =
@@ -204,6 +205,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   StatusPage: 'feedback',
   StatusBadge: 'feedback',
   WidgetManager: 'layout',
+  ScrollToTop: 'navigation',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

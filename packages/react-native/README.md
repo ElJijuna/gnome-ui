@@ -2677,6 +2677,55 @@ threshold. Unlike the web version there's no `data-breakpoint` attribute
 to expose for CSS targeting (RN has no attribute selectors) — branch on
 `activeBreakpoint` directly inside the render prop instead.
 
+### ScrollToTop
+
+```tsx
+import { ScrollToTop } from '@gnome-ui/react-native';
+
+const scrollRef = useRef<ScrollView>(null);
+const [scrollY, setScrollY] = useState(0);
+
+<View style={{ flex: 1 }}>
+  <ScrollView
+    ref={scrollRef}
+    onScroll={(e) => setScrollY(e.nativeEvent.contentOffset.y)}
+    scrollEventThrottle={16}
+  >
+    {/* ... */}
+  </ScrollView>
+  <ScrollToTop
+    scrollY={scrollY}
+    onPress={() => scrollRef.current?.scrollTo({ y: 0, animated: true })}
+  />
+</View>;
+```
+
+Absolutely-positioned OSD button that scrolls a `ScrollView`/`FlatList`
+back to the top — mirrors `@gnome-ui/react`'s `ScrollToTop`, reimagined
+rather than ported 1:1: RN has no page-level scroll event to observe
+internally, so the web version's `useScrollToTopVisibility` (a `window`/
+element `scroll` listener) doesn't port at all. `visible="auto"` (the
+default) is instead a pure function of a `scrollY` number prop the
+consumer feeds from their own `ScrollView`'s `onScroll` — no internal
+state or listener needed. There's likewise no way for this component to
+scroll a `ScrollView`/`FlatList` on the consumer's behalf the way the web
+version calls `scrollTarget.scrollTo(...)` itself, so pressing the button
+calls the required `onPress` instead — typically
+`scrollRef.current?.scrollTo({ y: 0, animated: true })`.
+
+Same "no `document.body`/portal target" gap `Toaster` already documents —
+mount this yourself as the last child of the `View` wrapping your
+scrollable content so it paints on top; `pointerEvents="box-none"` (the
+same technique `Toaster` uses) keeps the empty space around the button
+from intercepting touches meant for the content underneath. The web
+version's resting `opacity: 0.5`-until-hover/focus is dropped, the same
+call `PasswordEntryRow`'s reveal button already made — that effect exists
+purely so the control can brighten on hover, and touch has no hover.
+`topInset`/`bottomInset` let you thread in your own
+`useSafeAreaInsets()` values for a `"top-*"`/`"bottom-*"` position, same
+as `BottomTabBar`'s `bottomInset` — this package takes no dependency on
+`react-native-safe-area-context` itself.
+
 ## Installation
 
 ```bash

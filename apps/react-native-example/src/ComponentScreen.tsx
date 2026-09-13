@@ -55,6 +55,7 @@ import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { RangeSliderScreen } from './screens/RangeSliderScreen';
+import { ScrollToTopScreen } from './screens/ScrollToTopScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SegmentedBarScreen } from './screens/SegmentedBarScreen';
 import { SeparatorScreen } from './screens/SeparatorScreen';
@@ -159,6 +160,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   RangeSlider: RangeSliderScreen,
   StatusBadge: StatusBadgeScreen,
   WidgetManager: WidgetManagerScreen,
+  ScrollToTop: ScrollToTopScreen,
 };
 
 export interface ComponentScreenProps {
