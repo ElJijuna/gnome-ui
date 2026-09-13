@@ -131,7 +131,7 @@ Legend: ✅ Done · ⬜ Pending · 🚫 Deferred / not planned
 |--------|-----------|-------|
 | ✅ | **Toolbar** | Shipped exactly as predicted — flat-button row, `theme.space1` gap/padding. Web CSS's `color`/`font-family` on `.toolbar` dropped, no RN style inheritance from parent `View` to child `Text` for them to reach |
 | ✅ | **Spacer** | Shipped exactly as predicted — trivial `flex: 1` `View`, shipped alongside `Toolbar` since it's the documented pattern for pushing trailing items to the end. `accessible={false}` mirrors the web's `aria-hidden="true"`, the same call `Separator` already made for a purely decorative element |
-| ⬜ | **LinkedGroup** | Directly portable — connected-border trick already proven by `Dropdown`'s trigger border |
+| ✅ | **LinkedGroup** | Shipped — needed real reimagining, not the "directly portable" this row's own note guessed: the web version reaches every child's border-radius via a CSS `> *` universal child selector, which RN has no equivalent for (a parent `View` can't reach into an arbitrary child's own internal styles). Rebuilt on the same `cloneElement`-onto-children technique `Popover`/`Tooltip` already use on their trigger — each child gets a computed corner-radius/negative-margin override merged onto its own `style`, generalizing `SplitButton`'s fixed two-piece connected-border recipe to an arbitrary list. Only works because every component here already merges a passed `style` prop last. The web's hover/focus `z-index` bump is dropped — RN is touch-first, no `:hover` |
 | ⬜ | **Frame** | Trivial — border + radius, no background |
 
 ### BoxedList / ActionRow variants

@@ -82,6 +82,7 @@ export const COMPONENT_NAMES = [
   'CopyButton',
   'Toolbar',
   'Spacer',
+  'LinkedGroup',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

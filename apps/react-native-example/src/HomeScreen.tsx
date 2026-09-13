@@ -115,6 +115,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   CopyButton: 'Icon button that copies a value to the clipboard, with a checkmark confirmation',
   Toolbar: 'Horizontal action bar with standard flat-button padding and spacing',
   Spacer: 'Invisible flex: 1 filler that pushes trailing items to the end of a row',
+  LinkedGroup: 'Visually-connected row of buttons/inputs with merged borders, no gap',
 };
 
 type CategoryKey =
@@ -216,6 +217,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   CopyButton: 'actions',
   Toolbar: 'layout',
   Spacer: 'layout',
+  LinkedGroup: 'layout',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

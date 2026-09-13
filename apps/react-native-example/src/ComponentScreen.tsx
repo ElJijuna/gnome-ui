@@ -45,6 +45,7 @@ import { IconButtonScreen } from './screens/IconButtonScreen';
 import { IconScreen } from './screens/IconScreen';
 import { InlineViewSwitcherScreen } from './screens/InlineViewSwitcherScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
+import { LinkedGroupScreen } from './screens/LinkedGroupScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { MultiSelectDropdownScreen } from './screens/MultiSelectDropdownScreen';
 import { OverlayScreen } from './screens/OverlayScreen';
@@ -171,6 +172,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   CopyButton: CopyButtonScreen,
   Toolbar: ToolbarScreen,
   Spacer: SpacerScreen,
+  LinkedGroup: LinkedGroupScreen,
 };
 
 export interface ComponentScreenProps {

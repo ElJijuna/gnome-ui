@@ -157,7 +157,7 @@ from those two files — edit them, not this table, then run
 | `Kbd` | Standalone single key-cap for inline instructional text. | 🚫 | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-kbd--docs) |
 | `LevelBar` | Discrete level indicator with colour-coded low/high offset zones — mirrors `GtkLevelBar`. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-levelbar--docs) |
 | `Link` | Inline hyperlink following GNOME HIG. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-link--docs) |
-| `LinkedGroup` | Renders children as a single visually-connected unit with no gap and merged borders. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-linkedgroup--docs) |
+| `LinkedGroup` | Renders children as a single visually-connected unit with no gap and merged borders. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-linkedgroup--docs) |
 | `Modal` |  | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-modal--docs) |
 | `MultiSelectDropdown` | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-multiselectdropdown--docs) |
 | `NavigationSplitView` | Two-pane sidebar + content layout that collapses to a single navigable pane on narrow screens (≤ 400 px), mirroring `AdwNavigationSplitView`. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-navigationsplitview--docs) |

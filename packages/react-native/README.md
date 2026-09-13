@@ -294,6 +294,43 @@ announces the same thing, mirroring the web version's `aria-label` on its
 icon span. Unlike the web `Link`, RN has no tab concept, so `external` is
 purely presentational — `href` always opens the same way regardless.
 
+### LinkedGroup
+
+```tsx
+import { Button, LinkedGroup } from '@gnome-ui/react-native';
+
+<LinkedGroup>
+  <Button>Cut</Button>
+  <Button>Copy</Button>
+  <Button>Paste</Button>
+</LinkedGroup>
+```
+
+Renders children as a single visually-connected unit with no gap and
+merged borders — the canonical GNOME pattern for button groups and
+segmented inputs. Mirrors `@gnome-ui/react`'s `LinkedGroup`, itself
+mirroring the libadwaita `.linked` style class.
+
+The web version reaches every child's border-radius via a CSS `> *`
+universal child selector — RN has no equivalent way for a parent `View`
+to reach into an arbitrary child's own internally-computed styles.
+Reimagined as the same `cloneElement`-onto-children technique
+`Popover`/`Tooltip` already use on their own trigger: each child gets a
+computed corner-radius/negative-margin override merged onto whatever
+`style` it already has, generalizing the "zero the shared inner corners,
+keep `theme.radiusMd` on the outer ones, overlap by 1 dp to collapse the
+shared border" recipe `SplitButton` already proved for its own fixed
+two-piece connected border. This only works because every component in
+this package already merges a passed-in `style` prop last — the same
+assumption `Popover`'s own trigger-cloning already depends on, so any
+custom child passed to `LinkedGroup` needs to follow that same
+convention.
+
+The web CSS also raises a hovered/focused child's `z-index` so its own
+border isn't visually covered by the next sibling's overlapping edge —
+dropped here: RN is touch-first (no `:hover`), and no component in this
+package currently renders an escaping focus ring that overlap could clip.
+
 ### TextField
 
 ```tsx
