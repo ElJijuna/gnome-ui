@@ -110,6 +110,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   StatusBadge: 'Pill-shaped text label for entity status — published, beta, new, etc.',
   WidgetManager: 'Card managing a controlled collection of widgets picked from a catalog',
   ScrollToTop: 'Floating OSD button that scrolls a ScrollView/FlatList back to the top',
+  StepIndicator: 'Numbered "Step X of Y" progress indicator for onboarding/wizard flows',
 };
 
 type CategoryKey =
@@ -206,6 +207,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   StatusBadge: 'feedback',
   WidgetManager: 'layout',
   ScrollToTop: 'navigation',
+  StepIndicator: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

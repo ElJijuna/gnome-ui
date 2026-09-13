@@ -68,6 +68,7 @@ import { SpinRowScreen } from './screens/SpinRowScreen';
 import { SplitButtonScreen } from './screens/SplitButtonScreen';
 import { StatusBadgeScreen } from './screens/StatusBadgeScreen';
 import { StatusPageScreen } from './screens/StatusPageScreen';
+import { StepIndicatorScreen } from './screens/StepIndicatorScreen';
 import { SwitchRowScreen } from './screens/SwitchRowScreen';
 import { SwitchScreen } from './screens/SwitchScreen';
 import { TabsScreen } from './screens/TabsScreen';
@@ -161,6 +162,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   StatusBadge: StatusBadgeScreen,
   WidgetManager: WidgetManagerScreen,
   ScrollToTop: ScrollToTopScreen,
+  StepIndicator: StepIndicatorScreen,
 };
 
 export interface ComponentScreenProps {

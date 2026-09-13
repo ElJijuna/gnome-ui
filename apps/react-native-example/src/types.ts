@@ -77,6 +77,7 @@ export const COMPONENT_NAMES = [
   'StatusBadge',
   'WidgetManager',
   'ScrollToTop',
+  'StepIndicator',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

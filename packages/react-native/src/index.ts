@@ -64,6 +64,7 @@ export * from './components/SpinRow';
 export * from './components/SplitButton';
 export * from './components/StatusBadge';
 export * from './components/StatusPage';
+export * from './components/StepIndicator';
 export * from './components/Switch';
 export * from './components/SwitchRow';
 export * from './components/Tabs';

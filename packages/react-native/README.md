@@ -2534,6 +2534,50 @@ counter. Six variants (`success`/`warning`/`error`/`new`/`accent`/
 `neutral`) reuse `Badge`'s exact color-mapping shape, plus a `new` (purple)
 variant `Badge` doesn't have.
 
+### StepIndicator
+
+```tsx
+import { StepIndicator } from '@gnome-ui/react-native';
+
+<StepIndicator steps={5} currentStep={1} />
+
+<StepIndicator
+  steps={['Account', 'Profile', 'Payment', 'Confirm']}
+  currentStep={2}
+  onStepClick={setCurrentStep}
+/>
+
+<StepIndicator steps={4} currentStep={2} orientation="vertical" />
+```
+
+Numbered "Step X of Y" progress indicator for onboarding/wizard flows —
+mirrors `@gnome-ui/react`'s `StepIndicator`. Directly portable, no web-only
+APIs involved: each step's circle derives its state (upcoming/current/
+completed) purely from `currentStep`. Each circle animates its own
+border/background color (an independent pair of 0/1 `Animated.Value`s,
+one for "accented border" and one for "filled background", since they
+flip on different transitions) — the content swap between number and
+checkmark and the connector-line recolor are instant, matching the source
+CSS exactly (only `background-color`/`border-color` transition there).
+
+The connecting line between circles reuses the CSS trick verbatim —
+`position: absolute; left: '50%'; width: '100%'` inside each equal-width
+flex item, so the line runs from one circle's center to the next's;
+`left`/`width` percentages are valid RN position/dimension values, unlike
+the `transform: translateX('50%')` trick this package avoids elsewhere.
+The checkmark uses `tintColor` rather than `color`, since RN icons have no
+`currentColor` to inherit — the same call `BottomTabBar`'s active-tab icon
+already made for tracking the *configurable* accent.
+
+The outer container sets `role="navigation"` **without** `accessible` —
+the `ToggleGroup`-established pattern for a grouping role over multiple
+independently-focusable children (each step circle): `accessible` here
+would collapse the whole indicator into one VoiceOver stop on iOS. Assert
+`element.props.role` on a `testID` in tests instead of
+`getByRole('navigation')`. A completed step's circle becomes a `Pressable`
+only when `onStepClick` is provided — the current and upcoming steps are
+never pressable, matching the web version.
+
 ### WidgetManager
 
 ```tsx
