@@ -5,6 +5,34 @@
  * opt into these selectors instead of its own named palettes.
  */
 
+/*
+ * Body text font — the same self-hosted "Adwaita Sans" every gnome-ui
+ * package already ships (see packages/core/src/tokens.css's own
+ * @font-face + `--gnome-font-family`), copied into docs/assets/fonts/
+ * since this site builds independently of that package's own asset
+ * pipeline. Code blocks intentionally keep Material's default Roboto
+ * Mono — only `--md-text-font` changes here, not `--md-code-font`.
+ */
+@font-face {
+  font-family: "Adwaita Sans";
+  src: url("../assets/fonts/AdwaitaSans-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adwaita Sans";
+  src: url("../assets/fonts/AdwaitaSans-Italic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --md-text-font: "Adwaita Sans";
+}
+
 [data-md-color-scheme="default"] {
   --md-primary-fg-color: #3584e4;
   --md-primary-fg-color--light: #62a0ea;
