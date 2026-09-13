@@ -71,6 +71,7 @@ export * from './components/Tabs';
 export * from './components/TagInput';
 export * from './components/Text';
 export * from './components/TextField';
+export * from './components/Timeline';
 export * from './components/Toast';
 export * from './components/ToggleGroup';
 export * from './components/Tooltip';

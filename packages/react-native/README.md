@@ -2578,6 +2578,68 @@ would collapse the whole indicator into one VoiceOver stop on iOS. Assert
 only when `onStepClick` is provided — the current and upcoming steps are
 never pressable, matching the web version.
 
+### Timeline
+
+```tsx
+import { Timeline } from '@gnome-ui/react-native';
+
+<Timeline
+  items={[
+    { leading: <Text color="dim">10:00</Text>, icon: <Icon icon={Check} tintColor={theme.accentFgColor} />, content: <Text>Approved</Text> },
+    { content: <Text>Pending review</Text> },
+  ]}
+/>
+
+<Timeline orientation="horizontal" variant="dotted" items={steps} />
+```
+
+Ordered sequence of events connected by a visual timeline — mirrors
+`@gnome-ui/react`'s `Timeline`. An original composition (no direct
+libadwaita widget), following GNOME HIG activity-feed/stepper patterns.
+
+The web version aligns every item's `leading` column (vertical) or row
+(horizontal) via CSS subgrid, so timestamps/labels line up across items
+regardless of how wide/tall any single one of them is. RN/Yoga has no
+grid or subgrid at all, so that alignment is reproduced by measurement
+instead — the same `onLayout` + `Record<index, size>` +
+"largest-so-far wins" technique `Slider`'s mark labels already
+established. The node track itself additionally gets a fixed width
+(vertical, 24 dp, matching the source CSS's literal grid column) or
+height (horizontal, 28 dp, the larger of the dot/icon node sizes) so
+`content` starts at the same position across items even when dot and
+icon nodes are mixed in the same list.
+
+`orientation="horizontal"` wraps itself in a horizontal `ScrollView`,
+reimagining the web CSS's `overflow-x: auto`. The web version's
+`grid-auto-columns: minmax(72px, 1fr)` also grows items to fill leftover
+space when the row doesn't overflow; that half doesn't port (a
+`ScrollView`'s content isn't bounded the way a CSS grid track is) — each
+item gets a flat 72 dp `minWidth` instead, unconditionally scrollable.
+
+**Real, on-device-confirmed platform bug found while building `variant="dotted"`**:
+RN's `borderStyle: 'dotted'` renders nothing at all — no error, just
+invisible — unless *every* side shares the same width and color; the
+direct 1:1 port of the web CSS's single-side `border-left`/`border-top`
+dotted line (one bordered side, the other three left unset) silently
+produced no line whatsoever. Confirmed via the iOS Simulator with
+saturated debug colors: a uniform four-side `borderWidth`/`borderColor`
+renders the dotted pattern correctly, but reintroducing even three
+`transparent` sides (uniform width, per-side color) suppresses it again.
+Fixed by drawing the dotted connector as a narrow (6 dp) box with a
+uniform dotted border on all four sides instead of a single bordered
+edge — visually indistinguishable from a single dotted line at this
+thickness. **Any future dotted/dashed RN border needs all sides
+width-and-color-uniform — a single-side border in that style silently
+renders invisible.**
+
+`icon`/`leading`/`content` are plain `ReactNode`, the same as `PathBar`'s
+segment `icon` — the consumer sizes and colors their own icon (e.g.
+`tintColor={theme.accentFgColor}`), since RN has no `currentColor` for
+this component to tint an arbitrary child with. `role="list"`/
+`role="listitem"` are set without `accessible`, the same
+`ToggleGroup`/`StepIndicator`-established pattern for a grouping role
+over children that may themselves contain focusable content.
+
 ### WidgetManager
 
 ```tsx

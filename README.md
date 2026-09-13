@@ -203,7 +203,7 @@ from those two files — edit them, not this table, then run
 | `Text` | Typography component mirroring all [Adwaita text style classes](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html). | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-text--docs) |
 | `TextField` | Single-line text input with label, helper text, and error state. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-textfield--docs) |
 | `TextTruncate` | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-texttruncate--docs) |
-| `Timeline` | Ordered sequence of events connected by a visual timeline. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
+| `Timeline` | Ordered sequence of events connected by a visual timeline. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
 | `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
 | `Toast` | Non-blocking temporary notification following the Adwaita `AdwToast` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-toast--docs) |
 | `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |

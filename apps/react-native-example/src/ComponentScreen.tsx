@@ -75,6 +75,7 @@ import { TabsScreen } from './screens/TabsScreen';
 import { TagInputScreen } from './screens/TagInputScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
+import { TimelineScreen } from './screens/TimelineScreen';
 import { ToastScreen } from './screens/ToastScreen';
 import { ToggleGroupScreen } from './screens/ToggleGroupScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
@@ -163,6 +164,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   WidgetManager: WidgetManagerScreen,
   ScrollToTop: ScrollToTopScreen,
   StepIndicator: StepIndicatorScreen,
+  Timeline: TimelineScreen,
 };
 
 export interface ComponentScreenProps {

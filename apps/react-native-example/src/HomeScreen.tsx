@@ -111,6 +111,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   WidgetManager: 'Card managing a controlled collection of widgets picked from a catalog',
   ScrollToTop: 'Floating OSD button that scrolls a ScrollView/FlatList back to the top',
   StepIndicator: 'Numbered "Step X of Y" progress indicator for onboarding/wizard flows',
+  Timeline: 'Ordered sequence of events connected by a visual timeline',
 };
 
 type CategoryKey =
@@ -208,6 +209,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   WidgetManager: 'layout',
   ScrollToTop: 'navigation',
   StepIndicator: 'feedback',
+  Timeline: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

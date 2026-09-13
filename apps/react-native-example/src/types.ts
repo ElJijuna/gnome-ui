@@ -78,6 +78,7 @@ export const COMPONENT_NAMES = [
   'WidgetManager',
   'ScrollToTop',
   'StepIndicator',
+  'Timeline',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
