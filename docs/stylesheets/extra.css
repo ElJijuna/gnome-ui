@@ -146,7 +146,7 @@
  * for platforms the component actually ships on are rendered; there's no
  * "unavailable" placeholder state.
  */
-.gnome-platforms {
+.gnome-platform-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -165,6 +165,38 @@
   font-weight: 600;
   color: #1c71d8;
   white-space: nowrap;
+}
+
+/* Tabs are real `<button>`s (for keyboard/AT semantics) reset to look like
+   the badge pill they already were as static `<span>`s, plus an active
+   state and a pointer cursor. */
+.gnome-platform-tab {
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background-color 125ms,
+    border-color 125ms;
+}
+
+/* `button.` (not just `.gnome-platform-tab`) so this specificity beats
+   `[data-md-color-scheme="slate"] .gnome-platform-badge` below regardless
+   of source order — a bare two-class selector only ties with that
+   attribute-plus-class one, and the later-in-file rule would otherwise
+   win the tie (confirmed via getComputedStyle before this fix: the tab's
+   background was resolving to the dark-mode badge tint, never the active
+   blue, on `[data-md-color-scheme="slate"]`). */
+button.gnome-platform-tab.is-active {
+  background: #3584e4;
+  border-color: #3584e4;
+  color: #fff;
+}
+
+.gnome-platform-tab:not(.is-active):hover {
+  background: rgb(53 132 228 / 18%);
+}
+
+[data-md-color-scheme="slate"] .gnome-platform-tab:not(.is-active):hover {
+  background: rgb(153 193 241 / 20%);
 }
 
 .gnome-platform-badge::before {

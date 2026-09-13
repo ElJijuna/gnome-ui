@@ -50,6 +50,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/gallery-tabs.js
+
 plugins:
   - search
   - git-revision-date-localized:
@@ -57,6 +60,7 @@ plugins:
 
 markdown_extensions:
   - admonition
+  - md_in_html
   - pymdownx.details
   - pymdownx.superfences:
       custom_fences:
