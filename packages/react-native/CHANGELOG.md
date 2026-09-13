@@ -1,3 +1,15 @@
+## [@gnome-ui/react-native-v1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.11.0...@gnome-ui/react-native@1.12.0) (2026-09-13)
+
+### Features
+
+* **@gnome-ui/react-native:** add LinkedGroup component with documentation and tests ([f14bece](https://github.com/ElJijuna/gnome-ui/commit/f14bececdd3331661bd361928f67a0ab50df4077))
+* **@gnome-ui/react-native:** add NavigationSplitView component with documentation and tests ([f13ab3e](https://github.com/ElJijuna/gnome-ui/commit/f13ab3e422d6cb2a068769f3f04e05a7280504b1))
+* **@gnome-ui/react-native:** add RatingStars component with documentation, tests, and integration into example screens ([ecc5fe8](https://github.com/ElJijuna/gnome-ui/commit/ecc5fe892ffa2acdd30bca62f61f0dc5d254bb63))
+
+### Bug Fixes
+
+* **@gnome-ui/react-native:** defer Clipboard import to prevent crashes in Expo Go ([c3e1f55](https://github.com/ElJijuna/gnome-ui/commit/c3e1f55327b2814d1bebaa4aa74a7a7dc27dbd79))
+
 ## [@gnome-ui/react-native-v1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.10.0...@gnome-ui/react-native@1.11.0) (2026-09-13)
 
 ### Features
