@@ -1,3 +1,15 @@
+## [@gnome-ui/react-native-v1.11.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.10.0...@gnome-ui/react-native@1.11.0) (2026-09-13)
+
+### Features
+
+* **@gnome-ui/react-native:** add CopyButton component for clipboard functionality and update related files ([9b29e0d](https://github.com/ElJijuna/gnome-ui/commit/9b29e0dd5b90e4aa01cbba79a111de62e3d91722))
+* **@gnome-ui/react-native:** add ScrollToTop component for scrolling to the top of a ScrollView and update documentation ([ab00b3d](https://github.com/ElJijuna/gnome-ui/commit/ab00b3dfbadbe1a174f7c1320a135cdaffa7157d))
+* **@gnome-ui/react-native:** add Spacer component for layout flexibility and implement tests ([6017949](https://github.com/ElJijuna/gnome-ui/commit/60179491f0db691d9973074e3c416dabf7add4d0))
+* **@gnome-ui/react-native:** add StepIndicator component for onboarding flows and update documentation ([75129b7](https://github.com/ElJijuna/gnome-ui/commit/75129b72862479227328f1ef456f5389ecde4383))
+* **@gnome-ui/react-native:** add SwitchRow component with integrated toggle functionality and update documentation ([cbd3c53](https://github.com/ElJijuna/gnome-ui/commit/cbd3c53de31394f035f463405554e07b3c7c0053))
+* **@gnome-ui/react-native:** add Timeline component for visual event sequencing and update documentation ([d80d130](https://github.com/ElJijuna/gnome-ui/commit/d80d130cb63feec9f7a3ea584294a391f0ba68b6))
+* **@gnome-ui/react-native:** add Toolbar and Spacer components with documentation and tests ([5174fc8](https://github.com/ElJijuna/gnome-ui/commit/5174fc80bb2c5d21921e5ad4eeb6d4abdea63c70))
+
 ## [@gnome-ui/react-native-v1.10.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.9.0...@gnome-ui/react-native@1.10.0) (2026-09-12)
 
 ### Features
