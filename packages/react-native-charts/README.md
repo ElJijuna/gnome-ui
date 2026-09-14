@@ -12,8 +12,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, and `RadialBarChart`
-> shipped. This package mirrors
+> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`, and
+> `CloudChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -67,6 +67,7 @@ dependencies.
 | `PieChart` | Pie or donut chart with optional in-slice labels and legend |
 | `RadarChart` | Spider/radar chart for multi-attribute comparisons across subjects |
 | `RadialBarChart` | Concentric arc bars for multiple circular progress metrics |
+| `CloudChart` | Word/tag cloud with value-proportional font sizing |
 
 ## Usage
 
@@ -91,9 +92,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/BarChart/README.md`](src/components/BarChart/README.md),
 [`src/components/AreaChart/README.md`](src/components/AreaChart/README.md),
 [`src/components/PieChart/README.md`](src/components/PieChart/README.md),
-[`src/components/RadarChart/README.md`](src/components/RadarChart/README.md), and
-[`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md) for the full
-prop reference of each.
+[`src/components/RadarChart/README.md`](src/components/RadarChart/README.md),
+[`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md), and
+[`src/components/CloudChart/README.md`](src/components/CloudChart/README.md) for the full prop
+reference of each.
 
 ## Design notes
 
@@ -144,3 +146,8 @@ prop reference of each.
   gauge, rendering as a barely-visible sliver clipped against the canvas edge. Any future arc-based
   chart in this package should double-check sweep direction algebraically against Skia's own doc
   comment before trusting a screenshot alone to catch a sign error like this.
+- **`CloudChart` needed no Skia canvas at all**, unlike `RadarChart`/`RadialBarChart` — its web
+  source has no real word-cloud packing algorithm, just flex-wrapped `<span>`s with `font-size`
+  scaled linearly by value, laid out by the browser's own text flow. Ports directly to a plain
+  `flexWrap: 'wrap'` RN `View` of `Text`s. No hover-only hint (web's `:hover { opacity: 0.7 }`, no
+  touch equivalent and no `onPress` in the source either).

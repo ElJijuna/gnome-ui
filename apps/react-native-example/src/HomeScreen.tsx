@@ -125,6 +125,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   PieChart: 'Pie or donut chart with optional slice labels and legend',
   RadarChart: 'Spider/radar chart for multi-attribute comparisons across subjects',
   RadialBarChart: 'Concentric arc bars for multiple circular progress metrics',
+  CloudChart: 'Word/tag cloud with value-proportional font sizing',
 };
 
 type CategoryKey =
@@ -235,6 +236,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   PieChart: 'feedback',
   RadarChart: 'feedback',
   RadialBarChart: 'feedback',
+  CloudChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

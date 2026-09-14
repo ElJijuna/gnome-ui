@@ -27,6 +27,7 @@ import { CheckboxScreen } from './screens/CheckboxScreen';
 import { CheckRowScreen } from './screens/CheckRowScreen';
 import { ChipScreen } from './screens/ChipScreen';
 import { ClampScreen } from './screens/ClampScreen';
+import { CloudChartScreen } from './screens/CloudChartScreen';
 import { CoachMarkScreen } from './screens/CoachMarkScreen';
 import { ColorPickerScreen } from './screens/ColorPickerScreen';
 import { ComboRowScreen } from './screens/ComboRowScreen';
@@ -189,6 +190,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   PieChart: PieChartScreen,
   RadarChart: RadarChartScreen,
   RadialBarChart: RadialBarChartScreen,
+  CloudChart: CloudChartScreen,
 };
 
 export interface ComponentScreenProps {

@@ -1,6 +1,7 @@
 export { getChartPalette } from './colors';
 export { AreaChart, type AreaChartProps, type AreaChartSeries } from './components/AreaChart';
 export { BarChart, type BarChartProps, type BarChartSeries } from './components/BarChart';
+export { CloudChart, type CloudChartDataItem, type CloudChartProps } from './components/CloudChart';
 export { LineChart, type LineChartProps, type LineChartSeries } from './components/LineChart';
 export { PieChart, type PieChartDataItem, type PieChartProps } from './components/PieChart';
 export { RadarChart, type RadarChartProps, type RadarChartSeries } from './components/RadarChart';
