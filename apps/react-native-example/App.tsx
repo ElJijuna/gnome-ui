@@ -9,6 +9,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { ComponentScreen } from './src/ComponentScreen';
@@ -22,18 +23,20 @@ const App = () => {
   const [accentColor, setAccentColor] = useState<GnomeAccentColor>('blue');
 
   return (
-    <SafeAreaProvider>
-      <GnomeProvider colorScheme={colorScheme} contrast={contrast} accentColor={accentColor}>
-        <AppShell
-          colorScheme={colorScheme}
-          onColorSchemeChange={setColorScheme}
-          contrast={contrast}
-          onContrastChange={setContrast}
-          accentColor={accentColor}
-          onAccentColorChange={setAccentColor}
-        />
-      </GnomeProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <GnomeProvider colorScheme={colorScheme} contrast={contrast} accentColor={accentColor}>
+          <AppShell
+            colorScheme={colorScheme}
+            onColorSchemeChange={setColorScheme}
+            contrast={contrast}
+            onContrastChange={setContrast}
+            accentColor={accentColor}
+            onAccentColorChange={setAccentColor}
+          />
+        </GnomeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
 

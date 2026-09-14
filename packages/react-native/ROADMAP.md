@@ -273,12 +273,15 @@ convention.
 
 ## `@gnome-ui/charts` — Chart Components
 
-🚫 Deferred as a block. All 23 chart components are built on Recharts
-(SVG-over-DOM); RN has no equivalent renderer without a new native
-charting dependency (e.g. Victory Native, `react-native-svg-charts`, or
-hand-rolling on `react-native-svg` directly). Worth its own dedicated
-initiative — not a natural fit for a single component's turn — once there
-is a concrete consuming app that needs charts on mobile.
+✅ Started (2026-09-13) as its own package, [`@gnome-ui/react-native-charts`](../react-native-charts/README.md)
+— not part of this package, mirroring how `@gnome-ui/charts` is separate
+from `@gnome-ui/react` on the web side. All 23 chart components are built
+on Recharts (SVG-over-DOM) there; RN has no equivalent renderer, so the new
+package renders on [Victory Native](https://commerce.nearform.com/open-source/victory-native/)
+(Skia + Reanimated) instead — chosen over `react-native-svg-charts`
+(unmaintained) or hand-rolling on `react-native-svg` directly. See that
+package's own `ROADMAP.md` for per-component status (`LineChart` shipped
+first).
 
 ## Tier 18 — Data Display
 

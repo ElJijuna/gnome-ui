@@ -85,6 +85,7 @@ export const COMPONENT_NAMES = [
   'LinkedGroup',
   'NavigationSplitView',
   'RatingStars',
+  'LineChart',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

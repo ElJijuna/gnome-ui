@@ -45,6 +45,7 @@ import { IconButtonScreen } from './screens/IconButtonScreen';
 import { IconScreen } from './screens/IconScreen';
 import { InlineViewSwitcherScreen } from './screens/InlineViewSwitcherScreen';
 import { LevelBarScreen } from './screens/LevelBarScreen';
+import { LineChartScreen } from './screens/LineChartScreen';
 import { LinkedGroupScreen } from './screens/LinkedGroupScreen';
 import { LinkScreen } from './screens/LinkScreen';
 import { MultiSelectDropdownScreen } from './screens/MultiSelectDropdownScreen';
@@ -177,6 +178,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   LinkedGroup: LinkedGroupScreen,
   NavigationSplitView: NavigationSplitViewScreen,
   RatingStars: RatingStarsScreen,
+  LineChart: LineChartScreen,
 };
 
 export interface ComponentScreenProps {

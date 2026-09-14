@@ -118,6 +118,8 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   LinkedGroup: 'Visually-connected row of buttons/inputs with merged borders, no gap',
   NavigationSplitView: 'Two-pane sidebar + content layout that collapses to one pane on phones',
   RatingStars: 'Star rating display and input — read-only summary or tap-to-select',
+  LineChart:
+    'Multi-series line chart with grid, legend, and Adwaita palette — @gnome-ui/react-native-charts',
 };
 
 type CategoryKey =
@@ -222,6 +224,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   LinkedGroup: 'layout',
   NavigationSplitView: 'navigation',
   RatingStars: 'forms',
+  LineChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',
