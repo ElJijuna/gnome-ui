@@ -56,6 +56,7 @@ import { OverlayScreen } from './screens/OverlayScreen';
 import { PasswordEntryRowScreen } from './screens/PasswordEntryRowScreen';
 import { PasswordFieldScreen } from './screens/PasswordFieldScreen';
 import { PathBarScreen } from './screens/PathBarScreen';
+import { PieChartScreen } from './screens/PieChartScreen';
 import { PopoverScreen } from './screens/PopoverScreen';
 import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
@@ -183,6 +184,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   LineChart: LineChartScreen,
   BarChart: BarChartScreen,
   AreaChart: AreaChartScreen,
+  PieChart: PieChartScreen,
 };
 
 export interface ComponentScreenProps {
