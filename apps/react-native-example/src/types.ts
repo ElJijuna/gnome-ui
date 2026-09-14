@@ -98,6 +98,7 @@ export const COMPONENT_NAMES = [
   'ScatterChart',
   'FunnelChart',
   'ComposedChart',
+  'GaugeChart',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

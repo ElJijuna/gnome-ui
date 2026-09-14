@@ -44,6 +44,7 @@ import { FieldGroupScreen } from './screens/FieldGroupScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { FilterableMultiSelectDropdownScreen } from './screens/FilterableMultiSelectDropdownScreen';
 import { FunnelChartScreen } from './screens/FunnelChartScreen';
+import { GaugeChartScreen } from './screens/GaugeChartScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
 import { IconButtonScreen } from './screens/IconButtonScreen';
@@ -203,6 +204,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ScatterChart: ScatterChartScreen,
   FunnelChart: FunnelChartScreen,
   ComposedChart: ComposedChartScreen,
+  GaugeChart: GaugeChartScreen,
 };
 
 export interface ComponentScreenProps {

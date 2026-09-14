@@ -14,7 +14,7 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, and `ComposedChart` shipped. This package mirrors
+> `FunnelChart`, `ComposedChart`, and `GaugeChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -75,6 +75,7 @@ dependencies.
 | `ScatterChart` | Scatter/bubble chart for correlation between two numeric variables; `zKey` encodes a third dimension as bubble size |
 | `FunnelChart` | Funnel visualization for conversion rates and sales pipelines |
 | `ComposedChart` | Mixed `bar`/`line`/`area` series sharing one x-axis |
+| `GaugeChart` | Radial gauge for a single value against a min/max range, with optional color thresholds |
 
 ## Usage
 
@@ -106,9 +107,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md),
 [`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md),
 [`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md),
-[`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md), and
-[`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md) for the full
-prop reference of each.
+[`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md),
+[`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md), and
+[`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md) for the full prop
+reference of each.
 
 ## Design notes
 
@@ -213,3 +215,16 @@ prop reference of each.
   y-domain across every `yKey`, with no per-series secondary axis, the same limitation the web
   `ComposedChart` has with its own single `YAxis`. Any future composed-chart data needs every
   series kept within the same order of magnitude, or a series will visually vanish.
+- **`GaugeChart` is a single-ring simplification of `RadialBarChart`'s already-validated
+  semicircle-gauge geometry** — fourth chart in this package with no Victory Native primitive
+  (same category as `RadarChart`/`RadialBarChart`/`FunnelChart`), reusing `RadialBarChart`'s exact
+  `SkPathBuilder.addArc` sweep-direction convention and `strokeCap="round"` track/value pairing
+  rather than re-deriving them. Adds `thresholds` (ascending value/color status bands) and a
+  centered value+caption drawn as Skia `Text` nodes directly on the `Canvas`, rather than an
+  absolutely-positioned RN `<Text>` overlay. **No RN theme token exists for the web's
+  `--gnome-dim-label-color` CSS var** (confirmed by grepping the generated theme — zero hits) —
+  approximated the caption's dimmed look with `theme.windowFgColor` plus a Skia `opacity={0.55}`
+  node prop instead of inventing a new theme token for one component's caption text. Shipped with
+  zero bugs on the on-device screenshot, continuing the pattern `FunnelChart` started: once a
+  hand-rolled Skia chart's underlying primitive (arc math, here) has been paid down by an earlier
+  chart, a later chart reusing it in a simpler shape can reasonably ship clean.
