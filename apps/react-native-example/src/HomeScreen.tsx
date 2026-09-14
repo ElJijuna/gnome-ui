@@ -126,6 +126,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   RadarChart: 'Spider/radar chart for multi-attribute comparisons across subjects',
   RadialBarChart: 'Concentric arc bars for multiple circular progress metrics',
   CloudChart: 'Word/tag cloud with value-proportional font sizing',
+  SparkLineChart: 'Minimal inline line sparkline for embedding in cards and tables',
 };
 
 type CategoryKey =
@@ -237,6 +238,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   RadarChart: 'feedback',
   RadialBarChart: 'feedback',
   CloudChart: 'feedback',
+  SparkLineChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

@@ -12,8 +12,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`, and
-> `CloudChart` shipped. This package mirrors
+> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
+> `CloudChart`, and `SparkLineChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -68,6 +68,7 @@ dependencies.
 | `RadarChart` | Spider/radar chart for multi-attribute comparisons across subjects |
 | `RadialBarChart` | Concentric arc bars for multiple circular progress metrics |
 | `CloudChart` | Word/tag cloud with value-proportional font sizing |
+| `SparkLineChart` | Minimal inline line sparkline for embedding in cards and tables |
 
 ## Usage
 
@@ -93,9 +94,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/AreaChart/README.md`](src/components/AreaChart/README.md),
 [`src/components/PieChart/README.md`](src/components/PieChart/README.md),
 [`src/components/RadarChart/README.md`](src/components/RadarChart/README.md),
-[`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md), and
-[`src/components/CloudChart/README.md`](src/components/CloudChart/README.md) for the full prop
-reference of each.
+[`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md),
+[`src/components/CloudChart/README.md`](src/components/CloudChart/README.md), and
+[`src/components/SparkLineChart/README.md`](src/components/SparkLineChart/README.md) for the full
+prop reference of each.
 
 ## Design notes
 
@@ -151,3 +153,11 @@ reference of each.
   scaled linearly by value, laid out by the browser's own text flow. Ports directly to a plain
   `flexWrap: 'wrap'` RN `View` of `Text`s. No hover-only hint (web's `:hover { opacity: 0.7 }`, no
   touch equivalent and no `onPress` in the source either).
+- **`SparkLineChart` still reuses `CartesianChart`** (unlike `CloudChart`) purely for its scaling
+  math, with every decorative axis/grid/frame part hidden (`axisOptions={{ lineColor: 'transparent' }}`,
+  no `font`). It fully controls its own normalized data shape internally (always a plain
+  `Record<string, number>` via a synthetic `__x` index field), so it passes explicit generic type
+  arguments to `CartesianChart` instead of needing the `InputKeys`/`NumericalKeys` replica pattern
+  the bigger, consumer-shape-generic charts use. The web's hover-triggered `highlighted` mode is
+  dropped — a sparkline's usual embedding size (e.g. inside a table cell) has no natural touch
+  affordance, unlike this whole port's usual hover-to-long-press swap.

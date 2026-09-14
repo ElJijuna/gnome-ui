@@ -10,4 +10,9 @@ export {
   type RadialBarChartDataItem,
   type RadialBarChartProps,
 } from './components/RadialBarChart';
+export {
+  SparkLineChart,
+  type SparkLineChartProps,
+  type SparkSeries,
+} from './components/SparkLineChart';
 export { type ChartLegendPosition } from './types/legend';

@@ -74,6 +74,7 @@ import { SidebarScreen } from './screens/SidebarScreen';
 import { SkeletonScreen } from './screens/SkeletonScreen';
 import { SliderScreen } from './screens/SliderScreen';
 import { SpacerScreen } from './screens/SpacerScreen';
+import { SparkLineChartScreen } from './screens/SparkLineChartScreen';
 import { SpinButtonScreen } from './screens/SpinButtonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
 import { SpinRowScreen } from './screens/SpinRowScreen';
@@ -191,6 +192,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   RadarChart: RadarChartScreen,
   RadialBarChart: RadialBarChartScreen,
   CloudChart: CloudChartScreen,
+  SparkLineChart: SparkLineChartScreen,
 };
 
 export interface ComponentScreenProps {
