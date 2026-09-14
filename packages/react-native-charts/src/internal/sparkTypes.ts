@@ -44,7 +44,11 @@ export function normalizeSparkData(data: SparkData, key: string): Record<string,
  */
 export function sparkAccessibilityProps(ariaLabel: string | undefined) {
   return ariaLabel
-    ? { accessible: true as const, accessibilityRole: 'image' as const, accessibilityLabel: ariaLabel }
+    ? {
+        accessible: true as const,
+        accessibilityRole: 'image' as const,
+        accessibilityLabel: ariaLabel,
+      }
     : {
         accessibilityElementsHidden: true as const,
         importantForAccessibility: 'no-hide-descendants' as const,
