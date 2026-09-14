@@ -128,6 +128,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   CloudChart: 'Word/tag cloud with value-proportional font sizing',
   SparkLineChart: 'Minimal inline line sparkline for embedding in cards and tables',
   SparkAreaChart: 'Minimal inline area sparkline with optional gradient fill',
+  SparkBarChart: 'Minimal inline bar sparkline for compact trend display',
 };
 
 type CategoryKey =
@@ -241,6 +242,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   CloudChart: 'feedback',
   SparkLineChart: 'feedback',
   SparkAreaChart: 'feedback',
+  SparkBarChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

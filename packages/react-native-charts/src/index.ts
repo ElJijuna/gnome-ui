@@ -11,6 +11,7 @@ export {
   type RadialBarChartProps,
 } from './components/RadialBarChart';
 export { SparkAreaChart, type SparkAreaChartProps } from './components/SparkAreaChart';
+export { SparkBarChart, type SparkBarChartProps } from './components/SparkBarChart';
 export {
   SparkLineChart,
   type SparkLineChartProps,

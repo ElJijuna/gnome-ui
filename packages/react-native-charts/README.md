@@ -13,7 +13,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
-> `CloudChart`, `SparkLineChart`, and `SparkAreaChart` shipped. This package mirrors
+> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, and `SparkBarChart` shipped. This package
+> mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -70,6 +71,7 @@ dependencies.
 | `CloudChart` | Word/tag cloud with value-proportional font sizing |
 | `SparkLineChart` | Minimal inline line sparkline for embedding in cards and tables |
 | `SparkAreaChart` | Minimal inline area sparkline with optional gradient fill |
+| `SparkBarChart` | Minimal inline bar sparkline for compact trend display |
 
 ## Usage
 
@@ -97,8 +99,9 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/RadarChart/README.md`](src/components/RadarChart/README.md),
 [`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md),
 [`src/components/CloudChart/README.md`](src/components/CloudChart/README.md),
-[`src/components/SparkLineChart/README.md`](src/components/SparkLineChart/README.md), and
-[`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md) for the full
+[`src/components/SparkLineChart/README.md`](src/components/SparkLineChart/README.md),
+[`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md), and
+[`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md) for the full
 prop reference of each.
 
 ## Design notes
@@ -170,3 +173,7 @@ prop reference of each.
   Victory Native's `Area` hardcodes `style: "fill"` and its props don't accept a `style`/
   `strokeWidth` override at all (confirmed via a real `tsc` error, not assumed), so a second
   `<Area style="stroke">` doesn't typecheck.
+- **`SparkBarChart` has no multi-`series` mode at all** (single `dataKey`+`color` only), matching
+  the web version exactly — unlike its two spark siblings. Uses Victory Native's standalone `Bar`,
+  not `BarGroup`/`BarGroup.Bar` (which `BarChart` needs for grouping multiple series side by side),
+  since there's only ever one series here.
