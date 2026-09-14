@@ -3,4 +3,5 @@ export { AreaChart, type AreaChartProps, type AreaChartSeries } from './componen
 export { BarChart, type BarChartProps, type BarChartSeries } from './components/BarChart';
 export { LineChart, type LineChartProps, type LineChartSeries } from './components/LineChart';
 export { PieChart, type PieChartDataItem, type PieChartProps } from './components/PieChart';
+export { RadarChart, type RadarChartProps, type RadarChartSeries } from './components/RadarChart';
 export { type ChartLegendPosition } from './types/legend';

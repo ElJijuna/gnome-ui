@@ -123,6 +123,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   BarChart: 'Grouped bar chart for categorical comparisons — @gnome-ui/react-native-charts',
   AreaChart: 'Filled area chart — flat or gradient fill, overlapping or stacked series',
   PieChart: 'Pie or donut chart with optional slice labels and legend',
+  RadarChart: 'Spider/radar chart for multi-attribute comparisons across subjects',
 };
 
 type CategoryKey =
@@ -231,6 +232,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   BarChart: 'feedback',
   AreaChart: 'feedback',
   PieChart: 'feedback',
+  RadarChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

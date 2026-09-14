@@ -12,7 +12,7 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** `LineChart`, `BarChart`, `AreaChart`, and `PieChart` shipped. This package mirrors
+> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, and `RadarChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -64,6 +64,7 @@ dependencies.
 | `BarChart` | Grouped/clustered bar chart for categorical comparisons |
 | `AreaChart` | Filled area chart — flat tint or gradient fill, overlapping or stacked series |
 | `PieChart` | Pie or donut chart with optional in-slice labels and legend |
+| `RadarChart` | Spider/radar chart for multi-attribute comparisons across subjects |
 
 ## Usage
 
@@ -86,8 +87,9 @@ import { LineChart } from '@gnome-ui/react-native-charts';
 
 See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/BarChart/README.md`](src/components/BarChart/README.md),
-[`src/components/AreaChart/README.md`](src/components/AreaChart/README.md), and
-[`src/components/PieChart/README.md`](src/components/PieChart/README.md) for the full prop
+[`src/components/AreaChart/README.md`](src/components/AreaChart/README.md),
+[`src/components/PieChart/README.md`](src/components/PieChart/README.md), and
+[`src/components/RadarChart/README.md`](src/components/RadarChart/README.md) for the full prop
 reference of each.
 
 ## Design notes
@@ -122,3 +124,11 @@ reference of each.
   slice (Victory Native's `Pie.Label`) rather than the web version's external leader-line labels —
   there's no leader-line primitive to build on, and a label-position swap is a reasonable
   platform-idiom adaptation, not a data/behavior change.
+- **`RadarChart` has no Victory Native primitive at all** and is hand-built directly on
+  `@shopify/react-native-skia`'s own low-level primitives (`Canvas`, `Path`, `Line`, `Text`,
+  `Skia.PathBuilder`) — flagged to the user before starting rather than assumed, since it's a real
+  architecture decision (same category as the original Victory Native choice for this whole
+  package). Manages its own `Canvas` sizing via a plain `View`'s `onLayout`, since there's no
+  `CartesianChart`/`PolarChart` wrapper to do it. Uses the modern `Skia.PathBuilder.Make()` API,
+  not the older mutable `Skia.Path.Make()` (deprecated in this Skia version — confirmed via a real
+  runtime warning, not assumed from docs).

@@ -89,6 +89,7 @@ export const COMPONENT_NAMES = [
   'BarChart',
   'AreaChart',
   'PieChart',
+  'RadarChart',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

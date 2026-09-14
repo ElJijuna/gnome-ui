@@ -60,6 +60,7 @@ import { PieChartScreen } from './screens/PieChartScreen';
 import { PopoverScreen } from './screens/PopoverScreen';
 import { PreferencesGroupScreen } from './screens/PreferencesGroupScreen';
 import { ProgressBarScreen } from './screens/ProgressBarScreen';
+import { RadarChartScreen } from './screens/RadarChartScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { RangeSliderScreen } from './screens/RangeSliderScreen';
 import { RatingStarsScreen } from './screens/RatingStarsScreen';
@@ -185,6 +186,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   BarChart: BarChartScreen,
   AreaChart: AreaChartScreen,
   PieChart: PieChartScreen,
+  RadarChart: RadarChartScreen,
 };
 
 export interface ComponentScreenProps {
