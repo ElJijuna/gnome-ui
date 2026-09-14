@@ -42,6 +42,7 @@ import { ExpanderScreen } from './screens/ExpanderScreen';
 import { FieldGroupScreen } from './screens/FieldGroupScreen';
 import { FileTypeIconScreen } from './screens/FileTypeIconScreen';
 import { FilterableMultiSelectDropdownScreen } from './screens/FilterableMultiSelectDropdownScreen';
+import { FunnelChartScreen } from './screens/FunnelChartScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
 import { IconButtonScreen } from './screens/IconButtonScreen';
@@ -199,6 +200,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SparkAreaChart: SparkAreaChartScreen,
   SparkBarChart: SparkBarChartScreen,
   ScatterChart: ScatterChartScreen,
+  FunnelChart: FunnelChartScreen,
 };
 
 export interface ComponentScreenProps {

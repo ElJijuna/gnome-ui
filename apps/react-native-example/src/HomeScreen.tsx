@@ -130,6 +130,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SparkAreaChart: 'Minimal inline area sparkline with optional gradient fill',
   SparkBarChart: 'Minimal inline bar sparkline for compact trend display',
   ScatterChart: 'Scatter/bubble chart for correlation between two numeric variables',
+  FunnelChart: 'Funnel visualization for conversion rates and sales pipelines',
 };
 
 type CategoryKey =
@@ -245,6 +246,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   SparkAreaChart: 'feedback',
   SparkBarChart: 'feedback',
   ScatterChart: 'feedback',
+  FunnelChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

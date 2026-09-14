@@ -13,8 +13,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
-> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, and `ScatterChart` shipped.
-> This package mirrors
+> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`, and
+> `FunnelChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -73,6 +73,7 @@ dependencies.
 | `SparkAreaChart` | Minimal inline area sparkline with optional gradient fill |
 | `SparkBarChart` | Minimal inline bar sparkline for compact trend display |
 | `ScatterChart` | Scatter/bubble chart for correlation between two numeric variables; `zKey` encodes a third dimension as bubble size |
+| `FunnelChart` | Funnel visualization for conversion rates and sales pipelines |
 
 ## Usage
 
@@ -102,9 +103,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/CloudChart/README.md`](src/components/CloudChart/README.md),
 [`src/components/SparkLineChart/README.md`](src/components/SparkLineChart/README.md),
 [`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md),
-[`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md), and
-[`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md) for the full
-prop reference of each.
+[`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md),
+[`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md), and
+[`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md) for the full prop
+reference of each.
 
 ## Design notes
 
@@ -189,3 +191,11 @@ prop reference of each.
   raw `xValue`/`yValue`, never by array index into the array you originally built,** since the sort
   reorders points relative to your own insertion order. `xLabel`/`yLabel` from the web version are
   dropped — they only ever fed Recharts' tooltip text, which this package has none of yet.
+- **`FunnelChart` has no Victory Native primitive either**, same category as `RadarChart`/
+  `RadialBarChart`, and is hand-built directly on `Skia.PathBuilder` — one closed trapezoid `Path`
+  per segment (`moveTo`/`lineTo` around the four corners, `.close()`), width tapering linearly by
+  each item's share of the largest value. Uses `ChartContainer` with `legend={null}` since the web
+  source renders no legend for this chart. Shipped with zero bugs on the first on-device
+  screenshot — the first hand-rolled-geometry chart in this package to do so, credited to already
+  having the `Skia.PathBuilder.Make()` API and Skia's angle/coordinate conventions worked out from
+  the two prior hand-rolled charts before writing a line of this one.
