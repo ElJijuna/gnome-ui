@@ -121,6 +121,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   LineChart:
     'Multi-series line chart with grid, legend, and Adwaita palette — @gnome-ui/react-native-charts',
   BarChart: 'Grouped bar chart for categorical comparisons — @gnome-ui/react-native-charts',
+  AreaChart: 'Filled area chart — flat or gradient fill, overlapping or stacked series',
 };
 
 type CategoryKey =
@@ -227,6 +228,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   RatingStars: 'forms',
   LineChart: 'feedback',
   BarChart: 'feedback',
+  AreaChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

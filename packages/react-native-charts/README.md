@@ -12,7 +12,7 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** `LineChart` and `BarChart` shipped. This package mirrors
+> **Status:** `LineChart`, `BarChart`, and `AreaChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -62,6 +62,7 @@ dependencies.
 |-----------|-------------|
 | `LineChart` | Multi-series line chart with dots, grid, axis labels, and legend |
 | `BarChart` | Grouped/clustered bar chart for categorical comparisons |
+| `AreaChart` | Filled area chart — flat tint or gradient fill, overlapping or stacked series |
 
 ## Usage
 
@@ -82,8 +83,9 @@ import { LineChart } from '@gnome-ui/react-native-charts';
 />;
 ```
 
-See [`src/components/LineChart/README.md`](src/components/LineChart/README.md) and
-[`src/components/BarChart/README.md`](src/components/BarChart/README.md) for the full prop
+See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
+[`src/components/BarChart/README.md`](src/components/BarChart/README.md), and
+[`src/components/AreaChart/README.md`](src/components/AreaChart/README.md) for the full prop
 reference of each.
 
 ## Design notes
@@ -105,3 +107,10 @@ reference of each.
   this package's (and `@gnome-ui/charts`') deliberately dynamic `series: { dataKey: string }[]`
   prop shape without a larger API redesign. Revisit once a second chart's needs clarify the right
   shape for it.
+- **`AreaChart`'s `stacked` mode passes an explicit `domain={{ y: [0, stackedMax] }}`** to
+  `CartesianChart` — its own auto-domain is the extent of each series' raw values, not aware a
+  stacked chart sums them, so without this the topmost stacked band renders visibly flat-clipped
+  at the un-stacked ceiling (confirmed on-device). Gradient fills use a `withAlpha()` helper
+  (`src/internal/colorAlpha.ts`) to turn a palette hex color into a `#RRGGBBAA` fade-to-transparent
+  pair for Skia's `<LinearGradient>` — the same alpha-suffix trick `Chip`/`Highlight` use in
+  `@gnome-ui/react-native`.

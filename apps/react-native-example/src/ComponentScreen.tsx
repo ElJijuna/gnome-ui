@@ -4,6 +4,7 @@ import { ScrollView, View } from 'react-native';
 
 import { ActionRowScreen } from './screens/ActionRowScreen';
 import { AnimatedIconScreen } from './screens/AnimatedIconScreen';
+import { AreaChartScreen } from './screens/AreaChartScreen';
 import { AvatarGroupScreen } from './screens/AvatarGroupScreen';
 import { AvatarRotatorScreen } from './screens/AvatarRotatorScreen';
 import { AvatarScreen } from './screens/AvatarScreen';
@@ -181,6 +182,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   RatingStars: RatingStarsScreen,
   LineChart: LineChartScreen,
   BarChart: BarChartScreen,
+  AreaChart: AreaChartScreen,
 };
 
 export interface ComponentScreenProps {
