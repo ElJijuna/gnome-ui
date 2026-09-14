@@ -4,4 +4,9 @@ export { BarChart, type BarChartProps, type BarChartSeries } from './components/
 export { LineChart, type LineChartProps, type LineChartSeries } from './components/LineChart';
 export { PieChart, type PieChartDataItem, type PieChartProps } from './components/PieChart';
 export { RadarChart, type RadarChartProps, type RadarChartSeries } from './components/RadarChart';
+export {
+  RadialBarChart,
+  type RadialBarChartDataItem,
+  type RadialBarChartProps,
+} from './components/RadialBarChart';
 export { type ChartLegendPosition } from './types/legend';

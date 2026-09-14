@@ -124,6 +124,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   AreaChart: 'Filled area chart — flat or gradient fill, overlapping or stacked series',
   PieChart: 'Pie or donut chart with optional slice labels and legend',
   RadarChart: 'Spider/radar chart for multi-attribute comparisons across subjects',
+  RadialBarChart: 'Concentric arc bars for multiple circular progress metrics',
 };
 
 type CategoryKey =
@@ -233,6 +234,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   AreaChart: 'feedback',
   PieChart: 'feedback',
   RadarChart: 'feedback',
+  RadialBarChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

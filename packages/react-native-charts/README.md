@@ -12,7 +12,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, and `RadarChart` shipped. This package mirrors
+> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, and `RadialBarChart`
+> shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -65,6 +66,7 @@ dependencies.
 | `AreaChart` | Filled area chart — flat tint or gradient fill, overlapping or stacked series |
 | `PieChart` | Pie or donut chart with optional in-slice labels and legend |
 | `RadarChart` | Spider/radar chart for multi-attribute comparisons across subjects |
+| `RadialBarChart` | Concentric arc bars for multiple circular progress metrics |
 
 ## Usage
 
@@ -88,9 +90,10 @@ import { LineChart } from '@gnome-ui/react-native-charts';
 See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/BarChart/README.md`](src/components/BarChart/README.md),
 [`src/components/AreaChart/README.md`](src/components/AreaChart/README.md),
-[`src/components/PieChart/README.md`](src/components/PieChart/README.md), and
-[`src/components/RadarChart/README.md`](src/components/RadarChart/README.md) for the full prop
-reference of each.
+[`src/components/PieChart/README.md`](src/components/PieChart/README.md),
+[`src/components/RadarChart/README.md`](src/components/RadarChart/README.md), and
+[`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md) for the full
+prop reference of each.
 
 ## Design notes
 
@@ -132,3 +135,12 @@ reference of each.
   `CartesianChart`/`PolarChart` wrapper to do it. Uses the modern `Skia.PathBuilder.Make()` API,
   not the older mutable `Skia.Path.Make()` (deprecated in this Skia version — confirmed via a real
   runtime warning, not assumed from docs).
+- **`RadialBarChart` also has no Victory Native primitive** — same situation as `RadarChart`,
+  confirmed again with the user before starting rather than assumed. Hand-built on
+  `SkPathBuilder.addArc` (a thick stroked arc per ring, not a filled annular sector). **A real
+  sweep-direction bug shipped and was caught by the on-device screenshot, not by any automated
+  check** — Skia's `addArc` treats positive sweep as clockwise in its y-down coordinate space, so
+  a negative sweep from `startAngle: 180` traced the *bottom* half instead of the intended top-half
+  gauge, rendering as a barely-visible sliver clipped against the canvas edge. Any future arc-based
+  chart in this package should double-check sweep direction algebraically against Skia's own doc
+  comment before trusting a screenshot alone to catch a sign error like this.
