@@ -13,8 +13,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
-> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`, and
-> `FunnelChart` shipped. This package mirrors
+> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
+> `FunnelChart`, and `ComposedChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -74,6 +74,7 @@ dependencies.
 | `SparkBarChart` | Minimal inline bar sparkline for compact trend display |
 | `ScatterChart` | Scatter/bubble chart for correlation between two numeric variables; `zKey` encodes a third dimension as bubble size |
 | `FunnelChart` | Funnel visualization for conversion rates and sales pipelines |
+| `ComposedChart` | Mixed `bar`/`line`/`area` series sharing one x-axis |
 
 ## Usage
 
@@ -104,9 +105,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/SparkLineChart/README.md`](src/components/SparkLineChart/README.md),
 [`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md),
 [`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md),
-[`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md), and
-[`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md) for the full prop
-reference of each.
+[`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md),
+[`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md), and
+[`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md) for the full
+prop reference of each.
 
 ## Design notes
 
@@ -199,3 +201,15 @@ reference of each.
   screenshot — the first hand-rolled-geometry chart in this package to do so, credited to already
   having the `Skia.PathBuilder.Make()` API and Skia's angle/coordinate conventions worked out from
   the two prior hand-rolled charts before writing a line of this one.
+- **`ComposedChart` is the first chart mixing multiple render primitives (`bar`/`line`/`area`)
+  within one `series` array** — every prior chart's series all shared one rendering primitive.
+  `series` is split by `type` and rendered as: all bar-type series together inside one `BarGroup`
+  (it needs every bar as a direct child to compute width/offset), then area-type (`Area` fill + a
+  separate `Line` stroke, same pattern `AreaChart` uses), then line-type last — a deliberate,
+  documented deviation from the array's own literal order, since bars can't be interleaved with
+  other types without breaking `BarGroup`'s internal width math. **The first on-device screenshot
+  surfaced a demo-data mistake, not a component bug**: a `growth` field (values 8–30) sharing one
+  y-axis with `revenue` (4000–5600) rendered as an invisible hairline — `CartesianChart` shares one
+  y-domain across every `yKey`, with no per-series secondary axis, the same limitation the web
+  `ComposedChart` has with its own single `YAxis`. Any future composed-chart data needs every
+  series kept within the same order of magnitude, or a series will visually vanish.

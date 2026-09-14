@@ -3,6 +3,11 @@ export { AreaChart, type AreaChartProps, type AreaChartSeries } from './componen
 export { BarChart, type BarChartProps, type BarChartSeries } from './components/BarChart';
 export { CloudChart, type CloudChartDataItem, type CloudChartProps } from './components/CloudChart';
 export {
+  ComposedChart,
+  type ComposedChartProps,
+  type ComposedChartSeries,
+} from './components/ComposedChart';
+export {
   FunnelChart,
   type FunnelChartDataItem,
   type FunnelChartProps,

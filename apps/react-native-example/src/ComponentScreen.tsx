@@ -31,6 +31,7 @@ import { CloudChartScreen } from './screens/CloudChartScreen';
 import { CoachMarkScreen } from './screens/CoachMarkScreen';
 import { ColorPickerScreen } from './screens/ColorPickerScreen';
 import { ComboRowScreen } from './screens/ComboRowScreen';
+import { ComposedChartScreen } from './screens/ComposedChartScreen';
 import { CopyButtonScreen } from './screens/CopyButtonScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
@@ -201,6 +202,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SparkBarChart: SparkBarChartScreen,
   ScatterChart: ScatterChartScreen,
   FunnelChart: FunnelChartScreen,
+  ComposedChart: ComposedChartScreen,
 };
 
 export interface ComponentScreenProps {
