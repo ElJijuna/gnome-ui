@@ -129,6 +129,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SparkLineChart: 'Minimal inline line sparkline for embedding in cards and tables',
   SparkAreaChart: 'Minimal inline area sparkline with optional gradient fill',
   SparkBarChart: 'Minimal inline bar sparkline for compact trend display',
+  ScatterChart: 'Scatter/bubble chart for correlation between two numeric variables',
 };
 
 type CategoryKey =
@@ -243,6 +244,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   SparkLineChart: 'feedback',
   SparkAreaChart: 'feedback',
   SparkBarChart: 'feedback',
+  ScatterChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

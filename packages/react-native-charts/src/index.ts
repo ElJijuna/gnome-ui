@@ -10,6 +10,11 @@ export {
   type RadialBarChartDataItem,
   type RadialBarChartProps,
 } from './components/RadialBarChart';
+export {
+  ScatterChart,
+  type ScatterChartProps,
+  type ScatterChartSeries,
+} from './components/ScatterChart';
 export { SparkAreaChart, type SparkAreaChartProps } from './components/SparkAreaChart';
 export { SparkBarChart, type SparkBarChartProps } from './components/SparkBarChart';
 export {

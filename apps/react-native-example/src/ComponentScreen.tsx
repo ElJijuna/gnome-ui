@@ -66,6 +66,7 @@ import { RadialBarChartScreen } from './screens/RadialBarChartScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { RangeSliderScreen } from './screens/RangeSliderScreen';
 import { RatingStarsScreen } from './screens/RatingStarsScreen';
+import { ScatterChartScreen } from './screens/ScatterChartScreen';
 import { ScrollToTopScreen } from './screens/ScrollToTopScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
 import { SegmentedBarScreen } from './screens/SegmentedBarScreen';
@@ -197,6 +198,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SparkLineChart: SparkLineChartScreen,
   SparkAreaChart: SparkAreaChartScreen,
   SparkBarChart: SparkBarChartScreen,
+  ScatterChart: ScatterChartScreen,
 };
 
 export interface ComponentScreenProps {

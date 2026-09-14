@@ -13,8 +13,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
-> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, and `SparkBarChart` shipped. This package
-> mirrors
+> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, and `ScatterChart` shipped.
+> This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -72,6 +72,7 @@ dependencies.
 | `SparkLineChart` | Minimal inline line sparkline for embedding in cards and tables |
 | `SparkAreaChart` | Minimal inline area sparkline with optional gradient fill |
 | `SparkBarChart` | Minimal inline bar sparkline for compact trend display |
+| `ScatterChart` | Scatter/bubble chart for correlation between two numeric variables; `zKey` encodes a third dimension as bubble size |
 
 ## Usage
 
@@ -100,8 +101,9 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/RadialBarChart/README.md`](src/components/RadialBarChart/README.md),
 [`src/components/CloudChart/README.md`](src/components/CloudChart/README.md),
 [`src/components/SparkLineChart/README.md`](src/components/SparkLineChart/README.md),
-[`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md), and
-[`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md) for the full
+[`src/components/SparkAreaChart/README.md`](src/components/SparkAreaChart/README.md),
+[`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md), and
+[`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md) for the full
 prop reference of each.
 
 ## Design notes
@@ -177,3 +179,13 @@ prop reference of each.
   the web version exactly — unlike its two spark siblings. Uses Victory Native's standalone `Bar`,
   not `BarGroup`/`BarGroup.Bar` (which `BarChart` needs for grouping multiple series side by side),
   since there's only ever one series here.
+- **`ScatterChart` is the only chart here where each series owns its own independent point list**
+  (its own `xKey`/`yKey`/`zKey` field names), not rows shared across series — every series' points
+  are merged into one combined row array before handing it to `CartesianChart`, with each row only
+  populating its own series' namespaced y (and z) field; `Scatter` itself skips any point whose `y`
+  isn't a number, so other series' rows render as gaps for free. **`CartesianChart` sorts its data
+  by `xKey` internally (confirmed from `transformInputData`'s source) — any per-point data matched
+  back in *after* the fact (this chart's bubble-size `zKey` lookup) must match by each point's own
+  raw `xValue`/`yValue`, never by array index into the array you originally built,** since the sort
+  reorders points relative to your own insertion order. `xLabel`/`yLabel` from the web version are
+  dropped — they only ever fed Recharts' tooltip text, which this package has none of yet.
