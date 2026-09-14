@@ -12,11 +12,11 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** first component shipped — `LineChart`. This package mirrors
+> **Status:** `LineChart` and `BarChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
-> reuse directly.
+> reuse directly. See [`ROADMAP.md`](ROADMAP.md) for per-component status.
 
 ## Installation
 
@@ -61,6 +61,7 @@ dependencies.
 | Component | Description |
 |-----------|-------------|
 | `LineChart` | Multi-series line chart with dots, grid, axis labels, and legend |
+| `BarChart` | Grouped/clustered bar chart for categorical comparisons |
 
 ## Usage
 
@@ -81,10 +82,16 @@ import { LineChart } from '@gnome-ui/react-native-charts';
 />;
 ```
 
-See [`src/components/LineChart/README.md`](src/components/LineChart/README.md) for the full prop
-reference.
+See [`src/components/LineChart/README.md`](src/components/LineChart/README.md) and
+[`src/components/BarChart/README.md`](src/components/BarChart/README.md) for the full prop
+reference of each.
 
 ## Design notes
+
+- **Shared chart internals live in `src/internal/`** (`ChartContainer`, `ChartLegend`, `chartKeys`,
+  `useChartFont`) — extracted once `BarChart` became a second consumer of the exact same axis-font/
+  palette/legend/generic-typing code `LineChart` already had. Not part of the public API; every new
+  chart should compose these rather than re-deriving them.
 
 - **Series colors** default to the GNOME Adwaita chart palette (`blue3`, `green4`, `orange3`,
   `purple3`, `red3`, `yellow5`), read from the active `GnomeProvider` theme so they track color

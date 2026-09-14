@@ -9,6 +9,7 @@ import { AvatarRotatorScreen } from './screens/AvatarRotatorScreen';
 import { AvatarScreen } from './screens/AvatarScreen';
 import { BadgeScreen } from './screens/BadgeScreen';
 import { BannerScreen } from './screens/BannerScreen';
+import { BarChartScreen } from './screens/BarChartScreen';
 import { BinScreen } from './screens/BinScreen';
 import { BlockquoteScreen } from './screens/BlockquoteScreen';
 import { BottomSheetScreen } from './screens/BottomSheetScreen';
@@ -179,6 +180,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   NavigationSplitView: NavigationSplitViewScreen,
   RatingStars: RatingStarsScreen,
   LineChart: LineChartScreen,
+  BarChart: BarChartScreen,
 };
 
 export interface ComponentScreenProps {

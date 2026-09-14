@@ -86,6 +86,7 @@ export const COMPONENT_NAMES = [
   'NavigationSplitView',
   'RatingStars',
   'LineChart',
+  'BarChart',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

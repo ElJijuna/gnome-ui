@@ -13,7 +13,7 @@ came up — see that file for the original deferral note.
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ✅ | **LineChart** | First component — established the package's architecture: `matchFont({ fontSize: 12 })` (not `theme.fontFamily`, see README) for axis labels, `getChartPalette(theme)` for series colors, a hand-rolled legend (Victory Native has none built in). No interactive tap tooltip yet — see README |
-| ⬜ | **BarChart** | |
+| ✅ | **BarChart** | Second component — moved the shared architecture (axis font, palette, legend, `InputKeys`/`NumericalKeys` generic helpers) out to `src/internal/` (`ChartContainer`, `ChartLegend`, `chartKeys`, `useChartFont`), now that a second consumer needed the exact same code. Grouped/clustered bars via `BarGroup`/`BarGroup.Bar` (not stacked — matches the web version's default un-stacked `<Bar>` behavior), `roundedCorners={{ topLeft: 4, topRight: 4 }}` for the top-rounded look |
 | ⬜ | **AreaChart** | |
 | ⬜ | **PieChart** | |
 | ⬜ | **RadarChart** | |

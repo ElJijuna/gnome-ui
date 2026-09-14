@@ -1,6 +1,5 @@
 import { useGnomeTheme, useNumberFormatter } from '@gnome-ui/react-native';
-import { Circle } from '@shopify/react-native-skia';
-import { CartesianChart, Line } from 'victory-native';
+import { BarGroup, CartesianChart } from 'victory-native';
 
 import { getChartPalette } from '@/colors';
 import { ChartContainer } from '@/internal/ChartContainer';
@@ -9,18 +8,18 @@ import { type InputKeys, type NumericalKeys } from '@/internal/chartKeys';
 import { useChartFont } from '@/internal/useChartFont';
 import { type ChartLegendPosition } from '@/types/legend';
 
-export interface LineChartSeries<YK extends string = string> {
+export interface BarChartSeries<YK extends string = string> {
   dataKey: YK;
   name?: string;
   color?: string;
 }
 
-export interface LineChartProps<
+export interface BarChartProps<
   RawData extends Record<string, string | number>,
   YK extends keyof NumericalKeys<RawData> & string,
 > {
   data: RawData[];
-  series: LineChartSeries<YK>[];
+  series: BarChartSeries<YK>[];
   xAxisKey?: keyof InputKeys<RawData> & string;
   height?: number;
   showGrid?: boolean;
@@ -30,7 +29,7 @@ export interface LineChartProps<
   'aria-label'?: string;
 }
 
-export const LineChart = <
+export const BarChart = <
   RawData extends Record<string, string | number>,
   YK extends keyof NumericalKeys<RawData> & string,
 >({
@@ -42,16 +41,16 @@ export const LineChart = <
   showLegend = false,
   legendPosition = 'bottom',
   'aria-label': ariaLabel,
-}: LineChartProps<RawData, YK>) => {
+}: BarChartProps<RawData, YK>) => {
   const theme = useGnomeTheme();
   const formatNumber = useNumberFormatter().format;
   const palette = getChartPalette(theme);
   const font = useChartFont();
 
   const yKeys = series.map((s) => s.dataKey);
-  const seriesColor = (s: LineChartSeries<YK>, i: number) => s.color ?? palette[i % palette.length];
+  const seriesColor = (s: BarChartSeries<YK>, i: number) => s.color ?? palette[i % palette.length];
 
-  const label = ariaLabel ?? `Line chart with ${series.map((s) => s.name ?? s.dataKey).join(', ')}`;
+  const label = ariaLabel ?? `Bar chart with ${series.map((s) => s.name ?? s.dataKey).join(', ')}`;
 
   return (
     <ChartContainer
@@ -77,7 +76,7 @@ export const LineChart = <
         data={data}
         xKey={xAxisKey}
         yKeys={yKeys}
-        domainPadding={{ left: 12, right: 12, top: 12 }}
+        domainPadding={{ left: 20, right: 20, top: 12 }}
         axisOptions={{
           font,
           labelColor: theme.windowFgColor,
@@ -88,32 +87,22 @@ export const LineChart = <
           formatYLabel: (v) => formatNumber(Number(v)),
         }}
       >
-        {({ points }) => (
-          <>
+        {({ points, chartBounds }) => (
+          <BarGroup
+            chartBounds={chartBounds}
+            betweenGroupPadding={0.3}
+            withinGroupPadding={0.15}
+            roundedCorners={{ topLeft: 4, topRight: 4 }}
+          >
             {series.map((s, i) => (
-              <Line
+              <BarGroup.Bar
                 key={s.dataKey}
                 points={points[s.dataKey]}
                 color={seriesColor(s, i)}
-                strokeWidth={2}
-                curveType="natural"
                 animate={{ type: 'timing', duration: 300 }}
               />
             ))}
-            {series.map((s, i) =>
-              points[s.dataKey]
-                .filter((p) => p.y !== null)
-                .map((p, pointIndex) => (
-                  <Circle
-                    key={`${s.dataKey}-${pointIndex}`}
-                    cx={p.x}
-                    cy={p.y ?? 0}
-                    r={3}
-                    color={seriesColor(s, i)}
-                  />
-                )),
-            )}
-          </>
+          </BarGroup>
         )}
       </CartesianChart>
     </ChartContainer>

@@ -120,6 +120,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   RatingStars: 'Star rating display and input — read-only summary or tap-to-select',
   LineChart:
     'Multi-series line chart with grid, legend, and Adwaita palette — @gnome-ui/react-native-charts',
+  BarChart: 'Grouped bar chart for categorical comparisons — @gnome-ui/react-native-charts',
 };
 
 type CategoryKey =
@@ -225,6 +226,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   NavigationSplitView: 'navigation',
   RatingStars: 'forms',
   LineChart: 'feedback',
+  BarChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',
