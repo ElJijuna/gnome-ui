@@ -14,7 +14,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, `ComposedChart`, `GaugeChart`, and `TreeMap` shipped. This package mirrors
+> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, and `SankeyChart` shipped. This package
+> mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -77,6 +78,7 @@ dependencies.
 | `ComposedChart` | Mixed `bar`/`line`/`area` series sharing one x-axis |
 | `GaugeChart` | Radial gauge for a single value against a min/max range, with optional color thresholds |
 | `TreeMap` | Proportional-area rectangles for hierarchical/part-of-whole data, laid out with a squarified treemap algorithm |
+| `SankeyChart` | Flow diagram for multi-stage funnels/allocations, laid out with a d3-sankey-style algorithm |
 
 ## Usage
 
@@ -110,8 +112,9 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md),
 [`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md),
 [`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md),
-[`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md), and
-[`src/components/TreeMap/README.md`](src/components/TreeMap/README.md) for the full prop
+[`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md),
+[`src/components/TreeMap/README.md`](src/components/TreeMap/README.md), and
+[`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md) for the full prop
 reference of each.
 
 ## Design notes
@@ -246,3 +249,17 @@ reference of each.
   while still being narrower than its own text, visibly bleeding the label into the neighboring
   tile. Fixed by measuring `font.measureText(label).width` before deciding to draw it, hiding the
   label entirely once it doesn't fit rather than letting it overflow.
+- **`SankeyChart` is the second chart needing a real layout algorithm** — flagged to the user
+  before starting (same category as `TreeMap`, distinct from the "no Victory Native primitive"
+  question already settled for the arc-based hand-rolled charts), who chose a full d3-sankey-style
+  layout over a simplified no-relaxation version. Column assignment by longest-path depth (bounded
+  relaxation over the DAG, not an explicit topological sort), node height proportional to
+  throughput, then several passes alternating `relaxRightToLeft`/`relaxLeftToRight` — each pass
+  pulls every node toward the weighted-center of the links tugging on it and resolves the
+  resulting overlap — to straighten links and reduce crossings, the same technique d3-sankey (and
+  the web version's underlying Recharts `Sankey`) uses. Deliberately skips d3-sankey's own
+  link-crossing-minimizing sort at each node (links stack in the input `links` array's own order)
+  as a smaller, documented scope trim distinct from the relaxation algorithm itself. Links are
+  cubic-Bezier `Path`s colored by their *source* node via the `withAlpha()` helper
+  (`AreaChart`/`SparkAreaChart`'s translucent-fill trick), standing in for the web version's CSS
+  `color-mix` (no Skia equivalent).

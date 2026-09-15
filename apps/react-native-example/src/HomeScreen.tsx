@@ -134,6 +134,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   ComposedChart: 'Mixed bar/line/area series sharing one x-axis',
   GaugeChart: 'Radial gauge for a single value against a min/max range',
   TreeMap: 'Proportional-area rectangles for hierarchical/part-of-whole data',
+  SankeyChart: 'Flow diagram for multi-stage funnels/allocations',
 };
 
 type CategoryKey =
@@ -253,6 +254,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   ComposedChart: 'feedback',
   GaugeChart: 'feedback',
   TreeMap: 'feedback',
+  SankeyChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

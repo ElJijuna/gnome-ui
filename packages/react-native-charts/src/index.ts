@@ -26,6 +26,12 @@ export {
   type RadialBarChartProps,
 } from './components/RadialBarChart';
 export {
+  SankeyChart,
+  type SankeyChartLink,
+  type SankeyChartNode,
+  type SankeyChartProps,
+} from './components/SankeyChart';
+export {
   ScatterChart,
   type ScatterChartProps,
   type ScatterChartSeries,

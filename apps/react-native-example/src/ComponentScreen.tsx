@@ -69,6 +69,7 @@ import { RadialBarChartScreen } from './screens/RadialBarChartScreen';
 import { RadioButtonScreen } from './screens/RadioButtonScreen';
 import { RangeSliderScreen } from './screens/RangeSliderScreen';
 import { RatingStarsScreen } from './screens/RatingStarsScreen';
+import { SankeyChartScreen } from './screens/SankeyChartScreen';
 import { ScatterChartScreen } from './screens/ScatterChartScreen';
 import { ScrollToTopScreen } from './screens/ScrollToTopScreen';
 import { SearchBarScreen } from './screens/SearchBarScreen';
@@ -207,6 +208,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ComposedChart: ComposedChartScreen,
   GaugeChart: GaugeChartScreen,
   TreeMap: TreeMapScreen,
+  SankeyChart: SankeyChartScreen,
 };
 
 export interface ComponentScreenProps {
