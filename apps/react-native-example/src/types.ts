@@ -101,6 +101,7 @@ export const COMPONENT_NAMES = [
   'GaugeChart',
   'TreeMap',
   'SankeyChart',
+  'BulletChart',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -1,6 +1,11 @@
 export { getChartPalette } from './colors';
 export { AreaChart, type AreaChartProps, type AreaChartSeries } from './components/AreaChart';
 export { BarChart, type BarChartProps, type BarChartSeries } from './components/BarChart';
+export {
+  BulletChart,
+  type BulletChartProps,
+  type BulletChartRange,
+} from './components/BulletChart';
 export { CloudChart, type CloudChartDataItem, type CloudChartProps } from './components/CloudChart';
 export {
   ComposedChart,

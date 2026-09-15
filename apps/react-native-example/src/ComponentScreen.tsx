@@ -18,6 +18,7 @@ import { BottomTabBarScreen } from './screens/BottomTabBarScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
 import { BoxScreen } from './screens/BoxScreen';
 import { BreakpointBinScreen } from './screens/BreakpointBinScreen';
+import { BulletChartScreen } from './screens/BulletChartScreen';
 import { ButtonContentScreen } from './screens/ButtonContentScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
@@ -209,6 +210,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   GaugeChart: GaugeChartScreen,
   TreeMap: TreeMapScreen,
   SankeyChart: SankeyChartScreen,
+  BulletChart: BulletChartScreen,
 };
 
 export interface ComponentScreenProps {

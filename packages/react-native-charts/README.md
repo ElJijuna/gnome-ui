@@ -14,8 +14,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, and `SankeyChart` shipped. This package
-> mirrors
+> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, and `BulletChart`
+> shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -79,6 +79,7 @@ dependencies.
 | `GaugeChart` | Radial gauge for a single value against a min/max range, with optional color thresholds |
 | `TreeMap` | Proportional-area rectangles for hierarchical/part-of-whole data, laid out with a squarified treemap algorithm |
 | `SankeyChart` | Flow diagram for multi-stage funnels/allocations, laid out with a d3-sankey-style algorithm |
+| `BulletChart` | Compact single-measure KPI indicator — qualitative range bands, a performance bar, and an optional target tick |
 
 ## Usage
 
@@ -113,8 +114,9 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md),
 [`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md),
 [`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md),
-[`src/components/TreeMap/README.md`](src/components/TreeMap/README.md), and
-[`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md) for the full prop
+[`src/components/TreeMap/README.md`](src/components/TreeMap/README.md),
+[`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md), and
+[`src/components/BulletChart/README.md`](src/components/BulletChart/README.md) for the full prop
 reference of each.
 
 ## Design notes
@@ -263,3 +265,17 @@ reference of each.
   cubic-Bezier `Path`s colored by their *source* node via the `withAlpha()` helper
   (`AreaChart`/`SparkAreaChart`'s translucent-fill trick), standing in for the web version's CSS
   `color-mix` (no Skia equivalent).
+- **`BulletChart` needs no `Canvas`/Skia at all**, the second chart here after `CloudChart` to
+  skip it entirely — its web source is already just absolutely-positioned percentage-width
+  `<div>`s in a flex row (qualitative bands, a performance bar, an optional target tick), which
+  RN's own `View` percentage `left`/`width`/`top`/`bottom` styles port directly with no canvas or
+  layout algorithm needed. Reuses `GaugeChart`'s documented gap (no RN theme token for the web's
+  `--gnome-dim-label-color`) for the dim target-value text, approximated with `opacity: 0.55`.
+  **Verification lesson, not a component bug**: a demo where the performance bar's color matches
+  one of its own `ranges` bands (a realistic case, e.g. a red "critical" zone with a red bar)
+  looked broken in a screenshot — the bar's thin (40%-height-inset) fill seemingly absent over the
+  differently-colored earlier bands. It wasn't; sampling actual pixel RGB values at the bar's true
+  vertical center (not the row's visual midpoint) confirmed correct rendering the whole time — a
+  same-colored thin center stripe is genuinely hard for a human eye to resolve in a compressed
+  screenshot preview. Sample real pixel values for any future thin/inset overlay verification
+  against a same- or similar-colored background, rather than trusting a screenshot by eye alone.

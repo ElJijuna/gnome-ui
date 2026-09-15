@@ -135,6 +135,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   GaugeChart: 'Radial gauge for a single value against a min/max range',
   TreeMap: 'Proportional-area rectangles for hierarchical/part-of-whole data',
   SankeyChart: 'Flow diagram for multi-stage funnels/allocations',
+  BulletChart: 'Compact single-measure KPI indicator with a target tick',
 };
 
 type CategoryKey =
@@ -255,6 +256,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   GaugeChart: 'feedback',
   TreeMap: 'feedback',
   SankeyChart: 'feedback',
+  BulletChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',
