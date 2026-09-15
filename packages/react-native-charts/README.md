@@ -14,7 +14,7 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, `ComposedChart`, and `GaugeChart` shipped. This package mirrors
+> `FunnelChart`, `ComposedChart`, `GaugeChart`, and `TreeMap` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -76,6 +76,7 @@ dependencies.
 | `FunnelChart` | Funnel visualization for conversion rates and sales pipelines |
 | `ComposedChart` | Mixed `bar`/`line`/`area` series sharing one x-axis |
 | `GaugeChart` | Radial gauge for a single value against a min/max range, with optional color thresholds |
+| `TreeMap` | Proportional-area rectangles for hierarchical/part-of-whole data, laid out with a squarified treemap algorithm |
 
 ## Usage
 
@@ -108,8 +109,9 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/SparkBarChart/README.md`](src/components/SparkBarChart/README.md),
 [`src/components/ScatterChart/README.md`](src/components/ScatterChart/README.md),
 [`src/components/FunnelChart/README.md`](src/components/FunnelChart/README.md),
-[`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md), and
-[`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md) for the full prop
+[`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md),
+[`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md), and
+[`src/components/TreeMap/README.md`](src/components/TreeMap/README.md) for the full prop
 reference of each.
 
 ## Design notes
@@ -228,3 +230,19 @@ reference of each.
   zero bugs on the on-device screenshot, continuing the pattern `FunnelChart` started: once a
   hand-rolled Skia chart's underlying primitive (arc math, here) has been paid down by an earlier
   chart, a later chart reusing it in a simpler shape can reasonably ship clean.
+- **`TreeMap` is the first chart needing an actual layout algorithm, not just a hand-rolled
+  Skia primitive** — flagged to the user before starting, since it's a different category of
+  decision than "no Victory Native primitive" (already settled for `RadarChart`/`RadialBarChart`/
+  `FunnelChart`/`GaugeChart`). Ships a hand-rolled squarified treemap (Bruls/Huizing/van Wijk —
+  the same algorithm Recharts' own `Treemap` uses internally) as pure `squarify`/`layoutRow`/
+  `worstRatio` number-only helpers, decoupled from Skia entirely; `TreeMap` itself only turns the
+  resulting rects into `RoundedRect`/`Text` nodes. Sorts `data` descending by `value` before
+  layout — a deliberate deviation from array order, since squarify's aspect ratios degrade
+  noticeably on unsorted input. Reuses `GaugeChart`'s `opacity` node-prop trick for the dimmed
+  secondary value line. **Real bug found and fixed via the on-device screenshot**: the show-label
+  gate only checked the tile's own `width`/`height` against a fixed size threshold, never whether
+  the label's own measured text width actually fit inside that tile — a tall-but-narrow tile (an
+  ordinary outcome of squarify packing several small values into one row) could pass the size gate
+  while still being narrower than its own text, visibly bleeding the label into the neighboring
+  tile. Fixed by measuring `font.measureText(label).width` before deciding to draw it, hiding the
+  label entirely once it doesn't fit rather than letting it overflow.

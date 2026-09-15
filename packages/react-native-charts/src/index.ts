@@ -37,4 +37,5 @@ export {
   type SparkLineChartProps,
   type SparkSeries,
 } from './components/SparkLineChart';
+export { TreeMap, type TreeMapDataItem, type TreeMapProps } from './components/TreeMap';
 export { type ChartLegendPosition } from './types/legend';

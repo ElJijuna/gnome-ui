@@ -99,6 +99,7 @@ import { ToastScreen } from './screens/ToastScreen';
 import { ToggleGroupScreen } from './screens/ToggleGroupScreen';
 import { ToolbarScreen } from './screens/ToolbarScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
+import { TreeMapScreen } from './screens/TreeMapScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
 import { WidgetManagerScreen } from './screens/WidgetManagerScreen';
 import { WrapBoxScreen } from './screens/WrapBoxScreen';
@@ -205,6 +206,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   FunnelChart: FunnelChartScreen,
   ComposedChart: ComposedChartScreen,
   GaugeChart: GaugeChartScreen,
+  TreeMap: TreeMapScreen,
 };
 
 export interface ComponentScreenProps {

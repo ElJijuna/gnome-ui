@@ -99,6 +99,7 @@ export const COMPONENT_NAMES = [
   'FunnelChart',
   'ComposedChart',
   'GaugeChart',
+  'TreeMap',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
