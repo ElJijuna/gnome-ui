@@ -22,6 +22,7 @@ export {
   type GaugeChartProps,
   type GaugeChartThreshold,
 } from './components/GaugeChart';
+export { Heatmap, type HeatmapDataItem, type HeatmapProps } from './components/Heatmap';
 export { LineChart, type LineChartProps, type LineChartSeries } from './components/LineChart';
 export { PieChart, type PieChartDataItem, type PieChartProps } from './components/PieChart';
 export { RadarChart, type RadarChartProps, type RadarChartSeries } from './components/RadarChart';

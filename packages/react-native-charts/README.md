@@ -14,8 +14,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`, and
-> `WaterfallChart` shipped. This package mirrors
+> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`,
+> `WaterfallChart`, and `Heatmap` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -81,6 +81,7 @@ dependencies.
 | `SankeyChart` | Flow diagram for multi-stage funnels/allocations, laid out with a d3-sankey-style algorithm |
 | `BulletChart` | Compact single-measure KPI indicator — qualitative range bands, a performance bar, and an optional target tick |
 | `WaterfallChart` | Bridge chart showing how a sequence of increases/decreases moves a value from a starting point to an ending point |
+| `Heatmap` | Grid of colored cells for a value across two categorical dimensions, with intensity-based coloring and an optional legend |
 
 ## Usage
 
@@ -117,9 +118,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md),
 [`src/components/TreeMap/README.md`](src/components/TreeMap/README.md),
 [`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md),
-[`src/components/BulletChart/README.md`](src/components/BulletChart/README.md), and
-[`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md) for the full
-prop reference of each.
+[`src/components/BulletChart/README.md`](src/components/BulletChart/README.md),
+[`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md), and
+[`src/components/Heatmap/README.md`](src/components/Heatmap/README.md) for the full prop reference
+of each.
 
 ## Design notes
 
@@ -303,3 +305,28 @@ prop reference of each.
   step in a bridge is a named, meaningful data point — fixed with an explicit
   `tickCount: { x: data.length, y: 5 }` override so every bar always gets its own label,
   regardless of category count.
+- **`Heatmap` needed no chart primitive at all**, the third chart here after `CloudChart`/
+  `BulletChart` to skip both Victory Native and a hand-rolled Skia canvas — its web source is
+  already just a CSS grid of plain `<div>`s with no chart-drawing involved, which RN's own `View`/
+  `Text` port directly as a row-of-rows layout instead of `display: grid` (RN has no grid layout
+  mode at all). Cell color intensity reuses the `withAlpha()` helper (`AreaChart`/`SparkAreaChart`'s
+  translucent-fill trick) instead of the web's CSS `color-mix`. The only Skia usage in the whole
+  component is a tiny `Canvas` for the optional legend ramp's gradient fill, since RN `View` styles
+  have no `linear-gradient` equivalent — this package already depends on Skia for exactly that
+  gradient-fill need elsewhere, so it added no new dependency. **A genuine RN-vs-web layout gap**:
+  the web version gets its row-label column's width for free from CSS Grid's `auto` track sizing
+  (as wide as the longest row label); RN has no such per-track auto-sizing at all. Solved by
+  measuring every row label's width up front with Skia's synchronous `font.measureText` — the same
+  technique `TreeMap`/`GaugeChart` already use for layout decisions in this package — and using the
+  widest one as a fixed `View` width, rather than a two-pass `onLayout` measure-then-reflow. **Real
+  on-device bug in that measurement's first version**: the row-label box was sized to exactly the
+  measured text width *and* given its own `paddingRight` — RN's `width` is border-box, so the
+  padding silently ate into the text's own available space, ellipsizing capital-letter-heavy labels
+  first (`Mon`/`Tue`/`Wed`/`Thu` → `M…`/`T…`, `Fri` only surviving by coincidence). A first, wrong
+  hypothesis (a Skia-vs-RN font-metric mismatch from setting `theme.fontFamily` on the label `Text`)
+  was tested and ruled out before finding the real cause — reverting that font change alone fixed
+  nothing, which is what isolated the padding math as the actual bug. Fixed by adding the padding
+  to the measured width instead of trusting the box to absorb it — a lesson for any future
+  fixed-width `View` that also carries its own padding, in this package or otherwise. Reused
+  `GaugeChart`'s/`BulletChart`'s documented gap (no RN theme token for the web's
+  `--gnome-dim-label-color`) for row/column/legend label text, same `opacity: 0.55` approximation.

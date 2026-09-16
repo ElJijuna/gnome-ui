@@ -47,6 +47,7 @@ import { FilterableMultiSelectDropdownScreen } from './screens/FilterableMultiSe
 import { FunnelChartScreen } from './screens/FunnelChartScreen';
 import { GaugeChartScreen } from './screens/GaugeChartScreen';
 import { HeaderBarScreen } from './screens/HeaderBarScreen';
+import { HeatmapScreen } from './screens/HeatmapScreen';
 import { HighlightScreen } from './screens/HighlightScreen';
 import { IconButtonScreen } from './screens/IconButtonScreen';
 import { IconScreen } from './screens/IconScreen';
@@ -213,6 +214,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SankeyChart: SankeyChartScreen,
   BulletChart: BulletChartScreen,
   WaterfallChart: WaterfallChartScreen,
+  Heatmap: HeatmapScreen,
 };
 
 export interface ComponentScreenProps {

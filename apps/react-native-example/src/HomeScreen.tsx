@@ -137,6 +137,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SankeyChart: 'Flow diagram for multi-stage funnels/allocations',
   BulletChart: 'Compact single-measure KPI indicator with a target tick',
   WaterfallChart: 'Bridge chart showing increases/decreases from a starting to an ending value',
+  Heatmap: 'Grid of colored cells for a value across two categorical dimensions',
 };
 
 type CategoryKey =
@@ -259,6 +260,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   SankeyChart: 'feedback',
   BulletChart: 'feedback',
   WaterfallChart: 'feedback',
+  Heatmap: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',
