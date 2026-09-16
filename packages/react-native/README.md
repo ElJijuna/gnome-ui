@@ -3005,6 +3005,68 @@ purely so the control can brighten on hover, and touch has no hover.
 as `BottomTabBar`'s `bottomInset` — this package takes no dependency on
 `react-native-safe-area-context` itself.
 
+### Calendar
+
+```tsx
+import { Calendar } from '@gnome-ui/react-native';
+
+const [value, setValue] = useState<Date | null>(null);
+
+<Calendar value={value} onChange={setValue} />
+
+<Calendar
+  min={new Date(2024, 0, 1)}
+  max={new Date(2024, 11, 31)}
+  showWeekNumbers
+  weekStartsOn={0}
+/>
+```
+
+Month-grid date display — mirrors `GtkCalendar` and `@gnome-ui/react`'s own
+`Calendar`, ported from its `Calendar`+`CalendarBase`+`calendarUtils.ts`
+split. `calendarUtils.ts`'s pure date-math helpers port verbatim (zero DOM
+dependency on the web side already), the same `fileType.ts`/
+`coachMarkUtils.ts` precedent for dependency-free logic not worth a shared
+package.
+
+**The web version's entire keyboard layer drops here** — roving tabindex,
+arrow keys, PageUp/Down, Home/End, Enter/Space are all gone, replaced by
+plain tap-to-select on every day/month/year cell. Unlike `Slider`'s 1D
+`accessibilityRole="adjustable"` fallback, a full 2D date grid has no
+screen-reader analog to page through, so tap-to-select is the strict touch
+subset of the web interaction — the same trade-off `RatingStars`/
+`ToggleGroup`/`ColorPicker` already made. The heading label still cycles
+day grid → month grid → year grid on tap, exactly as on the web, so a
+distant year is two taps away rather than many pages of month navigation.
+
+`role="grid"`/`"row"` port 1:1 from RN's web-aligned `Role` union;
+`"gridcell"` isn't in that union, so day/month/year cells fall back to
+`"cell"` — the same kind of substitution `BoxedList` (`"list"`) and
+`ComboRow` (`"listbox"` → `"list"`) already made. The grid and its rows
+deliberately skip `accessible`, the `ToggleGroup`-corrected pattern: with
+many independently-focusable day cells inside, setting it would collapse
+the whole month into one VoiceOver stop. Day-name and week-number headers
+hold no interactive children, so they do set `accessible` to be announced
+as a single unit.
+
+`visibleMonths` (side-by-side month panels) and `autoFocus`
+(keyboard-focus-on-mount) are dropped outright, not merely unimplemented —
+both are desktop/keyboard concerns with no honest phone-width or
+no-keyboard counterpart. `locale` is dropped too, in favor of the app-wide
+locale `GnomeProvider` already exposes through `useDateTimeFormatter` —
+`Calendar` is the first component in this package to seriously exercise
+that hook, and every `Intl.DateTimeFormatOptions` object it passes is
+hoisted to module scope so the hook's own `useMemo`-over-`options` identity
+check actually holds across renders. Day and drill-down cells are equal-
+width flex rows (7 columns for days, matching `getCalendarWeeks`'s fixed
+6-row output; 4 columns for the 12-cell month/year grids) rather than a
+CSS Grid port, since Yoga has no grid layout at all.
+
+No `CalendarBase` split was extracted ahead of need — `CalendarRange`
+(unbuilt) will pull one out of this component's grid/navigation logic once
+it actually exists, rather than this component carrying unused abstraction
+for it now.
+
 ## Installation
 
 ```bash

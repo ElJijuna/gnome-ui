@@ -23,6 +23,7 @@ import { BulletChartScreen } from './screens/BulletChartScreen';
 import { ButtonContentScreen } from './screens/ButtonContentScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
+import { CalendarScreen } from './screens/CalendarScreen';
 import { CalloutScreen } from './screens/CalloutScreen';
 import { CardScreen } from './screens/CardScreen';
 import { CheckboxScreen } from './screens/CheckboxScreen';
@@ -176,6 +177,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SplitButton: SplitButtonScreen,
   TagInput: TagInputScreen,
   ColorPicker: ColorPickerScreen,
+  Calendar: CalendarScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,
   ButtonContent: ButtonContentScreen,

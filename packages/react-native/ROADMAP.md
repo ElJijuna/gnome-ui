@@ -327,14 +327,15 @@ components rather than as two-line `StatusPage` usages.
 
 ### Molecules
 
-> `Calendar` is the real prerequisite for four of these — build it first.
+> `Calendar` shipped — `DatePicker`/`TimePicker`/`CalendarRange` are now
+> unblocked (still unbuilt, picking any up is its own turn).
 
 | Status | Component | Notes |
 |--------|-----------|-------|
-| ⬜ | **Calendar** | The real design effort here — month-grid keyboard-nav-free (roving-tap instead) date grid; blocks `DatePicker`/`TimePicker`/`CalendarRange`/`DateRangePicker` below |
-| ⬜ | **DatePicker** | Unblocked now that `Popover` shipped (Tier 5) — `TextField` trigger + `Popover`-anchored `Calendar`; blocked only on `Calendar` itself |
-| ⬜ | **TimePicker** | Paired `SpinButton` columns in a `Popover` — blocked only on scheduling, all pieces exist |
-| ⬜ | **CalendarRange** | Shares `Calendar`'s grid engine — blocked on `Calendar` |
+| ✅ | **Calendar** | Shipped — day/month/year drill-down grid, ported from `@gnome-ui/react`'s `Calendar`+`CalendarBase`+`calendarUtils.ts`. `calendarUtils.ts` (`startOfDay`/`addMonths`/`getCalendarWeeks`/`isoWeekNumber`/`isOutOfRange`/…) ports verbatim — zero DOM dependency on the web side already, the same `fileType.ts`/`coachMarkUtils.ts` precedent; `fromISODateKey` is the one helper dropped, since it exists only to decode the web version's delegated `onMouseOver` hover-preview listener, which has no touch equivalent. **The entire keyboard layer drops**, as this file's own note predicted — roving tabindex, arrow keys, PageUp/Down, Home/End all gone, replaced by plain tap-to-select on every cell; unlike `Slider`'s 1D `accessibilityRole="adjustable"` escape hatch, a full 2D date grid has no screen-reader analog to fall back to, so tap is the strict touch subset of the web interaction (the `RatingStars`/`ToggleGroup` trade-off). `role="grid"`/`"row"` port 1:1 from RN's `Role` union; `"gridcell"` isn't in that union, so cells fall back to `"cell"` (the `BoxedList`/`ComboRow` substitution pattern). Grid/row containers skip `accessible` (the `ToggleGroup`-corrected pattern, many independently-focusable day cells); day-name/week-number headers, holding no interactive children, do set it. `visibleMonths` (side-by-side panels) and `autoFocus` (keyboard-focus-on-mount) are dropped outright rather than approximated — both are desktop/keyboard concerns with no honest phone-width or no-keyboard counterpart; `locale` is dropped too, in favor of `GnomeProvider`'s app-wide `useDateTimeFormatter` — **this is the first component in the package to seriously exercise that hook**, and it held up fine for every weekday/month/year combination needed (confirmed by reading its `useMemo`-over-`options` implementation before use, then hoisting every `Intl.DateTimeFormatOptions` object to module scope so the memo's identity check actually holds across renders instead of rebuilding a formatter every render). No `CalendarBase` split was added ahead of need — `CalendarRange` (still unbuilt) will extract one when it actually exists. Day/drill-down cells are equal-width flex rows (7 columns for days matching `getCalendarWeeks`'s fixed 6-row output, 4 columns for the 12-cell month/year grids), not a CSS Grid port — confirmed correct on the iOS Simulator (min/max disabling, outside-month dimming, today's ring, week numbers, Sunday-first weeks, and the no-heading fixed-month mode all screenshotted clean on the first pass, no on-device bug found this time) |
+| ⬜ | **DatePicker** | Unblocked now that both `Popover` (Tier 5) and `Calendar` have shipped — `TextField` trigger + `Popover`-anchored `Calendar` |
+| ⬜ | **TimePicker** | Paired `SpinButton` columns in a `Popover` — unblocked, all pieces exist |
+| ⬜ | **CalendarRange** | Shares `Calendar`'s grid engine — unblocked now that `Calendar` has shipped; still worth extracting a `CalendarBase`-equivalent split rather than duplicating the grid |
 | ⬜ | **DateRangePicker** | `Popover` + `CalendarRange` composition — blocked on `CalendarRange` |
 | ⬜ | **FontPicker** | Unblocked now that `Popover`+`Dropdown`+`SpinButton` all exist — thin glue composition |
 | ⬜ | **EmojiPicker** | Unblocked now that `Popover` exists — needs the same static emoji dataset the web version ships, `ScrollView`+search-filter |
@@ -523,8 +524,8 @@ package.
   shipped); all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster
-  (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, once
-  `Calendar` exists for the first two).
+  (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, now that
+  `Calendar` has shipped for the first two).
 - **Open follow-up (`ViewSwitcher`, found 2026-09-06 while building
   `ToggleGroup`)**: `ViewSwitcher`'s container sets `accessible` alongside
   `accessibilityRole="radiogroup"`. On iOS that collapses the whole subtree
@@ -575,6 +576,11 @@ package.
   applies before porting a fix, and check whether the fix's *complement*
   (an affordance, not a bug) actually fits the target platform's own
   conventions.**
+- **`Calendar` shipped (Tier 20 molecule)**: see its own row above for the
+  full design writeup. Unblocks the `DatePicker`/`TimePicker`/
+  `CalendarRange`/`DateRangePicker` cluster this file has been flagging as
+  blocked on it since Tier 20 was first drafted — none of those four were
+  picked up in this same turn, only `Calendar` itself.
 
 Per-component process for anything picked up from this file: read the
 `@gnome-ui/react` source first, design the RN API deliberately rather than

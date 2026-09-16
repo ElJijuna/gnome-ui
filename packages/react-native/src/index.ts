@@ -15,6 +15,7 @@ export * from './components/BreakpointBin';
 export * from './components/Button';
 export * from './components/ButtonContent';
 export * from './components/ButtonRow';
+export * from './components/Calendar';
 export * from './components/Callout';
 export * from './components/Card';
 export * from './components/Checkbox';

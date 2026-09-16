@@ -142,6 +142,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SparkPieChart: 'Minimal inline pie or donut chart for a small breakdown of values',
   SparkBulletChart: 'Minimal inline bullet-chart track for a single measure with a target',
   BoxPlot: 'Box-and-whisker plot for comparing distributions across groups',
+  Calendar: 'Month-grid date picker — tap-to-select, min/max, day/month/year drill-down',
 };
 
 type CategoryKey =
@@ -190,6 +191,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   Slider: 'forms',
   RangeSlider: 'forms',
   ColorPicker: 'forms',
+  Calendar: 'forms',
   ComboRow: 'forms',
   SpinRow: 'forms',
   TagInput: 'forms',
