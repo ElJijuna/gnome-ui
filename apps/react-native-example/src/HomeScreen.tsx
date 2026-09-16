@@ -139,6 +139,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   WaterfallChart: 'Bridge chart showing increases/decreases from a starting to an ending value',
   Heatmap: 'Grid of colored cells for a value across two categorical dimensions',
   SparkGaugeChart: 'Minimal inline circular progress ring for a single value',
+  SparkPieChart: 'Minimal inline pie or donut chart for a small breakdown of values',
 };
 
 type CategoryKey =
@@ -263,6 +264,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   WaterfallChart: 'feedback',
   Heatmap: 'feedback',
   SparkGaugeChart: 'feedback',
+  SparkPieChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

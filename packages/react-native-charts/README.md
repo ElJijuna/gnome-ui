@@ -15,7 +15,7 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
 > `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`,
-> `WaterfallChart`, `Heatmap`, and `SparkGaugeChart` shipped. This package mirrors
+> `WaterfallChart`, `Heatmap`, `SparkGaugeChart`, and `SparkPieChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -83,6 +83,7 @@ dependencies.
 | `WaterfallChart` | Bridge chart showing how a sequence of increases/decreases moves a value from a starting point to an ending point |
 | `Heatmap` | Grid of colored cells for a value across two categorical dimensions, with intensity-based coloring and an optional legend |
 | `SparkGaugeChart` | Minimal inline circular progress ring for a single value against a min/max range, with optional color thresholds |
+| `SparkPieChart` | Minimal inline pie or donut chart for a small breakdown of values |
 
 ## Usage
 
@@ -121,9 +122,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md),
 [`src/components/BulletChart/README.md`](src/components/BulletChart/README.md),
 [`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md),
-[`src/components/Heatmap/README.md`](src/components/Heatmap/README.md), and
-[`src/components/SparkGaugeChart/README.md`](src/components/SparkGaugeChart/README.md) for the
-full prop reference of each.
+[`src/components/Heatmap/README.md`](src/components/Heatmap/README.md),
+[`src/components/SparkGaugeChart/README.md`](src/components/SparkGaugeChart/README.md), and
+[`src/components/SparkPieChart/README.md`](src/components/SparkPieChart/README.md) for the full
+prop reference of each.
 
 ## Design notes
 
@@ -347,3 +349,18 @@ full prop reference of each.
   approximation needed here). Shipped with zero bugs on the first on-device screenshot, the arc
   geometry and sweep direction already fully de-risked by `GaugeChart`/`RadialBarChart` before this
   component existed.
+- **`SparkPieChart` reuses `PieChart`'s exact `PolarChart`/`Pie.Chart` primitive**, but had to solve
+  a real gap `PieChart` never needed: the web version supports `paddingAngle` (a gap in degrees
+  between slices), and `Pie.Chart` has no built-in equivalent at all. Victory Native does ship a
+  trick for this (`PieSliceAngularInset`, a stroke drawn over each slice's radial edge in a given
+  color) but it only *looks* like a gap when that color happens to match whatever surface the chart
+  sits on — fragile for a small inline chart meant to be dropped into cards, list rows, or any
+  arbitrary background. Used a different technique instead: interleave a synthetic, fully
+  transparent "spacer" slice between every pair of real slices, with its own `value` solved
+  algebraically (`spacer = paddingAngle * total / (360 - gaps * paddingAngle)`) so its rendered
+  sweep comes out to exactly `paddingAngle` degrees once mixed into `Pie.Chart`'s shared value
+  total — a real, transparent gap rather than a background-color illusion. Reused
+  `WaterfallChart`'s own documented lesson (an explicit `#00000000` hex, never the `"transparent"`
+  CSS keyword, for anything Skia needs to render as invisible) for the spacer's color. Confirmed
+  correct on-device: the "no padding" demo's slices visibly touch with no seam, while every other
+  demo shows a real gap — shipped with zero bugs on the first on-device screenshot.

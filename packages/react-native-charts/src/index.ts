@@ -54,6 +54,11 @@ export {
   type SparkLineChartProps,
   type SparkSeries,
 } from './components/SparkLineChart';
+export {
+  SparkPieChart,
+  type SparkPieChartDataItem,
+  type SparkPieChartProps,
+} from './components/SparkPieChart';
 export { TreeMap, type TreeMapDataItem, type TreeMapProps } from './components/TreeMap';
 export {
   WaterfallChart,
