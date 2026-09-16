@@ -1,6 +1,6 @@
 {
   "name": "@gnome-ui/react-native-charts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Data visualisation components for React Native, styled with Adwaita design tokens, rendered on Skia via Victory Native",
   "type": "module",
   "main": "./dist/index.cjs",

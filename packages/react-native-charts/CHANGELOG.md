@@ -1,3 +1,14 @@
+## [@gnome-ui/react-native-charts-v1.1.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native-charts@1.0.0...@gnome-ui/react-native-charts@1.1.0) (2026-09-16)
+
+### Features
+
+* **@gnome-ui/react-native-charts:** add BoxPlot component with demo, tests, and documentation ([57c17d7](https://github.com/ElJijuna/gnome-ui/commit/57c17d7da96c3606c216c4ffc2516e288d74a418))
+* **@gnome-ui/react-native-charts:** add Heatmap component with demo, tests, and documentation ([7bc0bfe](https://github.com/ElJijuna/gnome-ui/commit/7bc0bfe345883c707b38c05a5817f749d0f12015))
+* **@gnome-ui/react-native-charts:** add SparkBulletChart component with demo, tests, and documentation ([a91aefb](https://github.com/ElJijuna/gnome-ui/commit/a91aefbbf20b49443e8ab6d08c2d930728b78951))
+* **@gnome-ui/react-native-charts:** add SparkGaugeChart component with demo, tests, and documentation ([e70c0ca](https://github.com/ElJijuna/gnome-ui/commit/e70c0ca9ac40c708c34e0c7ca627f60193d34b54))
+* **@gnome-ui/react-native-charts:** add SparkPieChart component with demo, tests, and documentation ([4d7e4cb](https://github.com/ElJijuna/gnome-ui/commit/4d7e4cbc7f3184154c0d8ea35bdba77a07516d02))
+* **@gnome-ui/react-native-charts:** add WaterfallChart component with demo and tests ([6ea42e2](https://github.com/ElJijuna/gnome-ui/commit/6ea42e299f5894243c01be5e3d39d3a6af4701f3))
+
 ## @gnome-ui/react-native-charts-v1.0.0 (2026-09-15)
 
 ### Features
