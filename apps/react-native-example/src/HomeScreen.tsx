@@ -136,6 +136,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   TreeMap: 'Proportional-area rectangles for hierarchical/part-of-whole data',
   SankeyChart: 'Flow diagram for multi-stage funnels/allocations',
   BulletChart: 'Compact single-measure KPI indicator with a target tick',
+  WaterfallChart: 'Bridge chart showing increases/decreases from a starting to an ending value',
 };
 
 type CategoryKey =
@@ -257,6 +258,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   TreeMap: 'feedback',
   SankeyChart: 'feedback',
   BulletChart: 'feedback',
+  WaterfallChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

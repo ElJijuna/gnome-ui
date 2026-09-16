@@ -14,8 +14,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, and `BulletChart`
-> shipped. This package mirrors
+> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`, and
+> `WaterfallChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -80,6 +80,7 @@ dependencies.
 | `TreeMap` | Proportional-area rectangles for hierarchical/part-of-whole data, laid out with a squarified treemap algorithm |
 | `SankeyChart` | Flow diagram for multi-stage funnels/allocations, laid out with a d3-sankey-style algorithm |
 | `BulletChart` | Compact single-measure KPI indicator — qualitative range bands, a performance bar, and an optional target tick |
+| `WaterfallChart` | Bridge chart showing how a sequence of increases/decreases moves a value from a starting point to an ending point |
 
 ## Usage
 
@@ -115,9 +116,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/ComposedChart/README.md`](src/components/ComposedChart/README.md),
 [`src/components/GaugeChart/README.md`](src/components/GaugeChart/README.md),
 [`src/components/TreeMap/README.md`](src/components/TreeMap/README.md),
-[`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md), and
-[`src/components/BulletChart/README.md`](src/components/BulletChart/README.md) for the full prop
-reference of each.
+[`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md),
+[`src/components/BulletChart/README.md`](src/components/BulletChart/README.md), and
+[`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md) for the full
+prop reference of each.
 
 ## Design notes
 
@@ -279,3 +281,25 @@ reference of each.
   same-colored thin center stripe is genuinely hard for a human eye to resolve in a compressed
   screenshot preview. Sample real pixel values for any future thin/inset overlay verification
   against a same- or similar-colored background, rather than trusting a screenshot by eye alone.
+- **`WaterfallChart` is the first chart in this package to compose Victory Native's `StackedBar`**
+  — a real primitive match found by reading its source (`points`/`chartBounds`/`barOptions`),
+  not the "no Victory Native primitive, hand-roll on Skia" situation `RadarChart`/`RadialBarChart`/
+  `FunnelChart`/`GaugeChart` hit. Each bar is two stacked series per category (an invisible `base`
+  and a colored `value`, the same floating-bar recipe the web version's `<Bar dataKey="base"
+  fill="transparent">` + `<Bar dataKey="value">` pair uses), colored per-bar (not per-series) via
+  `barOptions`'s `datumIndex` closing back over the original row array — safe here because
+  `transformInputData` only sorts by `xKey` when every value is numeric, and this chart's `xKey`
+  is always a string label. An explicit `domain={{ y: [yMin, yMax] }}` covering both series'
+  combined extent is required for the same reason `AreaChart`'s `stacked` mode needs one: the
+  auto-domain only look at each series' own raw values, with no idea the real bar top is their
+  sum. **Two real on-device bugs, neither in the component's own math**: (1) Skia's color parser
+  can't be assumed to support the `"transparent"` CSS keyword the way a browser does — used an
+  explicit `#00000000` hex value for the invisible base segment instead, matching this whole
+  package's existing "prefer alpha-suffixed hex over named colors for Skia" convention.
+  (2) Victory Native's categorical x-axis defaults to `tickCount: 5` and silently downsamples
+  ticks past that — with 6 bridge steps, it didn't crowd the 6th label, it dropped one category's
+  label entirely (confirmed via `downsampleTicks`' even-spaced-index selection, not assumed).
+  Harmless for a chart where an occasional skipped tick is fine (a long time series), but every
+  step in a bridge is a named, meaningful data point — fixed with an explicit
+  `tickCount: { x: data.length, y: 5 }` override so every bar always gets its own label,
+  regardless of category count.

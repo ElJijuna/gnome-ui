@@ -49,4 +49,9 @@ export {
   type SparkSeries,
 } from './components/SparkLineChart';
 export { TreeMap, type TreeMapDataItem, type TreeMapProps } from './components/TreeMap';
+export {
+  WaterfallChart,
+  type WaterfallChartDataItem,
+  type WaterfallChartProps,
+} from './components/WaterfallChart';
 export { type ChartLegendPosition } from './types/legend';

@@ -103,6 +103,7 @@ import { ToolbarScreen } from './screens/ToolbarScreen';
 import { TooltipScreen } from './screens/TooltipScreen';
 import { TreeMapScreen } from './screens/TreeMapScreen';
 import { ViewSwitcherScreen } from './screens/ViewSwitcherScreen';
+import { WaterfallChartScreen } from './screens/WaterfallChartScreen';
 import { WidgetManagerScreen } from './screens/WidgetManagerScreen';
 import { WrapBoxScreen } from './screens/WrapBoxScreen';
 import type { ComponentName } from './types';
@@ -211,6 +212,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   TreeMap: TreeMapScreen,
   SankeyChart: SankeyChartScreen,
   BulletChart: BulletChartScreen,
+  WaterfallChart: WaterfallChartScreen,
 };
 
 export interface ComponentScreenProps {
