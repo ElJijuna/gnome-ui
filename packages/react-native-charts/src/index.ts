@@ -2,6 +2,12 @@ export { getChartPalette } from './colors';
 export { AreaChart, type AreaChartProps, type AreaChartSeries } from './components/AreaChart';
 export { BarChart, type BarChartProps, type BarChartSeries } from './components/BarChart';
 export {
+  BoxPlot,
+  type BoxPlotDataItem,
+  type BoxPlotProps,
+  type BoxPlotStats,
+} from './components/BoxPlot';
+export {
   BulletChart,
   type BulletChartProps,
   type BulletChartRange,

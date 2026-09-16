@@ -16,6 +16,7 @@ import { BlockquoteScreen } from './screens/BlockquoteScreen';
 import { BottomSheetScreen } from './screens/BottomSheetScreen';
 import { BottomTabBarScreen } from './screens/BottomTabBarScreen';
 import { BoxedListScreen } from './screens/BoxedListScreen';
+import { BoxPlotScreen } from './screens/BoxPlotScreen';
 import { BoxScreen } from './screens/BoxScreen';
 import { BreakpointBinScreen } from './screens/BreakpointBinScreen';
 import { BulletChartScreen } from './screens/BulletChartScreen';
@@ -221,6 +222,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   SparkGaugeChart: SparkGaugeChartScreen,
   SparkPieChart: SparkPieChartScreen,
   SparkBulletChart: SparkBulletChartScreen,
+  BoxPlot: BoxPlotScreen,
 };
 
 export interface ComponentScreenProps {

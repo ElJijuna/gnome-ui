@@ -141,6 +141,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   SparkGaugeChart: 'Minimal inline circular progress ring for a single value',
   SparkPieChart: 'Minimal inline pie or donut chart for a small breakdown of values',
   SparkBulletChart: 'Minimal inline bullet-chart track for a single measure with a target',
+  BoxPlot: 'Box-and-whisker plot for comparing distributions across groups',
 };
 
 type CategoryKey =
@@ -267,6 +268,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   SparkGaugeChart: 'feedback',
   SparkPieChart: 'feedback',
   SparkBulletChart: 'feedback',
+  BoxPlot: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

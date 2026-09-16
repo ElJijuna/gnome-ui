@@ -12,15 +12,15 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 [![CI](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/eljijuna/gnome-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
-> **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
-> `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
-> `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`,
-> `WaterfallChart`, `Heatmap`, `SparkGaugeChart`, `SparkPieChart`, and `SparkBulletChart` shipped.
-> This package mirrors
+> **Status: all 23 components shipped.** `LineChart`, `BarChart`, `AreaChart`, `PieChart`,
+> `RadarChart`, `RadialBarChart`, `CloudChart`, `SparkLineChart`, `SparkAreaChart`,
+> `SparkBarChart`, `ScatterChart`, `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`,
+> `SankeyChart`, `BulletChart`, `WaterfallChart`, `Heatmap`, `SparkGaugeChart`, `SparkPieChart`,
+> `SparkBulletChart`, and `BoxPlot` — this package now fully mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
-> reuse directly. See [`ROADMAP.md`](ROADMAP.md) for per-component status.
+> reuse directly. See [`ROADMAP.md`](ROADMAP.md) for the full per-component history.
 
 ## Installation
 
@@ -86,6 +86,7 @@ dependencies.
 | `SparkGaugeChart` | Minimal inline circular progress ring for a single value against a min/max range, with optional color thresholds |
 | `SparkPieChart` | Minimal inline pie or donut chart for a small breakdown of values |
 | `SparkBulletChart` | Minimal inline bullet-chart track for a single measure against qualitative bands and an optional target |
+| `BoxPlot` | Box-and-whisker plot for comparing distributions across groups — median, interquartile range, whiskers, and outliers |
 
 ## Usage
 
@@ -126,9 +127,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md),
 [`src/components/Heatmap/README.md`](src/components/Heatmap/README.md),
 [`src/components/SparkGaugeChart/README.md`](src/components/SparkGaugeChart/README.md),
-[`src/components/SparkPieChart/README.md`](src/components/SparkPieChart/README.md), and
-[`src/components/SparkBulletChart/README.md`](src/components/SparkBulletChart/README.md) for the
-full prop reference of each.
+[`src/components/SparkPieChart/README.md`](src/components/SparkPieChart/README.md),
+[`src/components/SparkBulletChart/README.md`](src/components/SparkBulletChart/README.md), and
+[`src/components/BoxPlot/README.md`](src/components/BoxPlot/README.md) for the full prop
+reference of each.
 
 ## Design notes
 
@@ -380,3 +382,27 @@ full prop reference of each.
   than assuming one, since the two consumers need genuinely different layout contexts. Shipped with
   zero bugs on the first on-device screenshot — the underlying track rendering was already fully
   validated by `BulletChart` before this component existed.
+- **`BoxPlot` is the twenty-third and final component in this package's roadmap** — same "no
+  layout algorithm, no Victory Native/Skia primitive" situation `BulletChart`/`Heatmap` already
+  found, just with vertical instead of horizontal percentage positioning for the whiskers/box/
+  median/outliers, the same `top`/`height` percentage technique `BulletTrack` already validated
+  on-device for `left`/`width`. Ported `percentile`/`computeStats`/`resolveStats` (the quartile and
+  1.5×IQR outlier-fence math) verbatim — pure number-crunching, no rendering concerns. **A real
+  layout gap, not from the percentage geometry itself**: the web version's tick-label column and
+  each column's own track get their vertical alignment "for free" from ordinary CSS box flow; RN
+  has no equivalent, so the axis column's tick-track area is given its own bottom spacer with the
+  exact same height as each data column's label row (`LABEL_ROW_HEIGHT`), guaranteeing by
+  construction — not by relying on how percentage `top` resolves against a padded containing block
+  — that the axis's 0%/100% line up with the real track's max/min. **Two real on-device bugs, both
+  in the tick-label sizing, not the alignment fix above**: a `Text` pinned with both `left: 0` and
+  `right: 8` (mirroring the web's fixed 44px column too literally) forced a 36dp box that ellipsized
+  longer formatted numbers (`"334.56"` rendered as `"334...."`); removing `left` fixed that case but
+  a still-wider formatted string (`"331.28ms"`, from a custom `valueFormatter`) truncated again —
+  RN clamped even an unconstrained absolutely-positioned `Text`'s measured width to its containing
+  block's size in practice, unlike the web `<span>`, which has no width constraint at all and
+  simply overflows left when it needs to. Fixed with a generous explicit `width` (120, well beyond
+  the 44dp column) plus `textAlign: 'right'`, so the digits stay anchored on their tick position
+  regardless of how many characters any formatter produces. **General lesson: don't assume an
+  absolutely-positioned RN `Text` with only one offset set (`right`, no `left`/`width`) sizes itself
+  to its own content the way a web `<span>` would — give it an explicit generous `width` instead of
+  relying on that assumption, especially for anything driven by a caller-supplied formatter.**

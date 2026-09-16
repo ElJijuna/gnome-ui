@@ -107,6 +107,7 @@ export const COMPONENT_NAMES = [
   'SparkGaugeChart',
   'SparkPieChart',
   'SparkBulletChart',
+  'BoxPlot',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
