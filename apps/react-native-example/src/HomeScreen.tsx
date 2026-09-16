@@ -140,6 +140,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Heatmap: 'Grid of colored cells for a value across two categorical dimensions',
   SparkGaugeChart: 'Minimal inline circular progress ring for a single value',
   SparkPieChart: 'Minimal inline pie or donut chart for a small breakdown of values',
+  SparkBulletChart: 'Minimal inline bullet-chart track for a single measure with a target',
 };
 
 type CategoryKey =
@@ -265,6 +266,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   Heatmap: 'feedback',
   SparkGaugeChart: 'feedback',
   SparkPieChart: 'feedback',
+  SparkBulletChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

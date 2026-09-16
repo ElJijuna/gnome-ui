@@ -15,7 +15,8 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
 > `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`,
-> `WaterfallChart`, `Heatmap`, `SparkGaugeChart`, and `SparkPieChart` shipped. This package mirrors
+> `WaterfallChart`, `Heatmap`, `SparkGaugeChart`, `SparkPieChart`, and `SparkBulletChart` shipped.
+> This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -84,6 +85,7 @@ dependencies.
 | `Heatmap` | Grid of colored cells for a value across two categorical dimensions, with intensity-based coloring and an optional legend |
 | `SparkGaugeChart` | Minimal inline circular progress ring for a single value against a min/max range, with optional color thresholds |
 | `SparkPieChart` | Minimal inline pie or donut chart for a small breakdown of values |
+| `SparkBulletChart` | Minimal inline bullet-chart track for a single measure against qualitative bands and an optional target |
 
 ## Usage
 
@@ -123,9 +125,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/BulletChart/README.md`](src/components/BulletChart/README.md),
 [`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md),
 [`src/components/Heatmap/README.md`](src/components/Heatmap/README.md),
-[`src/components/SparkGaugeChart/README.md`](src/components/SparkGaugeChart/README.md), and
-[`src/components/SparkPieChart/README.md`](src/components/SparkPieChart/README.md) for the full
-prop reference of each.
+[`src/components/SparkGaugeChart/README.md`](src/components/SparkGaugeChart/README.md),
+[`src/components/SparkPieChart/README.md`](src/components/SparkPieChart/README.md), and
+[`src/components/SparkBulletChart/README.md`](src/components/SparkBulletChart/README.md) for the
+full prop reference of each.
 
 ## Design notes
 
@@ -364,3 +367,16 @@ prop reference of each.
   CSS keyword, for anything Skia needs to render as invisible) for the spacer's color. Confirmed
   correct on-device: the "no padding" demo's slices visibly touch with no seam, while every other
   demo shows a real gap — shipped with zero bugs on the first on-device screenshot.
+- **`SparkBulletChart` needed no new geometry at all** — it's the "spark" (compact, no label, no
+  value text) member of the bullet-chart family, and its web source is close enough to
+  `BulletChart`'s own (the same absolutely-positioned percentage-width bands/bar/target-tick
+  recipe, just without the label/value text around it) that the actual bands/bar/target rendering
+  moved into a new shared `src/internal/BulletTrack.tsx` on this, `BulletChart`'s second real
+  consumer — same "extract on second occurrence" call this package's other shared helpers were
+  built on. `BulletChart` itself was refactored to compose `BulletTrack` rather than duplicating
+  the logic, with no behavior change (its own test suite still passes unchanged). `BulletTrack`
+  deliberately takes sizing (`flex: 1` for `BulletChart`, sitting next to a label in a row;
+  `width: '100%'` for `SparkBulletChart`, standing alone) as a caller-supplied `style` prop rather
+  than assuming one, since the two consumers need genuinely different layout contexts. Shipped with
+  zero bugs on the first on-device screenshot — the underlying track rendering was already fully
+  validated by `BulletChart` before this component existed.

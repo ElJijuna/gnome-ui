@@ -1,11 +1,9 @@
 import { useGnomeTheme, useNumberFormatter } from '@gnome-ui/react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
-export interface BulletChartRange {
-  /** Upper bound of this qualitative band. */
-  value: number;
-  color?: string;
-}
+import { BulletTrack, type BulletTrackRange } from '@/internal/BulletTrack';
+
+export type BulletChartRange = BulletTrackRange;
 
 export interface BulletChartProps {
   /** Performance measure — the current value. */
@@ -30,17 +28,13 @@ export interface BulletChartProps {
   'aria-label'?: string;
 }
 
-interface Band {
-  start: number;
-  end: number;
-  color: string;
-}
-
 /**
  * No layout algorithm and no Victory Native/Skia primitive needed — same
  * situation `CloudChart` found: the web version is just absolutely-positioned
  * percentage-width `<div>`s inside a flex row, which RN's own `View`
  * percentage `left`/`width`/`top`/`bottom` styles port directly. No `Canvas`.
+ * The track itself (bands/bar/target tick) lives in `src/internal/BulletTrack`,
+ * shared with `SparkBulletChart`.
  */
 export const BulletChart = ({
   value,
@@ -58,22 +52,6 @@ export const BulletChart = ({
   const theme = useGnomeTheme();
   const formatNumber = useNumberFormatter().format;
   const format = valueFormatter ?? formatNumber;
-  const barColor = color ?? theme.accentColor;
-  const defaultRangeColors = [theme.light2, theme.light3, theme.light4];
-
-  const domain = max - min || 1;
-  const toPercent = (v: number): `${number}%` =>
-    `${(Math.min(max, Math.max(min, v)) - min) * (100 / domain)}%`;
-
-  const bands: Band[] = ranges?.length
-    ? [...ranges]
-        .sort((a, b) => a.value - b.value)
-        .map((range, i, sorted) => ({
-          start: i === 0 ? min : sorted[i - 1].value,
-          end: range.value,
-          color: range.color ?? defaultRangeColors[i % defaultRangeColors.length],
-        }))
-    : [{ start: min, end: max, color: defaultRangeColors[1] }];
 
   const chartLabel =
     ariaLabel ??
@@ -96,47 +74,16 @@ export const BulletChart = ({
           {label}
         </Text>
       )}
-      <View style={[styles.track, { height, borderRadius: theme.radiusSm }]}>
-        {bands.map((band, i) => (
-          <View
-            key={`band-${i}`}
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: toPercent(band.start),
-              width: `${(Math.min(max, band.end) - Math.max(min, band.start)) * (100 / domain)}%`,
-              backgroundColor: band.color,
-            }}
-          />
-        ))}
-        <View
-          key="bar"
-          style={{
-            position: 'absolute',
-            top: '30%',
-            bottom: '30%',
-            left: 0,
-            width: toPercent(value),
-            borderRadius: theme.radiusSm,
-            backgroundColor: barColor,
-          }}
-        />
-        {target !== undefined && (
-          <View
-            key="target"
-            style={{
-              position: 'absolute',
-              top: '12%',
-              bottom: '12%',
-              left: toPercent(target),
-              width: 2,
-              marginLeft: -1,
-              backgroundColor: theme.windowFgColor,
-            }}
-          />
-        )}
-      </View>
+      <BulletTrack
+        value={value}
+        target={target}
+        min={min}
+        max={max}
+        ranges={ranges}
+        color={color}
+        height={height}
+        style={styles.track}
+      />
       {showValue && (
         <Text style={[styles.value, { color: theme.windowFgColor, fontFamily: theme.fontFamily }]}>
           {format(value)}
@@ -164,8 +111,6 @@ const styles = StyleSheet.create({
   },
   track: {
     flex: 1,
-    position: 'relative',
-    overflow: 'hidden',
   },
   value: {
     fontSize: 13,

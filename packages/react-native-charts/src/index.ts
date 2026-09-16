@@ -45,6 +45,11 @@ export {
 export { SparkAreaChart, type SparkAreaChartProps } from './components/SparkAreaChart';
 export { SparkBarChart, type SparkBarChartProps } from './components/SparkBarChart';
 export {
+  SparkBulletChart,
+  type SparkBulletChartProps,
+  type SparkBulletChartRange,
+} from './components/SparkBulletChart';
+export {
   SparkGaugeChart,
   type SparkGaugeChartProps,
   type SparkGaugeChartThreshold,
