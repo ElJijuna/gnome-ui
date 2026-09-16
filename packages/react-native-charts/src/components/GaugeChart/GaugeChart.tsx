@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { type LayoutChangeEvent, View } from 'react-native';
 
 import { ChartContainer } from '@/internal/ChartContainer';
+import { resolveThresholdColor } from '@/internal/resolveThresholdColor';
 import { useChartFont } from '@/internal/useChartFont';
 
 export interface GaugeChartThreshold {
@@ -36,32 +37,6 @@ const OUTER_PADDING = 24;
 const VALUE_FONT_SIZE = 28;
 const LABEL_FONT_SIZE = 13;
 
-const resolveColor = (
-  value: number,
-  color: string | undefined,
-  thresholds: GaugeChartThreshold[] | undefined,
-  fallback: string,
-) => {
-  if (color) {
-    return color;
-  }
-
-  if (thresholds && thresholds.length > 0) {
-    const sorted = [...thresholds].sort((a, b) => a.value - b.value);
-    let resolved = sorted[0].color;
-
-    for (const threshold of sorted) {
-      if (value >= threshold.value) {
-        resolved = threshold.color;
-      }
-    }
-
-    return resolved;
-  }
-
-  return fallback;
-};
-
 /**
  * Same "no Victory Native primitive" situation as RadarChart/RadialBarChart/
  * FunnelChart — hand-built on `SkPathBuilder.addArc`, reusing the exact
@@ -93,7 +68,7 @@ export const GaugeChart = ({
   }, []);
 
   const clampedValue = Math.min(max, Math.max(min, value));
-  const arcColor = resolveColor(value, color, thresholds, theme.accentColor);
+  const arcColor = resolveThresholdColor(value, color, thresholds, theme.accentColor);
 
   const chartLabel = ariaLabel ?? `Gauge: ${label ? `${label} ` : ''}${format(value)}`;
 

@@ -15,7 +15,7 @@ GNOME Adwaita design tokens and rendered on [Skia](https://shopify.github.io/rea
 > **Status:** `LineChart`, `BarChart`, `AreaChart`, `PieChart`, `RadarChart`, `RadialBarChart`,
 > `CloudChart`, `SparkLineChart`, `SparkAreaChart`, `SparkBarChart`, `ScatterChart`,
 > `FunnelChart`, `ComposedChart`, `GaugeChart`, `TreeMap`, `SankeyChart`, `BulletChart`,
-> `WaterfallChart`, and `Heatmap` shipped. This package mirrors
+> `WaterfallChart`, `Heatmap`, and `SparkGaugeChart` shipped. This package mirrors
 > [`@gnome-ui/charts`](../charts/README.md)'s 23-component roadmap for React
 > Native, one chart at a time, on top of Victory Native (Skia + Reanimated)
 > rather than Recharts (SVG-over-DOM), since RN has no DOM/SVG renderer to
@@ -82,6 +82,7 @@ dependencies.
 | `BulletChart` | Compact single-measure KPI indicator — qualitative range bands, a performance bar, and an optional target tick |
 | `WaterfallChart` | Bridge chart showing how a sequence of increases/decreases moves a value from a starting point to an ending point |
 | `Heatmap` | Grid of colored cells for a value across two categorical dimensions, with intensity-based coloring and an optional legend |
+| `SparkGaugeChart` | Minimal inline circular progress ring for a single value against a min/max range, with optional color thresholds |
 
 ## Usage
 
@@ -119,9 +120,10 @@ See [`src/components/LineChart/README.md`](src/components/LineChart/README.md),
 [`src/components/TreeMap/README.md`](src/components/TreeMap/README.md),
 [`src/components/SankeyChart/README.md`](src/components/SankeyChart/README.md),
 [`src/components/BulletChart/README.md`](src/components/BulletChart/README.md),
-[`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md), and
-[`src/components/Heatmap/README.md`](src/components/Heatmap/README.md) for the full prop reference
-of each.
+[`src/components/WaterfallChart/README.md`](src/components/WaterfallChart/README.md),
+[`src/components/Heatmap/README.md`](src/components/Heatmap/README.md), and
+[`src/components/SparkGaugeChart/README.md`](src/components/SparkGaugeChart/README.md) for the
+full prop reference of each.
 
 ## Design notes
 
@@ -330,3 +332,18 @@ of each.
   fixed-width `View` that also carries its own padding, in this package or otherwise. Reused
   `GaugeChart`'s/`BulletChart`'s documented gap (no RN theme token for the web's
   `--gnome-dim-label-color`) for row/column/legend label text, same `opacity: 0.55` approximation.
+- **`SparkGaugeChart` is a full-circle simplification of `GaugeChart`'s already-validated
+  semicircle-gauge geometry** — same `SkPathBuilder.addArc` primitive, `strokeCap="round"`, and
+  0deg=east/positive-sweep-is-clockwise angle convention `GaugeChart`/`RadialBarChart` already
+  paid down on-device, just sweeping the full 360deg from the top (`START_ANGLE = 270`) instead of
+  180deg from the side. Unlike `GaugeChart`, it takes an explicit square `size` (matching the web
+  version's own `width={size} height={size}`) instead of filling a container height, so it needs no
+  `onLayout`/canvas-size state at all — geometry is fully known from props up front. Extracted
+  `GaugeChart`'s threshold-color-resolution algorithm (walk sorted thresholds, keep the last one
+  `<=` value) into `src/internal/resolveThresholdColor.ts` on this, its second real consumer — same
+  "extract on second occurrence" call this package's other `src/internal/` helpers were built on.
+  Track color reuses `theme.light3` directly (a real token match for the web's
+  `--gnome-light-3` var, unlike the `--gnome-dim-label-color` gap several other charts hit — no
+  approximation needed here). Shipped with zero bugs on the first on-device screenshot, the arc
+  geometry and sweep direction already fully de-risked by `GaugeChart`/`RadialBarChart` before this
+  component existed.

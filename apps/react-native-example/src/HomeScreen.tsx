@@ -138,6 +138,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   BulletChart: 'Compact single-measure KPI indicator with a target tick',
   WaterfallChart: 'Bridge chart showing increases/decreases from a starting to an ending value',
   Heatmap: 'Grid of colored cells for a value across two categorical dimensions',
+  SparkGaugeChart: 'Minimal inline circular progress ring for a single value',
 };
 
 type CategoryKey =
@@ -261,6 +262,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   BulletChart: 'feedback',
   WaterfallChart: 'feedback',
   Heatmap: 'feedback',
+  SparkGaugeChart: 'feedback',
   Badge: 'feedback',
   LevelBar: 'feedback',
   Callout: 'feedback',

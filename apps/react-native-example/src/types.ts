@@ -104,6 +104,7 @@ export const COMPONENT_NAMES = [
   'BulletChart',
   'WaterfallChart',
   'Heatmap',
+  'SparkGaugeChart',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

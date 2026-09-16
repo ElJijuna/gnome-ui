@@ -83,6 +83,7 @@ import { SliderScreen } from './screens/SliderScreen';
 import { SpacerScreen } from './screens/SpacerScreen';
 import { SparkAreaChartScreen } from './screens/SparkAreaChartScreen';
 import { SparkBarChartScreen } from './screens/SparkBarChartScreen';
+import { SparkGaugeChartScreen } from './screens/SparkGaugeChartScreen';
 import { SparkLineChartScreen } from './screens/SparkLineChartScreen';
 import { SpinButtonScreen } from './screens/SpinButtonScreen';
 import { SpinnerScreen } from './screens/SpinnerScreen';
@@ -215,6 +216,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   BulletChart: BulletChartScreen,
   WaterfallChart: WaterfallChartScreen,
   Heatmap: HeatmapScreen,
+  SparkGaugeChart: SparkGaugeChartScreen,
 };
 
 export interface ComponentScreenProps {
