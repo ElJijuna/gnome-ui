@@ -3062,10 +3062,54 @@ width flex rows (7 columns for days, matching `getCalendarWeeks`'s fixed
 6-row output; 4 columns for the 12-cell month/year grids) rather than a
 CSS Grid port, since Yoga has no grid layout at all.
 
-No `CalendarBase` split was extracted ahead of need — `CalendarRange`
-(unbuilt) will pull one out of this component's grid/navigation logic once
-it actually exists, rather than this component carrying unused abstraction
-for it now.
+No `CalendarBase` split was extracted ahead of need — it was pulled out of
+this component's grid/navigation logic once `CalendarRange` actually
+shipped and needed it (see below), not carried as unused abstraction before
+that. The extraction changed no observable behavior: `Calendar`'s full
+pre-existing test suite passed unmodified against the refactor.
+
+### CalendarRange
+
+```tsx
+import { CalendarRange, type DateRange } from '@gnome-ui/react-native';
+
+const [range, setRange] = useState<DateRange | null>(null);
+
+<CalendarRange value={range} onChange={setRange} />
+
+<CalendarRange minRange={2} maxRange={5} value={range} onChange={setRange} />
+```
+
+Start/end date-range selection on the same grid engine as `Calendar` —
+month/year drill-down, `min`/`max`, week numbers — via `CalendarBase`, the
+shared engine `Calendar` extracted once this component actually needed it
+rather than adding the split ahead of need.
+
+The first tap anchors the range; the second commits it, so `onChange` only
+ever fires with **both** ends filled in. Tapping backwards is fine — the
+pair is ordered before it's emitted.
+
+**No live drag-preview band, unlike the web version.** The web
+`CalendarRange` grows the band under the mouse/keyboard focus between the
+two clicks; RN has no hover, and this package's whole keyboard layer is
+already dropped (see `Calendar`'s own doc comment above), so there's no
+signal to preview against. Rather than reach for a `PanResponder` drag
+gesture — a materially bigger feature the web version doesn't even have,
+since it's mouse-hover, not drag — the anchor day just shows as a normal
+selected day until the second tap lands and the full band appears at once,
+the same strict-touch-subset trade-off `RatingStars`/`ToggleGroup`/
+`Calendar` itself already made for other dropped hover/keyboard affordances.
+
+The range band has no CSS `::before`/pseudo-element or `color-mix()` to
+lean on in RN — it's an absolutely-positioned `View` behind each day's
+button, bleeding half the cell's own padding into its neighbor via a
+negative inset (the JS-math equivalent of the web CSS's
+`inset-inline: calc(gap/-2)` bleed) so consecutive in-range days read as one
+continuous stripe under the round day buttons; end caps skip the bleed on
+their outer side and round that corner instead, so a single-day range
+composes into a full pill from the same two conditionals rather than a
+separate case. Tint alpha uses the `#RRGGBBAA` hex-suffix substitution
+`Blockquote`/`Chip` already established for the web's `color-mix()`.
 
 ### DatePicker
 

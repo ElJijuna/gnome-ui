@@ -109,6 +109,7 @@ export const COMPONENT_NAMES = [
   'SparkBulletChart',
   'BoxPlot',
   'Calendar',
+  'CalendarRange',
   'DatePicker',
   'TimePicker',
 ] as const;

@@ -23,6 +23,7 @@ import { BulletChartScreen } from './screens/BulletChartScreen';
 import { ButtonContentScreen } from './screens/ButtonContentScreen';
 import { ButtonRowScreen } from './screens/ButtonRowScreen';
 import { ButtonScreen } from './screens/ButtonScreen';
+import { CalendarRangeScreen } from './screens/CalendarRangeScreen';
 import { CalendarScreen } from './screens/CalendarScreen';
 import { CalloutScreen } from './screens/CalloutScreen';
 import { CardScreen } from './screens/CardScreen';
@@ -180,6 +181,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   TagInput: TagInputScreen,
   ColorPicker: ColorPickerScreen,
   Calendar: CalendarScreen,
+  CalendarRange: CalendarRangeScreen,
   DatePicker: DatePickerScreen,
   TimePicker: TimePickerScreen,
   Bin: BinScreen,
