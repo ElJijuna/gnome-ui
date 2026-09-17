@@ -145,6 +145,7 @@ const DESCRIPTIONS: Record<ComponentName, string> = {
   Calendar: 'Month-grid date picker — tap-to-select, min/max, day/month/year drill-down',
   DatePicker:
     'Popover-anchored Calendar behind a text-entry trigger, with an optional showTime footer',
+  TimePicker: 'Paired hour/minute SpinButton columns behind a text-entry trigger, 12- or 24-hour',
 };
 
 type CategoryKey =
@@ -195,6 +196,7 @@ const CATEGORY_OF: Record<ComponentName, CategoryKey> = {
   ColorPicker: 'forms',
   Calendar: 'forms',
   DatePicker: 'forms',
+  TimePicker: 'forms',
   ComboRow: 'forms',
   SpinRow: 'forms',
   TagInput: 'forms',

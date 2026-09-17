@@ -104,6 +104,7 @@ import { TagInputScreen } from './screens/TagInputScreen';
 import { TextFieldScreen } from './screens/TextFieldScreen';
 import { TextScreen } from './screens/TextScreen';
 import { TimelineScreen } from './screens/TimelineScreen';
+import { TimePickerScreen } from './screens/TimePickerScreen';
 import { ToastScreen } from './screens/ToastScreen';
 import { ToggleGroupScreen } from './screens/ToggleGroupScreen';
 import { ToolbarScreen } from './screens/ToolbarScreen';
@@ -180,6 +181,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   ColorPicker: ColorPickerScreen,
   Calendar: CalendarScreen,
   DatePicker: DatePickerScreen,
+  TimePicker: TimePickerScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,
   ButtonContent: ButtonContentScreen,

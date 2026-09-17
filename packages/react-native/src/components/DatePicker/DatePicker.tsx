@@ -9,10 +9,9 @@ import type { WeekStart } from '@/components/Calendar/calendarUtils';
 import { Icon } from '@/components/Icon';
 import { Popover, type PopoverPlacement } from '@/components/Popover';
 import { Text } from '@/components/Text';
+import { TimeFields } from '@/components/TimePicker/TimeFields';
+import { mergeDateAndTime, type TimeValue, timeOf } from '@/components/TimePicker/timeUtils';
 import { useDateTimeFormatter, useGnomeTheme } from '@/GnomeProvider';
-
-import { TimeFields } from './TimeFields';
-import { mergeDateAndTime, type TimeValue, timeOf } from './timeUtils';
 
 export interface DatePickerProps {
   /** Controlled selected date. Pass `null` for "no selection". */

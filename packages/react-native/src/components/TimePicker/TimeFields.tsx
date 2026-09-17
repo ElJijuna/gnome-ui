@@ -36,9 +36,10 @@ export interface TimeFieldsProps {
  * reading `SpinButton.tsx` before wiring this up, no new prop needed for the
  * AM/PM column's "numeric spinner whose `format` maps 0/1 to text" trick).
  *
- * **Not exported from the package**: `TimePicker` (Tier 20, still unbuilt)
- * is this module's intended public face, the same "shared piece built by
- * its first real consumer" precedent `IconButton` set for `Drawer`'s `rail`.
+ * **Not exported from the package**: `TimePicker` is this module's public
+ * face; `DatePicker`'s `showTime` footer imports it directly via
+ * `@/components/TimePicker/TimeFields`, the same cross-folder internal
+ * import `Calendar/calendarUtils.ts`'s `WeekStart` already established.
  */
 export const TimeFields = ({
   value,

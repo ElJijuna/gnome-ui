@@ -3116,11 +3116,13 @@ immediately otherwise, ported as plain state logic from the web version's
 
 **`showTime` brought its own dependency.** The web `TimePicker`'s
 `TimeFields`/`timeUtils.ts` (hour/minute/AM-PM `SpinButton` columns plus
-pure 12/24-hour math) ported into `DatePicker`'s own folder as an internal,
-non-exported module — `TimePicker` itself (still unbuilt) is its intended
-public home, the same "shared piece built by its first real consumer"
-precedent `IconButton` set for `Drawer`'s `rail`. `timeUtils.ts` ports
-verbatim (zero DOM dependency already), and `TimeFields` rebuilds on this
+pure 12/24-hour math) first ported into `DatePicker`'s own folder as an
+internal, non-exported module, the same "shared piece built by its first
+real consumer" precedent `IconButton` set for `Drawer`'s `rail` — since
+relocated to `TimePicker`'s own folder now that it's shipped (see below),
+with `DatePicker` importing it from there instead of carrying its own copy.
+`timeUtils.ts` ports verbatim (zero DOM dependency already), and
+`TimeFields` rebuilds on this
 package's own `SpinButton` (Tier 5) — its `wrap` boolean and
 `format: (n: number) => string` callback already cover the AM/PM column's
 "numeric spinner whose `format` maps 0/1 to text" trick with no new prop
@@ -3136,6 +3138,38 @@ confirmed by reading `Popover.tsx` first) raises the cap to 420 dp for
 `showTime`, and the footer row itself is `flexWrap: 'wrap'` so the Done
 button drops to its own line instead of clipping or forcing horizontal
 scroll.
+
+### TimePicker
+
+```tsx
+import { TimePicker } from '@gnome-ui/react-native';
+
+const [value, setValue] = useState<{ hours: number; minutes: number } | null>(null);
+
+<TimePicker label="Time" value={value} onChange={setValue} />
+
+<TimePicker label="Reminder" hourCycle={12} value={value} onChange={setValue} />
+```
+
+Paired hour/minute `SpinButton` columns behind the same bordered/dimmed-
+placeholder/trailing-icon trigger style `DatePicker` established — mirrors
+the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time
+entry, with 12- and 24-hour support.
+
+`TimeFields`/`timeUtils.ts` — the hour/minute/AM-PM `SpinButton` columns and
+their pure 12/24-hour math — live here now, relocated out of `DatePicker`'s
+folder once this component gave them a real public home; `DatePicker`'s
+`showTime` footer imports them from here instead of carrying its own copy.
+
+Unlike `DatePicker`'s `showTime` footer, there's no Done button: with no
+calendar-day tap to disambiguate from a close, each `SpinButton` column
+commits live via `onChange`, and the popover only closes by tapping outside
+or the trigger again — the same convention `Dropdown` already established.
+Formatting uses `hour`/`minute` `Intl.DateTimeFormat` component options
+(`{hour: '2-digit', minute: '2-digit', hourCycle}`) rather than `DatePicker`'s
+`dateStyle`+`timeStyle` pairing, since there's no date to render — ported
+straight from the web version's own formatter call, still routed through
+`GnomeProvider`'s `useDateTimeFormatter` for locale consistency.
 
 ## Installation
 

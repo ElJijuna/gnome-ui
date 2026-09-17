@@ -1,12 +1,11 @@
 /**
- * Pure time helpers for `DatePicker`'s `showTime` footer (`TimeFields`).
- * Ported verbatim from `@gnome-ui/react`'s `TimePicker/timeUtils.ts` — no DOM
- * dependency there already, the same `calendarUtils.ts` precedent.
+ * Pure time helpers shared by `TimePicker` and `DatePicker`'s `showTime`
+ * footer. Ported verbatim from `@gnome-ui/react`'s `TimePicker/timeUtils.ts`
+ * — no DOM dependency there already, the same `calendarUtils.ts` precedent.
  *
- * Internal to `DatePicker` for now: `TimePicker` itself (Tier 20, still
- * unbuilt) is this module's eventual public home, the same "shared piece
- * built by its first real consumer" precedent `IconButton` set for
- * `Drawer`'s `rail`. Not exported from the package barrel.
+ * Not exported from the package barrel — `DatePicker` imports it directly
+ * via `@/components/TimePicker/timeUtils`, the same cross-folder internal
+ * import `Calendar/calendarUtils.ts`'s `WeekStart` already established.
  */
 
 /** A wall-clock time, in 24-hour terms. */

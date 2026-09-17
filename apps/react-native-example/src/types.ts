@@ -110,6 +110,7 @@ export const COMPONENT_NAMES = [
   'BoxPlot',
   'Calendar',
   'DatePicker',
+  'TimePicker',
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
