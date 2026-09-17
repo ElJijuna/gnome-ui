@@ -36,6 +36,7 @@ import { ColorPickerScreen } from './screens/ColorPickerScreen';
 import { ComboRowScreen } from './screens/ComboRowScreen';
 import { ComposedChartScreen } from './screens/ComposedChartScreen';
 import { CopyButtonScreen } from './screens/CopyButtonScreen';
+import { DatePickerScreen } from './screens/DatePickerScreen';
 import { DialogScreen } from './screens/DialogScreen';
 import { DividerScreen } from './screens/DividerScreen';
 import { DrawerScreen } from './screens/DrawerScreen';
@@ -178,6 +179,7 @@ const SCREENS: Record<ComponentName, ComponentType> = {
   TagInput: TagInputScreen,
   ColorPicker: ColorPickerScreen,
   Calendar: CalendarScreen,
+  DatePicker: DatePickerScreen,
   Bin: BinScreen,
   Blockquote: BlockquoteScreen,
   ButtonContent: ButtonContentScreen,

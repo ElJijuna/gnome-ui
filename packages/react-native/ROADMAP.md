@@ -328,13 +328,15 @@ components rather than as two-line `StatusPage` usages.
 ### Molecules
 
 > `Calendar` shipped — `DatePicker`/`TimePicker`/`CalendarRange` are now
-> unblocked (still unbuilt, picking any up is its own turn).
+> unblocked (still unbuilt, picking any up is its own turn). `DatePicker`
+> has since shipped too, unblocking `DateRangePicker`'s other half
+> (`CalendarRange`, still unbuilt).
 
 | Status | Component | Notes |
 |--------|-----------|-------|
 | ✅ | **Calendar** | Shipped — day/month/year drill-down grid, ported from `@gnome-ui/react`'s `Calendar`+`CalendarBase`+`calendarUtils.ts`. `calendarUtils.ts` (`startOfDay`/`addMonths`/`getCalendarWeeks`/`isoWeekNumber`/`isOutOfRange`/…) ports verbatim — zero DOM dependency on the web side already, the same `fileType.ts`/`coachMarkUtils.ts` precedent; `fromISODateKey` is the one helper dropped, since it exists only to decode the web version's delegated `onMouseOver` hover-preview listener, which has no touch equivalent. **The entire keyboard layer drops**, as this file's own note predicted — roving tabindex, arrow keys, PageUp/Down, Home/End all gone, replaced by plain tap-to-select on every cell; unlike `Slider`'s 1D `accessibilityRole="adjustable"` escape hatch, a full 2D date grid has no screen-reader analog to fall back to, so tap is the strict touch subset of the web interaction (the `RatingStars`/`ToggleGroup` trade-off). `role="grid"`/`"row"` port 1:1 from RN's `Role` union; `"gridcell"` isn't in that union, so cells fall back to `"cell"` (the `BoxedList`/`ComboRow` substitution pattern). Grid/row containers skip `accessible` (the `ToggleGroup`-corrected pattern, many independently-focusable day cells); day-name/week-number headers, holding no interactive children, do set it. `visibleMonths` (side-by-side panels) and `autoFocus` (keyboard-focus-on-mount) are dropped outright rather than approximated — both are desktop/keyboard concerns with no honest phone-width or no-keyboard counterpart; `locale` is dropped too, in favor of `GnomeProvider`'s app-wide `useDateTimeFormatter` — **this is the first component in the package to seriously exercise that hook**, and it held up fine for every weekday/month/year combination needed (confirmed by reading its `useMemo`-over-`options` implementation before use, then hoisting every `Intl.DateTimeFormatOptions` object to module scope so the memo's identity check actually holds across renders instead of rebuilding a formatter every render). No `CalendarBase` split was added ahead of need — `CalendarRange` (still unbuilt) will extract one when it actually exists. Day/drill-down cells are equal-width flex rows (7 columns for days matching `getCalendarWeeks`'s fixed 6-row output, 4 columns for the 12-cell month/year grids), not a CSS Grid port — confirmed correct on the iOS Simulator (min/max disabling, outside-month dimming, today's ring, week numbers, Sunday-first weeks, and the no-heading fixed-month mode all screenshotted clean on the first pass, no on-device bug found this time) |
-| ⬜ | **DatePicker** | Unblocked now that both `Popover` (Tier 5) and `Calendar` have shipped — `TextField` trigger + `Popover`-anchored `Calendar` |
-| ⬜ | **TimePicker** | Paired `SpinButton` columns in a `Popover` — unblocked, all pieces exist |
+| ✅ | **DatePicker** | Shipped — `Popover`-anchored `Calendar` behind a text-entry-styled trigger, composed entirely from already-shipped pieces (`Popover` Tier 5, `Calendar` this same tier): no new position-computation code, per this file's own standing pitfall about not reinventing `Popover`/`Dropdown`'s already-shipped trigger-rect + panel-size positioning. The trigger is a plain themed `Pressable` styled like `Dropdown`'s own text-entry-look trigger (bordered row, dimmed placeholder, trailing icon) rather than a literal `TextField` composition — a `TextField` wraps a real `TextInput`, which this trigger never wants (it's a button, not an editable field), so the ROADMAP note's "`TextField` trigger" phrasing turned out to describe the *visual* target, not the actual component to reuse. `locale`/`formatOptions` are dropped in favor of `GnomeProvider`'s app-wide `useDateTimeFormatter`, following `Calendar`'s own just-shipped convention — confirmed by reading the hook before relying on it that `{...dateTimeFormat, ...options}` already expresses `dateStyle`+`timeStyle`+`hourCycle` together, so three module-scope option objects (date-only, 24-hour, 12-hour) cover every `showTime`/`hourCycle` combination without needing an arbitrary caller-supplied `formatOptions` escape hatch. The web version's entire keyboard layer drops (no `ArrowDown`-opens, no `Enter`/`Space`) and `Calendar`'s own already-dropped `autoFocus` is correctly never wired here either. `showTime`'s day-pick-keeps-popover-open-until-Done branch ports as plain state logic verbatim from the web `handleSelect`, no web-only API involved. **`showTime` brought its own dependency**: `TimeFields`/`timeUtils.ts` (the web `TimePicker`'s SpinButton-columns half) ported into `DatePicker`'s own folder as an internal, non-exported module — `TimePicker` itself (still unbuilt) is its intended public home, the same "shared piece built by its first real consumer" precedent `IconButton` set for `Drawer`'s `rail`. `timeUtils.ts` (`pad2`/`to12`/`to24`/`timeOf`/`mergeDateAndTime`) ports verbatim, zero DOM dependency on the web side already. `TimeFields` rebuilds on this package's own `SpinButton` (Tier 5), confirmed by reading `SpinButton.tsx` before wiring it up that its `wrap` boolean and `format: (n: number) => string` callback already exist and need no new prop for the AM/PM column's "numeric spinner whose `format` maps 0/1 to text" trick. **Real sizing issue found, not guessed past**: `SpinButton` has a fixed per-column minimum width (two 36 dp buttons plus a 56 dp value `Text`, ~130 dp), so a 12-hour row of three columns (hours/minutes/AM-PM) can approach or exceed a narrow phone's screen width even after widening the popover past its default 320 dp cap — `Popover`'s own `panelStyle` prop (not a `panelClassName` string the way the web version's CSS-module trigger works — confirmed by reading `Popover.tsx` first) raises the cap to 420 dp for `showTime`, and the footer row itself is `flexWrap: 'wrap'` so the Done button drops to its own line rather than clipping or forcing horizontal scroll. Confirmed on the iOS Simulator across closed/open, a day selected, and both `showTime` clocks |
+| ⬜ | **TimePicker** | Paired `SpinButton` columns in a `Popover` — unblocked, all pieces exist. `DatePicker`'s `showTime` footer already ported the `TimeFields`/`timeUtils.ts` half internally (`DatePicker/TimeFields.tsx`, not exported from the package) — building this component is now mostly relocating/re-exporting that module behind its own `Popover` trigger, not writing the SpinButton-columns logic from scratch |
 | ⬜ | **CalendarRange** | Shares `Calendar`'s grid engine — unblocked now that `Calendar` has shipped; still worth extracting a `CalendarBase`-equivalent split rather than duplicating the grid |
 | ⬜ | **DateRangePicker** | `Popover` + `CalendarRange` composition — blocked on `CalendarRange` |
 | ⬜ | **FontPicker** | Unblocked now that `Popover`+`Dropdown`+`SpinButton` all exist — thin glue composition |
@@ -524,8 +526,10 @@ package.
   shipped); all of Tier 12's row composites;
   Tier 14's remaining `NavigationView`/`Carousel`; most of Tier 20's
   remaining atoms, plus the `Popover`-unblocked molecule cluster
-  (`DatePicker`/`TimePicker`/`FontPicker`/`EmojiPicker`/`CoachMark`, now that
-  `Calendar` has shipped for the first two).
+  (`TimePicker`/`FontPicker`/`EmojiPicker`, now that `Calendar` and
+  `DatePicker` have both shipped — `TimePicker` in particular can mostly
+  relocate `DatePicker`'s already-ported internal `TimeFields`/`timeUtils.ts`
+  rather than start from scratch).
 - **Open follow-up (`ViewSwitcher`, found 2026-09-06 while building
   `ToggleGroup`)**: `ViewSwitcher`'s container sets `accessible` alongside
   `accessibilityRole="radiogroup"`. On iOS that collapses the whole subtree
@@ -581,6 +585,14 @@ package.
   `CalendarRange`/`DateRangePicker` cluster this file has been flagging as
   blocked on it since Tier 20 was first drafted — none of those four were
   picked up in this same turn, only `Calendar` itself.
+- **`DatePicker` shipped (Tier 20 molecule)**: see its own row above for the
+  full design writeup. Picked up the same turn `Calendar` unblocked it, and
+  ported `TimeFields`/`timeUtils.ts` from the web `TimePicker` along the way
+  (internal to `DatePicker`'s own folder, not exported) since `showTime` needs
+  it and nothing blocks porting it early — the same "shared piece built by
+  its first real consumer" precedent `IconButton` set for `Drawer`'s `rail`.
+  `TimePicker` itself and `CalendarRange`/`DateRangePicker` remain unbuilt;
+  none of those three were picked up in this same turn.
 
 Per-component process for anything picked up from this file: read the
 `@gnome-ui/react` source first, design the RN API deliberately rather than

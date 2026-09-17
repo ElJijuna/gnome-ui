@@ -3067,6 +3067,76 @@ No `CalendarBase` split was extracted ahead of need — `CalendarRange`
 it actually exists, rather than this component carrying unused abstraction
 for it now.
 
+### DatePicker
+
+```tsx
+import { DatePicker } from '@gnome-ui/react-native';
+
+const [value, setValue] = useState<Date | null>(null);
+
+<DatePicker label="Date" value={value} onChange={setValue} />
+
+<DatePicker
+  label="Meeting time"
+  showTime
+  hourCycle={12}
+  value={value}
+  onChange={setValue}
+/>
+```
+
+A `Popover`-anchored `Calendar` behind a text-entry-styled trigger, mirroring
+the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry.
+Composed entirely from this package's own already-shipped pieces —
+`Popover` (Tier 5) and `Calendar` (Tier 20) — rather than reinventing any
+position-computation code, per this package's standing pitfall about not
+re-deriving `Popover`/`Dropdown`'s already-shipped trigger-rect + panel-size
+positioning.
+
+The trigger is a plain themed `Pressable` styled like `Dropdown`'s own
+text-entry-look trigger (bordered row, dimmed placeholder, trailing
+`XOfficeCalendar` icon) rather than a literal `TextField` composition — a
+`TextField` wraps a real editable `TextInput`, which a date-picker trigger
+never wants (it opens a panel, it doesn't accept typed text).
+`locale`/`formatOptions` are dropped in favor of `GnomeProvider`'s app-wide
+`useDateTimeFormatter`, the same convention `Calendar` itself just
+established: reading the hook's own `{...dateTimeFormat, ...options}` merge
+confirmed it already expresses `dateStyle`+`timeStyle`+`hourCycle` together,
+so three fixed, module-scope option objects (date-only, 24-hour, 12-hour)
+cover every `showTime`/`hourCycle` combination without needing an arbitrary
+caller-supplied `formatOptions` escape hatch. The web version's entire
+keyboard layer drops (no `ArrowDown`-opens-the-popover, no `Enter`/`Space`
+on the trigger), and `Calendar`'s own already-dropped `autoFocus` prop is
+correctly never wired here either.
+
+Picking a day keeps the popover open when `showTime` is on — only the Done
+button closes it, so the time columns stay reachable — and closes it
+immediately otherwise, ported as plain state logic from the web version's
+`handleSelect`, no web-only API involved.
+
+**`showTime` brought its own dependency.** The web `TimePicker`'s
+`TimeFields`/`timeUtils.ts` (hour/minute/AM-PM `SpinButton` columns plus
+pure 12/24-hour math) ported into `DatePicker`'s own folder as an internal,
+non-exported module — `TimePicker` itself (still unbuilt) is its intended
+public home, the same "shared piece built by its first real consumer"
+precedent `IconButton` set for `Drawer`'s `rail`. `timeUtils.ts` ports
+verbatim (zero DOM dependency already), and `TimeFields` rebuilds on this
+package's own `SpinButton` (Tier 5) — its `wrap` boolean and
+`format: (n: number) => string` callback already cover the AM/PM column's
+"numeric spinner whose `format` maps 0/1 to text" trick with no new prop
+needed, confirmed by reading `SpinButton.tsx` before wiring it up.
+
+`SpinButton` has a fixed per-column minimum width (two 36 dp buttons plus a
+56 dp value `Text`, ~130 dp), so a 12-hour row of three columns
+(hours/minutes/AM-PM) can approach or exceed a narrow phone's screen width
+even after widening the popover panel past its default 320 dp cap —
+`Popover`'s own `panelStyle` prop (a `StyleProp<ViewStyle>`, not a
+`panelClassName` string the way the web version's CSS-module trigger works;
+confirmed by reading `Popover.tsx` first) raises the cap to 420 dp for
+`showTime`, and the footer row itself is `flexWrap: 'wrap'` so the Done
+button drops to its own line instead of clipping or forcing horizontal
+scroll.
+
 ## Installation
 
 ```bash

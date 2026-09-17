@@ -26,6 +26,7 @@ export * from './components/CoachMark';
 export * from './components/ColorPicker';
 export * from './components/ComboRow';
 export * from './components/CopyButton';
+export * from './components/DatePicker';
 export * from './components/Dialog';
 export * from './components/Divider';
 export * from './components/Drawer';
