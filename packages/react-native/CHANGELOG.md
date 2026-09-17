@@ -1,3 +1,14 @@
+## [@gnome-ui/react-native-v1.13.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.12.0...@gnome-ui/react-native@1.13.0) (2026-09-17)
+
+### Features
+
+* **@gnome-ui/react-native-charts:** add package @gnome-ui/react-native-charts → data visualization for React Native, built on Victory Native/Skia, starting with LineChart ([29ba6bf](https://github.com/ElJijuna/gnome-ui/commit/29ba6bf567efadca993292399330795a13019d29))
+* **@gnome-ui/react-native:** add Calendar component with demo, tests, and documentation ([79ca34e](https://github.com/ElJijuna/gnome-ui/commit/79ca34e40cbd30440239ca4b13cdbfd98cd90276))
+* **@gnome-ui/react-native:** add CalendarRange component with demo, tests, and documentation ([8164f2c](https://github.com/ElJijuna/gnome-ui/commit/8164f2c50a8aefcb8861165dbfb96116d89d9f53))
+* **@gnome-ui/react-native:** add DatePicker component with demo, tests, and documentation ([dc51a04](https://github.com/ElJijuna/gnome-ui/commit/dc51a04e28ad325d9e4addebe8e175a67c119b3c))
+* **@gnome-ui/react-native:** add TimeFields component and time utility functions ([0823f4a](https://github.com/ElJijuna/gnome-ui/commit/0823f4a92f413d8e24c771c751e299b225e2162d))
+* **@gnome-ui/react-native:** add TimePicker component with demo, tests, and documentation ([94d4cc5](https://github.com/ElJijuna/gnome-ui/commit/94d4cc5a1ed7368427633b9d4a72757ae42a6413))
+
 ## [@gnome-ui/react-native-v1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.11.0...@gnome-ui/react-native@1.12.0) (2026-09-13)
 
 ### Features
