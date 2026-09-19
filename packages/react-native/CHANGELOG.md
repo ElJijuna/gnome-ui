@@ -1,3 +1,9 @@
+## [@gnome-ui/react-native-v1.14.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.13.0...@gnome-ui/react-native@1.14.0) (2026-09-19)
+
+### Features
+
+* **@gnome-ui/react-native:** add push variant to Drawer component with corresponding demo and tests ([b083313](https://github.com/ElJijuna/gnome-ui/commit/b083313728ffd2de1f3806bb68332a0fef5aa7f0))
+
 ## [@gnome-ui/react-native-v1.13.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react-native@1.12.0...@gnome-ui/react-native@1.13.0) (2026-09-17)
 
 ### Features
