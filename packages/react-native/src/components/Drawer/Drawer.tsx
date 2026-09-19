@@ -14,6 +14,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export type DrawerSide = 'left' | 'right';
 export type DrawerSize = 'classic' | 'wide';
+export type DrawerVariant = 'overlay' | 'push';
 
 export interface DrawerRailItem {
   /** Stable unique identifier. */
@@ -35,6 +36,16 @@ export interface DrawerProps {
   side?: DrawerSide;
   /** Preset drawer width. Defaults to `"classic"`. */
   size?: DrawerSize;
+  /**
+   * How the drawer displaces the page. `"overlay"` (default) floats above
+   * everything in a native `Modal` behind a dismissible backdrop. `"push"`
+   * renders in place instead — a plain animated `View` with no `Modal`, no
+   * backdrop, and no hardware-back interception, since the rest of the
+   * screen stays visible and interactive. Place it next to your main
+   * content inside a `flexDirection: 'row'` container and it shoulders
+   * that content aside as it opens.
+   */
+  variant?: DrawerVariant;
   /** Optional drawer heading. */
   title?: ReactNode;
   /** Drawer content when a prop is preferred over `children`. */
@@ -132,12 +143,21 @@ const DRAWER_MIN_WIDTH = 240;
  * `Sidebar`'s blurred `variant`/`BottomSheet`'s backdrop. `role="dialog"` +
  * `accessibilityViewIsModal` port 1:1 from `Dialog`'s own precedent.
  *
+ * **`variant="push"` skips `Modal` entirely** — a plain `Animated.View`
+ * whose `width` (not `translateX`) animates from `0` up to `drawerWidth`,
+ * so it has to sit inline next to the screen's main content (inside a
+ * `flexDirection: 'row'` container) to visibly push that content aside.
+ * No backdrop, no hardware-back interception, and `accessibilityViewIsModal`
+ * is omitted — the rest of the screen stays visible and interactive, the
+ * same non-modal contract as the web port's `"push"` variant.
+ *
  * @see https://developer.gnome.org/hig/patterns/containers.html
  */
 export const Drawer = ({
   open,
   side = 'right',
   size = 'classic',
+  variant = 'overlay',
   title,
   content,
   children,
@@ -153,13 +173,16 @@ export const Drawer = ({
   const depth = useContext(DrawerDepthContext);
 
   const body = content !== undefined ? content : children;
+  const isPush = variant === 'push';
 
   const presetWidth = DRAWER_PRESET_WIDTH[size];
   const scaledWidth =
     depth > 0
       ? Math.max(DRAWER_MIN_WIDTH, Math.round(presetWidth * DRAWER_DEPTH_SCALE ** depth))
       : presetWidth;
-  const maxAvailableWidth = Dimensions.get('window').width - theme.space3 * 2;
+  const maxAvailableWidth = isPush
+    ? Dimensions.get('window').width
+    : Dimensions.get('window').width - theme.space3 * 2;
   const drawerWidth = Math.min(scaledWidth, maxAvailableWidth);
 
   const progress = useRef(new Animated.Value(reducedMotion ? 1 : 0)).current;
@@ -183,12 +206,12 @@ export const Drawer = ({
       toValue: 1,
       duration: theme.durationNormal,
       easing: Easing.bezier(x1, y1, x2, y2),
-      useNativeDriver: true,
+      useNativeDriver: !isPush,
     }).start();
-  }, [open, reducedMotion, progress, theme.durationNormal, theme.easingDefault]);
+  }, [open, reducedMotion, progress, theme.durationNormal, theme.easingDefault, isPush]);
 
   useEffect(() => {
-    if (!open) {
+    if (!open || isPush) {
       return;
     }
 
@@ -199,10 +222,11 @@ export const Drawer = ({
     });
 
     return () => subscription.remove();
-  }, [open, onClose]);
+  }, [open, onClose, isPush]);
 
   const offset = side === 'left' ? -drawerWidth : drawerWidth;
   const translateX = progress.interpolate({ inputRange: [0, 1], outputRange: [offset, 0] });
+  const pushWidth = progress.interpolate({ inputRange: [0, 1], outputRange: [0, drawerWidth] });
 
   const shadow =
     scheme === 'dark'
@@ -238,6 +262,86 @@ export const Drawer = ({
         ))}
       </View>
     ) : null;
+
+  if (isPush && !open) {
+    return null;
+  }
+
+  const panel = (
+    <View style={{ flex: 1, minWidth: 0 }}>
+      {title && (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: theme.space2,
+            padding: theme.space4,
+            paddingBottom: theme.space2,
+          }}
+        >
+          <Text
+            variant="title-4"
+            style={{
+              flex: 1,
+              fontWeight: String(theme.fontWeightBold) as TextStyle['fontWeight'],
+            }}
+          >
+            {title}
+          </Text>
+          {onClose && (
+            <Button
+              variant="flat"
+              shape="circular"
+              size="sm"
+              accessibilityLabel="Close"
+              onPress={onClose}
+            >
+              <Icon icon={Close} size="sm" />
+            </Button>
+          )}
+        </View>
+      )}
+
+      {body !== undefined && (
+        <View
+          style={{
+            flex: 1,
+            padding: theme.space4,
+            paddingTop: title ? 0 : theme.space4,
+          }}
+        >
+          <DrawerDepthContext.Provider value={depth + 1}>
+            {typeof body === 'string' ? <Text variant="body">{body}</Text> : body}
+          </DrawerDepthContext.Provider>
+        </View>
+      )}
+    </View>
+  );
+
+  if (isPush) {
+    return (
+      <Animated.View
+        testID={testID}
+        accessible
+        role="dialog"
+        style={[
+          {
+            flexDirection: 'row',
+            overflow: 'hidden',
+            width: pushWidth,
+            backgroundColor: theme.dialogBgColor,
+            [side === 'left' ? 'borderRightWidth' : 'borderLeftWidth']: 1,
+            borderColor: theme.cardShadeColor,
+          },
+          style,
+        ]}
+      >
+        {side === 'right' && rail_}
+        {panel}
+        {side === 'left' && rail_}
+      </Animated.View>
+    );
+  }
 
   return (
     <Modal
@@ -281,56 +385,7 @@ export const Drawer = ({
             ]}
           >
             {side === 'right' && rail_}
-
-            <View style={{ flex: 1, minWidth: 0 }}>
-              {title && (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: theme.space2,
-                    padding: theme.space4,
-                    paddingBottom: theme.space2,
-                  }}
-                >
-                  <Text
-                    variant="title-4"
-                    style={{
-                      flex: 1,
-                      fontWeight: String(theme.fontWeightBold) as TextStyle['fontWeight'],
-                    }}
-                  >
-                    {title}
-                  </Text>
-                  {onClose && (
-                    <Button
-                      variant="flat"
-                      shape="circular"
-                      size="sm"
-                      accessibilityLabel="Close"
-                      onPress={onClose}
-                    >
-                      <Icon icon={Close} size="sm" />
-                    </Button>
-                  )}
-                </View>
-              )}
-
-              {body !== undefined && (
-                <View
-                  style={{
-                    flex: 1,
-                    padding: theme.space4,
-                    paddingTop: title ? 0 : theme.space4,
-                  }}
-                >
-                  <DrawerDepthContext.Provider value={depth + 1}>
-                    {typeof body === 'string' ? <Text variant="body">{body}</Text> : body}
-                  </DrawerDepthContext.Provider>
-                </View>
-              )}
-            </View>
-
+            {panel}
             {side === 'left' && rail_}
           </Animated.View>
         </Pressable>

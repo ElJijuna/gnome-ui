@@ -92,6 +92,32 @@ describe('Drawer', () => {
     expect(childWidth).toBe(357);
   });
 
+  it('renders push variant inline with no backdrop testID and no Modal wrapper', async () => {
+    await render(
+      <GnomeProvider colorScheme="light">
+        <Drawer open variant="push" testID="push-drawer">
+          <Text>Push content</Text>
+        </Drawer>
+      </GnomeProvider>,
+    );
+
+    expect(screen.getByRole('dialog')).toBeOnTheScreen();
+    expect(screen.getByText('Push content')).toBeOnTheScreen();
+    expect(screen.queryByTestId('push-drawer')).not.toBeNull();
+  });
+
+  it('does not render push variant when closed', async () => {
+    await render(
+      <GnomeProvider colorScheme="light">
+        <Drawer open={false} variant="push">
+          <Text>Hidden</Text>
+        </Drawer>
+      </GnomeProvider>,
+    );
+
+    expect(screen.queryByText('Hidden')).not.toBeOnTheScreen();
+  });
+
   it('renders a rail with selected state and fires onPress per entry', async () => {
     const onPressA = jest.fn();
     const onPressB = jest.fn();

@@ -63,6 +63,27 @@ const RailDemo = () => {
   );
 };
 
+const PushDemo = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <View style={{ flexDirection: 'row', height: 220, borderWidth: 1, borderColor: '#deddda' }}>
+      <View style={{ flex: 1, minWidth: 0, padding: 12, gap: 8 }}>
+        <Button onPress={() => setOpen((value) => !value)}>Toggle Drawer</Button>
+        <Text color="dim">
+          This panel is a flex sibling of the drawer, so opening it shrinks this content instead of
+          covering it.
+        </Text>
+      </View>
+      <Drawer variant="push" open={open} title="Details" onClose={() => setOpen(false)}>
+        <Text color="dim">
+          Push drawers render inline with no backdrop and no back-button trap.
+        </Text>
+      </Drawer>
+    </View>
+  );
+};
+
 const NestedDemo = () => {
   const [parentOpen, setParentOpen] = useState(false);
   const [childOpen, setChildOpen] = useState(false);
@@ -118,6 +139,13 @@ export const DrawerScreen = () => {
 
       <Section title="With rail" description="Switch panels without closing the drawer">
         <RailDemo />
+      </Section>
+
+      <Section
+        title="Push mode"
+        description="Shoulders sibling content aside instead of covering it"
+      >
+        <PushDemo />
       </Section>
 
       <Section title="Nested drawers" description="Each level scales its width down">
