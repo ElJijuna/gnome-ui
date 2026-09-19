@@ -2,6 +2,13 @@ Slide-over panel for supplementary React content. Use `side` to open from the
 left or right, `size` for classic or wide widths, and pass the body through
 `children` or the `content` prop.
 
+`variant` controls how the drawer displaces the page. The default
+`"overlay"` floats above the page behind a dismissible, focus-trapping
+backdrop. `"push"` renders in normal document flow instead — no portal, no
+backdrop, no focus trap, since the rest of the page stays visible and
+interactive — so place it next to your main content inside a flex/grid
+container and it shoulders that content aside as it opens.
+
 Opening a second `Drawer` from inside a drawer's content (or `content` prop)
 automatically makes it narrower than its parent — each nesting level scales
 the preset width down until it hits a minimum, so stacked drawers read as a

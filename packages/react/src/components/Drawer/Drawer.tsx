@@ -22,6 +22,7 @@ import styles from './Drawer.module.css';
 
 export type DrawerSide = 'left' | 'right';
 export type DrawerSize = 'classic' | 'wide';
+export type DrawerVariant = 'overlay' | 'push';
 
 export interface DrawerRailItem {
   /** Stable unique identifier. */
@@ -43,6 +44,15 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'conte
   side?: DrawerSide;
   /** Preset drawer width. Defaults to `"classic"`. */
   size?: DrawerSize;
+  /**
+   * How the drawer displaces the page. `"overlay"` (default) floats above
+   * the page behind a dismissible backdrop, trapping focus like a modal.
+   * `"push"` renders in normal document flow instead — place it next to
+   * your main content inside a flex/grid container and it shoulders that
+   * content aside as it opens, with no backdrop and no focus trap, since
+   * the rest of the page stays visible and interactive.
+   */
+  variant?: DrawerVariant;
   /** Optional drawer heading. */
   title?: ReactNode;
   /** Drawer content when a prop is preferred over `children`. */
@@ -72,8 +82,12 @@ const DRAWER_MIN_WIDTH = 240;
 /**
  * Slide-over panel for supplementary content.
  *
- * The drawer is controlled through `open`, renders into `document.body`, and
- * accepts its body as either `content` or `children`.
+ * The drawer is controlled through `open` and accepts its body as either
+ * `content` or `children`. The default `"overlay"` variant renders into
+ * `document.body` behind a dismissible, focus-trapping backdrop. The
+ * `"push"` variant renders in place instead — no portal, no backdrop, no
+ * focus trap — so it must be placed next to the page's main content inside
+ * a flex/grid container to visually push that content aside as it opens.
  *
  * Drawers opened from within another drawer's content are automatically
  * narrower than their parent — each nesting level scales the preset width
@@ -84,6 +98,7 @@ export const Drawer = ({
   open,
   side = 'right',
   size = 'classic',
+  variant = 'overlay',
   title,
   content,
   children,
@@ -100,6 +115,7 @@ export const Drawer = ({
   const viewportStyle = useVisualViewport();
   const body = content !== undefined ? content : children;
   const depth = useContext(DrawerDepthContext);
+  const isPush = variant === 'push';
 
   const presetWidth = DRAWER_PRESET_WIDTH[size];
   const scaledWidth =
@@ -130,13 +146,105 @@ export const Drawer = ({
         return;
       }
 
-      trapFocus(event, drawerRef);
+      if (!isPush) {
+        trapFocus(event, drawerRef);
+      }
     },
-    [onClose],
+    [isPush, onClose],
   );
 
   if (!open) {
     return null;
+  }
+
+  const dialog = (
+    <div
+      ref={drawerRef}
+      role="dialog"
+      aria-modal={isPush ? undefined : true}
+      aria-labelledby={title ? titleId : undefined}
+      data-side={side}
+      data-size={size}
+      data-variant={variant}
+      className={[
+        styles.drawer,
+        side === 'left' ? styles.left : styles.right,
+        size === 'wide' ? styles.wide : styles.classic,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      style={drawerStyle}
+      onKeyDown={handleKeyDown}
+      onClick={(event) => event.stopPropagation()}
+      {...props}
+    >
+      {rail && rail.length > 0 && side === 'right' && (
+        <nav className={styles.rail} aria-label="Drawer navigation">
+          {rail.map((item) => (
+            <IconButton
+              key={item.id}
+              icon={item.icon}
+              label={item.label}
+              tooltip={item.label}
+              tooltipPlacement="left"
+              variant="flat"
+              size="sm"
+              aria-pressed={Boolean(item.active)}
+              disabled={item.disabled}
+              onClick={item.onClick}
+            />
+          ))}
+        </nav>
+      )}
+
+      <div className={styles.panel}>
+        {title && (
+          <div id={titleId} className={styles.title}>
+            <span className={styles.titleText}>{title}</span>
+            {onClose && (
+              <Button
+                variant="flat"
+                shape="circular"
+                size="sm"
+                aria-label="Close"
+                onClick={onClose}
+              >
+                ✕
+              </Button>
+            )}
+          </div>
+        )}
+        {body !== undefined && (
+          <div className={styles.content}>
+            <DrawerDepthContext.Provider value={depth + 1}>{body}</DrawerDepthContext.Provider>
+          </div>
+        )}
+      </div>
+
+      {rail && rail.length > 0 && side === 'left' && (
+        <nav className={styles.rail} aria-label="Drawer navigation">
+          {rail.map((item) => (
+            <IconButton
+              key={item.id}
+              icon={item.icon}
+              label={item.label}
+              tooltip={item.label}
+              tooltipPlacement="right"
+              variant="flat"
+              size="sm"
+              aria-pressed={Boolean(item.active)}
+              disabled={item.disabled}
+              onClick={item.onClick}
+            />
+          ))}
+        </nav>
+      )}
+    </div>
+  );
+
+  if (isPush) {
+    return dialog;
   }
 
   const node = (
@@ -145,88 +253,7 @@ export const Drawer = ({
       style={viewportStyle}
       onClick={closeOnBackdrop ? onClose : undefined}
     >
-      <div
-        ref={drawerRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={title ? titleId : undefined}
-        data-side={side}
-        data-size={size}
-        className={[
-          styles.drawer,
-          side === 'left' ? styles.left : styles.right,
-          size === 'wide' ? styles.wide : styles.classic,
-          className,
-        ]
-          .filter(Boolean)
-          .join(' ')}
-        style={drawerStyle}
-        onKeyDown={handleKeyDown}
-        onClick={(event) => event.stopPropagation()}
-        {...props}
-      >
-        {rail && rail.length > 0 && side === 'right' && (
-          <nav className={styles.rail} aria-label="Drawer navigation">
-            {rail.map((item) => (
-              <IconButton
-                key={item.id}
-                icon={item.icon}
-                label={item.label}
-                tooltip={item.label}
-                tooltipPlacement="left"
-                variant="flat"
-                size="sm"
-                aria-pressed={Boolean(item.active)}
-                disabled={item.disabled}
-                onClick={item.onClick}
-              />
-            ))}
-          </nav>
-        )}
-
-        <div className={styles.panel}>
-          {title && (
-            <div id={titleId} className={styles.title}>
-              <span className={styles.titleText}>{title}</span>
-              {onClose && (
-                <Button
-                  variant="flat"
-                  shape="circular"
-                  size="sm"
-                  aria-label="Close"
-                  onClick={onClose}
-                >
-                  ✕
-                </Button>
-              )}
-            </div>
-          )}
-          {body !== undefined && (
-            <div className={styles.content}>
-              <DrawerDepthContext.Provider value={depth + 1}>{body}</DrawerDepthContext.Provider>
-            </div>
-          )}
-        </div>
-
-        {rail && rail.length > 0 && side === 'left' && (
-          <nav className={styles.rail} aria-label="Drawer navigation">
-            {rail.map((item) => (
-              <IconButton
-                key={item.id}
-                icon={item.icon}
-                label={item.label}
-                tooltip={item.label}
-                tooltipPlacement="right"
-                variant="flat"
-                size="sm"
-                aria-pressed={Boolean(item.active)}
-                disabled={item.disabled}
-                onClick={item.onClick}
-              />
-            ))}
-          </nav>
-        )}
-      </div>
+      {dialog}
     </div>
   );
 

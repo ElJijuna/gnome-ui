@@ -109,6 +109,35 @@
   }
 }
 
+/* ─── Push variant ────────────────────────────────────────────────────────── */
+
+.drawer[data-variant="push"] {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.drawer[data-variant="push"].left {
+  border-right: 1px solid var(--gnome-light-3, #deddda);
+  animation-name: drawer-push-in;
+}
+
+.drawer[data-variant="push"].right {
+  border-left: 1px solid var(--gnome-light-3, #deddda);
+  animation-name: drawer-push-in;
+}
+
+@keyframes drawer-push-in {
+  from {
+    width: 0;
+    min-width: 0;
+  }
+
+  to {
+    width: min(var(--gnome-drawer-width, var(--gnome-drawer-preset-width, 420px)), 100%);
+  }
+}
+
 .title {
   flex-shrink: 0;
   display: flex;
@@ -153,6 +182,14 @@
   }
 
   .drawer[data-side="left"] .rail {
+    border-left-color: rgb(255 255 255 / 0.12);
+  }
+
+  .drawer[data-variant="push"].left {
+    border-right-color: rgb(255 255 255 / 0.12);
+  }
+
+  .drawer[data-variant="push"].right {
     border-left-color: rgb(255 255 255 / 0.12);
   }
 

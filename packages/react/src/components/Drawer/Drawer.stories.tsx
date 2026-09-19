@@ -25,6 +25,7 @@ const meta: Meta<typeof Drawer> = {
     open: { control: 'boolean' },
     side: { control: 'inline-radio', options: ['left', 'right'] },
     size: { control: 'inline-radio', options: ['classic', 'wide'] },
+    variant: { control: 'inline-radio', options: ['overlay', 'push'] },
     title: { control: 'text' },
     closeOnBackdrop: { control: 'boolean' },
   },
@@ -32,6 +33,7 @@ const meta: Meta<typeof Drawer> = {
     open: false,
     side: 'right',
     size: 'classic',
+    variant: 'overlay',
     title: 'Details',
     closeOnBackdrop: true,
   },
@@ -140,6 +142,37 @@ export const WithRail: Story = {
           </Text>
         </Drawer>
       </>
+    );
+  },
+  parameters: { controls: { disable: true } },
+};
+
+export const PushMode: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div style={{ display: 'flex', height: 360, border: '1px solid #deddda' }}>
+        <div style={{ flex: 1, minWidth: 0, padding: 16, overflow: 'auto' }}>
+          <Button onClick={() => setOpen((value) => !value)}>Toggle Drawer</Button>
+          <Text variant="body" color="dim">
+            The drawer below is a flex sibling of this content, so opening it shrinks this panel
+            instead of covering it.
+          </Text>
+        </div>
+        <Drawer
+          variant="push"
+          open={open}
+          side="right"
+          title="Details"
+          onClose={() => setOpen(false)}
+        >
+          <Text variant="body" color="dim">
+            Push drawers render in normal flow with no backdrop and no focus trap — the rest of the
+            page stays interactive while this is open.
+          </Text>
+        </Drawer>
+      </div>
     );
   },
   parameters: { controls: { disable: true } },

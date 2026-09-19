@@ -86,6 +86,43 @@ describe('Drawer', () => {
     expect(childWidth).toBe('357px');
   });
 
+  it('renders push variant in place with no backdrop and no focus trap', () => {
+    render(
+      <div>
+        <Drawer open aria-label="Details" variant="push" onClose={vi.fn()}>
+          <button type="button">First</button>
+          <button type="button">Last</button>
+        </Drawer>
+        <button type="button">Outside</button>
+      </div>,
+    );
+
+    const drawer = screen.getByRole('dialog', { name: 'Details' });
+
+    expect(drawer).toHaveAttribute('data-variant', 'push');
+    expect(drawer).not.toHaveAttribute('aria-modal');
+    expect(drawer.parentElement?.className).not.toMatch(/backdrop/);
+
+    const last = screen.getByRole('button', { name: 'Last' });
+
+    last.focus();
+    fireEvent.keyDown(drawer, { key: 'Tab' });
+    expect(document.activeElement).toBe(last);
+  });
+
+  it('still closes push variant on Escape', () => {
+    const onClose = vi.fn();
+
+    render(
+      <Drawer open aria-label="Details" variant="push" onClose={onClose}>
+        <button type="button">Action</button>
+      </Drawer>,
+    );
+
+    fireEvent.keyDown(screen.getByRole('dialog', { name: 'Details' }), { key: 'Escape' });
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
   it('renders a rail with pressed state and fires onClick per entry', () => {
     const onClickA = vi.fn();
     const onClickB = vi.fn();
