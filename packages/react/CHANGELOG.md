@@ -1,3 +1,9 @@
+## [@gnome-ui/react-v1.68.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.67.0...@gnome-ui/react@1.68.0) (2026-09-19)
+
+### Features
+
+* **@gnome-ui/react:** add push variant to Drawer component with corresponding styles, tests, and documentation ([ddb6b56](https://github.com/ElJijuna/gnome-ui/commit/ddb6b5691add774964b1c232ff7b776a30f63501))
+
 ## [@gnome-ui/react-v1.67.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.66.1...@gnome-ui/react@1.67.0) (2026-09-12)
 
 ### Features
