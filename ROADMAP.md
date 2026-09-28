@@ -397,6 +397,95 @@ React hooks that surface every `@gnome-ui/platform` module as idiomatic React st
 
 ---
 
+## GNOME 51 Updates
+
+> Items identified from GNOME 51 "A Coruña" (released 16 September 2026), which ships
+> **libadwaita 1.10** and **GTK 4.23**. Sources: [Libadwaita 1.10 release notes](https://nyaa.place/blog/libadwaita-1-10/),
+> [What's New for Developers in GNOME 51](https://release.gnome.org/51/developers/),
+> [Introducing GNOME 51](https://release.gnome.org/51/).
+
+### Sidebar — prefix / suffix slots
+
+libadwaita 1.10 lets both sidebar widgets host arbitrary widgets before and after their
+item list (e.g. an account switcher or prominent title at the top, a help button at the
+bottom), and adds extra slots to sections and items.
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **`Sidebar` `prefix` / `suffix` props** | New `prefix?: ReactNode` and `suffix?: ReactNode` rendered above and below the scrollable item list (outside the scroll area, so they stay pinned). Must interact correctly with `searchable` (prefix renders above the search bar), `collapsed` (slots stay visible but should support icon-only content; consumers can read `useSidebarCollapsed`), and `mode="page"` (slots render above/below the boxed list). Mirrors `AdwSidebar:prefix` / `:suffix` |
+| ⬜ | **`ViewSwitcherSidebar` `prefix` / `suffix` props** | Add `prefix` / `suffix` as the libadwaita-aligned names for the existing `header` / `footer` slots. Keep `header` / `footer` as deprecated aliases (JSDoc `@deprecated`) for one major version; `showHeaderSeparator` / `showFooterSeparator` apply to the new names too. Mirrors `AdwViewSwitcherSidebar:prefix` / `:suffix` |
+| ⬜ | **`SidebarSection` `suffix` prop** | Widget rendered at the end of the section header row (e.g. an "add" `IconButton` or a count `Badge`), aligned like `PreferencesGroup`'s `headerSuffix`. Hidden when the sidebar is `collapsed`; must not toggle the section when clicked if the section is `collapsible` (stop propagation) |
+| ⬜ | **`SidebarItem` `prefix` prop** | Arbitrary widget rendered before the label, as an alternative to `icon` (e.g. an `Avatar`, a colour dot, a status indicator). When both `icon` and `prefix` are set, `prefix` wins. In `collapsed` mode the prefix replaces the icon in the rail. Mirrors `AdwSidebarItem:prefix` |
+
+### Dropdown — `.flat` style
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **`Dropdown` `flat` prop** | Borderless, background-less trigger that only shows a hover/active background — mirrors the new `.flat` style class for `GtkDropDown` |
+| ⬜ | **Auto-flat inside toolbars** | `Dropdown` becomes flat automatically when rendered inside `HeaderBar`, `Toolbar` or `ToolbarView` top/bottom bars (via a toolbar context, same mechanism flat buttons use), matching libadwaita's automatic flat styling in toolbars |
+| ⬜ | **`Dropdown` `raised` prop** | Opt-out of the automatic toolbar flat style — mirrors the `.raised` style class override. Also apply to `MultiSelectDropdown` and `FilterableMultiSelectDropdown` for consistency |
+
+### AboutDialog — Other Apps section
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **`AboutDialog` `otherApps` prop** | `otherApps?: { name: string; summary?: string; icon?: ReactNode; url: string }[]` rendered as a boxed list of `ActionRow`s linking to the developer's other applications — the section already exists in `AdwAboutDialog` but is missing here |
+| ⬜ | **`AboutDialog` `otherAppsTitle` prop** | Custom header for the Other Apps section (default: "Other Apps by {developerName}", falling back to "Other Apps"); localisable through the existing labels mechanism. Mirrors the new `AdwAboutDialog:other-apps-title` property |
+
+### Icon weight — lighter large icons
+
+libadwaita 1.10 renders larger icons with a reduced stroke weight so they look visually
+consistent with small icons; `AdwStatusPage` icons and `GtkImage` with `icon-size: large`
+now appear thinner, and `AdwSpinner` respects the `-gtk-icon-weight` CSS property.
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **Icon weight token** | Add `--gnome-icon-weight` (and a large-size variant) to `@gnome-ui/core` tokens; `@gnome-ui/icons` definitions consume it via `stroke-width` / variable-weight rendering where the SVG allows it |
+| ⬜ | **`StatusPage` thinner icon** | Apply the reduced large-icon weight to the `StatusPage` hero icon |
+| ⬜ | **`Icon` `size="large"` weight** | Large `Icon` instances use the lighter weight automatically |
+| ⬜ | **`Spinner` icon weight** | `Spinner` stroke width follows the icon weight token — mirrors `AdwSpinnerPaintable` icon weight support |
+| ⬜ | **React Native / Web Components parity** | Propagate the icon weight token to `@gnome-ui/react-native` and `@gnome-ui/web-components` |
+
+### OverlaySplitView — overlay styling hook
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **Overlay-mode styling hook** | Expose a stable `data-overlay` attribute (and a documented CSS module class) on the sidebar pane while it is shown as an overlay on narrow viewports, so consumers can style it differently from the docked sidebar (e.g. shadow, background). Mirrors the unique style class libadwaita 1.10 adds to `AdwOverlaySplitView`'s overlay sidebar |
+
+### ShortcutLabel — modifier ordering
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ⬜ | **Natural modifier ordering** | Normalise modifier order regardless of input order: `Ctrl` → `Alt` → `Shift` → `Super` on Linux/Windows, and the Apple order `⌃` → `⌥` → `⇧` → `⌘` on macOS — mirrors `AdwShortcutLabel`'s new ordering |
+| ⬜ | **macOS key labels** | Audit macOS rendering: use `⌥` for Alt, `⌃` for Control, `⏎` for Return, `⌫` for Backspace, `⎋` for Escape when the platform is macOS (already partially supported for `⌘`) |
+
+### Accessibility — system Reduced Motion
+
+GNOME 51 adds a system-wide **Reduced Motion** setting, respected by GTK in `GtkSpinner`,
+`GtkStack` and `GtkRevealer`. The web equivalent is `prefers-reduced-motion`.
+
+| Status | Item | Description |
+|--------|------|-------------|
+| ✅ | **`prefers-reduced-motion` coverage** | Already honoured across components (see *GNOME 50 Compatibility*); `Spinner` slows its animation instead of stopping it, matching GTK |
+| ⬜ | **Stack / Revealer-like transitions audit** | Re-audit components that mirror `GtkStack` / `GtkRevealer` transitions (`NavigationView`, `Carousel`, `ViewSwitcher` pages, `Expander`, `Banner`, `Toast`, `Drawer`, `BottomSheet`) to confirm they switch instantly (or cross-fade) under reduced motion |
+| ⬜ | **`useReducedMotion` hook** (`@gnome-ui/hooks`) | Expose the preference to JS-driven animations, reading the host setting through `@gnome-ui/platform` when running inside a GNOME shell and falling back to `matchMedia('(prefers-reduced-motion: reduce)')` in the browser. Align its API with the existing `useReducedMotion` exported by `@gnome-ui/react-native`'s `GnomeProvider` |
+
+### Not applicable
+
+These changes are GObject/platform-specific and have no equivalent in a web component
+library; listed for completeness.
+
+| Item | Reason |
+|------|--------|
+| `AdwCssClassBinding` / `adw_bind_property_to_css_class()` | Declarative GObject property → CSS class binding; React props + `className` already cover this |
+| `GtkEnumList` (replaces the now-deprecated `AdwEnumListModel`) | GType enum model for dropdowns; `Dropdown` takes plain option arrays |
+| `GtkSvgWidget`, native SVG icon rendering, SVG filter effects | Browsers render SVG natively |
+| CSS `font-width` property | Toolkit-specific; browsers already support `font-stretch` / `font-width` |
+| `AdwClampScrollable` `get_border()` | GtkScrollable internals |
+| Android port, Android settings backend, "Ministream" library | Platform/build infrastructure |
+
+---
+
 ## `@gnome-ui/charts` — Chart Components
 
 > Data visualisation components built on top of Recharts, fully styled with Adwaita design tokens.
