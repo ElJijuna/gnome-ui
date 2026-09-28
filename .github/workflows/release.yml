@@ -57,6 +57,8 @@ jobs:
     name: Release @gnome-ui/core
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -83,11 +85,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/core@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 2b. Release @gnome-ui/web-components ─────────────────────────────────
   release-web-components:
     name: Release @gnome-ui/web-components
     needs: release-core
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -121,11 +132,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/web-components@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 2c. Release @gnome-ui/icons ────────────────────────────────────────────
   release-icons:
     name: Release @gnome-ui/icons
     needs: release-web-components
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -156,11 +176,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/icons@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 2c. Release @gnome-ui/charts ──────────────────────────────────────────
   release-charts:
     name: Release @gnome-ui/charts
     needs: release-icons
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -203,11 +232,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/charts@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 2d. Release @gnome-ui/platform ───────────────────────────────────────
   release-platform:
     name: Release @gnome-ui/platform
     needs: release-charts
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -238,11 +276,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/platform@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 2e. Release @gnome-ui/hooks ───────────────────────────────────────────
   release-hooks:
     name: Release @gnome-ui/hooks
     needs: release-platform
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -276,11 +323,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/hooks@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 2f. Release @gnome-ui/layout ─────────────────────────────────────────
   release-layout:
     name: Release @gnome-ui/layout
     needs: [release-charts, release-hooks]
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -323,11 +379,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/layout@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 3. Release @gnome-ui/react (after icons + charts + hooks + layout) ───
   release-react:
     name: Release @gnome-ui/react
     needs: [release-icons, release-hooks, release-layout]
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -367,11 +432,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/react@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 4. Release @gnome-ui/cli ─────────────────────────────────────────────
   release-cli:
     name: Release @gnome-ui/cli
     needs: release-react
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -402,11 +476,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/cli@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 5. Release @gnome-ui/react-native ────────────────────────────────────
   release-react-native:
     name: Release @gnome-ui/react-native
     needs: release-cli
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -440,11 +523,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/react-native@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
   # ── 6. Release @gnome-ui/react-native-charts ─────────────────────────────
   release-react-native-charts:
     name: Release @gnome-ui/react-native-charts
     needs: release-react-native
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -480,3 +572,89 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+
+      # semantic-release tags the release commit (HEAD); no tag means nothing was published.
+      - name: Detect published release
+        id: release-check
+        run: |
+          tag="$(git tag --points-at HEAD --list '@gnome-ui/react-native-charts@*' | head -n 1)"
+          echo "version=${tag##*@}" >> "$GITHUB_OUTPUT"
+
+  # ── 7. Mirror released packages to GitHub Packages ───────────────────────
+  # Separate jobs so a failure here never affects npm, which has already
+  # published by the time these run.
+  github-packages-plan:
+    name: Plan GitHub Packages mirror
+    needs:
+      - release-core
+      - release-web-components
+      - release-icons
+      - release-charts
+      - release-platform
+      - release-hooks
+      - release-layout
+      - release-react
+      - release-cli
+      - release-react-native
+      - release-react-native-charts
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    outputs:
+      include: ${{ steps.plan.outputs.include }}
+    steps:
+      - name: List released packages
+        id: plan
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          include="$(jq -c '[to_entries[]
+            | select(.value.outputs.version // "" | length > 0)
+            | {package: (.key | sub("^release-"; "")), version: .value.outputs.version}]' <<< "$NEEDS")"
+          echo "include=$include" >> "$GITHUB_OUTPUT"
+          echo "Packages to mirror: $include"
+
+  github-packages:
+    name: Publish @eljijuna/gnome-ui-${{ matrix.package }} to GitHub Packages
+    needs: github-packages-plan
+    if: ${{ !cancelled() && needs.github-packages-plan.outputs.include != '[]' && needs.github-packages-plan.outputs.include != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.github-packages-plan.outputs.include) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The release tag carries the package.json bumped to the released version.
+          ref: refs/tags/@gnome-ui/${{ matrix.package }}@${{ matrix.version }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: '@eljijuna'
+
+      - run: npm ci
+
+      - name: Build @gnome-ui/${{ matrix.package }} and its workspace dependencies
+        run: npx turbo build --filter=@gnome-ui/${{ matrix.package }}...
+
+      # Only in this job: GitHub Packages requires the owner's scope. Internal
+      # @gnome-ui/* dependencies keep resolving from npmjs.
+      - name: Scope the package for GitHub Packages
+        working-directory: packages/${{ matrix.package }}
+        run: |
+          npm pkg set name=@eljijuna/gnome-ui-${{ matrix.package }}
+          npm pkg set repository.type=git
+          npm pkg set repository.url=git+https://github.com/${{ github.repository }}.git
+          npm pkg set repository.directory=packages/${{ matrix.package }}
+
+      - name: Publish
+        working-directory: packages/${{ matrix.package }}
+        run: npm publish --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
