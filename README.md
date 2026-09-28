@@ -46,6 +46,27 @@ export default function App() {
 }
 ```
 
+<details>
+<summary>Installing from GitHub Packages instead</summary>
+
+Every release is also published to GitHub Packages as `@eljijuna/gnome-ui-<package>`
+(e.g. `@eljijuna/gnome-ui-react`, `@eljijuna/gnome-ui-core`). GitHub requires
+authentication even for public packages: add this `.npmrc` next to your
+`package.json`, with a token that has the `read:packages` scope in `GITHUB_TOKEN`:
+
+```ini
+@eljijuna:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+```bash
+npm install @eljijuna/gnome-ui-react
+```
+
+Internal `@gnome-ui/*` dependencies are still resolved from npmjs.
+
+</details>
+
 ### Locale & number formatting
 
 Wrap your app in `GnomeProvider` to share locale, text direction, and default `Intl` options across `@gnome-ui/react`, `@gnome-ui/layout`, and `@gnome-ui/charts`.
