@@ -9,4 +9,8 @@ Updated for **libadwaita 1.9 / GNOME 50**:
 - **`searchable`** — built-in search bar with automatic item filtering.
 - **`mode`** — `"sidebar"` (default) or `"page"` (full-width boxed-list layout for narrow viewports).
 
+Updated for **libadwaita 1.10 / GNOME 51**:
+
+- **`prefix` / `suffix`** — content pinned above and below the scrollable item list (account switcher, title, help button…). Slot content can call `useSidebarCollapsed()` to adapt to rail mode.
+
 All previous `Sidebar` / `SidebarItem` usage is fully backward compatible.

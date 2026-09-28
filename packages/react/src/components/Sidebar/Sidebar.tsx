@@ -67,8 +67,26 @@ const variantClass: Record<string, string> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export interface SidebarProps extends HTMLAttributes<HTMLElement> {
+export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'prefix'> {
   children?: ReactNode;
+  /**
+   * Content pinned above the item list (and above the built-in search bar),
+   * e.g. an account switcher or a prominent title. It stays visible while the
+   * item list scrolls. Mirrors `AdwSidebar:prefix` (libadwaita 1.10).
+   *
+   * In `collapsed` mode the slot keeps rendering — use `useSidebarCollapsed()`
+   * inside it to switch to icon-only content.
+   */
+  prefix?: ReactNode;
+  /**
+   * Content pinned below the item list, e.g. a help or settings button.
+   * It stays visible while the item list scrolls. Mirrors `AdwSidebar:suffix`
+   * (libadwaita 1.10).
+   *
+   * In `collapsed` mode the slot keeps rendering — use `useSidebarCollapsed()`
+   * inside it to switch to icon-only content.
+   */
+  suffix?: ReactNode;
   /**
    * When `true`, collapses the sidebar to icon-only mode (rail/mini).
    * Labels, suffixes, and section titles are hidden; tooltips appear on hover.
@@ -117,10 +135,16 @@ export interface SidebarProps extends HTMLAttributes<HTMLElement> {
  * - `mode` — `"sidebar"` (default) or `"page"` (boxed-list layout).
  *   Auto-switches to `"page"` at ≤ 400 sp when `mode` is unset.
  *
+ * **libadwaita 1.10 / GNOME 51:**
+ * - `prefix` / `suffix` — content pinned above and below the scrollable
+ *   item list.
+ *
  * @see https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Sidebar.html
  */
 export const Sidebar = ({
   children,
+  prefix,
+  suffix,
   collapsed = false,
   searchable,
   filter: controlledFilter,
@@ -163,6 +187,8 @@ export const Sidebar = ({
             .join(' ')}
           {...props}
         >
+          {prefix !== undefined && prefix !== null && <div className={styles.prefix}>{prefix}</div>}
+
           {searchable && (
             <div className={styles.searchWrap}>
               <SearchBar
@@ -176,11 +202,15 @@ export const Sidebar = ({
             </div>
           )}
 
-          {isFilterActive && !hasMatches ? (
-            <StatusPage title="No Results" description="No items match your search." compact />
-          ) : (
-            children
-          )}
+          <div className={styles.content}>
+            {isFilterActive && !hasMatches ? (
+              <StatusPage title="No Results" description="No items match your search." compact />
+            ) : (
+              children
+            )}
+          </div>
+
+          {suffix !== undefined && suffix !== null && <div className={styles.suffix}>{suffix}</div>}
         </nav>
       </SidebarFilterContext.Provider>
     </SidebarCollapsedContext.Provider>

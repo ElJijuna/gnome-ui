@@ -3,7 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Sidebar, SidebarCollapsedContext, SidebarFilterContext } from './Sidebar';
+import {
+  Sidebar,
+  SidebarCollapsedContext,
+  SidebarFilterContext,
+  useSidebarCollapsed,
+} from './Sidebar';
 import { SidebarItem } from './SidebarItem';
 import { SidebarSection, type SidebarSectionHandle } from './SidebarSection';
 
@@ -36,6 +41,81 @@ describe('Sidebar', () => {
       // button's own text content rather than a document-wide text query.
       expect(screen.getByRole('button')).toHaveTextContent('');
       expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Inbox');
+    });
+  });
+
+  describe('prefix / suffix', () => {
+    it('renders prefix and suffix content', () => {
+      render(
+        <Sidebar prefix={<div>Account</div>} suffix={<button type="button">Help</button>}>
+          <SidebarItem label="Inbox" />
+        </Sidebar>,
+      );
+
+      expect(screen.getByText('Account')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Help' })).toBeInTheDocument();
+    });
+
+    it('places prefix before the items and suffix after them', () => {
+      render(
+        <Sidebar prefix={<span>Top</span>} suffix={<span>Bottom</span>}>
+          <SidebarItem label="Inbox" />
+        </Sidebar>,
+      );
+
+      const nav = screen.getByRole('navigation');
+      const text = nav.textContent ?? '';
+      expect(text.indexOf('Top')).toBeLessThan(text.indexOf('Inbox'));
+      expect(text.indexOf('Inbox')).toBeLessThan(text.indexOf('Bottom'));
+    });
+
+    it('renders prefix above the built-in search bar', () => {
+      render(
+        <Sidebar searchable prefix={<span data-testid="prefix">Top</span>}>
+          <SidebarItem label="Inbox" />
+        </Sidebar>,
+      );
+
+      const prefix = screen.getByTestId('prefix');
+      const search = screen.getByPlaceholderText('Search…');
+      expect(
+        prefix.compareDocumentPosition(search) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    });
+
+    it('keeps prefix and suffix visible when the filter has no matches', () => {
+      render(
+        <Sidebar filter="zzz" prefix={<span>Top</span>} suffix={<span>Bottom</span>}>
+          <SidebarItem label="Inbox" />
+        </Sidebar>,
+      );
+
+      expect(screen.getByText('No Results')).toBeInTheDocument();
+      expect(screen.getByText('Top')).toBeInTheDocument();
+      expect(screen.getByText('Bottom')).toBeInTheDocument();
+    });
+
+    it('exposes the collapsed state to slot content', () => {
+      const Slot = () => <span>{useSidebarCollapsed() ? 'rail' : 'full'}</span>;
+
+      render(<Sidebar collapsed prefix={<Slot />} suffix={<Slot />} />);
+      expect(screen.getAllByText('rail')).toHaveLength(2);
+    });
+
+    it('does not forward prefix as an HTML attribute', () => {
+      render(<Sidebar prefix={<span>Top</span>} />);
+      expect(screen.getByRole('navigation')).not.toHaveAttribute('prefix');
+    });
+
+    it('omits the slot wrappers when not provided', () => {
+      render(
+        <Sidebar>
+          <SidebarItem label="Inbox" />
+        </Sidebar>,
+      );
+
+      // Only the scrollable content region wraps the items.
+      expect(screen.getByRole('navigation').children).toHaveLength(1);
     });
   });
 

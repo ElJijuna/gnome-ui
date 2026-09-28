@@ -8,11 +8,44 @@
   background-color: var(--gnome-sidebar-bg-color, #ebebeb);
   color: var(--gnome-sidebar-fg-color, rgb(0 0 0 / 0.8));
   border-right: 1px solid var(--gnome-headerbar-border-color, rgb(0 0 0 / 0.12));
-  overflow: hidden auto;
-  padding: var(--gnome-space-1, 6px);
+  overflow: hidden;
   gap: 0;
   transition: width 200ms var(--gnome-easing-default, ease);
   flex-shrink: 0;
+}
+
+/* Scrollable item list. Padding lives here (not on the container) so item
+   focus rings are not clipped by the scroll area. */
+.content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden auto;
+  padding: var(--gnome-space-1, 6px);
+}
+
+/* ─── Prefix / suffix (pinned slots) ───────────────────────────────────────── */
+
+.prefix,
+.suffix {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: 0;
+  overflow: hidden;
+  padding: var(--gnome-space-1, 6px);
+}
+
+.prefix {
+  padding-bottom: 0;
+}
+
+.suffix {
+  padding-top: 0;
+}
+
+.collapsed .prefix,
+.collapsed .suffix {
+  align-items: center;
 }
 
 /* ─── Section ───────────────────────────────────────────────────────────────── */
@@ -298,7 +331,8 @@ button.sectionHeader:focus-visible {
 /* ─── Search wrap ───────────────────────────────────────────────────────────── */
 
 .searchWrap {
-  padding-bottom: var(--gnome-space-1, 6px);
+  flex-shrink: 0;
+  padding: var(--gnome-space-1, 6px) var(--gnome-space-1, 6px) 0;
 }
 
 /* Override SearchBar min-height to keep it compact inside the sidebar */

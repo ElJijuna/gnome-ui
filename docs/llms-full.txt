@@ -56,6 +56,27 @@ export default function App() {
 }
 ```
 
+<details>
+<summary>Installing from GitHub Packages instead</summary>
+
+Every release is also published to GitHub Packages as `@eljijuna/gnome-ui-<package>`
+(e.g. `@eljijuna/gnome-ui-react`, `@eljijuna/gnome-ui-core`). GitHub requires
+authentication even for public packages: add this `.npmrc` next to your
+`package.json`, with a token that has the `read:packages` scope in `GITHUB_TOKEN`:
+
+```ini
+@eljijuna:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+```bash
+npm install @eljijuna/gnome-ui-react
+```
+
+Internal `@gnome-ui/*` dependencies are still resolved from npmjs.
+
+</details>
+
 ### Locale & number formatting
 
 Wrap your app in `GnomeProvider` to share locale, text direction, and default `Intl` options across `@gnome-ui/react`, `@gnome-ui/layout`, and `@gnome-ui/charts`.
@@ -135,7 +156,7 @@ from those two files — edit them, not this table, then run
 | `ColumnView` | Multi-column sortable data table styled with Adwaita design tokens. | 🚫 | — | [Docs](https://gnome-ui.org/react/?path=/docs/data-display-columnview--docs) |
 | `ComboRow` | Settings row with an inline combo selector at the trailing edge. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-comborow--docs) |
 | `ContributionGraph` | A responsive activity heatmap calendar styled with Adwaita design tokens. Colour intensity represents activity count per day. | 🚫 | — | [Docs](https://gnome-ui.org/react/?path=/docs/data-display-contributiongraph--docs) |
-| `CopyButton` | Icon button that copies a value to the clipboard, swapping to a checkmark and a "Copied!" tooltip as confirmation. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-copybutton--docs) |
+| `CopyButton` | Icon button that copies a value to the clipboard, swapping to a checkmark and a "Copied!" tooltip as confirmation. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-copybutton--docs) |
 | `CopyField` | Read-only `TextField` with a built-in trailing `CopyButton`, for displaying copyable values (API keys, tokens, IDs) outside the `CveIdentifier`/`CweIdentifier`-style specialised components. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-copyfield--docs) |
 | `CountDownTimer` | Displays a countdown timer showing the remaining time until a specified end date. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-countdowntimer--docs) |
 | `CveIdentifier` | Monospace CVE identifier for vulnerability tables, findings, and report references. | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-cveidentifier--docs) |
@@ -167,10 +188,10 @@ from those two files — edit them, not this table, then run
 | `Kbd` | Standalone single key-cap for inline instructional text. | 🚫 | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-kbd--docs) |
 | `LevelBar` | Discrete level indicator with colour-coded low/high offset zones — mirrors `GtkLevelBar`. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-levelbar--docs) |
 | `Link` | Inline hyperlink following GNOME HIG. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-link--docs) |
-| `LinkedGroup` | Renders children as a single visually-connected unit with no gap and merged borders. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-linkedgroup--docs) |
+| `LinkedGroup` | Renders children as a single visually-connected unit with no gap and merged borders. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-linkedgroup--docs) |
 | `Modal` |  | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-modal--docs) |
 | `MultiSelectDropdown` | Checkbox-list variant of `Dropdown` for selecting multiple values from a single trigger. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-multiselectdropdown--docs) |
-| `NavigationSplitView` | Two-pane sidebar + content layout that collapses to a single navigable pane on narrow screens (≤ 400 px), mirroring `AdwNavigationSplitView`. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-navigationsplitview--docs) |
+| `NavigationSplitView` | Two-pane sidebar + content layout that collapses to a single navigable pane on narrow screens (≤ 400 px), mirroring `AdwNavigationSplitView`. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/adaptive-navigationsplitview--docs) |
 | `NavigationView` | Single-pane push/pop navigation stack. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-navigationview--docs) |
 | `OtpInput` | Segmented PIN/verification-code input — one cell per digit, with auto-advance on typing, backspace-to-previous-cell, and paste support. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-otpinput--docs) |
 | `Overlay` | Standalone backdrop/scrim layer with a fade transition and click-to-dismiss — the shared building block behind `Modal`, `Dialog`, and `BottomSheet`'s backdrops, extracted for building custom overlay UI. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-overlay--docs) |
@@ -186,8 +207,8 @@ from those two files — edit them, not this table, then run
 | `ProgressBar` | Determinate and indeterminate progress bar following the Adwaita style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-progressbar--docs) |
 | `RadioButton` | Single-selection radio button following the GNOME HIG and Adwaita style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-radiobutton--docs) |
 | `RangeSlider` | Dual-thumb slider for selecting a min/max range, following the Adwaita `GtkScale` pattern used by `Slider`. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-rangeslider--docs) |
-| `RatingStars` | Star rating display and input. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-ratingstars--docs) |
-| `ScrollToTop` | Fixed-position button that scrolls the page to the top on click, following the GNOME Human Interface Guidelines. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-scrolltotop--docs) |
+| `RatingStars` | Star rating display and input. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-ratingstars--docs) |
+| `ScrollToTop` | Fixed-position button that scrolls the page to the top on click, following the GNOME Human Interface Guidelines. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-scrolltotop--docs) |
 | `SearchBar` | Collapsible search bar following the Adwaita `AdwSearchBar` pattern. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-searchbar--docs) |
 | `SecurityMetric` |  | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-securitymetric--docs) |
 | `SegmentedBar` | Horizontal bar split into proportional segments, one per category. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-segmentedbar--docs) |
@@ -200,24 +221,24 @@ from those two files — edit them, not this table, then run
 | `Slider` | Draggable range control following the Adwaita `GtkScale` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-slider--docs) |
 | `SpinButton` | Numeric input with − and + buttons following the Adwaita `GtkSpinButton` style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinbutton--docs) |
 | `Spinner` | Indeterminate loading indicator following the Adwaita spinner style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinner--docs) |
-| `SpinRow` | Settings row with an integrated spin button for numeric values. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinrow--docs) |
-| `SplitButton` | Primary action button with an attached dropdown arrow. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-splitbutton--docs) |
+| `SpinRow` | Settings row with an integrated spin button for numeric values. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-spinrow--docs) |
+| `SplitButton` | Primary action button with an attached dropdown arrow. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-splitbutton--docs) |
 | `StatusBadge` | Pill-shaped text label for entity status. Use for human-readable state labels like `published`, `beta`, or `new` — not for numeric counts (use `Badge` for those). | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-statusbadge--docs) |
 | `StatusPage` | Empty-state and status page following the Adwaita `AdwStatusPage` pattern. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-statuspage--docs) |
-| `StepIndicator` | Numbered "Step X of Y" progress indicator for onboarding/wizard flows. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-stepindicator--docs) |
+| `StepIndicator` | Numbered "Step X of Y" progress indicator for onboarding/wizard flows. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-stepindicator--docs) |
 | `Switch` | On/off toggle following the Adwaita switch style. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switch--docs) |
-| `SwitchRow` | Activatable row with an integrated switch. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switchrow--docs) |
+| `SwitchRow` | Activatable row with an integrated switch. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-switchrow--docs) |
 | `Tabs` | Tab-based navigation following the Adwaita `AdwTabBar` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-tabs--docs) |
-| `TagInput` | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox`. | ⬜ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-taginput--docs) |
+| `TagInput` | Type-to-add multi-value input rendering entries as removable `Chip`s in a `WrapBox`. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-taginput--docs) |
 | `TerminalView` | Scrollable terminal-style output area styled after GNOME Terminal. Intended for displaying logs, command output, or read-only text content. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-terminalview--docs) |
 | `Text` | Typography component mirroring all [Adwaita text style classes](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/style-classes.html). | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-text--docs) |
 | `TextField` | Single-line text input with label, helper text, and error state. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-textfield--docs) |
 | `TextTruncate` | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-texttruncate--docs) |
-| `Timeline` | Ordered sequence of events connected by a visual timeline. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
+| `Timeline` | Ordered sequence of events connected by a visual timeline. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
 | `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
 | `Toast` | Non-blocking temporary notification following the Adwaita `AdwToast` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-toast--docs) |
 | `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |
-| `Toolbar` | Horizontal action bar following the libadwaita `.toolbar` pattern. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spacer--docs) |
+| `Toolbar` | Horizontal action bar following the libadwaita `.toolbar` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spacer--docs) |
 | `ToolbarView` | Layout container that attaches bars at the top and/or bottom while scrolling only the middle content. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-toolbarview--docs) |
 | `Tooltip` | Informational floating label following the GNOME HIG tooltip pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-tooltip--docs) |
 | `ViewSwitcher` | Segmented control for switching between major views, mirroring the Adwaita `AdwViewSwitcher`. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-viewswitcher--docs) |
@@ -226,7 +247,7 @@ from those two files — edit them, not this table, then run
 | `VisuallyHidden` | Reusable "sr-only" utility — visually hides content while keeping it in the accessibility tree, so screen readers still announce it. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-visuallyhidden--docs) |
 | `VulnerabilityFinding` |  | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-vulnerabilityfinding--docs) |
 | `VulnerabilitySummary` |  | — | — | [Docs](https://gnome-ui.org/react/) |
-| `WidgetManager` | Card that manages a controlled collection of "widgets" picked from a `catalog`, each rendering its own content via `render()`. The header's edit button toggles a dashed "add widget" trigger that opens a catalog picker — `Modal`, `BottomSheet`, or `Drawer`, chosen with `pickerSurface`. Adding and removing is staged inside the picker and only applied through `onChange` when the user confirms; canceling discards the staging. Widgets can only be removed through the picker, not inline in the card. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-widgetmanager--docs) |
+| `WidgetManager` | Card that manages a controlled collection of "widgets" picked from a `catalog`, each rendering its own content via `render()`. The header's edit button toggles a dashed "add widget" trigger that opens a catalog picker — `Modal`, `BottomSheet`, or `Drawer`, chosen with `pickerSurface`. Adding and removing is staged inside the picker and only applied through `onChange` when the user confirms; canceling discards the staging. Widgets can only be removed through the picker, not inline in the card. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-widgetmanager--docs) |
 | `WindowTitle` | Two-line title + subtitle widget for use inside a `HeaderBar`. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-windowtitle--docs) |
 | `WrapBox` | Flexible wrapping layout container. | ✅ | ⬜ | [Docs](https://gnome-ui.org/react/?path=/docs/components-wrapbox--docs) |
 <!-- /component-table:react -->
@@ -5816,6 +5837,13 @@ Slide-over panel for supplementary React content. Use `side` to open from the
 left or right, `size` for classic or wide widths, and pass the body through
 `children` or the `content` prop.
 
+`variant` controls how the drawer displaces the page. The default
+`"overlay"` floats above the page behind a dismissible, focus-trapping
+backdrop. `"push"` renders in normal document flow instead — no portal, no
+backdrop, no focus trap, since the rest of the page stays visible and
+interactive — so place it next to your main content inside a flex/grid
+container and it shoulders that content aside as it opens.
+
 Opening a second `Drawer` from inside a drawer's content (or `content` prop)
 automatically makes it narrower than its parent — each nesting level scales
 the preset width down until it hits a minimum, so stacked drawers read as a
@@ -7039,6 +7067,10 @@ Updated for **libadwaita 1.9 / GNOME 50**:
 - **`menuItems`** — per-item context menu on right-click or the `Menu` key.
 - **`searchable`** — built-in search bar with automatic item filtering.
 - **`mode`** — `"sidebar"` (default) or `"page"` (full-width boxed-list layout for narrow viewports).
+
+Updated for **libadwaita 1.10 / GNOME 51**:
+
+- **`prefix` / `suffix`** — content pinned above and below the scrollable item list (account switcher, title, help button…). Slot content can call `useSidebarCollapsed()` to adapt to rail mode.
 
 All previous `Sidebar` / `SidebarItem` usage is fully backward compatible.
 

@@ -4,6 +4,7 @@ import {
   Delete,
   DocumentOpen,
   GoHome,
+  HelpBrowser,
   MediaPlay,
   Search,
   Settings,
@@ -14,13 +15,14 @@ import {
 import type { Meta, StoryObj } from '@storybook/react';
 import { useRef, useState } from 'react';
 
+import { Avatar } from '@/components/Avatar';
 import { Badge } from '@/components/Badge';
 import { Button } from '@/components/Button';
 import { HeaderBar } from '@/components/HeaderBar';
 import { Icon } from '@/components/Icon';
 import { Text } from '@/components/Text';
 import readme from './README.md?raw';
-import { Sidebar } from './Sidebar';
+import { Sidebar, useSidebarCollapsed } from './Sidebar';
 import { SidebarItem } from './SidebarItem';
 import type { SidebarSectionHandle } from './SidebarSection';
 import { SidebarSection } from './SidebarSection';
@@ -71,6 +73,69 @@ export const Default: Story = {
       </SidebarSection>
     </Sidebar>
   ),
+};
+
+// ─── Prefix / suffix ──────────────────────────────────────────────────────────
+
+const AccountHeader = () => {
+  const collapsed = useSidebarCollapsed();
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '6px 6px 12px' }}>
+      <Avatar name="Ada Lovelace" size="sm" />
+      {!collapsed && (
+        <div style={{ minWidth: 0 }}>
+          <Text variant="heading" style={{ display: 'block' }}>
+            Ada Lovelace
+          </Text>
+          <Text variant="caption" color="dim" style={{ display: 'block' }}>
+            ada@example.org
+          </Text>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const PrefixAndSuffix: Story = {
+  render: function PrefixAndSuffixStory(args) {
+    const [active, setActive] = useState('inbox');
+    const folders = ['Inbox', 'Starred', 'Sent', 'Drafts', 'Archive', 'Spam', 'Trash'];
+
+    return (
+      <Sidebar
+        {...args}
+        style={{ height: 360 }}
+        prefix={<AccountHeader />}
+        suffix={<SidebarItem icon={HelpBrowser} label="Help" />}
+      >
+        <SidebarSection title="Mailboxes">
+          {folders.map((folder) => (
+            <SidebarItem
+              key={folder}
+              icon={DocumentOpen}
+              label={folder}
+              active={active === folder.toLowerCase()}
+              onClick={() => setActive(folder.toLowerCase())}
+            />
+          ))}
+        </SidebarSection>
+        <SidebarSection title="Labels">
+          {['Work', 'Family', 'Travel', 'Receipts'].map((label) => (
+            <SidebarItem key={label} icon={Star} label={label} />
+          ))}
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`prefix` and `suffix` stay pinned while the item list scrolls — here an account header and a help button. Slot content can call `useSidebarCollapsed()` to adapt to rail mode (try the `collapsed` control). Mirrors `AdwSidebar:prefix` / `:suffix` from libadwaita 1.10.',
+      },
+    },
+  },
 };
 
 // ─── Sections ─────────────────────────────────────────────────────────────────
