@@ -188,6 +188,42 @@ describe('OverlaySplitView', () => {
     });
   });
 
+  describe('overlay styling hook', () => {
+    it('marks the sidebar pane with data-overlay on narrow screens', () => {
+      setViewportWidth(360);
+
+      render(
+        <OverlaySplitView showSidebar sidebar={<div>Sidebar</div>} content={<div>Content</div>} />,
+      );
+
+      expect(screen.getByText('Sidebar').parentElement).toHaveAttribute('data-overlay');
+    });
+
+    it('keeps data-overlay while the overlay is closed', () => {
+      setViewportWidth(360);
+
+      render(<OverlaySplitView sidebar={<div>Sidebar</div>} content={<div>Content</div>} />);
+
+      expect(screen.getByText('Sidebar').parentElement).toHaveAttribute('data-overlay');
+    });
+
+    it('omits data-overlay on wide screens, where the sidebar is docked', () => {
+      setViewportWidth(1024);
+
+      render(<OverlaySplitView sidebar={<div>Sidebar</div>} content={<div>Content</div>} />);
+
+      expect(screen.getByText('Sidebar').parentElement).not.toHaveAttribute('data-overlay');
+    });
+
+    it('never marks the content pane', () => {
+      setViewportWidth(360);
+
+      render(<OverlaySplitView sidebar={<div>Sidebar</div>} content={<div>Content</div>} />);
+
+      expect(screen.getByText('Content').parentElement).not.toHaveAttribute('data-overlay');
+    });
+  });
+
   describe('sidebarPosition', () => {
     it('applies an end-position class when sidebarPosition is "end"', () => {
       const { container } = render(
