@@ -24,6 +24,9 @@ jobs:
 
       - run: npm run lint
 
+      - name: Lint CSS
+        run: npm run lint:css
+
       - name: Check component tables
         run: npm run tables:check
 
