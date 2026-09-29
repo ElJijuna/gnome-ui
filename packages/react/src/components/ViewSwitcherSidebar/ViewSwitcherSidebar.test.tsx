@@ -33,7 +33,64 @@ describe('ViewSwitcherSidebar', () => {
       expect(screen.getByRole('radiogroup')).toHaveAccessibleName('Library');
     });
 
-    it('renders a header and footer slot', () => {
+    it('renders prefix and suffix slots around the item list', () => {
+      render(
+        <ViewSwitcherSidebar
+          value="photos"
+          onValueChange={vi.fn()}
+          prefix={<span>Top</span>}
+          suffix={<span>Bottom</span>}
+        >
+          <ViewSwitcherSidebarItem name="photos" label="Photos" />
+        </ViewSwitcherSidebar>,
+      );
+
+      const text = screen.getByRole('navigation').textContent ?? '';
+      expect(text.indexOf('Top')).toBeLessThan(text.indexOf('Photos'));
+      expect(text.indexOf('Photos')).toBeLessThan(text.indexOf('Bottom'));
+    });
+
+    it('keeps prefix and suffix outside the radiogroup', () => {
+      render(
+        <ViewSwitcherSidebar
+          value="photos"
+          onValueChange={vi.fn()}
+          prefix={<span>Top</span>}
+          suffix={<span>Bottom</span>}
+        />,
+      );
+
+      const group = screen.getByRole('radiogroup');
+      expect(group).not.toContainElement(screen.getByText('Top'));
+      expect(group).not.toContainElement(screen.getByText('Bottom'));
+    });
+
+    it('prefers prefix / suffix over the deprecated header / footer', () => {
+      render(
+        <ViewSwitcherSidebar
+          value="photos"
+          onValueChange={vi.fn()}
+          prefix={<span>New top</span>}
+          header={<span>Old top</span>}
+          suffix={<span>New bottom</span>}
+          footer={<span>Old bottom</span>}
+        />,
+      );
+
+      expect(screen.getByText('New top')).toBeInTheDocument();
+      expect(screen.getByText('New bottom')).toBeInTheDocument();
+      expect(screen.queryByText('Old top')).not.toBeInTheDocument();
+      expect(screen.queryByText('Old bottom')).not.toBeInTheDocument();
+    });
+
+    it('does not forward prefix as an HTML attribute', () => {
+      render(
+        <ViewSwitcherSidebar value="photos" onValueChange={vi.fn()} prefix={<span>Top</span>} />,
+      );
+      expect(screen.getByRole('navigation')).not.toHaveAttribute('prefix');
+    });
+
+    it('still renders the deprecated header and footer slots', () => {
       render(
         <ViewSwitcherSidebar
           value="photos"

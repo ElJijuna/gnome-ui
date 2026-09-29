@@ -4,6 +4,10 @@ sidebar layout fits better than a header-bar `ViewSwitcher`.
 Mirrors `AdwViewSwitcherSidebar` (libadwaita 1.9 / GNOME 50) — the modern
 replacement for `GtkStackSidebar`.
 
+Updated for **libadwaita 1.10 / GNOME 51**: **`prefix`** / **`suffix`** pin
+content above and below the item list (account switcher, help button…). They
+replace `header` / `footer`, which keep working but are deprecated.
+
 ### When to use
 - More than 4 top-level views (where `ViewSwitcher` in a HeaderBar becomes cramped).
 - Apps whose primary navigation is already sidebar-shaped (mail, files, contacts).

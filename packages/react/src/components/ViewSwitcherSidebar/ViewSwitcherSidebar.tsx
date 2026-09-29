@@ -32,7 +32,7 @@ export function useViewSwitcherSidebar() {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
+export interface ViewSwitcherSidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'prefix'> {
   /** Name of the currently active view. */
   value: string;
   /** Called with the new view name when the user selects an item. */
@@ -44,13 +44,31 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
    * shrinks to its compact width. Used by `AdaptiveLayout` on tablet viewports.
    */
   collapsed?: boolean;
-  /** Rendered above the scrollable item list (e.g. user card). */
+  /**
+   * Content pinned above the scrollable item list (e.g. an account switcher
+   * or user card). Mirrors `AdwViewSwitcherSidebar:prefix` (libadwaita 1.10).
+   * Takes precedence over `header` when both are set.
+   */
+  prefix?: ReactNode;
+  /**
+   * Content pinned below the scrollable item list (e.g. a help button or
+   * collapse toggle). Mirrors `AdwViewSwitcherSidebar:suffix`
+   * (libadwaita 1.10). Takes precedence over `footer` when both are set.
+   */
+  suffix?: ReactNode;
+  /**
+   * Rendered above the scrollable item list.
+   * @deprecated Use `prefix` instead — the libadwaita 1.10 name for this slot.
+   */
   header?: ReactNode;
-  /** Rendered below the scrollable item list (e.g. collapse toggle). */
+  /**
+   * Rendered below the scrollable item list.
+   * @deprecated Use `suffix` instead — the libadwaita 1.10 name for this slot.
+   */
   footer?: ReactNode;
-  /** Show the separator line below the header slot. Defaults to `true`. */
+  /** Show the separator line below the `prefix` slot. Defaults to `true`. */
   showHeaderSeparator?: boolean;
-  /** Show the separator line above the footer slot. Defaults to `true`. */
+  /** Show the separator line above the `suffix` slot. Defaults to `true`. */
   showFooterSeparator?: boolean;
   children?: ReactNode;
 }
@@ -60,7 +78,8 @@ export interface ViewSwitcherSidebarProps extends HTMLAttributes<HTMLElement> {
  * or when the sidebar layout fits better than a header-bar `ViewSwitcher`.
  *
  * Mirrors `AdwViewSwitcherSidebar` (libadwaita 1.9 / GNOME 50), the modern
- * replacement for `GtkStackSidebar`.
+ * replacement for `GtkStackSidebar`. `prefix` / `suffix` pin content above
+ * and below the item list (libadwaita 1.10 / GNOME 51).
  *
  * Compose with `ViewSwitcherSidebarItem` for each view. The active item is
  * highlighted with the accent colour; keyboard ↑ / ↓ cycles through items.
@@ -80,6 +99,8 @@ export const ViewSwitcherSidebar = ({
   onValueChange,
   'aria-label': ariaLabel = 'Views',
   collapsed = false,
+  prefix,
+  suffix,
   header,
   footer,
   showHeaderSeparator = true,
@@ -89,6 +110,8 @@ export const ViewSwitcherSidebar = ({
   ...props
 }: ViewSwitcherSidebarProps) => {
   const groupRef = useRef<HTMLUListElement>(null);
+  const prefixContent = prefix ?? header;
+  const suffixContent = suffix ?? footer;
 
   function handleKeyDown(e: KeyboardEvent<HTMLElement>) {
     const items = Array.from(
@@ -134,11 +157,15 @@ export const ViewSwitcherSidebar = ({
         onKeyDown={handleKeyDown}
         {...props}
       >
-        {header && <div className={styles.header}>{header}</div>}
+        {prefixContent !== undefined && prefixContent !== null && (
+          <div className={styles.header}>{prefixContent}</div>
+        )}
         <ul ref={groupRef} role="radiogroup" aria-label={ariaLabel} className={styles.list}>
           {children}
         </ul>
-        {footer && <div className={styles.footer}>{footer}</div>}
+        {suffixContent !== undefined && suffixContent !== null && (
+          <div className={styles.footer}>{suffixContent}</div>
+        )}
       </nav>
     </ViewSwitcherSidebarContext.Provider>
   );

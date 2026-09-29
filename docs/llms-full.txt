@@ -140,8 +140,8 @@ from those two files — edit them, not this table, then run
 | `Button` | Button component following the [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/patterns/controls/buttons.html). | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-button--docs) |
 | `ButtonContent` | Icon + label layout helper for buttons that contain both an icon and text. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttoncontent--docs) |
 | `ButtonRow` | Full-width activatable row styled as a button inside a `BoxedList`. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-buttonrow--docs) |
-| `Calendar` | Month-grid date display with full keyboard navigation — mirrors [`GtkCalendar`](https://gnome.pages.gitlab.gnome.org/gtk/gtk4/class.Calendar.html). Usable standalone (settings, forms) or as the panel inside a `DatePicker`. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendar--docs) |
-| `CalendarRange` | Start/end date-range selection driving the same grid engine as `Calendar` — roving `tabindex`, month/year drill-down, `min`/`max`, week numbers, localisation. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendarrange--docs) |
+| `Calendar` | Month-grid date display with full keyboard navigation — mirrors [`GtkCalendar`](https://gnome.pages.gitlab.gnome.org/gtk/gtk4/class.Calendar.html). Usable standalone (settings, forms) or as the panel inside a `DatePicker`. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendar--docs) |
+| `CalendarRange` | Start/end date-range selection driving the same grid engine as `Calendar` — roving `tabindex`, month/year drill-down, `min`/`max`, week numbers, localisation. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-calendarrange--docs) |
 | `Callout` | Inline, dismissible admonition box for contextual help text within forms and cards. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-callout--docs) |
 | `Card` | Card component following the [GNOME HIG containers](https://developer.gnome.org/hig/patterns/containers.html) and the Adwaita `.card` style class. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-card--docs) |
 | `Carousel` | Swipeable content carousel. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-carousel--docs) |
@@ -163,7 +163,7 @@ from those two files — edit them, not this table, then run
 | `CvssScore` | Compact CVSS score display for vulnerability tables, finding summaries, and CVE detail surfaces. | — | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-cvssscore--docs) |
 | `CvssVector` |  | — | — | [Docs](https://gnome-ui.org/react/) |
 | `CweIdentifier` |  | — | — | [Docs](https://gnome-ui.org/react/) |
-| `DatePicker` | A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-datepicker--docs) |
+| `DatePicker` | A [`Popover`](../Popover)-anchored [`Calendar`](../Calendar) behind an entry-styled trigger — mirrors the `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-datepicker--docs) |
 | `DateRangePicker` | A [`Popover`](../Popover)-anchored [`CalendarRange`](../CalendarRange) behind an entry-styled trigger — the range counterpart of `DatePicker`, and the same `GtkCalendar` + `GtkPopover` composition GNOME apps use for date entry. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-daterangepicker--docs) |
 | `Dialog` | Blocking modal dialog — two modes in one component. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-dialog--docs) |
 | `Divider` | Horizontal rule with an optional centred label — common auth/login-form pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-divider--docs) |
@@ -235,7 +235,7 @@ from those two files — edit them, not this table, then run
 | `TextField` | Single-line text input with label, helper text, and error state. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-textfield--docs) |
 | `TextTruncate` | Single/multi-line text truncation with an automatic tooltip revealing the full content on overflow — mirrors `GtkLabel`'s `ellipsize` property. | ⬜ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-texttruncate--docs) |
 | `Timeline` | Ordered sequence of events connected by a visual timeline. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timeline--docs) |
-| `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | ⬜ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
+| `TimePicker` | Hour/minute selection built from paired [`SpinButton`](../SpinButton)s inside a [`Popover`](../Popover), behind an entry-styled trigger — mirrors the `GtkSpinButton` + `GtkPopover` composition GNOME apps use for time entry, with 12- and 24-hour support. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-timepicker--docs) |
 | `Toast` | Non-blocking temporary notification following the Adwaita `AdwToast` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-toast--docs) |
 | `ToggleGroup` | Mutually-exclusive group of toggle buttons for in-place option selection. | ✅ | — | [Docs](https://gnome-ui.org/react/?path=/docs/components-togglegroup--docs) |
 | `Toolbar` | Horizontal action bar following the libadwaita `.toolbar` pattern. | ✅ | ✅ | [Docs](https://gnome-ui.org/react/?path=/docs/components-spacer--docs) |
@@ -7559,6 +7559,10 @@ sidebar layout fits better than a header-bar `ViewSwitcher`.
 
 Mirrors `AdwViewSwitcherSidebar` (libadwaita 1.9 / GNOME 50) — the modern
 replacement for `GtkStackSidebar`.
+
+Updated for **libadwaita 1.10 / GNOME 51**: **`prefix`** / **`suffix`** pin
+content above and below the item list (account switcher, help button…). They
+replace `header` / `footer`, which keep working but are deprecated.
 
 ### When to use
 - More than 4 top-level views (where `ViewSwitcher` in a HeaderBar becomes cramped).
