@@ -285,6 +285,85 @@
   color: var(--gnome-accent-color, #3584e4);
 }
 
+/* ─── Other apps ────────────────────────────────────────────────────────────── */
+
+.otherApps {
+  margin-top: var(--gnome-space-3, 16px);
+}
+
+.otherAppsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--gnome-radius-lg, 12px);
+  background-color: var(--gnome-card-bg-color, #fff);
+  box-shadow: 0 0 0 1px var(--gnome-card-shade-color, rgb(0 0 0 / 0.07));
+  overflow: hidden;
+}
+
+.otherAppsList > li + li {
+  border-top: 1px solid var(--gnome-divider-color, rgb(0 0 0 / 0.1));
+}
+
+.otherAppRow {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-2, 12px);
+  padding: 8px var(--gnome-space-2, 12px);
+  min-height: 56px;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color var(--gnome-duration-fast, 100ms) var(--gnome-easing-default, ease);
+}
+
+.otherAppRow:hover {
+  background-color: var(--gnome-hover-overlay, rgb(0 0 0 / 0.04));
+}
+
+.otherAppRow:active {
+  background-color: var(--gnome-active-overlay, rgb(0 0 0 / 0.08));
+}
+
+.otherAppRow:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--gnome-focus-ring-color, #3584e4);
+}
+
+.otherAppIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.otherAppIcon > :global(img),
+.otherAppIcon > :global(svg) {
+  width: 100%;
+  height: 100%;
+}
+
+.otherAppText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.otherAppName {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-body, 1rem);
+}
+
+.otherAppSummary {
+  font-family: var(--gnome-font-family);
+  font-size: var(--gnome-font-size-caption, 0.8125rem);
+  opacity: var(--gnome-opacity-dim, 0.55);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ─── Dark mode ─────────────────────────────────────────────────────────────── */
 
 @media (prefers-color-scheme: dark) {
@@ -312,7 +391,8 @@
     animation: none;
   }
 
-  .btn {
+  .btn,
+  .otherAppRow {
     transition: none;
   }
 }

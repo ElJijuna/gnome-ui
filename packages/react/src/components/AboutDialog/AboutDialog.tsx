@@ -25,6 +25,17 @@ export interface AboutDialogLink {
   url: string;
 }
 
+export interface AboutDialogOtherApp {
+  /** Application name. */
+  name: string;
+  /** One-line description shown below the name. */
+  summary?: string;
+  /** Application icon (e.g. an `<img>` or `Icon`), rendered at 32 px. */
+  icon?: ReactNode;
+  /** Page for the application, opened in a new tab. */
+  url: string;
+}
+
 export interface AboutDialogProps {
   /** Whether the dialog is visible. */
   open: boolean;
@@ -58,6 +69,17 @@ export interface AboutDialogProps {
   licenseText?: string;
   /** Extra links shown in the Details section. */
   links?: AboutDialogLink[];
+  /**
+   * Other applications by the same developer, listed at the end of the
+   * Details tab. Mirrors the "Other Apps" section of `AdwAboutDialog`.
+   */
+  otherApps?: AboutDialogOtherApp[];
+  /**
+   * Heading for the `otherApps` section. Defaults to
+   * `"Other Apps by {developerName}"`, or `"Other Apps"` without a developer
+   * name. Mirrors `AdwAboutDialog:other-apps-title` (libadwaita 1.10).
+   */
+  otherAppsTitle?: string;
 }
 
 type AboutTab = 'details' | 'credits' | 'legal';
@@ -90,9 +112,12 @@ export const AboutDialog = ({
   licenseType,
   licenseText,
   links,
+  otherApps,
+  otherAppsTitle,
 }: AboutDialogProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
+  const otherAppsTitleId = useId();
   const previouslyFocused = useRef<Element | null>(null);
   const viewportStyle = useVisualViewport();
   const [activeTab, setActiveTab] = useState<AboutTab>('details');
@@ -212,6 +237,38 @@ export const AboutDialog = ({
                     </>
                   ))}
                 </dl>
+              )}
+              {!!otherApps?.length && (
+                <section className={styles.otherApps} aria-labelledby={otherAppsTitleId}>
+                  <h4 id={otherAppsTitleId} className={styles.creditTitle}>
+                    {otherAppsTitle ??
+                      (developerName ? `Other Apps by ${developerName}` : 'Other Apps')}
+                  </h4>
+                  <ul className={styles.otherAppsList}>
+                    {otherApps.map((app) => (
+                      <li key={app.url}>
+                        <a
+                          href={app.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.otherAppRow}
+                        >
+                          {app.icon && (
+                            <span className={styles.otherAppIcon} aria-hidden>
+                              {app.icon}
+                            </span>
+                          )}
+                          <span className={styles.otherAppText}>
+                            <span className={styles.otherAppName}>{app.name}</span>
+                            {app.summary && (
+                              <span className={styles.otherAppSummary}>{app.summary}</span>
+                            )}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               )}
             </div>
           )}
