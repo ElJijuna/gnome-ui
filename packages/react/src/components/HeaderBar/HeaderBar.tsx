@@ -37,6 +37,7 @@ export const HeaderBar = ({
   return (
     <header
       className={[styles.headerBar, flat ? styles.flat : null, className].filter(Boolean).join(' ')}
+      data-gnome-toolbar=""
       {...props}
     >
       {/* Leading slot */}

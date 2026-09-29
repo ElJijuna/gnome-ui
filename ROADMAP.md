@@ -421,9 +421,9 @@ bottom), and adds extra slots to sections and items.
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **`Dropdown` `flat` prop** | Borderless, background-less trigger that only shows a hover/active background — mirrors the new `.flat` style class for `GtkDropDown` |
-| ⬜ | **Auto-flat inside toolbars** | `Dropdown` becomes flat automatically when rendered inside `HeaderBar`, `Toolbar` or `ToolbarView` top/bottom bars (via a toolbar context, same mechanism flat buttons use), matching libadwaita's automatic flat styling in toolbars |
-| ⬜ | **`Dropdown` `raised` prop** | Opt-out of the automatic toolbar flat style — mirrors the `.raised` style class override. Also apply to `MultiSelectDropdown` and `FilterableMultiSelectDropdown` for consistency |
+| ✅ | **`Dropdown` `flat` prop** | Borderless, background-less trigger that only shows a hover/active background — mirrors the new `.flat` style class for `GtkDropDown` |
+| ✅ | **Auto-flat inside toolbars** | `Dropdown` becomes flat automatically when rendered inside `HeaderBar`, `Toolbar` or `ToolbarView` top/bottom bars (the bars set a `data-gnome-toolbar` attribute that the dropdown CSS keys off; overlays render in portals, so dropdowns inside popovers/dialogs opened from a toolbar keep their regular look), matching libadwaita's automatic flat styling in toolbars |
+| ✅ | **`Dropdown` `raised` prop** | Opt-out of the automatic toolbar flat style — mirrors the `.raised` style class override. Also apply to `MultiSelectDropdown` and `FilterableMultiSelectDropdown` for consistency |
 
 ### AboutDialog — Other Apps section
 

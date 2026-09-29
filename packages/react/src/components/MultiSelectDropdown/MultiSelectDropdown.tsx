@@ -39,6 +39,19 @@ export interface MultiSelectDropdownProps<V extends string = string>
   'aria-label'?: string;
   /** Disables the entire control. */
   disabled?: boolean;
+  /**
+   * Borderless, background-less trigger that only shows a hover background —
+   * mirrors the `.flat` style class for `GtkDropDown` (libadwaita 1.10).
+   * Applied automatically inside `HeaderBar`, `Toolbar` and `ToolbarView`
+   * bars; use `raised` to opt out.
+   */
+  flat?: boolean;
+  /**
+   * Keeps the regular raised trigger even inside a toolbar, where the
+   * dropdown would otherwise become flat automatically. Wins over `flat`.
+   * Mirrors the `.raised` style class override (libadwaita 1.10).
+   */
+  raised?: boolean;
 }
 
 function summarize(count: number, selected: { label: string }[]): string {
@@ -66,6 +79,8 @@ export const MultiSelectDropdown = <V extends string = string>({
   onChange,
   placeholder = 'Select options',
   disabled,
+  flat = false,
+  raised = false,
   className,
   'aria-label': ariaLabel,
   ...props
@@ -257,7 +272,14 @@ export const MultiSelectDropdown = <V extends string = string>({
           open && activeIndex >= 0 ? `${listboxId}-opt-${activeIndex}` : undefined
         }
         disabled={disabled}
-        className={[styles.trigger, open ? styles.triggerOpen : null].filter(Boolean).join(' ')}
+        className={[
+          styles.trigger,
+          open ? styles.triggerOpen : null,
+          flat ? styles.triggerFlat : null,
+          raised ? styles.triggerRaised : null,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onClick={() => (open ? closeList() : openList())}
         onKeyDown={handleTriggerKeyDown}
       >

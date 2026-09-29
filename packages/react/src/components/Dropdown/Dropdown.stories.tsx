@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Button } from '@/components/Button';
+import { HeaderBar } from '@/components/HeaderBar';
 import { Text } from '@/components/Text';
+import { Spacer, Toolbar } from '@/components/Toolbar';
 
 import { Dropdown } from './Dropdown';
 import readme from './README.md?raw';
@@ -260,4 +262,62 @@ export const InForm: Story = {
     );
   },
   parameters: { controls: { disable: true } },
+};
+
+// ─── Flat / toolbars ──────────────────────────────────────────────────────────
+
+const sortOptions = [
+  { value: 'name', label: 'Name' },
+  { value: 'date', label: 'Date modified' },
+  { value: 'size', label: 'Size' },
+];
+
+export const FlatAndToolbars: Story = {
+  render: function FlatStory() {
+    const [sort, setSort] = useState('name');
+    const [view, setView] = useState('name');
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560 }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <Dropdown aria-label="Sort by" options={sortOptions} value={sort} onChange={setSort} />
+          <Dropdown
+            aria-label="Sort by (flat)"
+            options={sortOptions}
+            value={sort}
+            onChange={setSort}
+            flat
+          />
+        </div>
+
+        <HeaderBar
+          title="Files"
+          end={
+            <Dropdown aria-label="Sort by" options={sortOptions} value={sort} onChange={setSort} />
+          }
+        />
+
+        <Toolbar>
+          <Dropdown aria-label="Group by" options={sortOptions} value={view} onChange={setView} />
+          <Spacer />
+          <Dropdown
+            aria-label="Sort by (raised)"
+            options={sortOptions}
+            value={sort}
+            onChange={setSort}
+            raised
+          />
+        </Toolbar>
+      </div>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Top row: the regular trigger next to an explicitly `flat` one. Inside a `HeaderBar`, `Toolbar` or `ToolbarView` bar the dropdown becomes flat automatically; `raised` (right, in the toolbar) opts out. Mirrors the `GtkDropDown` `.flat` / `.raised` style classes from libadwaita 1.10.',
+      },
+    },
+  },
 };

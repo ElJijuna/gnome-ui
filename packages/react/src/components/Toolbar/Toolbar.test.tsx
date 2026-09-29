@@ -51,4 +51,14 @@ describe('Toolbar', () => {
 
     expect(container.firstChild).toHaveAttribute('aria-label', 'actions');
   });
+
+  it('marks itself as a toolbar context for flat descendants', () => {
+    const { container } = render(
+      <Toolbar>
+        <span />
+      </Toolbar>,
+    );
+
+    expect(container.firstChild).toHaveAttribute('data-gnome-toolbar');
+  });
 });

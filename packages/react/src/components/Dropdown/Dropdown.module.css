@@ -232,6 +232,33 @@
   }
 }
 
+/* ─── Flat trigger ───────────────────────────────────────────────────────────
+   Explicit `flat`, or automatic inside toolbars (`[data-gnome-toolbar]` is set
+   by HeaderBar, Toolbar and ToolbarView bars). `raised` opts out. Mirrors the
+   GtkDropDown `.flat` / `.raised` style classes from libadwaita 1.10. Kept
+   after the dark-mode block so it wins at equal specificity. */
+
+.triggerFlat:not(.triggerRaised),
+:global([data-gnome-toolbar]) .trigger:not(.triggerRaised) {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.triggerFlat:not(.triggerRaised, :focus-visible, .triggerOpen),
+:global([data-gnome-toolbar]) .trigger:not(.triggerRaised, :focus-visible, .triggerOpen) {
+  box-shadow: none;
+}
+
+.triggerFlat:not(.triggerRaised):hover:not(:disabled),
+:global([data-gnome-toolbar]) .trigger:not(.triggerRaised):hover:not(:disabled) {
+  background-color: var(--gnome-hover-overlay);
+}
+
+.triggerFlat.triggerOpen:not(.triggerRaised),
+:global([data-gnome-toolbar]) .trigger.triggerOpen:not(.triggerRaised) {
+  background-color: var(--gnome-active-overlay);
+}
+
 /* ─── Reduced motion ─────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

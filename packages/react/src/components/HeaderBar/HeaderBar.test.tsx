@@ -40,4 +40,9 @@ describe('HeaderBar', () => {
     render(<HeaderBar data-testid="hb" />);
     expect(screen.getByTestId('hb')).toBeInTheDocument();
   });
+
+  it('marks itself as a toolbar context for flat descendants', () => {
+    const { container } = render(<HeaderBar />);
+    expect(container.firstChild).toHaveAttribute('data-gnome-toolbar');
+  });
 });

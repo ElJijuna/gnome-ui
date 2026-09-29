@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
+import { Toolbar } from '@/components/Toolbar';
+
 import { MultiSelectDropdown } from './MultiSelectDropdown';
 
 const options = [
@@ -278,6 +280,37 @@ describe('MultiSelectDropdown', () => {
 
       fireEvent.click(screen.getByRole('combobox'));
       expect(screen.queryByRole('listbox')).toBeNull();
+    });
+  });
+
+  describe('flat / raised', () => {
+    const renderIn = (extra: { flat?: boolean; raised?: boolean } = {}) => (
+      <MultiSelectDropdown
+        aria-label="Languages"
+        options={options}
+        value={[]}
+        onChange={vi.fn()}
+        {...extra}
+      />
+    );
+
+    it('marks the trigger flat or raised from props', () => {
+      const { rerender } = render(renderIn({ flat: true }));
+      expect(screen.getByRole('combobox', { name: 'Languages' }).className).toMatch(/triggerFlat/);
+
+      rerender(renderIn({ raised: true }));
+      expect(screen.getByRole('combobox', { name: 'Languages' }).className).toMatch(
+        /triggerRaised/,
+      );
+    });
+
+    it('renders flat automatically inside a toolbar unless raised', () => {
+      const { rerender } = render(<Toolbar>{renderIn()}</Toolbar>);
+      const trigger = () => screen.getByRole('combobox', { name: 'Languages' });
+      expect(getComputedStyle(trigger()).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+
+      rerender(<Toolbar>{renderIn({ raised: true })}</Toolbar>);
+      expect(getComputedStyle(trigger()).backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
     });
   });
 });
