@@ -254,6 +254,13 @@ body {
   --gnome-duration-slow: 400ms;
   --gnome-easing-default: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
+  /* ─── Icon weight ────────────────────────────────────────────── */
+
+  /* Stroke weight for line-drawn indicators, on the font-weight scale
+     (100–900, 400 = regular) like GTK's -gtk-icon-weight (libadwaita 1.10).
+     Components scale their stroke widths by var(--gnome-icon-weight) / 400. */
+  --gnome-icon-weight: 400;
+
   /* ─── Focus Ring ─────────────────────────────────────────────── */
 
   --gnome-focus-ring-color: var(--gnome-accent-color);

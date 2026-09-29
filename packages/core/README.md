@@ -148,6 +148,7 @@ standard `@media` conditions.
 | Token | Value |
 |-------|-------|
 | `--gnome-opacity-disabled` | `0.5` |
+| `--gnome-icon-weight` | `400` — stroke weight on the font-weight scale (100–900); line-drawn indicators such as `Spinner` scale by it |
 
 ## License
 
