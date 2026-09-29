@@ -6,3 +6,4 @@ Indeterminate loading indicator following the Adwaita spinner style.
 - Keep spinners small and close to the content they represent.
 - Always provide an accessible `label` (default: `"Loading…"`). Set `label=""` only when a visible sibling label describes the action.
 - Respects `prefers-reduced-motion` — slows the animation instead of stopping it.
+- Stroke weight follows the `--gnome-icon-weight` token (default `400`, font-weight scale) — mirrors `-gtk-icon-weight` support in `AdwSpinnerPaintable` (libadwaita 1.10).
