@@ -15,19 +15,19 @@
 .sm {
   width: 16px;
   height: 16px;
-  border-width: 2px;
+  border-width: calc(2px * var(--gnome-icon-weight, 400) / 400);
 }
 
 .md {
   width: 24px;
   height: 24px;
-  border-width: 2.5px;
+  border-width: calc(2.5px * var(--gnome-icon-weight, 400) / 400);
 }
 
 .lg {
   width: 36px;
   height: 36px;
-  border-width: 3px;
+  border-width: calc(3px * var(--gnome-icon-weight, 400) / 400);
 }
 
 /* ─── Keyframes ────────────────────────────────────────────────────────────── */

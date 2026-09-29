@@ -440,11 +440,12 @@ now appear thinner, and `AdwSpinner` respects the `-gtk-icon-weight` CSS propert
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **Icon weight token** | Add `--gnome-icon-weight` (and a large-size variant) to `@gnome-ui/core` tokens; `@gnome-ui/icons` definitions consume it via `stroke-width` / variable-weight rendering where the SVG allows it |
-| ⬜ | **`StatusPage` thinner icon** | Apply the reduced large-icon weight to the `StatusPage` hero icon |
-| ⬜ | **`Icon` `size="large"` weight** | Large `Icon` instances use the lighter weight automatically |
-| ⬜ | **`Spinner` icon weight** | `Spinner` stroke width follows the icon weight token — mirrors `AdwSpinnerPaintable` icon weight support |
-| ⬜ | **React Native / Web Components parity** | Propagate the icon weight token to `@gnome-ui/react-native` and `@gnome-ui/web-components` |
+| ✅ | **Icon weight token** | `--gnome-icon-weight` in `@gnome-ui/core`, on the font-weight scale (100–900, default `400`) like GTK's `-gtk-icon-weight`. Components scale stroke widths by `var(--gnome-icon-weight) / 400` |
+| ✅ | **`Spinner` icon weight** | `Spinner` border width follows `--gnome-icon-weight` (default renders unchanged) — mirrors `AdwSpinnerPaintable` icon weight support |
+| ⬜ | **`StatusPage` thinner icon** | **Blocked:** `@gnome-ui/icons` definitions are filled paths (no strokes), so there is no stroke weight to reduce. GTK 4.23 thins large icons through stroke-based symbolic SVGs. Revisit if the icon set gains stroke-based variants; an SVG `feMorphology` erode filter was considered and rejected as an approximation |
+| ⬜ | **`Icon` large-size weight** | **Blocked** for the same reason as `StatusPage` |
+| ✅ | **Web Components parity** | `gnome-spinner` border width follows `--gnome-icon-weight` |
+| ⬜ | **React Native parity** | React Native cannot read CSS custom properties; would need an `iconWeight` value in `GnomeProvider`'s theme |
 
 ### OverlaySplitView — overlay styling hook
 

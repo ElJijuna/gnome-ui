@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { CSSProperties } from 'react';
 
 import { Text } from '@/components/Text';
 import readme from './README.md?raw';
@@ -61,6 +62,35 @@ export const Sizes: Story = {
     </div>
   ),
   parameters: { controls: { disable: true } },
+};
+
+// ─── Icon weight ──────────────────────────────────────────────────────────────
+
+export const IconWeight: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+      {[200, 400, 700].map((weight) => (
+        <div
+          key={weight}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}
+        >
+          <Spinner size="lg" style={{ '--gnome-icon-weight': weight } as CSSProperties} />
+          <Text variant="caption" color="dim">
+            {weight}
+          </Text>
+        </div>
+      ))}
+    </div>
+  ),
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'The stroke width follows the `--gnome-icon-weight` token (font-weight scale, default `400`) — mirrors `-gtk-icon-weight` support in `AdwSpinnerPaintable` from libadwaita 1.10. Set it on any ancestor to adjust every spinner below it.',
+      },
+    },
+  },
 };
 
 // ─── Inline with text ──────────────────────────────────────────────────────────
