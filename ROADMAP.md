@@ -468,8 +468,8 @@ GNOME 51 adds a system-wide **Reduced Motion** setting, respected by GTK in `Gtk
 | Status | Item | Description |
 |--------|------|-------------|
 | ✅ | **`prefers-reduced-motion` coverage** | Already honoured across components (see *GNOME 50 Compatibility*); `Spinner` slows its animation instead of stopping it, matching GTK |
-| ⬜ | **Stack / Revealer-like transitions audit** | Re-audit components that mirror `GtkStack` / `GtkRevealer` transitions (`NavigationView`, `Carousel`, `ViewSwitcher` pages, `Expander`, `Banner`, `Toast`, `Drawer`, `BottomSheet`) to confirm they switch instantly (or cross-fade) under reduced motion |
-| ⬜ | **`useReducedMotion` hook** (`@gnome-ui/hooks`) | Expose the preference to JS-driven animations, reading the host setting through `@gnome-ui/platform` when running inside a GNOME shell and falling back to `matchMedia('(prefers-reduced-motion: reduce)')` in the browser. Align its API with the existing `useReducedMotion` exported by `@gnome-ui/react-native`'s `GnomeProvider` |
+| ✅ | **Stack / Revealer-like transitions audit** | Audited `NavigationView`, `Carousel`, `ViewSwitcher`, `Expander`, `Banner`, `Toast`, `Drawer` and `BottomSheet`. Fixed two gaps: the `Drawer` push variant's width animation kept running (its `animation-name` rule out-ranked the reduced-motion reset), and `Banner` had no reduced-motion rules. `BottomSheet` already skips its close animation in JS and `Carousel` swaps smooth scrolling for instant jumps |
+| ✅ | **Reduced-motion hook** | Already available as `usePrefersReducedMotion` in `@gnome-ui/hooks` (re-exported by `@gnome-ui/react`). No host bridge needed: inside a GNOME app, WebKitGTK maps the system animation setting to `prefers-reduced-motion`. `@gnome-ui/react-native` keeps its own `useReducedMotion` from `GnomeProvider` |
 
 ### Not applicable
 

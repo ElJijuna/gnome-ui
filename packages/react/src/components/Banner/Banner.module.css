@@ -144,3 +144,12 @@
 .actionBtn-success:active {
   background-color: rgb(255 255 255 / 0.25);
 }
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .actionBtn,
+  .dismissBtn {
+    transition: none;
+  }
+}
