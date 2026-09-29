@@ -20,6 +20,7 @@ import { Badge } from '@/components/Badge';
 import { Button } from '@/components/Button';
 import { HeaderBar } from '@/components/HeaderBar';
 import { Icon } from '@/components/Icon';
+import { IconButton } from '@/components/IconButton';
 import { Text } from '@/components/Text';
 import readme from './README.md?raw';
 import { Sidebar, useSidebarCollapsed } from './Sidebar';
@@ -1033,6 +1034,48 @@ export const CollapsibleSectionInRailMode: Story = {
       description: {
         story:
           "When the sidebar is in rail (icon-only) mode, collapsible sections always show their body — there's no title row to tap. The chevron is hidden.",
+      },
+    },
+  },
+};
+
+// ─── SidebarSection: header suffix ───────────────────────────────────────────
+
+export const SectionSuffix: Story = {
+  render: function SectionSuffixStory(args) {
+    const [labels, setLabels] = useState(['Work', 'Family']);
+
+    return (
+      <Sidebar {...args} style={{ height: 360 }}>
+        <SidebarSection title="Mailboxes" suffix={<Badge variant="neutral">12</Badge>}>
+          <SidebarItem icon={GoHome} label="Inbox" active />
+          <SidebarItem icon={Share} label="Sent" />
+        </SidebarSection>
+        <SidebarSection
+          title="Labels"
+          collapsible
+          suffix={
+            <IconButton
+              icon={Add}
+              label="Add label"
+              variant="flat"
+              size="sm"
+              onClick={() => setLabels((l) => [...l, `Label ${l.length + 1}`])}
+            />
+          }
+        >
+          {labels.map((label) => (
+            <SidebarItem key={label} icon={Star} label={label} />
+          ))}
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`SidebarSection` `suffix` renders a widget at the end of the header row — a count `Badge` or an "add" `IconButton`. On a `collapsible` section the suffix sits beside the toggle, so clicking it never folds the section. Hidden in rail mode. Mirrors `AdwSidebarSection:suffix` from libadwaita 1.10.',
       },
     },
   },

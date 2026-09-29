@@ -374,6 +374,74 @@ describe('SidebarSection', () => {
     });
   });
 
+  describe('suffix', () => {
+    it('renders the suffix in the header of a plain section', () => {
+      render(
+        <SidebarSection title="Favorites" suffix={<button type="button">Add</button>}>
+          <SidebarItem label="Inbox" />
+        </SidebarSection>,
+      );
+
+      expect(screen.getByRole('button', { name: 'Add' })).toBeInTheDocument();
+    });
+
+    it('renders a header for a suffix-only section', () => {
+      render(<SidebarSection suffix={<span>3</span>} />);
+      expect(screen.getByText('3')).toBeInTheDocument();
+    });
+
+    it('keeps the suffix outside the toggle button of a collapsible section', () => {
+      render(
+        <SidebarSection title="Favorites" collapsible suffix={<button type="button">Add</button>}>
+          <SidebarItem label="Inbox" />
+        </SidebarSection>,
+      );
+
+      const toggle = screen.getByRole('button', { name: /Favorites/ });
+      expect(toggle).not.toContainElement(screen.getByRole('button', { name: 'Add' }));
+    });
+
+    it('does not toggle a collapsible section when the suffix is clicked', async () => {
+      const user = userEvent.setup();
+      const onOpenChange = vi.fn();
+      const onAdd = vi.fn();
+      render(
+        <SidebarSection
+          title="Favorites"
+          collapsible
+          onOpenChange={onOpenChange}
+          suffix={
+            <button type="button" onClick={onAdd}>
+              Add
+            </button>
+          }
+        >
+          <SidebarItem label="Inbox" />
+        </SidebarSection>,
+      );
+
+      await user.click(screen.getByRole('button', { name: 'Add' }));
+      expect(onAdd).toHaveBeenCalledOnce();
+      expect(onOpenChange).not.toHaveBeenCalled();
+      expect(screen.getByRole('button', { name: /Favorites/ })).toHaveAttribute(
+        'aria-expanded',
+        'true',
+      );
+    });
+
+    it('hides the suffix in rail (collapsed) mode', () => {
+      render(
+        <SidebarCollapsedContext.Provider value={true}>
+          <SidebarSection title="Favorites" suffix={<span>Suffix</span>}>
+            <SidebarItem label="Inbox" />
+          </SidebarSection>
+        </SidebarCollapsedContext.Provider>,
+      );
+
+      expect(screen.queryByText('Suffix')).not.toBeInTheDocument();
+    });
+  });
+
   describe('collapsible', () => {
     it('renders the header as a toggle button, open by default', () => {
       render(
