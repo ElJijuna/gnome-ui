@@ -57,6 +57,11 @@ export interface OverlaySplitViewProps extends Omit<HTMLAttributes<HTMLDivElemen
  * the sidebar slides in as an overlay when `showSidebar` is true,
  * with a translucent backdrop behind it.
  *
+ * While shown as an overlay (narrow screens) the sidebar pane carries a
+ * `data-overlay` attribute, so it can be styled differently from the docked
+ * sidebar (e.g. `.my-app [data-overlay] { box-shadow: … }`). Mirrors the
+ * overlay-sidebar style class `AdwOverlaySplitView` adds in libadwaita 1.10.
+ *
  * @example
  * const [open, setOpen] = useState(false);
  * <OverlaySplitView
@@ -190,6 +195,7 @@ export const OverlaySplitView = ({
           .filter(Boolean)
           .join(' ')}
         aria-hidden={isNarrow && !showSidebar}
+        data-overlay={isNarrow ? '' : undefined}
       >
         {sidebar}
       </div>

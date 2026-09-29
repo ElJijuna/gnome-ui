@@ -451,7 +451,7 @@ now appear thinner, and `AdwSpinner` respects the `-gtk-icon-weight` CSS propert
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **Overlay-mode styling hook** | Expose a stable `data-overlay` attribute (and a documented CSS module class) on the sidebar pane while it is shown as an overlay on narrow viewports, so consumers can style it differently from the docked sidebar (e.g. shadow, background). Mirrors the unique style class libadwaita 1.10 adds to `AdwOverlaySplitView`'s overlay sidebar |
+| ✅ | **Overlay-mode styling hook** | Expose a stable `data-overlay` attribute (documented as a `[data-overlay]` selector — CSS module class names are hashed, so they are not a public styling API) on the sidebar pane while it is shown as an overlay on narrow viewports, so consumers can style it differently from the docked sidebar (e.g. shadow, background). Mirrors the unique style class libadwaita 1.10 adds to `AdwOverlaySplitView`'s overlay sidebar |
 
 ### ShortcutLabel — modifier ordering
 
