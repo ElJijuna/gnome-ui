@@ -211,7 +211,11 @@
 @media (prefers-reduced-motion: reduce) {
   .backdrop,
   .left,
-  .right {
+  .right,
+  /* The push variant sets animation-name with higher specificity, so it must
+     be reset explicitly or its width animation keeps running. */
+  .drawer[data-variant="push"].left,
+  .drawer[data-variant="push"].right {
     animation: none;
   }
 }
