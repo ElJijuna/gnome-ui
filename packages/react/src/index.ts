@@ -1,7 +1,11 @@
 // Components
 
 export { usePrefersReducedMotion } from '@gnome-ui/hooks';
-export type { AboutDialogLink, AboutDialogProps } from './components/AboutDialog';
+export type {
+  AboutDialogLink,
+  AboutDialogOtherApp,
+  AboutDialogProps,
+} from './components/AboutDialog';
 export { AboutDialog } from './components/AboutDialog';
 export type { ActionRowProps } from './components/ActionRow';
 export { ActionRow } from './components/ActionRow';

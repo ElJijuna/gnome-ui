@@ -83,3 +83,51 @@ export const DetailsOnly: Story = {
     },
   },
 };
+
+export const OtherApps: Story = {
+  render: function OtherAppsStory() {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>About Files</Button>
+        <AboutDialog
+          open={open}
+          applicationName="Files"
+          version="51.0"
+          comments="A file manager for the GNOME desktop."
+          developerName="The GNOME Project"
+          website="https://apps.gnome.org/Nautilus/"
+          otherApps={[
+            {
+              name: 'Maps',
+              summary: 'Find places around the world',
+              url: 'https://apps.gnome.org/Maps/',
+            },
+            {
+              name: 'Weather',
+              summary: 'Monitor the current weather conditions',
+              url: 'https://apps.gnome.org/Weather/',
+            },
+            {
+              name: 'Calendar',
+              summary: 'Manage your schedule',
+              url: 'https://apps.gnome.org/Calendar/',
+            },
+          ]}
+          otherAppsTitle="More Apps by GNOME"
+          onClose={() => setOpen(false)}
+        />
+      </>
+    );
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          '`otherApps` lists other applications by the same developer at the end of the Details tab. `otherAppsTitle` customises the heading (default: "Other Apps by {developerName}") — mirrors `AdwAboutDialog:other-apps-title` from libadwaita 1.10.',
+      },
+    },
+  },
+};

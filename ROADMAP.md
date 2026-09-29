@@ -429,8 +429,8 @@ bottom), and adds extra slots to sections and items.
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **`AboutDialog` `otherApps` prop** | `otherApps?: { name: string; summary?: string; icon?: ReactNode; url: string }[]` rendered as a boxed list of `ActionRow`s linking to the developer's other applications — the section already exists in `AdwAboutDialog` but is missing here |
-| ⬜ | **`AboutDialog` `otherAppsTitle` prop** | Custom header for the Other Apps section (default: "Other Apps by {developerName}", falling back to "Other Apps"); localisable through the existing labels mechanism. Mirrors the new `AdwAboutDialog:other-apps-title` property |
+| ✅ | **`AboutDialog` `otherApps` prop** | `otherApps?: { name: string; summary?: string; icon?: ReactNode; url: string }[]` rendered as a boxed list of `ActionRow`s linking to the developer's other applications — the section already exists in `AdwAboutDialog` but is missing here |
+| ✅ | **`AboutDialog` `otherAppsTitle` prop** | Custom header for the Other Apps section (default: "Other Apps by {developerName}", falling back to "Other Apps"). The dialog has no localisation mechanism yet — its tab and section labels are English strings. Mirrors the new `AdwAboutDialog:other-apps-title` property |
 
 ### Icon weight — lighter large icons
 

@@ -1,2 +1,6 @@
-export type { AboutDialogLink, AboutDialogProps } from './AboutDialog';
+export type {
+  AboutDialogLink,
+  AboutDialogOtherApp,
+  AboutDialogProps,
+} from './AboutDialog';
 export { AboutDialog } from './AboutDialog';
