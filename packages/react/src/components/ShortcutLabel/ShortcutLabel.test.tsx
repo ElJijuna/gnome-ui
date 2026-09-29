@@ -25,6 +25,49 @@ describe('ShortcutLabel', () => {
     });
   });
 
+  describe('modifier ordering', () => {
+    const keys = (shortcut: string, symbols = false) =>
+      Array.from(
+        render(<ShortcutLabel shortcut={shortcut} symbols={symbols} />).container.querySelectorAll(
+          'kbd',
+        ),
+      ).map((k) => k.textContent);
+
+    it('puts modifiers in canonical order regardless of input order', () => {
+      expect(keys('Shift+Ctrl+Z')).toEqual(['Ctrl', 'Shift', 'Z']);
+      expect(keys('Shift+Alt+Ctrl+Super+Hyper+Q')).toEqual([
+        'Hyper',
+        'Super',
+        'Ctrl',
+        'Alt',
+        'Shift',
+        'Q',
+      ]);
+    });
+
+    it('uses the Apple order ⌃ ⌥ ⇧ ⌘ for symbols', () => {
+      expect(keys('Cmd+Shift+Option+Control+K', true)).toEqual(['⌃', '⌥', '⇧', '⌘', 'K']);
+    });
+
+    it('moves modifiers before regular keys', () => {
+      expect(keys('S+Ctrl')).toEqual(['Ctrl', 'S']);
+    });
+
+    it('keeps the written order of regular keys', () => {
+      expect(keys('Ctrl+K+Ctrl+S')).toEqual(['Ctrl', 'Ctrl', 'K', 'S']);
+      expect(keys('G+G')).toEqual(['G', 'G']);
+    });
+
+    it('treats modifier aliases as the same modifier', () => {
+      expect(keys('Shift+Control+Option+A')).toEqual(['Control', 'Option', 'Shift', 'A']);
+    });
+
+    it('keeps the original string as the accessible name', () => {
+      const { container } = render(<ShortcutLabel shortcut="Shift+Ctrl+Z" />);
+      expect(container.firstChild).toHaveAttribute('aria-label', 'Shift+Ctrl+Z');
+    });
+  });
+
   describe('symbol normalization (symbols=true by default)', () => {
     it.each([
       ['Ctrl', '⌃'],
