@@ -4,6 +4,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--gnome-z-modal, 1000);
+
   /* Darkening is produced by the spotlight's spread shadow, so the backdrop
      itself stays transparent while still capturing clicks. */
   background: transparent;
