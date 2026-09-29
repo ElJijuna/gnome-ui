@@ -66,6 +66,13 @@ export interface SidebarSectionProps extends HTMLAttributes<HTMLElement> {
   open?: boolean;
   /** Called when open state changes. */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Widget rendered at the end of the header row, e.g. an "add" `IconButton`
+   * or a count `Badge`. Aligned like `PreferencesGroup`'s `headerSuffix`.
+   * Hidden in rail (collapsed) mode. Interacting with it never toggles a
+   * `collapsible` section. Mirrors `AdwSidebarSection:suffix` (libadwaita 1.10).
+   */
+  suffix?: ReactNode;
   children?: ReactNode;
 }
 
@@ -92,6 +99,7 @@ export const SidebarSection = forwardRef<SidebarSectionHandle, SidebarSectionPro
       defaultOpen = true,
       open: controlledOpen,
       onOpenChange,
+      suffix,
       children,
       className,
       ...props
@@ -131,37 +139,45 @@ export const SidebarSection = forwardRef<SidebarSectionHandle, SidebarSectionPro
     // In rail mode the body is always visible
     const isOpen = sidebarCollapsed ? true : open;
 
-    const showHeader = !!(title || icon || (collapsible && !sidebarCollapsed));
+    const hasSuffix = suffix !== undefined && suffix !== null && !sidebarCollapsed;
+    const showHeader = !!(title || icon || hasSuffix || (collapsible && !sidebarCollapsed));
+
+    const suffixNode = hasSuffix ? <span className={styles.sectionSuffix}>{suffix}</span> : null;
+
+    const iconNode = icon && (
+      <span className={styles.sectionHeaderIcon}>
+        <Icon icon={icon} size="sm" aria-hidden />
+      </span>
+    );
+    const titleNode = title && <span className={styles.sectionTitle}>{title}</span>;
 
     return (
       <section className={[styles.section, className].filter(Boolean).join(' ')} {...props}>
         {showHeader &&
           (collapsible && !sidebarCollapsed ? (
-            <button
-              type="button"
-              className={styles.sectionHeader}
-              onClick={() => setAndNotify(!open)}
-              aria-expanded={open}
-              aria-controls={bodyId}
-            >
-              {icon && (
-                <span className={styles.sectionHeaderIcon}>
-                  <Icon icon={icon} size="sm" aria-hidden />
+            // The suffix sits next to (not inside) the toggle button: nested
+            // interactive content is invalid HTML and would toggle the section.
+            <div className={styles.sectionHeaderRow}>
+              <button
+                type="button"
+                className={styles.sectionHeader}
+                onClick={() => setAndNotify(!open)}
+                aria-expanded={open}
+                aria-controls={bodyId}
+              >
+                {iconNode}
+                {titleNode}
+                <span className={styles.sectionChevron}>
+                  <Icon icon={open ? PanUp : PanDown} size="sm" aria-hidden />
                 </span>
-              )}
-              {title && <span className={styles.sectionTitle}>{title}</span>}
-              <span className={styles.sectionChevron}>
-                <Icon icon={open ? PanUp : PanDown} size="sm" aria-hidden />
-              </span>
-            </button>
+              </button>
+              {suffixNode}
+            </div>
           ) : (
             <div className={styles.sectionHeader}>
-              {icon && (
-                <span className={styles.sectionHeaderIcon}>
-                  <Icon icon={icon} size="sm" aria-hidden />
-                </span>
-              )}
-              {title && <span className={styles.sectionTitle}>{title}</span>}
+              {iconNode}
+              {titleNode}
+              {suffixNode}
             </div>
           ))}
 

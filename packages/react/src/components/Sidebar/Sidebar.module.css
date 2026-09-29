@@ -131,6 +131,28 @@ button.sectionHeader:focus-visible {
   opacity: 0.5;
 }
 
+/* Collapsible header with a suffix: the toggle button and the suffix sit
+   side by side in a row that takes over the header's outer margin. */
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: var(--gnome-space-1, 6px);
+  margin: 4px 0 2px;
+}
+
+.sectionHeaderRow > .sectionHeader {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.sectionSuffix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
 /* ─── Collapsible section body ──────────────────────────────────────────────── */
 
 .sectionBody {
