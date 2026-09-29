@@ -264,6 +264,14 @@ button.sectionHeader:focus-visible {
   opacity: 1;
 }
 
+/* ─── Prefix (leading widget, replaces the icon) ──────────────────────────── */
+
+.itemPrefix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 /* ─── Label ────────────────────────────────────────────────────────────────── */
 
 .itemLabel {

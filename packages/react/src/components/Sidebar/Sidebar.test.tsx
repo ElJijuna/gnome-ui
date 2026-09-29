@@ -1,3 +1,4 @@
+import { GoHome } from '@gnome-ui/icons';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
@@ -220,6 +221,49 @@ describe('SidebarItem', () => {
     it('falls back to the deprecated badge prop when no suffix is given', () => {
       render(<SidebarItem label="Inbox" badge={<span data-testid="badge">B</span>} />);
       expect(screen.getByTestId('badge')).toBeInTheDocument();
+    });
+  });
+
+  describe('prefix', () => {
+    it('renders the prefix before the label', () => {
+      render(<SidebarItem label="Inbox" prefix={<span data-testid="prefix">P</span>} />);
+
+      const prefix = screen.getByTestId('prefix');
+      expect(screen.getByRole('button')).toContainElement(prefix);
+      expect(
+        prefix.compareDocumentPosition(screen.getByText('Inbox')) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    });
+
+    it('takes precedence over icon', () => {
+      render(
+        <SidebarItem label="Inbox" icon={GoHome} prefix={<span data-testid="prefix">P</span>} />,
+      );
+
+      expect(screen.getByTestId('prefix')).toBeInTheDocument();
+      expect(screen.getByRole('button').querySelector('svg')).toBeNull();
+    });
+
+    it('still renders the icon when no prefix is given', () => {
+      render(<SidebarItem label="Inbox" icon={GoHome} />);
+      expect(screen.getByRole('button').querySelector('svg')).not.toBeNull();
+    });
+
+    it('keeps the prefix in rail (collapsed) mode', () => {
+      render(
+        <SidebarCollapsedContext.Provider value={true}>
+          <SidebarItem label="Inbox" prefix={<span data-testid="prefix">P</span>} />
+        </SidebarCollapsedContext.Provider>,
+      );
+
+      expect(screen.getByTestId('prefix')).toBeInTheDocument();
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Inbox');
+    });
+
+    it('does not forward prefix as an HTML attribute', () => {
+      render(<SidebarItem label="Inbox" prefix={<span>P</span>} />);
+      expect(screen.getByRole('button')).not.toHaveAttribute('prefix');
     });
   });
 

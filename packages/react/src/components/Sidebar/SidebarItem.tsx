@@ -30,11 +30,19 @@ export interface SidebarMenuEntry {
   disabled?: boolean;
 }
 
-export interface SidebarItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface SidebarItemProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> {
   /** Primary label. */
   label: string;
   /** Icon from `@gnome-ui/icons`. */
   icon?: IconDefinition;
+  /**
+   * Leading widget rendered before the label as an alternative to `icon` —
+   * e.g. an `Avatar`, a colour dot or a status indicator. Takes precedence
+   * over `icon` when both are set, and replaces it in rail (collapsed) mode.
+   * The row itself is a button, so use non-interactive content only.
+   * Mirrors `AdwSidebarItem:prefix` (libadwaita 1.10).
+   */
+  prefix?: ReactNode;
   /** Marks this item as the currently active view. */
   active?: boolean;
   /**
@@ -75,10 +83,14 @@ export interface SidebarItemProps extends ButtonHTMLAttributes<HTMLButtonElement
  * - Automatically hidden when `Sidebar`'s `filter` / `searchable` is active
  *   and the `label` does not match (case-insensitive substring).
  * - `onDrop` / `acceptTypes` — HTML5 drag-and-drop target support.
+ *
+ * **libadwaita 1.10 / GNOME 51:**
+ * - `prefix` — leading widget (avatar, colour dot…) in place of `icon`.
  */
 export const SidebarItem = ({
   label,
   icon,
+  prefix,
   active = false,
   suffix,
   badge,
@@ -206,10 +218,14 @@ export const SidebarItem = ({
       onDrop={handleDrop}
       {...props}
     >
-      {icon && (
-        <span className={styles.itemIcon}>
-          <Icon icon={icon} size="md" aria-hidden />
-        </span>
+      {prefix !== undefined && prefix !== null ? (
+        <span className={styles.itemPrefix}>{prefix}</span>
+      ) : (
+        icon && (
+          <span className={styles.itemIcon}>
+            <Icon icon={icon} size="md" aria-hidden />
+          </span>
+        )
       )}
       {!collapsed && <span className={styles.itemLabel}>{label}</span>}
       {!collapsed && trailing && <span className={styles.itemSuffix}>{trailing}</span>}

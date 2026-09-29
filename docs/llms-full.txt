@@ -7072,6 +7072,7 @@ Updated for **libadwaita 1.10 / GNOME 51**:
 
 - **`prefix` / `suffix`** — content pinned above and below the scrollable item list (account switcher, title, help button…). Slot content can call `useSidebarCollapsed()` to adapt to rail mode.
 - **`SidebarSection` `suffix`** — widget at the end of the section header (count badge, "add" button); never toggles a collapsible section.
+- **`SidebarItem` `prefix`** — leading widget (avatar, colour dot…) in place of `icon`; kept in rail mode.
 
 All previous `Sidebar` / `SidebarItem` usage is fully backward compatible.
 
