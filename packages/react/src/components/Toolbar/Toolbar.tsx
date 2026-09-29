@@ -21,7 +21,11 @@ export interface ToolbarProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const Toolbar = ({ children, className, ...props }: ToolbarProps) => {
   return (
-    <div className={[styles.toolbar, className].filter(Boolean).join(' ')} {...props}>
+    <div
+      className={[styles.toolbar, className].filter(Boolean).join(' ')}
+      data-gnome-toolbar=""
+      {...props}
+    >
       {children}
     </div>
   );

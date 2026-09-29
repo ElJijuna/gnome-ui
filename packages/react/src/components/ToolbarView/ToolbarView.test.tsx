@@ -80,4 +80,16 @@ describe('ToolbarView', () => {
     );
     expect(screen.getByTestId('tv')).toBeInTheDocument();
   });
+
+  it('marks the top and bottom bars, but not the content, as toolbar contexts', () => {
+    render(
+      <ToolbarView topBar={<span>Top</span>} bottomBar={<span>Bottom</span>}>
+        <p>Body</p>
+      </ToolbarView>,
+    );
+
+    expect(screen.getByText('Top').parentElement).toHaveAttribute('data-gnome-toolbar');
+    expect(screen.getByText('Bottom').parentElement).toHaveAttribute('data-gnome-toolbar');
+    expect(screen.getByText('Body').closest('[data-gnome-toolbar]')).toBeNull();
+  });
 });

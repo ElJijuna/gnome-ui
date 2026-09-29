@@ -1,6 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
+import { HeaderBar } from '@/components/HeaderBar';
+import { Toolbar } from '@/components/Toolbar';
+
 import { Dropdown } from './Dropdown';
 
 const options = [
@@ -85,5 +88,62 @@ describe('Dropdown', () => {
     render(<Dropdown aria-label="Colour scheme" options={options} disabled />);
 
     expect(screen.getByRole('combobox')).toBeDisabled();
+  });
+
+  describe('flat / raised', () => {
+    it('uses the regular trigger by default', () => {
+      render(<Dropdown aria-label="Scheme" options={options} />);
+      expect(screen.getByRole('combobox').className).not.toMatch(/triggerFlat|triggerRaised/);
+    });
+
+    it('marks the trigger flat with the flat prop', () => {
+      render(<Dropdown aria-label="Scheme" options={options} flat />);
+      expect(screen.getByRole('combobox').className).toMatch(/triggerFlat/);
+    });
+
+    it('marks the trigger raised with the raised prop', () => {
+      render(<Dropdown aria-label="Scheme" options={options} raised />);
+      expect(screen.getByRole('combobox').className).toMatch(/triggerRaised/);
+    });
+
+    it('renders flat automatically inside a toolbar', () => {
+      render(
+        <Toolbar>
+          <Dropdown aria-label="Scheme" options={options} />
+        </Toolbar>,
+      );
+
+      expect(getComputedStyle(screen.getByRole('combobox')).backgroundColor).toBe(
+        'rgba(0, 0, 0, 0)',
+      );
+    });
+
+    it('renders flat automatically inside a header bar', () => {
+      render(<HeaderBar end={<Dropdown aria-label="Scheme" options={options} />} />);
+
+      expect(getComputedStyle(screen.getByRole('combobox')).backgroundColor).toBe(
+        'rgba(0, 0, 0, 0)',
+      );
+    });
+
+    it('keeps the raised look inside a toolbar with raised', () => {
+      render(
+        <Toolbar>
+          <Dropdown aria-label="Scheme" options={options} raised />
+        </Toolbar>,
+      );
+
+      expect(getComputedStyle(screen.getByRole('combobox')).backgroundColor).not.toBe(
+        'rgba(0, 0, 0, 0)',
+      );
+    });
+
+    it('keeps the regular look outside toolbars', () => {
+      render(<Dropdown aria-label="Scheme" options={options} />);
+
+      expect(getComputedStyle(screen.getByRole('combobox')).backgroundColor).not.toBe(
+        'rgba(0, 0, 0, 0)',
+      );
+    });
   });
 });

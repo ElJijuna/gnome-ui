@@ -37,9 +37,17 @@ export const ToolbarView = ({
 }: ToolbarViewProps) => {
   return (
     <div className={[styles.toolbarView, className].filter(Boolean).join(' ')} {...props}>
-      {topBar && <div className={styles.top}>{topBar}</div>}
+      {topBar && (
+        <div className={styles.top} data-gnome-toolbar="">
+          {topBar}
+        </div>
+      )}
       <div className={styles.content}>{children}</div>
-      {bottomBar && <div className={styles.bottom}>{bottomBar}</div>}
+      {bottomBar && (
+        <div className={styles.bottom} data-gnome-toolbar="">
+          {bottomBar}
+        </div>
+      )}
     </div>
   );
 };
