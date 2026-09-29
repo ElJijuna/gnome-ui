@@ -457,8 +457,8 @@ now appear thinner, and `AdwSpinner` respects the `-gtk-icon-weight` CSS propert
 
 | Status | Item | Description |
 |--------|------|-------------|
-| ⬜ | **Natural modifier ordering** | Normalise modifier order regardless of input order: `Ctrl` → `Alt` → `Shift` → `Super` on Linux/Windows, and the Apple order `⌃` → `⌥` → `⇧` → `⌘` on macOS — mirrors `AdwShortcutLabel`'s new ordering |
-| ⬜ | **macOS key labels** | Audit macOS rendering: use `⌥` for Alt, `⌃` for Control, `⏎` for Return, `⌫` for Backspace, `⎋` for Escape when the platform is macOS (already partially supported for `⌘`) |
+| ✅ | **Natural modifier ordering** | Modifiers are displayed in a fixed order regardless of input order — Hyper → Super → Ctrl → Alt → Shift → Cmd/Meta, i.e. `⌃` → `⌥` → `⇧` → `⌘` — with regular keys after them in their written order. Order taken from `get_labels()` in libadwaita's `adw-shortcut-label.c` |
+| ✅ | **macOS key labels** | Already covered: `ShortcutLabel` renders Apple-style symbols (`⌃` `⌥` `⇧` `⌘` `⌫` `⎋` `↵`) on every platform by default, and `symbols={false}` shows plain names — no platform detection needed |
 
 ### Accessibility — system Reduced Motion
 
