@@ -2204,8 +2204,7 @@ gnome-combo-row {
     "prefix subtitle suffix";
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  column-gap: var(--gnome-space-2, 12px);
-  row-gap: 2px;
+  gap: 2px var(--gnome-space-2, 12px);
   padding: var(--gnome-space-2, 12px) var(--gnome-space-4, 24px);
   min-height: 52px;
   width: 100%;
@@ -4122,7 +4121,7 @@ gnome-copy-button [data-slot="copy-button-status"] {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
@@ -4252,7 +4251,7 @@ gnome-file-drop-zone [data-slot="file-drop-zone-input"] {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
