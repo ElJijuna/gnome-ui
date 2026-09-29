@@ -1039,6 +1039,53 @@ export const CollapsibleSectionInRailMode: Story = {
   },
 };
 
+// ─── SidebarItem: prefix ─────────────────────────────────────────────────────
+
+const Dot = ({ color }: { color: string }) => (
+  <span
+    aria-hidden
+    style={{ width: 10, height: 10, margin: 3, borderRadius: '50%', backgroundColor: color }}
+  />
+);
+
+export const ItemPrefix: Story = {
+  render: function ItemPrefixStory(args) {
+    const [active, setActive] = useState('ada');
+
+    return (
+      <Sidebar {...args} style={{ height: 360 }}>
+        <SidebarSection title="Accounts">
+          {['Ada Lovelace', 'Alan Turing', 'Grace Hopper'].map((name) => {
+            const id = name.split(' ')[0].toLowerCase();
+            return (
+              <SidebarItem
+                key={id}
+                label={name}
+                prefix={<Avatar name={name} size="sm" />}
+                active={active === id}
+                onClick={() => setActive(id)}
+              />
+            );
+          })}
+        </SidebarSection>
+        <SidebarSection title="Labels">
+          <SidebarItem label="Work" prefix={<Dot color="#3584e4" />} />
+          <SidebarItem label="Family" prefix={<Dot color="#33d17a" />} />
+          <SidebarItem label="Urgent" prefix={<Dot color="#e01b24" />} />
+        </SidebarSection>
+      </Sidebar>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`SidebarItem` `prefix` renders a leading widget instead of an `icon` — avatars or colour dots here. It takes precedence over `icon` and stays visible in rail mode (try the `collapsed` control). Use non-interactive content only: the row is itself a button. Mirrors `AdwSidebarItem:prefix` from libadwaita 1.10.',
+      },
+    },
+  },
+};
+
 // ─── SidebarSection: header suffix ───────────────────────────────────────────
 
 export const SectionSuffix: Story = {
