@@ -1,6 +1,5 @@
 /* ─── sr-only recipe ───────────────────────────────────────────────────────────
-   Visually hides content while keeping it readable by assistive technology.
-   `clip` is included alongside `clip-path` for older browser support. */
+   Visually hides content while keeping it readable by assistive technology. */
 
 .hidden {
   position: absolute;
@@ -10,7 +9,6 @@
   margin: -1px;
   overflow: hidden;
   white-space: nowrap;
-  clip: rect(0, 0, 0, 0);
   clip-path: inset(50%);
   border: 0;
 }
@@ -27,6 +25,5 @@
   margin: 0;
   overflow: visible;
   white-space: normal;
-  clip: auto;
   clip-path: none;
 }

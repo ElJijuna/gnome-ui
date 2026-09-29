@@ -17,6 +17,7 @@
   padding: 0 var(--gnome-space-1, 6px);
   gap: 2px;
   min-height: 40px;
+
   /* `.bar` is now a flex row (to make room for the scroll buttons below), so
      `.list` needs its own `flex: 1; min-width: 0` — the same shrink-inside-a-
      row fix `.tab` itself just needed, one level up. */
