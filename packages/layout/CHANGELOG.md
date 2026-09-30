@@ -1,3 +1,9 @@
+## [@gnome-ui/layout-v1.35.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.34.0...@gnome-ui/layout@1.35.0) (2026-09-30)
+
+### Features
+
+* **@gnome-ui/layout:** implement rolling value display in StatCard component ([9feb324](https://github.com/ElJijuna/gnome-ui/commit/9feb32408dc9f02524ed61d7740b7245b5f61deb))
+
 ## [@gnome-ui/layout-v1.34.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/layout@1.33.0...@gnome-ui/layout@1.34.0) (2026-09-04)
 
 ### Features
