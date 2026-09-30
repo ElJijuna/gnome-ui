@@ -1,3 +1,13 @@
+## [@gnome-ui/core-v1.43.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.42.4...@gnome-ui/core@1.43.0) (2026-09-30)
+
+### Features
+
+* **@gnome-ui/core:** add --gnome-icon-weight token ([f0d8f75](https://github.com/ElJijuna/gnome-ui/commit/f0d8f750ef29d05f4c030e23b2560931515f86eb))
+
+### Bug Fixes
+
+* **ci:** filter semantic-release changelog/notes by package path ([2baf72a](https://github.com/ElJijuna/gnome-ui/commit/2baf72ade7ae1ce476a16caea36100e7dc8fa3c7))
+
 ## [1.42.4](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/core@1.42.3...@gnome-ui/core@1.42.4) (2026-06-14)
 
 ### Features
