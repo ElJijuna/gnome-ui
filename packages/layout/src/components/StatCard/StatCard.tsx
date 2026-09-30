@@ -1,5 +1,5 @@
 import { Card, Skeleton, Spinner, Text, useNumberFormatter } from '@gnome-ui/react';
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
 import { LoadingStatus } from '@/components/LoadingStatus';
 
@@ -33,6 +33,47 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Loading placeholder style. Defaults to `"skeleton"`. */
   loadingType?: LoadingType;
 }
+
+const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+/**
+ * Odometer-style value: every digit is a 0–9 column shifted by `--d` lines,
+ * so changing the value rolls each digit via a CSS `translate` transition.
+ */
+const RollingValue = ({ text }: { text: string }) => {
+  const chars = [...text];
+
+  return (
+    <>
+      <span className={styles.srOnly}>{text}</span>
+      <span className={styles.roll} aria-hidden="true">
+        {chars.map((char, index) => {
+          // Key from the right so digits keep their identity when the length changes.
+          const key = chars.length - index;
+          const digit = DIGITS.indexOf(char);
+
+          if (digit === -1) {
+            return (
+              <span key={key} className={styles.rollChar}>
+                {char}
+              </span>
+            );
+          }
+
+          return (
+            <span key={key} className={styles.rollDigit}>
+              <span className={styles.rollStrip} style={{ '--d': digit } as CSSProperties}>
+                {DIGITS.map((d) => (
+                  <span key={d}>{d}</span>
+                ))}
+              </span>
+            </span>
+          );
+        })}
+      </span>
+    </>
+  );
+};
 
 const TREND_SYMBOL: Record<StatCardTrendDirection, string> = {
   up: 'up',
@@ -110,7 +151,7 @@ export const StatCard = ({
 
         <div className={styles.valueRow} aria-label={`${label}: ${accessibleValue}`}>
           <Text variant="title-2" as="span" className={styles.value}>
-            {displayValue}
+            {typeof value === 'number' ? <RollingValue text={displayValue} /> : displayValue}
           </Text>
           {unit && (
             <Text variant="caption" as="span" color="dim" className={styles.unit}>
