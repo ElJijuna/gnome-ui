@@ -1,3 +1,22 @@
+## [@gnome-ui/react-v1.69.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.68.0...@gnome-ui/react@1.69.0) (2026-09-30)
+
+### Features
+
+* **@gnome-ui/react:** add flat/raised styles to Dropdown with auto-flat in toolbars ([9fe7484](https://github.com/ElJijuna/gnome-ui/commit/9fe74846183f1f7aaf7fd923d0080020f4dee8e8))
+* **@gnome-ui/react:** add other apps section to AboutDialog ([ced7282](https://github.com/ElJijuna/gnome-ui/commit/ced72823d5f279804ecc78c35b9833e556cedd41))
+* **@gnome-ui/react:** add prefix and suffix props for pinned content in sidebar ([4709e8b](https://github.com/ElJijuna/gnome-ui/commit/4709e8b2748c82f11f32a1ab9363d247637a4312))
+* **@gnome-ui/react:** add prefix to SidebarItem ([0ae8128](https://github.com/ElJijuna/gnome-ui/commit/0ae81283cc5f94359641ad8a26ced3b075b055ef))
+* **@gnome-ui/react:** add prefix/suffix to ViewSwitcherSidebar ([a380eba](https://github.com/ElJijuna/gnome-ui/commit/a380ebaf96967fc36030a1f3aaf0211e93b88658))
+* **@gnome-ui/react:** add suffix to SidebarSection header ([27e76e6](https://github.com/ElJijuna/gnome-ui/commit/27e76e6098b6d874839af89ecab02f4aa759c9db))
+* **@gnome-ui/react:** expose data-overlay on OverlaySplitView sidebar ([c4520f8](https://github.com/ElJijuna/gnome-ui/commit/c4520f8254f9b7ab2ed8e6f52cc96c0ff0d3f105))
+* **@gnome-ui/react:** order ShortcutLabel modifiers like AdwShortcutLabel ([300fae4](https://github.com/ElJijuna/gnome-ui/commit/300fae4a881a71cd2d16dc5339af86d86a460b3a))
+* **@gnome-ui/react:** scale Spinner stroke with --gnome-icon-weight ([5f2f2e8](https://github.com/ElJijuna/gnome-ui/commit/5f2f2e8c926b52e7d95737d09f38ceb877300831))
+
+### Bug Fixes
+
+* **@gnome-ui/react:** honour reduced motion in Drawer push variant and Banner ([3e13434](https://github.com/ElJijuna/gnome-ui/commit/3e134346a82d2bfbe39d449ee8eff74db14a6cac))
+* **@gnome-ui/react:** resolve stylelint errors in component styles ([49ecfff](https://github.com/ElJijuna/gnome-ui/commit/49ecfffc2657915f4a9894558eb3fe9dafc26fb6))
+
 ## [@gnome-ui/react-v1.68.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/react@1.67.0...@gnome-ui/react@1.68.0) (2026-09-19)
 
 ### Features
