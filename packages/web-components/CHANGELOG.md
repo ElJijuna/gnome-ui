@@ -1,3 +1,13 @@
+## [@gnome-ui/web-components-v1.13.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.12.0...@gnome-ui/web-components@1.13.0) (2026-09-30)
+
+### Features
+
+* **@gnome-ui/web-components:** scale gnome-spinner stroke with --gnome-icon-weight ([904d3e6](https://github.com/ElJijuna/gnome-ui/commit/904d3e66dd168612e745b3f560807cd44bb439aa))
+
+### Bug Fixes
+
+* **@gnome-ui/web-components:** resolve stylelint errors in styles.css ([a68d549](https://github.com/ElJijuna/gnome-ui/commit/a68d5496bdd30bbc23f0638744772aa6f4ef3c10))
+
 ## [@gnome-ui/web-components-v1.12.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/web-components@1.11.0...@gnome-ui/web-components@1.12.0) (2026-09-12)
 
 ### Features
