@@ -32,7 +32,12 @@ import { AreaChart } from '@gnome-ui/charts';
 | `showLegend` | `boolean` | `false` | Show series legend |
 | `stacked` | `boolean` | `false` | Stack areas on top of each other |
 | `gradient` | `boolean` | `false` | Apply top-to-bottom gradient fill |
+| `selectedPoint` | `string \| number \| null` | — | Selected point/day identifier on X-axis (or index) |
+| `onPointClick` | `(event: AreaChartPointClickEvent) => void` | — | Callback fired when a point/day is clicked |
+| `onSelect` | `(event: AreaChartPointClickEvent) => void` | — | Alias for `onPointClick` |
+| `showSelectionLine` | `boolean` | `true` | Show vertical reference line at the selected point |
 | `aria-label` | `string` | auto | Accessible label for the chart |
+
 
 ### Guidelines
 

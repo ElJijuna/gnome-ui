@@ -157,4 +157,39 @@ describe('AreaChart', () => {
       expect(container.querySelector("[role='img']")).toBeInTheDocument();
     });
   });
+
+  describe('point selection and event emission', () => {
+    it('applies selectable style when onPointClick or onSelect is passed', () => {
+      const handlePointClick = vi.fn();
+      const { container } = render(
+        <AreaChart data={DATA} series={SERIES} xAxisKey="week" onPointClick={handlePointClick} />,
+      );
+
+      const root = container.querySelector("[role='img']");
+      expect(root).toBeInTheDocument();
+      expect(root?.className).toMatch(/selectable/);
+    });
+
+    it('renders with selectedPoint and showSelectionLine without crashing', () => {
+      const { container } = render(
+        <AreaChart
+          data={DATA}
+          series={SERIES}
+          xAxisKey="week"
+          selectedPoint="W1"
+          showSelectionLine
+        />,
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('supports numeric index for selectedPoint', () => {
+      const { container } = render(
+        <AreaChart data={DATA} series={SERIES} xAxisKey="week" selectedPoint={0} />,
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+  });
 });

@@ -69,6 +69,7 @@ export interface GnomeThemeTokens {
   readonly headerbarFgColor: string;
   readonly headerbarShadeColor: string;
   readonly hoverOverlay: string;
+  readonly iconWeight: number;
   readonly layoutBreakpointMedium: number;
   readonly layoutBreakpointNarrow: number;
   readonly layoutBreakpointWide: number;
@@ -207,6 +208,7 @@ export const lightTheme: GnomeThemeTokens = {
   headerbarFgColor: 'rgba(0, 0, 0, 0.8)',
   headerbarShadeColor: 'rgba(0, 0, 0, 0.12)',
   hoverOverlay: 'rgba(0, 0, 0, 0.06)',
+  iconWeight: 400,
   layoutBreakpointMedium: 550,
   layoutBreakpointNarrow: 400,
   layoutBreakpointWide: 860,
@@ -345,6 +347,7 @@ export const darkTheme: GnomeThemeTokens = {
   headerbarFgColor: 'rgba(255, 255, 255, 0.87)',
   headerbarShadeColor: 'rgba(0, 0, 0, 0.36)',
   hoverOverlay: 'rgba(255, 255, 255, 0.08)',
+  iconWeight: 400,
   layoutBreakpointMedium: 550,
   layoutBreakpointNarrow: 400,
   layoutBreakpointWide: 860,
@@ -483,6 +486,7 @@ export const highContrastTheme: GnomeThemeTokens = {
   headerbarFgColor: 'rgba(0, 0, 0, 0.8)',
   headerbarShadeColor: 'rgba(0, 0, 0, 0.12)',
   hoverOverlay: 'rgba(0, 0, 0, 0.12)',
+  iconWeight: 400,
   layoutBreakpointMedium: 550,
   layoutBreakpointNarrow: 400,
   layoutBreakpointWide: 860,
@@ -621,6 +625,7 @@ export const highContrastDarkTheme: GnomeThemeTokens = {
   headerbarFgColor: '#fff',
   headerbarShadeColor: 'rgba(0, 0, 0, 0.36)',
   hoverOverlay: 'rgba(255, 255, 255, 0.12)',
+  iconWeight: 400,
   layoutBreakpointMedium: 550,
   layoutBreakpointNarrow: 400,
   layoutBreakpointWide: 860,
@@ -759,6 +764,7 @@ export const lightRawTokens = {
   '--gnome-headerbar-fg-color': 'rgb(0 0 0 / 0.8)',
   '--gnome-headerbar-shade-color': 'rgb(0 0 0 / 0.12)',
   '--gnome-hover-overlay': 'rgb(0 0 0 / 0.06)',
+  '--gnome-icon-weight': '400',
   '--gnome-layout-breakpoint-medium': '550px',
   '--gnome-layout-breakpoint-narrow': '400px',
   '--gnome-layout-breakpoint-wide': '860px',
@@ -903,6 +909,7 @@ export const darkRawTokens = {
   '--gnome-headerbar-fg-color': 'rgb(255 255 255 / 0.87)',
   '--gnome-headerbar-shade-color': 'rgb(0 0 0 / 0.36)',
   '--gnome-hover-overlay': 'rgb(255 255 255 / 0.08)',
+  '--gnome-icon-weight': '400',
   '--gnome-layout-breakpoint-medium': '550px',
   '--gnome-layout-breakpoint-narrow': '400px',
   '--gnome-layout-breakpoint-wide': '860px',
@@ -1047,6 +1054,7 @@ export const highContrastRawTokens = {
   '--gnome-headerbar-fg-color': 'rgb(0 0 0 / 0.8)',
   '--gnome-headerbar-shade-color': 'rgb(0 0 0 / 0.12)',
   '--gnome-hover-overlay': 'rgb(0 0 0 / 0.12)',
+  '--gnome-icon-weight': '400',
   '--gnome-layout-breakpoint-medium': '550px',
   '--gnome-layout-breakpoint-narrow': '400px',
   '--gnome-layout-breakpoint-wide': '860px',
@@ -1191,6 +1199,7 @@ export const highContrastDarkRawTokens = {
   '--gnome-headerbar-fg-color': '#fff',
   '--gnome-headerbar-shade-color': 'rgb(0 0 0 / 0.36)',
   '--gnome-hover-overlay': 'rgb(255 255 255 / 0.12)',
+  '--gnome-icon-weight': '400',
   '--gnome-layout-breakpoint-medium': '550px',
   '--gnome-layout-breakpoint-narrow': '400px',
   '--gnome-layout-breakpoint-wide': '860px',

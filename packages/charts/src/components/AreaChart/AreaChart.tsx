@@ -1,9 +1,11 @@
 import { useNumberFormatter } from '@gnome-ui/react';
+import { useMemo, useState } from 'react';
 import {
   Area,
   CartesianGrid,
   Legend,
   AreaChart as RechartsAreaChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -22,6 +24,17 @@ export interface AreaChartSeries {
   color?: string;
 }
 
+export interface AreaChartPointClickEvent {
+  /** The data entry for the clicked day/point */
+  data: Record<string, unknown>;
+  /** The index of the data entry in the dataset */
+  index: number;
+  /** The value on the X-axis for this point (e.g. the date) */
+  label?: string;
+  /** The raw active payload per series from Recharts */
+  payload?: unknown;
+}
+
 export interface AreaChartProps {
   data: Record<string, unknown>[];
   series: AreaChartSeries[];
@@ -35,6 +48,25 @@ export interface AreaChartProps {
   gradient?: boolean;
   className?: string;
   'aria-label'?: string;
+  /**
+   * Value on the x-axis (or index) of the selected point/day.
+   * Can be controlled externally.
+   */
+  selectedPoint?: string | number | null;
+  /**
+   * Callback fired when a point/day in the series is selected/clicked.
+   * Emits the selected point's data and information.
+   */
+  onPointClick?: (event: AreaChartPointClickEvent) => void;
+  /**
+   * Alias for `onPointClick`.
+   */
+  onSelect?: (event: AreaChartPointClickEvent) => void;
+  /**
+   * Whether to display a vertical reference line at the selected point.
+   * Defaults to `true`.
+   */
+  showSelectionLine?: boolean;
 }
 
 const AXIS_STYLE = {
@@ -55,7 +87,15 @@ export const AreaChart = ({
   gradient = false,
   className,
   'aria-label': ariaLabel,
+  selectedPoint,
+  onPointClick,
+  onSelect,
+  showSelectionLine = true,
 }: AreaChartProps) => {
+  const [internalSelected, setInternalSelected] = useState<string | number | null>(null);
+  const activeSelected = selectedPoint !== undefined ? selectedPoint : internalSelected;
+  const isInteractive = Boolean(onPointClick || onSelect);
+
   const formatNumber = useNumberFormatter().format;
 
   const seriesWithColors = series.map((s, i) => ({
@@ -63,13 +103,69 @@ export const AreaChart = ({
     resolvedColor: s.color ?? GNOME_CHART_PALETTE[i % GNOME_CHART_PALETTE.length],
   }));
 
+  const selectedX = useMemo(() => {
+    if (activeSelected === null || activeSelected === undefined) {
+      return null;
+    }
+    if (typeof activeSelected === 'number') {
+      const item = data[activeSelected];
+      return (item?.[xAxisKey] as string | number | undefined) ?? activeSelected;
+    }
+    return activeSelected;
+  }, [activeSelected, data, xAxisKey]);
+
+  const handleClick = (nextState: unknown) => {
+    if (!nextState || typeof nextState !== 'object') {
+      return;
+    }
+    const state = nextState as {
+      activeTooltipIndex?: number;
+      activeIndex?: number;
+      activeLabel?: string | number;
+      activePayload?: Array<{ payload?: Record<string, unknown> }>;
+    };
+
+    const index = state.activeTooltipIndex ?? state.activeIndex;
+    if (index === undefined || index === null || index < 0) {
+      return;
+    }
+
+    const item = data[index] ?? state.activePayload?.[0]?.payload;
+    if (!item) {
+      return;
+    }
+
+    const label =
+      state.activeLabel !== undefined
+        ? String(state.activeLabel)
+        : (item[xAxisKey] as string | undefined);
+
+    const eventPayload: AreaChartPointClickEvent = {
+      data: item,
+      index,
+      label: label !== undefined ? String(label) : undefined,
+      payload: state.activePayload,
+    };
+
+    if (selectedPoint === undefined) {
+      setInternalSelected(
+        item[xAxisKey] !== undefined ? (item[xAxisKey] as string | number) : index,
+      );
+    }
+
+    onPointClick?.(eventPayload);
+    onSelect?.(eventPayload);
+  };
+
   return (
     <div
       role="img"
       aria-label={
         ariaLabel ?? `Area chart with ${series.map((s) => s.name ?? s.dataKey).join(', ')}`
       }
-      className={[styles.container, className].filter(Boolean).join(' ')}
+      className={[styles.container, isInteractive && styles.selectable, className]
+        .filter(Boolean)
+        .join(' ')}
       style={{ height }}
     >
       <ResponsiveContainer width="100%" height="100%">
@@ -77,6 +173,7 @@ export const AreaChart = ({
           accessibilityLayer
           data={data}
           margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
+          onClick={handleClick}
         >
           {gradient && (
             <defs>
@@ -129,6 +226,14 @@ export const AreaChart = ({
               }}
             />
           )}
+          {showSelectionLine && selectedX !== null && selectedX !== undefined && (
+            <ReferenceLine
+              x={selectedX}
+              stroke="var(--gnome-accent-bg, #3584e4)"
+              strokeWidth={2}
+              strokeDasharray="3 3"
+            />
+          )}
           {seriesWithColors.map((s) => (
             <Area
               key={s.dataKey}
@@ -140,6 +245,7 @@ export const AreaChart = ({
               fillOpacity={gradient ? 1 : 0.15}
               strokeWidth={2}
               stackId={stacked ? 'stack' : undefined}
+              activeDot={isInteractive ? { r: 5, strokeWidth: 2 } : true}
             />
           ))}
         </RechartsAreaChart>

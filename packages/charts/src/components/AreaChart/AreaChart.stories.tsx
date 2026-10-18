@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
-import { AreaChart } from './AreaChart';
+import { AreaChart, type AreaChartPointClickEvent } from './AreaChart';
 import readme from './README.md?raw';
 
 const meta: Meta<typeof AreaChart> = {
@@ -25,6 +26,8 @@ const meta: Meta<typeof AreaChart> = {
       options: ['top', 'bottom', 'left', 'right'],
       if: { arg: 'showLegend' },
     },
+    onPointClick: { action: 'pointClicked' },
+    onSelect: { action: 'selected' },
   },
 };
 
@@ -208,7 +211,7 @@ export const VulnerabilityHistory: Story = {
     docs: {
       description: {
         story:
-          'Component vulnerability history over 6 months with daily reports across CRITICAL, HIGH, MEDIUM, MINIMAL, LOW, and None severities.',
+          'Component vulnerability history over 6 months with daily reports across CRITICAL, HIGH, MEDIUM, MINIMAL, LOW, and None severities. Click on any point/day in the chart to select it and emit an event with the daily findings.',
       },
     },
   },
@@ -252,5 +255,169 @@ export const VulnerabilityHistory: Story = {
     stacked: true,
     gradient: true,
     height: 350,
+  },
+  render: function VulnerabilityHistoryInteractive(args) {
+    const [selectedEvent, setSelectedEvent] = useState<AreaChartPointClickEvent | null>(() => {
+      // Default to day 45 (the CVE disclosure incident) so initial info is visible
+      const initialIndex = 45;
+      const sampleItem = args.data[initialIndex];
+      return sampleItem
+        ? {
+            data: sampleItem,
+            index: initialIndex,
+            label: String(sampleItem.date ?? '2024-02-15'),
+          }
+        : null;
+    });
+
+    const handlePointClick = (event: AreaChartPointClickEvent) => {
+      setSelectedEvent(event);
+      args.onPointClick?.(event);
+    };
+
+    const d = selectedEvent?.data;
+    const total = d
+      ? Number(d.CRITICAL ?? 0) +
+        Number(d.HIGH ?? 0) +
+        Number(d.MEDIUM ?? 0) +
+        Number(d.MINIMAL ?? 0) +
+        Number(d.LOW ?? 0) +
+        Number(d.None ?? 0)
+      : 0;
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <AreaChart {...args} selectedPoint={selectedEvent?.label} onPointClick={handlePointClick} />
+
+        <div
+          style={{
+            padding: '16px 20px',
+            backgroundColor: 'var(--gnome-card-bg, rgba(0, 0, 0, 0.04))',
+            borderRadius: '12px',
+            border: '1px solid var(--gnome-border-subtle, rgba(0, 0, 0, 0.1))',
+            fontFamily: 'var(--gnome-font-family, system-ui)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 12,
+              flexWrap: 'wrap',
+              gap: 8,
+            }}
+          >
+            <div>
+              <strong style={{ fontSize: 14 }}>
+                {selectedEvent ? `📅 Reporte del día: ${selectedEvent.label}` : 'Selecciona un día'}
+              </strong>
+              <span
+                style={{
+                  marginLeft: 12,
+                  fontSize: 12,
+                  color: 'var(--gnome-window-fg-color, rgba(0, 0, 0, 0.6))',
+                }}
+              >
+                (Índice día: {selectedEvent ? selectedEvent.index + 1 : '—'} / 182)
+              </span>
+            </div>
+            {selectedEvent && (
+              <span
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color:
+                    total > 0 ? 'var(--gnome-red-3, #e01b24)' : 'var(--gnome-green-4, #2ec27e)',
+                }}
+              >
+                Total: {total} vulnerabilidades
+              </span>
+            )}
+          </div>
+
+          {selectedEvent && d ? (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 9999,
+                  backgroundColor: 'var(--gnome-red-3, #e01b24)',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                CRITICAL: {String(d.CRITICAL ?? 0)}
+              </span>
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 9999,
+                  backgroundColor: 'var(--gnome-orange-3, #ff7800)',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                HIGH: {String(d.HIGH ?? 0)}
+              </span>
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 9999,
+                  backgroundColor: 'var(--gnome-yellow-5, #e5a50a)',
+                  color: '#000',
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                MEDIUM: {String(d.MEDIUM ?? 0)}
+              </span>
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 9999,
+                  backgroundColor: 'var(--gnome-blue-1, #99c1f1)',
+                  color: '#000',
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                MINIMAL: {String(d.MINIMAL ?? 0)}
+              </span>
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 9999,
+                  backgroundColor: 'var(--gnome-blue-3, #3584e4)',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                LOW: {String(d.LOW ?? 0)}
+              </span>
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 9999,
+                  backgroundColor: 'var(--gnome-dark-2, #5e5c64)',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                None: {String(d.None ?? 0)}
+              </span>
+            </div>
+          ) : (
+            <p style={{ margin: 0, fontSize: 13, color: 'rgba(0,0,0,0.5)' }}>
+              Haz clic en cualquier punto del gráfico para ver el reporte emitido.
+            </p>
+          )}
+        </div>
+      </div>
+    );
   },
 };

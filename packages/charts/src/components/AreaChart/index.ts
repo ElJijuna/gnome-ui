@@ -1,2 +1,2 @@
-export type { AreaChartProps, AreaChartSeries } from './AreaChart';
+export type { AreaChartPointClickEvent, AreaChartProps, AreaChartSeries } from './AreaChart';
 export { AreaChart } from './AreaChart';

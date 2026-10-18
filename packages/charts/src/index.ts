@@ -1,6 +1,11 @@
 export { GNOME_CHART_PALETTE } from './colors';
-export type { AreaChartProps, AreaChartSeries } from './components/AreaChart';
+export type {
+  AreaChartPointClickEvent,
+  AreaChartProps,
+  AreaChartSeries,
+} from './components/AreaChart';
 export { AreaChart } from './components/AreaChart';
+
 export type { BarChartProps, BarChartSeries } from './components/BarChart';
 export { BarChart } from './components/BarChart';
 export type { BoxPlotDataItem, BoxPlotProps, BoxPlotStats } from './components/BoxPlot';
