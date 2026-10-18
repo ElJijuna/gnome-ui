@@ -1,3 +1,13 @@
+## [@gnome-ui/charts-v1.39.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.38.0...@gnome-ui/charts@1.39.0) (2026-10-18)
+
+### Features
+
+* **@gnome-ui/charts:** add point selection and event handling to AreaChart component ([0507188](https://github.com/ElJijuna/gnome-ui/commit/05071885d6bcad3b5697363815f6ff609a9a82a3))
+
+### Documentation
+
+* **@gnome-ui/charts:** add vulnerability history dataset and corresponding tests ([6514cc2](https://github.com/ElJijuna/gnome-ui/commit/6514cc2e00705ff1d2a51964dfe1e6724bbad1b9))
+
 ## [@gnome-ui/charts-v1.38.0](https://github.com/ElJijuna/gnome-ui/compare/@gnome-ui/charts@1.37.0...@gnome-ui/charts@1.38.0) (2026-09-04)
 
 ### Features
