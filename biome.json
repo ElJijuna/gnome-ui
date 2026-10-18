@@ -12,7 +12,9 @@
       "!.venv",
       "!node_modules",
       "!package-lock.json",
-      "!CHANGELOG.md"
+      "!CHANGELOG.md",
+      "!**/react-native-app/ios",
+      "!**/react-native-app/android"
     ]
   },
   "linter": {

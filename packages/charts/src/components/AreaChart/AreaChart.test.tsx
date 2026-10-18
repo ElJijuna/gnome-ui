@@ -111,4 +111,50 @@ describe('AreaChart', () => {
       );
     });
   });
+
+  describe('vulnerability history story data', () => {
+    it('provides 182 daily entries covering 6 full calendar months', async () => {
+      const { VulnerabilityHistory } = await import('./AreaChart.stories');
+      const data = VulnerabilityHistory.args?.data as Record<string, unknown>[];
+
+      expect(data).toHaveLength(182);
+      expect(data[0]).toMatchObject({
+        date: '2024-01-01',
+      });
+      expect(data[181]).toMatchObject({
+        date: '2024-06-30',
+      });
+
+      // Verify all requested severities exist on daily entries
+      const [firstDay] = data;
+      expect(firstDay).toHaveProperty('CRITICAL');
+      expect(firstDay).toHaveProperty('HIGH');
+      expect(firstDay).toHaveProperty('MEDIUM');
+      expect(firstDay).toHaveProperty('MINIMAL');
+      expect(firstDay).toHaveProperty('LOW');
+      expect(firstDay).toHaveProperty('None');
+
+      // Verify story series includes all severities
+      const seriesKeys = VulnerabilityHistory.args?.series?.map((s) => s.dataKey);
+      expect(seriesKeys).toEqual(['CRITICAL', 'HIGH', 'MEDIUM', 'MINIMAL', 'LOW', 'None']);
+    });
+
+    it('renders 6 months of daily vulnerability data without crashing', async () => {
+      const { VulnerabilityHistory } = await import('./AreaChart.stories');
+
+      const { container } = render(
+        <AreaChart
+          data={VulnerabilityHistory.args?.data as Record<string, unknown>[]}
+          series={VulnerabilityHistory.args?.series ?? []}
+          xAxisKey={VulnerabilityHistory.args?.xAxisKey}
+          stacked={VulnerabilityHistory.args?.stacked}
+          gradient={VulnerabilityHistory.args?.gradient}
+          showLegend={VulnerabilityHistory.args?.showLegend}
+        />,
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+      expect(container.querySelector("[role='img']")).toBeInTheDocument();
+    });
+  });
 });
